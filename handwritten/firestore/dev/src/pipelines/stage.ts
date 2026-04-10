@@ -724,6 +724,152 @@ export class Sort implements Stage {
   }
 }
 
+export type InternalSearchStageOptions = Omit<
+  firestore.Pipelines.SearchStageOptions,
+  'query' | 'sort' | 'select' | 'addFields'
+> & {
+  query: BooleanExpression;
+  sort?: Array<Ordering>;
+  select?: Record<string, Expression>;
+  addFields?: Record<string, Expression>;
+};
+
+/**
+ * Search stage.
+ */
+export class Search implements Stage {
+  name = 'search';
+
+  constructor(private options: InternalSearchStageOptions) {}
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.query, ignoreUndefinedProperties);
+    if (this.options.sort) {
+      validateUserDataHelper(this.options.sort, ignoreUndefinedProperties);
+    }
+    if (this.options.select) {
+      validateUserDataHelper(
+        Object.values(this.options.select) as Expression[],
+        ignoreUndefinedProperties,
+      );
+    }
+    if (this.options.addFields) {
+      validateUserDataHelper(
+        Object.values(this.options.addFields) as Expression[],
+        ignoreUndefinedProperties,
+      );
+    }
+  }
+
+  readonly optionsUtil = new OptionsUtil({
+    query: {
+      serverName: 'query',
+    },
+    limit: {
+      serverName: 'limit',
+    },
+    retrievalDepth: {
+      serverName: 'retrieval_depth',
+    },
+    sort: {
+      serverName: 'sort',
+    },
+    addFields: {
+      serverName: 'add_fields',
+    },
+    select: {
+      serverName: 'select',
+    },
+    offset: {
+      serverName: 'offset',
+    },
+    queryEnhancement: {
+      serverName: 'query_enhancement',
+    },
+    languageCode: {
+      serverName: 'language_code',
+    },
+  });
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+}
+
+/**
+ * Internal options for Define stage.
+ */
+export type InternalDefineStageOptions = Omit<
+  firestore.Pipelines.DefineStageOptions,
+  'variables'
+> & {
+  variables: Map<string, Expression>;
+};
+
+/**
+ * Define stage.
+ */
+export class Define implements Stage {
+  name = 'let';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalDefineStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [serializer.encodeValue(this.options.variables)!],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.options.variables, ignoreUndefinedProperties);
+  }
+}
+
+/**
+ * Internal options for Subcollection stage.
+ */
+export type InternalSubcollectionStageOptions =
+  firestore.Pipelines.SubcollectionStageOptions;
+
+/**
+ * Subcollection stage.
+ */
+export class SubcollectionSource implements Stage {
+  name = 'subcollection';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalSubcollectionStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    return {
+      name: this.name,
+      args: [serializer.encodeValue(this.options.path)!],
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(_ignoreUndefinedProperties: boolean): void {}
+}
+
 /**
  * Raw stage.
  */
@@ -780,7 +926,7 @@ export class DeleteStage implements Stage {
     };
   }
 
-  _validateUserData(ignoreUndefinedProperties: boolean): void {}
+  _validateUserData(_: boolean): void {}
 }
 
 /**

@@ -3233,6 +3233,98 @@
         }
       }
     },
+    "SessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SessionServiceClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "appendEvent"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionServiceClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "appendEvent"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SpecialistPoolService": {
       "clients": {
         "grpc": {
@@ -3791,6 +3883,16 @@
               "methods": [
                 "corroborateContent"
               ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
+              ]
             }
           }
         },
@@ -3810,6 +3912,16 @@
             "CorroborateContent": {
               "methods": [
                 "corroborateContent"
+              ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
               ]
             }
           }
