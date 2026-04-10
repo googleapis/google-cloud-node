@@ -4337,7 +4337,8 @@
                           "oneof": [
                             "sha256",
                             "sha384",
-                            "sha512"
+                            "sha512",
+                            "externalMu"
                           ]
                         }
                       },
@@ -4353,6 +4354,10 @@
                         "sha512": {
                           "type": "bytes",
                           "id": 3
+                        },
+                        "externalMu": {
+                          "type": "bytes",
+                          "id": 4
                         }
                       }
                     },
