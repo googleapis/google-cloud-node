@@ -66,7 +66,7 @@ async function downloadRepoMetadata () {
 
   let meta;
   for (const urlandRepo of urlsAndRepos) {
-    try {
+    try { 
       const res = await github.request({ url: urlandRepo.url });
       meta = JSON.parse(
         Buffer.from(res.data.content, 'base64').toString('utf8')
@@ -156,7 +156,7 @@ async function processMetadata (repoMetadata) {
       if (!supportDocsUrl.match(/^https/)) {
         supportDocsUrl = `https://${supportDocsUrl}`
       }
-
+      
       let res;
       let remoteUrlExists = true;
       // if URL doesn't exist, fall back to the generic docs page
