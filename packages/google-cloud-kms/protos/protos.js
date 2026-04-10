@@ -7053,6 +7053,7 @@
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] SingleTenantHsmInstance deleteTime
                          * @property {google.protobuf.IDuration|null} [unrefreshedDurationUntilDisable] SingleTenantHsmInstance unrefreshedDurationUntilDisable
                          * @property {google.protobuf.ITimestamp|null} [disableTime] SingleTenantHsmInstance disableTime
+                         * @property {boolean|null} [keyPortabilityEnabled] SingleTenantHsmInstance keyPortabilityEnabled
                          */
     
                         /**
@@ -7127,6 +7128,14 @@
                         SingleTenantHsmInstance.prototype.disableTime = null;
     
                         /**
+                         * SingleTenantHsmInstance keyPortabilityEnabled.
+                         * @member {boolean} keyPortabilityEnabled
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.keyPortabilityEnabled = false;
+    
+                        /**
                          * Creates a new SingleTenantHsmInstance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
@@ -7164,6 +7173,8 @@
                                 $root.google.protobuf.Duration.encode(message.unrefreshedDurationUntilDisable, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.disableTime != null && Object.hasOwnProperty.call(message, "disableTime"))
                                 $root.google.protobuf.Timestamp.encode(message.disableTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.keyPortabilityEnabled != null && Object.hasOwnProperty.call(message, "keyPortabilityEnabled"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.keyPortabilityEnabled);
                             return writer;
                         };
     
@@ -7226,6 +7237,10 @@
                                     }
                                 case 7: {
                                         message.disableTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.keyPortabilityEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7306,6 +7321,9 @@
                                 if (error)
                                     return "disableTime." + error;
                             }
+                            if (message.keyPortabilityEnabled != null && message.hasOwnProperty("keyPortabilityEnabled"))
+                                if (typeof message.keyPortabilityEnabled !== "boolean")
+                                    return "keyPortabilityEnabled: boolean expected";
                             return null;
                         };
     
@@ -7392,6 +7410,8 @@
                                     throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.disableTime: object expected");
                                 message.disableTime = $root.google.protobuf.Timestamp.fromObject(object.disableTime);
                             }
+                            if (object.keyPortabilityEnabled != null)
+                                message.keyPortabilityEnabled = Boolean(object.keyPortabilityEnabled);
                             return message;
                         };
     
@@ -7416,6 +7436,7 @@
                                 object.deleteTime = null;
                                 object.unrefreshedDurationUntilDisable = null;
                                 object.disableTime = null;
+                                object.keyPortabilityEnabled = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7431,6 +7452,8 @@
                                 object.unrefreshedDurationUntilDisable = $root.google.protobuf.Duration.toObject(message.unrefreshedDurationUntilDisable, options);
                             if (message.disableTime != null && message.hasOwnProperty("disableTime"))
                                 object.disableTime = $root.google.protobuf.Timestamp.toObject(message.disableTime, options);
+                            if (message.keyPortabilityEnabled != null && message.hasOwnProperty("keyPortabilityEnabled"))
+                                object.keyPortabilityEnabled = message.keyPortabilityEnabled;
                             return object;
                         };
     

@@ -3193,6 +3193,9 @@ export namespace google {
 
                     /** SingleTenantHsmInstance disableTime */
                     disableTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance keyPortabilityEnabled */
+                    keyPortabilityEnabled?: (boolean|null);
                 }
 
                 /** Represents a SingleTenantHsmInstance. */
@@ -3224,6 +3227,9 @@ export namespace google {
 
                     /** SingleTenantHsmInstance disableTime. */
                     public disableTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance keyPortabilityEnabled. */
+                    public keyPortabilityEnabled: boolean;
 
                     /**
                      * Creates a new SingleTenantHsmInstance instance using the specified properties.
