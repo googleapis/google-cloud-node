@@ -58,26 +58,12 @@ export FILTER_BRANCH_SQUELCH_WARNING=1
 WORKDIR=$(mktemp -d -t code-migration-XXXXXXXXXX)
 echo "Created working directory: ${WORKDIR}"
 
-# Define persistent cache directory for source repositories
-SOURCE_REPO_CACHE_ROOT="${HOME}/.gemini-cli/git-cache"
-SOURCE_REPO_CACHE_DIR="${SOURCE_REPO_CACHE_ROOT}/$(basename "${SOURCE_REPO}")"
-
 pushd "${WORKDIR}"
 
-echo "Checking for cached source repository: ${SOURCE_REPO_CACHE_DIR}"
-if [[ -d "${SOURCE_REPO_CACHE_DIR}" && -d "${SOURCE_REPO_CACHE_DIR}/.git" ]]
-then
-  echo "Cached source repository found. Updating..."
-  pushd "${SOURCE_REPO_CACHE_DIR}"
-  git pull
-  popd
-else
-  echo "Cached source repository not found. Cloning into ${SOURCE_REPO_CACHE_DIR}..."
-  mkdir -p "${SOURCE_REPO_CACHE_ROOT}"
-  git clone "git@github.com:${SOURCE_REPO}.git" "${SOURCE_REPO_CACHE_DIR}"
-fi
+echo "Cloning source repository: ${SOURCE_REPO}"
+git clone "git@github.com:${SOURCE_REPO}.git" source-repo
 
-pushd "${SOURCE_REPO_CACHE_DIR}"
+pushd source-repo
 git remote remove origin
 
 # prune only files within the specified directory
@@ -106,9 +92,9 @@ then
       if [[ $file == "${KEEP_FILES_SPACES[$LAST_ELEMENT]}" ]]
       then
         KEEP_FILE_COMMANDS+="git checkout -- ${file} 2>/dev/null || true"
-      else 
+      else
         KEEP_FILE_COMMANDS+="git checkout -- ${file} 2>/dev/null || true; "
-      fi   
+      fi
     done
     # restore files to keep, silence errors if the file doesn't exist
     FILTER="${FILTER}; ${KEEP_FILE_COMMANDS}"
@@ -134,17 +120,17 @@ fi
 popd
 
 # merge histories
-echo "Cloning target repository: ${TARGET_REPO}"
+echo "Cloning target repository: ${SOURCE_REPO}"
 git clone "git@github.com:${TARGET_REPO}.git" target-repo
 pushd target-repo
 
-git remote add --fetch migration "${SOURCE_REPO_CACHE_DIR}"
+git remote add --fetch migration ../source-repo
 git checkout -b "${BRANCH}"
 git merge --allow-unrelated-histories migration/main --no-edit
 
 if [[ ! -z "${UPDATE_SCRIPT}" ]]
 then
-  bash "${UPDATE_SCRIPT}" "${PACKAGE_PATH}"
+  bash "${UPDATE_SCRIPT}"
 fi
 
 git push -u origin "${BRANCH}" --force

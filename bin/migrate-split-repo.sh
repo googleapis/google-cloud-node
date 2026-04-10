@@ -12,24 +12,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
- 
+
 set -e
- 
+
 if [ $# -lt 2 ]
 then
   echo "Usage: $0 <split-repo-name> <target-path>"
   exit 1
 fi
- 
+
 # repo name (e.g. nodejs-asset)
-export SPLIT_REPO=$1
-# destination directory (e.g. packages/google-cloud-asset)
-export PACKAGE_PATH="$2"
-  
+SPLIT_REPO=$1
+# destination directory (e.g. google-cloud-asset)
+ARTIFACT_NAME=$2
+
 ## Get the directory of the build script
 SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
- 
+
 export UPDATE_SCRIPT="${SCRIPT_DIR}/split-repo-post-process.sh"
+export PACKAGE_PATH="packages/${ARTIFACT_NAME}"
+
 # run the migrate script, remove .kokoro and .github folders
 # keep the .github/.OwlBot.yaml config
 ${SCRIPT_DIR}/migrate-git-history.sh \
@@ -37,8 +39,9 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   "googleapis/google-cloud-node" \
   "" \
   "${PACKAGE_PATH}" \
-  "samples",".github/workflows/ci.yaml,.github/workflows/issues-no-repro.yaml,.github/workflows/response.yaml,SECURITY.md,renovate.json" \
-  "samples/generated",".github/.OwlBot.yaml,system-test/test/quickstart.js,system-test/test/quickstart.test.js"
- 
+  ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json,samples" \
+  ".github/.OwlBot.yaml,samples/quickstart.js,samples/test/quickstart.js,system-test/test/quickstart.js,samples/.eslintrc.yml,samples/test/sample.test.js,samples/test/quickstart.test.js,system-test/test/quickstart.test.js,system-test/test/quickstart.js,samples/README.md,samples/package.json,samples/generated"
 
+# run the script to update the split repo and either delete all the samples or just update the README
+${SCRIPT_DIR}/delete-everything-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"
 ${SCRIPT_DIR}/update-readme-only-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"
