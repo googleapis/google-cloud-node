@@ -7,7 +7,8 @@
           "type": "feat",
           "sha": "228fe85ad548968823bc9c99e21afceacf2638b0",
           "message": "Added public preview support for full-text search and geo search in Pipelines.",
-          "issues": []
+          "issues": [],
+          "scope": "firestore"
         },
         {
           "type": "feat",
@@ -21,14 +22,9 @@
         {
           "type": "feat",
           "sha": "09cd24fcb742fa2f084c4c358a0156aac7951c26",
-          "message": "[firestore] Add support for DML",
-          "issues": []
-        },
-        {
-          "type": "feat",
-          "sha": "77ce3195b2b5f569b7fba33ea5bcc05391428318",
-          "message": "[firestore] Add support for DML",
-          "issues": []
+          "message": "Add support for DML",
+          "issues": [],
+          "scope": "firestore"
         },
         {
           "type": "fix",
@@ -55,12 +51,41 @@
           "type": "fix",
           "sha": "7d044d1f9d30ab0edef38d1fc07311799a3e9f91",
           "message": "Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase",
-          "issues": []
+          "issues": [],
+          "scope": "firestore"
         },
         {
           "type": "feat",
           "sha": "deeb265d21751393a71224a3793adb38582f39b8",
           "message": "Add timestamp expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "d92085919976da1fcda69403720e3d1cacc7ea74",
+          "message": "Add `ifNull` and `coalesce` expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "6f99c36b867a1e660a05fb9d43d3f3fcd4312291",
+          "message": "Defer pipeline user data validation to `execute()`",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "3ebfb71491305f14866f09498a6b8a5cd12756da",
+          "message": "Global option to turn on implicit orderby",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "e340a4fbe5bff1010e00abefd9aa273eb29b8f86",
+          "message": "Add logical expressions",
           "issues": [],
           "scope": "firestore"
         }
