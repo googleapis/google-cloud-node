@@ -42,7 +42,7 @@ export function addToValue() {
  * @returns a Value-formatted object
  */
 export function toValue(
-  message: protobuf.Message | object
+  message: protobuf.Message | object,
 ): null | object | undefined | protobuf.common.IValue {
   if (message === undefined) {
     return undefined;
@@ -52,7 +52,7 @@ export function toValue(
     message as unknown as ValueType,
     (val: object) => {
       return val;
-    }
+    },
   );
   return value;
 }
@@ -63,7 +63,7 @@ export function toValue(
  * @returns a Message
  */
 export function fromValue(
-  value: protobuf.common.IValue
+  value: protobuf.common.IValue,
 ): object | null | undefined | string | number | ValueType | boolean {
   if (!value) {
     return undefined;
@@ -71,7 +71,7 @@ export function fromValue(
 
   if (!value.structValue || !value.structValue.fields) {
     throw new Error(
-      'ERROR: fromValue() was provided a malformed protobuf object'
+      'ERROR: fromValue() was provided a malformed protobuf object',
     );
   }
 

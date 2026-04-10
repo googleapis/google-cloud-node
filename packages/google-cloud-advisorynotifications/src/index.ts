@@ -18,7 +18,8 @@
 
 import * as v1 from './v1';
 
-const AdvisoryNotificationsServiceClient = v1.AdvisoryNotificationsServiceClient;
+const AdvisoryNotificationsServiceClient =
+  v1.AdvisoryNotificationsServiceClient;
 type AdvisoryNotificationsServiceClient = v1.AdvisoryNotificationsServiceClient;
 
 export {v1, AdvisoryNotificationsServiceClient};

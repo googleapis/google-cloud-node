@@ -1,6 +1,6 @@
 {
   // This file is handwritten since this library has many custom handwritten files
-  "extends": "./node_modules/gts/tsconfig-google.json",
+  "extends": "../../node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",

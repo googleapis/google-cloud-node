@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +27,7 @@ export interface ValueType {
 // INTERNAL ONLY. This function is not exposed to external callers.
 export function googleProtobufValueFromObject(
   object: ValueType,
-  create: (result: object) => object
+  create: (result: object) => object,
 ): object | null | ValueType | protobuf.common.IValue {
   if (object === null) {
     return create({
@@ -71,7 +72,7 @@ export function googleProtobufValueFromObject(
       const fieldName = names[i];
       fields[fieldName] = googleProtobufValueFromObject(
         object[fieldName] as ValueType,
-        create
+        create,
       );
     }
     return create({
@@ -87,7 +88,7 @@ export function googleProtobufValueFromObject(
 // INTERNAL ONLY. This function not exposed to external callers.
 // recursive google.protobuf.Value to plain JS object
 export function googleProtobufValueToObject(
-  message: protobuf.common.IValue
+  message: protobuf.common.IValue,
 ): object | null | undefined | boolean | number | string {
   if (message.kind === 'boolValue') {
     return message.boolValue;
@@ -113,7 +114,7 @@ export function googleProtobufValueToObject(
       struct: any = {};
     for (let i = 0; i < names.length; ++i) {
       struct[names[i]] = googleProtobufValueToObject(
-        message.structValue['fields'][names[i]]
+        message.structValue['fields'][names[i]],
       );
     }
     return struct;

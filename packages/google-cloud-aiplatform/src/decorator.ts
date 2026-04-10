@@ -32,7 +32,7 @@ interface NestedNamespace {
 // Walk the tree of nested namespaces contained within the enhanced-types.json file
 function walkNamespaces(
   jsonNode: JsonNode,
-  rootNamespace: NestedNamespace
+  rootNamespace: NestedNamespace,
 ): void {
   for (const namespaceName in jsonNode) {
     if (Object.hasOwnProperty.call(jsonNode, namespaceName)) {
@@ -50,7 +50,7 @@ function walkNamespaces(
         // Assign the methods to this list of types.
         assignMethodsToMessages(
           namespace as NestedNamespace,
-          namespaceJsonObject as string[]
+          namespaceJsonObject as string[],
         );
 
         // Check if this is another node.
@@ -71,7 +71,7 @@ function walkNamespaces(
 function assignMethodsToMessages(
   // tslint:disable-next-line no-any
   namespace: NestedNamespace,
-  messages: string[]
+  messages: string[],
 ): void {
   for (const message of messages) {
     if (message in namespace) {
