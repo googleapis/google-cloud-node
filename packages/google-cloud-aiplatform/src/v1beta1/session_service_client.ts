@@ -331,11 +331,17 @@ export class SessionServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragDataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}'
+      ),
       ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragEngineConfig'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      ragMetadataPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}'
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
@@ -887,6 +893,14 @@ export class SessionServiceClient {
  *   `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
  * @param {google.cloud.aiplatform.v1beta1.Session} request.session
  *   Required. The session to create.
+ * @param {string} [request.sessionId]
+ *   Optional. The user defined ID to use for session, which will become the
+ *   final component of the session resource name. If not provided, Vertex AI
+ *   will generate a value for this ID.
+ *
+ *   This value may be up to 63 characters, and valid characters are
+ *   `[a-z0-9-]`. The first character must be a letter, and the last character
+ *   must be a letter or number.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1122,8 +1136,9 @@ export class SessionServiceClient {
  *   Supported fields:
  *      * `display_name`
  *      * `user_id`
+ *      * `labels`
  *
- *   Example: `display_name="abc"`, `user_id="123"`.
+ *   Example: `display_name="abc"`, `user_id="123"`, `labels.key="value"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1242,8 +1257,9 @@ export class SessionServiceClient {
  *   Supported fields:
  *      * `display_name`
  *      * `user_id`
+ *      * `labels`
  *
- *   Example: `display_name="abc"`, `user_id="123"`.
+ *   Example: `display_name="abc"`, `user_id="123"`, `labels.key="value"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1311,8 +1327,9 @@ export class SessionServiceClient {
  *   Supported fields:
  *      * `display_name`
  *      * `user_id`
+ *      * `labels`
  *
- *   Example: `display_name="abc"`, `user_id="123"`.
+ *   Example: `display_name="abc"`, `user_id="123"`, `labels.key="value"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -4718,6 +4735,68 @@ export class SessionServiceClient {
   }
 
   /**
+   * Return a fully-qualified ragDataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_data_schema
+   * @returns {string} Resource name string.
+   */
+  ragDataSchemaPath(project:string,location:string,ragCorpus:string,ragDataSchema:string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_data_schema: ragDataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).project;
+  }
+
+  /**
+   * Parse the location from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_data_schema from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_data_schema.
+   */
+  matchRagDataSchemaFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_data_schema;
+  }
+
+  /**
    * Return a fully-qualified ragEngineConfig resource name string.
    *
    * @param {string} project
@@ -4813,6 +4892,81 @@ export class SessionServiceClient {
    */
   matchRagFileFromRagFileName(ragFileName: string) {
     return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified ragMetadata resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @param {string} rag_metadata
+   * @returns {string} Resource name string.
+   */
+  ragMetadataPath(project:string,location:string,ragCorpus:string,ragFile:string,ragMetadata:string) {
+    return this.pathTemplates.ragMetadataPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+      rag_metadata: ragMetadata,
+    });
+  }
+
+  /**
+   * Parse the project from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).project;
+  }
+
+  /**
+   * Parse the location from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_file;
+  }
+
+  /**
+   * Parse the rag_metadata from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_metadata.
+   */
+  matchRagMetadataFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_metadata;
   }
 
   /**
