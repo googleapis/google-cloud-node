@@ -102,7 +102,7 @@ export function runBaselineTest(options: BaselineOptions) {
     fs.mkdirSync(outputDir);
 
     let commandLine =
-      `${entryPointPath} ` +
+      `node ${entryPointPath} ` +
       `--output_dir=${outputDir} ` +
       `-I${protosDirRoot} ${protoPaths.join(' ')}`;
     if (options.useCommonProto) {

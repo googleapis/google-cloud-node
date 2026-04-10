@@ -37,21 +37,25 @@ jobs:
       with:
         node-version: 18.x
 
+    - name: Install protoc
+      run: |
+        curl -LO "https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protoc-25.3-linux-x86_64.zip"
+        unzip protoc-25.3-linux-x86_64.zip -d /usr/local
+        chmod +x /usr/local/bin/protoc
+
     - name: Install Node dependencies with npm
       run: npm install
       working-directory: core/generator/gapic-generator-typescript
-      
-    - name: Strip local GCC 15 flags for CI
-      working-directory: core/generator/gapic-generator-typescript
-      run: sed -i '/--gsframe/d' .bazelrc
 
-    - name: Run bazel build
+    - name: Run compile
       working-directory: core/generator/gapic-generator-typescript
-      run: bazelisk build --noremote_accept_cached '//...'
+      run: npm run compile
 
-    - name: Run bazel test
+    - name: Run test
       working-directory: core/generator/gapic-generator-typescript
-      run: bazelisk test --test_output=errors --noremote_accept_cached //...
+      run: npm test
+      env:
+        PROTOC_PATH: /usr/local/bin/protoc
 
     - name: Verify error conformance
       working-directory: core/generator/gapic-generator-typescript
@@ -59,15 +63,15 @@ jobs:
         curl -sSL https://github.com/googleapis/gapic-config-validator/releases/download/v0.6.0/gapic-config-validator-0.6.0-linux-amd64.tar.gz > config-validator.tar.gz
         tar xzf config-validator.tar.gz --no-same-owner
         chmod +x gapic-error-conformance
-        chmod +x bazel-bin/protoc_plugin_/protoc_plugin
-        ./gapic-error-conformance -plugin="bazel-bin/protoc_plugin_/protoc_plugin"
+        chmod +x build/typescript/src/protoc-plugin.js
+        ./gapic-error-conformance -plugin="build/typescript/src/protoc-plugin.js"
 
     - name: Prepare baseline artifacts
       working-directory: core/generator/gapic-generator-typescript
       run: |
         mkdir -p ~/artifacts
-        cp bazel-testlogs/unit_tests/test.outputs/outputs.zip ~/artifacts/
-        bazelisk run -- @pnpm//:pnpm --dir $PWD install
+        zip -r ~/artifacts/outputs.zip .test-out-*
+        npm install
         tar cfz ~/artifacts/node_modules.tar.gz node_modules
 
     - name: Save artifacts
@@ -93,7 +97,6 @@ jobs:
           npm run docs
           cd ../..
         done
-
     - name: Test generated ESM libraries
       working-directory: core/generator/gapic-generator-typescript
       run: |
