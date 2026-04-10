@@ -61,7 +61,7 @@ import {
   unicodeJSONStringify,
   formatAsUTCISO,
   PassThroughShim,
-  validateContexts,
+  handleContextValidation,
 } from './util.js';
 import {CRC32C, CRC32CValidatorGenerator} from './crc32c.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
@@ -1326,14 +1326,11 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     if (options.contexts) {
-      try {
-        validateContexts(options.contexts);
-      } catch (err) {
-        if (callback) {
-          return (callback as CopyCallback)(err as Error, null, null);
-        }
-        return Promise.reject(err);
-      }
+      const validationError = handleContextValidation(
+        options.contexts,
+        callback
+      );
+      if (validationError) return validationError;
     }
 
     callback = callback || util.noop;
@@ -4165,18 +4162,16 @@ class File extends ServiceObject<File, FileMetadata> {
     optionsOrCallback?: SaveOptions | SaveCallback,
     callback?: SaveCallback,
   ): Promise<void> | void {
-    // tslint:enable:no-any
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
-    try {
-      validateContexts(options.metadata?.contexts);
-    } catch (err) {
-      if (callback) return callback(err as Error);
-      return Promise.reject(err);
-    }
+    const validationError = handleContextValidation(
+      options.metadata?.contexts,
+      callback
+    );
+    if (validationError) return validationError;
 
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
@@ -4281,12 +4276,8 @@ class File extends ServiceObject<File, FileMetadata> {
         ? (optionsOrCallback as MetadataCallback<FileMetadata>)
         : cb;
 
-    try {
-      validateContexts(metadata.contexts);
-    } catch (err) {
-      if (cb) return cb(err as Error);
-      return Promise.reject(err);
-    }
+    const validationError = handleContextValidation(metadata.contexts, cb);
+    if (validationError) return validationError;
 
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,

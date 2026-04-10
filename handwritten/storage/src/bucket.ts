@@ -34,7 +34,7 @@ import * as path from 'path';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
-import {convertObjKeysToSnakeCase, validateContexts} from './util.js';
+import {convertObjKeysToSnakeCase, handleContextValidation} from './util.js';
 
 import {Acl, AclMetadata} from './acl.js';
 import {Channel} from './channel.js';
@@ -1662,14 +1662,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     }
 
     if (options.contexts) {
-      try {
-        validateContexts(options.contexts);
-      } catch (err) {
-        if (callback) {
-          return (callback as CombineCallback)(err as Error, null, null);
-        }
-        return Promise.reject(err);
-      }
+      const validationError = handleContextValidation(
+        options.contexts,
+        callback
+      );
+      if (validationError) return validationError;
     }
 
     this.disableAutoRetryConditionallyIdempotent_(
@@ -2692,6 +2689,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @property {string} [prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @property {string} [filter] Filter results using a server-side filter
+   * expression. This is primarily used for filtering by Object Contexts.
+   * Syntax: `contexts."<key>"="<value>"` or `contexts."<key>":*`.
+   * Prepend `-` for negation (e.g., `-contexts."key":*`).
    * @property {string} [matchGlob] A glob pattern used to filter results,
    *     for example foo*bar
    * @property {number} [maxApiCalls] Maximum number of API calls to make.
@@ -2739,6 +2740,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @param {string} [query.prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @param {string} [query.filter] Filter results using a server-side filter
+   *     expression. Supports Object Contexts with operators like `=`, `:`,
+   *     and `-` for negation.
    * @param {number} [query.maxApiCalls] Maximum number of API calls to make.
    * @param {number} [query.maxResults] Maximum number of items plus prefixes to
    *     return per call.
@@ -2758,6 +2762,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     billed for the request.
    * @param {boolean} [query.versions] If true, returns File objects scoped to
    *     their versions.
+   *
    * @param {GetFilesCallback} [callback] Callback function.
    * @returns {Promise<GetFilesResponse>}
    *
@@ -2848,6 +2853,31 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *   // apiResponse.prefixes = [
    *   //   'a/b/'
    *   // ]
+   * });
+   * ```
+   *
+   * @example
+   * //-
+   * // Filter files using Object Contexts.
+   * //-
+   * ```
+   * const query = {
+   *    filter: 'contexts."status"="active"'
+   * };
+   * bucket.getFiles(query, function(err, files) {
+   *    if (!err) {
+   *      // files only contains objects with the 'status' context set to 'active'.
+   *    }
+   * });
+   *
+   * //-
+   * // You can also filter by the absence of a context key.
+   * //-
+   *
+   * bucket.getFiles({
+   *    filter: '-contexts."priority":*'
+   * }, function(err, files) {
+   *     // files contains objects that DO NOT have the 'priority' context key.
    * });
    * ```
    *

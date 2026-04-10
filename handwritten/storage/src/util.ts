@@ -299,3 +299,23 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
     }
   }
 }
+
+/**
+ * Helper to validate contexts and route errors to either a callback or a Promise.
+ * @param contexts The contexts to validate.
+ * @param callback The optional user-provided callback.
+ */
+export function handleContextValidation(
+  contexts?: FileMetadata['contexts'],
+  callback?: Function
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Promise<any> | void {
+  try {
+    validateContexts(contexts);
+  } catch (err) {
+    if (callback) {
+      return callback(err as Error);
+    }
+    return Promise.reject(err);
+  }
+}
