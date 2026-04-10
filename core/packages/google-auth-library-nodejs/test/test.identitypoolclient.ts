@@ -1840,7 +1840,8 @@ describe('IdentityPoolClient', () => {
           token_url: getMtlsTokenUrl(),
           credential_source: {
             certificate: {
-              certificate_config_location: certConfigPath,
+              certificate_config_location:
+                './test/fixtures/external-account-cert/cert_config.json',
               trust_chain_path: trustChainPath,
             },
           },

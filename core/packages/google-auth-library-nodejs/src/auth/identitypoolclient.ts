@@ -225,12 +225,13 @@ export class IdentityPoolClient extends BaseExternalAccountClient {
         });
       } else if (certificate) {
         this.credentialSourceType = 'certificate';
+        const certOpts = originalOrCamelOptions(certificate);
         const certificateSubjecttokensupplier =
           new CertificateSubjectTokenSupplier({
             useDefaultCertificateConfig:
-              certificate.use_default_certificate_config,
-            certificateConfigLocation: certificate.certificate_config_location,
-            trustChainPath: certificate.trust_chain_path,
+              certOpts.get('use_default_certificate_config'),
+            certificateConfigLocation: certOpts.get('certificate_config_location'),
+            trustChainPath: certOpts.get('trust_chain_path'),
           });
         this.subjectTokenSupplier = certificateSubjecttokensupplier;
       } else {
