@@ -132,6 +132,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.delete_tool.js) |
 | delete toolset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.delete_toolset.js) |
 | export app | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.export_app.js) |
+| generate app resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.generate_app_resource.js) |
 | get agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_agent.js) |
 | get app | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_app.js) |
 | get app version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_app_version.js) |

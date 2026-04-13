@@ -33,8 +33,7 @@ import * as gapicConfig from './metrics_v1_beta3_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Dataflow Metrics API lets you monitor the progress of Dataflow
- *  jobs.
+ *  The Dataflow Metrics API lets you monitor the progress of Dataflow jobs.
  * @class
  * @memberof v1beta3
  */

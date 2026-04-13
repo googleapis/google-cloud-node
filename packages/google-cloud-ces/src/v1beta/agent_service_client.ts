@@ -310,6 +310,10 @@ export class AgentServiceClient {
       '.google.cloud.ces.v1beta.RestoreAppVersionResponse') as gax.protobuf.Type;
     const restoreAppVersionMetadata = protoFilesRoot.lookup(
       '.google.cloud.ces.v1beta.OperationMetadata') as gax.protobuf.Type;
+    const generateAppResourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.GenerateAppResourceResponse') as gax.protobuf.Type;
+    const generateAppResourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createApp: new this._gaxModule.LongrunningDescriptor(
@@ -335,7 +339,11 @@ export class AgentServiceClient {
       restoreAppVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreAppVersionResponse.decode.bind(restoreAppVersionResponse),
-        restoreAppVersionMetadata.decode.bind(restoreAppVersionMetadata))
+        restoreAppVersionMetadata.decode.bind(restoreAppVersionMetadata)),
+      generateAppResource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        generateAppResourceResponse.decode.bind(generateAppResourceResponse),
+        generateAppResourceMetadata.decode.bind(generateAppResourceMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -381,7 +389,7 @@ export class AgentServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const agentServiceStubMethods =
-        ['listApps', 'getApp', 'createApp', 'updateApp', 'deleteApp', 'exportApp', 'importApp', 'getSecuritySettings', 'updateSecuritySettings', 'listAgents', 'getAgent', 'createAgent', 'updateAgent', 'deleteAgent', 'listExamples', 'getExample', 'createExample', 'updateExample', 'deleteExample', 'listTools', 'getTool', 'listConversations', 'getConversation', 'deleteConversation', 'batchDeleteConversations', 'createTool', 'updateTool', 'deleteTool', 'listGuardrails', 'getGuardrail', 'createGuardrail', 'updateGuardrail', 'deleteGuardrail', 'listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listToolsets', 'getToolset', 'createToolset', 'updateToolset', 'deleteToolset', 'listAppVersions', 'getAppVersion', 'createAppVersion', 'deleteAppVersion', 'restoreAppVersion', 'listChangelogs', 'getChangelog'];
+        ['listApps', 'getApp', 'createApp', 'updateApp', 'deleteApp', 'exportApp', 'importApp', 'getSecuritySettings', 'updateSecuritySettings', 'listAgents', 'getAgent', 'createAgent', 'updateAgent', 'deleteAgent', 'listExamples', 'getExample', 'createExample', 'updateExample', 'deleteExample', 'listTools', 'getTool', 'listConversations', 'getConversation', 'deleteConversation', 'batchDeleteConversations', 'createTool', 'updateTool', 'deleteTool', 'listGuardrails', 'getGuardrail', 'createGuardrail', 'updateGuardrail', 'deleteGuardrail', 'listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listToolsets', 'getToolset', 'createToolset', 'updateToolset', 'deleteToolset', 'listAppVersions', 'getAppVersion', 'createAppVersion', 'deleteAppVersion', 'restoreAppVersion', 'generateAppResource', 'listChangelogs', 'getChangelog'];
     for (const methodName of agentServiceStubMethods) {
       const callPromise = this.agentServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -4524,6 +4532,136 @@ export class AgentServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restoreAppVersion, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.ces.v1beta.RestoreAppVersionResponse, protos.google.cloud.ces.v1beta.OperationMetadata>;
+  }
+/**
+ * Generates specific resources (e.g. agent) in the app using LLM assistant.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.ces.v1beta.Agent} request.agent
+ *   The agent resource to be used by the LLM assistant, can be empty for
+ *   generating a new agent.
+ * @param {google.cloud.ces.v1beta.Tool} request.tool
+ *   The tool resource to be used by the LLM assistant, can be empty for
+ *   generating a new tool.
+ * @param {google.cloud.ces.v1beta.Toolset} request.toolset
+ *   The toolset resource to be used by the LLM assistant, can be empty for
+ *   generating a new toolset.
+ * @param {string} request.parent
+ *   Required. The resource name of the app to generate the resource for.
+ * @param {number[]} [request.refineInstructions]
+ *   Optional. List of refine instructions to be used to refine the resource.
+ * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig} [request.toolGenerationConfig]
+ *   Optional. The configuration to be used to generate the tool.
+ * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig} [request.appGenerationConfig]
+ *   Optional. The configuration to be used to generate the agents and tools.
+ * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig} [request.evaluationGenerationConfig]
+ *   Optional. The configuration to be used to generate the evaluations.
+ * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig} [request.evaluationPersonasGenerationConfig]
+ *   Optional. The configuration to be used to generate the evaluation personas.
+ * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig} [request.qualityReportGenerationConfig]
+ *   Optional. The configuration to be used for quality report generation.
+ * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig} [request.hillClimbingFixConfig]
+ *   Optional. The configuration to be used for hill climbing fixes.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/agent_service.generate_app_resource.js</caption>
+ * region_tag:ces_v1beta_generated_AgentService_GenerateAppResource_async
+ */
+  generateAppResource(
+      request?: protos.google.cloud.ces.v1beta.IGenerateAppResourceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  generateAppResource(
+      request: protos.google.cloud.ces.v1beta.IGenerateAppResourceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  generateAppResource(
+      request: protos.google.cloud.ces.v1beta.IGenerateAppResourceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  generateAppResource(
+      request?: protos.google.cloud.ces.v1beta.IGenerateAppResourceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('generateAppResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('generateAppResource request %j', request);
+    return this.innerApiCalls.generateAppResource(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.ces.v1beta.IGenerateAppResourceResponse, protos.google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('generateAppResource response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `generateAppResource()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/agent_service.generate_app_resource.js</caption>
+ * region_tag:ces_v1beta_generated_AgentService_GenerateAppResource_async
+ */
+  async checkGenerateAppResourceProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1beta.GenerateAppResourceResponse, protos.google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata>>{
+    this._log.info('generateAppResource long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.generateAppResource, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.ces.v1beta.GenerateAppResourceResponse, protos.google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata>;
   }
  /**
  * Lists apps in the given project and location.
