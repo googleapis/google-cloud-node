@@ -255,7 +255,7 @@ Once downloaded, store the path to this file in the `GOOGLE_APPLICATION_CREDENTI
 
 ### Other Authentication Methods
 
-Other authentication methods are outlined in the README for [google-auth-library-nodejs](https://github.com/googleapis/google-auth-library-nodejs),
+Other authentication methods are outlined in the README for [google-auth-library-nodejs](https://github.com/googleapis/google-cloud-node/tree/main/core/packages/google-auth-library-nodejs),
 which is the authentication library used by all Google Cloud Node.js clients.
 
 ## Example Applications
