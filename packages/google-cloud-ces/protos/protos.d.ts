@@ -29878,6 +29878,20 @@ export namespace google {
                     public restoreAppVersion(request: google.cloud.ces.v1beta.IRestoreAppVersionRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls GenerateAppResource.
+                     * @param request GenerateAppResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public generateAppResource(request: google.cloud.ces.v1beta.IGenerateAppResourceRequest, callback: google.cloud.ces.v1beta.AgentService.GenerateAppResourceCallback): void;
+
+                    /**
+                     * Calls GenerateAppResource.
+                     * @param request GenerateAppResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateAppResource(request: google.cloud.ces.v1beta.IGenerateAppResourceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListChangelogs.
                      * @param request ListChangelogsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListChangelogsResponse
@@ -30243,6 +30257,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RestoreAppVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.ces.v1beta.AgentService|generateAppResource}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type GenerateAppResourceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.ces.v1beta.AgentService|listChangelogs}.
@@ -36799,6 +36820,1120 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GenerateAppResourceRequest. */
+                interface IGenerateAppResourceRequest {
+
+                    /** GenerateAppResourceRequest agent */
+                    agent?: (google.cloud.ces.v1beta.IAgent|null);
+
+                    /** GenerateAppResourceRequest tool */
+                    tool?: (google.cloud.ces.v1beta.ITool|null);
+
+                    /** GenerateAppResourceRequest toolset */
+                    toolset?: (google.cloud.ces.v1beta.IToolset|null);
+
+                    /** GenerateAppResourceRequest parent */
+                    parent?: (string|null);
+
+                    /** GenerateAppResourceRequest refineInstructions */
+                    refineInstructions?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions[]|null);
+
+                    /** GenerateAppResourceRequest toolGenerationConfig */
+                    toolGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest appGenerationConfig */
+                    appGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest evaluationGenerationConfig */
+                    evaluationGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest evaluationPersonasGenerationConfig */
+                    evaluationPersonasGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationPersonasGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest qualityReportGenerationConfig */
+                    qualityReportGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IQualityReportGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest hillClimbingFixConfig */
+                    hillClimbingFixConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IHillClimbingFixConfig|null);
+                }
+
+                /** Represents a GenerateAppResourceRequest. */
+                class GenerateAppResourceRequest implements IGenerateAppResourceRequest {
+
+                    /**
+                     * Constructs a new GenerateAppResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IGenerateAppResourceRequest);
+
+                    /** GenerateAppResourceRequest agent. */
+                    public agent?: (google.cloud.ces.v1beta.IAgent|null);
+
+                    /** GenerateAppResourceRequest tool. */
+                    public tool?: (google.cloud.ces.v1beta.ITool|null);
+
+                    /** GenerateAppResourceRequest toolset. */
+                    public toolset?: (google.cloud.ces.v1beta.IToolset|null);
+
+                    /** GenerateAppResourceRequest parent. */
+                    public parent: string;
+
+                    /** GenerateAppResourceRequest refineInstructions. */
+                    public refineInstructions: google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions[];
+
+                    /** GenerateAppResourceRequest toolGenerationConfig. */
+                    public toolGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest appGenerationConfig. */
+                    public appGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest evaluationGenerationConfig. */
+                    public evaluationGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest evaluationPersonasGenerationConfig. */
+                    public evaluationPersonasGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationPersonasGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest qualityReportGenerationConfig. */
+                    public qualityReportGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IQualityReportGenerationConfig|null);
+
+                    /** GenerateAppResourceRequest hillClimbingFixConfig. */
+                    public hillClimbingFixConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.IHillClimbingFixConfig|null);
+
+                    /** GenerateAppResourceRequest resource. */
+                    public resource?: ("agent"|"tool"|"toolset");
+
+                    /**
+                     * Creates a new GenerateAppResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateAppResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IGenerateAppResourceRequest): google.cloud.ces.v1beta.GenerateAppResourceRequest;
+
+                    /**
+                     * Encodes the specified GenerateAppResourceRequest message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.verify|verify} messages.
+                     * @param message GenerateAppResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IGenerateAppResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateAppResourceRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.verify|verify} messages.
+                     * @param message GenerateAppResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IGenerateAppResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateAppResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateAppResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest;
+
+                    /**
+                     * Decodes a GenerateAppResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateAppResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest;
+
+                    /**
+                     * Verifies a GenerateAppResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateAppResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateAppResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateAppResourceRequest message. Also converts values to other types if specified.
+                     * @param message GenerateAppResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateAppResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateAppResourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenerateAppResourceRequest {
+
+                    /** Properties of a RefineInstructions. */
+                    interface IRefineInstructions {
+
+                        /** RefineInstructions startIndex */
+                        startIndex?: (number|Long|string|null);
+
+                        /** RefineInstructions endIndex */
+                        endIndex?: (number|Long|string|null);
+
+                        /** RefineInstructions fieldMask */
+                        fieldMask?: (google.protobuf.IFieldMask|null);
+
+                        /** RefineInstructions instructions */
+                        instructions?: (string|null);
+                    }
+
+                    /** Represents a RefineInstructions. */
+                    class RefineInstructions implements IRefineInstructions {
+
+                        /**
+                         * Constructs a new RefineInstructions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions);
+
+                        /** RefineInstructions startIndex. */
+                        public startIndex: (number|Long|string);
+
+                        /** RefineInstructions endIndex. */
+                        public endIndex: (number|Long|string);
+
+                        /** RefineInstructions fieldMask. */
+                        public fieldMask?: (google.protobuf.IFieldMask|null);
+
+                        /** RefineInstructions instructions. */
+                        public instructions: string;
+
+                        /**
+                         * Creates a new RefineInstructions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RefineInstructions instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions): google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions;
+
+                        /**
+                         * Encodes the specified RefineInstructions message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions.verify|verify} messages.
+                         * @param message RefineInstructions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RefineInstructions message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions.verify|verify} messages.
+                         * @param message RefineInstructions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IRefineInstructions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RefineInstructions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RefineInstructions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions;
+
+                        /**
+                         * Decodes a RefineInstructions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RefineInstructions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions;
+
+                        /**
+                         * Verifies a RefineInstructions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RefineInstructions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RefineInstructions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions;
+
+                        /**
+                         * Creates a plain object from a RefineInstructions message. Also converts values to other types if specified.
+                         * @param message RefineInstructions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.RefineInstructions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RefineInstructions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RefineInstructions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ToolGenerationConfig. */
+                    interface IToolGenerationConfig {
+
+                        /** ToolGenerationConfig context */
+                        context?: (string|null);
+
+                        /** ToolGenerationConfig fileContexts */
+                        fileContexts?: (google.cloud.ces.v1beta.IFileContext[]|null);
+
+                        /** ToolGenerationConfig openApiToolsetGenerationConfig */
+                        openApiToolsetGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.IOpenApiToolsetGenerationConfig|null);
+                    }
+
+                    /** Represents a ToolGenerationConfig. */
+                    class ToolGenerationConfig implements IToolGenerationConfig {
+
+                        /**
+                         * Constructs a new ToolGenerationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig);
+
+                        /** ToolGenerationConfig context. */
+                        public context: string;
+
+                        /** ToolGenerationConfig fileContexts. */
+                        public fileContexts: google.cloud.ces.v1beta.IFileContext[];
+
+                        /** ToolGenerationConfig openApiToolsetGenerationConfig. */
+                        public openApiToolsetGenerationConfig?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.IOpenApiToolsetGenerationConfig|null);
+
+                        /**
+                         * Creates a new ToolGenerationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ToolGenerationConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig;
+
+                        /**
+                         * Encodes the specified ToolGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.verify|verify} messages.
+                         * @param message ToolGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ToolGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.verify|verify} messages.
+                         * @param message ToolGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IToolGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ToolGenerationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ToolGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig;
+
+                        /**
+                         * Decodes a ToolGenerationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ToolGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig;
+
+                        /**
+                         * Verifies a ToolGenerationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ToolGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ToolGenerationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig;
+
+                        /**
+                         * Creates a plain object from a ToolGenerationConfig message. Also converts values to other types if specified.
+                         * @param message ToolGenerationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ToolGenerationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ToolGenerationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ToolGenerationConfig {
+
+                        /** Properties of an OpenApiToolsetGenerationConfig. */
+                        interface IOpenApiToolsetGenerationConfig {
+
+                            /** OpenApiToolsetGenerationConfig uri */
+                            uri?: (string|null);
+
+                            /** OpenApiToolsetGenerationConfig operationGenerationConfigs */
+                            operationGenerationConfigs?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.IOperationGenerationConfig[]|null);
+                        }
+
+                        /** Represents an OpenApiToolsetGenerationConfig. */
+                        class OpenApiToolsetGenerationConfig implements IOpenApiToolsetGenerationConfig {
+
+                            /**
+                             * Constructs a new OpenApiToolsetGenerationConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.IOpenApiToolsetGenerationConfig);
+
+                            /** OpenApiToolsetGenerationConfig uri. */
+                            public uri: string;
+
+                            /** OpenApiToolsetGenerationConfig operationGenerationConfigs. */
+                            public operationGenerationConfigs: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.IOperationGenerationConfig[];
+
+                            /**
+                             * Creates a new OpenApiToolsetGenerationConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OpenApiToolsetGenerationConfig instance
+                             */
+                            public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.IOpenApiToolsetGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig;
+
+                            /**
+                             * Encodes the specified OpenApiToolsetGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.verify|verify} messages.
+                             * @param message OpenApiToolsetGenerationConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.IOpenApiToolsetGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OpenApiToolsetGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.verify|verify} messages.
+                             * @param message OpenApiToolsetGenerationConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.IOpenApiToolsetGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OpenApiToolsetGenerationConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OpenApiToolsetGenerationConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig;
+
+                            /**
+                             * Decodes an OpenApiToolsetGenerationConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OpenApiToolsetGenerationConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig;
+
+                            /**
+                             * Verifies an OpenApiToolsetGenerationConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OpenApiToolsetGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OpenApiToolsetGenerationConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig;
+
+                            /**
+                             * Creates a plain object from an OpenApiToolsetGenerationConfig message. Also converts values to other types if specified.
+                             * @param message OpenApiToolsetGenerationConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OpenApiToolsetGenerationConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OpenApiToolsetGenerationConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace OpenApiToolsetGenerationConfig {
+
+                            /** Properties of an OperationGenerationConfig. */
+                            interface IOperationGenerationConfig {
+
+                                /** OperationGenerationConfig method */
+                                method?: (string|null);
+
+                                /** OperationGenerationConfig path */
+                                path?: (string|null);
+
+                                /** OperationGenerationConfig requestJson */
+                                requestJson?: (string|null);
+
+                                /** OperationGenerationConfig responseJson */
+                                responseJson?: (string|null);
+                            }
+
+                            /** Represents an OperationGenerationConfig. */
+                            class OperationGenerationConfig implements IOperationGenerationConfig {
+
+                                /**
+                                 * Constructs a new OperationGenerationConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.IOperationGenerationConfig);
+
+                                /** OperationGenerationConfig method. */
+                                public method: string;
+
+                                /** OperationGenerationConfig path. */
+                                public path: string;
+
+                                /** OperationGenerationConfig requestJson. */
+                                public requestJson: string;
+
+                                /** OperationGenerationConfig responseJson. */
+                                public responseJson: string;
+
+                                /**
+                                 * Creates a new OperationGenerationConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns OperationGenerationConfig instance
+                                 */
+                                public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.IOperationGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig;
+
+                                /**
+                                 * Encodes the specified OperationGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig.verify|verify} messages.
+                                 * @param message OperationGenerationConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.IOperationGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified OperationGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig.verify|verify} messages.
+                                 * @param message OperationGenerationConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.IOperationGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an OperationGenerationConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns OperationGenerationConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig;
+
+                                /**
+                                 * Decodes an OperationGenerationConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns OperationGenerationConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig;
+
+                                /**
+                                 * Verifies an OperationGenerationConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an OperationGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns OperationGenerationConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig;
+
+                                /**
+                                 * Creates a plain object from an OperationGenerationConfig message. Also converts values to other types if specified.
+                                 * @param message OperationGenerationConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig.OpenApiToolsetGenerationConfig.OperationGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this OperationGenerationConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for OperationGenerationConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of an AppGenerationConfig. */
+                    interface IAppGenerationConfig {
+
+                        /** AppGenerationConfig context */
+                        context?: (string|null);
+
+                        /** AppGenerationConfig fileContexts */
+                        fileContexts?: (google.cloud.ces.v1beta.IFileContext[]|null);
+
+                        /** AppGenerationConfig datasetId */
+                        datasetId?: (string|null);
+
+                        /** AppGenerationConfig generateEvaluations */
+                        generateEvaluations?: (boolean|null);
+
+                        /** AppGenerationConfig gcsLocation */
+                        gcsLocation?: (string|null);
+                    }
+
+                    /** Represents an AppGenerationConfig. */
+                    class AppGenerationConfig implements IAppGenerationConfig {
+
+                        /**
+                         * Constructs a new AppGenerationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppGenerationConfig);
+
+                        /** AppGenerationConfig context. */
+                        public context: string;
+
+                        /** AppGenerationConfig fileContexts. */
+                        public fileContexts: google.cloud.ces.v1beta.IFileContext[];
+
+                        /** AppGenerationConfig datasetId. */
+                        public datasetId: string;
+
+                        /** AppGenerationConfig generateEvaluations. */
+                        public generateEvaluations: boolean;
+
+                        /** AppGenerationConfig gcsLocation. */
+                        public gcsLocation: string;
+
+                        /**
+                         * Creates a new AppGenerationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AppGenerationConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig;
+
+                        /**
+                         * Encodes the specified AppGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig.verify|verify} messages.
+                         * @param message AppGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AppGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig.verify|verify} messages.
+                         * @param message AppGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IAppGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AppGenerationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AppGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig;
+
+                        /**
+                         * Decodes an AppGenerationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AppGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig;
+
+                        /**
+                         * Verifies an AppGenerationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AppGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AppGenerationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig;
+
+                        /**
+                         * Creates a plain object from an AppGenerationConfig message. Also converts values to other types if specified.
+                         * @param message AppGenerationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AppGenerationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AppGenerationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EvaluationGenerationConfig. */
+                    interface IEvaluationGenerationConfig {
+
+                        /** EvaluationGenerationConfig datasetId */
+                        datasetId?: (string|null);
+                    }
+
+                    /** Represents an EvaluationGenerationConfig. */
+                    class EvaluationGenerationConfig implements IEvaluationGenerationConfig {
+
+                        /**
+                         * Constructs a new EvaluationGenerationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationGenerationConfig);
+
+                        /** EvaluationGenerationConfig datasetId. */
+                        public datasetId: string;
+
+                        /**
+                         * Creates a new EvaluationGenerationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EvaluationGenerationConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig;
+
+                        /**
+                         * Encodes the specified EvaluationGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig.verify|verify} messages.
+                         * @param message EvaluationGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EvaluationGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig.verify|verify} messages.
+                         * @param message EvaluationGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EvaluationGenerationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EvaluationGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig;
+
+                        /**
+                         * Decodes an EvaluationGenerationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EvaluationGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig;
+
+                        /**
+                         * Verifies an EvaluationGenerationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EvaluationGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EvaluationGenerationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig;
+
+                        /**
+                         * Creates a plain object from an EvaluationGenerationConfig message. Also converts values to other types if specified.
+                         * @param message EvaluationGenerationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EvaluationGenerationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EvaluationGenerationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EvaluationPersonasGenerationConfig. */
+                    interface IEvaluationPersonasGenerationConfig {
+                    }
+
+                    /** Represents an EvaluationPersonasGenerationConfig. */
+                    class EvaluationPersonasGenerationConfig implements IEvaluationPersonasGenerationConfig {
+
+                        /**
+                         * Constructs a new EvaluationPersonasGenerationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationPersonasGenerationConfig);
+
+                        /**
+                         * Creates a new EvaluationPersonasGenerationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EvaluationPersonasGenerationConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationPersonasGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig;
+
+                        /**
+                         * Encodes the specified EvaluationPersonasGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig.verify|verify} messages.
+                         * @param message EvaluationPersonasGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationPersonasGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EvaluationPersonasGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig.verify|verify} messages.
+                         * @param message EvaluationPersonasGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IEvaluationPersonasGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EvaluationPersonasGenerationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EvaluationPersonasGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig;
+
+                        /**
+                         * Decodes an EvaluationPersonasGenerationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EvaluationPersonasGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig;
+
+                        /**
+                         * Verifies an EvaluationPersonasGenerationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EvaluationPersonasGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EvaluationPersonasGenerationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig;
+
+                        /**
+                         * Creates a plain object from an EvaluationPersonasGenerationConfig message. Also converts values to other types if specified.
+                         * @param message EvaluationPersonasGenerationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EvaluationPersonasGenerationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EvaluationPersonasGenerationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QualityReportGenerationConfig. */
+                    interface IQualityReportGenerationConfig {
+
+                        /** QualityReportGenerationConfig evaluationRun */
+                        evaluationRun?: (string|null);
+                    }
+
+                    /** Represents a QualityReportGenerationConfig. */
+                    class QualityReportGenerationConfig implements IQualityReportGenerationConfig {
+
+                        /**
+                         * Constructs a new QualityReportGenerationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IQualityReportGenerationConfig);
+
+                        /** QualityReportGenerationConfig evaluationRun. */
+                        public evaluationRun: string;
+
+                        /**
+                         * Creates a new QualityReportGenerationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QualityReportGenerationConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IQualityReportGenerationConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig;
+
+                        /**
+                         * Encodes the specified QualityReportGenerationConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.verify|verify} messages.
+                         * @param message QualityReportGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IQualityReportGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QualityReportGenerationConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.verify|verify} messages.
+                         * @param message QualityReportGenerationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IQualityReportGenerationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QualityReportGenerationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QualityReportGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig;
+
+                        /**
+                         * Decodes a QualityReportGenerationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QualityReportGenerationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig;
+
+                        /**
+                         * Verifies a QualityReportGenerationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QualityReportGenerationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QualityReportGenerationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig;
+
+                        /**
+                         * Creates a plain object from a QualityReportGenerationConfig message. Also converts values to other types if specified.
+                         * @param message QualityReportGenerationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QualityReportGenerationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QualityReportGenerationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a HillClimbingFixConfig. */
+                    interface IHillClimbingFixConfig {
+
+                        /** HillClimbingFixConfig qualityReport */
+                        qualityReport?: (google.cloud.ces.v1beta.IQualityReport|null);
+                    }
+
+                    /** Represents a HillClimbingFixConfig. */
+                    class HillClimbingFixConfig implements IHillClimbingFixConfig {
+
+                        /**
+                         * Constructs a new HillClimbingFixConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IHillClimbingFixConfig);
+
+                        /** HillClimbingFixConfig qualityReport. */
+                        public qualityReport?: (google.cloud.ces.v1beta.IQualityReport|null);
+
+                        /**
+                         * Creates a new HillClimbingFixConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HillClimbingFixConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.GenerateAppResourceRequest.IHillClimbingFixConfig): google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig;
+
+                        /**
+                         * Encodes the specified HillClimbingFixConfig message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig.verify|verify} messages.
+                         * @param message HillClimbingFixConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IHillClimbingFixConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HillClimbingFixConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig.verify|verify} messages.
+                         * @param message HillClimbingFixConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.IHillClimbingFixConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HillClimbingFixConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HillClimbingFixConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig;
+
+                        /**
+                         * Decodes a HillClimbingFixConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HillClimbingFixConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig;
+
+                        /**
+                         * Verifies a HillClimbingFixConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HillClimbingFixConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HillClimbingFixConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig;
+
+                        /**
+                         * Creates a plain object from a HillClimbingFixConfig message. Also converts values to other types if specified.
+                         * @param message HillClimbingFixConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HillClimbingFixConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HillClimbingFixConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a GenerateAppResourceResponse. */
                 interface IGenerateAppResourceResponse {
 
@@ -37659,6 +38794,150 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GenerateAppResourceOperationMetadata. */
+                interface IGenerateAppResourceOperationMetadata {
+
+                    /** GenerateAppResourceOperationMetadata generationType */
+                    generationType?: (google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata.GenerationType|keyof typeof google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata.GenerationType|null);
+
+                    /** GenerateAppResourceOperationMetadata message */
+                    message?: (string|null);
+
+                    /** GenerateAppResourceOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenerateAppResourceOperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenerateAppResourceOperationMetadata target */
+                    target?: (string|null);
+
+                    /** GenerateAppResourceOperationMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a GenerateAppResourceOperationMetadata. */
+                class GenerateAppResourceOperationMetadata implements IGenerateAppResourceOperationMetadata {
+
+                    /**
+                     * Constructs a new GenerateAppResourceOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata);
+
+                    /** GenerateAppResourceOperationMetadata generationType. */
+                    public generationType: (google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata.GenerationType|keyof typeof google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata.GenerationType);
+
+                    /** GenerateAppResourceOperationMetadata message. */
+                    public message: string;
+
+                    /** GenerateAppResourceOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenerateAppResourceOperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenerateAppResourceOperationMetadata target. */
+                    public target: string;
+
+                    /** GenerateAppResourceOperationMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new GenerateAppResourceOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateAppResourceOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata): google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata;
+
+                    /**
+                     * Encodes the specified GenerateAppResourceOperationMetadata message. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata.verify|verify} messages.
+                     * @param message GenerateAppResourceOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateAppResourceOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata.verify|verify} messages.
+                     * @param message GenerateAppResourceOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IGenerateAppResourceOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateAppResourceOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateAppResourceOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata;
+
+                    /**
+                     * Decodes a GenerateAppResourceOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateAppResourceOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata;
+
+                    /**
+                     * Verifies a GenerateAppResourceOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateAppResourceOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateAppResourceOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a GenerateAppResourceOperationMetadata message. Also converts values to other types if specified.
+                     * @param message GenerateAppResourceOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.GenerateAppResourceOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateAppResourceOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateAppResourceOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenerateAppResourceOperationMetadata {
+
+                    /** GenerationType enum. */
+                    enum GenerationType {
+                        GENERATION_TYPE_UNSPECIFIED = 0,
+                        AGENT_RESTRUCTURE = 1,
+                        AGENT_REFINE = 2,
+                        AGENT_CREATE = 3,
+                        TOOL_CREATE = 4,
+                        SCENARIO_CREATE = 5,
+                        SCENARIO_CREATE_FROM_TRANSCRIPTS = 7,
+                        EVALUATION_PERSONA_CREATE = 6,
+                        QUALITY_REPORT_CREATE = 8,
+                        INSTRUCTION_FOLLOWING_FIX = 9
                     }
                 }
 
@@ -44305,6 +45584,9 @@ export namespace google {
 
                     /** AgentTool rootAgent */
                     rootAgent?: (string|null);
+
+                    /** AgentTool agent */
+                    agent?: (string|null);
                 }
 
                 /** Represents an AgentTool. */
@@ -44324,6 +45606,9 @@ export namespace google {
 
                     /** AgentTool rootAgent. */
                     public rootAgent: string;
+
+                    /** AgentTool agent. */
+                    public agent: string;
 
                     /**
                      * Creates a new AgentTool instance using the specified properties.
@@ -49565,7 +50850,8 @@ export namespace google {
                         SOURCE_UNSPECIFIED = 0,
                         LIVE = 1,
                         SIMULATOR = 2,
-                        EVAL = 3
+                        EVAL = 3,
+                        AGENT_TOOL = 4
                     }
 
                     /** InputType enum. */
@@ -58893,6 +60179,218 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileContext. */
+                interface IFileContext {
+
+                    /** FileContext fileBytes */
+                    fileBytes?: (google.cloud.ces.v1beta.FileContext.IFileBytes|null);
+                }
+
+                /** Represents a FileContext. */
+                class FileContext implements IFileContext {
+
+                    /**
+                     * Constructs a new FileContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IFileContext);
+
+                    /** FileContext fileBytes. */
+                    public fileBytes?: (google.cloud.ces.v1beta.FileContext.IFileBytes|null);
+
+                    /** FileContext file. */
+                    public file?: "fileBytes";
+
+                    /**
+                     * Creates a new FileContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileContext instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IFileContext): google.cloud.ces.v1beta.FileContext;
+
+                    /**
+                     * Encodes the specified FileContext message. Does not implicitly {@link google.cloud.ces.v1beta.FileContext.verify|verify} messages.
+                     * @param message FileContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IFileContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileContext message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.FileContext.verify|verify} messages.
+                     * @param message FileContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IFileContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.FileContext;
+
+                    /**
+                     * Decodes a FileContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.FileContext;
+
+                    /**
+                     * Verifies a FileContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.FileContext;
+
+                    /**
+                     * Creates a plain object from a FileContext message. Also converts values to other types if specified.
+                     * @param message FileContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.FileContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FileContext {
+
+                    /** Properties of a FileBytes. */
+                    interface IFileBytes {
+
+                        /** FileBytes fileName */
+                        fileName?: (string|null);
+
+                        /** FileBytes mimeType */
+                        mimeType?: (string|null);
+
+                        /** FileBytes data */
+                        data?: (Uint8Array|Buffer|string|null);
+                    }
+
+                    /** Represents a FileBytes. */
+                    class FileBytes implements IFileBytes {
+
+                        /**
+                         * Constructs a new FileBytes.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.FileContext.IFileBytes);
+
+                        /** FileBytes fileName. */
+                        public fileName: string;
+
+                        /** FileBytes mimeType. */
+                        public mimeType: string;
+
+                        /** FileBytes data. */
+                        public data: (Uint8Array|Buffer|string);
+
+                        /**
+                         * Creates a new FileBytes instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FileBytes instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.FileContext.IFileBytes): google.cloud.ces.v1beta.FileContext.FileBytes;
+
+                        /**
+                         * Encodes the specified FileBytes message. Does not implicitly {@link google.cloud.ces.v1beta.FileContext.FileBytes.verify|verify} messages.
+                         * @param message FileBytes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.FileContext.IFileBytes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FileBytes message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.FileContext.FileBytes.verify|verify} messages.
+                         * @param message FileBytes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.FileContext.IFileBytes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FileBytes message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FileBytes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.FileContext.FileBytes;
+
+                        /**
+                         * Decodes a FileBytes message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FileBytes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.FileContext.FileBytes;
+
+                        /**
+                         * Verifies a FileBytes message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FileBytes message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FileBytes
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.FileContext.FileBytes;
+
+                        /**
+                         * Creates a plain object from a FileBytes message. Also converts values to other types if specified.
+                         * @param message FileBytes
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.FileContext.FileBytes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FileBytes to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FileBytes
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a SecuritySettings. */

@@ -62125,6 +62125,7 @@
                          * Properties of a DataDocumentationResult.
                          * @memberof google.cloud.dataplex.v1
                          * @interface IDataDocumentationResult
+                         * @property {google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult|null} [datasetResult] DataDocumentationResult datasetResult
                          * @property {google.cloud.dataplex.v1.DataDocumentationResult.ITableResult|null} [tableResult] DataDocumentationResult tableResult
                          */
     
@@ -62144,6 +62145,14 @@
                         }
     
                         /**
+                         * DataDocumentationResult datasetResult.
+                         * @member {google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult|null|undefined} datasetResult
+                         * @memberof google.cloud.dataplex.v1.DataDocumentationResult
+                         * @instance
+                         */
+                        DataDocumentationResult.prototype.datasetResult = null;
+    
+                        /**
                          * DataDocumentationResult tableResult.
                          * @member {google.cloud.dataplex.v1.DataDocumentationResult.ITableResult|null|undefined} tableResult
                          * @memberof google.cloud.dataplex.v1.DataDocumentationResult
@@ -62156,12 +62165,12 @@
     
                         /**
                          * DataDocumentationResult result.
-                         * @member {"tableResult"|undefined} result
+                         * @member {"datasetResult"|"tableResult"|undefined} result
                          * @memberof google.cloud.dataplex.v1.DataDocumentationResult
                          * @instance
                          */
                         Object.defineProperty(DataDocumentationResult.prototype, "result", {
-                            get: $util.oneOfGetter($oneOfFields = ["tableResult"]),
+                            get: $util.oneOfGetter($oneOfFields = ["datasetResult", "tableResult"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -62189,6 +62198,8 @@
                         DataDocumentationResult.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.datasetResult != null && Object.hasOwnProperty.call(message, "datasetResult"))
+                                $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.encode(message.datasetResult, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.tableResult != null && Object.hasOwnProperty.call(message, "tableResult"))
                                 $root.google.cloud.dataplex.v1.DataDocumentationResult.TableResult.encode(message.tableResult, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
@@ -62227,6 +62238,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 7: {
+                                        message.datasetResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 8: {
                                         message.tableResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.TableResult.decode(reader, reader.uint32());
                                         break;
@@ -62267,7 +62282,17 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
+                            if (message.datasetResult != null && message.hasOwnProperty("datasetResult")) {
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.verify(message.datasetResult);
+                                    if (error)
+                                        return "datasetResult." + error;
+                                }
+                            }
                             if (message.tableResult != null && message.hasOwnProperty("tableResult")) {
+                                if (properties.result === 1)
+                                    return "result: multiple values";
                                 properties.result = 1;
                                 {
                                     var error = $root.google.cloud.dataplex.v1.DataDocumentationResult.TableResult.verify(message.tableResult);
@@ -62290,6 +62315,11 @@
                             if (object instanceof $root.google.cloud.dataplex.v1.DataDocumentationResult)
                                 return object;
                             var message = new $root.google.cloud.dataplex.v1.DataDocumentationResult();
+                            if (object.datasetResult != null) {
+                                if (typeof object.datasetResult !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.datasetResult: object expected");
+                                message.datasetResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.fromObject(object.datasetResult);
+                            }
                             if (object.tableResult != null) {
                                 if (typeof object.tableResult !== "object")
                                     throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.tableResult: object expected");
@@ -62311,6 +62341,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (message.datasetResult != null && message.hasOwnProperty("datasetResult")) {
+                                object.datasetResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.toObject(message.datasetResult, options);
+                                if (options.oneofs)
+                                    object.result = "datasetResult";
+                            }
                             if (message.tableResult != null && message.hasOwnProperty("tableResult")) {
                                 object.tableResult = $root.google.cloud.dataplex.v1.DataDocumentationResult.TableResult.toObject(message.tableResult, options);
                                 if (options.oneofs)
@@ -62344,6 +62379,301 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataplex.v1.DataDocumentationResult";
                         };
+    
+                        DataDocumentationResult.DatasetResult = (function() {
+    
+                            /**
+                             * Properties of a DatasetResult.
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult
+                             * @interface IDatasetResult
+                             * @property {string|null} [overview] DatasetResult overview
+                             * @property {Array.<google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship>|null} [schemaRelationships] DatasetResult schemaRelationships
+                             * @property {Array.<google.cloud.dataplex.v1.DataDocumentationResult.IQuery>|null} [queries] DatasetResult queries
+                             */
+    
+                            /**
+                             * Constructs a new DatasetResult.
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult
+                             * @classdesc Represents a DatasetResult.
+                             * @implements IDatasetResult
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult=} [properties] Properties to set
+                             */
+                            function DatasetResult(properties) {
+                                this.schemaRelationships = [];
+                                this.queries = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DatasetResult overview.
+                             * @member {string} overview
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @instance
+                             */
+                            DatasetResult.prototype.overview = "";
+    
+                            /**
+                             * DatasetResult schemaRelationships.
+                             * @member {Array.<google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship>} schemaRelationships
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @instance
+                             */
+                            DatasetResult.prototype.schemaRelationships = $util.emptyArray;
+    
+                            /**
+                             * DatasetResult queries.
+                             * @member {Array.<google.cloud.dataplex.v1.DataDocumentationResult.IQuery>} queries
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @instance
+                             */
+                            DatasetResult.prototype.queries = $util.emptyArray;
+    
+                            /**
+                             * Creates a new DatasetResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult} DatasetResult instance
+                             */
+                            DatasetResult.create = function create(properties) {
+                                return new DatasetResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DatasetResult message. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult} message DatasetResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DatasetResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.overview != null && Object.hasOwnProperty.call(message, "overview"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.overview);
+                                if (message.schemaRelationships != null && message.schemaRelationships.length)
+                                    for (var i = 0; i < message.schemaRelationships.length; ++i)
+                                        $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.encode(message.schemaRelationships[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.queries != null && message.queries.length)
+                                    for (var i = 0; i < message.queries.length; ++i)
+                                        $root.google.cloud.dataplex.v1.DataDocumentationResult.Query.encode(message.queries[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DatasetResult message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.IDatasetResult} message DatasetResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DatasetResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DatasetResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult} DatasetResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DatasetResult.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.overview = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.schemaRelationships && message.schemaRelationships.length))
+                                                message.schemaRelationships = [];
+                                            message.schemaRelationships.push($root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.queries && message.queries.length))
+                                                message.queries = [];
+                                            message.queries.push($root.google.cloud.dataplex.v1.DataDocumentationResult.Query.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DatasetResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult} DatasetResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DatasetResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DatasetResult message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DatasetResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.overview != null && message.hasOwnProperty("overview"))
+                                    if (!$util.isString(message.overview))
+                                        return "overview: string expected";
+                                if (message.schemaRelationships != null && message.hasOwnProperty("schemaRelationships")) {
+                                    if (!Array.isArray(message.schemaRelationships))
+                                        return "schemaRelationships: array expected";
+                                    for (var i = 0; i < message.schemaRelationships.length; ++i) {
+                                        var error = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.verify(message.schemaRelationships[i]);
+                                        if (error)
+                                            return "schemaRelationships." + error;
+                                    }
+                                }
+                                if (message.queries != null && message.hasOwnProperty("queries")) {
+                                    if (!Array.isArray(message.queries))
+                                        return "queries: array expected";
+                                    for (var i = 0; i < message.queries.length; ++i) {
+                                        var error = $root.google.cloud.dataplex.v1.DataDocumentationResult.Query.verify(message.queries[i]);
+                                        if (error)
+                                            return "queries." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DatasetResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult} DatasetResult
+                             */
+                            DatasetResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult();
+                                if (object.overview != null)
+                                    message.overview = String(object.overview);
+                                if (object.schemaRelationships) {
+                                    if (!Array.isArray(object.schemaRelationships))
+                                        throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.schemaRelationships: array expected");
+                                    message.schemaRelationships = [];
+                                    for (var i = 0; i < object.schemaRelationships.length; ++i) {
+                                        if (typeof object.schemaRelationships[i] !== "object")
+                                            throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.schemaRelationships: object expected");
+                                        message.schemaRelationships[i] = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.fromObject(object.schemaRelationships[i]);
+                                    }
+                                }
+                                if (object.queries) {
+                                    if (!Array.isArray(object.queries))
+                                        throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.queries: array expected");
+                                    message.queries = [];
+                                    for (var i = 0; i < object.queries.length; ++i) {
+                                        if (typeof object.queries[i] !== "object")
+                                            throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult.queries: object expected");
+                                        message.queries[i] = $root.google.cloud.dataplex.v1.DataDocumentationResult.Query.fromObject(object.queries[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DatasetResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult} message DatasetResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DatasetResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.schemaRelationships = [];
+                                    object.queries = [];
+                                }
+                                if (options.defaults)
+                                    object.overview = "";
+                                if (message.overview != null && message.hasOwnProperty("overview"))
+                                    object.overview = message.overview;
+                                if (message.schemaRelationships && message.schemaRelationships.length) {
+                                    object.schemaRelationships = [];
+                                    for (var j = 0; j < message.schemaRelationships.length; ++j)
+                                        object.schemaRelationships[j] = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.toObject(message.schemaRelationships[j], options);
+                                }
+                                if (message.queries && message.queries.length) {
+                                    object.queries = [];
+                                    for (var j = 0; j < message.queries.length; ++j)
+                                        object.queries[j] = $root.google.cloud.dataplex.v1.DataDocumentationResult.Query.toObject(message.queries[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DatasetResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DatasetResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DatasetResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DatasetResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataDocumentationResult.DatasetResult";
+                            };
+    
+                            return DatasetResult;
+                        })();
     
                         DataDocumentationResult.TableResult = (function() {
     
@@ -62645,6 +62975,641 @@
                             };
     
                             return TableResult;
+                        })();
+    
+                        DataDocumentationResult.SchemaRelationship = (function() {
+    
+                            /**
+                             * Properties of a SchemaRelationship.
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult
+                             * @interface ISchemaRelationship
+                             * @property {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null} [leftSchemaPaths] SchemaRelationship leftSchemaPaths
+                             * @property {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null} [rightSchemaPaths] SchemaRelationship rightSchemaPaths
+                             * @property {Array.<google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source>|null} [sources] SchemaRelationship sources
+                             * @property {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type|null} [type] SchemaRelationship type
+                             */
+    
+                            /**
+                             * Constructs a new SchemaRelationship.
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult
+                             * @classdesc Represents a SchemaRelationship.
+                             * @implements ISchemaRelationship
+                             * @constructor
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship=} [properties] Properties to set
+                             */
+                            function SchemaRelationship(properties) {
+                                this.sources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SchemaRelationship leftSchemaPaths.
+                             * @member {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null|undefined} leftSchemaPaths
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.leftSchemaPaths = null;
+    
+                            /**
+                             * SchemaRelationship rightSchemaPaths.
+                             * @member {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths|null|undefined} rightSchemaPaths
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.rightSchemaPaths = null;
+    
+                            /**
+                             * SchemaRelationship sources.
+                             * @member {Array.<google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source>} sources
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.sources = $util.emptyArray;
+    
+                            /**
+                             * SchemaRelationship type.
+                             * @member {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type} type
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @instance
+                             */
+                            SchemaRelationship.prototype.type = 0;
+    
+                            /**
+                             * Creates a new SchemaRelationship instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship=} [properties] Properties to set
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship} SchemaRelationship instance
+                             */
+                            SchemaRelationship.create = function create(properties) {
+                                return new SchemaRelationship(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaRelationship message. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship} message SchemaRelationship message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaRelationship.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.leftSchemaPaths != null && Object.hasOwnProperty.call(message, "leftSchemaPaths"))
+                                    $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.encode(message.leftSchemaPaths, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.rightSchemaPaths != null && Object.hasOwnProperty.call(message, "rightSchemaPaths"))
+                                    $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.encode(message.rightSchemaPaths, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.sources != null && message.sources.length) {
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                    for (var i = 0; i < message.sources.length; ++i)
+                                        writer.int32(message.sources[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.type);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaRelationship message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.ISchemaRelationship} message SchemaRelationship message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaRelationship.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SchemaRelationship message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship} SchemaRelationship
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaRelationship.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.leftSchemaPaths = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rightSchemaPaths = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.sources && message.sources.length))
+                                                message.sources = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.sources.push(reader.int32());
+                                            } else
+                                                message.sources.push(reader.int32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SchemaRelationship message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship} SchemaRelationship
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaRelationship.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SchemaRelationship message.
+                             * @function verify
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SchemaRelationship.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.leftSchemaPaths != null && message.hasOwnProperty("leftSchemaPaths")) {
+                                    var error = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.verify(message.leftSchemaPaths);
+                                    if (error)
+                                        return "leftSchemaPaths." + error;
+                                }
+                                if (message.rightSchemaPaths != null && message.hasOwnProperty("rightSchemaPaths")) {
+                                    var error = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.verify(message.rightSchemaPaths);
+                                    if (error)
+                                        return "rightSchemaPaths." + error;
+                                }
+                                if (message.sources != null && message.hasOwnProperty("sources")) {
+                                    if (!Array.isArray(message.sources))
+                                        return "sources: array expected";
+                                    for (var i = 0; i < message.sources.length; ++i)
+                                        switch (message.sources[i]) {
+                                        default:
+                                            return "sources: enum value[] expected";
+                                        case 0:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SchemaRelationship message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship} SchemaRelationship
+                             */
+                            SchemaRelationship.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship)
+                                    return object;
+                                var message = new $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship();
+                                if (object.leftSchemaPaths != null) {
+                                    if (typeof object.leftSchemaPaths !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.leftSchemaPaths: object expected");
+                                    message.leftSchemaPaths = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.fromObject(object.leftSchemaPaths);
+                                }
+                                if (object.rightSchemaPaths != null) {
+                                    if (typeof object.rightSchemaPaths !== "object")
+                                        throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.rightSchemaPaths: object expected");
+                                    message.rightSchemaPaths = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.fromObject(object.rightSchemaPaths);
+                                }
+                                if (object.sources) {
+                                    if (!Array.isArray(object.sources))
+                                        throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.sources: array expected");
+                                    message.sources = [];
+                                    for (var i = 0; i < object.sources.length; ++i)
+                                        switch (object.sources[i]) {
+                                        default:
+                                            if (typeof object.sources[i] === "number") {
+                                                message.sources[i] = object.sources[i];
+                                                break;
+                                            }
+                                        case "SOURCE_UNSPECIFIED":
+                                        case 0:
+                                            message.sources[i] = 0;
+                                            break;
+                                        case "AGENT":
+                                        case 4:
+                                            message.sources[i] = 4;
+                                            break;
+                                        case "QUERY_HISTORY":
+                                        case 5:
+                                            message.sources[i] = 5;
+                                            break;
+                                        case "TABLE_CONSTRAINTS":
+                                        case 6:
+                                            message.sources[i] = 6;
+                                            break;
+                                        }
+                                }
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "SCHEMA_JOIN":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SchemaRelationship message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship} message SchemaRelationship
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SchemaRelationship.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.sources = [];
+                                if (options.defaults) {
+                                    object.leftSchemaPaths = null;
+                                    object.rightSchemaPaths = null;
+                                    object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.leftSchemaPaths != null && message.hasOwnProperty("leftSchemaPaths"))
+                                    object.leftSchemaPaths = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.toObject(message.leftSchemaPaths, options);
+                                if (message.rightSchemaPaths != null && message.hasOwnProperty("rightSchemaPaths"))
+                                    object.rightSchemaPaths = $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.toObject(message.rightSchemaPaths, options);
+                                if (message.sources && message.sources.length) {
+                                    object.sources = [];
+                                    for (var j = 0; j < message.sources.length; ++j)
+                                        object.sources[j] = options.enums === String ? $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source[message.sources[j]] === undefined ? message.sources[j] : $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source[message.sources[j]] : message.sources[j];
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type[message.type] === undefined ? message.type : $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type[message.type] : message.type;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SchemaRelationship to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SchemaRelationship.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SchemaRelationship
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SchemaRelationship.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship";
+                            };
+    
+                            /**
+                             * Source enum.
+                             * @name google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Source
+                             * @enum {number}
+                             * @property {number} SOURCE_UNSPECIFIED=0 SOURCE_UNSPECIFIED value
+                             * @property {number} AGENT=4 AGENT value
+                             * @property {number} QUERY_HISTORY=5 QUERY_HISTORY value
+                             * @property {number} TABLE_CONSTRAINTS=6 TABLE_CONSTRAINTS value
+                             */
+                            SchemaRelationship.Source = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SOURCE_UNSPECIFIED"] = 0;
+                                values[valuesById[4] = "AGENT"] = 4;
+                                values[valuesById[5] = "QUERY_HISTORY"] = 5;
+                                values[valuesById[6] = "TABLE_CONSTRAINTS"] = 6;
+                                return values;
+                            })();
+    
+                            /**
+                             * Type enum.
+                             * @name google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.Type
+                             * @enum {number}
+                             * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                             * @property {number} SCHEMA_JOIN=1 SCHEMA_JOIN value
+                             */
+                            SchemaRelationship.Type = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SCHEMA_JOIN"] = 1;
+                                return values;
+                            })();
+    
+                            SchemaRelationship.SchemaPaths = (function() {
+    
+                                /**
+                                 * Properties of a SchemaPaths.
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                                 * @interface ISchemaPaths
+                                 * @property {string|null} [tableFqn] SchemaPaths tableFqn
+                                 * @property {Array.<string>|null} [paths] SchemaPaths paths
+                                 */
+    
+                                /**
+                                 * Constructs a new SchemaPaths.
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship
+                                 * @classdesc Represents a SchemaPaths.
+                                 * @implements ISchemaPaths
+                                 * @constructor
+                                 * @param {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths=} [properties] Properties to set
+                                 */
+                                function SchemaPaths(properties) {
+                                    this.paths = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SchemaPaths tableFqn.
+                                 * @member {string} tableFqn
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @instance
+                                 */
+                                SchemaPaths.prototype.tableFqn = "";
+    
+                                /**
+                                 * SchemaPaths paths.
+                                 * @member {Array.<string>} paths
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @instance
+                                 */
+                                SchemaPaths.prototype.paths = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new SchemaPaths instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths=} [properties] Properties to set
+                                 * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths} SchemaPaths instance
+                                 */
+                                SchemaPaths.create = function create(properties) {
+                                    return new SchemaPaths(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SchemaPaths message. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths} message SchemaPaths message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SchemaPaths.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.tableFqn != null && Object.hasOwnProperty.call(message, "tableFqn"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.tableFqn);
+                                    if (message.paths != null && message.paths.length)
+                                        for (var i = 0; i < message.paths.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.paths[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SchemaPaths message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.ISchemaPaths} message SchemaPaths message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SchemaPaths.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SchemaPaths message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths} SchemaPaths
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SchemaPaths.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.tableFqn = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.paths && message.paths.length))
+                                                    message.paths = [];
+                                                message.paths.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SchemaPaths message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths} SchemaPaths
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SchemaPaths.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SchemaPaths message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SchemaPaths.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.tableFqn != null && message.hasOwnProperty("tableFqn"))
+                                        if (!$util.isString(message.tableFqn))
+                                            return "tableFqn: string expected";
+                                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                                        if (!Array.isArray(message.paths))
+                                            return "paths: array expected";
+                                        for (var i = 0; i < message.paths.length; ++i)
+                                            if (!$util.isString(message.paths[i]))
+                                                return "paths: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SchemaPaths message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths} SchemaPaths
+                                 */
+                                SchemaPaths.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths)
+                                        return object;
+                                    var message = new $root.google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths();
+                                    if (object.tableFqn != null)
+                                        message.tableFqn = String(object.tableFqn);
+                                    if (object.paths) {
+                                        if (!Array.isArray(object.paths))
+                                            throw TypeError(".google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths.paths: array expected");
+                                        message.paths = [];
+                                        for (var i = 0; i < object.paths.length; ++i)
+                                            message.paths[i] = String(object.paths[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SchemaPaths message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths} message SchemaPaths
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SchemaPaths.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.paths = [];
+                                    if (options.defaults)
+                                        object.tableFqn = "";
+                                    if (message.tableFqn != null && message.hasOwnProperty("tableFqn"))
+                                        object.tableFqn = message.tableFqn;
+                                    if (message.paths && message.paths.length) {
+                                        object.paths = [];
+                                        for (var j = 0; j < message.paths.length; ++j)
+                                            object.paths[j] = message.paths[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SchemaPaths to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SchemaPaths.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SchemaPaths
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SchemaPaths.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataplex.v1.DataDocumentationResult.SchemaRelationship.SchemaPaths";
+                                };
+    
+                                return SchemaPaths;
+                            })();
+    
+                            return SchemaRelationship;
                         })();
     
                         DataDocumentationResult.Query = (function() {

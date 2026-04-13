@@ -6332,6 +6332,7 @@
                          * @property {string|null} [value] ContentItem value
                          * @property {google.privacy.dlp.v2.ITable|null} [table] ContentItem table
                          * @property {google.privacy.dlp.v2.IByteContentItem|null} [byteItem] ContentItem byteItem
+                         * @property {google.privacy.dlp.v2.IContentMetadata|null} [contentMetadata] ContentItem contentMetadata
                          */
     
                         /**
@@ -6372,6 +6373,14 @@
                          * @instance
                          */
                         ContentItem.prototype.byteItem = null;
+    
+                        /**
+                         * ContentItem contentMetadata.
+                         * @member {google.privacy.dlp.v2.IContentMetadata|null|undefined} contentMetadata
+                         * @memberof google.privacy.dlp.v2.ContentItem
+                         * @instance
+                         */
+                        ContentItem.prototype.contentMetadata = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -6417,6 +6426,8 @@
                                 $root.google.privacy.dlp.v2.Table.encode(message.table, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.byteItem != null && Object.hasOwnProperty.call(message, "byteItem"))
                                 $root.google.privacy.dlp.v2.ByteContentItem.encode(message.byteItem, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.contentMetadata != null && Object.hasOwnProperty.call(message, "contentMetadata"))
+                                $root.google.privacy.dlp.v2.ContentMetadata.encode(message.contentMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -6463,6 +6474,10 @@
                                     }
                                 case 5: {
                                         message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.contentMetadata = $root.google.privacy.dlp.v2.ContentMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6526,6 +6541,11 @@
                                         return "byteItem." + error;
                                 }
                             }
+                            if (message.contentMetadata != null && message.hasOwnProperty("contentMetadata")) {
+                                var error = $root.google.privacy.dlp.v2.ContentMetadata.verify(message.contentMetadata);
+                                if (error)
+                                    return "contentMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -6553,6 +6573,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.ContentItem.byteItem: object expected");
                                 message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.fromObject(object.byteItem);
                             }
+                            if (object.contentMetadata != null) {
+                                if (typeof object.contentMetadata !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ContentItem.contentMetadata: object expected");
+                                message.contentMetadata = $root.google.privacy.dlp.v2.ContentMetadata.fromObject(object.contentMetadata);
+                            }
                             return message;
                         };
     
@@ -6569,6 +6594,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.contentMetadata = null;
                             if (message.value != null && message.hasOwnProperty("value")) {
                                 object.value = message.value;
                                 if (options.oneofs)
@@ -6584,6 +6611,8 @@
                                 if (options.oneofs)
                                     object.dataItem = "byteItem";
                             }
+                            if (message.contentMetadata != null && message.hasOwnProperty("contentMetadata"))
+                                object.contentMetadata = $root.google.privacy.dlp.v2.ContentMetadata.toObject(message.contentMetadata, options);
                             return object;
                         };
     
@@ -6614,6 +6643,232 @@
                         };
     
                         return ContentItem;
+                    })();
+    
+                    v2.ContentMetadata = (function() {
+    
+                        /**
+                         * Properties of a ContentMetadata.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IContentMetadata
+                         * @property {Array.<google.privacy.dlp.v2.IKeyValueMetadataProperty>|null} [properties] ContentMetadata properties
+                         */
+    
+                        /**
+                         * Constructs a new ContentMetadata.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a ContentMetadata.
+                         * @implements IContentMetadata
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IContentMetadata=} [properties] Properties to set
+                         */
+                        function ContentMetadata(properties) {
+                            this.properties = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContentMetadata properties.
+                         * @member {Array.<google.privacy.dlp.v2.IKeyValueMetadataProperty>} properties
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @instance
+                         */
+                        ContentMetadata.prototype.properties = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ContentMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {google.privacy.dlp.v2.IContentMetadata=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ContentMetadata} ContentMetadata instance
+                         */
+                        ContentMetadata.create = function create(properties) {
+                            return new ContentMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContentMetadata message. Does not implicitly {@link google.privacy.dlp.v2.ContentMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {google.privacy.dlp.v2.IContentMetadata} message ContentMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContentMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.properties != null && message.properties.length)
+                                for (var i = 0; i < message.properties.length; ++i)
+                                    $root.google.privacy.dlp.v2.KeyValueMetadataProperty.encode(message.properties[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContentMetadata message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ContentMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {google.privacy.dlp.v2.IContentMetadata} message ContentMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContentMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContentMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ContentMetadata} ContentMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContentMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ContentMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        if (!(message.properties && message.properties.length))
+                                            message.properties = [];
+                                        message.properties.push($root.google.privacy.dlp.v2.KeyValueMetadataProperty.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContentMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ContentMetadata} ContentMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContentMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContentMetadata message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContentMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.properties != null && message.hasOwnProperty("properties")) {
+                                if (!Array.isArray(message.properties))
+                                    return "properties: array expected";
+                                for (var i = 0; i < message.properties.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.KeyValueMetadataProperty.verify(message.properties[i]);
+                                    if (error)
+                                        return "properties." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContentMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ContentMetadata} ContentMetadata
+                         */
+                        ContentMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ContentMetadata)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ContentMetadata();
+                            if (object.properties) {
+                                if (!Array.isArray(object.properties))
+                                    throw TypeError(".google.privacy.dlp.v2.ContentMetadata.properties: array expected");
+                                message.properties = [];
+                                for (var i = 0; i < object.properties.length; ++i) {
+                                    if (typeof object.properties[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ContentMetadata.properties: object expected");
+                                    message.properties[i] = $root.google.privacy.dlp.v2.KeyValueMetadataProperty.fromObject(object.properties[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContentMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {google.privacy.dlp.v2.ContentMetadata} message ContentMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContentMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.properties = [];
+                            if (message.properties && message.properties.length) {
+                                object.properties = [];
+                                for (var j = 0; j < message.properties.length; ++j)
+                                    object.properties[j] = $root.google.privacy.dlp.v2.KeyValueMetadataProperty.toObject(message.properties[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContentMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContentMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContentMetadata
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ContentMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContentMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ContentMetadata";
+                        };
+    
+                        return ContentMetadata;
                     })();
     
                     v2.Table = (function() {
@@ -7111,6 +7366,235 @@
                         })();
     
                         return Table;
+                    })();
+    
+                    v2.KeyValueMetadataProperty = (function() {
+    
+                        /**
+                         * Properties of a KeyValueMetadataProperty.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IKeyValueMetadataProperty
+                         * @property {string|null} [key] KeyValueMetadataProperty key
+                         * @property {string|null} [value] KeyValueMetadataProperty value
+                         */
+    
+                        /**
+                         * Constructs a new KeyValueMetadataProperty.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a KeyValueMetadataProperty.
+                         * @implements IKeyValueMetadataProperty
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataProperty=} [properties] Properties to set
+                         */
+                        function KeyValueMetadataProperty(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KeyValueMetadataProperty key.
+                         * @member {string} key
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @instance
+                         */
+                        KeyValueMetadataProperty.prototype.key = "";
+    
+                        /**
+                         * KeyValueMetadataProperty value.
+                         * @member {string} value
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @instance
+                         */
+                        KeyValueMetadataProperty.prototype.value = "";
+    
+                        /**
+                         * Creates a new KeyValueMetadataProperty instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataProperty=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataProperty} KeyValueMetadataProperty instance
+                         */
+                        KeyValueMetadataProperty.create = function create(properties) {
+                            return new KeyValueMetadataProperty(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KeyValueMetadataProperty message. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataProperty.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataProperty} message KeyValueMetadataProperty message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyValueMetadataProperty.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KeyValueMetadataProperty message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataProperty.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataProperty} message KeyValueMetadataProperty message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyValueMetadataProperty.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KeyValueMetadataProperty message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataProperty} KeyValueMetadataProperty
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyValueMetadataProperty.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.KeyValueMetadataProperty();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KeyValueMetadataProperty message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataProperty} KeyValueMetadataProperty
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyValueMetadataProperty.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KeyValueMetadataProperty message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KeyValueMetadataProperty.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KeyValueMetadataProperty message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataProperty} KeyValueMetadataProperty
+                         */
+                        KeyValueMetadataProperty.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.KeyValueMetadataProperty)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.KeyValueMetadataProperty();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KeyValueMetadataProperty message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {google.privacy.dlp.v2.KeyValueMetadataProperty} message KeyValueMetadataProperty
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KeyValueMetadataProperty.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.key = "";
+                                object.value = "";
+                            }
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KeyValueMetadataProperty to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KeyValueMetadataProperty.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for KeyValueMetadataProperty
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataProperty
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KeyValueMetadataProperty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.KeyValueMetadataProperty";
+                        };
+    
+                        return KeyValueMetadataProperty;
                     })();
     
                     v2.InspectResult = (function() {
@@ -8852,6 +9336,7 @@
                                 case 0:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.storageLabel != null && message.hasOwnProperty("storageLabel")) {
@@ -8905,6 +9390,10 @@
                             case "CONTENT_METADATA":
                             case 3:
                                 message.type = 3;
+                                break;
+                            case "CLIENT_PROVIDED_METADATA":
+                            case 4:
+                                message.type = 4;
                                 break;
                             }
                             if (object.storageLabel != null) {
@@ -82506,12 +82995,14 @@
                      * @property {number} METADATATYPE_UNSPECIFIED=0 METADATATYPE_UNSPECIFIED value
                      * @property {number} STORAGE_METADATA=2 STORAGE_METADATA value
                      * @property {number} CONTENT_METADATA=3 CONTENT_METADATA value
+                     * @property {number} CLIENT_PROVIDED_METADATA=4 CLIENT_PROVIDED_METADATA value
                      */
                     v2.MetadataType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "METADATATYPE_UNSPECIFIED"] = 0;
                         values[valuesById[2] = "STORAGE_METADATA"] = 2;
                         values[valuesById[3] = "CONTENT_METADATA"] = 3;
+                        values[valuesById[4] = "CLIENT_PROVIDED_METADATA"] = 4;
                         return values;
                     })();
     

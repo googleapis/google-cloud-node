@@ -20,8 +20,8 @@
     "pretest": "npm run compile",
     "test": "c8 mocha build/test --recursive",
     "snapshots-update": "SNAPSHOT_UPDATE=1 npm test",
-    "samples-test": "echo no system tests yet 🙀",
-    "system-test": "echo no system tests yet 🙀",
+    "samples-test": "echo no system tests yet \ud83d\ude40",
+    "system-test": "echo no system tests yet \ud83d\ude40",
     "lint": "gts check",
     "fix": "gts fix"
   },
@@ -48,8 +48,16 @@
     "c8": "^10.1.3",
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "snap-shot-it": "^7.9.10",
     "typescript": "^5.8.2"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }

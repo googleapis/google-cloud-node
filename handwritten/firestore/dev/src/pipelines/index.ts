@@ -17,6 +17,7 @@ export {
   PipelineResult,
   PipelineSnapshot,
   PipelineSource,
+  subcollection,
 } from './pipelines';
 
 export {
@@ -67,6 +68,10 @@ export {
   arrayMinimum,
   arrayMaximumN,
   arrayMinimumN,
+  arrayFilter,
+  arrayTransform,
+  arrayTransformWithIndex,
+  arraySlice,
   field,
   xor,
   AggregateFunction,
@@ -159,7 +164,13 @@ export {
   stringReplaceOne,
   nor,
   switchOn,
+  getField,
+  variable,
+  currentDocument,
   ifNull,
   coalesce,
+  documentMatches,
+  score,
+  geoDistance,
   // TODO(new-expression): Add new expression exports above this line
 } from './expression';
