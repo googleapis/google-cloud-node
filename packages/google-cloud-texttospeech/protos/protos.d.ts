@@ -450,6 +450,12 @@ export namespace google {
 
                     /** AdvancedVoiceOptions relaxSafetyFilters */
                     relaxSafetyFilters?: (boolean|null);
+
+                    /** AdvancedVoiceOptions safetySettings */
+                    safetySettings?: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings|null);
+
+                    /** AdvancedVoiceOptions enableTextnorm */
+                    enableTextnorm?: (boolean|null);
                 }
 
                 /** Represents an AdvancedVoiceOptions. */
@@ -466,6 +472,12 @@ export namespace google {
 
                     /** AdvancedVoiceOptions relaxSafetyFilters. */
                     public relaxSafetyFilters: boolean;
+
+                    /** AdvancedVoiceOptions safetySettings. */
+                    public safetySettings?: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings|null);
+
+                    /** AdvancedVoiceOptions enableTextnorm. */
+                    public enableTextnorm?: (boolean|null);
 
                     /**
                      * Creates a new AdvancedVoiceOptions instance using the specified properties.
@@ -543,6 +555,228 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AdvancedVoiceOptions {
+
+                    /** Properties of a SafetySetting. */
+                    interface ISafetySetting {
+
+                        /** SafetySetting category */
+                        category?: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory|keyof typeof google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory|null);
+
+                        /** SafetySetting threshold */
+                        threshold?: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold|keyof typeof google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold|null);
+                    }
+
+                    /** Represents a SafetySetting. */
+                    class SafetySetting implements ISafetySetting {
+
+                        /**
+                         * Constructs a new SafetySetting.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting);
+
+                        /** SafetySetting category. */
+                        public category: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory|keyof typeof google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory);
+
+                        /** SafetySetting threshold. */
+                        public threshold: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold|keyof typeof google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold);
+
+                        /**
+                         * Creates a new SafetySetting instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SafetySetting instance
+                         */
+                        public static create(properties?: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                         * @param message SafetySetting message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                         * @param message SafetySetting message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Verifies a SafetySetting message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SafetySetting
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                         * @param message SafetySetting
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SafetySetting to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SafetySetting
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SafetySettings. */
+                    interface ISafetySettings {
+
+                        /** SafetySettings settings */
+                        settings?: (google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting[]|null);
+                    }
+
+                    /** Represents a SafetySettings. */
+                    class SafetySettings implements ISafetySettings {
+
+                        /**
+                         * Constructs a new SafetySettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings);
+
+                        /** SafetySettings settings. */
+                        public settings: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting[];
+
+                        /**
+                         * Creates a new SafetySettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SafetySettings instance
+                         */
+                        public static create(properties?: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Encodes the specified SafetySettings message. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                         * @param message SafetySettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SafetySettings message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                         * @param message SafetySettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SafetySettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SafetySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Decodes a SafetySettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SafetySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Verifies a SafetySettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SafetySettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SafetySettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Creates a plain object from a SafetySettings message. Also converts values to other types if specified.
+                         * @param message SafetySettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SafetySettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SafetySettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** HarmCategory enum. */
+                    enum HarmCategory {
+                        HARM_CATEGORY_UNSPECIFIED = 0,
+                        HARM_CATEGORY_HATE_SPEECH = 1,
+                        HARM_CATEGORY_DANGEROUS_CONTENT = 2,
+                        HARM_CATEGORY_HARASSMENT = 3,
+                        HARM_CATEGORY_SEXUALLY_EXPLICIT = 4
+                    }
+
+                    /** HarmBlockThreshold enum. */
+                    enum HarmBlockThreshold {
+                        HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 1,
+                        BLOCK_MEDIUM_AND_ABOVE = 2,
+                        BLOCK_ONLY_HIGH = 3,
+                        BLOCK_NONE = 4,
+                        OFF = 5
+                    }
                 }
 
                 /** Properties of a SynthesizeSpeechRequest. */
@@ -2098,6 +2332,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig customPronunciations */
                     customPronunciations?: (google.cloud.texttospeech.v1.ICustomPronunciations|null);
+
+                    /** StreamingSynthesizeConfig advancedVoiceOptions */
+                    advancedVoiceOptions?: (google.cloud.texttospeech.v1.IAdvancedVoiceOptions|null);
                 }
 
                 /** Represents a StreamingSynthesizeConfig. */
@@ -2117,6 +2354,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig customPronunciations. */
                     public customPronunciations?: (google.cloud.texttospeech.v1.ICustomPronunciations|null);
+
+                    /** StreamingSynthesizeConfig advancedVoiceOptions. */
+                    public advancedVoiceOptions?: (google.cloud.texttospeech.v1.IAdvancedVoiceOptions|null);
 
                     /**
                      * Creates a new StreamingSynthesizeConfig instance using the specified properties.
@@ -3312,6 +3552,12 @@ export namespace google {
 
                     /** AdvancedVoiceOptions relaxSafetyFilters */
                     relaxSafetyFilters?: (boolean|null);
+
+                    /** AdvancedVoiceOptions safetySettings */
+                    safetySettings?: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings|null);
+
+                    /** AdvancedVoiceOptions enableTextnorm */
+                    enableTextnorm?: (boolean|null);
                 }
 
                 /** Represents an AdvancedVoiceOptions. */
@@ -3328,6 +3574,12 @@ export namespace google {
 
                     /** AdvancedVoiceOptions relaxSafetyFilters. */
                     public relaxSafetyFilters: boolean;
+
+                    /** AdvancedVoiceOptions safetySettings. */
+                    public safetySettings?: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings|null);
+
+                    /** AdvancedVoiceOptions enableTextnorm. */
+                    public enableTextnorm?: (boolean|null);
 
                     /**
                      * Creates a new AdvancedVoiceOptions instance using the specified properties.
@@ -3405,6 +3657,228 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AdvancedVoiceOptions {
+
+                    /** Properties of a SafetySetting. */
+                    interface ISafetySetting {
+
+                        /** SafetySetting category */
+                        category?: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory|keyof typeof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory|null);
+
+                        /** SafetySetting threshold */
+                        threshold?: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold|keyof typeof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold|null);
+                    }
+
+                    /** Represents a SafetySetting. */
+                    class SafetySetting implements ISafetySetting {
+
+                        /**
+                         * Constructs a new SafetySetting.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting);
+
+                        /** SafetySetting category. */
+                        public category: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory|keyof typeof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory);
+
+                        /** SafetySetting threshold. */
+                        public threshold: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold|keyof typeof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold);
+
+                        /**
+                         * Creates a new SafetySetting instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SafetySetting instance
+                         */
+                        public static create(properties?: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                         * @param message SafetySetting message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                         * @param message SafetySetting message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Verifies a SafetySetting message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SafetySetting
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting;
+
+                        /**
+                         * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                         * @param message SafetySetting
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SafetySetting to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SafetySetting
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SafetySettings. */
+                    interface ISafetySettings {
+
+                        /** SafetySettings settings */
+                        settings?: (google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting[]|null);
+                    }
+
+                    /** Represents a SafetySettings. */
+                    class SafetySettings implements ISafetySettings {
+
+                        /**
+                         * Constructs a new SafetySettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings);
+
+                        /** SafetySettings settings. */
+                        public settings: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting[];
+
+                        /**
+                         * Creates a new SafetySettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SafetySettings instance
+                         */
+                        public static create(properties?: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Encodes the specified SafetySettings message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                         * @param message SafetySettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SafetySettings message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                         * @param message SafetySettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SafetySettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SafetySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Decodes a SafetySettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SafetySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Verifies a SafetySettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SafetySettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SafetySettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings;
+
+                        /**
+                         * Creates a plain object from a SafetySettings message. Also converts values to other types if specified.
+                         * @param message SafetySettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SafetySettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SafetySettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** HarmCategory enum. */
+                    enum HarmCategory {
+                        HARM_CATEGORY_UNSPECIFIED = 0,
+                        HARM_CATEGORY_HATE_SPEECH = 1,
+                        HARM_CATEGORY_DANGEROUS_CONTENT = 2,
+                        HARM_CATEGORY_HARASSMENT = 3,
+                        HARM_CATEGORY_SEXUALLY_EXPLICIT = 4
+                    }
+
+                    /** HarmBlockThreshold enum. */
+                    enum HarmBlockThreshold {
+                        HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 1,
+                        BLOCK_MEDIUM_AND_ABOVE = 2,
+                        BLOCK_ONLY_HIGH = 3,
+                        BLOCK_NONE = 4,
+                        OFF = 5
+                    }
                 }
 
                 /** Properties of a SynthesizeSpeechRequest. */
@@ -5090,6 +5564,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig customPronunciations */
                     customPronunciations?: (google.cloud.texttospeech.v1beta1.ICustomPronunciations|null);
+
+                    /** StreamingSynthesizeConfig advancedVoiceOptions */
+                    advancedVoiceOptions?: (google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions|null);
                 }
 
                 /** Represents a StreamingSynthesizeConfig. */
@@ -5109,6 +5586,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig customPronunciations. */
                     public customPronunciations?: (google.cloud.texttospeech.v1beta1.ICustomPronunciations|null);
+
+                    /** StreamingSynthesizeConfig advancedVoiceOptions. */
+                    public advancedVoiceOptions?: (google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions|null);
 
                     /**
                      * Creates a new StreamingSynthesizeConfig instance using the specified properties.

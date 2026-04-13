@@ -63,10 +63,18 @@
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
     "prettier": "^3.6.2",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }

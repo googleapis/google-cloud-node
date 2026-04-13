@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.5.0...dialogflow-v7.6.0) (2026-04-08)
+
+
+### Features
+
+* [dialogflow] updated v2beta1 dialogflow client libraries ([#7853](https://github.com/googleapis/google-cloud-node/issues/7853)) ([75c76e1](https://github.com/googleapis/google-cloud-node/commit/75c76e1253982abc8e228c793dee684004e621f2))
+
 ## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.4.0...dialogflow-v7.5.0) (2026-01-31)
 
 
