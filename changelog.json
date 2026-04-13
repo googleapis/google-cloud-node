@@ -5,76 +5,6 @@
       "changes": [
         {
           "type": "feat",
-          "sha": "228fe85ad548968823bc9c99e21afceacf2638b0",
-          "message": "Added public preview support for full-text search and geo search in Pipelines.",
-          "issues": []
-        },
-        {
-          "type": "feat",
-          "sha": "fb317f859be6d1c9f60cf388431f6419a3dc5055",
-          "message": "Add support for subqueries",
-          "issues": [
-            "7839"
-          ],
-          "scope": "firestore"
-        },
-        {
-          "type": "feat",
-          "sha": "09cd24fcb742fa2f084c4c358a0156aac7951c26",
-          "message": "[firestore] Add support for DML",
-          "issues": []
-        },
-        {
-          "type": "feat",
-          "sha": "77ce3195b2b5f569b7fba33ea5bcc05391428318",
-          "message": "[firestore] Add support for DML",
-          "issues": []
-        },
-        {
-          "type": "fix",
-          "sha": "e8755b5f490e6eca885804792a18119a7a822a0a",
-          "message": "Update pipeline tests for backend changes",
-          "issues": [],
-          "scope": "firestore"
-        },
-        {
-          "type": "fix",
-          "sha": "e5dd91e03595452fc1dece58ca6b0c553f72398f",
-          "message": "Update pipeline tests for backend changes",
-          "issues": [],
-          "scope": "firestore"
-        },
-        {
-          "type": "feat",
-          "sha": "f17a79153046f578bda9bbd0d2cdb9ed9371d500",
-          "message": "Add the parent expression",
-          "issues": [],
-          "scope": "firestore"
-        },
-        {
-          "type": "fix",
-          "sha": "7d044d1f9d30ab0edef38d1fc07311799a3e9f91",
-          "message": "Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase",
-          "issues": []
-        },
-        {
-          "type": "feat",
-          "sha": "deeb265d21751393a71224a3793adb38582f39b8",
-          "message": "Add timestamp expressions",
-          "issues": [],
-          "scope": "firestore"
-        }
-      ],
-      "version": "8.4.0",
-      "language": "JAVASCRIPT",
-      "artifactName": "@google-cloud/firestore",
-      "id": "fd726701-c7d2-4d2b-a01a-974a73c4e114",
-      "createTime": "2026-04-09T15:40:49.002Z"
-    },
-    {
-      "changes": [
-        {
-          "type": "feat",
           "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
           "message": "[geocode] make the Place ID format consistent",
           "issues": [
@@ -69606,5 +69536,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-09T15:40:49.002Z"
+  "updateTime": "2026-04-08T00:07:52.535Z"
 }
