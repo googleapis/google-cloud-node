@@ -60,7 +60,7 @@
     "mocha": "^11.1.0",
     "null-loader": "^4.0.1",
     "pack-n-play": "^3.0.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
     "webpack": "^5.98.0",
@@ -69,5 +69,13 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-migration"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-migration",
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
+  }
 }

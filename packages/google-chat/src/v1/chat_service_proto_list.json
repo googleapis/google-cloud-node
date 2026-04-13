@@ -13,6 +13,7 @@
   "../../protos/google/chat/v1/membership.proto",
   "../../protos/google/chat/v1/message.proto",
   "../../protos/google/chat/v1/reaction.proto",
+  "../../protos/google/chat/v1/section.proto",
   "../../protos/google/chat/v1/slash_command.proto",
   "../../protos/google/chat/v1/space.proto",
   "../../protos/google/chat/v1/space_event.proto",

@@ -2788,6 +2788,9 @@ export namespace google {
 
                     /** ContentItem byteItem */
                     byteItem?: (google.privacy.dlp.v2.IByteContentItem|null);
+
+                    /** ContentItem contentMetadata */
+                    contentMetadata?: (google.privacy.dlp.v2.IContentMetadata|null);
                 }
 
                 /** Represents a ContentItem. */
@@ -2807,6 +2810,9 @@ export namespace google {
 
                     /** ContentItem byteItem. */
                     public byteItem?: (google.privacy.dlp.v2.IByteContentItem|null);
+
+                    /** ContentItem contentMetadata. */
+                    public contentMetadata?: (google.privacy.dlp.v2.IContentMetadata|null);
 
                     /** ContentItem dataItem. */
                     public dataItem?: ("value"|"table"|"byteItem");
@@ -2883,6 +2889,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ContentItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContentMetadata. */
+                interface IContentMetadata {
+
+                    /** ContentMetadata properties */
+                    properties?: (google.privacy.dlp.v2.IKeyValueMetadataProperty[]|null);
+                }
+
+                /** Represents a ContentMetadata. */
+                class ContentMetadata implements IContentMetadata {
+
+                    /**
+                     * Constructs a new ContentMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IContentMetadata);
+
+                    /** ContentMetadata properties. */
+                    public properties: google.privacy.dlp.v2.IKeyValueMetadataProperty[];
+
+                    /**
+                     * Creates a new ContentMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContentMetadata instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IContentMetadata): google.privacy.dlp.v2.ContentMetadata;
+
+                    /**
+                     * Encodes the specified ContentMetadata message. Does not implicitly {@link google.privacy.dlp.v2.ContentMetadata.verify|verify} messages.
+                     * @param message ContentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IContentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContentMetadata message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ContentMetadata.verify|verify} messages.
+                     * @param message ContentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IContentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContentMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ContentMetadata;
+
+                    /**
+                     * Decodes a ContentMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ContentMetadata;
+
+                    /**
+                     * Verifies a ContentMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContentMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContentMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ContentMetadata;
+
+                    /**
+                     * Creates a plain object from a ContentMetadata message. Also converts values to other types if specified.
+                     * @param message ContentMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ContentMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContentMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContentMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3090,6 +3193,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a KeyValueMetadataProperty. */
+                interface IKeyValueMetadataProperty {
+
+                    /** KeyValueMetadataProperty key */
+                    key?: (string|null);
+
+                    /** KeyValueMetadataProperty value */
+                    value?: (string|null);
+                }
+
+                /** Represents a KeyValueMetadataProperty. */
+                class KeyValueMetadataProperty implements IKeyValueMetadataProperty {
+
+                    /**
+                     * Constructs a new KeyValueMetadataProperty.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IKeyValueMetadataProperty);
+
+                    /** KeyValueMetadataProperty key. */
+                    public key: string;
+
+                    /** KeyValueMetadataProperty value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new KeyValueMetadataProperty instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KeyValueMetadataProperty instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IKeyValueMetadataProperty): google.privacy.dlp.v2.KeyValueMetadataProperty;
+
+                    /**
+                     * Encodes the specified KeyValueMetadataProperty message. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataProperty.verify|verify} messages.
+                     * @param message KeyValueMetadataProperty message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IKeyValueMetadataProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KeyValueMetadataProperty message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataProperty.verify|verify} messages.
+                     * @param message KeyValueMetadataProperty message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IKeyValueMetadataProperty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KeyValueMetadataProperty message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KeyValueMetadataProperty
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.KeyValueMetadataProperty;
+
+                    /**
+                     * Decodes a KeyValueMetadataProperty message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KeyValueMetadataProperty
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.KeyValueMetadataProperty;
+
+                    /**
+                     * Verifies a KeyValueMetadataProperty message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KeyValueMetadataProperty message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KeyValueMetadataProperty
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.KeyValueMetadataProperty;
+
+                    /**
+                     * Creates a plain object from a KeyValueMetadataProperty message. Also converts values to other types if specified.
+                     * @param message KeyValueMetadataProperty
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.KeyValueMetadataProperty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KeyValueMetadataProperty to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KeyValueMetadataProperty
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an InspectResult. */
@@ -32927,7 +33133,8 @@ export namespace google {
                 enum MetadataType {
                     METADATATYPE_UNSPECIFIED = 0,
                     STORAGE_METADATA = 2,
-                    CONTENT_METADATA = 3
+                    CONTENT_METADATA = 3,
+                    CLIENT_PROVIDED_METADATA = 4
                 }
 
                 /** InfoTypeSupportedBy enum. */
