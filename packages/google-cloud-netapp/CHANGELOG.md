@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.16.0...netapp-v0.17.0) (2026-04-08)
+
+
+### Features
+
+* [netapp] Add ONTAP passthrough APIs ([#7861](https://github.com/googleapis/google-cloud-node/issues/7861)) ([5d3b138](https://github.com/googleapis/google-cloud-node/commit/5d3b1387d42b741e2d0cda09c6993e2e37da959c))
+
 ## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.15.0...netapp-v0.16.0) (2026-01-16)
 
 

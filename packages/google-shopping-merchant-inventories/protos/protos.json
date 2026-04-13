@@ -109,6 +109,14 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
+                            },
+                            "loyaltyPrograms": {
+                              "rule": "repeated",
+                              "type": "InventoryLoyaltyProgram",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -142,6 +150,96 @@
                                 "SIX_DAY": 7,
                                 "SEVEN_DAY": 8,
                                 "MULTI_WEEK": 9
+                              }
+                            }
+                          }
+                        },
+                        "InventoryLoyaltyProgram": {
+                          "oneofs": {
+                            "_programLabel": {
+                              "oneof": [
+                                "programLabel"
+                              ]
+                            },
+                            "_tierLabel": {
+                              "oneof": [
+                                "tierLabel"
+                              ]
+                            },
+                            "_price": {
+                              "oneof": [
+                                "price"
+                              ]
+                            },
+                            "_cashbackForFutureUse": {
+                              "oneof": [
+                                "cashbackForFutureUse"
+                              ]
+                            },
+                            "_loyaltyPoints": {
+                              "oneof": [
+                                "loyaltyPoints"
+                              ]
+                            },
+                            "_memberPriceEffectiveInterval": {
+                              "oneof": [
+                                "memberPriceEffectiveInterval"
+                              ]
+                            },
+                            "_shippingLabel": {
+                              "oneof": [
+                                "shippingLabel"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "programLabel": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "tierLabel": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "cashbackForFutureUse": {
+                              "type": "google.shopping.type.Price",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "loyaltyPoints": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "memberPriceEffectiveInterval": {
+                              "type": "google.type.Interval",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "shippingLabel": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -182,6 +280,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            },
+                            "loyaltyPrograms": {
+                              "rule": "repeated",
+                              "type": "InventoryLoyaltyProgram",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           },
@@ -264,6 +370,13 @@
                             "name": {
                               "type": "string",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "base64EncodedName": {
+                              "type": "string",
+                              "id": 15,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -424,6 +537,13 @@
                             "name": {
                               "type": "string",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "base64EncodedName": {
+                              "type": "string",
+                              "id": 10,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }

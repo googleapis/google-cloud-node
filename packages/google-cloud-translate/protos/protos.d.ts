@@ -686,6 +686,9 @@ export namespace google {
                     /** AdaptiveMtTranslateRequest content */
                     content?: (string[]|null);
 
+                    /** AdaptiveMtTranslateRequest mimeType */
+                    mimeType?: (string|null);
+
                     /** AdaptiveMtTranslateRequest referenceSentenceConfig */
                     referenceSentenceConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null);
 
@@ -710,6 +713,9 @@ export namespace google {
 
                     /** AdaptiveMtTranslateRequest content. */
                     public content: string[];
+
+                    /** AdaptiveMtTranslateRequest mimeType. */
+                    public mimeType: string;
 
                     /** AdaptiveMtTranslateRequest referenceSentenceConfig. */
                     public referenceSentenceConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null);
