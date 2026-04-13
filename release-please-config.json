@@ -236,7 +236,8 @@
     "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2beta2-nodejs": {},
     "packages/google-cloud-auditmanager": {},
     "packages/google-maps-geocode": {},
-    "packages/google-cloud-datacatalog-lineage-configmanagement": {}
+    "packages/google-cloud-datacatalog-lineage-configmanagement": {},
+    "handwritten/firestore": {}
   },
   "plugins": [
     {
