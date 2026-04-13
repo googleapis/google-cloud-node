@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.8.1...securesourcemanager-v0.9.0) (2026-04-08)
+
+
+### Features
+
+* [securesourcemanager] Add CustomHostConfig to configure custom hostnames for private instances ([#7901](https://github.com/googleapis/google-cloud-node/issues/7901)) ([a8fac0a](https://github.com/googleapis/google-cloud-node/commit/a8fac0a6374071436ff37cfffe9dbceb896d496c))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.8.0...securesourcemanager-v0.8.1) (2025-10-13)
 
 
