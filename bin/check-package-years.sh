@@ -49,7 +49,7 @@ while IFS= read -r -d '' pkg_path; do
   # Use a temporary file to store the list of files to avoid subshell issues
   tmp_file=$(mktemp)
   find "$pkg_path" -type f \
-    \( -name "*.ts" -o -name "*.js" -o -name "*.proto" \) \
+    \( -name "*.ts" -o -name "*.js" \) \
     -not -path "*/node_modules/*" \
     -not -path "*/.git/*" \
     -not -path "*/dist/*" \
