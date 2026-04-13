@@ -491,6 +491,114 @@ describe('v1beta1.CloudRedisClusterClient', () => {
         });
     });
 
+    describe('getSharedRegionalCertificateAuthority', () => {
+        it('invokes getSharedRegionalCertificateAuthority without error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority()
+            );
+            client.innerApiCalls.getSharedRegionalCertificateAuthority = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSharedRegionalCertificateAuthority(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSharedRegionalCertificateAuthority without error using callback', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority()
+            );
+            client.innerApiCalls.getSharedRegionalCertificateAuthority = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSharedRegionalCertificateAuthority(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSharedRegionalCertificateAuthority with error', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSharedRegionalCertificateAuthority = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSharedRegionalCertificateAuthority(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSharedRegionalCertificateAuthority with closed client', async () => {
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSharedRegionalCertificateAuthority(request), expectedError);
+        });
+    });
+
     describe('getBackupCollection', () => {
         it('invokes getBackupCollection without error', async () => {
             const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
@@ -3047,6 +3155,52 @@ describe('v1beta1.CloudRedisClusterClient', () => {
             });
         });
 
+        describe('caPool', async () => {
+            const fakePath = "/rendered/path/caPool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                ca_pool: "caPoolValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.caPoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.caPoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('caPoolPath', () => {
+                const result = client.caPoolPath("projectValue", "locationValue", "caPoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.caPoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCaPoolName', () => {
+                const result = client.matchProjectFromCaPoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCaPoolName', () => {
+                const result = client.matchLocationFromCaPoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaPoolFromCaPoolName', () => {
+                const result = client.matchCaPoolFromCaPoolName(fakePath);
+                assert.strictEqual(result, "caPoolValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('certificateAuthority', async () => {
             const fakePath = "/rendered/path/certificateAuthority";
             const expectedParameters = {
@@ -3449,6 +3603,44 @@ describe('v1beta1.CloudRedisClusterClient', () => {
                 const result = client.matchServiceAttachmentFromServiceAttachmentName(fakePath);
                 assert.strictEqual(result, "serviceAttachmentValue");
                 assert((client.pathTemplates.serviceAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sharedRegionalCertificateAuthority', async () => {
+            const fakePath = "/rendered/path/sharedRegionalCertificateAuthority";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sharedRegionalCertificateAuthorityPath', () => {
+                const result = client.sharedRegionalCertificateAuthorityPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSharedRegionalCertificateAuthorityName', () => {
+                const result = client.matchProjectFromSharedRegionalCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSharedRegionalCertificateAuthorityName', () => {
+                const result = client.matchLocationFromSharedRegionalCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

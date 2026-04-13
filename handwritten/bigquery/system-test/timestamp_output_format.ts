@@ -38,6 +38,9 @@ describe('Timestamp Output Format System Tests', () => {
   const expectedTsValuePicoseconds = '2023-01-01T12:00:00.123456789123Z';
 
   before(async () => {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      return;
+    }
     await dataset.create();
     await table.create({
       schema: [{name: 'ts', type: 'TIMESTAMP', timestampPrecision: '12'}],
@@ -159,6 +162,9 @@ describe('Timestamp Output Format System Tests', () => {
       expectedTsValue,
     }) => {
       it(name, async () => {
+        if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+          return;
+        }
         const options: {[key: string]: any} = {};
         if (timestampOutputFormat !== undefined) {
           options['formatOptions.timestampOutputFormat'] =
@@ -185,6 +191,10 @@ describe('Timestamp Output Format System Tests', () => {
   );
 
   it('should make a request with ISO8601_STRING when no format options are being used', done => {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      done();
+      return;
+    }
     void (async () => {
       const originalRequest = table.request;
       const requestPromise: Promise<RequestResponse> = new Promise(
