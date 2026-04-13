@@ -183,6 +183,15 @@ export class EntityServiceClient {
       dataAccessScopePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}'
       ),
+      dataTablePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}'
+      ),
+      dataTableOperationErrorsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}'
+      ),
+      dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}'
+      ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
       ),
@@ -1127,6 +1136,205 @@ export class EntityServiceClient {
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
     return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
+  }
+
+  /**
+   * Return a fully-qualified dataTable resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} data_table
+   * @returns {string} Resource name string.
+   */
+  dataTablePath(project:string,location:string,instance:string,dataTable:string) {
+    return this.pathTemplates.dataTablePathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      data_table: dataTable,
+    });
+  }
+
+  /**
+   * Parse the project from DataTable resource.
+   *
+   * @param {string} dataTableName
+   *   A fully-qualified path representing DataTable resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataTableName(dataTableName: string) {
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).project;
+  }
+
+  /**
+   * Parse the location from DataTable resource.
+   *
+   * @param {string} dataTableName
+   *   A fully-qualified path representing DataTable resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataTableName(dataTableName: string) {
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).location;
+  }
+
+  /**
+   * Parse the instance from DataTable resource.
+   *
+   * @param {string} dataTableName
+   *   A fully-qualified path representing DataTable resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromDataTableName(dataTableName: string) {
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).instance;
+  }
+
+  /**
+   * Parse the data_table from DataTable resource.
+   *
+   * @param {string} dataTableName
+   *   A fully-qualified path representing DataTable resource.
+   * @returns {string} A string representing the data_table.
+   */
+  matchDataTableFromDataTableName(dataTableName: string) {
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).data_table;
+  }
+
+  /**
+   * Return a fully-qualified dataTableOperationErrors resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} data_table_operation_errors
+   * @returns {string} Resource name string.
+   */
+  dataTableOperationErrorsPath(project:string,location:string,instance:string,dataTableOperationErrors:string) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      data_table_operation_errors: dataTableOperationErrors,
+    });
+  }
+
+  /**
+   * Parse the project from DataTableOperationErrors resource.
+   *
+   * @param {string} dataTableOperationErrorsName
+   *   A fully-qualified path representing DataTableOperationErrors resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).project;
+  }
+
+  /**
+   * Parse the location from DataTableOperationErrors resource.
+   *
+   * @param {string} dataTableOperationErrorsName
+   *   A fully-qualified path representing DataTableOperationErrors resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).location;
+  }
+
+  /**
+   * Parse the instance from DataTableOperationErrors resource.
+   *
+   * @param {string} dataTableOperationErrorsName
+   *   A fully-qualified path representing DataTableOperationErrors resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).instance;
+  }
+
+  /**
+   * Parse the data_table_operation_errors from DataTableOperationErrors resource.
+   *
+   * @param {string} dataTableOperationErrorsName
+   *   A fully-qualified path representing DataTableOperationErrors resource.
+   * @returns {string} A string representing the data_table_operation_errors.
+   */
+  matchDataTableOperationErrorsFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).data_table_operation_errors;
+  }
+
+  /**
+   * Return a fully-qualified dataTableRow resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} data_table
+   * @param {string} data_table_row
+   * @returns {string} Resource name string.
+   */
+  dataTableRowPath(project:string,location:string,instance:string,dataTable:string,dataTableRow:string) {
+    return this.pathTemplates.dataTableRowPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      data_table: dataTable,
+      data_table_row: dataTableRow,
+    });
+  }
+
+  /**
+   * Parse the project from DataTableRow resource.
+   *
+   * @param {string} dataTableRowName
+   *   A fully-qualified path representing DataTableRow resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataTableRowName(dataTableRowName: string) {
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).project;
+  }
+
+  /**
+   * Parse the location from DataTableRow resource.
+   *
+   * @param {string} dataTableRowName
+   *   A fully-qualified path representing DataTableRow resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataTableRowName(dataTableRowName: string) {
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).location;
+  }
+
+  /**
+   * Parse the instance from DataTableRow resource.
+   *
+   * @param {string} dataTableRowName
+   *   A fully-qualified path representing DataTableRow resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromDataTableRowName(dataTableRowName: string) {
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).instance;
+  }
+
+  /**
+   * Parse the data_table from DataTableRow resource.
+   *
+   * @param {string} dataTableRowName
+   *   A fully-qualified path representing DataTableRow resource.
+   * @returns {string} A string representing the data_table.
+   */
+  matchDataTableFromDataTableRowName(dataTableRowName: string) {
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table;
+  }
+
+  /**
+   * Parse the data_table_row from DataTableRow resource.
+   *
+   * @param {string} dataTableRowName
+   *   A fully-qualified path representing DataTableRow resource.
+   * @returns {string} A string representing the data_table_row.
+   */
+  matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table_row;
   }
 
   /**
