@@ -104,6 +104,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/vector_search_service.list_collections.js) |
 | list indexes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/vector_search_service.list_indexes.js) |
 | update collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/vector_search_service.update_collection.js) |
+| update index | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vectorsearch/samples/generated/v1beta/vector_search_service.update_index.js) |
 
 
 ## Supported Node.js Versions
