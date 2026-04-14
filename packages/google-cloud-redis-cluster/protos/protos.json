@@ -15,8 +15,8 @@
                         "java_outer_classname": "CloudRedisClusterProto",
                         "java_package": "com.google.cloud.redis.cluster.v1",
                         "ruby_package": "Google::Cloud::Redis::Cluster::V1",
-                        "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                        "(google.api.resource_definition).type": "privateca.googleapis.com/CaPool",
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/caPools/{ca_pool}"
                       },
                       "nested": {
                         "CloudRedisCluster": {
@@ -154,6 +154,24 @@
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{name=projects/*/locations/*/clusters/*/certificateAuthority}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "GetSharedRegionalCertificateAuthority": {
+                              "requestType": "GetSharedRegionalCertificateAuthorityRequest",
+                              "responseType": "SharedRegionalCertificateAuthority",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}"
                                   }
                                 },
                                 {
@@ -369,6 +387,14 @@
                             "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED": 0,
                             "TRANSIT_ENCRYPTION_MODE_DISABLED": 1,
                             "TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION": 2
+                          }
+                        },
+                        "ServerCaMode": {
+                          "values": {
+                            "SERVER_CA_MODE_UNSPECIFIED": 0,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA": 1,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA": 2,
+                            "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA": 3
                           }
                         },
                         "ConnectionType": {
@@ -756,6 +782,21 @@
                               "oneof": [
                                 "kmsKey"
                               ]
+                            },
+                            "_serverCaMode": {
+                              "oneof": [
+                                "serverCaMode"
+                              ]
+                            },
+                            "_serverCaPool": {
+                              "oneof": [
+                                "serverCaPool"
+                              ]
+                            },
+                            "_rotateServerCertificate": {
+                              "oneof": [
+                                "rotateServerCertificate"
+                              ]
                             }
                           },
                           "fields": {
@@ -984,6 +1025,31 @@
                               "id": 43,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "serverCaMode": {
+                              "type": "ServerCaMode",
+                              "id": 53,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "serverCaPool": {
+                              "type": "string",
+                              "id": 54,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool",
+                                "proto3_optional": true
+                              }
+                            },
+                            "rotateServerCertificate": {
+                              "type": "bool",
+                              "id": 55,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -1684,6 +1750,68 @@
                               "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "SharedRegionalCertificateAuthority": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/SharedRegionalCertificateAuthority",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/sharedRegionalCertificateAuthority",
+                            "(google.api.resource).plural": "sharedRegionalCertificateAuthorities",
+                            "(google.api.resource).singular": "sharedRegionalCertificateAuthority"
+                          },
+                          "oneofs": {
+                            "serverCa": {
+                              "oneof": [
+                                "managedServerCa"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "managedServerCa": {
+                              "type": "RegionalManagedCertificateAuthority",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RegionalManagedCertificateAuthority": {
+                              "fields": {
+                                "caCerts": {
+                                  "rule": "repeated",
+                                  "type": "RegionalCertChain",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "RegionalCertChain": {
+                                  "fields": {
+                                    "certificates": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "GetSharedRegionalCertificateAuthorityRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/SharedRegionalCertificateAuthority"
                               }
                             }
                           }
@@ -2003,8 +2131,8 @@
                         "java_outer_classname": "CloudRedisClusterProto",
                         "java_package": "com.google.cloud.redis.cluster.v1beta1",
                         "ruby_package": "Google::Cloud::Redis::Cluster::V1beta1",
-                        "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                        "(google.api.resource_definition).type": "privateca.googleapis.com/CaPool",
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/caPools/{ca_pool}"
                       },
                       "nested": {
                         "CloudRedisCluster": {
@@ -2142,6 +2270,24 @@
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1beta1/{name=projects/*/locations/*/clusters/*/certificateAuthority}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "GetSharedRegionalCertificateAuthority": {
+                              "requestType": "GetSharedRegionalCertificateAuthorityRequest",
+                              "responseType": "SharedRegionalCertificateAuthority",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}"
                                   }
                                 },
                                 {
@@ -2357,6 +2503,14 @@
                             "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED": 0,
                             "TRANSIT_ENCRYPTION_MODE_DISABLED": 1,
                             "TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION": 2
+                          }
+                        },
+                        "ServerCaMode": {
+                          "values": {
+                            "SERVER_CA_MODE_UNSPECIFIED": 0,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA": 1,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA": 2,
+                            "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA": 3
                           }
                         },
                         "ConnectionType": {
@@ -2744,6 +2898,21 @@
                               "oneof": [
                                 "kmsKey"
                               ]
+                            },
+                            "_serverCaMode": {
+                              "oneof": [
+                                "serverCaMode"
+                              ]
+                            },
+                            "_serverCaPool": {
+                              "oneof": [
+                                "serverCaPool"
+                              ]
+                            },
+                            "_rotateServerCertificate": {
+                              "oneof": [
+                                "rotateServerCertificate"
+                              ]
                             }
                           },
                           "fields": {
@@ -2972,6 +3141,31 @@
                               "id": 43,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "serverCaMode": {
+                              "type": "ServerCaMode",
+                              "id": 53,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "serverCaPool": {
+                              "type": "string",
+                              "id": 54,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool",
+                                "proto3_optional": true
+                              }
+                            },
+                            "rotateServerCertificate": {
+                              "type": "bool",
+                              "id": 55,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -3672,6 +3866,68 @@
                               "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "SharedRegionalCertificateAuthority": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/SharedRegionalCertificateAuthority",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/sharedRegionalCertificateAuthority",
+                            "(google.api.resource).plural": "sharedRegionalCertificateAuthorities",
+                            "(google.api.resource).singular": "sharedRegionalCertificateAuthority"
+                          },
+                          "oneofs": {
+                            "serverCa": {
+                              "oneof": [
+                                "managedServerCa"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "managedServerCa": {
+                              "type": "RegionalManagedCertificateAuthority",
+                              "id": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RegionalManagedCertificateAuthority": {
+                              "fields": {
+                                "caCerts": {
+                                  "rule": "repeated",
+                                  "type": "RegionalCertChain",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "RegionalCertChain": {
+                                  "fields": {
+                                    "certificates": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "GetSharedRegionalCertificateAuthorityRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/SharedRegionalCertificateAuthority"
                               }
                             }
                           }

@@ -75,7 +75,7 @@
       "regionTag": "chat_v1_generated_ChatService_ListMessages_async",
       "title": "ChatService listMessages Sample",
       "origin": "API_DEFINITION",
-      "description": " Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. System messages, like those announcing new space members, aren't included. If you list messages from a space with no messages, the response is an empty object. When using a REST/HTTP interface, the response contains an empty JSON object, `{}`. For an example, see [List messages](https://developers.google.com/workspace/chat/api/guides/v1/messages/list). Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize): - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) in [Developer Preview](https://developers.google.com/workspace/preview)  with the authorization scope:     - `https://www.googleapis.com/auth/chat.app.messages.readonly`. When     using this authentication scope, this method only returns public     messages in a space. It doesn't include private messages. - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages`     - `https://www.googleapis.com/auth/chat.import` (import mode spaces     only)",
+      "description": " Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. System messages, like those announcing new space members, aren't included. If you list messages from a space with no messages, the response is an empty object. When using a REST/HTTP interface, the response contains an empty JSON object, `{}`. For an example, see [List messages](https://developers.google.com/workspace/chat/api/guides/v1/messages/list). Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize): - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) with the authorization scope:     - `https://www.googleapis.com/auth/chat.app.messages.readonly`. When     using this authentication scope, this method only returns public     messages in a space. It doesn't include private messages. - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages`     - `https://www.googleapis.com/auth/chat.import` (import mode spaces     only)",
       "canonical": true,
       "file": "chat_service.list_messages.js",
       "language": "JAVASCRIPT",
@@ -243,7 +243,7 @@
       "regionTag": "chat_v1_generated_ChatService_GetMessage_async",
       "title": "ChatService getMessage Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns details about a message. For an example, see [Get details about a message](https://developers.google.com/workspace/chat/get-messages). Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize): - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.bot`: When using this     authorization scope, this method returns details about a message the     Chat app has access to, like direct messages and [slash     commands](https://developers.google.com/workspace/chat/slash-commands)     that invoke the Chat app.     - `https://www.googleapis.com/auth/chat.app.messages.readonly`     with [administrator     approval](https://support.google.com/a?p=chat-app-auth) (available in     [Developer Preview](https://developers.google.com/workspace/preview)).     When using this authentication scope,     this method returns details about a public message in a space. - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages` Note: Might return a message from a blocked member or space.",
+      "description": " Returns details about a message. For an example, see [Get details about a message](https://developers.google.com/workspace/chat/get-messages). Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize): - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.bot`: When using this     authorization scope, this method returns details about a message the     Chat app has access to, like direct messages and [slash     commands](https://developers.google.com/workspace/chat/slash-commands)     that invoke the Chat app.     - `https://www.googleapis.com/auth/chat.app.messages.readonly`     with [administrator     approval](https://support.google.com/a?p=chat-app-auth).     When using this authentication scope,     this method returns details about a public message in a space. - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages` Note: Might return a message from a blocked member or space.",
       "canonical": true,
       "file": "chat_service.get_message.js",
       "language": "JAVASCRIPT",
@@ -1439,7 +1439,7 @@
       "regionTag": "chat_v1_generated_ChatService_GetSpaceEvent_async",
       "title": "ChatService getSpaceEvent Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Note: The `permissionSettings` field is not returned in the Space object of the Space event data for this request. Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize) with an [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes) appropriate for reading the requested data: - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) in [Developer Preview](https://developers.google.com/workspace/preview)  with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.app.spaces`     - `https://www.googleapis.com/auth/chat.app.messages.readonly`     - `https://www.googleapis.com/auth/chat.app.memberships` - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.spaces.readonly`     - `https://www.googleapis.com/auth/chat.spaces`     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages`     - `https://www.googleapis.com/auth/chat.messages.reactions.readonly`     - `https://www.googleapis.com/auth/chat.messages.reactions`     - `https://www.googleapis.com/auth/chat.memberships.readonly`     - `https://www.googleapis.com/auth/chat.memberships` To get an event, the authenticated caller must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).",
+      "description": " Returns an event from a Google Chat space. The [event payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the resource that changed. For example, if you request an event about a new message but the message was later updated, the server returns the updated `Message` resource in the event payload. Note: The `permissionSettings` field is not returned in the Space object of the Space event data for this request. Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize) with an [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes) appropriate for reading the requested data: - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.app.spaces`     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`     - `https://www.googleapis.com/auth/chat.app.messages.readonly`     - `https://www.googleapis.com/auth/chat.app.memberships`     - `https://www.googleapis.com/auth/chat.app.memberships.readonly` - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.spaces.readonly`     - `https://www.googleapis.com/auth/chat.spaces`     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages`     - `https://www.googleapis.com/auth/chat.messages.reactions.readonly`     - `https://www.googleapis.com/auth/chat.messages.reactions`     - `https://www.googleapis.com/auth/chat.memberships.readonly`     - `https://www.googleapis.com/auth/chat.memberships` To get an event, the authenticated caller must be a member of the space. For an example, see [Get details about an event from a Google Chat space](https://developers.google.com/workspace/chat/get-space-event).",
       "canonical": true,
       "file": "chat_service.get_space_event.js",
       "language": "JAVASCRIPT",
@@ -1479,7 +1479,7 @@
       "regionTag": "chat_v1_generated_ChatService_ListSpaceEvents_async",
       "title": "ChatService listSpaceEvents Sample",
       "origin": "API_DEFINITION",
-      "description": " Lists events from a Google Chat space. For each event, the [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the Chat resource. For example, if you list events about new space members, the server returns `Membership` resources that contain the latest membership details. If new members were removed during the requested period, the event payload contains an empty `Membership` resource. Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize) with an [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes) appropriate for reading the requested data: - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) in [Developer Preview](https://developers.google.com/workspace/preview)  with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.app.spaces`     - `https://www.googleapis.com/auth/chat.app.messages.readonly`     - `https://www.googleapis.com/auth/chat.app.memberships` - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.spaces.readonly`     - `https://www.googleapis.com/auth/chat.spaces`     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages`     - `https://www.googleapis.com/auth/chat.messages.reactions.readonly`     - `https://www.googleapis.com/auth/chat.messages.reactions`     - `https://www.googleapis.com/auth/chat.memberships.readonly`     - `https://www.googleapis.com/auth/chat.memberships` To list events, the authenticated caller must be a member of the space. For an example, see [List events from a Google Chat space](https://developers.google.com/workspace/chat/list-space-events).",
+      "description": " Lists events from a Google Chat space. For each event, the [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload) contains the most recent version of the Chat resource. For example, if you list events about new space members, the server returns `Membership` resources that contain the latest membership details. If new members were removed during the requested period, the event payload contains an empty `Membership` resource. Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize) with an [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes) appropriate for reading the requested data: - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.app.spaces`     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`     - `https://www.googleapis.com/auth/chat.app.messages.readonly`     - `https://www.googleapis.com/auth/chat.app.memberships`     - `https://www.googleapis.com/auth/chat.app.memberships.readonly` - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.spaces.readonly`     - `https://www.googleapis.com/auth/chat.spaces`     - `https://www.googleapis.com/auth/chat.messages.readonly`     - `https://www.googleapis.com/auth/chat.messages`     - `https://www.googleapis.com/auth/chat.messages.reactions.readonly`     - `https://www.googleapis.com/auth/chat.messages.reactions`     - `https://www.googleapis.com/auth/chat.memberships.readonly`     - `https://www.googleapis.com/auth/chat.memberships` To list events, the authenticated caller must be a member of the space. For an example, see [List events from a Google Chat space](https://developers.google.com/workspace/chat/list-space-events).",
       "canonical": true,
       "file": "chat_service.list_space_events.js",
       "language": "JAVASCRIPT",
@@ -1604,6 +1604,326 @@
         "method": {
           "shortName": "UpdateSpaceNotificationSetting",
           "fullName": "google.chat.v1.ChatService.UpdateSpaceNotificationSetting",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_CreateSection_async",
+      "title": "ChatService createSection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a section in Google Chat. Sections help users group conversations and customize the list of spaces displayed in Chat navigation panel. Only sections of type `CUSTOM_SECTION` can be created. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`",
+      "canonical": true,
+      "file": "chat_service.create_section.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSection",
+        "fullName": "google.chat.v1.ChatService.CreateSection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "section",
+            "type": ".google.chat.v1.Section"
+          }
+        ],
+        "resultType": ".google.chat.v1.Section",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSection",
+          "fullName": "google.chat.v1.ChatService.CreateSection",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_DeleteSection_async",
+      "title": "ChatService deleteSection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a section of type `CUSTOM_SECTION`. If the section contains items, such as spaces, the items are moved to Google Chat's default sections and are not deleted. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`",
+      "canonical": true,
+      "file": "chat_service.delete_section.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSection",
+        "fullName": "google.chat.v1.ChatService.DeleteSection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSection",
+          "fullName": "google.chat.v1.ChatService.DeleteSection",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_UpdateSection_async",
+      "title": "ChatService updateSection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a section. Only sections of type `CUSTOM_SECTION` can be updated. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`",
+      "canonical": true,
+      "file": "chat_service.update_section.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSection",
+        "fullName": "google.chat.v1.ChatService.UpdateSection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "section",
+            "type": ".google.chat.v1.Section"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.chat.v1.Section",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSection",
+          "fullName": "google.chat.v1.ChatService.UpdateSection",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_ListSections_async",
+      "title": "ChatService listSections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists sections available to the Chat user. Sections help users group their conversations and customize the list of spaces displayed in Chat navigation panel. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`   - `https://www.googleapis.com/auth/chat.users.sections.readonly`",
+      "canonical": true,
+      "file": "chat_service.list_sections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSections",
+        "fullName": "google.chat.v1.ChatService.ListSections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.chat.v1.ListSectionsResponse",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "ListSections",
+          "fullName": "google.chat.v1.ChatService.ListSections",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_PositionSection_async",
+      "title": "ChatService positionSection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Changes the sort order of a section. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`",
+      "canonical": true,
+      "file": "chat_service.position_section.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PositionSection",
+        "fullName": "google.chat.v1.ChatService.PositionSection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "sort_order",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "relative_position",
+            "type": ".google.chat.v1.PositionSectionRequest.Position"
+          }
+        ],
+        "resultType": ".google.chat.v1.PositionSectionResponse",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "PositionSection",
+          "fullName": "google.chat.v1.ChatService.PositionSection",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_ListSectionItems_async",
+      "title": "ChatService listSectionItems Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists items in a section. Only spaces can be section items. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`   - `https://www.googleapis.com/auth/chat.users.sections.readonly`",
+      "canonical": true,
+      "file": "chat_service.list_section_items.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSectionItems",
+        "fullName": "google.chat.v1.ChatService.ListSectionItems",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.chat.v1.ListSectionItemsResponse",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "ListSectionItems",
+          "fullName": "google.chat.v1.ChatService.ListSectionItems",
+          "service": {
+            "shortName": "ChatService",
+            "fullName": "google.chat.v1.ChatService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chat_v1_generated_ChatService_MoveSectionItem_async",
+      "title": "ChatService moveSectionItem Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moves an item from one section to another. For example, if a section contains spaces, this method can be used to move a space to a different section. For details, see [Create and organize sections in Google Chat](https://support.google.com/chat/answer/16059854). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with the [authorization scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):   - `https://www.googleapis.com/auth/chat.users.sections`",
+      "canonical": true,
+      "file": "chat_service.move_section_item.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MoveSectionItem",
+        "fullName": "google.chat.v1.ChatService.MoveSectionItem",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_section",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.chat.v1.MoveSectionItemResponse",
+        "client": {
+          "shortName": "ChatServiceClient",
+          "fullName": "google.chat.v1.ChatServiceClient"
+        },
+        "method": {
+          "shortName": "MoveSectionItem",
+          "fullName": "google.chat.v1.ChatService.MoveSectionItem",
           "service": {
             "shortName": "ChatService",
             "fullName": "google.chat.v1.ChatService"

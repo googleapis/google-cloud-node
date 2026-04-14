@@ -1772,6 +1772,19 @@
                         "byteItem": {
                           "type": "ByteContentItem",
                           "id": 5
+                        },
+                        "contentMetadata": {
+                          "type": "ContentMetadata",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ContentMetadata": {
+                      "fields": {
+                        "properties": {
+                          "rule": "repeated",
+                          "type": "KeyValueMetadataProperty",
+                          "id": 2
                         }
                       }
                     },
@@ -1797,6 +1810,18 @@
                               "id": 1
                             }
                           }
+                        }
+                      }
+                    },
+                    "KeyValueMetadataProperty": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -7373,7 +7398,8 @@
                       "values": {
                         "METADATATYPE_UNSPECIFIED": 0,
                         "STORAGE_METADATA": 2,
-                        "CONTENT_METADATA": 3
+                        "CONTENT_METADATA": 3,
+                        "CLIENT_PROVIDED_METADATA": 4
                       }
                     },
                     "InfoTypeSupportedBy": {

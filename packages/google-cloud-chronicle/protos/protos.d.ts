@@ -2034,6 +2034,3142 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a DataTableService */
+                class DataTableService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataTableService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataTableService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataTableService;
+
+                    /**
+                     * Calls CreateDataTable.
+                     * @param request CreateDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTable
+                     */
+                    public createDataTable(request: google.cloud.chronicle.v1.ICreateDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.CreateDataTableCallback): void;
+
+                    /**
+                     * Calls CreateDataTable.
+                     * @param request CreateDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataTable(request: google.cloud.chronicle.v1.ICreateDataTableRequest): Promise<google.cloud.chronicle.v1.DataTable>;
+
+                    /**
+                     * Calls ListDataTables.
+                     * @param request ListDataTablesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataTablesResponse
+                     */
+                    public listDataTables(request: google.cloud.chronicle.v1.IListDataTablesRequest, callback: google.cloud.chronicle.v1.DataTableService.ListDataTablesCallback): void;
+
+                    /**
+                     * Calls ListDataTables.
+                     * @param request ListDataTablesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataTables(request: google.cloud.chronicle.v1.IListDataTablesRequest): Promise<google.cloud.chronicle.v1.ListDataTablesResponse>;
+
+                    /**
+                     * Calls GetDataTable.
+                     * @param request GetDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTable
+                     */
+                    public getDataTable(request: google.cloud.chronicle.v1.IGetDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.GetDataTableCallback): void;
+
+                    /**
+                     * Calls GetDataTable.
+                     * @param request GetDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataTable(request: google.cloud.chronicle.v1.IGetDataTableRequest): Promise<google.cloud.chronicle.v1.DataTable>;
+
+                    /**
+                     * Calls UpdateDataTable.
+                     * @param request UpdateDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTable
+                     */
+                    public updateDataTable(request: google.cloud.chronicle.v1.IUpdateDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.UpdateDataTableCallback): void;
+
+                    /**
+                     * Calls UpdateDataTable.
+                     * @param request UpdateDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataTable(request: google.cloud.chronicle.v1.IUpdateDataTableRequest): Promise<google.cloud.chronicle.v1.DataTable>;
+
+                    /**
+                     * Calls DeleteDataTable.
+                     * @param request DeleteDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataTable(request: google.cloud.chronicle.v1.IDeleteDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.DeleteDataTableCallback): void;
+
+                    /**
+                     * Calls DeleteDataTable.
+                     * @param request DeleteDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataTable(request: google.cloud.chronicle.v1.IDeleteDataTableRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateDataTableRow.
+                     * @param request CreateDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableRow
+                     */
+                    public createDataTableRow(request: google.cloud.chronicle.v1.ICreateDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.CreateDataTableRowCallback): void;
+
+                    /**
+                     * Calls CreateDataTableRow.
+                     * @param request CreateDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataTableRow(request: google.cloud.chronicle.v1.ICreateDataTableRowRequest): Promise<google.cloud.chronicle.v1.DataTableRow>;
+
+                    /**
+                     * Calls UpdateDataTableRow.
+                     * @param request UpdateDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableRow
+                     */
+                    public updateDataTableRow(request: google.cloud.chronicle.v1.IUpdateDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.UpdateDataTableRowCallback): void;
+
+                    /**
+                     * Calls UpdateDataTableRow.
+                     * @param request UpdateDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataTableRow(request: google.cloud.chronicle.v1.IUpdateDataTableRowRequest): Promise<google.cloud.chronicle.v1.DataTableRow>;
+
+                    /**
+                     * Calls ListDataTableRows.
+                     * @param request ListDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataTableRowsResponse
+                     */
+                    public listDataTableRows(request: google.cloud.chronicle.v1.IListDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.ListDataTableRowsCallback): void;
+
+                    /**
+                     * Calls ListDataTableRows.
+                     * @param request ListDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataTableRows(request: google.cloud.chronicle.v1.IListDataTableRowsRequest): Promise<google.cloud.chronicle.v1.ListDataTableRowsResponse>;
+
+                    /**
+                     * Calls GetDataTableRow.
+                     * @param request GetDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableRow
+                     */
+                    public getDataTableRow(request: google.cloud.chronicle.v1.IGetDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.GetDataTableRowCallback): void;
+
+                    /**
+                     * Calls GetDataTableRow.
+                     * @param request GetDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataTableRow(request: google.cloud.chronicle.v1.IGetDataTableRowRequest): Promise<google.cloud.chronicle.v1.DataTableRow>;
+
+                    /**
+                     * Calls DeleteDataTableRow.
+                     * @param request DeleteDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataTableRow(request: google.cloud.chronicle.v1.IDeleteDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.DeleteDataTableRowCallback): void;
+
+                    /**
+                     * Calls DeleteDataTableRow.
+                     * @param request DeleteDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataTableRow(request: google.cloud.chronicle.v1.IDeleteDataTableRowRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls BulkCreateDataTableRows.
+                     * @param request BulkCreateDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkCreateDataTableRowsResponse
+                     */
+                    public bulkCreateDataTableRows(request: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkCreateDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkCreateDataTableRows.
+                     * @param request BulkCreateDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkCreateDataTableRows(request: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse>;
+
+                    /**
+                     * Calls BulkGetDataTableRows.
+                     * @param request BulkGetDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkGetDataTableRowsResponse
+                     */
+                    public bulkGetDataTableRows(request: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkGetDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkGetDataTableRows.
+                     * @param request BulkGetDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkGetDataTableRows(request: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkGetDataTableRowsResponse>;
+
+                    /**
+                     * Calls BulkReplaceDataTableRows.
+                     * @param request BulkReplaceDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkReplaceDataTableRowsResponse
+                     */
+                    public bulkReplaceDataTableRows(request: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkReplaceDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkReplaceDataTableRows.
+                     * @param request BulkReplaceDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkReplaceDataTableRows(request: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse>;
+
+                    /**
+                     * Calls BulkUpdateDataTableRows.
+                     * @param request BulkUpdateDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkUpdateDataTableRowsResponse
+                     */
+                    public bulkUpdateDataTableRows(request: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkUpdateDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkUpdateDataTableRows.
+                     * @param request BulkUpdateDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkUpdateDataTableRows(request: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse>;
+
+                    /**
+                     * Calls GetDataTableOperationErrors.
+                     * @param request GetDataTableOperationErrorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableOperationErrors
+                     */
+                    public getDataTableOperationErrors(request: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest, callback: google.cloud.chronicle.v1.DataTableService.GetDataTableOperationErrorsCallback): void;
+
+                    /**
+                     * Calls GetDataTableOperationErrors.
+                     * @param request GetDataTableOperationErrorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataTableOperationErrors(request: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest): Promise<google.cloud.chronicle.v1.DataTableOperationErrors>;
+                }
+
+                namespace DataTableService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|createDataTable}.
+                     * @param error Error, if any
+                     * @param [response] DataTable
+                     */
+                    type CreateDataTableCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|listDataTables}.
+                     * @param error Error, if any
+                     * @param [response] ListDataTablesResponse
+                     */
+                    type ListDataTablesCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListDataTablesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTable}.
+                     * @param error Error, if any
+                     * @param [response] DataTable
+                     */
+                    type GetDataTableCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|updateDataTable}.
+                     * @param error Error, if any
+                     * @param [response] DataTable
+                     */
+                    type UpdateDataTableCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|deleteDataTable}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataTableCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|createDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] DataTableRow
+                     */
+                    type CreateDataTableRowCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableRow) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|updateDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] DataTableRow
+                     */
+                    type UpdateDataTableRowCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableRow) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|listDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] ListDataTableRowsResponse
+                     */
+                    type ListDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] DataTableRow
+                     */
+                    type GetDataTableRowCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableRow) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|deleteDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataTableRowCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkCreateDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkCreateDataTableRowsResponse
+                     */
+                    type BulkCreateDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkGetDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkGetDataTableRowsResponse
+                     */
+                    type BulkGetDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkGetDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkReplaceDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkReplaceDataTableRowsResponse
+                     */
+                    type BulkReplaceDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkUpdateDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkUpdateDataTableRowsResponse
+                     */
+                    type BulkUpdateDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTableOperationErrors}.
+                     * @param error Error, if any
+                     * @param [response] DataTableOperationErrors
+                     */
+                    type GetDataTableOperationErrorsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableOperationErrors) => void;
+                }
+
+                /** DataTableUpdateSource enum. */
+                enum DataTableUpdateSource {
+                    DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED = 0,
+                    USER = 1,
+                    RULE = 2,
+                    SEARCH = 3
+                }
+
+                /** Properties of a CreateDataTableRequest. */
+                interface ICreateDataTableRequest {
+
+                    /** CreateDataTableRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataTableRequest dataTable */
+                    dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** CreateDataTableRequest dataTableId */
+                    dataTableId?: (string|null);
+                }
+
+                /** Represents a CreateDataTableRequest. */
+                class CreateDataTableRequest implements ICreateDataTableRequest {
+
+                    /**
+                     * Constructs a new CreateDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ICreateDataTableRequest);
+
+                    /** CreateDataTableRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataTableRequest dataTable. */
+                    public dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** CreateDataTableRequest dataTableId. */
+                    public dataTableId: string;
+
+                    /**
+                     * Creates a new CreateDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ICreateDataTableRequest): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Encodes the specified CreateDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRequest.verify|verify} messages.
+                     * @param message CreateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ICreateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRequest.verify|verify} messages.
+                     * @param message CreateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ICreateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Decodes a CreateDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Verifies a CreateDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataTableRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.CreateDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDataTableRequest. */
+                interface IGetDataTableRequest {
+
+                    /** GetDataTableRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataTableRequest. */
+                class GetDataTableRequest implements IGetDataTableRequest {
+
+                    /**
+                     * Constructs a new GetDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDataTableRequest);
+
+                    /** GetDataTableRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDataTableRequest): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Encodes the specified GetDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRequest.verify|verify} messages.
+                     * @param message GetDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRequest.verify|verify} messages.
+                     * @param message GetDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Decodes a GetDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Verifies a GetDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataTableRequest message. Also converts values to other types if specified.
+                     * @param message GetDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDataTableRequest. */
+                interface IUpdateDataTableRequest {
+
+                    /** UpdateDataTableRequest dataTable */
+                    dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** UpdateDataTableRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataTableRequest. */
+                class UpdateDataTableRequest implements IUpdateDataTableRequest {
+
+                    /**
+                     * Constructs a new UpdateDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateDataTableRequest);
+
+                    /** UpdateDataTableRequest dataTable. */
+                    public dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** UpdateDataTableRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateDataTableRequest): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Decodes an UpdateDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Verifies an UpdateDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataTableRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTablesRequest. */
+                interface IListDataTablesRequest {
+
+                    /** ListDataTablesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataTablesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataTablesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDataTablesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDataTablesRequest. */
+                class ListDataTablesRequest implements IListDataTablesRequest {
+
+                    /**
+                     * Constructs a new ListDataTablesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTablesRequest);
+
+                    /** ListDataTablesRequest parent. */
+                    public parent: string;
+
+                    /** ListDataTablesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataTablesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDataTablesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDataTablesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTablesRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTablesRequest): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Encodes the specified ListDataTablesRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesRequest.verify|verify} messages.
+                     * @param message ListDataTablesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTablesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTablesRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesRequest.verify|verify} messages.
+                     * @param message ListDataTablesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTablesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTablesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTablesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Decodes a ListDataTablesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTablesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Verifies a ListDataTablesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTablesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTablesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataTablesRequest message. Also converts values to other types if specified.
+                     * @param message ListDataTablesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTablesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTablesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTablesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataTableRequest. */
+                interface IDeleteDataTableRequest {
+
+                    /** DeleteDataTableRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDataTableRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteDataTableRequest. */
+                class DeleteDataTableRequest implements IDeleteDataTableRequest {
+
+                    /**
+                     * Constructs a new DeleteDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDeleteDataTableRequest);
+
+                    /** DeleteDataTableRequest name. */
+                    public name: string;
+
+                    /** DeleteDataTableRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDeleteDataTableRequest): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDeleteDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDeleteDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Decodes a DeleteDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Verifies a DeleteDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataTableRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DeleteDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTablesResponse. */
+                interface IListDataTablesResponse {
+
+                    /** ListDataTablesResponse dataTables */
+                    dataTables?: (google.cloud.chronicle.v1.IDataTable[]|null);
+
+                    /** ListDataTablesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDataTablesResponse. */
+                class ListDataTablesResponse implements IListDataTablesResponse {
+
+                    /**
+                     * Constructs a new ListDataTablesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTablesResponse);
+
+                    /** ListDataTablesResponse dataTables. */
+                    public dataTables: google.cloud.chronicle.v1.IDataTable[];
+
+                    /** ListDataTablesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDataTablesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTablesResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTablesResponse): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Encodes the specified ListDataTablesResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesResponse.verify|verify} messages.
+                     * @param message ListDataTablesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTablesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTablesResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesResponse.verify|verify} messages.
+                     * @param message ListDataTablesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTablesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTablesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTablesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Decodes a ListDataTablesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTablesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Verifies a ListDataTablesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTablesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTablesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataTablesResponse message. Also converts values to other types if specified.
+                     * @param message ListDataTablesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTablesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTablesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTablesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDataTableRowRequest. */
+                interface ICreateDataTableRowRequest {
+
+                    /** CreateDataTableRowRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataTableRowRequest dataTableRow */
+                    dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+                }
+
+                /** Represents a CreateDataTableRowRequest. */
+                class CreateDataTableRowRequest implements ICreateDataTableRowRequest {
+
+                    /**
+                     * Constructs a new CreateDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ICreateDataTableRowRequest);
+
+                    /** CreateDataTableRowRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataTableRowRequest dataTableRow. */
+                    public dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+
+                    /**
+                     * Creates a new CreateDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ICreateDataTableRowRequest): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified CreateDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRowRequest.verify|verify} messages.
+                     * @param message CreateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ICreateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRowRequest.verify|verify} messages.
+                     * @param message CreateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ICreateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Decodes a CreateDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Verifies a CreateDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.CreateDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDataTableRowRequest. */
+                interface IUpdateDataTableRowRequest {
+
+                    /** UpdateDataTableRowRequest dataTableRow */
+                    dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+
+                    /** UpdateDataTableRowRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataTableRowRequest. */
+                class UpdateDataTableRowRequest implements IUpdateDataTableRowRequest {
+
+                    /**
+                     * Constructs a new UpdateDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateDataTableRowRequest);
+
+                    /** UpdateDataTableRowRequest dataTableRow. */
+                    public dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+
+                    /** UpdateDataTableRowRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateDataTableRowRequest): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Decodes an UpdateDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Verifies an UpdateDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTableRowsRequest. */
+                interface IListDataTableRowsRequest {
+
+                    /** ListDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataTableRowsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataTableRowsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDataTableRowsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListDataTableRowsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDataTableRowsRequest. */
+                class ListDataTableRowsRequest implements IListDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new ListDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTableRowsRequest);
+
+                    /** ListDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** ListDataTableRowsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataTableRowsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDataTableRowsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListDataTableRowsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTableRowsRequest): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsRequest.verify|verify} messages.
+                     * @param message ListDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsRequest.verify|verify} messages.
+                     * @param message ListDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Decodes a ListDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Verifies a ListDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message ListDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTableRowsResponse. */
+                interface IListDataTableRowsResponse {
+
+                    /** ListDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+
+                    /** ListDataTableRowsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDataTableRowsResponse. */
+                class ListDataTableRowsResponse implements IListDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new ListDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTableRowsResponse);
+
+                    /** ListDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /** ListDataTableRowsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTableRowsResponse): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsResponse.verify|verify} messages.
+                     * @param message ListDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsResponse.verify|verify} messages.
+                     * @param message ListDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Decodes a ListDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Verifies a ListDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message ListDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDataTableRowRequest. */
+                interface IGetDataTableRowRequest {
+
+                    /** GetDataTableRowRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataTableRowRequest. */
+                class GetDataTableRowRequest implements IGetDataTableRowRequest {
+
+                    /**
+                     * Constructs a new GetDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDataTableRowRequest);
+
+                    /** GetDataTableRowRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDataTableRowRequest): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified GetDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRowRequest.verify|verify} messages.
+                     * @param message GetDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRowRequest.verify|verify} messages.
+                     * @param message GetDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Decodes a GetDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Verifies a GetDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message GetDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataTableRowRequest. */
+                interface IDeleteDataTableRowRequest {
+
+                    /** DeleteDataTableRowRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDataTableRowRequest. */
+                class DeleteDataTableRowRequest implements IDeleteDataTableRowRequest {
+
+                    /**
+                     * Constructs a new DeleteDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDeleteDataTableRowRequest);
+
+                    /** DeleteDataTableRowRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDeleteDataTableRowRequest): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRowRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDeleteDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRowRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDeleteDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Decodes a DeleteDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Verifies a DeleteDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DeleteDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkCreateDataTableRowsRequest. */
+                interface IBulkCreateDataTableRowsRequest {
+
+                    /** BulkCreateDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkCreateDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.ICreateDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkCreateDataTableRowsRequest. */
+                class BulkCreateDataTableRowsRequest implements IBulkCreateDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkCreateDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest);
+
+                    /** BulkCreateDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkCreateDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.ICreateDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkCreateDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkCreateDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkCreateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkCreateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkCreateDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkCreateDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkCreateDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkCreateDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkCreateDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkCreateDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkCreateDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkCreateDataTableRowsResponse. */
+                interface IBulkCreateDataTableRowsResponse {
+
+                    /** BulkCreateDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkCreateDataTableRowsResponse. */
+                class BulkCreateDataTableRowsResponse implements IBulkCreateDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkCreateDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse);
+
+                    /** BulkCreateDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkCreateDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkCreateDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkCreateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkCreateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkCreateDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkCreateDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkCreateDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkCreateDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkCreateDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkCreateDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkCreateDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkGetDataTableRowsRequest. */
+                interface IBulkGetDataTableRowsRequest {
+
+                    /** BulkGetDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkGetDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.IGetDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkGetDataTableRowsRequest. */
+                class BulkGetDataTableRowsRequest implements IBulkGetDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkGetDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest);
+
+                    /** BulkGetDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkGetDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.IGetDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkGetDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkGetDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkGetDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkGetDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkGetDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkGetDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkGetDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkGetDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkGetDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkGetDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkGetDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkGetDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkGetDataTableRowsResponse. */
+                interface IBulkGetDataTableRowsResponse {
+
+                    /** BulkGetDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkGetDataTableRowsResponse. */
+                class BulkGetDataTableRowsResponse implements IBulkGetDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkGetDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse);
+
+                    /** BulkGetDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkGetDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkGetDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkGetDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkGetDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkGetDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkGetDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkGetDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkGetDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkGetDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkGetDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkGetDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkGetDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkReplaceDataTableRowsRequest. */
+                interface IBulkReplaceDataTableRowsRequest {
+
+                    /** BulkReplaceDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkReplaceDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.ICreateDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkReplaceDataTableRowsRequest. */
+                class BulkReplaceDataTableRowsRequest implements IBulkReplaceDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkReplaceDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest);
+
+                    /** BulkReplaceDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkReplaceDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.ICreateDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkReplaceDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkReplaceDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkReplaceDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkReplaceDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkReplaceDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkReplaceDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkReplaceDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkReplaceDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkReplaceDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkReplaceDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkReplaceDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkReplaceDataTableRowsResponse. */
+                interface IBulkReplaceDataTableRowsResponse {
+
+                    /** BulkReplaceDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkReplaceDataTableRowsResponse. */
+                class BulkReplaceDataTableRowsResponse implements IBulkReplaceDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkReplaceDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse);
+
+                    /** BulkReplaceDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkReplaceDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkReplaceDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkReplaceDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkReplaceDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkReplaceDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkReplaceDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkReplaceDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkReplaceDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkReplaceDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkReplaceDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkReplaceDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkUpdateDataTableRowsRequest. */
+                interface IBulkUpdateDataTableRowsRequest {
+
+                    /** BulkUpdateDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkUpdateDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.IUpdateDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkUpdateDataTableRowsRequest. */
+                class BulkUpdateDataTableRowsRequest implements IBulkUpdateDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkUpdateDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest);
+
+                    /** BulkUpdateDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkUpdateDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.IUpdateDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkUpdateDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUpdateDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUpdateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUpdateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkUpdateDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUpdateDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUpdateDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkUpdateDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkUpdateDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUpdateDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUpdateDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkUpdateDataTableRowsResponse. */
+                interface IBulkUpdateDataTableRowsResponse {
+
+                    /** BulkUpdateDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkUpdateDataTableRowsResponse. */
+                class BulkUpdateDataTableRowsResponse implements IBulkUpdateDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkUpdateDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse);
+
+                    /** BulkUpdateDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkUpdateDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUpdateDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUpdateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUpdateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkUpdateDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUpdateDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUpdateDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkUpdateDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkUpdateDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUpdateDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUpdateDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableScopeInfo. */
+                interface IDataTableScopeInfo {
+
+                    /** DataTableScopeInfo dataAccessScopes */
+                    dataAccessScopes?: (string[]|null);
+                }
+
+                /** Represents a DataTableScopeInfo. */
+                class DataTableScopeInfo implements IDataTableScopeInfo {
+
+                    /**
+                     * Constructs a new DataTableScopeInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableScopeInfo);
+
+                    /** DataTableScopeInfo dataAccessScopes. */
+                    public dataAccessScopes: string[];
+
+                    /**
+                     * Creates a new DataTableScopeInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableScopeInfo instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableScopeInfo): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Encodes the specified DataTableScopeInfo message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableScopeInfo.verify|verify} messages.
+                     * @param message DataTableScopeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableScopeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableScopeInfo message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableScopeInfo.verify|verify} messages.
+                     * @param message DataTableScopeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableScopeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableScopeInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableScopeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Decodes a DataTableScopeInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableScopeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Verifies a DataTableScopeInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableScopeInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableScopeInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Creates a plain object from a DataTableScopeInfo message. Also converts values to other types if specified.
+                     * @param message DataTableScopeInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableScopeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableScopeInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableScopeInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTable. */
+                interface IDataTable {
+
+                    /** DataTable name */
+                    name?: (string|null);
+
+                    /** DataTable displayName */
+                    displayName?: (string|null);
+
+                    /** DataTable description */
+                    description?: (string|null);
+
+                    /** DataTable createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable columnInfo */
+                    columnInfo?: (google.cloud.chronicle.v1.IDataTableColumnInfo[]|null);
+
+                    /** DataTable dataTableUuid */
+                    dataTableUuid?: (string|null);
+
+                    /** DataTable rules */
+                    rules?: (string[]|null);
+
+                    /** DataTable ruleAssociationsCount */
+                    ruleAssociationsCount?: (number|null);
+
+                    /** DataTable rowTimeToLive */
+                    rowTimeToLive?: (string|null);
+
+                    /** DataTable approximateRowCount */
+                    approximateRowCount?: (number|Long|string|null);
+
+                    /** DataTable scopeInfo */
+                    scopeInfo?: (google.cloud.chronicle.v1.IDataTableScopeInfo|null);
+
+                    /** DataTable updateSource */
+                    updateSource?: (google.cloud.chronicle.v1.DataTableUpdateSource|keyof typeof google.cloud.chronicle.v1.DataTableUpdateSource|null);
+
+                    /** DataTable rowTimeToLiveUpdateTime */
+                    rowTimeToLiveUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DataTable. */
+                class DataTable implements IDataTable {
+
+                    /**
+                     * Constructs a new DataTable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTable);
+
+                    /** DataTable name. */
+                    public name: string;
+
+                    /** DataTable displayName. */
+                    public displayName: string;
+
+                    /** DataTable description. */
+                    public description: string;
+
+                    /** DataTable createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable columnInfo. */
+                    public columnInfo: google.cloud.chronicle.v1.IDataTableColumnInfo[];
+
+                    /** DataTable dataTableUuid. */
+                    public dataTableUuid: string;
+
+                    /** DataTable rules. */
+                    public rules: string[];
+
+                    /** DataTable ruleAssociationsCount. */
+                    public ruleAssociationsCount: number;
+
+                    /** DataTable rowTimeToLive. */
+                    public rowTimeToLive: string;
+
+                    /** DataTable approximateRowCount. */
+                    public approximateRowCount: (number|Long|string);
+
+                    /** DataTable scopeInfo. */
+                    public scopeInfo?: (google.cloud.chronicle.v1.IDataTableScopeInfo|null);
+
+                    /** DataTable updateSource. */
+                    public updateSource: (google.cloud.chronicle.v1.DataTableUpdateSource|keyof typeof google.cloud.chronicle.v1.DataTableUpdateSource);
+
+                    /** DataTable rowTimeToLiveUpdateTime. */
+                    public rowTimeToLiveUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DataTable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTable instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTable): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Encodes the specified DataTable message. Does not implicitly {@link google.cloud.chronicle.v1.DataTable.verify|verify} messages.
+                     * @param message DataTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTable message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTable.verify|verify} messages.
+                     * @param message DataTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Decodes a DataTable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Verifies a DataTable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Creates a plain object from a DataTable message. Also converts values to other types if specified.
+                     * @param message DataTable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableRow. */
+                interface IDataTableRow {
+
+                    /** DataTableRow name */
+                    name?: (string|null);
+
+                    /** DataTableRow values */
+                    values?: (string[]|null);
+
+                    /** DataTableRow createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow rowTimeToLive */
+                    rowTimeToLive?: (string|null);
+                }
+
+                /** Represents a DataTableRow. */
+                class DataTableRow implements IDataTableRow {
+
+                    /**
+                     * Constructs a new DataTableRow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableRow);
+
+                    /** DataTableRow name. */
+                    public name: string;
+
+                    /** DataTableRow values. */
+                    public values: string[];
+
+                    /** DataTableRow createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow rowTimeToLive. */
+                    public rowTimeToLive: string;
+
+                    /**
+                     * Creates a new DataTableRow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableRow instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableRow): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Encodes the specified DataTableRow message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRow.verify|verify} messages.
+                     * @param message DataTableRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableRow message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRow.verify|verify} messages.
+                     * @param message DataTableRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableRow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Decodes a DataTableRow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Verifies a DataTableRow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableRow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableRow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Creates a plain object from a DataTableRow message. Also converts values to other types if specified.
+                     * @param message DataTableRow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableRow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableRow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableColumnInfo. */
+                interface IDataTableColumnInfo {
+
+                    /** DataTableColumnInfo mappedColumnPath */
+                    mappedColumnPath?: (string|null);
+
+                    /** DataTableColumnInfo columnType */
+                    columnType?: (google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|keyof typeof google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|null);
+
+                    /** DataTableColumnInfo columnIndex */
+                    columnIndex?: (number|null);
+
+                    /** DataTableColumnInfo originalColumn */
+                    originalColumn?: (string|null);
+
+                    /** DataTableColumnInfo keyColumn */
+                    keyColumn?: (boolean|null);
+
+                    /** DataTableColumnInfo repeatedValues */
+                    repeatedValues?: (boolean|null);
+                }
+
+                /** Represents a DataTableColumnInfo. */
+                class DataTableColumnInfo implements IDataTableColumnInfo {
+
+                    /**
+                     * Constructs a new DataTableColumnInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableColumnInfo);
+
+                    /** DataTableColumnInfo mappedColumnPath. */
+                    public mappedColumnPath?: (string|null);
+
+                    /** DataTableColumnInfo columnType. */
+                    public columnType?: (google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|keyof typeof google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|null);
+
+                    /** DataTableColumnInfo columnIndex. */
+                    public columnIndex: number;
+
+                    /** DataTableColumnInfo originalColumn. */
+                    public originalColumn: string;
+
+                    /** DataTableColumnInfo keyColumn. */
+                    public keyColumn: boolean;
+
+                    /** DataTableColumnInfo repeatedValues. */
+                    public repeatedValues: boolean;
+
+                    /** DataTableColumnInfo pathOrType. */
+                    public pathOrType?: ("mappedColumnPath"|"columnType");
+
+                    /**
+                     * Creates a new DataTableColumnInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableColumnInfo instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableColumnInfo): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Encodes the specified DataTableColumnInfo message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableColumnInfo.verify|verify} messages.
+                     * @param message DataTableColumnInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableColumnInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableColumnInfo message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableColumnInfo.verify|verify} messages.
+                     * @param message DataTableColumnInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableColumnInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableColumnInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableColumnInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Decodes a DataTableColumnInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableColumnInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Verifies a DataTableColumnInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableColumnInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableColumnInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Creates a plain object from a DataTableColumnInfo message. Also converts values to other types if specified.
+                     * @param message DataTableColumnInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableColumnInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableColumnInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableColumnInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataTableColumnInfo {
+
+                    /** DataTableColumnType enum. */
+                    enum DataTableColumnType {
+                        DATA_TABLE_COLUMN_TYPE_UNSPECIFIED = 0,
+                        STRING = 1,
+                        REGEX = 2,
+                        CIDR = 3,
+                        NUMBER = 4
+                    }
+                }
+
+                /** Properties of a GetDataTableOperationErrorsRequest. */
+                interface IGetDataTableOperationErrorsRequest {
+
+                    /** GetDataTableOperationErrorsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataTableOperationErrorsRequest. */
+                class GetDataTableOperationErrorsRequest implements IGetDataTableOperationErrorsRequest {
+
+                    /**
+                     * Constructs a new GetDataTableOperationErrorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest);
+
+                    /** GetDataTableOperationErrorsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataTableOperationErrorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataTableOperationErrorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Encodes the specified GetDataTableOperationErrorsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest.verify|verify} messages.
+                     * @param message GetDataTableOperationErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataTableOperationErrorsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest.verify|verify} messages.
+                     * @param message GetDataTableOperationErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataTableOperationErrorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataTableOperationErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Decodes a GetDataTableOperationErrorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataTableOperationErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Verifies a GetDataTableOperationErrorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataTableOperationErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataTableOperationErrorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataTableOperationErrorsRequest message. Also converts values to other types if specified.
+                     * @param message GetDataTableOperationErrorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataTableOperationErrorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataTableOperationErrorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableOperationErrors. */
+                interface IDataTableOperationErrors {
+
+                    /** DataTableOperationErrors name */
+                    name?: (string|null);
+
+                    /** DataTableOperationErrors rpcErrors */
+                    rpcErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a DataTableOperationErrors. */
+                class DataTableOperationErrors implements IDataTableOperationErrors {
+
+                    /**
+                     * Constructs a new DataTableOperationErrors.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableOperationErrors);
+
+                    /** DataTableOperationErrors name. */
+                    public name: string;
+
+                    /** DataTableOperationErrors rpcErrors. */
+                    public rpcErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new DataTableOperationErrors instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableOperationErrors instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableOperationErrors): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Encodes the specified DataTableOperationErrors message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableOperationErrors.verify|verify} messages.
+                     * @param message DataTableOperationErrors message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableOperationErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableOperationErrors message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableOperationErrors.verify|verify} messages.
+                     * @param message DataTableOperationErrors message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableOperationErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableOperationErrors message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableOperationErrors
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Decodes a DataTableOperationErrors message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableOperationErrors
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Verifies a DataTableOperationErrors message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableOperationErrors message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableOperationErrors
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Creates a plain object from a DataTableOperationErrors message. Also converts values to other types if specified.
+                     * @param message DataTableOperationErrors
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableOperationErrors, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableOperationErrors to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableOperationErrors
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an EntityService */
                 class EntityService extends $protobuf.rpc.Service {
 
@@ -14448,6 +17584,119 @@ export namespace google {
         }
     }
 
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
     /** Namespace longrunning. */
     namespace longrunning {
 
@@ -15413,119 +18662,6 @@ export namespace google {
 
             /**
              * Gets the default type url for OperationInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Properties of a Status. */
-        interface IStatus {
-
-            /** Status code */
-            code?: (number|null);
-
-            /** Status message */
-            message?: (string|null);
-
-            /** Status details */
-            details?: (google.protobuf.IAny[]|null);
-        }
-
-        /** Represents a Status. */
-        class Status implements IStatus {
-
-            /**
-             * Constructs a new Status.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.rpc.IStatus);
-
-            /** Status code. */
-            public code: number;
-
-            /** Status message. */
-            public message: string;
-
-            /** Status details. */
-            public details: google.protobuf.IAny[];
-
-            /**
-             * Creates a new Status instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Status instance
-             */
-            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
-
-            /**
-             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
-
-            /**
-             * Verifies a Status message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Status message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Status
-             */
-            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
-
-            /**
-             * Creates a plain object from a Status message. Also converts values to other types if specified.
-             * @param message Status
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Status to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
