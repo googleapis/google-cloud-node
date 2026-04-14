@@ -166,7 +166,7 @@ describe('Publisher', () => {
     it('should call through to publishMessage', () => {
       const stub = sandbox.stub(publisher, 'publishMessage');
 
-      publisher.publish(buffer, spy);
+      void publisher.publish(buffer, spy);
 
       const [{data}, callback] = stub.lastCall.args;
       assert.strictEqual(data, buffer);
@@ -177,7 +177,7 @@ describe('Publisher', () => {
       const stub = sandbox.stub(publisher, 'publishMessage');
       const attrs = {};
 
-      publisher.publish(buffer, attrs, spy);
+      void publisher.publish(buffer, attrs, spy);
 
       const [{attributes}, callback] = stub.lastCall.args;
       assert.strictEqual(attributes, attrs);
