@@ -1,5 +1,27 @@
 # Changelog
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.5.0...aiplatform-v6.6.0) (2026-04-14)
+
+
+### Features
+
+* A new field `evaluation_run` is added to message `.google.cloud.aiplatform.v1beta1.EvaluateDatasetRun` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* A new field `inference_generation_config` is added to message `.google.cloud.aiplatform.v1beta1.EvaluationConfig` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add custom memory id field to create memory v1beta1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add custom session id field to create session v1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add custom session id field to create session v1beta1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add image_spec to Reasoning Engine public protos ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add image_spec to Reasoning Engine public protos ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add new `embed_content_config` to message `EmbedContentRequest` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add new `embed_content_config` to message `EmbedContentRequest` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add raw_event field to event proto v1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add raw_event field to event proto v1beta1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add transcription fields to Session Service ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* RagMetadata and RagDataSchema concepts and Batch API definitions added for Preview ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Update the schema proto for the RagChunk with file_id and chunk_id to align with the vertex_rag_data.proto ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.4.0...aiplatform-v6.5.0) (2026-03-02)
 
 

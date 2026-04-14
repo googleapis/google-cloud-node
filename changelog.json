@@ -5,6 +5,196 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "460e654682993b5d0e9b20ef12e92f40d106ecf9",
+          "message": "[vectorsearch] Added CMEK support",
+          "issues": [
+            "8033"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "6c5dba96-2dd9-4edd-961f-19ff6f2dc679",
+      "createTime": "2026-04-14T18:40:56.396Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "71be7d38a621ddbb5435115132aa98167a9231d3",
+          "message": "[inventory] support external-μ in the Digest",
+          "issues": [
+            "8015"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "e91661b3-84a1-4540-b481-7239b885c156",
+      "createTime": "2026-04-14T18:40:56.378Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c75e5b6c00aff1eda45f1ea0ca0e71bd72748452",
+          "message": "[dataplex] Allow Data Documentation DataScans to support BigQuery Dataset resources in addition to BigQuery table resources",
+          "issues": [
+            "8012"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "176d035c-22d8-4e16-88e2-3d7ff10a953e",
+      "createTime": "2026-04-14T18:40:56.362Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3879a1647ec14adfe6296a4afc5f270bb2a0bc5c",
+          "message": "[config] adding DeploymentGroups, you can now manage deployment of multiple module root dependencies in a single DAG",
+          "issues": [
+            "7994"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "811e3c11-2e02-4503-b9ac-5371a8bbc8b9",
+      "createTime": "2026-04-14T18:40:56.347Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4e5f42cae475b0529fb3a10df609b3a52a25eadf",
+          "message": "[bigquery-reservation] add principal field to BigQuery Reservation Assignment",
+          "issues": [
+            "8042"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "cca9dfa9-9b12-4798-9226-f8183afeeee1",
+      "createTime": "2026-04-14T18:40:56.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add new `embed_content_config` to message `EmbedContentRequest`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add new `embed_content_config` to message `EmbedContentRequest`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Update the schema proto for the RagChunk with file_id and chunk_id to align with the vertex_rag_data.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "RagMetadata and RagDataSchema concepts and Batch API definitions added for Preview",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add raw_event field to event proto v1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add custom session id field to create session v1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add custom memory id field to create memory v1beta1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add raw_event field to event proto v1beta1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add custom session id field to create session v1beta1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add AskContexts and AsyncRetrieveContexts APIs to VertexRagService",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add AskContexts and AsyncRetrieveContexts APIs to VertexRagService",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "A new field `evaluation_run` is added to message `.google.cloud.aiplatform.v1beta1.EvaluateDatasetRun`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "A new field `inference_generation_config` is added to message `.google.cloud.aiplatform.v1beta1.EvaluationConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add image_spec to Reasoning Engine public protos",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add image_spec to Reasoning Engine public protos",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "adee1ec57fc5feb09ae46d1c6103367e697094d7",
+          "message": "Add transcription fields to Session Service",
+          "issues": []
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "98c38b26-e4f0-46cb-99f0-f06ca01c7835",
+      "createTime": "2026-04-14T18:40:56.307Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "55d63858490a47af29eb328fef2a927b2b98987b",
           "message": "Add array expressions",
           "issues": [],
@@ -69783,5 +69973,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-13T20:17:24.690Z"
+  "updateTime": "2026-04-14T18:40:56.396Z"
 }
