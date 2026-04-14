@@ -5262,6 +5262,8 @@
                      * @property {number} UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE=97 UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE value
                      * @property {number} UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK=98 UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK value
                      * @property {number} MEMBERSHIP_DURATION_TOO_LONG=99 MEMBERSHIP_DURATION_TOO_LONG value
+                     * @property {number} INVALID_MERCHANT_ID=100 INVALID_MERCHANT_ID value
+                     * @property {number} EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED=101 EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED value
                      */
                     v1.ErrorReason = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -5365,6 +5367,8 @@
                         values[valuesById[97] = "UNSUPPORTED_ACCOUNT_TYPES_FOR_USER_LIST_TYPE"] = 97;
                         values[valuesById[98] = "UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK"] = 98;
                         values[valuesById[99] = "MEMBERSHIP_DURATION_TOO_LONG"] = 99;
+                        values[valuesById[100] = "INVALID_MERCHANT_ID"] = 100;
+                        values[valuesById[101] = "EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED"] = 101;
                         return values;
                     })();
     

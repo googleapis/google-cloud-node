@@ -1741,7 +1741,8 @@ describe('DocumentReference class', () => {
       },
     };
 
-    const coll = firestore.collection('tests');
+    const coll = firestore.collection('node_tests_' + autoId());
+
     const ref = coll.doc('number').withConverter(primitiveConverter);
     await ref.set(3);
     const result = await ref.get();
@@ -7436,7 +7437,8 @@ describe('BulkWriter class', () => {
     // TODO enterprise b/469490062
     it.skipEnterprise('does not affect other collections', async () => {
       // Add other nested collection that shouldn't be deleted.
-      const collB = firestore.collection('doggos');
+      const collB = firestore.collection('node_doggos_' + autoId());
+
       await collB.doc('doggo').set({name: 'goodboi'});
 
       await firestore.recursiveDelete(collB);

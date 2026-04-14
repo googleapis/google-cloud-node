@@ -186,6 +186,11 @@
                 "createIndex"
               ]
             },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
             "DeleteIndex": {
               "methods": [
                 "deleteIndex"
@@ -248,6 +253,11 @@
             "CreateIndex": {
               "methods": [
                 "createIndex"
+              ]
+            },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
               ]
             },
             "DeleteIndex": {

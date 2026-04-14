@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.3.1...network-security-v3.4.0) (2026-04-08)
+
+
+### Features
+
+* [networksecurity] Publish proto definitions for AuthzPolicy, TlsInspectionPolicy, GatewaySecurityPolicy, GatewaySecurityPolicyRule, and UrlList ([#7862](https://github.com/googleapis/google-cloud-node/issues/7862)) ([efa3e04](https://github.com/googleapis/google-cloud-node/commit/efa3e04e34f4eb4d2f4ee757d2ef8c6b2e380a40))
+
 ## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.3.0...network-security-v3.3.1) (2025-10-13)
 
 

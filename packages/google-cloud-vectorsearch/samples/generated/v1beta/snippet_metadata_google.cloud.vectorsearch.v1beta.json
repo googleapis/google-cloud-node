@@ -920,6 +920,54 @@
       }
     },
     {
+      "regionTag": "vectorsearch_v1beta_generated_VectorSearchService_UpdateIndex_async",
+      "title": "DataObjectSearchService updateIndex Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Index.",
+      "canonical": true,
+      "file": "vector_search_service.update_index.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIndex",
+        "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService.UpdateIndex",
+        "async": true,
+        "parameters": [
+          {
+            "name": "index",
+            "type": ".google.cloud.vectorsearch.v1beta.Index"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VectorSearchServiceClient",
+          "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateIndex",
+          "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService.UpdateIndex",
+          "service": {
+            "shortName": "VectorSearchService",
+            "fullName": "google.cloud.vectorsearch.v1beta.VectorSearchService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "vectorsearch_v1beta_generated_VectorSearchService_DeleteIndex_async",
       "title": "DataObjectSearchService deleteIndex Sample",
       "origin": "API_DEFINITION",

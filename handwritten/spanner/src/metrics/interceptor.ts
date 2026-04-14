@@ -75,9 +75,7 @@ export const MetricInterceptor = (options, nextCall) => {
           if (metricsTracer?.afeLatency) {
             metricsTracer?.recordAfeLatency(status.code);
           } else {
-            // Disable afe_connectivity_error_count metric as AFE header is disabled in backend
-            // currently.
-            // metricsTracer?.recordAfeConnectivityErrorCount(status.code);
+            metricsTracer?.recordAfeConnectivityErrorCount(status.code);
           }
         },
       };

@@ -2041,12 +2041,20 @@ describe('BigQuery/Table', () => {
 
     it('should make correct API request', done => {
       const options = {a: 'b', c: 'd'};
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+            }
+          : {
+              'formatOptions.useInt64Timestamp': true,
+            };
 
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.strictEqual(reqOpts.uri, '/data');
         assert.deepStrictEqual(reqOpts.qs, {
           ...options,
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          ...formatOptions,
         });
         callback(null, {});
       };
@@ -2201,13 +2209,16 @@ describe('BigQuery/Table', () => {
       sandbox.restore();
       const mergeStub = sandbox.stub(BigQuery, 'mergeSchemaWithRows_');
 
-      table.getRows({skipParsing: true}, (err: Error, rows_: {}[], nextQuery: {}, apiResponse: any) => {
-        assert.ifError(err);
-        assert.strictEqual(rows_, rows);
-        assert.strictEqual(mergeStub.called, false);
-        assert.deepStrictEqual(apiResponse.rows, rows);
-        done();
-      });
+      table.getRows(
+        {skipParsing: true},
+        (err: Error, rows_: {}[], nextQuery: {}, apiResponse: any) => {
+          assert.ifError(err);
+          assert.strictEqual(rows_, rows);
+          assert.strictEqual(mergeStub.called, false);
+          assert.deepStrictEqual(apiResponse.rows, rows);
+          done();
+        },
+      );
     });
 
     it('should pass nextQuery if pageToken is returned', done => {
@@ -2217,18 +2228,33 @@ describe('BigQuery/Table', () => {
       // Set a schema so it doesn't try to refresh the metadata.
       table.metadata = {schema: {}};
 
+      const callbackResponse =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              'formatOptions.useInt64Timestamp': true,
+              pageToken,
+            }
+          : {
+              pageToken,
+            };
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
-        callback(null, {
-          pageToken,
-        });
+        callback(null, callbackResponse);
       };
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+            }
+          : {
+              'formatOptions.useInt64Timestamp': true,
+            };
 
       table.getRows(options, (err: Error, rows: {}, nextQuery: {}) => {
         assert.ifError(err);
         assert.deepStrictEqual(nextQuery, {
           a: 'b',
           c: 'd',
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          ...formatOptions,
           pageToken,
         });
         // Original object isn't affected.
@@ -2442,10 +2468,18 @@ describe('BigQuery/Table', () => {
       const wrapIntegers = {integerTypeCastFunction: sinon.stub()};
       const options = {wrapIntegers};
       const merged = [{name: 'stephen'}];
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+            }
+          : {
+              'formatOptions.useInt64Timestamp': true,
+            };
 
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts.qs, {
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          ...formatOptions,
         });
         callback(null, {});
       };
@@ -2466,10 +2500,18 @@ describe('BigQuery/Table', () => {
         parseJSON: true,
       };
       const merged = [{name: 'stephen'}];
+      const formatOptions =
+        process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true'
+          ? {
+              'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+            }
+          : {
+              'formatOptions.useInt64Timestamp': true,
+            };
 
       table.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts.qs, {
-          'formatOptions.timestampOutputFormat': 'ISO8601_STRING',
+          ...formatOptions,
         });
         callback(null, {});
       };

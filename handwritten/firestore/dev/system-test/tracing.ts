@@ -41,7 +41,8 @@ import {
   SpanProcessor,
   TimedEvent,
 } from '@opentelemetry/sdk-trace-node';
-import {setLogFunction, Firestore} from '../src';
+import {setLogFunction, Firestore, CollectionReference} from '../src';
+import {autoId} from '../src/util';
 import {verifyInstance} from '../test/util/helpers';
 import {
   ATTRIBUTE_GCP_RESOURCE_NAME,
@@ -159,6 +160,7 @@ class SpanData {
 
 describe.skipEnterprise('Tracing Tests', () => {
   let firestore: Firestore;
+  let randomCol: CollectionReference;
   let tracerProvider: NodeTracerProvider;
   let inMemorySpanExporter: InMemorySpanExporter;
   let consoleSpanExporter: ConsoleSpanExporter;
@@ -299,6 +301,7 @@ describe.skipEnterprise('Tracing Tests', () => {
     }
 
     firestore = new Firestore(settings);
+    randomCol = firestore.collection('node_tracing_' + autoId());
   }
 
   function getSettingsAttributes(): Attributes {
@@ -767,9 +770,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
   function runTestCases() {
     it('document reference get()', async () => {
-      await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').doc('bar').get(),
-      );
+      await runFirestoreOperationInRootSpan(() => randomCol.doc('bar').get());
       await waitForCompletedSpans(3);
       expectSpanHierarchy(
         SPAN_NAME_TEST_ROOT,
@@ -788,9 +789,7 @@ describe.skipEnterprise('Tracing Tests', () => {
     });
 
     it('document reference create()', async () => {
-      await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').doc().create({}),
-      );
+      await runFirestoreOperationInRootSpan(() => randomCol.doc().create({}));
       await waitForCompletedSpans(3);
       expectSpanHierarchy(
         SPAN_NAME_TEST_ROOT,
@@ -805,7 +804,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
     it('document reference delete()', async () => {
       await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').doc('bar').delete(),
+        randomCol.doc('bar').delete(),
       );
       await waitForCompletedSpans(3);
       expectSpanHierarchy(
@@ -821,7 +820,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
     it('document reference set()', async () => {
       await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').doc('bar').set({foo: 'bar'}),
+        randomCol.doc('bar').set({foo: 'bar'}),
       );
       await waitForCompletedSpans(3);
       expectSpanHierarchy(
@@ -838,10 +837,10 @@ describe.skipEnterprise('Tracing Tests', () => {
     it('document reference update()', async () => {
       // Make sure the document exists before updating it.
       // Perform the `set` operation outside of the root span.
-      await firestore.collection('foo').doc('bar').set({foo: 'bar'});
+      await randomCol.doc('bar').set({foo: 'bar'});
 
       await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').doc('bar').update('foo', 'bar2'),
+        randomCol.doc('bar').update('foo', 'bar2'),
       );
       await waitForCompletedSpans(3);
       expectSpanHierarchy(
@@ -857,7 +856,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
     it('document reference list collections', async () => {
       await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').doc('bar').listCollections(),
+        randomCol.doc('bar').listCollections(),
       );
       await waitForCompletedSpans(2);
       expectSpanHierarchy(
@@ -871,9 +870,7 @@ describe.skipEnterprise('Tracing Tests', () => {
     });
 
     it('aggregate query get()', async () => {
-      await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').count().get(),
-      );
+      await runFirestoreOperationInRootSpan(() => randomCol.count().get());
       await waitForCompletedSpans(2);
       expectSpanHierarchy(SPAN_NAME_TEST_ROOT, SPAN_NAME_AGGREGATION_QUERY_GET);
       expectSpanHasEvents(SPAN_NAME_AGGREGATION_QUERY_GET, [
@@ -884,9 +881,7 @@ describe.skipEnterprise('Tracing Tests', () => {
     });
 
     it('collection reference add()', async () => {
-      await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').add({foo: 'bar'}),
-      );
+      await runFirestoreOperationInRootSpan(() => randomCol.add({foo: 'bar'}));
       await waitForCompletedSpans(4);
       expectSpanHierarchy(
         SPAN_NAME_TEST_ROOT,
@@ -902,9 +897,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
     // Enterprise: field mask is not supported
     it.skipEnterprise('collection reference list documents', async () => {
-      await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').listDocuments(),
-      );
+      await runFirestoreOperationInRootSpan(() => randomCol.listDocuments());
       await waitForCompletedSpans(2);
       expectSpanHierarchy(
         SPAN_NAME_TEST_ROOT,
@@ -918,7 +911,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
     it('query get()', async () => {
       await runFirestoreOperationInRootSpan(() =>
-        firestore.collection('foo').where('foo', '==', 'bar').limit(1).get(),
+        randomCol.where('foo', '==', 'bar').limit(1).get(),
       );
       await waitForCompletedSpans(2);
       expectSpanHierarchy(SPAN_NAME_TEST_ROOT, SPAN_NAME_QUERY_GET);
@@ -935,8 +928,8 @@ describe.skipEnterprise('Tracing Tests', () => {
     });
 
     it('firestore getAll()', async () => {
-      const docRef1 = firestore.collection('foo').doc('1');
-      const docRef2 = firestore.collection('foo').doc('2');
+      const docRef1 = randomCol.doc('1');
+      const docRef2 = randomCol.doc('2');
       await runFirestoreOperationInRootSpan(() =>
         firestore.getAll(docRef1, docRef2),
       );
@@ -954,16 +947,18 @@ describe.skipEnterprise('Tracing Tests', () => {
     });
 
     it('transaction', async () => {
-      const docRef1 = firestore.collection('foo').doc('bar');
-      const docRef2 = firestore.collection('foo').doc('bar');
+      const docRef1 = randomCol.doc('bar');
+      const docRef2 = randomCol.doc('bar');
 
       await runFirestoreOperationInRootSpan(async () => {
         return firestore.runTransaction(async transaction => {
           await transaction.get(docRef1);
           await transaction.getAll(docRef1, docRef2);
-          await transaction.get(firestore.collection('foo').limit(1));
-          await transaction.get(firestore.collection('nonexistent').count());
-          transaction.set(firestore.collection('foo').doc(), {foo: 'bar'});
+          await transaction.get(randomCol.limit(1));
+          await transaction.get(
+            firestore.collection('nonexistent_' + autoId()).count(),
+          );
+          transaction.set(randomCol.doc(), {foo: 'bar'});
         });
       });
 
@@ -1032,7 +1027,7 @@ describe.skipEnterprise('Tracing Tests', () => {
     // Service not implemented for Enterprise DB: PartitionQuery
     it.skipEnterprise('partition query', async () => {
       await runFirestoreOperationInRootSpan(async () => {
-        const query = firestore.collectionGroup('foo');
+        const query = firestore.collectionGroup('node_cg_' + autoId());
         let numPartitions = 0;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for await (const partition of query.getPartitions(3)) {
@@ -1052,11 +1047,11 @@ describe.skipEnterprise('Tracing Tests', () => {
       await runFirestoreOperationInRootSpan(async () => {
         const bulkWriter = firestore.bulkWriter();
         // No need to await the set operations as 'close()' will commit all writes before closing.
-        void bulkWriter.set(firestore.collection('foo').doc(), {foo: 1});
-        void bulkWriter.set(firestore.collection('foo').doc(), {foo: 2});
-        void bulkWriter.set(firestore.collection('foo').doc(), {foo: 3});
-        void bulkWriter.set(firestore.collection('foo').doc(), {foo: 4});
-        void bulkWriter.set(firestore.collection('foo').doc(), {foo: 5});
+        void bulkWriter.set(randomCol.doc(), {foo: 1});
+        void bulkWriter.set(randomCol.doc(), {foo: 2});
+        void bulkWriter.set(randomCol.doc(), {foo: 3});
+        void bulkWriter.set(randomCol.doc(), {foo: 4});
+        void bulkWriter.set(randomCol.doc(), {foo: 5});
         await bulkWriter.close();
       });
 
