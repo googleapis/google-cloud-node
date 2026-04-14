@@ -53,7 +53,8 @@ function main(parent) {
    *  Supported fields:
    *     * `display_name`
    *     * `user_id`
-   *  Example: `display_name="abc"`, `user_id="123"`.
+   *     * `labels`
+   *  Example: `display_name="abc"`, `user_id="123"`, `labels.key="value"`.
    */
   // const filter = 'abc123'
   /**
