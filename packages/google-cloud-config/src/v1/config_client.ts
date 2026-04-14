@@ -194,6 +194,12 @@ export class ConfigClient {
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
       ),
+      deploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentGroups/{deployment_group}'
+      ),
+      deploymentGroupRevisionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentGroups/{deployment_group}/revisions/{revision}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -240,7 +246,11 @@ export class ConfigClient {
       listResourceChanges:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceChanges'),
       listResourceDrifts:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceDrifts')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceDrifts'),
+      listDeploymentGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deploymentGroups'),
+      listDeploymentGroupRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deploymentGroupRevisions')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -288,6 +298,26 @@ export class ConfigClient {
       '.google.cloud.config.v1.AutoMigrationConfig') as gax.protobuf.Type;
     const updateAutoMigrationConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
+    const createDeploymentGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.DeploymentGroup') as gax.protobuf.Type;
+    const createDeploymentGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateDeploymentGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.DeploymentGroup') as gax.protobuf.Type;
+    const updateDeploymentGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteDeploymentGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.DeploymentGroup') as gax.protobuf.Type;
+    const deleteDeploymentGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
+    const provisionDeploymentGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.DeploymentGroup') as gax.protobuf.Type;
+    const provisionDeploymentGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
+    const deprovisionDeploymentGroupResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.DeploymentGroup') as gax.protobuf.Type;
+    const deprovisionDeploymentGroupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDeployment: new this._gaxModule.LongrunningDescriptor(
@@ -321,7 +351,27 @@ export class ConfigClient {
       updateAutoMigrationConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAutoMigrationConfigResponse.decode.bind(updateAutoMigrationConfigResponse),
-        updateAutoMigrationConfigMetadata.decode.bind(updateAutoMigrationConfigMetadata))
+        updateAutoMigrationConfigMetadata.decode.bind(updateAutoMigrationConfigMetadata)),
+      createDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDeploymentGroupResponse.decode.bind(createDeploymentGroupResponse),
+        createDeploymentGroupMetadata.decode.bind(createDeploymentGroupMetadata)),
+      updateDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateDeploymentGroupResponse.decode.bind(updateDeploymentGroupResponse),
+        updateDeploymentGroupMetadata.decode.bind(updateDeploymentGroupMetadata)),
+      deleteDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteDeploymentGroupResponse.decode.bind(deleteDeploymentGroupResponse),
+        deleteDeploymentGroupMetadata.decode.bind(deleteDeploymentGroupMetadata)),
+      provisionDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        provisionDeploymentGroupResponse.decode.bind(provisionDeploymentGroupResponse),
+        provisionDeploymentGroupMetadata.decode.bind(provisionDeploymentGroupMetadata)),
+      deprovisionDeploymentGroup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deprovisionDeploymentGroupResponse.decode.bind(deprovisionDeploymentGroupResponse),
+        deprovisionDeploymentGroupMetadata.decode.bind(deprovisionDeploymentGroupMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -367,7 +417,7 @@ export class ConfigClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const configStubMethods =
-        ['listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listRevisions', 'getRevision', 'getResource', 'listResources', 'exportDeploymentStatefile', 'exportRevisionStatefile', 'importStatefile', 'deleteStatefile', 'lockDeployment', 'unlockDeployment', 'exportLockInfo', 'createPreview', 'getPreview', 'listPreviews', 'deletePreview', 'exportPreviewResult', 'listTerraformVersions', 'getTerraformVersion', 'listResourceChanges', 'getResourceChange', 'listResourceDrifts', 'getResourceDrift', 'getAutoMigrationConfig', 'updateAutoMigrationConfig'];
+        ['listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listRevisions', 'getRevision', 'getResource', 'listResources', 'exportDeploymentStatefile', 'exportRevisionStatefile', 'importStatefile', 'deleteStatefile', 'lockDeployment', 'unlockDeployment', 'exportLockInfo', 'createPreview', 'getPreview', 'listPreviews', 'deletePreview', 'exportPreviewResult', 'listTerraformVersions', 'getTerraformVersion', 'listResourceChanges', 'getResourceChange', 'listResourceDrifts', 'getResourceDrift', 'getAutoMigrationConfig', 'updateAutoMigrationConfig', 'getDeploymentGroup', 'createDeploymentGroup', 'updateDeploymentGroup', 'deleteDeploymentGroup', 'listDeploymentGroups', 'provisionDeploymentGroup', 'deprovisionDeploymentGroup', 'getDeploymentGroupRevision', 'listDeploymentGroupRevisions'];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
         stub => (...args: Array<{}>) => {
@@ -1823,6 +1873,199 @@ export class ConfigClient {
         throw error;
       });
   }
+/**
+ * Get a DeploymentGroup for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment group to retrieve.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}'.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.get_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_GetDeploymentGroup_async
+ */
+  getDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IGetDeploymentGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroup,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRequest|undefined, {}|undefined
+      ]>;
+  getDeploymentGroup(
+      request: protos.google.cloud.config.v1.IGetDeploymentGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.config.v1.IDeploymentGroup,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeploymentGroup(
+      request: protos.google.cloud.config.v1.IGetDeploymentGroupRequest,
+      callback: Callback<
+          protos.google.cloud.config.v1.IDeploymentGroup,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IGetDeploymentGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.config.v1.IDeploymentGroup,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.config.v1.IDeploymentGroup,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroup,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getDeploymentGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.config.v1.IDeploymentGroup,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeploymentGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getDeploymentGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.config.v1.IDeploymentGroup,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeploymentGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details about a
+ * {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment group revision to retrieve.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}/revisions/{revision}'.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.get_deployment_group_revision.js</caption>
+ * region_tag:config_v1_generated_Config_GetDeploymentGroupRevision_async
+ */
+  getDeploymentGroupRevision(
+      request?: protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroupRevision,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|undefined, {}|undefined
+      ]>;
+  getDeploymentGroupRevision(
+      request: protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.config.v1.IDeploymentGroupRevision,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeploymentGroupRevision(
+      request: protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest,
+      callback: Callback<
+          protos.google.cloud.config.v1.IDeploymentGroupRevision,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeploymentGroupRevision(
+      request?: protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.config.v1.IDeploymentGroupRevision,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.config.v1.IDeploymentGroupRevision,
+          protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroupRevision,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getDeploymentGroupRevision request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.config.v1.IDeploymentGroupRevision,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeploymentGroupRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getDeploymentGroupRevision(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.config.v1.IDeploymentGroupRevision,
+        protos.google.cloud.config.v1.IGetDeploymentGroupRevisionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeploymentGroupRevision response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Creates a {@link protos.google.cloud.config.v1.Deployment|Deployment}.
@@ -2788,6 +3031,652 @@ export class ConfigClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAutoMigrationConfig, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.config.v1.AutoMigrationConfig, protos.google.cloud.config.v1.OperationMetadata>;
+  }
+/**
+ * Creates a {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}
+ * The newly created DeploymentGroup will be in the `CREATING` state
+ * and can be retrieved via Get and List calls.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the Deployment Group is created. The
+ *   parent value is in the format: 'projects/{project_id}/locations/{location}'
+ * @param {string} request.deploymentGroupId
+ *   Required. The deployment group ID.
+ * @param {google.cloud.config.v1.DeploymentGroup} request.deploymentGroup
+ *   Required. {@link protos.|Deployment Group} resource to create
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.create_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_CreateDeploymentGroup_async
+ */
+  createDeploymentGroup(
+      request?: protos.google.cloud.config.v1.ICreateDeploymentGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createDeploymentGroup(
+      request: protos.google.cloud.config.v1.ICreateDeploymentGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createDeploymentGroup(
+      request: protos.google.cloud.config.v1.ICreateDeploymentGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createDeploymentGroup(
+      request?: protos.google.cloud.config.v1.ICreateDeploymentGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDeploymentGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDeploymentGroup request %j', request);
+    return this.innerApiCalls.createDeploymentGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createDeploymentGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createDeploymentGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.create_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_CreateDeploymentGroup_async
+ */
+  async checkCreateDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>>{
+    this._log.info('createDeploymentGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>;
+  }
+/**
+ * Updates a {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Field mask used to specify the fields to be overwritten in the
+ *   Deployment Group resource by the update.
+ *
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.config.v1.DeploymentGroup} request.deploymentGroup
+ *   Required. {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup} to
+ *   update.
+ *
+ *   The deployment group's `name` field is used to identify the resource to be
+ *   updated. Format:
+ *   `projects/{project}/locations/{location}/deploymentGroups/{deployment_group_id}`
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.update_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_UpdateDeploymentGroup_async
+ */
+  updateDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IUpdateDeploymentGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateDeploymentGroup(
+      request: protos.google.cloud.config.v1.IUpdateDeploymentGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateDeploymentGroup(
+      request: protos.google.cloud.config.v1.IUpdateDeploymentGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IUpdateDeploymentGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'deployment_group.name': request.deploymentGroup!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDeploymentGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDeploymentGroup request %j', request);
+    return this.innerApiCalls.updateDeploymentGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDeploymentGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateDeploymentGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.update_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_UpdateDeploymentGroup_async
+ */
+  async checkUpdateDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>>{
+    this._log.info('updateDeploymentGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of DeploymentGroup in the format
+ *   projects/{project_id}/locations/{location_id}/deploymentGroups/{deploymentGroup}
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any revisions for this deployment group will also
+ *   be deleted. (Otherwise, the request will only work if the deployment group
+ *   has no revisions.)
+ * @param {google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy} [request.deploymentReferencePolicy]
+ *   Optional. Policy on how to handle referenced deployments when deleting the
+ *   DeploymentGroup.
+ *   If unspecified, the default behavior is to fail the deletion if any
+ *   deployments currently referenced in the `deployment_units` of the
+ *   DeploymentGroup or in the latest revision are not deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.delete_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_DeleteDeploymentGroup_async
+ */
+  deleteDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IDeleteDeploymentGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteDeploymentGroup(
+      request: protos.google.cloud.config.v1.IDeleteDeploymentGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteDeploymentGroup(
+      request: protos.google.cloud.config.v1.IDeleteDeploymentGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IDeleteDeploymentGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDeploymentGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDeploymentGroup request %j', request);
+    return this.innerApiCalls.deleteDeploymentGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDeploymentGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteDeploymentGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.delete_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_DeleteDeploymentGroup_async
+ */
+  async checkDeleteDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>>{
+    this._log.info('deleteDeploymentGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>;
+  }
+/**
+ * Provisions a deployment group.
+ *
+ * NOTE: As a first step of this operation, Infra Manager will
+ * automatically delete any Deployments that were part of the
+ * *last successful*
+ * {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}
+ * but are *no longer* included in the *current*
+ * {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup} definition (e.g.,
+ * following an `UpdateDeploymentGroup` call), along with their actuated
+ * resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment group to provision.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}'.
+ * @param {number[]} [request.deploymentSpecs]
+ *   Optional. The deployment specs of the deployment units to be created within
+ *   the same project and location of the deployment group. The key is the unit
+ *   ID, and the value is the `DeploymentSpec`. Provisioning will fail if a
+ *   `deployment_spec` has a `deployment_id` that matches an existing deployment
+ *   in the same project and location. If an existing deployment was part of the
+ *   last successful revision but is no longer in the current DeploymentGroup's
+ *   `deployment_units`, it will be recreated if included in `deployment_specs`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.provision_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_ProvisionDeploymentGroup_async
+ */
+  provisionDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IProvisionDeploymentGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  provisionDeploymentGroup(
+      request: protos.google.cloud.config.v1.IProvisionDeploymentGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  provisionDeploymentGroup(
+      request: protos.google.cloud.config.v1.IProvisionDeploymentGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  provisionDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IProvisionDeploymentGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('provisionDeploymentGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('provisionDeploymentGroup request %j', request);
+    return this.innerApiCalls.provisionDeploymentGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('provisionDeploymentGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `provisionDeploymentGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.provision_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_ProvisionDeploymentGroup_async
+ */
+  async checkProvisionDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>>{
+    this._log.info('provisionDeploymentGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.provisionDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>;
+  }
+/**
+ * Deprovisions a deployment group.
+ *
+ * NOTE: As a first step of this operation, Infra Manager will
+ * automatically delete any Deployments that were part of the
+ * *last successful*
+ * {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}
+ * but are *no longer* included in the *current*
+ * {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup} definition (e.g.,
+ * following an `UpdateDeploymentGroup` call), along with their actuated
+ * resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment group to deprovision.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}'.
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, this option is propagated to the deletion of each
+ *   deployment in the group. This corresponds to the 'force' field
+ *   in DeleteDeploymentRequest.
+ * @param {google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy} [request.deletePolicy]
+ *   Optional. Policy on how resources within each deployment should be handled
+ *   during deletion. This policy is applied globally to the deletion of all
+ *   deployments in this group. This corresponds to the 'delete_policy' field
+ *   in DeleteDeploymentRequest.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.deprovision_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_DeprovisionDeploymentGroup_async
+ */
+  deprovisionDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IDeprovisionDeploymentGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deprovisionDeploymentGroup(
+      request: protos.google.cloud.config.v1.IDeprovisionDeploymentGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deprovisionDeploymentGroup(
+      request: protos.google.cloud.config.v1.IDeprovisionDeploymentGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deprovisionDeploymentGroup(
+      request?: protos.google.cloud.config.v1.IDeprovisionDeploymentGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deprovisionDeploymentGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deprovisionDeploymentGroup request %j', request);
+    return this.innerApiCalls.deprovisionDeploymentGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deprovisionDeploymentGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deprovisionDeploymentGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.deprovision_deployment_group.js</caption>
+ * region_tag:config_v1_generated_Config_DeprovisionDeploymentGroup_async
+ */
+  async checkDeprovisionDeploymentGroupProgress(name: string): Promise<LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>>{
+    this._log.info('deprovisionDeploymentGroup long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deprovisionDeploymentGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.config.v1.DeploymentGroup, protos.google.cloud.config.v1.OperationMetadata>;
   }
  /**
  * Lists {@link protos.google.cloud.config.v1.Deployment|Deployment}s in a given project
@@ -4642,6 +5531,507 @@ export class ConfigClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.config.v1.IResourceDrift>;
   }
+ /**
+ * List DeploymentGroups for a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of deployment groups.
+ *   Format: 'projects/{project_id}/locations/{location}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resources, 'page_size' specifies number
+ *   of resources to return. If unspecified, at most 500 will be returned. The
+ *   maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListDeploymentGroups' which
+ *   specifies the position in the list from where to continue listing the
+ *   deployment groups.
+ * @param {string} [request.filter]
+ *   Optional. Lists the DeploymentGroups that match the filter expression. A
+ *   filter expression filters the deployment groups listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+ *   operator which is roughly synonymous with equality). {field} can refer to a
+ *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+ *   snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name = "projects/foo/locations/us-central1/deploymentGroups/bar"
+ *
+ *   - Filter by labels:
+ *     - Resources that have a key called 'foo'
+ *       labels.foo:*
+ *     - Resources that have a key called 'foo' whose value is 'bar'
+ *       labels.foo = bar
+ *
+ *   - Filter by state:
+ *     - DeploymentGroups in CREATING state.
+ *       state=CREATING
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeploymentGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDeploymentGroups(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroup[],
+        protos.google.cloud.config.v1.IListDeploymentGroupsRequest|null,
+        protos.google.cloud.config.v1.IListDeploymentGroupsResponse
+      ]>;
+  listDeploymentGroups(
+      request: protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroup>): void;
+  listDeploymentGroups(
+      request: protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroup>): void;
+  listDeploymentGroups(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroup>):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroup[],
+        protos.google.cloud.config.v1.IListDeploymentGroupsRequest|null,
+        protos.google.cloud.config.v1.IListDeploymentGroupsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      protos.google.cloud.config.v1.IListDeploymentGroupsResponse|null|undefined,
+      protos.google.cloud.config.v1.IDeploymentGroup>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeploymentGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeploymentGroups request %j', request);
+    return this.innerApiCalls
+      .listDeploymentGroups(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.config.v1.IDeploymentGroup[],
+        protos.google.cloud.config.v1.IListDeploymentGroupsRequest|null,
+        protos.google.cloud.config.v1.IListDeploymentGroupsResponse
+      ]) => {
+        this._log.info('listDeploymentGroups values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listDeploymentGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of deployment groups.
+ *   Format: 'projects/{project_id}/locations/{location}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resources, 'page_size' specifies number
+ *   of resources to return. If unspecified, at most 500 will be returned. The
+ *   maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListDeploymentGroups' which
+ *   specifies the position in the list from where to continue listing the
+ *   deployment groups.
+ * @param {string} [request.filter]
+ *   Optional. Lists the DeploymentGroups that match the filter expression. A
+ *   filter expression filters the deployment groups listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+ *   operator which is roughly synonymous with equality). {field} can refer to a
+ *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+ *   snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name = "projects/foo/locations/us-central1/deploymentGroups/bar"
+ *
+ *   - Filter by labels:
+ *     - Resources that have a key called 'foo'
+ *       labels.foo:*
+ *     - Resources that have a key called 'foo' whose value is 'bar'
+ *       labels.foo = bar
+ *
+ *   - Filter by state:
+ *     - DeploymentGroups in CREATING state.
+ *       state=CREATING
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeploymentGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDeploymentGroupsStream(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDeploymentGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDeploymentGroups stream %j', request);
+    return this.descriptors.page.listDeploymentGroups.createStream(
+      this.innerApiCalls.listDeploymentGroups as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listDeploymentGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of deployment groups.
+ *   Format: 'projects/{project_id}/locations/{location}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resources, 'page_size' specifies number
+ *   of resources to return. If unspecified, at most 500 will be returned. The
+ *   maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListDeploymentGroups' which
+ *   specifies the position in the list from where to continue listing the
+ *   deployment groups.
+ * @param {string} [request.filter]
+ *   Optional. Lists the DeploymentGroups that match the filter expression. A
+ *   filter expression filters the deployment groups listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+ *   operator which is roughly synonymous with equality). {field} can refer to a
+ *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+ *   snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name = "projects/foo/locations/us-central1/deploymentGroups/bar"
+ *
+ *   - Filter by labels:
+ *     - Resources that have a key called 'foo'
+ *       labels.foo:*
+ *     - Resources that have a key called 'foo' whose value is 'bar'
+ *       labels.foo = bar
+ *
+ *   - Filter by state:
+ *     - DeploymentGroups in CREATING state.
+ *       state=CREATING
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.list_deployment_groups.js</caption>
+ * region_tag:config_v1_generated_Config_ListDeploymentGroups_async
+ */
+  listDeploymentGroupsAsync(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.config.v1.IDeploymentGroup>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDeploymentGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDeploymentGroups iterate %j', request);
+    return this.descriptors.page.listDeploymentGroups.asyncIterate(
+      this.innerApiCalls['listDeploymentGroups'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.config.v1.IDeploymentGroup>;
+  }
+ /**
+ * Lists
+ * {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}s
+ * in a given {@link protos.google.cloud.config.v1.DeploymentGroup|DeploymentGroup}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of deployment group
+ *   revisions. Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resources, 'page_size' specifies number
+ *   of resources to return. If unspecified, a sensible default will be used by
+ *   the server. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListDeploymentGroupRevisions'
+ *   which specifies the position in the list from where to continue listing the
+ *   deployment group revisions. All other parameters provided to
+ *   `ListDeploymentGroupRevisions` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeploymentGroupRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDeploymentGroupRevisions(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroupRevision[],
+        protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest|null,
+        protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse
+      ]>;
+  listDeploymentGroupRevisions(
+      request: protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroupRevision>): void;
+  listDeploymentGroupRevisions(
+      request: protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroupRevision>): void;
+  listDeploymentGroupRevisions(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroupRevision>,
+      callback?: PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+          protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse|null|undefined,
+          protos.google.cloud.config.v1.IDeploymentGroupRevision>):
+      Promise<[
+        protos.google.cloud.config.v1.IDeploymentGroupRevision[],
+        protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest|null,
+        protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse|null|undefined,
+      protos.google.cloud.config.v1.IDeploymentGroupRevision>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeploymentGroupRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeploymentGroupRevisions request %j', request);
+    return this.innerApiCalls
+      .listDeploymentGroupRevisions(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.config.v1.IDeploymentGroupRevision[],
+        protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest|null,
+        protos.google.cloud.config.v1.IListDeploymentGroupRevisionsResponse
+      ]) => {
+        this._log.info('listDeploymentGroupRevisions values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listDeploymentGroupRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of deployment group
+ *   revisions. Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resources, 'page_size' specifies number
+ *   of resources to return. If unspecified, a sensible default will be used by
+ *   the server. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListDeploymentGroupRevisions'
+ *   which specifies the position in the list from where to continue listing the
+ *   deployment group revisions. All other parameters provided to
+ *   `ListDeploymentGroupRevisions` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeploymentGroupRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listDeploymentGroupRevisionsStream(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDeploymentGroupRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDeploymentGroupRevisions stream %j', request);
+    return this.descriptors.page.listDeploymentGroupRevisions.createStream(
+      this.innerApiCalls.listDeploymentGroupRevisions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listDeploymentGroupRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of deployment group
+ *   revisions. Format:
+ *   'projects/{project_id}/locations/{location}/deploymentGroups/{deployment_group}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resources, 'page_size' specifies number
+ *   of resources to return. If unspecified, a sensible default will be used by
+ *   the server. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListDeploymentGroupRevisions'
+ *   which specifies the position in the list from where to continue listing the
+ *   deployment group revisions. All other parameters provided to
+ *   `ListDeploymentGroupRevisions` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.config.v1.DeploymentGroupRevision|DeploymentGroupRevision}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.list_deployment_group_revisions.js</caption>
+ * region_tag:config_v1_generated_Config_ListDeploymentGroupRevisions_async
+ */
+  listDeploymentGroupRevisionsAsync(
+      request?: protos.google.cloud.config.v1.IListDeploymentGroupRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.config.v1.IDeploymentGroupRevision>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listDeploymentGroupRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listDeploymentGroupRevisions iterate %j', request);
+    return this.descriptors.page.listDeploymentGroupRevisions.asyncIterate(
+      this.innerApiCalls['listDeploymentGroupRevisions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.config.v1.IDeploymentGroupRevision>;
+  }
 /**
  * Gets the access control policy for a resource. Returns an empty policy
  * if the resource exists and does not have a policy set.
@@ -5169,6 +6559,117 @@ export class ConfigClient {
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
     return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+  }
+
+  /**
+   * Return a fully-qualified deploymentGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_group
+   * @returns {string} Resource name string.
+   */
+  deploymentGroupPath(project:string,location:string,deploymentGroup:string) {
+    return this.pathTemplates.deploymentGroupPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_group: deploymentGroup,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentGroup resource.
+   *
+   * @param {string} deploymentGroupName
+   *   A fully-qualified path representing DeploymentGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentGroupName(deploymentGroupName: string) {
+    return this.pathTemplates.deploymentGroupPathTemplate.match(deploymentGroupName).project;
+  }
+
+  /**
+   * Parse the location from DeploymentGroup resource.
+   *
+   * @param {string} deploymentGroupName
+   *   A fully-qualified path representing DeploymentGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentGroupName(deploymentGroupName: string) {
+    return this.pathTemplates.deploymentGroupPathTemplate.match(deploymentGroupName).location;
+  }
+
+  /**
+   * Parse the deployment_group from DeploymentGroup resource.
+   *
+   * @param {string} deploymentGroupName
+   *   A fully-qualified path representing DeploymentGroup resource.
+   * @returns {string} A string representing the deployment_group.
+   */
+  matchDeploymentGroupFromDeploymentGroupName(deploymentGroupName: string) {
+    return this.pathTemplates.deploymentGroupPathTemplate.match(deploymentGroupName).deployment_group;
+  }
+
+  /**
+   * Return a fully-qualified deploymentGroupRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_group
+   * @param {string} revision
+   * @returns {string} Resource name string.
+   */
+  deploymentGroupRevisionPath(project:string,location:string,deploymentGroup:string,revision:string) {
+    return this.pathTemplates.deploymentGroupRevisionPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_group: deploymentGroup,
+      revision: revision,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentGroupRevision resource.
+   *
+   * @param {string} deploymentGroupRevisionName
+   *   A fully-qualified path representing DeploymentGroupRevision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentGroupRevisionName(deploymentGroupRevisionName: string) {
+    return this.pathTemplates.deploymentGroupRevisionPathTemplate.match(deploymentGroupRevisionName).project;
+  }
+
+  /**
+   * Parse the location from DeploymentGroupRevision resource.
+   *
+   * @param {string} deploymentGroupRevisionName
+   *   A fully-qualified path representing DeploymentGroupRevision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentGroupRevisionName(deploymentGroupRevisionName: string) {
+    return this.pathTemplates.deploymentGroupRevisionPathTemplate.match(deploymentGroupRevisionName).location;
+  }
+
+  /**
+   * Parse the deployment_group from DeploymentGroupRevision resource.
+   *
+   * @param {string} deploymentGroupRevisionName
+   *   A fully-qualified path representing DeploymentGroupRevision resource.
+   * @returns {string} A string representing the deployment_group.
+   */
+  matchDeploymentGroupFromDeploymentGroupRevisionName(deploymentGroupRevisionName: string) {
+    return this.pathTemplates.deploymentGroupRevisionPathTemplate.match(deploymentGroupRevisionName).deployment_group;
+  }
+
+  /**
+   * Parse the revision from DeploymentGroupRevision resource.
+   *
+   * @param {string} deploymentGroupRevisionName
+   *   A fully-qualified path representing DeploymentGroupRevision resource.
+   * @returns {string} A string representing the revision.
+   */
+  matchRevisionFromDeploymentGroupRevisionName(deploymentGroupRevisionName: string) {
+    return this.pathTemplates.deploymentGroupRevisionPathTemplate.match(deploymentGroupRevisionName).revision;
   }
 
   /**

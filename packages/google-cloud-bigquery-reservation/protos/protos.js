@@ -8618,6 +8618,7 @@
                              * @property {google.cloud.bigquery.reservation.v1.Assignment.State|null} [state] Assignment state
                              * @property {boolean|null} [enableGeminiInBigquery] Assignment enableGeminiInBigquery
                              * @property {google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null} [schedulingPolicy] Assignment schedulingPolicy
+                             * @property {string|null} [principal] Assignment principal
                              */
     
                             /**
@@ -8684,6 +8685,14 @@
                             Assignment.prototype.schedulingPolicy = null;
     
                             /**
+                             * Assignment principal.
+                             * @member {string} principal
+                             * @memberof google.cloud.bigquery.reservation.v1.Assignment
+                             * @instance
+                             */
+                            Assignment.prototype.principal = "";
+    
+                            /**
                              * Creates a new Assignment instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.Assignment
@@ -8719,6 +8728,8 @@
                                     writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableGeminiInBigquery);
                                 if (message.schedulingPolicy != null && Object.hasOwnProperty.call(message, "schedulingPolicy"))
                                     $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.encode(message.schedulingPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.principal != null && Object.hasOwnProperty.call(message, "principal"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.principal);
                                 return writer;
                             };
     
@@ -8777,6 +8788,10 @@
                                         }
                                     case 11: {
                                             message.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.principal = reader.string();
                                             break;
                                         }
                                     default:
@@ -8852,6 +8867,9 @@
                                     if (error)
                                         return "schedulingPolicy." + error;
                                 }
+                                if (message.principal != null && message.hasOwnProperty("principal"))
+                                    if (!$util.isString(message.principal))
+                                        return "principal: string expected";
                                 return null;
                             };
     
@@ -8942,6 +8960,8 @@
                                         throw TypeError(".google.cloud.bigquery.reservation.v1.Assignment.schedulingPolicy: object expected");
                                     message.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.fromObject(object.schedulingPolicy);
                                 }
+                                if (object.principal != null)
+                                    message.principal = String(object.principal);
                                 return message;
                             };
     
@@ -8965,6 +8985,7 @@
                                     object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                     object.enableGeminiInBigquery = false;
                                     object.schedulingPolicy = null;
+                                    object.principal = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -8978,6 +8999,8 @@
                                     object.enableGeminiInBigquery = message.enableGeminiInBigquery;
                                 if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
                                     object.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.toObject(message.schedulingPolicy, options);
+                                if (message.principal != null && message.hasOwnProperty("principal"))
+                                    object.principal = message.principal;
                                 return object;
                             };
     
