@@ -20,12 +20,7 @@ import {describe, it, beforeEach} from 'mocha';
 import * as trace from '@opentelemetry/sdk-trace-base';
 import * as otel from '../src/telemetry-tracing';
 import {exporter} from './tracing';
-import {
-  SpanKind,
-  context,
-  propagation,
-  trace as otelTrace,
-} from '@opentelemetry/api';
+import {SpanKind, context, propagation} from '@opentelemetry/api';
 import sinon = require('sinon');
 import {PubsubMessage} from '../src/publisher';
 import {Duration} from '../src/temporal';
@@ -197,14 +192,11 @@ describe('OpenTelemetryTracer', () => {
       );
     });
 
-    it('round-trips baggage through inject and extract', () => {
-      // Verify that baggage set on a message via the composite propagator
-      // can be extracted on the subscriber side.
+    it('injects baggage from the active context into message attributes', () => {
       const baggage = propagation.createBaggage({
         'test-key': {value: 'test-value'},
       });
 
-      // Build a context with both a span and baggage.
       const publishMessage: PubsubMessage = {
         attributes: {},
       };
@@ -215,17 +207,15 @@ describe('OpenTelemetryTracer', () => {
       );
       assert.ok(span);
 
-      // Simulate what injectSpan does, but with baggage on the context.
+      // Set the baggage on the active context.
       const ctxWithBaggage = propagation.setBaggage(context.active(), baggage);
-      const propagationCtx = otelTrace.setSpanContext(
-        ctxWithBaggage,
-        span.spanContext(),
-      );
 
-      // Use the pubsub setter/getter directly with propagation API.
-      propagation.inject(propagationCtx, publishMessage, otel.pubsubSetter);
+      // Execute injectSpan within the scope of the active context.
+      context.with(ctxWithBaggage, () => {
+        otel.injectSpan(span, publishMessage);
+      });
 
-      // Verify baggage attribute was set on the message.
+      // Verify baggage attribute was set on the message by the compositePropagator.
       assert.strictEqual(
         Object.getOwnPropertyNames(publishMessage.attributes).includes(
           otel.baggageAttributeName,

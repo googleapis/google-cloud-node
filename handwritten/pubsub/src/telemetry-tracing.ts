@@ -811,7 +811,9 @@ export function containsSpanContext(message: MessageWithAttributes): boolean {
   }
 
   const keys = Object.getOwnPropertyNames(message.attributes);
-  return !!keys.find(n => n === modernAttributeName);
+  return !!keys.find(
+    n => n === modernAttributeName || n === baggageAttributeName,
+  );
 }
 
 /**
