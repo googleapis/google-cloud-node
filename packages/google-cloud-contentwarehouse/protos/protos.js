@@ -32584,6 +32584,7 @@
                          * @property {Array.<google.cloud.documentai.v1.Document.IRevision>|null} [revisions] Document revisions
                          * @property {google.cloud.documentai.v1.Document.IDocumentLayout|null} [documentLayout] Document documentLayout
                          * @property {google.cloud.documentai.v1.Document.IChunkedDocument|null} [chunkedDocument] Document chunkedDocument
+                         * @property {Array.<google.cloud.documentai.v1.Document.IBlobAsset>|null} [blobAssets] Document blobAssets
                          * @property {google.cloud.documentai.v1.Document.IEntityValidationOutput|null} [entityValidationOutput] Document entityValidationOutput
                          * @property {Array.<google.cloud.documentai.v1.Document.IEntitiesRevision>|null} [entitiesRevisions] Document entitiesRevisions
                          * @property {string|null} [entitiesRevisionId] Document entitiesRevisionId
@@ -32604,6 +32605,7 @@
                             this.entityRelations = [];
                             this.textChanges = [];
                             this.revisions = [];
+                            this.blobAssets = [];
                             this.entitiesRevisions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -32732,6 +32734,14 @@
                         Document.prototype.chunkedDocument = null;
     
                         /**
+                         * Document blobAssets.
+                         * @member {Array.<google.cloud.documentai.v1.Document.IBlobAsset>} blobAssets
+                         * @memberof google.cloud.documentai.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.blobAssets = $util.emptyArray;
+    
+                        /**
                          * Document entityValidationOutput.
                          * @member {google.cloud.documentai.v1.Document.IEntityValidationOutput|null|undefined} entityValidationOutput
                          * @memberof google.cloud.documentai.v1.Document
@@ -32829,6 +32839,9 @@
                                 $root.google.cloud.documentai.v1.Document.DocumentLayout.encode(message.documentLayout, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.chunkedDocument != null && Object.hasOwnProperty.call(message, "chunkedDocument"))
                                 $root.google.cloud.documentai.v1.Document.ChunkedDocument.encode(message.chunkedDocument, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.blobAssets != null && message.blobAssets.length)
+                                for (var i = 0; i < message.blobAssets.length; ++i)
+                                    $root.google.cloud.documentai.v1.Document.BlobAsset.encode(message.blobAssets[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.entityValidationOutput != null && Object.hasOwnProperty.call(message, "entityValidationOutput"))
                                 $root.google.cloud.documentai.v1.Document.EntityValidationOutput.encode(message.entityValidationOutput, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.entitiesRevisions != null && message.entitiesRevisions.length)
@@ -32942,6 +32955,12 @@
                                     }
                                 case 18: {
                                         message.chunkedDocument = $root.google.cloud.documentai.v1.Document.ChunkedDocument.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        if (!(message.blobAssets && message.blobAssets.length))
+                                            message.blobAssets = [];
+                                        message.blobAssets.push($root.google.cloud.documentai.v1.Document.BlobAsset.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 21: {
@@ -33089,6 +33108,15 @@
                                 if (error)
                                     return "chunkedDocument." + error;
                             }
+                            if (message.blobAssets != null && message.hasOwnProperty("blobAssets")) {
+                                if (!Array.isArray(message.blobAssets))
+                                    return "blobAssets: array expected";
+                                for (var i = 0; i < message.blobAssets.length; ++i) {
+                                    var error = $root.google.cloud.documentai.v1.Document.BlobAsset.verify(message.blobAssets[i]);
+                                    if (error)
+                                        return "blobAssets." + error;
+                                }
+                            }
                             if (message.entityValidationOutput != null && message.hasOwnProperty("entityValidationOutput")) {
                                 var error = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.verify(message.entityValidationOutput);
                                 if (error)
@@ -33214,6 +33242,16 @@
                                     throw TypeError(".google.cloud.documentai.v1.Document.chunkedDocument: object expected");
                                 message.chunkedDocument = $root.google.cloud.documentai.v1.Document.ChunkedDocument.fromObject(object.chunkedDocument);
                             }
+                            if (object.blobAssets) {
+                                if (!Array.isArray(object.blobAssets))
+                                    throw TypeError(".google.cloud.documentai.v1.Document.blobAssets: array expected");
+                                message.blobAssets = [];
+                                for (var i = 0; i < object.blobAssets.length; ++i) {
+                                    if (typeof object.blobAssets[i] !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.Document.blobAssets: object expected");
+                                    message.blobAssets[i] = $root.google.cloud.documentai.v1.Document.BlobAsset.fromObject(object.blobAssets[i]);
+                                }
+                            }
                             if (object.entityValidationOutput != null) {
                                 if (typeof object.entityValidationOutput !== "object")
                                     throw TypeError(".google.cloud.documentai.v1.Document.entityValidationOutput: object expected");
@@ -33254,6 +33292,7 @@
                                 object.entityRelations = [];
                                 object.revisions = [];
                                 object.textChanges = [];
+                                object.blobAssets = [];
                                 object.entitiesRevisions = [];
                             }
                             if (options.defaults) {
@@ -33321,6 +33360,11 @@
                                 object.documentLayout = $root.google.cloud.documentai.v1.Document.DocumentLayout.toObject(message.documentLayout, options);
                             if (message.chunkedDocument != null && message.hasOwnProperty("chunkedDocument"))
                                 object.chunkedDocument = $root.google.cloud.documentai.v1.Document.ChunkedDocument.toObject(message.chunkedDocument, options);
+                            if (message.blobAssets && message.blobAssets.length) {
+                                object.blobAssets = [];
+                                for (var j = 0; j < message.blobAssets.length; ++j)
+                                    object.blobAssets[j] = $root.google.cloud.documentai.v1.Document.BlobAsset.toObject(message.blobAssets[j], options);
+                            }
                             if (message.entityValidationOutput != null && message.hasOwnProperty("entityValidationOutput"))
                                 object.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.toObject(message.entityValidationOutput, options);
                             if (message.entitiesRevisions && message.entitiesRevisions.length) {
@@ -44995,6 +45039,211 @@
                             return TextChange;
                         })();
     
+                        Document.Annotations = (function() {
+    
+                            /**
+                             * Properties of an Annotations.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @interface IAnnotations
+                             * @property {string|null} [description] Annotations description
+                             */
+    
+                            /**
+                             * Constructs a new Annotations.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @classdesc Represents an Annotations.
+                             * @implements IAnnotations
+                             * @constructor
+                             * @param {google.cloud.documentai.v1.Document.IAnnotations=} [properties] Properties to set
+                             */
+                            function Annotations(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Annotations description.
+                             * @member {string} description
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @instance
+                             */
+                            Annotations.prototype.description = "";
+    
+                            /**
+                             * Creates a new Annotations instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IAnnotations=} [properties] Properties to set
+                             * @returns {google.cloud.documentai.v1.Document.Annotations} Annotations instance
+                             */
+                            Annotations.create = function create(properties) {
+                                return new Annotations(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Annotations message. Does not implicitly {@link google.cloud.documentai.v1.Document.Annotations.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IAnnotations} message Annotations message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Annotations.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Annotations message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.Annotations.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IAnnotations} message Annotations message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Annotations.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Annotations message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.documentai.v1.Document.Annotations} Annotations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Annotations.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.Annotations();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Annotations message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.documentai.v1.Document.Annotations} Annotations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Annotations.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Annotations message.
+                             * @function verify
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Annotations.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Annotations message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.documentai.v1.Document.Annotations} Annotations
+                             */
+                            Annotations.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.documentai.v1.Document.Annotations)
+                                    return object;
+                                var message = new $root.google.cloud.documentai.v1.Document.Annotations();
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Annotations message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.Annotations} message Annotations
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Annotations.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.description = "";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Annotations to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Annotations.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Annotations
+                             * @function getTypeUrl
+                             * @memberof google.cloud.documentai.v1.Document.Annotations
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Annotations.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.documentai.v1.Document.Annotations";
+                            };
+    
+                            return Annotations;
+                        })();
+    
                         Document.DocumentLayout = (function() {
     
                             /**
@@ -45227,6 +45476,7 @@
                                  * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTextBlock|null} [textBlock] DocumentLayoutBlock textBlock
                                  * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableBlock|null} [tableBlock] DocumentLayoutBlock tableBlock
                                  * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutListBlock|null} [listBlock] DocumentLayoutBlock listBlock
+                                 * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutImageBlock|null} [imageBlock] DocumentLayoutBlock imageBlock
                                  * @property {string|null} [blockId] DocumentLayoutBlock blockId
                                  * @property {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan|null} [pageSpan] DocumentLayoutBlock pageSpan
                                  * @property {google.cloud.documentai.v1.IBoundingPoly|null} [boundingBox] DocumentLayoutBlock boundingBox
@@ -45272,6 +45522,14 @@
                                 DocumentLayoutBlock.prototype.listBlock = null;
     
                                 /**
+                                 * DocumentLayoutBlock imageBlock.
+                                 * @member {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutImageBlock|null|undefined} imageBlock
+                                 * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock
+                                 * @instance
+                                 */
+                                DocumentLayoutBlock.prototype.imageBlock = null;
+    
+                                /**
                                  * DocumentLayoutBlock blockId.
                                  * @member {string} blockId
                                  * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock
@@ -45300,12 +45558,12 @@
     
                                 /**
                                  * DocumentLayoutBlock block.
-                                 * @member {"textBlock"|"tableBlock"|"listBlock"|undefined} block
+                                 * @member {"textBlock"|"tableBlock"|"listBlock"|"imageBlock"|undefined} block
                                  * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock
                                  * @instance
                                  */
                                 Object.defineProperty(DocumentLayoutBlock.prototype, "block", {
-                                    get: $util.oneOfGetter($oneOfFields = ["textBlock", "tableBlock", "listBlock"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["textBlock", "tableBlock", "listBlock", "imageBlock"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -45345,6 +45603,8 @@
                                         $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.encode(message.pageSpan, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                     if (message.boundingBox != null && Object.hasOwnProperty.call(message, "boundingBox"))
                                         $root.google.cloud.documentai.v1.BoundingPoly.encode(message.boundingBox, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    if (message.imageBlock != null && Object.hasOwnProperty.call(message, "imageBlock"))
+                                        $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.encode(message.imageBlock, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -45391,6 +45651,10 @@
                                             }
                                         case 4: {
                                                 message.listBlock = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.imageBlock = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 1: {
@@ -45469,6 +45733,16 @@
                                                 return "listBlock." + error;
                                         }
                                     }
+                                    if (message.imageBlock != null && message.hasOwnProperty("imageBlock")) {
+                                        if (properties.block === 1)
+                                            return "block: multiple values";
+                                        properties.block = 1;
+                                        {
+                                            var error = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.verify(message.imageBlock);
+                                            if (error)
+                                                return "imageBlock." + error;
+                                        }
+                                    }
                                     if (message.blockId != null && message.hasOwnProperty("blockId"))
                                         if (!$util.isString(message.blockId))
                                             return "blockId: string expected";
@@ -45511,6 +45785,11 @@
                                         if (typeof object.listBlock !== "object")
                                             throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.listBlock: object expected");
                                         message.listBlock = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutListBlock.fromObject(object.listBlock);
+                                    }
+                                    if (object.imageBlock != null) {
+                                        if (typeof object.imageBlock !== "object")
+                                            throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.imageBlock: object expected");
+                                        message.imageBlock = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.fromObject(object.imageBlock);
                                     }
                                     if (object.blockId != null)
                                         message.blockId = String(object.blockId);
@@ -45566,6 +45845,11 @@
                                         object.pageSpan = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutPageSpan.toObject(message.pageSpan, options);
                                     if (message.boundingBox != null && message.hasOwnProperty("boundingBox"))
                                         object.boundingBox = $root.google.cloud.documentai.v1.BoundingPoly.toObject(message.boundingBox, options);
+                                    if (message.imageBlock != null && message.hasOwnProperty("imageBlock")) {
+                                        object.imageBlock = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.toObject(message.imageBlock, options);
+                                        if (options.oneofs)
+                                            object.block = "imageBlock";
+                                    }
                                     return object;
                                 };
     
@@ -45833,6 +46117,7 @@
                                      * @property {string|null} [text] LayoutTextBlock text
                                      * @property {string|null} [type] LayoutTextBlock type
                                      * @property {Array.<google.cloud.documentai.v1.Document.DocumentLayout.IDocumentLayoutBlock>|null} [blocks] LayoutTextBlock blocks
+                                     * @property {google.cloud.documentai.v1.Document.IAnnotations|null} [annotations] LayoutTextBlock annotations
                                      */
     
                                     /**
@@ -45876,6 +46161,14 @@
                                     LayoutTextBlock.prototype.blocks = $util.emptyArray;
     
                                     /**
+                                     * LayoutTextBlock annotations.
+                                     * @member {google.cloud.documentai.v1.Document.IAnnotations|null|undefined} annotations
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock
+                                     * @instance
+                                     */
+                                    LayoutTextBlock.prototype.annotations = null;
+    
+                                    /**
                                      * Creates a new LayoutTextBlock instance using the specified properties.
                                      * @function create
                                      * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock
@@ -45906,6 +46199,8 @@
                                         if (message.blocks != null && message.blocks.length)
                                             for (var i = 0; i < message.blocks.length; ++i)
                                                 $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.encode(message.blocks[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                            $root.google.cloud.documentai.v1.Document.Annotations.encode(message.annotations, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                         return writer;
                                     };
     
@@ -45954,6 +46249,10 @@
                                                     if (!(message.blocks && message.blocks.length))
                                                         message.blocks = [];
                                                     message.blocks.push($root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.decode(reader, reader.uint32()));
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.decode(reader, reader.uint32());
                                                     break;
                                                 }
                                             default:
@@ -46006,6 +46305,11 @@
                                                     return "blocks." + error;
                                             }
                                         }
+                                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Annotations.verify(message.annotations);
+                                            if (error)
+                                                return "annotations." + error;
+                                        }
                                         return null;
                                     };
     
@@ -46035,6 +46339,11 @@
                                                 message.blocks[i] = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.fromObject(object.blocks[i]);
                                             }
                                         }
+                                        if (object.annotations != null) {
+                                            if (typeof object.annotations !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTextBlock.annotations: object expected");
+                                            message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.fromObject(object.annotations);
+                                        }
                                         return message;
                                     };
     
@@ -46056,6 +46365,7 @@
                                         if (options.defaults) {
                                             object.text = "";
                                             object.type = "";
+                                            object.annotations = null;
                                         }
                                         if (message.text != null && message.hasOwnProperty("text"))
                                             object.text = message.text;
@@ -46066,6 +46376,8 @@
                                             for (var j = 0; j < message.blocks.length; ++j)
                                                 object.blocks[j] = $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.toObject(message.blocks[j], options);
                                         }
+                                        if (message.annotations != null && message.hasOwnProperty("annotations"))
+                                            object.annotations = $root.google.cloud.documentai.v1.Document.Annotations.toObject(message.annotations, options);
                                         return object;
                                     };
     
@@ -46107,6 +46419,7 @@
                                      * @property {Array.<google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow>|null} [headerRows] LayoutTableBlock headerRows
                                      * @property {Array.<google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutTableRow>|null} [bodyRows] LayoutTableBlock bodyRows
                                      * @property {string|null} [caption] LayoutTableBlock caption
+                                     * @property {google.cloud.documentai.v1.Document.IAnnotations|null} [annotations] LayoutTableBlock annotations
                                      */
     
                                     /**
@@ -46151,6 +46464,14 @@
                                     LayoutTableBlock.prototype.caption = "";
     
                                     /**
+                                     * LayoutTableBlock annotations.
+                                     * @member {google.cloud.documentai.v1.Document.IAnnotations|null|undefined} annotations
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock
+                                     * @instance
+                                     */
+                                    LayoutTableBlock.prototype.annotations = null;
+    
+                                    /**
                                      * Creates a new LayoutTableBlock instance using the specified properties.
                                      * @function create
                                      * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock
@@ -46182,6 +46503,8 @@
                                                 $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableRow.encode(message.bodyRows[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                         if (message.caption != null && Object.hasOwnProperty.call(message, "caption"))
                                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.caption);
+                                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                            $root.google.cloud.documentai.v1.Document.Annotations.encode(message.annotations, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                         return writer;
                                     };
     
@@ -46232,6 +46555,10 @@
                                                 }
                                             case 3: {
                                                     message.caption = reader.string();
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.decode(reader, reader.uint32());
                                                     break;
                                                 }
                                             default:
@@ -46290,6 +46617,11 @@
                                         if (message.caption != null && message.hasOwnProperty("caption"))
                                             if (!$util.isString(message.caption))
                                                 return "caption: string expected";
+                                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Annotations.verify(message.annotations);
+                                            if (error)
+                                                return "annotations." + error;
+                                        }
                                         return null;
                                     };
     
@@ -46327,6 +46659,11 @@
                                         }
                                         if (object.caption != null)
                                             message.caption = String(object.caption);
+                                        if (object.annotations != null) {
+                                            if (typeof object.annotations !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutTableBlock.annotations: object expected");
+                                            message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.fromObject(object.annotations);
+                                        }
                                         return message;
                                     };
     
@@ -46347,8 +46684,10 @@
                                             object.headerRows = [];
                                             object.bodyRows = [];
                                         }
-                                        if (options.defaults)
+                                        if (options.defaults) {
                                             object.caption = "";
+                                            object.annotations = null;
+                                        }
                                         if (message.headerRows && message.headerRows.length) {
                                             object.headerRows = [];
                                             for (var j = 0; j < message.headerRows.length; ++j)
@@ -46361,6 +46700,8 @@
                                         }
                                         if (message.caption != null && message.hasOwnProperty("caption"))
                                             object.caption = message.caption;
+                                        if (message.annotations != null && message.hasOwnProperty("annotations"))
+                                            object.annotations = $root.google.cloud.documentai.v1.Document.Annotations.toObject(message.annotations, options);
                                         return object;
                                     };
     
@@ -47369,6 +47710,363 @@
                                     return LayoutListEntry;
                                 })();
     
+                                DocumentLayoutBlock.LayoutImageBlock = (function() {
+    
+                                    /**
+                                     * Properties of a LayoutImageBlock.
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock
+                                     * @interface ILayoutImageBlock
+                                     * @property {string|null} [blobAssetId] LayoutImageBlock blobAssetId
+                                     * @property {string|null} [gcsUri] LayoutImageBlock gcsUri
+                                     * @property {string|null} [dataUri] LayoutImageBlock dataUri
+                                     * @property {string|null} [mimeType] LayoutImageBlock mimeType
+                                     * @property {string|null} [imageText] LayoutImageBlock imageText
+                                     * @property {google.cloud.documentai.v1.Document.IAnnotations|null} [annotations] LayoutImageBlock annotations
+                                     */
+    
+                                    /**
+                                     * Constructs a new LayoutImageBlock.
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock
+                                     * @classdesc Represents a LayoutImageBlock.
+                                     * @implements ILayoutImageBlock
+                                     * @constructor
+                                     * @param {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutImageBlock=} [properties] Properties to set
+                                     */
+                                    function LayoutImageBlock(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * LayoutImageBlock blobAssetId.
+                                     * @member {string|null|undefined} blobAssetId
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    LayoutImageBlock.prototype.blobAssetId = null;
+    
+                                    /**
+                                     * LayoutImageBlock gcsUri.
+                                     * @member {string|null|undefined} gcsUri
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    LayoutImageBlock.prototype.gcsUri = null;
+    
+                                    /**
+                                     * LayoutImageBlock dataUri.
+                                     * @member {string|null|undefined} dataUri
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    LayoutImageBlock.prototype.dataUri = null;
+    
+                                    /**
+                                     * LayoutImageBlock mimeType.
+                                     * @member {string} mimeType
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    LayoutImageBlock.prototype.mimeType = "";
+    
+                                    /**
+                                     * LayoutImageBlock imageText.
+                                     * @member {string} imageText
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    LayoutImageBlock.prototype.imageText = "";
+    
+                                    /**
+                                     * LayoutImageBlock annotations.
+                                     * @member {google.cloud.documentai.v1.Document.IAnnotations|null|undefined} annotations
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    LayoutImageBlock.prototype.annotations = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    /**
+                                     * LayoutImageBlock imageSource.
+                                     * @member {"blobAssetId"|"gcsUri"|"dataUri"|undefined} imageSource
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     */
+                                    Object.defineProperty(LayoutImageBlock.prototype, "imageSource", {
+                                        get: $util.oneOfGetter($oneOfFields = ["blobAssetId", "gcsUri", "dataUri"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new LayoutImageBlock instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutImageBlock=} [properties] Properties to set
+                                     * @returns {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock} LayoutImageBlock instance
+                                     */
+                                    LayoutImageBlock.create = function create(properties) {
+                                        return new LayoutImageBlock(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified LayoutImageBlock message. Does not implicitly {@link google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutImageBlock} message LayoutImageBlock message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    LayoutImageBlock.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                                        if (message.imageText != null && Object.hasOwnProperty.call(message, "imageText"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.imageText);
+                                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                            $root.google.cloud.documentai.v1.Document.Annotations.encode(message.annotations, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        if (message.blobAssetId != null && Object.hasOwnProperty.call(message, "blobAssetId"))
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.blobAssetId);
+                                        if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.gcsUri);
+                                        if (message.dataUri != null && Object.hasOwnProperty.call(message, "dataUri"))
+                                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.dataUri);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified LayoutImageBlock message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutImageBlock} message LayoutImageBlock message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    LayoutImageBlock.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a LayoutImageBlock message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock} LayoutImageBlock
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    LayoutImageBlock.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 4: {
+                                                    message.blobAssetId = reader.string();
+                                                    break;
+                                                }
+                                            case 5: {
+                                                    message.gcsUri = reader.string();
+                                                    break;
+                                                }
+                                            case 6: {
+                                                    message.dataUri = reader.string();
+                                                    break;
+                                                }
+                                            case 1: {
+                                                    message.mimeType = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.imageText = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a LayoutImageBlock message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock} LayoutImageBlock
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    LayoutImageBlock.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a LayoutImageBlock message.
+                                     * @function verify
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    LayoutImageBlock.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.blobAssetId != null && message.hasOwnProperty("blobAssetId")) {
+                                            properties.imageSource = 1;
+                                            if (!$util.isString(message.blobAssetId))
+                                                return "blobAssetId: string expected";
+                                        }
+                                        if (message.gcsUri != null && message.hasOwnProperty("gcsUri")) {
+                                            if (properties.imageSource === 1)
+                                                return "imageSource: multiple values";
+                                            properties.imageSource = 1;
+                                            if (!$util.isString(message.gcsUri))
+                                                return "gcsUri: string expected";
+                                        }
+                                        if (message.dataUri != null && message.hasOwnProperty("dataUri")) {
+                                            if (properties.imageSource === 1)
+                                                return "imageSource: multiple values";
+                                            properties.imageSource = 1;
+                                            if (!$util.isString(message.dataUri))
+                                                return "dataUri: string expected";
+                                        }
+                                        if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                            if (!$util.isString(message.mimeType))
+                                                return "mimeType: string expected";
+                                        if (message.imageText != null && message.hasOwnProperty("imageText"))
+                                            if (!$util.isString(message.imageText))
+                                                return "imageText: string expected";
+                                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Annotations.verify(message.annotations);
+                                            if (error)
+                                                return "annotations." + error;
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a LayoutImageBlock message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock} LayoutImageBlock
+                                     */
+                                    LayoutImageBlock.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock)
+                                            return object;
+                                        var message = new $root.google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock();
+                                        if (object.blobAssetId != null)
+                                            message.blobAssetId = String(object.blobAssetId);
+                                        if (object.gcsUri != null)
+                                            message.gcsUri = String(object.gcsUri);
+                                        if (object.dataUri != null)
+                                            message.dataUri = String(object.dataUri);
+                                        if (object.mimeType != null)
+                                            message.mimeType = String(object.mimeType);
+                                        if (object.imageText != null)
+                                            message.imageText = String(object.imageText);
+                                        if (object.annotations != null) {
+                                            if (typeof object.annotations !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock.annotations: object expected");
+                                            message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.fromObject(object.annotations);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a LayoutImageBlock message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock} message LayoutImageBlock
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    LayoutImageBlock.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.mimeType = "";
+                                            object.imageText = "";
+                                            object.annotations = null;
+                                        }
+                                        if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                            object.mimeType = message.mimeType;
+                                        if (message.imageText != null && message.hasOwnProperty("imageText"))
+                                            object.imageText = message.imageText;
+                                        if (message.annotations != null && message.hasOwnProperty("annotations"))
+                                            object.annotations = $root.google.cloud.documentai.v1.Document.Annotations.toObject(message.annotations, options);
+                                        if (message.blobAssetId != null && message.hasOwnProperty("blobAssetId")) {
+                                            object.blobAssetId = message.blobAssetId;
+                                            if (options.oneofs)
+                                                object.imageSource = "blobAssetId";
+                                        }
+                                        if (message.gcsUri != null && message.hasOwnProperty("gcsUri")) {
+                                            object.gcsUri = message.gcsUri;
+                                            if (options.oneofs)
+                                                object.imageSource = "gcsUri";
+                                        }
+                                        if (message.dataUri != null && message.hasOwnProperty("dataUri")) {
+                                            object.dataUri = message.dataUri;
+                                            if (options.oneofs)
+                                                object.imageSource = "dataUri";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this LayoutImageBlock to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    LayoutImageBlock.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for LayoutImageBlock
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    LayoutImageBlock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.LayoutImageBlock";
+                                    };
+    
+                                    return LayoutImageBlock;
+                                })();
+    
                                 return DocumentLayoutBlock;
                             })();
     
@@ -47610,6 +48308,7 @@
                                  * @property {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkPageSpan|null} [pageSpan] Chunk pageSpan
                                  * @property {Array.<google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkPageHeader>|null} [pageHeaders] Chunk pageHeaders
                                  * @property {Array.<google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkPageFooter>|null} [pageFooters] Chunk pageFooters
+                                 * @property {Array.<google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkField>|null} [chunkFields] Chunk chunkFields
                                  */
     
                                 /**
@@ -47624,6 +48323,7 @@
                                     this.sourceBlockIds = [];
                                     this.pageHeaders = [];
                                     this.pageFooters = [];
+                                    this.chunkFields = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -47679,6 +48379,14 @@
                                 Chunk.prototype.pageFooters = $util.emptyArray;
     
                                 /**
+                                 * Chunk chunkFields.
+                                 * @member {Array.<google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkField>} chunkFields
+                                 * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                 * @instance
+                                 */
+                                Chunk.prototype.chunkFields = $util.emptyArray;
+    
+                                /**
                                  * Creates a new Chunk instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
@@ -47717,6 +48425,9 @@
                                     if (message.pageFooters != null && message.pageFooters.length)
                                         for (var i = 0; i < message.pageFooters.length; ++i)
                                             $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkPageFooter.encode(message.pageFooters[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    if (message.chunkFields != null && message.chunkFields.length)
+                                        for (var i = 0; i < message.chunkFields.length; ++i)
+                                            $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.encode(message.chunkFields[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -47781,6 +48492,12 @@
                                                 if (!(message.pageFooters && message.pageFooters.length))
                                                     message.pageFooters = [];
                                                 message.pageFooters.push($root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkPageFooter.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 7: {
+                                                if (!(message.chunkFields && message.chunkFields.length))
+                                                    message.chunkFields = [];
+                                                message.chunkFields.push($root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.decode(reader, reader.uint32()));
                                                 break;
                                             }
                                         default:
@@ -47854,6 +48571,15 @@
                                                 return "pageFooters." + error;
                                         }
                                     }
+                                    if (message.chunkFields != null && message.hasOwnProperty("chunkFields")) {
+                                        if (!Array.isArray(message.chunkFields))
+                                            return "chunkFields: array expected";
+                                        for (var i = 0; i < message.chunkFields.length; ++i) {
+                                            var error = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.verify(message.chunkFields[i]);
+                                            if (error)
+                                                return "chunkFields." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -47905,6 +48631,16 @@
                                             message.pageFooters[i] = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkPageFooter.fromObject(object.pageFooters[i]);
                                         }
                                     }
+                                    if (object.chunkFields) {
+                                        if (!Array.isArray(object.chunkFields))
+                                            throw TypeError(".google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.chunkFields: array expected");
+                                        message.chunkFields = [];
+                                        for (var i = 0; i < object.chunkFields.length; ++i) {
+                                            if (typeof object.chunkFields[i] !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.chunkFields: object expected");
+                                            message.chunkFields[i] = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.fromObject(object.chunkFields[i]);
+                                        }
+                                    }
                                     return message;
                                 };
     
@@ -47925,6 +48661,7 @@
                                         object.sourceBlockIds = [];
                                         object.pageHeaders = [];
                                         object.pageFooters = [];
+                                        object.chunkFields = [];
                                     }
                                     if (options.defaults) {
                                         object.chunkId = "";
@@ -47951,6 +48688,11 @@
                                         object.pageFooters = [];
                                         for (var j = 0; j < message.pageFooters.length; ++j)
                                             object.pageFooters[j] = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkPageFooter.toObject(message.pageFooters[j], options);
+                                    }
+                                    if (message.chunkFields && message.chunkFields.length) {
+                                        object.chunkFields = [];
+                                        for (var j = 0; j < message.chunkFields.length; ++j)
+                                            object.chunkFields[j] = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.toObject(message.chunkFields[j], options);
                                     }
                                     return object;
                                 };
@@ -48678,10 +49420,1055 @@
                                     return ChunkPageFooter;
                                 })();
     
+                                Chunk.ImageChunkField = (function() {
+    
+                                    /**
+                                     * Properties of an ImageChunkField.
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                     * @interface IImageChunkField
+                                     * @property {string|null} [blobAssetId] ImageChunkField blobAssetId
+                                     * @property {string|null} [gcsUri] ImageChunkField gcsUri
+                                     * @property {string|null} [dataUri] ImageChunkField dataUri
+                                     * @property {google.cloud.documentai.v1.Document.IAnnotations|null} [annotations] ImageChunkField annotations
+                                     */
+    
+                                    /**
+                                     * Constructs a new ImageChunkField.
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                     * @classdesc Represents an ImageChunkField.
+                                     * @implements IImageChunkField
+                                     * @constructor
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IImageChunkField=} [properties] Properties to set
+                                     */
+                                    function ImageChunkField(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ImageChunkField blobAssetId.
+                                     * @member {string|null|undefined} blobAssetId
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @instance
+                                     */
+                                    ImageChunkField.prototype.blobAssetId = null;
+    
+                                    /**
+                                     * ImageChunkField gcsUri.
+                                     * @member {string|null|undefined} gcsUri
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @instance
+                                     */
+                                    ImageChunkField.prototype.gcsUri = null;
+    
+                                    /**
+                                     * ImageChunkField dataUri.
+                                     * @member {string|null|undefined} dataUri
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @instance
+                                     */
+                                    ImageChunkField.prototype.dataUri = null;
+    
+                                    /**
+                                     * ImageChunkField annotations.
+                                     * @member {google.cloud.documentai.v1.Document.IAnnotations|null|undefined} annotations
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @instance
+                                     */
+                                    ImageChunkField.prototype.annotations = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    /**
+                                     * ImageChunkField imageSource.
+                                     * @member {"blobAssetId"|"gcsUri"|"dataUri"|undefined} imageSource
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @instance
+                                     */
+                                    Object.defineProperty(ImageChunkField.prototype, "imageSource", {
+                                        get: $util.oneOfGetter($oneOfFields = ["blobAssetId", "gcsUri", "dataUri"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ImageChunkField instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IImageChunkField=} [properties] Properties to set
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField} ImageChunkField instance
+                                     */
+                                    ImageChunkField.create = function create(properties) {
+                                        return new ImageChunkField(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ImageChunkField message. Does not implicitly {@link google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IImageChunkField} message ImageChunkField message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ImageChunkField.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.blobAssetId != null && Object.hasOwnProperty.call(message, "blobAssetId"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.blobAssetId);
+                                        if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.gcsUri);
+                                        if (message.dataUri != null && Object.hasOwnProperty.call(message, "dataUri"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataUri);
+                                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                            $root.google.cloud.documentai.v1.Document.Annotations.encode(message.annotations, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ImageChunkField message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IImageChunkField} message ImageChunkField message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ImageChunkField.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an ImageChunkField message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField} ImageChunkField
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ImageChunkField.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.blobAssetId = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.gcsUri = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.dataUri = reader.string();
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an ImageChunkField message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField} ImageChunkField
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ImageChunkField.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an ImageChunkField message.
+                                     * @function verify
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ImageChunkField.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.blobAssetId != null && message.hasOwnProperty("blobAssetId")) {
+                                            properties.imageSource = 1;
+                                            if (!$util.isString(message.blobAssetId))
+                                                return "blobAssetId: string expected";
+                                        }
+                                        if (message.gcsUri != null && message.hasOwnProperty("gcsUri")) {
+                                            if (properties.imageSource === 1)
+                                                return "imageSource: multiple values";
+                                            properties.imageSource = 1;
+                                            if (!$util.isString(message.gcsUri))
+                                                return "gcsUri: string expected";
+                                        }
+                                        if (message.dataUri != null && message.hasOwnProperty("dataUri")) {
+                                            if (properties.imageSource === 1)
+                                                return "imageSource: multiple values";
+                                            properties.imageSource = 1;
+                                            if (!$util.isString(message.dataUri))
+                                                return "dataUri: string expected";
+                                        }
+                                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Annotations.verify(message.annotations);
+                                            if (error)
+                                                return "annotations." + error;
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an ImageChunkField message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField} ImageChunkField
+                                     */
+                                    ImageChunkField.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField)
+                                            return object;
+                                        var message = new $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField();
+                                        if (object.blobAssetId != null)
+                                            message.blobAssetId = String(object.blobAssetId);
+                                        if (object.gcsUri != null)
+                                            message.gcsUri = String(object.gcsUri);
+                                        if (object.dataUri != null)
+                                            message.dataUri = String(object.dataUri);
+                                        if (object.annotations != null) {
+                                            if (typeof object.annotations !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.annotations: object expected");
+                                            message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.fromObject(object.annotations);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an ImageChunkField message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField} message ImageChunkField
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ImageChunkField.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.annotations = null;
+                                        if (message.blobAssetId != null && message.hasOwnProperty("blobAssetId")) {
+                                            object.blobAssetId = message.blobAssetId;
+                                            if (options.oneofs)
+                                                object.imageSource = "blobAssetId";
+                                        }
+                                        if (message.gcsUri != null && message.hasOwnProperty("gcsUri")) {
+                                            object.gcsUri = message.gcsUri;
+                                            if (options.oneofs)
+                                                object.imageSource = "gcsUri";
+                                        }
+                                        if (message.dataUri != null && message.hasOwnProperty("dataUri")) {
+                                            object.dataUri = message.dataUri;
+                                            if (options.oneofs)
+                                                object.imageSource = "dataUri";
+                                        }
+                                        if (message.annotations != null && message.hasOwnProperty("annotations"))
+                                            object.annotations = $root.google.cloud.documentai.v1.Document.Annotations.toObject(message.annotations, options);
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ImageChunkField to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ImageChunkField.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ImageChunkField
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ImageChunkField.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField";
+                                    };
+    
+                                    return ImageChunkField;
+                                })();
+    
+                                Chunk.TableChunkField = (function() {
+    
+                                    /**
+                                     * Properties of a TableChunkField.
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                     * @interface ITableChunkField
+                                     * @property {google.cloud.documentai.v1.Document.IAnnotations|null} [annotations] TableChunkField annotations
+                                     */
+    
+                                    /**
+                                     * Constructs a new TableChunkField.
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                     * @classdesc Represents a TableChunkField.
+                                     * @implements ITableChunkField
+                                     * @constructor
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ITableChunkField=} [properties] Properties to set
+                                     */
+                                    function TableChunkField(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * TableChunkField annotations.
+                                     * @member {google.cloud.documentai.v1.Document.IAnnotations|null|undefined} annotations
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @instance
+                                     */
+                                    TableChunkField.prototype.annotations = null;
+    
+                                    /**
+                                     * Creates a new TableChunkField instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ITableChunkField=} [properties] Properties to set
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField} TableChunkField instance
+                                     */
+                                    TableChunkField.create = function create(properties) {
+                                        return new TableChunkField(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified TableChunkField message. Does not implicitly {@link google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ITableChunkField} message TableChunkField message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    TableChunkField.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                            $root.google.cloud.documentai.v1.Document.Annotations.encode(message.annotations, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified TableChunkField message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ITableChunkField} message TableChunkField message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    TableChunkField.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a TableChunkField message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField} TableChunkField
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    TableChunkField.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a TableChunkField message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField} TableChunkField
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    TableChunkField.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a TableChunkField message.
+                                     * @function verify
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    TableChunkField.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                            var error = $root.google.cloud.documentai.v1.Document.Annotations.verify(message.annotations);
+                                            if (error)
+                                                return "annotations." + error;
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a TableChunkField message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField} TableChunkField
+                                     */
+                                    TableChunkField.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField)
+                                            return object;
+                                        var message = new $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField();
+                                        if (object.annotations != null) {
+                                            if (typeof object.annotations !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.annotations: object expected");
+                                            message.annotations = $root.google.cloud.documentai.v1.Document.Annotations.fromObject(object.annotations);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a TableChunkField message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField} message TableChunkField
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    TableChunkField.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.annotations = null;
+                                        if (message.annotations != null && message.hasOwnProperty("annotations"))
+                                            object.annotations = $root.google.cloud.documentai.v1.Document.Annotations.toObject(message.annotations, options);
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this TableChunkField to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    TableChunkField.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for TableChunkField
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    TableChunkField.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField";
+                                    };
+    
+                                    return TableChunkField;
+                                })();
+    
+                                Chunk.ChunkField = (function() {
+    
+                                    /**
+                                     * Properties of a ChunkField.
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                     * @interface IChunkField
+                                     * @property {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IImageChunkField|null} [imageChunkField] ChunkField imageChunkField
+                                     * @property {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ITableChunkField|null} [tableChunkField] ChunkField tableChunkField
+                                     */
+    
+                                    /**
+                                     * Constructs a new ChunkField.
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk
+                                     * @classdesc Represents a ChunkField.
+                                     * @implements IChunkField
+                                     * @constructor
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkField=} [properties] Properties to set
+                                     */
+                                    function ChunkField(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ChunkField imageChunkField.
+                                     * @member {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IImageChunkField|null|undefined} imageChunkField
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @instance
+                                     */
+                                    ChunkField.prototype.imageChunkField = null;
+    
+                                    /**
+                                     * ChunkField tableChunkField.
+                                     * @member {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ITableChunkField|null|undefined} tableChunkField
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @instance
+                                     */
+                                    ChunkField.prototype.tableChunkField = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    /**
+                                     * ChunkField fieldType.
+                                     * @member {"imageChunkField"|"tableChunkField"|undefined} fieldType
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @instance
+                                     */
+                                    Object.defineProperty(ChunkField.prototype, "fieldType", {
+                                        get: $util.oneOfGetter($oneOfFields = ["imageChunkField", "tableChunkField"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ChunkField instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkField=} [properties] Properties to set
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField} ChunkField instance
+                                     */
+                                    ChunkField.create = function create(properties) {
+                                        return new ChunkField(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ChunkField message. Does not implicitly {@link google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkField} message ChunkField message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ChunkField.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.imageChunkField != null && Object.hasOwnProperty.call(message, "imageChunkField"))
+                                            $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.encode(message.imageChunkField, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.tableChunkField != null && Object.hasOwnProperty.call(message, "tableChunkField"))
+                                            $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.encode(message.tableChunkField, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ChunkField message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.IChunkField} message ChunkField message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ChunkField.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ChunkField message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField} ChunkField
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ChunkField.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.imageChunkField = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.tableChunkField = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ChunkField message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField} ChunkField
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ChunkField.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ChunkField message.
+                                     * @function verify
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ChunkField.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.imageChunkField != null && message.hasOwnProperty("imageChunkField")) {
+                                            properties.fieldType = 1;
+                                            {
+                                                var error = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.verify(message.imageChunkField);
+                                                if (error)
+                                                    return "imageChunkField." + error;
+                                            }
+                                        }
+                                        if (message.tableChunkField != null && message.hasOwnProperty("tableChunkField")) {
+                                            if (properties.fieldType === 1)
+                                                return "fieldType: multiple values";
+                                            properties.fieldType = 1;
+                                            {
+                                                var error = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.verify(message.tableChunkField);
+                                                if (error)
+                                                    return "tableChunkField." + error;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ChunkField message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField} ChunkField
+                                     */
+                                    ChunkField.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField)
+                                            return object;
+                                        var message = new $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField();
+                                        if (object.imageChunkField != null) {
+                                            if (typeof object.imageChunkField !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.imageChunkField: object expected");
+                                            message.imageChunkField = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.fromObject(object.imageChunkField);
+                                        }
+                                        if (object.tableChunkField != null) {
+                                            if (typeof object.tableChunkField !== "object")
+                                                throw TypeError(".google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField.tableChunkField: object expected");
+                                            message.tableChunkField = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.fromObject(object.tableChunkField);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ChunkField message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField} message ChunkField
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ChunkField.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (message.imageChunkField != null && message.hasOwnProperty("imageChunkField")) {
+                                            object.imageChunkField = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ImageChunkField.toObject(message.imageChunkField, options);
+                                            if (options.oneofs)
+                                                object.fieldType = "imageChunkField";
+                                        }
+                                        if (message.tableChunkField != null && message.hasOwnProperty("tableChunkField")) {
+                                            object.tableChunkField = $root.google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.TableChunkField.toObject(message.tableChunkField, options);
+                                            if (options.oneofs)
+                                                object.fieldType = "tableChunkField";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ChunkField to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ChunkField.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ChunkField
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ChunkField.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.documentai.v1.Document.ChunkedDocument.Chunk.ChunkField";
+                                    };
+    
+                                    return ChunkField;
+                                })();
+    
                                 return Chunk;
                             })();
     
                             return ChunkedDocument;
+                        })();
+    
+                        Document.BlobAsset = (function() {
+    
+                            /**
+                             * Properties of a BlobAsset.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @interface IBlobAsset
+                             * @property {string|null} [assetId] BlobAsset assetId
+                             * @property {Uint8Array|null} [content] BlobAsset content
+                             * @property {string|null} [mimeType] BlobAsset mimeType
+                             */
+    
+                            /**
+                             * Constructs a new BlobAsset.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @classdesc Represents a BlobAsset.
+                             * @implements IBlobAsset
+                             * @constructor
+                             * @param {google.cloud.documentai.v1.Document.IBlobAsset=} [properties] Properties to set
+                             */
+                            function BlobAsset(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BlobAsset assetId.
+                             * @member {string} assetId
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @instance
+                             */
+                            BlobAsset.prototype.assetId = "";
+    
+                            /**
+                             * BlobAsset content.
+                             * @member {Uint8Array} content
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @instance
+                             */
+                            BlobAsset.prototype.content = $util.newBuffer([]);
+    
+                            /**
+                             * BlobAsset mimeType.
+                             * @member {string} mimeType
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @instance
+                             */
+                            BlobAsset.prototype.mimeType = "";
+    
+                            /**
+                             * Creates a new BlobAsset instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IBlobAsset=} [properties] Properties to set
+                             * @returns {google.cloud.documentai.v1.Document.BlobAsset} BlobAsset instance
+                             */
+                            BlobAsset.create = function create(properties) {
+                                return new BlobAsset(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BlobAsset message. Does not implicitly {@link google.cloud.documentai.v1.Document.BlobAsset.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IBlobAsset} message BlobAsset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BlobAsset.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.assetId != null && Object.hasOwnProperty.call(message, "assetId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.assetId);
+                                if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.content);
+                                if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.mimeType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BlobAsset message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.BlobAsset.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IBlobAsset} message BlobAsset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BlobAsset.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BlobAsset message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.documentai.v1.Document.BlobAsset} BlobAsset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BlobAsset.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.BlobAsset();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.assetId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.content = reader.bytes();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.mimeType = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BlobAsset message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.documentai.v1.Document.BlobAsset} BlobAsset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BlobAsset.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BlobAsset message.
+                             * @function verify
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BlobAsset.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.assetId != null && message.hasOwnProperty("assetId"))
+                                    if (!$util.isString(message.assetId))
+                                        return "assetId: string expected";
+                                if (message.content != null && message.hasOwnProperty("content"))
+                                    if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
+                                        return "content: buffer expected";
+                                if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                    if (!$util.isString(message.mimeType))
+                                        return "mimeType: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BlobAsset message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.documentai.v1.Document.BlobAsset} BlobAsset
+                             */
+                            BlobAsset.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.documentai.v1.Document.BlobAsset)
+                                    return object;
+                                var message = new $root.google.cloud.documentai.v1.Document.BlobAsset();
+                                if (object.assetId != null)
+                                    message.assetId = String(object.assetId);
+                                if (object.content != null)
+                                    if (typeof object.content === "string")
+                                        $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
+                                    else if (object.content.length >= 0)
+                                        message.content = object.content;
+                                if (object.mimeType != null)
+                                    message.mimeType = String(object.mimeType);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BlobAsset message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.BlobAsset} message BlobAsset
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BlobAsset.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.assetId = "";
+                                    if (options.bytes === String)
+                                        object.content = "";
+                                    else {
+                                        object.content = [];
+                                        if (options.bytes !== Array)
+                                            object.content = $util.newBuffer(object.content);
+                                    }
+                                    object.mimeType = "";
+                                }
+                                if (message.assetId != null && message.hasOwnProperty("assetId"))
+                                    object.assetId = message.assetId;
+                                if (message.content != null && message.hasOwnProperty("content"))
+                                    object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+                                if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                    object.mimeType = message.mimeType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BlobAsset to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BlobAsset.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BlobAsset
+                             * @function getTypeUrl
+                             * @memberof google.cloud.documentai.v1.Document.BlobAsset
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BlobAsset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.documentai.v1.Document.BlobAsset";
+                            };
+    
+                            return BlobAsset;
                         })();
     
                         Document.EntityValidationOutput = (function() {

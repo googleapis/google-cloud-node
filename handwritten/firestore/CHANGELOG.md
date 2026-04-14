@@ -4,6 +4,50 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.4.0...firestore-v8.5.0) (2026-04-13)
+
+
+### Features
+
+* [firestore] Add support for DML ([09cd24f](https://github.com/googleapis/google-cloud-node/commit/09cd24fcb742fa2f084c4c358a0156aac7951c26))
+* [firestore] Add support for DML ([77ce319](https://github.com/googleapis/google-cloud-node/commit/77ce3195b2b5f569b7fba33ea5bcc05391428318))
+* **firestore:** Add array expressions ([55d6385](https://github.com/googleapis/google-cloud-node/commit/55d63858490a47af29eb328fef2a927b2b98987b))
+* **firestore:** Add array expressions ([d72d1c0](https://github.com/googleapis/google-cloud-node/commit/d72d1c0e2efe7e581e9cbb62bce462c9d43e9452))
+* **firestore:** Add array expressions ([0fa836d](https://github.com/googleapis/google-cloud-node/commit/0fa836d2a832f37220c4c1248c54095933c12783))
+* **firestore:** Add array expressions ([d71b3d9](https://github.com/googleapis/google-cloud-node/commit/d71b3d96adbbd382dd1d43d321e742fb614467ab))
+* **firestore:** Add array expressions ([71933e5](https://github.com/googleapis/google-cloud-node/commit/71933e5a99f018a6ae4bf46f529ed4405d3ee96f))
+* **firestore:** Add array expressions ([da46223](https://github.com/googleapis/google-cloud-node/commit/da4622308132b9de5d0d9b535283fd022cde6edf))
+* **firestore:** Add array expressions ([81733e8](https://github.com/googleapis/google-cloud-node/commit/81733e81cc5498be384fcdfe3bbdadde8e26390b))
+* **firestore:** Add array expressions ([2513fd5](https://github.com/googleapis/google-cloud-node/commit/2513fd5666a2f88a30a9c79d3ab9c8a7a44b27db))
+* **firestore:** Add array expressions ([d8a8334](https://github.com/googleapis/google-cloud-node/commit/d8a8334081ea2a07fbf7688a86e15bb0818ca12a))
+* **firestore:** Add support for subqueries ([#7839](https://github.com/googleapis/google-cloud-node/issues/7839)) ([fb317f8](https://github.com/googleapis/google-cloud-node/commit/fb317f859be6d1c9f60cf388431f6419a3dc5055))
+* **firestore:** add the parent expression ([f17a791](https://github.com/googleapis/google-cloud-node/commit/f17a79153046f578bda9bbd0d2cdb9ed9371d500))
+* **firestore:** Add timestamp expressions ([deeb265](https://github.com/googleapis/google-cloud-node/commit/deeb265d21751393a71224a3793adb38582f39b8))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([228fe85](https://github.com/googleapis/google-cloud-node/commit/228fe85ad548968823bc9c99e21afceacf2638b0))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([32089a9](https://github.com/googleapis/google-cloud-node/commit/32089a9582b053bb4f74c8ab6148d139537bf0a5))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([a95b65d](https://github.com/googleapis/google-cloud-node/commit/a95b65da1e80d3ee13f730780cdc7fd7de21cdfd))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([7feca57](https://github.com/googleapis/google-cloud-node/commit/7feca5761b40dde27892faf679575447d8b5d370))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([20a55db](https://github.com/googleapis/google-cloud-node/commit/20a55db91471b87af49c4e132e7ab217b4f4ffbb))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([0ae2a4f](https://github.com/googleapis/google-cloud-node/commit/0ae2a4f6a942104069bdf81b8b1305e3bb0dd690))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([e18620e](https://github.com/googleapis/google-cloud-node/commit/e18620ec4b4c843d9d9e77ae11a2ab7ed06b8660))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([cf4ea62](https://github.com/googleapis/google-cloud-node/commit/cf4ea627f0b88d563bc9c5d5812daaf4d10b2184))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([343c8ec](https://github.com/googleapis/google-cloud-node/commit/343c8ec80fa0f1c857bd4633c742b940054d421e))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([80c3170](https://github.com/googleapis/google-cloud-node/commit/80c31703679cdfe7ad0a69a2aad7c05c987cef15))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([606f97a](https://github.com/googleapis/google-cloud-node/commit/606f97ab3cac462cf78bb81c09711cf28725fabd))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([410e7fd](https://github.com/googleapis/google-cloud-node/commit/410e7fd81da713deb6df9abc8429e4cf3c5106ff))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([e6f646b](https://github.com/googleapis/google-cloud-node/commit/e6f646b90901daf2ae445cb0d671b5852a6d7b3b))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([781b5c7](https://github.com/googleapis/google-cloud-node/commit/781b5c71b447e72b7e1d21a7c840e3896ed7f437))
+* **firestore:** Added public preview support for full-text search and geo search in Pipelines ([0e925ba](https://github.com/googleapis/google-cloud-node/commit/0e925babf77309c9547915fbd8942419de1caec9))
+
+
+### Bug Fixes
+
+* **firestore:** Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase ([7d044d1](https://github.com/googleapis/google-cloud-node/commit/7d044d1f9d30ab0edef38d1fc07311799a3e9f91))
+* **firestore:** Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase ([2882bc9](https://github.com/googleapis/google-cloud-node/commit/2882bc9eaf1c29754437473af8bd2779df0f677a))
+* **firestore:** Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase ([1b971f0](https://github.com/googleapis/google-cloud-node/commit/1b971f0e9d4ce9d725fb5fdc43378350cb48c920))
+* **firestore:** update pipeline tests for backend changes ([e8755b5](https://github.com/googleapis/google-cloud-node/commit/e8755b5f490e6eca885804792a18119a7a822a0a))
+* **firestore:** update pipeline tests for backend changes ([e5dd91e](https://github.com/googleapis/google-cloud-node/commit/e5dd91e03595452fc1dece58ca6b0c553f72398f))
+
 ## [8.3.0](https://github.com/googleapis/nodejs-firestore/compare/v8.2.0...v8.3.0) (2026-02-02)
 
 

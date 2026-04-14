@@ -324,6 +324,12 @@ export class LlmUtilityServiceClient {
       schedulePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/schedules/{schedule}'
       ),
+      sessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
+      ),
+      sessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
@@ -3455,6 +3461,143 @@ export class LlmUtilityServiceClient {
    */
   matchScheduleFromScheduleName(scheduleName: string) {
     return this.pathTemplates.schedulePathTemplate.match(scheduleName).schedule;
+  }
+
+  /**
+   * Return a fully-qualified session resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  sessionPath(project:string,location:string,reasoningEngine:string,session:string) {
+    return this.pathTemplates.sessionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the location from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified sessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  sessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
+    return this.pathTemplates.sessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).project;
+  }
+
+  /**
+   * Parse the location from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).session;
+  }
+
+  /**
+   * Parse the event from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).event;
   }
 
   /**

@@ -5,6 +5,253 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "55d63858490a47af29eb328fef2a927b2b98987b",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "228fe85ad548968823bc9c99e21afceacf2638b0",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "d72d1c0e2efe7e581e9cbb62bce462c9d43e9452",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "0fa836d2a832f37220c4c1248c54095933c12783",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "32089a9582b053bb4f74c8ab6148d139537bf0a5",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "fb317f859be6d1c9f60cf388431f6419a3dc5055",
+          "message": "Add support for subqueries",
+          "issues": [
+            "7839"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "a95b65da1e80d3ee13f730780cdc7fd7de21cdfd",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "7feca5761b40dde27892faf679575447d8b5d370",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "d71b3d96adbbd382dd1d43d321e742fb614467ab",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "20a55db91471b87af49c4e132e7ab217b4f4ffbb",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "0ae2a4f6a942104069bdf81b8b1305e3bb0dd690",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "e18620ec4b4c843d9d9e77ae11a2ab7ed06b8660",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "cf4ea627f0b88d563bc9c5d5812daaf4d10b2184",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "343c8ec80fa0f1c857bd4633c742b940054d421e",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "80c31703679cdfe7ad0a69a2aad7c05c987cef15",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "71933e5a99f018a6ae4bf46f529ed4405d3ee96f",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "606f97ab3cac462cf78bb81c09711cf28725fabd",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "09cd24fcb742fa2f084c4c358a0156aac7951c26",
+          "message": "[firestore] Add support for DML",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "77ce3195b2b5f569b7fba33ea5bcc05391428318",
+          "message": "[firestore] Add support for DML",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "e8755b5f490e6eca885804792a18119a7a822a0a",
+          "message": "update pipeline tests for backend changes",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "e5dd91e03595452fc1dece58ca6b0c553f72398f",
+          "message": "update pipeline tests for backend changes",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "da4622308132b9de5d0d9b535283fd022cde6edf",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "81733e81cc5498be384fcdfe3bbdadde8e26390b",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "f17a79153046f578bda9bbd0d2cdb9ed9371d500",
+          "message": "add the parent expression",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "2513fd5666a2f88a30a9c79d3ab9c8a7a44b27db",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "410e7fd81da713deb6df9abc8429e4cf3c5106ff",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "e6f646b90901daf2ae445cb0d671b5852a6d7b3b",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "781b5c71b447e72b7e1d21a7c840e3896ed7f437",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "0e925babf77309c9547915fbd8942419de1caec9",
+          "message": "Added public preview support for full-text search and geo search in Pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "d8a8334081ea2a07fbf7688a86e15bb0818ca12a",
+          "message": "Add array expressions",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "7d044d1f9d30ab0edef38d1fc07311799a3e9f91",
+          "message": "Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "2882bc9eaf1c29754437473af8bd2779df0f677a",
+          "message": "Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "1b971f0e9d4ce9d725fb5fdc43378350cb48c920",
+          "message": "Refactor the parameters for timestamp expressions and fix bug for timeGranularity lowercase",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "deeb265d21751393a71224a3793adb38582f39b8",
+          "message": "Add timestamp expressions",
+          "issues": [],
+          "scope": "firestore"
+        }
+      ],
+      "version": "8.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "660fa930-cd94-405a-b4ea-3008b640c4f4",
+      "createTime": "2026-04-13T20:17:24.690Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "da6ef3b2599582c2132b83b5311caadc3e1e2a34",
           "message": "[geocode] make the Place ID format consistent",
           "issues": [
@@ -69536,5 +69783,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-08T00:07:52.535Z"
+  "updateTime": "2026-04-13T20:17:24.690Z"
 }
