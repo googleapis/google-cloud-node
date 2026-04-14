@@ -26,7 +26,11 @@ import {
   Context,
   Link,
 } from '@opentelemetry/api';
-import {W3CTraceContextPropagator} from '@opentelemetry/core';
+import {
+  W3CTraceContextPropagator,
+  W3CBaggagePropagator,
+  CompositePropagator,
+} from '@opentelemetry/core';
 import {Attributes, PubsubMessage} from './publisher/pubsub-message';
 import {Duration} from './temporal';
 
@@ -76,7 +80,9 @@ export enum OpenTelemetryLevel {
  * @private
  * @internal
  */
-const w3cTraceContextPropagator = new W3CTraceContextPropagator();
+const compositePropagator = new CompositePropagator({
+  propagators: [new W3CTraceContextPropagator(), new W3CBaggagePropagator()],
+});
 
 // True if user code elsewhere wants to enable OpenTelemetry support.
 let globallyEnabled = false;
@@ -225,6 +231,7 @@ export function spanContextToContext(
  * @internal
  */
 export const modernAttributeName = 'googclient_traceparent';
+export const baggageAttributeName = 'googclient_baggage';
 
 export interface AttributeParams {
   // Fully qualified.
@@ -768,9 +775,20 @@ export function injectSpan(span: Span, message: MessageWithAttributes): void {
     delete message.attributes[modernAttributeName];
   }
 
-  // Always do propagation injection with the trace context.
-  const context = trace.setSpanContext(ROOT_CONTEXT, span.spanContext());
-  w3cTraceContextPropagator.inject(context, message, pubsubSetter);
+  if (message.attributes[baggageAttributeName]) {
+    console.warn(
+      `${baggageAttributeName} key set as message attribute, but will be overridden.`,
+    );
+
+    delete message.attributes[baggageAttributeName];
+  }
+
+  // Always do propagation injection with the trace and baggage context.
+  const propagationContext = trace.setSpanContext(
+    context.active(),
+    span.spanContext(),
+  );
+  compositePropagator.inject(propagationContext, message, pubsubSetter);
 
   // Also put the direct reference to the Span object for while we're
   // passing it around in the client library.
@@ -822,12 +840,11 @@ export function extractSpan(
 
   let context: Context | undefined;
 
-  if (keys.includes(modernAttributeName)) {
-    context = w3cTraceContextPropagator.extract(
-      ROOT_CONTEXT,
-      message,
-      pubsubGetter,
-    );
+  if (
+    keys.includes(modernAttributeName) ||
+    keys.includes(baggageAttributeName)
+  ) {
+    context = compositePropagator.extract(ROOT_CONTEXT, message, pubsubGetter);
   }
 
   const span = PubsubSpans.createReceiveSpan(

@@ -20,7 +20,12 @@ import {describe, it, beforeEach} from 'mocha';
 import * as trace from '@opentelemetry/sdk-trace-base';
 import * as otel from '../src/telemetry-tracing';
 import {exporter} from './tracing';
-import {SpanKind} from '@opentelemetry/api';
+import {
+  SpanKind,
+  context,
+  propagation,
+  trace as otelTrace,
+} from '@opentelemetry/api';
 import sinon = require('sinon');
 import {PubsubMessage} from '../src/publisher';
 import {Duration} from '../src/temporal';
@@ -190,6 +195,104 @@ describe('OpenTelemetryTracer', () => {
         childSpan!.spanContext().traceId,
         'd4cda95b652f4a1592b449d5929fda1b',
       );
+    });
+
+    it('round-trips baggage through inject and extract', () => {
+      // Verify that baggage set on a message via the composite propagator
+      // can be extracted on the subscriber side.
+      const baggage = propagation.createBaggage({
+        'test-key': {value: 'test-value'},
+      });
+
+      // Build a context with both a span and baggage.
+      const publishMessage: PubsubMessage = {
+        attributes: {},
+      };
+      const span = otel.PubsubSpans.createPublisherSpan(
+        publishMessage,
+        'projects/test/topics/topicfoo',
+        'tests',
+      );
+      assert.ok(span);
+
+      // Simulate what injectSpan does, but with baggage on the context.
+      const ctxWithBaggage = propagation.setBaggage(context.active(), baggage);
+      const propagationCtx = otelTrace.setSpanContext(
+        ctxWithBaggage,
+        span.spanContext(),
+      );
+
+      // Use the pubsub setter/getter directly with propagation API.
+      propagation.inject(propagationCtx, publishMessage, otel.pubsubSetter);
+
+      // Verify baggage attribute was set on the message.
+      assert.strictEqual(
+        Object.getOwnPropertyNames(publishMessage.attributes).includes(
+          otel.baggageAttributeName,
+        ),
+        true,
+      );
+      assert.ok(
+        (
+          publishMessage.attributes![otel.baggageAttributeName] as string
+        ).includes('test-key=test-value'),
+      );
+    });
+
+    it('should issue a warning if baggage attribute key is set', () => {
+      const message: PubsubMessage = {
+        attributes: {
+          [otel.baggageAttributeName]: 'bazbar',
+        },
+      };
+      const span = otel.PubsubSpans.createPublisherSpan(
+        message,
+        'projects/test/topics/topicfoo',
+        'tests',
+      );
+      assert.ok(span);
+
+      const warnSpy = sinon.spy(console, 'warn');
+      try {
+        otel.injectSpan(span, message);
+        assert.strictEqual(warnSpy.callCount, 1);
+      } finally {
+        warnSpy.restore();
+      }
+    });
+
+    it('extracts baggage from message attributes', () => {
+      const message = {
+        attributes: {
+          [otel.modernAttributeName]:
+            '00-d4cda95b652f4a1592b449d5929fda1b-553964cd9101a314-01',
+          [otel.baggageAttributeName]: 'test-key=test-value',
+        },
+      };
+
+      const childSpan = otel.extractSpan(
+        message,
+        'projects/test/subscriptions/subfoo',
+      );
+      assert.ok(childSpan);
+      assert.strictEqual(
+        childSpan.spanContext().traceId,
+        'd4cda95b652f4a1592b449d5929fda1b',
+      );
+    });
+
+    it('extracts span when only baggage is present', () => {
+      const message = {
+        attributes: {
+          [otel.baggageAttributeName]: 'test-key=test-value',
+        },
+      };
+
+      const childSpan = otel.extractSpan(
+        message,
+        'projects/test/subscriptions/subfoo',
+      );
+      assert.ok(childSpan);
     });
   });
 

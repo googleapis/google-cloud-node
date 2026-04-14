@@ -19,6 +19,12 @@ import {
   InMemorySpanExporter,
   SimpleSpanProcessor,
 } from '@opentelemetry/sdk-trace-base';
+import {propagation} from '@opentelemetry/api';
+import {
+  CompositePropagator,
+  W3CTraceContextPropagator,
+  W3CBaggagePropagator,
+} from '@opentelemetry/core';
 
 /**
  * This file is used to initialise a global tracing provider and span exporter
@@ -39,3 +45,8 @@ export const exporter: InMemorySpanExporter = new InMemorySpanExporter();
 export const provider: BasicTracerProvider = new BasicTracerProvider();
 provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
 provider.register();
+propagation.setGlobalPropagator(
+  new CompositePropagator({
+    propagators: [new W3CTraceContextPropagator(), new W3CBaggagePropagator()],
+  }),
+);
