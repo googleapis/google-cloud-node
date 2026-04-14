@@ -16,10 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataAccessControlServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient} from '@google-cloud/chronicle';
+import {DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient} from '@google-cloud/chronicle';
 
 // check that the client class type name can be used
 function doStuffWithDataAccessControlServiceClient(client: DataAccessControlServiceClient) {
+  client.close();
+}
+function doStuffWithDataTableServiceClient(client: DataTableServiceClient) {
   client.close();
 }
 function doStuffWithEntityServiceClient(client: EntityServiceClient) {
@@ -39,6 +42,9 @@ function main() {
   // check that the client instance can be created
   const dataAccessControlServiceClient = new DataAccessControlServiceClient();
   doStuffWithDataAccessControlServiceClient(dataAccessControlServiceClient);
+  // check that the client instance can be created
+  const dataTableServiceClient = new DataTableServiceClient();
+  doStuffWithDataTableServiceClient(dataTableServiceClient);
   // check that the client instance can be created
   const entityServiceClient = new EntityServiceClient();
   doStuffWithEntityServiceClient(entityServiceClient);

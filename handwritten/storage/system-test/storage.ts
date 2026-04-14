@@ -3621,6 +3621,259 @@ describe('storage', function () {
     });
   });
 
+  describe('object contexts', () => {
+    after(async () => {
+      await bucket.deleteFiles();
+    });
+
+    it('should create, retrieve, and update object contexts', async () => {
+      const file = bucket.file('test-context-obj.txt');
+      const initialContexts = {
+        custom: {
+          'team-owner': {value: 'storage-team'},
+          priority: {value: 'high'},
+        },
+      };
+
+      await file.save('hello world', {
+        metadata: {contexts: initialContexts},
+      });
+
+      const [metadata] = await file.getMetadata();
+      assert.ok(metadata.contexts?.custom);
+      assert.strictEqual(
+        metadata.contexts.custom['team-owner']?.value,
+        'storage-team'
+      );
+      assert.ok(metadata.contexts.custom['team-owner'].createTime);
+
+      const patchMetadata = {
+        contexts: {
+          custom: {
+            priority: {value: 'critical'}, // Update existing
+            env: {value: 'prod'}, // Add new
+            'team-owner': null, // Remove existing
+          },
+        },
+      };
+      await file.setMetadata(patchMetadata);
+
+      const [updatedMetadata] = await file.getMetadata();
+      const finalCustom = updatedMetadata.contexts!.custom!;
+      assert.strictEqual(finalCustom['priority']?.value, 'critical');
+      assert.strictEqual(finalCustom['env']?.value, 'prod');
+      assert.strictEqual(finalCustom['team-owner'], undefined);
+      assert.ok(finalCustom['priority'].updateTime);
+    });
+
+    it('should get contexts and server-generated timestamps in response', async () => {
+      const file = bucket.file('test-context-obj.txt');
+      await file.save('data', {
+        metadata: {contexts: {custom: {status: {value: 'active'}}}},
+      });
+
+      const [metadata] = await file.getMetadata();
+
+      assert.ok(metadata.contexts?.custom?.status);
+      const context = metadata.contexts.custom.status;
+      assert.strictEqual(context.value, 'active');
+      assert.ok(context.createTime);
+      assert.ok(context.updateTime);
+    });
+
+    it('should clear all contexts of an existing object', async () => {
+      const file = bucket.file('test-context-obj-clear-all.txt');
+      await file.save('data', {
+        metadata: {
+          contexts: {
+            custom: {
+              'temp-key': {value: 'temp'},
+              status: {value: 'to-be-cleared'},
+            },
+          },
+        },
+      });
+
+      await file.setMetadata({
+        contexts: {
+          custom: null,
+        },
+      });
+      const [metadata] = await file.getMetadata();
+
+      assert.strictEqual(metadata.contexts?.custom, undefined);
+    });
+
+    describe('copy/rewrite object with contexts', () => {
+      it('should inherit contexts from the source by default', async () => {
+        const source = bucket.file('test-context-obj-src-copy.txt');
+        const dest = bucket.file('test-context-obj-dest-copy.txt');
+
+        await source.save('content', {
+          metadata: {contexts: {custom: {tag: {value: 'original'}}}},
+        });
+
+        await source.copy(dest);
+
+        const [metadata] = await dest.getMetadata();
+        assert.strictEqual(metadata.contexts?.custom?.tag?.value, 'original');
+      });
+
+      it('should override contexts during copy', async () => {
+        const source = bucket.file('test-context-obj-src-ovr.txt');
+        const dest = bucket.file('test-context-obj-dest-ovr.txt');
+
+        await source.save('content', {
+          metadata: {contexts: {custom: {tag: {value: 'original'}}}},
+        });
+
+        await source.copy(dest, {
+          contexts: {custom: {tag: {value: 'overridden'}}},
+        });
+
+        const [metadata] = await dest.getMetadata();
+        assert.strictEqual(metadata.contexts?.custom?.tag?.value, 'overridden');
+      });
+    });
+
+    describe('combine object with contexts', () => {
+      it('should inherit contexts from the first source object', async () => {
+        const file1 = bucket.file('test-context-obj-c1.txt');
+        const file2 = bucket.file('test-context-obj-c2.txt');
+        const combined = bucket.file('test-context-obj-combined.txt');
+
+        await file1.save('a', {
+          metadata: {contexts: {custom: {source: {value: 'file1'}}}},
+        });
+        await file2.save('b');
+
+        await bucket.combine([file1, file2], combined);
+
+        const [metadata] = await combined.getMetadata();
+        assert.strictEqual(metadata.contexts?.custom?.source?.value, 'file1');
+      });
+
+      it('should override contexts for the composed object', async () => {
+        const file1 = bucket.file('test-context-obj-o1.txt');
+        const file2 = bucket.file('test-context-obj-o2.txt');
+        const combined = bucket.file('test-context-obj-combined-ovr.txt');
+
+        await file1.save('a');
+        await file2.save('b');
+
+        await bucket.combine([file1, file2], combined, {
+          contexts: {custom: {status: {value: 'composed'}}},
+        });
+
+        const [metadata] = await combined.getMetadata();
+        assert.strictEqual(
+          metadata.contexts?.custom?.status?.value,
+          'composed'
+        );
+      });
+    });
+
+    describe('list objects with contexts filter', () => {
+      const FILE_ACTIVE = bucket.file('test-context-obj-filter-active.txt');
+      const FILE_INACTIVE = bucket.file('test-context-obj-filter-inactive.txt');
+      const FILE_NO_CONTEXT = bucket.file('test-context-obj-filter-none.txt');
+
+      before(async () => {
+        await bucket.deleteFiles();
+        await Promise.all([
+          FILE_ACTIVE.save('content', {
+            metadata: {contexts: {custom: {status: {value: 'active'}}}},
+          }),
+          FILE_INACTIVE.save('content', {
+            metadata: {contexts: {custom: {status: {value: 'inactive'}}}},
+          }),
+          FILE_NO_CONTEXT.save('content'),
+        ]);
+      });
+
+      it('should list all objects matching a prefix', async () => {
+        const [files] = await bucket.getFiles();
+        assert.strictEqual(files.length, 3);
+      });
+
+      it('should filter by presence of key/value pair', async () => {
+        const query = {
+          filter: 'contexts."status"="active"',
+        };
+        const [files] = await bucket.getFiles(query);
+
+        assert.strictEqual(files.length, 1);
+        assert.strictEqual(files[0].name, FILE_ACTIVE.name);
+      });
+
+      it('should filter by absence of key/value pair (NOT)', async () => {
+        const query = {
+          filter: '-contexts."status"="active"',
+        };
+        const [files] = await bucket.getFiles(query);
+
+        assert.strictEqual(files.length, 2);
+        const names = files.map(f => f.name);
+        assert.ok(names.includes(FILE_INACTIVE.name));
+        assert.ok(names.includes(FILE_NO_CONTEXT.name));
+      });
+
+      it('should filter by presence of key regardless of value (Existence)', async () => {
+        const query = {
+          filter: 'contexts."status":*',
+        };
+        const [files] = await bucket.getFiles(query);
+
+        assert.strictEqual(files.length, 2);
+        const names = files.map(f => f.name);
+        assert.ok(names.includes(FILE_ACTIVE.name));
+        assert.ok(names.includes(FILE_INACTIVE.name));
+      });
+
+      it('should filter by absence of key regardless of value (Non-existence)', async () => {
+        const query = {
+          filter: '-contexts."status":*',
+        };
+        const [files] = await bucket.getFiles(query);
+
+        assert.strictEqual(files.length, 1);
+        assert.strictEqual(files[0].name, FILE_NO_CONTEXT.name);
+      });
+
+      it('should return empty list when no contexts match the filter', async () => {
+        const query = {
+          filter: 'contexts."status"="non-existent"',
+        };
+
+        const [files] = await bucket.getFiles(query);
+
+        assert.strictEqual(files.length, 0);
+      });
+
+      it('should correctly handle double quotes in filter keys', async () => {
+        const file = bucket.file('test-context-quoted-test.txt');
+        await file.save('data', {
+          metadata: {
+            contexts: {
+              custom: {
+                priority: {value: 'quoted-val'},
+              },
+            },
+          },
+        });
+        const query = {
+          filter: 'contexts."priority"="quoted-val"',
+        };
+
+        const [files] = await bucket.getFiles(query);
+
+        assert.strictEqual(files.length, 1);
+        assert.strictEqual(files[0].name, file.name);
+        await file.delete();
+      });
+    });
+  });
+
   describe('offset', () => {
     const NEW_FILES = [
       bucket.file('startOffset_file1'),

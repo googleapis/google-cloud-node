@@ -89,6 +89,7 @@
                              * @property {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|null} [pickupMethod] LocalInventoryAttributes pickupMethod
                              * @property {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|null} [pickupSla] LocalInventoryAttributes pickupSla
                              * @property {string|null} [instoreProductLocation] LocalInventoryAttributes instoreProductLocation
+                             * @property {Array.<google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram>|null} [loyaltyPrograms] LocalInventoryAttributes loyaltyPrograms
                              */
     
                             /**
@@ -100,6 +101,7 @@
                              * @param {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes=} [properties] Properties to set
                              */
                             function LocalInventoryAttributes(properties) {
+                                this.loyaltyPrograms = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -169,6 +171,14 @@
                              * @instance
                              */
                             LocalInventoryAttributes.prototype.instoreProductLocation = null;
+    
+                            /**
+                             * LocalInventoryAttributes loyaltyPrograms.
+                             * @member {Array.<google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram>} loyaltyPrograms
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.loyaltyPrograms = $util.emptyArray;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -243,6 +253,9 @@
                                     writer.uint32(/* id 7, wireType 0 =*/56).int32(message.pickupSla);
                                 if (message.instoreProductLocation != null && Object.hasOwnProperty.call(message, "instoreProductLocation"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.instoreProductLocation);
+                                if (message.loyaltyPrograms != null && message.loyaltyPrograms.length)
+                                    for (var i = 0; i < message.loyaltyPrograms.length; ++i)
+                                        $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.encode(message.loyaltyPrograms[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 return writer;
                             };
     
@@ -309,6 +322,12 @@
                                         }
                                     case 8: {
                                             message.instoreProductLocation = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            if (!(message.loyaltyPrograms && message.loyaltyPrograms.length))
+                                                message.loyaltyPrograms = [];
+                                            message.loyaltyPrograms.push($root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -415,6 +434,15 @@
                                     properties._instoreProductLocation = 1;
                                     if (!$util.isString(message.instoreProductLocation))
                                         return "instoreProductLocation: string expected";
+                                }
+                                if (message.loyaltyPrograms != null && message.hasOwnProperty("loyaltyPrograms")) {
+                                    if (!Array.isArray(message.loyaltyPrograms))
+                                        return "loyaltyPrograms: array expected";
+                                    for (var i = 0; i < message.loyaltyPrograms.length; ++i) {
+                                        var error = $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.verify(message.loyaltyPrograms[i]);
+                                        if (error)
+                                            return "loyaltyPrograms." + error;
+                                    }
                                 }
                                 return null;
                             };
@@ -561,6 +589,16 @@
                                 }
                                 if (object.instoreProductLocation != null)
                                     message.instoreProductLocation = String(object.instoreProductLocation);
+                                if (object.loyaltyPrograms) {
+                                    if (!Array.isArray(object.loyaltyPrograms))
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.LocalInventoryAttributes.loyaltyPrograms: array expected");
+                                    message.loyaltyPrograms = [];
+                                    for (var i = 0; i < object.loyaltyPrograms.length; ++i) {
+                                        if (typeof object.loyaltyPrograms[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.inventories.v1.LocalInventoryAttributes.loyaltyPrograms: object expected");
+                                        message.loyaltyPrograms[i] = $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.fromObject(object.loyaltyPrograms[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -577,6 +615,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.loyaltyPrograms = [];
                                 if (options.defaults) {
                                     object.price = null;
                                     object.salePrice = null;
@@ -615,6 +655,11 @@
                                     object.instoreProductLocation = message.instoreProductLocation;
                                     if (options.oneofs)
                                         object._instoreProductLocation = "instoreProductLocation";
+                                }
+                                if (message.loyaltyPrograms && message.loyaltyPrograms.length) {
+                                    object.loyaltyPrograms = [];
+                                    for (var j = 0; j < message.loyaltyPrograms.length; ++j)
+                                        object.loyaltyPrograms[j] = $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.toObject(message.loyaltyPrograms[j], options);
                                 }
                                 return object;
                             };
@@ -718,6 +763,450 @@
                             return LocalInventoryAttributes;
                         })();
     
+                        v1.InventoryLoyaltyProgram = (function() {
+    
+                            /**
+                             * Properties of an InventoryLoyaltyProgram.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IInventoryLoyaltyProgram
+                             * @property {string|null} [programLabel] InventoryLoyaltyProgram programLabel
+                             * @property {string|null} [tierLabel] InventoryLoyaltyProgram tierLabel
+                             * @property {google.shopping.type.IPrice|null} [price] InventoryLoyaltyProgram price
+                             * @property {google.shopping.type.IPrice|null} [cashbackForFutureUse] InventoryLoyaltyProgram cashbackForFutureUse
+                             * @property {number|Long|null} [loyaltyPoints] InventoryLoyaltyProgram loyaltyPoints
+                             * @property {google.type.IInterval|null} [memberPriceEffectiveInterval] InventoryLoyaltyProgram memberPriceEffectiveInterval
+                             * @property {string|null} [shippingLabel] InventoryLoyaltyProgram shippingLabel
+                             */
+    
+                            /**
+                             * Constructs a new InventoryLoyaltyProgram.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents an InventoryLoyaltyProgram.
+                             * @implements IInventoryLoyaltyProgram
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram=} [properties] Properties to set
+                             */
+                            function InventoryLoyaltyProgram(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InventoryLoyaltyProgram programLabel.
+                             * @member {string|null|undefined} programLabel
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.programLabel = null;
+    
+                            /**
+                             * InventoryLoyaltyProgram tierLabel.
+                             * @member {string|null|undefined} tierLabel
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.tierLabel = null;
+    
+                            /**
+                             * InventoryLoyaltyProgram price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.price = null;
+    
+                            /**
+                             * InventoryLoyaltyProgram cashbackForFutureUse.
+                             * @member {google.shopping.type.IPrice|null|undefined} cashbackForFutureUse
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.cashbackForFutureUse = null;
+    
+                            /**
+                             * InventoryLoyaltyProgram loyaltyPoints.
+                             * @member {number|Long|null|undefined} loyaltyPoints
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.loyaltyPoints = null;
+    
+                            /**
+                             * InventoryLoyaltyProgram memberPriceEffectiveInterval.
+                             * @member {google.type.IInterval|null|undefined} memberPriceEffectiveInterval
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.memberPriceEffectiveInterval = null;
+    
+                            /**
+                             * InventoryLoyaltyProgram shippingLabel.
+                             * @member {string|null|undefined} shippingLabel
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             */
+                            InventoryLoyaltyProgram.prototype.shippingLabel = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_programLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["programLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_tierLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["tierLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_price", {
+                                get: $util.oneOfGetter($oneOfFields = ["price"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_cashbackForFutureUse", {
+                                get: $util.oneOfGetter($oneOfFields = ["cashbackForFutureUse"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_loyaltyPoints", {
+                                get: $util.oneOfGetter($oneOfFields = ["loyaltyPoints"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_memberPriceEffectiveInterval", {
+                                get: $util.oneOfGetter($oneOfFields = ["memberPriceEffectiveInterval"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(InventoryLoyaltyProgram.prototype, "_shippingLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["shippingLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new InventoryLoyaltyProgram instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram} InventoryLoyaltyProgram instance
+                             */
+                            InventoryLoyaltyProgram.create = function create(properties) {
+                                return new InventoryLoyaltyProgram(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InventoryLoyaltyProgram message. Does not implicitly {@link google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram} message InventoryLoyaltyProgram message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InventoryLoyaltyProgram.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.programLabel != null && Object.hasOwnProperty.call(message, "programLabel"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.programLabel);
+                                if (message.tierLabel != null && Object.hasOwnProperty.call(message, "tierLabel"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.tierLabel);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.cashbackForFutureUse != null && Object.hasOwnProperty.call(message, "cashbackForFutureUse"))
+                                    $root.google.shopping.type.Price.encode(message.cashbackForFutureUse, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.loyaltyPoints != null && Object.hasOwnProperty.call(message, "loyaltyPoints"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.loyaltyPoints);
+                                if (message.memberPriceEffectiveInterval != null && Object.hasOwnProperty.call(message, "memberPriceEffectiveInterval"))
+                                    $root.google.type.Interval.encode(message.memberPriceEffectiveInterval, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.shippingLabel != null && Object.hasOwnProperty.call(message, "shippingLabel"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.shippingLabel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InventoryLoyaltyProgram message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram} message InventoryLoyaltyProgram message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InventoryLoyaltyProgram.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InventoryLoyaltyProgram message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram} InventoryLoyaltyProgram
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InventoryLoyaltyProgram.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.programLabel = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.tierLabel = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.cashbackForFutureUse = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.loyaltyPoints = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.memberPriceEffectiveInterval = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.shippingLabel = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InventoryLoyaltyProgram message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram} InventoryLoyaltyProgram
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InventoryLoyaltyProgram.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InventoryLoyaltyProgram message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InventoryLoyaltyProgram.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.programLabel != null && message.hasOwnProperty("programLabel")) {
+                                    properties._programLabel = 1;
+                                    if (!$util.isString(message.programLabel))
+                                        return "programLabel: string expected";
+                                }
+                                if (message.tierLabel != null && message.hasOwnProperty("tierLabel")) {
+                                    properties._tierLabel = 1;
+                                    if (!$util.isString(message.tierLabel))
+                                        return "tierLabel: string expected";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    properties._price = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.price);
+                                        if (error)
+                                            return "price." + error;
+                                    }
+                                }
+                                if (message.cashbackForFutureUse != null && message.hasOwnProperty("cashbackForFutureUse")) {
+                                    properties._cashbackForFutureUse = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.cashbackForFutureUse);
+                                        if (error)
+                                            return "cashbackForFutureUse." + error;
+                                    }
+                                }
+                                if (message.loyaltyPoints != null && message.hasOwnProperty("loyaltyPoints")) {
+                                    properties._loyaltyPoints = 1;
+                                    if (!$util.isInteger(message.loyaltyPoints) && !(message.loyaltyPoints && $util.isInteger(message.loyaltyPoints.low) && $util.isInteger(message.loyaltyPoints.high)))
+                                        return "loyaltyPoints: integer|Long expected";
+                                }
+                                if (message.memberPriceEffectiveInterval != null && message.hasOwnProperty("memberPriceEffectiveInterval")) {
+                                    properties._memberPriceEffectiveInterval = 1;
+                                    {
+                                        var error = $root.google.type.Interval.verify(message.memberPriceEffectiveInterval);
+                                        if (error)
+                                            return "memberPriceEffectiveInterval." + error;
+                                    }
+                                }
+                                if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
+                                    properties._shippingLabel = 1;
+                                    if (!$util.isString(message.shippingLabel))
+                                        return "shippingLabel: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InventoryLoyaltyProgram message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram} InventoryLoyaltyProgram
+                             */
+                            InventoryLoyaltyProgram.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram();
+                                if (object.programLabel != null)
+                                    message.programLabel = String(object.programLabel);
+                                if (object.tierLabel != null)
+                                    message.tierLabel = String(object.tierLabel);
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.cashbackForFutureUse != null) {
+                                    if (typeof object.cashbackForFutureUse !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.cashbackForFutureUse: object expected");
+                                    message.cashbackForFutureUse = $root.google.shopping.type.Price.fromObject(object.cashbackForFutureUse);
+                                }
+                                if (object.loyaltyPoints != null)
+                                    if ($util.Long)
+                                        (message.loyaltyPoints = $util.Long.fromValue(object.loyaltyPoints)).unsigned = false;
+                                    else if (typeof object.loyaltyPoints === "string")
+                                        message.loyaltyPoints = parseInt(object.loyaltyPoints, 10);
+                                    else if (typeof object.loyaltyPoints === "number")
+                                        message.loyaltyPoints = object.loyaltyPoints;
+                                    else if (typeof object.loyaltyPoints === "object")
+                                        message.loyaltyPoints = new $util.LongBits(object.loyaltyPoints.low >>> 0, object.loyaltyPoints.high >>> 0).toNumber();
+                                if (object.memberPriceEffectiveInterval != null) {
+                                    if (typeof object.memberPriceEffectiveInterval !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.memberPriceEffectiveInterval: object expected");
+                                    message.memberPriceEffectiveInterval = $root.google.type.Interval.fromObject(object.memberPriceEffectiveInterval);
+                                }
+                                if (object.shippingLabel != null)
+                                    message.shippingLabel = String(object.shippingLabel);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InventoryLoyaltyProgram message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram} message InventoryLoyaltyProgram
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InventoryLoyaltyProgram.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.programLabel != null && message.hasOwnProperty("programLabel")) {
+                                    object.programLabel = message.programLabel;
+                                    if (options.oneofs)
+                                        object._programLabel = "programLabel";
+                                }
+                                if (message.tierLabel != null && message.hasOwnProperty("tierLabel")) {
+                                    object.tierLabel = message.tierLabel;
+                                    if (options.oneofs)
+                                        object._tierLabel = "tierLabel";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                    if (options.oneofs)
+                                        object._price = "price";
+                                }
+                                if (message.cashbackForFutureUse != null && message.hasOwnProperty("cashbackForFutureUse")) {
+                                    object.cashbackForFutureUse = $root.google.shopping.type.Price.toObject(message.cashbackForFutureUse, options);
+                                    if (options.oneofs)
+                                        object._cashbackForFutureUse = "cashbackForFutureUse";
+                                }
+                                if (message.loyaltyPoints != null && message.hasOwnProperty("loyaltyPoints")) {
+                                    if (typeof message.loyaltyPoints === "number")
+                                        object.loyaltyPoints = options.longs === String ? String(message.loyaltyPoints) : message.loyaltyPoints;
+                                    else
+                                        object.loyaltyPoints = options.longs === String ? $util.Long.prototype.toString.call(message.loyaltyPoints) : options.longs === Number ? new $util.LongBits(message.loyaltyPoints.low >>> 0, message.loyaltyPoints.high >>> 0).toNumber() : message.loyaltyPoints;
+                                    if (options.oneofs)
+                                        object._loyaltyPoints = "loyaltyPoints";
+                                }
+                                if (message.memberPriceEffectiveInterval != null && message.hasOwnProperty("memberPriceEffectiveInterval")) {
+                                    object.memberPriceEffectiveInterval = $root.google.type.Interval.toObject(message.memberPriceEffectiveInterval, options);
+                                    if (options.oneofs)
+                                        object._memberPriceEffectiveInterval = "memberPriceEffectiveInterval";
+                                }
+                                if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
+                                    object.shippingLabel = message.shippingLabel;
+                                    if (options.oneofs)
+                                        object._shippingLabel = "shippingLabel";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InventoryLoyaltyProgram to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InventoryLoyaltyProgram.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InventoryLoyaltyProgram
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InventoryLoyaltyProgram.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram";
+                            };
+    
+                            return InventoryLoyaltyProgram;
+                        })();
+    
                         v1.RegionalInventoryAttributes = (function() {
     
                             /**
@@ -728,6 +1217,7 @@
                              * @property {google.shopping.type.IPrice|null} [salePrice] RegionalInventoryAttributes salePrice
                              * @property {google.type.IInterval|null} [salePriceEffectiveDate] RegionalInventoryAttributes salePriceEffectiveDate
                              * @property {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null} [availability] RegionalInventoryAttributes availability
+                             * @property {Array.<google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram>|null} [loyaltyPrograms] RegionalInventoryAttributes loyaltyPrograms
                              */
     
                             /**
@@ -739,6 +1229,7 @@
                              * @param {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes=} [properties] Properties to set
                              */
                             function RegionalInventoryAttributes(properties) {
+                                this.loyaltyPrograms = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -776,6 +1267,14 @@
                              * @instance
                              */
                             RegionalInventoryAttributes.prototype.availability = null;
+    
+                            /**
+                             * RegionalInventoryAttributes loyaltyPrograms.
+                             * @member {Array.<google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram>} loyaltyPrograms
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @instance
+                             */
+                            RegionalInventoryAttributes.prototype.loyaltyPrograms = $util.emptyArray;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -818,6 +1317,9 @@
                                     $root.google.type.Interval.encode(message.salePriceEffectiveDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.availability != null && Object.hasOwnProperty.call(message, "availability"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.availability);
+                                if (message.loyaltyPrograms != null && message.loyaltyPrograms.length)
+                                    for (var i = 0; i < message.loyaltyPrograms.length; ++i)
+                                        $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.encode(message.loyaltyPrograms[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -868,6 +1370,12 @@
                                         }
                                     case 4: {
                                             message.availability = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.loyaltyPrograms && message.loyaltyPrograms.length))
+                                                message.loyaltyPrograms = [];
+                                            message.loyaltyPrograms.push($root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -932,6 +1440,15 @@
                                         break;
                                     }
                                 }
+                                if (message.loyaltyPrograms != null && message.hasOwnProperty("loyaltyPrograms")) {
+                                    if (!Array.isArray(message.loyaltyPrograms))
+                                        return "loyaltyPrograms: array expected";
+                                    for (var i = 0; i < message.loyaltyPrograms.length; ++i) {
+                                        var error = $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.verify(message.loyaltyPrograms[i]);
+                                        if (error)
+                                            return "loyaltyPrograms." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -982,6 +1499,16 @@
                                     message.availability = 2;
                                     break;
                                 }
+                                if (object.loyaltyPrograms) {
+                                    if (!Array.isArray(object.loyaltyPrograms))
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.loyaltyPrograms: array expected");
+                                    message.loyaltyPrograms = [];
+                                    for (var i = 0; i < object.loyaltyPrograms.length; ++i) {
+                                        if (typeof object.loyaltyPrograms[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.loyaltyPrograms: object expected");
+                                        message.loyaltyPrograms[i] = $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.fromObject(object.loyaltyPrograms[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -998,6 +1525,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.loyaltyPrograms = [];
                                 if (options.defaults) {
                                     object.price = null;
                                     object.salePrice = null;
@@ -1013,6 +1542,11 @@
                                     object.availability = options.enums === String ? $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability[message.availability] === undefined ? message.availability : $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability[message.availability] : message.availability;
                                     if (options.oneofs)
                                         object._availability = "availability";
+                                }
+                                if (message.loyaltyPrograms && message.loyaltyPrograms.length) {
+                                    object.loyaltyPrograms = [];
+                                    for (var j = 0; j < message.loyaltyPrograms.length; ++j)
+                                        object.loyaltyPrograms[j] = $root.google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.toObject(message.loyaltyPrograms[j], options);
                                 }
                                 return object;
                             };
@@ -1203,6 +1737,7 @@
                              * @memberof google.shopping.merchant.inventories.v1
                              * @interface ILocalInventory
                              * @property {string|null} [name] LocalInventory name
+                             * @property {string|null} [base64EncodedName] LocalInventory base64EncodedName
                              * @property {number|Long|null} [account] LocalInventory account
                              * @property {string|null} [storeCode] LocalInventory storeCode
                              * @property {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes|null} [localInventoryAttributes] LocalInventory localInventoryAttributes
@@ -1230,6 +1765,14 @@
                              * @instance
                              */
                             LocalInventory.prototype.name = "";
+    
+                            /**
+                             * LocalInventory base64EncodedName.
+                             * @member {string} base64EncodedName
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @instance
+                             */
+                            LocalInventory.prototype.base64EncodedName = "";
     
                             /**
                              * LocalInventory account.
@@ -1287,6 +1830,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.storeCode);
                                 if (message.localInventoryAttributes != null && Object.hasOwnProperty.call(message, "localInventoryAttributes"))
                                     $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.encode(message.localInventoryAttributes, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.base64EncodedName != null && Object.hasOwnProperty.call(message, "base64EncodedName"))
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.base64EncodedName);
                                 return writer;
                             };
     
@@ -1325,6 +1870,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.base64EncodedName = reader.string();
                                             break;
                                         }
                                     case 2: {
@@ -1377,6 +1926,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    if (!$util.isString(message.base64EncodedName))
+                                        return "base64EncodedName: string expected";
                                 if (message.account != null && message.hasOwnProperty("account"))
                                     if (!$util.isInteger(message.account) && !(message.account && $util.isInteger(message.account.low) && $util.isInteger(message.account.high)))
                                         return "account: integer|Long expected";
@@ -1405,6 +1957,8 @@
                                 var message = new $root.google.shopping.merchant.inventories.v1.LocalInventory();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.base64EncodedName != null)
+                                    message.base64EncodedName = String(object.base64EncodedName);
                                 if (object.account != null)
                                     if ($util.Long)
                                         (message.account = $util.Long.fromValue(object.account)).unsigned = false;
@@ -1446,6 +2000,7 @@
                                         object.account = options.longs === String ? "0" : 0;
                                     object.storeCode = "";
                                     object.localInventoryAttributes = null;
+                                    object.base64EncodedName = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1458,6 +2013,8 @@
                                     object.storeCode = message.storeCode;
                                 if (message.localInventoryAttributes != null && message.hasOwnProperty("localInventoryAttributes"))
                                     object.localInventoryAttributes = $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.toObject(message.localInventoryAttributes, options);
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    object.base64EncodedName = message.base64EncodedName;
                                 return object;
                             };
     
@@ -2572,6 +3129,7 @@
                              * @memberof google.shopping.merchant.inventories.v1
                              * @interface IRegionalInventory
                              * @property {string|null} [name] RegionalInventory name
+                             * @property {string|null} [base64EncodedName] RegionalInventory base64EncodedName
                              * @property {number|Long|null} [account] RegionalInventory account
                              * @property {string|null} [region] RegionalInventory region
                              * @property {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes|null} [regionalInventoryAttributes] RegionalInventory regionalInventoryAttributes
@@ -2599,6 +3157,14 @@
                              * @instance
                              */
                             RegionalInventory.prototype.name = "";
+    
+                            /**
+                             * RegionalInventory base64EncodedName.
+                             * @member {string} base64EncodedName
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @instance
+                             */
+                            RegionalInventory.prototype.base64EncodedName = "";
     
                             /**
                              * RegionalInventory account.
@@ -2656,6 +3222,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.region);
                                 if (message.regionalInventoryAttributes != null && Object.hasOwnProperty.call(message, "regionalInventoryAttributes"))
                                     $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.encode(message.regionalInventoryAttributes, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.base64EncodedName != null && Object.hasOwnProperty.call(message, "base64EncodedName"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.base64EncodedName);
                                 return writer;
                             };
     
@@ -2694,6 +3262,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.base64EncodedName = reader.string();
                                             break;
                                         }
                                     case 2: {
@@ -2746,6 +3318,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    if (!$util.isString(message.base64EncodedName))
+                                        return "base64EncodedName: string expected";
                                 if (message.account != null && message.hasOwnProperty("account"))
                                     if (!$util.isInteger(message.account) && !(message.account && $util.isInteger(message.account.low) && $util.isInteger(message.account.high)))
                                         return "account: integer|Long expected";
@@ -2774,6 +3349,8 @@
                                 var message = new $root.google.shopping.merchant.inventories.v1.RegionalInventory();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.base64EncodedName != null)
+                                    message.base64EncodedName = String(object.base64EncodedName);
                                 if (object.account != null)
                                     if ($util.Long)
                                         (message.account = $util.Long.fromValue(object.account)).unsigned = false;
@@ -2815,6 +3392,7 @@
                                         object.account = options.longs === String ? "0" : 0;
                                     object.region = "";
                                     object.regionalInventoryAttributes = null;
+                                    object.base64EncodedName = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -2827,6 +3405,8 @@
                                     object.region = message.region;
                                 if (message.regionalInventoryAttributes != null && message.hasOwnProperty("regionalInventoryAttributes"))
                                     object.regionalInventoryAttributes = $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.toObject(message.regionalInventoryAttributes, options);
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    object.base64EncodedName = message.base64EncodedName;
                                 return object;
                             };
     

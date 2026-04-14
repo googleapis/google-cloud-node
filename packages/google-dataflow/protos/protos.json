@@ -52,7 +52,10 @@
                     },
                     "userAgent": {
                       "type": "google.protobuf.Struct",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "version": {
                       "type": "google.protobuf.Struct",
@@ -128,6 +131,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "usePublicIps": {
+                      "type": "bool",
+                      "id": 20,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -140,6 +150,13 @@
                     "location": {
                       "type": "string",
                       "id": 2
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -379,6 +396,20 @@
                     "diskType": {
                       "type": "string",
                       "id": 16
+                    },
+                    "diskProvisionedIops": {
+                      "type": "int64",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskProvisionedThroughputMibps": {
+                      "type": "int64",
+                      "id": 24,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "diskSourceImage": {
                       "type": "string",
@@ -778,6 +809,13 @@
                         "(google.api.field_behavior)": "OUTPUT_ONLY",
                         "proto3_optional": true
                       }
+                    },
+                    "pausable": {
+                      "type": "bool",
+                      "id": 29,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -809,6 +847,16 @@
                       "oneof": [
                         "workerUtilizationHint"
                       ]
+                    },
+                    "_acceptableBacklogDuration": {
+                      "oneof": [
+                        "acceptableBacklogDuration"
+                      ]
+                    },
+                    "_autoscalingTier": {
+                      "oneof": [
+                        "autoscalingTier"
+                      ]
                     }
                   },
                   "fields": {
@@ -830,6 +878,23 @@
                       "type": "double",
                       "id": 3,
                       "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "acceptableBacklogDuration": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4,
+                      "options": {
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
+                    },
+                    "autoscalingTier": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
                       }
                     }
@@ -1313,7 +1378,9 @@
                     "JOB_STATE_PENDING": 9,
                     "JOB_STATE_CANCELLING": 10,
                     "JOB_STATE_QUEUED": 11,
-                    "JOB_STATE_RESOURCE_CLEANING_UP": 12
+                    "JOB_STATE_RESOURCE_CLEANING_UP": 12,
+                    "JOB_STATE_PAUSING": 13,
+                    "JOB_STATE_PAUSED": 14
                   }
                 },
                 "JobExecutionInfo": {
@@ -2028,6 +2095,10 @@
                     "trie": {
                       "type": "google.protobuf.Value",
                       "id": 13
+                    },
+                    "boundedTrie": {
+                      "type": "google.protobuf.Value",
+                      "id": 14
                     },
                     "distribution": {
                       "type": "google.protobuf.Value",
@@ -2954,6 +3025,14 @@
                         "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
                       }
+                    },
+                    "additionalPipelineOptions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 27,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3062,6 +3141,14 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
+                      }
+                    },
+                    "additionalPipelineOptions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 20,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }
@@ -3201,7 +3288,8 @@
                         "UNKNOWN": 0,
                         "JAVA": 1,
                         "PYTHON": 2,
-                        "GO": 3
+                        "GO": 3,
+                        "YAML": 4
                       }
                     }
                   }
