@@ -4762,6 +4762,7352 @@
                         return IngestionLabel;
                     })();
     
+                    v1.DataTableService = (function() {
+    
+                        /**
+                         * Constructs a new DataTableService service.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataTableService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function DataTableService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (DataTableService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataTableService;
+    
+                        /**
+                         * Creates new DataTableService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {DataTableService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        DataTableService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|createDataTable}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef CreateDataTableCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTable} [response] DataTable
+                         */
+    
+                        /**
+                         * Calls CreateDataTable.
+                         * @function createDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRequest} request CreateDataTableRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.CreateDataTableCallback} callback Node-style callback called with the error, if any, and DataTable
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.createDataTable = function createDataTable(request, callback) {
+                            return this.rpcCall(createDataTable, $root.google.cloud.chronicle.v1.CreateDataTableRequest, $root.google.cloud.chronicle.v1.DataTable, request, callback);
+                        }, "name", { value: "CreateDataTable" });
+    
+                        /**
+                         * Calls CreateDataTable.
+                         * @function createDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRequest} request CreateDataTableRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTable>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|listDataTables}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef ListDataTablesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ListDataTablesResponse} [response] ListDataTablesResponse
+                         */
+    
+                        /**
+                         * Calls ListDataTables.
+                         * @function listDataTables
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListDataTablesRequest} request ListDataTablesRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.ListDataTablesCallback} callback Node-style callback called with the error, if any, and ListDataTablesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.listDataTables = function listDataTables(request, callback) {
+                            return this.rpcCall(listDataTables, $root.google.cloud.chronicle.v1.ListDataTablesRequest, $root.google.cloud.chronicle.v1.ListDataTablesResponse, request, callback);
+                        }, "name", { value: "ListDataTables" });
+    
+                        /**
+                         * Calls ListDataTables.
+                         * @function listDataTables
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListDataTablesRequest} request ListDataTablesRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ListDataTablesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTable}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef GetDataTableCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTable} [response] DataTable
+                         */
+    
+                        /**
+                         * Calls GetDataTable.
+                         * @function getDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRequest} request GetDataTableRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.GetDataTableCallback} callback Node-style callback called with the error, if any, and DataTable
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.getDataTable = function getDataTable(request, callback) {
+                            return this.rpcCall(getDataTable, $root.google.cloud.chronicle.v1.GetDataTableRequest, $root.google.cloud.chronicle.v1.DataTable, request, callback);
+                        }, "name", { value: "GetDataTable" });
+    
+                        /**
+                         * Calls GetDataTable.
+                         * @function getDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRequest} request GetDataTableRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTable>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|updateDataTable}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef UpdateDataTableCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTable} [response] DataTable
+                         */
+    
+                        /**
+                         * Calls UpdateDataTable.
+                         * @function updateDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRequest} request UpdateDataTableRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.UpdateDataTableCallback} callback Node-style callback called with the error, if any, and DataTable
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.updateDataTable = function updateDataTable(request, callback) {
+                            return this.rpcCall(updateDataTable, $root.google.cloud.chronicle.v1.UpdateDataTableRequest, $root.google.cloud.chronicle.v1.DataTable, request, callback);
+                        }, "name", { value: "UpdateDataTable" });
+    
+                        /**
+                         * Calls UpdateDataTable.
+                         * @function updateDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRequest} request UpdateDataTableRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTable>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|deleteDataTable}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef DeleteDataTableCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDataTable.
+                         * @function deleteDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRequest} request DeleteDataTableRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.DeleteDataTableCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.deleteDataTable = function deleteDataTable(request, callback) {
+                            return this.rpcCall(deleteDataTable, $root.google.cloud.chronicle.v1.DeleteDataTableRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDataTable" });
+    
+                        /**
+                         * Calls DeleteDataTable.
+                         * @function deleteDataTable
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRequest} request DeleteDataTableRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|createDataTableRow}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef CreateDataTableRowCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTableRow} [response] DataTableRow
+                         */
+    
+                        /**
+                         * Calls CreateDataTableRow.
+                         * @function createDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRowRequest} request CreateDataTableRowRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.CreateDataTableRowCallback} callback Node-style callback called with the error, if any, and DataTableRow
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.createDataTableRow = function createDataTableRow(request, callback) {
+                            return this.rpcCall(createDataTableRow, $root.google.cloud.chronicle.v1.CreateDataTableRowRequest, $root.google.cloud.chronicle.v1.DataTableRow, request, callback);
+                        }, "name", { value: "CreateDataTableRow" });
+    
+                        /**
+                         * Calls CreateDataTableRow.
+                         * @function createDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRowRequest} request CreateDataTableRowRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTableRow>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|updateDataTableRow}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef UpdateDataTableRowCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTableRow} [response] DataTableRow
+                         */
+    
+                        /**
+                         * Calls UpdateDataTableRow.
+                         * @function updateDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRowRequest} request UpdateDataTableRowRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.UpdateDataTableRowCallback} callback Node-style callback called with the error, if any, and DataTableRow
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.updateDataTableRow = function updateDataTableRow(request, callback) {
+                            return this.rpcCall(updateDataTableRow, $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest, $root.google.cloud.chronicle.v1.DataTableRow, request, callback);
+                        }, "name", { value: "UpdateDataTableRow" });
+    
+                        /**
+                         * Calls UpdateDataTableRow.
+                         * @function updateDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRowRequest} request UpdateDataTableRowRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTableRow>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|listDataTableRows}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef ListDataTableRowsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ListDataTableRowsResponse} [response] ListDataTableRowsResponse
+                         */
+    
+                        /**
+                         * Calls ListDataTableRows.
+                         * @function listDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsRequest} request ListDataTableRowsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.ListDataTableRowsCallback} callback Node-style callback called with the error, if any, and ListDataTableRowsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.listDataTableRows = function listDataTableRows(request, callback) {
+                            return this.rpcCall(listDataTableRows, $root.google.cloud.chronicle.v1.ListDataTableRowsRequest, $root.google.cloud.chronicle.v1.ListDataTableRowsResponse, request, callback);
+                        }, "name", { value: "ListDataTableRows" });
+    
+                        /**
+                         * Calls ListDataTableRows.
+                         * @function listDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsRequest} request ListDataTableRowsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ListDataTableRowsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTableRow}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef GetDataTableRowCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTableRow} [response] DataTableRow
+                         */
+    
+                        /**
+                         * Calls GetDataTableRow.
+                         * @function getDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRowRequest} request GetDataTableRowRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.GetDataTableRowCallback} callback Node-style callback called with the error, if any, and DataTableRow
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.getDataTableRow = function getDataTableRow(request, callback) {
+                            return this.rpcCall(getDataTableRow, $root.google.cloud.chronicle.v1.GetDataTableRowRequest, $root.google.cloud.chronicle.v1.DataTableRow, request, callback);
+                        }, "name", { value: "GetDataTableRow" });
+    
+                        /**
+                         * Calls GetDataTableRow.
+                         * @function getDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRowRequest} request GetDataTableRowRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTableRow>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|deleteDataTableRow}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef DeleteDataTableRowCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDataTableRow.
+                         * @function deleteDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRowRequest} request DeleteDataTableRowRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.DeleteDataTableRowCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.deleteDataTableRow = function deleteDataTableRow(request, callback) {
+                            return this.rpcCall(deleteDataTableRow, $root.google.cloud.chronicle.v1.DeleteDataTableRowRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDataTableRow" });
+    
+                        /**
+                         * Calls DeleteDataTableRow.
+                         * @function deleteDataTableRow
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRowRequest} request DeleteDataTableRowRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkCreateDataTableRows}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef BulkCreateDataTableRowsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse} [response] BulkCreateDataTableRowsResponse
+                         */
+    
+                        /**
+                         * Calls BulkCreateDataTableRows.
+                         * @function bulkCreateDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest} request BulkCreateDataTableRowsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.BulkCreateDataTableRowsCallback} callback Node-style callback called with the error, if any, and BulkCreateDataTableRowsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.bulkCreateDataTableRows = function bulkCreateDataTableRows(request, callback) {
+                            return this.rpcCall(bulkCreateDataTableRows, $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest, $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse, request, callback);
+                        }, "name", { value: "BulkCreateDataTableRows" });
+    
+                        /**
+                         * Calls BulkCreateDataTableRows.
+                         * @function bulkCreateDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest} request BulkCreateDataTableRowsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkGetDataTableRows}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef BulkGetDataTableRowsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BulkGetDataTableRowsResponse} [response] BulkGetDataTableRowsResponse
+                         */
+    
+                        /**
+                         * Calls BulkGetDataTableRows.
+                         * @function bulkGetDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest} request BulkGetDataTableRowsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.BulkGetDataTableRowsCallback} callback Node-style callback called with the error, if any, and BulkGetDataTableRowsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.bulkGetDataTableRows = function bulkGetDataTableRows(request, callback) {
+                            return this.rpcCall(bulkGetDataTableRows, $root.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest, $root.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse, request, callback);
+                        }, "name", { value: "BulkGetDataTableRows" });
+    
+                        /**
+                         * Calls BulkGetDataTableRows.
+                         * @function bulkGetDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest} request BulkGetDataTableRowsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BulkGetDataTableRowsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkReplaceDataTableRows}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef BulkReplaceDataTableRowsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse} [response] BulkReplaceDataTableRowsResponse
+                         */
+    
+                        /**
+                         * Calls BulkReplaceDataTableRows.
+                         * @function bulkReplaceDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest} request BulkReplaceDataTableRowsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.BulkReplaceDataTableRowsCallback} callback Node-style callback called with the error, if any, and BulkReplaceDataTableRowsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.bulkReplaceDataTableRows = function bulkReplaceDataTableRows(request, callback) {
+                            return this.rpcCall(bulkReplaceDataTableRows, $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest, $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse, request, callback);
+                        }, "name", { value: "BulkReplaceDataTableRows" });
+    
+                        /**
+                         * Calls BulkReplaceDataTableRows.
+                         * @function bulkReplaceDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest} request BulkReplaceDataTableRowsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkUpdateDataTableRows}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef BulkUpdateDataTableRowsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse} [response] BulkUpdateDataTableRowsResponse
+                         */
+    
+                        /**
+                         * Calls BulkUpdateDataTableRows.
+                         * @function bulkUpdateDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest} request BulkUpdateDataTableRowsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.BulkUpdateDataTableRowsCallback} callback Node-style callback called with the error, if any, and BulkUpdateDataTableRowsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.bulkUpdateDataTableRows = function bulkUpdateDataTableRows(request, callback) {
+                            return this.rpcCall(bulkUpdateDataTableRows, $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest, $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse, request, callback);
+                        }, "name", { value: "BulkUpdateDataTableRows" });
+    
+                        /**
+                         * Calls BulkUpdateDataTableRows.
+                         * @function bulkUpdateDataTableRows
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest} request BulkUpdateDataTableRowsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTableOperationErrors}.
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @typedef GetDataTableOperationErrorsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.DataTableOperationErrors} [response] DataTableOperationErrors
+                         */
+    
+                        /**
+                         * Calls GetDataTableOperationErrors.
+                         * @function getDataTableOperationErrors
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest} request GetDataTableOperationErrorsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.DataTableService.GetDataTableOperationErrorsCallback} callback Node-style callback called with the error, if any, and DataTableOperationErrors
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTableService.prototype.getDataTableOperationErrors = function getDataTableOperationErrors(request, callback) {
+                            return this.rpcCall(getDataTableOperationErrors, $root.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest, $root.google.cloud.chronicle.v1.DataTableOperationErrors, request, callback);
+                        }, "name", { value: "GetDataTableOperationErrors" });
+    
+                        /**
+                         * Calls GetDataTableOperationErrors.
+                         * @function getDataTableOperationErrors
+                         * @memberof google.cloud.chronicle.v1.DataTableService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest} request GetDataTableOperationErrorsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.DataTableOperationErrors>} Promise
+                         * @variation 2
+                         */
+    
+                        return DataTableService;
+                    })();
+    
+                    /**
+                     * DataTableUpdateSource enum.
+                     * @name google.cloud.chronicle.v1.DataTableUpdateSource
+                     * @enum {number}
+                     * @property {number} DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED=0 DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED value
+                     * @property {number} USER=1 USER value
+                     * @property {number} RULE=2 RULE value
+                     * @property {number} SEARCH=3 SEARCH value
+                     */
+                    v1.DataTableUpdateSource = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "USER"] = 1;
+                        values[valuesById[2] = "RULE"] = 2;
+                        values[valuesById[3] = "SEARCH"] = 3;
+                        return values;
+                    })();
+    
+                    v1.CreateDataTableRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface ICreateDataTableRequest
+                         * @property {string|null} [parent] CreateDataTableRequest parent
+                         * @property {google.cloud.chronicle.v1.IDataTable|null} [dataTable] CreateDataTableRequest dataTable
+                         * @property {string|null} [dataTableId] CreateDataTableRequest dataTableId
+                         */
+    
+                        /**
+                         * Constructs a new CreateDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a CreateDataTableRequest.
+                         * @implements ICreateDataTableRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRequest=} [properties] Properties to set
+                         */
+                        function CreateDataTableRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDataTableRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @instance
+                         */
+                        CreateDataTableRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDataTableRequest dataTable.
+                         * @member {google.cloud.chronicle.v1.IDataTable|null|undefined} dataTable
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @instance
+                         */
+                        CreateDataTableRequest.prototype.dataTable = null;
+    
+                        /**
+                         * CreateDataTableRequest dataTableId.
+                         * @member {string} dataTableId
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @instance
+                         */
+                        CreateDataTableRequest.prototype.dataTableId = "";
+    
+                        /**
+                         * Creates a new CreateDataTableRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRequest} CreateDataTableRequest instance
+                         */
+                        CreateDataTableRequest.create = function create(properties) {
+                            return new CreateDataTableRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRequest} message CreateDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDataTableRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.dataTable != null && Object.hasOwnProperty.call(message, "dataTable"))
+                                $root.google.cloud.chronicle.v1.DataTable.encode(message.dataTable, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.dataTableId != null && Object.hasOwnProperty.call(message, "dataTableId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataTableId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRequest} message CreateDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDataTableRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDataTableRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRequest} CreateDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDataTableRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.CreateDataTableRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataTable = $root.google.cloud.chronicle.v1.DataTable.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dataTableId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDataTableRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRequest} CreateDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDataTableRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDataTableRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDataTableRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.dataTable != null && message.hasOwnProperty("dataTable")) {
+                                var error = $root.google.cloud.chronicle.v1.DataTable.verify(message.dataTable);
+                                if (error)
+                                    return "dataTable." + error;
+                            }
+                            if (message.dataTableId != null && message.hasOwnProperty("dataTableId"))
+                                if (!$util.isString(message.dataTableId))
+                                    return "dataTableId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRequest} CreateDataTableRequest
+                         */
+                        CreateDataTableRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.CreateDataTableRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.CreateDataTableRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.dataTable != null) {
+                                if (typeof object.dataTable !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.CreateDataTableRequest.dataTable: object expected");
+                                message.dataTable = $root.google.cloud.chronicle.v1.DataTable.fromObject(object.dataTable);
+                            }
+                            if (object.dataTableId != null)
+                                message.dataTableId = String(object.dataTableId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDataTableRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.CreateDataTableRequest} message CreateDataTableRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDataTableRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.dataTable = null;
+                                object.dataTableId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.dataTable != null && message.hasOwnProperty("dataTable"))
+                                object.dataTable = $root.google.cloud.chronicle.v1.DataTable.toObject(message.dataTable, options);
+                            if (message.dataTableId != null && message.hasOwnProperty("dataTableId"))
+                                object.dataTableId = message.dataTableId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDataTableRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDataTableRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDataTableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDataTableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.CreateDataTableRequest";
+                        };
+    
+                        return CreateDataTableRequest;
+                    })();
+    
+                    v1.GetDataTableRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IGetDataTableRequest
+                         * @property {string|null} [name] GetDataTableRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a GetDataTableRequest.
+                         * @implements IGetDataTableRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRequest=} [properties] Properties to set
+                         */
+                        function GetDataTableRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDataTableRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @instance
+                         */
+                        GetDataTableRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDataTableRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRequest} GetDataTableRequest instance
+                         */
+                        GetDataTableRequest.create = function create(properties) {
+                            return new GetDataTableRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRequest} message GetDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataTableRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRequest} message GetDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataTableRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDataTableRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRequest} GetDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataTableRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.GetDataTableRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDataTableRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRequest} GetDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataTableRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDataTableRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDataTableRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRequest} GetDataTableRequest
+                         */
+                        GetDataTableRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.GetDataTableRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.GetDataTableRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDataTableRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.GetDataTableRequest} message GetDataTableRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDataTableRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDataTableRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDataTableRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDataTableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDataTableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.GetDataTableRequest";
+                        };
+    
+                        return GetDataTableRequest;
+                    })();
+    
+                    v1.UpdateDataTableRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IUpdateDataTableRequest
+                         * @property {google.cloud.chronicle.v1.IDataTable|null} [dataTable] UpdateDataTableRequest dataTable
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDataTableRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents an UpdateDataTableRequest.
+                         * @implements IUpdateDataTableRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRequest=} [properties] Properties to set
+                         */
+                        function UpdateDataTableRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDataTableRequest dataTable.
+                         * @member {google.cloud.chronicle.v1.IDataTable|null|undefined} dataTable
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @instance
+                         */
+                        UpdateDataTableRequest.prototype.dataTable = null;
+    
+                        /**
+                         * UpdateDataTableRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @instance
+                         */
+                        UpdateDataTableRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateDataTableRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRequest} UpdateDataTableRequest instance
+                         */
+                        UpdateDataTableRequest.create = function create(properties) {
+                            return new UpdateDataTableRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRequest} message UpdateDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDataTableRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTable != null && Object.hasOwnProperty.call(message, "dataTable"))
+                                $root.google.cloud.chronicle.v1.DataTable.encode(message.dataTable, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRequest} message UpdateDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDataTableRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDataTableRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRequest} UpdateDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDataTableRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.UpdateDataTableRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataTable = $root.google.cloud.chronicle.v1.DataTable.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDataTableRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRequest} UpdateDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDataTableRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDataTableRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDataTableRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTable != null && message.hasOwnProperty("dataTable")) {
+                                var error = $root.google.cloud.chronicle.v1.DataTable.verify(message.dataTable);
+                                if (error)
+                                    return "dataTable." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRequest} UpdateDataTableRequest
+                         */
+                        UpdateDataTableRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.UpdateDataTableRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.UpdateDataTableRequest();
+                            if (object.dataTable != null) {
+                                if (typeof object.dataTable !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateDataTableRequest.dataTable: object expected");
+                                message.dataTable = $root.google.cloud.chronicle.v1.DataTable.fromObject(object.dataTable);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateDataTableRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDataTableRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.UpdateDataTableRequest} message UpdateDataTableRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDataTableRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataTable = null;
+                                object.updateMask = null;
+                            }
+                            if (message.dataTable != null && message.hasOwnProperty("dataTable"))
+                                object.dataTable = $root.google.cloud.chronicle.v1.DataTable.toObject(message.dataTable, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDataTableRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDataTableRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateDataTableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateDataTableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.UpdateDataTableRequest";
+                        };
+    
+                        return UpdateDataTableRequest;
+                    })();
+    
+                    v1.ListDataTablesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDataTablesRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListDataTablesRequest
+                         * @property {string|null} [parent] ListDataTablesRequest parent
+                         * @property {number|null} [pageSize] ListDataTablesRequest pageSize
+                         * @property {string|null} [pageToken] ListDataTablesRequest pageToken
+                         * @property {string|null} [orderBy] ListDataTablesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListDataTablesRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListDataTablesRequest.
+                         * @implements IListDataTablesRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListDataTablesRequest=} [properties] Properties to set
+                         */
+                        function ListDataTablesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDataTablesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @instance
+                         */
+                        ListDataTablesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDataTablesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @instance
+                         */
+                        ListDataTablesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDataTablesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @instance
+                         */
+                        ListDataTablesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListDataTablesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @instance
+                         */
+                        ListDataTablesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListDataTablesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTablesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesRequest} ListDataTablesRequest instance
+                         */
+                        ListDataTablesRequest.create = function create(properties) {
+                            return new ListDataTablesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTablesRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTablesRequest} message ListDataTablesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTablesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTablesRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTablesRequest} message ListDataTablesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTablesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDataTablesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesRequest} ListDataTablesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTablesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListDataTablesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDataTablesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesRequest} ListDataTablesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTablesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDataTablesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDataTablesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDataTablesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesRequest} ListDataTablesRequest
+                         */
+                        ListDataTablesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListDataTablesRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.ListDataTablesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDataTablesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListDataTablesRequest} message ListDataTablesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDataTablesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDataTablesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDataTablesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDataTablesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDataTablesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListDataTablesRequest";
+                        };
+    
+                        return ListDataTablesRequest;
+                    })();
+    
+                    v1.DeleteDataTableRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDeleteDataTableRequest
+                         * @property {string|null} [name] DeleteDataTableRequest name
+                         * @property {boolean|null} [force] DeleteDataTableRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDataTableRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DeleteDataTableRequest.
+                         * @implements IDeleteDataTableRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRequest=} [properties] Properties to set
+                         */
+                        function DeleteDataTableRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDataTableRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @instance
+                         */
+                        DeleteDataTableRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteDataTableRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @instance
+                         */
+                        DeleteDataTableRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteDataTableRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRequest} DeleteDataTableRequest instance
+                         */
+                        DeleteDataTableRequest.create = function create(properties) {
+                            return new DeleteDataTableRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRequest} message DeleteDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDataTableRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRequest} message DeleteDataTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDataTableRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDataTableRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRequest} DeleteDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDataTableRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DeleteDataTableRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDataTableRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRequest} DeleteDataTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDataTableRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDataTableRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDataTableRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRequest} DeleteDataTableRequest
+                         */
+                        DeleteDataTableRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DeleteDataTableRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DeleteDataTableRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDataTableRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DeleteDataTableRequest} message DeleteDataTableRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDataTableRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDataTableRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDataTableRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDataTableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDataTableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DeleteDataTableRequest";
+                        };
+    
+                        return DeleteDataTableRequest;
+                    })();
+    
+                    v1.ListDataTablesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDataTablesResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListDataTablesResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTable>|null} [dataTables] ListDataTablesResponse dataTables
+                         * @property {string|null} [nextPageToken] ListDataTablesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDataTablesResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListDataTablesResponse.
+                         * @implements IListDataTablesResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListDataTablesResponse=} [properties] Properties to set
+                         */
+                        function ListDataTablesResponse(properties) {
+                            this.dataTables = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDataTablesResponse dataTables.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTable>} dataTables
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @instance
+                         */
+                        ListDataTablesResponse.prototype.dataTables = $util.emptyArray;
+    
+                        /**
+                         * ListDataTablesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @instance
+                         */
+                        ListDataTablesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDataTablesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTablesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesResponse} ListDataTablesResponse instance
+                         */
+                        ListDataTablesResponse.create = function create(properties) {
+                            return new ListDataTablesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTablesResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTablesResponse} message ListDataTablesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTablesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTables != null && message.dataTables.length)
+                                for (var i = 0; i < message.dataTables.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTable.encode(message.dataTables[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTablesResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTablesResponse} message ListDataTablesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTablesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDataTablesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesResponse} ListDataTablesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTablesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListDataTablesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTables && message.dataTables.length))
+                                            message.dataTables = [];
+                                        message.dataTables.push($root.google.cloud.chronicle.v1.DataTable.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDataTablesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesResponse} ListDataTablesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTablesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDataTablesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDataTablesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTables != null && message.hasOwnProperty("dataTables")) {
+                                if (!Array.isArray(message.dataTables))
+                                    return "dataTables: array expected";
+                                for (var i = 0; i < message.dataTables.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTable.verify(message.dataTables[i]);
+                                    if (error)
+                                        return "dataTables." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDataTablesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListDataTablesResponse} ListDataTablesResponse
+                         */
+                        ListDataTablesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListDataTablesResponse)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.ListDataTablesResponse();
+                            if (object.dataTables) {
+                                if (!Array.isArray(object.dataTables))
+                                    throw TypeError(".google.cloud.chronicle.v1.ListDataTablesResponse.dataTables: array expected");
+                                message.dataTables = [];
+                                for (var i = 0; i < object.dataTables.length; ++i) {
+                                    if (typeof object.dataTables[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.ListDataTablesResponse.dataTables: object expected");
+                                    message.dataTables[i] = $root.google.cloud.chronicle.v1.DataTable.fromObject(object.dataTables[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDataTablesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListDataTablesResponse} message ListDataTablesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDataTablesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTables = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.dataTables && message.dataTables.length) {
+                                object.dataTables = [];
+                                for (var j = 0; j < message.dataTables.length; ++j)
+                                    object.dataTables[j] = $root.google.cloud.chronicle.v1.DataTable.toObject(message.dataTables[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDataTablesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDataTablesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDataTablesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListDataTablesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDataTablesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListDataTablesResponse";
+                        };
+    
+                        return ListDataTablesResponse;
+                    })();
+    
+                    v1.CreateDataTableRowRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface ICreateDataTableRowRequest
+                         * @property {string|null} [parent] CreateDataTableRowRequest parent
+                         * @property {google.cloud.chronicle.v1.IDataTableRow|null} [dataTableRow] CreateDataTableRowRequest dataTableRow
+                         */
+    
+                        /**
+                         * Constructs a new CreateDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a CreateDataTableRowRequest.
+                         * @implements ICreateDataTableRowRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRowRequest=} [properties] Properties to set
+                         */
+                        function CreateDataTableRowRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDataTableRowRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @instance
+                         */
+                        CreateDataTableRowRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDataTableRowRequest dataTableRow.
+                         * @member {google.cloud.chronicle.v1.IDataTableRow|null|undefined} dataTableRow
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @instance
+                         */
+                        CreateDataTableRowRequest.prototype.dataTableRow = null;
+    
+                        /**
+                         * Creates a new CreateDataTableRowRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRowRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRowRequest} CreateDataTableRowRequest instance
+                         */
+                        CreateDataTableRowRequest.create = function create(properties) {
+                            return new CreateDataTableRowRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRowRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRowRequest} message CreateDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDataTableRowRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.dataTableRow != null && Object.hasOwnProperty.call(message, "dataTableRow"))
+                                $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRow, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRowRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ICreateDataTableRowRequest} message CreateDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDataTableRowRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDataTableRowRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRowRequest} CreateDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDataTableRowRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.CreateDataTableRowRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataTableRow = $root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDataTableRowRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRowRequest} CreateDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDataTableRowRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDataTableRowRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDataTableRowRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.dataTableRow != null && message.hasOwnProperty("dataTableRow")) {
+                                var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRow);
+                                if (error)
+                                    return "dataTableRow." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.CreateDataTableRowRequest} CreateDataTableRowRequest
+                         */
+                        CreateDataTableRowRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.CreateDataTableRowRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.CreateDataTableRowRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.dataTableRow != null) {
+                                if (typeof object.dataTableRow !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.CreateDataTableRowRequest.dataTableRow: object expected");
+                                message.dataTableRow = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRow);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDataTableRowRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.CreateDataTableRowRequest} message CreateDataTableRowRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDataTableRowRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.dataTableRow = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.dataTableRow != null && message.hasOwnProperty("dataTableRow"))
+                                object.dataTableRow = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRow, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDataTableRowRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDataTableRowRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDataTableRowRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.CreateDataTableRowRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDataTableRowRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.CreateDataTableRowRequest";
+                        };
+    
+                        return CreateDataTableRowRequest;
+                    })();
+    
+                    v1.UpdateDataTableRowRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IUpdateDataTableRowRequest
+                         * @property {google.cloud.chronicle.v1.IDataTableRow|null} [dataTableRow] UpdateDataTableRowRequest dataTableRow
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDataTableRowRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents an UpdateDataTableRowRequest.
+                         * @implements IUpdateDataTableRowRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRowRequest=} [properties] Properties to set
+                         */
+                        function UpdateDataTableRowRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDataTableRowRequest dataTableRow.
+                         * @member {google.cloud.chronicle.v1.IDataTableRow|null|undefined} dataTableRow
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @instance
+                         */
+                        UpdateDataTableRowRequest.prototype.dataTableRow = null;
+    
+                        /**
+                         * UpdateDataTableRowRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @instance
+                         */
+                        UpdateDataTableRowRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateDataTableRowRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRowRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRowRequest} UpdateDataTableRowRequest instance
+                         */
+                        UpdateDataTableRowRequest.create = function create(properties) {
+                            return new UpdateDataTableRowRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRowRequest} message UpdateDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDataTableRowRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTableRow != null && Object.hasOwnProperty.call(message, "dataTableRow"))
+                                $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRow, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateDataTableRowRequest} message UpdateDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDataTableRowRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDataTableRowRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRowRequest} UpdateDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDataTableRowRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataTableRow = $root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDataTableRowRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRowRequest} UpdateDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDataTableRowRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDataTableRowRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDataTableRowRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTableRow != null && message.hasOwnProperty("dataTableRow")) {
+                                var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRow);
+                                if (error)
+                                    return "dataTableRow." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.UpdateDataTableRowRequest} UpdateDataTableRowRequest
+                         */
+                        UpdateDataTableRowRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest();
+                            if (object.dataTableRow != null) {
+                                if (typeof object.dataTableRow !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateDataTableRowRequest.dataTableRow: object expected");
+                                message.dataTableRow = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRow);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateDataTableRowRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDataTableRowRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.UpdateDataTableRowRequest} message UpdateDataTableRowRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDataTableRowRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataTableRow = null;
+                                object.updateMask = null;
+                            }
+                            if (message.dataTableRow != null && message.hasOwnProperty("dataTableRow"))
+                                object.dataTableRow = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRow, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDataTableRowRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDataTableRowRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateDataTableRowRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.UpdateDataTableRowRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateDataTableRowRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.UpdateDataTableRowRequest";
+                        };
+    
+                        return UpdateDataTableRowRequest;
+                    })();
+    
+                    v1.ListDataTableRowsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListDataTableRowsRequest
+                         * @property {string|null} [parent] ListDataTableRowsRequest parent
+                         * @property {number|null} [pageSize] ListDataTableRowsRequest pageSize
+                         * @property {string|null} [pageToken] ListDataTableRowsRequest pageToken
+                         * @property {string|null} [orderBy] ListDataTableRowsRequest orderBy
+                         * @property {string|null} [filter] ListDataTableRowsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListDataTableRowsRequest.
+                         * @implements IListDataTableRowsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsRequest=} [properties] Properties to set
+                         */
+                        function ListDataTableRowsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDataTableRowsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @instance
+                         */
+                        ListDataTableRowsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDataTableRowsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @instance
+                         */
+                        ListDataTableRowsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDataTableRowsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @instance
+                         */
+                        ListDataTableRowsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListDataTableRowsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @instance
+                         */
+                        ListDataTableRowsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListDataTableRowsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @instance
+                         */
+                        ListDataTableRowsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListDataTableRowsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsRequest} ListDataTableRowsRequest instance
+                         */
+                        ListDataTableRowsRequest.create = function create(properties) {
+                            return new ListDataTableRowsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsRequest} message ListDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTableRowsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsRequest} message ListDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTableRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDataTableRowsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsRequest} ListDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTableRowsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListDataTableRowsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsRequest} ListDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTableRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDataTableRowsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDataTableRowsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsRequest} ListDataTableRowsRequest
+                         */
+                        ListDataTableRowsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListDataTableRowsRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.ListDataTableRowsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDataTableRowsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListDataTableRowsRequest} message ListDataTableRowsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDataTableRowsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDataTableRowsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDataTableRowsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDataTableRowsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDataTableRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListDataTableRowsRequest";
+                        };
+    
+                        return ListDataTableRowsRequest;
+                    })();
+    
+                    v1.ListDataTableRowsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListDataTableRowsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTableRow>|null} [dataTableRows] ListDataTableRowsResponse dataTableRows
+                         * @property {string|null} [nextPageToken] ListDataTableRowsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListDataTableRowsResponse.
+                         * @implements IListDataTableRowsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsResponse=} [properties] Properties to set
+                         */
+                        function ListDataTableRowsResponse(properties) {
+                            this.dataTableRows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDataTableRowsResponse dataTableRows.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTableRow>} dataTableRows
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @instance
+                         */
+                        ListDataTableRowsResponse.prototype.dataTableRows = $util.emptyArray;
+    
+                        /**
+                         * ListDataTableRowsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @instance
+                         */
+                        ListDataTableRowsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDataTableRowsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsResponse} ListDataTableRowsResponse instance
+                         */
+                        ListDataTableRowsResponse.create = function create(properties) {
+                            return new ListDataTableRowsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsResponse} message ListDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTableRowsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTableRows != null && message.dataTableRows.length)
+                                for (var i = 0; i < message.dataTableRows.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListDataTableRowsResponse} message ListDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDataTableRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDataTableRowsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsResponse} ListDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTableRowsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListDataTableRowsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTableRows && message.dataTableRows.length))
+                                            message.dataTableRows = [];
+                                        message.dataTableRows.push($root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsResponse} ListDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDataTableRowsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDataTableRowsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDataTableRowsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTableRows != null && message.hasOwnProperty("dataTableRows")) {
+                                if (!Array.isArray(message.dataTableRows))
+                                    return "dataTableRows: array expected";
+                                for (var i = 0; i < message.dataTableRows.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRows[i]);
+                                    if (error)
+                                        return "dataTableRows." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListDataTableRowsResponse} ListDataTableRowsResponse
+                         */
+                        ListDataTableRowsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListDataTableRowsResponse)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.ListDataTableRowsResponse();
+                            if (object.dataTableRows) {
+                                if (!Array.isArray(object.dataTableRows))
+                                    throw TypeError(".google.cloud.chronicle.v1.ListDataTableRowsResponse.dataTableRows: array expected");
+                                message.dataTableRows = [];
+                                for (var i = 0; i < object.dataTableRows.length; ++i) {
+                                    if (typeof object.dataTableRows[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.ListDataTableRowsResponse.dataTableRows: object expected");
+                                    message.dataTableRows[i] = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRows[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDataTableRowsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListDataTableRowsResponse} message ListDataTableRowsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDataTableRowsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTableRows = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.dataTableRows && message.dataTableRows.length) {
+                                object.dataTableRows = [];
+                                for (var j = 0; j < message.dataTableRows.length; ++j)
+                                    object.dataTableRows[j] = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRows[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDataTableRowsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDataTableRowsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDataTableRowsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListDataTableRowsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDataTableRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListDataTableRowsResponse";
+                        };
+    
+                        return ListDataTableRowsResponse;
+                    })();
+    
+                    v1.GetDataTableRowRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IGetDataTableRowRequest
+                         * @property {string|null} [name] GetDataTableRowRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a GetDataTableRowRequest.
+                         * @implements IGetDataTableRowRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRowRequest=} [properties] Properties to set
+                         */
+                        function GetDataTableRowRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDataTableRowRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @instance
+                         */
+                        GetDataTableRowRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDataTableRowRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRowRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRowRequest} GetDataTableRowRequest instance
+                         */
+                        GetDataTableRowRequest.create = function create(properties) {
+                            return new GetDataTableRowRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRowRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRowRequest} message GetDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataTableRowRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRowRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableRowRequest} message GetDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataTableRowRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDataTableRowRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRowRequest} GetDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataTableRowRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.GetDataTableRowRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDataTableRowRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRowRequest} GetDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataTableRowRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDataTableRowRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDataTableRowRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.GetDataTableRowRequest} GetDataTableRowRequest
+                         */
+                        GetDataTableRowRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.GetDataTableRowRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.GetDataTableRowRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDataTableRowRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.GetDataTableRowRequest} message GetDataTableRowRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDataTableRowRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDataTableRowRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDataTableRowRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDataTableRowRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.GetDataTableRowRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDataTableRowRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.GetDataTableRowRequest";
+                        };
+    
+                        return GetDataTableRowRequest;
+                    })();
+    
+                    v1.DeleteDataTableRowRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDeleteDataTableRowRequest
+                         * @property {string|null} [name] DeleteDataTableRowRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDataTableRowRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DeleteDataTableRowRequest.
+                         * @implements IDeleteDataTableRowRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRowRequest=} [properties] Properties to set
+                         */
+                        function DeleteDataTableRowRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDataTableRowRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @instance
+                         */
+                        DeleteDataTableRowRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteDataTableRowRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRowRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRowRequest} DeleteDataTableRowRequest instance
+                         */
+                        DeleteDataTableRowRequest.create = function create(properties) {
+                            return new DeleteDataTableRowRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRowRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRowRequest} message DeleteDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDataTableRowRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRowRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDeleteDataTableRowRequest} message DeleteDataTableRowRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDataTableRowRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDataTableRowRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRowRequest} DeleteDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDataTableRowRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DeleteDataTableRowRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDataTableRowRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRowRequest} DeleteDataTableRowRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDataTableRowRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDataTableRowRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDataTableRowRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DeleteDataTableRowRequest} DeleteDataTableRowRequest
+                         */
+                        DeleteDataTableRowRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DeleteDataTableRowRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DeleteDataTableRowRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDataTableRowRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DeleteDataTableRowRequest} message DeleteDataTableRowRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDataTableRowRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDataTableRowRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDataTableRowRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDataTableRowRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DeleteDataTableRowRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDataTableRowRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DeleteDataTableRowRequest";
+                        };
+    
+                        return DeleteDataTableRowRequest;
+                    })();
+    
+                    v1.BulkCreateDataTableRowsRequest = (function() {
+    
+                        /**
+                         * Properties of a BulkCreateDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkCreateDataTableRowsRequest
+                         * @property {string|null} [parent] BulkCreateDataTableRowsRequest parent
+                         * @property {Array.<google.cloud.chronicle.v1.ICreateDataTableRowRequest>|null} [requests] BulkCreateDataTableRowsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BulkCreateDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkCreateDataTableRowsRequest.
+                         * @implements IBulkCreateDataTableRowsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest=} [properties] Properties to set
+                         */
+                        function BulkCreateDataTableRowsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkCreateDataTableRowsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkCreateDataTableRowsRequest.prototype.parent = "";
+    
+                        /**
+                         * BulkCreateDataTableRowsRequest requests.
+                         * @member {Array.<google.cloud.chronicle.v1.ICreateDataTableRowRequest>} requests
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkCreateDataTableRowsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkCreateDataTableRowsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest} BulkCreateDataTableRowsRequest instance
+                         */
+                        BulkCreateDataTableRowsRequest.create = function create(properties) {
+                            return new BulkCreateDataTableRowsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkCreateDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest} message BulkCreateDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkCreateDataTableRowsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkCreateDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest} message BulkCreateDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkCreateDataTableRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkCreateDataTableRowsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest} BulkCreateDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkCreateDataTableRowsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.cloud.chronicle.v1.CreateDataTableRowRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkCreateDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest} BulkCreateDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkCreateDataTableRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkCreateDataTableRowsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkCreateDataTableRowsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkCreateDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest} BulkCreateDataTableRowsRequest
+                         */
+                        BulkCreateDataTableRowsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkCreateDataTableRowsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest} message BulkCreateDataTableRowsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkCreateDataTableRowsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkCreateDataTableRowsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkCreateDataTableRowsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkCreateDataTableRowsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkCreateDataTableRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest";
+                        };
+    
+                        return BulkCreateDataTableRowsRequest;
+                    })();
+    
+                    v1.BulkCreateDataTableRowsResponse = (function() {
+    
+                        /**
+                         * Properties of a BulkCreateDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkCreateDataTableRowsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTableRow>|null} [dataTableRows] BulkCreateDataTableRowsResponse dataTableRows
+                         */
+    
+                        /**
+                         * Constructs a new BulkCreateDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkCreateDataTableRowsResponse.
+                         * @implements IBulkCreateDataTableRowsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse=} [properties] Properties to set
+                         */
+                        function BulkCreateDataTableRowsResponse(properties) {
+                            this.dataTableRows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkCreateDataTableRowsResponse dataTableRows.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTableRow>} dataTableRows
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @instance
+                         */
+                        BulkCreateDataTableRowsResponse.prototype.dataTableRows = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkCreateDataTableRowsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse} BulkCreateDataTableRowsResponse instance
+                         */
+                        BulkCreateDataTableRowsResponse.create = function create(properties) {
+                            return new BulkCreateDataTableRowsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkCreateDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse} message BulkCreateDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkCreateDataTableRowsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTableRows != null && message.dataTableRows.length)
+                                for (var i = 0; i < message.dataTableRows.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkCreateDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse} message BulkCreateDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkCreateDataTableRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkCreateDataTableRowsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse} BulkCreateDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkCreateDataTableRowsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTableRows && message.dataTableRows.length))
+                                            message.dataTableRows = [];
+                                        message.dataTableRows.push($root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkCreateDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse} BulkCreateDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkCreateDataTableRowsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkCreateDataTableRowsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkCreateDataTableRowsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTableRows != null && message.hasOwnProperty("dataTableRows")) {
+                                if (!Array.isArray(message.dataTableRows))
+                                    return "dataTableRows: array expected";
+                                for (var i = 0; i < message.dataTableRows.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRows[i]);
+                                    if (error)
+                                        return "dataTableRows." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkCreateDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse} BulkCreateDataTableRowsResponse
+                         */
+                        BulkCreateDataTableRowsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse();
+                            if (object.dataTableRows) {
+                                if (!Array.isArray(object.dataTableRows))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.dataTableRows: array expected");
+                                message.dataTableRows = [];
+                                for (var i = 0; i < object.dataTableRows.length; ++i) {
+                                    if (typeof object.dataTableRows[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.dataTableRows: object expected");
+                                    message.dataTableRows[i] = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRows[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkCreateDataTableRowsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse} message BulkCreateDataTableRowsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkCreateDataTableRowsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTableRows = [];
+                            if (message.dataTableRows && message.dataTableRows.length) {
+                                object.dataTableRows = [];
+                                for (var j = 0; j < message.dataTableRows.length; ++j)
+                                    object.dataTableRows[j] = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRows[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkCreateDataTableRowsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkCreateDataTableRowsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkCreateDataTableRowsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkCreateDataTableRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse";
+                        };
+    
+                        return BulkCreateDataTableRowsResponse;
+                    })();
+    
+                    v1.BulkGetDataTableRowsRequest = (function() {
+    
+                        /**
+                         * Properties of a BulkGetDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkGetDataTableRowsRequest
+                         * @property {string|null} [parent] BulkGetDataTableRowsRequest parent
+                         * @property {Array.<google.cloud.chronicle.v1.IGetDataTableRowRequest>|null} [requests] BulkGetDataTableRowsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BulkGetDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkGetDataTableRowsRequest.
+                         * @implements IBulkGetDataTableRowsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest=} [properties] Properties to set
+                         */
+                        function BulkGetDataTableRowsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkGetDataTableRowsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkGetDataTableRowsRequest.prototype.parent = "";
+    
+                        /**
+                         * BulkGetDataTableRowsRequest requests.
+                         * @member {Array.<google.cloud.chronicle.v1.IGetDataTableRowRequest>} requests
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkGetDataTableRowsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkGetDataTableRowsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsRequest} BulkGetDataTableRowsRequest instance
+                         */
+                        BulkGetDataTableRowsRequest.create = function create(properties) {
+                            return new BulkGetDataTableRowsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkGetDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest} message BulkGetDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkGetDataTableRowsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.cloud.chronicle.v1.GetDataTableRowRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkGetDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest} message BulkGetDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkGetDataTableRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkGetDataTableRowsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsRequest} BulkGetDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkGetDataTableRowsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.cloud.chronicle.v1.GetDataTableRowRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkGetDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsRequest} BulkGetDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkGetDataTableRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkGetDataTableRowsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkGetDataTableRowsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.GetDataTableRowRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkGetDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsRequest} BulkGetDataTableRowsRequest
+                         */
+                        BulkGetDataTableRowsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.cloud.chronicle.v1.GetDataTableRowRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkGetDataTableRowsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkGetDataTableRowsRequest} message BulkGetDataTableRowsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkGetDataTableRowsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.cloud.chronicle.v1.GetDataTableRowRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkGetDataTableRowsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkGetDataTableRowsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkGetDataTableRowsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkGetDataTableRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkGetDataTableRowsRequest";
+                        };
+    
+                        return BulkGetDataTableRowsRequest;
+                    })();
+    
+                    v1.BulkGetDataTableRowsResponse = (function() {
+    
+                        /**
+                         * Properties of a BulkGetDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkGetDataTableRowsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTableRow>|null} [dataTableRows] BulkGetDataTableRowsResponse dataTableRows
+                         */
+    
+                        /**
+                         * Constructs a new BulkGetDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkGetDataTableRowsResponse.
+                         * @implements IBulkGetDataTableRowsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse=} [properties] Properties to set
+                         */
+                        function BulkGetDataTableRowsResponse(properties) {
+                            this.dataTableRows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkGetDataTableRowsResponse dataTableRows.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTableRow>} dataTableRows
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @instance
+                         */
+                        BulkGetDataTableRowsResponse.prototype.dataTableRows = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkGetDataTableRowsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsResponse} BulkGetDataTableRowsResponse instance
+                         */
+                        BulkGetDataTableRowsResponse.create = function create(properties) {
+                            return new BulkGetDataTableRowsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkGetDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse} message BulkGetDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkGetDataTableRowsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTableRows != null && message.dataTableRows.length)
+                                for (var i = 0; i < message.dataTableRows.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkGetDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse} message BulkGetDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkGetDataTableRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkGetDataTableRowsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsResponse} BulkGetDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkGetDataTableRowsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTableRows && message.dataTableRows.length))
+                                            message.dataTableRows = [];
+                                        message.dataTableRows.push($root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkGetDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsResponse} BulkGetDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkGetDataTableRowsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkGetDataTableRowsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkGetDataTableRowsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTableRows != null && message.hasOwnProperty("dataTableRows")) {
+                                if (!Array.isArray(message.dataTableRows))
+                                    return "dataTableRows: array expected";
+                                for (var i = 0; i < message.dataTableRows.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRows[i]);
+                                    if (error)
+                                        return "dataTableRows." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkGetDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkGetDataTableRowsResponse} BulkGetDataTableRowsResponse
+                         */
+                        BulkGetDataTableRowsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse();
+                            if (object.dataTableRows) {
+                                if (!Array.isArray(object.dataTableRows))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.dataTableRows: array expected");
+                                message.dataTableRows = [];
+                                for (var i = 0; i < object.dataTableRows.length; ++i) {
+                                    if (typeof object.dataTableRows[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.dataTableRows: object expected");
+                                    message.dataTableRows[i] = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRows[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkGetDataTableRowsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkGetDataTableRowsResponse} message BulkGetDataTableRowsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkGetDataTableRowsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTableRows = [];
+                            if (message.dataTableRows && message.dataTableRows.length) {
+                                object.dataTableRows = [];
+                                for (var j = 0; j < message.dataTableRows.length; ++j)
+                                    object.dataTableRows[j] = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRows[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkGetDataTableRowsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkGetDataTableRowsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkGetDataTableRowsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkGetDataTableRowsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkGetDataTableRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkGetDataTableRowsResponse";
+                        };
+    
+                        return BulkGetDataTableRowsResponse;
+                    })();
+    
+                    v1.BulkReplaceDataTableRowsRequest = (function() {
+    
+                        /**
+                         * Properties of a BulkReplaceDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkReplaceDataTableRowsRequest
+                         * @property {string|null} [parent] BulkReplaceDataTableRowsRequest parent
+                         * @property {Array.<google.cloud.chronicle.v1.ICreateDataTableRowRequest>|null} [requests] BulkReplaceDataTableRowsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BulkReplaceDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkReplaceDataTableRowsRequest.
+                         * @implements IBulkReplaceDataTableRowsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest=} [properties] Properties to set
+                         */
+                        function BulkReplaceDataTableRowsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkReplaceDataTableRowsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkReplaceDataTableRowsRequest.prototype.parent = "";
+    
+                        /**
+                         * BulkReplaceDataTableRowsRequest requests.
+                         * @member {Array.<google.cloud.chronicle.v1.ICreateDataTableRowRequest>} requests
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkReplaceDataTableRowsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkReplaceDataTableRowsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest} BulkReplaceDataTableRowsRequest instance
+                         */
+                        BulkReplaceDataTableRowsRequest.create = function create(properties) {
+                            return new BulkReplaceDataTableRowsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkReplaceDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest} message BulkReplaceDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkReplaceDataTableRowsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkReplaceDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest} message BulkReplaceDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkReplaceDataTableRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkReplaceDataTableRowsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest} BulkReplaceDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkReplaceDataTableRowsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.cloud.chronicle.v1.CreateDataTableRowRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkReplaceDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest} BulkReplaceDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkReplaceDataTableRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkReplaceDataTableRowsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkReplaceDataTableRowsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkReplaceDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest} BulkReplaceDataTableRowsRequest
+                         */
+                        BulkReplaceDataTableRowsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkReplaceDataTableRowsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest} message BulkReplaceDataTableRowsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkReplaceDataTableRowsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.cloud.chronicle.v1.CreateDataTableRowRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkReplaceDataTableRowsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkReplaceDataTableRowsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkReplaceDataTableRowsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkReplaceDataTableRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest";
+                        };
+    
+                        return BulkReplaceDataTableRowsRequest;
+                    })();
+    
+                    v1.BulkReplaceDataTableRowsResponse = (function() {
+    
+                        /**
+                         * Properties of a BulkReplaceDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkReplaceDataTableRowsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTableRow>|null} [dataTableRows] BulkReplaceDataTableRowsResponse dataTableRows
+                         */
+    
+                        /**
+                         * Constructs a new BulkReplaceDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkReplaceDataTableRowsResponse.
+                         * @implements IBulkReplaceDataTableRowsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse=} [properties] Properties to set
+                         */
+                        function BulkReplaceDataTableRowsResponse(properties) {
+                            this.dataTableRows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkReplaceDataTableRowsResponse dataTableRows.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTableRow>} dataTableRows
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @instance
+                         */
+                        BulkReplaceDataTableRowsResponse.prototype.dataTableRows = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkReplaceDataTableRowsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse} BulkReplaceDataTableRowsResponse instance
+                         */
+                        BulkReplaceDataTableRowsResponse.create = function create(properties) {
+                            return new BulkReplaceDataTableRowsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkReplaceDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse} message BulkReplaceDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkReplaceDataTableRowsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTableRows != null && message.dataTableRows.length)
+                                for (var i = 0; i < message.dataTableRows.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkReplaceDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse} message BulkReplaceDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkReplaceDataTableRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkReplaceDataTableRowsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse} BulkReplaceDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkReplaceDataTableRowsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTableRows && message.dataTableRows.length))
+                                            message.dataTableRows = [];
+                                        message.dataTableRows.push($root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkReplaceDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse} BulkReplaceDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkReplaceDataTableRowsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkReplaceDataTableRowsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkReplaceDataTableRowsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTableRows != null && message.hasOwnProperty("dataTableRows")) {
+                                if (!Array.isArray(message.dataTableRows))
+                                    return "dataTableRows: array expected";
+                                for (var i = 0; i < message.dataTableRows.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRows[i]);
+                                    if (error)
+                                        return "dataTableRows." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkReplaceDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse} BulkReplaceDataTableRowsResponse
+                         */
+                        BulkReplaceDataTableRowsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse();
+                            if (object.dataTableRows) {
+                                if (!Array.isArray(object.dataTableRows))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.dataTableRows: array expected");
+                                message.dataTableRows = [];
+                                for (var i = 0; i < object.dataTableRows.length; ++i) {
+                                    if (typeof object.dataTableRows[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.dataTableRows: object expected");
+                                    message.dataTableRows[i] = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRows[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkReplaceDataTableRowsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse} message BulkReplaceDataTableRowsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkReplaceDataTableRowsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTableRows = [];
+                            if (message.dataTableRows && message.dataTableRows.length) {
+                                object.dataTableRows = [];
+                                for (var j = 0; j < message.dataTableRows.length; ++j)
+                                    object.dataTableRows[j] = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRows[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkReplaceDataTableRowsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkReplaceDataTableRowsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkReplaceDataTableRowsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkReplaceDataTableRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse";
+                        };
+    
+                        return BulkReplaceDataTableRowsResponse;
+                    })();
+    
+                    v1.BulkUpdateDataTableRowsRequest = (function() {
+    
+                        /**
+                         * Properties of a BulkUpdateDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkUpdateDataTableRowsRequest
+                         * @property {string|null} [parent] BulkUpdateDataTableRowsRequest parent
+                         * @property {Array.<google.cloud.chronicle.v1.IUpdateDataTableRowRequest>|null} [requests] BulkUpdateDataTableRowsRequest requests
+                         */
+    
+                        /**
+                         * Constructs a new BulkUpdateDataTableRowsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkUpdateDataTableRowsRequest.
+                         * @implements IBulkUpdateDataTableRowsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest=} [properties] Properties to set
+                         */
+                        function BulkUpdateDataTableRowsRequest(properties) {
+                            this.requests = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkUpdateDataTableRowsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkUpdateDataTableRowsRequest.prototype.parent = "";
+    
+                        /**
+                         * BulkUpdateDataTableRowsRequest requests.
+                         * @member {Array.<google.cloud.chronicle.v1.IUpdateDataTableRowRequest>} requests
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @instance
+                         */
+                        BulkUpdateDataTableRowsRequest.prototype.requests = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkUpdateDataTableRowsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest} BulkUpdateDataTableRowsRequest instance
+                         */
+                        BulkUpdateDataTableRowsRequest.create = function create(properties) {
+                            return new BulkUpdateDataTableRowsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkUpdateDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest} message BulkUpdateDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkUpdateDataTableRowsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.requests != null && message.requests.length)
+                                for (var i = 0; i < message.requests.length; ++i)
+                                    $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkUpdateDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest} message BulkUpdateDataTableRowsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkUpdateDataTableRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkUpdateDataTableRowsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest} BulkUpdateDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkUpdateDataTableRowsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.requests && message.requests.length))
+                                            message.requests = [];
+                                        message.requests.push($root.google.cloud.chronicle.v1.UpdateDataTableRowRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkUpdateDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest} BulkUpdateDataTableRowsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkUpdateDataTableRowsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkUpdateDataTableRowsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkUpdateDataTableRowsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.requests != null && message.hasOwnProperty("requests")) {
+                                if (!Array.isArray(message.requests))
+                                    return "requests: array expected";
+                                for (var i = 0; i < message.requests.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify(message.requests[i]);
+                                    if (error)
+                                        return "requests." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkUpdateDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest} BulkUpdateDataTableRowsRequest
+                         */
+                        BulkUpdateDataTableRowsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.requests) {
+                                if (!Array.isArray(object.requests))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.requests: array expected");
+                                message.requests = [];
+                                for (var i = 0; i < object.requests.length; ++i) {
+                                    if (typeof object.requests[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.requests: object expected");
+                                    message.requests[i] = $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest.fromObject(object.requests[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkUpdateDataTableRowsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest} message BulkUpdateDataTableRowsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkUpdateDataTableRowsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.requests = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.requests && message.requests.length) {
+                                object.requests = [];
+                                for (var j = 0; j < message.requests.length; ++j)
+                                    object.requests[j] = $root.google.cloud.chronicle.v1.UpdateDataTableRowRequest.toObject(message.requests[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkUpdateDataTableRowsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkUpdateDataTableRowsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkUpdateDataTableRowsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkUpdateDataTableRowsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest";
+                        };
+    
+                        return BulkUpdateDataTableRowsRequest;
+                    })();
+    
+                    v1.BulkUpdateDataTableRowsResponse = (function() {
+    
+                        /**
+                         * Properties of a BulkUpdateDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBulkUpdateDataTableRowsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTableRow>|null} [dataTableRows] BulkUpdateDataTableRowsResponse dataTableRows
+                         */
+    
+                        /**
+                         * Constructs a new BulkUpdateDataTableRowsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BulkUpdateDataTableRowsResponse.
+                         * @implements IBulkUpdateDataTableRowsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse=} [properties] Properties to set
+                         */
+                        function BulkUpdateDataTableRowsResponse(properties) {
+                            this.dataTableRows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BulkUpdateDataTableRowsResponse dataTableRows.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTableRow>} dataTableRows
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @instance
+                         */
+                        BulkUpdateDataTableRowsResponse.prototype.dataTableRows = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BulkUpdateDataTableRowsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse} BulkUpdateDataTableRowsResponse instance
+                         */
+                        BulkUpdateDataTableRowsResponse.create = function create(properties) {
+                            return new BulkUpdateDataTableRowsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BulkUpdateDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse} message BulkUpdateDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkUpdateDataTableRowsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTableRows != null && message.dataTableRows.length)
+                                for (var i = 0; i < message.dataTableRows.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTableRow.encode(message.dataTableRows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BulkUpdateDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse} message BulkUpdateDataTableRowsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BulkUpdateDataTableRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BulkUpdateDataTableRowsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse} BulkUpdateDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkUpdateDataTableRowsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTableRows && message.dataTableRows.length))
+                                            message.dataTableRows = [];
+                                        message.dataTableRows.push($root.google.cloud.chronicle.v1.DataTableRow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BulkUpdateDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse} BulkUpdateDataTableRowsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BulkUpdateDataTableRowsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BulkUpdateDataTableRowsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BulkUpdateDataTableRowsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTableRows != null && message.hasOwnProperty("dataTableRows")) {
+                                if (!Array.isArray(message.dataTableRows))
+                                    return "dataTableRows: array expected";
+                                for (var i = 0; i < message.dataTableRows.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTableRow.verify(message.dataTableRows[i]);
+                                    if (error)
+                                        return "dataTableRows." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BulkUpdateDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse} BulkUpdateDataTableRowsResponse
+                         */
+                        BulkUpdateDataTableRowsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse();
+                            if (object.dataTableRows) {
+                                if (!Array.isArray(object.dataTableRows))
+                                    throw TypeError(".google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.dataTableRows: array expected");
+                                message.dataTableRows = [];
+                                for (var i = 0; i < object.dataTableRows.length; ++i) {
+                                    if (typeof object.dataTableRows[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.dataTableRows: object expected");
+                                    message.dataTableRows[i] = $root.google.cloud.chronicle.v1.DataTableRow.fromObject(object.dataTableRows[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BulkUpdateDataTableRowsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse} message BulkUpdateDataTableRowsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BulkUpdateDataTableRowsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTableRows = [];
+                            if (message.dataTableRows && message.dataTableRows.length) {
+                                object.dataTableRows = [];
+                                for (var j = 0; j < message.dataTableRows.length; ++j)
+                                    object.dataTableRows[j] = $root.google.cloud.chronicle.v1.DataTableRow.toObject(message.dataTableRows[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BulkUpdateDataTableRowsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BulkUpdateDataTableRowsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BulkUpdateDataTableRowsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BulkUpdateDataTableRowsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse";
+                        };
+    
+                        return BulkUpdateDataTableRowsResponse;
+                    })();
+    
+                    v1.DataTableScopeInfo = (function() {
+    
+                        /**
+                         * Properties of a DataTableScopeInfo.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDataTableScopeInfo
+                         * @property {Array.<string>|null} [dataAccessScopes] DataTableScopeInfo dataAccessScopes
+                         */
+    
+                        /**
+                         * Constructs a new DataTableScopeInfo.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataTableScopeInfo.
+                         * @implements IDataTableScopeInfo
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDataTableScopeInfo=} [properties] Properties to set
+                         */
+                        function DataTableScopeInfo(properties) {
+                            this.dataAccessScopes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataTableScopeInfo dataAccessScopes.
+                         * @member {Array.<string>} dataAccessScopes
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @instance
+                         */
+                        DataTableScopeInfo.prototype.dataAccessScopes = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DataTableScopeInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableScopeInfo=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DataTableScopeInfo} DataTableScopeInfo instance
+                         */
+                        DataTableScopeInfo.create = function create(properties) {
+                            return new DataTableScopeInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableScopeInfo message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableScopeInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableScopeInfo} message DataTableScopeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableScopeInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataAccessScopes != null && message.dataAccessScopes.length)
+                                for (var i = 0; i < message.dataAccessScopes.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataAccessScopes[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableScopeInfo message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableScopeInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableScopeInfo} message DataTableScopeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableScopeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataTableScopeInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DataTableScopeInfo} DataTableScopeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableScopeInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DataTableScopeInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataAccessScopes && message.dataAccessScopes.length))
+                                            message.dataAccessScopes = [];
+                                        message.dataAccessScopes.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataTableScopeInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DataTableScopeInfo} DataTableScopeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableScopeInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataTableScopeInfo message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataTableScopeInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataAccessScopes != null && message.hasOwnProperty("dataAccessScopes")) {
+                                if (!Array.isArray(message.dataAccessScopes))
+                                    return "dataAccessScopes: array expected";
+                                for (var i = 0; i < message.dataAccessScopes.length; ++i)
+                                    if (!$util.isString(message.dataAccessScopes[i]))
+                                        return "dataAccessScopes: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataTableScopeInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DataTableScopeInfo} DataTableScopeInfo
+                         */
+                        DataTableScopeInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DataTableScopeInfo)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DataTableScopeInfo();
+                            if (object.dataAccessScopes) {
+                                if (!Array.isArray(object.dataAccessScopes))
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTableScopeInfo.dataAccessScopes: array expected");
+                                message.dataAccessScopes = [];
+                                for (var i = 0; i < object.dataAccessScopes.length; ++i)
+                                    message.dataAccessScopes[i] = String(object.dataAccessScopes[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataTableScopeInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DataTableScopeInfo} message DataTableScopeInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataTableScopeInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataAccessScopes = [];
+                            if (message.dataAccessScopes && message.dataAccessScopes.length) {
+                                object.dataAccessScopes = [];
+                                for (var j = 0; j < message.dataAccessScopes.length; ++j)
+                                    object.dataAccessScopes[j] = message.dataAccessScopes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataTableScopeInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataTableScopeInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataTableScopeInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DataTableScopeInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataTableScopeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DataTableScopeInfo";
+                        };
+    
+                        return DataTableScopeInfo;
+                    })();
+    
+                    v1.DataTable = (function() {
+    
+                        /**
+                         * Properties of a DataTable.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDataTable
+                         * @property {string|null} [name] DataTable name
+                         * @property {string|null} [displayName] DataTable displayName
+                         * @property {string|null} [description] DataTable description
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DataTable createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DataTable updateTime
+                         * @property {Array.<google.cloud.chronicle.v1.IDataTableColumnInfo>|null} [columnInfo] DataTable columnInfo
+                         * @property {string|null} [dataTableUuid] DataTable dataTableUuid
+                         * @property {Array.<string>|null} [rules] DataTable rules
+                         * @property {number|null} [ruleAssociationsCount] DataTable ruleAssociationsCount
+                         * @property {string|null} [rowTimeToLive] DataTable rowTimeToLive
+                         * @property {number|Long|null} [approximateRowCount] DataTable approximateRowCount
+                         * @property {google.cloud.chronicle.v1.IDataTableScopeInfo|null} [scopeInfo] DataTable scopeInfo
+                         * @property {google.cloud.chronicle.v1.DataTableUpdateSource|null} [updateSource] DataTable updateSource
+                         * @property {google.protobuf.ITimestamp|null} [rowTimeToLiveUpdateTime] DataTable rowTimeToLiveUpdateTime
+                         */
+    
+                        /**
+                         * Constructs a new DataTable.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataTable.
+                         * @implements IDataTable
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDataTable=} [properties] Properties to set
+                         */
+                        function DataTable(properties) {
+                            this.columnInfo = [];
+                            this.rules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataTable name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.name = "";
+    
+                        /**
+                         * DataTable displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.displayName = "";
+    
+                        /**
+                         * DataTable description.
+                         * @member {string} description
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.description = "";
+    
+                        /**
+                         * DataTable createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.createTime = null;
+    
+                        /**
+                         * DataTable updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.updateTime = null;
+    
+                        /**
+                         * DataTable columnInfo.
+                         * @member {Array.<google.cloud.chronicle.v1.IDataTableColumnInfo>} columnInfo
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.columnInfo = $util.emptyArray;
+    
+                        /**
+                         * DataTable dataTableUuid.
+                         * @member {string} dataTableUuid
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.dataTableUuid = "";
+    
+                        /**
+                         * DataTable rules.
+                         * @member {Array.<string>} rules
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.rules = $util.emptyArray;
+    
+                        /**
+                         * DataTable ruleAssociationsCount.
+                         * @member {number} ruleAssociationsCount
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.ruleAssociationsCount = 0;
+    
+                        /**
+                         * DataTable rowTimeToLive.
+                         * @member {string} rowTimeToLive
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.rowTimeToLive = "";
+    
+                        /**
+                         * DataTable approximateRowCount.
+                         * @member {number|Long} approximateRowCount
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.approximateRowCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DataTable scopeInfo.
+                         * @member {google.cloud.chronicle.v1.IDataTableScopeInfo|null|undefined} scopeInfo
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.scopeInfo = null;
+    
+                        /**
+                         * DataTable updateSource.
+                         * @member {google.cloud.chronicle.v1.DataTableUpdateSource} updateSource
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.updateSource = 0;
+    
+                        /**
+                         * DataTable rowTimeToLiveUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} rowTimeToLiveUpdateTime
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         */
+                        DataTable.prototype.rowTimeToLiveUpdateTime = null;
+    
+                        /**
+                         * Creates a new DataTable instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTable=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DataTable} DataTable instance
+                         */
+                        DataTable.create = function create(properties) {
+                            return new DataTable(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataTable message. Does not implicitly {@link google.cloud.chronicle.v1.DataTable.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTable} message DataTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTable.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.columnInfo != null && message.columnInfo.length)
+                                for (var i = 0; i < message.columnInfo.length; ++i)
+                                    $root.google.cloud.chronicle.v1.DataTableColumnInfo.encode(message.columnInfo[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.dataTableUuid != null && Object.hasOwnProperty.call(message, "dataTableUuid"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.dataTableUuid);
+                            if (message.rules != null && message.rules.length)
+                                for (var i = 0; i < message.rules.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.rules[i]);
+                            if (message.ruleAssociationsCount != null && Object.hasOwnProperty.call(message, "ruleAssociationsCount"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.ruleAssociationsCount);
+                            if (message.rowTimeToLive != null && Object.hasOwnProperty.call(message, "rowTimeToLive"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.rowTimeToLive);
+                            if (message.approximateRowCount != null && Object.hasOwnProperty.call(message, "approximateRowCount"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int64(message.approximateRowCount);
+                            if (message.scopeInfo != null && Object.hasOwnProperty.call(message, "scopeInfo"))
+                                $root.google.cloud.chronicle.v1.DataTableScopeInfo.encode(message.scopeInfo, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.updateSource != null && Object.hasOwnProperty.call(message, "updateSource"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.updateSource);
+                            if (message.rowTimeToLiveUpdateTime != null && Object.hasOwnProperty.call(message, "rowTimeToLiveUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.rowTimeToLiveUpdateTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataTable message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTable.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTable} message DataTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTable.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataTable message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DataTable} DataTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTable.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DataTable();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.columnInfo && message.columnInfo.length))
+                                            message.columnInfo = [];
+                                        message.columnInfo.push($root.google.cloud.chronicle.v1.DataTableColumnInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.dataTableUuid = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.rules && message.rules.length))
+                                            message.rules = [];
+                                        message.rules.push(reader.string());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.ruleAssociationsCount = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.rowTimeToLive = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.approximateRowCount = reader.int64();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.scopeInfo = $root.google.cloud.chronicle.v1.DataTableScopeInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.updateSource = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.rowTimeToLiveUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataTable message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DataTable} DataTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTable.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataTable message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataTable.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.columnInfo != null && message.hasOwnProperty("columnInfo")) {
+                                if (!Array.isArray(message.columnInfo))
+                                    return "columnInfo: array expected";
+                                for (var i = 0; i < message.columnInfo.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.DataTableColumnInfo.verify(message.columnInfo[i]);
+                                    if (error)
+                                        return "columnInfo." + error;
+                                }
+                            }
+                            if (message.dataTableUuid != null && message.hasOwnProperty("dataTableUuid"))
+                                if (!$util.isString(message.dataTableUuid))
+                                    return "dataTableUuid: string expected";
+                            if (message.rules != null && message.hasOwnProperty("rules")) {
+                                if (!Array.isArray(message.rules))
+                                    return "rules: array expected";
+                                for (var i = 0; i < message.rules.length; ++i)
+                                    if (!$util.isString(message.rules[i]))
+                                        return "rules: string[] expected";
+                            }
+                            if (message.ruleAssociationsCount != null && message.hasOwnProperty("ruleAssociationsCount"))
+                                if (!$util.isInteger(message.ruleAssociationsCount))
+                                    return "ruleAssociationsCount: integer expected";
+                            if (message.rowTimeToLive != null && message.hasOwnProperty("rowTimeToLive"))
+                                if (!$util.isString(message.rowTimeToLive))
+                                    return "rowTimeToLive: string expected";
+                            if (message.approximateRowCount != null && message.hasOwnProperty("approximateRowCount"))
+                                if (!$util.isInteger(message.approximateRowCount) && !(message.approximateRowCount && $util.isInteger(message.approximateRowCount.low) && $util.isInteger(message.approximateRowCount.high)))
+                                    return "approximateRowCount: integer|Long expected";
+                            if (message.scopeInfo != null && message.hasOwnProperty("scopeInfo")) {
+                                var error = $root.google.cloud.chronicle.v1.DataTableScopeInfo.verify(message.scopeInfo);
+                                if (error)
+                                    return "scopeInfo." + error;
+                            }
+                            if (message.updateSource != null && message.hasOwnProperty("updateSource"))
+                                switch (message.updateSource) {
+                                default:
+                                    return "updateSource: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.rowTimeToLiveUpdateTime != null && message.hasOwnProperty("rowTimeToLiveUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.rowTimeToLiveUpdateTime);
+                                if (error)
+                                    return "rowTimeToLiveUpdateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataTable message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DataTable} DataTable
+                         */
+                        DataTable.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DataTable)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DataTable();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTable.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTable.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.columnInfo) {
+                                if (!Array.isArray(object.columnInfo))
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTable.columnInfo: array expected");
+                                message.columnInfo = [];
+                                for (var i = 0; i < object.columnInfo.length; ++i) {
+                                    if (typeof object.columnInfo[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.DataTable.columnInfo: object expected");
+                                    message.columnInfo[i] = $root.google.cloud.chronicle.v1.DataTableColumnInfo.fromObject(object.columnInfo[i]);
+                                }
+                            }
+                            if (object.dataTableUuid != null)
+                                message.dataTableUuid = String(object.dataTableUuid);
+                            if (object.rules) {
+                                if (!Array.isArray(object.rules))
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTable.rules: array expected");
+                                message.rules = [];
+                                for (var i = 0; i < object.rules.length; ++i)
+                                    message.rules[i] = String(object.rules[i]);
+                            }
+                            if (object.ruleAssociationsCount != null)
+                                message.ruleAssociationsCount = object.ruleAssociationsCount | 0;
+                            if (object.rowTimeToLive != null)
+                                message.rowTimeToLive = String(object.rowTimeToLive);
+                            if (object.approximateRowCount != null)
+                                if ($util.Long)
+                                    (message.approximateRowCount = $util.Long.fromValue(object.approximateRowCount)).unsigned = false;
+                                else if (typeof object.approximateRowCount === "string")
+                                    message.approximateRowCount = parseInt(object.approximateRowCount, 10);
+                                else if (typeof object.approximateRowCount === "number")
+                                    message.approximateRowCount = object.approximateRowCount;
+                                else if (typeof object.approximateRowCount === "object")
+                                    message.approximateRowCount = new $util.LongBits(object.approximateRowCount.low >>> 0, object.approximateRowCount.high >>> 0).toNumber();
+                            if (object.scopeInfo != null) {
+                                if (typeof object.scopeInfo !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTable.scopeInfo: object expected");
+                                message.scopeInfo = $root.google.cloud.chronicle.v1.DataTableScopeInfo.fromObject(object.scopeInfo);
+                            }
+                            switch (object.updateSource) {
+                            default:
+                                if (typeof object.updateSource === "number") {
+                                    message.updateSource = object.updateSource;
+                                    break;
+                                }
+                                break;
+                            case "DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.updateSource = 0;
+                                break;
+                            case "USER":
+                            case 1:
+                                message.updateSource = 1;
+                                break;
+                            case "RULE":
+                            case 2:
+                                message.updateSource = 2;
+                                break;
+                            case "SEARCH":
+                            case 3:
+                                message.updateSource = 3;
+                                break;
+                            }
+                            if (object.rowTimeToLiveUpdateTime != null) {
+                                if (typeof object.rowTimeToLiveUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTable.rowTimeToLiveUpdateTime: object expected");
+                                message.rowTimeToLiveUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.rowTimeToLiveUpdateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataTable message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DataTable} message DataTable
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataTable.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.columnInfo = [];
+                                object.rules = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.dataTableUuid = "";
+                                object.ruleAssociationsCount = 0;
+                                object.rowTimeToLive = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.approximateRowCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.approximateRowCount = options.longs === String ? "0" : 0;
+                                object.scopeInfo = null;
+                                object.updateSource = options.enums === String ? "DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED" : 0;
+                                object.rowTimeToLiveUpdateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.columnInfo && message.columnInfo.length) {
+                                object.columnInfo = [];
+                                for (var j = 0; j < message.columnInfo.length; ++j)
+                                    object.columnInfo[j] = $root.google.cloud.chronicle.v1.DataTableColumnInfo.toObject(message.columnInfo[j], options);
+                            }
+                            if (message.dataTableUuid != null && message.hasOwnProperty("dataTableUuid"))
+                                object.dataTableUuid = message.dataTableUuid;
+                            if (message.rules && message.rules.length) {
+                                object.rules = [];
+                                for (var j = 0; j < message.rules.length; ++j)
+                                    object.rules[j] = message.rules[j];
+                            }
+                            if (message.ruleAssociationsCount != null && message.hasOwnProperty("ruleAssociationsCount"))
+                                object.ruleAssociationsCount = message.ruleAssociationsCount;
+                            if (message.rowTimeToLive != null && message.hasOwnProperty("rowTimeToLive"))
+                                object.rowTimeToLive = message.rowTimeToLive;
+                            if (message.approximateRowCount != null && message.hasOwnProperty("approximateRowCount"))
+                                if (typeof message.approximateRowCount === "number")
+                                    object.approximateRowCount = options.longs === String ? String(message.approximateRowCount) : message.approximateRowCount;
+                                else
+                                    object.approximateRowCount = options.longs === String ? $util.Long.prototype.toString.call(message.approximateRowCount) : options.longs === Number ? new $util.LongBits(message.approximateRowCount.low >>> 0, message.approximateRowCount.high >>> 0).toNumber() : message.approximateRowCount;
+                            if (message.scopeInfo != null && message.hasOwnProperty("scopeInfo"))
+                                object.scopeInfo = $root.google.cloud.chronicle.v1.DataTableScopeInfo.toObject(message.scopeInfo, options);
+                            if (message.updateSource != null && message.hasOwnProperty("updateSource"))
+                                object.updateSource = options.enums === String ? $root.google.cloud.chronicle.v1.DataTableUpdateSource[message.updateSource] === undefined ? message.updateSource : $root.google.cloud.chronicle.v1.DataTableUpdateSource[message.updateSource] : message.updateSource;
+                            if (message.rowTimeToLiveUpdateTime != null && message.hasOwnProperty("rowTimeToLiveUpdateTime"))
+                                object.rowTimeToLiveUpdateTime = $root.google.protobuf.Timestamp.toObject(message.rowTimeToLiveUpdateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataTable to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataTable.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataTable
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DataTable
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataTable.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DataTable";
+                        };
+    
+                        return DataTable;
+                    })();
+    
+                    v1.DataTableRow = (function() {
+    
+                        /**
+                         * Properties of a DataTableRow.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDataTableRow
+                         * @property {string|null} [name] DataTableRow name
+                         * @property {Array.<string>|null} [values] DataTableRow values
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DataTableRow createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DataTableRow updateTime
+                         * @property {string|null} [rowTimeToLive] DataTableRow rowTimeToLive
+                         */
+    
+                        /**
+                         * Constructs a new DataTableRow.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataTableRow.
+                         * @implements IDataTableRow
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDataTableRow=} [properties] Properties to set
+                         */
+                        function DataTableRow(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataTableRow name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @instance
+                         */
+                        DataTableRow.prototype.name = "";
+    
+                        /**
+                         * DataTableRow values.
+                         * @member {Array.<string>} values
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @instance
+                         */
+                        DataTableRow.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * DataTableRow createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @instance
+                         */
+                        DataTableRow.prototype.createTime = null;
+    
+                        /**
+                         * DataTableRow updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @instance
+                         */
+                        DataTableRow.prototype.updateTime = null;
+    
+                        /**
+                         * DataTableRow rowTimeToLive.
+                         * @member {string} rowTimeToLive
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @instance
+                         */
+                        DataTableRow.prototype.rowTimeToLive = "";
+    
+                        /**
+                         * Creates a new DataTableRow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableRow=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DataTableRow} DataTableRow instance
+                         */
+                        DataTableRow.create = function create(properties) {
+                            return new DataTableRow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableRow message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableRow} message DataTableRow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableRow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.values != null && message.values.length)
+                                for (var i = 0; i < message.values.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.values[i]);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.rowTimeToLive != null && Object.hasOwnProperty.call(message, "rowTimeToLive"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.rowTimeToLive);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableRow message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableRow} message DataTableRow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableRow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataTableRow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DataTableRow} DataTableRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableRow.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DataTableRow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.rowTimeToLive = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataTableRow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DataTableRow} DataTableRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableRow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataTableRow message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataTableRow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i)
+                                    if (!$util.isString(message.values[i]))
+                                        return "values: string[] expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.rowTimeToLive != null && message.hasOwnProperty("rowTimeToLive"))
+                                if (!$util.isString(message.rowTimeToLive))
+                                    return "rowTimeToLive: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataTableRow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DataTableRow} DataTableRow
+                         */
+                        DataTableRow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DataTableRow)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DataTableRow();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTableRow.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i)
+                                    message.values[i] = String(object.values[i]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTableRow.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTableRow.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.rowTimeToLive != null)
+                                message.rowTimeToLive = String(object.rowTimeToLive);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataTableRow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DataTableRow} message DataTableRow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataTableRow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.rowTimeToLive = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = message.values[j];
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.rowTimeToLive != null && message.hasOwnProperty("rowTimeToLive"))
+                                object.rowTimeToLive = message.rowTimeToLive;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataTableRow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataTableRow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataTableRow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DataTableRow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataTableRow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DataTableRow";
+                        };
+    
+                        return DataTableRow;
+                    })();
+    
+                    v1.DataTableColumnInfo = (function() {
+    
+                        /**
+                         * Properties of a DataTableColumnInfo.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDataTableColumnInfo
+                         * @property {string|null} [mappedColumnPath] DataTableColumnInfo mappedColumnPath
+                         * @property {google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|null} [columnType] DataTableColumnInfo columnType
+                         * @property {number|null} [columnIndex] DataTableColumnInfo columnIndex
+                         * @property {string|null} [originalColumn] DataTableColumnInfo originalColumn
+                         * @property {boolean|null} [keyColumn] DataTableColumnInfo keyColumn
+                         * @property {boolean|null} [repeatedValues] DataTableColumnInfo repeatedValues
+                         */
+    
+                        /**
+                         * Constructs a new DataTableColumnInfo.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataTableColumnInfo.
+                         * @implements IDataTableColumnInfo
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDataTableColumnInfo=} [properties] Properties to set
+                         */
+                        function DataTableColumnInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataTableColumnInfo mappedColumnPath.
+                         * @member {string|null|undefined} mappedColumnPath
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        DataTableColumnInfo.prototype.mappedColumnPath = null;
+    
+                        /**
+                         * DataTableColumnInfo columnType.
+                         * @member {google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|null|undefined} columnType
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        DataTableColumnInfo.prototype.columnType = null;
+    
+                        /**
+                         * DataTableColumnInfo columnIndex.
+                         * @member {number} columnIndex
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        DataTableColumnInfo.prototype.columnIndex = 0;
+    
+                        /**
+                         * DataTableColumnInfo originalColumn.
+                         * @member {string} originalColumn
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        DataTableColumnInfo.prototype.originalColumn = "";
+    
+                        /**
+                         * DataTableColumnInfo keyColumn.
+                         * @member {boolean} keyColumn
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        DataTableColumnInfo.prototype.keyColumn = false;
+    
+                        /**
+                         * DataTableColumnInfo repeatedValues.
+                         * @member {boolean} repeatedValues
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        DataTableColumnInfo.prototype.repeatedValues = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DataTableColumnInfo pathOrType.
+                         * @member {"mappedColumnPath"|"columnType"|undefined} pathOrType
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         */
+                        Object.defineProperty(DataTableColumnInfo.prototype, "pathOrType", {
+                            get: $util.oneOfGetter($oneOfFields = ["mappedColumnPath", "columnType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DataTableColumnInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableColumnInfo=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DataTableColumnInfo} DataTableColumnInfo instance
+                         */
+                        DataTableColumnInfo.create = function create(properties) {
+                            return new DataTableColumnInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableColumnInfo message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableColumnInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableColumnInfo} message DataTableColumnInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableColumnInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columnIndex != null && Object.hasOwnProperty.call(message, "columnIndex"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.columnIndex);
+                            if (message.originalColumn != null && Object.hasOwnProperty.call(message, "originalColumn"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.originalColumn);
+                            if (message.mappedColumnPath != null && Object.hasOwnProperty.call(message, "mappedColumnPath"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mappedColumnPath);
+                            if (message.columnType != null && Object.hasOwnProperty.call(message, "columnType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.columnType);
+                            if (message.keyColumn != null && Object.hasOwnProperty.call(message, "keyColumn"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.keyColumn);
+                            if (message.repeatedValues != null && Object.hasOwnProperty.call(message, "repeatedValues"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.repeatedValues);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableColumnInfo message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableColumnInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableColumnInfo} message DataTableColumnInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableColumnInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataTableColumnInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DataTableColumnInfo} DataTableColumnInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableColumnInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DataTableColumnInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.mappedColumnPath = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.columnType = reader.int32();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.columnIndex = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.originalColumn = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.keyColumn = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.repeatedValues = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataTableColumnInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DataTableColumnInfo} DataTableColumnInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableColumnInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataTableColumnInfo message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataTableColumnInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.mappedColumnPath != null && message.hasOwnProperty("mappedColumnPath")) {
+                                properties.pathOrType = 1;
+                                if (!$util.isString(message.mappedColumnPath))
+                                    return "mappedColumnPath: string expected";
+                            }
+                            if (message.columnType != null && message.hasOwnProperty("columnType")) {
+                                if (properties.pathOrType === 1)
+                                    return "pathOrType: multiple values";
+                                properties.pathOrType = 1;
+                                switch (message.columnType) {
+                                default:
+                                    return "columnType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            }
+                            if (message.columnIndex != null && message.hasOwnProperty("columnIndex"))
+                                if (!$util.isInteger(message.columnIndex))
+                                    return "columnIndex: integer expected";
+                            if (message.originalColumn != null && message.hasOwnProperty("originalColumn"))
+                                if (!$util.isString(message.originalColumn))
+                                    return "originalColumn: string expected";
+                            if (message.keyColumn != null && message.hasOwnProperty("keyColumn"))
+                                if (typeof message.keyColumn !== "boolean")
+                                    return "keyColumn: boolean expected";
+                            if (message.repeatedValues != null && message.hasOwnProperty("repeatedValues"))
+                                if (typeof message.repeatedValues !== "boolean")
+                                    return "repeatedValues: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataTableColumnInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DataTableColumnInfo} DataTableColumnInfo
+                         */
+                        DataTableColumnInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DataTableColumnInfo)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DataTableColumnInfo();
+                            if (object.mappedColumnPath != null)
+                                message.mappedColumnPath = String(object.mappedColumnPath);
+                            switch (object.columnType) {
+                            default:
+                                if (typeof object.columnType === "number") {
+                                    message.columnType = object.columnType;
+                                    break;
+                                }
+                                break;
+                            case "DATA_TABLE_COLUMN_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.columnType = 0;
+                                break;
+                            case "STRING":
+                            case 1:
+                                message.columnType = 1;
+                                break;
+                            case "REGEX":
+                            case 2:
+                                message.columnType = 2;
+                                break;
+                            case "CIDR":
+                            case 3:
+                                message.columnType = 3;
+                                break;
+                            case "NUMBER":
+                            case 4:
+                                message.columnType = 4;
+                                break;
+                            }
+                            if (object.columnIndex != null)
+                                message.columnIndex = object.columnIndex | 0;
+                            if (object.originalColumn != null)
+                                message.originalColumn = String(object.originalColumn);
+                            if (object.keyColumn != null)
+                                message.keyColumn = Boolean(object.keyColumn);
+                            if (object.repeatedValues != null)
+                                message.repeatedValues = Boolean(object.repeatedValues);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataTableColumnInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DataTableColumnInfo} message DataTableColumnInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataTableColumnInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.columnIndex = 0;
+                                object.originalColumn = "";
+                                object.keyColumn = false;
+                                object.repeatedValues = false;
+                            }
+                            if (message.columnIndex != null && message.hasOwnProperty("columnIndex"))
+                                object.columnIndex = message.columnIndex;
+                            if (message.originalColumn != null && message.hasOwnProperty("originalColumn"))
+                                object.originalColumn = message.originalColumn;
+                            if (message.mappedColumnPath != null && message.hasOwnProperty("mappedColumnPath")) {
+                                object.mappedColumnPath = message.mappedColumnPath;
+                                if (options.oneofs)
+                                    object.pathOrType = "mappedColumnPath";
+                            }
+                            if (message.columnType != null && message.hasOwnProperty("columnType")) {
+                                object.columnType = options.enums === String ? $root.google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType[message.columnType] === undefined ? message.columnType : $root.google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType[message.columnType] : message.columnType;
+                                if (options.oneofs)
+                                    object.pathOrType = "columnType";
+                            }
+                            if (message.keyColumn != null && message.hasOwnProperty("keyColumn"))
+                                object.keyColumn = message.keyColumn;
+                            if (message.repeatedValues != null && message.hasOwnProperty("repeatedValues"))
+                                object.repeatedValues = message.repeatedValues;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataTableColumnInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataTableColumnInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataTableColumnInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DataTableColumnInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataTableColumnInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DataTableColumnInfo";
+                        };
+    
+                        /**
+                         * DataTableColumnType enum.
+                         * @name google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType
+                         * @enum {number}
+                         * @property {number} DATA_TABLE_COLUMN_TYPE_UNSPECIFIED=0 DATA_TABLE_COLUMN_TYPE_UNSPECIFIED value
+                         * @property {number} STRING=1 STRING value
+                         * @property {number} REGEX=2 REGEX value
+                         * @property {number} CIDR=3 CIDR value
+                         * @property {number} NUMBER=4 NUMBER value
+                         */
+                        DataTableColumnInfo.DataTableColumnType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DATA_TABLE_COLUMN_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STRING"] = 1;
+                            values[valuesById[2] = "REGEX"] = 2;
+                            values[valuesById[3] = "CIDR"] = 3;
+                            values[valuesById[4] = "NUMBER"] = 4;
+                            return values;
+                        })();
+    
+                        return DataTableColumnInfo;
+                    })();
+    
+                    v1.GetDataTableOperationErrorsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDataTableOperationErrorsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IGetDataTableOperationErrorsRequest
+                         * @property {string|null} [name] GetDataTableOperationErrorsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDataTableOperationErrorsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a GetDataTableOperationErrorsRequest.
+                         * @implements IGetDataTableOperationErrorsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest=} [properties] Properties to set
+                         */
+                        function GetDataTableOperationErrorsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDataTableOperationErrorsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @instance
+                         */
+                        GetDataTableOperationErrorsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDataTableOperationErrorsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest} GetDataTableOperationErrorsRequest instance
+                         */
+                        GetDataTableOperationErrorsRequest.create = function create(properties) {
+                            return new GetDataTableOperationErrorsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataTableOperationErrorsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest} message GetDataTableOperationErrorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataTableOperationErrorsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataTableOperationErrorsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest} message GetDataTableOperationErrorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataTableOperationErrorsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDataTableOperationErrorsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest} GetDataTableOperationErrorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataTableOperationErrorsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDataTableOperationErrorsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest} GetDataTableOperationErrorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataTableOperationErrorsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDataTableOperationErrorsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDataTableOperationErrorsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDataTableOperationErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest} GetDataTableOperationErrorsRequest
+                         */
+                        GetDataTableOperationErrorsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDataTableOperationErrorsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest} message GetDataTableOperationErrorsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDataTableOperationErrorsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDataTableOperationErrorsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDataTableOperationErrorsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDataTableOperationErrorsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDataTableOperationErrorsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest";
+                        };
+    
+                        return GetDataTableOperationErrorsRequest;
+                    })();
+    
+                    v1.DataTableOperationErrors = (function() {
+    
+                        /**
+                         * Properties of a DataTableOperationErrors.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDataTableOperationErrors
+                         * @property {string|null} [name] DataTableOperationErrors name
+                         * @property {Array.<google.rpc.IStatus>|null} [rpcErrors] DataTableOperationErrors rpcErrors
+                         */
+    
+                        /**
+                         * Constructs a new DataTableOperationErrors.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataTableOperationErrors.
+                         * @implements IDataTableOperationErrors
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDataTableOperationErrors=} [properties] Properties to set
+                         */
+                        function DataTableOperationErrors(properties) {
+                            this.rpcErrors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataTableOperationErrors name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @instance
+                         */
+                        DataTableOperationErrors.prototype.name = "";
+    
+                        /**
+                         * DataTableOperationErrors rpcErrors.
+                         * @member {Array.<google.rpc.IStatus>} rpcErrors
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @instance
+                         */
+                        DataTableOperationErrors.prototype.rpcErrors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DataTableOperationErrors instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableOperationErrors=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DataTableOperationErrors} DataTableOperationErrors instance
+                         */
+                        DataTableOperationErrors.create = function create(properties) {
+                            return new DataTableOperationErrors(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableOperationErrors message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableOperationErrors.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableOperationErrors} message DataTableOperationErrors message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableOperationErrors.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.rpcErrors != null && message.rpcErrors.length)
+                                for (var i = 0; i < message.rpcErrors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.rpcErrors[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataTableOperationErrors message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableOperationErrors.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataTableOperationErrors} message DataTableOperationErrors message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataTableOperationErrors.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataTableOperationErrors message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DataTableOperationErrors} DataTableOperationErrors
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableOperationErrors.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DataTableOperationErrors();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.rpcErrors && message.rpcErrors.length))
+                                            message.rpcErrors = [];
+                                        message.rpcErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataTableOperationErrors message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DataTableOperationErrors} DataTableOperationErrors
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataTableOperationErrors.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataTableOperationErrors message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataTableOperationErrors.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.rpcErrors != null && message.hasOwnProperty("rpcErrors")) {
+                                if (!Array.isArray(message.rpcErrors))
+                                    return "rpcErrors: array expected";
+                                for (var i = 0; i < message.rpcErrors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.rpcErrors[i]);
+                                    if (error)
+                                        return "rpcErrors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataTableOperationErrors message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DataTableOperationErrors} DataTableOperationErrors
+                         */
+                        DataTableOperationErrors.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DataTableOperationErrors)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DataTableOperationErrors();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.rpcErrors) {
+                                if (!Array.isArray(object.rpcErrors))
+                                    throw TypeError(".google.cloud.chronicle.v1.DataTableOperationErrors.rpcErrors: array expected");
+                                message.rpcErrors = [];
+                                for (var i = 0; i < object.rpcErrors.length; ++i) {
+                                    if (typeof object.rpcErrors[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.DataTableOperationErrors.rpcErrors: object expected");
+                                    message.rpcErrors[i] = $root.google.rpc.Status.fromObject(object.rpcErrors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataTableOperationErrors message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DataTableOperationErrors} message DataTableOperationErrors
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataTableOperationErrors.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rpcErrors = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.rpcErrors && message.rpcErrors.length) {
+                                object.rpcErrors = [];
+                                for (var j = 0; j < message.rpcErrors.length; ++j)
+                                    object.rpcErrors[j] = $root.google.rpc.Status.toObject(message.rpcErrors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataTableOperationErrors to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataTableOperationErrors.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataTableOperationErrors
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DataTableOperationErrors
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataTableOperationErrors.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DataTableOperationErrors";
+                        };
+    
+                        return DataTableOperationErrors;
+                    })();
+    
                     v1.EntityService = (function() {
     
                         /**
@@ -37191,6 +44537,292 @@
             return protobuf;
         })();
     
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
+        })();
+    
         google.longrunning = (function() {
     
             /**
@@ -39344,292 +46976,6 @@
             })();
     
             return longrunning;
-        })();
-    
-        google.rpc = (function() {
-    
-            /**
-             * Namespace rpc.
-             * @memberof google
-             * @namespace
-             */
-            var rpc = {};
-    
-            rpc.Status = (function() {
-    
-                /**
-                 * Properties of a Status.
-                 * @memberof google.rpc
-                 * @interface IStatus
-                 * @property {number|null} [code] Status code
-                 * @property {string|null} [message] Status message
-                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
-                 */
-    
-                /**
-                 * Constructs a new Status.
-                 * @memberof google.rpc
-                 * @classdesc Represents a Status.
-                 * @implements IStatus
-                 * @constructor
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 */
-                function Status(properties) {
-                    this.details = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Status code.
-                 * @member {number} code
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.code = 0;
-    
-                /**
-                 * Status message.
-                 * @member {string} message
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.message = "";
-    
-                /**
-                 * Status details.
-                 * @member {Array.<google.protobuf.IAny>} details
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.details = $util.emptyArray;
-    
-                /**
-                 * Creates a new Status instance using the specified properties.
-                 * @function create
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 * @returns {google.rpc.Status} Status instance
-                 */
-                Status.create = function create(properties) {
-                    return new Status(properties);
-                };
-    
-                /**
-                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.code = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.message = reader.string();
-                                break;
-                            }
-                        case 3: {
-                                if (!(message.details && message.details.length))
-                                    message.details = [];
-                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Status message.
-                 * @function verify
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Status.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        if (!$util.isInteger(message.code))
-                            return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        if (!$util.isString(message.message))
-                            return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.rpc.Status} Status
-                 */
-                Status.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.rpc.Status)
-                        return object;
-                    var message = new $root.google.rpc.Status();
-                    if (object.code != null)
-                        message.code = object.code | 0;
-                    if (object.message != null)
-                        message.message = String(object.message);
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".google.rpc.Status.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Status message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.Status} message Status
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Status.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.details = [];
-                    if (options.defaults) {
-                        object.code = 0;
-                        object.message = "";
-                    }
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        object.message = message.message;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Status to JSON.
-                 * @function toJSON
-                 * @memberof google.rpc.Status
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Status.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Status
-                 * @function getTypeUrl
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.rpc.Status";
-                };
-    
-                return Status;
-            })();
-    
-            return rpc;
         })();
     
         google.type = (function() {

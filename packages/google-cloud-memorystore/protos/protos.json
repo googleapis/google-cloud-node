@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.memorystore.v1",
                     "php_namespace": "Google\\Cloud\\Memorystore\\V1",
                     "ruby_package": "Google::Cloud::Memorystore::V1",
-                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                    "(google.api.resource_definition).type": "privateca.googleapis.com/CaPool",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/caPools/{ca_pool}"
                   },
                   "nested": {
                     "Memorystore": {
@@ -154,6 +154,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/instances/*}/certificateAuthority"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetSharedRegionalCertificateAuthority": {
+                          "requestType": "GetSharedRegionalCertificateAuthorityRequest",
+                          "responseType": "SharedRegionalCertificateAuthority",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}"
                               }
                             },
                             {
@@ -423,6 +441,21 @@
                         "_effectiveMaintenanceVersion": {
                           "oneof": [
                             "effectiveMaintenanceVersion"
+                          ]
+                        },
+                        "_serverCaMode": {
+                          "oneof": [
+                            "serverCaMode"
+                          ]
+                        },
+                        "_serverCaPool": {
+                          "oneof": [
+                            "serverCaPool"
+                          ]
+                        },
+                        "_rotateServerCertificate": {
+                          "oneof": [
+                            "rotateServerCertificate"
                           ]
                         }
                       },
@@ -738,6 +771,31 @@
                             "deprecated": true,
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "serverCaMode": {
+                          "type": "ServerCaMode",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "serverCaPool": {
+                          "type": "string",
+                          "id": 57,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool",
+                            "proto3_optional": true
+                          }
+                        },
+                        "rotateServerCertificate": {
+                          "type": "bool",
+                          "id": 58,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -920,6 +978,31 @@
                             "STANDALONE": 1,
                             "CLUSTER": 2,
                             "CLUSTER_DISABLED": 4
+                          }
+                        },
+                        "ServerCaMode": {
+                          "options": {
+                            "allow_alias": true
+                          },
+                          "valuesOptions": {
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA": {
+                              "deprecated": true
+                            },
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA": {
+                              "deprecated": true
+                            },
+                            "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA": {
+                              "deprecated": true
+                            }
+                          },
+                          "values": {
+                            "SERVER_CA_MODE_UNSPECIFIED": 0,
+                            "GOOGLE_MANAGED_PER_INSTANCE_CA": 1,
+                            "GOOGLE_MANAGED_SHARED_CA": 2,
+                            "CUSTOMER_MANAGED_CAS_CA": 3,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA": 1,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA": 2,
+                            "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA": 3
                           }
                         }
                       }
@@ -2126,6 +2209,68 @@
                         }
                       }
                     },
+                    "SharedRegionalCertificateAuthority": {
+                      "options": {
+                        "(google.api.resource).type": "memorystore.googleapis.com/SharedRegionalCertificateAuthority",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sharedRegionalCertificateAuthority",
+                        "(google.api.resource).plural": "sharedRegionalCertificateAuthorities",
+                        "(google.api.resource).singular": "sharedRegionalCertificateAuthority"
+                      },
+                      "oneofs": {
+                        "serverCa": {
+                          "oneof": [
+                            "managedServerCa"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "managedServerCa": {
+                          "type": "RegionalManagedCertificateAuthority",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RegionalManagedCertificateAuthority": {
+                          "fields": {
+                            "caCerts": {
+                              "rule": "repeated",
+                              "type": "RegionalCertChain",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "RegionalCertChain": {
+                              "fields": {
+                                "certificates": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GetSharedRegionalCertificateAuthorityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memorystore.googleapis.com/SharedRegionalCertificateAuthority"
+                          }
+                        }
+                      }
+                    },
                     "OperationMetadata": {
                       "fields": {
                         "createTime": {
@@ -2246,8 +2391,8 @@
                     "java_package": "com.google.cloud.memorystore.v1beta",
                     "php_namespace": "Google\\Cloud\\Memorystore\\V1beta",
                     "ruby_package": "Google::Cloud::Memorystore::V1beta",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/ServiceAttachment",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/serviceAttachments/{service_attachment}"
+                    "(google.api.resource_definition).type": "privateca.googleapis.com/CaPool",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/caPools/{ca_pool}"
                   },
                   "nested": {
                     "Memorystore": {
@@ -2391,6 +2536,24 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "GetSharedRegionalCertificateAuthority": {
+                          "requestType": "GetSharedRegionalCertificateAuthorityRequest",
+                          "responseType": "SharedRegionalCertificateAuthority",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/sharedRegionalCertificateAuthority}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2425,6 +2588,21 @@
                         "_deletionProtectionEnabled": {
                           "oneof": [
                             "deletionProtectionEnabled"
+                          ]
+                        },
+                        "_serverCaMode": {
+                          "oneof": [
+                            "serverCaMode"
+                          ]
+                        },
+                        "_serverCaPool": {
+                          "oneof": [
+                            "serverCaPool"
+                          ]
+                        },
+                        "_rotateServerCertificate": {
+                          "oneof": [
+                            "rotateServerCertificate"
                           ]
                         }
                       },
@@ -2590,6 +2768,31 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "serverCaMode": {
+                          "type": "ServerCaMode",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "serverCaPool": {
+                          "type": "string",
+                          "id": 57,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool",
+                            "proto3_optional": true
+                          }
+                        },
+                        "rotateServerCertificate": {
+                          "type": "bool",
+                          "id": 58,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2720,6 +2923,31 @@
                             "STANDALONE": 1,
                             "CLUSTER": 2,
                             "CLUSTER_DISABLED": 4
+                          }
+                        },
+                        "ServerCaMode": {
+                          "options": {
+                            "allow_alias": true
+                          },
+                          "valuesOptions": {
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA": {
+                              "deprecated": true
+                            },
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA": {
+                              "deprecated": true
+                            },
+                            "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA": {
+                              "deprecated": true
+                            }
+                          },
+                          "values": {
+                            "SERVER_CA_MODE_UNSPECIFIED": 0,
+                            "GOOGLE_MANAGED_PER_INSTANCE_CA": 1,
+                            "GOOGLE_MANAGED_SHARED_CA": 2,
+                            "CUSTOMER_MANAGED_CAS_CA": 3,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA": 1,
+                            "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA": 2,
+                            "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA": 3
                           }
                         }
                       }
@@ -3223,6 +3451,68 @@
                                 }
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "SharedRegionalCertificateAuthority": {
+                      "options": {
+                        "(google.api.resource).type": "memorystore.googleapis.com/SharedRegionalCertificateAuthority",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sharedRegionalCertificateAuthority",
+                        "(google.api.resource).plural": "sharedRegionalCertificateAuthorities",
+                        "(google.api.resource).singular": "sharedRegionalCertificateAuthority"
+                      },
+                      "oneofs": {
+                        "serverCa": {
+                          "oneof": [
+                            "managedServerCa"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "managedServerCa": {
+                          "type": "RegionalManagedCertificateAuthority",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RegionalManagedCertificateAuthority": {
+                          "fields": {
+                            "caCerts": {
+                              "rule": "repeated",
+                              "type": "RegionalCertChain",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "RegionalCertChain": {
+                              "fields": {
+                                "certificates": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GetSharedRegionalCertificateAuthorityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "memorystore.googleapis.com/SharedRegionalCertificateAuthority"
                           }
                         }
                       }

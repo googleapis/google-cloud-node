@@ -61,6 +61,7 @@ import {
   unicodeJSONStringify,
   formatAsUTCISO,
   PassThroughShim,
+  handleContextValidation,
 } from './util.js';
 import {CRC32C, CRC32CValidatorGenerator} from './crc32c.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
@@ -382,6 +383,11 @@ export interface CopyOptions {
   metadata?: {
     [key: string]: string | boolean | number | null;
   };
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue;
+    } | null;
+  };
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
@@ -485,6 +491,12 @@ export interface RestoreOptions extends PreconditionOptions {
   projection?: 'full' | 'noAcl';
 }
 
+export interface ContextValue {
+  value: string | null;
+  readonly createTime?: string;
+  readonly updateTime?: string;
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -498,6 +510,11 @@ export interface FileMetadata extends BaseMetadata {
   customerEncryption?: {
     encryptionAlgorithm?: string;
     keySha256?: string;
+  };
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue | null;
+    } | null;
   };
   customTime?: string;
   eventBasedHold?: boolean | null;
@@ -1306,6 +1323,14 @@ class File extends ServiceObject<File, FileMetadata> {
       callback = optionsOrCallback;
     } else if (optionsOrCallback) {
       options = {...optionsOrCallback};
+    }
+
+    if (options.contexts) {
+      const validationError = handleContextValidation(
+        options.contexts,
+        callback
+      );
+      if (validationError) return validationError;
     }
 
     callback = callback || util.noop;
@@ -4137,11 +4162,16 @@ class File extends ServiceObject<File, FileMetadata> {
     optionsOrCallback?: SaveOptions | SaveCallback,
     callback?: SaveCallback,
   ): Promise<void> | void {
-    // tslint:enable:no-any
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+
+    const validationError = handleContextValidation(
+      options.metadata?.contexts,
+      callback
+    );
+    if (validationError) return validationError;
 
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
@@ -4245,6 +4275,9 @@ class File extends ServiceObject<File, FileMetadata> {
       typeof optionsOrCallback === 'function'
         ? (optionsOrCallback as MetadataCallback<FileMetadata>)
         : cb;
+
+    const validationError = handleContextValidation(metadata.contexts, cb);
+    if (validationError) return validationError;
 
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,
