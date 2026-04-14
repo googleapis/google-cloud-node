@@ -9450,7 +9450,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -9478,6 +9478,10 @@
           {
             "name": "encryption_spec",
             "type": ".google.cloud.aiplatform.v1.EncryptionSpec"
+          },
+          {
+            "name": "custom_service_account",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.longrunning.Operation",

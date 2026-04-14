@@ -29988,6 +29988,13 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 3
+                        },
+                        "customServiceAccount": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -77007,6 +77014,13 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 3
+                        },
+                        "customServiceAccount": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
