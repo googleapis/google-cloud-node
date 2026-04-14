@@ -196,6 +196,12 @@ export class ChatServiceClient {
       reactionPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/messages/{message}/reactions/{reaction}'
       ),
+      sectionPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/sections/{section}'
+      ),
+      sectionItemPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/sections/{section}/items/{item}'
+      ),
       spacePathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}'
       ),
@@ -233,7 +239,11 @@ export class ChatServiceClient {
       listCustomEmojis:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'customEmojis'),
       listSpaceEvents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'spaceEvents')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'spaceEvents'),
+      listSections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sections'),
+      listSectionItems:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sectionItems')
     };
 
     // Put together the default options sent with requests.
@@ -279,7 +289,7 @@ export class ChatServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const chatServiceStubMethods =
-        ['createMessage', 'listMessages', 'listMemberships', 'getMembership', 'getMessage', 'updateMessage', 'deleteMessage', 'getAttachment', 'uploadAttachment', 'listSpaces', 'searchSpaces', 'getSpace', 'createSpace', 'setUpSpace', 'updateSpace', 'deleteSpace', 'completeImportSpace', 'findDirectMessage', 'createMembership', 'updateMembership', 'deleteMembership', 'createReaction', 'listReactions', 'deleteReaction', 'createCustomEmoji', 'getCustomEmoji', 'listCustomEmojis', 'deleteCustomEmoji', 'getSpaceReadState', 'updateSpaceReadState', 'getThreadReadState', 'getSpaceEvent', 'listSpaceEvents', 'getSpaceNotificationSetting', 'updateSpaceNotificationSetting'];
+        ['createMessage', 'listMessages', 'listMemberships', 'getMembership', 'getMessage', 'updateMessage', 'deleteMessage', 'getAttachment', 'uploadAttachment', 'listSpaces', 'searchSpaces', 'getSpace', 'createSpace', 'setUpSpace', 'updateSpace', 'deleteSpace', 'completeImportSpace', 'findDirectMessage', 'createMembership', 'updateMembership', 'deleteMembership', 'createReaction', 'listReactions', 'deleteReaction', 'createCustomEmoji', 'getCustomEmoji', 'listCustomEmojis', 'deleteCustomEmoji', 'getSpaceReadState', 'updateSpaceReadState', 'getThreadReadState', 'getSpaceEvent', 'listSpaceEvents', 'getSpaceNotificationSetting', 'updateSpaceNotificationSetting', 'createSection', 'deleteSection', 'updateSection', 'listSections', 'positionSection', 'listSectionItems', 'moveSectionItem'];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -367,9 +377,11 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.admin.spaces.readonly',
       'https://www.googleapis.com/auth/chat.app.delete',
       'https://www.googleapis.com/auth/chat.app.memberships',
+      'https://www.googleapis.com/auth/chat.app.memberships.readonly',
       'https://www.googleapis.com/auth/chat.app.messages.readonly',
       'https://www.googleapis.com/auth/chat.app.spaces',
       'https://www.googleapis.com/auth/chat.app.spaces.create',
+      'https://www.googleapis.com/auth/chat.app.spaces.readonly',
       'https://www.googleapis.com/auth/chat.bot',
       'https://www.googleapis.com/auth/chat.customemojis',
       'https://www.googleapis.com/auth/chat.customemojis.readonly',
@@ -389,6 +401,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces.readonly',
       'https://www.googleapis.com/auth/chat.users.readstate',
       'https://www.googleapis.com/auth/chat.users.readstate.readonly',
+      'https://www.googleapis.com/auth/chat.users.sections',
+      'https://www.googleapis.com/auth/chat.users.sections.readonly',
       'https://www.googleapis.com/auth/chat.users.spacesettings'
     ];
   }
@@ -747,8 +761,7 @@ export class ChatServiceClient {
  *     that invoke the Chat app.
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
  *     with [administrator
- *     approval](https://support.google.com/a?p=chat-app-auth) (available in
- *     [Developer Preview](https://developers.google.com/workspace/preview)).
+ *     approval](https://support.google.com/a?p=chat-app-auth).
  *     When using this authentication scope,
  *     this method returns details about a public message in a space.
  *
@@ -3836,12 +3849,13 @@ export class ChatServiceClient {
  * - [App
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
  * with [administrator
- * approval](https://support.google.com/a?p=chat-app-auth) in
- * [Developer Preview](https://developers.google.com/workspace/preview)
- *  with one of the following authorization scopes:
+ * approval](https://support.google.com/a?p=chat-app-auth)
+ * with one of the following authorization scopes:
  *     - `https://www.googleapis.com/auth/chat.app.spaces`
+ *     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.memberships`
+ *     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
  *
  * - [User
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -4174,6 +4188,556 @@ export class ChatServiceClient {
         throw error;
       });
   }
+/**
+ * Creates a section in Google Chat. Sections help users group conversations
+ * and customize the list of spaces displayed in Chat navigation panel. Only
+ * sections of type `CUSTOM_SECTION` can be created. For details, see [Create
+ * and organize sections in Google
+ * Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name where the section is created.
+ *
+ *   Format: `users/{user}`
+ * @param {google.chat.v1.Section} request.section
+ *   Required. The section to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.chat.v1.Section|Section}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.create_section.js</caption>
+ * region_tag:chat_v1_generated_ChatService_CreateSection_async
+ */
+  createSection(
+      request?: protos.google.chat.v1.ICreateSectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.ICreateSectionRequest|undefined, {}|undefined
+      ]>;
+  createSection(
+      request: protos.google.chat.v1.ICreateSectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.ICreateSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSection(
+      request: protos.google.chat.v1.ICreateSectionRequest,
+      callback: Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.ICreateSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createSection(
+      request?: protos.google.chat.v1.ICreateSectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.ICreateSectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.ICreateSectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.ICreateSectionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createSection request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.ICreateSectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createSection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.ICreateSectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createSection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a section of type `CUSTOM_SECTION`.
+ *
+ * If the section contains items, such as spaces, the items are moved to
+ * Google Chat's default sections and are not deleted.
+ *
+ * For details, see [Create and organize sections in Google
+ * Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the section to delete.
+ *
+ *   Format: `users/{user}/sections/{section}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.delete_section.js</caption>
+ * region_tag:chat_v1_generated_ChatService_DeleteSection_async
+ */
+  deleteSection(
+      request?: protos.google.chat.v1.IDeleteSectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.chat.v1.IDeleteSectionRequest|undefined, {}|undefined
+      ]>;
+  deleteSection(
+      request: protos.google.chat.v1.IDeleteSectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSection(
+      request: protos.google.chat.v1.IDeleteSectionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteSection(
+      request?: protos.google.chat.v1.IDeleteSectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteSectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteSectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.chat.v1.IDeleteSectionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteSection request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.chat.v1.IDeleteSectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteSection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.chat.v1.IDeleteSectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteSection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates a section. Only sections of type `CUSTOM_SECTION` can be updated.
+ * For details, see [Create and organize sections in Google
+ * Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.chat.v1.Section} request.section
+ *   Required. The section to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The mask to specify which fields to update.
+ *
+ *   Currently supported field paths:
+ *
+ *   - `display_name`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.chat.v1.Section|Section}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.update_section.js</caption>
+ * region_tag:chat_v1_generated_ChatService_UpdateSection_async
+ */
+  updateSection(
+      request?: protos.google.chat.v1.IUpdateSectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.IUpdateSectionRequest|undefined, {}|undefined
+      ]>;
+  updateSection(
+      request: protos.google.chat.v1.IUpdateSectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.IUpdateSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSection(
+      request: protos.google.chat.v1.IUpdateSectionRequest,
+      callback: Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.IUpdateSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateSection(
+      request?: protos.google.chat.v1.IUpdateSectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.IUpdateSectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.chat.v1.ISection,
+          protos.google.chat.v1.IUpdateSectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.IUpdateSectionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'section.name': request.section!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateSection request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.IUpdateSectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateSection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.chat.v1.ISection,
+        protos.google.chat.v1.IUpdateSectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateSection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Changes the sort order of a section. For details, see [Create and organize
+ * sections in Google Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the section to position.
+ *
+ *   Format: `users/{user}/sections/{section}`
+ * @param {number} [request.sortOrder]
+ *   Optional. The absolute position of the section in the list of sections.
+ *   The position must be greater than 0. If the position is greater than the
+ *   number of sections, the section will be appended to the end of the list.
+ *   This operation inserts the section at the given position and shifts the
+ *   original section at that position, and those below it, to the next
+ *   position.
+ * @param {google.chat.v1.PositionSectionRequest.Position} [request.relativePosition]
+ *   Optional. The relative position of the section in the list of sections.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.chat.v1.PositionSectionResponse|PositionSectionResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.position_section.js</caption>
+ * region_tag:chat_v1_generated_ChatService_PositionSection_async
+ */
+  positionSection(
+      request?: protos.google.chat.v1.IPositionSectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.IPositionSectionResponse,
+        protos.google.chat.v1.IPositionSectionRequest|undefined, {}|undefined
+      ]>;
+  positionSection(
+      request: protos.google.chat.v1.IPositionSectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.chat.v1.IPositionSectionResponse,
+          protos.google.chat.v1.IPositionSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  positionSection(
+      request: protos.google.chat.v1.IPositionSectionRequest,
+      callback: Callback<
+          protos.google.chat.v1.IPositionSectionResponse,
+          protos.google.chat.v1.IPositionSectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  positionSection(
+      request?: protos.google.chat.v1.IPositionSectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.chat.v1.IPositionSectionResponse,
+          protos.google.chat.v1.IPositionSectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.chat.v1.IPositionSectionResponse,
+          protos.google.chat.v1.IPositionSectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.chat.v1.IPositionSectionResponse,
+        protos.google.chat.v1.IPositionSectionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('positionSection request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.chat.v1.IPositionSectionResponse,
+        protos.google.chat.v1.IPositionSectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('positionSection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.positionSection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.chat.v1.IPositionSectionResponse,
+        protos.google.chat.v1.IPositionSectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('positionSection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Moves an item from one section to another. For example, if a section
+ * contains spaces, this method can be used to move a space to a different
+ * section. For details, see [Create and organize sections in Google
+ * Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the section item to move.
+ *
+ *   Format: `users/{user}/sections/{section}/items/{item}`
+ * @param {string} request.targetSection
+ *   Required. The resource name of the section to move the section item to.
+ *
+ *   Format: `users/{user}/sections/{section}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.chat.v1.MoveSectionItemResponse|MoveSectionItemResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.move_section_item.js</caption>
+ * region_tag:chat_v1_generated_ChatService_MoveSectionItem_async
+ */
+  moveSectionItem(
+      request?: protos.google.chat.v1.IMoveSectionItemRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.IMoveSectionItemResponse,
+        protos.google.chat.v1.IMoveSectionItemRequest|undefined, {}|undefined
+      ]>;
+  moveSectionItem(
+      request: protos.google.chat.v1.IMoveSectionItemRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.chat.v1.IMoveSectionItemResponse,
+          protos.google.chat.v1.IMoveSectionItemRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveSectionItem(
+      request: protos.google.chat.v1.IMoveSectionItemRequest,
+      callback: Callback<
+          protos.google.chat.v1.IMoveSectionItemResponse,
+          protos.google.chat.v1.IMoveSectionItemRequest|null|undefined,
+          {}|null|undefined>): void;
+  moveSectionItem(
+      request?: protos.google.chat.v1.IMoveSectionItemRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.chat.v1.IMoveSectionItemResponse,
+          protos.google.chat.v1.IMoveSectionItemRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.chat.v1.IMoveSectionItemResponse,
+          protos.google.chat.v1.IMoveSectionItemRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.chat.v1.IMoveSectionItemResponse,
+        protos.google.chat.v1.IMoveSectionItemRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('moveSectionItem request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.chat.v1.IMoveSectionItemResponse,
+        protos.google.chat.v1.IMoveSectionItemRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('moveSectionItem response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.moveSectionItem(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.chat.v1.IMoveSectionItemResponse,
+        protos.google.chat.v1.IMoveSectionItemRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('moveSectionItem response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
  /**
  * Lists messages in a space that the caller is a member of, including
@@ -4191,9 +4755,8 @@ export class ChatServiceClient {
  * - [App
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
  * with [administrator
- * approval](https://support.google.com/a?p=chat-app-auth) in
- * [Developer Preview](https://developers.google.com/workspace/preview)
- *  with the authorization scope:
+ * approval](https://support.google.com/a?p=chat-app-auth)
+ * with the authorization scope:
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`. When
  *     using this authentication scope, this method only returns public
  *     messages in a space. It doesn't include private messages.
@@ -6535,12 +7098,13 @@ export class ChatServiceClient {
  * - [App
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
  * with [administrator
- * approval](https://support.google.com/a?p=chat-app-auth) in
- * [Developer Preview](https://developers.google.com/workspace/preview)
- *  with one of the following authorization scopes:
+ * approval](https://support.google.com/a?p=chat-app-auth)
+ * with one of the following authorization scopes:
  *     - `https://www.googleapis.com/auth/chat.app.spaces`
+ *     - `https://www.googleapis.com/auth/chat.app.spaces.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.messages.readonly`
  *     - `https://www.googleapis.com/auth/chat.app.memberships`
+ *     - `https://www.googleapis.com/auth/chat.app.memberships.readonly`
  *
  * - [User
  * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
@@ -6942,6 +7506,563 @@ export class ChatServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.chat.v1.ISpaceEvent>;
   }
+ /**
+ * Lists sections available to the Chat user. Sections help users group their
+ * conversations and customize the list of spaces displayed in Chat
+ * navigation panel. For details, see [Create and organize sections in Google
+ * Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *   - `https://www.googleapis.com/auth/chat.users.sections.readonly`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which is the user resource name that owns this
+ *   collection of sections. Only supports listing sections for the calling
+ *   user. To refer to the calling user, set one of the following:
+ *
+ *   - The `me` alias. For example, `users/me`.
+ *
+ *   - Their Workspace email address. For example, `users/user@example.com`.
+ *
+ *   - Their user id. For example, `users/123456789`.
+ *
+ *   Format: `users/{user}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of sections to return. The service may return
+ *   fewer than this value.
+ *
+ *   If unspecified, at most 10 sections will be returned.
+ *
+ *   The maximum value is 100. If you use a value more than 100, it's
+ *   automatically changed to 100.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list sections call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the page token. Passing different values to the other parameters
+ *   might lead to unexpected results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.chat.v1.Section|Section}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listSections(
+      request?: protos.google.chat.v1.IListSectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.ISection[],
+        protos.google.chat.v1.IListSectionsRequest|null,
+        protos.google.chat.v1.IListSectionsResponse
+      ]>;
+  listSections(
+      request: protos.google.chat.v1.IListSectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.chat.v1.IListSectionsRequest,
+          protos.google.chat.v1.IListSectionsResponse|null|undefined,
+          protos.google.chat.v1.ISection>): void;
+  listSections(
+      request: protos.google.chat.v1.IListSectionsRequest,
+      callback: PaginationCallback<
+          protos.google.chat.v1.IListSectionsRequest,
+          protos.google.chat.v1.IListSectionsResponse|null|undefined,
+          protos.google.chat.v1.ISection>): void;
+  listSections(
+      request?: protos.google.chat.v1.IListSectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.chat.v1.IListSectionsRequest,
+          protos.google.chat.v1.IListSectionsResponse|null|undefined,
+          protos.google.chat.v1.ISection>,
+      callback?: PaginationCallback<
+          protos.google.chat.v1.IListSectionsRequest,
+          protos.google.chat.v1.IListSectionsResponse|null|undefined,
+          protos.google.chat.v1.ISection>):
+      Promise<[
+        protos.google.chat.v1.ISection[],
+        protos.google.chat.v1.IListSectionsRequest|null,
+        protos.google.chat.v1.IListSectionsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.chat.v1.IListSectionsRequest,
+      protos.google.chat.v1.IListSectionsResponse|null|undefined,
+      protos.google.chat.v1.ISection>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSections request %j', request);
+    return this.innerApiCalls
+      .listSections(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.chat.v1.ISection[],
+        protos.google.chat.v1.IListSectionsRequest|null,
+        protos.google.chat.v1.IListSectionsResponse
+      ]) => {
+        this._log.info('listSections values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listSections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which is the user resource name that owns this
+ *   collection of sections. Only supports listing sections for the calling
+ *   user. To refer to the calling user, set one of the following:
+ *
+ *   - The `me` alias. For example, `users/me`.
+ *
+ *   - Their Workspace email address. For example, `users/user@example.com`.
+ *
+ *   - Their user id. For example, `users/123456789`.
+ *
+ *   Format: `users/{user}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of sections to return. The service may return
+ *   fewer than this value.
+ *
+ *   If unspecified, at most 10 sections will be returned.
+ *
+ *   The maximum value is 100. If you use a value more than 100, it's
+ *   automatically changed to 100.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list sections call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the page token. Passing different values to the other parameters
+ *   might lead to unexpected results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.chat.v1.Section|Section} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listSectionsStream(
+      request?: protos.google.chat.v1.IListSectionsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listSections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listSections stream %j', request);
+    return this.descriptors.page.listSections.createStream(
+      this.innerApiCalls.listSections as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listSections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which is the user resource name that owns this
+ *   collection of sections. Only supports listing sections for the calling
+ *   user. To refer to the calling user, set one of the following:
+ *
+ *   - The `me` alias. For example, `users/me`.
+ *
+ *   - Their Workspace email address. For example, `users/user@example.com`.
+ *
+ *   - Their user id. For example, `users/123456789`.
+ *
+ *   Format: `users/{user}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of sections to return. The service may return
+ *   fewer than this value.
+ *
+ *   If unspecified, at most 10 sections will be returned.
+ *
+ *   The maximum value is 100. If you use a value more than 100, it's
+ *   automatically changed to 100.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list sections call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the page token. Passing different values to the other parameters
+ *   might lead to unexpected results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.chat.v1.Section|Section}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.list_sections.js</caption>
+ * region_tag:chat_v1_generated_ChatService_ListSections_async
+ */
+  listSectionsAsync(
+      request?: protos.google.chat.v1.IListSectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.chat.v1.ISection>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listSections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listSections iterate %j', request);
+    return this.descriptors.page.listSections.asyncIterate(
+      this.innerApiCalls['listSections'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.chat.v1.ISection>;
+  }
+ /**
+ * Lists items in a section.
+ *
+ * Only spaces can be section items. For details, see [Create and organize
+ * sections in Google Chat](https://support.google.com/chat/answer/16059854).
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with the [authorization
+ * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.users.sections`
+ *   - `https://www.googleapis.com/auth/chat.users.sections.readonly`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which is the section resource name that owns this
+ *   collection of section items. Only supports listing section items for the
+ *   calling user.
+ *
+ *   When you're filtering by space, use the wildcard `-` to search across all
+ *   sections. For example, `users/{user}/sections/-`.
+ *
+ *   Format: `users/{user}/sections/{section}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of section items to return. The service may
+ *   return fewer than this value.
+ *
+ *   If unspecified, at most 10 section items will be returned.
+ *
+ *   The maximum value is 100. If you use a value more than 100, it's
+ *   automatically changed to 100.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list section items call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the page token. Passing different values to the other parameters
+ *   might lead to unexpected results.
+ * @param {string} [request.filter]
+ *   Optional. A query filter.
+ *
+ *   Currently only supports filtering by space.
+ *
+ *   For example, `space = spaces/{space}`.
+ *
+ *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.chat.v1.SectionItem|SectionItem}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSectionItemsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listSectionItems(
+      request?: protos.google.chat.v1.IListSectionItemsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.ISectionItem[],
+        protos.google.chat.v1.IListSectionItemsRequest|null,
+        protos.google.chat.v1.IListSectionItemsResponse
+      ]>;
+  listSectionItems(
+      request: protos.google.chat.v1.IListSectionItemsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.chat.v1.IListSectionItemsRequest,
+          protos.google.chat.v1.IListSectionItemsResponse|null|undefined,
+          protos.google.chat.v1.ISectionItem>): void;
+  listSectionItems(
+      request: protos.google.chat.v1.IListSectionItemsRequest,
+      callback: PaginationCallback<
+          protos.google.chat.v1.IListSectionItemsRequest,
+          protos.google.chat.v1.IListSectionItemsResponse|null|undefined,
+          protos.google.chat.v1.ISectionItem>): void;
+  listSectionItems(
+      request?: protos.google.chat.v1.IListSectionItemsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.chat.v1.IListSectionItemsRequest,
+          protos.google.chat.v1.IListSectionItemsResponse|null|undefined,
+          protos.google.chat.v1.ISectionItem>,
+      callback?: PaginationCallback<
+          protos.google.chat.v1.IListSectionItemsRequest,
+          protos.google.chat.v1.IListSectionItemsResponse|null|undefined,
+          protos.google.chat.v1.ISectionItem>):
+      Promise<[
+        protos.google.chat.v1.ISectionItem[],
+        protos.google.chat.v1.IListSectionItemsRequest|null,
+        protos.google.chat.v1.IListSectionItemsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.chat.v1.IListSectionItemsRequest,
+      protos.google.chat.v1.IListSectionItemsResponse|null|undefined,
+      protos.google.chat.v1.ISectionItem>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSectionItems values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSectionItems request %j', request);
+    return this.innerApiCalls
+      .listSectionItems(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.chat.v1.ISectionItem[],
+        protos.google.chat.v1.IListSectionItemsRequest|null,
+        protos.google.chat.v1.IListSectionItemsResponse
+      ]) => {
+        this._log.info('listSectionItems values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listSectionItems`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which is the section resource name that owns this
+ *   collection of section items. Only supports listing section items for the
+ *   calling user.
+ *
+ *   When you're filtering by space, use the wildcard `-` to search across all
+ *   sections. For example, `users/{user}/sections/-`.
+ *
+ *   Format: `users/{user}/sections/{section}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of section items to return. The service may
+ *   return fewer than this value.
+ *
+ *   If unspecified, at most 10 section items will be returned.
+ *
+ *   The maximum value is 100. If you use a value more than 100, it's
+ *   automatically changed to 100.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list section items call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the page token. Passing different values to the other parameters
+ *   might lead to unexpected results.
+ * @param {string} [request.filter]
+ *   Optional. A query filter.
+ *
+ *   Currently only supports filtering by space.
+ *
+ *   For example, `space = spaces/{space}`.
+ *
+ *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.chat.v1.SectionItem|SectionItem} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSectionItemsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listSectionItemsStream(
+      request?: protos.google.chat.v1.IListSectionItemsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listSectionItems'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listSectionItems stream %j', request);
+    return this.descriptors.page.listSectionItems.createStream(
+      this.innerApiCalls.listSectionItems as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listSectionItems`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which is the section resource name that owns this
+ *   collection of section items. Only supports listing section items for the
+ *   calling user.
+ *
+ *   When you're filtering by space, use the wildcard `-` to search across all
+ *   sections. For example, `users/{user}/sections/-`.
+ *
+ *   Format: `users/{user}/sections/{section}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of section items to return. The service may
+ *   return fewer than this value.
+ *
+ *   If unspecified, at most 10 section items will be returned.
+ *
+ *   The maximum value is 100. If you use a value more than 100, it's
+ *   automatically changed to 100.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous list section items call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the page token. Passing different values to the other parameters
+ *   might lead to unexpected results.
+ * @param {string} [request.filter]
+ *   Optional. A query filter.
+ *
+ *   Currently only supports filtering by space.
+ *
+ *   For example, `space = spaces/{space}`.
+ *
+ *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.chat.v1.SectionItem|SectionItem}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.list_section_items.js</caption>
+ * region_tag:chat_v1_generated_ChatService_ListSectionItems_async
+ */
+  listSectionItemsAsync(
+      request?: protos.google.chat.v1.IListSectionItemsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.chat.v1.ISectionItem>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listSectionItems'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listSectionItems iterate %j', request);
+    return this.descriptors.page.listSectionItems.asyncIterate(
+      this.innerApiCalls['listSectionItems'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.chat.v1.ISectionItem>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -7186,6 +8307,91 @@ export class ChatServiceClient {
    */
   matchReactionFromReactionName(reactionName: string) {
     return this.pathTemplates.reactionPathTemplate.match(reactionName).reaction;
+  }
+
+  /**
+   * Return a fully-qualified section resource name string.
+   *
+   * @param {string} user
+   * @param {string} section
+   * @returns {string} Resource name string.
+   */
+  sectionPath(user:string,section:string) {
+    return this.pathTemplates.sectionPathTemplate.render({
+      user: user,
+      section: section,
+    });
+  }
+
+  /**
+   * Parse the user from Section resource.
+   *
+   * @param {string} sectionName
+   *   A fully-qualified path representing Section resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromSectionName(sectionName: string) {
+    return this.pathTemplates.sectionPathTemplate.match(sectionName).user;
+  }
+
+  /**
+   * Parse the section from Section resource.
+   *
+   * @param {string} sectionName
+   *   A fully-qualified path representing Section resource.
+   * @returns {string} A string representing the section.
+   */
+  matchSectionFromSectionName(sectionName: string) {
+    return this.pathTemplates.sectionPathTemplate.match(sectionName).section;
+  }
+
+  /**
+   * Return a fully-qualified sectionItem resource name string.
+   *
+   * @param {string} user
+   * @param {string} section
+   * @param {string} item
+   * @returns {string} Resource name string.
+   */
+  sectionItemPath(user:string,section:string,item:string) {
+    return this.pathTemplates.sectionItemPathTemplate.render({
+      user: user,
+      section: section,
+      item: item,
+    });
+  }
+
+  /**
+   * Parse the user from SectionItem resource.
+   *
+   * @param {string} sectionItemName
+   *   A fully-qualified path representing SectionItem resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromSectionItemName(sectionItemName: string) {
+    return this.pathTemplates.sectionItemPathTemplate.match(sectionItemName).user;
+  }
+
+  /**
+   * Parse the section from SectionItem resource.
+   *
+   * @param {string} sectionItemName
+   *   A fully-qualified path representing SectionItem resource.
+   * @returns {string} A string representing the section.
+   */
+  matchSectionFromSectionItemName(sectionItemName: string) {
+    return this.pathTemplates.sectionItemPathTemplate.match(sectionItemName).section;
+  }
+
+  /**
+   * Parse the item from SectionItem resource.
+   *
+   * @param {string} sectionItemName
+   *   A fully-qualified path representing SectionItem resource.
+   * @returns {string} A string representing the item.
+   */
+  matchItemFromSectionItemName(sectionItemName: string) {
+    return this.pathTemplates.sectionItemPathTemplate.match(sectionItemName).item;
   }
 
   /**

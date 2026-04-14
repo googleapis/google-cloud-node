@@ -3673,6 +3673,9 @@ export namespace google {
 
                         /** Assignment schedulingPolicy */
                         schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
+
+                        /** Assignment principal */
+                        principal?: (string|null);
                     }
 
                     /** Represents an Assignment. */
@@ -3701,6 +3704,9 @@ export namespace google {
 
                         /** Assignment schedulingPolicy. */
                         public schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
+
+                        /** Assignment principal. */
+                        public principal: string;
 
                         /**
                          * Creates a new Assignment instance using the specified properties.

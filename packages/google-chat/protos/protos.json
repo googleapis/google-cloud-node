@@ -2741,7 +2741,9 @@
                 "java_package": "com.google.chat.v1",
                 "objc_class_prefix": "DYNAPIProto",
                 "php_namespace": "Google\\Apps\\Chat\\V1",
-                "ruby_package": "Google::Apps::Chat::V1"
+                "ruby_package": "Google::Apps::Chat::V1",
+                "(google.api.resource_definition).type": "chat.googleapis.com/User",
+                "(google.api.resource_definition).pattern": "users/{user}"
               },
               "nested": {
                 "ActionStatus": {
@@ -3497,7 +3499,7 @@
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.memberships.readonly,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.app.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.sections,https://www.googleapis.com/auth/chat.users.sections.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -4143,6 +4145,136 @@
                         },
                         {
                           "(google.api.method_signature)": "space_notification_setting,update_mask"
+                        }
+                      ]
+                    },
+                    "CreateSection": {
+                      "requestType": "CreateSectionRequest",
+                      "responseType": "Section",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=users/*}/sections",
+                        "(google.api.http).body": "section",
+                        "(google.api.method_signature)": "parent,section"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=users/*}/sections",
+                            "body": "section"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,section"
+                        }
+                      ]
+                    },
+                    "DeleteSection": {
+                      "requestType": "DeleteSectionRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1/{name=users/*/sections/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1/{name=users/*/sections/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateSection": {
+                      "requestType": "UpdateSectionRequest",
+                      "responseType": "Section",
+                      "options": {
+                        "(google.api.http).patch": "/v1/{section.name=users/*/sections/*}",
+                        "(google.api.http).body": "section",
+                        "(google.api.method_signature)": "section,update_mask"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1/{section.name=users/*/sections/*}",
+                            "body": "section"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "section,update_mask"
+                        }
+                      ]
+                    },
+                    "ListSections": {
+                      "requestType": "ListSectionsRequest",
+                      "responseType": "ListSectionsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/{parent=users/*}/sections",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{parent=users/*}/sections"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "PositionSection": {
+                      "requestType": "PositionSectionRequest",
+                      "responseType": "PositionSectionResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=users/*/sections/*}:position",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=users/*/sections/*}:position",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "ListSectionItems": {
+                      "requestType": "ListSectionItemsRequest",
+                      "responseType": "ListSectionItemsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/{parent=users/*/sections/*}/items",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{parent=users/*/sections/*}/items"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "MoveSectionItem": {
+                      "requestType": "MoveSectionItemRequest",
+                      "responseType": "MoveSectionItemResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=users/*/sections/*/items/*}:move",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "name,target_section"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=users/*/sections/*/items/*}:move",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name,target_section"
                         }
                       ]
                     }
@@ -6036,6 +6168,297 @@
                     "HISTORY_STATE_UNSPECIFIED": 0,
                     "HISTORY_OFF": 1,
                     "HISTORY_ON": 2
+                  }
+                },
+                "Section": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/Section",
+                    "(google.api.resource).pattern": "users/{user}/sections/{section}",
+                    "(google.api.resource).plural": "sections",
+                    "(google.api.resource).singular": "section"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "sortOrder": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "type": {
+                      "type": "SectionType",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "SectionType": {
+                      "values": {
+                        "SECTION_TYPE_UNSPECIFIED": 0,
+                        "CUSTOM_SECTION": 1,
+                        "DEFAULT_DIRECT_MESSAGES": 2,
+                        "DEFAULT_SPACES": 3,
+                        "DEFAULT_APPS": 6
+                      }
+                    }
+                  }
+                },
+                "SectionItem": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/SectionItem",
+                    "(google.api.resource).pattern": "users/{user}/sections/{section}/items/{item}",
+                    "(google.api.resource).plural": "sectionItems",
+                    "(google.api.resource).singular": "sectionItem"
+                  },
+                  "oneofs": {
+                    "item": {
+                      "oneof": [
+                        "space"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "space": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Space"
+                      }
+                    }
+                  }
+                },
+                "CreateSectionRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/User"
+                      }
+                    },
+                    "section": {
+                      "type": "Section",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "DeleteSectionRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Section"
+                      }
+                    }
+                  }
+                },
+                "UpdateSectionRequest": {
+                  "fields": {
+                    "section": {
+                      "type": "Section",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListSectionsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/User"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListSectionsResponse": {
+                  "fields": {
+                    "sections": {
+                      "rule": "repeated",
+                      "type": "Section",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "PositionSectionRequest": {
+                  "oneofs": {
+                    "position": {
+                      "oneof": [
+                        "sortOrder",
+                        "relativePosition"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Section"
+                      }
+                    },
+                    "sortOrder": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "relativePosition": {
+                      "type": "Position",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Position": {
+                      "values": {
+                        "POSITION_UNSPECIFIED": 0,
+                        "START": 1,
+                        "END": 2
+                      }
+                    }
+                  }
+                },
+                "PositionSectionResponse": {
+                  "fields": {
+                    "section": {
+                      "type": "Section",
+                      "id": 1
+                    }
+                  }
+                },
+                "ListSectionItemsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Section"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListSectionItemsResponse": {
+                  "fields": {
+                    "sectionItems": {
+                      "rule": "repeated",
+                      "type": "SectionItem",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "MoveSectionItemRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/SectionItem"
+                      }
+                    },
+                    "targetSection": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Section"
+                      }
+                    }
+                  }
+                },
+                "MoveSectionItemResponse": {
+                  "fields": {
+                    "sectionItem": {
+                      "type": "SectionItem",
+                      "id": 1
+                    }
                   }
                 },
                 "SpaceEvent": {

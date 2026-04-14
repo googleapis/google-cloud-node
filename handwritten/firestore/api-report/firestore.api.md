@@ -230,6 +230,12 @@ function arrayContainsAny(array: Expression, values: Expression): BooleanExpress
 function arrayContainsAny(fieldName: string, values: Expression): BooleanExpression;
 
 // @public
+function arrayFilter(fieldName: string, alias: string, filter: BooleanExpression): FunctionExpression;
+
+// @public
+function arrayFilter(arrayExpression: Expression, alias: string, filter: BooleanExpression): FunctionExpression;
+
+// @public
 function arrayFirst(fieldName: string): FunctionExpression;
 
 // @public
@@ -344,10 +350,28 @@ function arrayReverse(fieldName: string): FunctionExpression;
 function arrayReverse(arrayExpression: Expression): FunctionExpression;
 
 // @public
+function arraySlice(arrayName: string, offset: number | Expression, length?: number | Expression): FunctionExpression;
+
+// @public
+function arraySlice(arrayExpression: Expression, offset: number | Expression, length?: number | Expression): FunctionExpression;
+
+// @public
 function arraySum(fieldName: string): FunctionExpression;
 
 // @public
 function arraySum(expression: Expression): FunctionExpression;
+
+// @public
+function arrayTransform(fieldName: string, elementAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransform(arrayExpression: Expression, elementAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransformWithIndex(fieldName: string, elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
+
+// @public
+function arrayTransformWithIndex(arrayExpression: Expression, elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
 
 // @public
 function ascending(expr: Expression): Ordering;
@@ -683,6 +707,9 @@ function countDistinct(expr: Expression | string): AggregateFunction;
 function countIf(booleanExpr: BooleanExpression): AggregateFunction;
 
 // @public
+function currentDocument(): Expression;
+
+// @public
 function currentTimestamp(): FunctionExpression;
 
 // @public (undocumented)
@@ -753,6 +780,9 @@ function documentId(documentPath: string | firestore.DocumentReference): Functio
 
 // @public
 function documentId(documentPathExpr: Expression): FunctionExpression;
+
+// @beta
+function documentMatches(rquery: string | Expression): BooleanExpression;
 
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 // Warning: (ae-forgotten-export) The symbol "Serializable" needs to be exported by the entry point index.d.ts
@@ -1084,6 +1114,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     arrayContainsAll(arrayExpression: Expression): BooleanExpression;
     arrayContainsAny(values: Array<Expression | unknown>): BooleanExpression;
     arrayContainsAny(arrayExpression: Expression): BooleanExpression;
+    arrayFilter(alias: string, filter: BooleanExpression): FunctionExpression;
     arrayFirst(): FunctionExpression;
     arrayFirstN(n: number): FunctionExpression;
     arrayFirstN(n: Expression): FunctionExpression;
@@ -1106,7 +1137,10 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     arrayMinimumN(n: number): FunctionExpression;
     arrayMinimumN(n: Expression): FunctionExpression;
     arrayReverse(): FunctionExpression;
+    arraySlice(offset: number | Expression, length?: number | Expression): FunctionExpression;
     arraySum(): FunctionExpression;
+    arrayTransform(elementAlias: string, transform: Expression): FunctionExpression;
+    arrayTransformWithIndex(elementAlias: string, indexAlias: string, transform: Expression): FunctionExpression;
     as(name: string): AliasedExpression;
     asBoolean(): BooleanExpression;
     ascending(): Ordering;
@@ -1145,6 +1179,7 @@ abstract class Expression implements firestore.Pipelines.Expression, HasUserData
     abstract expressionType: firestore.Pipelines.ExpressionType;
     first(): AggregateFunction;
     floor(): FunctionExpression;
+    getField(key: string | Expression): Expression;
     greaterThan(expression: Expression): BooleanExpression;
     greaterThan(value: unknown): BooleanExpression;
     greaterThanOrEqual(expression: Expression): BooleanExpression;
@@ -1281,6 +1316,8 @@ class Field extends Expression implements firestore.Pipelines.Selectable {
     readonly expressionType: firestore.Pipelines.ExpressionType;
     // (undocumented)
     get fieldName(): string;
+    // @beta
+    geoDistance(location: GeoPoint | Expression): Expression;
     // (undocumented)
     selectable: true;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@private" is not defined in this configuration
@@ -1588,6 +1625,9 @@ class FunctionExpression extends Expression {
     _validateUserData(ignoreUndefinedProperties: boolean): void;
 }
 
+// @beta
+function geoDistance(fieldName: string | Field, location: GeoPoint | Expression): Expression;
+
 // Warning: (tsdoc-undefined-tag) The TSDoc tag "@class" is not defined in this configuration
 //
 // @public
@@ -1618,6 +1658,18 @@ export class GeoPoint implements Serializable, firestore.GeoPoint {
     // @internal
     toProto(): api.IValue;
 }
+
+// @public
+function getField(expression: Expression, key: string): Expression;
+
+// @public
+function getField(expression: Expression, keyExpr: Expression): Expression;
+
+// @public
+function getField(fieldName: string, key: string): Expression;
+
+// @public
+function getField(fieldName: string, keyExpr: Expression): Expression;
 
 // @public
 function greaterThan(left: Expression, right: Expression): BooleanExpression;
@@ -1938,6 +1990,8 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     addFields(options: firestore.Pipelines.AddFieldsStageOptions): Pipeline;
     aggregate(accumulator: firestore.Pipelines.AliasedAggregate, ...additionalAccumulators: firestore.Pipelines.AliasedAggregate[]): Pipeline;
     aggregate(options: firestore.Pipelines.AggregateStageOptions): Pipeline;
+    define(aliasedExpression: firestore.Pipelines.AliasedExpression, ...additionalExpressions: firestore.Pipelines.AliasedExpression[]): Pipeline;
+    define(options: firestore.Pipelines.DefineStageOptions): Pipeline;
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
     // Warning: (tsdoc-undefined-tag) The TSDoc tag "@code" is not defined in this configuration
     //
@@ -1969,6 +2023,10 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     sample(options: firestore.Pipelines.SampleStageOptions): Pipeline;
+    // Warning: (tsdoc-undefined-tag) The TSDoc tag "@return" is not defined in this configuration
+    //
+    // @beta
+    search(options: firestore.Pipelines.SearchStageOptions): Pipeline;
     select(selection: firestore.Pipelines.Selectable | string, ...additionalSelections: Array<firestore.Pipelines.Selectable | string>): Pipeline;
     select(options: firestore.Pipelines.SelectStageOptions): Pipeline;
     sort(ordering: firestore.Pipelines.Ordering, ...additionalOrderings: firestore.Pipelines.Ordering[]): Pipeline;
@@ -1976,8 +2034,10 @@ class Pipeline implements firestore.Pipelines.Pipeline {
     // Warning: (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
     // Warning: (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
     stream(): NodeJS.ReadableStream;
+    toArrayExpression(): firestore.Pipelines.Expression;
     // (undocumented)
-    _toProto(): api.IPipeline;
+    _toProto(serializer?: Serializer): api.IPipeline;
+    toScalarExpression(): firestore.Pipelines.Expression;
     // Warning: (ae-forgotten-export) The symbol "StructuredPipeline" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -2055,6 +2115,7 @@ declare namespace Pipelines {
         PipelineResult,
         PipelineSnapshot,
         PipelineSource,
+        subcollection,
         and,
         arrayContains,
         arrayContainsAny,
@@ -2102,6 +2163,10 @@ declare namespace Pipelines {
         arrayMinimum,
         arrayMaximumN,
         arrayMinimumN,
+        arrayFilter,
+        arrayTransform,
+        arrayTransformWithIndex,
+        arraySlice,
         field,
         xor,
         AggregateFunction,
@@ -2194,8 +2259,14 @@ declare namespace Pipelines {
         stringReplaceOne,
         nor,
         switchOn,
+        getField,
+        variable,
+        currentDocument,
         ifNull,
-        coalesce
+        coalesce,
+        documentMatches,
+        score,
+        geoDistance
     }
 }
 export { Pipelines }
@@ -2607,6 +2678,9 @@ function rtrim(fieldName: string, valueToTrim?: string | Expression | Uint8Array
 // @public
 function rtrim(expression: Expression, valueToTrim?: string | Expression | Uint8Array | Buffer): FunctionExpression;
 
+// @beta
+function score(): Expression;
+
 // @public
 export function setLogFunction(logger: ((msg: string) => void) | null): void;
 
@@ -2687,6 +2761,12 @@ function stringReverse(stringExpression: Expression): FunctionExpression;
 
 // @public
 function stringReverse(field: string): FunctionExpression;
+
+// @public
+function subcollection(path: string): Pipeline;
+
+// @public
+function subcollection(options: firestore.Pipelines.SubcollectionStageOptions): Pipeline;
 
 // @public
 function substring(field: string, position: number, length?: number): FunctionExpression;
@@ -2982,6 +3062,9 @@ function unixSecondsToTimestamp(expr: Expression): FunctionExpression;
 
 // @public
 function unixSecondsToTimestamp(fieldName: string): FunctionExpression;
+
+// @public
+function variable(name: string): Expression;
 
 // @public
 function vectorLength(vectorExpression: Expression): FunctionExpression;

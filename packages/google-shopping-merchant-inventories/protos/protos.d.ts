@@ -55,6 +55,9 @@ export namespace google {
 
                         /** LocalInventoryAttributes instoreProductLocation */
                         instoreProductLocation?: (string|null);
+
+                        /** LocalInventoryAttributes loyaltyPrograms */
+                        loyaltyPrograms?: (google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram[]|null);
                     }
 
                     /** Represents a LocalInventoryAttributes. */
@@ -89,6 +92,9 @@ export namespace google {
 
                         /** LocalInventoryAttributes instoreProductLocation. */
                         public instoreProductLocation?: (string|null);
+
+                        /** LocalInventoryAttributes loyaltyPrograms. */
+                        public loyaltyPrograms: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram[];
 
                         /**
                          * Creates a new LocalInventoryAttributes instance using the specified properties.
@@ -203,6 +209,139 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of an InventoryLoyaltyProgram. */
+                    interface IInventoryLoyaltyProgram {
+
+                        /** InventoryLoyaltyProgram programLabel */
+                        programLabel?: (string|null);
+
+                        /** InventoryLoyaltyProgram tierLabel */
+                        tierLabel?: (string|null);
+
+                        /** InventoryLoyaltyProgram price */
+                        price?: (google.shopping.type.IPrice|null);
+
+                        /** InventoryLoyaltyProgram cashbackForFutureUse */
+                        cashbackForFutureUse?: (google.shopping.type.IPrice|null);
+
+                        /** InventoryLoyaltyProgram loyaltyPoints */
+                        loyaltyPoints?: (number|Long|string|null);
+
+                        /** InventoryLoyaltyProgram memberPriceEffectiveInterval */
+                        memberPriceEffectiveInterval?: (google.type.IInterval|null);
+
+                        /** InventoryLoyaltyProgram shippingLabel */
+                        shippingLabel?: (string|null);
+                    }
+
+                    /** Represents an InventoryLoyaltyProgram. */
+                    class InventoryLoyaltyProgram implements IInventoryLoyaltyProgram {
+
+                        /**
+                         * Constructs a new InventoryLoyaltyProgram.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram);
+
+                        /** InventoryLoyaltyProgram programLabel. */
+                        public programLabel?: (string|null);
+
+                        /** InventoryLoyaltyProgram tierLabel. */
+                        public tierLabel?: (string|null);
+
+                        /** InventoryLoyaltyProgram price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /** InventoryLoyaltyProgram cashbackForFutureUse. */
+                        public cashbackForFutureUse?: (google.shopping.type.IPrice|null);
+
+                        /** InventoryLoyaltyProgram loyaltyPoints. */
+                        public loyaltyPoints?: (number|Long|string|null);
+
+                        /** InventoryLoyaltyProgram memberPriceEffectiveInterval. */
+                        public memberPriceEffectiveInterval?: (google.type.IInterval|null);
+
+                        /** InventoryLoyaltyProgram shippingLabel. */
+                        public shippingLabel?: (string|null);
+
+                        /**
+                         * Creates a new InventoryLoyaltyProgram instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InventoryLoyaltyProgram instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram): google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram;
+
+                        /**
+                         * Encodes the specified InventoryLoyaltyProgram message. Does not implicitly {@link google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.verify|verify} messages.
+                         * @param message InventoryLoyaltyProgram message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InventoryLoyaltyProgram message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram.verify|verify} messages.
+                         * @param message InventoryLoyaltyProgram message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InventoryLoyaltyProgram message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InventoryLoyaltyProgram
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram;
+
+                        /**
+                         * Decodes an InventoryLoyaltyProgram message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InventoryLoyaltyProgram
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram;
+
+                        /**
+                         * Verifies an InventoryLoyaltyProgram message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InventoryLoyaltyProgram message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InventoryLoyaltyProgram
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram;
+
+                        /**
+                         * Creates a plain object from an InventoryLoyaltyProgram message. Also converts values to other types if specified.
+                         * @param message InventoryLoyaltyProgram
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.InventoryLoyaltyProgram, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InventoryLoyaltyProgram to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InventoryLoyaltyProgram
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a RegionalInventoryAttributes. */
                     interface IRegionalInventoryAttributes {
 
@@ -217,6 +356,9 @@ export namespace google {
 
                         /** RegionalInventoryAttributes availability */
                         availability?: (google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|keyof typeof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null);
+
+                        /** RegionalInventoryAttributes loyaltyPrograms */
+                        loyaltyPrograms?: (google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram[]|null);
                     }
 
                     /** Represents a RegionalInventoryAttributes. */
@@ -239,6 +381,9 @@ export namespace google {
 
                         /** RegionalInventoryAttributes availability. */
                         public availability?: (google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|keyof typeof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null);
+
+                        /** RegionalInventoryAttributes loyaltyPrograms. */
+                        public loyaltyPrograms: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram[];
 
                         /**
                          * Creates a new RegionalInventoryAttributes instance using the specified properties.
@@ -421,6 +566,9 @@ export namespace google {
                         /** LocalInventory name */
                         name?: (string|null);
 
+                        /** LocalInventory base64EncodedName */
+                        base64EncodedName?: (string|null);
+
                         /** LocalInventory account */
                         account?: (number|Long|string|null);
 
@@ -442,6 +590,9 @@ export namespace google {
 
                         /** LocalInventory name. */
                         public name: string;
+
+                        /** LocalInventory base64EncodedName. */
+                        public base64EncodedName: string;
 
                         /** LocalInventory account. */
                         public account: (number|Long|string);
@@ -1035,6 +1186,9 @@ export namespace google {
                         /** RegionalInventory name */
                         name?: (string|null);
 
+                        /** RegionalInventory base64EncodedName */
+                        base64EncodedName?: (string|null);
+
                         /** RegionalInventory account */
                         account?: (number|Long|string|null);
 
@@ -1056,6 +1210,9 @@ export namespace google {
 
                         /** RegionalInventory name. */
                         public name: string;
+
+                        /** RegionalInventory base64EncodedName. */
+                        public base64EncodedName: string;
 
                         /** RegionalInventory account. */
                         public account: (number|Long|string);
