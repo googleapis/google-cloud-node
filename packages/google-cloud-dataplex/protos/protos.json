@@ -8253,11 +8253,19 @@
                       "oneofs": {
                         "result": {
                           "oneof": [
+                            "datasetResult",
                             "tableResult"
                           ]
                         }
                       },
                       "fields": {
+                        "datasetResult": {
+                          "type": "DatasetResult",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "tableResult": {
                           "type": "TableResult",
                           "id": 8,
@@ -8267,6 +8275,33 @@
                         }
                       },
                       "nested": {
+                        "DatasetResult": {
+                          "fields": {
+                            "overview": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "schemaRelationships": {
+                              "rule": "repeated",
+                              "type": "SchemaRelationship",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queries": {
+                              "rule": "repeated",
+                              "type": "Query",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "TableResult": {
                           "fields": {
                             "name": {
@@ -8296,6 +8331,74 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "SchemaRelationship": {
+                          "fields": {
+                            "leftSchemaPaths": {
+                              "type": "SchemaPaths",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "rightSchemaPaths": {
+                              "type": "SchemaPaths",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sources": {
+                              "rule": "repeated",
+                              "type": "Source",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Source": {
+                              "values": {
+                                "SOURCE_UNSPECIFIED": 0,
+                                "AGENT": 4,
+                                "QUERY_HISTORY": 5,
+                                "TABLE_CONSTRAINTS": 6
+                              }
+                            },
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "SCHEMA_JOIN": 1
+                              }
+                            },
+                            "SchemaPaths": {
+                              "fields": {
+                                "tableFqn": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "paths": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
                               }
                             }
                           }
