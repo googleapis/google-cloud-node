@@ -150,6 +150,31 @@
                 "updateSpaceNotificationSetting"
               ]
             },
+            "CreateSection": {
+              "methods": [
+                "createSection"
+              ]
+            },
+            "DeleteSection": {
+              "methods": [
+                "deleteSection"
+              ]
+            },
+            "UpdateSection": {
+              "methods": [
+                "updateSection"
+              ]
+            },
+            "PositionSection": {
+              "methods": [
+                "positionSection"
+              ]
+            },
+            "MoveSectionItem": {
+              "methods": [
+                "moveSectionItem"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -197,6 +222,20 @@
                 "listSpaceEvents",
                 "listSpaceEventsStream",
                 "listSpaceEventsAsync"
+              ]
+            },
+            "ListSections": {
+              "methods": [
+                "listSections",
+                "listSectionsStream",
+                "listSectionsAsync"
+              ]
+            },
+            "ListSectionItems": {
+              "methods": [
+                "listSectionItems",
+                "listSectionItemsStream",
+                "listSectionItemsAsync"
               ]
             }
           }
@@ -344,6 +383,31 @@
                 "updateSpaceNotificationSetting"
               ]
             },
+            "CreateSection": {
+              "methods": [
+                "createSection"
+              ]
+            },
+            "DeleteSection": {
+              "methods": [
+                "deleteSection"
+              ]
+            },
+            "UpdateSection": {
+              "methods": [
+                "updateSection"
+              ]
+            },
+            "PositionSection": {
+              "methods": [
+                "positionSection"
+              ]
+            },
+            "MoveSectionItem": {
+              "methods": [
+                "moveSectionItem"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -391,6 +455,20 @@
                 "listSpaceEvents",
                 "listSpaceEventsStream",
                 "listSpaceEventsAsync"
+              ]
+            },
+            "ListSections": {
+              "methods": [
+                "listSections",
+                "listSectionsStream",
+                "listSectionsAsync"
+              ]
+            },
+            "ListSectionItems": {
+              "methods": [
+                "listSectionItems",
+                "listSectionItemsStream",
+                "listSectionItemsAsync"
               ]
             }
           }

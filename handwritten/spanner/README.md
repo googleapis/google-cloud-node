@@ -327,3 +327,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-spanner/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=spanner.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+

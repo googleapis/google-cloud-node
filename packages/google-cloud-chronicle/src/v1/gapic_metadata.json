@@ -127,6 +127,178 @@
         }
       }
     },
+    "DataTableService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataTableServiceClient",
+          "rpcs": {
+            "CreateDataTable": {
+              "methods": [
+                "createDataTable"
+              ]
+            },
+            "GetDataTable": {
+              "methods": [
+                "getDataTable"
+              ]
+            },
+            "UpdateDataTable": {
+              "methods": [
+                "updateDataTable"
+              ]
+            },
+            "DeleteDataTable": {
+              "methods": [
+                "deleteDataTable"
+              ]
+            },
+            "CreateDataTableRow": {
+              "methods": [
+                "createDataTableRow"
+              ]
+            },
+            "UpdateDataTableRow": {
+              "methods": [
+                "updateDataTableRow"
+              ]
+            },
+            "GetDataTableRow": {
+              "methods": [
+                "getDataTableRow"
+              ]
+            },
+            "DeleteDataTableRow": {
+              "methods": [
+                "deleteDataTableRow"
+              ]
+            },
+            "BulkCreateDataTableRows": {
+              "methods": [
+                "bulkCreateDataTableRows"
+              ]
+            },
+            "BulkGetDataTableRows": {
+              "methods": [
+                "bulkGetDataTableRows"
+              ]
+            },
+            "BulkReplaceDataTableRows": {
+              "methods": [
+                "bulkReplaceDataTableRows"
+              ]
+            },
+            "BulkUpdateDataTableRows": {
+              "methods": [
+                "bulkUpdateDataTableRows"
+              ]
+            },
+            "GetDataTableOperationErrors": {
+              "methods": [
+                "getDataTableOperationErrors"
+              ]
+            },
+            "ListDataTables": {
+              "methods": [
+                "listDataTables",
+                "listDataTablesStream",
+                "listDataTablesAsync"
+              ]
+            },
+            "ListDataTableRows": {
+              "methods": [
+                "listDataTableRows",
+                "listDataTableRowsStream",
+                "listDataTableRowsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataTableServiceClient",
+          "rpcs": {
+            "CreateDataTable": {
+              "methods": [
+                "createDataTable"
+              ]
+            },
+            "GetDataTable": {
+              "methods": [
+                "getDataTable"
+              ]
+            },
+            "UpdateDataTable": {
+              "methods": [
+                "updateDataTable"
+              ]
+            },
+            "DeleteDataTable": {
+              "methods": [
+                "deleteDataTable"
+              ]
+            },
+            "CreateDataTableRow": {
+              "methods": [
+                "createDataTableRow"
+              ]
+            },
+            "UpdateDataTableRow": {
+              "methods": [
+                "updateDataTableRow"
+              ]
+            },
+            "GetDataTableRow": {
+              "methods": [
+                "getDataTableRow"
+              ]
+            },
+            "DeleteDataTableRow": {
+              "methods": [
+                "deleteDataTableRow"
+              ]
+            },
+            "BulkCreateDataTableRows": {
+              "methods": [
+                "bulkCreateDataTableRows"
+              ]
+            },
+            "BulkGetDataTableRows": {
+              "methods": [
+                "bulkGetDataTableRows"
+              ]
+            },
+            "BulkReplaceDataTableRows": {
+              "methods": [
+                "bulkReplaceDataTableRows"
+              ]
+            },
+            "BulkUpdateDataTableRows": {
+              "methods": [
+                "bulkUpdateDataTableRows"
+              ]
+            },
+            "GetDataTableOperationErrors": {
+              "methods": [
+                "getDataTableOperationErrors"
+              ]
+            },
+            "ListDataTables": {
+              "methods": [
+                "listDataTables",
+                "listDataTablesStream",
+                "listDataTablesAsync"
+              ]
+            },
+            "ListDataTableRows": {
+              "methods": [
+                "listDataTableRows",
+                "listDataTableRowsStream",
+                "listDataTableRowsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityService": {
       "clients": {
         "grpc": {

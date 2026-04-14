@@ -14,7 +14,9 @@
                     "java_outer_classname": "VectorSearchServiceProto",
                     "java_package": "com.google.cloud.vectorsearch.v1",
                     "php_namespace": "Google\\Cloud\\VectorSearch\\V1",
-                    "ruby_package": "Google::Cloud::VectorSearch::V1"
+                    "ruby_package": "Google::Cloud::VectorSearch::V1",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "DistanceMetric": {
@@ -1100,6 +1102,18 @@
                         }
                       }
                     },
+                    "EncryptionSpec": {
+                      "fields": {
+                        "cryptoKeyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
                     "VectorSearchService": {
                       "options": {
                         "(google.api.default_host)": "vectorsearch.googleapis.com",
@@ -1288,6 +1302,34 @@
                             }
                           ]
                         },
+                        "UpdateIndex": {
+                          "requestType": "UpdateIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{index.name=projects/*/locations/*/collections/*/indexes/*}",
+                            "(google.api.http).body": "index",
+                            "(google.api.method_signature)": "index,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{index.name=projects/*/locations/*/collections/*/indexes/*}",
+                                "body": "index"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "index,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteIndex": {
                           "requestType": "DeleteIndexRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1426,6 +1468,13 @@
                         "dataSchema": {
                           "type": "google.protobuf.Struct",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1759,6 +1808,32 @@
                         "requestId": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateIndexRequest": {
+                      "fields": {
+                        "index": {
+                          "type": "Index",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -2149,7 +2224,9 @@
                     "java_outer_classname": "VectorSearchServiceProto",
                     "java_package": "com.google.cloud.vectorsearch.v1beta",
                     "php_namespace": "Google\\Cloud\\VectorSearch\\V1beta",
-                    "ruby_package": "Google::Cloud::VectorSearch::V1beta"
+                    "ruby_package": "Google::Cloud::VectorSearch::V1beta",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "DistanceMetric": {
@@ -3339,6 +3416,18 @@
                         }
                       }
                     },
+                    "EncryptionSpec": {
+                      "fields": {
+                        "cryptoKeyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
                     "VectorSearchService": {
                       "options": {
                         "(google.api.default_host)": "vectorsearch.googleapis.com",
@@ -3527,6 +3616,34 @@
                             }
                           ]
                         },
+                        "UpdateIndex": {
+                          "requestType": "UpdateIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{index.name=projects/*/locations/*/collections/*/indexes/*}",
+                            "(google.api.http).body": "index",
+                            "(google.api.method_signature)": "index,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{index.name=projects/*/locations/*/collections/*/indexes/*}",
+                                "body": "index"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "index,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteIndex": {
                           "requestType": "DeleteIndexRequest",
                           "responseType": "google.longrunning.Operation",
@@ -3673,6 +3790,13 @@
                         "dataSchema": {
                           "type": "google.protobuf.Struct",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4013,6 +4137,32 @@
                         }
                       }
                     },
+                    "UpdateIndexRequest": {
+                      "fields": {
+                        "index": {
+                          "type": "Index",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "DeleteIndexRequest": {
                       "fields": {
                         "name": {
@@ -4283,9 +4433,15 @@
                           },
                           "nested": {
                             "Format": {
+                              "valuesOptions": {
+                                "JSON": {
+                                  "deprecated": true
+                                }
+                              },
                               "values": {
                                 "FORMAT_UNSPECIFIED": 0,
-                                "JSON": 1
+                                "JSON": 1,
+                                "JSONL": 2
                               }
                             }
                           }
