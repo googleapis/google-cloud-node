@@ -105,9 +105,23 @@
                                 "(google.api.field_behavior)": "IDENTIFIER"
                               }
                             },
+                            "base64EncodedName": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "product": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "base64EncodedProduct": {
+                              "type": "string",
+                              "id": 13,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -550,6 +564,11 @@
                                 "shippingLabel"
                               ]
                             },
+                            "_returnPolicyLabel": {
+                              "oneof": [
+                                "returnPolicyLabel"
+                              ]
+                            },
                             "_transitTimeLabel": {
                               "oneof": [
                                 "transitTimeLabel"
@@ -973,6 +992,13 @@
                             "shippingLabel": {
                               "type": "string",
                               "id": 46,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "returnPolicyLabel": {
+                              "type": "string",
+                              "id": 170,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -2373,6 +2399,13 @@
                             "name": {
                               "type": "string",
                               "id": 1
+                            },
+                            "base64EncodedName": {
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "legacyLocal": {
                               "type": "bool",

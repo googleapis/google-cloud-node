@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 export {DataAccessControlServiceClient} from './data_access_control_service_client';
+export {DataTableServiceClient} from './data_table_service_client';
 export {EntityServiceClient} from './entity_service_client';
 export {InstanceServiceClient} from './instance_service_client';
 export {ReferenceListServiceClient} from './reference_list_service_client';
