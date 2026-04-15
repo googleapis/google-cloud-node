@@ -3059,7 +3059,7 @@ describe('storage', function () {
             });
 
             await new Promise(res =>
-              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME)
             );
 
             const [metadata] = await bucket.getMetadata();
