@@ -13771,6 +13771,114 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         });
     });
 
+    describe('getUserProvidedDataSettings', () => {
+        it('invokes getUserProvidedDataSettings without error', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.UserProvidedDataSettings()
+            );
+            client.innerApiCalls.getUserProvidedDataSettings = stubSimpleCall(expectedResponse);
+            const [response] = await client.getUserProvidedDataSettings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUserProvidedDataSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserProvidedDataSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserProvidedDataSettings without error using callback', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.UserProvidedDataSettings()
+            );
+            client.innerApiCalls.getUserProvidedDataSettings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getUserProvidedDataSettings(
+                    request,
+                    (err?: Error|null, result?: protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getUserProvidedDataSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserProvidedDataSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserProvidedDataSettings with error', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getUserProvidedDataSettings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getUserProvidedDataSettings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getUserProvidedDataSettings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getUserProvidedDataSettings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getUserProvidedDataSettings with closed client', async () => {
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getUserProvidedDataSettings(request), expectedError);
+        });
+    });
+
     describe('listAccounts', () => {
         it('invokes listAccounts without error', async () => {
             const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
@@ -22028,6 +22136,36 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
                 const result = client.matchSubpropertySyncConfigFromSubpropertySyncConfigName(fakePath);
                 assert.strictEqual(result, "subpropertySyncConfigValue");
                 assert((client.pathTemplates.subpropertySyncConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('userProvidedDataSettings', async () => {
+            const fakePath = "/rendered/path/userProvidedDataSettings";
+            const expectedParameters = {
+                property: "propertyValue",
+            };
+            const client = new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.userProvidedDataSettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.userProvidedDataSettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('userProvidedDataSettingsPath', () => {
+                const result = client.userProvidedDataSettingsPath("propertyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.userProvidedDataSettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchPropertyFromUserProvidedDataSettingsName', () => {
+                const result = client.matchPropertyFromUserProvidedDataSettingsName(fakePath);
+                assert.strictEqual(result, "propertyValue");
+                assert((client.pathTemplates.userProvidedDataSettingsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

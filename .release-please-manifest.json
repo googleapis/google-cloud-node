@@ -19,7 +19,7 @@
   "core/precise-date": "5.0.0",
   "core/projectify": "5.0.0",
   "core/promisify": "5.0.0",
-  "handwritten/bigquery": "8.2.0",
+  "handwritten/bigquery": "8.3.0",
   "handwritten/bigquery-storage": "5.1.0",
   "handwritten/bigtable": "6.5.0",
   "handwritten/cloud-profiler": "6.0.4",

@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.2.0...bigquery-v8.3.0) (2026-04-09)
+
+
+### Features
+
+* **bigquery:** Allow the user to ask for skipping parsing rows when querying ([#7848](https://github.com/googleapis/google-cloud-node/issues/7848)) ([e500d40](https://github.com/googleapis/google-cloud-node/commit/e500d4077065529fbdee4be565434a34b6643c09))
+
+
+### Bug Fixes
+
+* Unblock the releases on Node Bigquery ([#7946](https://github.com/googleapis/google-cloud-node/issues/7946)) ([7fad2f6](https://github.com/googleapis/google-cloud-node/commit/7fad2f6e2ef0b16ab87a92ae471136fe6f2655ef))
+
 ## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.1.1...bigquery-v8.2.0) (2026-02-19)
 
 
