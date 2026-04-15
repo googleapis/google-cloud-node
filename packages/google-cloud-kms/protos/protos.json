@@ -1138,6 +1138,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "keyPortabilityEnabled": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -4330,7 +4337,8 @@
                           "oneof": [
                             "sha256",
                             "sha384",
-                            "sha512"
+                            "sha512",
+                            "externalMu"
                           ]
                         }
                       },
@@ -4346,6 +4354,10 @@
                         "sha512": {
                           "type": "bytes",
                           "id": 3
+                        },
+                        "externalMu": {
+                          "type": "bytes",
+                          "id": 4
                         }
                       }
                     },

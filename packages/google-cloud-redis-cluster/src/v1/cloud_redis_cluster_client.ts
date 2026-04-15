@@ -204,6 +204,9 @@ export class CloudRedisClusterClient {
       backupCollectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupCollections/{backup_collection}'
       ),
+      caPoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/caPools/{ca_pool}'
+      ),
       certificateAuthorityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority'
       ),
@@ -230,6 +233,9 @@ export class CloudRedisClusterClient {
       ),
       serviceAttachmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/serviceAttachments/{service_attachment}'
+      ),
+      sharedRegionalCertificateAuthorityPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sharedRegionalCertificateAuthority'
       ),
     };
 
@@ -361,7 +367,7 @@ export class CloudRedisClusterClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const cloudRedisClusterStubMethods =
-        ['listClusters', 'getCluster', 'updateCluster', 'deleteCluster', 'createCluster', 'getClusterCertificateAuthority', 'rescheduleClusterMaintenance', 'listBackupCollections', 'getBackupCollection', 'listBackups', 'getBackup', 'deleteBackup', 'exportBackup', 'backupCluster'];
+        ['listClusters', 'getCluster', 'updateCluster', 'deleteCluster', 'createCluster', 'getClusterCertificateAuthority', 'getSharedRegionalCertificateAuthority', 'rescheduleClusterMaintenance', 'listBackupCollections', 'getBackupCollection', 'listBackups', 'getBackup', 'deleteBackup', 'exportBackup', 'backupCluster'];
     for (const methodName of cloudRedisClusterStubMethods) {
       const callPromise = this.cloudRedisClusterStub.then(
         stub => (...args: Array<{}>) => {
@@ -648,6 +654,103 @@ export class CloudRedisClusterClient {
         {}|undefined
       ]) => {
         this._log.info('getClusterCertificateAuthority response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets the details of regional certificate authority information for Redis
+ * cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Regional certificate authority resource name using the form:
+ *       `projects/{project_id}/locations/{location_id}/sharedRegionalCertificateAuthority`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority|SharedRegionalCertificateAuthority}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/cloud_redis_cluster.get_shared_regional_certificate_authority.js</caption>
+ * region_tag:redis_v1_generated_CloudRedisCluster_GetSharedRegionalCertificateAuthority_async
+ */
+  getSharedRegionalCertificateAuthority(
+      request?: protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+        protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|undefined, {}|undefined
+      ]>;
+  getSharedRegionalCertificateAuthority(
+      request: protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+          protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSharedRegionalCertificateAuthority(
+      request: protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest,
+      callback: Callback<
+          protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+          protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>): void;
+  getSharedRegionalCertificateAuthority(
+      request?: protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+          protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+          protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+        protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getSharedRegionalCertificateAuthority request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+        protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSharedRegionalCertificateAuthority response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getSharedRegionalCertificateAuthority(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority,
+        protos.google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getSharedRegionalCertificateAuthority response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -2757,6 +2860,55 @@ export class CloudRedisClusterClient {
   }
 
   /**
+   * Return a fully-qualified caPool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} ca_pool
+   * @returns {string} Resource name string.
+   */
+  caPoolPath(project:string,location:string,caPool:string) {
+    return this.pathTemplates.caPoolPathTemplate.render({
+      project: project,
+      location: location,
+      ca_pool: caPool,
+    });
+  }
+
+  /**
+   * Parse the project from CaPool resource.
+   *
+   * @param {string} caPoolName
+   *   A fully-qualified path representing CaPool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCaPoolName(caPoolName: string) {
+    return this.pathTemplates.caPoolPathTemplate.match(caPoolName).project;
+  }
+
+  /**
+   * Parse the location from CaPool resource.
+   *
+   * @param {string} caPoolName
+   *   A fully-qualified path representing CaPool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCaPoolName(caPoolName: string) {
+    return this.pathTemplates.caPoolPathTemplate.match(caPoolName).location;
+  }
+
+  /**
+   * Parse the ca_pool from CaPool resource.
+   *
+   * @param {string} caPoolName
+   *   A fully-qualified path representing CaPool resource.
+   * @returns {string} A string representing the ca_pool.
+   */
+  matchCaPoolFromCaPoolName(caPoolName: string) {
+    return this.pathTemplates.caPoolPathTemplate.match(caPoolName).ca_pool;
+  }
+
+  /**
    * Return a fully-qualified certificateAuthority resource name string.
    *
    * @param {string} project
@@ -3182,6 +3334,42 @@ export class CloudRedisClusterClient {
    */
   matchServiceAttachmentFromServiceAttachmentName(serviceAttachmentName: string) {
     return this.pathTemplates.serviceAttachmentPathTemplate.match(serviceAttachmentName).service_attachment;
+  }
+
+  /**
+   * Return a fully-qualified sharedRegionalCertificateAuthority resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  sharedRegionalCertificateAuthorityPath(project:string,location:string) {
+    return this.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from SharedRegionalCertificateAuthority resource.
+   *
+   * @param {string} sharedRegionalCertificateAuthorityName
+   *   A fully-qualified path representing SharedRegionalCertificateAuthority resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSharedRegionalCertificateAuthorityName(sharedRegionalCertificateAuthorityName: string) {
+    return this.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match(sharedRegionalCertificateAuthorityName).project;
+  }
+
+  /**
+   * Parse the location from SharedRegionalCertificateAuthority resource.
+   *
+   * @param {string} sharedRegionalCertificateAuthorityName
+   *   A fully-qualified path representing SharedRegionalCertificateAuthority resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSharedRegionalCertificateAuthorityName(sharedRegionalCertificateAuthorityName: string) {
+    return this.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match(sharedRegionalCertificateAuthorityName).location;
   }
 
   /**

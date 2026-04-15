@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.5.0...vectorsearch-v0.6.0) (2026-04-14)
+
+
+### Features
+
+* [vectorsearch] Added CMEK support ([#8033](https://github.com/googleapis/google-cloud-node/issues/8033)) ([460e654](https://github.com/googleapis/google-cloud-node/commit/460e654682993b5d0e9b20ef12e92f40d106ecf9))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.4.0...vectorsearch-v0.5.0) (2026-03-19)
 
 

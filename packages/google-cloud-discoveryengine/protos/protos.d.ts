@@ -67026,7 +67026,8 @@ export namespace google {
                         enum Condition {
                             CONDITION_UNSPECIFIED = 0,
                             DISABLED = 1,
-                            ENABLED = 2
+                            ENABLED = 2,
+                            AUTO = 3
                         }
                     }
 
@@ -113031,7 +113032,8 @@ export namespace google {
                         enum Condition {
                             CONDITION_UNSPECIFIED = 0,
                             DISABLED = 1,
-                            ENABLED = 2
+                            ENABLED = 2,
+                            AUTO = 3
                         }
                     }
 

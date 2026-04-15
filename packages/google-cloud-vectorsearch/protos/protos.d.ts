@@ -3983,6 +3983,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec cryptoKeyName */
+                    cryptoKeyName?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IEncryptionSpec);
+
+                    /** EncryptionSpec cryptoKeyName. */
+                    public cryptoKeyName: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IEncryptionSpec): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a VectorSearchService */
                 class VectorSearchService extends $protobuf.rpc.Service {
 
@@ -4116,6 +4213,20 @@ export namespace google {
                     public createIndex(request: google.cloud.vectorsearch.v1.ICreateIndexRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1.IUpdateIndexRequest, callback: google.cloud.vectorsearch.v1.VectorSearchService.UpdateIndexCallback): void;
+
+                    /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1.IUpdateIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteIndex.
                      * @param request DeleteIndexRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -4217,6 +4328,13 @@ export namespace google {
                     type CreateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|updateIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|deleteIndex}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -4264,6 +4382,9 @@ export namespace google {
 
                     /** Collection dataSchema */
                     dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec */
+                    encryptionSpec?: (google.cloud.vectorsearch.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a Collection. */
@@ -4298,6 +4419,9 @@ export namespace google {
 
                     /** Collection dataSchema. */
                     public dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.vectorsearch.v1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Collection instance using the specified properties.
@@ -5609,6 +5733,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateIndexRequest. */
+                interface IUpdateIndexRequest {
+
+                    /** UpdateIndexRequest index */
+                    index?: (google.cloud.vectorsearch.v1.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateIndexRequest. */
+                class UpdateIndexRequest implements IUpdateIndexRequest {
+
+                    /**
+                     * Constructs a new UpdateIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1.IUpdateIndexRequest);
+
+                    /** UpdateIndexRequest index. */
+                    public index?: (google.cloud.vectorsearch.v1.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1.IUpdateIndexRequest): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Verifies an UpdateIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.UpdateIndexRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateIndexRequest message. Also converts values to other types if specified.
+                     * @param message UpdateIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1.UpdateIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateIndexRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11646,6 +11879,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec cryptoKeyName */
+                    cryptoKeyName?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IEncryptionSpec);
+
+                    /** EncryptionSpec cryptoKeyName. */
+                    public cryptoKeyName: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IEncryptionSpec): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a VectorSearchService */
                 class VectorSearchService extends $protobuf.rpc.Service {
 
@@ -11779,6 +12109,20 @@ export namespace google {
                     public createIndex(request: google.cloud.vectorsearch.v1beta.ICreateIndexRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest, callback: google.cloud.vectorsearch.v1beta.VectorSearchService.UpdateIndexCallback): void;
+
+                    /**
+                     * Calls UpdateIndex.
+                     * @param request UpdateIndexRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateIndex(request: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteIndex.
                      * @param request DeleteIndexRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -11880,6 +12224,13 @@ export namespace google {
                     type CreateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|updateIndex}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateIndexCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|deleteIndex}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -11930,6 +12281,9 @@ export namespace google {
 
                     /** Collection dataSchema */
                     dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec */
+                    encryptionSpec?: (google.cloud.vectorsearch.v1beta.IEncryptionSpec|null);
                 }
 
                 /** Represents a Collection. */
@@ -11967,6 +12321,9 @@ export namespace google {
 
                     /** Collection dataSchema. */
                     public dataSchema?: (google.protobuf.IStruct|null);
+
+                    /** Collection encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.vectorsearch.v1beta.IEncryptionSpec|null);
 
                     /**
                      * Creates a new Collection instance using the specified properties.
@@ -13284,6 +13641,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateIndexRequest. */
+                interface IUpdateIndexRequest {
+
+                    /** UpdateIndexRequest index */
+                    index?: (google.cloud.vectorsearch.v1beta.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateIndexRequest. */
+                class UpdateIndexRequest implements IUpdateIndexRequest {
+
+                    /**
+                     * Constructs a new UpdateIndexRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest);
+
+                    /** UpdateIndexRequest index. */
+                    public index?: (google.cloud.vectorsearch.v1beta.IIndex|null);
+
+                    /** UpdateIndexRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateIndexRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateIndexRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateIndexRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UpdateIndexRequest.verify|verify} messages.
+                     * @param message UpdateIndexRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IUpdateIndexRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Decodes an UpdateIndexRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateIndexRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Verifies an UpdateIndexRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateIndexRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.UpdateIndexRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateIndexRequest message. Also converts values to other types if specified.
+                     * @param message UpdateIndexRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.UpdateIndexRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateIndexRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateIndexRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteIndexRequest. */
                 interface IDeleteIndexRequest {
 
@@ -14487,7 +14953,8 @@ export namespace google {
                         /** Format enum. */
                         enum Format {
                             FORMAT_UNSPECIFIED = 0,
-                            JSON = 1
+                            JSON = 1,
+                            JSONL = 2
                         }
                     }
                 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.5.0...kms-inventory-v2.6.0) (2026-04-14)
+
+
+### Features
+
+* [inventory] support external-μ in the Digest ([#8015](https://github.com/googleapis/google-cloud-node/issues/8015)) ([71be7d3](https://github.com/googleapis/google-cloud-node/commit/71be7d38a621ddbb5435115132aa98167a9231d3))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.4.0...kms-inventory-v2.5.0) (2026-03-02)
 
 

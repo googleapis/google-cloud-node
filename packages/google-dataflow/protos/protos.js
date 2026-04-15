@@ -82,6 +82,7 @@
                      * @property {google.dataflow.v1beta3.IDebugOptions|null} [debugOptions] Environment debugOptions
                      * @property {boolean|null} [useStreamingEngineResourceBasedBilling] Environment useStreamingEngineResourceBasedBilling
                      * @property {google.dataflow.v1beta3.StreamingMode|null} [streamingMode] Environment streamingMode
+                     * @property {boolean|null} [usePublicIps] Environment usePublicIps
                      */
     
                     /**
@@ -255,6 +256,14 @@
                     Environment.prototype.streamingMode = 0;
     
                     /**
+                     * Environment usePublicIps.
+                     * @member {boolean} usePublicIps
+                     * @memberof google.dataflow.v1beta3.Environment
+                     * @instance
+                     */
+                    Environment.prototype.usePublicIps = false;
+    
+                    /**
                      * Creates a new Environment instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.Environment
@@ -319,6 +328,8 @@
                             writer.uint32(/* id 18, wireType 0 =*/144).bool(message.useStreamingEngineResourceBasedBilling);
                         if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
                             writer.uint32(/* id 19, wireType 0 =*/152).int32(message.streamingMode);
+                        if (message.usePublicIps != null && Object.hasOwnProperty.call(message, "usePublicIps"))
+                            writer.uint32(/* id 20, wireType 0 =*/160).bool(message.usePublicIps);
                         return writer;
                     };
     
@@ -435,6 +446,10 @@
                                 }
                             case 19: {
                                     message.streamingMode = reader.int32();
+                                    break;
+                                }
+                            case 20: {
+                                    message.usePublicIps = reader.bool();
                                     break;
                                 }
                             default:
@@ -571,6 +586,9 @@
                             case 2:
                                 break;
                             }
+                        if (message.usePublicIps != null && message.hasOwnProperty("usePublicIps"))
+                            if (typeof message.usePublicIps !== "boolean")
+                                return "usePublicIps: boolean expected";
                         return null;
                     };
     
@@ -711,6 +729,8 @@
                             message.streamingMode = 2;
                             break;
                         }
+                        if (object.usePublicIps != null)
+                            message.usePublicIps = Boolean(object.usePublicIps);
                         return message;
                     };
     
@@ -749,6 +769,7 @@
                             object.debugOptions = null;
                             object.useStreamingEngineResourceBasedBilling = false;
                             object.streamingMode = options.enums === String ? "STREAMING_MODE_UNSPECIFIED" : 0;
+                            object.usePublicIps = false;
                         }
                         if (message.tempStoragePrefix != null && message.hasOwnProperty("tempStoragePrefix"))
                             object.tempStoragePrefix = message.tempStoragePrefix;
@@ -797,6 +818,8 @@
                             object.useStreamingEngineResourceBasedBilling = message.useStreamingEngineResourceBasedBilling;
                         if (message.streamingMode != null && message.hasOwnProperty("streamingMode"))
                             object.streamingMode = options.enums === String ? $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] : message.streamingMode;
+                        if (message.usePublicIps != null && message.hasOwnProperty("usePublicIps"))
+                            object.usePublicIps = message.usePublicIps;
                         return object;
                     };
     
@@ -837,6 +860,7 @@
                      * @interface IPackage
                      * @property {string|null} [name] Package name
                      * @property {string|null} [location] Package location
+                     * @property {string|null} [sha256] Package sha256
                      */
     
                     /**
@@ -871,6 +895,14 @@
                     Package.prototype.location = "";
     
                     /**
+                     * Package sha256.
+                     * @member {string} sha256
+                     * @memberof google.dataflow.v1beta3.Package
+                     * @instance
+                     */
+                    Package.prototype.sha256 = "";
+    
+                    /**
                      * Creates a new Package instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.Package
@@ -898,6 +930,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                        if (message.sha256 != null && Object.hasOwnProperty.call(message, "sha256"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.sha256);
                         return writer;
                     };
     
@@ -942,6 +976,10 @@
                                     message.location = reader.string();
                                     break;
                                 }
+                            case 3: {
+                                    message.sha256 = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -983,6 +1021,9 @@
                         if (message.location != null && message.hasOwnProperty("location"))
                             if (!$util.isString(message.location))
                                 return "location: string expected";
+                        if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                            if (!$util.isString(message.sha256))
+                                return "sha256: string expected";
                         return null;
                     };
     
@@ -1002,6 +1043,8 @@
                             message.name = String(object.name);
                         if (object.location != null)
                             message.location = String(object.location);
+                        if (object.sha256 != null)
+                            message.sha256 = String(object.sha256);
                         return message;
                     };
     
@@ -1021,11 +1064,14 @@
                         if (options.defaults) {
                             object.name = "";
                             object.location = "";
+                            object.sha256 = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
+                        if (message.sha256 != null && message.hasOwnProperty("sha256"))
+                            object.sha256 = message.sha256;
                         return object;
                     };
     
@@ -2932,6 +2978,8 @@
                      * @property {google.dataflow.v1beta3.TeardownPolicy|null} [teardownPolicy] WorkerPool teardownPolicy
                      * @property {number|null} [diskSizeGb] WorkerPool diskSizeGb
                      * @property {string|null} [diskType] WorkerPool diskType
+                     * @property {number|Long|null} [diskProvisionedIops] WorkerPool diskProvisionedIops
+                     * @property {number|Long|null} [diskProvisionedThroughputMibps] WorkerPool diskProvisionedThroughputMibps
                      * @property {string|null} [diskSourceImage] WorkerPool diskSourceImage
                      * @property {string|null} [zone] WorkerPool zone
                      * @property {google.dataflow.v1beta3.ITaskRunnerSettings|null} [taskrunnerSettings] WorkerPool taskrunnerSettings
@@ -3030,6 +3078,22 @@
                      * @instance
                      */
                     WorkerPool.prototype.diskType = "";
+    
+                    /**
+                     * WorkerPool diskProvisionedIops.
+                     * @member {number|Long} diskProvisionedIops
+                     * @memberof google.dataflow.v1beta3.WorkerPool
+                     * @instance
+                     */
+                    WorkerPool.prototype.diskProvisionedIops = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * WorkerPool diskProvisionedThroughputMibps.
+                     * @member {number|Long} diskProvisionedThroughputMibps
+                     * @memberof google.dataflow.v1beta3.WorkerPool
+                     * @instance
+                     */
+                    WorkerPool.prototype.diskProvisionedThroughputMibps = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                     /**
                      * WorkerPool diskSourceImage.
@@ -3215,6 +3279,10 @@
                         if (message.sdkHarnessContainerImages != null && message.sdkHarnessContainerImages.length)
                             for (var i = 0; i < message.sdkHarnessContainerImages.length; ++i)
                                 $root.google.dataflow.v1beta3.SdkHarnessContainerImage.encode(message.sdkHarnessContainerImages[i], writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        if (message.diskProvisionedIops != null && Object.hasOwnProperty.call(message, "diskProvisionedIops"))
+                            writer.uint32(/* id 23, wireType 0 =*/184).int64(message.diskProvisionedIops);
+                        if (message.diskProvisionedThroughputMibps != null && Object.hasOwnProperty.call(message, "diskProvisionedThroughputMibps"))
+                            writer.uint32(/* id 24, wireType 0 =*/192).int64(message.diskProvisionedThroughputMibps);
                         return writer;
                     };
     
@@ -3283,6 +3351,14 @@
                                 }
                             case 16: {
                                     message.diskType = reader.string();
+                                    break;
+                                }
+                            case 23: {
+                                    message.diskProvisionedIops = reader.int64();
+                                    break;
+                                }
+                            case 24: {
+                                    message.diskProvisionedThroughputMibps = reader.int64();
                                     break;
                                 }
                             case 8: {
@@ -3443,6 +3519,12 @@
                         if (message.diskType != null && message.hasOwnProperty("diskType"))
                             if (!$util.isString(message.diskType))
                                 return "diskType: string expected";
+                        if (message.diskProvisionedIops != null && message.hasOwnProperty("diskProvisionedIops"))
+                            if (!$util.isInteger(message.diskProvisionedIops) && !(message.diskProvisionedIops && $util.isInteger(message.diskProvisionedIops.low) && $util.isInteger(message.diskProvisionedIops.high)))
+                                return "diskProvisionedIops: integer|Long expected";
+                        if (message.diskProvisionedThroughputMibps != null && message.hasOwnProperty("diskProvisionedThroughputMibps"))
+                            if (!$util.isInteger(message.diskProvisionedThroughputMibps) && !(message.diskProvisionedThroughputMibps && $util.isInteger(message.diskProvisionedThroughputMibps.low) && $util.isInteger(message.diskProvisionedThroughputMibps.high)))
+                                return "diskProvisionedThroughputMibps: integer|Long expected";
                         if (message.diskSourceImage != null && message.hasOwnProperty("diskSourceImage"))
                             if (!$util.isString(message.diskSourceImage))
                                 return "diskSourceImage: string expected";
@@ -3597,6 +3679,24 @@
                             message.diskSizeGb = object.diskSizeGb | 0;
                         if (object.diskType != null)
                             message.diskType = String(object.diskType);
+                        if (object.diskProvisionedIops != null)
+                            if ($util.Long)
+                                (message.diskProvisionedIops = $util.Long.fromValue(object.diskProvisionedIops)).unsigned = false;
+                            else if (typeof object.diskProvisionedIops === "string")
+                                message.diskProvisionedIops = parseInt(object.diskProvisionedIops, 10);
+                            else if (typeof object.diskProvisionedIops === "number")
+                                message.diskProvisionedIops = object.diskProvisionedIops;
+                            else if (typeof object.diskProvisionedIops === "object")
+                                message.diskProvisionedIops = new $util.LongBits(object.diskProvisionedIops.low >>> 0, object.diskProvisionedIops.high >>> 0).toNumber();
+                        if (object.diskProvisionedThroughputMibps != null)
+                            if ($util.Long)
+                                (message.diskProvisionedThroughputMibps = $util.Long.fromValue(object.diskProvisionedThroughputMibps)).unsigned = false;
+                            else if (typeof object.diskProvisionedThroughputMibps === "string")
+                                message.diskProvisionedThroughputMibps = parseInt(object.diskProvisionedThroughputMibps, 10);
+                            else if (typeof object.diskProvisionedThroughputMibps === "number")
+                                message.diskProvisionedThroughputMibps = object.diskProvisionedThroughputMibps;
+                            else if (typeof object.diskProvisionedThroughputMibps === "object")
+                                message.diskProvisionedThroughputMibps = new $util.LongBits(object.diskProvisionedThroughputMibps.low >>> 0, object.diskProvisionedThroughputMibps.high >>> 0).toNumber();
                         if (object.diskSourceImage != null)
                             message.diskSourceImage = String(object.diskSourceImage);
                         if (object.zone != null)
@@ -3715,6 +3815,16 @@
                             object.subnetwork = "";
                             object.numThreadsPerWorker = 0;
                             object.ipConfiguration = options.enums === String ? "WORKER_IP_UNSPECIFIED" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.diskProvisionedIops = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.diskProvisionedIops = options.longs === String ? "0" : 0;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.diskProvisionedThroughputMibps = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.diskProvisionedThroughputMibps = options.longs === String ? "0" : 0;
                         }
                         if (message.kind != null && message.hasOwnProperty("kind"))
                             object.kind = message.kind;
@@ -3773,6 +3883,16 @@
                             for (var j = 0; j < message.sdkHarnessContainerImages.length; ++j)
                                 object.sdkHarnessContainerImages[j] = $root.google.dataflow.v1beta3.SdkHarnessContainerImage.toObject(message.sdkHarnessContainerImages[j], options);
                         }
+                        if (message.diskProvisionedIops != null && message.hasOwnProperty("diskProvisionedIops"))
+                            if (typeof message.diskProvisionedIops === "number")
+                                object.diskProvisionedIops = options.longs === String ? String(message.diskProvisionedIops) : message.diskProvisionedIops;
+                            else
+                                object.diskProvisionedIops = options.longs === String ? $util.Long.prototype.toString.call(message.diskProvisionedIops) : options.longs === Number ? new $util.LongBits(message.diskProvisionedIops.low >>> 0, message.diskProvisionedIops.high >>> 0).toNumber() : message.diskProvisionedIops;
+                        if (message.diskProvisionedThroughputMibps != null && message.hasOwnProperty("diskProvisionedThroughputMibps"))
+                            if (typeof message.diskProvisionedThroughputMibps === "number")
+                                object.diskProvisionedThroughputMibps = options.longs === String ? String(message.diskProvisionedThroughputMibps) : message.diskProvisionedThroughputMibps;
+                            else
+                                object.diskProvisionedThroughputMibps = options.longs === String ? $util.Long.prototype.toString.call(message.diskProvisionedThroughputMibps) : options.longs === Number ? new $util.LongBits(message.diskProvisionedThroughputMibps.low >>> 0, message.diskProvisionedThroughputMibps.high >>> 0).toNumber() : message.diskProvisionedThroughputMibps;
                         return object;
                     };
     
@@ -4647,6 +4767,7 @@
                      * @property {google.dataflow.v1beta3.IRuntimeUpdatableParams|null} [runtimeUpdatableParams] Job runtimeUpdatableParams
                      * @property {boolean|null} [satisfiesPzi] Job satisfiesPzi
                      * @property {google.dataflow.v1beta3.IServiceResources|null} [serviceResources] Job serviceResources
+                     * @property {boolean|null} [pausable] Job pausable
                      */
     
                     /**
@@ -4893,6 +5014,14 @@
                      */
                     Job.prototype.serviceResources = null;
     
+                    /**
+                     * Job pausable.
+                     * @member {boolean} pausable
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Job.prototype.pausable = false;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -4999,6 +5128,8 @@
                             writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzi);
                         if (message.serviceResources != null && Object.hasOwnProperty.call(message, "serviceResources"))
                             $root.google.dataflow.v1beta3.ServiceResources.encode(message.serviceResources, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                        if (message.pausable != null && Object.hasOwnProperty.call(message, "pausable"))
+                            writer.uint32(/* id 29, wireType 0 =*/232).bool(message.pausable);
                         return writer;
                     };
     
@@ -5191,6 +5322,10 @@
                                     message.serviceResources = $root.google.dataflow.v1beta3.ServiceResources.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 29: {
+                                    message.pausable = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -5279,6 +5414,8 @@
                             case 10:
                             case 11:
                             case 12:
+                            case 13:
+                            case 14:
                                 break;
                             }
                         if (message.currentStateTime != null && message.hasOwnProperty("currentStateTime")) {
@@ -5303,6 +5440,8 @@
                             case 10:
                             case 11:
                             case 12:
+                            case 13:
+                            case 14:
                                 break;
                             }
                         if (message.executionInfo != null && message.hasOwnProperty("executionInfo")) {
@@ -5401,6 +5540,9 @@
                                     return "serviceResources." + error;
                             }
                         }
+                        if (message.pausable != null && message.hasOwnProperty("pausable"))
+                            if (typeof message.pausable !== "boolean")
+                                return "pausable: boolean expected";
                         return null;
                     };
     
@@ -5518,6 +5660,14 @@
                         case 12:
                             message.currentState = 12;
                             break;
+                        case "JOB_STATE_PAUSING":
+                        case 13:
+                            message.currentState = 13;
+                            break;
+                        case "JOB_STATE_PAUSED":
+                        case 14:
+                            message.currentState = 14;
+                            break;
                         }
                         if (object.currentStateTime != null) {
                             if (typeof object.currentStateTime !== "object")
@@ -5582,6 +5732,14 @@
                         case "JOB_STATE_RESOURCE_CLEANING_UP":
                         case 12:
                             message.requestedState = 12;
+                            break;
+                        case "JOB_STATE_PAUSING":
+                        case 13:
+                            message.requestedState = 13;
+                            break;
+                        case "JOB_STATE_PAUSED":
+                        case 14:
+                            message.requestedState = 14;
                             break;
                         }
                         if (object.executionInfo != null) {
@@ -5664,6 +5822,8 @@
                                 throw TypeError(".google.dataflow.v1beta3.Job.serviceResources: object expected");
                             message.serviceResources = $root.google.dataflow.v1beta3.ServiceResources.fromObject(object.serviceResources);
                         }
+                        if (object.pausable != null)
+                            message.pausable = Boolean(object.pausable);
                         return message;
                     };
     
@@ -5710,6 +5870,7 @@
                             object.createdFromSnapshotId = "";
                             object.stepsLocation = "";
                             object.satisfiesPzs = false;
+                            object.pausable = false;
                         }
                         if (message.id != null && message.hasOwnProperty("id"))
                             object.id = message.id;
@@ -5792,6 +5953,8 @@
                             if (options.oneofs)
                                 object._serviceResources = "serviceResources";
                         }
+                        if (message.pausable != null && message.hasOwnProperty("pausable"))
+                            object.pausable = message.pausable;
                         return object;
                     };
     
@@ -6054,6 +6217,8 @@
                      * @property {number|null} [maxNumWorkers] RuntimeUpdatableParams maxNumWorkers
                      * @property {number|null} [minNumWorkers] RuntimeUpdatableParams minNumWorkers
                      * @property {number|null} [workerUtilizationHint] RuntimeUpdatableParams workerUtilizationHint
+                     * @property {google.protobuf.IDuration|null} [acceptableBacklogDuration] RuntimeUpdatableParams acceptableBacklogDuration
+                     * @property {string|null} [autoscalingTier] RuntimeUpdatableParams autoscalingTier
                      */
     
                     /**
@@ -6095,6 +6260,22 @@
                      */
                     RuntimeUpdatableParams.prototype.workerUtilizationHint = null;
     
+                    /**
+                     * RuntimeUpdatableParams acceptableBacklogDuration.
+                     * @member {google.protobuf.IDuration|null|undefined} acceptableBacklogDuration
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    RuntimeUpdatableParams.prototype.acceptableBacklogDuration = null;
+    
+                    /**
+                     * RuntimeUpdatableParams autoscalingTier.
+                     * @member {string|null|undefined} autoscalingTier
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    RuntimeUpdatableParams.prototype.autoscalingTier = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -6113,6 +6294,18 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(RuntimeUpdatableParams.prototype, "_workerUtilizationHint", {
                         get: $util.oneOfGetter($oneOfFields = ["workerUtilizationHint"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(RuntimeUpdatableParams.prototype, "_acceptableBacklogDuration", {
+                        get: $util.oneOfGetter($oneOfFields = ["acceptableBacklogDuration"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(RuntimeUpdatableParams.prototype, "_autoscalingTier", {
+                        get: $util.oneOfGetter($oneOfFields = ["autoscalingTier"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -6146,6 +6339,10 @@
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minNumWorkers);
                         if (message.workerUtilizationHint != null && Object.hasOwnProperty.call(message, "workerUtilizationHint"))
                             writer.uint32(/* id 3, wireType 1 =*/25).double(message.workerUtilizationHint);
+                        if (message.acceptableBacklogDuration != null && Object.hasOwnProperty.call(message, "acceptableBacklogDuration"))
+                            $root.google.protobuf.Duration.encode(message.acceptableBacklogDuration, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.autoscalingTier != null && Object.hasOwnProperty.call(message, "autoscalingTier"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.autoscalingTier);
                         return writer;
                     };
     
@@ -6192,6 +6389,14 @@
                                 }
                             case 3: {
                                     message.workerUtilizationHint = reader.double();
+                                    break;
+                                }
+                            case 4: {
+                                    message.acceptableBacklogDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.autoscalingTier = reader.string();
                                     break;
                                 }
                             default:
@@ -6245,6 +6450,19 @@
                             if (typeof message.workerUtilizationHint !== "number")
                                 return "workerUtilizationHint: number expected";
                         }
+                        if (message.acceptableBacklogDuration != null && message.hasOwnProperty("acceptableBacklogDuration")) {
+                            properties._acceptableBacklogDuration = 1;
+                            {
+                                var error = $root.google.protobuf.Duration.verify(message.acceptableBacklogDuration);
+                                if (error)
+                                    return "acceptableBacklogDuration." + error;
+                            }
+                        }
+                        if (message.autoscalingTier != null && message.hasOwnProperty("autoscalingTier")) {
+                            properties._autoscalingTier = 1;
+                            if (!$util.isString(message.autoscalingTier))
+                                return "autoscalingTier: string expected";
+                        }
                         return null;
                     };
     
@@ -6266,6 +6484,13 @@
                             message.minNumWorkers = object.minNumWorkers | 0;
                         if (object.workerUtilizationHint != null)
                             message.workerUtilizationHint = Number(object.workerUtilizationHint);
+                        if (object.acceptableBacklogDuration != null) {
+                            if (typeof object.acceptableBacklogDuration !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.RuntimeUpdatableParams.acceptableBacklogDuration: object expected");
+                            message.acceptableBacklogDuration = $root.google.protobuf.Duration.fromObject(object.acceptableBacklogDuration);
+                        }
+                        if (object.autoscalingTier != null)
+                            message.autoscalingTier = String(object.autoscalingTier);
                         return message;
                     };
     
@@ -6296,6 +6521,16 @@
                             object.workerUtilizationHint = options.json && !isFinite(message.workerUtilizationHint) ? String(message.workerUtilizationHint) : message.workerUtilizationHint;
                             if (options.oneofs)
                                 object._workerUtilizationHint = "workerUtilizationHint";
+                        }
+                        if (message.acceptableBacklogDuration != null && message.hasOwnProperty("acceptableBacklogDuration")) {
+                            object.acceptableBacklogDuration = $root.google.protobuf.Duration.toObject(message.acceptableBacklogDuration, options);
+                            if (options.oneofs)
+                                object._acceptableBacklogDuration = "acceptableBacklogDuration";
+                        }
+                        if (message.autoscalingTier != null && message.hasOwnProperty("autoscalingTier")) {
+                            object.autoscalingTier = message.autoscalingTier;
+                            if (options.oneofs)
+                                object._autoscalingTier = "autoscalingTier";
                         }
                         return object;
                     };
@@ -9186,6 +9421,8 @@
                             case 10:
                             case 11:
                             case 12:
+                            case 13:
+                            case 14:
                                 break;
                             }
                         if (message.currentStateTime != null && message.hasOwnProperty("currentStateTime")) {
@@ -9268,6 +9505,14 @@
                         case "JOB_STATE_RESOURCE_CLEANING_UP":
                         case 12:
                             message.executionStageState = 12;
+                            break;
+                        case "JOB_STATE_PAUSING":
+                        case 13:
+                            message.executionStageState = 13;
+                            break;
+                        case "JOB_STATE_PAUSED":
+                        case 14:
+                            message.executionStageState = 14;
                             break;
                         }
                         if (object.currentStateTime != null) {
@@ -12257,6 +12502,8 @@
                  * @property {number} JOB_STATE_CANCELLING=10 JOB_STATE_CANCELLING value
                  * @property {number} JOB_STATE_QUEUED=11 JOB_STATE_QUEUED value
                  * @property {number} JOB_STATE_RESOURCE_CLEANING_UP=12 JOB_STATE_RESOURCE_CLEANING_UP value
+                 * @property {number} JOB_STATE_PAUSING=13 JOB_STATE_PAUSING value
+                 * @property {number} JOB_STATE_PAUSED=14 JOB_STATE_PAUSED value
                  */
                 v1beta3.JobState = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
@@ -12273,6 +12520,8 @@
                     values[valuesById[10] = "JOB_STATE_CANCELLING"] = 10;
                     values[valuesById[11] = "JOB_STATE_QUEUED"] = 11;
                     values[valuesById[12] = "JOB_STATE_RESOURCE_CLEANING_UP"] = 12;
+                    values[valuesById[13] = "JOB_STATE_PAUSING"] = 13;
+                    values[valuesById[14] = "JOB_STATE_PAUSED"] = 14;
                     return values;
                 })();
     
@@ -19938,6 +20187,7 @@
                      * @property {google.protobuf.IValue|null} [meanCount] MetricUpdate meanCount
                      * @property {google.protobuf.IValue|null} [set] MetricUpdate set
                      * @property {google.protobuf.IValue|null} [trie] MetricUpdate trie
+                     * @property {google.protobuf.IValue|null} [boundedTrie] MetricUpdate boundedTrie
                      * @property {google.protobuf.IValue|null} [distribution] MetricUpdate distribution
                      * @property {google.protobuf.IValue|null} [gauge] MetricUpdate gauge
                      * @property {google.protobuf.IValue|null} [internal] MetricUpdate internal
@@ -20024,6 +20274,14 @@
                     MetricUpdate.prototype.trie = null;
     
                     /**
+                     * MetricUpdate boundedTrie.
+                     * @member {google.protobuf.IValue|null|undefined} boundedTrie
+                     * @memberof google.dataflow.v1beta3.MetricUpdate
+                     * @instance
+                     */
+                    MetricUpdate.prototype.boundedTrie = null;
+    
+                    /**
                      * MetricUpdate distribution.
                      * @member {google.protobuf.IValue|null|undefined} distribution
                      * @memberof google.dataflow.v1beta3.MetricUpdate
@@ -20103,6 +20361,8 @@
                             $root.google.protobuf.Value.encode(message.gauge, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         if (message.trie != null && Object.hasOwnProperty.call(message, "trie"))
                             $root.google.protobuf.Value.encode(message.trie, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        if (message.boundedTrie != null && Object.hasOwnProperty.call(message, "boundedTrie"))
+                            $root.google.protobuf.Value.encode(message.boundedTrie, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         return writer;
                     };
     
@@ -20169,6 +20429,10 @@
                                 }
                             case 13: {
                                     message.trie = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 14: {
+                                    message.boundedTrie = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 11: {
@@ -20258,6 +20522,11 @@
                             if (error)
                                 return "trie." + error;
                         }
+                        if (message.boundedTrie != null && message.hasOwnProperty("boundedTrie")) {
+                            var error = $root.google.protobuf.Value.verify(message.boundedTrie);
+                            if (error)
+                                return "boundedTrie." + error;
+                        }
                         if (message.distribution != null && message.hasOwnProperty("distribution")) {
                             var error = $root.google.protobuf.Value.verify(message.distribution);
                             if (error)
@@ -20327,6 +20596,11 @@
                                 throw TypeError(".google.dataflow.v1beta3.MetricUpdate.trie: object expected");
                             message.trie = $root.google.protobuf.Value.fromObject(object.trie);
                         }
+                        if (object.boundedTrie != null) {
+                            if (typeof object.boundedTrie !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.MetricUpdate.boundedTrie: object expected");
+                            message.boundedTrie = $root.google.protobuf.Value.fromObject(object.boundedTrie);
+                        }
                         if (object.distribution != null) {
                             if (typeof object.distribution !== "object")
                                 throw TypeError(".google.dataflow.v1beta3.MetricUpdate.distribution: object expected");
@@ -20376,6 +20650,7 @@
                             object.distribution = null;
                             object.gauge = null;
                             object.trie = null;
+                            object.boundedTrie = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = $root.google.dataflow.v1beta3.MetricStructuredName.toObject(message.name, options);
@@ -20401,6 +20676,8 @@
                             object.gauge = $root.google.protobuf.Value.toObject(message.gauge, options);
                         if (message.trie != null && message.hasOwnProperty("trie"))
                             object.trie = $root.google.protobuf.Value.toObject(message.trie, options);
+                        if (message.boundedTrie != null && message.hasOwnProperty("boundedTrie"))
+                            object.boundedTrie = $root.google.protobuf.Value.toObject(message.boundedTrie, options);
                         return object;
                     };
     
@@ -30843,6 +31120,7 @@
                      * @property {string|null} [launcherMachineType] FlexTemplateRuntimeEnvironment launcherMachineType
                      * @property {boolean|null} [enableLauncherVmSerialPortLogging] FlexTemplateRuntimeEnvironment enableLauncherVmSerialPortLogging
                      * @property {google.dataflow.v1beta3.StreamingMode|null} [streamingMode] FlexTemplateRuntimeEnvironment streamingMode
+                     * @property {Array.<string>|null} [additionalPipelineOptions] FlexTemplateRuntimeEnvironment additionalPipelineOptions
                      */
     
                     /**
@@ -30856,6 +31134,7 @@
                     function FlexTemplateRuntimeEnvironment(properties) {
                         this.additionalExperiments = [];
                         this.additionalUserLabels = {};
+                        this.additionalPipelineOptions = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -31062,6 +31341,14 @@
                      */
                     FlexTemplateRuntimeEnvironment.prototype.streamingMode = null;
     
+                    /**
+                     * FlexTemplateRuntimeEnvironment additionalPipelineOptions.
+                     * @member {Array.<string>} additionalPipelineOptions
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.additionalPipelineOptions = $util.emptyArray;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -31147,6 +31434,9 @@
                             writer.uint32(/* id 25, wireType 0 =*/200).bool(message.enableLauncherVmSerialPortLogging);
                         if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
                             writer.uint32(/* id 26, wireType 0 =*/208).int32(message.streamingMode);
+                        if (message.additionalPipelineOptions != null && message.additionalPipelineOptions.length)
+                            for (var i = 0; i < message.additionalPipelineOptions.length; ++i)
+                                writer.uint32(/* id 27, wireType 2 =*/218).string(message.additionalPipelineOptions[i]);
                         return writer;
                     };
     
@@ -31304,6 +31594,12 @@
                                     message.streamingMode = reader.int32();
                                     break;
                                 }
+                            case 27: {
+                                    if (!(message.additionalPipelineOptions && message.additionalPipelineOptions.length))
+                                        message.additionalPipelineOptions = [];
+                                    message.additionalPipelineOptions.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -31449,6 +31745,13 @@
                             case 2:
                                 break;
                             }
+                        }
+                        if (message.additionalPipelineOptions != null && message.hasOwnProperty("additionalPipelineOptions")) {
+                            if (!Array.isArray(message.additionalPipelineOptions))
+                                return "additionalPipelineOptions: array expected";
+                            for (var i = 0; i < message.additionalPipelineOptions.length; ++i)
+                                if (!$util.isString(message.additionalPipelineOptions[i]))
+                                    return "additionalPipelineOptions: string[] expected";
                         }
                         return null;
                     };
@@ -31597,6 +31900,13 @@
                             message.streamingMode = 2;
                             break;
                         }
+                        if (object.additionalPipelineOptions) {
+                            if (!Array.isArray(object.additionalPipelineOptions))
+                                throw TypeError(".google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.additionalPipelineOptions: array expected");
+                            message.additionalPipelineOptions = [];
+                            for (var i = 0; i < object.additionalPipelineOptions.length; ++i)
+                                message.additionalPipelineOptions[i] = String(object.additionalPipelineOptions[i]);
+                        }
                         return message;
                     };
     
@@ -31613,8 +31923,10 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.arrays || options.defaults)
+                        if (options.arrays || options.defaults) {
                             object.additionalExperiments = [];
+                            object.additionalPipelineOptions = [];
+                        }
                         if (options.objects || options.defaults)
                             object.additionalUserLabels = {};
                         if (options.defaults) {
@@ -31700,6 +32012,11 @@
                             object.streamingMode = options.enums === String ? $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] : message.streamingMode;
                             if (options.oneofs)
                                 object._streamingMode = "streamingMode";
+                        }
+                        if (message.additionalPipelineOptions && message.additionalPipelineOptions.length) {
+                            object.additionalPipelineOptions = [];
+                            for (var j = 0; j < message.additionalPipelineOptions.length; ++j)
+                                object.additionalPipelineOptions[j] = message.additionalPipelineOptions[j];
                         }
                         return object;
                     };
@@ -32037,6 +32354,7 @@
                      * @property {boolean|null} [enableStreamingEngine] RuntimeEnvironment enableStreamingEngine
                      * @property {number|null} [diskSizeGb] RuntimeEnvironment diskSizeGb
                      * @property {google.dataflow.v1beta3.StreamingMode|null} [streamingMode] RuntimeEnvironment streamingMode
+                     * @property {Array.<string>|null} [additionalPipelineOptions] RuntimeEnvironment additionalPipelineOptions
                      */
     
                     /**
@@ -32050,6 +32368,7 @@
                     function RuntimeEnvironment(properties) {
                         this.additionalExperiments = [];
                         this.additionalUserLabels = {};
+                        this.additionalPipelineOptions = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -32200,6 +32519,14 @@
                      */
                     RuntimeEnvironment.prototype.streamingMode = null;
     
+                    /**
+                     * RuntimeEnvironment additionalPipelineOptions.
+                     * @member {Array.<string>} additionalPipelineOptions
+                     * @memberof google.dataflow.v1beta3.RuntimeEnvironment
+                     * @instance
+                     */
+                    RuntimeEnvironment.prototype.additionalPipelineOptions = $util.emptyArray;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -32271,6 +32598,9 @@
                             writer.uint32(/* id 18, wireType 0 =*/144).int32(message.diskSizeGb);
                         if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
                             writer.uint32(/* id 19, wireType 0 =*/152).int32(message.streamingMode);
+                        if (message.additionalPipelineOptions != null && message.additionalPipelineOptions.length)
+                            for (var i = 0; i < message.additionalPipelineOptions.length; ++i)
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.additionalPipelineOptions[i]);
                         return writer;
                     };
     
@@ -32400,6 +32730,12 @@
                                     message.streamingMode = reader.int32();
                                     break;
                                 }
+                            case 20: {
+                                    if (!(message.additionalPipelineOptions && message.additionalPipelineOptions.length))
+                                        message.additionalPipelineOptions = [];
+                                    message.additionalPipelineOptions.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -32513,6 +32849,13 @@
                                 break;
                             }
                         }
+                        if (message.additionalPipelineOptions != null && message.hasOwnProperty("additionalPipelineOptions")) {
+                            if (!Array.isArray(message.additionalPipelineOptions))
+                                return "additionalPipelineOptions: array expected";
+                            for (var i = 0; i < message.additionalPipelineOptions.length; ++i)
+                                if (!$util.isString(message.additionalPipelineOptions[i]))
+                                    return "additionalPipelineOptions: string[] expected";
+                        }
                         return null;
                     };
     
@@ -32610,6 +32953,13 @@
                             message.streamingMode = 2;
                             break;
                         }
+                        if (object.additionalPipelineOptions) {
+                            if (!Array.isArray(object.additionalPipelineOptions))
+                                throw TypeError(".google.dataflow.v1beta3.RuntimeEnvironment.additionalPipelineOptions: array expected");
+                            message.additionalPipelineOptions = [];
+                            for (var i = 0; i < object.additionalPipelineOptions.length; ++i)
+                                message.additionalPipelineOptions[i] = String(object.additionalPipelineOptions[i]);
+                        }
                         return message;
                     };
     
@@ -32626,8 +32976,10 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.arrays || options.defaults)
+                        if (options.arrays || options.defaults) {
                             object.additionalExperiments = [];
+                            object.additionalPipelineOptions = [];
+                        }
                         if (options.objects || options.defaults)
                             object.additionalUserLabels = {};
                         if (options.defaults) {
@@ -32692,6 +33044,11 @@
                             object.streamingMode = options.enums === String ? $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] : message.streamingMode;
                             if (options.oneofs)
                                 object._streamingMode = "streamingMode";
+                        }
+                        if (message.additionalPipelineOptions && message.additionalPipelineOptions.length) {
+                            object.additionalPipelineOptions = [];
+                            for (var j = 0; j < message.additionalPipelineOptions.length; ++j)
+                                object.additionalPipelineOptions[j] = message.additionalPipelineOptions[j];
                         }
                         return object;
                     };
@@ -34196,6 +34553,7 @@
                             case 1:
                             case 2:
                             case 3:
+                            case 4:
                                 break;
                             }
                         if (message.version != null && message.hasOwnProperty("version"))
@@ -34238,6 +34596,10 @@
                         case "GO":
                         case 3:
                             message.language = 3;
+                            break;
+                        case "YAML":
+                        case 4:
+                            message.language = 4;
                             break;
                         }
                         if (object.version != null)
@@ -34303,6 +34665,7 @@
                      * @property {number} JAVA=1 JAVA value
                      * @property {number} PYTHON=2 PYTHON value
                      * @property {number} GO=3 GO value
+                     * @property {number} YAML=4 YAML value
                      */
                     SDKInfo.Language = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -34310,6 +34673,7 @@
                         values[valuesById[1] = "JAVA"] = 1;
                         values[valuesById[2] = "PYTHON"] = 2;
                         values[valuesById[3] = "GO"] = 3;
+                        values[valuesById[4] = "YAML"] = 4;
                         return values;
                     })();
     
