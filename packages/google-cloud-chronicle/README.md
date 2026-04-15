@@ -67,6 +67,21 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list data access scopes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_scopes.js) |
 | update data access label | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_label.js) |
 | update data access scope | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_scope.js) |
+| bulk create data table rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.bulk_create_data_table_rows.js) |
+| bulk get data table rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.bulk_get_data_table_rows.js) |
+| bulk replace data table rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.bulk_replace_data_table_rows.js) |
+| bulk update data table rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.bulk_update_data_table_rows.js) |
+| create data table | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.create_data_table.js) |
+| create data table row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.create_data_table_row.js) |
+| delete data table | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.delete_data_table.js) |
+| delete data table row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.delete_data_table_row.js) |
+| get data table | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.get_data_table.js) |
+| get data table operation errors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.get_data_table_operation_errors.js) |
+| get data table row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.get_data_table_row.js) |
+| list data table rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.list_data_table_rows.js) |
+| list data tables | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.list_data_tables.js) |
+| update data table | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.update_data_table.js) |
+| update data table row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_table_service.update_data_table_row.js) |
 | create watchlist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.create_watchlist.js) |
 | delete watchlist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.delete_watchlist.js) |
 | get watchlist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.get_watchlist.js) |

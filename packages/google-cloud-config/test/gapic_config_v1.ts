@@ -1787,6 +1787,222 @@ describe('v1.ConfigClient', () => {
         });
     });
 
+    describe('getDeploymentGroup', () => {
+        it('invokes getDeploymentGroup without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeploymentGroup()
+            );
+            client.innerApiCalls.getDeploymentGroup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDeploymentGroup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentGroup without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeploymentGroup()
+            );
+            client.innerApiCalls.getDeploymentGroup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDeploymentGroup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IDeploymentGroup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentGroup with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDeploymentGroup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDeploymentGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentGroup with closed client', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDeploymentGroup(request), expectedError);
+        });
+    });
+
+    describe('getDeploymentGroupRevision', () => {
+        it('invokes getDeploymentGroupRevision without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRevisionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRevisionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeploymentGroupRevision()
+            );
+            client.innerApiCalls.getDeploymentGroupRevision = stubSimpleCall(expectedResponse);
+            const [response] = await client.getDeploymentGroupRevision(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeploymentGroupRevision as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentGroupRevision as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentGroupRevision without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRevisionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRevisionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeploymentGroupRevision()
+            );
+            client.innerApiCalls.getDeploymentGroupRevision = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getDeploymentGroupRevision(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IDeploymentGroupRevision|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getDeploymentGroupRevision as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentGroupRevision as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentGroupRevision with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRevisionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRevisionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getDeploymentGroupRevision = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getDeploymentGroupRevision(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getDeploymentGroupRevision as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getDeploymentGroupRevision as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getDeploymentGroupRevision with closed client', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetDeploymentGroupRevisionRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetDeploymentGroupRevisionRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getDeploymentGroupRevision(request), expectedError);
+        });
+    });
+
     describe('createDeployment', () => {
         it('invokes createDeployment without error', async () => {
             const client = new configModule.v1.ConfigClient({
@@ -3022,6 +3238,780 @@ describe('v1.ConfigClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkUpdateAutoMigrationConfigProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createDeploymentGroup', () => {
+        it('invokes createDeploymentGroup without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.CreateDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.CreateDeploymentGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDeploymentGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createDeploymentGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeploymentGroup without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.CreateDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.CreateDeploymentGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createDeploymentGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createDeploymentGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeploymentGroup with call error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.CreateDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.CreateDeploymentGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDeploymentGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createDeploymentGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createDeploymentGroup with LRO error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.CreateDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.CreateDeploymentGroupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createDeploymentGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createDeploymentGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateDeploymentGroupProgress without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateDeploymentGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateDeploymentGroupProgress with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateDeploymentGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateDeploymentGroup', () => {
+        it('invokes updateDeploymentGroup without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateDeploymentGroupRequest()
+            );
+            request.deploymentGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateDeploymentGroupRequest', ['deploymentGroup', 'name']);
+            request.deploymentGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateDeploymentGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateDeploymentGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDeploymentGroup without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateDeploymentGroupRequest()
+            );
+            request.deploymentGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateDeploymentGroupRequest', ['deploymentGroup', 'name']);
+            request.deploymentGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment_group.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateDeploymentGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateDeploymentGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDeploymentGroup with call error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateDeploymentGroupRequest()
+            );
+            request.deploymentGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateDeploymentGroupRequest', ['deploymentGroup', 'name']);
+            request.deploymentGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDeploymentGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateDeploymentGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateDeploymentGroup with LRO error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.UpdateDeploymentGroupRequest()
+            );
+            request.deploymentGroup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.UpdateDeploymentGroupRequest', ['deploymentGroup', 'name']);
+            request.deploymentGroup.name = defaultValue1;
+            const expectedHeaderRequestParams = `deployment_group.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateDeploymentGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateDeploymentGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateDeploymentGroupProgress without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateDeploymentGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateDeploymentGroupProgress with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateDeploymentGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteDeploymentGroup', () => {
+        it('invokes deleteDeploymentGroup without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeleteDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeleteDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDeploymentGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteDeploymentGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeploymentGroup without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeleteDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeleteDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteDeploymentGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteDeploymentGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeploymentGroup with call error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeleteDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeleteDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDeploymentGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteDeploymentGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteDeploymentGroup with LRO error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeleteDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeleteDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteDeploymentGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteDeploymentGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteDeploymentGroupProgress without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteDeploymentGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteDeploymentGroupProgress with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteDeploymentGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('provisionDeploymentGroup', () => {
+        it('invokes provisionDeploymentGroup without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ProvisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ProvisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.provisionDeploymentGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.provisionDeploymentGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes provisionDeploymentGroup without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ProvisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ProvisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.provisionDeploymentGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.provisionDeploymentGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes provisionDeploymentGroup with call error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ProvisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ProvisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.provisionDeploymentGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.provisionDeploymentGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes provisionDeploymentGroup with LRO error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ProvisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ProvisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.provisionDeploymentGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.provisionDeploymentGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.provisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkProvisionDeploymentGroupProgress without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkProvisionDeploymentGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkProvisionDeploymentGroupProgress with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkProvisionDeploymentGroupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deprovisionDeploymentGroup', () => {
+        it('invokes deprovisionDeploymentGroup without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeprovisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeprovisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deprovisionDeploymentGroup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deprovisionDeploymentGroup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deprovisionDeploymentGroup without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeprovisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeprovisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deprovisionDeploymentGroup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deprovisionDeploymentGroup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.config.v1.IDeploymentGroup, protos.google.cloud.config.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deprovisionDeploymentGroup with call error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeprovisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeprovisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deprovisionDeploymentGroup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deprovisionDeploymentGroup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deprovisionDeploymentGroup with LRO error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.DeprovisionDeploymentGroupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.DeprovisionDeploymentGroupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deprovisionDeploymentGroup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deprovisionDeploymentGroup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deprovisionDeploymentGroup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeprovisionDeploymentGroupProgress without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeprovisionDeploymentGroupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeprovisionDeploymentGroupProgress with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeprovisionDeploymentGroupProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -4741,6 +5731,496 @@ describe('v1.ConfigClient', () => {
             );
         });
     });
+
+    describe('listDeploymentGroups', () => {
+        it('invokes listDeploymentGroups without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+            ];
+            client.innerApiCalls.listDeploymentGroups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDeploymentGroups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentGroups without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+            ];
+            client.innerApiCalls.listDeploymentGroups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDeploymentGroups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IDeploymentGroup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentGroups with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDeploymentGroups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDeploymentGroups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDeploymentGroups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentGroups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentGroupsStream without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+            ];
+            client.descriptors.page.listDeploymentGroups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDeploymentGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.DeploymentGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.DeploymentGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDeploymentGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentGroups, request));
+            assert(
+                (client.descriptors.page.listDeploymentGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDeploymentGroupsStream with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentGroups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDeploymentGroupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.DeploymentGroup[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.DeploymentGroup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDeploymentGroups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentGroups, request));
+            assert(
+                (client.descriptors.page.listDeploymentGroups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDeploymentGroups without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroup()),
+            ];
+            client.descriptors.page.listDeploymentGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.config.v1.IDeploymentGroup[] = [];
+            const iterable = client.listDeploymentGroupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDeploymentGroups with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDeploymentGroupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.config.v1.IDeploymentGroup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentGroups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDeploymentGroupRevisions', () => {
+        it('invokes listDeploymentGroupRevisions without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+            ];
+            client.innerApiCalls.listDeploymentGroupRevisions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDeploymentGroupRevisions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentGroupRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentGroupRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentGroupRevisions without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+            ];
+            client.innerApiCalls.listDeploymentGroupRevisions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDeploymentGroupRevisions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IDeploymentGroupRevision[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDeploymentGroupRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentGroupRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentGroupRevisions with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDeploymentGroupRevisions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDeploymentGroupRevisions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDeploymentGroupRevisions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDeploymentGroupRevisions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDeploymentGroupRevisionsStream without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+            ];
+            client.descriptors.page.listDeploymentGroupRevisions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDeploymentGroupRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.DeploymentGroupRevision[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.DeploymentGroupRevision) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDeploymentGroupRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentGroupRevisions, request));
+            assert(
+                (client.descriptors.page.listDeploymentGroupRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDeploymentGroupRevisionsStream with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentGroupRevisions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDeploymentGroupRevisionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.DeploymentGroupRevision[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.DeploymentGroupRevision) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDeploymentGroupRevisions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDeploymentGroupRevisions, request));
+            assert(
+                (client.descriptors.page.listDeploymentGroupRevisions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDeploymentGroupRevisions without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+              generateSampleMessage(new protos.google.cloud.config.v1.DeploymentGroupRevision()),
+            ];
+            client.descriptors.page.listDeploymentGroupRevisions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.config.v1.IDeploymentGroupRevision[] = [];
+            const iterable = client.listDeploymentGroupRevisionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentGroupRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentGroupRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDeploymentGroupRevisions with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDeploymentGroupRevisions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDeploymentGroupRevisionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.config.v1.IDeploymentGroupRevision[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDeploymentGroupRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDeploymentGroupRevisions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getIamPolicy', () => {
         it('invokes getIamPolicy without error', async () => {
             const client = new configModule.v1.ConfigClient({
@@ -5521,6 +7001,106 @@ describe('v1.ConfigClient', () => {
                 const result = client.matchDeploymentFromDeploymentName(fakePath);
                 assert.strictEqual(result, "deploymentValue");
                 assert((client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deploymentGroup', async () => {
+            const fakePath = "/rendered/path/deploymentGroup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                deployment_group: "deploymentGroupValue",
+            };
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentGroupPath', () => {
+                const result = client.deploymentGroupPath("projectValue", "locationValue", "deploymentGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentGroupName', () => {
+                const result = client.matchProjectFromDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDeploymentGroupName', () => {
+                const result = client.matchLocationFromDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.deploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentGroupFromDeploymentGroupName', () => {
+                const result = client.matchDeploymentGroupFromDeploymentGroupName(fakePath);
+                assert.strictEqual(result, "deploymentGroupValue");
+                assert((client.pathTemplates.deploymentGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deploymentGroupRevision', async () => {
+            const fakePath = "/rendered/path/deploymentGroupRevision";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                deployment_group: "deploymentGroupValue",
+                revision: "revisionValue",
+            };
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deploymentGroupRevisionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deploymentGroupRevisionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deploymentGroupRevisionPath', () => {
+                const result = client.deploymentGroupRevisionPath("projectValue", "locationValue", "deploymentGroupValue", "revisionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deploymentGroupRevisionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDeploymentGroupRevisionName', () => {
+                const result = client.matchProjectFromDeploymentGroupRevisionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.deploymentGroupRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDeploymentGroupRevisionName', () => {
+                const result = client.matchLocationFromDeploymentGroupRevisionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.deploymentGroupRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeploymentGroupFromDeploymentGroupRevisionName', () => {
+                const result = client.matchDeploymentGroupFromDeploymentGroupRevisionName(fakePath);
+                assert.strictEqual(result, "deploymentGroupValue");
+                assert((client.pathTemplates.deploymentGroupRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRevisionFromDeploymentGroupRevisionName', () => {
+                const result = client.matchRevisionFromDeploymentGroupRevisionName(fakePath);
+                assert.strictEqual(result, "revisionValue");
+                assert((client.pathTemplates.deploymentGroupRevisionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

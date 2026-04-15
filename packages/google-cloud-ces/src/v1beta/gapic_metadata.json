@@ -210,6 +210,11 @@
                 "restoreAppVersion"
               ]
             },
+            "GenerateAppResource": {
+              "methods": [
+                "generateAppResource"
+              ]
+            },
             "ListApps": {
               "methods": [
                 "listApps",
@@ -483,6 +488,11 @@
             "RestoreAppVersion": {
               "methods": [
                 "restoreAppVersion"
+              ]
+            },
+            "GenerateAppResource": {
+              "methods": [
+                "generateAppResource"
               ]
             },
             "ListApps": {

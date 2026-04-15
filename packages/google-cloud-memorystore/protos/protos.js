@@ -297,6 +297,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|getSharedRegionalCertificateAuthority}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef GetSharedRegionalCertificateAuthorityCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority} [response] SharedRegionalCertificateAuthority
+                         */
+    
+                        /**
+                         * Calls GetSharedRegionalCertificateAuthority.
+                         * @function getSharedRegionalCertificateAuthority
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.GetSharedRegionalCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and SharedRegionalCertificateAuthority
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.getSharedRegionalCertificateAuthority = function getSharedRegionalCertificateAuthority(request, callback) {
+                            return this.rpcCall(getSharedRegionalCertificateAuthority, $root.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest, $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority, request, callback);
+                        }, "name", { value: "GetSharedRegionalCertificateAuthority" });
+    
+                        /**
+                         * Calls GetSharedRegionalCertificateAuthority.
+                         * @function getSharedRegionalCertificateAuthority
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                         * @returns {Promise<google.cloud.memorystore.v1.SharedRegionalCertificateAuthority>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|rescheduleMaintenance}.
                          * @memberof google.cloud.memorystore.v1.Memorystore
                          * @typedef RescheduleMaintenanceCallback
@@ -644,6 +677,9 @@
                          * @property {string|null} [effectiveMaintenanceVersion] Instance effectiveMaintenanceVersion
                          * @property {Array.<string>|null} [availableMaintenanceVersions] Instance availableMaintenanceVersions
                          * @property {boolean|null} [allowFewerZonesDeployment] Instance allowFewerZonesDeployment
+                         * @property {google.cloud.memorystore.v1.Instance.ServerCaMode|null} [serverCaMode] Instance serverCaMode
+                         * @property {string|null} [serverCaPool] Instance serverCaPool
+                         * @property {boolean|null} [rotateServerCertificate] Instance rotateServerCertificate
                          */
     
                         /**
@@ -996,6 +1032,30 @@
                          */
                         Instance.prototype.allowFewerZonesDeployment = false;
     
+                        /**
+                         * Instance serverCaMode.
+                         * @member {google.cloud.memorystore.v1.Instance.ServerCaMode|null|undefined} serverCaMode
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.serverCaMode = null;
+    
+                        /**
+                         * Instance serverCaPool.
+                         * @member {string|null|undefined} serverCaPool
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.serverCaPool = null;
+    
+                        /**
+                         * Instance rotateServerCertificate.
+                         * @member {boolean|null|undefined} rotateServerCertificate
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.rotateServerCertificate = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1073,6 +1133,24 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Instance.prototype, "_effectiveMaintenanceVersion", {
                             get: $util.oneOfGetter($oneOfFields = ["effectiveMaintenanceVersion"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_serverCaMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["serverCaMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_serverCaPool", {
+                            get: $util.oneOfGetter($oneOfFields = ["serverCaPool"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_rotateServerCertificate", {
+                            get: $util.oneOfGetter($oneOfFields = ["rotateServerCertificate"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1189,6 +1267,12 @@
                                     writer.uint32(/* id 51, wireType 2 =*/410).string(message.availableMaintenanceVersions[i]);
                             if (message.allowFewerZonesDeployment != null && Object.hasOwnProperty.call(message, "allowFewerZonesDeployment"))
                                 writer.uint32(/* id 54, wireType 0 =*/432).bool(message.allowFewerZonesDeployment);
+                            if (message.serverCaMode != null && Object.hasOwnProperty.call(message, "serverCaMode"))
+                                writer.uint32(/* id 56, wireType 0 =*/448).int32(message.serverCaMode);
+                            if (message.serverCaPool != null && Object.hasOwnProperty.call(message, "serverCaPool"))
+                                writer.uint32(/* id 57, wireType 2 =*/458).string(message.serverCaPool);
+                            if (message.rotateServerCertificate != null && Object.hasOwnProperty.call(message, "rotateServerCertificate"))
+                                writer.uint32(/* id 58, wireType 0 =*/464).bool(message.rotateServerCertificate);
                             return writer;
                         };
     
@@ -1435,6 +1519,18 @@
                                     }
                                 case 54: {
                                         message.allowFewerZonesDeployment = reader.bool();
+                                        break;
+                                    }
+                                case 56: {
+                                        message.serverCaMode = reader.int32();
+                                        break;
+                                    }
+                                case 57: {
+                                        message.serverCaPool = reader.string();
+                                        break;
+                                    }
+                                case 58: {
+                                        message.rotateServerCertificate = reader.bool();
                                         break;
                                     }
                                 default:
@@ -1725,6 +1821,31 @@
                             if (message.allowFewerZonesDeployment != null && message.hasOwnProperty("allowFewerZonesDeployment"))
                                 if (typeof message.allowFewerZonesDeployment !== "boolean")
                                     return "allowFewerZonesDeployment: boolean expected";
+                            if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                properties._serverCaMode = 1;
+                                switch (message.serverCaMode) {
+                                default:
+                                    return "serverCaMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                properties._serverCaPool = 1;
+                                if (!$util.isString(message.serverCaPool))
+                                    return "serverCaPool: string expected";
+                            }
+                            if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                properties._rotateServerCertificate = 1;
+                                if (typeof message.rotateServerCertificate !== "boolean")
+                                    return "rotateServerCertificate: boolean expected";
+                            }
                             return null;
                         };
     
@@ -2018,6 +2139,46 @@
                             }
                             if (object.allowFewerZonesDeployment != null)
                                 message.allowFewerZonesDeployment = Boolean(object.allowFewerZonesDeployment);
+                            switch (object.serverCaMode) {
+                            default:
+                                if (typeof object.serverCaMode === "number") {
+                                    message.serverCaMode = object.serverCaMode;
+                                    break;
+                                }
+                                break;
+                            case "SERVER_CA_MODE_UNSPECIFIED":
+                            case 0:
+                                message.serverCaMode = 0;
+                                break;
+                            case "GOOGLE_MANAGED_PER_INSTANCE_CA":
+                            case 1:
+                                message.serverCaMode = 1;
+                                break;
+                            case "GOOGLE_MANAGED_SHARED_CA":
+                            case 2:
+                                message.serverCaMode = 2;
+                                break;
+                            case "CUSTOMER_MANAGED_CAS_CA":
+                            case 3:
+                                message.serverCaMode = 3;
+                                break;
+                            case "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA":
+                            case 1:
+                                message.serverCaMode = 1;
+                                break;
+                            case "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA":
+                            case 2:
+                                message.serverCaMode = 2;
+                                break;
+                            case "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA":
+                            case 3:
+                                message.serverCaMode = 3;
+                                break;
+                            }
+                            if (object.serverCaPool != null)
+                                message.serverCaPool = String(object.serverCaPool);
+                            if (object.rotateServerCertificate != null)
+                                message.rotateServerCertificate = Boolean(object.rotateServerCertificate);
                             return message;
                         };
     
@@ -2211,6 +2372,21 @@
                             }
                             if (message.allowFewerZonesDeployment != null && message.hasOwnProperty("allowFewerZonesDeployment"))
                                 object.allowFewerZonesDeployment = message.allowFewerZonesDeployment;
+                            if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                object.serverCaMode = options.enums === String ? $root.google.cloud.memorystore.v1.Instance.ServerCaMode[message.serverCaMode] === undefined ? message.serverCaMode : $root.google.cloud.memorystore.v1.Instance.ServerCaMode[message.serverCaMode] : message.serverCaMode;
+                                if (options.oneofs)
+                                    object._serverCaMode = "serverCaMode";
+                            }
+                            if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                object.serverCaPool = message.serverCaPool;
+                                if (options.oneofs)
+                                    object._serverCaPool = "serverCaPool";
+                            }
+                            if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                object.rotateServerCertificate = message.rotateServerCertificate;
+                                if (options.oneofs)
+                                    object._rotateServerCertificate = "rotateServerCertificate";
+                            }
                             return object;
                         };
     
@@ -3823,6 +3999,30 @@
                             values[valuesById[1] = "STANDALONE"] = 1;
                             values[valuesById[2] = "CLUSTER"] = 2;
                             values[valuesById[4] = "CLUSTER_DISABLED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * ServerCaMode enum.
+                         * @name google.cloud.memorystore.v1.Instance.ServerCaMode
+                         * @enum {number}
+                         * @property {number} SERVER_CA_MODE_UNSPECIFIED=0 SERVER_CA_MODE_UNSPECIFIED value
+                         * @property {number} GOOGLE_MANAGED_PER_INSTANCE_CA=1 GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} GOOGLE_MANAGED_SHARED_CA=2 GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} CUSTOMER_MANAGED_CAS_CA=3 CUSTOMER_MANAGED_CAS_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA=1 SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA=2 SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA=3 SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA value
+                         */
+                        Instance.ServerCaMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SERVER_CA_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values[valuesById[2] = "GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values[valuesById[3] = "CUSTOMER_MANAGED_CAS_CA"] = 3;
+                            values["SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values["SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values["SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA"] = 3;
                             return values;
                         })();
     
@@ -15203,6 +15403,911 @@
                         return CertificateAuthority;
                     })();
     
+                    v1.SharedRegionalCertificateAuthority = (function() {
+    
+                        /**
+                         * Properties of a SharedRegionalCertificateAuthority.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface ISharedRegionalCertificateAuthority
+                         * @property {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null} [managedServerCa] SharedRegionalCertificateAuthority managedServerCa
+                         * @property {string|null} [name] SharedRegionalCertificateAuthority name
+                         */
+    
+                        /**
+                         * Constructs a new SharedRegionalCertificateAuthority.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a SharedRegionalCertificateAuthority.
+                         * @implements ISharedRegionalCertificateAuthority
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                         */
+                        function SharedRegionalCertificateAuthority(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SharedRegionalCertificateAuthority managedServerCa.
+                         * @member {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null|undefined} managedServerCa
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @instance
+                         */
+                        SharedRegionalCertificateAuthority.prototype.managedServerCa = null;
+    
+                        /**
+                         * SharedRegionalCertificateAuthority name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @instance
+                         */
+                        SharedRegionalCertificateAuthority.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SharedRegionalCertificateAuthority serverCa.
+                         * @member {"managedServerCa"|undefined} serverCa
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @instance
+                         */
+                        Object.defineProperty(SharedRegionalCertificateAuthority.prototype, "serverCa", {
+                            get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SharedRegionalCertificateAuthority instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority instance
+                         */
+                        SharedRegionalCertificateAuthority.create = function create(properties) {
+                            return new SharedRegionalCertificateAuthority(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SharedRegionalCertificateAuthority message. Does not implicitly {@link google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SharedRegionalCertificateAuthority.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SharedRegionalCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SharedRegionalCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SharedRegionalCertificateAuthority.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.managedServerCa = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SharedRegionalCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SharedRegionalCertificateAuthority message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SharedRegionalCertificateAuthority.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                properties.serverCa = 1;
+                                {
+                                    var error = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify(message.managedServerCa);
+                                    if (error)
+                                        return "managedServerCa." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SharedRegionalCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                         */
+                        SharedRegionalCertificateAuthority.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority();
+                            if (object.managedServerCa != null) {
+                                if (typeof object.managedServerCa !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.managedServerCa: object expected");
+                                message.managedServerCa = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.fromObject(object.managedServerCa);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SharedRegionalCertificateAuthority message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SharedRegionalCertificateAuthority.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                object.managedServerCa = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                if (options.oneofs)
+                                    object.serverCa = "managedServerCa";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SharedRegionalCertificateAuthority to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SharedRegionalCertificateAuthority.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SharedRegionalCertificateAuthority
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SharedRegionalCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.SharedRegionalCertificateAuthority";
+                        };
+    
+                        SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a RegionalManagedCertificateAuthority.
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                             * @interface IRegionalManagedCertificateAuthority
+                             * @property {Array.<google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>|null} [caCerts] RegionalManagedCertificateAuthority caCerts
+                             */
+    
+                            /**
+                             * Constructs a new RegionalManagedCertificateAuthority.
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority
+                             * @classdesc Represents a RegionalManagedCertificateAuthority.
+                             * @implements IRegionalManagedCertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                             */
+                            function RegionalManagedCertificateAuthority(properties) {
+                                this.caCerts = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegionalManagedCertificateAuthority caCerts.
+                             * @member {Array.<google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>} caCerts
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @instance
+                             */
+                            RegionalManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RegionalManagedCertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority instance
+                             */
+                            RegionalManagedCertificateAuthority.create = function create(properties) {
+                                return new RegionalManagedCertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalManagedCertificateAuthority message. Does not implicitly {@link google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalManagedCertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.caCerts != null && message.caCerts.length)
+                                    for (var i = 0; i < message.caCerts.length; ++i)
+                                        $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalManagedCertificateAuthority.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.caCerts && message.caCerts.length))
+                                                message.caCerts = [];
+                                            message.caCerts.push($root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegionalManagedCertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegionalManagedCertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                    if (!Array.isArray(message.caCerts))
+                                        return "caCerts: array expected";
+                                    for (var i = 0; i < message.caCerts.length; ++i) {
+                                        var error = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify(message.caCerts[i]);
+                                        if (error)
+                                            return "caCerts." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegionalManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                             */
+                            RegionalManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                if (object.caCerts) {
+                                    if (!Array.isArray(object.caCerts))
+                                        throw TypeError(".google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: array expected");
+                                    message.caCerts = [];
+                                    for (var i = 0; i < object.caCerts.length; ++i) {
+                                        if (typeof object.caCerts[i] !== "object")
+                                            throw TypeError(".google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: object expected");
+                                        message.caCerts[i] = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.fromObject(object.caCerts[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegionalManagedCertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegionalManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.caCerts = [];
+                                if (message.caCerts && message.caCerts.length) {
+                                    object.caCerts = [];
+                                    for (var j = 0; j < message.caCerts.length; ++j)
+                                        object.caCerts[j] = $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.toObject(message.caCerts[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegionalManagedCertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegionalManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegionalManagedCertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegionalManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority";
+                            };
+    
+                            RegionalManagedCertificateAuthority.RegionalCertChain = (function() {
+    
+                                /**
+                                 * Properties of a RegionalCertChain.
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @interface IRegionalCertChain
+                                 * @property {Array.<string>|null} [certificates] RegionalCertChain certificates
+                                 */
+    
+                                /**
+                                 * Constructs a new RegionalCertChain.
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @classdesc Represents a RegionalCertChain.
+                                 * @implements IRegionalCertChain
+                                 * @constructor
+                                 * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                 */
+                                function RegionalCertChain(properties) {
+                                    this.certificates = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RegionalCertChain certificates.
+                                 * @member {Array.<string>} certificates
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @instance
+                                 */
+                                RegionalCertChain.prototype.certificates = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new RegionalCertChain instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                 * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain instance
+                                 */
+                                RegionalCertChain.create = function create(properties) {
+                                    return new RegionalCertChain(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalCertChain message. Does not implicitly {@link google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalCertChain.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.certificates != null && message.certificates.length)
+                                        for (var i = 0; i < message.certificates.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalCertChain message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalCertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RegionalCertChain message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalCertChain.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.certificates && message.certificates.length))
+                                                    message.certificates = [];
+                                                message.certificates.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RegionalCertChain message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalCertChain.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RegionalCertChain message.
+                                 * @function verify
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RegionalCertChain.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                        if (!Array.isArray(message.certificates))
+                                            return "certificates: array expected";
+                                        for (var i = 0; i < message.certificates.length; ++i)
+                                            if (!$util.isString(message.certificates[i]))
+                                                return "certificates: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RegionalCertChain message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                 */
+                                RegionalCertChain.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain)
+                                        return object;
+                                    var message = new $root.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                    if (object.certificates) {
+                                        if (!Array.isArray(object.certificates))
+                                            throw TypeError(".google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.certificates: array expected");
+                                        message.certificates = [];
+                                        for (var i = 0; i < object.certificates.length; ++i)
+                                            message.certificates[i] = String(object.certificates[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RegionalCertChain message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} message RegionalCertChain
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RegionalCertChain.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.certificates = [];
+                                    if (message.certificates && message.certificates.length) {
+                                        object.certificates = [];
+                                        for (var j = 0; j < message.certificates.length; ++j)
+                                            object.certificates[j] = message.certificates[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RegionalCertChain to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RegionalCertChain.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RegionalCertChain
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RegionalCertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.memorystore.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain";
+                                };
+    
+                                return RegionalCertChain;
+                            })();
+    
+                            return RegionalManagedCertificateAuthority;
+                        })();
+    
+                        return SharedRegionalCertificateAuthority;
+                    })();
+    
+                    v1.GetSharedRegionalCertificateAuthorityRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSharedRegionalCertificateAuthorityRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IGetSharedRegionalCertificateAuthorityRequest
+                         * @property {string|null} [name] GetSharedRegionalCertificateAuthorityRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSharedRegionalCertificateAuthorityRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a GetSharedRegionalCertificateAuthorityRequest.
+                         * @implements IGetSharedRegionalCertificateAuthorityRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                         */
+                        function GetSharedRegionalCertificateAuthorityRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSharedRegionalCertificateAuthorityRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @instance
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSharedRegionalCertificateAuthorityRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest instance
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.create = function create(properties) {
+                            return new GetSharedRegionalCertificateAuthorityRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSharedRegionalCertificateAuthorityRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSharedRegionalCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSharedRegionalCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSharedRegionalCertificateAuthorityRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSharedRegionalCertificateAuthorityRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest";
+                        };
+    
+                        return GetSharedRegionalCertificateAuthorityRequest;
+                    })();
+    
                     v1.OperationMetadata = (function() {
     
                         /**
@@ -16218,6 +17323,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|getSharedRegionalCertificateAuthority}.
+                         * @memberof google.cloud.memorystore.v1beta.Memorystore
+                         * @typedef GetSharedRegionalCertificateAuthorityCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority} [response] SharedRegionalCertificateAuthority
+                         */
+    
+                        /**
+                         * Calls GetSharedRegionalCertificateAuthority.
+                         * @function getSharedRegionalCertificateAuthority
+                         * @memberof google.cloud.memorystore.v1beta.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1beta.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                         * @param {google.cloud.memorystore.v1beta.Memorystore.GetSharedRegionalCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and SharedRegionalCertificateAuthority
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.getSharedRegionalCertificateAuthority = function getSharedRegionalCertificateAuthority(request, callback) {
+                            return this.rpcCall(getSharedRegionalCertificateAuthority, $root.google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest, $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority, request, callback);
+                        }, "name", { value: "GetSharedRegionalCertificateAuthority" });
+    
+                        /**
+                         * Calls GetSharedRegionalCertificateAuthority.
+                         * @function getSharedRegionalCertificateAuthority
+                         * @memberof google.cloud.memorystore.v1beta.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1beta.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                         * @returns {Promise<google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority>} Promise
+                         * @variation 2
+                         */
+    
                         return Memorystore;
                     })();
     
@@ -16283,6 +17421,9 @@
                          * @property {Array.<google.cloud.memorystore.v1beta.IPscAutoConnection>|null} [pscAutoConnections] Instance pscAutoConnections
                          * @property {Array.<google.cloud.memorystore.v1beta.Instance.IInstanceEndpoint>|null} [endpoints] Instance endpoints
                          * @property {google.cloud.memorystore.v1beta.Instance.Mode|null} [mode] Instance mode
+                         * @property {google.cloud.memorystore.v1beta.Instance.ServerCaMode|null} [serverCaMode] Instance serverCaMode
+                         * @property {string|null} [serverCaPool] Instance serverCaPool
+                         * @property {boolean|null} [rotateServerCertificate] Instance rotateServerCertificate
                          */
     
                         /**
@@ -16481,6 +17622,30 @@
                          */
                         Instance.prototype.mode = 0;
     
+                        /**
+                         * Instance serverCaMode.
+                         * @member {google.cloud.memorystore.v1beta.Instance.ServerCaMode|null|undefined} serverCaMode
+                         * @memberof google.cloud.memorystore.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.serverCaMode = null;
+    
+                        /**
+                         * Instance serverCaPool.
+                         * @member {string|null|undefined} serverCaPool
+                         * @memberof google.cloud.memorystore.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.serverCaPool = null;
+    
+                        /**
+                         * Instance rotateServerCertificate.
+                         * @member {boolean|null|undefined} rotateServerCertificate
+                         * @memberof google.cloud.memorystore.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.rotateServerCertificate = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -16493,6 +17658,24 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Instance.prototype, "_deletionProtectionEnabled", {
                             get: $util.oneOfGetter($oneOfFields = ["deletionProtectionEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_serverCaMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["serverCaMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_serverCaPool", {
+                            get: $util.oneOfGetter($oneOfFields = ["serverCaPool"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Instance.prototype, "_rotateServerCertificate", {
+                            get: $util.oneOfGetter($oneOfFields = ["rotateServerCertificate"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -16569,6 +17752,12 @@
                                     $root.google.cloud.memorystore.v1beta.Instance.InstanceEndpoint.encode(message.endpoints[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                 writer.uint32(/* id 26, wireType 0 =*/208).int32(message.mode);
+                            if (message.serverCaMode != null && Object.hasOwnProperty.call(message, "serverCaMode"))
+                                writer.uint32(/* id 56, wireType 0 =*/448).int32(message.serverCaMode);
+                            if (message.serverCaPool != null && Object.hasOwnProperty.call(message, "serverCaPool"))
+                                writer.uint32(/* id 57, wireType 2 =*/458).string(message.serverCaPool);
+                            if (message.rotateServerCertificate != null && Object.hasOwnProperty.call(message, "rotateServerCertificate"))
+                                writer.uint32(/* id 58, wireType 0 =*/464).bool(message.rotateServerCertificate);
                             return writer;
                         };
     
@@ -16735,6 +17924,18 @@
                                     }
                                 case 26: {
                                         message.mode = reader.int32();
+                                        break;
+                                    }
+                                case 56: {
+                                        message.serverCaMode = reader.int32();
+                                        break;
+                                    }
+                                case 57: {
+                                        message.serverCaPool = reader.string();
+                                        break;
+                                    }
+                                case 58: {
+                                        message.rotateServerCertificate = reader.bool();
                                         break;
                                     }
                                 default:
@@ -16918,6 +18119,31 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                properties._serverCaMode = 1;
+                                switch (message.serverCaMode) {
+                                default:
+                                    return "serverCaMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                properties._serverCaPool = 1;
+                                if (!$util.isString(message.serverCaPool))
+                                    return "serverCaPool: string expected";
+                            }
+                            if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                properties._rotateServerCertificate = 1;
+                                if (typeof message.rotateServerCertificate !== "boolean")
+                                    return "rotateServerCertificate: boolean expected";
+                            }
                             return null;
                         };
     
@@ -17139,6 +18365,46 @@
                                 message.mode = 4;
                                 break;
                             }
+                            switch (object.serverCaMode) {
+                            default:
+                                if (typeof object.serverCaMode === "number") {
+                                    message.serverCaMode = object.serverCaMode;
+                                    break;
+                                }
+                                break;
+                            case "SERVER_CA_MODE_UNSPECIFIED":
+                            case 0:
+                                message.serverCaMode = 0;
+                                break;
+                            case "GOOGLE_MANAGED_PER_INSTANCE_CA":
+                            case 1:
+                                message.serverCaMode = 1;
+                                break;
+                            case "GOOGLE_MANAGED_SHARED_CA":
+                            case 2:
+                                message.serverCaMode = 2;
+                                break;
+                            case "CUSTOMER_MANAGED_CAS_CA":
+                            case 3:
+                                message.serverCaMode = 3;
+                                break;
+                            case "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA":
+                            case 1:
+                                message.serverCaMode = 1;
+                                break;
+                            case "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA":
+                            case 2:
+                                message.serverCaMode = 2;
+                                break;
+                            case "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA":
+                            case 3:
+                                message.serverCaMode = 3;
+                                break;
+                            }
+                            if (object.serverCaPool != null)
+                                message.serverCaPool = String(object.serverCaPool);
+                            if (object.rotateServerCertificate != null)
+                                message.rotateServerCertificate = Boolean(object.rotateServerCertificate);
                             return message;
                         };
     
@@ -17247,6 +18513,21 @@
                             }
                             if (message.mode != null && message.hasOwnProperty("mode"))
                                 object.mode = options.enums === String ? $root.google.cloud.memorystore.v1beta.Instance.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.memorystore.v1beta.Instance.Mode[message.mode] : message.mode;
+                            if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                object.serverCaMode = options.enums === String ? $root.google.cloud.memorystore.v1beta.Instance.ServerCaMode[message.serverCaMode] === undefined ? message.serverCaMode : $root.google.cloud.memorystore.v1beta.Instance.ServerCaMode[message.serverCaMode] : message.serverCaMode;
+                                if (options.oneofs)
+                                    object._serverCaMode = "serverCaMode";
+                            }
+                            if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                object.serverCaPool = message.serverCaPool;
+                                if (options.oneofs)
+                                    object._serverCaPool = "serverCaPool";
+                            }
+                            if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                object.rotateServerCertificate = message.rotateServerCertificate;
+                                if (options.oneofs)
+                                    object._rotateServerCertificate = "rotateServerCertificate";
+                            }
                             return object;
                         };
     
@@ -18333,6 +19614,30 @@
                             values[valuesById[1] = "STANDALONE"] = 1;
                             values[valuesById[2] = "CLUSTER"] = 2;
                             values[valuesById[4] = "CLUSTER_DISABLED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * ServerCaMode enum.
+                         * @name google.cloud.memorystore.v1beta.Instance.ServerCaMode
+                         * @enum {number}
+                         * @property {number} SERVER_CA_MODE_UNSPECIFIED=0 SERVER_CA_MODE_UNSPECIFIED value
+                         * @property {number} GOOGLE_MANAGED_PER_INSTANCE_CA=1 GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} GOOGLE_MANAGED_SHARED_CA=2 GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} CUSTOMER_MANAGED_CAS_CA=3 CUSTOMER_MANAGED_CAS_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA=1 SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA=2 SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA=3 SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA value
+                         */
+                        Instance.ServerCaMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SERVER_CA_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values[valuesById[2] = "GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values[valuesById[3] = "CUSTOMER_MANAGED_CAS_CA"] = 3;
+                            values["SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values["SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values["SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA"] = 3;
                             return values;
                         })();
     
@@ -23263,6 +24568,911 @@
                         })();
     
                         return CertificateAuthority;
+                    })();
+    
+                    v1beta.SharedRegionalCertificateAuthority = (function() {
+    
+                        /**
+                         * Properties of a SharedRegionalCertificateAuthority.
+                         * @memberof google.cloud.memorystore.v1beta
+                         * @interface ISharedRegionalCertificateAuthority
+                         * @property {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null} [managedServerCa] SharedRegionalCertificateAuthority managedServerCa
+                         * @property {string|null} [name] SharedRegionalCertificateAuthority name
+                         */
+    
+                        /**
+                         * Constructs a new SharedRegionalCertificateAuthority.
+                         * @memberof google.cloud.memorystore.v1beta
+                         * @classdesc Represents a SharedRegionalCertificateAuthority.
+                         * @implements ISharedRegionalCertificateAuthority
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1beta.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                         */
+                        function SharedRegionalCertificateAuthority(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SharedRegionalCertificateAuthority managedServerCa.
+                         * @member {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null|undefined} managedServerCa
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @instance
+                         */
+                        SharedRegionalCertificateAuthority.prototype.managedServerCa = null;
+    
+                        /**
+                         * SharedRegionalCertificateAuthority name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @instance
+                         */
+                        SharedRegionalCertificateAuthority.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SharedRegionalCertificateAuthority serverCa.
+                         * @member {"managedServerCa"|undefined} serverCa
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @instance
+                         */
+                        Object.defineProperty(SharedRegionalCertificateAuthority.prototype, "serverCa", {
+                            get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SharedRegionalCertificateAuthority instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority instance
+                         */
+                        SharedRegionalCertificateAuthority.create = function create(properties) {
+                            return new SharedRegionalCertificateAuthority(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SharedRegionalCertificateAuthority message. Does not implicitly {@link google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SharedRegionalCertificateAuthority.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SharedRegionalCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SharedRegionalCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SharedRegionalCertificateAuthority.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.managedServerCa = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SharedRegionalCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SharedRegionalCertificateAuthority message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SharedRegionalCertificateAuthority.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                properties.serverCa = 1;
+                                {
+                                    var error = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify(message.managedServerCa);
+                                    if (error)
+                                        return "managedServerCa." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SharedRegionalCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                         */
+                        SharedRegionalCertificateAuthority.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority();
+                            if (object.managedServerCa != null) {
+                                if (typeof object.managedServerCa !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.managedServerCa: object expected");
+                                message.managedServerCa = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.fromObject(object.managedServerCa);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SharedRegionalCertificateAuthority message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SharedRegionalCertificateAuthority.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                object.managedServerCa = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                if (options.oneofs)
+                                    object.serverCa = "managedServerCa";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SharedRegionalCertificateAuthority to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SharedRegionalCertificateAuthority.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SharedRegionalCertificateAuthority
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SharedRegionalCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority";
+                        };
+    
+                        SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a RegionalManagedCertificateAuthority.
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                             * @interface IRegionalManagedCertificateAuthority
+                             * @property {Array.<google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>|null} [caCerts] RegionalManagedCertificateAuthority caCerts
+                             */
+    
+                            /**
+                             * Constructs a new RegionalManagedCertificateAuthority.
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority
+                             * @classdesc Represents a RegionalManagedCertificateAuthority.
+                             * @implements IRegionalManagedCertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                             */
+                            function RegionalManagedCertificateAuthority(properties) {
+                                this.caCerts = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegionalManagedCertificateAuthority caCerts.
+                             * @member {Array.<google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>} caCerts
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @instance
+                             */
+                            RegionalManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RegionalManagedCertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority instance
+                             */
+                            RegionalManagedCertificateAuthority.create = function create(properties) {
+                                return new RegionalManagedCertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalManagedCertificateAuthority message. Does not implicitly {@link google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalManagedCertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.caCerts != null && message.caCerts.length)
+                                    for (var i = 0; i < message.caCerts.length; ++i)
+                                        $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalManagedCertificateAuthority.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.caCerts && message.caCerts.length))
+                                                message.caCerts = [];
+                                            message.caCerts.push($root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegionalManagedCertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegionalManagedCertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                    if (!Array.isArray(message.caCerts))
+                                        return "caCerts: array expected";
+                                    for (var i = 0; i < message.caCerts.length; ++i) {
+                                        var error = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify(message.caCerts[i]);
+                                        if (error)
+                                            return "caCerts." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegionalManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                             */
+                            RegionalManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                if (object.caCerts) {
+                                    if (!Array.isArray(object.caCerts))
+                                        throw TypeError(".google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: array expected");
+                                    message.caCerts = [];
+                                    for (var i = 0; i < object.caCerts.length; ++i) {
+                                        if (typeof object.caCerts[i] !== "object")
+                                            throw TypeError(".google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: object expected");
+                                        message.caCerts[i] = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.fromObject(object.caCerts[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegionalManagedCertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegionalManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.caCerts = [];
+                                if (message.caCerts && message.caCerts.length) {
+                                    object.caCerts = [];
+                                    for (var j = 0; j < message.caCerts.length; ++j)
+                                        object.caCerts[j] = $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.toObject(message.caCerts[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegionalManagedCertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegionalManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegionalManagedCertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegionalManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority";
+                            };
+    
+                            RegionalManagedCertificateAuthority.RegionalCertChain = (function() {
+    
+                                /**
+                                 * Properties of a RegionalCertChain.
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @interface IRegionalCertChain
+                                 * @property {Array.<string>|null} [certificates] RegionalCertChain certificates
+                                 */
+    
+                                /**
+                                 * Constructs a new RegionalCertChain.
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @classdesc Represents a RegionalCertChain.
+                                 * @implements IRegionalCertChain
+                                 * @constructor
+                                 * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                 */
+                                function RegionalCertChain(properties) {
+                                    this.certificates = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RegionalCertChain certificates.
+                                 * @member {Array.<string>} certificates
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @instance
+                                 */
+                                RegionalCertChain.prototype.certificates = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new RegionalCertChain instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                 * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain instance
+                                 */
+                                RegionalCertChain.create = function create(properties) {
+                                    return new RegionalCertChain(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalCertChain message. Does not implicitly {@link google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalCertChain.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.certificates != null && message.certificates.length)
+                                        for (var i = 0; i < message.certificates.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalCertChain message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalCertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RegionalCertChain message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalCertChain.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.certificates && message.certificates.length))
+                                                    message.certificates = [];
+                                                message.certificates.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RegionalCertChain message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalCertChain.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RegionalCertChain message.
+                                 * @function verify
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RegionalCertChain.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                        if (!Array.isArray(message.certificates))
+                                            return "certificates: array expected";
+                                        for (var i = 0; i < message.certificates.length; ++i)
+                                            if (!$util.isString(message.certificates[i]))
+                                                return "certificates: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RegionalCertChain message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                 */
+                                RegionalCertChain.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain)
+                                        return object;
+                                    var message = new $root.google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                    if (object.certificates) {
+                                        if (!Array.isArray(object.certificates))
+                                            throw TypeError(".google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.certificates: array expected");
+                                        message.certificates = [];
+                                        for (var i = 0; i < object.certificates.length; ++i)
+                                            message.certificates[i] = String(object.certificates[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RegionalCertChain message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} message RegionalCertChain
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RegionalCertChain.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.certificates = [];
+                                    if (message.certificates && message.certificates.length) {
+                                        object.certificates = [];
+                                        for (var j = 0; j < message.certificates.length; ++j)
+                                            object.certificates[j] = message.certificates[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RegionalCertChain to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RegionalCertChain.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RegionalCertChain
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RegionalCertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain";
+                                };
+    
+                                return RegionalCertChain;
+                            })();
+    
+                            return RegionalManagedCertificateAuthority;
+                        })();
+    
+                        return SharedRegionalCertificateAuthority;
+                    })();
+    
+                    v1beta.GetSharedRegionalCertificateAuthorityRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSharedRegionalCertificateAuthorityRequest.
+                         * @memberof google.cloud.memorystore.v1beta
+                         * @interface IGetSharedRegionalCertificateAuthorityRequest
+                         * @property {string|null} [name] GetSharedRegionalCertificateAuthorityRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSharedRegionalCertificateAuthorityRequest.
+                         * @memberof google.cloud.memorystore.v1beta
+                         * @classdesc Represents a GetSharedRegionalCertificateAuthorityRequest.
+                         * @implements IGetSharedRegionalCertificateAuthorityRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1beta.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                         */
+                        function GetSharedRegionalCertificateAuthorityRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSharedRegionalCertificateAuthorityRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @instance
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSharedRegionalCertificateAuthorityRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest instance
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.create = function create(properties) {
+                            return new GetSharedRegionalCertificateAuthorityRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSharedRegionalCertificateAuthorityRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSharedRegionalCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSharedRegionalCertificateAuthorityRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSharedRegionalCertificateAuthorityRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSharedRegionalCertificateAuthorityRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSharedRegionalCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1beta.GetSharedRegionalCertificateAuthorityRequest";
+                        };
+    
+                        return GetSharedRegionalCertificateAuthorityRequest;
                     })();
     
                     v1beta.OperationMetadata = (function() {

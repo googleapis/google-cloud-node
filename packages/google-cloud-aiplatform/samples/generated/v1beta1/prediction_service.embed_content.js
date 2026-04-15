@@ -35,27 +35,13 @@ function main() {
    */
   // const model = 'abc123'
   /**
-   *  Required. Input content to be embedded. Required.
+   *  Required. Input content to be embedded.
    */
   // const content = {}
   /**
-   *  Optional. An optional title for the text.
+   *  Optional. Configuration for the EmbedContent request.
    */
-  // const title = 'abc123'
-  /**
-   *  Optional. The task type of the embedding.
-   */
-  // const taskType = {}
-  /**
-   *  Optional. Optional reduced dimension for the output embedding. If set,
-   *  excessive values in the output embedding are truncated from the end.
-   */
-  // const outputDimensionality = 1234
-  /**
-   *  Optional. Whether to silently truncate the input content if it's longer
-   *  than the maximum sequence length.
-   */
-  // const autoTruncate = true
+  // const embedContentConfig = {}
 
   // Imports the Aiplatform library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1beta1;

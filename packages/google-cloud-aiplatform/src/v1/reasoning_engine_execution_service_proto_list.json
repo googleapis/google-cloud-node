@@ -136,6 +136,8 @@
   "../../protos/google/cloud/aiplatform/v1/schema/trainingjob/definition/automl_video_object_tracking.proto",
   "../../protos/google/cloud/aiplatform/v1/schema/trainingjob/definition/export_evaluated_data_items_config.proto",
   "../../protos/google/cloud/aiplatform/v1/service_networking.proto",
+  "../../protos/google/cloud/aiplatform/v1/session.proto",
+  "../../protos/google/cloud/aiplatform/v1/session_service.proto",
   "../../protos/google/cloud/aiplatform/v1/specialist_pool.proto",
   "../../protos/google/cloud/aiplatform/v1/specialist_pool_service.proto",
   "../../protos/google/cloud/aiplatform/v1/study.proto",

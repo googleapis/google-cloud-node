@@ -39043,6 +39043,237 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|createSection}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef CreateSectionCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.Section} [response] Section
+                     */
+    
+                    /**
+                     * Calls CreateSection.
+                     * @function createSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.ICreateSectionRequest} request CreateSectionRequest message or plain object
+                     * @param {google.chat.v1.ChatService.CreateSectionCallback} callback Node-style callback called with the error, if any, and Section
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.createSection = function createSection(request, callback) {
+                        return this.rpcCall(createSection, $root.google.chat.v1.CreateSectionRequest, $root.google.chat.v1.Section, request, callback);
+                    }, "name", { value: "CreateSection" });
+    
+                    /**
+                     * Calls CreateSection.
+                     * @function createSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.ICreateSectionRequest} request CreateSectionRequest message or plain object
+                     * @returns {Promise<google.chat.v1.Section>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|deleteSection}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef DeleteSectionCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteSection.
+                     * @function deleteSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IDeleteSectionRequest} request DeleteSectionRequest message or plain object
+                     * @param {google.chat.v1.ChatService.DeleteSectionCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.deleteSection = function deleteSection(request, callback) {
+                        return this.rpcCall(deleteSection, $root.google.chat.v1.DeleteSectionRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteSection" });
+    
+                    /**
+                     * Calls DeleteSection.
+                     * @function deleteSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IDeleteSectionRequest} request DeleteSectionRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|updateSection}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef UpdateSectionCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.Section} [response] Section
+                     */
+    
+                    /**
+                     * Calls UpdateSection.
+                     * @function updateSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateSectionRequest} request UpdateSectionRequest message or plain object
+                     * @param {google.chat.v1.ChatService.UpdateSectionCallback} callback Node-style callback called with the error, if any, and Section
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.updateSection = function updateSection(request, callback) {
+                        return this.rpcCall(updateSection, $root.google.chat.v1.UpdateSectionRequest, $root.google.chat.v1.Section, request, callback);
+                    }, "name", { value: "UpdateSection" });
+    
+                    /**
+                     * Calls UpdateSection.
+                     * @function updateSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateSectionRequest} request UpdateSectionRequest message or plain object
+                     * @returns {Promise<google.chat.v1.Section>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|listSections}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef ListSectionsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.ListSectionsResponse} [response] ListSectionsResponse
+                     */
+    
+                    /**
+                     * Calls ListSections.
+                     * @function listSections
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListSectionsRequest} request ListSectionsRequest message or plain object
+                     * @param {google.chat.v1.ChatService.ListSectionsCallback} callback Node-style callback called with the error, if any, and ListSectionsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.listSections = function listSections(request, callback) {
+                        return this.rpcCall(listSections, $root.google.chat.v1.ListSectionsRequest, $root.google.chat.v1.ListSectionsResponse, request, callback);
+                    }, "name", { value: "ListSections" });
+    
+                    /**
+                     * Calls ListSections.
+                     * @function listSections
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListSectionsRequest} request ListSectionsRequest message or plain object
+                     * @returns {Promise<google.chat.v1.ListSectionsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|positionSection}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef PositionSectionCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.PositionSectionResponse} [response] PositionSectionResponse
+                     */
+    
+                    /**
+                     * Calls PositionSection.
+                     * @function positionSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IPositionSectionRequest} request PositionSectionRequest message or plain object
+                     * @param {google.chat.v1.ChatService.PositionSectionCallback} callback Node-style callback called with the error, if any, and PositionSectionResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.positionSection = function positionSection(request, callback) {
+                        return this.rpcCall(positionSection, $root.google.chat.v1.PositionSectionRequest, $root.google.chat.v1.PositionSectionResponse, request, callback);
+                    }, "name", { value: "PositionSection" });
+    
+                    /**
+                     * Calls PositionSection.
+                     * @function positionSection
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IPositionSectionRequest} request PositionSectionRequest message or plain object
+                     * @returns {Promise<google.chat.v1.PositionSectionResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|listSectionItems}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef ListSectionItemsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.ListSectionItemsResponse} [response] ListSectionItemsResponse
+                     */
+    
+                    /**
+                     * Calls ListSectionItems.
+                     * @function listSectionItems
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListSectionItemsRequest} request ListSectionItemsRequest message or plain object
+                     * @param {google.chat.v1.ChatService.ListSectionItemsCallback} callback Node-style callback called with the error, if any, and ListSectionItemsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.listSectionItems = function listSectionItems(request, callback) {
+                        return this.rpcCall(listSectionItems, $root.google.chat.v1.ListSectionItemsRequest, $root.google.chat.v1.ListSectionItemsResponse, request, callback);
+                    }, "name", { value: "ListSectionItems" });
+    
+                    /**
+                     * Calls ListSectionItems.
+                     * @function listSectionItems
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListSectionItemsRequest} request ListSectionItemsRequest message or plain object
+                     * @returns {Promise<google.chat.v1.ListSectionItemsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|moveSectionItem}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef MoveSectionItemCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.MoveSectionItemResponse} [response] MoveSectionItemResponse
+                     */
+    
+                    /**
+                     * Calls MoveSectionItem.
+                     * @function moveSectionItem
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IMoveSectionItemRequest} request MoveSectionItemRequest message or plain object
+                     * @param {google.chat.v1.ChatService.MoveSectionItemCallback} callback Node-style callback called with the error, if any, and MoveSectionItemResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.moveSectionItem = function moveSectionItem(request, callback) {
+                        return this.rpcCall(moveSectionItem, $root.google.chat.v1.MoveSectionItemRequest, $root.google.chat.v1.MoveSectionItemResponse, request, callback);
+                    }, "name", { value: "MoveSectionItem" });
+    
+                    /**
+                     * Calls MoveSectionItem.
+                     * @function moveSectionItem
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IMoveSectionItemRequest} request MoveSectionItemRequest message or plain object
+                     * @returns {Promise<google.chat.v1.MoveSectionItemResponse>} Promise
+                     * @variation 2
+                     */
+    
                     return ChatService;
                 })();
     
@@ -57510,6 +57741,3252 @@
                     values[valuesById[1] = "HISTORY_OFF"] = 1;
                     values[valuesById[2] = "HISTORY_ON"] = 2;
                     return values;
+                })();
+    
+                v1.Section = (function() {
+    
+                    /**
+                     * Properties of a Section.
+                     * @memberof google.chat.v1
+                     * @interface ISection
+                     * @property {string|null} [name] Section name
+                     * @property {string|null} [displayName] Section displayName
+                     * @property {number|null} [sortOrder] Section sortOrder
+                     * @property {google.chat.v1.Section.SectionType|null} [type] Section type
+                     */
+    
+                    /**
+                     * Constructs a new Section.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a Section.
+                     * @implements ISection
+                     * @constructor
+                     * @param {google.chat.v1.ISection=} [properties] Properties to set
+                     */
+                    function Section(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Section name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.Section
+                     * @instance
+                     */
+                    Section.prototype.name = "";
+    
+                    /**
+                     * Section displayName.
+                     * @member {string} displayName
+                     * @memberof google.chat.v1.Section
+                     * @instance
+                     */
+                    Section.prototype.displayName = "";
+    
+                    /**
+                     * Section sortOrder.
+                     * @member {number} sortOrder
+                     * @memberof google.chat.v1.Section
+                     * @instance
+                     */
+                    Section.prototype.sortOrder = 0;
+    
+                    /**
+                     * Section type.
+                     * @member {google.chat.v1.Section.SectionType} type
+                     * @memberof google.chat.v1.Section
+                     * @instance
+                     */
+                    Section.prototype.type = 0;
+    
+                    /**
+                     * Creates a new Section instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {google.chat.v1.ISection=} [properties] Properties to set
+                     * @returns {google.chat.v1.Section} Section instance
+                     */
+                    Section.create = function create(properties) {
+                        return new Section(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Section message. Does not implicitly {@link google.chat.v1.Section.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {google.chat.v1.ISection} message Section message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Section.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                        if (message.sortOrder != null && Object.hasOwnProperty.call(message, "sortOrder"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sortOrder);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Section message, length delimited. Does not implicitly {@link google.chat.v1.Section.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {google.chat.v1.ISection} message Section message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Section.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Section message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.Section} Section
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Section.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Section();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.displayName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.sortOrder = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.type = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Section message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.Section} Section
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Section.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Section message.
+                     * @function verify
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Section.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.sortOrder != null && message.hasOwnProperty("sortOrder"))
+                            if (!$util.isInteger(message.sortOrder))
+                                return "sortOrder: integer expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            switch (message.type) {
+                            default:
+                                return "type: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 6:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Section message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.Section} Section
+                     */
+                    Section.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.Section)
+                            return object;
+                        var message = new $root.google.chat.v1.Section();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.sortOrder != null)
+                            message.sortOrder = object.sortOrder | 0;
+                        switch (object.type) {
+                        default:
+                            if (typeof object.type === "number") {
+                                message.type = object.type;
+                                break;
+                            }
+                            break;
+                        case "SECTION_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.type = 0;
+                            break;
+                        case "CUSTOM_SECTION":
+                        case 1:
+                            message.type = 1;
+                            break;
+                        case "DEFAULT_DIRECT_MESSAGES":
+                        case 2:
+                            message.type = 2;
+                            break;
+                        case "DEFAULT_SPACES":
+                        case 3:
+                            message.type = 3;
+                            break;
+                        case "DEFAULT_APPS":
+                        case 6:
+                            message.type = 6;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Section message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {google.chat.v1.Section} message Section
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Section.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.displayName = "";
+                            object.sortOrder = 0;
+                            object.type = options.enums === String ? "SECTION_TYPE_UNSPECIFIED" : 0;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        if (message.sortOrder != null && message.hasOwnProperty("sortOrder"))
+                            object.sortOrder = message.sortOrder;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = options.enums === String ? $root.google.chat.v1.Section.SectionType[message.type] === undefined ? message.type : $root.google.chat.v1.Section.SectionType[message.type] : message.type;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Section to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.Section
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Section.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Section
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.Section
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Section.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.Section";
+                    };
+    
+                    /**
+                     * SectionType enum.
+                     * @name google.chat.v1.Section.SectionType
+                     * @enum {number}
+                     * @property {number} SECTION_TYPE_UNSPECIFIED=0 SECTION_TYPE_UNSPECIFIED value
+                     * @property {number} CUSTOM_SECTION=1 CUSTOM_SECTION value
+                     * @property {number} DEFAULT_DIRECT_MESSAGES=2 DEFAULT_DIRECT_MESSAGES value
+                     * @property {number} DEFAULT_SPACES=3 DEFAULT_SPACES value
+                     * @property {number} DEFAULT_APPS=6 DEFAULT_APPS value
+                     */
+                    Section.SectionType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SECTION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CUSTOM_SECTION"] = 1;
+                        values[valuesById[2] = "DEFAULT_DIRECT_MESSAGES"] = 2;
+                        values[valuesById[3] = "DEFAULT_SPACES"] = 3;
+                        values[valuesById[6] = "DEFAULT_APPS"] = 6;
+                        return values;
+                    })();
+    
+                    return Section;
+                })();
+    
+                v1.SectionItem = (function() {
+    
+                    /**
+                     * Properties of a SectionItem.
+                     * @memberof google.chat.v1
+                     * @interface ISectionItem
+                     * @property {string|null} [name] SectionItem name
+                     * @property {string|null} [space] SectionItem space
+                     */
+    
+                    /**
+                     * Constructs a new SectionItem.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SectionItem.
+                     * @implements ISectionItem
+                     * @constructor
+                     * @param {google.chat.v1.ISectionItem=} [properties] Properties to set
+                     */
+                    function SectionItem(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SectionItem name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.SectionItem
+                     * @instance
+                     */
+                    SectionItem.prototype.name = "";
+    
+                    /**
+                     * SectionItem space.
+                     * @member {string|null|undefined} space
+                     * @memberof google.chat.v1.SectionItem
+                     * @instance
+                     */
+                    SectionItem.prototype.space = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * SectionItem item.
+                     * @member {"space"|undefined} item
+                     * @memberof google.chat.v1.SectionItem
+                     * @instance
+                     */
+                    Object.defineProperty(SectionItem.prototype, "item", {
+                        get: $util.oneOfGetter($oneOfFields = ["space"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new SectionItem instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {google.chat.v1.ISectionItem=} [properties] Properties to set
+                     * @returns {google.chat.v1.SectionItem} SectionItem instance
+                     */
+                    SectionItem.create = function create(properties) {
+                        return new SectionItem(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SectionItem message. Does not implicitly {@link google.chat.v1.SectionItem.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {google.chat.v1.ISectionItem} message SectionItem message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SectionItem.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.space != null && Object.hasOwnProperty.call(message, "space"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.space);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SectionItem message, length delimited. Does not implicitly {@link google.chat.v1.SectionItem.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {google.chat.v1.ISectionItem} message SectionItem message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SectionItem.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SectionItem message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SectionItem} SectionItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SectionItem.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SectionItem();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.space = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SectionItem message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SectionItem} SectionItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SectionItem.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SectionItem message.
+                     * @function verify
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SectionItem.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.space != null && message.hasOwnProperty("space")) {
+                            properties.item = 1;
+                            if (!$util.isString(message.space))
+                                return "space: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SectionItem message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SectionItem} SectionItem
+                     */
+                    SectionItem.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SectionItem)
+                            return object;
+                        var message = new $root.google.chat.v1.SectionItem();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.space != null)
+                            message.space = String(object.space);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SectionItem message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {google.chat.v1.SectionItem} message SectionItem
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SectionItem.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.space != null && message.hasOwnProperty("space")) {
+                            object.space = message.space;
+                            if (options.oneofs)
+                                object.item = "space";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SectionItem to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SectionItem
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SectionItem.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SectionItem
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SectionItem
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SectionItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SectionItem";
+                    };
+    
+                    return SectionItem;
+                })();
+    
+                v1.CreateSectionRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateSectionRequest.
+                     * @memberof google.chat.v1
+                     * @interface ICreateSectionRequest
+                     * @property {string|null} [parent] CreateSectionRequest parent
+                     * @property {google.chat.v1.ISection|null} [section] CreateSectionRequest section
+                     */
+    
+                    /**
+                     * Constructs a new CreateSectionRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CreateSectionRequest.
+                     * @implements ICreateSectionRequest
+                     * @constructor
+                     * @param {google.chat.v1.ICreateSectionRequest=} [properties] Properties to set
+                     */
+                    function CreateSectionRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateSectionRequest parent.
+                     * @member {string} parent
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @instance
+                     */
+                    CreateSectionRequest.prototype.parent = "";
+    
+                    /**
+                     * CreateSectionRequest section.
+                     * @member {google.chat.v1.ISection|null|undefined} section
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @instance
+                     */
+                    CreateSectionRequest.prototype.section = null;
+    
+                    /**
+                     * Creates a new CreateSectionRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateSectionRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.CreateSectionRequest} CreateSectionRequest instance
+                     */
+                    CreateSectionRequest.create = function create(properties) {
+                        return new CreateSectionRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateSectionRequest message. Does not implicitly {@link google.chat.v1.CreateSectionRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateSectionRequest} message CreateSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateSectionRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.section != null && Object.hasOwnProperty.call(message, "section"))
+                            $root.google.chat.v1.Section.encode(message.section, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateSectionRequest message, length delimited. Does not implicitly {@link google.chat.v1.CreateSectionRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.ICreateSectionRequest} message CreateSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateSectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateSectionRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CreateSectionRequest} CreateSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateSectionRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateSectionRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.section = $root.google.chat.v1.Section.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateSectionRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CreateSectionRequest} CreateSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateSectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateSectionRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateSectionRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.section != null && message.hasOwnProperty("section")) {
+                            var error = $root.google.chat.v1.Section.verify(message.section);
+                            if (error)
+                                return "section." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateSectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CreateSectionRequest} CreateSectionRequest
+                     */
+                    CreateSectionRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CreateSectionRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.CreateSectionRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.section != null) {
+                            if (typeof object.section !== "object")
+                                throw TypeError(".google.chat.v1.CreateSectionRequest.section: object expected");
+                            message.section = $root.google.chat.v1.Section.fromObject(object.section);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateSectionRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.CreateSectionRequest} message CreateSectionRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateSectionRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.section = null;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.section != null && message.hasOwnProperty("section"))
+                            object.section = $root.google.chat.v1.Section.toObject(message.section, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateSectionRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateSectionRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateSectionRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CreateSectionRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateSectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CreateSectionRequest";
+                    };
+    
+                    return CreateSectionRequest;
+                })();
+    
+                v1.DeleteSectionRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteSectionRequest.
+                     * @memberof google.chat.v1
+                     * @interface IDeleteSectionRequest
+                     * @property {string|null} [name] DeleteSectionRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteSectionRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a DeleteSectionRequest.
+                     * @implements IDeleteSectionRequest
+                     * @constructor
+                     * @param {google.chat.v1.IDeleteSectionRequest=} [properties] Properties to set
+                     */
+                    function DeleteSectionRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteSectionRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @instance
+                     */
+                    DeleteSectionRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteSectionRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteSectionRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.DeleteSectionRequest} DeleteSectionRequest instance
+                     */
+                    DeleteSectionRequest.create = function create(properties) {
+                        return new DeleteSectionRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteSectionRequest message. Does not implicitly {@link google.chat.v1.DeleteSectionRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteSectionRequest} message DeleteSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteSectionRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteSectionRequest message, length delimited. Does not implicitly {@link google.chat.v1.DeleteSectionRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IDeleteSectionRequest} message DeleteSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteSectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteSectionRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.DeleteSectionRequest} DeleteSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteSectionRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteSectionRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteSectionRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.DeleteSectionRequest} DeleteSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteSectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteSectionRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteSectionRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteSectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.DeleteSectionRequest} DeleteSectionRequest
+                     */
+                    DeleteSectionRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.DeleteSectionRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.DeleteSectionRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteSectionRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {google.chat.v1.DeleteSectionRequest} message DeleteSectionRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteSectionRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteSectionRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteSectionRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteSectionRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.DeleteSectionRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteSectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.DeleteSectionRequest";
+                    };
+    
+                    return DeleteSectionRequest;
+                })();
+    
+                v1.UpdateSectionRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateSectionRequest.
+                     * @memberof google.chat.v1
+                     * @interface IUpdateSectionRequest
+                     * @property {google.chat.v1.ISection|null} [section] UpdateSectionRequest section
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSectionRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateSectionRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an UpdateSectionRequest.
+                     * @implements IUpdateSectionRequest
+                     * @constructor
+                     * @param {google.chat.v1.IUpdateSectionRequest=} [properties] Properties to set
+                     */
+                    function UpdateSectionRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateSectionRequest section.
+                     * @member {google.chat.v1.ISection|null|undefined} section
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @instance
+                     */
+                    UpdateSectionRequest.prototype.section = null;
+    
+                    /**
+                     * UpdateSectionRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @instance
+                     */
+                    UpdateSectionRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateSectionRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSectionRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.UpdateSectionRequest} UpdateSectionRequest instance
+                     */
+                    UpdateSectionRequest.create = function create(properties) {
+                        return new UpdateSectionRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSectionRequest message. Does not implicitly {@link google.chat.v1.UpdateSectionRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSectionRequest} message UpdateSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSectionRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.section != null && Object.hasOwnProperty.call(message, "section"))
+                            $root.google.chat.v1.Section.encode(message.section, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSectionRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateSectionRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSectionRequest} message UpdateSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateSectionRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.UpdateSectionRequest} UpdateSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSectionRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateSectionRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.section = $root.google.chat.v1.Section.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateSectionRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.UpdateSectionRequest} UpdateSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateSectionRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateSectionRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.section != null && message.hasOwnProperty("section")) {
+                            var error = $root.google.chat.v1.Section.verify(message.section);
+                            if (error)
+                                return "section." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateSectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.UpdateSectionRequest} UpdateSectionRequest
+                     */
+                    UpdateSectionRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.UpdateSectionRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.UpdateSectionRequest();
+                        if (object.section != null) {
+                            if (typeof object.section !== "object")
+                                throw TypeError(".google.chat.v1.UpdateSectionRequest.section: object expected");
+                            message.section = $root.google.chat.v1.Section.fromObject(object.section);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.chat.v1.UpdateSectionRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateSectionRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {google.chat.v1.UpdateSectionRequest} message UpdateSectionRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateSectionRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.section = null;
+                            object.updateMask = null;
+                        }
+                        if (message.section != null && message.hasOwnProperty("section"))
+                            object.section = $root.google.chat.v1.Section.toObject(message.section, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateSectionRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateSectionRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateSectionRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.UpdateSectionRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateSectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.UpdateSectionRequest";
+                    };
+    
+                    return UpdateSectionRequest;
+                })();
+    
+                v1.ListSectionsRequest = (function() {
+    
+                    /**
+                     * Properties of a ListSectionsRequest.
+                     * @memberof google.chat.v1
+                     * @interface IListSectionsRequest
+                     * @property {string|null} [parent] ListSectionsRequest parent
+                     * @property {number|null} [pageSize] ListSectionsRequest pageSize
+                     * @property {string|null} [pageToken] ListSectionsRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListSectionsRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListSectionsRequest.
+                     * @implements IListSectionsRequest
+                     * @constructor
+                     * @param {google.chat.v1.IListSectionsRequest=} [properties] Properties to set
+                     */
+                    function ListSectionsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSectionsRequest parent.
+                     * @member {string} parent
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @instance
+                     */
+                    ListSectionsRequest.prototype.parent = "";
+    
+                    /**
+                     * ListSectionsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @instance
+                     */
+                    ListSectionsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListSectionsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @instance
+                     */
+                    ListSectionsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new ListSectionsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSectionsRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListSectionsRequest} ListSectionsRequest instance
+                     */
+                    ListSectionsRequest.create = function create(properties) {
+                        return new ListSectionsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionsRequest message. Does not implicitly {@link google.chat.v1.ListSectionsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSectionsRequest} message ListSectionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListSectionsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSectionsRequest} message ListSectionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSectionsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListSectionsRequest} ListSectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionsRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSectionsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSectionsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListSectionsRequest} ListSectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSectionsRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSectionsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListSectionsRequest} ListSectionsRequest
+                     */
+                    ListSectionsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListSectionsRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.ListSectionsRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSectionsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {google.chat.v1.ListSectionsRequest} message ListSectionsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSectionsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSectionsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSectionsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSectionsRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListSectionsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSectionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListSectionsRequest";
+                    };
+    
+                    return ListSectionsRequest;
+                })();
+    
+                v1.ListSectionsResponse = (function() {
+    
+                    /**
+                     * Properties of a ListSectionsResponse.
+                     * @memberof google.chat.v1
+                     * @interface IListSectionsResponse
+                     * @property {Array.<google.chat.v1.ISection>|null} [sections] ListSectionsResponse sections
+                     * @property {string|null} [nextPageToken] ListSectionsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListSectionsResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListSectionsResponse.
+                     * @implements IListSectionsResponse
+                     * @constructor
+                     * @param {google.chat.v1.IListSectionsResponse=} [properties] Properties to set
+                     */
+                    function ListSectionsResponse(properties) {
+                        this.sections = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSectionsResponse sections.
+                     * @member {Array.<google.chat.v1.ISection>} sections
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @instance
+                     */
+                    ListSectionsResponse.prototype.sections = $util.emptyArray;
+    
+                    /**
+                     * ListSectionsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @instance
+                     */
+                    ListSectionsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListSectionsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSectionsResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListSectionsResponse} ListSectionsResponse instance
+                     */
+                    ListSectionsResponse.create = function create(properties) {
+                        return new ListSectionsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionsResponse message. Does not implicitly {@link google.chat.v1.ListSectionsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSectionsResponse} message ListSectionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sections != null && message.sections.length)
+                            for (var i = 0; i < message.sections.length; ++i)
+                                $root.google.chat.v1.Section.encode(message.sections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListSectionsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSectionsResponse} message ListSectionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSectionsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListSectionsResponse} ListSectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionsResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSectionsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.sections && message.sections.length))
+                                        message.sections = [];
+                                    message.sections.push($root.google.chat.v1.Section.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSectionsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListSectionsResponse} ListSectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSectionsResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSectionsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sections != null && message.hasOwnProperty("sections")) {
+                            if (!Array.isArray(message.sections))
+                                return "sections: array expected";
+                            for (var i = 0; i < message.sections.length; ++i) {
+                                var error = $root.google.chat.v1.Section.verify(message.sections[i]);
+                                if (error)
+                                    return "sections." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListSectionsResponse} ListSectionsResponse
+                     */
+                    ListSectionsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListSectionsResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.ListSectionsResponse();
+                        if (object.sections) {
+                            if (!Array.isArray(object.sections))
+                                throw TypeError(".google.chat.v1.ListSectionsResponse.sections: array expected");
+                            message.sections = [];
+                            for (var i = 0; i < object.sections.length; ++i) {
+                                if (typeof object.sections[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ListSectionsResponse.sections: object expected");
+                                message.sections[i] = $root.google.chat.v1.Section.fromObject(object.sections[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSectionsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {google.chat.v1.ListSectionsResponse} message ListSectionsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSectionsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.sections = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.sections && message.sections.length) {
+                            object.sections = [];
+                            for (var j = 0; j < message.sections.length; ++j)
+                                object.sections[j] = $root.google.chat.v1.Section.toObject(message.sections[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSectionsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSectionsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSectionsResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListSectionsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSectionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListSectionsResponse";
+                    };
+    
+                    return ListSectionsResponse;
+                })();
+    
+                v1.PositionSectionRequest = (function() {
+    
+                    /**
+                     * Properties of a PositionSectionRequest.
+                     * @memberof google.chat.v1
+                     * @interface IPositionSectionRequest
+                     * @property {string|null} [name] PositionSectionRequest name
+                     * @property {number|null} [sortOrder] PositionSectionRequest sortOrder
+                     * @property {google.chat.v1.PositionSectionRequest.Position|null} [relativePosition] PositionSectionRequest relativePosition
+                     */
+    
+                    /**
+                     * Constructs a new PositionSectionRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a PositionSectionRequest.
+                     * @implements IPositionSectionRequest
+                     * @constructor
+                     * @param {google.chat.v1.IPositionSectionRequest=} [properties] Properties to set
+                     */
+                    function PositionSectionRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PositionSectionRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @instance
+                     */
+                    PositionSectionRequest.prototype.name = "";
+    
+                    /**
+                     * PositionSectionRequest sortOrder.
+                     * @member {number|null|undefined} sortOrder
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @instance
+                     */
+                    PositionSectionRequest.prototype.sortOrder = null;
+    
+                    /**
+                     * PositionSectionRequest relativePosition.
+                     * @member {google.chat.v1.PositionSectionRequest.Position|null|undefined} relativePosition
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @instance
+                     */
+                    PositionSectionRequest.prototype.relativePosition = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * PositionSectionRequest position.
+                     * @member {"sortOrder"|"relativePosition"|undefined} position
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @instance
+                     */
+                    Object.defineProperty(PositionSectionRequest.prototype, "position", {
+                        get: $util.oneOfGetter($oneOfFields = ["sortOrder", "relativePosition"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new PositionSectionRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IPositionSectionRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.PositionSectionRequest} PositionSectionRequest instance
+                     */
+                    PositionSectionRequest.create = function create(properties) {
+                        return new PositionSectionRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PositionSectionRequest message. Does not implicitly {@link google.chat.v1.PositionSectionRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IPositionSectionRequest} message PositionSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PositionSectionRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.sortOrder != null && Object.hasOwnProperty.call(message, "sortOrder"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sortOrder);
+                        if (message.relativePosition != null && Object.hasOwnProperty.call(message, "relativePosition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.relativePosition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PositionSectionRequest message, length delimited. Does not implicitly {@link google.chat.v1.PositionSectionRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {google.chat.v1.IPositionSectionRequest} message PositionSectionRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PositionSectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PositionSectionRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.PositionSectionRequest} PositionSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PositionSectionRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.PositionSectionRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.sortOrder = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.relativePosition = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PositionSectionRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.PositionSectionRequest} PositionSectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PositionSectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PositionSectionRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PositionSectionRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.sortOrder != null && message.hasOwnProperty("sortOrder")) {
+                            properties.position = 1;
+                            if (!$util.isInteger(message.sortOrder))
+                                return "sortOrder: integer expected";
+                        }
+                        if (message.relativePosition != null && message.hasOwnProperty("relativePosition")) {
+                            if (properties.position === 1)
+                                return "position: multiple values";
+                            properties.position = 1;
+                            switch (message.relativePosition) {
+                            default:
+                                return "relativePosition: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PositionSectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.PositionSectionRequest} PositionSectionRequest
+                     */
+                    PositionSectionRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.PositionSectionRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.PositionSectionRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.sortOrder != null)
+                            message.sortOrder = object.sortOrder | 0;
+                        switch (object.relativePosition) {
+                        default:
+                            if (typeof object.relativePosition === "number") {
+                                message.relativePosition = object.relativePosition;
+                                break;
+                            }
+                            break;
+                        case "POSITION_UNSPECIFIED":
+                        case 0:
+                            message.relativePosition = 0;
+                            break;
+                        case "START":
+                        case 1:
+                            message.relativePosition = 1;
+                            break;
+                        case "END":
+                        case 2:
+                            message.relativePosition = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PositionSectionRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {google.chat.v1.PositionSectionRequest} message PositionSectionRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PositionSectionRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.sortOrder != null && message.hasOwnProperty("sortOrder")) {
+                            object.sortOrder = message.sortOrder;
+                            if (options.oneofs)
+                                object.position = "sortOrder";
+                        }
+                        if (message.relativePosition != null && message.hasOwnProperty("relativePosition")) {
+                            object.relativePosition = options.enums === String ? $root.google.chat.v1.PositionSectionRequest.Position[message.relativePosition] === undefined ? message.relativePosition : $root.google.chat.v1.PositionSectionRequest.Position[message.relativePosition] : message.relativePosition;
+                            if (options.oneofs)
+                                object.position = "relativePosition";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PositionSectionRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PositionSectionRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PositionSectionRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.PositionSectionRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PositionSectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.PositionSectionRequest";
+                    };
+    
+                    /**
+                     * Position enum.
+                     * @name google.chat.v1.PositionSectionRequest.Position
+                     * @enum {number}
+                     * @property {number} POSITION_UNSPECIFIED=0 POSITION_UNSPECIFIED value
+                     * @property {number} START=1 START value
+                     * @property {number} END=2 END value
+                     */
+                    PositionSectionRequest.Position = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "POSITION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "START"] = 1;
+                        values[valuesById[2] = "END"] = 2;
+                        return values;
+                    })();
+    
+                    return PositionSectionRequest;
+                })();
+    
+                v1.PositionSectionResponse = (function() {
+    
+                    /**
+                     * Properties of a PositionSectionResponse.
+                     * @memberof google.chat.v1
+                     * @interface IPositionSectionResponse
+                     * @property {google.chat.v1.ISection|null} [section] PositionSectionResponse section
+                     */
+    
+                    /**
+                     * Constructs a new PositionSectionResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a PositionSectionResponse.
+                     * @implements IPositionSectionResponse
+                     * @constructor
+                     * @param {google.chat.v1.IPositionSectionResponse=} [properties] Properties to set
+                     */
+                    function PositionSectionResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PositionSectionResponse section.
+                     * @member {google.chat.v1.ISection|null|undefined} section
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @instance
+                     */
+                    PositionSectionResponse.prototype.section = null;
+    
+                    /**
+                     * Creates a new PositionSectionResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {google.chat.v1.IPositionSectionResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.PositionSectionResponse} PositionSectionResponse instance
+                     */
+                    PositionSectionResponse.create = function create(properties) {
+                        return new PositionSectionResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PositionSectionResponse message. Does not implicitly {@link google.chat.v1.PositionSectionResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {google.chat.v1.IPositionSectionResponse} message PositionSectionResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PositionSectionResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.section != null && Object.hasOwnProperty.call(message, "section"))
+                            $root.google.chat.v1.Section.encode(message.section, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PositionSectionResponse message, length delimited. Does not implicitly {@link google.chat.v1.PositionSectionResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {google.chat.v1.IPositionSectionResponse} message PositionSectionResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PositionSectionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PositionSectionResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.PositionSectionResponse} PositionSectionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PositionSectionResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.PositionSectionResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.section = $root.google.chat.v1.Section.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PositionSectionResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.PositionSectionResponse} PositionSectionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PositionSectionResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PositionSectionResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PositionSectionResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.section != null && message.hasOwnProperty("section")) {
+                            var error = $root.google.chat.v1.Section.verify(message.section);
+                            if (error)
+                                return "section." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PositionSectionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.PositionSectionResponse} PositionSectionResponse
+                     */
+                    PositionSectionResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.PositionSectionResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.PositionSectionResponse();
+                        if (object.section != null) {
+                            if (typeof object.section !== "object")
+                                throw TypeError(".google.chat.v1.PositionSectionResponse.section: object expected");
+                            message.section = $root.google.chat.v1.Section.fromObject(object.section);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PositionSectionResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {google.chat.v1.PositionSectionResponse} message PositionSectionResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PositionSectionResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.section = null;
+                        if (message.section != null && message.hasOwnProperty("section"))
+                            object.section = $root.google.chat.v1.Section.toObject(message.section, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PositionSectionResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PositionSectionResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PositionSectionResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.PositionSectionResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PositionSectionResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.PositionSectionResponse";
+                    };
+    
+                    return PositionSectionResponse;
+                })();
+    
+                v1.ListSectionItemsRequest = (function() {
+    
+                    /**
+                     * Properties of a ListSectionItemsRequest.
+                     * @memberof google.chat.v1
+                     * @interface IListSectionItemsRequest
+                     * @property {string|null} [parent] ListSectionItemsRequest parent
+                     * @property {number|null} [pageSize] ListSectionItemsRequest pageSize
+                     * @property {string|null} [pageToken] ListSectionItemsRequest pageToken
+                     * @property {string|null} [filter] ListSectionItemsRequest filter
+                     */
+    
+                    /**
+                     * Constructs a new ListSectionItemsRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListSectionItemsRequest.
+                     * @implements IListSectionItemsRequest
+                     * @constructor
+                     * @param {google.chat.v1.IListSectionItemsRequest=} [properties] Properties to set
+                     */
+                    function ListSectionItemsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSectionItemsRequest parent.
+                     * @member {string} parent
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @instance
+                     */
+                    ListSectionItemsRequest.prototype.parent = "";
+    
+                    /**
+                     * ListSectionItemsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @instance
+                     */
+                    ListSectionItemsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListSectionItemsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @instance
+                     */
+                    ListSectionItemsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * ListSectionItemsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @instance
+                     */
+                    ListSectionItemsRequest.prototype.filter = "";
+    
+                    /**
+                     * Creates a new ListSectionItemsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSectionItemsRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListSectionItemsRequest} ListSectionItemsRequest instance
+                     */
+                    ListSectionItemsRequest.create = function create(properties) {
+                        return new ListSectionItemsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionItemsRequest message. Does not implicitly {@link google.chat.v1.ListSectionItemsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSectionItemsRequest} message ListSectionItemsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionItemsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionItemsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListSectionItemsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSectionItemsRequest} message ListSectionItemsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionItemsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSectionItemsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListSectionItemsRequest} ListSectionItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionItemsRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSectionItemsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSectionItemsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListSectionItemsRequest} ListSectionItemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionItemsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSectionItemsRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSectionItemsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSectionItemsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListSectionItemsRequest} ListSectionItemsRequest
+                     */
+                    ListSectionItemsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListSectionItemsRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.ListSectionItemsRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSectionItemsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {google.chat.v1.ListSectionItemsRequest} message ListSectionItemsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSectionItemsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.filter = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSectionItemsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSectionItemsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSectionItemsRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListSectionItemsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSectionItemsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListSectionItemsRequest";
+                    };
+    
+                    return ListSectionItemsRequest;
+                })();
+    
+                v1.ListSectionItemsResponse = (function() {
+    
+                    /**
+                     * Properties of a ListSectionItemsResponse.
+                     * @memberof google.chat.v1
+                     * @interface IListSectionItemsResponse
+                     * @property {Array.<google.chat.v1.ISectionItem>|null} [sectionItems] ListSectionItemsResponse sectionItems
+                     * @property {string|null} [nextPageToken] ListSectionItemsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListSectionItemsResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListSectionItemsResponse.
+                     * @implements IListSectionItemsResponse
+                     * @constructor
+                     * @param {google.chat.v1.IListSectionItemsResponse=} [properties] Properties to set
+                     */
+                    function ListSectionItemsResponse(properties) {
+                        this.sectionItems = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSectionItemsResponse sectionItems.
+                     * @member {Array.<google.chat.v1.ISectionItem>} sectionItems
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @instance
+                     */
+                    ListSectionItemsResponse.prototype.sectionItems = $util.emptyArray;
+    
+                    /**
+                     * ListSectionItemsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @instance
+                     */
+                    ListSectionItemsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListSectionItemsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSectionItemsResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListSectionItemsResponse} ListSectionItemsResponse instance
+                     */
+                    ListSectionItemsResponse.create = function create(properties) {
+                        return new ListSectionItemsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionItemsResponse message. Does not implicitly {@link google.chat.v1.ListSectionItemsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSectionItemsResponse} message ListSectionItemsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionItemsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sectionItems != null && message.sectionItems.length)
+                            for (var i = 0; i < message.sectionItems.length; ++i)
+                                $root.google.chat.v1.SectionItem.encode(message.sectionItems[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSectionItemsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListSectionItemsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSectionItemsResponse} message ListSectionItemsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSectionItemsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSectionItemsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListSectionItemsResponse} ListSectionItemsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionItemsResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSectionItemsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.sectionItems && message.sectionItems.length))
+                                        message.sectionItems = [];
+                                    message.sectionItems.push($root.google.chat.v1.SectionItem.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSectionItemsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListSectionItemsResponse} ListSectionItemsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSectionItemsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSectionItemsResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSectionItemsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sectionItems != null && message.hasOwnProperty("sectionItems")) {
+                            if (!Array.isArray(message.sectionItems))
+                                return "sectionItems: array expected";
+                            for (var i = 0; i < message.sectionItems.length; ++i) {
+                                var error = $root.google.chat.v1.SectionItem.verify(message.sectionItems[i]);
+                                if (error)
+                                    return "sectionItems." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSectionItemsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListSectionItemsResponse} ListSectionItemsResponse
+                     */
+                    ListSectionItemsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListSectionItemsResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.ListSectionItemsResponse();
+                        if (object.sectionItems) {
+                            if (!Array.isArray(object.sectionItems))
+                                throw TypeError(".google.chat.v1.ListSectionItemsResponse.sectionItems: array expected");
+                            message.sectionItems = [];
+                            for (var i = 0; i < object.sectionItems.length; ++i) {
+                                if (typeof object.sectionItems[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ListSectionItemsResponse.sectionItems: object expected");
+                                message.sectionItems[i] = $root.google.chat.v1.SectionItem.fromObject(object.sectionItems[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSectionItemsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {google.chat.v1.ListSectionItemsResponse} message ListSectionItemsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSectionItemsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.sectionItems = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.sectionItems && message.sectionItems.length) {
+                            object.sectionItems = [];
+                            for (var j = 0; j < message.sectionItems.length; ++j)
+                                object.sectionItems[j] = $root.google.chat.v1.SectionItem.toObject(message.sectionItems[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSectionItemsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSectionItemsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSectionItemsResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListSectionItemsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSectionItemsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListSectionItemsResponse";
+                    };
+    
+                    return ListSectionItemsResponse;
+                })();
+    
+                v1.MoveSectionItemRequest = (function() {
+    
+                    /**
+                     * Properties of a MoveSectionItemRequest.
+                     * @memberof google.chat.v1
+                     * @interface IMoveSectionItemRequest
+                     * @property {string|null} [name] MoveSectionItemRequest name
+                     * @property {string|null} [targetSection] MoveSectionItemRequest targetSection
+                     */
+    
+                    /**
+                     * Constructs a new MoveSectionItemRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MoveSectionItemRequest.
+                     * @implements IMoveSectionItemRequest
+                     * @constructor
+                     * @param {google.chat.v1.IMoveSectionItemRequest=} [properties] Properties to set
+                     */
+                    function MoveSectionItemRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MoveSectionItemRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @instance
+                     */
+                    MoveSectionItemRequest.prototype.name = "";
+    
+                    /**
+                     * MoveSectionItemRequest targetSection.
+                     * @member {string} targetSection
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @instance
+                     */
+                    MoveSectionItemRequest.prototype.targetSection = "";
+    
+                    /**
+                     * Creates a new MoveSectionItemRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {google.chat.v1.IMoveSectionItemRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.MoveSectionItemRequest} MoveSectionItemRequest instance
+                     */
+                    MoveSectionItemRequest.create = function create(properties) {
+                        return new MoveSectionItemRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MoveSectionItemRequest message. Does not implicitly {@link google.chat.v1.MoveSectionItemRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {google.chat.v1.IMoveSectionItemRequest} message MoveSectionItemRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MoveSectionItemRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.targetSection != null && Object.hasOwnProperty.call(message, "targetSection"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetSection);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MoveSectionItemRequest message, length delimited. Does not implicitly {@link google.chat.v1.MoveSectionItemRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {google.chat.v1.IMoveSectionItemRequest} message MoveSectionItemRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MoveSectionItemRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MoveSectionItemRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MoveSectionItemRequest} MoveSectionItemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MoveSectionItemRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MoveSectionItemRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.targetSection = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MoveSectionItemRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MoveSectionItemRequest} MoveSectionItemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MoveSectionItemRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MoveSectionItemRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MoveSectionItemRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.targetSection != null && message.hasOwnProperty("targetSection"))
+                            if (!$util.isString(message.targetSection))
+                                return "targetSection: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MoveSectionItemRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MoveSectionItemRequest} MoveSectionItemRequest
+                     */
+                    MoveSectionItemRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MoveSectionItemRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.MoveSectionItemRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.targetSection != null)
+                            message.targetSection = String(object.targetSection);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MoveSectionItemRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {google.chat.v1.MoveSectionItemRequest} message MoveSectionItemRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MoveSectionItemRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.targetSection = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.targetSection != null && message.hasOwnProperty("targetSection"))
+                            object.targetSection = message.targetSection;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MoveSectionItemRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MoveSectionItemRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MoveSectionItemRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MoveSectionItemRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MoveSectionItemRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MoveSectionItemRequest";
+                    };
+    
+                    return MoveSectionItemRequest;
+                })();
+    
+                v1.MoveSectionItemResponse = (function() {
+    
+                    /**
+                     * Properties of a MoveSectionItemResponse.
+                     * @memberof google.chat.v1
+                     * @interface IMoveSectionItemResponse
+                     * @property {google.chat.v1.ISectionItem|null} [sectionItem] MoveSectionItemResponse sectionItem
+                     */
+    
+                    /**
+                     * Constructs a new MoveSectionItemResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MoveSectionItemResponse.
+                     * @implements IMoveSectionItemResponse
+                     * @constructor
+                     * @param {google.chat.v1.IMoveSectionItemResponse=} [properties] Properties to set
+                     */
+                    function MoveSectionItemResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MoveSectionItemResponse sectionItem.
+                     * @member {google.chat.v1.ISectionItem|null|undefined} sectionItem
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @instance
+                     */
+                    MoveSectionItemResponse.prototype.sectionItem = null;
+    
+                    /**
+                     * Creates a new MoveSectionItemResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {google.chat.v1.IMoveSectionItemResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.MoveSectionItemResponse} MoveSectionItemResponse instance
+                     */
+                    MoveSectionItemResponse.create = function create(properties) {
+                        return new MoveSectionItemResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MoveSectionItemResponse message. Does not implicitly {@link google.chat.v1.MoveSectionItemResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {google.chat.v1.IMoveSectionItemResponse} message MoveSectionItemResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MoveSectionItemResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sectionItem != null && Object.hasOwnProperty.call(message, "sectionItem"))
+                            $root.google.chat.v1.SectionItem.encode(message.sectionItem, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MoveSectionItemResponse message, length delimited. Does not implicitly {@link google.chat.v1.MoveSectionItemResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {google.chat.v1.IMoveSectionItemResponse} message MoveSectionItemResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MoveSectionItemResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MoveSectionItemResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MoveSectionItemResponse} MoveSectionItemResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MoveSectionItemResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MoveSectionItemResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.sectionItem = $root.google.chat.v1.SectionItem.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MoveSectionItemResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MoveSectionItemResponse} MoveSectionItemResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MoveSectionItemResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MoveSectionItemResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MoveSectionItemResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sectionItem != null && message.hasOwnProperty("sectionItem")) {
+                            var error = $root.google.chat.v1.SectionItem.verify(message.sectionItem);
+                            if (error)
+                                return "sectionItem." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MoveSectionItemResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MoveSectionItemResponse} MoveSectionItemResponse
+                     */
+                    MoveSectionItemResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MoveSectionItemResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.MoveSectionItemResponse();
+                        if (object.sectionItem != null) {
+                            if (typeof object.sectionItem !== "object")
+                                throw TypeError(".google.chat.v1.MoveSectionItemResponse.sectionItem: object expected");
+                            message.sectionItem = $root.google.chat.v1.SectionItem.fromObject(object.sectionItem);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MoveSectionItemResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {google.chat.v1.MoveSectionItemResponse} message MoveSectionItemResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MoveSectionItemResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.sectionItem = null;
+                        if (message.sectionItem != null && message.hasOwnProperty("sectionItem"))
+                            object.sectionItem = $root.google.chat.v1.SectionItem.toObject(message.sectionItem, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MoveSectionItemResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MoveSectionItemResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MoveSectionItemResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MoveSectionItemResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MoveSectionItemResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MoveSectionItemResponse";
+                    };
+    
+                    return MoveSectionItemResponse;
                 })();
     
                 v1.SpaceEvent = (function() {
