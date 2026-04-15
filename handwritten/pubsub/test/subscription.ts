@@ -1003,6 +1003,10 @@ describe('Subscription', () => {
         done();
       };
 
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       subscription.setMetadata(METADATA, done);
     });
 

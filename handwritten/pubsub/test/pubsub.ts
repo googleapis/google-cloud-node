@@ -429,6 +429,10 @@ describe('PubSub', () => {
         callback(null, apiResponse);
       };
 
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       pubsub.createSubscription(TOPIC, SUB_NAME, done);
     });
 
@@ -1024,6 +1028,10 @@ describe('PubSub', () => {
     });
 
     it('should accept a query and a callback', done => {
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       pubsub.getSnapshots({}, done);
     });
 
@@ -1116,10 +1124,18 @@ describe('PubSub', () => {
     });
 
     it('should accept a query and a callback', done => {
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       pubsub.getSubscriptions({}, done);
     });
 
     it('should accept just a callback', done => {
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       pubsub.getSubscriptions(done);
     });
 
@@ -1254,10 +1270,18 @@ describe('PubSub', () => {
     });
 
     it('should accept a query and a callback', done => {
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       pubsub.getTopics({}, done);
     });
 
     it('should accept just a callback', done => {
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       pubsub.getTopics(done);
     });
 
