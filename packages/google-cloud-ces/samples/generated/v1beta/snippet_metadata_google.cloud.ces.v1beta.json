@@ -3940,6 +3940,62 @@
       }
     },
     {
+      "regionTag": "ces_v1beta_generated_EvaluationService_ExportEvaluations_async",
+      "title": "AgentService exportEvaluations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports evaluations.",
+      "canonical": true,
+      "file": "evaluation_service.export_evaluations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportEvaluations",
+        "fullName": "google.cloud.ces.v1beta.EvaluationService.ExportEvaluations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "export_options",
+            "type": ".google.cloud.ces.v1beta.ExportOptions"
+          },
+          {
+            "name": "include_evaluation_results",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "include_evaluations",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EvaluationServiceClient",
+          "fullName": "google.cloud.ces.v1beta.EvaluationServiceClient"
+        },
+        "method": {
+          "shortName": "ExportEvaluations",
+          "fullName": "google.cloud.ces.v1beta.EvaluationService.ExportEvaluations",
+          "service": {
+            "shortName": "EvaluationService",
+            "fullName": "google.cloud.ces.v1beta.EvaluationService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "ces_v1beta_generated_SessionService_RunSession_async",
       "title": "AgentService runSession Sample",
       "origin": "API_DEFINITION",
@@ -4082,7 +4138,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 86,
           "type": "FULL"
         }
       ],
@@ -4114,6 +4170,10 @@
           {
             "name": "args",
             "type": ".google.protobuf.Struct"
+          },
+          {
+            "name": "mock_config",
+            "type": ".google.cloud.ces.v1beta.MockConfig"
           }
         ],
         "resultType": ".google.cloud.ces.v1beta.ExecuteToolResponse",
