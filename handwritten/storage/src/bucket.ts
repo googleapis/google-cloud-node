@@ -1664,7 +1664,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback,
+        callback
       );
       if (validationError) return validationError;
     }

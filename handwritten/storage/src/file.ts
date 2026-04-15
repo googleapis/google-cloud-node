@@ -1328,7 +1328,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback,
+        callback
       );
       if (validationError) return validationError;
     }

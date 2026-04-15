@@ -611,7 +611,7 @@ export class TransferManager {
     let files: File[] = [];
 
     const baseDestination = path.resolve(
-      options.passthroughOptions?.destination || '.',
+      options.passthroughOptions?.destination || '.'
     );
 
     if (!Array.isArray(filesOrFolder)) {
@@ -705,7 +705,7 @@ export class TransferManager {
             await fsp.mkdir(path.dirname(destination), {recursive: true});
 
             const resp = (await file.download(
-              passThroughOptionsCopy,
+              passThroughOptionsCopy
             )) as DownloadResponseWithStatus;
 
             finalResults[i] = {
@@ -723,7 +723,7 @@ export class TransferManager {
             errorResp.error = err as Error;
             finalResults[i] = errorResp;
           }
-        }),
+        })
       );
     }
 
@@ -922,7 +922,7 @@ export class TransferManager {
           promises = [];
         }
         promises.push(
-          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation)),
+          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation))
         );
       }
       await Promise.all(promises);
