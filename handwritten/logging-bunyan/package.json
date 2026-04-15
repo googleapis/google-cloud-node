@@ -72,7 +72,7 @@
     "cpy-cli": "^4.0.0",
     "delay": "^5.0.0",
     "express": "^4.16.3",
-    "gts": "^5.0.0",
+    "gts": "^6.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
