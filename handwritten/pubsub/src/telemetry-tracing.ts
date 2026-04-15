@@ -1,5 +1,5 @@
 /*!
- * Copyright 2020-2024 Google LLC
+ * Copyright 2020-2026 Google LLC
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -123,6 +123,7 @@ export function isEnabled(): OpenTelemetryLevel {
 export interface MessageWithAttributes {
   attributes?: Attributes | null | undefined;
   parentSpan?: Span;
+  parentContext?: Context;
 }
 
 /**
@@ -796,12 +797,15 @@ export function injectSpan(span: Span, message: MessageWithAttributes): void {
 }
 
 /**
- * Returns true if this message potentially contains a span context.
+ * Returns true if this message potentially contains a propagation context
+ * (trace context or baggage).
  *
  * @private
  * @internal
  */
-export function containsSpanContext(message: MessageWithAttributes): boolean {
+export function containsPropagationContext(
+  message: MessageWithAttributes,
+): boolean {
   if (message.parentSpan) {
     return true;
   }
@@ -856,5 +860,8 @@ export function extractSpan(
     'extractSpan',
   );
   message.parentSpan = span;
+  if (context) {
+    message.parentContext = context;
+  }
   return span;
 }

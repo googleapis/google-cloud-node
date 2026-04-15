@@ -15,6 +15,7 @@
  */
 
 import {EventEmitter} from 'events';
+import {context as otelContext} from '@opentelemetry/api';
 
 import {AckError, Message, Subscriber} from './subscriber';
 import {defaultOptions} from './default-options';
@@ -297,8 +298,13 @@ export class LeaseManager extends EventEmitter {
           message.ackId,
         );
         message.subSpans.processingStart(this._subscriber.name);
+        const emitCallback = () => this._subscriber.emit('message', message);
         try {
-          this._subscriber.emit('message', message);
+          if (message.parentContext) {
+            otelContext.with(message.parentContext, emitCallback);
+          } else {
+            emitCallback();
+          }
         } catch (e: unknown) {
           logs.callbackExceptions.error(
             'message (ID %s, ackID %s) caused a user callback exception: %o',

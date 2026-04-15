@@ -160,7 +160,7 @@ describe('OpenTelemetryTracer', () => {
       }
     });
 
-    it('should be able to determine if attributes are present', () => {
+    it('should be able to determine if propagation attributes are present', () => {
       let message: otel.MessageWithAttributes;
 
       message = {
@@ -168,10 +168,17 @@ describe('OpenTelemetryTracer', () => {
           [otel.modernAttributeName]: 'foobar',
         },
       };
-      assert.strictEqual(otel.containsSpanContext(message), true);
+      assert.strictEqual(otel.containsPropagationContext(message), true);
+
+      message = {
+        attributes: {
+          [otel.baggageAttributeName]: 'key=value',
+        },
+      };
+      assert.strictEqual(otel.containsPropagationContext(message), true);
 
       message = {};
-      assert.strictEqual(otel.containsSpanContext(message), false);
+      assert.strictEqual(otel.containsPropagationContext(message), false);
     });
 
     it('extracts a trace context', () => {
@@ -252,7 +259,7 @@ describe('OpenTelemetryTracer', () => {
     });
 
     it('extracts baggage from message attributes', () => {
-      const message = {
+      const message: otel.MessageWithAttributes = {
         attributes: {
           [otel.modernAttributeName]:
             '00-d4cda95b652f4a1592b449d5929fda1b-553964cd9101a314-01',
@@ -269,10 +276,16 @@ describe('OpenTelemetryTracer', () => {
         childSpan.spanContext().traceId,
         'd4cda95b652f4a1592b449d5929fda1b',
       );
+
+      // Verify baggage is accessible on the extracted context.
+      assert.ok(message.parentContext);
+      const baggage = propagation.getBaggage(message.parentContext!);
+      assert.ok(baggage);
+      assert.strictEqual(baggage!.getEntry('test-key')?.value, 'test-value');
     });
 
     it('extracts span when only baggage is present', () => {
-      const message = {
+      const message: otel.MessageWithAttributes = {
         attributes: {
           [otel.baggageAttributeName]: 'test-key=test-value',
         },
@@ -283,6 +296,12 @@ describe('OpenTelemetryTracer', () => {
         'projects/test/subscriptions/subfoo',
       );
       assert.ok(childSpan);
+
+      // Verify baggage is accessible even without a trace context.
+      assert.ok(message.parentContext);
+      const baggage = propagation.getBaggage(message.parentContext!);
+      assert.ok(baggage);
+      assert.strictEqual(baggage!.getEntry('test-key')?.value, 'test-value');
     });
   });
 
