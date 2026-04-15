@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.8.0...products-v0.9.0) (2026-04-15)
+
+
+### Features
+
+* [merchantapi] a new field `base64_encoded_name` is added to the `Product` message ([#7997](https://github.com/googleapis/google-cloud-node/issues/7997)) ([f56dc14](https://github.com/googleapis/google-cloud-node/commit/f56dc1431ac275a9ab834b10685da0f99122dc90))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.7.0...products-v0.8.0) (2025-10-13)
 
 

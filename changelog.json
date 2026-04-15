@@ -5,6 +5,74 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "f56dc1431ac275a9ab834b10685da0f99122dc90",
+          "message": "[merchantapi] a new field `base64_encoded_name` is added to the `Product` message",
+          "issues": [
+            "7997"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "9627ed81-d167-4a98-b43b-d77f9f8ad16e",
+      "createTime": "2026-04-15T00:10:58.452Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "048f3db389c8c512c32f10e246ff0fc3e0626931",
+          "message": "[kms] support external-μ in the Digest",
+          "issues": [
+            "8014"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "20b92124-ca84-475f-b7f5-915e57ea4d8b",
+      "createTime": "2026-04-15T00:10:58.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "35ba85651226491b08d3f62369fdcf1fe64d1e4b",
+          "message": "[discoveryengine] add AUTO condition to SearchAsYouTypeSpec in v1alpha and v1beta",
+          "issues": [
+            "8032"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "2293f6ea-2ae5-4a61-95d8-87d190feecc4",
+      "createTime": "2026-04-15T00:10:58.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f92aa192d117ce65f07bdc6a2c44ad5f3b3ff138",
+          "message": "[chronicle] Add DataTableService to Chronicle v1 Client Libraries",
+          "issues": [
+            "8035"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "9dd1683e-9db1-4c5f-8e65-62321d52d59a",
+      "createTime": "2026-04-15T00:10:58.348Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "460e654682993b5d0e9b20ef12e92f40d106ecf9",
           "message": "[vectorsearch] Added CMEK support",
           "issues": [
@@ -69973,5 +70041,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-14T18:40:56.396Z"
+  "updateTime": "2026-04-15T00:10:58.452Z"
 }

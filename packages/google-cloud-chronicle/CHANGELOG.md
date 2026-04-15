@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.2.1...chronicle-v0.3.0) (2026-04-15)
+
+
+### Features
+
+* [chronicle] Add DataTableService to Chronicle v1 Client Libraries ([#8035](https://github.com/googleapis/google-cloud-node/issues/8035)) ([f92aa19](https://github.com/googleapis/google-cloud-node/commit/f92aa192d117ce65f07bdc6a2c44ad5f3b3ff138))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.2.0...chronicle-v0.2.1) (2025-10-13)
 
 

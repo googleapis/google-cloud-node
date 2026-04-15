@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.6.0...discoveryengine-v2.7.0) (2026-04-15)
+
+
+### Features
+
+* [discoveryengine] add AUTO condition to SearchAsYouTypeSpec in v1alpha and v1beta ([#8032](https://github.com/googleapis/google-cloud-node/issues/8032)) ([35ba856](https://github.com/googleapis/google-cloud-node/commit/35ba85651226491b08d3f62369fdcf1fe64d1e4b))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.3...discoveryengine-v2.6.0) (2026-03-25)
 
 
