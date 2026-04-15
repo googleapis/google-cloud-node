@@ -1354,6 +1354,434 @@
           }
         }
       }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_GetDeploymentGroup_async",
+      "title": "Config getDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a DeploymentGroup for a given project and location.",
+      "canonical": true,
+      "file": "config.get_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDeploymentGroup",
+        "fullName": "google.cloud.config.v1.Config.GetDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.config.v1.DeploymentGroup",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "GetDeploymentGroup",
+          "fullName": "google.cloud.config.v1.Config.GetDeploymentGroup",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_CreateDeploymentGroup_async",
+      "title": "Config createDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] The newly created DeploymentGroup will be in the `CREATING` state and can be retrieved via Get and List calls.",
+      "canonical": true,
+      "file": "config.create_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDeploymentGroup",
+        "fullName": "google.cloud.config.v1.Config.CreateDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deployment_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deployment_group",
+            "type": ".google.cloud.config.v1.DeploymentGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "CreateDeploymentGroup",
+          "fullName": "google.cloud.config.v1.Config.CreateDeploymentGroup",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_UpdateDeploymentGroup_async",
+      "title": "Config updateDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a [DeploymentGroup][google.cloud.config.v1.DeploymentGroup]",
+      "canonical": true,
+      "file": "config.update_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDeploymentGroup",
+        "fullName": "google.cloud.config.v1.Config.UpdateDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "deployment_group",
+            "type": ".google.cloud.config.v1.DeploymentGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "UpdateDeploymentGroup",
+          "fullName": "google.cloud.config.v1.Config.UpdateDeploymentGroup",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_DeleteDeploymentGroup_async",
+      "title": "Config deleteDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a [DeploymentGroup][google.cloud.config.v1.DeploymentGroup]",
+      "canonical": true,
+      "file": "config.delete_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDeploymentGroup",
+        "fullName": "google.cloud.config.v1.Config.DeleteDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "deployment_reference_policy",
+            "type": ".google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "DeleteDeploymentGroup",
+          "fullName": "google.cloud.config.v1.Config.DeleteDeploymentGroup",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_ListDeploymentGroups_async",
+      "title": "Config listDeploymentGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " List DeploymentGroups for a given project and location.",
+      "canonical": true,
+      "file": "config.list_deployment_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 94,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeploymentGroups",
+        "fullName": "google.cloud.config.v1.Config.ListDeploymentGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.config.v1.ListDeploymentGroupsResponse",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "ListDeploymentGroups",
+          "fullName": "google.cloud.config.v1.Config.ListDeploymentGroups",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_ProvisionDeploymentGroup_async",
+      "title": "Config provisionDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Provisions a deployment group. NOTE: As a first step of this operation, Infra Manager will automatically delete any Deployments that were part of the *last successful* [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision] but are *no longer* included in the *current* [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] definition (e.g., following an `UpdateDeploymentGroup` call), along with their actuated resources.",
+      "canonical": true,
+      "file": "config.provision_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProvisionDeploymentGroup",
+        "fullName": "google.cloud.config.v1.Config.ProvisionDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deployment_specs",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "ProvisionDeploymentGroup",
+          "fullName": "google.cloud.config.v1.Config.ProvisionDeploymentGroup",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_DeprovisionDeploymentGroup_async",
+      "title": "Config deprovisionDeploymentGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprovisions a deployment group. NOTE: As a first step of this operation, Infra Manager will automatically delete any Deployments that were part of the *last successful* [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision] but are *no longer* included in the *current* [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] definition (e.g., following an `UpdateDeploymentGroup` call), along with their actuated resources.",
+      "canonical": true,
+      "file": "config.deprovision_deployment_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeprovisionDeploymentGroup",
+        "fullName": "google.cloud.config.v1.Config.DeprovisionDeploymentGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "delete_policy",
+            "type": ".google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "DeprovisionDeploymentGroup",
+          "fullName": "google.cloud.config.v1.Config.DeprovisionDeploymentGroup",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_GetDeploymentGroupRevision_async",
+      "title": "Config getDeploymentGroupRevision Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision].",
+      "canonical": true,
+      "file": "config.get_deployment_group_revision.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDeploymentGroupRevision",
+        "fullName": "google.cloud.config.v1.Config.GetDeploymentGroupRevision",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.config.v1.DeploymentGroupRevision",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "GetDeploymentGroupRevision",
+          "fullName": "google.cloud.config.v1.Config.GetDeploymentGroupRevision",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "config_v1_generated_Config_ListDeploymentGroupRevisions_async",
+      "title": "Config listDeploymentGroupRevisions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [DeploymentGroupRevision][google.cloud.config.v1.DeploymentGroupRevision]s in a given [DeploymentGroup][google.cloud.config.v1.DeploymentGroup].",
+      "canonical": true,
+      "file": "config.list_deployment_group_revisions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDeploymentGroupRevisions",
+        "fullName": "google.cloud.config.v1.Config.ListDeploymentGroupRevisions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.config.v1.ListDeploymentGroupRevisionsResponse",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.config.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "ListDeploymentGroupRevisions",
+          "fullName": "google.cloud.config.v1.Config.ListDeploymentGroupRevisions",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.config.v1.Config"
+          }
+        }
+      }
     }
   ]
 }

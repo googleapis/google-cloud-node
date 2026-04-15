@@ -9727,6 +9727,9 @@ export namespace google {
 
                 /** WriteObjectResponse resource */
                 resource?: (google.storage.v2.IStorageObject|null);
+
+                /** WriteObjectResponse persistedDataChecksums */
+                persistedDataChecksums?: (google.storage.v2.IObjectChecksums|null);
             }
 
             /** Represents a WriteObjectResponse. */
@@ -9743,6 +9746,9 @@ export namespace google {
 
                 /** WriteObjectResponse resource. */
                 public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** WriteObjectResponse persistedDataChecksums. */
+                public persistedDataChecksums?: (google.storage.v2.IObjectChecksums|null);
 
                 /** WriteObjectResponse writeStatus. */
                 public writeStatus?: ("persistedSize"|"resource");
@@ -10124,6 +10130,9 @@ export namespace google {
                 /** BidiWriteObjectResponse resource */
                 resource?: (google.storage.v2.IStorageObject|null);
 
+                /** BidiWriteObjectResponse persistedDataChecksums */
+                persistedDataChecksums?: (google.storage.v2.IObjectChecksums|null);
+
                 /** BidiWriteObjectResponse writeHandle */
                 writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
             }
@@ -10142,6 +10151,9 @@ export namespace google {
 
                 /** BidiWriteObjectResponse resource. */
                 public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** BidiWriteObjectResponse persistedDataChecksums. */
+                public persistedDataChecksums?: (google.storage.v2.IObjectChecksums|null);
 
                 /** BidiWriteObjectResponse writeHandle. */
                 public writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
@@ -10513,6 +10525,9 @@ export namespace google {
 
                 /** QueryWriteStatusResponse resource */
                 resource?: (google.storage.v2.IStorageObject|null);
+
+                /** QueryWriteStatusResponse persistedDataChecksums */
+                persistedDataChecksums?: (google.storage.v2.IObjectChecksums|null);
             }
 
             /** Represents a QueryWriteStatusResponse. */
@@ -10529,6 +10544,9 @@ export namespace google {
 
                 /** QueryWriteStatusResponse resource. */
                 public resource?: (google.storage.v2.IStorageObject|null);
+
+                /** QueryWriteStatusResponse persistedDataChecksums. */
+                public persistedDataChecksums?: (google.storage.v2.IObjectChecksums|null);
 
                 /** QueryWriteStatusResponse writeStatus. */
                 public writeStatus?: ("persistedSize"|"resource");

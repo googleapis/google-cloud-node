@@ -5071,6 +5071,209 @@ describe('File', () => {
     });
   });
 
+  describe('Object Contexts', () => {
+    describe('Create a new object', () => {
+      it('should include valid contexts in the upload request', async () => {
+        const metadata = {
+          contexts: {
+            custom: {
+              dept: {value: 'eng'},
+              env: {value: 'prod'},
+            },
+          },
+        };
+
+        const stub = sinon.stub(file, 'save').resolves();
+        await file.save('data', {metadata});
+
+        assert.strictEqual(stub.calledOnce, true);
+
+        const callArgs = stub.getCall(0).args[1];
+        assert.ok(callArgs);
+
+        const sentMetadata = callArgs!.metadata;
+        assert.ok(sentMetadata);
+        assert.strictEqual(sentMetadata!.contexts!.custom!.dept.value, 'eng');
+      });
+
+      it('should handle Unicode characters in keys and values', async () => {
+        const metadata = {
+          contexts: {
+            custom: {
+              '🚀-launcher': {value: '✨-sparkle'},
+            },
+          },
+        };
+
+        const stub = sinon.stub(file, 'save').resolves();
+        await file.save('data', {metadata});
+
+        const options = stub.getCall(0).args[1];
+        const {contexts} = options!.metadata!;
+
+        assert.strictEqual(
+          contexts!.custom!['🚀-launcher'].value,
+          '✨-sparkle'
+        );
+      });
+
+      it('should throw an error for invalid characters (double quotes) in keys', async () => {
+        const metadata = {
+          contexts: {
+            custom: {
+              'invalid"key': {value: 'some-value'},
+            },
+          },
+        };
+
+        try {
+          await file.save('data', {metadata});
+          assert.fail('Should have thrown validation error');
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (err: any) {
+          assert.ok(err.message.includes('Forbidden character'));
+        }
+      });
+    });
+
+    describe('Update/Patch an existing object', () => {
+      it('should replace all contexts (PUT semantics)', async () => {
+        const newMetadata = {
+          contexts: {
+            custom: {'only-key': {value: 'only-val'}},
+          },
+        };
+
+        const stub = sinon.stub(file, 'setMetadata').resolves();
+        await file.setMetadata(newMetadata);
+
+        const sentMetadata = stub.getCall(0).args[0];
+
+        assert.ok(sentMetadata.contexts);
+        assert.ok(sentMetadata.contexts!.custom);
+        assert.strictEqual(
+          sentMetadata.contexts!.custom!['only-key'].value,
+          'only-val'
+        );
+        assert.strictEqual(
+          sentMetadata.contexts!.custom!['new-key'],
+          undefined
+        );
+      });
+
+      it('should add/modify individual contexts (PATCH semantics)', async () => {
+        const patchMetadata = {
+          contexts: {
+            custom: {
+              'new-key': {value: 'added'},
+              'existing-key': {value: 'modified'},
+            },
+          },
+        };
+
+        const stub = sinon.stub(file, 'setMetadata').resolves();
+        await file.setMetadata(patchMetadata);
+
+        const sentMetadata = stub.getCall(0).args[0]!;
+
+        assert.ok(sentMetadata.contexts);
+        assert.ok(sentMetadata.contexts!.custom);
+        assert.strictEqual(
+          sentMetadata.contexts!.custom!['new-key'].value,
+          'added'
+        );
+      });
+
+      it('should remove an individual context by setting it to null', async () => {
+        const patchMetadata = {
+          contexts: {
+            custom: {
+              'key-to-delete': null,
+            },
+          },
+        };
+
+        const stub = sinon.stub(file, 'setMetadata').resolves();
+        await file.setMetadata(patchMetadata);
+
+        const sentMetadata = stub.getCall(0).args[0];
+        const custom = sentMetadata.contexts!.custom!;
+        assert.strictEqual(custom['key-to-delete'], null);
+      });
+
+      it('should clear all contexts by setting custom to null', async () => {
+        const clearMetadata = {
+          contexts: {
+            custom: null,
+          },
+        };
+
+        const stub = sinon.stub(file, 'setMetadata').resolves();
+        await file.setMetadata(clearMetadata);
+        const sentMetadata = stub.getCall(0).args[0];
+        assert.strictEqual(sentMetadata.contexts!.custom, null);
+      });
+    });
+
+    describe('Copying/Rewriting an object', () => {
+      it('should include contexts when copying an object with overrides', async () => {
+        const destFile = BUCKET.file('destination.txt');
+        const metadata = {
+          contexts: {
+            custom: {tag: {value: 'overridden'}},
+          },
+        };
+
+        const stub = sinon.stub(file, 'copy').resolves();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await file.copy(destFile, {metadata} as any);
+
+        assert.strictEqual(stub.calledOnce, true);
+        const options = stub.getCall(0).args[1];
+        assert.deepStrictEqual(options.metadata.contexts, metadata.contexts);
+      });
+    });
+
+    describe('Composing objects', () => {
+      it('should pass contexts to the destination object during combine', async () => {
+        const sources = [BUCKET.file('src1.txt'), BUCKET.file('src2.txt')];
+        const combinedFile = BUCKET.file('combined.txt');
+        const metadata = {
+          contexts: {
+            custom: {status: {value: 'composed'}},
+          },
+        };
+
+        const stub = sinon.stub(BUCKET, 'combine').resolves();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await BUCKET.combine(sources, combinedFile, {metadata} as any);
+
+        const callOptions = stub.getCall(0).args[2];
+        assert.deepStrictEqual(
+          callOptions.metadata.contexts,
+          metadata.contexts
+        );
+      });
+    });
+
+    it('should handle empty string values in contexts', async () => {
+      const metadata = {
+        contexts: {
+          custom: {'empty-key': {value: ''}},
+        },
+      };
+
+      const stub = sinon.stub(file, 'save').resolves();
+      await file.save('data', {metadata});
+
+      const sentMetadata = stub.getCall(0).args[1].metadata;
+      assert.strictEqual(sentMetadata.contexts.custom['empty-key'].value, '');
+    });
+  });
+
+
   describe('setStorageClass', () => {
     const STORAGE_CLASS = 'new_storage_class';
 
