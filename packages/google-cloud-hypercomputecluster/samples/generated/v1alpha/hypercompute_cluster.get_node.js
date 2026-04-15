@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  // [START hypercomputecluster_v1alpha_generated_HypercomputeCluster_GetNode_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,38 +29,30 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required.
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  Required. Name of the node to retrieve, in the format
+   *  `projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}`.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. If force=false and if a user tries to delete an ml run resource
-   *  that still has child resources (e.g., ProfilerTarget), the request should
-   *  fail with a FAILED_PRECONDITION error. If force=true, the delete request
-   *  should delete both parent and child resources that exist.
-   */
-  // const force = true
 
   // Imports the Hypercomputecluster library
-  const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;
+  const {HypercomputeClusterClient} = require('@google-cloud/hypercomputecluster').v1alpha;
 
   // Instantiates a client
-  const hypercomputeclusterClient = new MachineLearningRunsClient();
+  const hypercomputeclusterClient = new HypercomputeClusterClient();
 
-  async function callDeleteMachineLearningRun() {
+  async function callGetNode() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await hypercomputeclusterClient.deleteMachineLearningRun(request);
-    const [response] = await operation.promise();
+    const response = await hypercomputeclusterClient.getNode(request);
     console.log(response);
   }
 
-  callDeleteMachineLearningRun();
-  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  callGetNode();
+  // [END hypercomputecluster_v1alpha_generated_HypercomputeCluster_GetNode_async]
 }
 
 process.on('unhandledRejection', err => {
