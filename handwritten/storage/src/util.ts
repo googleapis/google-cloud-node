@@ -274,6 +274,7 @@ export class PassThroughShim extends PassThrough {
   }
 }
 
+
 /**
  * Validates Object Contexts for forbidden characters.
  * Double quotes (") are forbidden in context keys and values as they
@@ -288,12 +289,12 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
   for (const [key, context] of Object.entries(custom)) {
     if (key.includes('"')) {
       throw new Error(
-        `Invalid context key "${key}": Forbidden character (") detected.`,
+        `Invalid context key "${key}": Forbidden character (") detected.`
       );
     }
     if (context?.value && context.value.includes('"')) {
       throw new Error(
-        `Invalid context value for key "${key}": Forbidden character (") detected.`,
+        `Invalid context value for key "${key}": Forbidden character (") detected.`
       );
     }
   }
@@ -306,7 +307,7 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
  */
 export function handleContextValidation(
   contexts?: FileMetadata['contexts'],
-  callback?: Function,
+  callback?: Function
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> | void {
   try {
