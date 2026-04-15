@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+function main(parent) {
+  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfilerTargets_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -30,16 +30,23 @@ function main(name) {
    */
   /**
    *  Required.
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. If force=false and if a user tries to delete an ml run resource
-   *  that still has child resources (e.g., ProfilerTarget), the request should
-   *  fail with a FAILED_PRECONDITION error. If force=true, the delete request
-   *  should delete both parent and child resources that exist.
+   *  Optional. The maximum number of profiler targets to return. The service may
+   *  return fewer than this value. If unspecified, at most 10 profiler targets
+   *  will be returned. The maximum value is 1000; values above 1000 will be
+   *  coerced to 1000. Please refer to https://google.aip.dev/158 for more
+   *  details.
    */
-  // const force = true
+  // const pageSize = 1234
+  /**
+   *  Optional. A page token, received from a previous `ListProfilerTargets`
+   *  call. Provide this to retrieve the subsequent page. Please refer to
+   *  https://google.aip.dev/158 for more details.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Hypercomputecluster library
   const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;
@@ -47,20 +54,21 @@ function main(name) {
   // Instantiates a client
   const hypercomputeclusterClient = new MachineLearningRunsClient();
 
-  async function callDeleteMachineLearningRun() {
+  async function callListProfilerTargets() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const [operation] = await hypercomputeclusterClient.deleteMachineLearningRun(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = hypercomputeclusterClient.listProfilerTargetsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteMachineLearningRun();
-  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  callListProfilerTargets();
+  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfilerTargets_async]
 }
 
 process.on('unhandledRejection', err => {

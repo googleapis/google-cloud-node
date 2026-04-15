@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+function main(monitoredEvent) {
+  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMonitoredEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,17 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required.
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  Required. The monitored event to update.
+   *  The event's `name` field is used to identify the event to be updated.
    */
-  // const name = 'abc123'
+  // const monitoredEvent = {}
   /**
-   *  Optional. If force=false and if a user tries to delete an ml run resource
-   *  that still has child resources (e.g., ProfilerTarget), the request should
-   *  fail with a FAILED_PRECONDITION error. If force=true, the delete request
-   *  should delete both parent and child resources that exist.
+   *  Optional. The list of fields to be updated.
    */
-  // const force = true
+  // const updateMask = {}
 
   // Imports the Hypercomputecluster library
   const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;
@@ -47,20 +44,20 @@ function main(name) {
   // Instantiates a client
   const hypercomputeclusterClient = new MachineLearningRunsClient();
 
-  async function callDeleteMachineLearningRun() {
+  async function callUpdateMonitoredEvent() {
     // Construct request
     const request = {
-      name,
+      monitoredEvent,
     };
 
     // Run request
-    const [operation] = await hypercomputeclusterClient.deleteMachineLearningRun(request);
+    const [operation] = await hypercomputeclusterClient.updateMonitoredEvent(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteMachineLearningRun();
-  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  callUpdateMonitoredEvent();
+  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_UpdateMonitoredEvent_async]
 }
 
 process.on('unhandledRejection', err => {

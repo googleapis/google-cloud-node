@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfilerTarget_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -30,16 +30,9 @@ function main(name) {
    */
   /**
    *  Required.
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}
    */
   // const name = 'abc123'
-  /**
-   *  Optional. If force=false and if a user tries to delete an ml run resource
-   *  that still has child resources (e.g., ProfilerTarget), the request should
-   *  fail with a FAILED_PRECONDITION error. If force=true, the delete request
-   *  should delete both parent and child resources that exist.
-   */
-  // const force = true
 
   // Imports the Hypercomputecluster library
   const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;
@@ -47,20 +40,19 @@ function main(name) {
   // Instantiates a client
   const hypercomputeclusterClient = new MachineLearningRunsClient();
 
-  async function callDeleteMachineLearningRun() {
+  async function callGetProfilerTarget() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await hypercomputeclusterClient.deleteMachineLearningRun(request);
-    const [response] = await operation.promise();
+    const response = await hypercomputeclusterClient.getProfilerTarget(request);
     console.log(response);
   }
 
-  callDeleteMachineLearningRun();
-  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  callGetProfilerTarget();
+  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_GetProfilerTarget_async]
 }
 
 process.on('unhandledRejection', err => {
