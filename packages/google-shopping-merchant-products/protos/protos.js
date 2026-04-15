@@ -216,7 +216,9 @@
                              * @memberof google.shopping.merchant.products.v1
                              * @interface IProductInput
                              * @property {string|null} [name] ProductInput name
+                             * @property {string|null} [base64EncodedName] ProductInput base64EncodedName
                              * @property {string|null} [product] ProductInput product
+                             * @property {string|null} [base64EncodedProduct] ProductInput base64EncodedProduct
                              * @property {boolean|null} [legacyLocal] ProductInput legacyLocal
                              * @property {string|null} [offerId] ProductInput offerId
                              * @property {string|null} [contentLanguage] ProductInput contentLanguage
@@ -251,12 +253,28 @@
                             ProductInput.prototype.name = "";
     
                             /**
+                             * ProductInput base64EncodedName.
+                             * @member {string} base64EncodedName
+                             * @memberof google.shopping.merchant.products.v1.ProductInput
+                             * @instance
+                             */
+                            ProductInput.prototype.base64EncodedName = "";
+    
+                            /**
                              * ProductInput product.
                              * @member {string} product
                              * @memberof google.shopping.merchant.products.v1.ProductInput
                              * @instance
                              */
                             ProductInput.prototype.product = "";
+    
+                            /**
+                             * ProductInput base64EncodedProduct.
+                             * @member {string} base64EncodedProduct
+                             * @memberof google.shopping.merchant.products.v1.ProductInput
+                             * @instance
+                             */
+                            ProductInput.prototype.base64EncodedProduct = "";
     
                             /**
                              * ProductInput legacyLocal.
@@ -366,6 +384,10 @@
                                     writer.uint32(/* id 10, wireType 0 =*/80).bool(message.legacyLocal);
                                 if (message.productAttributes != null && Object.hasOwnProperty.call(message, "productAttributes"))
                                     $root.google.shopping.merchant.products.v1.ProductAttributes.encode(message.productAttributes, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.base64EncodedName != null && Object.hasOwnProperty.call(message, "base64EncodedName"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.base64EncodedName);
+                                if (message.base64EncodedProduct != null && Object.hasOwnProperty.call(message, "base64EncodedProduct"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.base64EncodedProduct);
                                 return writer;
                             };
     
@@ -406,8 +428,16 @@
                                             message.name = reader.string();
                                             break;
                                         }
+                                    case 12: {
+                                            message.base64EncodedName = reader.string();
+                                            break;
+                                        }
                                     case 2: {
                                             message.product = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.base64EncodedProduct = reader.string();
                                             break;
                                         }
                                     case 10: {
@@ -479,9 +509,15 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    if (!$util.isString(message.base64EncodedName))
+                                        return "base64EncodedName: string expected";
                                 if (message.product != null && message.hasOwnProperty("product"))
                                     if (!$util.isString(message.product))
                                         return "product: string expected";
+                                if (message.base64EncodedProduct != null && message.hasOwnProperty("base64EncodedProduct"))
+                                    if (!$util.isString(message.base64EncodedProduct))
+                                        return "base64EncodedProduct: string expected";
                                 if (message.legacyLocal != null && message.hasOwnProperty("legacyLocal"))
                                     if (typeof message.legacyLocal !== "boolean")
                                         return "legacyLocal: boolean expected";
@@ -530,8 +566,12 @@
                                 var message = new $root.google.shopping.merchant.products.v1.ProductInput();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.base64EncodedName != null)
+                                    message.base64EncodedName = String(object.base64EncodedName);
                                 if (object.product != null)
                                     message.product = String(object.product);
+                                if (object.base64EncodedProduct != null)
+                                    message.base64EncodedProduct = String(object.base64EncodedProduct);
                                 if (object.legacyLocal != null)
                                     message.legacyLocal = Boolean(object.legacyLocal);
                                 if (object.offerId != null)
@@ -590,6 +630,8 @@
                                     object.feedLabel = "";
                                     object.legacyLocal = false;
                                     object.productAttributes = null;
+                                    object.base64EncodedName = "";
+                                    object.base64EncodedProduct = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -618,6 +660,10 @@
                                     object.legacyLocal = message.legacyLocal;
                                 if (message.productAttributes != null && message.hasOwnProperty("productAttributes"))
                                     object.productAttributes = $root.google.shopping.merchant.products.v1.ProductAttributes.toObject(message.productAttributes, options);
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    object.base64EncodedName = message.base64EncodedName;
+                                if (message.base64EncodedProduct != null && message.hasOwnProperty("base64EncodedProduct"))
+                                    object.base64EncodedProduct = message.base64EncodedProduct;
                                 return object;
                             };
     
@@ -1874,6 +1920,7 @@
                              * @property {Array.<google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig>|null} [shippingTransitBusinessDays] ProductAttributes shippingTransitBusinessDays
                              * @property {Array.<google.shopping.merchant.products.v1.IHandlingCutoffTime>|null} [handlingCutoffTimes] ProductAttributes handlingCutoffTimes
                              * @property {string|null} [shippingLabel] ProductAttributes shippingLabel
+                             * @property {string|null} [returnPolicyLabel] ProductAttributes returnPolicyLabel
                              * @property {string|null} [transitTimeLabel] ProductAttributes transitTimeLabel
                              * @property {string|null} [size] ProductAttributes size
                              * @property {google.shopping.merchant.products.v1.SizeSystem|null} [sizeSystem] ProductAttributes sizeSystem
@@ -2375,6 +2422,14 @@
                             ProductAttributes.prototype.shippingLabel = null;
     
                             /**
+                             * ProductAttributes returnPolicyLabel.
+                             * @member {string|null|undefined} returnPolicyLabel
+                             * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                             * @instance
+                             */
+                            ProductAttributes.prototype.returnPolicyLabel = null;
+    
+                            /**
                              * ProductAttributes transitTimeLabel.
                              * @member {string|null|undefined} transitTimeLabel
                              * @memberof google.shopping.merchant.products.v1.ProductAttributes
@@ -2874,6 +2929,12 @@
                             });
     
                             // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductAttributes.prototype, "_returnPolicyLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["returnPolicyLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductAttributes.prototype, "_transitTimeLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["transitTimeLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -3283,6 +3344,8 @@
                                 if (message.shippingTransitBusinessDays != null && message.shippingTransitBusinessDays.length)
                                     for (var i = 0; i < message.shippingTransitBusinessDays.length; ++i)
                                         $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.encode(message.shippingTransitBusinessDays[i], writer.uint32(/* id 144, wireType 2 =*/1154).fork()).ldelim();
+                                if (message.returnPolicyLabel != null && Object.hasOwnProperty.call(message, "returnPolicyLabel"))
+                                    writer.uint32(/* id 170, wireType 2 =*/1362).string(message.returnPolicyLabel);
                                 return writer;
                             };
     
@@ -3545,6 +3608,10 @@
                                         }
                                     case 46: {
                                             message.shippingLabel = reader.string();
+                                            break;
+                                        }
+                                    case 170: {
+                                            message.returnPolicyLabel = reader.string();
                                             break;
                                         }
                                     case 47: {
@@ -4125,6 +4192,11 @@
                                     properties._shippingLabel = 1;
                                     if (!$util.isString(message.shippingLabel))
                                         return "shippingLabel: string expected";
+                                }
+                                if (message.returnPolicyLabel != null && message.hasOwnProperty("returnPolicyLabel")) {
+                                    properties._returnPolicyLabel = 1;
+                                    if (!$util.isString(message.returnPolicyLabel))
+                                        return "returnPolicyLabel: string expected";
                                 }
                                 if (message.transitTimeLabel != null && message.hasOwnProperty("transitTimeLabel")) {
                                     properties._transitTimeLabel = 1;
@@ -4880,6 +4952,8 @@
                                 }
                                 if (object.shippingLabel != null)
                                     message.shippingLabel = String(object.shippingLabel);
+                                if (object.returnPolicyLabel != null)
+                                    message.returnPolicyLabel = String(object.returnPolicyLabel);
                                 if (object.transitTimeLabel != null)
                                     message.transitTimeLabel = String(object.transitTimeLabel);
                                 if (object.size != null)
@@ -6000,6 +6074,11 @@
                                     object.shippingTransitBusinessDays = [];
                                     for (var j = 0; j < message.shippingTransitBusinessDays.length; ++j)
                                         object.shippingTransitBusinessDays[j] = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.toObject(message.shippingTransitBusinessDays[j], options);
+                                }
+                                if (message.returnPolicyLabel != null && message.hasOwnProperty("returnPolicyLabel")) {
+                                    object.returnPolicyLabel = message.returnPolicyLabel;
+                                    if (options.oneofs)
+                                        object._returnPolicyLabel = "returnPolicyLabel";
                                 }
                                 return object;
                             };
@@ -15288,6 +15367,7 @@
                              * @memberof google.shopping.merchant.products.v1
                              * @interface IProduct
                              * @property {string|null} [name] Product name
+                             * @property {string|null} [base64EncodedName] Product base64EncodedName
                              * @property {boolean|null} [legacyLocal] Product legacyLocal
                              * @property {string|null} [offerId] Product offerId
                              * @property {string|null} [contentLanguage] Product contentLanguage
@@ -15323,6 +15403,14 @@
                              * @instance
                              */
                             Product.prototype.name = "";
+    
+                            /**
+                             * Product base64EncodedName.
+                             * @member {string} base64EncodedName
+                             * @memberof google.shopping.merchant.products.v1.Product
+                             * @instance
+                             */
+                            Product.prototype.base64EncodedName = "";
     
                             /**
                              * Product legacyLocal.
@@ -15460,6 +15548,8 @@
                                     $root.google.shopping.merchant.products.v1.AutomatedDiscounts.encode(message.automatedDiscounts, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 if (message.productAttributes != null && Object.hasOwnProperty.call(message, "productAttributes"))
                                     $root.google.shopping.merchant.products.v1.ProductAttributes.encode(message.productAttributes, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.base64EncodedName != null && Object.hasOwnProperty.call(message, "base64EncodedName"))
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.base64EncodedName);
                                 return writer;
                             };
     
@@ -15498,6 +15588,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.base64EncodedName = reader.string();
                                             break;
                                         }
                                     case 11: {
@@ -15581,6 +15675,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    if (!$util.isString(message.base64EncodedName))
+                                        return "base64EncodedName: string expected";
                                 if (message.legacyLocal != null && message.hasOwnProperty("legacyLocal"))
                                     if (typeof message.legacyLocal !== "boolean")
                                         return "legacyLocal: boolean expected";
@@ -15642,6 +15739,8 @@
                                 var message = new $root.google.shopping.merchant.products.v1.Product();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.base64EncodedName != null)
+                                    message.base64EncodedName = String(object.base64EncodedName);
                                 if (object.legacyLocal != null)
                                     message.legacyLocal = Boolean(object.legacyLocal);
                                 if (object.offerId != null)
@@ -15714,6 +15813,7 @@
                                     object.legacyLocal = false;
                                     object.automatedDiscounts = null;
                                     object.productAttributes = null;
+                                    object.base64EncodedName = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -15746,6 +15846,8 @@
                                     object.automatedDiscounts = $root.google.shopping.merchant.products.v1.AutomatedDiscounts.toObject(message.automatedDiscounts, options);
                                 if (message.productAttributes != null && message.hasOwnProperty("productAttributes"))
                                     object.productAttributes = $root.google.shopping.merchant.products.v1.ProductAttributes.toObject(message.productAttributes, options);
+                                if (message.base64EncodedName != null && message.hasOwnProperty("base64EncodedName"))
+                                    object.base64EncodedName = message.base64EncodedName;
                                 return object;
                             };
     

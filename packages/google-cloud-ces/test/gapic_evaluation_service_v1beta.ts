@@ -3175,6 +3175,160 @@ describe('v1beta.EvaluationServiceClient', () => {
         });
     });
 
+    describe('exportEvaluations', () => {
+        it('invokes exportEvaluations without error', async () => {
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.ExportEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.ExportEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportEvaluations = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportEvaluations(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEvaluations without error using callback', async () => {
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.ExportEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.ExportEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportEvaluations = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportEvaluations(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEvaluations with call error', async () => {
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.ExportEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.ExportEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportEvaluations = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportEvaluations(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportEvaluations with LRO error', async () => {
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.ces.v1beta.ExportEvaluationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.ces.v1beta.ExportEvaluationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportEvaluations = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportEvaluations(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportEvaluations as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportEvaluationsProgress without error', async () => {
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportEvaluationsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportEvaluationsProgress with error', async () => {
+            const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportEvaluationsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listEvaluations', () => {
         it('invokes listEvaluations without error', async () => {
             const client = new evaluationserviceModule.v1beta.EvaluationServiceClient({

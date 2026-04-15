@@ -24336,6 +24336,7 @@
                      * @interface IWriteObjectResponse
                      * @property {number|Long|null} [persistedSize] WriteObjectResponse persistedSize
                      * @property {google.storage.v2.IStorageObject|null} [resource] WriteObjectResponse resource
+                     * @property {google.storage.v2.IObjectChecksums|null} [persistedDataChecksums] WriteObjectResponse persistedDataChecksums
                      */
     
                     /**
@@ -24368,6 +24369,14 @@
                      * @instance
                      */
                     WriteObjectResponse.prototype.resource = null;
+    
+                    /**
+                     * WriteObjectResponse persistedDataChecksums.
+                     * @member {google.storage.v2.IObjectChecksums|null|undefined} persistedDataChecksums
+                     * @memberof google.storage.v2.WriteObjectResponse
+                     * @instance
+                     */
+                    WriteObjectResponse.prototype.persistedDataChecksums = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -24411,6 +24420,8 @@
                             writer.uint32(/* id 1, wireType 0 =*/8).int64(message.persistedSize);
                         if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             $root.google.storage.v2.StorageObject.encode(message.resource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums"))
+                            $root.google.storage.v2.ObjectChecksums.encode(message.persistedDataChecksums, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -24453,6 +24464,10 @@
                                 }
                             case 2: {
                                     message.resource = $root.google.storage.v2.StorageObject.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -24506,6 +24521,11 @@
                                     return "resource." + error;
                             }
                         }
+                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums")) {
+                            var error = $root.google.storage.v2.ObjectChecksums.verify(message.persistedDataChecksums);
+                            if (error)
+                                return "persistedDataChecksums." + error;
+                        }
                         return null;
                     };
     
@@ -24535,6 +24555,11 @@
                                 throw TypeError(".google.storage.v2.WriteObjectResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource);
                         }
+                        if (object.persistedDataChecksums != null) {
+                            if (typeof object.persistedDataChecksums !== "object")
+                                throw TypeError(".google.storage.v2.WriteObjectResponse.persistedDataChecksums: object expected");
+                            message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.persistedDataChecksums);
+                        }
                         return message;
                     };
     
@@ -24551,6 +24576,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.defaults)
+                            object.persistedDataChecksums = null;
                         if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
                             if (typeof message.persistedSize === "number")
                                 object.persistedSize = options.longs === String ? String(message.persistedSize) : message.persistedSize;
@@ -24564,6 +24591,8 @@
                             if (options.oneofs)
                                 object.writeStatus = "resource";
                         }
+                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums"))
+                            object.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.persistedDataChecksums, options);
                         return object;
                     };
     
@@ -25533,6 +25562,7 @@
                      * @interface IBidiWriteObjectResponse
                      * @property {number|Long|null} [persistedSize] BidiWriteObjectResponse persistedSize
                      * @property {google.storage.v2.IStorageObject|null} [resource] BidiWriteObjectResponse resource
+                     * @property {google.storage.v2.IObjectChecksums|null} [persistedDataChecksums] BidiWriteObjectResponse persistedDataChecksums
                      * @property {google.storage.v2.IBidiWriteHandle|null} [writeHandle] BidiWriteObjectResponse writeHandle
                      */
     
@@ -25566,6 +25596,14 @@
                      * @instance
                      */
                     BidiWriteObjectResponse.prototype.resource = null;
+    
+                    /**
+                     * BidiWriteObjectResponse persistedDataChecksums.
+                     * @member {google.storage.v2.IObjectChecksums|null|undefined} persistedDataChecksums
+                     * @memberof google.storage.v2.BidiWriteObjectResponse
+                     * @instance
+                     */
+                    BidiWriteObjectResponse.prototype.persistedDataChecksums = null;
     
                     /**
                      * BidiWriteObjectResponse writeHandle.
@@ -25625,6 +25663,8 @@
                             $root.google.storage.v2.StorageObject.encode(message.resource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle"))
                             $root.google.storage.v2.BidiWriteHandle.encode(message.writeHandle, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums"))
+                            $root.google.storage.v2.ObjectChecksums.encode(message.persistedDataChecksums, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -25667,6 +25707,10 @@
                                 }
                             case 2: {
                                     message.resource = $root.google.storage.v2.StorageObject.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 3: {
@@ -25724,6 +25768,11 @@
                                     return "resource." + error;
                             }
                         }
+                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums")) {
+                            var error = $root.google.storage.v2.ObjectChecksums.verify(message.persistedDataChecksums);
+                            if (error)
+                                return "persistedDataChecksums." + error;
+                        }
                         if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
                             properties._writeHandle = 1;
                             {
@@ -25761,6 +25810,11 @@
                                 throw TypeError(".google.storage.v2.BidiWriteObjectResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource);
                         }
+                        if (object.persistedDataChecksums != null) {
+                            if (typeof object.persistedDataChecksums !== "object")
+                                throw TypeError(".google.storage.v2.BidiWriteObjectResponse.persistedDataChecksums: object expected");
+                            message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.persistedDataChecksums);
+                        }
                         if (object.writeHandle != null) {
                             if (typeof object.writeHandle !== "object")
                                 throw TypeError(".google.storage.v2.BidiWriteObjectResponse.writeHandle: object expected");
@@ -25782,6 +25836,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.defaults)
+                            object.persistedDataChecksums = null;
                         if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
                             if (typeof message.persistedSize === "number")
                                 object.persistedSize = options.longs === String ? String(message.persistedSize) : message.persistedSize;
@@ -25800,6 +25856,8 @@
                             if (options.oneofs)
                                 object._writeHandle = "writeHandle";
                         }
+                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums"))
+                            object.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.persistedDataChecksums, options);
                         return object;
                     };
     
@@ -26599,6 +26657,7 @@
                      * @interface IQueryWriteStatusResponse
                      * @property {number|Long|null} [persistedSize] QueryWriteStatusResponse persistedSize
                      * @property {google.storage.v2.IStorageObject|null} [resource] QueryWriteStatusResponse resource
+                     * @property {google.storage.v2.IObjectChecksums|null} [persistedDataChecksums] QueryWriteStatusResponse persistedDataChecksums
                      */
     
                     /**
@@ -26631,6 +26690,14 @@
                      * @instance
                      */
                     QueryWriteStatusResponse.prototype.resource = null;
+    
+                    /**
+                     * QueryWriteStatusResponse persistedDataChecksums.
+                     * @member {google.storage.v2.IObjectChecksums|null|undefined} persistedDataChecksums
+                     * @memberof google.storage.v2.QueryWriteStatusResponse
+                     * @instance
+                     */
+                    QueryWriteStatusResponse.prototype.persistedDataChecksums = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -26674,6 +26741,8 @@
                             writer.uint32(/* id 1, wireType 0 =*/8).int64(message.persistedSize);
                         if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             $root.google.storage.v2.StorageObject.encode(message.resource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums"))
+                            $root.google.storage.v2.ObjectChecksums.encode(message.persistedDataChecksums, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -26716,6 +26785,10 @@
                                 }
                             case 2: {
                                     message.resource = $root.google.storage.v2.StorageObject.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -26769,6 +26842,11 @@
                                     return "resource." + error;
                             }
                         }
+                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums")) {
+                            var error = $root.google.storage.v2.ObjectChecksums.verify(message.persistedDataChecksums);
+                            if (error)
+                                return "persistedDataChecksums." + error;
+                        }
                         return null;
                     };
     
@@ -26798,6 +26876,11 @@
                                 throw TypeError(".google.storage.v2.QueryWriteStatusResponse.resource: object expected");
                             message.resource = $root.google.storage.v2.StorageObject.fromObject(object.resource);
                         }
+                        if (object.persistedDataChecksums != null) {
+                            if (typeof object.persistedDataChecksums !== "object")
+                                throw TypeError(".google.storage.v2.QueryWriteStatusResponse.persistedDataChecksums: object expected");
+                            message.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.persistedDataChecksums);
+                        }
                         return message;
                     };
     
@@ -26814,6 +26897,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.defaults)
+                            object.persistedDataChecksums = null;
                         if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
                             if (typeof message.persistedSize === "number")
                                 object.persistedSize = options.longs === String ? String(message.persistedSize) : message.persistedSize;
@@ -26827,6 +26912,8 @@
                             if (options.oneofs)
                                 object.writeStatus = "resource";
                         }
+                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums"))
+                            object.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.persistedDataChecksums, options);
                         return object;
                     };
     
