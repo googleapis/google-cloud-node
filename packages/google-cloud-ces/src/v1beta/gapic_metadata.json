@@ -699,6 +699,11 @@
                 "deleteEvaluationRun"
               ]
             },
+            "ExportEvaluations": {
+              "methods": [
+                "exportEvaluations"
+              ]
+            },
             "ListEvaluations": {
               "methods": [
                 "listEvaluations",
@@ -869,6 +874,11 @@
             "DeleteEvaluationRun": {
               "methods": [
                 "deleteEvaluationRun"
+              ]
+            },
+            "ExportEvaluations": {
+              "methods": [
+                "exportEvaluations"
               ]
             },
             "ListEvaluations": {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.3.0...bigquery-reservation-v4.4.0) (2026-04-14)
+
+
+### Features
+
+* [bigquery-reservation] add principal field to BigQuery Reservation Assignment ([#8042](https://github.com/googleapis/google-cloud-node/issues/8042)) ([4e5f42c](https://github.com/googleapis/google-cloud-node/commit/4e5f42cae475b0529fb3a10df609b3a52a25eadf))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.2.0...bigquery-reservation-v4.3.0) (2025-10-13)
 
 

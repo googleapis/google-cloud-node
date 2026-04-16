@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.4.0...dataplex-v5.5.0) (2026-04-14)
+
+
+### Features
+
+* [dataplex] Allow Data Documentation DataScans to support BigQuery Dataset resources in addition to BigQuery table resources ([#8012](https://github.com/googleapis/google-cloud-node/issues/8012)) ([c75e5b6](https://github.com/googleapis/google-cloud-node/commit/c75e5b6c00aff1eda45f1ea0ca0e71bd72748452))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.3.0...dataplex-v5.4.0) (2026-03-18)
 
 
