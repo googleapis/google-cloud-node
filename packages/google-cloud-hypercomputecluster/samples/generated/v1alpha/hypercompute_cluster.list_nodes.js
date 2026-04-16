@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfileSessions_async]
+  // [START hypercomputecluster_v1alpha_generated_HypercomputeCluster_ListNodes_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,57 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent format:
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
+   *  Required. Parent cluster of the nodes to list, in the format
+   *  `projects/{project}/locations/{location}/clusters/{cluster}`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of Profile Sessions to return. The service may
-   *  return fewer than this value.
-   *  If unspecified, at most 50 Profile Sessions will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Optional. Maximum number of nodes to return. The service may return fewer
+   *  than this value.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous `ListProfileSessions`
-   *  call. Provide this to retrieve the subsequent page.
+   *  Optional. A page token received from a previous `ListNodes` call. Provide
+   *  this to retrieve the subsequent page. When paginating, all other parameters
+   *  provided to `ListNodes` must match the call that provided the page
+   *  token.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Filter (https://google.aip.dev/160) to apply to the returned
+   *  results.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. How to order the resulting nodes. Must be one of the following
+   *  strings:
+   *  * `name`
+   *  * `name desc`
+   *  If not specified, nodes will be returned in an arbitrary order.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Hypercomputecluster library
-  const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;
+  const {HypercomputeClusterClient} = require('@google-cloud/hypercomputecluster').v1alpha;
 
   // Instantiates a client
-  const hypercomputeclusterClient = new MachineLearningRunsClient();
+  const hypercomputeclusterClient = new HypercomputeClusterClient();
 
-  async function callListProfileSessions() {
+  async function callListNodes() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = hypercomputeclusterClient.listProfileSessionsAsync(request);
+    const iterable = hypercomputeclusterClient.listNodesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListProfileSessions();
-  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_ListProfileSessions_async]
+  callListNodes();
+  // [END hypercomputecluster_v1alpha_generated_HypercomputeCluster_ListNodes_async]
 }
 
 process.on('unhandledRejection', err => {

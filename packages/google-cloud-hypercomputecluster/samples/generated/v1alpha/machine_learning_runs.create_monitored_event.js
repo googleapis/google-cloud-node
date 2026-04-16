@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+function main(parent, monitoredEvent) {
+  // [START hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMonitoredEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,17 +29,19 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required.
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  Required. Parent resource where the event will be created.
+   *  Format:
+   *  projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. If force=false and if a user tries to delete an ml run resource
-   *  that still has child resources (e.g., ProfilerTarget), the request should
-   *  fail with a FAILED_PRECONDITION error. If force=true, the delete request
-   *  should delete both parent and child resources that exist.
+   *  Required. The event resource to create.
    */
-  // const force = true
+  // const monitoredEvent = {}
+  /**
+   *  Optional. Optional ID for the event.
+   */
+  // const monitoredEventId = 'abc123'
 
   // Imports the Hypercomputecluster library
   const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;
@@ -47,20 +49,21 @@ function main(name) {
   // Instantiates a client
   const hypercomputeclusterClient = new MachineLearningRunsClient();
 
-  async function callDeleteMachineLearningRun() {
+  async function callCreateMonitoredEvent() {
     // Construct request
     const request = {
-      name,
+      parent,
+      monitoredEvent,
     };
 
     // Run request
-    const [operation] = await hypercomputeclusterClient.deleteMachineLearningRun(request);
+    const [operation] = await hypercomputeclusterClient.createMonitoredEvent(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteMachineLearningRun();
-  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_DeleteMachineLearningRun_async]
+  callCreateMonitoredEvent();
+  // [END hypercomputecluster_v1alpha_generated_MachineLearningRuns_CreateMonitoredEvent_async]
 }
 
 process.on('unhandledRejection', err => {
