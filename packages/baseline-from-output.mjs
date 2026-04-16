@@ -42,7 +42,7 @@ async function processFiles() {
     if (rules.size === 0) continue;
 
     if (fs.existsSync(file)) {
-      const ruleList = Array.from(rules).join(', ');
+      const ruleList = Array.from(rules).sort().join(', ');
       const disableComment = `/* eslint-disable ${ruleList} */\n`;
 
       const fd = fs.openSync(file, 'r');
