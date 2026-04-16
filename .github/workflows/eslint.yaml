@@ -1,0 +1,44 @@
+name: ESLint Check
+
+on:
+  pull_request:
+    paths:
+      - 'packages/**'
+
+jobs:
+  lint-changed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to get all history for diffs
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install shared linting dependencies
+        run: |
+          npm install --save-dev eslint@8 gts@6.0.2 stream-json
+
+      - name: Get changed packages
+        id: changed-packages
+        run: |
+          # Get files changed in the PR relative to the base branch
+          git fetch origin ${{ github.base_ref }}
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          
+          # Extract unique package names from packages/ directory
+          CHANGED_PACKAGES=$(echo "$CHANGED_FILES" | grep '^packages/' | cut -d/ -f2 | sort -u | tr '\n' ' ')
+          
+          echo "packages=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
+          echo "Changed packages: $CHANGED_PACKAGES"
+
+      - name: Run ESLint on changed packages
+        if: steps.changed-packages.outputs.packages != ''
+        run: |
+          for pkg in ${{ steps.changed-packages.outputs.packages }}; do
+            echo "Processing package: $pkg"
+            node packages/run-eslint-root.mjs "$pkg"
+          done
