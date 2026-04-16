@@ -69,8 +69,13 @@ function runEslintOnFiles(filesToLint, tsconfigInclude) {
     }
 
     try {
-      const json = JSON.parse(output);
-      allResults.push(...json);
+      if (output.trim().startsWith('[')) {
+        const json = JSON.parse(output);
+        allResults.push(...json);
+      } else {
+        console.error(`ESLint output is not JSON in chunk ${i / chunkSize + 1}.`);
+        console.error(`Output was: ${output.substring(0, 200)}...`);
+      }
     } catch (e) {
       console.error(`Failed to parse JSON output from chunk ${i / chunkSize + 1}:`, e);
       console.error(`Output was: ${output.substring(0, 100)}...`);
