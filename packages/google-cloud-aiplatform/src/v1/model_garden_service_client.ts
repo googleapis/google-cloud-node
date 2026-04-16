@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, no-trailing-spaces, "packages/google-cloud-aiplatform/src/v1beta1/match_service_client.ts" */
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");

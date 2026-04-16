@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, `protos.google.cloud.security.privateca.v1beta1.CertificateAuthority,·protos.google.cloud.security.privateca.v1be */
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");

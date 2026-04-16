@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 #!/usr/bin/env node
 // Copyright 2022 Google LLC
 //

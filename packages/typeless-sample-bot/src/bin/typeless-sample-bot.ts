@@ -1,3 +1,4 @@
+/* eslint-disable n/no-process-exit, prettier/prettier */
 #!/usr/bin/env node
 // Copyright 2022 Google LLC
 //

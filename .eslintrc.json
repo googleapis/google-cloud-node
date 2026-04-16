@@ -1,0 +1,11 @@
+{
+  "overrides": [
+    {
+      "files": ["packages/**/*.ts"],
+      "extends": "./node_modules/gts",
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      }
+    }
+  ]
+}

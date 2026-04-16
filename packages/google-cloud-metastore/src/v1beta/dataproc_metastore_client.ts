@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, no-trailing-spaces, `⏎····name:·string,⏎··):·Promise<⏎····LROperation<⏎······protos.google.cloud.metastore.v1beta.Service,⏎······protos.goo */
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
