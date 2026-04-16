@@ -213,6 +213,7 @@ async function renderFile(
     try {
       processed = await prettier.format(processed, {
         parser: 'typescript',
+        filepath: targetFilename,
         singleQuote: true,
         trailingComma: 'all',
         semi: true,
