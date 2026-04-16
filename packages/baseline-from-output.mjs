@@ -42,32 +42,27 @@ async function processFiles() {
 
     if (fs.existsSync(file)) {
       const ruleList = Array.from(rules).sort().join(', ');
-      const disableComment = `/* eslint-disable ${ruleList} */\n`;
-
-      const fd = fs.openSync(file, 'r');
-      const buffer = Buffer.alloc(disableComment.length);
-      fs.readSync(fd, buffer, 0, disableComment.length, 0);
-      fs.closeSync(fd);
-      const firstPart = buffer.toString('utf8');
-
-      if (firstPart !== disableComment) {
-        const tempFile = `${file}.tmp`;
-        const writeStream = fs.createWriteStream(tempFile);
-        const readStream = fs.createReadStream(file);
-
-        writeStream.write(disableComment);
-        
-        try {
-          await pipeline(readStream, writeStream);
-          fs.renameSync(tempFile, file);
-          console.log(`Baselined ${file} with rules: ${ruleList}`);
-        } catch (err) {
-          console.error(`Error piping streams for ${file}:`, err);
-          if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
-        }
-      } else {
+      const content = fs.readFileSync(file, 'utf8');
+      
+      // Check if already baselined
+      const baselineMarker = `/* eslint-disable ${ruleList} */`;
+      if (content.includes(baselineMarker)) {
         console.log(`File ${file} already baselined.`);
+        continue;
       }
+
+      let updatedContent;
+      if (content.startsWith('#!')) {
+        const lines = content.split('\n');
+        // Insert comment after the shebang line
+        lines.splice(1, 0, baselineMarker);
+        updatedContent = lines.join('\n');
+      } else {
+        updatedContent = baselineMarker + '\n' + content;
+      }
+
+      fs.writeFileSync(file, updatedContent);
+      console.log(`Baselined ${file} with rules: ${ruleList}`);
     } else {
       console.warn(`File not found: ${file}`);
     }
