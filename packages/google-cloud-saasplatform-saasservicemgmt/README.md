@@ -2,7 +2,7 @@
 [//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [SaaS Runtime API: Nodejs Client][homepage]
+# [App Lifecycle Manager API: Nodejs Client][homepage]
 
 This library is considered to be in **preview**. This means it is still a
 work-in-progress and under active development. Any release is subject to
@@ -10,15 +10,15 @@ backwards-incompatible changes at any time.
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/saasservicemgmt.svg)](https://www.npmjs.org/package/@google-cloud/saasservicemgmt)
 
-SaaS Runtime API client for Node.js
+App Lifecycle Manager API client for Node.js
 
 [//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
-* [SaaS Runtime API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/saasservicemgmt/latest)
-* [SaaS Runtime API Documentation](https://cloud.google.com/saas-runtime/docs/overview)
+* [App Lifecycle Manager API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/saasservicemgmt/latest)
+* [App Lifecycle Manager API Documentation](https://cloud.google.com/saas-runtime/docs/overview)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -40,7 +40,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the SaaS Runtime API API][enable_api].
+1.  [Enable the App Lifecycle Manager API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
 ### Installing the client library

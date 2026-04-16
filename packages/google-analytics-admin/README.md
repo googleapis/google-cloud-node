@@ -149,6 +149,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get search ads360 link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_search_ads360_link.js) |
 | get subproperty event filter | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_subproperty_event_filter.js) |
 | get subproperty sync config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_subproperty_sync_config.js) |
+| get user provided data settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_user_provided_data_settings.js) |
 | list access bindings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_access_bindings.js) |
 | list account summaries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_account_summaries.js) |
 | list accounts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_accounts.js) |

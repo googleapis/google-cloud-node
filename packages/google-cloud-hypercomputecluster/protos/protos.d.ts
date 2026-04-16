@@ -7423,6 +7423,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteCluster(request: google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetNode.
+                     * @param request GetNodeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Node
+                     */
+                    public getNode(request: google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest, callback: google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster.GetNodeCallback): void;
+
+                    /**
+                     * Calls GetNode.
+                     * @param request GetNodeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNode(request: google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest): Promise<google.cloud.hypercomputecluster.v1alpha.Node>;
+
+                    /**
+                     * Calls ListNodes.
+                     * @param request ListNodesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListNodesResponse
+                     */
+                    public listNodes(request: google.cloud.hypercomputecluster.v1alpha.IListNodesRequest, callback: google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster.ListNodesCallback): void;
+
+                    /**
+                     * Calls ListNodes.
+                     * @param request ListNodesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listNodes(request: google.cloud.hypercomputecluster.v1alpha.IListNodesRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ListNodesResponse>;
                 }
 
                 namespace HypercomputeCluster {
@@ -7461,6 +7489,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster|getNode}.
+                     * @param error Error, if any
+                     * @param [response] Node
+                     */
+                    type GetNodeCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.Node) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster|listNodes}.
+                     * @param error Error, if any
+                     * @param [response] ListNodesResponse
+                     */
+                    type ListNodesCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ListNodesResponse) => void;
                 }
 
                 /** Properties of a Cluster. */
@@ -7496,11 +7538,8 @@ export namespace google {
                     /** Cluster orchestrator */
                     orchestrator?: (google.cloud.hypercomputecluster.v1alpha.IOrchestrator|null);
 
-                    /** Cluster networks */
-                    networks?: (google.cloud.hypercomputecluster.v1alpha.INetwork[]|null);
-
-                    /** Cluster storages */
-                    storages?: (google.cloud.hypercomputecluster.v1alpha.IStorage[]|null);
+                    /** Cluster maintenancePolicy */
+                    maintenancePolicy?: (google.cloud.hypercomputecluster.v1alpha.IMaintenancePolicy|null);
 
                     /** Cluster compute */
                     compute?: (google.cloud.hypercomputecluster.v1alpha.ICompute|null);
@@ -7545,11 +7584,8 @@ export namespace google {
                     /** Cluster orchestrator. */
                     public orchestrator?: (google.cloud.hypercomputecluster.v1alpha.IOrchestrator|null);
 
-                    /** Cluster networks. */
-                    public networks: google.cloud.hypercomputecluster.v1alpha.INetwork[];
-
-                    /** Cluster storages. */
-                    public storages: google.cloud.hypercomputecluster.v1alpha.IStorage[];
+                    /** Cluster maintenancePolicy. */
+                    public maintenancePolicy?: (google.cloud.hypercomputecluster.v1alpha.IMaintenancePolicy|null);
 
                     /** Cluster compute. */
                     public compute?: (google.cloud.hypercomputecluster.v1alpha.ICompute|null);
@@ -8286,14 +8322,332 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetNodeRequest. */
+                interface IGetNodeRequest {
+
+                    /** GetNodeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetNodeRequest. */
+                class GetNodeRequest implements IGetNodeRequest {
+
+                    /**
+                     * Constructs a new GetNodeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest);
+
+                    /** GetNodeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetNodeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNodeRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest): google.cloud.hypercomputecluster.v1alpha.GetNodeRequest;
+
+                    /**
+                     * Encodes the specified GetNodeRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetNodeRequest.verify|verify} messages.
+                     * @param message GetNodeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNodeRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetNodeRequest.verify|verify} messages.
+                     * @param message GetNodeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNodeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNodeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GetNodeRequest;
+
+                    /**
+                     * Decodes a GetNodeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNodeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GetNodeRequest;
+
+                    /**
+                     * Verifies a GetNodeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNodeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNodeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GetNodeRequest;
+
+                    /**
+                     * Creates a plain object from a GetNodeRequest message. Also converts values to other types if specified.
+                     * @param message GetNodeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GetNodeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNodeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNodeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNodesRequest. */
+                interface IListNodesRequest {
+
+                    /** ListNodesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListNodesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListNodesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListNodesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListNodesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListNodesRequest. */
+                class ListNodesRequest implements IListNodesRequest {
+
+                    /**
+                     * Constructs a new ListNodesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListNodesRequest);
+
+                    /** ListNodesRequest parent. */
+                    public parent: string;
+
+                    /** ListNodesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListNodesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListNodesRequest filter. */
+                    public filter: string;
+
+                    /** ListNodesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListNodesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNodesRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListNodesRequest): google.cloud.hypercomputecluster.v1alpha.ListNodesRequest;
+
+                    /**
+                     * Encodes the specified ListNodesRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListNodesRequest.verify|verify} messages.
+                     * @param message ListNodesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListNodesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNodesRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListNodesRequest.verify|verify} messages.
+                     * @param message ListNodesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListNodesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNodesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNodesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListNodesRequest;
+
+                    /**
+                     * Decodes a ListNodesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNodesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListNodesRequest;
+
+                    /**
+                     * Verifies a ListNodesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNodesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNodesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListNodesRequest;
+
+                    /**
+                     * Creates a plain object from a ListNodesRequest message. Also converts values to other types if specified.
+                     * @param message ListNodesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListNodesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNodesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNodesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNodesResponse. */
+                interface IListNodesResponse {
+
+                    /** ListNodesResponse nodes */
+                    nodes?: (google.cloud.hypercomputecluster.v1alpha.INode[]|null);
+
+                    /** ListNodesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListNodesResponse. */
+                class ListNodesResponse implements IListNodesResponse {
+
+                    /**
+                     * Constructs a new ListNodesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListNodesResponse);
+
+                    /** ListNodesResponse nodes. */
+                    public nodes: google.cloud.hypercomputecluster.v1alpha.INode[];
+
+                    /** ListNodesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListNodesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNodesResponse instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListNodesResponse): google.cloud.hypercomputecluster.v1alpha.ListNodesResponse;
+
+                    /**
+                     * Encodes the specified ListNodesResponse message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListNodesResponse.verify|verify} messages.
+                     * @param message ListNodesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListNodesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNodesResponse message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListNodesResponse.verify|verify} messages.
+                     * @param message ListNodesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListNodesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNodesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNodesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListNodesResponse;
+
+                    /**
+                     * Decodes a ListNodesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNodesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListNodesResponse;
+
+                    /**
+                     * Verifies a ListNodesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNodesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNodesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListNodesResponse;
+
+                    /**
+                     * Creates a plain object from a ListNodesResponse message. Also converts values to other types if specified.
+                     * @param message ListNodesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListNodesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNodesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNodesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a NetworkResource. */
                 interface INetworkResource {
 
                     /** NetworkResource network */
                     network?: (google.cloud.hypercomputecluster.v1alpha.INetworkReference|null);
-
-                    /** NetworkResource computeNetwork */
-                    computeNetwork?: (google.cloud.hypercomputecluster.v1alpha.IComputeNetworkReference|null);
 
                     /** NetworkResource config */
                     config?: (google.cloud.hypercomputecluster.v1alpha.INetworkResourceConfig|null);
@@ -8311,14 +8665,11 @@ export namespace google {
                     /** NetworkResource network. */
                     public network?: (google.cloud.hypercomputecluster.v1alpha.INetworkReference|null);
 
-                    /** NetworkResource computeNetwork. */
-                    public computeNetwork?: (google.cloud.hypercomputecluster.v1alpha.IComputeNetworkReference|null);
-
                     /** NetworkResource config. */
                     public config?: (google.cloud.hypercomputecluster.v1alpha.INetworkResourceConfig|null);
 
                     /** NetworkResource reference. */
-                    public reference?: ("network"|"computeNetwork");
+                    public reference?: "network";
 
                     /**
                      * Creates a new NetworkResource instance using the specified properties.
@@ -8509,12 +8860,6 @@ export namespace google {
 
                     /** NetworkResourceConfig existingNetwork */
                     existingNetwork?: (google.cloud.hypercomputecluster.v1alpha.IExistingNetworkConfig|null);
-
-                    /** NetworkResourceConfig newComputeNetwork */
-                    newComputeNetwork?: (google.cloud.hypercomputecluster.v1alpha.INewComputeNetworkConfig|null);
-
-                    /** NetworkResourceConfig existingComputeNetwork */
-                    existingComputeNetwork?: (google.cloud.hypercomputecluster.v1alpha.IExistingComputeNetworkConfig|null);
                 }
 
                 /** Represents a NetworkResourceConfig. */
@@ -8532,14 +8877,8 @@ export namespace google {
                     /** NetworkResourceConfig existingNetwork. */
                     public existingNetwork?: (google.cloud.hypercomputecluster.v1alpha.IExistingNetworkConfig|null);
 
-                    /** NetworkResourceConfig newComputeNetwork. */
-                    public newComputeNetwork?: (google.cloud.hypercomputecluster.v1alpha.INewComputeNetworkConfig|null);
-
-                    /** NetworkResourceConfig existingComputeNetwork. */
-                    public existingComputeNetwork?: (google.cloud.hypercomputecluster.v1alpha.IExistingComputeNetworkConfig|null);
-
                     /** NetworkResourceConfig config. */
-                    public config?: ("newNetwork"|"existingNetwork"|"newComputeNetwork"|"existingComputeNetwork");
+                    public config?: ("newNetwork"|"existingNetwork");
 
                     /**
                      * Creates a new NetworkResourceConfig instance using the specified properties.
@@ -9491,11 +9830,7 @@ export namespace google {
                     enum Tier {
                         TIER_UNSPECIFIED = 0,
                         ZONAL = 4,
-                        REGIONAL = 6,
-                        BASIC_HDD = 1,
-                        BASIC_SSD = 2,
-                        HIGH_SCALE_SSD = 3,
-                        ENTERPRISE = 5
+                        REGIONAL = 6
                     }
 
                     /** Protocol enum. */
@@ -10157,6 +10492,9 @@ export namespace google {
 
                     /** NewLustreConfig capacityGb */
                     capacityGb?: (number|Long|string|null);
+
+                    /** NewLustreConfig perUnitStorageThroughput */
+                    perUnitStorageThroughput?: (number|Long|string|null);
                 }
 
                 /** Represents a NewLustreConfig. */
@@ -10179,6 +10517,9 @@ export namespace google {
 
                     /** NewLustreConfig capacityGb. */
                     public capacityGb: (number|Long|string);
+
+                    /** NewLustreConfig perUnitStorageThroughput. */
+                    public perUnitStorageThroughput: (number|Long|string);
 
                     /**
                      * Creates a new NewLustreConfig instance using the specified properties.
@@ -10358,18 +10699,6 @@ export namespace google {
                 /** Properties of a ComputeResource. */
                 interface IComputeResource {
 
-                    /** ComputeResource newOnDemandInstances */
-                    newOnDemandInstances?: (google.cloud.hypercomputecluster.v1alpha.INewOnDemandInstancesConfig|null);
-
-                    /** ComputeResource newSpotInstances */
-                    newSpotInstances?: (google.cloud.hypercomputecluster.v1alpha.INewSpotInstancesConfig|null);
-
-                    /** ComputeResource newReservedInstances */
-                    newReservedInstances?: (google.cloud.hypercomputecluster.v1alpha.INewReservedInstancesConfig|null);
-
-                    /** ComputeResource newDwsFlexInstances */
-                    newDwsFlexInstances?: (google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig|null);
-
                     /** ComputeResource config */
                     config?: (google.cloud.hypercomputecluster.v1alpha.IComputeResourceConfig|null);
                 }
@@ -10383,23 +10712,8 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IComputeResource);
 
-                    /** ComputeResource newOnDemandInstances. */
-                    public newOnDemandInstances?: (google.cloud.hypercomputecluster.v1alpha.INewOnDemandInstancesConfig|null);
-
-                    /** ComputeResource newSpotInstances. */
-                    public newSpotInstances?: (google.cloud.hypercomputecluster.v1alpha.INewSpotInstancesConfig|null);
-
-                    /** ComputeResource newReservedInstances. */
-                    public newReservedInstances?: (google.cloud.hypercomputecluster.v1alpha.INewReservedInstancesConfig|null);
-
-                    /** ComputeResource newDwsFlexInstances. */
-                    public newDwsFlexInstances?: (google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig|null);
-
                     /** ComputeResource config. */
                     public config?: (google.cloud.hypercomputecluster.v1alpha.IComputeResourceConfig|null);
-
-                    /** ComputeResource configOneof. */
-                    public configOneof?: ("newOnDemandInstances"|"newSpotInstances"|"newReservedInstances"|"newDwsFlexInstances");
 
                     /**
                      * Creates a new ComputeResource instance using the specified properties.
@@ -10491,9 +10805,6 @@ export namespace google {
                     /** ComputeResourceConfig newReservedInstances */
                     newReservedInstances?: (google.cloud.hypercomputecluster.v1alpha.INewReservedInstancesConfig|null);
 
-                    /** ComputeResourceConfig newDwsFlexInstances */
-                    newDwsFlexInstances?: (google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig|null);
-
                     /** ComputeResourceConfig newFlexStartInstances */
                     newFlexStartInstances?: (google.cloud.hypercomputecluster.v1alpha.INewFlexStartInstancesConfig|null);
                 }
@@ -10516,14 +10827,11 @@ export namespace google {
                     /** ComputeResourceConfig newReservedInstances. */
                     public newReservedInstances?: (google.cloud.hypercomputecluster.v1alpha.INewReservedInstancesConfig|null);
 
-                    /** ComputeResourceConfig newDwsFlexInstances. */
-                    public newDwsFlexInstances?: (google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig|null);
-
                     /** ComputeResourceConfig newFlexStartInstances. */
                     public newFlexStartInstances?: (google.cloud.hypercomputecluster.v1alpha.INewFlexStartInstancesConfig|null);
 
                     /** ComputeResourceConfig config. */
-                    public config?: ("newOnDemandInstances"|"newSpotInstances"|"newReservedInstances"|"newDwsFlexInstances"|"newFlexStartInstances");
+                    public config?: ("newOnDemandInstances"|"newSpotInstances"|"newReservedInstances"|"newFlexStartInstances");
 
                     /**
                      * Creates a new ComputeResourceConfig instance using the specified properties.
@@ -10614,9 +10922,6 @@ export namespace google {
 
                     /** NewOnDemandInstancesConfig atmTags */
                     atmTags?: ({ [k: string]: string }|null);
-
-                    /** NewOnDemandInstancesConfig bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
                 }
 
                 /** Represents a NewOnDemandInstancesConfig. */
@@ -10636,9 +10941,6 @@ export namespace google {
 
                     /** NewOnDemandInstancesConfig atmTags. */
                     public atmTags: { [k: string]: string };
-
-                    /** NewOnDemandInstancesConfig bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
 
                     /**
                      * Creates a new NewOnDemandInstancesConfig instance using the specified properties.
@@ -10730,9 +11032,6 @@ export namespace google {
                     /** NewSpotInstancesConfig atmTags */
                     atmTags?: ({ [k: string]: string }|null);
 
-                    /** NewSpotInstancesConfig bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
-
                     /** NewSpotInstancesConfig terminationAction */
                     terminationAction?: (google.cloud.hypercomputecluster.v1alpha.NewSpotInstancesConfig.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewSpotInstancesConfig.TerminationAction|null);
                 }
@@ -10754,9 +11053,6 @@ export namespace google {
 
                     /** NewSpotInstancesConfig atmTags. */
                     public atmTags: { [k: string]: string };
-
-                    /** NewSpotInstancesConfig bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
 
                     /** NewSpotInstancesConfig terminationAction. */
                     public terminationAction: (google.cloud.hypercomputecluster.v1alpha.NewSpotInstancesConfig.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewSpotInstancesConfig.TerminationAction);
@@ -10855,6 +11151,12 @@ export namespace google {
                     /** NewReservedInstancesConfig reservation */
                     reservation?: (string|null);
 
+                    /** NewReservedInstancesConfig reservationBlock */
+                    reservationBlock?: (string|null);
+
+                    /** NewReservedInstancesConfig reservationSubBlock */
+                    reservationSubBlock?: (string|null);
+
                     /** NewReservedInstancesConfig atmTags */
                     atmTags?: ({ [k: string]: string }|null);
 
@@ -10863,12 +11165,6 @@ export namespace google {
 
                     /** NewReservedInstancesConfig machineType */
                     machineType?: (string|null);
-
-                    /** NewReservedInstancesConfig type */
-                    type?: (google.cloud.hypercomputecluster.v1alpha.NewReservedInstancesConfig.ReservationType|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewReservedInstancesConfig.ReservationType|null);
-
-                    /** NewReservedInstancesConfig bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
                 }
 
                 /** Represents a NewReservedInstancesConfig. */
@@ -10881,7 +11177,13 @@ export namespace google {
                     constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INewReservedInstancesConfig);
 
                     /** NewReservedInstancesConfig reservation. */
-                    public reservation: string;
+                    public reservation?: (string|null);
+
+                    /** NewReservedInstancesConfig reservationBlock. */
+                    public reservationBlock?: (string|null);
+
+                    /** NewReservedInstancesConfig reservationSubBlock. */
+                    public reservationSubBlock?: (string|null);
 
                     /** NewReservedInstancesConfig atmTags. */
                     public atmTags: { [k: string]: string };
@@ -10892,11 +11194,8 @@ export namespace google {
                     /** NewReservedInstancesConfig machineType. */
                     public machineType: string;
 
-                    /** NewReservedInstancesConfig type. */
-                    public type: (google.cloud.hypercomputecluster.v1alpha.NewReservedInstancesConfig.ReservationType|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewReservedInstancesConfig.ReservationType);
-
-                    /** NewReservedInstancesConfig bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
+                    /** NewReservedInstancesConfig source. */
+                    public source?: ("reservation"|"reservationBlock"|"reservationSubBlock");
 
                     /**
                      * Creates a new NewReservedInstancesConfig instance using the specified properties.
@@ -10976,17 +11275,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                namespace NewReservedInstancesConfig {
-
-                    /** ReservationType enum. */
-                    enum ReservationType {
-                        RESERVATION_TYPE_UNSPECIFIED = 0,
-                        NO_RESERVATION = 1,
-                        ANY_RESERVATION = 2,
-                        SPECIFIC_RESERVATION = 3
-                    }
-                }
-
                 /** Properties of a NewFlexStartInstancesConfig. */
                 interface INewFlexStartInstancesConfig {
 
@@ -11001,12 +11289,6 @@ export namespace google {
 
                     /** NewFlexStartInstancesConfig atmTags */
                     atmTags?: ({ [k: string]: string }|null);
-
-                    /** NewFlexStartInstancesConfig terminationAction */
-                    terminationAction?: (google.cloud.hypercomputecluster.v1alpha.NewFlexStartInstancesConfig.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewFlexStartInstancesConfig.TerminationAction|null);
-
-                    /** NewFlexStartInstancesConfig bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
                 }
 
                 /** Represents a NewFlexStartInstancesConfig. */
@@ -11029,12 +11311,6 @@ export namespace google {
 
                     /** NewFlexStartInstancesConfig atmTags. */
                     public atmTags: { [k: string]: string };
-
-                    /** NewFlexStartInstancesConfig terminationAction. */
-                    public terminationAction: (google.cloud.hypercomputecluster.v1alpha.NewFlexStartInstancesConfig.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewFlexStartInstancesConfig.TerminationAction);
-
-                    /** NewFlexStartInstancesConfig bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
 
                     /**
                      * Creates a new NewFlexStartInstancesConfig instance using the specified properties.
@@ -11108,131 +11384,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for NewFlexStartInstancesConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace NewFlexStartInstancesConfig {
-
-                    /** TerminationAction enum. */
-                    enum TerminationAction {
-                        TERMINATION_ACTION_UNSPECIFIED = 0,
-                        STOP = 1,
-                        DELETE = 2
-                    }
-                }
-
-                /** Properties of a Disk. */
-                interface IDisk {
-
-                    /** Disk type */
-                    type?: (string|null);
-
-                    /** Disk sizeGb */
-                    sizeGb?: (number|Long|string|null);
-
-                    /** Disk boot */
-                    boot?: (boolean|null);
-
-                    /** Disk sourceImage */
-                    sourceImage?: (string|null);
-                }
-
-                /** Represents a Disk. */
-                class Disk implements IDisk {
-
-                    /**
-                     * Constructs a new Disk.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDisk);
-
-                    /** Disk type. */
-                    public type: string;
-
-                    /** Disk sizeGb. */
-                    public sizeGb: (number|Long|string);
-
-                    /** Disk boot. */
-                    public boot: boolean;
-
-                    /** Disk sourceImage. */
-                    public sourceImage: string;
-
-                    /**
-                     * Creates a new Disk instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Disk instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDisk): google.cloud.hypercomputecluster.v1alpha.Disk;
-
-                    /**
-                     * Encodes the specified Disk message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Disk.verify|verify} messages.
-                     * @param message Disk message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDisk, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Disk message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Disk.verify|verify} messages.
-                     * @param message Disk message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDisk, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Disk message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Disk
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.Disk;
-
-                    /**
-                     * Decodes a Disk message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Disk
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.Disk;
-
-                    /**
-                     * Verifies a Disk message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Disk message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Disk
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.Disk;
-
-                    /**
-                     * Creates a plain object from a Disk message. Also converts values to other types if specified.
-                     * @param message Disk
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.Disk, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Disk to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Disk
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11586,6 +11737,9 @@ export namespace google {
 
                     /** SlurmOrchestrator taskEpilogBashScripts */
                     taskEpilogBashScripts?: (string[]|null);
+
+                    /** SlurmOrchestrator disableHealthCheckProgram */
+                    disableHealthCheckProgram?: (boolean|null);
                 }
 
                 /** Represents a SlurmOrchestrator. */
@@ -11623,6 +11777,9 @@ export namespace google {
 
                     /** SlurmOrchestrator taskEpilogBashScripts. */
                     public taskEpilogBashScripts: string[];
+
+                    /** SlurmOrchestrator disableHealthCheckProgram. */
+                    public disableHealthCheckProgram: boolean;
 
                     /**
                      * Creates a new SlurmOrchestrator instance using the specified properties.
@@ -11754,6 +11911,15 @@ export namespace google {
 
                         /** SlurmConfig preemptExemptTime */
                         preemptExemptTime?: (string|null);
+
+                        /** SlurmConfig healthCheckInterval */
+                        healthCheckInterval?: (number|Long|string|null);
+
+                        /** SlurmConfig healthCheckNodeState */
+                        healthCheckNodeState?: (string|null);
+
+                        /** SlurmConfig healthCheckProgram */
+                        healthCheckProgram?: (string|null);
                     }
 
                     /** Represents a SlurmConfig. */
@@ -11812,6 +11978,15 @@ export namespace google {
 
                         /** SlurmConfig preemptExemptTime. */
                         public preemptExemptTime: string;
+
+                        /** SlurmConfig healthCheckInterval. */
+                        public healthCheckInterval: (number|Long|string);
+
+                        /** SlurmConfig healthCheckNodeState. */
+                        public healthCheckNodeState: string;
+
+                        /** SlurmConfig healthCheckProgram. */
+                        public healthCheckProgram: string;
 
                         /**
                          * Creates a new SlurmConfig instance using the specified properties.
@@ -11975,23 +12150,14 @@ export namespace google {
                     /** SlurmNodeSet serviceAccount */
                     serviceAccount?: (google.cloud.hypercomputecluster.v1alpha.IServiceAccount|null);
 
-                    /** SlurmNodeSet bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
+                    /** SlurmNodeSet enablePublicIps */
+                    enablePublicIps?: (boolean|null);
 
                     /** SlurmNodeSet startupScript */
                     startupScript?: (string|null);
 
-                    /** SlurmNodeSet resourceRequestId */
-                    resourceRequestId?: (string|null);
-
                     /** SlurmNodeSet enableOsLogin */
                     enableOsLogin?: (boolean|null);
-
-                    /** SlurmNodeSet canIpForward */
-                    canIpForward?: (boolean|null);
-
-                    /** SlurmNodeSet enablePublicIps */
-                    enablePublicIps?: (boolean|null);
 
                     /** SlurmNodeSet labels */
                     labels?: ({ [k: string]: string }|null);
@@ -12030,23 +12196,14 @@ export namespace google {
                     /** SlurmNodeSet serviceAccount. */
                     public serviceAccount?: (google.cloud.hypercomputecluster.v1alpha.IServiceAccount|null);
 
-                    /** SlurmNodeSet bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
+                    /** SlurmNodeSet enablePublicIps. */
+                    public enablePublicIps: boolean;
 
                     /** SlurmNodeSet startupScript. */
                     public startupScript: string;
 
-                    /** SlurmNodeSet resourceRequestId. */
-                    public resourceRequestId: string;
-
                     /** SlurmNodeSet enableOsLogin. */
                     public enableOsLogin: boolean;
-
-                    /** SlurmNodeSet canIpForward. */
-                    public canIpForward: boolean;
-
-                    /** SlurmNodeSet enablePublicIps. */
-                    public enablePublicIps: boolean;
 
                     /** SlurmNodeSet labels. */
                     public labels: { [k: string]: string };
@@ -12143,6 +12300,9 @@ export namespace google {
 
                     /** ComputeInstanceSlurmNodeSet bootDisk */
                     bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IBootDisk|null);
+
+                    /** ComputeInstanceSlurmNodeSet startupScriptTimeout */
+                    startupScriptTimeout?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a ComputeInstanceSlurmNodeSet. */
@@ -12162,6 +12322,9 @@ export namespace google {
 
                     /** ComputeInstanceSlurmNodeSet bootDisk. */
                     public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IBootDisk|null);
+
+                    /** ComputeInstanceSlurmNodeSet startupScriptTimeout. */
+                    public startupScriptTimeout?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new ComputeInstanceSlurmNodeSet instance using the specified properties.
@@ -12243,6 +12406,12 @@ export namespace google {
 
                 /** Properties of a ContainerNodePoolSlurmNodeSet. */
                 interface IContainerNodePoolSlurmNodeSet {
+
+                    /** ContainerNodePoolSlurmNodeSet resourceLabels */
+                    resourceLabels?: ({ [k: string]: string }|null);
+
+                    /** ContainerNodePoolSlurmNodeSet startupScript */
+                    startupScript?: (string|null);
                 }
 
                 /** Represents a ContainerNodePoolSlurmNodeSet. */
@@ -12253,6 +12422,12 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IContainerNodePoolSlurmNodeSet);
+
+                    /** ContainerNodePoolSlurmNodeSet resourceLabels. */
+                    public resourceLabels: { [k: string]: string };
+
+                    /** ContainerNodePoolSlurmNodeSet startupScript. */
+                    public startupScript: string;
 
                     /**
                      * Creates a new ContainerNodePoolSlurmNodeSet instance using the specified properties.
@@ -12471,14 +12646,11 @@ export namespace google {
                     /** SlurmLoginNodes instances */
                     instances?: (google.cloud.hypercomputecluster.v1alpha.IComputeInstance[]|null);
 
-                    /** SlurmLoginNodes disks */
-                    disks?: (google.cloud.hypercomputecluster.v1alpha.IDisk[]|null);
+                    /** SlurmLoginNodes bootDisk */
+                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IBootDisk|null);
 
                     /** SlurmLoginNodes serviceAccount */
                     serviceAccount?: (google.cloud.hypercomputecluster.v1alpha.IServiceAccount|null);
-
-                    /** SlurmLoginNodes bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IBootDisk|null);
                 }
 
                 /** Represents a SlurmLoginNodes. */
@@ -12517,14 +12689,11 @@ export namespace google {
                     /** SlurmLoginNodes instances. */
                     public instances: google.cloud.hypercomputecluster.v1alpha.IComputeInstance[];
 
-                    /** SlurmLoginNodes disks. */
-                    public disks: google.cloud.hypercomputecluster.v1alpha.IDisk[];
+                    /** SlurmLoginNodes bootDisk. */
+                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IBootDisk|null);
 
                     /** SlurmLoginNodes serviceAccount. */
                     public serviceAccount?: (google.cloud.hypercomputecluster.v1alpha.IServiceAccount|null);
-
-                    /** SlurmLoginNodes bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IBootDisk|null);
 
                     /**
                      * Creates a new SlurmLoginNodes instance using the specified properties.
@@ -12907,1362 +13076,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a Network. */
-                interface INetwork {
+                /** Properties of a MaintenancePolicy. */
+                interface IMaintenancePolicy {
 
-                    /** Network initializeParams */
-                    initializeParams?: (google.cloud.hypercomputecluster.v1alpha.INetworkInitializeParams|null);
-
-                    /** Network networkSource */
-                    networkSource?: (google.cloud.hypercomputecluster.v1alpha.INetworkSource|null);
-
-                    /** Network network */
-                    network?: (string|null);
-
-                    /** Network subnetwork */
-                    subnetwork?: (string|null);
+                    /** MaintenancePolicy windows */
+                    windows?: (google.cloud.hypercomputecluster.v1alpha.IMaintenanceWindow[]|null);
                 }
 
-                /** Represents a Network. */
-                class Network implements INetwork {
+                /** Represents a MaintenancePolicy. */
+                class MaintenancePolicy implements IMaintenancePolicy {
 
                     /**
-                     * Constructs a new Network.
+                     * Constructs a new MaintenancePolicy.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INetwork);
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IMaintenancePolicy);
 
-                    /** Network initializeParams. */
-                    public initializeParams?: (google.cloud.hypercomputecluster.v1alpha.INetworkInitializeParams|null);
-
-                    /** Network networkSource. */
-                    public networkSource?: (google.cloud.hypercomputecluster.v1alpha.INetworkSource|null);
-
-                    /** Network network. */
-                    public network: string;
-
-                    /** Network subnetwork. */
-                    public subnetwork: string;
-
-                    /** Network source. */
-                    public source?: ("initializeParams"|"networkSource");
+                    /** MaintenancePolicy windows. */
+                    public windows: google.cloud.hypercomputecluster.v1alpha.IMaintenanceWindow[];
 
                     /**
-                     * Creates a new Network instance using the specified properties.
+                     * Creates a new MaintenancePolicy instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Network instance
+                     * @returns MaintenancePolicy instance
                      */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.INetwork): google.cloud.hypercomputecluster.v1alpha.Network;
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IMaintenancePolicy): google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy;
 
                     /**
-                     * Encodes the specified Network message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Network.verify|verify} messages.
-                     * @param message Network message or plain object to encode
+                     * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.INetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Network message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Network.verify|verify} messages.
-                     * @param message Network message or plain object to encode
+                     * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.INetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a Network message from the specified reader or buffer.
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Network
+                     * @returns MaintenancePolicy
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.Network;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy;
 
                     /**
-                     * Decodes a Network message from the specified reader or buffer, length delimited.
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Network
+                     * @returns MaintenancePolicy
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.Network;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy;
 
                     /**
-                     * Verifies a Network message.
+                     * Verifies a MaintenancePolicy message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a Network message from a plain object. Also converts values to their respective internal types.
+                     * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Network
+                     * @returns MaintenancePolicy
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.Network;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy;
 
                     /**
-                     * Creates a plain object from a Network message. Also converts values to other types if specified.
-                     * @param message Network
+                     * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                     * @param message MaintenancePolicy
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.Network, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.MaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Network to JSON.
+                     * Converts this MaintenancePolicy to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for Network
+                     * Gets the default type url for MaintenancePolicy
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a NetworkInitializeParams. */
-                interface INetworkInitializeParams {
+                /** Properties of a MaintenanceWindow. */
+                interface IMaintenanceWindow {
 
-                    /** NetworkInitializeParams network */
-                    network?: (string|null);
+                    /** MaintenanceWindow day */
+                    day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
 
-                    /** NetworkInitializeParams description */
-                    description?: (string|null);
+                    /** MaintenanceWindow startTime */
+                    startTime?: (google.type.ITimeOfDay|null);
+
+                    /** MaintenanceWindow duration */
+                    duration?: (google.protobuf.IDuration|null);
                 }
 
-                /** Represents a NetworkInitializeParams. */
-                class NetworkInitializeParams implements INetworkInitializeParams {
+                /** Represents a MaintenanceWindow. */
+                class MaintenanceWindow implements IMaintenanceWindow {
 
                     /**
-                     * Constructs a new NetworkInitializeParams.
+                     * Constructs a new MaintenanceWindow.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INetworkInitializeParams);
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IMaintenanceWindow);
 
-                    /** NetworkInitializeParams network. */
-                    public network: string;
+                    /** MaintenanceWindow day. */
+                    public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
 
-                    /** NetworkInitializeParams description. */
-                    public description: string;
+                    /** MaintenanceWindow startTime. */
+                    public startTime?: (google.type.ITimeOfDay|null);
+
+                    /** MaintenanceWindow duration. */
+                    public duration?: (google.protobuf.IDuration|null);
 
                     /**
-                     * Creates a new NetworkInitializeParams instance using the specified properties.
+                     * Creates a new MaintenanceWindow instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns NetworkInitializeParams instance
+                     * @returns MaintenanceWindow instance
                      */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.INetworkInitializeParams): google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams;
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IMaintenanceWindow): google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow;
 
                     /**
-                     * Encodes the specified NetworkInitializeParams message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams.verify|verify} messages.
-                     * @param message NetworkInitializeParams message or plain object to encode
+                     * Encodes the specified MaintenanceWindow message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow.verify|verify} messages.
+                     * @param message MaintenanceWindow message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.INetworkInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified NetworkInitializeParams message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams.verify|verify} messages.
-                     * @param message NetworkInitializeParams message or plain object to encode
+                     * Encodes the specified MaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow.verify|verify} messages.
+                     * @param message MaintenanceWindow message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.INetworkInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a NetworkInitializeParams message from the specified reader or buffer.
+                     * Decodes a MaintenanceWindow message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns NetworkInitializeParams
+                     * @returns MaintenanceWindow
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow;
 
                     /**
-                     * Decodes a NetworkInitializeParams message from the specified reader or buffer, length delimited.
+                     * Decodes a MaintenanceWindow message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns NetworkInitializeParams
+                     * @returns MaintenanceWindow
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow;
 
                     /**
-                     * Verifies a NetworkInitializeParams message.
+                     * Verifies a MaintenanceWindow message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a NetworkInitializeParams message from a plain object. Also converts values to their respective internal types.
+                     * Creates a MaintenanceWindow message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns NetworkInitializeParams
+                     * @returns MaintenanceWindow
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow;
 
                     /**
-                     * Creates a plain object from a NetworkInitializeParams message. Also converts values to other types if specified.
-                     * @param message NetworkInitializeParams
+                     * Creates a plain object from a MaintenanceWindow message. Also converts values to other types if specified.
+                     * @param message MaintenanceWindow
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.NetworkInitializeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.MaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this NetworkInitializeParams to JSON.
+                     * Converts this MaintenanceWindow to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for NetworkInitializeParams
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a NetworkSource. */
-                interface INetworkSource {
-
-                    /** NetworkSource network */
-                    network?: (string|null);
-
-                    /** NetworkSource subnetwork */
-                    subnetwork?: (string|null);
-                }
-
-                /** Represents a NetworkSource. */
-                class NetworkSource implements INetworkSource {
-
-                    /**
-                     * Constructs a new NetworkSource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INetworkSource);
-
-                    /** NetworkSource network. */
-                    public network: string;
-
-                    /** NetworkSource subnetwork. */
-                    public subnetwork: string;
-
-                    /**
-                     * Creates a new NetworkSource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NetworkSource instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.INetworkSource): google.cloud.hypercomputecluster.v1alpha.NetworkSource;
-
-                    /**
-                     * Encodes the specified NetworkSource message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NetworkSource.verify|verify} messages.
-                     * @param message NetworkSource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.INetworkSource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NetworkSource message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NetworkSource.verify|verify} messages.
-                     * @param message NetworkSource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.INetworkSource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NetworkSource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NetworkSource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.NetworkSource;
-
-                    /**
-                     * Decodes a NetworkSource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NetworkSource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.NetworkSource;
-
-                    /**
-                     * Verifies a NetworkSource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NetworkSource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NetworkSource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.NetworkSource;
-
-                    /**
-                     * Creates a plain object from a NetworkSource message. Also converts values to other types if specified.
-                     * @param message NetworkSource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.NetworkSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NetworkSource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NetworkSource
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ComputeNetworkReference. */
-                interface IComputeNetworkReference {
-
-                    /** ComputeNetworkReference network */
-                    network?: (string|null);
-
-                    /** ComputeNetworkReference subnetwork */
-                    subnetwork?: (string|null);
-                }
-
-                /** Represents a ComputeNetworkReference. */
-                class ComputeNetworkReference implements IComputeNetworkReference {
-
-                    /**
-                     * Constructs a new ComputeNetworkReference.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IComputeNetworkReference);
-
-                    /** ComputeNetworkReference network. */
-                    public network: string;
-
-                    /** ComputeNetworkReference subnetwork. */
-                    public subnetwork: string;
-
-                    /**
-                     * Creates a new ComputeNetworkReference instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ComputeNetworkReference instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IComputeNetworkReference): google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference;
-
-                    /**
-                     * Encodes the specified ComputeNetworkReference message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference.verify|verify} messages.
-                     * @param message ComputeNetworkReference message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IComputeNetworkReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ComputeNetworkReference message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference.verify|verify} messages.
-                     * @param message ComputeNetworkReference message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IComputeNetworkReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ComputeNetworkReference message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ComputeNetworkReference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference;
-
-                    /**
-                     * Decodes a ComputeNetworkReference message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ComputeNetworkReference
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference;
-
-                    /**
-                     * Verifies a ComputeNetworkReference message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ComputeNetworkReference message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ComputeNetworkReference
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference;
-
-                    /**
-                     * Creates a plain object from a ComputeNetworkReference message. Also converts values to other types if specified.
-                     * @param message ComputeNetworkReference
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ComputeNetworkReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ComputeNetworkReference to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ComputeNetworkReference
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a NewComputeNetworkConfig. */
-                interface INewComputeNetworkConfig {
-
-                    /** NewComputeNetworkConfig network */
-                    network?: (string|null);
-
-                    /** NewComputeNetworkConfig description */
-                    description?: (string|null);
-                }
-
-                /** Represents a NewComputeNetworkConfig. */
-                class NewComputeNetworkConfig implements INewComputeNetworkConfig {
-
-                    /**
-                     * Constructs a new NewComputeNetworkConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INewComputeNetworkConfig);
-
-                    /** NewComputeNetworkConfig network. */
-                    public network: string;
-
-                    /** NewComputeNetworkConfig description. */
-                    public description: string;
-
-                    /**
-                     * Creates a new NewComputeNetworkConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NewComputeNetworkConfig instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.INewComputeNetworkConfig): google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig;
-
-                    /**
-                     * Encodes the specified NewComputeNetworkConfig message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig.verify|verify} messages.
-                     * @param message NewComputeNetworkConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.INewComputeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NewComputeNetworkConfig message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig.verify|verify} messages.
-                     * @param message NewComputeNetworkConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.INewComputeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NewComputeNetworkConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NewComputeNetworkConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig;
-
-                    /**
-                     * Decodes a NewComputeNetworkConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NewComputeNetworkConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig;
-
-                    /**
-                     * Verifies a NewComputeNetworkConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NewComputeNetworkConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NewComputeNetworkConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig;
-
-                    /**
-                     * Creates a plain object from a NewComputeNetworkConfig message. Also converts values to other types if specified.
-                     * @param message NewComputeNetworkConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.NewComputeNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NewComputeNetworkConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NewComputeNetworkConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ExistingComputeNetworkConfig. */
-                interface IExistingComputeNetworkConfig {
-
-                    /** ExistingComputeNetworkConfig network */
-                    network?: (string|null);
-
-                    /** ExistingComputeNetworkConfig subnetwork */
-                    subnetwork?: (string|null);
-                }
-
-                /** Represents an ExistingComputeNetworkConfig. */
-                class ExistingComputeNetworkConfig implements IExistingComputeNetworkConfig {
-
-                    /**
-                     * Constructs a new ExistingComputeNetworkConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IExistingComputeNetworkConfig);
-
-                    /** ExistingComputeNetworkConfig network. */
-                    public network: string;
-
-                    /** ExistingComputeNetworkConfig subnetwork. */
-                    public subnetwork: string;
-
-                    /**
-                     * Creates a new ExistingComputeNetworkConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExistingComputeNetworkConfig instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IExistingComputeNetworkConfig): google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig;
-
-                    /**
-                     * Encodes the specified ExistingComputeNetworkConfig message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig.verify|verify} messages.
-                     * @param message ExistingComputeNetworkConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IExistingComputeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExistingComputeNetworkConfig message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig.verify|verify} messages.
-                     * @param message ExistingComputeNetworkConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IExistingComputeNetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExistingComputeNetworkConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExistingComputeNetworkConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig;
-
-                    /**
-                     * Decodes an ExistingComputeNetworkConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExistingComputeNetworkConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig;
-
-                    /**
-                     * Verifies an ExistingComputeNetworkConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExistingComputeNetworkConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExistingComputeNetworkConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig;
-
-                    /**
-                     * Creates a plain object from an ExistingComputeNetworkConfig message. Also converts values to other types if specified.
-                     * @param message ExistingComputeNetworkConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ExistingComputeNetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExistingComputeNetworkConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ExistingComputeNetworkConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Storage. */
-                interface IStorage {
-
-                    /** Storage initializeParams */
-                    initializeParams?: (google.cloud.hypercomputecluster.v1alpha.IStorageInitializeParams|null);
-
-                    /** Storage storageSource */
-                    storageSource?: (google.cloud.hypercomputecluster.v1alpha.IStorageSource|null);
-
-                    /** Storage id */
-                    id?: (string|null);
-
-                    /** Storage storage */
-                    storage?: (string|null);
-                }
-
-                /** Represents a Storage. */
-                class Storage implements IStorage {
-
-                    /**
-                     * Constructs a new Storage.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IStorage);
-
-                    /** Storage initializeParams. */
-                    public initializeParams?: (google.cloud.hypercomputecluster.v1alpha.IStorageInitializeParams|null);
-
-                    /** Storage storageSource. */
-                    public storageSource?: (google.cloud.hypercomputecluster.v1alpha.IStorageSource|null);
-
-                    /** Storage id. */
-                    public id: string;
-
-                    /** Storage storage. */
-                    public storage: string;
-
-                    /** Storage source. */
-                    public source?: ("initializeParams"|"storageSource");
-
-                    /**
-                     * Creates a new Storage instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Storage instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IStorage): google.cloud.hypercomputecluster.v1alpha.Storage;
-
-                    /**
-                     * Encodes the specified Storage message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Storage.verify|verify} messages.
-                     * @param message Storage message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IStorage, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Storage message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Storage.verify|verify} messages.
-                     * @param message Storage message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IStorage, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Storage message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Storage
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.Storage;
-
-                    /**
-                     * Decodes a Storage message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Storage
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.Storage;
-
-                    /**
-                     * Verifies a Storage message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Storage message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Storage
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.Storage;
-
-                    /**
-                     * Creates a plain object from a Storage message. Also converts values to other types if specified.
-                     * @param message Storage
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.Storage, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Storage to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Storage
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a StorageInitializeParams. */
-                interface IStorageInitializeParams {
-
-                    /** StorageInitializeParams filestore */
-                    filestore?: (google.cloud.hypercomputecluster.v1alpha.IFilestoreInitializeParams|null);
-
-                    /** StorageInitializeParams gcs */
-                    gcs?: (google.cloud.hypercomputecluster.v1alpha.IGcsInitializeParams|null);
-
-                    /** StorageInitializeParams lustre */
-                    lustre?: (google.cloud.hypercomputecluster.v1alpha.ILustreInitializeParams|null);
-                }
-
-                /** Represents a StorageInitializeParams. */
-                class StorageInitializeParams implements IStorageInitializeParams {
-
-                    /**
-                     * Constructs a new StorageInitializeParams.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IStorageInitializeParams);
-
-                    /** StorageInitializeParams filestore. */
-                    public filestore?: (google.cloud.hypercomputecluster.v1alpha.IFilestoreInitializeParams|null);
-
-                    /** StorageInitializeParams gcs. */
-                    public gcs?: (google.cloud.hypercomputecluster.v1alpha.IGcsInitializeParams|null);
-
-                    /** StorageInitializeParams lustre. */
-                    public lustre?: (google.cloud.hypercomputecluster.v1alpha.ILustreInitializeParams|null);
-
-                    /** StorageInitializeParams option. */
-                    public option?: ("filestore"|"gcs"|"lustre");
-
-                    /**
-                     * Creates a new StorageInitializeParams instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StorageInitializeParams instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IStorageInitializeParams): google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams;
-
-                    /**
-                     * Encodes the specified StorageInitializeParams message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams.verify|verify} messages.
-                     * @param message StorageInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IStorageInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StorageInitializeParams message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams.verify|verify} messages.
-                     * @param message StorageInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IStorageInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StorageInitializeParams message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StorageInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams;
-
-                    /**
-                     * Decodes a StorageInitializeParams message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StorageInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams;
-
-                    /**
-                     * Verifies a StorageInitializeParams message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StorageInitializeParams message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StorageInitializeParams
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams;
-
-                    /**
-                     * Creates a plain object from a StorageInitializeParams message. Also converts values to other types if specified.
-                     * @param message StorageInitializeParams
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.StorageInitializeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StorageInitializeParams to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for StorageInitializeParams
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a FilestoreInitializeParams. */
-                interface IFilestoreInitializeParams {
-
-                    /** FilestoreInitializeParams fileShares */
-                    fileShares?: (google.cloud.hypercomputecluster.v1alpha.IFileShareConfig[]|null);
-
-                    /** FilestoreInitializeParams tier */
-                    tier?: (google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Tier|keyof typeof google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Tier|null);
-
-                    /** FilestoreInitializeParams filestore */
-                    filestore?: (string|null);
-
-                    /** FilestoreInitializeParams description */
-                    description?: (string|null);
-
-                    /** FilestoreInitializeParams protocol */
-                    protocol?: (google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Protocol|keyof typeof google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Protocol|null);
-                }
-
-                /** Represents a FilestoreInitializeParams. */
-                class FilestoreInitializeParams implements IFilestoreInitializeParams {
-
-                    /**
-                     * Constructs a new FilestoreInitializeParams.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IFilestoreInitializeParams);
-
-                    /** FilestoreInitializeParams fileShares. */
-                    public fileShares: google.cloud.hypercomputecluster.v1alpha.IFileShareConfig[];
-
-                    /** FilestoreInitializeParams tier. */
-                    public tier: (google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Tier|keyof typeof google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Tier);
-
-                    /** FilestoreInitializeParams filestore. */
-                    public filestore: string;
-
-                    /** FilestoreInitializeParams description. */
-                    public description: string;
-
-                    /** FilestoreInitializeParams protocol. */
-                    public protocol: (google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Protocol|keyof typeof google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.Protocol);
-
-                    /**
-                     * Creates a new FilestoreInitializeParams instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FilestoreInitializeParams instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IFilestoreInitializeParams): google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams;
-
-                    /**
-                     * Encodes the specified FilestoreInitializeParams message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.verify|verify} messages.
-                     * @param message FilestoreInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IFilestoreInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FilestoreInitializeParams message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams.verify|verify} messages.
-                     * @param message FilestoreInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IFilestoreInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FilestoreInitializeParams message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FilestoreInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams;
-
-                    /**
-                     * Decodes a FilestoreInitializeParams message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FilestoreInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams;
-
-                    /**
-                     * Verifies a FilestoreInitializeParams message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FilestoreInitializeParams message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FilestoreInitializeParams
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams;
-
-                    /**
-                     * Creates a plain object from a FilestoreInitializeParams message. Also converts values to other types if specified.
-                     * @param message FilestoreInitializeParams
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.FilestoreInitializeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FilestoreInitializeParams to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FilestoreInitializeParams
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace FilestoreInitializeParams {
-
-                    /** Tier enum. */
-                    enum Tier {
-                        TIER_UNSPECIFIED = 0,
-                        TIER_BASIC_HDD = 1,
-                        TIER_BASIC_SSD = 2,
-                        TIER_HIGH_SCALE_SSD = 3,
-                        TIER_ZONAL = 4,
-                        TIER_ENTERPRISE = 5,
-                        TIER_REGIONAL = 6
-                    }
-
-                    /** Protocol enum. */
-                    enum Protocol {
-                        PROTOCOL_UNSPECIFIED = 0,
-                        PROTOCOL_NFSV3 = 1,
-                        PROTOCOL_NFSV41 = 2
-                    }
-                }
-
-                /** Properties of a GcsInitializeParams. */
-                interface IGcsInitializeParams {
-
-                    /** GcsInitializeParams autoclass */
-                    autoclass?: (google.cloud.hypercomputecluster.v1alpha.IGcsAutoclassConfig|null);
-
-                    /** GcsInitializeParams storageClass */
-                    storageClass?: (google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams.StorageClass|keyof typeof google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams.StorageClass|null);
-
-                    /** GcsInitializeParams bucket */
-                    bucket?: (string|null);
-
-                    /** GcsInitializeParams hierarchicalNamespace */
-                    hierarchicalNamespace?: (google.cloud.hypercomputecluster.v1alpha.IGcsHierarchicalNamespaceConfig|null);
-                }
-
-                /** Represents a GcsInitializeParams. */
-                class GcsInitializeParams implements IGcsInitializeParams {
-
-                    /**
-                     * Constructs a new GcsInitializeParams.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGcsInitializeParams);
-
-                    /** GcsInitializeParams autoclass. */
-                    public autoclass?: (google.cloud.hypercomputecluster.v1alpha.IGcsAutoclassConfig|null);
-
-                    /** GcsInitializeParams storageClass. */
-                    public storageClass?: (google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams.StorageClass|keyof typeof google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams.StorageClass|null);
-
-                    /** GcsInitializeParams bucket. */
-                    public bucket: string;
-
-                    /** GcsInitializeParams hierarchicalNamespace. */
-                    public hierarchicalNamespace?: (google.cloud.hypercomputecluster.v1alpha.IGcsHierarchicalNamespaceConfig|null);
-
-                    /** GcsInitializeParams option. */
-                    public option?: ("autoclass"|"storageClass");
-
-                    /**
-                     * Creates a new GcsInitializeParams instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsInitializeParams instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGcsInitializeParams): google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams;
-
-                    /**
-                     * Encodes the specified GcsInitializeParams message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams.verify|verify} messages.
-                     * @param message GcsInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGcsInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsInitializeParams message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams.verify|verify} messages.
-                     * @param message GcsInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGcsInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsInitializeParams message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams;
-
-                    /**
-                     * Decodes a GcsInitializeParams message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams;
-
-                    /**
-                     * Verifies a GcsInitializeParams message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsInitializeParams message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsInitializeParams
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams;
-
-                    /**
-                     * Creates a plain object from a GcsInitializeParams message. Also converts values to other types if specified.
-                     * @param message GcsInitializeParams
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GcsInitializeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsInitializeParams to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GcsInitializeParams
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace GcsInitializeParams {
-
-                    /** StorageClass enum. */
-                    enum StorageClass {
-                        STORAGE_CLASS_UNSPECIFIED = 0,
-                        STORAGE_CLASS_STANDARD = 1,
-                        STORAGE_CLASS_NEARLINE = 2,
-                        STORAGE_CLASS_COLDLINE = 3,
-                        STORAGE_CLASS_ARCHIVE = 4
-                    }
-                }
-
-                /** Properties of a LustreInitializeParams. */
-                interface ILustreInitializeParams {
-
-                    /** LustreInitializeParams lustre */
-                    lustre?: (string|null);
-
-                    /** LustreInitializeParams description */
-                    description?: (string|null);
-
-                    /** LustreInitializeParams filesystem */
-                    filesystem?: (string|null);
-
-                    /** LustreInitializeParams capacityGb */
-                    capacityGb?: (number|Long|string|null);
-                }
-
-                /** Represents a LustreInitializeParams. */
-                class LustreInitializeParams implements ILustreInitializeParams {
-
-                    /**
-                     * Constructs a new LustreInitializeParams.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ILustreInitializeParams);
-
-                    /** LustreInitializeParams lustre. */
-                    public lustre: string;
-
-                    /** LustreInitializeParams description. */
-                    public description: string;
-
-                    /** LustreInitializeParams filesystem. */
-                    public filesystem: string;
-
-                    /** LustreInitializeParams capacityGb. */
-                    public capacityGb: (number|Long|string);
-
-                    /**
-                     * Creates a new LustreInitializeParams instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns LustreInitializeParams instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ILustreInitializeParams): google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams;
-
-                    /**
-                     * Encodes the specified LustreInitializeParams message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams.verify|verify} messages.
-                     * @param message LustreInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ILustreInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified LustreInitializeParams message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams.verify|verify} messages.
-                     * @param message LustreInitializeParams message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ILustreInitializeParams, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a LustreInitializeParams message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns LustreInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams;
-
-                    /**
-                     * Decodes a LustreInitializeParams message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns LustreInitializeParams
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams;
-
-                    /**
-                     * Verifies a LustreInitializeParams message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a LustreInitializeParams message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns LustreInitializeParams
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams;
-
-                    /**
-                     * Creates a plain object from a LustreInitializeParams message. Also converts values to other types if specified.
-                     * @param message LustreInitializeParams
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.LustreInitializeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this LustreInitializeParams to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for LustreInitializeParams
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a StorageSource. */
-                interface IStorageSource {
-
-                    /** StorageSource filestore */
-                    filestore?: (string|null);
-
-                    /** StorageSource bucket */
-                    bucket?: (string|null);
-
-                    /** StorageSource lustre */
-                    lustre?: (string|null);
-                }
-
-                /** Represents a StorageSource. */
-                class StorageSource implements IStorageSource {
-
-                    /**
-                     * Constructs a new StorageSource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IStorageSource);
-
-                    /** StorageSource filestore. */
-                    public filestore?: (string|null);
-
-                    /** StorageSource bucket. */
-                    public bucket?: (string|null);
-
-                    /** StorageSource lustre. */
-                    public lustre?: (string|null);
-
-                    /** StorageSource option. */
-                    public option?: ("filestore"|"bucket"|"lustre");
-
-                    /**
-                     * Creates a new StorageSource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StorageSource instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IStorageSource): google.cloud.hypercomputecluster.v1alpha.StorageSource;
-
-                    /**
-                     * Encodes the specified StorageSource message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.StorageSource.verify|verify} messages.
-                     * @param message StorageSource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StorageSource message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.StorageSource.verify|verify} messages.
-                     * @param message StorageSource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StorageSource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StorageSource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.StorageSource;
-
-                    /**
-                     * Decodes a StorageSource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StorageSource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.StorageSource;
-
-                    /**
-                     * Verifies a StorageSource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StorageSource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StorageSource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.StorageSource;
-
-                    /**
-                     * Creates a plain object from a StorageSource message. Also converts values to other types if specified.
-                     * @param message StorageSource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.StorageSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StorageSource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for StorageSource
+                     * Gets the default type url for MaintenanceWindow
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14271,9 +13284,6 @@ export namespace google {
 
                 /** Properties of a Compute. */
                 interface ICompute {
-
-                    /** Compute resourceRequests */
-                    resourceRequests?: (google.cloud.hypercomputecluster.v1alpha.IResourceRequest[]|null);
 
                     /** Compute atmTags */
                     atmTags?: (google.cloud.hypercomputecluster.v1alpha.IAtmTag[]|null);
@@ -14287,9 +13297,6 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICompute);
-
-                    /** Compute resourceRequests. */
-                    public resourceRequests: google.cloud.hypercomputecluster.v1alpha.IResourceRequest[];
 
                     /** Compute atmTags. */
                     public atmTags: google.cloud.hypercomputecluster.v1alpha.IAtmTag[];
@@ -14372,651 +13379,505 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a ResourceRequest. */
-                interface IResourceRequest {
+                /** Properties of a Node. */
+                interface INode {
 
-                    /** ResourceRequest id */
-                    id?: (string|null);
+                    /** Node name */
+                    name?: (string|null);
 
-                    /** ResourceRequest zone */
+                    /** Node zone */
                     zone?: (string|null);
 
-                    /** ResourceRequest machineType */
-                    machineType?: (string|null);
+                    /** Node state */
+                    state?: (google.cloud.hypercomputecluster.v1alpha.Node.State|keyof typeof google.cloud.hypercomputecluster.v1alpha.Node.State|null);
 
-                    /** ResourceRequest guestAccelerators */
-                    guestAccelerators?: (google.cloud.hypercomputecluster.v1alpha.IGuestAccelerator[]|null);
+                    /** Node stateMessage */
+                    stateMessage?: (string|null);
 
-                    /** ResourceRequest disks */
-                    disks?: (google.cloud.hypercomputecluster.v1alpha.IDisk[]|null);
+                    /** Node runningJobs */
+                    runningJobs?: (boolean|null);
 
-                    /** ResourceRequest maxRunDuration */
-                    maxRunDuration?: (number|Long|string|null);
+                    /** Node acceptingJobs */
+                    acceptingJobs?: (boolean|null);
 
-                    /** ResourceRequest provisioningModel */
-                    provisioningModel?: (google.cloud.hypercomputecluster.v1alpha.ResourceRequest.ProvisioningModel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ResourceRequest.ProvisioningModel|null);
+                    /** Node slurmDetails */
+                    slurmDetails?: (google.cloud.hypercomputecluster.v1alpha.ISlurmNodeDetails|null);
 
-                    /** ResourceRequest reservationAffinity */
-                    reservationAffinity?: (google.cloud.hypercomputecluster.v1alpha.IReservationAffinity|null);
+                    /** Node computeEngineDetails */
+                    computeEngineDetails?: (google.cloud.hypercomputecluster.v1alpha.IComputeEngineNodeDetails|null);
 
-                    /** ResourceRequest terminationAction */
-                    terminationAction?: (google.cloud.hypercomputecluster.v1alpha.ResourceRequest.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.ResourceRequest.TerminationAction|null);
-                }
+                    /** Node containerEngineDetails */
+                    containerEngineDetails?: (google.cloud.hypercomputecluster.v1alpha.IContainerEngineNodeDetails|null);
 
-                /** Represents a ResourceRequest. */
-                class ResourceRequest implements IResourceRequest {
-
-                    /**
-                     * Constructs a new ResourceRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IResourceRequest);
-
-                    /** ResourceRequest id. */
-                    public id: string;
-
-                    /** ResourceRequest zone. */
-                    public zone: string;
-
-                    /** ResourceRequest machineType. */
-                    public machineType: string;
-
-                    /** ResourceRequest guestAccelerators. */
-                    public guestAccelerators: google.cloud.hypercomputecluster.v1alpha.IGuestAccelerator[];
-
-                    /** ResourceRequest disks. */
-                    public disks: google.cloud.hypercomputecluster.v1alpha.IDisk[];
-
-                    /** ResourceRequest maxRunDuration. */
-                    public maxRunDuration: (number|Long|string);
-
-                    /** ResourceRequest provisioningModel. */
-                    public provisioningModel: (google.cloud.hypercomputecluster.v1alpha.ResourceRequest.ProvisioningModel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ResourceRequest.ProvisioningModel);
-
-                    /** ResourceRequest reservationAffinity. */
-                    public reservationAffinity?: (google.cloud.hypercomputecluster.v1alpha.IReservationAffinity|null);
-
-                    /** ResourceRequest terminationAction. */
-                    public terminationAction: (google.cloud.hypercomputecluster.v1alpha.ResourceRequest.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.ResourceRequest.TerminationAction);
-
-                    /**
-                     * Creates a new ResourceRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ResourceRequest instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IResourceRequest): google.cloud.hypercomputecluster.v1alpha.ResourceRequest;
-
-                    /**
-                     * Encodes the specified ResourceRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ResourceRequest.verify|verify} messages.
-                     * @param message ResourceRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ResourceRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ResourceRequest.verify|verify} messages.
-                     * @param message ResourceRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ResourceRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ResourceRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ResourceRequest;
-
-                    /**
-                     * Decodes a ResourceRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ResourceRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ResourceRequest;
-
-                    /**
-                     * Verifies a ResourceRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ResourceRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ResourceRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ResourceRequest;
-
-                    /**
-                     * Creates a plain object from a ResourceRequest message. Also converts values to other types if specified.
-                     * @param message ResourceRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ResourceRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ResourceRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace ResourceRequest {
-
-                    /** ProvisioningModel enum. */
-                    enum ProvisioningModel {
-                        PROVISIONING_MODEL_UNSPECIFIED = 0,
-                        PROVISIONING_MODEL_STANDARD = 1,
-                        PROVISIONING_MODEL_SPOT = 2,
-                        PROVISIONING_MODEL_FLEX_START = 3,
-                        PROVISIONING_MODEL_RESERVATION_BOUND = 4
-                    }
-
-                    /** TerminationAction enum. */
-                    enum TerminationAction {
-                        TERMINATION_ACTION_UNSPECIFIED = 0,
-                        TERMINATION_ACTION_STOP = 1,
-                        TERMINATION_ACTION_DELETE = 2
-                    }
-                }
-
-                /** Properties of a GuestAccelerator. */
-                interface IGuestAccelerator {
-
-                    /** GuestAccelerator acceleratorType */
-                    acceleratorType?: (string|null);
-
-                    /** GuestAccelerator count */
-                    count?: (number|Long|string|null);
-                }
-
-                /** Represents a GuestAccelerator. */
-                class GuestAccelerator implements IGuestAccelerator {
-
-                    /**
-                     * Constructs a new GuestAccelerator.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGuestAccelerator);
-
-                    /** GuestAccelerator acceleratorType. */
-                    public acceleratorType: string;
-
-                    /** GuestAccelerator count. */
-                    public count: (number|Long|string);
-
-                    /**
-                     * Creates a new GuestAccelerator instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GuestAccelerator instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGuestAccelerator): google.cloud.hypercomputecluster.v1alpha.GuestAccelerator;
-
-                    /**
-                     * Encodes the specified GuestAccelerator message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GuestAccelerator.verify|verify} messages.
-                     * @param message GuestAccelerator message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGuestAccelerator, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GuestAccelerator message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GuestAccelerator.verify|verify} messages.
-                     * @param message GuestAccelerator message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGuestAccelerator, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GuestAccelerator message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GuestAccelerator
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GuestAccelerator;
-
-                    /**
-                     * Decodes a GuestAccelerator message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GuestAccelerator
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GuestAccelerator;
-
-                    /**
-                     * Verifies a GuestAccelerator message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GuestAccelerator message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GuestAccelerator
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GuestAccelerator;
-
-                    /**
-                     * Creates a plain object from a GuestAccelerator message. Also converts values to other types if specified.
-                     * @param message GuestAccelerator
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GuestAccelerator, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GuestAccelerator to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GuestAccelerator
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a NewDWSFlexInstancesConfig. */
-                interface INewDWSFlexInstancesConfig {
-
-                    /** NewDWSFlexInstancesConfig zone */
-                    zone?: (string|null);
-
-                    /** NewDWSFlexInstancesConfig machineType */
-                    machineType?: (string|null);
-
-                    /** NewDWSFlexInstancesConfig maxDuration */
-                    maxDuration?: (google.protobuf.IDuration|null);
-
-                    /** NewDWSFlexInstancesConfig atmTags */
-                    atmTags?: ({ [k: string]: string }|null);
-
-                    /** NewDWSFlexInstancesConfig terminationAction */
-                    terminationAction?: (google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig.TerminationAction|null);
-
-                    /** NewDWSFlexInstancesConfig bootDisk */
-                    bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
-                }
-
-                /** Represents a NewDWSFlexInstancesConfig. */
-                class NewDWSFlexInstancesConfig implements INewDWSFlexInstancesConfig {
-
-                    /**
-                     * Constructs a new NewDWSFlexInstancesConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig);
-
-                    /** NewDWSFlexInstancesConfig zone. */
-                    public zone: string;
-
-                    /** NewDWSFlexInstancesConfig machineType. */
-                    public machineType: string;
-
-                    /** NewDWSFlexInstancesConfig maxDuration. */
-                    public maxDuration?: (google.protobuf.IDuration|null);
-
-                    /** NewDWSFlexInstancesConfig atmTags. */
-                    public atmTags: { [k: string]: string };
-
-                    /** NewDWSFlexInstancesConfig terminationAction. */
-                    public terminationAction: (google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig.TerminationAction|keyof typeof google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig.TerminationAction);
-
-                    /** NewDWSFlexInstancesConfig bootDisk. */
-                    public bootDisk?: (google.cloud.hypercomputecluster.v1alpha.IDisk|null);
-
-                    /**
-                     * Creates a new NewDWSFlexInstancesConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns NewDWSFlexInstancesConfig instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig): google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig;
-
-                    /**
-                     * Encodes the specified NewDWSFlexInstancesConfig message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig.verify|verify} messages.
-                     * @param message NewDWSFlexInstancesConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified NewDWSFlexInstancesConfig message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig.verify|verify} messages.
-                     * @param message NewDWSFlexInstancesConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.INewDWSFlexInstancesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a NewDWSFlexInstancesConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns NewDWSFlexInstancesConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig;
-
-                    /**
-                     * Decodes a NewDWSFlexInstancesConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns NewDWSFlexInstancesConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig;
-
-                    /**
-                     * Verifies a NewDWSFlexInstancesConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a NewDWSFlexInstancesConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns NewDWSFlexInstancesConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig;
-
-                    /**
-                     * Creates a plain object from a NewDWSFlexInstancesConfig message. Also converts values to other types if specified.
-                     * @param message NewDWSFlexInstancesConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.NewDWSFlexInstancesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this NewDWSFlexInstancesConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for NewDWSFlexInstancesConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace NewDWSFlexInstancesConfig {
-
-                    /** TerminationAction enum. */
-                    enum TerminationAction {
-                        TERMINATION_ACTION_UNSPECIFIED = 0,
-                        STOP = 1,
-                        DELETE = 2
-                    }
-                }
-
-                /** Properties of a ReservationAffinity. */
-                interface IReservationAffinity {
-
-                    /** ReservationAffinity type */
-                    type?: (google.cloud.hypercomputecluster.v1alpha.ReservationAffinity.ReservationType|keyof typeof google.cloud.hypercomputecluster.v1alpha.ReservationAffinity.ReservationType|null);
-
-                    /** ReservationAffinity key */
-                    key?: (string|null);
-
-                    /** ReservationAffinity values */
-                    values?: (string[]|null);
-                }
-
-                /** Represents a ReservationAffinity. */
-                class ReservationAffinity implements IReservationAffinity {
-
-                    /**
-                     * Constructs a new ReservationAffinity.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IReservationAffinity);
-
-                    /** ReservationAffinity type. */
-                    public type: (google.cloud.hypercomputecluster.v1alpha.ReservationAffinity.ReservationType|keyof typeof google.cloud.hypercomputecluster.v1alpha.ReservationAffinity.ReservationType);
-
-                    /** ReservationAffinity key. */
-                    public key: string;
-
-                    /** ReservationAffinity values. */
-                    public values: string[];
-
-                    /**
-                     * Creates a new ReservationAffinity instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ReservationAffinity instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IReservationAffinity): google.cloud.hypercomputecluster.v1alpha.ReservationAffinity;
-
-                    /**
-                     * Encodes the specified ReservationAffinity message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ReservationAffinity.verify|verify} messages.
-                     * @param message ReservationAffinity message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IReservationAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ReservationAffinity message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ReservationAffinity.verify|verify} messages.
-                     * @param message ReservationAffinity message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IReservationAffinity, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ReservationAffinity message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ReservationAffinity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ReservationAffinity;
-
-                    /**
-                     * Decodes a ReservationAffinity message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ReservationAffinity
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ReservationAffinity;
-
-                    /**
-                     * Verifies a ReservationAffinity message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ReservationAffinity message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ReservationAffinity
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ReservationAffinity;
-
-                    /**
-                     * Creates a plain object from a ReservationAffinity message. Also converts values to other types if specified.
-                     * @param message ReservationAffinity
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ReservationAffinity, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ReservationAffinity to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ReservationAffinity
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace ReservationAffinity {
-
-                    /** ReservationType enum. */
-                    enum ReservationType {
-                        RESERVATION_TYPE_UNSPECIFIED = 0,
-                        RESERVATION_TYPE_NO_RESERVATION = 1,
-                        RESERVATION_TYPE_ANY_RESERVATION = 2,
-                        RESERVATION_TYPE_SPECIFIC_RESERVATION = 3
-                    }
-                }
-
-                /** Properties of an OperationMetadata. */
-                interface IOperationMetadata {
-
-                    /** OperationMetadata createTime */
+                    /** Node createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** OperationMetadata endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata target */
-                    target?: (string|null);
-
-                    /** OperationMetadata verb */
-                    verb?: (string|null);
-
-                    /** OperationMetadata requestedCancellation */
-                    requestedCancellation?: (boolean|null);
-
-                    /** OperationMetadata apiVersion */
-                    apiVersion?: (string|null);
+                    /** Node updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
                 }
 
-                /** Represents an OperationMetadata. */
-                class OperationMetadata implements IOperationMetadata {
+                /** Represents a Node. */
+                class Node implements INode {
 
                     /**
-                     * Constructs a new OperationMetadata.
+                     * Constructs a new Node.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata);
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.INode);
 
-                    /** OperationMetadata createTime. */
+                    /** Node name. */
+                    public name: string;
+
+                    /** Node zone. */
+                    public zone: string;
+
+                    /** Node state. */
+                    public state: (google.cloud.hypercomputecluster.v1alpha.Node.State|keyof typeof google.cloud.hypercomputecluster.v1alpha.Node.State);
+
+                    /** Node stateMessage. */
+                    public stateMessage: string;
+
+                    /** Node runningJobs. */
+                    public runningJobs: boolean;
+
+                    /** Node acceptingJobs. */
+                    public acceptingJobs: boolean;
+
+                    /** Node slurmDetails. */
+                    public slurmDetails?: (google.cloud.hypercomputecluster.v1alpha.ISlurmNodeDetails|null);
+
+                    /** Node computeEngineDetails. */
+                    public computeEngineDetails?: (google.cloud.hypercomputecluster.v1alpha.IComputeEngineNodeDetails|null);
+
+                    /** Node containerEngineDetails. */
+                    public containerEngineDetails?: (google.cloud.hypercomputecluster.v1alpha.IContainerEngineNodeDetails|null);
+
+                    /** Node createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** OperationMetadata endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata target. */
-                    public target: string;
-
-                    /** OperationMetadata verb. */
-                    public verb: string;
-
-                    /** OperationMetadata requestedCancellation. */
-                    public requestedCancellation: boolean;
-
-                    /** OperationMetadata apiVersion. */
-                    public apiVersion: string;
+                    /** Node updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
-                     * Creates a new OperationMetadata instance using the specified properties.
+                     * Creates a new Node instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns OperationMetadata instance
+                     * @returns Node instance
                      */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.INode): google.cloud.hypercomputecluster.v1alpha.Node;
 
                     /**
-                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationMetadata.verify|verify} messages.
-                     * @param message OperationMetadata message or plain object to encode
+                     * Encodes the specified Node message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Node.verify|verify} messages.
+                     * @param message Node message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.INode, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationMetadata.verify|verify} messages.
-                     * @param message OperationMetadata message or plain object to encode
+                     * Encodes the specified Node message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Node.verify|verify} messages.
+                     * @param message Node message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.INode, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * Decodes a Node message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns OperationMetadata
+                     * @returns Node
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.Node;
 
                     /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * Decodes a Node message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns OperationMetadata
+                     * @returns Node
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.Node;
 
                     /**
-                     * Verifies an OperationMetadata message.
+                     * Verifies a Node message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * Creates a Node message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns OperationMetadata
+                     * @returns Node
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.Node;
 
                     /**
-                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                     * @param message OperationMetadata
+                     * Creates a plain object from a Node message. Also converts values to other types if specified.
+                     * @param message Node
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.Node, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this OperationMetadata to JSON.
+                     * Converts this Node to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for OperationMetadata
+                     * Gets the default type url for Node
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Node {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        SUSPENDING = 3,
+                        SUSPENDED = 4,
+                        REPAIRING = 5,
+                        FAILED = 6,
+                        DELETING = 7
+                    }
+                }
+
+                /** Properties of a SlurmNodeDetails. */
+                interface ISlurmNodeDetails {
+
+                    /** SlurmNodeDetails states */
+                    states?: (string[]|null);
+
+                    /** SlurmNodeDetails reason */
+                    reason?: (string|null);
+
+                    /** SlurmNodeDetails partitions */
+                    partitions?: (string[]|null);
+
+                    /** SlurmNodeDetails nodeset */
+                    nodeset?: (string|null);
+
+                    /** SlurmNodeDetails comment */
+                    comment?: (string|null);
+                }
+
+                /** Represents a SlurmNodeDetails. */
+                class SlurmNodeDetails implements ISlurmNodeDetails {
+
+                    /**
+                     * Constructs a new SlurmNodeDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ISlurmNodeDetails);
+
+                    /** SlurmNodeDetails states. */
+                    public states: string[];
+
+                    /** SlurmNodeDetails reason. */
+                    public reason: string;
+
+                    /** SlurmNodeDetails partitions. */
+                    public partitions: string[];
+
+                    /** SlurmNodeDetails nodeset. */
+                    public nodeset: string;
+
+                    /** SlurmNodeDetails comment. */
+                    public comment: string;
+
+                    /**
+                     * Creates a new SlurmNodeDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SlurmNodeDetails instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ISlurmNodeDetails): google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails;
+
+                    /**
+                     * Encodes the specified SlurmNodeDetails message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails.verify|verify} messages.
+                     * @param message SlurmNodeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ISlurmNodeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SlurmNodeDetails message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails.verify|verify} messages.
+                     * @param message SlurmNodeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ISlurmNodeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SlurmNodeDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SlurmNodeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails;
+
+                    /**
+                     * Decodes a SlurmNodeDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SlurmNodeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails;
+
+                    /**
+                     * Verifies a SlurmNodeDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SlurmNodeDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SlurmNodeDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails;
+
+                    /**
+                     * Creates a plain object from a SlurmNodeDetails message. Also converts values to other types if specified.
+                     * @param message SlurmNodeDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.SlurmNodeDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SlurmNodeDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SlurmNodeDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ComputeEngineNodeDetails. */
+                interface IComputeEngineNodeDetails {
+
+                    /** ComputeEngineNodeDetails instance */
+                    instance?: (string|null);
+
+                    /** ComputeEngineNodeDetails machineType */
+                    machineType?: (string|null);
+
+                    /** ComputeEngineNodeDetails state */
+                    state?: (string|null);
+                }
+
+                /** Represents a ComputeEngineNodeDetails. */
+                class ComputeEngineNodeDetails implements IComputeEngineNodeDetails {
+
+                    /**
+                     * Constructs a new ComputeEngineNodeDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IComputeEngineNodeDetails);
+
+                    /** ComputeEngineNodeDetails instance. */
+                    public instance: string;
+
+                    /** ComputeEngineNodeDetails machineType. */
+                    public machineType: string;
+
+                    /** ComputeEngineNodeDetails state. */
+                    public state: string;
+
+                    /**
+                     * Creates a new ComputeEngineNodeDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeEngineNodeDetails instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IComputeEngineNodeDetails): google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails;
+
+                    /**
+                     * Encodes the specified ComputeEngineNodeDetails message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails.verify|verify} messages.
+                     * @param message ComputeEngineNodeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IComputeEngineNodeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeEngineNodeDetails message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails.verify|verify} messages.
+                     * @param message ComputeEngineNodeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IComputeEngineNodeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeEngineNodeDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeEngineNodeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails;
+
+                    /**
+                     * Decodes a ComputeEngineNodeDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeEngineNodeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails;
+
+                    /**
+                     * Verifies a ComputeEngineNodeDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeEngineNodeDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeEngineNodeDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails;
+
+                    /**
+                     * Creates a plain object from a ComputeEngineNodeDetails message. Also converts values to other types if specified.
+                     * @param message ComputeEngineNodeDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ComputeEngineNodeDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeEngineNodeDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeEngineNodeDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContainerEngineNodeDetails. */
+                interface IContainerEngineNodeDetails {
+
+                    /** ContainerEngineNodeDetails pod */
+                    pod?: (string|null);
+
+                    /** ContainerEngineNodeDetails state */
+                    state?: (string|null);
+                }
+
+                /** Represents a ContainerEngineNodeDetails. */
+                class ContainerEngineNodeDetails implements IContainerEngineNodeDetails {
+
+                    /**
+                     * Constructs a new ContainerEngineNodeDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IContainerEngineNodeDetails);
+
+                    /** ContainerEngineNodeDetails pod. */
+                    public pod: string;
+
+                    /** ContainerEngineNodeDetails state. */
+                    public state: string;
+
+                    /**
+                     * Creates a new ContainerEngineNodeDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContainerEngineNodeDetails instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IContainerEngineNodeDetails): google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails;
+
+                    /**
+                     * Encodes the specified ContainerEngineNodeDetails message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails.verify|verify} messages.
+                     * @param message ContainerEngineNodeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IContainerEngineNodeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContainerEngineNodeDetails message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails.verify|verify} messages.
+                     * @param message ContainerEngineNodeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IContainerEngineNodeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContainerEngineNodeDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContainerEngineNodeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails;
+
+                    /**
+                     * Decodes a ContainerEngineNodeDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContainerEngineNodeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails;
+
+                    /**
+                     * Verifies a ContainerEngineNodeDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContainerEngineNodeDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContainerEngineNodeDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails;
+
+                    /**
+                     * Creates a plain object from a ContainerEngineNodeDetails message. Also converts values to other types if specified.
+                     * @param message ContainerEngineNodeDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ContainerEngineNodeDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContainerEngineNodeDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContainerEngineNodeDetails
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -15114,6 +13975,118 @@ export namespace google {
                     public listMachineLearningRuns(request: google.cloud.hypercomputecluster.v1alpha.IListMachineLearningRunsRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsResponse>;
 
                     /**
+                     * Calls CreateProfilerTarget.
+                     * @param request CreateProfilerTargetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createProfilerTarget(request: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.CreateProfilerTargetCallback): void;
+
+                    /**
+                     * Calls CreateProfilerTarget.
+                     * @param request CreateProfilerTargetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createProfilerTarget(request: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetProfilerTarget.
+                     * @param request GetProfilerTargetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProfilerTarget
+                     */
+                    public getProfilerTarget(request: google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.GetProfilerTargetCallback): void;
+
+                    /**
+                     * Calls GetProfilerTarget.
+                     * @param request GetProfilerTargetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProfilerTarget(request: google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ProfilerTarget>;
+
+                    /**
+                     * Calls ListProfilerTargets.
+                     * @param request ListProfilerTargetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProfilerTargetsResponse
+                     */
+                    public listProfilerTargets(request: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.ListProfilerTargetsCallback): void;
+
+                    /**
+                     * Calls ListProfilerTargets.
+                     * @param request ListProfilerTargetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProfilerTargets(request: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse>;
+
+                    /**
+                     * Calls DeleteProfilerTarget.
+                     * @param request DeleteProfilerTargetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteProfilerTarget(request: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.DeleteProfilerTargetCallback): void;
+
+                    /**
+                     * Calls DeleteProfilerTarget.
+                     * @param request DeleteProfilerTargetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteProfilerTarget(request: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateProfilerSession.
+                     * @param request CreateProfilerSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createProfilerSession(request: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.CreateProfilerSessionCallback): void;
+
+                    /**
+                     * Calls CreateProfilerSession.
+                     * @param request CreateProfilerSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createProfilerSession(request: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetProfilerSession.
+                     * @param request GetProfilerSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProfilerSession
+                     */
+                    public getProfilerSession(request: google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.GetProfilerSessionCallback): void;
+
+                    /**
+                     * Calls GetProfilerSession.
+                     * @param request GetProfilerSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProfilerSession(request: google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ProfilerSession>;
+
+                    /**
+                     * Calls ListProfilerSessions.
+                     * @param request ListProfilerSessionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProfilerSessionsResponse
+                     */
+                    public listProfilerSessions(request: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.ListProfilerSessionsCallback): void;
+
+                    /**
+                     * Calls ListProfilerSessions.
+                     * @param request ListProfilerSessionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProfilerSessions(request: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse>;
+
+                    /**
+                     * Calls DeleteProfilerSession.
+                     * @param request DeleteProfilerSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteProfilerSession(request: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.DeleteProfilerSessionCallback): void;
+
+                    /**
+                     * Calls DeleteProfilerSession.
+                     * @param request DeleteProfilerSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteProfilerSession(request: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
                      * Calls GetProfileSession.
                      * @param request GetProfileSessionRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ProfileSession
@@ -15140,6 +14113,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listProfileSessions(request: google.cloud.hypercomputecluster.v1alpha.IListProfileSessionsRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsResponse>;
+
+                    /**
+                     * Calls CreateMonitoredEvent.
+                     * @param request CreateMonitoredEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.CreateMonitoredEventCallback): void;
+
+                    /**
+                     * Calls CreateMonitoredEvent.
+                     * @param request CreateMonitoredEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetMonitoredEvent.
+                     * @param request GetMonitoredEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MonitoredEvent
+                     */
+                    public getMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.GetMonitoredEventCallback): void;
+
+                    /**
+                     * Calls GetMonitoredEvent.
+                     * @param request GetMonitoredEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest): Promise<google.cloud.hypercomputecluster.v1alpha.MonitoredEvent>;
+
+                    /**
+                     * Calls ListMonitoredEvents.
+                     * @param request ListMonitoredEventsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMonitoredEventsResponse
+                     */
+                    public listMonitoredEvents(request: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.ListMonitoredEventsCallback): void;
+
+                    /**
+                     * Calls ListMonitoredEvents.
+                     * @param request ListMonitoredEventsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMonitoredEvents(request: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest): Promise<google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse>;
+
+                    /**
+                     * Calls UpdateMonitoredEvent.
+                     * @param request UpdateMonitoredEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.UpdateMonitoredEventCallback): void;
+
+                    /**
+                     * Calls UpdateMonitoredEvent.
+                     * @param request UpdateMonitoredEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMonitoredEvent.
+                     * @param request DeleteMonitoredEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest, callback: google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns.DeleteMonitoredEventCallback): void;
+
+                    /**
+                     * Calls DeleteMonitoredEvent.
+                     * @param request DeleteMonitoredEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMonitoredEvent(request: google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace MachineLearningRuns {
@@ -15180,6 +14223,62 @@ export namespace google {
                     type ListMachineLearningRunsCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|createProfilerTarget}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateProfilerTargetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|getProfilerTarget}.
+                     * @param error Error, if any
+                     * @param [response] ProfilerTarget
+                     */
+                    type GetProfilerTargetCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ProfilerTarget) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|listProfilerTargets}.
+                     * @param error Error, if any
+                     * @param [response] ListProfilerTargetsResponse
+                     */
+                    type ListProfilerTargetsCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|deleteProfilerTarget}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteProfilerTargetCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|createProfilerSession}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateProfilerSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|getProfilerSession}.
+                     * @param error Error, if any
+                     * @param [response] ProfilerSession
+                     */
+                    type GetProfilerSessionCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ProfilerSession) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|listProfilerSessions}.
+                     * @param error Error, if any
+                     * @param [response] ListProfilerSessionsResponse
+                     */
+                    type ListProfilerSessionsCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|deleteProfilerSession}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteProfilerSessionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|getProfileSession}.
                      * @param error Error, if any
                      * @param [response] ProfileSession
@@ -15192,6 +14291,41 @@ export namespace google {
                      * @param [response] ListProfileSessionsResponse
                      */
                     type ListProfileSessionsCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|createMonitoredEvent}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMonitoredEventCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|getMonitoredEvent}.
+                     * @param error Error, if any
+                     * @param [response] MonitoredEvent
+                     */
+                    type GetMonitoredEventCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.MonitoredEvent) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|listMonitoredEvents}.
+                     * @param error Error, if any
+                     * @param [response] ListMonitoredEventsResponse
+                     */
+                    type ListMonitoredEventsCallback = (error: (Error|null), response?: google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|updateMonitoredEvent}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMonitoredEventCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns|deleteMonitoredEvent}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteMonitoredEventCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** State enum. */
@@ -15255,6 +14389,9 @@ export namespace google {
 
                     /** MachineLearningRun endTime */
                     endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MachineLearningRun runGroup */
+                    runGroup?: (string|null);
                 }
 
                 /** Represents a MachineLearningRun. */
@@ -15316,6 +14453,9 @@ export namespace google {
 
                     /** MachineLearningRun endTime. */
                     public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MachineLearningRun runGroup. */
+                    public runGroup: string;
 
                     /**
                      * Creates a new MachineLearningRun instance using the specified properties.
@@ -15412,6 +14552,581 @@ export namespace google {
                         COMPLETED = 2,
                         FAILED = 3
                     }
+                }
+
+                /** Properties of a ProfilerTarget. */
+                interface IProfilerTarget {
+
+                    /** ProfilerTarget name */
+                    name?: (string|null);
+
+                    /** ProfilerTarget isMaster */
+                    isMaster?: (boolean|null);
+
+                    /** ProfilerTarget hostname */
+                    hostname?: (string|null);
+
+                    /** ProfilerTarget nodeIndex */
+                    nodeIndex?: (number|null);
+
+                    /** ProfilerTarget etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a ProfilerTarget. */
+                class ProfilerTarget implements IProfilerTarget {
+
+                    /**
+                     * Constructs a new ProfilerTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IProfilerTarget);
+
+                    /** ProfilerTarget name. */
+                    public name: string;
+
+                    /** ProfilerTarget isMaster. */
+                    public isMaster: boolean;
+
+                    /** ProfilerTarget hostname. */
+                    public hostname: string;
+
+                    /** ProfilerTarget nodeIndex. */
+                    public nodeIndex: number;
+
+                    /** ProfilerTarget etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new ProfilerTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProfilerTarget instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IProfilerTarget): google.cloud.hypercomputecluster.v1alpha.ProfilerTarget;
+
+                    /**
+                     * Encodes the specified ProfilerTarget message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfilerTarget.verify|verify} messages.
+                     * @param message ProfilerTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProfilerTarget message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfilerTarget.verify|verify} messages.
+                     * @param message ProfilerTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProfilerTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProfilerTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ProfilerTarget;
+
+                    /**
+                     * Decodes a ProfilerTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProfilerTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ProfilerTarget;
+
+                    /**
+                     * Verifies a ProfilerTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProfilerTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProfilerTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ProfilerTarget;
+
+                    /**
+                     * Creates a plain object from a ProfilerTarget message. Also converts values to other types if specified.
+                     * @param message ProfilerTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ProfilerTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProfilerTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProfilerTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProfilerSession. */
+                interface IProfilerSession {
+
+                    /** ProfilerSession name */
+                    name?: (string|null);
+
+                    /** ProfilerSession storageFolderUri */
+                    storageFolderUri?: (string|null);
+
+                    /** ProfilerSession createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProfilerSession dashboardUri */
+                    dashboardUri?: (string|null);
+
+                    /** ProfilerSession isTraceEnabled */
+                    isTraceEnabled?: (boolean|null);
+
+                    /** ProfilerSession duration */
+                    duration?: (google.protobuf.IDuration|null);
+
+                    /** ProfilerSession etag */
+                    etag?: (string|null);
+
+                    /** ProfilerSession profilerTargets */
+                    profilerTargets?: (string[]|null);
+
+                    /** ProfilerSession hostTracerLevel */
+                    hostTracerLevel?: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.HostTracerLevel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.HostTracerLevel|null);
+
+                    /** ProfilerSession deviceTracerLevel */
+                    deviceTracerLevel?: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.DeviceTracerLevel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.DeviceTracerLevel|null);
+
+                    /** ProfilerSession kind */
+                    kind?: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.Kind|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.Kind|null);
+
+                    /** ProfilerSession pythonTracerLevel */
+                    pythonTracerLevel?: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.PythonTracerLevel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.PythonTracerLevel|null);
+                }
+
+                /** Represents a ProfilerSession. */
+                class ProfilerSession implements IProfilerSession {
+
+                    /**
+                     * Constructs a new ProfilerSession.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IProfilerSession);
+
+                    /** ProfilerSession name. */
+                    public name: string;
+
+                    /** ProfilerSession storageFolderUri. */
+                    public storageFolderUri: string;
+
+                    /** ProfilerSession createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProfilerSession dashboardUri. */
+                    public dashboardUri: string;
+
+                    /** ProfilerSession isTraceEnabled. */
+                    public isTraceEnabled: boolean;
+
+                    /** ProfilerSession duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /** ProfilerSession etag. */
+                    public etag: string;
+
+                    /** ProfilerSession profilerTargets. */
+                    public profilerTargets: string[];
+
+                    /** ProfilerSession hostTracerLevel. */
+                    public hostTracerLevel: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.HostTracerLevel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.HostTracerLevel);
+
+                    /** ProfilerSession deviceTracerLevel. */
+                    public deviceTracerLevel: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.DeviceTracerLevel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.DeviceTracerLevel);
+
+                    /** ProfilerSession kind. */
+                    public kind: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.Kind|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.Kind);
+
+                    /** ProfilerSession pythonTracerLevel. */
+                    public pythonTracerLevel: (google.cloud.hypercomputecluster.v1alpha.ProfilerSession.PythonTracerLevel|keyof typeof google.cloud.hypercomputecluster.v1alpha.ProfilerSession.PythonTracerLevel);
+
+                    /**
+                     * Creates a new ProfilerSession instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProfilerSession instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IProfilerSession): google.cloud.hypercomputecluster.v1alpha.ProfilerSession;
+
+                    /**
+                     * Encodes the specified ProfilerSession message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfilerSession.verify|verify} messages.
+                     * @param message ProfilerSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IProfilerSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProfilerSession message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfilerSession.verify|verify} messages.
+                     * @param message ProfilerSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IProfilerSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProfilerSession message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProfilerSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ProfilerSession;
+
+                    /**
+                     * Decodes a ProfilerSession message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProfilerSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ProfilerSession;
+
+                    /**
+                     * Verifies a ProfilerSession message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProfilerSession message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProfilerSession
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ProfilerSession;
+
+                    /**
+                     * Creates a plain object from a ProfilerSession message. Also converts values to other types if specified.
+                     * @param message ProfilerSession
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ProfilerSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProfilerSession to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProfilerSession
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProfilerSession {
+
+                    /** HostTracerLevel enum. */
+                    enum HostTracerLevel {
+                        HOST_TRACER_LEVEL_UNSPECIFIED = 0,
+                        HOST_TRACER_LEVEL_DISABLED = 1,
+                        HOST_TRACER_LEVEL_CRITICAL = 2,
+                        HOST_TRACER_LEVEL_INFO = 3,
+                        HOST_TRACER_LEVEL_VERBOSE = 4
+                    }
+
+                    /** DeviceTracerLevel enum. */
+                    enum DeviceTracerLevel {
+                        DEVICE_TRACER_LEVEL_UNSPECIFIED = 0,
+                        DEVICE_TRACER_LEVEL_DISABLED = 1,
+                        DEVICE_TRACER_LEVEL_ENABLED = 2
+                    }
+
+                    /** Kind enum. */
+                    enum Kind {
+                        KIND_UNSPECIFIED = 0,
+                        KIND_ON_DEMAND = 1,
+                        KIND_PROGRAMMATIC = 2,
+                        KIND_SCANNED = 3
+                    }
+
+                    /** PythonTracerLevel enum. */
+                    enum PythonTracerLevel {
+                        PYTHON_TRACER_LEVEL_UNSPECIFIED = 0,
+                        PYTHON_TRACER_LEVEL_DISABLED = 1,
+                        PYTHON_TRACER_LEVEL_ENABLED = 2
+                    }
+                }
+
+                /** Properties of a MonitoredEvent. */
+                interface IMonitoredEvent {
+
+                    /** MonitoredEvent name */
+                    name?: (string|null);
+
+                    /** MonitoredEvent type */
+                    type?: (google.cloud.hypercomputecluster.v1alpha.MonitoredEvent.EventType|keyof typeof google.cloud.hypercomputecluster.v1alpha.MonitoredEvent.EventType|null);
+
+                    /** MonitoredEvent displayName */
+                    displayName?: (string|null);
+
+                    /** MonitoredEvent startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MonitoredEvent endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MonitoredEvent analyzerReports */
+                    analyzerReports?: (google.cloud.hypercomputecluster.v1alpha.IAnalyzerReport[]|null);
+
+                    /** MonitoredEvent analyzerInsightFound */
+                    analyzerInsightFound?: (boolean|null);
+                }
+
+                /** Represents a MonitoredEvent. */
+                class MonitoredEvent implements IMonitoredEvent {
+
+                    /**
+                     * Constructs a new MonitoredEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent);
+
+                    /** MonitoredEvent name. */
+                    public name: string;
+
+                    /** MonitoredEvent type. */
+                    public type: (google.cloud.hypercomputecluster.v1alpha.MonitoredEvent.EventType|keyof typeof google.cloud.hypercomputecluster.v1alpha.MonitoredEvent.EventType);
+
+                    /** MonitoredEvent displayName. */
+                    public displayName: string;
+
+                    /** MonitoredEvent startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MonitoredEvent endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MonitoredEvent analyzerReports. */
+                    public analyzerReports: google.cloud.hypercomputecluster.v1alpha.IAnalyzerReport[];
+
+                    /** MonitoredEvent analyzerInsightFound. */
+                    public analyzerInsightFound: boolean;
+
+                    /**
+                     * Creates a new MonitoredEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MonitoredEvent instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent): google.cloud.hypercomputecluster.v1alpha.MonitoredEvent;
+
+                    /**
+                     * Encodes the specified MonitoredEvent message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.MonitoredEvent.verify|verify} messages.
+                     * @param message MonitoredEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MonitoredEvent message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.MonitoredEvent.verify|verify} messages.
+                     * @param message MonitoredEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MonitoredEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MonitoredEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.MonitoredEvent;
+
+                    /**
+                     * Decodes a MonitoredEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MonitoredEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.MonitoredEvent;
+
+                    /**
+                     * Verifies a MonitoredEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MonitoredEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MonitoredEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.MonitoredEvent;
+
+                    /**
+                     * Creates a plain object from a MonitoredEvent message. Also converts values to other types if specified.
+                     * @param message MonitoredEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.MonitoredEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MonitoredEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MonitoredEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MonitoredEvent {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        PERFORMANCE_DEGRADATION = 1
+                    }
+                }
+
+                /** Properties of a ProfileSession. */
+                interface IProfileSession {
+
+                    /** ProfileSession name */
+                    name?: (string|null);
+
+                    /** ProfileSession gcsPath */
+                    gcsPath?: (string|null);
+
+                    /** ProfileSession createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProfileSession dashboardUrl */
+                    dashboardUrl?: (string|null);
+                }
+
+                /** Represents a ProfileSession. */
+                class ProfileSession implements IProfileSession {
+
+                    /**
+                     * Constructs a new ProfileSession.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IProfileSession);
+
+                    /** ProfileSession name. */
+                    public name: string;
+
+                    /** ProfileSession gcsPath. */
+                    public gcsPath: string;
+
+                    /** ProfileSession createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ProfileSession dashboardUrl. */
+                    public dashboardUrl: string;
+
+                    /**
+                     * Creates a new ProfileSession instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProfileSession instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IProfileSession): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+
+                    /**
+                     * Encodes the specified ProfileSession message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfileSession.verify|verify} messages.
+                     * @param message ProfileSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IProfileSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProfileSession message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfileSession.verify|verify} messages.
+                     * @param message ProfileSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IProfileSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProfileSession message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProfileSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+
+                    /**
+                     * Decodes a ProfileSession message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProfileSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+
+                    /**
+                     * Verifies a ProfileSession message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProfileSession message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProfileSession
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+
+                    /**
+                     * Creates a plain object from a ProfileSession message. Also converts values to other types if specified.
+                     * @param message ProfileSession
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ProfileSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProfileSession to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProfileSession
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a CreateMachineLearningRunRequest. */
@@ -15517,212 +15232,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateMachineLearningRunRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an UpdateMachineLearningRunRequest. */
-                interface IUpdateMachineLearningRunRequest {
-
-                    /** UpdateMachineLearningRunRequest machineLearningRun */
-                    machineLearningRun?: (google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun|null);
-
-                    /** UpdateMachineLearningRunRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateMachineLearningRunRequest. */
-                class UpdateMachineLearningRunRequest implements IUpdateMachineLearningRunRequest {
-
-                    /**
-                     * Constructs a new UpdateMachineLearningRunRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest);
-
-                    /** UpdateMachineLearningRunRequest machineLearningRun. */
-                    public machineLearningRun?: (google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun|null);
-
-                    /** UpdateMachineLearningRunRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateMachineLearningRunRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateMachineLearningRunRequest instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
-
-                    /**
-                     * Encodes the specified UpdateMachineLearningRunRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest.verify|verify} messages.
-                     * @param message UpdateMachineLearningRunRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateMachineLearningRunRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest.verify|verify} messages.
-                     * @param message UpdateMachineLearningRunRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateMachineLearningRunRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateMachineLearningRunRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
-
-                    /**
-                     * Decodes an UpdateMachineLearningRunRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateMachineLearningRunRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
-
-                    /**
-                     * Verifies an UpdateMachineLearningRunRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateMachineLearningRunRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateMachineLearningRunRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateMachineLearningRunRequest message. Also converts values to other types if specified.
-                     * @param message UpdateMachineLearningRunRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateMachineLearningRunRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for UpdateMachineLearningRunRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DeleteMachineLearningRunRequest. */
-                interface IDeleteMachineLearningRunRequest {
-
-                    /** DeleteMachineLearningRunRequest name */
-                    name?: (string|null);
-
-                    /** DeleteMachineLearningRunRequest etag */
-                    etag?: (string|null);
-                }
-
-                /** Represents a DeleteMachineLearningRunRequest. */
-                class DeleteMachineLearningRunRequest implements IDeleteMachineLearningRunRequest {
-
-                    /**
-                     * Constructs a new DeleteMachineLearningRunRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest);
-
-                    /** DeleteMachineLearningRunRequest name. */
-                    public name: string;
-
-                    /** DeleteMachineLearningRunRequest etag. */
-                    public etag: string;
-
-                    /**
-                     * Creates a new DeleteMachineLearningRunRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteMachineLearningRunRequest instance
-                     */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
-
-                    /**
-                     * Encodes the specified DeleteMachineLearningRunRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest.verify|verify} messages.
-                     * @param message DeleteMachineLearningRunRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteMachineLearningRunRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest.verify|verify} messages.
-                     * @param message DeleteMachineLearningRunRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteMachineLearningRunRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteMachineLearningRunRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
-
-                    /**
-                     * Decodes a DeleteMachineLearningRunRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteMachineLearningRunRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
-
-                    /**
-                     * Verifies a DeleteMachineLearningRunRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteMachineLearningRunRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteMachineLearningRunRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteMachineLearningRunRequest message. Also converts values to other types if specified.
-                     * @param message DeleteMachineLearningRunRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteMachineLearningRunRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DeleteMachineLearningRunRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -16050,6 +15559,1339 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateMachineLearningRunRequest. */
+                interface IUpdateMachineLearningRunRequest {
+
+                    /** UpdateMachineLearningRunRequest machineLearningRun */
+                    machineLearningRun?: (google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun|null);
+
+                    /** UpdateMachineLearningRunRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMachineLearningRunRequest. */
+                class UpdateMachineLearningRunRequest implements IUpdateMachineLearningRunRequest {
+
+                    /**
+                     * Constructs a new UpdateMachineLearningRunRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest);
+
+                    /** UpdateMachineLearningRunRequest machineLearningRun. */
+                    public machineLearningRun?: (google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun|null);
+
+                    /** UpdateMachineLearningRunRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMachineLearningRunRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMachineLearningRunRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
+
+                    /**
+                     * Encodes the specified UpdateMachineLearningRunRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest.verify|verify} messages.
+                     * @param message UpdateMachineLearningRunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMachineLearningRunRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest.verify|verify} messages.
+                     * @param message UpdateMachineLearningRunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdateMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMachineLearningRunRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMachineLearningRunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
+
+                    /**
+                     * Decodes an UpdateMachineLearningRunRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMachineLearningRunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
+
+                    /**
+                     * Verifies an UpdateMachineLearningRunRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMachineLearningRunRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMachineLearningRunRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMachineLearningRunRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMachineLearningRunRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMachineLearningRunRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMachineLearningRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMachineLearningRunRequest. */
+                interface IDeleteMachineLearningRunRequest {
+
+                    /** DeleteMachineLearningRunRequest name */
+                    name?: (string|null);
+
+                    /** DeleteMachineLearningRunRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteMachineLearningRunRequest. */
+                class DeleteMachineLearningRunRequest implements IDeleteMachineLearningRunRequest {
+
+                    /**
+                     * Constructs a new DeleteMachineLearningRunRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest);
+
+                    /** DeleteMachineLearningRunRequest name. */
+                    public name: string;
+
+                    /** DeleteMachineLearningRunRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteMachineLearningRunRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMachineLearningRunRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
+
+                    /**
+                     * Encodes the specified DeleteMachineLearningRunRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest.verify|verify} messages.
+                     * @param message DeleteMachineLearningRunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMachineLearningRunRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest.verify|verify} messages.
+                     * @param message DeleteMachineLearningRunRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteMachineLearningRunRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMachineLearningRunRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMachineLearningRunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
+
+                    /**
+                     * Decodes a DeleteMachineLearningRunRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMachineLearningRunRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
+
+                    /**
+                     * Verifies a DeleteMachineLearningRunRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMachineLearningRunRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMachineLearningRunRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMachineLearningRunRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMachineLearningRunRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMachineLearningRunRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMachineLearningRunRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateProfilerTargetRequest. */
+                interface ICreateProfilerTargetRequest {
+
+                    /** CreateProfilerTargetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateProfilerTargetRequest profilerTarget */
+                    profilerTarget?: (google.cloud.hypercomputecluster.v1alpha.IProfilerTarget|null);
+
+                    /** CreateProfilerTargetRequest profilerTargetId */
+                    profilerTargetId?: (string|null);
+                }
+
+                /** Represents a CreateProfilerTargetRequest. */
+                class CreateProfilerTargetRequest implements ICreateProfilerTargetRequest {
+
+                    /**
+                     * Constructs a new CreateProfilerTargetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest);
+
+                    /** CreateProfilerTargetRequest parent. */
+                    public parent: string;
+
+                    /** CreateProfilerTargetRequest profilerTarget. */
+                    public profilerTarget?: (google.cloud.hypercomputecluster.v1alpha.IProfilerTarget|null);
+
+                    /** CreateProfilerTargetRequest profilerTargetId. */
+                    public profilerTargetId: string;
+
+                    /**
+                     * Creates a new CreateProfilerTargetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateProfilerTargetRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest): google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest;
+
+                    /**
+                     * Encodes the specified CreateProfilerTargetRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest.verify|verify} messages.
+                     * @param message CreateProfilerTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateProfilerTargetRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest.verify|verify} messages.
+                     * @param message CreateProfilerTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateProfilerTargetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateProfilerTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest;
+
+                    /**
+                     * Decodes a CreateProfilerTargetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateProfilerTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest;
+
+                    /**
+                     * Verifies a CreateProfilerTargetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateProfilerTargetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateProfilerTargetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateProfilerTargetRequest message. Also converts values to other types if specified.
+                     * @param message CreateProfilerTargetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateProfilerTargetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateProfilerTargetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProfilerTargetRequest. */
+                interface IGetProfilerTargetRequest {
+
+                    /** GetProfilerTargetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProfilerTargetRequest. */
+                class GetProfilerTargetRequest implements IGetProfilerTargetRequest {
+
+                    /**
+                     * Constructs a new GetProfilerTargetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest);
+
+                    /** GetProfilerTargetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProfilerTargetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProfilerTargetRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest): google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest;
+
+                    /**
+                     * Encodes the specified GetProfilerTargetRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest.verify|verify} messages.
+                     * @param message GetProfilerTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProfilerTargetRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest.verify|verify} messages.
+                     * @param message GetProfilerTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGetProfilerTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProfilerTargetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProfilerTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest;
+
+                    /**
+                     * Decodes a GetProfilerTargetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProfilerTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest;
+
+                    /**
+                     * Verifies a GetProfilerTargetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProfilerTargetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProfilerTargetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest;
+
+                    /**
+                     * Creates a plain object from a GetProfilerTargetRequest message. Also converts values to other types if specified.
+                     * @param message GetProfilerTargetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProfilerTargetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProfilerTargetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProfilerTargetsRequest. */
+                interface IListProfilerTargetsRequest {
+
+                    /** ListProfilerTargetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProfilerTargetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProfilerTargetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListProfilerTargetsRequest. */
+                class ListProfilerTargetsRequest implements IListProfilerTargetsRequest {
+
+                    /**
+                     * Constructs a new ListProfilerTargetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest);
+
+                    /** ListProfilerTargetsRequest parent. */
+                    public parent: string;
+
+                    /** ListProfilerTargetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProfilerTargetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListProfilerTargetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilerTargetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest;
+
+                    /**
+                     * Encodes the specified ListProfilerTargetsRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest.verify|verify} messages.
+                     * @param message ListProfilerTargetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilerTargetsRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest.verify|verify} messages.
+                     * @param message ListProfilerTargetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilerTargetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilerTargetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest;
+
+                    /**
+                     * Decodes a ListProfilerTargetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilerTargetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest;
+
+                    /**
+                     * Verifies a ListProfilerTargetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilerTargetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilerTargetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListProfilerTargetsRequest message. Also converts values to other types if specified.
+                     * @param message ListProfilerTargetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilerTargetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProfilerTargetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProfilerTargetsResponse. */
+                interface IListProfilerTargetsResponse {
+
+                    /** ListProfilerTargetsResponse profilerTargets */
+                    profilerTargets?: (google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[]|null);
+
+                    /** ListProfilerTargetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListProfilerTargetsResponse. */
+                class ListProfilerTargetsResponse implements IListProfilerTargetsResponse {
+
+                    /**
+                     * Constructs a new ListProfilerTargetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse);
+
+                    /** ListProfilerTargetsResponse profilerTargets. */
+                    public profilerTargets: google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[];
+
+                    /** ListProfilerTargetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListProfilerTargetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilerTargetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse;
+
+                    /**
+                     * Encodes the specified ListProfilerTargetsResponse message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse.verify|verify} messages.
+                     * @param message ListProfilerTargetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilerTargetsResponse message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse.verify|verify} messages.
+                     * @param message ListProfilerTargetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerTargetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilerTargetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilerTargetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse;
+
+                    /**
+                     * Decodes a ListProfilerTargetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilerTargetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse;
+
+                    /**
+                     * Verifies a ListProfilerTargetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilerTargetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilerTargetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListProfilerTargetsResponse message. Also converts values to other types if specified.
+                     * @param message ListProfilerTargetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilerTargetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProfilerTargetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteProfilerTargetRequest. */
+                interface IDeleteProfilerTargetRequest {
+
+                    /** DeleteProfilerTargetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteProfilerTargetRequest. */
+                class DeleteProfilerTargetRequest implements IDeleteProfilerTargetRequest {
+
+                    /**
+                     * Constructs a new DeleteProfilerTargetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest);
+
+                    /** DeleteProfilerTargetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteProfilerTargetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteProfilerTargetRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest;
+
+                    /**
+                     * Encodes the specified DeleteProfilerTargetRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest.verify|verify} messages.
+                     * @param message DeleteProfilerTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteProfilerTargetRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest.verify|verify} messages.
+                     * @param message DeleteProfilerTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteProfilerTargetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteProfilerTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest;
+
+                    /**
+                     * Decodes a DeleteProfilerTargetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteProfilerTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest;
+
+                    /**
+                     * Verifies a DeleteProfilerTargetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteProfilerTargetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteProfilerTargetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteProfilerTargetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteProfilerTargetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteProfilerTargetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteProfilerTargetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateProfilerSessionRequest. */
+                interface ICreateProfilerSessionRequest {
+
+                    /** CreateProfilerSessionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateProfilerSessionRequest profilerSessionId */
+                    profilerSessionId?: (string|null);
+
+                    /** CreateProfilerSessionRequest profilerSession */
+                    profilerSession?: (google.cloud.hypercomputecluster.v1alpha.IProfilerSession|null);
+                }
+
+                /** Represents a CreateProfilerSessionRequest. */
+                class CreateProfilerSessionRequest implements ICreateProfilerSessionRequest {
+
+                    /**
+                     * Constructs a new CreateProfilerSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest);
+
+                    /** CreateProfilerSessionRequest parent. */
+                    public parent: string;
+
+                    /** CreateProfilerSessionRequest profilerSessionId. */
+                    public profilerSessionId: string;
+
+                    /** CreateProfilerSessionRequest profilerSession. */
+                    public profilerSession?: (google.cloud.hypercomputecluster.v1alpha.IProfilerSession|null);
+
+                    /**
+                     * Creates a new CreateProfilerSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateProfilerSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest): google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest;
+
+                    /**
+                     * Encodes the specified CreateProfilerSessionRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest.verify|verify} messages.
+                     * @param message CreateProfilerSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateProfilerSessionRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest.verify|verify} messages.
+                     * @param message CreateProfilerSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateProfilerSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateProfilerSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateProfilerSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest;
+
+                    /**
+                     * Decodes a CreateProfilerSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateProfilerSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest;
+
+                    /**
+                     * Verifies a CreateProfilerSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateProfilerSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateProfilerSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateProfilerSessionRequest message. Also converts values to other types if specified.
+                     * @param message CreateProfilerSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateProfilerSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateProfilerSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProfilerSessionRequest. */
+                interface IGetProfilerSessionRequest {
+
+                    /** GetProfilerSessionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProfilerSessionRequest. */
+                class GetProfilerSessionRequest implements IGetProfilerSessionRequest {
+
+                    /**
+                     * Constructs a new GetProfilerSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest);
+
+                    /** GetProfilerSessionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProfilerSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProfilerSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest): google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest;
+
+                    /**
+                     * Encodes the specified GetProfilerSessionRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest.verify|verify} messages.
+                     * @param message GetProfilerSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProfilerSessionRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest.verify|verify} messages.
+                     * @param message GetProfilerSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGetProfilerSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProfilerSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProfilerSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest;
+
+                    /**
+                     * Decodes a GetProfilerSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProfilerSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest;
+
+                    /**
+                     * Verifies a GetProfilerSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProfilerSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProfilerSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest;
+
+                    /**
+                     * Creates a plain object from a GetProfilerSessionRequest message. Also converts values to other types if specified.
+                     * @param message GetProfilerSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProfilerSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProfilerSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProfilerSessionsRequest. */
+                interface IListProfilerSessionsRequest {
+
+                    /** ListProfilerSessionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProfilerSessionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProfilerSessionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListProfilerSessionsRequest. */
+                class ListProfilerSessionsRequest implements IListProfilerSessionsRequest {
+
+                    /**
+                     * Constructs a new ListProfilerSessionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest);
+
+                    /** ListProfilerSessionsRequest parent. */
+                    public parent: string;
+
+                    /** ListProfilerSessionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProfilerSessionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListProfilerSessionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilerSessionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest;
+
+                    /**
+                     * Encodes the specified ListProfilerSessionsRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest.verify|verify} messages.
+                     * @param message ListProfilerSessionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilerSessionsRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest.verify|verify} messages.
+                     * @param message ListProfilerSessionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilerSessionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilerSessionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest;
+
+                    /**
+                     * Decodes a ListProfilerSessionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilerSessionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest;
+
+                    /**
+                     * Verifies a ListProfilerSessionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilerSessionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilerSessionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListProfilerSessionsRequest message. Also converts values to other types if specified.
+                     * @param message ListProfilerSessionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilerSessionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProfilerSessionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProfilerSessionsResponse. */
+                interface IListProfilerSessionsResponse {
+
+                    /** ListProfilerSessionsResponse profilerSessions */
+                    profilerSessions?: (google.cloud.hypercomputecluster.v1alpha.IProfilerSession[]|null);
+
+                    /** ListProfilerSessionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListProfilerSessionsResponse. */
+                class ListProfilerSessionsResponse implements IListProfilerSessionsResponse {
+
+                    /**
+                     * Constructs a new ListProfilerSessionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse);
+
+                    /** ListProfilerSessionsResponse profilerSessions. */
+                    public profilerSessions: google.cloud.hypercomputecluster.v1alpha.IProfilerSession[];
+
+                    /** ListProfilerSessionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListProfilerSessionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilerSessionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse;
+
+                    /**
+                     * Encodes the specified ListProfilerSessionsResponse message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse.verify|verify} messages.
+                     * @param message ListProfilerSessionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilerSessionsResponse message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse.verify|verify} messages.
+                     * @param message ListProfilerSessionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListProfilerSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilerSessionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilerSessionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse;
+
+                    /**
+                     * Decodes a ListProfilerSessionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilerSessionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse;
+
+                    /**
+                     * Verifies a ListProfilerSessionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilerSessionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilerSessionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListProfilerSessionsResponse message. Also converts values to other types if specified.
+                     * @param message ListProfilerSessionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilerSessionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProfilerSessionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteProfilerSessionRequest. */
+                interface IDeleteProfilerSessionRequest {
+
+                    /** DeleteProfilerSessionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteProfilerSessionRequest. */
+                class DeleteProfilerSessionRequest implements IDeleteProfilerSessionRequest {
+
+                    /**
+                     * Constructs a new DeleteProfilerSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest);
+
+                    /** DeleteProfilerSessionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteProfilerSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteProfilerSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest;
+
+                    /**
+                     * Encodes the specified DeleteProfilerSessionRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest.verify|verify} messages.
+                     * @param message DeleteProfilerSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteProfilerSessionRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest.verify|verify} messages.
+                     * @param message DeleteProfilerSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteProfilerSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteProfilerSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteProfilerSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest;
+
+                    /**
+                     * Decodes a DeleteProfilerSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteProfilerSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest;
+
+                    /**
+                     * Verifies a DeleteProfilerSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteProfilerSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteProfilerSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteProfilerSessionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteProfilerSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteProfilerSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteProfilerSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProfileSessionRequest. */
+                interface IGetProfileSessionRequest {
+
+                    /** GetProfileSessionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProfileSessionRequest. */
+                class GetProfileSessionRequest implements IGetProfileSessionRequest {
+
+                    /**
+                     * Constructs a new GetProfileSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest);
+
+                    /** GetProfileSessionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProfileSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProfileSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+
+                    /**
+                     * Encodes the specified GetProfileSessionRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest.verify|verify} messages.
+                     * @param message GetProfileSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProfileSessionRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest.verify|verify} messages.
+                     * @param message GetProfileSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProfileSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProfileSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+
+                    /**
+                     * Decodes a GetProfileSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProfileSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+
+                    /**
+                     * Verifies a GetProfileSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProfileSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProfileSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+
+                    /**
+                     * Creates a plain object from a GetProfileSessionRequest message. Also converts values to other types if specified.
+                     * @param message GetProfileSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProfileSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProfileSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListProfileSessionsRequest. */
                 interface IListProfileSessionsRequest {
 
@@ -16262,212 +17104,630 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a GetProfileSessionRequest. */
-                interface IGetProfileSessionRequest {
+                /** Properties of a CreateMonitoredEventRequest. */
+                interface ICreateMonitoredEventRequest {
 
-                    /** GetProfileSessionRequest name */
-                    name?: (string|null);
+                    /** CreateMonitoredEventRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMonitoredEventRequest monitoredEvent */
+                    monitoredEvent?: (google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent|null);
+
+                    /** CreateMonitoredEventRequest monitoredEventId */
+                    monitoredEventId?: (string|null);
                 }
 
-                /** Represents a GetProfileSessionRequest. */
-                class GetProfileSessionRequest implements IGetProfileSessionRequest {
+                /** Represents a CreateMonitoredEventRequest. */
+                class CreateMonitoredEventRequest implements ICreateMonitoredEventRequest {
 
                     /**
-                     * Constructs a new GetProfileSessionRequest.
+                     * Constructs a new CreateMonitoredEventRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest);
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest);
 
-                    /** GetProfileSessionRequest name. */
-                    public name: string;
+                    /** CreateMonitoredEventRequest parent. */
+                    public parent: string;
+
+                    /** CreateMonitoredEventRequest monitoredEvent. */
+                    public monitoredEvent?: (google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent|null);
+
+                    /** CreateMonitoredEventRequest monitoredEventId. */
+                    public monitoredEventId: string;
 
                     /**
-                     * Creates a new GetProfileSessionRequest instance using the specified properties.
+                     * Creates a new CreateMonitoredEventRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns GetProfileSessionRequest instance
+                     * @returns CreateMonitoredEventRequest instance
                      */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest): google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest;
 
                     /**
-                     * Encodes the specified GetProfileSessionRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest.verify|verify} messages.
-                     * @param message GetProfileSessionRequest message or plain object to encode
+                     * Encodes the specified CreateMonitoredEventRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest.verify|verify} messages.
+                     * @param message CreateMonitoredEventRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified GetProfileSessionRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest.verify|verify} messages.
-                     * @param message GetProfileSessionRequest message or plain object to encode
+                     * Encodes the specified CreateMonitoredEventRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest.verify|verify} messages.
+                     * @param message CreateMonitoredEventRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGetProfileSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a GetProfileSessionRequest message from the specified reader or buffer.
+                     * Decodes a CreateMonitoredEventRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns GetProfileSessionRequest
+                     * @returns CreateMonitoredEventRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest;
 
                     /**
-                     * Decodes a GetProfileSessionRequest message from the specified reader or buffer, length delimited.
+                     * Decodes a CreateMonitoredEventRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns GetProfileSessionRequest
+                     * @returns CreateMonitoredEventRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest;
 
                     /**
-                     * Verifies a GetProfileSessionRequest message.
+                     * Verifies a CreateMonitoredEventRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a GetProfileSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * Creates a CreateMonitoredEventRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns GetProfileSessionRequest
+                     * @returns CreateMonitoredEventRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest;
 
                     /**
-                     * Creates a plain object from a GetProfileSessionRequest message. Also converts values to other types if specified.
-                     * @param message GetProfileSessionRequest
+                     * Creates a plain object from a CreateMonitoredEventRequest message. Also converts values to other types if specified.
+                     * @param message CreateMonitoredEventRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this GetProfileSessionRequest to JSON.
+                     * Converts this CreateMonitoredEventRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for GetProfileSessionRequest
+                     * Gets the default type url for CreateMonitoredEventRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a ProfileSession. */
-                interface IProfileSession {
+                /** Properties of a GetMonitoredEventRequest. */
+                interface IGetMonitoredEventRequest {
 
-                    /** ProfileSession name */
+                    /** GetMonitoredEventRequest name */
                     name?: (string|null);
-
-                    /** ProfileSession gcsPath */
-                    gcsPath?: (string|null);
-
-                    /** ProfileSession createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ProfileSession dashboardUrl */
-                    dashboardUrl?: (string|null);
                 }
 
-                /** Represents a ProfileSession. */
-                class ProfileSession implements IProfileSession {
+                /** Represents a GetMonitoredEventRequest. */
+                class GetMonitoredEventRequest implements IGetMonitoredEventRequest {
 
                     /**
-                     * Constructs a new ProfileSession.
+                     * Constructs a new GetMonitoredEventRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IProfileSession);
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest);
 
-                    /** ProfileSession name. */
+                    /** GetMonitoredEventRequest name. */
                     public name: string;
 
-                    /** ProfileSession gcsPath. */
-                    public gcsPath: string;
-
-                    /** ProfileSession createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ProfileSession dashboardUrl. */
-                    public dashboardUrl: string;
-
                     /**
-                     * Creates a new ProfileSession instance using the specified properties.
+                     * Creates a new GetMonitoredEventRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ProfileSession instance
+                     * @returns GetMonitoredEventRequest instance
                      */
-                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IProfileSession): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest): google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest;
 
                     /**
-                     * Encodes the specified ProfileSession message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfileSession.verify|verify} messages.
-                     * @param message ProfileSession message or plain object to encode
+                     * Encodes the specified GetMonitoredEventRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest.verify|verify} messages.
+                     * @param message GetMonitoredEventRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IProfileSession, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ProfileSession message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ProfileSession.verify|verify} messages.
-                     * @param message ProfileSession message or plain object to encode
+                     * Encodes the specified GetMonitoredEventRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest.verify|verify} messages.
+                     * @param message GetMonitoredEventRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IProfileSession, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IGetMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a ProfileSession message from the specified reader or buffer.
+                     * Decodes a GetMonitoredEventRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ProfileSession
+                     * @returns GetMonitoredEventRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest;
 
                     /**
-                     * Decodes a ProfileSession message from the specified reader or buffer, length delimited.
+                     * Decodes a GetMonitoredEventRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ProfileSession
+                     * @returns GetMonitoredEventRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest;
 
                     /**
-                     * Verifies a ProfileSession message.
+                     * Verifies a GetMonitoredEventRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a ProfileSession message from a plain object. Also converts values to their respective internal types.
+                     * Creates a GetMonitoredEventRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ProfileSession
+                     * @returns GetMonitoredEventRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ProfileSession;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest;
 
                     /**
-                     * Creates a plain object from a ProfileSession message. Also converts values to other types if specified.
-                     * @param message ProfileSession
+                     * Creates a plain object from a GetMonitoredEventRequest message. Also converts values to other types if specified.
+                     * @param message GetMonitoredEventRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ProfileSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ProfileSession to JSON.
+                     * Converts this GetMonitoredEventRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for ProfileSession
+                     * Gets the default type url for GetMonitoredEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMonitoredEventsRequest. */
+                interface IListMonitoredEventsRequest {
+
+                    /** ListMonitoredEventsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMonitoredEventsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMonitoredEventsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMonitoredEventsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListMonitoredEventsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListMonitoredEventsRequest. */
+                class ListMonitoredEventsRequest implements IListMonitoredEventsRequest {
+
+                    /**
+                     * Constructs a new ListMonitoredEventsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest);
+
+                    /** ListMonitoredEventsRequest parent. */
+                    public parent: string;
+
+                    /** ListMonitoredEventsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMonitoredEventsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMonitoredEventsRequest filter. */
+                    public filter: string;
+
+                    /** ListMonitoredEventsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListMonitoredEventsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMonitoredEventsRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest;
+
+                    /**
+                     * Encodes the specified ListMonitoredEventsRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest.verify|verify} messages.
+                     * @param message ListMonitoredEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMonitoredEventsRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest.verify|verify} messages.
+                     * @param message ListMonitoredEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMonitoredEventsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMonitoredEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest;
+
+                    /**
+                     * Decodes a ListMonitoredEventsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMonitoredEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest;
+
+                    /**
+                     * Verifies a ListMonitoredEventsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMonitoredEventsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMonitoredEventsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMonitoredEventsRequest message. Also converts values to other types if specified.
+                     * @param message ListMonitoredEventsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMonitoredEventsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMonitoredEventsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMonitoredEventsResponse. */
+                interface IListMonitoredEventsResponse {
+
+                    /** ListMonitoredEventsResponse monitoredEvents */
+                    monitoredEvents?: (google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[]|null);
+
+                    /** ListMonitoredEventsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMonitoredEventsResponse. */
+                class ListMonitoredEventsResponse implements IListMonitoredEventsResponse {
+
+                    /**
+                     * Constructs a new ListMonitoredEventsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse);
+
+                    /** ListMonitoredEventsResponse monitoredEvents. */
+                    public monitoredEvents: google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[];
+
+                    /** ListMonitoredEventsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMonitoredEventsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMonitoredEventsResponse instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse;
+
+                    /**
+                     * Encodes the specified ListMonitoredEventsResponse message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse.verify|verify} messages.
+                     * @param message ListMonitoredEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMonitoredEventsResponse message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse.verify|verify} messages.
+                     * @param message ListMonitoredEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IListMonitoredEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMonitoredEventsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMonitoredEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse;
+
+                    /**
+                     * Decodes a ListMonitoredEventsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMonitoredEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse;
+
+                    /**
+                     * Verifies a ListMonitoredEventsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMonitoredEventsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMonitoredEventsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMonitoredEventsResponse message. Also converts values to other types if specified.
+                     * @param message ListMonitoredEventsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMonitoredEventsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMonitoredEventsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMonitoredEventRequest. */
+                interface IUpdateMonitoredEventRequest {
+
+                    /** UpdateMonitoredEventRequest monitoredEvent */
+                    monitoredEvent?: (google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent|null);
+
+                    /** UpdateMonitoredEventRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMonitoredEventRequest. */
+                class UpdateMonitoredEventRequest implements IUpdateMonitoredEventRequest {
+
+                    /**
+                     * Constructs a new UpdateMonitoredEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest);
+
+                    /** UpdateMonitoredEventRequest monitoredEvent. */
+                    public monitoredEvent?: (google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent|null);
+
+                    /** UpdateMonitoredEventRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMonitoredEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMonitoredEventRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest): google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest;
+
+                    /**
+                     * Encodes the specified UpdateMonitoredEventRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest.verify|verify} messages.
+                     * @param message UpdateMonitoredEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMonitoredEventRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest.verify|verify} messages.
+                     * @param message UpdateMonitoredEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdateMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMonitoredEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMonitoredEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest;
+
+                    /**
+                     * Decodes an UpdateMonitoredEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMonitoredEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest;
+
+                    /**
+                     * Verifies an UpdateMonitoredEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMonitoredEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMonitoredEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMonitoredEventRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMonitoredEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMonitoredEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMonitoredEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMonitoredEventRequest. */
+                interface IDeleteMonitoredEventRequest {
+
+                    /** DeleteMonitoredEventRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMonitoredEventRequest. */
+                class DeleteMonitoredEventRequest implements IDeleteMonitoredEventRequest {
+
+                    /**
+                     * Constructs a new DeleteMonitoredEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest);
+
+                    /** DeleteMonitoredEventRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMonitoredEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMonitoredEventRequest instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest): google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest;
+
+                    /**
+                     * Encodes the specified DeleteMonitoredEventRequest message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest.verify|verify} messages.
+                     * @param message DeleteMonitoredEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMonitoredEventRequest message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest.verify|verify} messages.
+                     * @param message DeleteMonitoredEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteMonitoredEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMonitoredEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMonitoredEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest;
+
+                    /**
+                     * Decodes a DeleteMonitoredEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMonitoredEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest;
+
+                    /**
+                     * Verifies a DeleteMonitoredEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMonitoredEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMonitoredEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMonitoredEventRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMonitoredEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMonitoredEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMonitoredEventRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -16597,6 +17857,12 @@ export namespace google {
 
                     /** Metrics avgLatency */
                     avgLatency?: (google.protobuf.IDuration|null);
+
+                    /** Metrics avgTpuTensorcoreUtilization */
+                    avgTpuTensorcoreUtilization?: (number|null);
+
+                    /** Metrics avgHbmUtilization */
+                    avgHbmUtilization?: (number|null);
                 }
 
                 /** Represents a Metrics. */
@@ -16619,6 +17885,12 @@ export namespace google {
 
                     /** Metrics avgLatency. */
                     public avgLatency?: (google.protobuf.IDuration|null);
+
+                    /** Metrics avgTpuTensorcoreUtilization. */
+                    public avgTpuTensorcoreUtilization: number;
+
+                    /** Metrics avgHbmUtilization. */
+                    public avgHbmUtilization: number;
 
                     /**
                      * Creates a new Metrics instance using the specified properties.
@@ -16800,6 +18072,9 @@ export namespace google {
 
                     /** Tool xprof */
                     xprof?: (google.cloud.hypercomputecluster.v1alpha.IXprof|null);
+
+                    /** Tool smon */
+                    smon?: (google.cloud.hypercomputecluster.v1alpha.ISmon|null);
                 }
 
                 /** Represents a Tool. */
@@ -16814,8 +18089,11 @@ export namespace google {
                     /** Tool xprof. */
                     public xprof?: (google.cloud.hypercomputecluster.v1alpha.IXprof|null);
 
+                    /** Tool smon. */
+                    public smon?: (google.cloud.hypercomputecluster.v1alpha.ISmon|null);
+
                     /** Tool tool. */
-                    public tool?: "xprof";
+                    public tool?: ("xprof"|"smon");
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -17015,6 +18293,9 @@ export namespace google {
 
                     /** GKEWorkloadDetails labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** GKEWorkloadDetails createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a GKEWorkloadDetails. */
@@ -17043,6 +18324,9 @@ export namespace google {
 
                     /** GKEWorkloadDetails labels. */
                     public labels: { [k: string]: string };
+
+                    /** GKEWorkloadDetails createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new GKEWorkloadDetails instance using the specified properties.
@@ -17213,6 +18497,3193 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Xprof
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Smon. */
+                interface ISmon {
+
+                    /** Smon monitoringSummary */
+                    monitoringSummary?: (string|null);
+                }
+
+                /** Represents a Smon. */
+                class Smon implements ISmon {
+
+                    /**
+                     * Constructs a new Smon.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ISmon);
+
+                    /** Smon monitoringSummary. */
+                    public monitoringSummary: string;
+
+                    /**
+                     * Creates a new Smon instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Smon instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ISmon): google.cloud.hypercomputecluster.v1alpha.Smon;
+
+                    /**
+                     * Encodes the specified Smon message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Smon.verify|verify} messages.
+                     * @param message Smon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ISmon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Smon message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.Smon.verify|verify} messages.
+                     * @param message Smon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ISmon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Smon message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Smon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.Smon;
+
+                    /**
+                     * Decodes a Smon message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Smon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.Smon;
+
+                    /**
+                     * Verifies a Smon message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Smon message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Smon
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.Smon;
+
+                    /**
+                     * Creates a plain object from a Smon message. Also converts values to other types if specified.
+                     * @param message Smon
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.Smon, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Smon to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Smon
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnalyzerReport. */
+                interface IAnalyzerReport {
+
+                    /** AnalyzerReport recommendedActions */
+                    recommendedActions?: (google.cloud.hypercomputecluster.v1alpha.IRecommendedAction[]|null);
+
+                    /** AnalyzerReport analyzer */
+                    analyzer?: (string|null);
+
+                    /** AnalyzerReport detectionState */
+                    detectionState?: (google.cloud.hypercomputecluster.v1alpha.AnalyzerReport.DetectionState|keyof typeof google.cloud.hypercomputecluster.v1alpha.AnalyzerReport.DetectionState|null);
+
+                    /** AnalyzerReport details */
+                    details?: (string|null);
+                }
+
+                /** Represents an AnalyzerReport. */
+                class AnalyzerReport implements IAnalyzerReport {
+
+                    /**
+                     * Constructs a new AnalyzerReport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IAnalyzerReport);
+
+                    /** AnalyzerReport recommendedActions. */
+                    public recommendedActions: google.cloud.hypercomputecluster.v1alpha.IRecommendedAction[];
+
+                    /** AnalyzerReport analyzer. */
+                    public analyzer: string;
+
+                    /** AnalyzerReport detectionState. */
+                    public detectionState: (google.cloud.hypercomputecluster.v1alpha.AnalyzerReport.DetectionState|keyof typeof google.cloud.hypercomputecluster.v1alpha.AnalyzerReport.DetectionState);
+
+                    /** AnalyzerReport details. */
+                    public details: string;
+
+                    /**
+                     * Creates a new AnalyzerReport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalyzerReport instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IAnalyzerReport): google.cloud.hypercomputecluster.v1alpha.AnalyzerReport;
+
+                    /**
+                     * Encodes the specified AnalyzerReport message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.AnalyzerReport.verify|verify} messages.
+                     * @param message AnalyzerReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IAnalyzerReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalyzerReport message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.AnalyzerReport.verify|verify} messages.
+                     * @param message AnalyzerReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IAnalyzerReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalyzerReport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalyzerReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.AnalyzerReport;
+
+                    /**
+                     * Decodes an AnalyzerReport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalyzerReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.AnalyzerReport;
+
+                    /**
+                     * Verifies an AnalyzerReport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalyzerReport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalyzerReport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.AnalyzerReport;
+
+                    /**
+                     * Creates a plain object from an AnalyzerReport message. Also converts values to other types if specified.
+                     * @param message AnalyzerReport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.AnalyzerReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalyzerReport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalyzerReport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AnalyzerReport {
+
+                    /** DetectionState enum. */
+                    enum DetectionState {
+                        DETECTION_STATE_UNSPECIFIED = 0,
+                        DETECTED = 1,
+                        NOT_DETECTED = 2
+                    }
+                }
+
+                /** Properties of a RecommendedAction. */
+                interface IRecommendedAction {
+
+                    /** RecommendedAction description */
+                    description?: (string|null);
+
+                    /** RecommendedAction documentationUrl */
+                    documentationUrl?: (string|null);
+                }
+
+                /** Represents a RecommendedAction. */
+                class RecommendedAction implements IRecommendedAction {
+
+                    /**
+                     * Constructs a new RecommendedAction.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IRecommendedAction);
+
+                    /** RecommendedAction description. */
+                    public description: string;
+
+                    /** RecommendedAction documentationUrl. */
+                    public documentationUrl: string;
+
+                    /**
+                     * Creates a new RecommendedAction instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecommendedAction instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IRecommendedAction): google.cloud.hypercomputecluster.v1alpha.RecommendedAction;
+
+                    /**
+                     * Encodes the specified RecommendedAction message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.RecommendedAction.verify|verify} messages.
+                     * @param message RecommendedAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IRecommendedAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecommendedAction message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.RecommendedAction.verify|verify} messages.
+                     * @param message RecommendedAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IRecommendedAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecommendedAction message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecommendedAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.RecommendedAction;
+
+                    /**
+                     * Decodes a RecommendedAction message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecommendedAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.RecommendedAction;
+
+                    /**
+                     * Verifies a RecommendedAction message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecommendedAction message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecommendedAction
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.RecommendedAction;
+
+                    /**
+                     * Creates a plain object from a RecommendedAction message. Also converts values to other types if specified.
+                     * @param message RecommendedAction
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.RecommendedAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecommendedAction to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecommendedAction
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+
+                    /** OperationMetadata progress */
+                    progress?: (google.cloud.hypercomputecluster.v1alpha.IOperationProgress|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /** OperationMetadata progress. */
+                    public progress?: (google.cloud.hypercomputecluster.v1alpha.IOperationProgress|null);
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OperationProgress. */
+                interface IOperationProgress {
+
+                    /** OperationProgress steps */
+                    steps?: (google.cloud.hypercomputecluster.v1alpha.IOperationStep[]|null);
+                }
+
+                /** Represents an OperationProgress. */
+                class OperationProgress implements IOperationProgress {
+
+                    /**
+                     * Constructs a new OperationProgress.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationProgress);
+
+                    /** OperationProgress steps. */
+                    public steps: google.cloud.hypercomputecluster.v1alpha.IOperationStep[];
+
+                    /**
+                     * Creates a new OperationProgress instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationProgress instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationProgress): google.cloud.hypercomputecluster.v1alpha.OperationProgress;
+
+                    /**
+                     * Encodes the specified OperationProgress message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationProgress.verify|verify} messages.
+                     * @param message OperationProgress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IOperationProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationProgress message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationProgress.verify|verify} messages.
+                     * @param message OperationProgress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IOperationProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationProgress message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationProgress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.OperationProgress;
+
+                    /**
+                     * Decodes an OperationProgress message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationProgress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.OperationProgress;
+
+                    /**
+                     * Verifies an OperationProgress message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationProgress message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationProgress
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.OperationProgress;
+
+                    /**
+                     * Creates a plain object from an OperationProgress message. Also converts values to other types if specified.
+                     * @param message OperationProgress
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.OperationProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationProgress to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationProgress
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OperationStep. */
+                interface IOperationStep {
+
+                    /** OperationStep createNetwork */
+                    createNetwork?: (google.cloud.hypercomputecluster.v1alpha.ICreateNetwork|null);
+
+                    /** OperationStep createPrivateServiceAccess */
+                    createPrivateServiceAccess?: (google.cloud.hypercomputecluster.v1alpha.ICreatePrivateServiceAccess|null);
+
+                    /** OperationStep createFilestoreInstance */
+                    createFilestoreInstance?: (google.cloud.hypercomputecluster.v1alpha.ICreateFilestoreInstance|null);
+
+                    /** OperationStep createStorageBucket */
+                    createStorageBucket?: (google.cloud.hypercomputecluster.v1alpha.ICreateStorageBucket|null);
+
+                    /** OperationStep createLustreInstance */
+                    createLustreInstance?: (google.cloud.hypercomputecluster.v1alpha.ICreateLustreInstance|null);
+
+                    /** OperationStep createGkeCluster */
+                    createGkeCluster?: (google.cloud.hypercomputecluster.v1alpha.ICreateGKECluster|null);
+
+                    /** OperationStep createOrchestrator */
+                    createOrchestrator?: (google.cloud.hypercomputecluster.v1alpha.ICreateOrchestrator|null);
+
+                    /** OperationStep createNodeset */
+                    createNodeset?: (google.cloud.hypercomputecluster.v1alpha.ICreateNodeset|null);
+
+                    /** OperationStep createPartition */
+                    createPartition?: (google.cloud.hypercomputecluster.v1alpha.ICreatePartition|null);
+
+                    /** OperationStep createLoginNode */
+                    createLoginNode?: (google.cloud.hypercomputecluster.v1alpha.ICreateLoginNode|null);
+
+                    /** OperationStep checkClusterHealth */
+                    checkClusterHealth?: (google.cloud.hypercomputecluster.v1alpha.ICheckClusterHealth|null);
+
+                    /** OperationStep updateOrchestrator */
+                    updateOrchestrator?: (google.cloud.hypercomputecluster.v1alpha.IUpdateOrchestrator|null);
+
+                    /** OperationStep updateNodeset */
+                    updateNodeset?: (google.cloud.hypercomputecluster.v1alpha.IUpdateNodeset|null);
+
+                    /** OperationStep updatePartition */
+                    updatePartition?: (google.cloud.hypercomputecluster.v1alpha.IUpdatePartition|null);
+
+                    /** OperationStep updateLoginNode */
+                    updateLoginNode?: (google.cloud.hypercomputecluster.v1alpha.IUpdateLoginNode|null);
+
+                    /** OperationStep deleteGkeCluster */
+                    deleteGkeCluster?: (google.cloud.hypercomputecluster.v1alpha.IDeleteGKECluster|null);
+
+                    /** OperationStep deleteOrchestrator */
+                    deleteOrchestrator?: (google.cloud.hypercomputecluster.v1alpha.IDeleteOrchestrator|null);
+
+                    /** OperationStep deleteNodeset */
+                    deleteNodeset?: (google.cloud.hypercomputecluster.v1alpha.IDeleteNodeset|null);
+
+                    /** OperationStep deletePartition */
+                    deletePartition?: (google.cloud.hypercomputecluster.v1alpha.IDeletePartition|null);
+
+                    /** OperationStep deleteLoginNode */
+                    deleteLoginNode?: (google.cloud.hypercomputecluster.v1alpha.IDeleteLoginNode|null);
+
+                    /** OperationStep deleteFilestoreInstance */
+                    deleteFilestoreInstance?: (google.cloud.hypercomputecluster.v1alpha.IDeleteFilestoreInstance|null);
+
+                    /** OperationStep deleteStorageBucket */
+                    deleteStorageBucket?: (google.cloud.hypercomputecluster.v1alpha.IDeleteStorageBucket|null);
+
+                    /** OperationStep deleteLustreInstance */
+                    deleteLustreInstance?: (google.cloud.hypercomputecluster.v1alpha.IDeleteLustreInstance|null);
+
+                    /** OperationStep deletePrivateServiceAccess */
+                    deletePrivateServiceAccess?: (google.cloud.hypercomputecluster.v1alpha.IDeletePrivateServiceAccess|null);
+
+                    /** OperationStep deleteNetwork */
+                    deleteNetwork?: (google.cloud.hypercomputecluster.v1alpha.IDeleteNetwork|null);
+
+                    /** OperationStep state */
+                    state?: (google.cloud.hypercomputecluster.v1alpha.OperationStep.State|keyof typeof google.cloud.hypercomputecluster.v1alpha.OperationStep.State|null);
+                }
+
+                /** Represents an OperationStep. */
+                class OperationStep implements IOperationStep {
+
+                    /**
+                     * Constructs a new OperationStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationStep);
+
+                    /** OperationStep createNetwork. */
+                    public createNetwork?: (google.cloud.hypercomputecluster.v1alpha.ICreateNetwork|null);
+
+                    /** OperationStep createPrivateServiceAccess. */
+                    public createPrivateServiceAccess?: (google.cloud.hypercomputecluster.v1alpha.ICreatePrivateServiceAccess|null);
+
+                    /** OperationStep createFilestoreInstance. */
+                    public createFilestoreInstance?: (google.cloud.hypercomputecluster.v1alpha.ICreateFilestoreInstance|null);
+
+                    /** OperationStep createStorageBucket. */
+                    public createStorageBucket?: (google.cloud.hypercomputecluster.v1alpha.ICreateStorageBucket|null);
+
+                    /** OperationStep createLustreInstance. */
+                    public createLustreInstance?: (google.cloud.hypercomputecluster.v1alpha.ICreateLustreInstance|null);
+
+                    /** OperationStep createGkeCluster. */
+                    public createGkeCluster?: (google.cloud.hypercomputecluster.v1alpha.ICreateGKECluster|null);
+
+                    /** OperationStep createOrchestrator. */
+                    public createOrchestrator?: (google.cloud.hypercomputecluster.v1alpha.ICreateOrchestrator|null);
+
+                    /** OperationStep createNodeset. */
+                    public createNodeset?: (google.cloud.hypercomputecluster.v1alpha.ICreateNodeset|null);
+
+                    /** OperationStep createPartition. */
+                    public createPartition?: (google.cloud.hypercomputecluster.v1alpha.ICreatePartition|null);
+
+                    /** OperationStep createLoginNode. */
+                    public createLoginNode?: (google.cloud.hypercomputecluster.v1alpha.ICreateLoginNode|null);
+
+                    /** OperationStep checkClusterHealth. */
+                    public checkClusterHealth?: (google.cloud.hypercomputecluster.v1alpha.ICheckClusterHealth|null);
+
+                    /** OperationStep updateOrchestrator. */
+                    public updateOrchestrator?: (google.cloud.hypercomputecluster.v1alpha.IUpdateOrchestrator|null);
+
+                    /** OperationStep updateNodeset. */
+                    public updateNodeset?: (google.cloud.hypercomputecluster.v1alpha.IUpdateNodeset|null);
+
+                    /** OperationStep updatePartition. */
+                    public updatePartition?: (google.cloud.hypercomputecluster.v1alpha.IUpdatePartition|null);
+
+                    /** OperationStep updateLoginNode. */
+                    public updateLoginNode?: (google.cloud.hypercomputecluster.v1alpha.IUpdateLoginNode|null);
+
+                    /** OperationStep deleteGkeCluster. */
+                    public deleteGkeCluster?: (google.cloud.hypercomputecluster.v1alpha.IDeleteGKECluster|null);
+
+                    /** OperationStep deleteOrchestrator. */
+                    public deleteOrchestrator?: (google.cloud.hypercomputecluster.v1alpha.IDeleteOrchestrator|null);
+
+                    /** OperationStep deleteNodeset. */
+                    public deleteNodeset?: (google.cloud.hypercomputecluster.v1alpha.IDeleteNodeset|null);
+
+                    /** OperationStep deletePartition. */
+                    public deletePartition?: (google.cloud.hypercomputecluster.v1alpha.IDeletePartition|null);
+
+                    /** OperationStep deleteLoginNode. */
+                    public deleteLoginNode?: (google.cloud.hypercomputecluster.v1alpha.IDeleteLoginNode|null);
+
+                    /** OperationStep deleteFilestoreInstance. */
+                    public deleteFilestoreInstance?: (google.cloud.hypercomputecluster.v1alpha.IDeleteFilestoreInstance|null);
+
+                    /** OperationStep deleteStorageBucket. */
+                    public deleteStorageBucket?: (google.cloud.hypercomputecluster.v1alpha.IDeleteStorageBucket|null);
+
+                    /** OperationStep deleteLustreInstance. */
+                    public deleteLustreInstance?: (google.cloud.hypercomputecluster.v1alpha.IDeleteLustreInstance|null);
+
+                    /** OperationStep deletePrivateServiceAccess. */
+                    public deletePrivateServiceAccess?: (google.cloud.hypercomputecluster.v1alpha.IDeletePrivateServiceAccess|null);
+
+                    /** OperationStep deleteNetwork. */
+                    public deleteNetwork?: (google.cloud.hypercomputecluster.v1alpha.IDeleteNetwork|null);
+
+                    /** OperationStep state. */
+                    public state: (google.cloud.hypercomputecluster.v1alpha.OperationStep.State|keyof typeof google.cloud.hypercomputecluster.v1alpha.OperationStep.State);
+
+                    /** OperationStep type. */
+                    public type?: ("createNetwork"|"createPrivateServiceAccess"|"createFilestoreInstance"|"createStorageBucket"|"createLustreInstance"|"createGkeCluster"|"createOrchestrator"|"createNodeset"|"createPartition"|"createLoginNode"|"checkClusterHealth"|"updateOrchestrator"|"updateNodeset"|"updatePartition"|"updateLoginNode"|"deleteGkeCluster"|"deleteOrchestrator"|"deleteNodeset"|"deletePartition"|"deleteLoginNode"|"deleteFilestoreInstance"|"deleteStorageBucket"|"deleteLustreInstance"|"deletePrivateServiceAccess"|"deleteNetwork");
+
+                    /**
+                     * Creates a new OperationStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationStep instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IOperationStep): google.cloud.hypercomputecluster.v1alpha.OperationStep;
+
+                    /**
+                     * Encodes the specified OperationStep message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationStep.verify|verify} messages.
+                     * @param message OperationStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IOperationStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationStep message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.OperationStep.verify|verify} messages.
+                     * @param message OperationStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IOperationStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.OperationStep;
+
+                    /**
+                     * Decodes an OperationStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.OperationStep;
+
+                    /**
+                     * Verifies an OperationStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.OperationStep;
+
+                    /**
+                     * Creates a plain object from an OperationStep message. Also converts values to other types if specified.
+                     * @param message OperationStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.OperationStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OperationStep {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        WAITING = 1,
+                        IN_PROGRESS = 2,
+                        DONE = 3
+                    }
+                }
+
+                /** Properties of a CreateNetwork. */
+                interface ICreateNetwork {
+
+                    /** CreateNetwork network */
+                    network?: (string|null);
+                }
+
+                /** Represents a CreateNetwork. */
+                class CreateNetwork implements ICreateNetwork {
+
+                    /**
+                     * Constructs a new CreateNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateNetwork);
+
+                    /** CreateNetwork network. */
+                    public network: string;
+
+                    /**
+                     * Creates a new CreateNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNetwork instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateNetwork): google.cloud.hypercomputecluster.v1alpha.CreateNetwork;
+
+                    /**
+                     * Encodes the specified CreateNetwork message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateNetwork.verify|verify} messages.
+                     * @param message CreateNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNetwork message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateNetwork.verify|verify} messages.
+                     * @param message CreateNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateNetwork;
+
+                    /**
+                     * Decodes a CreateNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateNetwork;
+
+                    /**
+                     * Verifies a CreateNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateNetwork;
+
+                    /**
+                     * Creates a plain object from a CreateNetwork message. Also converts values to other types if specified.
+                     * @param message CreateNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateNetwork
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatePrivateServiceAccess. */
+                interface ICreatePrivateServiceAccess {
+                }
+
+                /** Represents a CreatePrivateServiceAccess. */
+                class CreatePrivateServiceAccess implements ICreatePrivateServiceAccess {
+
+                    /**
+                     * Constructs a new CreatePrivateServiceAccess.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreatePrivateServiceAccess);
+
+                    /**
+                     * Creates a new CreatePrivateServiceAccess instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePrivateServiceAccess instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreatePrivateServiceAccess): google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess;
+
+                    /**
+                     * Encodes the specified CreatePrivateServiceAccess message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess.verify|verify} messages.
+                     * @param message CreatePrivateServiceAccess message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreatePrivateServiceAccess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePrivateServiceAccess message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess.verify|verify} messages.
+                     * @param message CreatePrivateServiceAccess message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreatePrivateServiceAccess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePrivateServiceAccess message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePrivateServiceAccess
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess;
+
+                    /**
+                     * Decodes a CreatePrivateServiceAccess message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePrivateServiceAccess
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess;
+
+                    /**
+                     * Verifies a CreatePrivateServiceAccess message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePrivateServiceAccess message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePrivateServiceAccess
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess;
+
+                    /**
+                     * Creates a plain object from a CreatePrivateServiceAccess message. Also converts values to other types if specified.
+                     * @param message CreatePrivateServiceAccess
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreatePrivateServiceAccess, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePrivateServiceAccess to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePrivateServiceAccess
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateFilestoreInstance. */
+                interface ICreateFilestoreInstance {
+
+                    /** CreateFilestoreInstance filestore */
+                    filestore?: (string|null);
+                }
+
+                /** Represents a CreateFilestoreInstance. */
+                class CreateFilestoreInstance implements ICreateFilestoreInstance {
+
+                    /**
+                     * Constructs a new CreateFilestoreInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateFilestoreInstance);
+
+                    /** CreateFilestoreInstance filestore. */
+                    public filestore: string;
+
+                    /**
+                     * Creates a new CreateFilestoreInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFilestoreInstance instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateFilestoreInstance): google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance;
+
+                    /**
+                     * Encodes the specified CreateFilestoreInstance message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance.verify|verify} messages.
+                     * @param message CreateFilestoreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateFilestoreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFilestoreInstance message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance.verify|verify} messages.
+                     * @param message CreateFilestoreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateFilestoreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFilestoreInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFilestoreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance;
+
+                    /**
+                     * Decodes a CreateFilestoreInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFilestoreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance;
+
+                    /**
+                     * Verifies a CreateFilestoreInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFilestoreInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFilestoreInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance;
+
+                    /**
+                     * Creates a plain object from a CreateFilestoreInstance message. Also converts values to other types if specified.
+                     * @param message CreateFilestoreInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateFilestoreInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFilestoreInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFilestoreInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateStorageBucket. */
+                interface ICreateStorageBucket {
+
+                    /** CreateStorageBucket bucket */
+                    bucket?: (string|null);
+                }
+
+                /** Represents a CreateStorageBucket. */
+                class CreateStorageBucket implements ICreateStorageBucket {
+
+                    /**
+                     * Constructs a new CreateStorageBucket.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateStorageBucket);
+
+                    /** CreateStorageBucket bucket. */
+                    public bucket: string;
+
+                    /**
+                     * Creates a new CreateStorageBucket instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateStorageBucket instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateStorageBucket): google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket;
+
+                    /**
+                     * Encodes the specified CreateStorageBucket message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket.verify|verify} messages.
+                     * @param message CreateStorageBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateStorageBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateStorageBucket message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket.verify|verify} messages.
+                     * @param message CreateStorageBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateStorageBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateStorageBucket message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateStorageBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket;
+
+                    /**
+                     * Decodes a CreateStorageBucket message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateStorageBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket;
+
+                    /**
+                     * Verifies a CreateStorageBucket message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateStorageBucket message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateStorageBucket
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket;
+
+                    /**
+                     * Creates a plain object from a CreateStorageBucket message. Also converts values to other types if specified.
+                     * @param message CreateStorageBucket
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateStorageBucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateStorageBucket to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateStorageBucket
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateLustreInstance. */
+                interface ICreateLustreInstance {
+
+                    /** CreateLustreInstance lustre */
+                    lustre?: (string|null);
+                }
+
+                /** Represents a CreateLustreInstance. */
+                class CreateLustreInstance implements ICreateLustreInstance {
+
+                    /**
+                     * Constructs a new CreateLustreInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateLustreInstance);
+
+                    /** CreateLustreInstance lustre. */
+                    public lustre: string;
+
+                    /**
+                     * Creates a new CreateLustreInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateLustreInstance instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateLustreInstance): google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance;
+
+                    /**
+                     * Encodes the specified CreateLustreInstance message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance.verify|verify} messages.
+                     * @param message CreateLustreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateLustreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateLustreInstance message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance.verify|verify} messages.
+                     * @param message CreateLustreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateLustreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateLustreInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateLustreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance;
+
+                    /**
+                     * Decodes a CreateLustreInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateLustreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance;
+
+                    /**
+                     * Verifies a CreateLustreInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateLustreInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateLustreInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance;
+
+                    /**
+                     * Creates a plain object from a CreateLustreInstance message. Also converts values to other types if specified.
+                     * @param message CreateLustreInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateLustreInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateLustreInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateLustreInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateGKECluster. */
+                interface ICreateGKECluster {
+
+                    /** CreateGKECluster cluster */
+                    cluster?: (string|null);
+                }
+
+                /** Represents a CreateGKECluster. */
+                class CreateGKECluster implements ICreateGKECluster {
+
+                    /**
+                     * Constructs a new CreateGKECluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateGKECluster);
+
+                    /** CreateGKECluster cluster. */
+                    public cluster: string;
+
+                    /**
+                     * Creates a new CreateGKECluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGKECluster instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateGKECluster): google.cloud.hypercomputecluster.v1alpha.CreateGKECluster;
+
+                    /**
+                     * Encodes the specified CreateGKECluster message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateGKECluster.verify|verify} messages.
+                     * @param message CreateGKECluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateGKECluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGKECluster message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateGKECluster.verify|verify} messages.
+                     * @param message CreateGKECluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateGKECluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGKECluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGKECluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateGKECluster;
+
+                    /**
+                     * Decodes a CreateGKECluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGKECluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateGKECluster;
+
+                    /**
+                     * Verifies a CreateGKECluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGKECluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGKECluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateGKECluster;
+
+                    /**
+                     * Creates a plain object from a CreateGKECluster message. Also converts values to other types if specified.
+                     * @param message CreateGKECluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateGKECluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGKECluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateGKECluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateOrchestrator. */
+                interface ICreateOrchestrator {
+                }
+
+                /** Represents a CreateOrchestrator. */
+                class CreateOrchestrator implements ICreateOrchestrator {
+
+                    /**
+                     * Constructs a new CreateOrchestrator.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateOrchestrator);
+
+                    /**
+                     * Creates a new CreateOrchestrator instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOrchestrator instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateOrchestrator): google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator;
+
+                    /**
+                     * Encodes the specified CreateOrchestrator message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator.verify|verify} messages.
+                     * @param message CreateOrchestrator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateOrchestrator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOrchestrator message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator.verify|verify} messages.
+                     * @param message CreateOrchestrator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateOrchestrator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOrchestrator message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOrchestrator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator;
+
+                    /**
+                     * Decodes a CreateOrchestrator message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOrchestrator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator;
+
+                    /**
+                     * Verifies a CreateOrchestrator message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOrchestrator message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOrchestrator
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator;
+
+                    /**
+                     * Creates a plain object from a CreateOrchestrator message. Also converts values to other types if specified.
+                     * @param message CreateOrchestrator
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateOrchestrator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOrchestrator to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateOrchestrator
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateNodeset. */
+                interface ICreateNodeset {
+
+                    /** CreateNodeset nodesets */
+                    nodesets?: (string[]|null);
+                }
+
+                /** Represents a CreateNodeset. */
+                class CreateNodeset implements ICreateNodeset {
+
+                    /**
+                     * Constructs a new CreateNodeset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateNodeset);
+
+                    /** CreateNodeset nodesets. */
+                    public nodesets: string[];
+
+                    /**
+                     * Creates a new CreateNodeset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNodeset instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateNodeset): google.cloud.hypercomputecluster.v1alpha.CreateNodeset;
+
+                    /**
+                     * Encodes the specified CreateNodeset message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateNodeset.verify|verify} messages.
+                     * @param message CreateNodeset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateNodeset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNodeset message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateNodeset.verify|verify} messages.
+                     * @param message CreateNodeset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateNodeset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNodeset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNodeset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateNodeset;
+
+                    /**
+                     * Decodes a CreateNodeset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNodeset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateNodeset;
+
+                    /**
+                     * Verifies a CreateNodeset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNodeset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNodeset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateNodeset;
+
+                    /**
+                     * Creates a plain object from a CreateNodeset message. Also converts values to other types if specified.
+                     * @param message CreateNodeset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateNodeset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNodeset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateNodeset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatePartition. */
+                interface ICreatePartition {
+
+                    /** CreatePartition partitions */
+                    partitions?: (string[]|null);
+                }
+
+                /** Represents a CreatePartition. */
+                class CreatePartition implements ICreatePartition {
+
+                    /**
+                     * Constructs a new CreatePartition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreatePartition);
+
+                    /** CreatePartition partitions. */
+                    public partitions: string[];
+
+                    /**
+                     * Creates a new CreatePartition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePartition instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreatePartition): google.cloud.hypercomputecluster.v1alpha.CreatePartition;
+
+                    /**
+                     * Encodes the specified CreatePartition message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreatePartition.verify|verify} messages.
+                     * @param message CreatePartition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreatePartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePartition message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreatePartition.verify|verify} messages.
+                     * @param message CreatePartition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreatePartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePartition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePartition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreatePartition;
+
+                    /**
+                     * Decodes a CreatePartition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePartition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreatePartition;
+
+                    /**
+                     * Verifies a CreatePartition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePartition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePartition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreatePartition;
+
+                    /**
+                     * Creates a plain object from a CreatePartition message. Also converts values to other types if specified.
+                     * @param message CreatePartition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreatePartition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePartition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePartition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateLoginNode. */
+                interface ICreateLoginNode {
+                }
+
+                /** Represents a CreateLoginNode. */
+                class CreateLoginNode implements ICreateLoginNode {
+
+                    /**
+                     * Constructs a new CreateLoginNode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateLoginNode);
+
+                    /**
+                     * Creates a new CreateLoginNode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateLoginNode instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICreateLoginNode): google.cloud.hypercomputecluster.v1alpha.CreateLoginNode;
+
+                    /**
+                     * Encodes the specified CreateLoginNode message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateLoginNode.verify|verify} messages.
+                     * @param message CreateLoginNode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICreateLoginNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateLoginNode message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CreateLoginNode.verify|verify} messages.
+                     * @param message CreateLoginNode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICreateLoginNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateLoginNode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateLoginNode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CreateLoginNode;
+
+                    /**
+                     * Decodes a CreateLoginNode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateLoginNode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CreateLoginNode;
+
+                    /**
+                     * Verifies a CreateLoginNode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateLoginNode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateLoginNode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CreateLoginNode;
+
+                    /**
+                     * Creates a plain object from a CreateLoginNode message. Also converts values to other types if specified.
+                     * @param message CreateLoginNode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CreateLoginNode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateLoginNode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateLoginNode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CheckClusterHealth. */
+                interface ICheckClusterHealth {
+                }
+
+                /** Represents a CheckClusterHealth. */
+                class CheckClusterHealth implements ICheckClusterHealth {
+
+                    /**
+                     * Constructs a new CheckClusterHealth.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.ICheckClusterHealth);
+
+                    /**
+                     * Creates a new CheckClusterHealth instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckClusterHealth instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.ICheckClusterHealth): google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth;
+
+                    /**
+                     * Encodes the specified CheckClusterHealth message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth.verify|verify} messages.
+                     * @param message CheckClusterHealth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.ICheckClusterHealth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckClusterHealth message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth.verify|verify} messages.
+                     * @param message CheckClusterHealth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.ICheckClusterHealth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckClusterHealth message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckClusterHealth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth;
+
+                    /**
+                     * Decodes a CheckClusterHealth message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckClusterHealth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth;
+
+                    /**
+                     * Verifies a CheckClusterHealth message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckClusterHealth message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckClusterHealth
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth;
+
+                    /**
+                     * Creates a plain object from a CheckClusterHealth message. Also converts values to other types if specified.
+                     * @param message CheckClusterHealth
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.CheckClusterHealth, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckClusterHealth to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CheckClusterHealth
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateOrchestrator. */
+                interface IUpdateOrchestrator {
+                }
+
+                /** Represents an UpdateOrchestrator. */
+                class UpdateOrchestrator implements IUpdateOrchestrator {
+
+                    /**
+                     * Constructs a new UpdateOrchestrator.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateOrchestrator);
+
+                    /**
+                     * Creates a new UpdateOrchestrator instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateOrchestrator instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateOrchestrator): google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator;
+
+                    /**
+                     * Encodes the specified UpdateOrchestrator message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator.verify|verify} messages.
+                     * @param message UpdateOrchestrator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdateOrchestrator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateOrchestrator message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator.verify|verify} messages.
+                     * @param message UpdateOrchestrator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdateOrchestrator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateOrchestrator message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateOrchestrator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator;
+
+                    /**
+                     * Decodes an UpdateOrchestrator message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateOrchestrator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator;
+
+                    /**
+                     * Verifies an UpdateOrchestrator message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateOrchestrator message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateOrchestrator
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator;
+
+                    /**
+                     * Creates a plain object from an UpdateOrchestrator message. Also converts values to other types if specified.
+                     * @param message UpdateOrchestrator
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdateOrchestrator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateOrchestrator to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateOrchestrator
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateNodeset. */
+                interface IUpdateNodeset {
+
+                    /** UpdateNodeset nodesets */
+                    nodesets?: (string[]|null);
+                }
+
+                /** Represents an UpdateNodeset. */
+                class UpdateNodeset implements IUpdateNodeset {
+
+                    /**
+                     * Constructs a new UpdateNodeset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateNodeset);
+
+                    /** UpdateNodeset nodesets. */
+                    public nodesets: string[];
+
+                    /**
+                     * Creates a new UpdateNodeset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNodeset instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateNodeset): google.cloud.hypercomputecluster.v1alpha.UpdateNodeset;
+
+                    /**
+                     * Encodes the specified UpdateNodeset message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateNodeset.verify|verify} messages.
+                     * @param message UpdateNodeset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdateNodeset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNodeset message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateNodeset.verify|verify} messages.
+                     * @param message UpdateNodeset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdateNodeset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNodeset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNodeset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdateNodeset;
+
+                    /**
+                     * Decodes an UpdateNodeset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNodeset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdateNodeset;
+
+                    /**
+                     * Verifies an UpdateNodeset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNodeset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNodeset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdateNodeset;
+
+                    /**
+                     * Creates a plain object from an UpdateNodeset message. Also converts values to other types if specified.
+                     * @param message UpdateNodeset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdateNodeset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNodeset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateNodeset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePartition. */
+                interface IUpdatePartition {
+
+                    /** UpdatePartition partitions */
+                    partitions?: (string[]|null);
+                }
+
+                /** Represents an UpdatePartition. */
+                class UpdatePartition implements IUpdatePartition {
+
+                    /**
+                     * Constructs a new UpdatePartition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdatePartition);
+
+                    /** UpdatePartition partitions. */
+                    public partitions: string[];
+
+                    /**
+                     * Creates a new UpdatePartition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePartition instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdatePartition): google.cloud.hypercomputecluster.v1alpha.UpdatePartition;
+
+                    /**
+                     * Encodes the specified UpdatePartition message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdatePartition.verify|verify} messages.
+                     * @param message UpdatePartition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdatePartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePartition message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdatePartition.verify|verify} messages.
+                     * @param message UpdatePartition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdatePartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePartition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePartition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdatePartition;
+
+                    /**
+                     * Decodes an UpdatePartition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePartition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdatePartition;
+
+                    /**
+                     * Verifies an UpdatePartition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePartition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePartition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdatePartition;
+
+                    /**
+                     * Creates a plain object from an UpdatePartition message. Also converts values to other types if specified.
+                     * @param message UpdatePartition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdatePartition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePartition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePartition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateLoginNode. */
+                interface IUpdateLoginNode {
+                }
+
+                /** Represents an UpdateLoginNode. */
+                class UpdateLoginNode implements IUpdateLoginNode {
+
+                    /**
+                     * Constructs a new UpdateLoginNode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateLoginNode);
+
+                    /**
+                     * Creates a new UpdateLoginNode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateLoginNode instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IUpdateLoginNode): google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode;
+
+                    /**
+                     * Encodes the specified UpdateLoginNode message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode.verify|verify} messages.
+                     * @param message UpdateLoginNode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IUpdateLoginNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateLoginNode message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode.verify|verify} messages.
+                     * @param message UpdateLoginNode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IUpdateLoginNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateLoginNode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateLoginNode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode;
+
+                    /**
+                     * Decodes an UpdateLoginNode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateLoginNode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode;
+
+                    /**
+                     * Verifies an UpdateLoginNode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateLoginNode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateLoginNode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode;
+
+                    /**
+                     * Creates a plain object from an UpdateLoginNode message. Also converts values to other types if specified.
+                     * @param message UpdateLoginNode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.UpdateLoginNode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateLoginNode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateLoginNode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteGKECluster. */
+                interface IDeleteGKECluster {
+
+                    /** DeleteGKECluster cluster */
+                    cluster?: (string|null);
+                }
+
+                /** Represents a DeleteGKECluster. */
+                class DeleteGKECluster implements IDeleteGKECluster {
+
+                    /**
+                     * Constructs a new DeleteGKECluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteGKECluster);
+
+                    /** DeleteGKECluster cluster. */
+                    public cluster: string;
+
+                    /**
+                     * Creates a new DeleteGKECluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGKECluster instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteGKECluster): google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster;
+
+                    /**
+                     * Encodes the specified DeleteGKECluster message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster.verify|verify} messages.
+                     * @param message DeleteGKECluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteGKECluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGKECluster message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster.verify|verify} messages.
+                     * @param message DeleteGKECluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteGKECluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGKECluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGKECluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster;
+
+                    /**
+                     * Decodes a DeleteGKECluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGKECluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster;
+
+                    /**
+                     * Verifies a DeleteGKECluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGKECluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGKECluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster;
+
+                    /**
+                     * Creates a plain object from a DeleteGKECluster message. Also converts values to other types if specified.
+                     * @param message DeleteGKECluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteGKECluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGKECluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteGKECluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteOrchestrator. */
+                interface IDeleteOrchestrator {
+                }
+
+                /** Represents a DeleteOrchestrator. */
+                class DeleteOrchestrator implements IDeleteOrchestrator {
+
+                    /**
+                     * Constructs a new DeleteOrchestrator.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteOrchestrator);
+
+                    /**
+                     * Creates a new DeleteOrchestrator instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteOrchestrator instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteOrchestrator): google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator;
+
+                    /**
+                     * Encodes the specified DeleteOrchestrator message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator.verify|verify} messages.
+                     * @param message DeleteOrchestrator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteOrchestrator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteOrchestrator message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator.verify|verify} messages.
+                     * @param message DeleteOrchestrator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteOrchestrator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteOrchestrator message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteOrchestrator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator;
+
+                    /**
+                     * Decodes a DeleteOrchestrator message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteOrchestrator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator;
+
+                    /**
+                     * Verifies a DeleteOrchestrator message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteOrchestrator message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteOrchestrator
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator;
+
+                    /**
+                     * Creates a plain object from a DeleteOrchestrator message. Also converts values to other types if specified.
+                     * @param message DeleteOrchestrator
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteOrchestrator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteOrchestrator to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteOrchestrator
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteNodeset. */
+                interface IDeleteNodeset {
+
+                    /** DeleteNodeset nodesets */
+                    nodesets?: (string[]|null);
+                }
+
+                /** Represents a DeleteNodeset. */
+                class DeleteNodeset implements IDeleteNodeset {
+
+                    /**
+                     * Constructs a new DeleteNodeset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteNodeset);
+
+                    /** DeleteNodeset nodesets. */
+                    public nodesets: string[];
+
+                    /**
+                     * Creates a new DeleteNodeset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteNodeset instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteNodeset): google.cloud.hypercomputecluster.v1alpha.DeleteNodeset;
+
+                    /**
+                     * Encodes the specified DeleteNodeset message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteNodeset.verify|verify} messages.
+                     * @param message DeleteNodeset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteNodeset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteNodeset message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteNodeset.verify|verify} messages.
+                     * @param message DeleteNodeset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteNodeset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteNodeset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteNodeset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteNodeset;
+
+                    /**
+                     * Decodes a DeleteNodeset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteNodeset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteNodeset;
+
+                    /**
+                     * Verifies a DeleteNodeset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteNodeset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteNodeset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteNodeset;
+
+                    /**
+                     * Creates a plain object from a DeleteNodeset message. Also converts values to other types if specified.
+                     * @param message DeleteNodeset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteNodeset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteNodeset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteNodeset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePartition. */
+                interface IDeletePartition {
+
+                    /** DeletePartition partitions */
+                    partitions?: (string[]|null);
+                }
+
+                /** Represents a DeletePartition. */
+                class DeletePartition implements IDeletePartition {
+
+                    /**
+                     * Constructs a new DeletePartition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeletePartition);
+
+                    /** DeletePartition partitions. */
+                    public partitions: string[];
+
+                    /**
+                     * Creates a new DeletePartition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePartition instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeletePartition): google.cloud.hypercomputecluster.v1alpha.DeletePartition;
+
+                    /**
+                     * Encodes the specified DeletePartition message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeletePartition.verify|verify} messages.
+                     * @param message DeletePartition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeletePartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePartition message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeletePartition.verify|verify} messages.
+                     * @param message DeletePartition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeletePartition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePartition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePartition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeletePartition;
+
+                    /**
+                     * Decodes a DeletePartition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePartition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeletePartition;
+
+                    /**
+                     * Verifies a DeletePartition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePartition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePartition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeletePartition;
+
+                    /**
+                     * Creates a plain object from a DeletePartition message. Also converts values to other types if specified.
+                     * @param message DeletePartition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeletePartition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePartition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePartition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteLoginNode. */
+                interface IDeleteLoginNode {
+                }
+
+                /** Represents a DeleteLoginNode. */
+                class DeleteLoginNode implements IDeleteLoginNode {
+
+                    /**
+                     * Constructs a new DeleteLoginNode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteLoginNode);
+
+                    /**
+                     * Creates a new DeleteLoginNode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteLoginNode instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteLoginNode): google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode;
+
+                    /**
+                     * Encodes the specified DeleteLoginNode message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode.verify|verify} messages.
+                     * @param message DeleteLoginNode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteLoginNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteLoginNode message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode.verify|verify} messages.
+                     * @param message DeleteLoginNode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteLoginNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteLoginNode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteLoginNode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode;
+
+                    /**
+                     * Decodes a DeleteLoginNode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteLoginNode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode;
+
+                    /**
+                     * Verifies a DeleteLoginNode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteLoginNode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteLoginNode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode;
+
+                    /**
+                     * Creates a plain object from a DeleteLoginNode message. Also converts values to other types if specified.
+                     * @param message DeleteLoginNode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteLoginNode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteLoginNode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteLoginNode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteFilestoreInstance. */
+                interface IDeleteFilestoreInstance {
+
+                    /** DeleteFilestoreInstance filestore */
+                    filestore?: (string|null);
+                }
+
+                /** Represents a DeleteFilestoreInstance. */
+                class DeleteFilestoreInstance implements IDeleteFilestoreInstance {
+
+                    /**
+                     * Constructs a new DeleteFilestoreInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteFilestoreInstance);
+
+                    /** DeleteFilestoreInstance filestore. */
+                    public filestore: string;
+
+                    /**
+                     * Creates a new DeleteFilestoreInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFilestoreInstance instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteFilestoreInstance): google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance;
+
+                    /**
+                     * Encodes the specified DeleteFilestoreInstance message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance.verify|verify} messages.
+                     * @param message DeleteFilestoreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteFilestoreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFilestoreInstance message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance.verify|verify} messages.
+                     * @param message DeleteFilestoreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteFilestoreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFilestoreInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFilestoreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance;
+
+                    /**
+                     * Decodes a DeleteFilestoreInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFilestoreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance;
+
+                    /**
+                     * Verifies a DeleteFilestoreInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFilestoreInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFilestoreInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance;
+
+                    /**
+                     * Creates a plain object from a DeleteFilestoreInstance message. Also converts values to other types if specified.
+                     * @param message DeleteFilestoreInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteFilestoreInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFilestoreInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFilestoreInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteStorageBucket. */
+                interface IDeleteStorageBucket {
+
+                    /** DeleteStorageBucket bucket */
+                    bucket?: (string|null);
+                }
+
+                /** Represents a DeleteStorageBucket. */
+                class DeleteStorageBucket implements IDeleteStorageBucket {
+
+                    /**
+                     * Constructs a new DeleteStorageBucket.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteStorageBucket);
+
+                    /** DeleteStorageBucket bucket. */
+                    public bucket: string;
+
+                    /**
+                     * Creates a new DeleteStorageBucket instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteStorageBucket instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteStorageBucket): google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket;
+
+                    /**
+                     * Encodes the specified DeleteStorageBucket message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket.verify|verify} messages.
+                     * @param message DeleteStorageBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteStorageBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteStorageBucket message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket.verify|verify} messages.
+                     * @param message DeleteStorageBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteStorageBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteStorageBucket message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteStorageBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket;
+
+                    /**
+                     * Decodes a DeleteStorageBucket message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteStorageBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket;
+
+                    /**
+                     * Verifies a DeleteStorageBucket message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteStorageBucket message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteStorageBucket
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket;
+
+                    /**
+                     * Creates a plain object from a DeleteStorageBucket message. Also converts values to other types if specified.
+                     * @param message DeleteStorageBucket
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteStorageBucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteStorageBucket to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteStorageBucket
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteLustreInstance. */
+                interface IDeleteLustreInstance {
+
+                    /** DeleteLustreInstance lustre */
+                    lustre?: (string|null);
+                }
+
+                /** Represents a DeleteLustreInstance. */
+                class DeleteLustreInstance implements IDeleteLustreInstance {
+
+                    /**
+                     * Constructs a new DeleteLustreInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteLustreInstance);
+
+                    /** DeleteLustreInstance lustre. */
+                    public lustre: string;
+
+                    /**
+                     * Creates a new DeleteLustreInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteLustreInstance instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteLustreInstance): google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance;
+
+                    /**
+                     * Encodes the specified DeleteLustreInstance message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance.verify|verify} messages.
+                     * @param message DeleteLustreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteLustreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteLustreInstance message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance.verify|verify} messages.
+                     * @param message DeleteLustreInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteLustreInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteLustreInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteLustreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance;
+
+                    /**
+                     * Decodes a DeleteLustreInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteLustreInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance;
+
+                    /**
+                     * Verifies a DeleteLustreInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteLustreInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteLustreInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance;
+
+                    /**
+                     * Creates a plain object from a DeleteLustreInstance message. Also converts values to other types if specified.
+                     * @param message DeleteLustreInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteLustreInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteLustreInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteLustreInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePrivateServiceAccess. */
+                interface IDeletePrivateServiceAccess {
+                }
+
+                /** Represents a DeletePrivateServiceAccess. */
+                class DeletePrivateServiceAccess implements IDeletePrivateServiceAccess {
+
+                    /**
+                     * Constructs a new DeletePrivateServiceAccess.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeletePrivateServiceAccess);
+
+                    /**
+                     * Creates a new DeletePrivateServiceAccess instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePrivateServiceAccess instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeletePrivateServiceAccess): google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess;
+
+                    /**
+                     * Encodes the specified DeletePrivateServiceAccess message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess.verify|verify} messages.
+                     * @param message DeletePrivateServiceAccess message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeletePrivateServiceAccess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePrivateServiceAccess message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess.verify|verify} messages.
+                     * @param message DeletePrivateServiceAccess message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeletePrivateServiceAccess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePrivateServiceAccess message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePrivateServiceAccess
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess;
+
+                    /**
+                     * Decodes a DeletePrivateServiceAccess message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePrivateServiceAccess
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess;
+
+                    /**
+                     * Verifies a DeletePrivateServiceAccess message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePrivateServiceAccess message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePrivateServiceAccess
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess;
+
+                    /**
+                     * Creates a plain object from a DeletePrivateServiceAccess message. Also converts values to other types if specified.
+                     * @param message DeletePrivateServiceAccess
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeletePrivateServiceAccess, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePrivateServiceAccess to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePrivateServiceAccess
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteNetwork. */
+                interface IDeleteNetwork {
+
+                    /** DeleteNetwork network */
+                    network?: (string|null);
+                }
+
+                /** Represents a DeleteNetwork. */
+                class DeleteNetwork implements IDeleteNetwork {
+
+                    /**
+                     * Constructs a new DeleteNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteNetwork);
+
+                    /** DeleteNetwork network. */
+                    public network: string;
+
+                    /**
+                     * Creates a new DeleteNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteNetwork instance
+                     */
+                    public static create(properties?: google.cloud.hypercomputecluster.v1alpha.IDeleteNetwork): google.cloud.hypercomputecluster.v1alpha.DeleteNetwork;
+
+                    /**
+                     * Encodes the specified DeleteNetwork message. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteNetwork.verify|verify} messages.
+                     * @param message DeleteNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.hypercomputecluster.v1alpha.IDeleteNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteNetwork message, length delimited. Does not implicitly {@link google.cloud.hypercomputecluster.v1alpha.DeleteNetwork.verify|verify} messages.
+                     * @param message DeleteNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.hypercomputecluster.v1alpha.IDeleteNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.hypercomputecluster.v1alpha.DeleteNetwork;
+
+                    /**
+                     * Decodes a DeleteNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.hypercomputecluster.v1alpha.DeleteNetwork;
+
+                    /**
+                     * Verifies a DeleteNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.hypercomputecluster.v1alpha.DeleteNetwork;
+
+                    /**
+                     * Creates a plain object from a DeleteNetwork message. Also converts values to other types if specified.
+                     * @param message DeleteNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.hypercomputecluster.v1alpha.DeleteNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteNetwork
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -29906,6 +34377,137 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

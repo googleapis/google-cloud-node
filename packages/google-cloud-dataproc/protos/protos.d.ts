@@ -5320,6 +5320,9 @@ export namespace google {
                     /** ClusterConfig clusterTier */
                     clusterTier?: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null);
 
+                    /** ClusterConfig engine */
+                    engine?: (google.cloud.dataproc.v1.ClusterConfig.Engine|keyof typeof google.cloud.dataproc.v1.ClusterConfig.Engine|null);
+
                     /** ClusterConfig configBucket */
                     configBucket?: (string|null);
 
@@ -5383,6 +5386,9 @@ export namespace google {
 
                     /** ClusterConfig clusterTier. */
                     public clusterTier: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier);
+
+                    /** ClusterConfig engine. */
+                    public engine: (google.cloud.dataproc.v1.ClusterConfig.Engine|keyof typeof google.cloud.dataproc.v1.ClusterConfig.Engine);
 
                     /** ClusterConfig configBucket. */
                     public configBucket: string;
@@ -5525,6 +5531,13 @@ export namespace google {
                         CLUSTER_TIER_UNSPECIFIED = 0,
                         CLUSTER_TIER_STANDARD = 1,
                         CLUSTER_TIER_PREMIUM = 2
+                    }
+
+                    /** Engine enum. */
+                    enum Engine {
+                        ENGINE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        LIGHTNING = 2
                     }
                 }
 
@@ -8659,6 +8672,15 @@ export namespace google {
                     /** LifecycleConfig autoDeleteTtl */
                     autoDeleteTtl?: (google.protobuf.IDuration|null);
 
+                    /** LifecycleConfig idleStopTtl */
+                    idleStopTtl?: (google.protobuf.IDuration|null);
+
+                    /** LifecycleConfig autoStopTime */
+                    autoStopTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LifecycleConfig autoStopTtl */
+                    autoStopTtl?: (google.protobuf.IDuration|null);
+
                     /** LifecycleConfig idleStartTime */
                     idleStartTime?: (google.protobuf.ITimestamp|null);
                 }
@@ -8681,11 +8703,23 @@ export namespace google {
                     /** LifecycleConfig autoDeleteTtl. */
                     public autoDeleteTtl?: (google.protobuf.IDuration|null);
 
+                    /** LifecycleConfig idleStopTtl. */
+                    public idleStopTtl?: (google.protobuf.IDuration|null);
+
+                    /** LifecycleConfig autoStopTime. */
+                    public autoStopTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LifecycleConfig autoStopTtl. */
+                    public autoStopTtl?: (google.protobuf.IDuration|null);
+
                     /** LifecycleConfig idleStartTime. */
                     public idleStartTime?: (google.protobuf.ITimestamp|null);
 
                     /** LifecycleConfig ttl. */
                     public ttl?: ("autoDeleteTime"|"autoDeleteTtl");
+
+                    /** LifecycleConfig stopTtl. */
+                    public stopTtl?: ("autoStopTime"|"autoStopTtl");
 
                     /**
                      * Creates a new LifecycleConfig instance using the specified properties.

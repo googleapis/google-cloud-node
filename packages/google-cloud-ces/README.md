@@ -174,6 +174,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete evaluation result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_result.js) |
 | delete evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_run.js) |
 | delete scheduled evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_scheduled_evaluation_run.js) |
+| export evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.export_evaluations.js) |
 | generate evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.generate_evaluation.js) |
 | get evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation.js) |
 | get evaluation dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation_dataset.js) |
