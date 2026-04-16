@@ -40,5 +40,5 @@ jobs:
         run: |
           for pkg in ${{ steps.changed-packages.outputs.packages }}; do
             echo "Processing package: $pkg"
-            node packages/run-eslint-root.mjs "$pkg"
+            node packages/run-eslint-root.mjs "$pkg" --fail-on-error
           done

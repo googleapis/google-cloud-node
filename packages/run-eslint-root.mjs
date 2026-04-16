@@ -107,3 +107,11 @@ if (dirs.length > 0) {
 const outputPath = path.join(packagePath, 'eslint-output.json');
 fs.writeFileSync(outputPath, JSON.stringify(allResults, null, 2));
 console.log(`Wrote all results to ${outputPath}`);
+
+// Fail if requested and violations found
+const failOnError = process.argv.includes('--fail-on-error');
+const hasErrors = allResults.some(result => result.errorCount > 0);
+if (failOnError && hasErrors) {
+  console.error("ESLint violations found! Failing build.");
+  process.exit(1);
+}
