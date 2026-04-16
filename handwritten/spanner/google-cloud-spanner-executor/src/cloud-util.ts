@@ -16,18 +16,18 @@
 
 import * as fs from 'fs';
 import * as grpc from '@grpc/grpc-js';
-import { WorkerProxy } from './worker-proxy';
-import { SpannerOptions } from '../../src';
-import { trace } from '@opentelemetry/api';
-import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-grpc';
-import { Resource } from '@opentelemetry/resources';
-import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
+import {WorkerProxy} from './worker-proxy';
+import {SpannerOptions} from '../../src';
+import {trace} from '@opentelemetry/api';
+import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
+import {OTLPTraceExporter} from '@opentelemetry/exporter-trace-otlp-grpc';
+import {Resource} from '@opentelemetry/resources';
+import {ATTR_SERVICE_NAME} from '@opentelemetry/semantic-conventions';
 import {
   BatchSpanProcessor,
   TraceIdRatioBasedSampler,
 } from '@opentelemetry/sdk-trace-base';
-import { GoogleAuth } from 'google-auth-library';
+import {GoogleAuth} from 'google-auth-library';
 
 /**
  * Provides utility methods for configuring the Cloud Spanner client for tests.
@@ -80,7 +80,7 @@ export class CloudUtil {
         tracerProvider: trace.getTracerProvider(),
         enableExtendedTracing: true,
         enableEndToEndTracing: true,
-      }
+      },
     };
 
     const maxMessageSize = 100 * 1024 * 1024;
