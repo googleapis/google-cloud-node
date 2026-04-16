@@ -123507,6 +123507,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public streamQueryReasoningEngine(request: google.cloud.aiplatform.v1.IStreamQueryReasoningEngineRequest): Promise<google.api.HttpBody>;
+
+                    /**
+                     * Calls AsyncQueryReasoningEngine.
+                     * @param request AsyncQueryReasoningEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public asyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest, callback: google.cloud.aiplatform.v1.ReasoningEngineExecutionService.AsyncQueryReasoningEngineCallback): void;
+
+                    /**
+                     * Calls AsyncQueryReasoningEngine.
+                     * @param request AsyncQueryReasoningEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public asyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ReasoningEngineExecutionService {
@@ -123524,6 +123538,13 @@ export namespace google {
                      * @param [response] HttpBody
                      */
                     type StreamQueryReasoningEngineCallback = (error: (Error|null), response?: google.api.HttpBody) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.ReasoningEngineExecutionService|asyncQueryReasoningEngine}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type AsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a QueryReasoningEngineRequest. */
@@ -123835,6 +123856,309 @@ export namespace google {
 
                     /**
                      * Gets the default type url for StreamQueryReasoningEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AsyncQueryReasoningEngineRequest. */
+                interface IAsyncQueryReasoningEngineRequest {
+
+                    /** AsyncQueryReasoningEngineRequest name */
+                    name?: (string|null);
+
+                    /** AsyncQueryReasoningEngineRequest inputGcsUri */
+                    inputGcsUri?: (string|null);
+
+                    /** AsyncQueryReasoningEngineRequest outputGcsUri */
+                    outputGcsUri?: (string|null);
+                }
+
+                /** Represents an AsyncQueryReasoningEngineRequest. */
+                class AsyncQueryReasoningEngineRequest implements IAsyncQueryReasoningEngineRequest {
+
+                    /**
+                     * Constructs a new AsyncQueryReasoningEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest);
+
+                    /** AsyncQueryReasoningEngineRequest name. */
+                    public name: string;
+
+                    /** AsyncQueryReasoningEngineRequest inputGcsUri. */
+                    public inputGcsUri: string;
+
+                    /** AsyncQueryReasoningEngineRequest outputGcsUri. */
+                    public outputGcsUri: string;
+
+                    /**
+                     * Creates a new AsyncQueryReasoningEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AsyncQueryReasoningEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Encodes the specified AsyncQueryReasoningEngineRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message AsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AsyncQueryReasoningEngineRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message AsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AsyncQueryReasoningEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Decodes an AsyncQueryReasoningEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Verifies an AsyncQueryReasoningEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AsyncQueryReasoningEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AsyncQueryReasoningEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Creates a plain object from an AsyncQueryReasoningEngineRequest message. Also converts values to other types if specified.
+                     * @param message AsyncQueryReasoningEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.AsyncQueryReasoningEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AsyncQueryReasoningEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AsyncQueryReasoningEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AsyncQueryReasoningEngineOperationMetadata. */
+                interface IAsyncQueryReasoningEngineOperationMetadata {
+
+                    /** AsyncQueryReasoningEngineOperationMetadata genericMetadata */
+                    genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+                }
+
+                /** Represents an AsyncQueryReasoningEngineOperationMetadata. */
+                class AsyncQueryReasoningEngineOperationMetadata implements IAsyncQueryReasoningEngineOperationMetadata {
+
+                    /**
+                     * Constructs a new AsyncQueryReasoningEngineOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineOperationMetadata);
+
+                    /** AsyncQueryReasoningEngineOperationMetadata genericMetadata. */
+                    public genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /**
+                     * Creates a new AsyncQueryReasoningEngineOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AsyncQueryReasoningEngineOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineOperationMetadata): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata;
+
+                    /**
+                     * Encodes the specified AsyncQueryReasoningEngineOperationMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata.verify|verify} messages.
+                     * @param message AsyncQueryReasoningEngineOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AsyncQueryReasoningEngineOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata.verify|verify} messages.
+                     * @param message AsyncQueryReasoningEngineOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AsyncQueryReasoningEngineOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AsyncQueryReasoningEngineOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata;
+
+                    /**
+                     * Decodes an AsyncQueryReasoningEngineOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AsyncQueryReasoningEngineOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata;
+
+                    /**
+                     * Verifies an AsyncQueryReasoningEngineOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AsyncQueryReasoningEngineOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AsyncQueryReasoningEngineOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata;
+
+                    /**
+                     * Creates a plain object from an AsyncQueryReasoningEngineOperationMetadata message. Also converts values to other types if specified.
+                     * @param message AsyncQueryReasoningEngineOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.AsyncQueryReasoningEngineOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AsyncQueryReasoningEngineOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AsyncQueryReasoningEngineOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AsyncQueryReasoningEngineResponse. */
+                interface IAsyncQueryReasoningEngineResponse {
+
+                    /** AsyncQueryReasoningEngineResponse outputGcsUri */
+                    outputGcsUri?: (string|null);
+                }
+
+                /** Represents an AsyncQueryReasoningEngineResponse. */
+                class AsyncQueryReasoningEngineResponse implements IAsyncQueryReasoningEngineResponse {
+
+                    /**
+                     * Constructs a new AsyncQueryReasoningEngineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineResponse);
+
+                    /** AsyncQueryReasoningEngineResponse outputGcsUri. */
+                    public outputGcsUri: string;
+
+                    /**
+                     * Creates a new AsyncQueryReasoningEngineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AsyncQueryReasoningEngineResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineResponse): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Encodes the specified AsyncQueryReasoningEngineResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message AsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AsyncQueryReasoningEngineResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message AsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AsyncQueryReasoningEngineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Decodes an AsyncQueryReasoningEngineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Verifies an AsyncQueryReasoningEngineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AsyncQueryReasoningEngineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AsyncQueryReasoningEngineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Creates a plain object from an AsyncQueryReasoningEngineResponse message. Also converts values to other types if specified.
+                     * @param message AsyncQueryReasoningEngineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.AsyncQueryReasoningEngineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AsyncQueryReasoningEngineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AsyncQueryReasoningEngineResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

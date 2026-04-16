@@ -34151,6 +34151,36 @@
                               }
                             }
                           ]
+                        },
+                        "AsyncQueryReasoningEngine": {
+                          "requestType": "AsyncQueryReasoningEngineRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/reasoningEngines/*}:asyncQuery",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=reasoningEngines/*}:asyncQuery",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.longrunning.operation_info).response_type": "AsyncQueryReasoningEngineResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AsyncQueryReasoningEngineOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/reasoningEngines/*}:asyncQuery",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=reasoningEngines/*}:asyncQuery",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AsyncQueryReasoningEngineResponse",
+                                "metadata_type": "AsyncQueryReasoningEngineOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -34211,6 +34241,48 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "AsyncQueryReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "inputGcsUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputGcsUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AsyncQueryReasoningEngineOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AsyncQueryReasoningEngineResponse": {
+                      "fields": {
+                        "outputGcsUri": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
