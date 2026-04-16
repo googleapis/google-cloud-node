@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier, `(⏎········|·protos.google.cloud.securitycenter.v1beta1.IUpdateSecurityMarksRequest⏎········|·undefined⏎······), */
+/* eslint-disable prettier/prettier */
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");

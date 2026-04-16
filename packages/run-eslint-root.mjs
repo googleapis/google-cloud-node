@@ -33,6 +33,8 @@ function getFiles(dir, fileList = []) {
   return fileList;
 }
 
+const allResults = [];
+
 // Helper to run ESLint on a list of files in chunks
 function runEslintOnFiles(filesToLint, tsconfigInclude) {
   if (filesToLint.length === 0) return;
@@ -54,24 +56,26 @@ function runEslintOnFiles(filesToLint, tsconfigInclude) {
   for (let i = 0; i < filesToLint.length; i += chunkSize) {
     const chunk = filesToLint.slice(i, i + chunkSize);
     const fileArgs = chunk.map(f => `"${f}"`).join(' ');
-    const cmd = `NODE_OPTIONS="--max-old-space-size=8192" ${eslintPath} ${fileArgs}`;
+    const cmd = `NODE_OPTIONS="--max-old-space-size=8192" ${eslintPath} -f json ${fileArgs}`;
     console.log(`Running on chunk ${i / chunkSize + 1} (${chunk.length} files): ${cmd}`);
 
+    let output = '';
     try {
-      const output = execSync(cmd, { encoding: 'utf8' });
+      output = execSync(cmd, { encoding: 'utf8' });
       console.log("ESLint passed!");
-      fs.appendFileSync(path.join(packagePath, 'eslint-output.txt'), output);
     } catch (error) {
       console.log("ESLint failed (as expected if violations found)!");
-      fs.appendFileSync(path.join(packagePath, 'eslint-output.txt'), error.stdout || error.message);
+      output = error.stdout || error.message;
+    }
+
+    try {
+      const json = JSON.parse(output);
+      allResults.push(...json);
+    } catch (e) {
+      console.error(`Failed to parse JSON output from chunk ${i / chunkSize + 1}:`, e);
+      console.error(`Output was: ${output.substring(0, 100)}...`);
     }
   }
-}
-
-// Clear old output if exists
-const outputPath = path.join(packagePath, 'eslint-output.txt');
-if (fs.existsSync(outputPath)) {
-  fs.unlinkSync(outputPath);
 }
 
 const items = fs.readdirSync(srcPath);
@@ -98,3 +102,8 @@ if (dirs.length > 0) {
   const allFiles = getFiles(srcPath);
   runEslintOnFiles(allFiles, path.join(srcPath, '**/*.ts'));
 }
+
+// Write all results to a single JSON file
+const outputPath = path.join(packagePath, 'eslint-output.json');
+fs.writeFileSync(outputPath, JSON.stringify(allResults, null, 2));
+console.log(`Wrote all results to ${outputPath}`);
