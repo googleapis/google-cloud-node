@@ -17,6 +17,9 @@ dependencies:
   object-hash:
     specifier: ^3.0.0
     version: 3.0.0
+  prettier:
+    specifier: ^3.2.5
+    version: 3.3.3
   proto3-json-serializer:
     specifier: ^3.0.3
     version: 3.0.3
@@ -3178,7 +3181,6 @@ packages:
     resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
 
   /proto3-json-serializer@3.0.3:
     resolution: {integrity: sha512-iUi7jGLuECChuoUwtvf6eXBDcFXTHAt5GM6ckvtD3RqD+j2wW0GW6WndPOu9IWeUk7n933lzrskcNMHJy2tFSw==}
