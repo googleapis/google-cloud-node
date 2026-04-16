@@ -1,6 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import { pipeline } from 'stream/promises';
+import streamJson from 'stream-json';
+import StreamArray from 'stream-json/streamers/StreamArray.js';
+
+const { parser } = streamJson;
+const { streamArray } = StreamArray;
 
 const packageName = process.argv[2];
 if (!packageName) {
@@ -16,17 +21,11 @@ if (!fs.existsSync(outputPath)) {
   process.exit(1);
 }
 
-let results;
-try {
-  const content = fs.readFileSync(outputPath, 'utf8');
-  results = JSON.parse(content);
-} catch (e) {
-  console.error(`Error parsing JSON from ${outputPath}:`, e);
-  process.exit(1);
-}
-
 async function processFiles() {
-  for (const result of results) {
+  const fileStream = fs.createReadStream(outputPath);
+  const jsonStream = fileStream.pipe(parser()).pipe(streamArray());
+
+  for await (const { value: result } of jsonStream) {
     const file = result.filePath;
     const messages = result.messages;
 

@@ -37,9 +37,13 @@
     "chalk": "^5.0.0",
     "figures": "^6.0.0",
     "gaxios": "^7.0.0-rc",
-    "parse-link-header": "^2.0.0"
+    "parse-link-header": "^2.0.0",
+    "stream-json": "^1.8.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "gts": "^6.0.2"
+  },
   "engines": {
     "node": ">=18"
   }

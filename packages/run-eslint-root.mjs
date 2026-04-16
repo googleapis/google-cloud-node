@@ -61,7 +61,7 @@ function runEslintOnFiles(filesToLint, tsconfigInclude) {
 
     let output = '';
     try {
-      output = execSync(cmd, { encoding: 'utf8' });
+      output = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 10 });
       console.log("ESLint passed!");
     } catch (error) {
       console.log("ESLint failed (as expected if violations found)!");
