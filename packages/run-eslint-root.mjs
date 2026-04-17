@@ -39,22 +39,23 @@ const allResults = [];
 function runEslintOnFiles(filesToLint, tsconfigInclude) {
   if (filesToLint.length === 0) return;
 
-  // Dynamically update tsconfig scope to maintain type coverage for the directory
-  const tsconfig = {
-    extends: "./node_modules/gts/tsconfig-google.json",
-    compilerOptions: {
-      rootDir: ".",
-      outDir: "build"
-    },
-    include: [tsconfigInclude]
-  };
-  fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2));
-  console.log(`Updated tsconfig.json to include: ${tsconfigInclude}`);
-
   // Chunk files to avoid OOM (e.g., max 20 files at a time)
   const chunkSize = 20;
   for (let i = 0; i < filesToLint.length; i += chunkSize) {
     const chunk = filesToLint.slice(i, i + chunkSize);
+
+    // Dynamically update tsconfig scope to include ONLY the files in this chunk
+    const tsconfig = {
+      extends: "./node_modules/gts/tsconfig-google.json",
+      compilerOptions: {
+        rootDir: ".",
+        outDir: "build"
+      },
+      include: chunk
+    };
+    fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2));
+    console.log(`Updated tsconfig.json to include ${chunk.length} files in chunk.`);
+
     const fileArgs = chunk.map(f => `"${f}"`).join(' ');
     const cmd = `NODE_OPTIONS="--max-old-space-size=8192" ${eslintPath} -f json ${fileArgs}`;
     console.log(`Running on chunk ${i / chunkSize + 1} (${chunk.length} files): ${cmd}`);

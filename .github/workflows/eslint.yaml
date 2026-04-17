@@ -40,8 +40,10 @@ jobs:
 
       - name: Run ESLint on changed packages
         if: steps.changed-packages.outputs.packages != ''
+        env:
+          CHANGED_PACKAGES: ${{ steps.changed-packages.outputs.packages }}
         run: |
-          for pkg in ${{ steps.changed-packages.outputs.packages }}; do
+          for pkg in $CHANGED_PACKAGES; do
             echo "Processing package: $pkg"
             node packages/run-eslint-root.mjs "$pkg" --fail-on-error
           done

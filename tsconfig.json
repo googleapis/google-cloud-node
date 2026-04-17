@@ -5,6 +5,7 @@
     "outDir": "build"
   },
   "include": [
-    "packages/typeless-sample-bot/src/*.ts"
+    "packages/google-cloud-functions/src/v2alpha/function_service_client.ts",
+    "packages/google-cloud-functions/src/v2alpha/index.ts"
   ]
 }
