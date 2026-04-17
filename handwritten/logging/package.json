@@ -60,7 +60,7 @@
     "eventid": "^2.0.0",
     "extend": "^3.0.2",
     "gcp-metadata": "^6.0.0",
-    "google-auth-library": "^9.0.0",
+    "google-auth-library": "^10.6.2",
     "google-gax": "^4.0.3",
     "long": "^5.3.2",
     "on-finished": "^2.3.0",
