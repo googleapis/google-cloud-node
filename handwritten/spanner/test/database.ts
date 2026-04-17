@@ -2609,6 +2609,7 @@ describe('Database', () => {
       const fakeOptions = {excludeTxnFromChangeStreams: true};
 
       database.getTransaction(fakeOptions, (_err, transaction) => {
+        assert.ifError(_err);
         assert.strictEqual(transaction.runTransactionOptions, fakeOptions);
         done();
       });
