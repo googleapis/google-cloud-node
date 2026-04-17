@@ -2268,6 +2268,10 @@ class Database extends common.GrpcServiceObject {
   ): Promise<[Transaction]>;
   getTransaction(callback: GetTransactionCallback): void;
   getTransaction(
+    options: GetTransactionOptions,
+    callback: GetTransactionCallback,
+  ): void;
+  getTransaction(
     optionsOrCallback?: GetTransactionOptions | GetTransactionCallback,
     callback?: GetTransactionCallback,
   ): void | Promise<[Transaction]> {
