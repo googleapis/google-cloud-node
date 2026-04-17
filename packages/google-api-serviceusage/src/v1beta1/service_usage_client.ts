@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable eol-last */
 /* eslint-disable prettier/prettier */
 // Copyright 2026 Google LLC
