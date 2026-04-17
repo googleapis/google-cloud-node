@@ -5,6 +5,83 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "4c8239955def8cf8f8915ff4254eae70b2abed31",
+          "message": "trigger release",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "2280f7aeab96b9911efc3673dd084e3d9f831d9b",
+          "message": "type conflict between @sinonjs/fake-timers and @types/sinonjs__fake-timers",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "6d513f93d0126198b4eb3867c4f5809422e467fe",
+          "message": "resolve type conflicts between @types/sinon and @sinonjs/fake-timers",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "4d597690ad90f9cf7c3c2aa9611029beaa599703",
+          "message": "enable afe_connectivity_error_count metric",
+          "issues": [
+            "7964"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "16971e7ab08a54cfc1b57b17ee75800aa1dcedee",
+          "message": "override gcp-metadata to resolve punycode deprecation](https://github.com/googleapis/google-cloud-node/pull/7815#top)",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "01d1d9e8f89d6ad79da8b1c790e13eab176e932f",
+          "message": "override gcp-metadata to resolve punycode deprecation](https://github.com/googleapis/google-cloud-node/pull/7815#top)",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "c717550789a731c629003908acd713c44f170c23",
+          "message": "override gcp-metadata to resolve punycode deprecation](https://github.com/googleapis/google-cloud-node/pull/7815#top)",
+          "issues": [],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "f1650a8095cbe6023a9b23aa3264f7f19edaba19",
+          "message": "add SI, adapt, split point related proto",
+          "issues": [
+            "2527"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "184684f669f97835af88ac9d4101320732d65683",
+          "message": "include cache updates into the ResultSet response",
+          "issues": [
+            "2519"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "d844e87e-e75b-4513-950c-1fe8eeda719d",
+      "createTime": "2026-04-14T23:04:28.521Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "7fad2f6e2ef0b16ab87a92ae471136fe6f2655ef",
           "message": "Unblock the releases on Node Bigquery",
           "issues": [
@@ -69999,5 +70076,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-04-14T18:40:56.396Z"
+  "updateTime": "2026-04-14T23:04:28.521Z"
 }
