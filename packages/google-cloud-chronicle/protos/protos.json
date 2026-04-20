@@ -641,6 +641,924 @@
                         }
                       }
                     },
+                    "DataTableService": {
+                      "options": {
+                        "(google.api.default_host)": "chronicle.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateDataTable": {
+                          "requestType": "CreateDataTableRequest",
+                          "responseType": "DataTable",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*}/dataTables",
+                            "(google.api.http).body": "data_table",
+                            "(google.api.method_signature)": "parent,data_table,data_table_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*}/dataTables",
+                                "body": "data_table"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_table,data_table_id"
+                            }
+                          ]
+                        },
+                        "ListDataTables": {
+                          "requestType": "ListDataTablesRequest",
+                          "responseType": "ListDataTablesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/dataTables",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/dataTables"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetDataTable": {
+                          "requestType": "GetDataTableRequest",
+                          "responseType": "DataTable",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDataTable": {
+                          "requestType": "UpdateDataTableRequest",
+                          "responseType": "DataTable",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{data_table.name=projects/*/locations/*/instances/*/dataTables/*}",
+                            "(google.api.http).body": "data_table",
+                            "(google.api.method_signature)": "data_table,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{data_table.name=projects/*/locations/*/instances/*/dataTables/*}",
+                                "body": "data_table"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_table,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteDataTable": {
+                          "requestType": "DeleteDataTableRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*}",
+                            "(google.api.method_signature)": "name,force"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
+                            }
+                          ]
+                        },
+                        "CreateDataTableRow": {
+                          "requestType": "CreateDataTableRowRequest",
+                          "responseType": "DataTableRow",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows",
+                            "(google.api.http).body": "data_table_row",
+                            "(google.api.method_signature)": "parent,data_table_row"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows",
+                                "body": "data_table_row"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,data_table_row"
+                            }
+                          ]
+                        },
+                        "UpdateDataTableRow": {
+                          "requestType": "UpdateDataTableRowRequest",
+                          "responseType": "DataTableRow",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{data_table_row.name=projects/*/locations/*/instances/*/dataTables/*/dataTableRows/*}",
+                            "(google.api.http).body": "data_table_row",
+                            "(google.api.method_signature)": "data_table_row,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{data_table_row.name=projects/*/locations/*/instances/*/dataTables/*/dataTableRows/*}",
+                                "body": "data_table_row"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_table_row,update_mask"
+                            }
+                          ]
+                        },
+                        "ListDataTableRows": {
+                          "requestType": "ListDataTableRowsRequest",
+                          "responseType": "ListDataTableRowsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetDataTableRow": {
+                          "requestType": "GetDataTableRowRequest",
+                          "responseType": "DataTableRow",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*/dataTableRows/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*/dataTableRows/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteDataTableRow": {
+                          "requestType": "DeleteDataTableRowRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*/dataTableRows/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*/dataTables/*/dataTableRows/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "BulkCreateDataTableRows": {
+                          "requestType": "BulkCreateDataTableRowsRequest",
+                          "responseType": "BulkCreateDataTableRowsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "BulkGetDataTableRows": {
+                          "requestType": "BulkGetDataTableRowsRequest",
+                          "responseType": "BulkGetDataTableRowsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkGet",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkGet",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "BulkReplaceDataTableRows": {
+                          "requestType": "BulkReplaceDataTableRowsRequest",
+                          "responseType": "BulkReplaceDataTableRowsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkReplace",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkReplace",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "BulkUpdateDataTableRows": {
+                          "requestType": "BulkUpdateDataTableRowsRequest",
+                          "responseType": "BulkUpdateDataTableRowsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*/dataTables/*}/dataTableRows:bulkUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "GetDataTableOperationErrors": {
+                          "requestType": "GetDataTableOperationErrorsRequest",
+                          "responseType": "DataTableOperationErrors",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/dataTableOperationErrors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/dataTableOperationErrors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "DataTableUpdateSource": {
+                      "values": {
+                        "DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED": 0,
+                        "USER": 1,
+                        "RULE": 2,
+                        "SEARCH": 3
+                      }
+                    },
+                    "CreateDataTableRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTable"
+                          }
+                        },
+                        "dataTable": {
+                          "type": "DataTable",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dataTableId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetDataTableRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/DataTable"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDataTableRequest": {
+                      "fields": {
+                        "dataTable": {
+                          "type": "DataTable",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDataTablesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTable"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDataTableRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/DataTable"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDataTablesResponse": {
+                      "fields": {
+                        "dataTables": {
+                          "rule": "repeated",
+                          "type": "DataTable",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateDataTableRowRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        },
+                        "dataTableRow": {
+                          "type": "DataTableRow",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDataTableRowRequest": {
+                      "fields": {
+                        "dataTableRow": {
+                          "type": "DataTableRow",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDataTableRowsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDataTableRowsResponse": {
+                      "fields": {
+                        "dataTableRows": {
+                          "rule": "repeated",
+                          "type": "DataTableRow",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetDataTableRowRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDataTableRowRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        }
+                      }
+                    },
+                    "BulkCreateDataTableRowsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateDataTableRowRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BulkCreateDataTableRowsResponse": {
+                      "fields": {
+                        "dataTableRows": {
+                          "rule": "repeated",
+                          "type": "DataTableRow",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BulkGetDataTableRowsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "GetDataTableRowRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BulkGetDataTableRowsResponse": {
+                      "fields": {
+                        "dataTableRows": {
+                          "rule": "repeated",
+                          "type": "DataTableRow",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BulkReplaceDataTableRowsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateDataTableRowRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BulkReplaceDataTableRowsResponse": {
+                      "fields": {
+                        "dataTableRows": {
+                          "rule": "repeated",
+                          "type": "DataTableRow",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BulkUpdateDataTableRowsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/DataTableRow"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "UpdateDataTableRowRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BulkUpdateDataTableRowsResponse": {
+                      "fields": {
+                        "dataTableRows": {
+                          "rule": "repeated",
+                          "type": "DataTableRow",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DataTableScopeInfo": {
+                      "fields": {
+                        "dataAccessScopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/DataAccessScope"
+                          }
+                        }
+                      }
+                    },
+                    "DataTable": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/DataTable",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}",
+                        "(google.api.resource).plural": "dataTables",
+                        "(google.api.resource).singular": "dataTable"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "columnInfo": {
+                          "rule": "repeated",
+                          "type": "DataTableColumnInfo",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "dataTableUuid": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "ruleAssociationsCount": {
+                          "type": "int32",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rowTimeToLive": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "approximateRowCount": {
+                          "type": "int64",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "scopeInfo": {
+                          "type": "DataTableScopeInfo",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateSource": {
+                          "type": "DataTableUpdateSource",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rowTimeToLiveUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DataTableRow": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/DataTableRow",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}",
+                        "(google.api.resource).plural": "dataTableRows",
+                        "(google.api.resource).singular": "dataTableRow"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rowTimeToLive": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DataTableColumnInfo": {
+                      "oneofs": {
+                        "pathOrType": {
+                          "oneof": [
+                            "mappedColumnPath",
+                            "columnType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mappedColumnPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "columnType": {
+                          "type": "DataTableColumnType",
+                          "id": 4
+                        },
+                        "columnIndex": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "originalColumn": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "keyColumn": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "repeatedValues": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DataTableColumnType": {
+                          "values": {
+                            "DATA_TABLE_COLUMN_TYPE_UNSPECIFIED": 0,
+                            "STRING": 1,
+                            "REGEX": 2,
+                            "CIDR": 3,
+                            "NUMBER": 4
+                          }
+                        }
+                      }
+                    },
+                    "GetDataTableOperationErrorsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/DataTableOperationErrors"
+                          }
+                        }
+                      }
+                    },
+                    "DataTableOperationErrors": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/DataTableOperationErrors",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}",
+                        "(google.api.resource).plural": "dataTableOperationErrors",
+                        "(google.api.resource).singular": "dataTableOperationErrors"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "rpcErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        }
+                      }
+                    },
                     "EntityService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
@@ -4161,6 +5079,35 @@
             }
           }
         },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
         "longrunning": {
           "options": {
             "cc_enable_arenas": true,
@@ -4372,35 +5319,6 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }

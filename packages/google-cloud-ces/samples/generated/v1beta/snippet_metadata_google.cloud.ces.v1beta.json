@@ -2268,6 +2268,86 @@
       }
     },
     {
+      "regionTag": "ces_v1beta_generated_AgentService_GenerateAppResource_async",
+      "title": "AgentService generateAppResource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates specific resources (e.g. agent) in the app using LLM assistant.",
+      "canonical": true,
+      "file": "agent_service.generate_app_resource.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 97,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateAppResource",
+        "fullName": "google.cloud.ces.v1beta.AgentService.GenerateAppResource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "agent",
+            "type": ".google.cloud.ces.v1beta.Agent"
+          },
+          {
+            "name": "tool",
+            "type": ".google.cloud.ces.v1beta.Tool"
+          },
+          {
+            "name": "toolset",
+            "type": ".google.cloud.ces.v1beta.Toolset"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "refine_instructions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "tool_generation_config",
+            "type": ".google.cloud.ces.v1beta.GenerateAppResourceRequest.ToolGenerationConfig"
+          },
+          {
+            "name": "app_generation_config",
+            "type": ".google.cloud.ces.v1beta.GenerateAppResourceRequest.AppGenerationConfig"
+          },
+          {
+            "name": "evaluation_generation_config",
+            "type": ".google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationGenerationConfig"
+          },
+          {
+            "name": "evaluation_personas_generation_config",
+            "type": ".google.cloud.ces.v1beta.GenerateAppResourceRequest.EvaluationPersonasGenerationConfig"
+          },
+          {
+            "name": "quality_report_generation_config",
+            "type": ".google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig"
+          },
+          {
+            "name": "hill_climbing_fix_config",
+            "type": ".google.cloud.ces.v1beta.GenerateAppResourceRequest.HillClimbingFixConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AgentServiceClient",
+          "fullName": "google.cloud.ces.v1beta.AgentServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateAppResource",
+          "fullName": "google.cloud.ces.v1beta.AgentService.GenerateAppResource",
+          "service": {
+            "shortName": "AgentService",
+            "fullName": "google.cloud.ces.v1beta.AgentService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "ces_v1beta_generated_AgentService_ListChangelogs_async",
       "title": "AgentService listChangelogs Sample",
       "origin": "API_DEFINITION",
@@ -3860,6 +3940,62 @@
       }
     },
     {
+      "regionTag": "ces_v1beta_generated_EvaluationService_ExportEvaluations_async",
+      "title": "AgentService exportEvaluations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports evaluations.",
+      "canonical": true,
+      "file": "evaluation_service.export_evaluations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportEvaluations",
+        "fullName": "google.cloud.ces.v1beta.EvaluationService.ExportEvaluations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "export_options",
+            "type": ".google.cloud.ces.v1beta.ExportOptions"
+          },
+          {
+            "name": "include_evaluation_results",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "include_evaluations",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EvaluationServiceClient",
+          "fullName": "google.cloud.ces.v1beta.EvaluationServiceClient"
+        },
+        "method": {
+          "shortName": "ExportEvaluations",
+          "fullName": "google.cloud.ces.v1beta.EvaluationService.ExportEvaluations",
+          "service": {
+            "shortName": "EvaluationService",
+            "fullName": "google.cloud.ces.v1beta.EvaluationService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "ces_v1beta_generated_SessionService_RunSession_async",
       "title": "AgentService runSession Sample",
       "origin": "API_DEFINITION",
@@ -4002,7 +4138,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 86,
           "type": "FULL"
         }
       ],
@@ -4034,6 +4170,10 @@
           {
             "name": "args",
             "type": ".google.protobuf.Struct"
+          },
+          {
+            "name": "mock_config",
+            "type": ".google.cloud.ces.v1beta.MockConfig"
           }
         ],
         "resultType": ".google.cloud.ces.v1beta.ExecuteToolResponse",

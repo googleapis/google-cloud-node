@@ -59,6 +59,12 @@ function main(parent) {
    *  format.
    */
   // const args = {}
+  /**
+   *  Optional. Mock configuration for the tool execution.
+   *  If this field is set, tools that call other tools will be
+   *  mocked based on the provided patterns and responses.
+   */
+  // const mockConfig = {}
 
   // Imports the Ces library
   const {ToolServiceClient} = require('@google-cloud/ces').v1beta;

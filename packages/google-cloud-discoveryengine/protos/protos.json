@@ -16913,7 +16913,8 @@
                               "values": {
                                 "CONDITION_UNSPECIFIED": 0,
                                 "DISABLED": 1,
-                                "ENABLED": 2
+                                "ENABLED": 2,
+                                "AUTO": 3
                               }
                             }
                           }
@@ -28822,7 +28823,8 @@
                               "values": {
                                 "CONDITION_UNSPECIFIED": 0,
                                 "DISABLED": 1,
-                                "ENABLED": 2
+                                "ENABLED": 2,
+                                "AUTO": 3
                               }
                             }
                           }

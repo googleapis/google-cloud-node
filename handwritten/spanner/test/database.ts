@@ -173,6 +173,7 @@ class FakeTable {
 
 class FakeTransaction extends EventEmitter {
   calledWith_: IArguments;
+  runTransactionOptions: RunTransactionOptions | undefined;
   _options!: google.spanner.v1.ITransactionOptions;
   private _queuedMutations: google.spanner.v1.Mutation[];
   constructor(options) {
@@ -190,7 +191,9 @@ class FakeTransaction extends EventEmitter {
   setQueuedMutations(mutation) {
     this._queuedMutations = mutation;
   }
-  setReadWriteTransactionOptions(options: RunTransactionOptions) {}
+  setReadWriteTransactionOptions(options: RunTransactionOptions) {
+    this.runTransactionOptions = options;
+  }
   commit(
     options?: CommitOptions,
     callback?: CommitCallback,
@@ -2598,6 +2601,16 @@ describe('Database', () => {
       database.getTransaction((err, transaction) => {
         assert.ifError(err);
         assert.strictEqual(transaction, fakeTransaction);
+        done();
+      });
+    });
+
+    it('should optionally accept runner `options`', done => {
+      const fakeOptions = {excludeTxnFromChangeStreams: true};
+
+      database.getTransaction(fakeOptions, (_err, transaction) => {
+        assert.ifError(_err);
+        assert.strictEqual(transaction.runTransactionOptions, fakeOptions);
         done();
       });
     });

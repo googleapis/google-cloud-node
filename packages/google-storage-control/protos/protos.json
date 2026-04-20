@@ -3903,6 +3903,10 @@
                     "resource": {
                       "type": "StorageObject",
                       "id": 2
+                    },
+                    "persistedDataChecksums": {
+                      "type": "ObjectChecksums",
+                      "id": 3
                     }
                   }
                 },
@@ -4081,6 +4085,10 @@
                       "type": "StorageObject",
                       "id": 2
                     },
+                    "persistedDataChecksums": {
+                      "type": "ObjectChecksums",
+                      "id": 4
+                    },
                     "writeHandle": {
                       "type": "BidiWriteHandle",
                       "id": 3,
@@ -4235,6 +4243,10 @@
                     "resource": {
                       "type": "StorageObject",
                       "id": 2
+                    },
+                    "persistedDataChecksums": {
+                      "type": "ObjectChecksums",
+                      "id": 3
                     }
                   }
                 },

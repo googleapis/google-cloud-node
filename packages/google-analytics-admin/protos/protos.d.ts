@@ -4429,6 +4429,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getReportingIdentitySettings(request: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest): Promise<google.analytics.admin.v1alpha.ReportingIdentitySettings>;
+
+                    /**
+                     * Calls GetUserProvidedDataSettings.
+                     * @param request GetUserProvidedDataSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and UserProvidedDataSettings
+                     */
+                    public getUserProvidedDataSettings(request: google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetUserProvidedDataSettingsCallback): void;
+
+                    /**
+                     * Calls GetUserProvidedDataSettings.
+                     * @param request GetUserProvidedDataSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getUserProvidedDataSettings(request: google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest): Promise<google.analytics.admin.v1alpha.UserProvidedDataSettings>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -5510,6 +5524,13 @@ export namespace google {
                      * @param [response] ReportingIdentitySettings
                      */
                     type GetReportingIdentitySettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingIdentitySettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getUserProvidedDataSettings}.
+                     * @param error Error, if any
+                     * @param [response] UserProvidedDataSettings
+                     */
+                    type GetUserProvidedDataSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.UserProvidedDataSettings) => void;
                 }
 
                 /** Properties of a RunAccessReportRequest. */
@@ -25298,6 +25319,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetUserProvidedDataSettingsRequest. */
+                interface IGetUserProvidedDataSettingsRequest {
+
+                    /** GetUserProvidedDataSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetUserProvidedDataSettingsRequest. */
+                class GetUserProvidedDataSettingsRequest implements IGetUserProvidedDataSettingsRequest {
+
+                    /**
+                     * Constructs a new GetUserProvidedDataSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest);
+
+                    /** GetUserProvidedDataSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetUserProvidedDataSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetUserProvidedDataSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest): google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetUserProvidedDataSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest.verify|verify} messages.
+                     * @param message GetUserProvidedDataSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetUserProvidedDataSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest.verify|verify} messages.
+                     * @param message GetUserProvidedDataSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetUserProvidedDataSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetUserProvidedDataSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest;
+
+                    /**
+                     * Decodes a GetUserProvidedDataSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetUserProvidedDataSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest;
+
+                    /**
+                     * Verifies a GetUserProvidedDataSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetUserProvidedDataSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetUserProvidedDataSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetUserProvidedDataSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetUserProvidedDataSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetUserProvidedDataSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetUserProvidedDataSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** AudienceFilterScope enum. */
                 enum AudienceFilterScope {
                     AUDIENCE_FILTER_SCOPE_UNSPECIFIED = 0,
@@ -29057,7 +29175,8 @@ export namespace google {
                     CALCULATED_METRIC = 31,
                     REPORTING_DATA_ANNOTATION = 32,
                     SUBPROPERTY_SYNC_CONFIG = 33,
-                    REPORTING_IDENTITY_SETTINGS = 34
+                    REPORTING_IDENTITY_SETTINGS = 34,
+                    USER_PROVIDED_DATA_SETTINGS = 35
                 }
 
                 /** GoogleSignalsState enum. */
@@ -31488,6 +31607,9 @@ export namespace google {
 
                         /** ChangeHistoryResource reportingIdentitySettings */
                         reportingIdentitySettings?: (google.analytics.admin.v1alpha.IReportingIdentitySettings|null);
+
+                        /** ChangeHistoryResource userProvidedDataSettings */
+                        userProvidedDataSettings?: (google.analytics.admin.v1alpha.IUserProvidedDataSettings|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -31586,8 +31708,11 @@ export namespace google {
                         /** ChangeHistoryResource reportingIdentitySettings. */
                         public reportingIdentitySettings?: (google.analytics.admin.v1alpha.IReportingIdentitySettings|null);
 
+                        /** ChangeHistoryResource userProvidedDataSettings. */
+                        public userProvidedDataSettings?: (google.analytics.admin.v1alpha.IUserProvidedDataSettings|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|"reportingIdentitySettings");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|"reportingIdentitySettings"|"userProvidedDataSettings");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -34752,6 +34877,115 @@ export namespace google {
                         OBSERVED = 2,
                         DEVICE_BASED = 3
                     }
+                }
+
+                /** Properties of a UserProvidedDataSettings. */
+                interface IUserProvidedDataSettings {
+
+                    /** UserProvidedDataSettings name */
+                    name?: (string|null);
+
+                    /** UserProvidedDataSettings userProvidedDataCollectionEnabled */
+                    userProvidedDataCollectionEnabled?: (boolean|null);
+
+                    /** UserProvidedDataSettings automaticallyDetectedDataCollectionEnabled */
+                    automaticallyDetectedDataCollectionEnabled?: (boolean|null);
+                }
+
+                /** Represents a UserProvidedDataSettings. */
+                class UserProvidedDataSettings implements IUserProvidedDataSettings {
+
+                    /**
+                     * Constructs a new UserProvidedDataSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUserProvidedDataSettings);
+
+                    /** UserProvidedDataSettings name. */
+                    public name: string;
+
+                    /** UserProvidedDataSettings userProvidedDataCollectionEnabled. */
+                    public userProvidedDataCollectionEnabled: boolean;
+
+                    /** UserProvidedDataSettings automaticallyDetectedDataCollectionEnabled. */
+                    public automaticallyDetectedDataCollectionEnabled: boolean;
+
+                    /**
+                     * Creates a new UserProvidedDataSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserProvidedDataSettings instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUserProvidedDataSettings): google.analytics.admin.v1alpha.UserProvidedDataSettings;
+
+                    /**
+                     * Encodes the specified UserProvidedDataSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.UserProvidedDataSettings.verify|verify} messages.
+                     * @param message UserProvidedDataSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUserProvidedDataSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserProvidedDataSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UserProvidedDataSettings.verify|verify} messages.
+                     * @param message UserProvidedDataSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUserProvidedDataSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserProvidedDataSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserProvidedDataSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UserProvidedDataSettings;
+
+                    /**
+                     * Decodes a UserProvidedDataSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserProvidedDataSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UserProvidedDataSettings;
+
+                    /**
+                     * Verifies a UserProvidedDataSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserProvidedDataSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserProvidedDataSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UserProvidedDataSettings;
+
+                    /**
+                     * Creates a plain object from a UserProvidedDataSettings message. Also converts values to other types if specified.
+                     * @param message UserProvidedDataSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UserProvidedDataSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserProvidedDataSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserProvidedDataSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SubpropertyEventFilterCondition. */
