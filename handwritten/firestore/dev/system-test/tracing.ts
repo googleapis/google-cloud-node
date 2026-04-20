@@ -286,8 +286,8 @@ describe.skipEnterprise('Tracing Tests', () => {
     };
 
     // Named-database tests use an environment variable to specify the database ID. Add it to the settings.
-    if (process.env.FIRESTORE_NAMED_DATABASE) {
-      settings.databaseId = process.env.FIRESTORE_NAMED_DATABASE;
+    if (process.env.FIRESTORE_DATABASE_ID) {
+      settings.databaseId = process.env.FIRESTORE_DATABASE_ID;
     }
     // If a database ID has not been specified in the settings, check whether
     // it's been specified using an environment variable.

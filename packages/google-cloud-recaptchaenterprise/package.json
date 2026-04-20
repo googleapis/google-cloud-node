@@ -10,7 +10,6 @@
   "description": "reCAPTCHA Enterprise API client for Node.js",
   "main": "build/src/index.js",
   "files": [
-    "build/protos",
     "build/src",
     "AUTHORS",
     "COPYING",

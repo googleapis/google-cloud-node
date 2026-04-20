@@ -105,8 +105,8 @@ if (process.env.NODE_ENV === 'DEBUG') {
 
 export function getTestDb(settings: Settings = {}): Firestore {
   const internalSettings: Settings = {};
-  if (process.env.FIRESTORE_NAMED_DATABASE) {
-    internalSettings.databaseId = process.env.FIRESTORE_NAMED_DATABASE;
+  if (process.env.FIRESTORE_DATABASE_ID) {
+    internalSettings.databaseId = process.env.FIRESTORE_DATABASE_ID;
   }
 
   if (process.env.FIRESTORE_TARGET_BACKEND) {
