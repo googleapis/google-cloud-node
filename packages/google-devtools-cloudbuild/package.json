@@ -12,7 +12,6 @@
   "browser": "src/browser.js",
   "files": [
     "build/src",
-    "build/protos",
     "!build/src/**/*.map"
   ],
   "keywords": [
