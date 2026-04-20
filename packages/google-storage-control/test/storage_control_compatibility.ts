@@ -13,8 +13,8 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {StorageControlClient as UberStorageControlClient} from '../src/storage_control_client';
-import {StorageControlClient as OriginalStorageControlClient} from '../src/v2/storage_control_client';
+import { StorageControlClient as UberStorageControlClient } from '../src/storage_control_client';
+import { StorageControlClient as OriginalStorageControlClient } from '../src/v2/storage_control_client';
 
 describe('Backwards compatibility', () => {
   it('uber client should have all the methods of the original client', () => {
