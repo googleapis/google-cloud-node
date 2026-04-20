@@ -40,8 +40,8 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gaxios",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gaxios",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "google"

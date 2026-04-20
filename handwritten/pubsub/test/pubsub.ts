@@ -170,8 +170,9 @@ describe('PubSub', () => {
   // tslint:disable-next-line variable-name
   let PubSub: typeof pubsubTypes.PubSub;
   const PROJECT_ID = 'test-project';
+  const PROJECT_ID_PLACEHOLDER = '{{projectId}}';
 
-  let pubsub: Partial<pubsubTypes.PubSub>;
+  let pubsub: pubsubTypes.PubSub;
   const OPTIONS = {
     projectId: PROJECT_ID,
   } as pubsubTypes.ClientConfig;
@@ -317,7 +318,7 @@ describe('PubSub', () => {
     });
 
     it('should not be in the opened state after close()', async () => {
-      await pubsub.close?.();
+      await pubsub.close();
       assert.strictEqual(pubsub.isOpen, false);
     });
 
@@ -413,13 +414,13 @@ describe('PubSub', () => {
 
     it('should throw if no Topic is provided', async () => {
       await assert.rejects(async () => {
-        await pubsub.createSubscription?.(undefined!, undefined!);
+        await pubsub.createSubscription(undefined!, undefined!);
       }, /A Topic is required for a new subscription\./);
     });
 
     it('should throw if no subscription name is provided', async () => {
       await assert.rejects(async () => {
-        await pubsub.createSubscription?.(TOPIC_NAME, undefined!);
+        await pubsub.createSubscription(TOPIC_NAME, undefined!);
       }, /A subscription name is required./);
     });
 
@@ -428,7 +429,11 @@ describe('PubSub', () => {
         callback(null, apiResponse);
       };
 
-      pubsub.createSubscription?.(TOPIC, SUB_NAME, done);
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      pubsub.createSubscription(TOPIC, SUB_NAME, done);
     });
 
     it('should allow undefined/optional configuration options', done => {
@@ -450,7 +455,7 @@ describe('PubSub', () => {
         setImmediate(done);
         return SUBSCRIPTION as subby.Subscription;
       };
-      pubsub.createSubscription?.(TOPIC, SUB_NAME, opts, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, opts, assert.ifError);
     });
 
     it('should create a Topic object from a string', done => {
@@ -462,7 +467,7 @@ describe('PubSub', () => {
         return TOPIC;
       };
 
-      pubsub.createSubscription?.(TOPIC_NAME, SUB_NAME, assert.ifError);
+      pubsub.createSubscription(TOPIC_NAME, SUB_NAME, assert.ifError);
     });
 
     it('should send correct request', done => {
@@ -491,7 +496,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.createSubscription?.(TOPIC, SUB_NAME, options, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
     });
 
     it('should pass options to the api request', done => {
@@ -523,7 +528,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.createSubscription?.(TOPIC, SUB_NAME, options, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
     });
 
     it('should discard flow control options', done => {
@@ -554,7 +559,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.createSubscription?.(TOPIC, SUB_NAME, options, assert.ifError);
+      pubsub.createSubscription(TOPIC, SUB_NAME, options, assert.ifError);
     });
 
     it('should format the metadata', done => {
@@ -573,12 +578,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.createSubscription?.(
-        TOPIC,
-        SUB_NAME,
-        fakeMetadata,
-        assert.ifError,
-      );
+      pubsub.createSubscription(TOPIC, SUB_NAME, fakeMetadata, assert.ifError);
     });
 
     describe('error', () => {
@@ -607,7 +607,7 @@ describe('PubSub', () => {
           done();
         }
 
-        pubsub.createSubscription?.(TOPIC_NAME, SUB_NAME, callback);
+        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, callback);
       });
     });
 
@@ -643,7 +643,7 @@ describe('PubSub', () => {
           done();
         }
 
-        pubsub.createSubscription?.(TOPIC_NAME, SUB_NAME, callback);
+        pubsub.createSubscription(TOPIC_NAME, SUB_NAME, callback);
       });
 
       it('should fill the subscription object name if projectId was empty', async () => {
@@ -704,7 +704,7 @@ describe('PubSub', () => {
       });
 
       it('should return an error & API response', done => {
-        pubsub.createTopic?.('new-topic', (err, topic, apiResponse_) => {
+        pubsub.createTopic('new-topic', (err, topic, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(topic, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -739,7 +739,7 @@ describe('PubSub', () => {
           return topicInstance as Topic;
         };
 
-        pubsub.createTopic?.(topicName, (err, topic) => {
+        pubsub.createTopic(topicName, (err, topic) => {
           assert.ifError(err);
           assert.strictEqual(topic, topicInstance);
           done();
@@ -747,7 +747,7 @@ describe('PubSub', () => {
       });
 
       it('should pass apiResponse to callback', done => {
-        pubsub.createTopic?.('new-topic', (err, topic, apiResponse_) => {
+        pubsub.createTopic('new-topic', (err, topic, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
@@ -785,7 +785,7 @@ describe('PubSub', () => {
 
     it('should throw if no subscription name is provided', async () => {
       await assert.rejects(async () => {
-        await pubsub.detachSubscription?.(undefined!);
+        await pubsub.detachSubscription(undefined!);
       }, /A subscription name is required./);
     });
 
@@ -794,7 +794,7 @@ describe('PubSub', () => {
         .stub(pubsub, 'request')
         .callsArgOnWith(1, undefined, undefined, apiResponse);
 
-      pubsub.detachSubscription?.(SUB_NAME, (err, response) => {
+      pubsub.detachSubscription(SUB_NAME, (err, response) => {
         assert.strictEqual(response, apiResponse);
         done();
       });
@@ -805,7 +805,7 @@ describe('PubSub', () => {
         .stub(pubsub, 'request')
         .callsArgOnWith(1, undefined, undefined, apiResponse);
 
-      pubsub.detachSubscription?.(SUB_NAME, undefined!, (_err, _response) => {
+      pubsub.detachSubscription(SUB_NAME, undefined!, (_err, _response) => {
         assert.strictEqual(_response, apiResponse);
         done();
       });
@@ -818,7 +818,7 @@ describe('PubSub', () => {
         return SUBSCRIPTION as subby.Subscription;
       });
 
-      await pubsub.detachSubscription?.(SUB_NAME);
+      await pubsub.detachSubscription(SUB_NAME);
     });
 
     it('should send correct request', done => {
@@ -839,7 +839,7 @@ describe('PubSub', () => {
         done();
       });
 
-      pubsub.detachSubscription?.(SUB_NAME, options, assert.ifError);
+      pubsub.detachSubscription(SUB_NAME, options, assert.ifError);
     });
 
     it('should pass options to the api request', done => {
@@ -858,7 +858,7 @@ describe('PubSub', () => {
         done();
       });
 
-      pubsub.detachSubscription?.(SUB_NAME, options, assert.ifError);
+      pubsub.detachSubscription(SUB_NAME, options, assert.ifError);
     });
   });
 
@@ -881,7 +881,7 @@ describe('PubSub', () => {
     });
 
     it('should do nothing if correct options are not set', () => {
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
 
       assert.strictEqual(pubsub.options?.servicePath, undefined);
       assert.strictEqual(pubsub.options?.port, undefined);
@@ -893,18 +893,18 @@ describe('PubSub', () => {
 
       setHost(defaultBaseUrl_);
       pubsub!.options!.apiEndpoint = testingUrl;
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
 
       assert.strictEqual(pubsub.options?.servicePath, 'localhost');
-      assert.strictEqual(pubsub.options.port, 8085);
-      assert.strictEqual(pubsub.options.sslCreds, fakeCreds);
+      assert.strictEqual(pubsub.options?.port, 8085);
+      assert.strictEqual(pubsub.options?.sslCreds, fakeCreds);
       assert.strictEqual(pubsub.isEmulator, true);
     });
 
     it('should allow overriding fake cred mode (on)', () => {
       pubsub!.options!.apiEndpoint = 'something.googleapis.com';
       pubsub!.options!.emulatorMode = true;
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
 
       assert.strictEqual(pubsub.options!.sslCreds, fakeCreds);
       assert.strictEqual(pubsub.isEmulator, true);
@@ -917,7 +917,7 @@ describe('PubSub', () => {
       setHost(defaultBaseUrl_);
       pubsub!.options!.apiEndpoint = testingUrl;
       pubsub!.options!.emulatorMode = false;
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
 
       assert.strictEqual(pubsub.options?.servicePath, 'localhost');
       assert.strictEqual(pubsub.options.port, 8085);
@@ -927,35 +927,35 @@ describe('PubSub', () => {
 
     it('should remove slashes from the baseUrl', () => {
       setHost('localhost:8080/');
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
       assert.strictEqual(pubsub.options?.servicePath, 'localhost');
-      assert.strictEqual(pubsub.options.port, 8080);
+      assert.strictEqual(pubsub.options?.port, 8080);
 
       setHost('localhost:8081//');
-      pubsub.determineBaseUrl_?.();
-      assert.strictEqual(pubsub.options.servicePath, 'localhost');
-      assert.strictEqual(pubsub.options.port, 8081);
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.options?.servicePath, 'localhost');
+      assert.strictEqual(pubsub.options?.port, 8081);
     });
 
     it('should set the port to undefined if not set', () => {
       setHost('localhost');
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
       assert.strictEqual(pubsub.options?.servicePath, 'localhost');
-      assert.strictEqual(pubsub.options.port, undefined);
+      assert.strictEqual(pubsub.options?.port, undefined);
     });
 
     it('should set the port to 80 for http with no port specified', () => {
       setHost('http://localhost/');
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
       assert.strictEqual(pubsub.options?.servicePath, 'localhost');
       assert.strictEqual(pubsub.options?.port, 80);
     });
 
     it('should set the port to 443 for https with no port specified', () => {
       setHost('https://localhost/');
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
       assert.strictEqual(pubsub.options?.servicePath, 'localhost');
-      assert.strictEqual(pubsub.options.port, 443);
+      assert.strictEqual(pubsub.options?.port, 443);
     });
 
     it('should create credentials from local grpc if present', () => {
@@ -968,7 +968,7 @@ describe('PubSub', () => {
 
       setHost('localhost');
       pubsub!.options!.grpc = fakeGrpc as unknown as typeof gax.grpc;
-      pubsub.determineBaseUrl_?.();
+      pubsub.determineBaseUrl_();
       assert.strictEqual(pubsub.options?.sslCreds, fakeCredentials);
     });
 
@@ -986,9 +986,9 @@ describe('PubSub', () => {
       });
 
       it('should use the PUBSUB_EMULATOR_HOST env var', () => {
-        pubsub.determineBaseUrl_?.();
+        pubsub.determineBaseUrl_();
         assert.strictEqual(pubsub.options?.servicePath, 'localhost');
-        assert.strictEqual(pubsub.options.port, 9090);
+        assert.strictEqual(pubsub.options?.port, 9090);
         assert.strictEqual(pubsub.isEmulator, true);
       });
     });
@@ -1008,7 +1008,7 @@ describe('PubSub', () => {
       });
 
       it('should use the CLOUDSDK_API_ENDPOINT_OVERRIDES_PUBSUB env var', () => {
-        pubsub.determineBaseUrl_?.();
+        pubsub.determineBaseUrl_();
         assert.strictEqual(pubsub.options?.servicePath, server);
         assert.strictEqual(pubsub.options?.port, 443);
         assert.strictEqual(pubsub.isEmulator, false);
@@ -1028,11 +1028,15 @@ describe('PubSub', () => {
     });
 
     it('should accept a query and a callback', done => {
-      pubsub.getSnapshots?.({}, done);
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      pubsub.getSnapshots({}, done);
     });
 
     it('should accept just a callback', done => {
-      pubsub.getSnapshots?.(done);
+      pubsub.getSnapshots(done);
     });
 
     it('should build the right request', done => {
@@ -1067,7 +1071,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.getSnapshots?.(options, assert.ifError);
+      pubsub.getSnapshots(options, assert.ifError);
     });
 
     it('should return Snapshot instances with metadata', done => {
@@ -1079,7 +1083,7 @@ describe('PubSub', () => {
       });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      pubsub.getSnapshots?.((err: any, snapshots: any) => {
+      pubsub.getSnapshots((err: any, snapshots: any) => {
         assert.ifError(err);
         assert.strictEqual(snapshots![0], snapshot);
         assert.strictEqual(
@@ -1101,7 +1105,7 @@ describe('PubSub', () => {
         callback(err_, snapshots_, nextQuery_, apiResponse_);
       };
 
-      pubsub.getSnapshots?.((err, snapshots, apiResponse) => {
+      pubsub.getSnapshots((err, snapshots, apiResponse) => {
         assert.strictEqual(err, err_);
         assert.deepStrictEqual(snapshots, snapshots_);
         assert.strictEqual(apiResponse, nextQuery_);
@@ -1120,11 +1124,19 @@ describe('PubSub', () => {
     });
 
     it('should accept a query and a callback', done => {
-      pubsub.getSubscriptions?.({}, done);
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      pubsub.getSubscriptions({}, done);
     });
 
     it('should accept just a callback', done => {
-      pubsub.getSubscriptions?.(done);
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      pubsub.getSubscriptions(done);
     });
 
     it('should pass the correct arguments to the API', done => {
@@ -1152,7 +1164,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.getSubscriptions?.(options, assert.ifError);
+      pubsub.getSubscriptions(options, assert.ifError);
     });
 
     it('should pass options to API request', done => {
@@ -1167,11 +1179,11 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.getSubscriptions?.(opts, assert.ifError);
+      pubsub.getSubscriptions(opts, assert.ifError);
     });
 
     it('should return Subscription instances', done => {
-      pubsub.getSubscriptions?.(
+      pubsub.getSubscriptions(
         (
           err: gax.grpc.ServiceError | null,
           subscriptions?: subby.Subscription[] | null,
@@ -1193,7 +1205,7 @@ describe('PubSub', () => {
         callback(err_, subs_, nextQuery_, apiResponse_);
       };
 
-      pubsub.getSubscriptions?.(
+      pubsub.getSubscriptions(
         (
           err: gax.grpc.ServiceError | null,
           subs?: subby.Subscription[] | null,
@@ -1222,7 +1234,7 @@ describe('PubSub', () => {
           done();
         };
 
-        pubsub.getSubscriptions?.(opts, assert.ifError);
+        pubsub.getSubscriptions(opts, assert.ifError);
       });
 
       it('should create a topic instance from a name', done => {
@@ -1242,7 +1254,7 @@ describe('PubSub', () => {
           return fakeTopic as Topic;
         };
 
-        pubsub.getSubscriptions?.(opts, assert.ifError);
+        pubsub.getSubscriptions(opts, assert.ifError);
       });
     });
   });
@@ -1258,11 +1270,19 @@ describe('PubSub', () => {
     });
 
     it('should accept a query and a callback', done => {
-      pubsub.getTopics?.({}, done);
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      pubsub.getTopics({}, done);
     });
 
     it('should accept just a callback', done => {
-      pubsub.getTopics?.(done);
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      pubsub.getTopics(done);
     });
 
     it('should build the right request', done => {
@@ -1297,7 +1317,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.getTopics?.(options, assert.ifError);
+      pubsub.getTopics(options, assert.ifError);
     });
 
     it('should return Topic instances with metadata', done => {
@@ -1309,7 +1329,7 @@ describe('PubSub', () => {
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      pubsub.getTopics?.((err: any, topics: any) => {
+      pubsub.getTopics((err: any, topics: any) => {
         assert.ifError(err);
         assert.strictEqual(topics![0], topic);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1328,7 +1348,7 @@ describe('PubSub', () => {
         callback(err_, topics_, nextQuery_, apiResponse_);
       };
 
-      pubsub.getTopics?.((err, topics, apiResponse) => {
+      pubsub.getTopics((err, topics, apiResponse) => {
         assert.strictEqual(err, err_);
         assert.deepStrictEqual(topics, topics_);
         assert.strictEqual(apiResponse, nextQuery_);
@@ -1346,7 +1366,7 @@ describe('PubSub', () => {
     } as pubsubTypes.RequestConfig;
 
     beforeEach(() => {
-      delete pubsub.projectId;
+      pubsub.projectId = PROJECT_ID_PLACEHOLDER;
       afterEach(() => sandbox.restore());
 
       sandbox.stub(pubsub, 'auth').value({
@@ -1360,10 +1380,10 @@ describe('PubSub', () => {
     });
 
     it('should throw if the PubSub is already closed', done => {
-      pubsub.close?.((err: Error | null) => {
+      pubsub.close((err: Error | null) => {
         assert.strictEqual(err, null);
 
-        pubsub.request?.(CONFIG, (errInner: Error | null) => {
+        pubsub.request(CONFIG, (errInner: Error | null) => {
           assert.notStrictEqual(errInner, null);
           assert.strictEqual(
             errInner!.message.indexOf('closed PubSub object') >= 0,
@@ -1380,7 +1400,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.request?.(CONFIG, assert.ifError);
+      pubsub.request(CONFIG, assert.ifError);
     });
 
     it('should return error from getClient_', done => {
@@ -1389,7 +1409,7 @@ describe('PubSub', () => {
         callback(expectedError);
       };
 
-      pubsub.request?.(CONFIG, (err: gax.grpc.ServiceError | null) => {
+      pubsub.request(CONFIG, (err: gax.grpc.ServiceError | null) => {
         assert.strictEqual(expectedError, err);
         done();
       });
@@ -1410,7 +1430,7 @@ describe('PubSub', () => {
       pubsub.getClient_ = (config, callback: Function) => {
         callback(null, fakeClient);
       };
-      pubsub.request?.(CONFIG, assert.ifError);
+      pubsub.request(CONFIG, assert.ifError);
     });
 
     it('should replace the project id token on reqOpts', done => {
@@ -1420,7 +1440,7 @@ describe('PubSub', () => {
         assert.strictEqual(projectId, PROJECT_ID);
         done();
       };
-      pubsub.request?.(CONFIG, assert.ifError);
+      pubsub.request(CONFIG, assert.ifError);
     });
   });
 
@@ -1446,7 +1466,7 @@ describe('PubSub', () => {
 
         // Stub out its close method, and verify it gets called.
         const stub = sandbox.stub(client, 'close').resolves();
-        await pubsub.closeAllClients_?.();
+        await pubsub.closeAllClients_();
 
         assert.strictEqual(stub.called, true);
       });
@@ -1454,24 +1474,24 @@ describe('PubSub', () => {
 
     describe('project ID', () => {
       beforeEach(() => {
-        delete pubsub.projectId;
+        pubsub.projectId = PROJECT_ID_PLACEHOLDER;
         pubsub.isEmulator = false;
       });
 
       it('should get and cache the project ID', async () => {
         sandbox.stub(pubsub!.auth!, 'getProjectId').resolves(PROJECT_ID);
 
-        await pubsub.getClientAsync_?.(CONFIG);
+        await pubsub.getClientAsync_(CONFIG);
 
         assert.strictEqual(pubsub.projectId, PROJECT_ID);
         assert.strictEqual(pubsub.options?.projectId, PROJECT_ID);
       });
 
       it('should get the project ID if placeholder', async () => {
-        pubsub.projectId = '{{projectId}}';
+        pubsub.projectId = PROJECT_ID_PLACEHOLDER;
         sandbox.stub(pubsub!.auth!, 'getProjectId').resolves(PROJECT_ID);
 
-        await pubsub.getClientAsync_?.(CONFIG);
+        await pubsub.getClientAsync_(CONFIG);
 
         assert.strictEqual(pubsub.projectId, PROJECT_ID);
       });
@@ -1481,7 +1501,7 @@ describe('PubSub', () => {
         sandbox.stub(pubsub!.auth!, 'getProjectId').rejects(error);
 
         try {
-          await pubsub.getClientAsync_?.(CONFIG);
+          await pubsub.getClientAsync_(CONFIG);
           throw new Error('getClientAsync_ should have thrown an error');
         } catch (e) {
           assert.strictEqual(e, error);
@@ -1494,7 +1514,7 @@ describe('PubSub', () => {
         const error = new Error('err');
         sandbox.stub(pubsub!.auth!, 'getProjectId').rejects(error);
 
-        await pubsub.getClientAsync_?.(CONFIG);
+        await pubsub.getClientAsync_(CONFIG);
         assert.strictEqual(pubsub.projectId, '');
       });
 
@@ -1504,7 +1524,7 @@ describe('PubSub', () => {
         const error = new Error('getProjectId should not be called.');
         sandbox.stub(pubsub!.auth!, 'getProjectId').rejects(error);
 
-        await pubsub.getClientAsync_?.(CONFIG);
+        await pubsub.getClientAsync_(CONFIG);
       });
     });
 
@@ -1519,10 +1539,10 @@ describe('PubSub', () => {
         return FAKE_CLIENT_INSTANCE;
       };
 
-      await pubsub.getClientAsync_?.(CONFIG);
+      await pubsub.getClientAsync_(CONFIG);
       assert.strictEqual(pubsub.api?.FakeClient, FAKE_CLIENT_INSTANCE);
 
-      await pubsub.getClientAsync_?.(CONFIG);
+      await pubsub.getClientAsync_(CONFIG);
       assert.strictEqual(numTimesFakeClientInstantiated, 1);
     });
 
@@ -1535,7 +1555,7 @@ describe('PubSub', () => {
         return FAKE_CLIENT_INSTANCE;
       };
 
-      const client = await pubsub.getClientAsync_?.(CONFIG);
+      const client = await pubsub.getClientAsync_(CONFIG);
       assert.strictEqual(client, FAKE_CLIENT_INSTANCE);
     });
   });
@@ -1552,7 +1572,7 @@ describe('PubSub', () => {
         .withArgs(CONFIG)
         .resolves(FAKE_CLIENT_INSTANCE);
 
-      pubsub.getClient_?.(CONFIG, (err, client) => {
+      pubsub.getClient_(CONFIG, (err, client) => {
         assert.ifError(err);
         assert.strictEqual(client, FAKE_CLIENT_INSTANCE);
         done();
@@ -1563,7 +1583,7 @@ describe('PubSub', () => {
       const error = new Error('err');
       sandbox.stub(pubsub, 'getClientAsync_').rejects(error);
 
-      pubsub.getClient_?.(CONFIG, err => {
+      pubsub.getClient_(CONFIG, err => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1599,7 +1619,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.request?.(CONFIG, assert.ifError);
+      pubsub.request(CONFIG, assert.ifError);
     });
 
     it('should return error from getting the client', done => {
@@ -1609,7 +1629,7 @@ describe('PubSub', () => {
         callback(error);
       };
 
-      pubsub.request?.(CONFIG, (err: gax.ServiceError | null) => {
+      pubsub.request(CONFIG, (err: gax.ServiceError | null) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1623,7 +1643,7 @@ describe('PubSub', () => {
         done();
       };
 
-      pubsub.request?.(CONFIG, assert.ifError);
+      pubsub.request(CONFIG, assert.ifError);
     });
 
     it('should call the client method correctly', done => {
@@ -1653,7 +1673,7 @@ describe('PubSub', () => {
         callback(null, fakeClient);
       };
 
-      pubsub.request?.(CONFIG, assert.ifError);
+      pubsub.request(CONFIG, assert.ifError);
     });
   });
 
@@ -1667,7 +1687,7 @@ describe('PubSub', () => {
 
     it('should return a Snapshot object', () => {
       const SNAPSHOT_NAME = 'new-snapshot';
-      const snapshot = pubsub.snapshot?.(SNAPSHOT_NAME);
+      const snapshot = pubsub.snapshot(SNAPSHOT_NAME);
       const args = (snapshot as {} as FakeSnapshot).calledWith_;
 
       assert(snapshot instanceof FakeSnapshot);
@@ -1683,7 +1703,7 @@ describe('PubSub', () => {
     it('should return a Subscription object', () => {
       // tslint:disable-next-line only-arrow-functions
       subscriptionOverride = function () {};
-      const subscription = pubsub.subscription?.(SUB_NAME, {});
+      const subscription = pubsub.subscription(SUB_NAME, {});
       assert(subscription instanceof subscriptionOverride);
     });
 
@@ -1696,7 +1716,7 @@ describe('PubSub', () => {
         assert.strictEqual(name, SUB_NAME);
         done();
       };
-      pubsub.subscription?.(SUB_NAME);
+      pubsub.subscription(SUB_NAME);
     });
 
     it('should honor settings', done => {
@@ -1709,7 +1729,7 @@ describe('PubSub', () => {
         assert.strictEqual(options, CONFIG);
         done();
       };
-      pubsub.subscription?.(SUB_NAME, CONFIG);
+      pubsub.subscription(SUB_NAME, CONFIG);
     });
 
     it('should throw if a name is not provided', () => {
@@ -1729,13 +1749,13 @@ describe('PubSub', () => {
     });
 
     it('should return a Topic object', () => {
-      assert(pubsub.topic?.('new-topic') instanceof FakeTopic);
+      assert(pubsub.topic('new-topic') instanceof FakeTopic);
     });
 
     it('should pass the correct args', () => {
       const fakeName = 'with-options';
       const fakeOptions = {};
-      const topic = pubsub.topic?.(fakeName, fakeOptions);
+      const topic = pubsub.topic(fakeName, fakeOptions);
 
       const [ps, name, options] = (topic as {} as FakeTopic).calledWith_;
 
@@ -1754,9 +1774,9 @@ describe('PubSub', () => {
 
     it('should close the schema client when it has been opened', async () => {
       // Force it to create a client.
-      const client = await pubsub.getSchemaClient?.();
+      const client = await pubsub.getSchemaClient();
       sandbox.stub(client!, 'close').resolves();
-      await pubsub.close?.();
+      await pubsub.close();
     });
 
     // I feel like this ought to be a test, but something in getSchemaClient_()
@@ -1822,7 +1842,7 @@ describe('PubSub', () => {
 
     it('defaults to BASIC for listSchemas', async () => {
       // Grab the schema client it'll be using so we can stub it.
-      const client = await pubsub.getSchemaClient?.();
+      const client = await pubsub.getSchemaClient();
 
       sandbox.stub(client!, 'listSchemasAsync').callsFake(req => {
         assert.strictEqual(req!.view, 'BASIC');
@@ -1837,7 +1857,7 @@ describe('PubSub', () => {
     });
 
     it('returns a proper Schema object from schema()', async () => {
-      const schema = pubsub.schema?.('foo');
+      const schema = pubsub.schema('foo');
       assert.strictEqual(schema!.id, 'foo');
 
       const name = await schema!.getName();

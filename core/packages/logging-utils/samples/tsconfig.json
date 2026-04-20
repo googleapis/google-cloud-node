@@ -8,7 +8,9 @@
       "es2018",
       "dom"
     ],
-    "moduleResolution": "node"
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "system-test/*.ts"
