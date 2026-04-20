@@ -25,5 +25,6 @@ node.owlbot_main(relative_dir="handwritten/bigquery",
     ]
 )
 
-# Regenerate Discovery types.
-shell.run(('npm','run','types'))
+# Install dependencies and regenerate Discovery types.
+shell.run(('npm', 'install'), cwd='handwritten/bigquery')
+shell.run(('npm', 'run', 'types'), cwd='handwritten/bigquery')

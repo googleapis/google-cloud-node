@@ -27,6 +27,7 @@
   "../../protos/google/cloud/ces/v1beta/guardrail.proto",
   "../../protos/google/cloud/ces/v1beta/mcp_tool.proto",
   "../../protos/google/cloud/ces/v1beta/mcp_toolset.proto",
+  "../../protos/google/cloud/ces/v1beta/mocks.proto",
   "../../protos/google/cloud/ces/v1beta/omnichannel.proto",
   "../../protos/google/cloud/ces/v1beta/omnichannel_service.proto",
   "../../protos/google/cloud/ces/v1beta/open_api_tool.proto",

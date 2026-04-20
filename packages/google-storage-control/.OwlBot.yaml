@@ -15,7 +15,5 @@
 deep-copy-regex:
     - source: /google/storage/control/google-storage-control-nodejs
       dest: /owl-bot-staging/google-storage-control
-deep-preserve-regex:
-    - /.*\.jsdoc\.js
 
 api-name: control

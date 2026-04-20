@@ -1852,6 +1852,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "engine": {
+                          "type": "Engine",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "configBucket": {
                           "type": "string",
                           "id": 1,
@@ -1981,6 +1988,13 @@
                             "CLUSTER_TIER_UNSPECIFIED": 0,
                             "CLUSTER_TIER_STANDARD": 1,
                             "CLUSTER_TIER_PREMIUM": 2
+                          }
+                        },
+                        "Engine": {
+                          "values": {
+                            "ENGINE_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "LIGHTNING": 2
                           }
                         }
                       }
@@ -2935,6 +2949,12 @@
                             "autoDeleteTime",
                             "autoDeleteTtl"
                           ]
+                        },
+                        "stopTtl": {
+                          "oneof": [
+                            "autoStopTime",
+                            "autoStopTtl"
+                          ]
                         }
                       },
                       "fields": {
@@ -2955,6 +2975,27 @@
                         "autoDeleteTtl": {
                           "type": "google.protobuf.Duration",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "idleStopTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoStopTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoStopTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
