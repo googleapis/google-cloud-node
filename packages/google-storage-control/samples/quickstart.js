@@ -31,7 +31,7 @@ function main(bucketName) {
   // const bucketName = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const { StorageControlClient } = require('@google-cloud/storage-control').v2;
 
   // Instantiates a client
   const controlClient = new StorageControlClient();
@@ -54,7 +54,7 @@ function main(bucketName) {
   callGetStorageLayout();
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });
