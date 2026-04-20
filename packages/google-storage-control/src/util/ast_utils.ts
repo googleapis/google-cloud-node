@@ -77,7 +77,7 @@ function getOverloadedMethod(
   let promiseReturnType = '';
   if (ts.isUnionTypeNode(node.type)) {
     const promiseTypeNode = node.type.types.find(
-      t =>
+      (t) =>
         t.kind === ts.SyntaxKind.TypeReference &&
         t.getText(sourceFile).startsWith('Promise'),
     );
@@ -97,7 +97,7 @@ function getOverloadedMethod(
   let callbackType = '';
   if (ts.isUnionTypeNode(optionsOrCallbackParam.type)) {
     const callbackTypeNode = optionsOrCallbackParam.type.types.find(
-      t =>
+      (t) =>
         t.kind === ts.SyntaxKind.TypeReference &&
         (t.getText(sourceFile).startsWith('Callback') ||
           t.getText(sourceFile).startsWith('PaginationCallback')),
@@ -158,7 +158,7 @@ function extract(node: ts.Node, client: string): void {
         );
         let docString = '';
         if (commentRanges) {
-          commentRanges.map(r => {
+          commentRanges.map((r) => {
             docString = docString.concat(
               sourceFile!.getFullText().slice(r.pos, r.end),
             );
@@ -175,7 +175,7 @@ function extract(node: ts.Node, client: string): void {
       }
     }
   }
-  ts.forEachChild(node, childNode => {
+  ts.forEachChild(node, (childNode) => {
     extract(childNode, client);
   });
 }
@@ -190,7 +190,7 @@ function extract(node: ts.Node, client: string): void {
  * @returns {string} The generated source code for the methods.
  */
 function ast(file: string, client: string): [string, string][] {
-  const program = ts.createProgram([file], {allowJs: true});
+  const program = ts.createProgram([file], { allowJs: true });
   sourceFile = program.getSourceFile(file)!;
   if (!sourceFile) {
     throw new Error(`Could not find source file: ${file}`);
@@ -200,7 +200,7 @@ function ast(file: string, client: string): [string, string][] {
   extract(sourceFile, client);
   program.getTypeChecker();
 
-  return foundNodes.map(f => {
+  return foundNodes.map((f) => {
     let output = '';
     const [name, node] = f;
     const escapedName = getEscapedText(name);
@@ -216,7 +216,7 @@ function ast(file: string, client: string): [string, string][] {
     }
 
     const isStatic = node.modifiers?.some(
-      m => m.kind === ts.SyntaxKind.StaticKeyword,
+      (m) => m.kind === ts.SyntaxKind.StaticKeyword,
     );
     if (!isExcludedFunction) {
       const docString = methodDocstrings.get(functionName);
@@ -293,7 +293,7 @@ function ast(file: string, client: string): [string, string][] {
 `;
         } else {
           const hasRequestArg = node.parameters.some(
-            p => getEscapedText(p.name) === 'request',
+            (p) => getEscapedText(p.name) === 'request',
           );
 
           // If there's no 'request' parameter, it's a simple helper method.
@@ -356,7 +356,7 @@ export function astHelper(files: string[], clients: string[]) {
     }
   }
   let output = '';
-  functions.forEach(source => {
+  functions.forEach((source) => {
     output += source;
   });
   return output;
@@ -379,7 +379,7 @@ export function parseClientName(client: string) {
  * @returns {Map<string, string>} A map of public property names to their full text.
  */
 export function getPropertyDeclarations(file: string): Map<string, string> {
-  const program = ts.createProgram([file], {allowJs: true});
+  const program = ts.createProgram([file], { allowJs: true });
   const sourceFile = program.getSourceFile(file)!;
   if (!sourceFile) {
     throw new Error(`Could not find source file: ${file}`);
@@ -389,7 +389,7 @@ export function getPropertyDeclarations(file: string): Map<string, string> {
   function visit(node: ts.Node) {
     if (ts.isPropertyDeclaration(node)) {
       const isPrivate = node.modifiers?.some(
-        m => m.kind === ts.SyntaxKind.PrivateKeyword,
+        (m) => m.kind === ts.SyntaxKind.PrivateKeyword,
       );
       if (!isPrivate) {
         const propertyName = getEscapedText(node.name);
