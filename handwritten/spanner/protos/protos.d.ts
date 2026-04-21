@@ -5655,24 +5655,6 @@ export namespace google {
 
                 /** Violation description */
                 description?: (string|null);
-
-                /** Violation apiService */
-                apiService?: (string|null);
-
-                /** Violation quotaMetric */
-                quotaMetric?: (string|null);
-
-                /** Violation quotaId */
-                quotaId?: (string|null);
-
-                /** Violation quotaDimensions */
-                quotaDimensions?: ({ [k: string]: string }|null);
-
-                /** Violation quotaValue */
-                quotaValue?: (number|Long|string|null);
-
-                /** Violation futureQuotaValue */
-                futureQuotaValue?: (number|Long|string|null);
             }
 
             /** Represents a Violation. */
@@ -5689,24 +5671,6 @@ export namespace google {
 
                 /** Violation description. */
                 public description: string;
-
-                /** Violation apiService. */
-                public apiService: string;
-
-                /** Violation quotaMetric. */
-                public quotaMetric: string;
-
-                /** Violation quotaId. */
-                public quotaId: string;
-
-                /** Violation quotaDimensions. */
-                public quotaDimensions: { [k: string]: string };
-
-                /** Violation quotaValue. */
-                public quotaValue: (number|Long|string);
-
-                /** Violation futureQuotaValue. */
-                public futureQuotaValue?: (number|Long|string|null);
 
                 /**
                  * Creates a new Violation instance using the specified properties.
@@ -6103,12 +6067,6 @@ export namespace google {
 
                 /** FieldViolation description */
                 description?: (string|null);
-
-                /** FieldViolation reason */
-                reason?: (string|null);
-
-                /** FieldViolation localizedMessage */
-                localizedMessage?: (google.rpc.ILocalizedMessage|null);
             }
 
             /** Represents a FieldViolation. */
@@ -6125,12 +6083,6 @@ export namespace google {
 
                 /** FieldViolation description. */
                 public description: string;
-
-                /** FieldViolation reason. */
-                public reason: string;
-
-                /** FieldViolation localizedMessage. */
-                public localizedMessage?: (google.rpc.ILocalizedMessage|null);
 
                 /**
                  * Creates a new FieldViolation instance using the specified properties.
