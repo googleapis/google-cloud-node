@@ -1832,6 +1832,92 @@ describe('entity', () => {
         assert.strictEqual(key.parent!.name, 'sampletask1');
         assert.deepStrictEqual(key.parent!.path, ['Task', 'sampletask1']);
       });
+
+      it('should decode key with numeric ID', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHIKCxIES2luZBh7DA';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, ['Kind', '123']);
+      });
+
+      it('should decode key with string name with spaces', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHIaCxIES2luZCIQbmFtZSB3aXRoIHNwYWNlcww';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, ['Kind', 'name with spaces']);
+      });
+
+      it('should decode key with special characters', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHIbCxIES2luZCIRc3BlY2lhbCFAIyQlXiYqKCkM';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, ['Kind', 'special!@#$%^&*()']);
+      });
+
+      it('should decode key with 3-level parent', () => {
+        const encodedKey =
+          'ag5zfnRlc3QtcHJvamVjdHIqCxILR3JhbmRwYXJlbnQYAQwLEgZQYXJlbnQiAnAxDAsSBUNoaWxkGAIM';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, [
+          'Grandparent',
+          '1',
+          'Parent',
+          'p1',
+          'Child',
+          '2',
+        ]);
+      });
+
+      it('should decode key with namespace and numeric ID', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHILCxIES2luZBjIAwyiAQRNeU5T';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.strictEqual(key.namespace, 'MyNS');
+        assert.deepStrictEqual(key.path, ['Kind', '456']);
+      });
+
+      it('should decode key with namespace and parent', () => {
+        const encodedKey =
+          'ag5zfnRlc3QtcHJvamVjdHIZCxIGUGFyZW50GAEMCxIFQ2hpbGQiAmMxDKIBBE15TlM';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.strictEqual(key.namespace, 'MyNS');
+        assert.deepStrictEqual(key.path, ['Parent', '1', 'Child', 'c1']);
+      });
+
+      it('should decode key with long integer ID as string', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHIdCxIES2luZCITOTIyMzM3MjAzNjg1NDc3NTgwNww';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, ['Kind', '9223372036854775807']);
+      });
+
+      it('should decode key with kind with hyphens', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHINCxIHTXktS2luZBgBDA';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, ['My-Kind', '1']);
+      });
+
+      it('should decode key with different kinds in path', () => {
+        const encodedKey =
+          'ag5zfnRlc3QtcHJvamVjdHIoCxIEVXNlciIFdXNlcjEMCxIEUG9zdBhkDAsSB0NvbW1lbnQiAmMxDA';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, [
+          'User',
+          'user1',
+          'Post',
+          '100',
+          'Comment',
+          'c1',
+        ]);
+      });
+
+      it('should decode key with same kinds in path', () => {
+        const encodedKey = 'ag5zfnRlc3QtcHJvamVjdHIeCxIETm9kZRgBDAsSBE5vZGUYAgwLEgROb2RlGAMM';
+        const key = urlSafeKey.legacyDecode(encodedKey);
+        assert.deepStrictEqual(key.path, [
+          'Node',
+          '1',
+          'Node',
+          '2',
+          'Node',
+          '3',
+        ]);
+      });
     });
   });
 });
