@@ -64846,7 +64846,8 @@
                             "supervisedTuningSpec",
                             "distillationSpec",
                             "partnerModelTuningSpec",
-                            "veoTuningSpec"
+                            "veoTuningSpec",
+                            "veoLoraTuningSpec"
                           ]
                         }
                       },
@@ -64874,6 +64875,10 @@
                         "veoTuningSpec": {
                           "type": "VeoTuningSpec",
                           "id": 33
+                        },
+                        "veoLoraTuningSpec": {
+                          "type": "VeoLoraTuningSpec",
+                          "id": 38
                         },
                         "name": {
                           "type": "string",
@@ -65676,6 +65681,18 @@
                       }
                     },
                     "VeoHyperParameters": {
+                      "oneofs": {
+                        "_veoDataMixtureRatio": {
+                          "oneof": [
+                            "veoDataMixtureRatio"
+                          ]
+                        },
+                        "_tuningSpeed": {
+                          "oneof": [
+                            "tuningSpeed"
+                          ]
+                        }
+                      },
                       "fields": {
                         "epochCount": {
                           "type": "int64",
@@ -65697,6 +65714,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "veoDataMixtureRatio": {
+                          "type": "double",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "tuningSpeed": {
+                          "type": "TuningSpeed",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "adapterSize": {
+                          "type": "AdapterSize",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -65704,12 +65743,53 @@
                           "values": {
                             "TUNING_TASK_UNSPECIFIED": 0,
                             "TUNING_TASK_I2V": 1,
-                            "TUNING_TASK_T2V": 2
+                            "TUNING_TASK_T2V": 2,
+                            "TUNING_TASK_R2V": 3
+                          }
+                        },
+                        "TuningSpeed": {
+                          "values": {
+                            "TUNING_SPEED_UNSPECIFIED": 0,
+                            "REGULAR": 1,
+                            "FAST": 2
+                          }
+                        },
+                        "AdapterSize": {
+                          "values": {
+                            "ADAPTER_SIZE_UNSPECIFIED": 0,
+                            "ADAPTER_SIZE_EIGHT": 8,
+                            "ADAPTER_SIZE_SIXTEEN": 16,
+                            "ADAPTER_SIZE_THIRTY_TWO": 32
                           }
                         }
                       }
                     },
                     "VeoTuningSpec": {
+                      "fields": {
+                        "trainingDatasetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validationDatasetUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hyperParameters": {
+                          "type": "VeoHyperParameters",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VeoLoraTuningSpec": {
                       "fields": {
                         "trainingDatasetUri": {
                           "type": "string",

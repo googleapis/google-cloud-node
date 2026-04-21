@@ -241466,6 +241466,9 @@ export namespace google {
                     /** TuningJob veoTuningSpec */
                     veoTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoTuningSpec|null);
 
+                    /** TuningJob veoLoraTuningSpec */
+                    veoLoraTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoLoraTuningSpec|null);
+
                     /** TuningJob name */
                     name?: (string|null);
 
@@ -241551,6 +241554,9 @@ export namespace google {
                     /** TuningJob veoTuningSpec. */
                     public veoTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoTuningSpec|null);
 
+                    /** TuningJob veoLoraTuningSpec. */
+                    public veoLoraTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoLoraTuningSpec|null);
+
                     /** TuningJob name. */
                     public name: string;
 
@@ -241612,7 +241618,7 @@ export namespace google {
                     public sourceModel?: ("baseModel"|"preTunedModel");
 
                     /** TuningJob tuningSpec. */
-                    public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec"|"veoTuningSpec");
+                    public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec"|"veoTuningSpec"|"veoLoraTuningSpec");
 
                     /**
                      * Creates a new TuningJob instance using the specified properties.
@@ -243563,6 +243569,15 @@ export namespace google {
 
                     /** VeoHyperParameters tuningTask */
                     tuningTask?: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|null);
+
+                    /** VeoHyperParameters veoDataMixtureRatio */
+                    veoDataMixtureRatio?: (number|null);
+
+                    /** VeoHyperParameters tuningSpeed */
+                    tuningSpeed?: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningSpeed|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningSpeed|null);
+
+                    /** VeoHyperParameters adapterSize */
+                    adapterSize?: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.AdapterSize|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.AdapterSize|null);
                 }
 
                 /** Represents a VeoHyperParameters. */
@@ -243582,6 +243597,15 @@ export namespace google {
 
                     /** VeoHyperParameters tuningTask. */
                     public tuningTask: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask);
+
+                    /** VeoHyperParameters veoDataMixtureRatio. */
+                    public veoDataMixtureRatio?: (number|null);
+
+                    /** VeoHyperParameters tuningSpeed. */
+                    public tuningSpeed?: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningSpeed|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningSpeed|null);
+
+                    /** VeoHyperParameters adapterSize. */
+                    public adapterSize: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.AdapterSize|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.AdapterSize);
 
                     /**
                      * Creates a new VeoHyperParameters instance using the specified properties.
@@ -243667,7 +243691,23 @@ export namespace google {
                     enum TuningTask {
                         TUNING_TASK_UNSPECIFIED = 0,
                         TUNING_TASK_I2V = 1,
-                        TUNING_TASK_T2V = 2
+                        TUNING_TASK_T2V = 2,
+                        TUNING_TASK_R2V = 3
+                    }
+
+                    /** TuningSpeed enum. */
+                    enum TuningSpeed {
+                        TUNING_SPEED_UNSPECIFIED = 0,
+                        REGULAR = 1,
+                        FAST = 2
+                    }
+
+                    /** AdapterSize enum. */
+                    enum AdapterSize {
+                        ADAPTER_SIZE_UNSPECIFIED = 0,
+                        ADAPTER_SIZE_EIGHT = 8,
+                        ADAPTER_SIZE_SIXTEEN = 16,
+                        ADAPTER_SIZE_THIRTY_TWO = 32
                     }
                 }
 
@@ -243774,6 +243814,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for VeoTuningSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VeoLoraTuningSpec. */
+                interface IVeoLoraTuningSpec {
+
+                    /** VeoLoraTuningSpec trainingDatasetUri */
+                    trainingDatasetUri?: (string|null);
+
+                    /** VeoLoraTuningSpec validationDatasetUri */
+                    validationDatasetUri?: (string|null);
+
+                    /** VeoLoraTuningSpec hyperParameters */
+                    hyperParameters?: (google.cloud.aiplatform.v1beta1.IVeoHyperParameters|null);
+                }
+
+                /** Represents a VeoLoraTuningSpec. */
+                class VeoLoraTuningSpec implements IVeoLoraTuningSpec {
+
+                    /**
+                     * Constructs a new VeoLoraTuningSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IVeoLoraTuningSpec);
+
+                    /** VeoLoraTuningSpec trainingDatasetUri. */
+                    public trainingDatasetUri: string;
+
+                    /** VeoLoraTuningSpec validationDatasetUri. */
+                    public validationDatasetUri: string;
+
+                    /** VeoLoraTuningSpec hyperParameters. */
+                    public hyperParameters?: (google.cloud.aiplatform.v1beta1.IVeoHyperParameters|null);
+
+                    /**
+                     * Creates a new VeoLoraTuningSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VeoLoraTuningSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IVeoLoraTuningSpec): google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec;
+
+                    /**
+                     * Encodes the specified VeoLoraTuningSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec.verify|verify} messages.
+                     * @param message VeoLoraTuningSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IVeoLoraTuningSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VeoLoraTuningSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec.verify|verify} messages.
+                     * @param message VeoLoraTuningSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IVeoLoraTuningSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VeoLoraTuningSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VeoLoraTuningSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec;
+
+                    /**
+                     * Decodes a VeoLoraTuningSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VeoLoraTuningSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec;
+
+                    /**
+                     * Verifies a VeoLoraTuningSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VeoLoraTuningSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VeoLoraTuningSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec;
+
+                    /**
+                     * Creates a plain object from a VeoLoraTuningSpec message. Also converts values to other types if specified.
+                     * @param message VeoLoraTuningSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.VeoLoraTuningSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VeoLoraTuningSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VeoLoraTuningSpec
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
