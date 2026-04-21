@@ -32,7 +32,7 @@ describe('Combined Samples Tests', () => {
   async function cleanSubs() {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
-      resources.filterForCleanup(subscriptions).map((x: any) => x.delete?.())
+      resources.filterForCleanup(subscriptions).map(x => x.delete?.())
     );
   }
 
