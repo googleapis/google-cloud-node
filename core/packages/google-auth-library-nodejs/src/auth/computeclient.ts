@@ -21,6 +21,7 @@ import {
   OAuth2Client,
   OAuth2ClientOptions,
 } from './oauth2client';
+import {SERVICE_ACCOUNT_LOOKUP_ENDPOINT} from './regionalaccessboundary';
 
 export interface ComputeOptions extends OAuth2ClientOptions {
   /**
@@ -135,6 +136,47 @@ export class Compute extends OAuth2Client {
           'Engine instance does not have any permission scopes specified: ' +
           e.message;
       }
+    }
+  }
+
+  /**
+   * Returns the regional access boundary lookup URL for the GCE instance.
+   * This implementation resolves the default service account email of the GCE
+   * instance to construct the lookup endpoint.
+   *
+   * @return The regional access boundary URL string.
+   * @internal
+   */
+  public async getRegionalAccessBoundaryUrl(): Promise<string> {
+    const email = await this.resolveServiceAccountEmail();
+    const regionalAccessBoundaryUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+      '{service_account_email}',
+      encodeURIComponent(email),
+    );
+    return regionalAccessBoundaryUrl;
+  }
+
+  /**
+   * Resolves the service account email. If the email is set to 'default',
+   * it fetches the email from the GCE metadata server.
+   * @returns A promise that resolves with the service account email.
+   */
+  private async resolveServiceAccountEmail(): Promise<string> {
+    if (this.serviceAccountEmail !== 'default') {
+      // If a specific email is provided, return it directly.
+      return this.serviceAccountEmail;
+    }
+
+    // Otherwise, fetch the default email from the metadata server.
+    try {
+      return await gcpMetadata.instance('service-accounts/default/email');
+    } catch (e) {
+      throw new Error(
+        'RegionalAccessBoundary: Failed to retrieve default service account email from metadata server.',
+        {
+          cause: e,
+        },
+      );
     }
   }
 }
