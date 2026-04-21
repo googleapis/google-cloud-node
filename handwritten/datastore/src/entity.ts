@@ -1302,6 +1302,14 @@ export namespace entity {
         path.join(__dirname, '..', 'protos', 'app_engine_key.proto'),
       );
       loadedRoot.resolveAll();
+
+      // Ensure all types are initialized and setup correctly.
+      // In newer versions of protobufjs, this ensures group support
+      // is preserved for legacy keys.
+      (loadedRoot.lookupType('Reference') as any).setup();
+      (loadedRoot.lookupType('Path') as any).setup();
+      (loadedRoot.lookupType('Element') as any).setup();
+
       return loadedRoot.nested;
     }
 
