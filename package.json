@@ -40,7 +40,7 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "gts": "^7.0.0"
+    "gts": "^6.0.2"
   },
   "engines": {
     "node": ">=18"
