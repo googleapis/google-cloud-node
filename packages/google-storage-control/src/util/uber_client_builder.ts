@@ -13,7 +13,11 @@
 // limitations under the License.
 
 import * as prettier from 'prettier';
-import {astHelper, parseClientName, getPropertyDeclarations} from './ast_utils';
+import {
+  astHelper,
+  parseClientName,
+  getPropertyDeclarations,
+} from './ast_utils';
 
 export const CLIENTS = ['StorageControlInternal', 'StorageClient'];
 export const FILES = [
@@ -170,7 +174,7 @@ function buildClientConstructor(clients: string[]) {
   });
   constructorInitializers = constructorInitializers.concat('\t}');
   let output = 'export class StorageControlClient{\n';
-  properties.forEach(property => {
+  properties.forEach((property) => {
     variableDecl = variableDecl.concat(property);
   });
   output = output.concat(
