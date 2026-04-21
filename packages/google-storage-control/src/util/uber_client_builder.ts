@@ -13,11 +13,7 @@
 // limitations under the License.
 
 import * as prettier from 'prettier';
-import {
-  astHelper,
-  parseClientName,
-  getPropertyDeclarations,
-} from './ast_utils';
+import {astHelper, parseClientName, getPropertyDeclarations} from './ast_utils';
 
 export const CLIENTS = ['StorageControlInternal', 'StorageClient'];
 export const FILES = [
@@ -141,9 +137,9 @@ function buildOptionTypes(clients: string[]) {
 function buildClientConstructor(clients: string[]) {
   let variableDecl = '';
   const comment = `\t/**
-  \* @param {object} [StorageControlClientOptions] - Enables user to instantiate clients separately and use those as the subclients.
-  \* To have sub-clients with different options, instantiate each client separately.
-  \*/`;
+  * @param {object} [StorageControlClientOptions] - Enables user to instantiate clients separately and use those as the subclients.
+  * To have sub-clients with different options, instantiate each client separately.
+  */`;
   let constructorInitializers = `\tconstructor(options?: StorageControlClientOptions){
     options = options || {};\n`;
   let clientCounter = 0;
@@ -174,7 +170,7 @@ function buildClientConstructor(clients: string[]) {
   });
   constructorInitializers = constructorInitializers.concat('\t}');
   let output = 'export class StorageControlClient{\n';
-  properties.forEach((property) => {
+  properties.forEach(property => {
     variableDecl = variableDecl.concat(property);
   });
   output = output.concat(

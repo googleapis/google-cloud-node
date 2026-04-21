@@ -17,9 +17,9 @@
 const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
-const { describe, it, before } = require('mocha');
+const {describe, it} = require('mocha');
 
-const execSync = (cmd) => cp.execSync(cmd, { encoding: 'utf-8' });
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
@@ -27,7 +27,7 @@ describe('Quickstart', () => {
   it('should run quickstart', async () => {
     const bucketName = 'storage-control-test-monorepo';
 
-    const output = execSync(`node ./quickstart.js ${bucketName}`, { cwd });
+    const output = execSync(`node ./quickstart.js ${bucketName}`, {cwd});
     assert.match(output, new RegExp(`Bucket ${bucketName} has location type`));
   });
 });

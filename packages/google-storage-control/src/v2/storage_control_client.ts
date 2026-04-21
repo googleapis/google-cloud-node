@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class StorageControlClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('storage-control');
@@ -67,10 +67,10 @@ export class StorageControlClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  storageControlStub?: Promise<{ [name: string]: Function }>;
+  storageControlStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of StorageControlClient.
@@ -146,7 +146,7 @@ export class StorageControlClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -331,7 +331,7 @@ export class StorageControlClient {
       'google.storage.control.v2.StorageControl',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -371,7 +371,7 @@ export class StorageControlClient {
           (this._protos as any).google.storage.control.v2.StorageControl,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -406,7 +406,7 @@ export class StorageControlClient {
     ];
     for (const methodName of storageControlStubMethods) {
       const callPromise = this.storageControlStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -632,13 +632,13 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createFolder request %j', request);
@@ -785,13 +785,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteFolder request %j', request);
@@ -936,13 +936,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFolder request %j', request);
@@ -1089,13 +1089,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getStorageLayout request %j', request);
@@ -1246,13 +1246,13 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createManagedFolder request %j', request);
@@ -1413,13 +1413,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteManagedFolder request %j', request);
@@ -1575,13 +1575,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getManagedFolder request %j', request);
@@ -1731,13 +1731,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('disableAnywhereCache request %j', request);
@@ -1887,13 +1887,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pauseAnywhereCache request %j', request);
@@ -2043,13 +2043,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resumeAnywhereCache request %j', request);
@@ -2198,13 +2198,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnywhereCache request %j', request);
@@ -2347,7 +2347,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getProjectIntelligenceConfig request %j', request);
@@ -2497,7 +2497,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams({
         'intelligence_config.name': request.intelligenceConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateProjectIntelligenceConfig request %j', request);
@@ -2649,7 +2649,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFolderIntelligenceConfig request %j', request);
@@ -2799,7 +2799,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams({
         'intelligence_config.name': request.intelligenceConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateFolderIntelligenceConfig request %j', request);
@@ -2951,7 +2951,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getOrganizationIntelligenceConfig request %j', request);
@@ -3107,7 +3107,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams({
         'intelligence_config.name': request.intelligenceConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateOrganizationIntelligenceConfig request %j', request);
@@ -3253,7 +3253,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -3265,13 +3265,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -3414,7 +3414,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -3426,13 +3426,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -3571,7 +3571,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -3585,7 +3585,7 @@ export class StorageControlClient {
           );
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -3601,13 +3601,13 @@ export class StorageControlClient {
           );
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -3776,13 +3776,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3839,7 +3839,7 @@ export class StorageControlClient {
     this._log.info('renameFolder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3971,13 +3971,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4034,7 +4034,7 @@ export class StorageControlClient {
     this._log.info('deleteFolderRecursive long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4162,13 +4162,13 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4225,7 +4225,7 @@ export class StorageControlClient {
     this._log.info('createAnywhereCache long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4360,13 +4360,13 @@ export class StorageControlClient {
           .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4423,7 +4423,7 @@ export class StorageControlClient {
     this._log.info('updateAnywhereCache long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4551,13 +4551,13 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4648,7 +4648,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -4656,7 +4656,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFolders stream %j', request);
@@ -4729,7 +4729,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -4737,7 +4737,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFolders iterate %j', request);
@@ -4855,13 +4855,13 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4940,7 +4940,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -4948,7 +4948,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listManagedFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listManagedFolders stream %j', request);
@@ -5009,7 +5009,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -5017,7 +5017,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listManagedFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listManagedFolders iterate %j', request);
@@ -5132,13 +5132,13 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5214,7 +5214,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -5222,7 +5222,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listAnywhereCaches'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnywhereCaches stream %j', request);
@@ -5280,7 +5280,7 @@ export class StorageControlClient {
         const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['bucket'] ?? fieldValue;
-          Object.assign(routingParameter, { bucket: parameterValue });
+          Object.assign(routingParameter, {bucket: parameterValue});
         }
       }
     }
@@ -5288,7 +5288,7 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listAnywhereCaches'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnywhereCaches iterate %j', request);
@@ -5920,7 +5920,7 @@ export class StorageControlClient {
    */
   close(): Promise<void> {
     if (this.storageControlStub && !this._terminated) {
-      return this.storageControlStub.then((stub) => {
+      return this.storageControlStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

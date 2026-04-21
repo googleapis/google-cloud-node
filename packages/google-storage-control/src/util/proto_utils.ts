@@ -41,10 +41,10 @@ export function cleanObjectReferences(
   filePaths: string[],
   replacements: Replacement[],
 ): void {
-  filePaths.forEach((filePath) => {
+  filePaths.forEach(filePath => {
     const fullPath = path.join(__dirname, '..', '..', filePath);
     if (fs.existsSync(fullPath)) {
-      replacements.forEach(({ pattern, replacement }) => {
+      replacements.forEach(({pattern, replacement}) => {
         try {
           const data = fs.readFileSync(fullPath, 'utf8');
           const result = data.replace(pattern, replacement);
