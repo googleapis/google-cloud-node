@@ -6217,15 +6217,15 @@ describe.skipClassic('Pipeline class', () => {
     });
 
     it('PipelineValueExpression respects ignoreUndefinedProperties', async () => {
-      firestore = getTestDb({ignoreUndefinedProperties: false});
+      const firestore_2 = getTestDb({ignoreUndefinedProperties: false});
 
-      const subWithUndefined = firestore
+      const subWithUndefined = firestore_2
         .pipeline()
         .collection('test')
         .where(equal(field('title'), {title: undefined}));
 
       try {
-        const results = await firestore
+        await firestore_2
           .pipeline()
           .collection(randomCol.path)
           .addFields(subWithUndefined.toArrayExpression().as('reviewsData'))
