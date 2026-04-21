@@ -6216,6 +6216,30 @@ describe.skipClassic('Pipeline class', () => {
       });
     });
 
+    it('PipelineValueExpression respects ignoreUndefinedProperties', async () => {
+      firestore = getTestDb({ignoreUndefinedProperties: false});
+
+      const subWithUndefined = firestore
+        .pipeline()
+        .collection('test')
+        .where(equal(field('title'), {title: undefined}));
+
+      try {
+        const results = await firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .addFields(subWithUndefined.toArrayExpression().as('reviewsData'))
+          .execute();
+
+        expect(false).to.be.true('should have thrown an error');
+      } catch (e: unknown) {
+        const err: Error = e as Error;
+        expect(err.message).to.contain(
+          'Cannot use "undefined" as a Firestore value',
+        );
+      }
+    });
+
     it('multiple array subqueries', async () => {
       const reviewsCollectionName = `reviews_multi_${Date.now()}`;
       const authorsCollectionName = `authors_multi_${Date.now()}`;
