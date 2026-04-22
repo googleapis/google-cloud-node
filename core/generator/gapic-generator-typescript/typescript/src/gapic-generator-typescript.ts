@@ -113,10 +113,12 @@ async function main(processArgv: string[]) {
       'diregapic',
       'DIREGAPIC represents Discovery Rest GAPICs. Set to true for GCE API or non-gRPC APIs with a Discovery doc description.',
     )
+    .boolean('diregapic')
     .describe(
       'handwritten_layer',
       'Set to true if the library has a handwritten layer over GAPIC layer.',
     )
+    .boolean('handwritten_layer')
     .describe(
       'legacy_proto_load',
       'Load protos from *.proto directly at runtime, without compiling a proto JSON file. May speed up loading huge proto trees. Disables all fallback modes.',
