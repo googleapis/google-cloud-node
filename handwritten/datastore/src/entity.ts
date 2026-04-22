@@ -1307,7 +1307,7 @@ export namespace entity {
       // In newer versions of protobufjs, this ensures group support
       // is preserved for legacy keys.
       for (const typeName of ['Reference', 'Path', 'Element']) {
-        (loadedRoot.lookupType(typeName) as any).setup();
+        loadedRoot.lookupType(typeName).setup();
       }
 
       return loadedRoot.nested;
