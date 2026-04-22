@@ -162,11 +162,20 @@ describe('BaseExternalAccountClient', () => {
     '//iam.googleapis.com/projects_suffix/123456',
   ];
 
+  let sandbox: sinon.SinonSandbox;
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+    sandbox
+      .stub(BaseExternalAccountClient.prototype, 'getRegionalAccessBoundaryUrl')
+      .resolves(undefined);
+  });
+
   afterEach(() => {
     nock.cleanAll();
     if (clock) {
       clock.restore();
     }
+    sandbox.restore();
   });
 
   describe('Constructor', () => {
@@ -2723,11 +2732,13 @@ describe('BaseExternalAccountClient', () => {
     };
 
     beforeEach(() => {
-      process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
+      (
+        BaseExternalAccountClient.prototype
+          .getRegionalAccessBoundaryUrl as sinon.SinonStub
+      ).restore();
     });
 
     afterEach(() => {
-      delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
       nock.cleanAll();
     });
 

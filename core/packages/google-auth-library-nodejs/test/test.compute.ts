@@ -17,7 +17,7 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import {BASE_PATH, HEADERS, HOST_ADDRESS} from 'gcp-metadata';
 import * as nock from 'nock';
 import * as sinon from 'sinon';
-import { Compute, gcpMetadata } from '../src';
+import {Compute, gcpMetadata} from '../src';
 import {
   SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
   RegionalAccessBoundaryData,
@@ -48,6 +48,9 @@ describe('compute', () => {
   let compute: Compute;
   beforeEach(() => {
     compute = new Compute();
+    sandbox
+      .stub(Compute.prototype, 'getRegionalAccessBoundaryUrl')
+      .resolves(undefined);
   });
 
   afterEach(() => {
@@ -284,7 +287,7 @@ describe('compute', () => {
         .get(tokenPath)
         .reply(
           200,
-          { access_token: MOCK_ACCESS_TOKEN, expires_in: 10000 },
+          {access_token: MOCK_ACCESS_TOKEN, expires_in: 10000},
           HEADERS,
         );
     }
@@ -305,11 +308,12 @@ describe('compute', () => {
 
     beforeEach(() => {
       sandbox = sinon.createSandbox();
-      process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
+      (
+        Compute.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub
+      ).restore();
     });
 
     afterEach(() => {
-      delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
       sandbox.restore();
       nock.cleanAll();
     });
