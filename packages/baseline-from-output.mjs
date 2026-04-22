@@ -41,27 +41,35 @@ async function processFiles() {
     if (rules.size === 0) continue;
 
     if (fs.existsSync(file)) {
-      const ruleList = Array.from(rules).sort().join(', ');
       const content = fs.readFileSync(file, 'utf8');
-      
-      // Check if already baselined
+      const isShebang = content.startsWith('#!');
+      const lines = content.split('\n');
+      const targetLineIdx = isShebang ? 1 : 0;
+
+      const existingMatch = lines[targetLineIdx] ? lines[targetLineIdx].match(/\/\* eslint-disable (.*) \*\//) : null;
+
+      let updatedRules = new Set(rules);
+      if (existingMatch) {
+        const existingRules = existingMatch[1].split(',').map(r => r.trim());
+        for (const r of existingRules) {
+          if (r) updatedRules.add(r);
+        }
+      }
+
+      const ruleList = Array.from(updatedRules).sort().join(', ');
       const baselineMarker = `/* eslint-disable ${ruleList} */`;
-      if (content.includes(baselineMarker)) {
-        console.log(`File ${file} already baselined.`);
-        continue;
-      }
 
-      let updatedContent;
-      if (content.startsWith('#!')) {
-        const lines = content.split('\n');
-        // Insert comment after the shebang line
-        lines.splice(1, 0, baselineMarker);
-        updatedContent = lines.join('\n');
+      if (existingMatch) {
+        lines[targetLineIdx] = baselineMarker;
+        fs.writeFileSync(file, lines.join('\n'));
       } else {
-        updatedContent = baselineMarker + '\n' + content;
+        if (isShebang) {
+          lines.splice(1, 0, baselineMarker);
+          fs.writeFileSync(file, lines.join('\n'));
+        } else {
+          fs.writeFileSync(file, baselineMarker + '\n' + content);
+        }
       }
-
-      fs.writeFileSync(file, updatedContent);
       console.log(`Baselined ${file} with rules: ${ruleList}`);
     } else {
       console.warn(`File not found: ${file}`);

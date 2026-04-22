@@ -29,15 +29,19 @@ const packages = items.filter(item => {
 console.log(`Found ${packages.length} remaining packages to process.`);
 
 for (const pkg of packages) {
+  if (!/^[a-zA-Z0-9-_]+$/.test(pkg)) {
+    console.error(`Skipping invalid package name: ${pkg}`);
+    continue;
+  }
   console.log(`\n========================================`);
   console.log(`Processing package: ${pkg}`);
   
   try {
     console.log(`Running ESLint...`);
-    execSync(`node packages/run-eslint-root.mjs ${pkg}`, { stdio: 'inherit' });
+    execSync(`node packages/run-eslint-root.mjs "${pkg}"`, { stdio: 'inherit' });
     
     console.log(`Baselining violations...`);
-    execSync(`node packages/baseline-from-output.mjs ${pkg}`, { stdio: 'inherit' });
+    execSync(`node packages/baseline-from-output.mjs "${pkg}"`, { stdio: 'inherit' });
     
     console.log(`Finished processing ${pkg}`);
   } catch (error) {

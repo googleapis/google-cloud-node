@@ -269,6 +269,8 @@ async function processOneTemplate(
 
     result.push(output);
   } else if (outputFilename.match(/\$method/)) {
+    const promises: Promise<protos.google.protobuf.compiler.CodeGeneratorResponse.File>[] =
+      [];
     for (const service of api.services) {
       for (const method of service.method) {
         const pushFilename = outputFilename
@@ -276,8 +278,8 @@ async function processOneTemplate(
           .replace(/\$method/, method.name!.toSnakeCase())
           .replace(/\$service/, service.name!.toSnakeCase());
 
-        result.push(
-          await renderFile(pushFilename, relativeTemplateName, {
+        promises.push(
+          renderFile(pushFilename, relativeTemplateName, {
             method,
             api,
             commonParameters,
@@ -287,23 +289,26 @@ async function processOneTemplate(
         );
       }
     }
+    result.push(...(await Promise.all(promises)));
   } else if (outputFilename.match(/\$service/)) {
+    const promises: Promise<protos.google.protobuf.compiler.CodeGeneratorResponse.File>[] =
+      [];
     for (const service of api.services) {
-      // Do not generate tests for deprecated services
       if (
         service.options.deprecated === true &&
         outputFilename.match('test/')
       ) {
         continue;
       }
-      result.push(
-        await renderFile(
+      promises.push(
+        renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),
           relativeTemplateName,
           {api, commonParameters, service, id},
         ),
       );
     }
+    result.push(...(await Promise.all(promises)));
   } else {
     result.push(
       await renderFile(outputFilename, relativeTemplateName, {
@@ -347,13 +352,11 @@ export async function processTemplates(basePath: string, api: API) {
   const templateFiles = await recursiveFileList(basePath, /^(?!_[^_]).*\.njk$/);
   const result: protos.google.protobuf.compiler.CodeGeneratorResponse.File[] =
     [];
-  for (const templateFilename of templateFiles) {
-    const generatedFiles = await processOneTemplate(
-      basePath,
-      templateFilename,
-      api,
-      id,
-    );
+  const promises = templateFiles.map(templateFilename =>
+    processOneTemplate(basePath, templateFilename, api, id),
+  );
+  const allFiles = await Promise.all(promises);
+  for (const generatedFiles of allFiles) {
     result.push(...generatedFiles);
   }
   return result;
