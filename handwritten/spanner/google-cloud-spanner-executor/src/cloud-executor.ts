@@ -46,6 +46,7 @@ export class OutcomeSender {
   public finishWithOK(): {code: number; details: string} {
     const outcome = SpannerActionOutcome.create({
       status: CloudExecutor.toProto(status.OK),
+      commitTime: {seconds: 0, nanos: 0},
     });
     return this.sendOutcome(outcome);
   }
@@ -54,11 +55,12 @@ export class OutcomeSender {
     const s = CloudExecutor.toStatus(err);
     const outcome = SpannerActionOutcome.create({
       status: CloudExecutor.toProto(s.code, s.message),
+      commitTime: {seconds: 0, nanos: 0},
     });
     return this.sendOutcome(outcome);
   }
 
-  private sendOutcome(outcome: SpannerActionOutcome): {
+  public sendOutcome(outcome: SpannerActionOutcome): {
     code: number;
     details: string;
   } {
