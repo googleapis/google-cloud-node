@@ -1,5 +1,5 @@
-/* eslint-disable prettier/prettier */
 #!/usr/bin/env node
+/* eslint-disable prettier/prettier */
 // Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
