@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
@@ -38,10 +38,10 @@ for (const pkg of packages) {
   
   try {
     console.log(`Running ESLint...`);
-    execSync(`node packages/run-eslint-root.mjs "${pkg}"`, { stdio: 'inherit' });
+    execFileSync('node', ['packages/run-eslint-root.mjs', pkg], { stdio: 'inherit' });
     
     console.log(`Baselining violations...`);
-    execSync(`node packages/baseline-from-output.mjs "${pkg}"`, { stdio: 'inherit' });
+    execFileSync('node', ['packages/baseline-from-output.mjs', pkg], { stdio: 'inherit' });
     
     console.log(`Finished processing ${pkg}`);
   } catch (error) {
