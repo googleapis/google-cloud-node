@@ -14,6 +14,7 @@
   },
   "main": "build/src/index.js",
   "files": [
+    "build/protos",
     "build/src",
     "LICENSE",
     "!build/src/**/*.map"
