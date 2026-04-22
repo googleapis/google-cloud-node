@@ -72,6 +72,9 @@ describe('jwt', () => {
     json = createJSON();
     jwt = new JWT();
     sandbox = sinon.createSandbox();
+    sandbox
+      .stub(JWT.prototype, 'getRegionalAccessBoundaryUrl')
+      .resolves(undefined);
   });
 
   afterEach(() => {
@@ -1277,11 +1280,10 @@ describe('jwt', () => {
 
     beforeEach(() => {
       sandbox = sinon.createSandbox();
-      process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
+      (JWT.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub).restore();
     });
 
     afterEach(() => {
-      delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
       sandbox.restore();
       nock.cleanAll();
     });
@@ -1293,9 +1295,9 @@ describe('jwt', () => {
         scopes: ['http://bar', 'http://foo'],
         subject: 'bar@subjectaccount.com',
       });
-      jwt.credentials = { refresh_token: 'jwt-placeholder' };
+      jwt.credentials = {refresh_token: 'jwt-placeholder'};
 
-      const tokenScope = createGTokenMock({ access_token: MOCK_ACCESS_TOKEN });
+      const tokenScope = createGTokenMock({access_token: MOCK_ACCESS_TOKEN});
 
       let rabLookupCalled = false;
       const rabScope = setupRegionalAccessBoundaryNock(SERVICE_ACCOUNT_EMAIL);
@@ -1335,7 +1337,7 @@ describe('jwt', () => {
         email: SERVICE_ACCOUNT_EMAIL,
         key: keys.private,
       });
-      jwt.credentials = { refresh_token: 'jwt-placeholder' };
+      jwt.credentials = {refresh_token: 'jwt-placeholder'};
 
       const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
         '{service_account_email}',
@@ -1379,13 +1381,13 @@ describe('jwt', () => {
       const jwt = new JWT({
         email: SERVICE_ACCOUNT_EMAIL,
         key: PEM_CONTENTS,
-        additionalClaims: { target_audience: 'some-audience' },
+        additionalClaims: {target_audience: 'some-audience'},
       });
 
       // Setup a RAB lookup mock that should NOT be hit
       const rabScope = setupRegionalAccessBoundaryNock(SERVICE_ACCOUNT_EMAIL);
 
-      const scope = createGTokenMock({ id_token: 'id-token-abc' });
+      const scope = createGTokenMock({id_token: 'id-token-abc'});
       const headers = await jwt.getRequestHeaders(
         'https://pubsub.googleapis.com',
       );
