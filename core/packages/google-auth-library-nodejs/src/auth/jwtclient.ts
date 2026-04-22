@@ -26,6 +26,7 @@ import {
   RequestMetadataResponse,
 } from './oauth2client';
 import {DEFAULT_UNIVERSE} from './authclient';
+import {SERVICE_ACCOUNT_LOOKUP_ENDPOINT} from './regionalaccessboundary';
 
 export interface JWTOptions extends OAuth2ClientOptions {
   /**
@@ -147,6 +148,9 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
               authorization: `Bearer ${tokens.id_token}`,
             }),
           ),
+          // Since ID-tokens are outside RAB scope,
+          // isIDToken is used as a flag to avoid RAB lookup.
+          isIDToken: true,
         };
       } else {
         // no scopes have been set, but a uri has been provided. Use JWTAccess
@@ -271,7 +275,7 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
   protected async refreshTokenNoCache(): Promise<GetTokenResponse> {
     const gtoken = this.createGToken();
     const token = await gtoken.getToken({
-      forceRefresh: this.isTokenExpiring(),
+      forceRefresh: this.isExpired(),
     });
     const tokens = {
       access_token: token.access_token,
@@ -407,5 +411,26 @@ export class JWT extends OAuth2Client implements IdTokenProvider {
       return {private_key: creds.privateKey, client_email: creds.clientEmail};
     }
     throw new Error('A key or a keyFile must be provided to getCredentials.');
+  }
+
+  /**
+   * Returns the regional access boundary lookup URL for the service account.
+   * This implementation uses the configured service account email to construct
+   * the lookup endpoint.
+   *
+   * @return The regional access boundary URL string.
+   * @internal
+   */
+  public async getRegionalAccessBoundaryUrl(): Promise<string> {
+    if (!this.email) {
+      throw new Error(
+        'RegionalAccessBoundary: An email address is required for regional access boundary lookups but was not provided in the JwtClient options.',
+      );
+    }
+    const regionalAccessBoundaryUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+      '{service_account_email}',
+      encodeURIComponent(this.email),
+    );
+    return regionalAccessBoundaryUrl;
   }
 }
