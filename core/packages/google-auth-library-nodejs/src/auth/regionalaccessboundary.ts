@@ -63,7 +63,6 @@ export interface RegionalAccessBoundaryData {
   encodedLocations: string;
 }
 
-
 export interface RegionalAccessBoundaryManagerOptions {
   transporter: Gaxios;
   getLookupUrl: () => Promise<string | null>;
@@ -81,7 +80,6 @@ export class RegionalAccessBoundaryManager {
   constructor(options: RegionalAccessBoundaryManagerOptions) {
     this.options = options;
   }
-
 
   /**
    * @internal

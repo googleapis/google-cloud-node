@@ -269,8 +269,6 @@ describe('compute', () => {
     assert.fail('failed to throw');
   });
   describe('regional access boundaries', () => {
-    let sandbox: sinon.SinonSandbox;
-
     const MOCK_ACCESS_TOKEN = 'abc123';
     const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
     const EXPECTED_RAB_DATA: RegionalAccessBoundaryData = {
@@ -307,14 +305,12 @@ describe('compute', () => {
     }
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
       (
         Compute.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub
       ).restore();
     });
 
     afterEach(() => {
-      sandbox.restore();
       nock.cleanAll();
     });
 

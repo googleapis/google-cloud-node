@@ -1253,7 +1253,6 @@ describe('jwt', () => {
   });
 
   describe('regional access boundaries', () => {
-    let sandbox: sinon.SinonSandbox;
     const SERVICE_ACCOUNT_EMAIL = 'service-account@example.com';
     const MOCK_ACCESS_TOKEN = 'abc123';
     const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
@@ -1279,12 +1278,10 @@ describe('jwt', () => {
     }
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
       (JWT.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub).restore();
     });
 
     afterEach(() => {
-      sandbox.restore();
       nock.cleanAll();
     });
 
