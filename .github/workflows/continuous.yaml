@@ -15,6 +15,7 @@ jobs:
         with:
           version: ^7.0.0
       - run: node --version
+      - run: pnpm install
       - run: ci/run_conditional_tests.sh
         name: Run unit tests
         env:
