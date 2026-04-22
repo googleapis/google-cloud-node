@@ -1849,57 +1849,62 @@ describe('entity', () => {
         );
       });
 
-      const TEST_PROJECT = 'test-project';
-      const testCases = [
-        {name: 'numeric ID', path: ['Kind', '123']},
-        {name: 'string name with spaces', path: ['Kind', 'name with spaces']},
-        {name: 'special characters', path: ['Kind', 'special!@#$%^&*()']},
-        {
-          name: '3-level parent',
-          path: ['Grandparent', '1', 'Parent', 'p1', 'Child', '2'],
-        },
-        {
-          name: 'namespace and numeric ID',
-          path: ['Kind', '456'],
-          namespace: 'MyNS',
-        },
-        {
-          name: 'namespace and parent',
-          path: ['Parent', '1', 'Child', 'c1'],
-          namespace: 'MyNS',
-        },
-        {
-          name: 'long integer ID as string',
-          path: ['Kind', '9223372036854775807'],
-        },
-        {name: 'kind with hyphens', path: ['My-Kind', '1']},
-        {
-          name: 'different kinds in path',
-          path: ['User', 'user1', 'Post', '100', 'Comment', 'c1'],
-        },
-        {name: 'same kinds in path', path: ['Node', '1', 'Node', '2', 'Node', '3']},
-      ];
+      describe('should ensure that decode inverses encode and decoding is correct', () => {
+        const TEST_PROJECT = 'test-project';
+        const testCases = [
+          {name: 'numeric ID', path: ['Kind', '123']},
+          {name: 'string name with spaces', path: ['Kind', 'name with spaces']},
+          {name: 'special characters', path: ['Kind', 'special!@#$%^&*()']},
+          {
+            name: '3-level parent',
+            path: ['Grandparent', '1', 'Parent', 'p1', 'Child', '2'],
+          },
+          {
+            name: 'namespace and numeric ID',
+            path: ['Kind', '456'],
+            namespace: 'MyNS',
+          },
+          {
+            name: 'namespace and parent',
+            path: ['Parent', '1', 'Child', 'c1'],
+            namespace: 'MyNS',
+          },
+          {
+            name: 'long integer ID as string',
+            path: ['Kind', '9223372036854775807'],
+          },
+          {name: 'kind with hyphens', path: ['My-Kind', '1']},
+          {
+            name: 'different kinds in path',
+            path: ['User', 'user1', 'Post', '100', 'Comment', 'c1'],
+          },
+          {
+            name: 'same kinds in path',
+            path: ['Node', '1', 'Node', '2', 'Node', '3'],
+          },
+        ];
 
-      testCases.forEach(tc => {
-        it(`should decode and re-encode ${tc.name} correctly`, () => {
-          const key = new testEntity.Key({
-            path: tc.path,
-            namespace: tc.namespace,
+        testCases.forEach(tc => {
+          it(`should decode and re-encode ${tc.name} correctly`, () => {
+            const key = new testEntity.Key({
+              path: tc.path,
+              namespace: tc.namespace,
+            });
+            const encoded = urlSafeKey.legacyEncode(
+              TEST_PROJECT,
+              key,
+              LOCATION_PREFIX,
+            );
+            const decoded = urlSafeKey.legacyDecode(encoded);
+            assert.strictEqual(decoded.namespace, tc.namespace);
+            assert.deepStrictEqual(decoded.path, tc.path);
+            const reEncoded = urlSafeKey.legacyEncode(
+              TEST_PROJECT,
+              decoded,
+              LOCATION_PREFIX,
+            );
+            assert.strictEqual(reEncoded, encoded);
           });
-          const encoded = urlSafeKey.legacyEncode(
-            TEST_PROJECT,
-            key,
-            LOCATION_PREFIX,
-          );
-          const decoded = urlSafeKey.legacyDecode(encoded);
-          assert.strictEqual(decoded.namespace, tc.namespace);
-          assert.deepStrictEqual(decoded.path, tc.path);
-          const reEncoded = urlSafeKey.legacyEncode(
-            TEST_PROJECT,
-            decoded,
-            LOCATION_PREFIX,
-          );
-          assert.strictEqual(reEncoded, encoded);
         });
       });
     });
