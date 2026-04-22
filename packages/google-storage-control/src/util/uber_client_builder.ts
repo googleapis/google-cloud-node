@@ -137,9 +137,9 @@ function buildOptionTypes(clients: string[]) {
 function buildClientConstructor(clients: string[]) {
   let variableDecl = '';
   const comment = `\t/**
-  \* @param {object} [StorageControlClientOptions] - Enables user to instantiate clients separately and use those as the subclients.
-  \* To have sub-clients with different options, instantiate each client separately.
-  \*/`;
+  * @param {object} [StorageControlClientOptions] - Enables user to instantiate clients separately and use those as the subclients.
+  * To have sub-clients with different options, instantiate each client separately.
+  */`;
   let constructorInitializers = `\tconstructor(options?: StorageControlClientOptions){
     options = options || {};\n`;
   let clientCounter = 0;
