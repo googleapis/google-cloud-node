@@ -603,7 +603,6 @@ describe('impersonated', () => {
   });
 
   describe('regional access boundaries', () => {
-    let sandbox: sinon.SinonSandbox;
     const TARGET_PRINCIPAL_EMAIL = 'target@project.iam.gserviceaccount.com';
     const MOCK_ACCESS_TOKEN = 'abc123';
     const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
@@ -628,14 +627,12 @@ describe('impersonated', () => {
     }
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
       (
         Impersonated.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub
       ).restore();
     });
 
     afterEach(() => {
-      sandbox.restore();
       nock.cleanAll();
     });
 
