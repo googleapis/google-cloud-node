@@ -3839,6 +3839,52 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
             });
         });
 
+        describe('onlineEvaluator', async () => {
+            const fakePath = "/rendered/path/onlineEvaluator";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                online_evaluator: "onlineEvaluatorValue",
+            };
+            const client = new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.onlineEvaluatorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.onlineEvaluatorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('onlineEvaluatorPath', () => {
+                const result = client.onlineEvaluatorPath("projectValue", "locationValue", "onlineEvaluatorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOnlineEvaluatorName', () => {
+                const result = client.matchProjectFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOnlineEvaluatorName', () => {
+                const result = client.matchLocationFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOnlineEvaluatorFromOnlineEvaluatorName', () => {
+                const result = client.matchOnlineEvaluatorFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "onlineEvaluatorValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('persistentResource', async () => {
             const fakePath = "/rendered/path/persistentResource";
             const expectedParameters = {
