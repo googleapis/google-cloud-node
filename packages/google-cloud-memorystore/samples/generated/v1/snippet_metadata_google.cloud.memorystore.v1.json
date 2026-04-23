@@ -292,6 +292,46 @@
       }
     },
     {
+      "regionTag": "memorystore_v1_generated_Memorystore_GetSharedRegionalCertificateAuthority_async",
+      "title": "Memorystore getSharedRegionalCertificateAuthority Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of shared regional certificate authority information for Memorystore instance.",
+      "canonical": true,
+      "file": "memorystore.get_shared_regional_certificate_authority.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSharedRegionalCertificateAuthority",
+        "fullName": "google.cloud.memorystore.v1.Memorystore.GetSharedRegionalCertificateAuthority",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.memorystore.v1.SharedRegionalCertificateAuthority",
+        "client": {
+          "shortName": "MemorystoreClient",
+          "fullName": "google.cloud.memorystore.v1.MemorystoreClient"
+        },
+        "method": {
+          "shortName": "GetSharedRegionalCertificateAuthority",
+          "fullName": "google.cloud.memorystore.v1.Memorystore.GetSharedRegionalCertificateAuthority",
+          "service": {
+            "shortName": "Memorystore",
+            "fullName": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "memorystore_v1_generated_Memorystore_RescheduleMaintenance_async",
       "title": "Memorystore rescheduleMaintenance Sample",
       "origin": "API_DEFINITION",

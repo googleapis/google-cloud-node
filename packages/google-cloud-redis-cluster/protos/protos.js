@@ -306,6 +306,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getSharedRegionalCertificateAuthority}.
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @typedef GetSharedRegionalCertificateAuthorityCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} [response] SharedRegionalCertificateAuthority
+                             */
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @param {google.cloud.redis.cluster.v1.CloudRedisCluster.GetSharedRegionalCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and SharedRegionalCertificateAuthority
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CloudRedisCluster.prototype.getSharedRegionalCertificateAuthority = function getSharedRegionalCertificateAuthority(request, callback) {
+                                return this.rpcCall(getSharedRegionalCertificateAuthority, $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest, $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority, request, callback);
+                            }, "name", { value: "GetSharedRegionalCertificateAuthority" });
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @returns {Promise<google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|rescheduleClusterMaintenance}.
                              * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
                              * @typedef RescheduleClusterMaintenanceCallback
@@ -637,6 +670,24 @@
                             values[valuesById[0] = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "TRANSIT_ENCRYPTION_MODE_DISABLED"] = 1;
                             values[valuesById[2] = "TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ServerCaMode enum.
+                         * @name google.cloud.redis.cluster.v1.ServerCaMode
+                         * @enum {number}
+                         * @property {number} SERVER_CA_MODE_UNSPECIFIED=0 SERVER_CA_MODE_UNSPECIFIED value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA=1 SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA=2 SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA=3 SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA value
+                         */
+                        v1.ServerCaMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SERVER_CA_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values[valuesById[2] = "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values[valuesById[3] = "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA"] = 3;
                             return values;
                         })();
     
@@ -4658,6 +4709,9 @@
                              * @property {string|null} [kmsKey] Cluster kmsKey
                              * @property {google.cloud.redis.cluster.v1.IAutomatedBackupConfig|null} [automatedBackupConfig] Cluster automatedBackupConfig
                              * @property {google.cloud.redis.cluster.v1.IEncryptionInfo|null} [encryptionInfo] Cluster encryptionInfo
+                             * @property {google.cloud.redis.cluster.v1.ServerCaMode|null} [serverCaMode] Cluster serverCaMode
+                             * @property {string|null} [serverCaPool] Cluster serverCaPool
+                             * @property {boolean|null} [rotateServerCertificate] Cluster rotateServerCertificate
                              */
     
                             /**
@@ -4921,6 +4975,30 @@
                              */
                             Cluster.prototype.encryptionInfo = null;
     
+                            /**
+                             * Cluster serverCaMode.
+                             * @member {google.cloud.redis.cluster.v1.ServerCaMode|null|undefined} serverCaMode
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaMode = null;
+    
+                            /**
+                             * Cluster serverCaPool.
+                             * @member {string|null|undefined} serverCaPool
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaPool = null;
+    
+                            /**
+                             * Cluster rotateServerCertificate.
+                             * @member {boolean|null|undefined} rotateServerCertificate
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.rotateServerCertificate = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -4986,6 +5064,24 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Cluster.prototype, "_kmsKey", {
                                 get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaMode", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaMode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaPool", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaPool"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_rotateServerCertificate", {
+                                get: $util.oneOfGetter($oneOfFields = ["rotateServerCertificate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -5079,6 +5175,12 @@
                                     $root.google.cloud.redis.cluster.v1.AutomatedBackupConfig.encode(message.automatedBackupConfig, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                                 if (message.encryptionInfo != null && Object.hasOwnProperty.call(message, "encryptionInfo"))
                                     $root.google.cloud.redis.cluster.v1.EncryptionInfo.encode(message.encryptionInfo, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                                if (message.serverCaMode != null && Object.hasOwnProperty.call(message, "serverCaMode"))
+                                    writer.uint32(/* id 53, wireType 0 =*/424).int32(message.serverCaMode);
+                                if (message.serverCaPool != null && Object.hasOwnProperty.call(message, "serverCaPool"))
+                                    writer.uint32(/* id 54, wireType 2 =*/434).string(message.serverCaPool);
+                                if (message.rotateServerCertificate != null && Object.hasOwnProperty.call(message, "rotateServerCertificate"))
+                                    writer.uint32(/* id 55, wireType 0 =*/440).bool(message.rotateServerCertificate);
                                 return writer;
                             };
     
@@ -5262,6 +5364,18 @@
                                         }
                                     case 43: {
                                             message.encryptionInfo = $root.google.cloud.redis.cluster.v1.EncryptionInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 53: {
+                                            message.serverCaMode = reader.int32();
+                                            break;
+                                        }
+                                    case 54: {
+                                            message.serverCaPool = reader.string();
+                                            break;
+                                        }
+                                    case 55: {
+                                            message.rotateServerCertificate = reader.bool();
                                             break;
                                         }
                                     default:
@@ -5502,6 +5616,28 @@
                                     var error = $root.google.cloud.redis.cluster.v1.EncryptionInfo.verify(message.encryptionInfo);
                                     if (error)
                                         return "encryptionInfo." + error;
+                                }
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    properties._serverCaMode = 1;
+                                    switch (message.serverCaMode) {
+                                    default:
+                                        return "serverCaMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    properties._serverCaPool = 1;
+                                    if (!$util.isString(message.serverCaPool))
+                                        return "serverCaPool: string expected";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    properties._rotateServerCertificate = 1;
+                                    if (typeof message.rotateServerCertificate !== "boolean")
+                                        return "rotateServerCertificate: boolean expected";
                                 }
                                 return null;
                             };
@@ -5744,6 +5880,34 @@
                                         throw TypeError(".google.cloud.redis.cluster.v1.Cluster.encryptionInfo: object expected");
                                     message.encryptionInfo = $root.google.cloud.redis.cluster.v1.EncryptionInfo.fromObject(object.encryptionInfo);
                                 }
+                                switch (object.serverCaMode) {
+                                default:
+                                    if (typeof object.serverCaMode === "number") {
+                                        message.serverCaMode = object.serverCaMode;
+                                        break;
+                                    }
+                                    break;
+                                case "SERVER_CA_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.serverCaMode = 0;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA":
+                                case 1:
+                                    message.serverCaMode = 1;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA":
+                                case 2:
+                                    message.serverCaMode = 2;
+                                    break;
+                                case "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA":
+                                case 3:
+                                    message.serverCaMode = 3;
+                                    break;
+                                }
+                                if (object.serverCaPool != null)
+                                    message.serverCaPool = String(object.serverCaPool);
+                                if (object.rotateServerCertificate != null)
+                                    message.rotateServerCertificate = Boolean(object.rotateServerCertificate);
                                 return message;
                             };
     
@@ -5896,6 +6060,21 @@
                                     object.automatedBackupConfig = $root.google.cloud.redis.cluster.v1.AutomatedBackupConfig.toObject(message.automatedBackupConfig, options);
                                 if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo"))
                                     object.encryptionInfo = $root.google.cloud.redis.cluster.v1.EncryptionInfo.toObject(message.encryptionInfo, options);
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    object.serverCaMode = options.enums === String ? $root.google.cloud.redis.cluster.v1.ServerCaMode[message.serverCaMode] === undefined ? message.serverCaMode : $root.google.cloud.redis.cluster.v1.ServerCaMode[message.serverCaMode] : message.serverCaMode;
+                                    if (options.oneofs)
+                                        object._serverCaMode = "serverCaMode";
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    object.serverCaPool = message.serverCaPool;
+                                    if (options.oneofs)
+                                        object._serverCaPool = "serverCaPool";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    object.rotateServerCertificate = message.rotateServerCertificate;
+                                    if (options.oneofs)
+                                        object._rotateServerCertificate = "rotateServerCertificate";
+                                }
                                 return object;
                             };
     
@@ -12408,6 +12587,911 @@
                             return PscAutoConnection;
                         })();
     
+                        v1.SharedRegionalCertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface ISharedRegionalCertificateAuthority
+                             * @property {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null} [managedServerCa] SharedRegionalCertificateAuthority managedServerCa
+                             * @property {string|null} [name] SharedRegionalCertificateAuthority name
+                             */
+    
+                            /**
+                             * Constructs a new SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a SharedRegionalCertificateAuthority.
+                             * @implements ISharedRegionalCertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             */
+                            function SharedRegionalCertificateAuthority(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SharedRegionalCertificateAuthority managedServerCa.
+                             * @member {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null|undefined} managedServerCa
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.managedServerCa = null;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority serverCa.
+                             * @member {"managedServerCa"|undefined} serverCa
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            Object.defineProperty(SharedRegionalCertificateAuthority.prototype, "serverCa", {
+                                get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SharedRegionalCertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority instance
+                             */
+                            SharedRegionalCertificateAuthority.create = function create(properties) {
+                                return new SharedRegionalCertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                    $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.managedServerCa = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SharedRegionalCertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SharedRegionalCertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    properties.serverCa = 1;
+                                    {
+                                        var error = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify(message.managedServerCa);
+                                        if (error)
+                                            return "managedServerCa." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SharedRegionalCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             */
+                            SharedRegionalCertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority();
+                                if (object.managedServerCa != null) {
+                                    if (typeof object.managedServerCa !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.managedServerCa: object expected");
+                                    message.managedServerCa = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.fromObject(object.managedServerCa);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SharedRegionalCertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SharedRegionalCertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    object.managedServerCa = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                    if (options.oneofs)
+                                        object.serverCa = "managedServerCa";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SharedRegionalCertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SharedRegionalCertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SharedRegionalCertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SharedRegionalCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority";
+                            };
+    
+                            SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority = (function() {
+    
+                                /**
+                                 * Properties of a RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                                 * @interface IRegionalManagedCertificateAuthority
+                                 * @property {Array.<google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>|null} [caCerts] RegionalManagedCertificateAuthority caCerts
+                                 */
+    
+                                /**
+                                 * Constructs a new RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                                 * @classdesc Represents a RegionalManagedCertificateAuthority.
+                                 * @implements IRegionalManagedCertificateAuthority
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 */
+                                function RegionalManagedCertificateAuthority(properties) {
+                                    this.caCerts = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RegionalManagedCertificateAuthority caCerts.
+                                 * @member {Array.<google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>} caCerts
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new RegionalManagedCertificateAuthority instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority instance
+                                 */
+                                RegionalManagedCertificateAuthority.create = function create(properties) {
+                                    return new RegionalManagedCertificateAuthority(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caCerts != null && message.caCerts.length)
+                                        for (var i = 0; i < message.caCerts.length; ++i)
+                                            $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.caCerts && message.caCerts.length))
+                                                    message.caCerts = [];
+                                                message.caCerts.push($root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RegionalManagedCertificateAuthority message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RegionalManagedCertificateAuthority.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                        if (!Array.isArray(message.caCerts))
+                                            return "caCerts: array expected";
+                                        for (var i = 0; i < message.caCerts.length; ++i) {
+                                            var error = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify(message.caCerts[i]);
+                                            if (error)
+                                                return "caCerts." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RegionalManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 */
+                                RegionalManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    if (object.caCerts) {
+                                        if (!Array.isArray(object.caCerts))
+                                            throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: array expected");
+                                        message.caCerts = [];
+                                        for (var i = 0; i < object.caCerts.length; ++i) {
+                                            if (typeof object.caCerts[i] !== "object")
+                                                throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: object expected");
+                                            message.caCerts[i] = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.fromObject(object.caCerts[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RegionalManagedCertificateAuthority message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RegionalManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.caCerts = [];
+                                    if (message.caCerts && message.caCerts.length) {
+                                        object.caCerts = [];
+                                        for (var j = 0; j < message.caCerts.length; ++j)
+                                            object.caCerts[j] = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.toObject(message.caCerts[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RegionalManagedCertificateAuthority to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RegionalManagedCertificateAuthority
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RegionalManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority";
+                                };
+    
+                                RegionalManagedCertificateAuthority.RegionalCertChain = (function() {
+    
+                                    /**
+                                     * Properties of a RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @interface IRegionalCertChain
+                                     * @property {Array.<string>|null} [certificates] RegionalCertChain certificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @classdesc Represents a RegionalCertChain.
+                                     * @implements IRegionalCertChain
+                                     * @constructor
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     */
+                                    function RegionalCertChain(properties) {
+                                        this.certificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * RegionalCertChain certificates.
+                                     * @member {Array.<string>} certificates
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     */
+                                    RegionalCertChain.prototype.certificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new RegionalCertChain instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain instance
+                                     */
+                                    RegionalCertChain.create = function create(properties) {
+                                        return new RegionalCertChain(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.certificates != null && message.certificates.length)
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.certificates && message.certificates.length))
+                                                        message.certificates = [];
+                                                    message.certificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a RegionalCertChain message.
+                                     * @function verify
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    RegionalCertChain.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                            if (!Array.isArray(message.certificates))
+                                                return "certificates: array expected";
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                if (!$util.isString(message.certificates[i]))
+                                                    return "certificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a RegionalCertChain message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     */
+                                    RegionalCertChain.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain)
+                                            return object;
+                                        var message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        if (object.certificates) {
+                                            if (!Array.isArray(object.certificates))
+                                                throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.certificates: array expected");
+                                            message.certificates = [];
+                                            for (var i = 0; i < object.certificates.length; ++i)
+                                                message.certificates[i] = String(object.certificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a RegionalCertChain message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} message RegionalCertChain
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    RegionalCertChain.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.certificates = [];
+                                        if (message.certificates && message.certificates.length) {
+                                            object.certificates = [];
+                                            for (var j = 0; j < message.certificates.length; ++j)
+                                                object.certificates[j] = message.certificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this RegionalCertChain to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    RegionalCertChain.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for RegionalCertChain
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    RegionalCertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain";
+                                    };
+    
+                                    return RegionalCertChain;
+                                })();
+    
+                                return RegionalManagedCertificateAuthority;
+                            })();
+    
+                            return SharedRegionalCertificateAuthority;
+                        })();
+    
+                        v1.GetSharedRegionalCertificateAuthorityRequest = (function() {
+    
+                            /**
+                             * Properties of a GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface IGetSharedRegionalCertificateAuthorityRequest
+                             * @property {string|null} [name] GetSharedRegionalCertificateAuthorityRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a GetSharedRegionalCertificateAuthorityRequest.
+                             * @implements IGetSharedRegionalCertificateAuthorityRequest
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             */
+                            function GetSharedRegionalCertificateAuthorityRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetSharedRegionalCertificateAuthorityRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetSharedRegionalCertificateAuthorityRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.create = function create(properties) {
+                                return new GetSharedRegionalCertificateAuthorityRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetSharedRegionalCertificateAuthorityRequest message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetSharedRegionalCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetSharedRegionalCertificateAuthorityRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetSharedRegionalCertificateAuthorityRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetSharedRegionalCertificateAuthorityRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest";
+                            };
+    
+                            return GetSharedRegionalCertificateAuthorityRequest;
+                        })();
+    
                         v1.OperationMetadata = (function() {
     
                             /**
@@ -15539,6 +16623,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getSharedRegionalCertificateAuthority}.
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @typedef GetSharedRegionalCertificateAuthorityCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} [response] SharedRegionalCertificateAuthority
+                             */
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @param {google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetSharedRegionalCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and SharedRegionalCertificateAuthority
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CloudRedisCluster.prototype.getSharedRegionalCertificateAuthority = function getSharedRegionalCertificateAuthority(request, callback) {
+                                return this.rpcCall(getSharedRegionalCertificateAuthority, $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest, $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority, request, callback);
+                            }, "name", { value: "GetSharedRegionalCertificateAuthority" });
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @returns {Promise<google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|rescheduleClusterMaintenance}.
                              * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
                              * @typedef RescheduleClusterMaintenanceCallback
@@ -15870,6 +16987,24 @@
                             values[valuesById[0] = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "TRANSIT_ENCRYPTION_MODE_DISABLED"] = 1;
                             values[valuesById[2] = "TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ServerCaMode enum.
+                         * @name google.cloud.redis.cluster.v1beta1.ServerCaMode
+                         * @enum {number}
+                         * @property {number} SERVER_CA_MODE_UNSPECIFIED=0 SERVER_CA_MODE_UNSPECIFIED value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA=1 SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA=2 SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA=3 SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA value
+                         */
+                        v1beta1.ServerCaMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SERVER_CA_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values[valuesById[2] = "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values[valuesById[3] = "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA"] = 3;
                             return values;
                         })();
     
@@ -19891,6 +21026,9 @@
                              * @property {string|null} [kmsKey] Cluster kmsKey
                              * @property {google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig|null} [automatedBackupConfig] Cluster automatedBackupConfig
                              * @property {google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null} [encryptionInfo] Cluster encryptionInfo
+                             * @property {google.cloud.redis.cluster.v1beta1.ServerCaMode|null} [serverCaMode] Cluster serverCaMode
+                             * @property {string|null} [serverCaPool] Cluster serverCaPool
+                             * @property {boolean|null} [rotateServerCertificate] Cluster rotateServerCertificate
                              */
     
                             /**
@@ -20154,6 +21292,30 @@
                              */
                             Cluster.prototype.encryptionInfo = null;
     
+                            /**
+                             * Cluster serverCaMode.
+                             * @member {google.cloud.redis.cluster.v1beta1.ServerCaMode|null|undefined} serverCaMode
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaMode = null;
+    
+                            /**
+                             * Cluster serverCaPool.
+                             * @member {string|null|undefined} serverCaPool
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaPool = null;
+    
+                            /**
+                             * Cluster rotateServerCertificate.
+                             * @member {boolean|null|undefined} rotateServerCertificate
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.rotateServerCertificate = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -20219,6 +21381,24 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Cluster.prototype, "_kmsKey", {
                                 get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaMode", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaMode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaPool", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaPool"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_rotateServerCertificate", {
+                                get: $util.oneOfGetter($oneOfFields = ["rotateServerCertificate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -20312,6 +21492,12 @@
                                     $root.google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.encode(message.automatedBackupConfig, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                                 if (message.encryptionInfo != null && Object.hasOwnProperty.call(message, "encryptionInfo"))
                                     $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.encode(message.encryptionInfo, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                                if (message.serverCaMode != null && Object.hasOwnProperty.call(message, "serverCaMode"))
+                                    writer.uint32(/* id 53, wireType 0 =*/424).int32(message.serverCaMode);
+                                if (message.serverCaPool != null && Object.hasOwnProperty.call(message, "serverCaPool"))
+                                    writer.uint32(/* id 54, wireType 2 =*/434).string(message.serverCaPool);
+                                if (message.rotateServerCertificate != null && Object.hasOwnProperty.call(message, "rotateServerCertificate"))
+                                    writer.uint32(/* id 55, wireType 0 =*/440).bool(message.rotateServerCertificate);
                                 return writer;
                             };
     
@@ -20495,6 +21681,18 @@
                                         }
                                     case 43: {
                                             message.encryptionInfo = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 53: {
+                                            message.serverCaMode = reader.int32();
+                                            break;
+                                        }
+                                    case 54: {
+                                            message.serverCaPool = reader.string();
+                                            break;
+                                        }
+                                    case 55: {
+                                            message.rotateServerCertificate = reader.bool();
                                             break;
                                         }
                                     default:
@@ -20735,6 +21933,28 @@
                                     var error = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.verify(message.encryptionInfo);
                                     if (error)
                                         return "encryptionInfo." + error;
+                                }
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    properties._serverCaMode = 1;
+                                    switch (message.serverCaMode) {
+                                    default:
+                                        return "serverCaMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    properties._serverCaPool = 1;
+                                    if (!$util.isString(message.serverCaPool))
+                                        return "serverCaPool: string expected";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    properties._rotateServerCertificate = 1;
+                                    if (typeof message.rotateServerCertificate !== "boolean")
+                                        return "rotateServerCertificate: boolean expected";
                                 }
                                 return null;
                             };
@@ -20977,6 +22197,34 @@
                                         throw TypeError(".google.cloud.redis.cluster.v1beta1.Cluster.encryptionInfo: object expected");
                                     message.encryptionInfo = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.fromObject(object.encryptionInfo);
                                 }
+                                switch (object.serverCaMode) {
+                                default:
+                                    if (typeof object.serverCaMode === "number") {
+                                        message.serverCaMode = object.serverCaMode;
+                                        break;
+                                    }
+                                    break;
+                                case "SERVER_CA_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.serverCaMode = 0;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA":
+                                case 1:
+                                    message.serverCaMode = 1;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA":
+                                case 2:
+                                    message.serverCaMode = 2;
+                                    break;
+                                case "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA":
+                                case 3:
+                                    message.serverCaMode = 3;
+                                    break;
+                                }
+                                if (object.serverCaPool != null)
+                                    message.serverCaPool = String(object.serverCaPool);
+                                if (object.rotateServerCertificate != null)
+                                    message.rotateServerCertificate = Boolean(object.rotateServerCertificate);
                                 return message;
                             };
     
@@ -21129,6 +22377,21 @@
                                     object.automatedBackupConfig = $root.google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.toObject(message.automatedBackupConfig, options);
                                 if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo"))
                                     object.encryptionInfo = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.toObject(message.encryptionInfo, options);
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    object.serverCaMode = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.ServerCaMode[message.serverCaMode] === undefined ? message.serverCaMode : $root.google.cloud.redis.cluster.v1beta1.ServerCaMode[message.serverCaMode] : message.serverCaMode;
+                                    if (options.oneofs)
+                                        object._serverCaMode = "serverCaMode";
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    object.serverCaPool = message.serverCaPool;
+                                    if (options.oneofs)
+                                        object._serverCaPool = "serverCaPool";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    object.rotateServerCertificate = message.rotateServerCertificate;
+                                    if (options.oneofs)
+                                        object._rotateServerCertificate = "rotateServerCertificate";
+                                }
                                 return object;
                             };
     
@@ -27639,6 +28902,911 @@
                             };
     
                             return PscAutoConnection;
+                        })();
+    
+                        v1beta1.SharedRegionalCertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface ISharedRegionalCertificateAuthority
+                             * @property {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null} [managedServerCa] SharedRegionalCertificateAuthority managedServerCa
+                             * @property {string|null} [name] SharedRegionalCertificateAuthority name
+                             */
+    
+                            /**
+                             * Constructs a new SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a SharedRegionalCertificateAuthority.
+                             * @implements ISharedRegionalCertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             */
+                            function SharedRegionalCertificateAuthority(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SharedRegionalCertificateAuthority managedServerCa.
+                             * @member {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null|undefined} managedServerCa
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.managedServerCa = null;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority serverCa.
+                             * @member {"managedServerCa"|undefined} serverCa
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            Object.defineProperty(SharedRegionalCertificateAuthority.prototype, "serverCa", {
+                                get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SharedRegionalCertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority instance
+                             */
+                            SharedRegionalCertificateAuthority.create = function create(properties) {
+                                return new SharedRegionalCertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                    $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SharedRegionalCertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SharedRegionalCertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    properties.serverCa = 1;
+                                    {
+                                        var error = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify(message.managedServerCa);
+                                        if (error)
+                                            return "managedServerCa." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SharedRegionalCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             */
+                            SharedRegionalCertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority();
+                                if (object.managedServerCa != null) {
+                                    if (typeof object.managedServerCa !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.managedServerCa: object expected");
+                                    message.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.fromObject(object.managedServerCa);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SharedRegionalCertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SharedRegionalCertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    object.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                    if (options.oneofs)
+                                        object.serverCa = "managedServerCa";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SharedRegionalCertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SharedRegionalCertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SharedRegionalCertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SharedRegionalCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority";
+                            };
+    
+                            SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority = (function() {
+    
+                                /**
+                                 * Properties of a RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                                 * @interface IRegionalManagedCertificateAuthority
+                                 * @property {Array.<google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>|null} [caCerts] RegionalManagedCertificateAuthority caCerts
+                                 */
+    
+                                /**
+                                 * Constructs a new RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                                 * @classdesc Represents a RegionalManagedCertificateAuthority.
+                                 * @implements IRegionalManagedCertificateAuthority
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 */
+                                function RegionalManagedCertificateAuthority(properties) {
+                                    this.caCerts = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RegionalManagedCertificateAuthority caCerts.
+                                 * @member {Array.<google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>} caCerts
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new RegionalManagedCertificateAuthority instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority instance
+                                 */
+                                RegionalManagedCertificateAuthority.create = function create(properties) {
+                                    return new RegionalManagedCertificateAuthority(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caCerts != null && message.caCerts.length)
+                                        for (var i = 0; i < message.caCerts.length; ++i)
+                                            $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.caCerts && message.caCerts.length))
+                                                    message.caCerts = [];
+                                                message.caCerts.push($root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RegionalManagedCertificateAuthority message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RegionalManagedCertificateAuthority.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                        if (!Array.isArray(message.caCerts))
+                                            return "caCerts: array expected";
+                                        for (var i = 0; i < message.caCerts.length; ++i) {
+                                            var error = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify(message.caCerts[i]);
+                                            if (error)
+                                                return "caCerts." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RegionalManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 */
+                                RegionalManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    if (object.caCerts) {
+                                        if (!Array.isArray(object.caCerts))
+                                            throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: array expected");
+                                        message.caCerts = [];
+                                        for (var i = 0; i < object.caCerts.length; ++i) {
+                                            if (typeof object.caCerts[i] !== "object")
+                                                throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: object expected");
+                                            message.caCerts[i] = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.fromObject(object.caCerts[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RegionalManagedCertificateAuthority message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RegionalManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.caCerts = [];
+                                    if (message.caCerts && message.caCerts.length) {
+                                        object.caCerts = [];
+                                        for (var j = 0; j < message.caCerts.length; ++j)
+                                            object.caCerts[j] = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.toObject(message.caCerts[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RegionalManagedCertificateAuthority to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RegionalManagedCertificateAuthority
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RegionalManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority";
+                                };
+    
+                                RegionalManagedCertificateAuthority.RegionalCertChain = (function() {
+    
+                                    /**
+                                     * Properties of a RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @interface IRegionalCertChain
+                                     * @property {Array.<string>|null} [certificates] RegionalCertChain certificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @classdesc Represents a RegionalCertChain.
+                                     * @implements IRegionalCertChain
+                                     * @constructor
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     */
+                                    function RegionalCertChain(properties) {
+                                        this.certificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * RegionalCertChain certificates.
+                                     * @member {Array.<string>} certificates
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     */
+                                    RegionalCertChain.prototype.certificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new RegionalCertChain instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain instance
+                                     */
+                                    RegionalCertChain.create = function create(properties) {
+                                        return new RegionalCertChain(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.certificates != null && message.certificates.length)
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.certificates && message.certificates.length))
+                                                        message.certificates = [];
+                                                    message.certificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a RegionalCertChain message.
+                                     * @function verify
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    RegionalCertChain.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                            if (!Array.isArray(message.certificates))
+                                                return "certificates: array expected";
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                if (!$util.isString(message.certificates[i]))
+                                                    return "certificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a RegionalCertChain message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     */
+                                    RegionalCertChain.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain)
+                                            return object;
+                                        var message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        if (object.certificates) {
+                                            if (!Array.isArray(object.certificates))
+                                                throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.certificates: array expected");
+                                            message.certificates = [];
+                                            for (var i = 0; i < object.certificates.length; ++i)
+                                                message.certificates[i] = String(object.certificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a RegionalCertChain message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} message RegionalCertChain
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    RegionalCertChain.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.certificates = [];
+                                        if (message.certificates && message.certificates.length) {
+                                            object.certificates = [];
+                                            for (var j = 0; j < message.certificates.length; ++j)
+                                                object.certificates[j] = message.certificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this RegionalCertChain to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    RegionalCertChain.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for RegionalCertChain
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    RegionalCertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain";
+                                    };
+    
+                                    return RegionalCertChain;
+                                })();
+    
+                                return RegionalManagedCertificateAuthority;
+                            })();
+    
+                            return SharedRegionalCertificateAuthority;
+                        })();
+    
+                        v1beta1.GetSharedRegionalCertificateAuthorityRequest = (function() {
+    
+                            /**
+                             * Properties of a GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface IGetSharedRegionalCertificateAuthorityRequest
+                             * @property {string|null} [name] GetSharedRegionalCertificateAuthorityRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a GetSharedRegionalCertificateAuthorityRequest.
+                             * @implements IGetSharedRegionalCertificateAuthorityRequest
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             */
+                            function GetSharedRegionalCertificateAuthorityRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetSharedRegionalCertificateAuthorityRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetSharedRegionalCertificateAuthorityRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.create = function create(properties) {
+                                return new GetSharedRegionalCertificateAuthorityRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetSharedRegionalCertificateAuthorityRequest message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetSharedRegionalCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetSharedRegionalCertificateAuthorityRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetSharedRegionalCertificateAuthorityRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetSharedRegionalCertificateAuthorityRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest";
+                            };
+    
+                            return GetSharedRegionalCertificateAuthorityRequest;
                         })();
     
                         v1beta1.OperationMetadata = (function() {

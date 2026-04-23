@@ -122,8 +122,14 @@ export namespace google {
                         /** ProductInput name */
                         name?: (string|null);
 
+                        /** ProductInput base64EncodedName */
+                        base64EncodedName?: (string|null);
+
                         /** ProductInput product */
                         product?: (string|null);
+
+                        /** ProductInput base64EncodedProduct */
+                        base64EncodedProduct?: (string|null);
 
                         /** ProductInput legacyLocal */
                         legacyLocal?: (boolean|null);
@@ -159,8 +165,14 @@ export namespace google {
                         /** ProductInput name. */
                         public name: string;
 
+                        /** ProductInput base64EncodedName. */
+                        public base64EncodedName: string;
+
                         /** ProductInput product. */
                         public product: string;
+
+                        /** ProductInput base64EncodedProduct. */
+                        public base64EncodedProduct: string;
 
                         /** ProductInput legacyLocal. */
                         public legacyLocal: boolean;
@@ -934,6 +946,9 @@ export namespace google {
                         /** ProductAttributes shippingLabel */
                         shippingLabel?: (string|null);
 
+                        /** ProductAttributes returnPolicyLabel */
+                        returnPolicyLabel?: (string|null);
+
                         /** ProductAttributes transitTimeLabel */
                         transitTimeLabel?: (string|null);
 
@@ -1231,6 +1246,9 @@ export namespace google {
 
                         /** ProductAttributes shippingLabel. */
                         public shippingLabel?: (string|null);
+
+                        /** ProductAttributes returnPolicyLabel. */
+                        public returnPolicyLabel?: (string|null);
 
                         /** ProductAttributes transitTimeLabel. */
                         public transitTimeLabel?: (string|null);
@@ -4521,6 +4539,9 @@ export namespace google {
                         /** Product name */
                         name?: (string|null);
 
+                        /** Product base64EncodedName */
+                        base64EncodedName?: (string|null);
+
                         /** Product legacyLocal */
                         legacyLocal?: (boolean|null);
 
@@ -4563,6 +4584,9 @@ export namespace google {
 
                         /** Product name. */
                         public name: string;
+
+                        /** Product base64EncodedName. */
+                        public base64EncodedName: string;
 
                         /** Product legacyLocal. */
                         public legacyLocal: boolean;

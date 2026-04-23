@@ -20,6 +20,8 @@ import * as v1 from './v1';
 
 const DataAccessControlServiceClient = v1.DataAccessControlServiceClient;
 type DataAccessControlServiceClient = v1.DataAccessControlServiceClient;
+const DataTableServiceClient = v1.DataTableServiceClient;
+type DataTableServiceClient = v1.DataTableServiceClient;
 const EntityServiceClient = v1.EntityServiceClient;
 type EntityServiceClient = v1.EntityServiceClient;
 const InstanceServiceClient = v1.InstanceServiceClient;
@@ -29,7 +31,7 @@ type ReferenceListServiceClient = v1.ReferenceListServiceClient;
 const RuleServiceClient = v1.RuleServiceClient;
 type RuleServiceClient = v1.RuleServiceClient;
 
-export {v1, DataAccessControlServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient};
-export default {v1, DataAccessControlServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient};
+export {v1, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient};
+export default {v1, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, InstanceServiceClient, ReferenceListServiceClient, RuleServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -3193,6 +3193,9 @@ export namespace google {
 
                     /** SingleTenantHsmInstance disableTime */
                     disableTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance keyPortabilityEnabled */
+                    keyPortabilityEnabled?: (boolean|null);
                 }
 
                 /** Represents a SingleTenantHsmInstance. */
@@ -3224,6 +3227,9 @@ export namespace google {
 
                     /** SingleTenantHsmInstance disableTime. */
                     public disableTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance keyPortabilityEnabled. */
+                    public keyPortabilityEnabled: boolean;
 
                     /**
                      * Creates a new SingleTenantHsmInstance instance using the specified properties.
@@ -14480,6 +14486,9 @@ export namespace google {
 
                     /** Digest sha512 */
                     sha512?: (Uint8Array|Buffer|string|null);
+
+                    /** Digest externalMu */
+                    externalMu?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Digest. */
@@ -14500,8 +14509,11 @@ export namespace google {
                     /** Digest sha512. */
                     public sha512?: (Uint8Array|Buffer|string|null);
 
+                    /** Digest externalMu. */
+                    public externalMu?: (Uint8Array|Buffer|string|null);
+
                     /** Digest digest. */
-                    public digest?: ("sha256"|"sha384"|"sha512");
+                    public digest?: ("sha256"|"sha384"|"sha512"|"externalMu");
 
                     /**
                      * Creates a new Digest instance using the specified properties.

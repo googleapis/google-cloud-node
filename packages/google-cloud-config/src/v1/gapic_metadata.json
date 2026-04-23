@@ -80,6 +80,16 @@
                 "getAutoMigrationConfig"
               ]
             },
+            "GetDeploymentGroup": {
+              "methods": [
+                "getDeploymentGroup"
+              ]
+            },
+            "GetDeploymentGroupRevision": {
+              "methods": [
+                "getDeploymentGroupRevision"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -118,6 +128,31 @@
             "UpdateAutoMigrationConfig": {
               "methods": [
                 "updateAutoMigrationConfig"
+              ]
+            },
+            "CreateDeploymentGroup": {
+              "methods": [
+                "createDeploymentGroup"
+              ]
+            },
+            "UpdateDeploymentGroup": {
+              "methods": [
+                "updateDeploymentGroup"
+              ]
+            },
+            "DeleteDeploymentGroup": {
+              "methods": [
+                "deleteDeploymentGroup"
+              ]
+            },
+            "ProvisionDeploymentGroup": {
+              "methods": [
+                "provisionDeploymentGroup"
+              ]
+            },
+            "DeprovisionDeploymentGroup": {
+              "methods": [
+                "deprovisionDeploymentGroup"
               ]
             },
             "ListDeployments": {
@@ -167,6 +202,20 @@
                 "listResourceDrifts",
                 "listResourceDriftsStream",
                 "listResourceDriftsAsync"
+              ]
+            },
+            "ListDeploymentGroups": {
+              "methods": [
+                "listDeploymentGroups",
+                "listDeploymentGroupsStream",
+                "listDeploymentGroupsAsync"
+              ]
+            },
+            "ListDeploymentGroupRevisions": {
+              "methods": [
+                "listDeploymentGroupRevisions",
+                "listDeploymentGroupRevisionsStream",
+                "listDeploymentGroupRevisionsAsync"
               ]
             }
           }
@@ -244,6 +293,16 @@
                 "getAutoMigrationConfig"
               ]
             },
+            "GetDeploymentGroup": {
+              "methods": [
+                "getDeploymentGroup"
+              ]
+            },
+            "GetDeploymentGroupRevision": {
+              "methods": [
+                "getDeploymentGroupRevision"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -282,6 +341,31 @@
             "UpdateAutoMigrationConfig": {
               "methods": [
                 "updateAutoMigrationConfig"
+              ]
+            },
+            "CreateDeploymentGroup": {
+              "methods": [
+                "createDeploymentGroup"
+              ]
+            },
+            "UpdateDeploymentGroup": {
+              "methods": [
+                "updateDeploymentGroup"
+              ]
+            },
+            "DeleteDeploymentGroup": {
+              "methods": [
+                "deleteDeploymentGroup"
+              ]
+            },
+            "ProvisionDeploymentGroup": {
+              "methods": [
+                "provisionDeploymentGroup"
+              ]
+            },
+            "DeprovisionDeploymentGroup": {
+              "methods": [
+                "deprovisionDeploymentGroup"
               ]
             },
             "ListDeployments": {
@@ -331,6 +415,20 @@
                 "listResourceDrifts",
                 "listResourceDriftsStream",
                 "listResourceDriftsAsync"
+              ]
+            },
+            "ListDeploymentGroups": {
+              "methods": [
+                "listDeploymentGroups",
+                "listDeploymentGroupsStream",
+                "listDeploymentGroupsAsync"
+              ]
+            },
+            "ListDeploymentGroupRevisions": {
+              "methods": [
+                "listDeploymentGroupRevisions",
+                "listDeploymentGroupRevisionsStream",
+                "listDeploymentGroupRevisionsAsync"
               ]
             }
           }

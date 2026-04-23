@@ -22,6 +22,7 @@ const chronicle = require('@google-cloud/chronicle');
 
 function main() {
   const dataAccessControlServiceClient = new chronicle.DataAccessControlServiceClient();
+  const dataTableServiceClient = new chronicle.DataTableServiceClient();
   const entityServiceClient = new chronicle.EntityServiceClient();
   const instanceServiceClient = new chronicle.InstanceServiceClient();
   const referenceListServiceClient = new chronicle.ReferenceListServiceClient();

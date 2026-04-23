@@ -926,7 +926,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 70,
+          "end": 71,
           "type": "FULL"
         }
       ],
@@ -6707,7 +6707,7 @@
       "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetReportingIdentitySettings_async",
       "title": "AnalyticsAdminService getReportingIdentitySettings Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns the singleton data retention settings for this property.",
+      "description": " Returns the reporting identity settings for this property.",
       "canonical": true,
       "file": "analytics_admin_service.get_reporting_identity_settings.js",
       "language": "JAVASCRIPT",
@@ -6736,6 +6736,46 @@
         "method": {
           "shortName": "GetReportingIdentitySettings",
           "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingIdentitySettings",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetUserProvidedDataSettings_async",
+      "title": "AnalyticsAdminService getUserProvidedDataSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Looks up settings related to user-provided data for a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_user_provided_data_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUserProvidedDataSettings",
+        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetUserProvidedDataSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1alpha.UserProvidedDataSettings",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetUserProvidedDataSettings",
+          "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetUserProvidedDataSettings",
           "service": {
             "shortName": "AnalyticsAdminService",
             "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"

@@ -34,7 +34,7 @@ import * as path from 'path';
 import pLimit from 'p-limit';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
-import {convertObjKeysToSnakeCase} from './util.js';
+import {convertObjKeysToSnakeCase, handleContextValidation} from './util.js';
 
 import {Acl, AclMetadata} from './acl.js';
 import {Channel} from './channel.js';
@@ -44,6 +44,7 @@ import {
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
   FileMetadata,
+  ContextValue,
 } from './file.js';
 import {Iam} from './iam.js';
 import {Notification, NotificationMetadata} from './notification.js';
@@ -178,11 +179,17 @@ export interface GetFilesOptions {
   userProject?: string;
   versions?: boolean;
   fields?: string;
+  filter?: string;
 }
 
 export interface CombineOptions extends PreconditionOptions {
   kmsKeyName?: string;
   userProject?: string;
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue;
+    } | null;
+  };
 }
 
 export interface CombineCallback {
@@ -1654,6 +1661,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       options = optionsOrCallback;
     }
 
+    if (options.contexts) {
+      const validationError = handleContextValidation(
+        options.contexts,
+        callback
+      );
+      if (validationError) return validationError;
+    }
+
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata, // Not relevant but param is required
       AvailableServiceObjectMethods.setMetadata, // Same as above
@@ -1708,6 +1723,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           destination: {
             contentType: destinationFile.metadata.contentType,
             contentEncoding: destinationFile.metadata.contentEncoding,
+            contexts: options.contexts || destinationFile.metadata.contexts,
           },
           sourceObjects: (sources as File[]).map(source => {
             const sourceObject = {
@@ -2673,6 +2689,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @property {string} [prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @property {string} [filter] Filter results using a server-side filter
+   * expression. This is primarily used for filtering by Object Contexts.
+   * Syntax: `contexts."<key>"="<value>"` or `contexts."<key>":*`.
+   * Prepend `-` for negation (e.g., `-contexts."key":*`).
    * @property {string} [matchGlob] A glob pattern used to filter results,
    *     for example foo*bar
    * @property {number} [maxApiCalls] Maximum number of API calls to make.
@@ -2720,6 +2740,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * in addition to the relevant part of the object name appearing in prefixes[].
    * @param {string} [query.prefix] Filter results to objects whose names begin
    *     with this prefix.
+   * @param {string} [query.filter] Filter results using a server-side filter
+   *     expression. Supports Object Contexts with operators like `=`, `:`,
+   *     and `-` for negation.
    * @param {number} [query.maxApiCalls] Maximum number of API calls to make.
    * @param {number} [query.maxResults] Maximum number of items plus prefixes to
    *     return per call.
@@ -2739,6 +2762,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     billed for the request.
    * @param {boolean} [query.versions] If true, returns File objects scoped to
    *     their versions.
+   *
    * @param {GetFilesCallback} [callback] Callback function.
    * @returns {Promise<GetFilesResponse>}
    *
@@ -2829,6 +2853,31 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *   // apiResponse.prefixes = [
    *   //   'a/b/'
    *   // ]
+   * });
+   * ```
+   *
+   * @example
+   * //-
+   * // Filter files using Object Contexts.
+   * //-
+   * ```
+   * const query = {
+   *    filter: 'contexts."status"="active"'
+   * };
+   * bucket.getFiles(query, function(err, files) {
+   *    if (!err) {
+   *      // files only contains objects with the 'status' context set to 'active'.
+   *    }
+   * });
+   *
+   * //-
+   * // You can also filter by the absence of a context key.
+   * //-
+   *
+   * bucket.getFiles({
+   *    filter: '-contexts."priority":*'
+   * }, function(err, files) {
+   *     // files contains objects that DO NOT have the 'priority' context key.
    * });
    * ```
    *
