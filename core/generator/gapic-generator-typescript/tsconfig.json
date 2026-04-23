@@ -9,7 +9,7 @@
     "sourceMap": false,
     "lib": ["esnext",  "DOM"],
     "target": "esnext",
-    "types": ["node"]
+    "types": ["node", "mocha"]
   },
   "include": [
     "typescript/**/*.ts",
