@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.11.1...config-v0.12.0) (2026-04-14)
+
+
+### Features
+
+* [config] adding DeploymentGroups, you can now manage deployment of multiple module root dependencies in a single DAG ([#7994](https://github.com/googleapis/google-cloud-node/issues/7994)) ([3879a16](https://github.com/googleapis/google-cloud-node/commit/3879a1647ec14adfe6296a4afc5f270bb2a0bc5c))
+
 ## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/config-v0.11.0...config-v0.11.1) (2025-10-13)
 
 

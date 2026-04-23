@@ -12431,9 +12431,61 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "fallbackResponseConfig": {
+                          "type": "FallbackResponseConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endSessionConfig": {
+                          "type": "EndSessionConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "FallbackResponseConfig": {
+                          "fields": {
+                            "customFallbackMessages": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxFallbackAttempts": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "EndSessionConfig": {
+                          "oneofs": {
+                            "_escalateSession": {
+                              "oneof": [
+                                "escalateSession"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "escalateSession": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "ErrorHandlingStrategy": {
                           "values": {
                             "ERROR_HANDLING_STRATEGY_UNSPECIFIED": 0,
@@ -12672,6 +12724,13 @@
                         "disableConversationLogging": {
                           "type": "bool",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "retentionWindow": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -17460,7 +17519,8 @@
                           "values": {
                             "OUTCOME_UNSPECIFIED": 0,
                             "PASS": 1,
-                            "FAIL": 2
+                            "FAIL": 2,
+                            "SKIPPED": 3
                           }
                         },
                         "ExecutionState": {
@@ -18472,6 +18532,34 @@
                         "ALAW": 3
                       }
                     },
+                    "MockConfig": {
+                      "fields": {
+                        "mockedToolCalls": {
+                          "rule": "repeated",
+                          "type": "MockedToolCall",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unmatchedToolCallBehavior": {
+                          "type": "UnmatchedToolCallBehavior",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UnmatchedToolCallBehavior": {
+                          "values": {
+                            "UNMATCHED_TOOL_CALL_BEHAVIOR_UNSPECIFIED": 0,
+                            "FAIL": 1,
+                            "PASS_THROUGH": 2
+                          }
+                        }
+                      }
+                    },
                     "InputAudioConfig": {
                       "fields": {
                         "audioEncoding": {
@@ -18969,6 +19057,56 @@
                         "goAway": {
                           "type": "GoAway",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "MockedToolCall": {
+                      "oneofs": {
+                        "toolIdentifier": {
+                          "oneof": [
+                            "toolId",
+                            "toolset"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "toolId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/Tool"
+                          }
+                        },
+                        "toolset": {
+                          "type": "ToolsetTool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/Tool"
+                          }
+                        },
+                        "expectedArgsPattern": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "mockResponse": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -19752,6 +19890,34 @@
                               "(google.api.method_signature)": "app"
                             }
                           ]
+                        },
+                        "ExportEvaluations": {
+                          "requestType": "ExportEvaluationsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/apps/*}/evaluations:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "ExportEvaluationsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/apps/*}/evaluations:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportEvaluationsResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -19949,6 +20115,16 @@
                           "type": "Evaluation",
                           "id": 1
                         },
+                        "evaluationResults": {
+                          "rule": "repeated",
+                          "type": "EvaluationResult",
+                          "id": 4
+                        },
+                        "evaluationRuns": {
+                          "rule": "repeated",
+                          "type": "EvaluationRun",
+                          "id": 5
+                        },
                         "errorMessages": {
                           "rule": "repeated",
                           "type": "string",
@@ -19960,6 +20136,14 @@
                         "importFailureCount": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "evaluationResultImportFailureCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "evaluationRunImportFailureCount": {
+                          "type": "int32",
+                          "id": 7
                         }
                       }
                     },
@@ -20733,6 +20917,143 @@
                         }
                       }
                     },
+                    "ExportOptions": {
+                      "fields": {
+                        "exportFormat": {
+                          "type": "ExportFormat",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ExportFormat": {
+                          "values": {
+                            "EXPORT_FORMAT_UNSPECIFIED": 0,
+                            "JSON": 1,
+                            "YAML": 2
+                          }
+                        }
+                      }
+                    },
+                    "ExportEvaluationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/App"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/Evaluation"
+                          }
+                        },
+                        "exportOptions": {
+                          "type": "ExportOptions",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeEvaluationResults": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeEvaluations": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExportEvaluationsResponse": {
+                      "oneofs": {
+                        "evaluations": {
+                          "oneof": [
+                            "evaluationsContent",
+                            "evaluationsUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "evaluationsContent": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "evaluationsUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "failedEvaluations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ExportEvaluationResultsResponse": {
+                      "oneofs": {
+                        "evaluationResults": {
+                          "oneof": [
+                            "evaluationResultsContent",
+                            "evaluationResultsUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "evaluationResultsContent": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "evaluationResultsUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExportEvaluationRunsResponse": {
+                      "oneofs": {
+                        "evaluationRuns": {
+                          "oneof": [
+                            "evaluationRunsContent",
+                            "evaluationRunsUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "evaluationRunsContent": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "evaluationRunsUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Omnichannel": {
                       "options": {
                         "(google.api.resource).type": "ces.googleapis.com/Omnichannel",
@@ -21043,6 +21364,13 @@
                         "args": {
                           "type": "google.protobuf.Struct",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mockConfig": {
+                          "type": "MockConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

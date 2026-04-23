@@ -56,6 +56,14 @@
           "timeout_millis": 3600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "GetNode": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListNodes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

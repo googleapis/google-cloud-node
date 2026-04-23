@@ -15,6 +15,11 @@
                 "getCluster"
               ]
             },
+            "GetNode": {
+              "methods": [
+                "getNode"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -35,6 +40,13 @@
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
               ]
             }
           }
@@ -47,6 +59,11 @@
                 "getCluster"
               ]
             },
+            "GetNode": {
+              "methods": [
+                "getNode"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -67,6 +84,13 @@
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
               ]
             }
           }
@@ -83,9 +107,34 @@
                 "getMachineLearningRun"
               ]
             },
+            "GetProfilerTarget": {
+              "methods": [
+                "getProfilerTarget"
+              ]
+            },
+            "DeleteProfilerTarget": {
+              "methods": [
+                "deleteProfilerTarget"
+              ]
+            },
+            "GetProfilerSession": {
+              "methods": [
+                "getProfilerSession"
+              ]
+            },
+            "DeleteProfilerSession": {
+              "methods": [
+                "deleteProfilerSession"
+              ]
+            },
             "GetProfileSession": {
               "methods": [
                 "getProfileSession"
+              ]
+            },
+            "GetMonitoredEvent": {
+              "methods": [
+                "getMonitoredEvent"
               ]
             },
             "CreateMachineLearningRun": {
@@ -103,6 +152,31 @@
                 "deleteMachineLearningRun"
               ]
             },
+            "CreateProfilerTarget": {
+              "methods": [
+                "createProfilerTarget"
+              ]
+            },
+            "CreateProfilerSession": {
+              "methods": [
+                "createProfilerSession"
+              ]
+            },
+            "CreateMonitoredEvent": {
+              "methods": [
+                "createMonitoredEvent"
+              ]
+            },
+            "UpdateMonitoredEvent": {
+              "methods": [
+                "updateMonitoredEvent"
+              ]
+            },
+            "DeleteMonitoredEvent": {
+              "methods": [
+                "deleteMonitoredEvent"
+              ]
+            },
             "ListMachineLearningRuns": {
               "methods": [
                 "listMachineLearningRuns",
@@ -110,11 +184,32 @@
                 "listMachineLearningRunsAsync"
               ]
             },
+            "ListProfilerTargets": {
+              "methods": [
+                "listProfilerTargets",
+                "listProfilerTargetsStream",
+                "listProfilerTargetsAsync"
+              ]
+            },
+            "ListProfilerSessions": {
+              "methods": [
+                "listProfilerSessions",
+                "listProfilerSessionsStream",
+                "listProfilerSessionsAsync"
+              ]
+            },
             "ListProfileSessions": {
               "methods": [
                 "listProfileSessions",
                 "listProfileSessionsStream",
                 "listProfileSessionsAsync"
+              ]
+            },
+            "ListMonitoredEvents": {
+              "methods": [
+                "listMonitoredEvents",
+                "listMonitoredEventsStream",
+                "listMonitoredEventsAsync"
               ]
             }
           }
@@ -127,9 +222,34 @@
                 "getMachineLearningRun"
               ]
             },
+            "GetProfilerTarget": {
+              "methods": [
+                "getProfilerTarget"
+              ]
+            },
+            "DeleteProfilerTarget": {
+              "methods": [
+                "deleteProfilerTarget"
+              ]
+            },
+            "GetProfilerSession": {
+              "methods": [
+                "getProfilerSession"
+              ]
+            },
+            "DeleteProfilerSession": {
+              "methods": [
+                "deleteProfilerSession"
+              ]
+            },
             "GetProfileSession": {
               "methods": [
                 "getProfileSession"
+              ]
+            },
+            "GetMonitoredEvent": {
+              "methods": [
+                "getMonitoredEvent"
               ]
             },
             "CreateMachineLearningRun": {
@@ -147,6 +267,31 @@
                 "deleteMachineLearningRun"
               ]
             },
+            "CreateProfilerTarget": {
+              "methods": [
+                "createProfilerTarget"
+              ]
+            },
+            "CreateProfilerSession": {
+              "methods": [
+                "createProfilerSession"
+              ]
+            },
+            "CreateMonitoredEvent": {
+              "methods": [
+                "createMonitoredEvent"
+              ]
+            },
+            "UpdateMonitoredEvent": {
+              "methods": [
+                "updateMonitoredEvent"
+              ]
+            },
+            "DeleteMonitoredEvent": {
+              "methods": [
+                "deleteMonitoredEvent"
+              ]
+            },
             "ListMachineLearningRuns": {
               "methods": [
                 "listMachineLearningRuns",
@@ -154,11 +299,32 @@
                 "listMachineLearningRunsAsync"
               ]
             },
+            "ListProfilerTargets": {
+              "methods": [
+                "listProfilerTargets",
+                "listProfilerTargetsStream",
+                "listProfilerTargetsAsync"
+              ]
+            },
+            "ListProfilerSessions": {
+              "methods": [
+                "listProfilerSessions",
+                "listProfilerSessionsStream",
+                "listProfilerSessionsAsync"
+              ]
+            },
             "ListProfileSessions": {
               "methods": [
                 "listProfileSessions",
                 "listProfileSessionsStream",
                 "listProfileSessionsAsync"
+              ]
+            },
+            "ListMonitoredEvents": {
+              "methods": [
+                "listMonitoredEvents",
+                "listMonitoredEventsStream",
+                "listMonitoredEventsAsync"
               ]
             }
           }

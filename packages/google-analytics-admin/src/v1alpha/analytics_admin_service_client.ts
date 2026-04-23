@@ -288,6 +288,9 @@ export class AnalyticsAdminServiceClient {
       subpropertySyncConfigPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/subpropertySyncConfigs/{subproperty_sync_config}'
       ),
+      userProvidedDataSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/userProvidedDataSettings'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -397,7 +400,7 @@ export class AnalyticsAdminServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const analyticsAdminServiceStubMethods =
-        ['getAccount', 'listAccounts', 'deleteAccount', 'updateAccount', 'provisionAccountTicket', 'listAccountSummaries', 'getProperty', 'listProperties', 'createProperty', 'deleteProperty', 'updateProperty', 'createFirebaseLink', 'deleteFirebaseLink', 'listFirebaseLinks', 'getGlobalSiteTag', 'createGoogleAdsLink', 'updateGoogleAdsLink', 'deleteGoogleAdsLink', 'listGoogleAdsLinks', 'getDataSharingSettings', 'getMeasurementProtocolSecret', 'listMeasurementProtocolSecrets', 'createMeasurementProtocolSecret', 'deleteMeasurementProtocolSecret', 'updateMeasurementProtocolSecret', 'acknowledgeUserDataCollection', 'getSkAdNetworkConversionValueSchema', 'createSkAdNetworkConversionValueSchema', 'deleteSkAdNetworkConversionValueSchema', 'updateSkAdNetworkConversionValueSchema', 'listSkAdNetworkConversionValueSchemas', 'searchChangeHistoryEvents', 'getGoogleSignalsSettings', 'updateGoogleSignalsSettings', 'createConversionEvent', 'updateConversionEvent', 'getConversionEvent', 'deleteConversionEvent', 'listConversionEvents', 'createKeyEvent', 'updateKeyEvent', 'getKeyEvent', 'deleteKeyEvent', 'listKeyEvents', 'getDisplayVideo360AdvertiserLink', 'listDisplayVideo360AdvertiserLinks', 'createDisplayVideo360AdvertiserLink', 'deleteDisplayVideo360AdvertiserLink', 'updateDisplayVideo360AdvertiserLink', 'getDisplayVideo360AdvertiserLinkProposal', 'listDisplayVideo360AdvertiserLinkProposals', 'createDisplayVideo360AdvertiserLinkProposal', 'deleteDisplayVideo360AdvertiserLinkProposal', 'approveDisplayVideo360AdvertiserLinkProposal', 'cancelDisplayVideo360AdvertiserLinkProposal', 'createCustomDimension', 'updateCustomDimension', 'listCustomDimensions', 'archiveCustomDimension', 'getCustomDimension', 'createCustomMetric', 'updateCustomMetric', 'listCustomMetrics', 'archiveCustomMetric', 'getCustomMetric', 'getDataRetentionSettings', 'updateDataRetentionSettings', 'createDataStream', 'deleteDataStream', 'updateDataStream', 'listDataStreams', 'getDataStream', 'getAudience', 'listAudiences', 'createAudience', 'updateAudience', 'archiveAudience', 'getSearchAds360Link', 'listSearchAds360Links', 'createSearchAds360Link', 'deleteSearchAds360Link', 'updateSearchAds360Link', 'getAttributionSettings', 'updateAttributionSettings', 'runAccessReport', 'createAccessBinding', 'getAccessBinding', 'updateAccessBinding', 'deleteAccessBinding', 'listAccessBindings', 'batchCreateAccessBindings', 'batchGetAccessBindings', 'batchUpdateAccessBindings', 'batchDeleteAccessBindings', 'getExpandedDataSet', 'listExpandedDataSets', 'createExpandedDataSet', 'updateExpandedDataSet', 'deleteExpandedDataSet', 'getChannelGroup', 'listChannelGroups', 'createChannelGroup', 'updateChannelGroup', 'deleteChannelGroup', 'createBigQueryLink', 'getBigQueryLink', 'listBigQueryLinks', 'deleteBigQueryLink', 'updateBigQueryLink', 'getEnhancedMeasurementSettings', 'updateEnhancedMeasurementSettings', 'getAdSenseLink', 'createAdSenseLink', 'deleteAdSenseLink', 'listAdSenseLinks', 'getEventCreateRule', 'listEventCreateRules', 'createEventCreateRule', 'updateEventCreateRule', 'deleteEventCreateRule', 'getEventEditRule', 'listEventEditRules', 'createEventEditRule', 'updateEventEditRule', 'deleteEventEditRule', 'reorderEventEditRules', 'updateDataRedactionSettings', 'getDataRedactionSettings', 'getCalculatedMetric', 'createCalculatedMetric', 'listCalculatedMetrics', 'updateCalculatedMetric', 'deleteCalculatedMetric', 'createRollupProperty', 'getRollupPropertySourceLink', 'listRollupPropertySourceLinks', 'createRollupPropertySourceLink', 'deleteRollupPropertySourceLink', 'provisionSubproperty', 'createSubpropertyEventFilter', 'getSubpropertyEventFilter', 'listSubpropertyEventFilters', 'updateSubpropertyEventFilter', 'deleteSubpropertyEventFilter', 'createReportingDataAnnotation', 'getReportingDataAnnotation', 'listReportingDataAnnotations', 'updateReportingDataAnnotation', 'deleteReportingDataAnnotation', 'submitUserDeletion', 'listSubpropertySyncConfigs', 'updateSubpropertySyncConfig', 'getSubpropertySyncConfig', 'getReportingIdentitySettings'];
+        ['getAccount', 'listAccounts', 'deleteAccount', 'updateAccount', 'provisionAccountTicket', 'listAccountSummaries', 'getProperty', 'listProperties', 'createProperty', 'deleteProperty', 'updateProperty', 'createFirebaseLink', 'deleteFirebaseLink', 'listFirebaseLinks', 'getGlobalSiteTag', 'createGoogleAdsLink', 'updateGoogleAdsLink', 'deleteGoogleAdsLink', 'listGoogleAdsLinks', 'getDataSharingSettings', 'getMeasurementProtocolSecret', 'listMeasurementProtocolSecrets', 'createMeasurementProtocolSecret', 'deleteMeasurementProtocolSecret', 'updateMeasurementProtocolSecret', 'acknowledgeUserDataCollection', 'getSkAdNetworkConversionValueSchema', 'createSkAdNetworkConversionValueSchema', 'deleteSkAdNetworkConversionValueSchema', 'updateSkAdNetworkConversionValueSchema', 'listSkAdNetworkConversionValueSchemas', 'searchChangeHistoryEvents', 'getGoogleSignalsSettings', 'updateGoogleSignalsSettings', 'createConversionEvent', 'updateConversionEvent', 'getConversionEvent', 'deleteConversionEvent', 'listConversionEvents', 'createKeyEvent', 'updateKeyEvent', 'getKeyEvent', 'deleteKeyEvent', 'listKeyEvents', 'getDisplayVideo360AdvertiserLink', 'listDisplayVideo360AdvertiserLinks', 'createDisplayVideo360AdvertiserLink', 'deleteDisplayVideo360AdvertiserLink', 'updateDisplayVideo360AdvertiserLink', 'getDisplayVideo360AdvertiserLinkProposal', 'listDisplayVideo360AdvertiserLinkProposals', 'createDisplayVideo360AdvertiserLinkProposal', 'deleteDisplayVideo360AdvertiserLinkProposal', 'approveDisplayVideo360AdvertiserLinkProposal', 'cancelDisplayVideo360AdvertiserLinkProposal', 'createCustomDimension', 'updateCustomDimension', 'listCustomDimensions', 'archiveCustomDimension', 'getCustomDimension', 'createCustomMetric', 'updateCustomMetric', 'listCustomMetrics', 'archiveCustomMetric', 'getCustomMetric', 'getDataRetentionSettings', 'updateDataRetentionSettings', 'createDataStream', 'deleteDataStream', 'updateDataStream', 'listDataStreams', 'getDataStream', 'getAudience', 'listAudiences', 'createAudience', 'updateAudience', 'archiveAudience', 'getSearchAds360Link', 'listSearchAds360Links', 'createSearchAds360Link', 'deleteSearchAds360Link', 'updateSearchAds360Link', 'getAttributionSettings', 'updateAttributionSettings', 'runAccessReport', 'createAccessBinding', 'getAccessBinding', 'updateAccessBinding', 'deleteAccessBinding', 'listAccessBindings', 'batchCreateAccessBindings', 'batchGetAccessBindings', 'batchUpdateAccessBindings', 'batchDeleteAccessBindings', 'getExpandedDataSet', 'listExpandedDataSets', 'createExpandedDataSet', 'updateExpandedDataSet', 'deleteExpandedDataSet', 'getChannelGroup', 'listChannelGroups', 'createChannelGroup', 'updateChannelGroup', 'deleteChannelGroup', 'createBigQueryLink', 'getBigQueryLink', 'listBigQueryLinks', 'deleteBigQueryLink', 'updateBigQueryLink', 'getEnhancedMeasurementSettings', 'updateEnhancedMeasurementSettings', 'getAdSenseLink', 'createAdSenseLink', 'deleteAdSenseLink', 'listAdSenseLinks', 'getEventCreateRule', 'listEventCreateRules', 'createEventCreateRule', 'updateEventCreateRule', 'deleteEventCreateRule', 'getEventEditRule', 'listEventEditRules', 'createEventEditRule', 'updateEventEditRule', 'deleteEventEditRule', 'reorderEventEditRules', 'updateDataRedactionSettings', 'getDataRedactionSettings', 'getCalculatedMetric', 'createCalculatedMetric', 'listCalculatedMetrics', 'updateCalculatedMetric', 'deleteCalculatedMetric', 'createRollupProperty', 'getRollupPropertySourceLink', 'listRollupPropertySourceLinks', 'createRollupPropertySourceLink', 'deleteRollupPropertySourceLink', 'provisionSubproperty', 'createSubpropertyEventFilter', 'getSubpropertyEventFilter', 'listSubpropertyEventFilters', 'updateSubpropertyEventFilter', 'deleteSubpropertyEventFilter', 'createReportingDataAnnotation', 'getReportingDataAnnotation', 'listReportingDataAnnotations', 'updateReportingDataAnnotation', 'deleteReportingDataAnnotation', 'submitUserDeletion', 'listSubpropertySyncConfigs', 'updateSubpropertySyncConfig', 'getSubpropertySyncConfig', 'getReportingIdentitySettings', 'getUserProvidedDataSettings'];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -12704,7 +12707,7 @@ export class AnalyticsAdminServiceClient {
       });
   }
 /**
- * Returns the singleton data retention settings for this property.
+ * Returns the reporting identity settings for this property.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -12800,6 +12803,101 @@ export class AnalyticsAdminServiceClient {
         throw error;
       });
   }
+/**
+ * Looks up settings related to user-provided data for a property.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the user provided data settings to retrieve.
+ *   Format: properties/{property}/userProvidedDataSettings
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.UserProvidedDataSettings|UserProvidedDataSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_user_provided_data_settings.js</caption>
+ * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetUserProvidedDataSettings_async
+ */
+  getUserProvidedDataSettings(
+      request?: protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+        protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|undefined, {}|undefined
+      ]>;
+  getUserProvidedDataSettings(
+      request: protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+          protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getUserProvidedDataSettings(
+      request: protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest,
+      callback: Callback<
+          protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+          protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getUserProvidedDataSettings(
+      request?: protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+          protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+          protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+        protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getUserProvidedDataSettings request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+        protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUserProvidedDataSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getUserProvidedDataSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.analytics.admin.v1alpha.IUserProvidedDataSettings,
+        protos.google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getUserProvidedDataSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
  /**
  * Returns all accounts accessible by the caller.
@@ -12810,13 +12908,13 @@ export class AnalyticsAdminServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListAccounts` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListAccounts` must
  *   match the call that provided the page token.
@@ -12911,13 +13009,13 @@ export class AnalyticsAdminServiceClient {
  * Equivalent to `listAccounts`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListAccounts` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListAccounts` must
  *   match the call that provided the page token.
@@ -12961,13 +13059,13 @@ export class AnalyticsAdminServiceClient {
  * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
  * @param {Object} request
  *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListAccounts` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccounts` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListAccounts` must
  *   match the call that provided the page token.
@@ -13010,16 +13108,16 @@ export class AnalyticsAdminServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of AccountSummary resources to return. The service may
- *   return fewer than this value, even if there are additional pages.
- *   If unspecified, at most 50 resources will be returned.
- *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListAccountSummaries` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListAccountSummaries`
- *   must match the call that provided the page token.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of AccountSummary resources to return. The
+ *   service may return fewer than this value, even if there are additional
+ *   pages. If unspecified, at most 50 resources will be returned. The maximum
+ *   value is 200; (higher values will be coerced to the maximum)
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccountSummaries`
+ *   call. Provide this to retrieve the subsequent page. When paginating, all
+ *   other parameters provided to `ListAccountSummaries` must match the call
+ *   that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -13107,16 +13205,16 @@ export class AnalyticsAdminServiceClient {
  * Equivalent to `listAccountSummaries`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of AccountSummary resources to return. The service may
- *   return fewer than this value, even if there are additional pages.
- *   If unspecified, at most 50 resources will be returned.
- *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListAccountSummaries` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListAccountSummaries`
- *   must match the call that provided the page token.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of AccountSummary resources to return. The
+ *   service may return fewer than this value, even if there are additional
+ *   pages. If unspecified, at most 50 resources will be returned. The maximum
+ *   value is 200; (higher values will be coerced to the maximum)
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccountSummaries`
+ *   call. Provide this to retrieve the subsequent page. When paginating, all
+ *   other parameters provided to `ListAccountSummaries` must match the call
+ *   that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -13153,16 +13251,16 @@ export class AnalyticsAdminServiceClient {
  * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
  * @param {Object} request
  *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of AccountSummary resources to return. The service may
- *   return fewer than this value, even if there are additional pages.
- *   If unspecified, at most 50 resources will be returned.
- *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListAccountSummaries` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListAccountSummaries`
- *   must match the call that provided the page token.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of AccountSummary resources to return. The
+ *   service may return fewer than this value, even if there are additional
+ *   pages. If unspecified, at most 50 resources will be returned. The maximum
+ *   value is 200; (higher values will be coerced to the maximum)
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListAccountSummaries`
+ *   call. Provide this to retrieve the subsequent page. When paginating, all
+ *   other parameters provided to `ListAccountSummaries` must match the call
+ *   that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -13219,13 +13317,13 @@ export class AnalyticsAdminServiceClient {
  *   | firebase_project:project-id | The firebase project with id: project-id. |
  *   | firebase_project:123        | The firebase project with number: 123.    |
  *   ```
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListProperties` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListProperties` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListProperties` must
  *   match the call that provided the page token.
@@ -13337,13 +13435,13 @@ export class AnalyticsAdminServiceClient {
  *   | firebase_project:project-id | The firebase project with id: project-id. |
  *   | firebase_project:123        | The firebase project with number: 123.    |
  *   ```
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListProperties` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListProperties` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListProperties` must
  *   match the call that provided the page token.
@@ -13404,13 +13502,13 @@ export class AnalyticsAdminServiceClient {
  *   | firebase_project:project-id | The firebase project with id: project-id. |
  *   | firebase_project:123        | The firebase project with number: 123.    |
  *   ```
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListProperties` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListProperties` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListProperties` must
  *   match the call that provided the page token.
@@ -13458,13 +13556,13 @@ export class AnalyticsAdminServiceClient {
  *   Required. Format: properties/{property_id}
  *
  *   Example: `properties/1234`
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListFirebaseLinks` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListFirebaseLinks` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListFirebaseLinks` must
  *   match the call that provided the page token.
@@ -13564,13 +13662,13 @@ export class AnalyticsAdminServiceClient {
  *   Required. Format: properties/{property_id}
  *
  *   Example: `properties/1234`
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListFirebaseLinks` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListFirebaseLinks` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListFirebaseLinks` must
  *   match the call that provided the page token.
@@ -13619,13 +13717,13 @@ export class AnalyticsAdminServiceClient {
  *   Required. Format: properties/{property_id}
  *
  *   Example: `properties/1234`
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListFirebaseLinks` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListFirebaseLinks` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListFirebaseLinks` must
  *   match the call that provided the page token.
@@ -13671,12 +13769,12 @@ export class AnalyticsAdminServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Example format: properties/1234
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200 (higher values will be coerced to the maximum).
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListGoogleAdsLinks` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListGoogleAdsLinks` call.
  *   Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to `ListGoogleAdsLinks` must
@@ -13775,12 +13873,12 @@ export class AnalyticsAdminServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Example format: properties/1234
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200 (higher values will be coerced to the maximum).
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListGoogleAdsLinks` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListGoogleAdsLinks` call.
  *   Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to `ListGoogleAdsLinks` must
@@ -13828,12 +13926,12 @@ export class AnalyticsAdminServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Example format: properties/1234
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200 (higher values will be coerced to the maximum).
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListGoogleAdsLinks` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListGoogleAdsLinks` call.
  *   Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to `ListGoogleAdsLinks` must
@@ -13883,15 +13981,16 @@ export class AnalyticsAdminServiceClient {
  *   Required. The resource name of the parent stream.
  *   Format:
  *   properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 10 resources will be returned.
  *   The maximum value is 10. Higher values will be coerced to the maximum.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListMeasurementProtocolSecrets`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListMeasurementProtocolSecrets` must match
- *   the call that provided the page token.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListMeasurementProtocolSecrets` call. Provide this to retrieve the
+ *   subsequent page. When paginating, all other parameters provided to
+ *   `ListMeasurementProtocolSecrets` must match the call that provided the page
+ *   token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -13988,15 +14087,16 @@ export class AnalyticsAdminServiceClient {
  *   Required. The resource name of the parent stream.
  *   Format:
  *   properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 10 resources will be returned.
  *   The maximum value is 10. Higher values will be coerced to the maximum.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListMeasurementProtocolSecrets`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListMeasurementProtocolSecrets` must match
- *   the call that provided the page token.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListMeasurementProtocolSecrets` call. Provide this to retrieve the
+ *   subsequent page. When paginating, all other parameters provided to
+ *   `ListMeasurementProtocolSecrets` must match the call that provided the page
+ *   token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -14042,15 +14142,16 @@ export class AnalyticsAdminServiceClient {
  *   Required. The resource name of the parent stream.
  *   Format:
  *   properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 10 resources will be returned.
  *   The maximum value is 10. Higher values will be coerced to the maximum.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListMeasurementProtocolSecrets`
- *   call. Provide this to retrieve the subsequent page. When paginating, all
- *   other parameters provided to `ListMeasurementProtocolSecrets` must match
- *   the call that provided the page token.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListMeasurementProtocolSecrets` call. Provide this to retrieve the
+ *   subsequent page. When paginating, all other parameters provided to
+ *   `ListMeasurementProtocolSecrets` must match the call that provided the page
+ *   token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -14097,13 +14198,13 @@ export class AnalyticsAdminServiceClient {
  *   Format:
  *   properties/{property_id}/dataStreams/{dataStream}
  *   Example: properties/1234/dataStreams/5678
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
  *   `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
  *   subsequent page. When paginating, all other parameters provided to
  *   `ListSKAdNetworkConversionValueSchema` must match the call that provided
@@ -14205,13 +14306,13 @@ export class AnalyticsAdminServiceClient {
  *   Format:
  *   properties/{property_id}/dataStreams/{dataStream}
  *   Example: properties/1234/dataStreams/5678
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
  *   `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
  *   subsequent page. When paginating, all other parameters provided to
  *   `ListSKAdNetworkConversionValueSchema` must match the call that provided
@@ -14262,13 +14363,13 @@ export class AnalyticsAdminServiceClient {
  *   Format:
  *   properties/{property_id}/dataStreams/{dataStream}
  *   Example: properties/1234/dataStreams/5678
- * @param {number} request.pageSize
- *   The maximum number of resources to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return. The service may return
  *   fewer than this value, even if there are additional pages.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
  *   `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
  *   subsequent page. When paginating, all other parameters provided to
  *   `ListSKAdNetworkConversionValueSchema` must match the call that provided
@@ -14616,15 +14717,15 @@ export class AnalyticsAdminServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the parent property.
  *   Example: 'properties/123'
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListConversionEvents` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListConversionEvents`
- *   must match the call that provided the page token.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListConversionEvents`
+ *   call. Provide this to retrieve the subsequent page. When paginating, all
+ *   other parameters provided to `ListConversionEvents` must match the call
+ *   that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -14722,15 +14823,15 @@ export class AnalyticsAdminServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the parent property.
  *   Example: 'properties/123'
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListConversionEvents` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListConversionEvents`
- *   must match the call that provided the page token.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListConversionEvents`
+ *   call. Provide this to retrieve the subsequent page. When paginating, all
+ *   other parameters provided to `ListConversionEvents` must match the call
+ *   that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -14777,15 +14878,15 @@ export class AnalyticsAdminServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the parent property.
  *   Example: 'properties/123'
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListConversionEvents` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListConversionEvents`
- *   must match the call that provided the page token.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListConversionEvents`
+ *   call. Provide this to retrieve the subsequent page. When paginating, all
+ *   other parameters provided to `ListConversionEvents` must match the call
+ *   that provided the page token.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -14832,12 +14933,12 @@ export class AnalyticsAdminServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the parent property.
  *   Example: 'properties/123'
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListKeyEvents` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListKeyEvents` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListKeyEvents`
  *   must match the call that provided the page token.
@@ -14936,12 +15037,12 @@ export class AnalyticsAdminServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the parent property.
  *   Example: 'properties/123'
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListKeyEvents` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListKeyEvents` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListKeyEvents`
  *   must match the call that provided the page token.
@@ -14989,12 +15090,12 @@ export class AnalyticsAdminServiceClient {
  * @param {string} request.parent
  *   Required. The resource name of the parent property.
  *   Example: 'properties/123'
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200; (higher values will be coerced to the maximum)
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListKeyEvents` call.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListKeyEvents` call.
  *   Provide this to retrieve the subsequent page.
  *   When paginating, all other parameters provided to `ListKeyEvents`
  *   must match the call that provided the page token.
@@ -15467,13 +15568,13 @@ export class AnalyticsAdminServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Example format: properties/1234
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200 (higher values will be coerced to the maximum).
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListCustomDimensions` call.
- *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCustomDimensions`
+ *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to `ListCustomDimensions`
  *   must match the call that provided the page token.
@@ -15571,13 +15672,13 @@ export class AnalyticsAdminServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Example format: properties/1234
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200 (higher values will be coerced to the maximum).
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListCustomDimensions` call.
- *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCustomDimensions`
+ *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to `ListCustomDimensions`
  *   must match the call that provided the page token.
@@ -15624,13 +15725,13 @@ export class AnalyticsAdminServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. Example format: properties/1234
- * @param {number} request.pageSize
- *   The maximum number of resources to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of resources to return.
  *   If unspecified, at most 50 resources will be returned.
  *   The maximum value is 200 (higher values will be coerced to the maximum).
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListCustomDimensions` call.
- *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListCustomDimensions`
+ *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other parameters provided to `ListCustomDimensions`
  *   must match the call that provided the page token.
@@ -20452,6 +20553,29 @@ export class AnalyticsAdminServiceClient {
    */
   matchSubpropertySyncConfigFromSubpropertySyncConfigName(subpropertySyncConfigName: string) {
     return this.pathTemplates.subpropertySyncConfigPathTemplate.match(subpropertySyncConfigName).subproperty_sync_config;
+  }
+
+  /**
+   * Return a fully-qualified userProvidedDataSettings resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  userProvidedDataSettingsPath(property:string) {
+    return this.pathTemplates.userProvidedDataSettingsPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from UserProvidedDataSettings resource.
+   *
+   * @param {string} userProvidedDataSettingsName
+   *   A fully-qualified path representing UserProvidedDataSettings resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromUserProvidedDataSettingsName(userProvidedDataSettingsName: string) {
+    return this.pathTemplates.userProvidedDataSettingsPathTemplate.match(userProvidedDataSettingsName).property;
   }
 
   /**

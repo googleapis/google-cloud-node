@@ -40737,6 +40737,12 @@ export namespace google {
 
                     /** ErrorHandlingSettings errorHandlingStrategy */
                     errorHandlingStrategy?: (google.cloud.ces.v1beta.ErrorHandlingSettings.ErrorHandlingStrategy|keyof typeof google.cloud.ces.v1beta.ErrorHandlingSettings.ErrorHandlingStrategy|null);
+
+                    /** ErrorHandlingSettings fallbackResponseConfig */
+                    fallbackResponseConfig?: (google.cloud.ces.v1beta.ErrorHandlingSettings.IFallbackResponseConfig|null);
+
+                    /** ErrorHandlingSettings endSessionConfig */
+                    endSessionConfig?: (google.cloud.ces.v1beta.ErrorHandlingSettings.IEndSessionConfig|null);
                 }
 
                 /** Represents an ErrorHandlingSettings. */
@@ -40750,6 +40756,12 @@ export namespace google {
 
                     /** ErrorHandlingSettings errorHandlingStrategy. */
                     public errorHandlingStrategy: (google.cloud.ces.v1beta.ErrorHandlingSettings.ErrorHandlingStrategy|keyof typeof google.cloud.ces.v1beta.ErrorHandlingSettings.ErrorHandlingStrategy);
+
+                    /** ErrorHandlingSettings fallbackResponseConfig. */
+                    public fallbackResponseConfig?: (google.cloud.ces.v1beta.ErrorHandlingSettings.IFallbackResponseConfig|null);
+
+                    /** ErrorHandlingSettings endSessionConfig. */
+                    public endSessionConfig?: (google.cloud.ces.v1beta.ErrorHandlingSettings.IEndSessionConfig|null);
 
                     /**
                      * Creates a new ErrorHandlingSettings instance using the specified properties.
@@ -40830,6 +40842,206 @@ export namespace google {
                 }
 
                 namespace ErrorHandlingSettings {
+
+                    /** Properties of a FallbackResponseConfig. */
+                    interface IFallbackResponseConfig {
+
+                        /** FallbackResponseConfig customFallbackMessages */
+                        customFallbackMessages?: ({ [k: string]: string }|null);
+
+                        /** FallbackResponseConfig maxFallbackAttempts */
+                        maxFallbackAttempts?: (number|null);
+                    }
+
+                    /** Represents a FallbackResponseConfig. */
+                    class FallbackResponseConfig implements IFallbackResponseConfig {
+
+                        /**
+                         * Constructs a new FallbackResponseConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.ErrorHandlingSettings.IFallbackResponseConfig);
+
+                        /** FallbackResponseConfig customFallbackMessages. */
+                        public customFallbackMessages: { [k: string]: string };
+
+                        /** FallbackResponseConfig maxFallbackAttempts. */
+                        public maxFallbackAttempts: number;
+
+                        /**
+                         * Creates a new FallbackResponseConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FallbackResponseConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.ErrorHandlingSettings.IFallbackResponseConfig): google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Encodes the specified FallbackResponseConfig message. Does not implicitly {@link google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig.verify|verify} messages.
+                         * @param message FallbackResponseConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.ErrorHandlingSettings.IFallbackResponseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FallbackResponseConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig.verify|verify} messages.
+                         * @param message FallbackResponseConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.ErrorHandlingSettings.IFallbackResponseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FallbackResponseConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FallbackResponseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Decodes a FallbackResponseConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FallbackResponseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Verifies a FallbackResponseConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FallbackResponseConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FallbackResponseConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Creates a plain object from a FallbackResponseConfig message. Also converts values to other types if specified.
+                         * @param message FallbackResponseConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.ErrorHandlingSettings.FallbackResponseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FallbackResponseConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FallbackResponseConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EndSessionConfig. */
+                    interface IEndSessionConfig {
+
+                        /** EndSessionConfig escalateSession */
+                        escalateSession?: (boolean|null);
+                    }
+
+                    /** Represents an EndSessionConfig. */
+                    class EndSessionConfig implements IEndSessionConfig {
+
+                        /**
+                         * Constructs a new EndSessionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.ErrorHandlingSettings.IEndSessionConfig);
+
+                        /** EndSessionConfig escalateSession. */
+                        public escalateSession?: (boolean|null);
+
+                        /**
+                         * Creates a new EndSessionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndSessionConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.ErrorHandlingSettings.IEndSessionConfig): google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Encodes the specified EndSessionConfig message. Does not implicitly {@link google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig.verify|verify} messages.
+                         * @param message EndSessionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.ErrorHandlingSettings.IEndSessionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndSessionConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig.verify|verify} messages.
+                         * @param message EndSessionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.ErrorHandlingSettings.IEndSessionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndSessionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndSessionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Decodes an EndSessionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndSessionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Verifies an EndSessionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndSessionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndSessionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Creates a plain object from an EndSessionConfig message. Also converts values to other types if specified.
+                         * @param message EndSessionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.ErrorHandlingSettings.EndSessionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndSessionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndSessionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** ErrorHandlingStrategy enum. */
                     enum ErrorHandlingStrategy {
@@ -41639,6 +41851,9 @@ export namespace google {
 
                     /** ConversationLoggingSettings disableConversationLogging */
                     disableConversationLogging?: (boolean|null);
+
+                    /** ConversationLoggingSettings retentionWindow */
+                    retentionWindow?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a ConversationLoggingSettings. */
@@ -41652,6 +41867,9 @@ export namespace google {
 
                     /** ConversationLoggingSettings disableConversationLogging. */
                     public disableConversationLogging: boolean;
+
+                    /** ConversationLoggingSettings retentionWindow. */
+                    public retentionWindow?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new ConversationLoggingSettings instance using the specified properties.
@@ -55324,7 +55542,8 @@ export namespace google {
                     enum Outcome {
                         OUTCOME_UNSPECIFIED = 0,
                         PASS = 1,
-                        FAIL = 2
+                        FAIL = 2,
+                        SKIPPED = 3
                     }
 
                     /** ExecutionState enum. */
@@ -57780,6 +57999,119 @@ export namespace google {
                     ALAW = 3
                 }
 
+                /** Properties of a MockConfig. */
+                interface IMockConfig {
+
+                    /** MockConfig mockedToolCalls */
+                    mockedToolCalls?: (google.cloud.ces.v1beta.IMockedToolCall[]|null);
+
+                    /** MockConfig unmatchedToolCallBehavior */
+                    unmatchedToolCallBehavior?: (google.cloud.ces.v1beta.MockConfig.UnmatchedToolCallBehavior|keyof typeof google.cloud.ces.v1beta.MockConfig.UnmatchedToolCallBehavior|null);
+                }
+
+                /** Represents a MockConfig. */
+                class MockConfig implements IMockConfig {
+
+                    /**
+                     * Constructs a new MockConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IMockConfig);
+
+                    /** MockConfig mockedToolCalls. */
+                    public mockedToolCalls: google.cloud.ces.v1beta.IMockedToolCall[];
+
+                    /** MockConfig unmatchedToolCallBehavior. */
+                    public unmatchedToolCallBehavior: (google.cloud.ces.v1beta.MockConfig.UnmatchedToolCallBehavior|keyof typeof google.cloud.ces.v1beta.MockConfig.UnmatchedToolCallBehavior);
+
+                    /**
+                     * Creates a new MockConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MockConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IMockConfig): google.cloud.ces.v1beta.MockConfig;
+
+                    /**
+                     * Encodes the specified MockConfig message. Does not implicitly {@link google.cloud.ces.v1beta.MockConfig.verify|verify} messages.
+                     * @param message MockConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IMockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MockConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.MockConfig.verify|verify} messages.
+                     * @param message MockConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IMockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MockConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MockConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.MockConfig;
+
+                    /**
+                     * Decodes a MockConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MockConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.MockConfig;
+
+                    /**
+                     * Verifies a MockConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MockConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MockConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.MockConfig;
+
+                    /**
+                     * Creates a plain object from a MockConfig message. Also converts values to other types if specified.
+                     * @param message MockConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.MockConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MockConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MockConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MockConfig {
+
+                    /** UnmatchedToolCallBehavior enum. */
+                    enum UnmatchedToolCallBehavior {
+                        UNMATCHED_TOOL_CALL_BEHAVIOR_UNSPECIFIED = 0,
+                        FAIL = 1,
+                        PASS_THROUGH = 2
+                    }
+                }
+
                 /** Properties of an InputAudioConfig. */
                 interface IInputAudioConfig {
 
@@ -59975,6 +60307,130 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MockedToolCall. */
+                interface IMockedToolCall {
+
+                    /** MockedToolCall toolId */
+                    toolId?: (string|null);
+
+                    /** MockedToolCall toolset */
+                    toolset?: (google.cloud.ces.v1beta.IToolsetTool|null);
+
+                    /** MockedToolCall tool */
+                    tool?: (string|null);
+
+                    /** MockedToolCall expectedArgsPattern */
+                    expectedArgsPattern?: (google.protobuf.IStruct|null);
+
+                    /** MockedToolCall mockResponse */
+                    mockResponse?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a MockedToolCall. */
+                class MockedToolCall implements IMockedToolCall {
+
+                    /**
+                     * Constructs a new MockedToolCall.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IMockedToolCall);
+
+                    /** MockedToolCall toolId. */
+                    public toolId?: (string|null);
+
+                    /** MockedToolCall toolset. */
+                    public toolset?: (google.cloud.ces.v1beta.IToolsetTool|null);
+
+                    /** MockedToolCall tool. */
+                    public tool: string;
+
+                    /** MockedToolCall expectedArgsPattern. */
+                    public expectedArgsPattern?: (google.protobuf.IStruct|null);
+
+                    /** MockedToolCall mockResponse. */
+                    public mockResponse?: (google.protobuf.IStruct|null);
+
+                    /** MockedToolCall toolIdentifier. */
+                    public toolIdentifier?: ("toolId"|"toolset");
+
+                    /**
+                     * Creates a new MockedToolCall instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MockedToolCall instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IMockedToolCall): google.cloud.ces.v1beta.MockedToolCall;
+
+                    /**
+                     * Encodes the specified MockedToolCall message. Does not implicitly {@link google.cloud.ces.v1beta.MockedToolCall.verify|verify} messages.
+                     * @param message MockedToolCall message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IMockedToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MockedToolCall message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.MockedToolCall.verify|verify} messages.
+                     * @param message MockedToolCall message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IMockedToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MockedToolCall message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MockedToolCall
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.MockedToolCall;
+
+                    /**
+                     * Decodes a MockedToolCall message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MockedToolCall
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.MockedToolCall;
+
+                    /**
+                     * Verifies a MockedToolCall message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MockedToolCall message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MockedToolCall
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.MockedToolCall;
+
+                    /**
+                     * Creates a plain object from a MockedToolCall message. Also converts values to other types if specified.
+                     * @param message MockedToolCall
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.MockedToolCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MockedToolCall to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MockedToolCall
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GoogleSearchSuggestions. */
                 interface IGoogleSearchSuggestions {
 
@@ -61080,6 +61536,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public testPersonaVoice(request: google.cloud.ces.v1beta.ITestPersonaVoiceRequest): Promise<google.cloud.ces.v1beta.TestPersonaVoiceResponse>;
+
+                    /**
+                     * Calls ExportEvaluations.
+                     * @param request ExportEvaluationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportEvaluations(request: google.cloud.ces.v1beta.IExportEvaluationsRequest, callback: google.cloud.ces.v1beta.EvaluationService.ExportEvaluationsCallback): void;
+
+                    /**
+                     * Calls ExportEvaluations.
+                     * @param request ExportEvaluationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportEvaluations(request: google.cloud.ces.v1beta.IExportEvaluationsRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace EvaluationService {
@@ -61300,6 +61770,13 @@ export namespace google {
                      * @param [response] TestPersonaVoiceResponse
                      */
                     type TestPersonaVoiceCallback = (error: (Error|null), response?: google.cloud.ces.v1beta.TestPersonaVoiceResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.ces.v1beta.EvaluationService|exportEvaluations}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportEvaluationsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a RunEvaluationResponse. */
@@ -62258,11 +62735,23 @@ export namespace google {
                     /** ImportEvaluationsResponse evaluations */
                     evaluations?: (google.cloud.ces.v1beta.IEvaluation[]|null);
 
+                    /** ImportEvaluationsResponse evaluationResults */
+                    evaluationResults?: (google.cloud.ces.v1beta.IEvaluationResult[]|null);
+
+                    /** ImportEvaluationsResponse evaluationRuns */
+                    evaluationRuns?: (google.cloud.ces.v1beta.IEvaluationRun[]|null);
+
                     /** ImportEvaluationsResponse errorMessages */
                     errorMessages?: (string[]|null);
 
                     /** ImportEvaluationsResponse importFailureCount */
                     importFailureCount?: (number|null);
+
+                    /** ImportEvaluationsResponse evaluationResultImportFailureCount */
+                    evaluationResultImportFailureCount?: (number|null);
+
+                    /** ImportEvaluationsResponse evaluationRunImportFailureCount */
+                    evaluationRunImportFailureCount?: (number|null);
                 }
 
                 /** Represents an ImportEvaluationsResponse. */
@@ -62277,11 +62766,23 @@ export namespace google {
                     /** ImportEvaluationsResponse evaluations. */
                     public evaluations: google.cloud.ces.v1beta.IEvaluation[];
 
+                    /** ImportEvaluationsResponse evaluationResults. */
+                    public evaluationResults: google.cloud.ces.v1beta.IEvaluationResult[];
+
+                    /** ImportEvaluationsResponse evaluationRuns. */
+                    public evaluationRuns: google.cloud.ces.v1beta.IEvaluationRun[];
+
                     /** ImportEvaluationsResponse errorMessages. */
                     public errorMessages: string[];
 
                     /** ImportEvaluationsResponse importFailureCount. */
                     public importFailureCount: number;
+
+                    /** ImportEvaluationsResponse evaluationResultImportFailureCount. */
+                    public evaluationResultImportFailureCount: number;
+
+                    /** ImportEvaluationsResponse evaluationRunImportFailureCount. */
+                    public evaluationRunImportFailureCount: number;
 
                     /**
                      * Creates a new ImportEvaluationsResponse instance using the specified properties.
@@ -66189,6 +66690,564 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExportOptions. */
+                interface IExportOptions {
+
+                    /** ExportOptions exportFormat */
+                    exportFormat?: (google.cloud.ces.v1beta.ExportOptions.ExportFormat|keyof typeof google.cloud.ces.v1beta.ExportOptions.ExportFormat|null);
+
+                    /** ExportOptions gcsUri */
+                    gcsUri?: (string|null);
+                }
+
+                /** Represents an ExportOptions. */
+                class ExportOptions implements IExportOptions {
+
+                    /**
+                     * Constructs a new ExportOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IExportOptions);
+
+                    /** ExportOptions exportFormat. */
+                    public exportFormat: (google.cloud.ces.v1beta.ExportOptions.ExportFormat|keyof typeof google.cloud.ces.v1beta.ExportOptions.ExportFormat);
+
+                    /** ExportOptions gcsUri. */
+                    public gcsUri: string;
+
+                    /**
+                     * Creates a new ExportOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportOptions instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IExportOptions): google.cloud.ces.v1beta.ExportOptions;
+
+                    /**
+                     * Encodes the specified ExportOptions message. Does not implicitly {@link google.cloud.ces.v1beta.ExportOptions.verify|verify} messages.
+                     * @param message ExportOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportOptions message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportOptions.verify|verify} messages.
+                     * @param message ExportOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ExportOptions;
+
+                    /**
+                     * Decodes an ExportOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ExportOptions;
+
+                    /**
+                     * Verifies an ExportOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ExportOptions;
+
+                    /**
+                     * Creates a plain object from an ExportOptions message. Also converts values to other types if specified.
+                     * @param message ExportOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.ExportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExportOptions {
+
+                    /** ExportFormat enum. */
+                    enum ExportFormat {
+                        EXPORT_FORMAT_UNSPECIFIED = 0,
+                        JSON = 1,
+                        YAML = 2
+                    }
+                }
+
+                /** Properties of an ExportEvaluationsRequest. */
+                interface IExportEvaluationsRequest {
+
+                    /** ExportEvaluationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ExportEvaluationsRequest names */
+                    names?: (string[]|null);
+
+                    /** ExportEvaluationsRequest exportOptions */
+                    exportOptions?: (google.cloud.ces.v1beta.IExportOptions|null);
+
+                    /** ExportEvaluationsRequest includeEvaluationResults */
+                    includeEvaluationResults?: (boolean|null);
+
+                    /** ExportEvaluationsRequest includeEvaluations */
+                    includeEvaluations?: (boolean|null);
+                }
+
+                /** Represents an ExportEvaluationsRequest. */
+                class ExportEvaluationsRequest implements IExportEvaluationsRequest {
+
+                    /**
+                     * Constructs a new ExportEvaluationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IExportEvaluationsRequest);
+
+                    /** ExportEvaluationsRequest parent. */
+                    public parent: string;
+
+                    /** ExportEvaluationsRequest names. */
+                    public names: string[];
+
+                    /** ExportEvaluationsRequest exportOptions. */
+                    public exportOptions?: (google.cloud.ces.v1beta.IExportOptions|null);
+
+                    /** ExportEvaluationsRequest includeEvaluationResults. */
+                    public includeEvaluationResults: boolean;
+
+                    /** ExportEvaluationsRequest includeEvaluations. */
+                    public includeEvaluations: boolean;
+
+                    /**
+                     * Creates a new ExportEvaluationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEvaluationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IExportEvaluationsRequest): google.cloud.ces.v1beta.ExportEvaluationsRequest;
+
+                    /**
+                     * Encodes the specified ExportEvaluationsRequest message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationsRequest.verify|verify} messages.
+                     * @param message ExportEvaluationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IExportEvaluationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEvaluationsRequest message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationsRequest.verify|verify} messages.
+                     * @param message ExportEvaluationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IExportEvaluationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEvaluationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEvaluationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ExportEvaluationsRequest;
+
+                    /**
+                     * Decodes an ExportEvaluationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEvaluationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ExportEvaluationsRequest;
+
+                    /**
+                     * Verifies an ExportEvaluationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEvaluationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEvaluationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ExportEvaluationsRequest;
+
+                    /**
+                     * Creates a plain object from an ExportEvaluationsRequest message. Also converts values to other types if specified.
+                     * @param message ExportEvaluationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.ExportEvaluationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEvaluationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportEvaluationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportEvaluationsResponse. */
+                interface IExportEvaluationsResponse {
+
+                    /** ExportEvaluationsResponse evaluationsContent */
+                    evaluationsContent?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportEvaluationsResponse evaluationsUri */
+                    evaluationsUri?: (string|null);
+
+                    /** ExportEvaluationsResponse failedEvaluations */
+                    failedEvaluations?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an ExportEvaluationsResponse. */
+                class ExportEvaluationsResponse implements IExportEvaluationsResponse {
+
+                    /**
+                     * Constructs a new ExportEvaluationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IExportEvaluationsResponse);
+
+                    /** ExportEvaluationsResponse evaluationsContent. */
+                    public evaluationsContent?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportEvaluationsResponse evaluationsUri. */
+                    public evaluationsUri?: (string|null);
+
+                    /** ExportEvaluationsResponse failedEvaluations. */
+                    public failedEvaluations: { [k: string]: string };
+
+                    /** ExportEvaluationsResponse evaluations. */
+                    public evaluations?: ("evaluationsContent"|"evaluationsUri");
+
+                    /**
+                     * Creates a new ExportEvaluationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEvaluationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IExportEvaluationsResponse): google.cloud.ces.v1beta.ExportEvaluationsResponse;
+
+                    /**
+                     * Encodes the specified ExportEvaluationsResponse message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationsResponse.verify|verify} messages.
+                     * @param message ExportEvaluationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IExportEvaluationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEvaluationsResponse message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationsResponse.verify|verify} messages.
+                     * @param message ExportEvaluationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IExportEvaluationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEvaluationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEvaluationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ExportEvaluationsResponse;
+
+                    /**
+                     * Decodes an ExportEvaluationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEvaluationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ExportEvaluationsResponse;
+
+                    /**
+                     * Verifies an ExportEvaluationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEvaluationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEvaluationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ExportEvaluationsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportEvaluationsResponse message. Also converts values to other types if specified.
+                     * @param message ExportEvaluationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.ExportEvaluationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEvaluationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportEvaluationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportEvaluationResultsResponse. */
+                interface IExportEvaluationResultsResponse {
+
+                    /** ExportEvaluationResultsResponse evaluationResultsContent */
+                    evaluationResultsContent?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportEvaluationResultsResponse evaluationResultsUri */
+                    evaluationResultsUri?: (string|null);
+                }
+
+                /** Represents an ExportEvaluationResultsResponse. */
+                class ExportEvaluationResultsResponse implements IExportEvaluationResultsResponse {
+
+                    /**
+                     * Constructs a new ExportEvaluationResultsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IExportEvaluationResultsResponse);
+
+                    /** ExportEvaluationResultsResponse evaluationResultsContent. */
+                    public evaluationResultsContent?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportEvaluationResultsResponse evaluationResultsUri. */
+                    public evaluationResultsUri?: (string|null);
+
+                    /** ExportEvaluationResultsResponse evaluationResults. */
+                    public evaluationResults?: ("evaluationResultsContent"|"evaluationResultsUri");
+
+                    /**
+                     * Creates a new ExportEvaluationResultsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEvaluationResultsResponse instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IExportEvaluationResultsResponse): google.cloud.ces.v1beta.ExportEvaluationResultsResponse;
+
+                    /**
+                     * Encodes the specified ExportEvaluationResultsResponse message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationResultsResponse.verify|verify} messages.
+                     * @param message ExportEvaluationResultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IExportEvaluationResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEvaluationResultsResponse message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationResultsResponse.verify|verify} messages.
+                     * @param message ExportEvaluationResultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IExportEvaluationResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEvaluationResultsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEvaluationResultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ExportEvaluationResultsResponse;
+
+                    /**
+                     * Decodes an ExportEvaluationResultsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEvaluationResultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ExportEvaluationResultsResponse;
+
+                    /**
+                     * Verifies an ExportEvaluationResultsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEvaluationResultsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEvaluationResultsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ExportEvaluationResultsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportEvaluationResultsResponse message. Also converts values to other types if specified.
+                     * @param message ExportEvaluationResultsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.ExportEvaluationResultsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEvaluationResultsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportEvaluationResultsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportEvaluationRunsResponse. */
+                interface IExportEvaluationRunsResponse {
+
+                    /** ExportEvaluationRunsResponse evaluationRunsContent */
+                    evaluationRunsContent?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportEvaluationRunsResponse evaluationRunsUri */
+                    evaluationRunsUri?: (string|null);
+                }
+
+                /** Represents an ExportEvaluationRunsResponse. */
+                class ExportEvaluationRunsResponse implements IExportEvaluationRunsResponse {
+
+                    /**
+                     * Constructs a new ExportEvaluationRunsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IExportEvaluationRunsResponse);
+
+                    /** ExportEvaluationRunsResponse evaluationRunsContent. */
+                    public evaluationRunsContent?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportEvaluationRunsResponse evaluationRunsUri. */
+                    public evaluationRunsUri?: (string|null);
+
+                    /** ExportEvaluationRunsResponse evaluationRuns. */
+                    public evaluationRuns?: ("evaluationRunsContent"|"evaluationRunsUri");
+
+                    /**
+                     * Creates a new ExportEvaluationRunsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportEvaluationRunsResponse instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IExportEvaluationRunsResponse): google.cloud.ces.v1beta.ExportEvaluationRunsResponse;
+
+                    /**
+                     * Encodes the specified ExportEvaluationRunsResponse message. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationRunsResponse.verify|verify} messages.
+                     * @param message ExportEvaluationRunsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IExportEvaluationRunsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportEvaluationRunsResponse message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ExportEvaluationRunsResponse.verify|verify} messages.
+                     * @param message ExportEvaluationRunsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IExportEvaluationRunsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportEvaluationRunsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportEvaluationRunsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ExportEvaluationRunsResponse;
+
+                    /**
+                     * Decodes an ExportEvaluationRunsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportEvaluationRunsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ExportEvaluationRunsResponse;
+
+                    /**
+                     * Verifies an ExportEvaluationRunsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportEvaluationRunsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportEvaluationRunsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ExportEvaluationRunsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportEvaluationRunsResponse message. Also converts values to other types if specified.
+                     * @param message ExportEvaluationRunsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.ExportEvaluationRunsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportEvaluationRunsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportEvaluationRunsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Omnichannel. */
                 interface IOmnichannel {
 
@@ -67177,6 +68236,9 @@ export namespace google {
 
                     /** ExecuteToolRequest args */
                     args?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolRequest mockConfig */
+                    mockConfig?: (google.cloud.ces.v1beta.IMockConfig|null);
                 }
 
                 /** Represents an ExecuteToolRequest. */
@@ -67205,6 +68267,9 @@ export namespace google {
 
                     /** ExecuteToolRequest args. */
                     public args?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolRequest mockConfig. */
+                    public mockConfig?: (google.cloud.ces.v1beta.IMockConfig|null);
 
                     /** ExecuteToolRequest toolIdentifier. */
                     public toolIdentifier?: ("tool"|"toolsetTool");

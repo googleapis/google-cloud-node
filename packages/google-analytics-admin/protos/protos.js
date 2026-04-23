@@ -10510,6 +10510,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getUserProvidedDataSettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetUserProvidedDataSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.UserProvidedDataSettings} [response] UserProvidedDataSettings
+                         */
+    
+                        /**
+                         * Calls GetUserProvidedDataSettings.
+                         * @function getUserProvidedDataSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest} request GetUserProvidedDataSettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetUserProvidedDataSettingsCallback} callback Node-style callback called with the error, if any, and UserProvidedDataSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getUserProvidedDataSettings = function getUserProvidedDataSettings(request, callback) {
+                            return this.rpcCall(getUserProvidedDataSettings, $root.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest, $root.google.analytics.admin.v1alpha.UserProvidedDataSettings, request, callback);
+                        }, "name", { value: "GetUserProvidedDataSettings" });
+    
+                        /**
+                         * Calls GetUserProvidedDataSettings.
+                         * @function getUserProvidedDataSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest} request GetUserProvidedDataSettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.UserProvidedDataSettings>} Promise
+                         * @variation 2
+                         */
+    
                         return AnalyticsAdminService;
                     })();
     
@@ -18201,6 +18234,7 @@
                                     case 32:
                                     case 33:
                                     case 34:
+                                    case 35:
                                         break;
                                     }
                             }
@@ -18390,6 +18424,10 @@
                                     case "REPORTING_IDENTITY_SETTINGS":
                                     case 34:
                                         message.resourceType[i] = 34;
+                                        break;
+                                    case "USER_PROVIDED_DATA_SETTINGS":
+                                    case 35:
+                                        message.resourceType[i] = 35;
                                         break;
                                     }
                             }
@@ -56034,6 +56072,211 @@
                         return GetReportingIdentitySettingsRequest;
                     })();
     
+                    v1alpha.GetUserProvidedDataSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetUserProvidedDataSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetUserProvidedDataSettingsRequest
+                         * @property {string|null} [name] GetUserProvidedDataSettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetUserProvidedDataSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetUserProvidedDataSettingsRequest.
+                         * @implements IGetUserProvidedDataSettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest=} [properties] Properties to set
+                         */
+                        function GetUserProvidedDataSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetUserProvidedDataSettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @instance
+                         */
+                        GetUserProvidedDataSettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetUserProvidedDataSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest} GetUserProvidedDataSettingsRequest instance
+                         */
+                        GetUserProvidedDataSettingsRequest.create = function create(properties) {
+                            return new GetUserProvidedDataSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetUserProvidedDataSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest} message GetUserProvidedDataSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetUserProvidedDataSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetUserProvidedDataSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetUserProvidedDataSettingsRequest} message GetUserProvidedDataSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetUserProvidedDataSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetUserProvidedDataSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest} GetUserProvidedDataSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetUserProvidedDataSettingsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetUserProvidedDataSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest} GetUserProvidedDataSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetUserProvidedDataSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetUserProvidedDataSettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetUserProvidedDataSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetUserProvidedDataSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest} GetUserProvidedDataSettingsRequest
+                         */
+                        GetUserProvidedDataSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetUserProvidedDataSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest} message GetUserProvidedDataSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetUserProvidedDataSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetUserProvidedDataSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetUserProvidedDataSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetUserProvidedDataSettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetUserProvidedDataSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.GetUserProvidedDataSettingsRequest";
+                        };
+    
+                        return GetUserProvidedDataSettingsRequest;
+                    })();
+    
                     /**
                      * AudienceFilterScope enum.
                      * @name google.analytics.admin.v1alpha.AudienceFilterScope
@@ -65727,6 +65970,7 @@
                      * @property {number} REPORTING_DATA_ANNOTATION=32 REPORTING_DATA_ANNOTATION value
                      * @property {number} SUBPROPERTY_SYNC_CONFIG=33 SUBPROPERTY_SYNC_CONFIG value
                      * @property {number} REPORTING_IDENTITY_SETTINGS=34 REPORTING_IDENTITY_SETTINGS value
+                     * @property {number} USER_PROVIDED_DATA_SETTINGS=35 USER_PROVIDED_DATA_SETTINGS value
                      */
                     v1alpha.ChangeHistoryResourceType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -65760,6 +66004,7 @@
                         values[valuesById[32] = "REPORTING_DATA_ANNOTATION"] = 32;
                         values[valuesById[33] = "SUBPROPERTY_SYNC_CONFIG"] = 33;
                         values[valuesById[34] = "REPORTING_IDENTITY_SETTINGS"] = 34;
+                        values[valuesById[35] = "USER_PROVIDED_DATA_SETTINGS"] = 35;
                         return values;
                     })();
     
@@ -72136,6 +72381,7 @@
                              * @property {google.analytics.admin.v1alpha.IReportingDataAnnotation|null} [reportingDataAnnotation] ChangeHistoryResource reportingDataAnnotation
                              * @property {google.analytics.admin.v1alpha.ISubpropertySyncConfig|null} [subpropertySyncConfig] ChangeHistoryResource subpropertySyncConfig
                              * @property {google.analytics.admin.v1alpha.IReportingIdentitySettings|null} [reportingIdentitySettings] ChangeHistoryResource reportingIdentitySettings
+                             * @property {google.analytics.admin.v1alpha.IUserProvidedDataSettings|null} [userProvidedDataSettings] ChangeHistoryResource userProvidedDataSettings
                              */
     
                             /**
@@ -72385,17 +72631,25 @@
                              */
                             ChangeHistoryResource.prototype.reportingIdentitySettings = null;
     
+                            /**
+                             * ChangeHistoryResource userProvidedDataSettings.
+                             * @member {google.analytics.admin.v1alpha.IUserProvidedDataSettings|null|undefined} userProvidedDataSettings
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.userProvidedDataSettings = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * ChangeHistoryResource resource.
-                             * @member {"account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|"reportingIdentitySettings"|undefined} resource
+                             * @member {"account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|"reportingIdentitySettings"|"userProvidedDataSettings"|undefined} resource
                              * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
                              * @instance
                              */
                             Object.defineProperty(ChangeHistoryResource.prototype, "resource", {
-                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings", "searchAds_360Link", "dataStream", "attributionSettings", "expandedDataSet", "channelGroup", "bigqueryLink", "enhancedMeasurementSettings", "dataRedactionSettings", "skadnetworkConversionValueSchema", "adsenseLink", "audience", "eventCreateRule", "keyEvent", "calculatedMetric", "reportingDataAnnotation", "subpropertySyncConfig", "reportingIdentitySettings"]),
+                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings", "searchAds_360Link", "dataStream", "attributionSettings", "expandedDataSet", "channelGroup", "bigqueryLink", "enhancedMeasurementSettings", "dataRedactionSettings", "skadnetworkConversionValueSchema", "adsenseLink", "audience", "eventCreateRule", "keyEvent", "calculatedMetric", "reportingDataAnnotation", "subpropertySyncConfig", "reportingIdentitySettings", "userProvidedDataSettings"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -72481,6 +72735,8 @@
                                     $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.encode(message.subpropertySyncConfig, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                                 if (message.reportingIdentitySettings != null && Object.hasOwnProperty.call(message, "reportingIdentitySettings"))
                                     $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.encode(message.reportingIdentitySettings, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                                if (message.userProvidedDataSettings != null && Object.hasOwnProperty.call(message, "userProvidedDataSettings"))
+                                    $root.google.analytics.admin.v1alpha.UserProvidedDataSettings.encode(message.userProvidedDataSettings, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                                 return writer;
                             };
     
@@ -72631,6 +72887,10 @@
                                         }
                                     case 34: {
                                             message.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 35: {
+                                            message.userProvidedDataSettings = $root.google.analytics.admin.v1alpha.UserProvidedDataSettings.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -72957,6 +73217,16 @@
                                             return "reportingIdentitySettings." + error;
                                     }
                                 }
+                                if (message.userProvidedDataSettings != null && message.hasOwnProperty("userProvidedDataSettings")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.UserProvidedDataSettings.verify(message.userProvidedDataSettings);
+                                        if (error)
+                                            return "userProvidedDataSettings." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -73116,6 +73386,11 @@
                                     if (typeof object.reportingIdentitySettings !== "object")
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.reportingIdentitySettings: object expected");
                                     message.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.fromObject(object.reportingIdentitySettings);
+                                }
+                                if (object.userProvidedDataSettings != null) {
+                                    if (typeof object.userProvidedDataSettings !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.userProvidedDataSettings: object expected");
+                                    message.userProvidedDataSettings = $root.google.analytics.admin.v1alpha.UserProvidedDataSettings.fromObject(object.userProvidedDataSettings);
                                 }
                                 return message;
                             };
@@ -73277,6 +73552,11 @@
                                     object.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.toObject(message.reportingIdentitySettings, options);
                                     if (options.oneofs)
                                         object.resource = "reportingIdentitySettings";
+                                }
+                                if (message.userProvidedDataSettings != null && message.hasOwnProperty("userProvidedDataSettings")) {
+                                    object.userProvidedDataSettings = $root.google.analytics.admin.v1alpha.UserProvidedDataSettings.toObject(message.userProvidedDataSettings, options);
+                                    if (options.oneofs)
+                                        object.resource = "userProvidedDataSettings";
                                 }
                                 return object;
                             };
@@ -81777,6 +82057,258 @@
                         })();
     
                         return ReportingIdentitySettings;
+                    })();
+    
+                    v1alpha.UserProvidedDataSettings = (function() {
+    
+                        /**
+                         * Properties of a UserProvidedDataSettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUserProvidedDataSettings
+                         * @property {string|null} [name] UserProvidedDataSettings name
+                         * @property {boolean|null} [userProvidedDataCollectionEnabled] UserProvidedDataSettings userProvidedDataCollectionEnabled
+                         * @property {boolean|null} [automaticallyDetectedDataCollectionEnabled] UserProvidedDataSettings automaticallyDetectedDataCollectionEnabled
+                         */
+    
+                        /**
+                         * Constructs a new UserProvidedDataSettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a UserProvidedDataSettings.
+                         * @implements IUserProvidedDataSettings
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUserProvidedDataSettings=} [properties] Properties to set
+                         */
+                        function UserProvidedDataSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UserProvidedDataSettings name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @instance
+                         */
+                        UserProvidedDataSettings.prototype.name = "";
+    
+                        /**
+                         * UserProvidedDataSettings userProvidedDataCollectionEnabled.
+                         * @member {boolean} userProvidedDataCollectionEnabled
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @instance
+                         */
+                        UserProvidedDataSettings.prototype.userProvidedDataCollectionEnabled = false;
+    
+                        /**
+                         * UserProvidedDataSettings automaticallyDetectedDataCollectionEnabled.
+                         * @member {boolean} automaticallyDetectedDataCollectionEnabled
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @instance
+                         */
+                        UserProvidedDataSettings.prototype.automaticallyDetectedDataCollectionEnabled = false;
+    
+                        /**
+                         * Creates a new UserProvidedDataSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUserProvidedDataSettings=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UserProvidedDataSettings} UserProvidedDataSettings instance
+                         */
+                        UserProvidedDataSettings.create = function create(properties) {
+                            return new UserProvidedDataSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UserProvidedDataSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.UserProvidedDataSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUserProvidedDataSettings} message UserProvidedDataSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserProvidedDataSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.userProvidedDataCollectionEnabled != null && Object.hasOwnProperty.call(message, "userProvidedDataCollectionEnabled"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.userProvidedDataCollectionEnabled);
+                            if (message.automaticallyDetectedDataCollectionEnabled != null && Object.hasOwnProperty.call(message, "automaticallyDetectedDataCollectionEnabled"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.automaticallyDetectedDataCollectionEnabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UserProvidedDataSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UserProvidedDataSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUserProvidedDataSettings} message UserProvidedDataSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UserProvidedDataSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UserProvidedDataSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UserProvidedDataSettings} UserProvidedDataSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserProvidedDataSettings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UserProvidedDataSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.userProvidedDataCollectionEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.automaticallyDetectedDataCollectionEnabled = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UserProvidedDataSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UserProvidedDataSettings} UserProvidedDataSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UserProvidedDataSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UserProvidedDataSettings message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UserProvidedDataSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.userProvidedDataCollectionEnabled != null && message.hasOwnProperty("userProvidedDataCollectionEnabled"))
+                                if (typeof message.userProvidedDataCollectionEnabled !== "boolean")
+                                    return "userProvidedDataCollectionEnabled: boolean expected";
+                            if (message.automaticallyDetectedDataCollectionEnabled != null && message.hasOwnProperty("automaticallyDetectedDataCollectionEnabled"))
+                                if (typeof message.automaticallyDetectedDataCollectionEnabled !== "boolean")
+                                    return "automaticallyDetectedDataCollectionEnabled: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UserProvidedDataSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UserProvidedDataSettings} UserProvidedDataSettings
+                         */
+                        UserProvidedDataSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UserProvidedDataSettings)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UserProvidedDataSettings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.userProvidedDataCollectionEnabled != null)
+                                message.userProvidedDataCollectionEnabled = Boolean(object.userProvidedDataCollectionEnabled);
+                            if (object.automaticallyDetectedDataCollectionEnabled != null)
+                                message.automaticallyDetectedDataCollectionEnabled = Boolean(object.automaticallyDetectedDataCollectionEnabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UserProvidedDataSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UserProvidedDataSettings} message UserProvidedDataSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UserProvidedDataSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.userProvidedDataCollectionEnabled = false;
+                                object.automaticallyDetectedDataCollectionEnabled = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.userProvidedDataCollectionEnabled != null && message.hasOwnProperty("userProvidedDataCollectionEnabled"))
+                                object.userProvidedDataCollectionEnabled = message.userProvidedDataCollectionEnabled;
+                            if (message.automaticallyDetectedDataCollectionEnabled != null && message.hasOwnProperty("automaticallyDetectedDataCollectionEnabled"))
+                                object.automaticallyDetectedDataCollectionEnabled = message.automaticallyDetectedDataCollectionEnabled;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UserProvidedDataSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UserProvidedDataSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UserProvidedDataSettings
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.UserProvidedDataSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UserProvidedDataSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.UserProvidedDataSettings";
+                        };
+    
+                        return UserProvidedDataSettings;
                     })();
     
                     v1alpha.SubpropertyEventFilterCondition = (function() {

@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required.
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
    */
   // const name = 'abc123'
 
