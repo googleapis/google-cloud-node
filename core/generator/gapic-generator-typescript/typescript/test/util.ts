@@ -166,6 +166,15 @@ function equalToBaseline(outpurDir: string, baselineDir: string): boolean {
     protoItemStack.pop();
     // if item is a file, compare it with baseline
     if (fs.lstatSync(item.outputPath).isFile()) {
+      if (process.env.UPDATE_BASELINES === 'true') {
+        fs.mkdirSync(path.dirname(item.baselinePath + BASELINE_EXTENSION), {
+          recursive: true,
+        });
+        fs.copyFileSync(
+          item.outputPath,
+          item.baselinePath + BASELINE_EXTENSION,
+        );
+      }
       const compareResult = checkIdenticalFile(
         item.outputPath,
         item.baselinePath + BASELINE_EXTENSION,
