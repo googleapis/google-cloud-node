@@ -57,12 +57,12 @@ function runEslintOnFiles(filesToLint, tsconfigInclude) {
     console.log(`Updated tsconfig.json to include ${chunk.length} files in chunk.`);
 
     const fileArgs = chunk.map(f => `"${f}"`).join(' ');
-    const cmd = `NODE_OPTIONS="--max-old-space-size=24576" ${eslintPath} -f json ${fileArgs}`;
+    const cmd = `NODE_OPTIONS="--max-old-space-size=4096" ${eslintPath} -f json --parser-options project=tsconfig.json ${fileArgs}`;
     console.log(`Running on chunk ${i / chunkSize + 1} (${chunk.length} files): ${cmd}`);
 
     let output = '';
     try {
-      output = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 10 });
+      output = execSync(cmd, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 50 });
       console.log("ESLint passed!");
     } catch (error) {
       console.log("ESLint failed (as expected if violations found)!");
