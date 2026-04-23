@@ -1800,6 +1800,10 @@ describe('entity', () => {
         const key = urlSafeKey.legacyDecode(encodedKey);
         assert.strictEqual(key.namespace, 'NS');
         assert.deepStrictEqual(key.path, ['Task', 'sampletask1']);
+        assert.strictEqual(
+          urlSafeKey.legacyEncode(PROJECT_ID, key, LOCATION_PREFIX),
+          encodedKey,
+        );
       });
 
       it('should decode key with single path element string type', () => {
@@ -1808,6 +1812,10 @@ describe('entity', () => {
         const key = urlSafeKey.legacyDecode(encodedKey);
         assert.strictEqual(key.namespace, undefined);
         assert.deepStrictEqual(key.path, ['Task', 'sampletask1']);
+        assert.strictEqual(
+          urlSafeKey.legacyEncode(PROJECT_ID, key),
+          encodedKey,
+        );
       });
 
       it('should decode key with single path element long int type', () => {
@@ -1816,6 +1824,10 @@ describe('entity', () => {
         const key = urlSafeKey.legacyDecode(encodedKey);
         assert.strictEqual(key.namespace, undefined);
         assert.deepStrictEqual(key.path, ['Task', '5754248394440704']);
+        assert.strictEqual(
+          urlSafeKey.legacyEncode(PROJECT_ID, key, LOCATION_PREFIX),
+          encodedKey,
+        );
       });
 
       it('should decode key with parent path', () => {
@@ -1831,6 +1843,69 @@ describe('entity', () => {
         ]);
         assert.strictEqual(key.parent!.name, 'sampletask1');
         assert.deepStrictEqual(key.parent!.path, ['Task', 'sampletask1']);
+        assert.strictEqual(
+          urlSafeKey.legacyEncode(PROJECT_ID, key, LOCATION_PREFIX),
+          encodedKey,
+        );
+      });
+
+      describe('should ensure that decode inverses encode and decoding is correct', () => {
+        const TEST_PROJECT = 'test-project';
+        const testCases = [
+          {name: 'numeric ID', path: ['Kind', '123']},
+          {name: 'string name with spaces', path: ['Kind', 'name with spaces']},
+          {name: 'special characters', path: ['Kind', 'special!@#$%^&*()']},
+          {
+            name: '3-level parent',
+            path: ['Grandparent', '1', 'Parent', 'p1', 'Child', '2'],
+          },
+          {
+            name: 'namespace and numeric ID',
+            path: ['Kind', '456'],
+            namespace: 'MyNS',
+          },
+          {
+            name: 'namespace and parent',
+            path: ['Parent', '1', 'Child', 'c1'],
+            namespace: 'MyNS',
+          },
+          {
+            name: 'long integer ID as string',
+            path: ['Kind', '9223372036854775807'],
+          },
+          {name: 'kind with hyphens', path: ['My-Kind', '1']},
+          {
+            name: 'different kinds in path',
+            path: ['User', 'user1', 'Post', '100', 'Comment', 'c1'],
+          },
+          {
+            name: 'same kinds in path',
+            path: ['Node', '1', 'Node', '2', 'Node', '3'],
+          },
+        ];
+
+        testCases.forEach(tc => {
+          it(`should decode and re-encode ${tc.name} correctly`, () => {
+            const key = new testEntity.Key({
+              path: tc.path,
+              namespace: tc.namespace,
+            });
+            const encoded = urlSafeKey.legacyEncode(
+              TEST_PROJECT,
+              key,
+              LOCATION_PREFIX,
+            );
+            const decoded = urlSafeKey.legacyDecode(encoded);
+            assert.strictEqual(decoded.namespace, tc.namespace);
+            assert.deepStrictEqual(decoded.path, tc.path);
+            const reEncoded = urlSafeKey.legacyEncode(
+              TEST_PROJECT,
+              decoded,
+              LOCATION_PREFIX,
+            );
+            assert.strictEqual(reEncoded, encoded);
+          });
+        });
       });
     });
   });
