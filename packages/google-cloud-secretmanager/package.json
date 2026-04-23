@@ -11,6 +11,7 @@
   "author": "Google LLC",
   "files": [
     "build/src",
+    "build/protos",
     "!build/src/**/*.map"
   ],
   "keywords": [
