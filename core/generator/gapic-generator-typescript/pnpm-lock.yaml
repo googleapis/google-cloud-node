@@ -21,11 +21,11 @@ dependencies:
     specifier: ^3.0.3
     version: 3.0.3
   protobufjs:
-    specifier: ^7.5.4
-    version: 7.5.4
+    specifier: ^7.5.5
+    version: 7.5.5
   protobufjs-cli:
     specifier: ^1.2.0
-    version: 1.2.0(protobufjs@7.5.4)
+    version: 1.2.0(protobufjs@7.5.5)
   yargs:
     specifier: ^17.7.2
     version: 17.7.2
@@ -60,7 +60,7 @@ devDependencies:
     version: 0.1.6
   gapic-tools:
     specifier: ^1.0.3
-    version: 1.0.3(protobufjs@7.5.4)
+    version: 1.0.3(protobufjs@7.5.5)
   google-gax:
     specifier: ^5.1.1-rc.1
     version: 5.1.1-rc.1
@@ -335,7 +335,7 @@ packages:
     dependencies:
       lodash.camelcase: 4.3.0
       long: 5.3.2
-      protobufjs: 7.5.4
+      protobufjs: 7.5.5
       yargs: 17.7.2
     dev: true
 
@@ -1967,7 +1967,7 @@ packages:
       - supports-color
     dev: true
 
-  /gapic-tools@1.0.3(protobufjs@7.5.4):
+  /gapic-tools@1.0.3(protobufjs@7.5.5):
     resolution: {integrity: sha512-LKa0SzFl4Uv/aB8UNmE2c+to2KjestX2Q97H1W617p5Tt5MR2xunAhALGW/zRyGLwluv5thwKVPMWqfBAODPiw==}
     engines: {node: '>=18'}
     hasBin: true
@@ -1976,7 +1976,7 @@ packages:
       '@babel/traverse': 7.27.0
       google-gax: 5.0.0-rc.3
       google-proto-files: 5.0.1
-      protobufjs-cli: 1.2.0(protobufjs@7.5.4)
+      protobufjs-cli: 1.2.0(protobufjs@7.5.5)
       uglify-js: 3.19.3
       walk-up-path: 3.0.1
       walkdir: 0.4.1
@@ -2187,7 +2187,7 @@ packages:
       node-fetch: 3.3.2
       object-hash: 3.0.0
       proto3-json-serializer: 3.0.3
-      protobufjs: 7.5.4
+      protobufjs: 7.5.5
       retry-request: 8.0.0
     transitivePeerDependencies:
       - supports-color
@@ -2207,7 +2207,7 @@ packages:
       node-fetch: 3.3.2
       object-hash: 3.0.0
       proto3-json-serializer: 3.0.3
-      protobufjs: 7.5.4
+      protobufjs: 7.5.5
       retry-request: 8.0.0
     transitivePeerDependencies:
       - supports-color
@@ -3184,9 +3184,9 @@ packages:
     resolution: {integrity: sha512-iUi7jGLuECChuoUwtvf6eXBDcFXTHAt5GM6ckvtD3RqD+j2wW0GW6WndPOu9IWeUk7n933lzrskcNMHJy2tFSw==}
     engines: {node: '>=18'}
     dependencies:
-      protobufjs: 7.5.4
+      protobufjs: 7.5.5
 
-  /protobufjs-cli@1.2.0(protobufjs@7.5.4):
+  /protobufjs-cli@1.2.0(protobufjs@7.5.5):
     resolution: {integrity: sha512-+YvqJEmsmZHGzE5j0tvEzFeHm0sX7pzRFpyj7+GazhkS4Y0r+jgbioVvFxxSWIlPzUel/lxeOnLChBmV8NmyHA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -3200,13 +3200,32 @@ packages:
       glob: 8.1.0
       jsdoc: 4.0.4
       minimist: 1.2.8
-      protobufjs: 7.5.4
+      protobufjs: 7.5.5
       semver: 7.7.1
       tmp: 0.2.3
       uglify-js: 3.19.3
 
   /protobufjs@7.5.4:
     resolution: {integrity: sha512-CvexbZtbov6jW2eXAvLukXjXUW1TzFaivC46BpWc/3BpcCysb5Vffu+B3XHMm8lVEuy2Mm4XGex8hBSg1yapPg==}
+    engines: {node: '>=12.0.0'}
+    requiresBuild: true
+    dependencies:
+      '@protobufjs/aspromise': 1.1.2
+      '@protobufjs/base64': 1.1.2
+      '@protobufjs/codegen': 2.0.4
+      '@protobufjs/eventemitter': 1.1.0
+      '@protobufjs/fetch': 1.1.0
+      '@protobufjs/float': 1.0.2
+      '@protobufjs/inquire': 1.1.0
+      '@protobufjs/path': 1.1.2
+      '@protobufjs/pool': 1.1.0
+      '@protobufjs/utf8': 1.1.0
+      '@types/node': 22.18.12
+      long: 5.3.2
+    dev: true
+
+  /protobufjs@7.5.5:
+    resolution: {integrity: sha512-3wY1AxV+VBNW8Yypfd1yQY9pXnqTAN+KwQxL8iYm3/BjKYMNg4i0owhEe26PWDOMaIrzeeF98Lqd5NGz4omiIg==}
     engines: {node: '>=12.0.0'}
     requiresBuild: true
     dependencies:
