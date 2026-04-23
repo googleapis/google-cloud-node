@@ -427,11 +427,13 @@ describe('src/schema/proto.ts', () => {
       fd.service[0].method = [
         {name: 'GetIamPolicy'},
         {name: 'ListLocations'},
+        {name: 'GetOperation'},
       ] as protos.google.protobuf.MethodDescriptorProto[];
 
       // Simulating mixins being enabled (non-zero value)
       (fd.service[0] as any).IAMPolicyMixin = 1;
       (fd.service[0] as any).LocationMixin = 1;
+      (fd.service[0] as any).LongRunningOperationsMixin = 1;
 
       const options: Options = {
         grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
@@ -464,6 +466,11 @@ describe('src/schema/proto.ts', () => {
         augmentedService.locationMixinFlags?.listLocations,
         false
       ); // Native ListLocations exists
+
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.getOperation, false); // Native GetOperation exists
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.cancelOperation, true);
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.deleteOperation, true);
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.listOperations, true);
     });
 
     it('should return api version if it exists', () => {

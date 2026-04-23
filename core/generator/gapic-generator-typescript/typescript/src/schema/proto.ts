@@ -98,6 +98,13 @@ export interface LocationMixinConfig extends MixinConfig {
   listLocations: boolean;
 }
 
+export interface OperationsMixinConfig extends MixinConfig {
+  cancelOperation: boolean;
+  deleteOperation: boolean;
+  getOperation: boolean;
+  listOperations: boolean;
+}
+
 export interface ServiceDescriptorProto
   extends protos.google.protobuf.IServiceDescriptorProto {
   internalMethods: MethodDescriptorProto[];
@@ -128,6 +135,7 @@ export interface ServiceDescriptorProto
   LongRunningOperationsMixin: number;
   iamPolicyMixinFlags?: IamPolicyMixinConfig;
   locationMixinFlags?: LocationMixinConfig;
+  longRunningOperationsMixinFlags?: OperationsMixinConfig;
   protoFile: string;
   diregapicLRO?: MethodDescriptorProto[];
   httpRules?: protos.google.api.IHttpRule[];
@@ -1102,6 +1110,14 @@ export function augmentService(parameters: AugmentServiceParameters) {
   ) {
     augmentedService.LongRunningOperationsMixin = 1;
   }
+
+  augmentedService.longRunningOperationsMixinFlags = {
+    enabled: augmentedService.LongRunningOperationsMixin === 1,
+    getOperation: !nativeMethodNames.includes('GetOperation'),
+    cancelOperation: !nativeMethodNames.includes('CancelOperation'),
+    deleteOperation: !nativeMethodNames.includes('DeleteOperation'),
+    listOperations: !nativeMethodNames.includes('ListOperations'),
+  };
 
   augmentedService.hostname = '';
   augmentedService.port = 0;
