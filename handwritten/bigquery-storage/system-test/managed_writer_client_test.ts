@@ -23,6 +23,7 @@ import {BigQuery, TableSchema} from '@google-cloud/bigquery';
 import * as protos from '../protos/protos';
 import * as bigquerywriter from '../src';
 import * as protobuf from 'protobufjs';
+import 'protobufjs/ext/descriptor';
 import {ClientOptions} from 'google-gax';
 import * as customerRecordProtoJson from './fixtures/customer_record.json';
 import {JSONEncoder} from '../src/managedwriter/encoder';
@@ -1863,7 +1864,7 @@ describe('managedwriter.WriterClient', () => {
         assert.equal(reconnectedCalled, false);
 
         // add a fake pending write
-        connection['_pendingWrites'].push(new PendingWrite({}));
+        connection['_pendingWrites'].push(new PendingWrite({writeStream: parent}));
         conn.emit('error', gerr);
         conn.emit('close');
 

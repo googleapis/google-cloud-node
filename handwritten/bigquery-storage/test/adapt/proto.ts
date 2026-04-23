@@ -15,6 +15,7 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as protobuf from 'protobufjs';
+import 'protobufjs/ext/descriptor';
 import * as adapt from '../../src/adapt';
 import * as messagesJSON from '../testdata/message.json';
 import * as protos from '../../protos/protos';

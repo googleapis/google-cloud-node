@@ -20,6 +20,7 @@ import * as sinon from 'sinon';
 import {BigQuery, TableRow, TableSchema} from '@google-cloud/bigquery';
 import * as protos from '../protos/protos';
 import * as protobuf from 'protobufjs';
+import 'protobufjs/ext/descriptor';
 import {ClientOptions} from 'google-gax';
 import * as customerRecordProtoJson from './fixtures/customer_record.json';
 import * as bigquerystorage from '../src';
