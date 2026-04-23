@@ -5,6 +5,7 @@
     "resolveJsonModule": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "ignoreDeprecations": "5.0",
     "esModuleInterop": true,
     "sourceMap": false,
     "lib": ["esnext",  "DOM"],
