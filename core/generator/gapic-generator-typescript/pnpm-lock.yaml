@@ -33,6 +33,9 @@ importers:
         specifier: ^17.7.2
         version: 17.7.2
     devDependencies:
+      '@bazel/bazelisk':
+        specifier: ^1.26.0
+        version: 1.28.1
       '@types/mocha':
         specifier: ^10.0.10
         version: 10.0.10
@@ -144,6 +147,10 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@bazel/bazelisk@1.28.1':
+    resolution: {integrity: sha512-K21x83NXOtd0yb2qzjMES3UV4xEWZ1q1vnXFhADA1u7IoiMVQkJAVQRK3oZ5txpnrGafY15HS+YYr2nmsEP4Tg==}
+    hasBin: true
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -2357,6 +2364,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@bazel/bazelisk@1.28.1': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
