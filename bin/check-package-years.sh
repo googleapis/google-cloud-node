@@ -52,6 +52,7 @@ while IFS= read -r -d '' pkg_path; do
     \( -name "*.ts" -o -name "*.js" \) \
     -not -path "*/node_modules/*" \
     -not -path "*/.git/*" \
+    -not -path "*/.coverage/*" \
     -not -path "*/dist/*" \
     -not -path "*/build/*" \
     -not -name "LICENSE" \
