@@ -31,7 +31,7 @@
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
 {%- if service.iamPolicyMixinFlags.getIamPolicy %}
-  /**
+  getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
       | gax.CallOptions
@@ -80,7 +80,7 @@
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
 {%- if service.iamPolicyMixinFlags.setIamPolicy %}
-  /**
+  setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
       | gax.CallOptions
@@ -112,7 +112,7 @@
  *   The request object that will be sent.
  * @param {string} request.resource
  *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
+ *   See the operation documentation for the a ppropriate value for this field.
  * @param {string[]} request.permissions
  *   The set of permissions to check for the `resource`. Permissions with
  *   wildcards (such as '*' or 'storage.*') are not allowed. For more
@@ -130,7 +130,7 @@
  *
  */
 {%- if service.iamPolicyMixinFlags.testIamPermissions %}
-  /**
+  testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
       | gax.CallOptions

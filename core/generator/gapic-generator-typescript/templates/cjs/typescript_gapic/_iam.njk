@@ -31,7 +31,7 @@
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
 {%- if service.iamPolicyMixinFlags.getIamPolicy == true %}
-  /**
+  getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
       | gax.CallOptions
@@ -80,7 +80,7 @@
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
 {%- if service.iamPolicyMixinFlags.setIamPolicy %}
-  /**
+  setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
       | gax.CallOptions
@@ -130,7 +130,7 @@
  *
  */
 {%- if service.iamPolicyMixinFlags.testIamPermissions %}
-  /**
+  testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
       | gax.CallOptions
