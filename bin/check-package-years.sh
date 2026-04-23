@@ -43,36 +43,13 @@ while IFS= read -r -d '' pkg_path; do
 
   # Find all files that are likely to have copyright headers
   # This addresses the request to ensure all files in the folder have a copyright year.
-  # We focus on source files to avoid checking every single file (like images, etc.)
-  # and exclude common non-source files.
-
-  # Use a temporary file to store the list of files to avoid subshell issues
-  tmp_file=$(mktemp)
-  find "$pkg_path" -type f \
-    \( -name "*.ts" -o -name "*.js" \) \
-    -not -path "*/node_modules/*" \
-    -not -path "*/.git/*" \
-    -not -path "*/.coverage/*" \
-    -not -path "*/dist/*" \
-    -not -path "*/build/*" \
-    -not -name "LICENSE" \
-    -not -name "CHANGELOG.md" \
-    -not -name "package.json" \
-    -not -name "package-lock.json" \
-    -not -name "pnpm-lock.yaml" \
-    -not -name "prettier.config.js" \
-    -not -name ".prettierrc.js" \
-    -not -name ".eslintrc.js" \
-    -not -name "webpack.config.js" \
-    -not -name "rollup.config.js" \
-    > "$tmp_file"
-
-  while IFS= read -r file; do
+  # We focus on source files and configuration files that should have headers.
+  while IFS= read -r -d '' file; do
     if [ -z "$file" ]; then continue; fi
 
     # Extract the year from the first copyright line found in the file
-    # We use grep -i to be case-insensitive and || true to be robust
-    year=$(grep -iohE "Copyright [0-9]{4}" "$file" | head -n 1 | awk '{print $2}' || true)
+    # We use grep -i to be case-insensitive. awk will exit with 0 even if no input is found.
+    year=$(grep -iohE "Copyright [0-9]{4}" "$file" | head -n 1 | awk '{print $2}')
 
     if [ -z "$year" ]; then
       # If the file is missing a copyright year, report it
@@ -92,8 +69,19 @@ while IFS= read -r -d '' pkg_path; do
       EXIT_CODE=1
       # We don't break here to allow finding all issues in this package
     fi
-  done < "$tmp_file"
-  rm "$tmp_file"
+  done < <(find "$pkg_path" -type f \
+    \( -name "*.ts" -o -name "*.js" -o -name "*.cjs" -o -name "*.mjs" \) \
+    -not -path "*/node_modules/*" \
+    -not -path "*/.git/*" \
+    -not -path "*/.coverage/*" \
+    -not -path "*/dist/*" \
+    -not -path "*/build/*" \
+    -not -name "LICENSE" \
+    -not -name "CHANGELOG.md" \
+    -not -name "package.json" \
+    -not -name "package-lock.json" \
+    -not -name "pnpm-lock.yaml" \
+    -print0)
 done < <(find "$PACKAGES_DIR" -maxdepth 1 -mindepth 1 -type d -print0 | sort -z)
 
 if [ $EXIT_CODE -eq 0 ]; then
