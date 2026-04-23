@@ -383,4 +383,21 @@ describe('FieldValue sentinel type guards', () => {
       expect(FieldValue.isArrayRemove({})).to.be.false;
     });
   });
+
+  describe('isDelete()', () => {
+    it('matches only delete sentinels', () => {
+      expect(FieldValue.isDelete(deleteSentinel)).to.be.true;
+      expect(FieldValue.isDelete(serverTimestampSentinel)).to.be.false;
+      expect(FieldValue.isDelete(positiveIncrement)).to.be.false;
+      expect(FieldValue.isDelete(arrayUnionSentinel)).to.be.false;
+      expect(FieldValue.isDelete(arrayRemoveSentinel)).to.be.false;
+    });
+
+    it('returns false for non-sentinel values', () => {
+      expect(FieldValue.isDelete(null)).to.be.false;
+      expect(FieldValue.isDelete(undefined)).to.be.false;
+      expect(FieldValue.isDelete('delete')).to.be.false;
+      expect(FieldValue.isDelete({})).to.be.false;
+    });
+  });
 });

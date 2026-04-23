@@ -340,6 +340,23 @@ export class FieldValue implements firestore.FieldValue {
   }
 
   /**
+   * Returns `true` if the provided value is a sentinel returned by
+   * {@link FieldValue.delete}.
+   *
+   * @param value The value to check.
+   * @returns `true` if `value` is a delete sentinel.
+   *
+   * @example
+   * ```
+   * Firestore.FieldValue.isDelete(Firestore.FieldValue.delete()); // true
+   * Firestore.FieldValue.isDelete(null); // false
+   * ```
+   */
+  static isDelete(value: unknown): value is FieldValue {
+    return value instanceof DeleteTransform;
+  }
+
+  /**
    * Returns true if this `FieldValue` is equal to the provided value.
    *
    * @param {*} other The value to compare against.

@@ -2820,6 +2820,14 @@ declare namespace FirebaseFirestore {
      */
     static isArrayRemove(value: unknown): value is FieldValue;
     /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.delete}.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is a delete sentinel.
+     */
+    static isDelete(value: unknown): value is FieldValue;
+    /**
      * Returns true if this `FieldValue` is equal to the provided one.
      *
      * @param other The `FieldValue` to compare against.
