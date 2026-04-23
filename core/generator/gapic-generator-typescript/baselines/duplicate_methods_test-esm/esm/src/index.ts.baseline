@@ -16,12 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const duplicate-methods-test = require('@google-cloud/duplicate_methods_test');
-
-function main() {
-  const duplicateMethodsTestServiceClient = new duplicate-methods-test.DuplicateMethodsTestServiceClient();
-}
-
-main();
+import * as v1 from './v1/index.js';
+const DuplicateMethodsTestServiceClient = v1.DuplicateMethodsTestServiceClient;
+type DuplicateMethodsTestServiceClient = v1.DuplicateMethodsTestServiceClient;
+export {v1, DuplicateMethodsTestServiceClient};
+export default {v1, DuplicateMethodsTestServiceClient};
+// @ts-ignore
+import * as protos from '../../protos/protos.js';
+export {protos}

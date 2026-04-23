@@ -17,20 +17,35 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import type * as gax from 'google-gax';
+import * as gax from 'google-gax';
 import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
-import * as protos from '../../protos/protos';
-import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+// @ts-ignore
+import type * as protos from '../../../protos/protos.js';
+import * as duplicate_methods_test_service_client_config from './duplicate_methods_test_service_client_config.json';
+import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
+// @ts-ignore
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/duplicate_methods_test_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './duplicate_methods_test_service_client_config.json';
-const version = require('../../../package.json').version;
+const gapicConfig = getJSON(
+  path.join(dirname, 'duplicate_methods_test_service_client_config.json')
+);
+
+const jsonProtos = getJSON(
+  path.join(dirname, '..', '..', '..', 'protos/protos.json')
+);
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+const version = getJSON(
+  path.join(dirname, '..', '..', '..', '..', 'package.json')
+).version;
 
 /**
  * @class
@@ -46,8 +61,7 @@ export class DuplicateMethodsTestServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('duplicate_methods_test');
-
+  private _log = logging.log('duplicate-methods-test');
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +103,8 @@ export class DuplicateMethodsTestServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -97,7 +112,7 @@ export class DuplicateMethodsTestServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DuplicateMethodsTestServiceClient({fallback: true}, gax);
+   *     const client = new DuplicateMethodsTestServiceClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
@@ -123,7 +138,7 @@ export class DuplicateMethodsTestServiceClient {
 
     // Load google-gax module synchronously if needed
     if (!gaxInstance) {
-      gaxInstance = require('google-gax') as typeof gax;
+      gaxInstance = gax as typeof gax;
     }
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
@@ -156,26 +171,30 @@ export class DuplicateMethodsTestServiceClient {
     );
   
 
+    // Add ESM headers
+    const isEsm = true;
+    const isEsmString = isEsm ? '-esm' : '-cjs';
     // Determine the client header string.
     const clientHeader = [
       `gax/${this._gaxModule.version}`,
       `gapic/${version}`,
     ];
     if (typeof process === 'object' && 'versions' in process) {
-      clientHeader.push(`gl-node/${process.versions.node}`);
+      clientHeader.push(`gl-node/{process.versions.node}${isEsmString}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else {
+    } else if (opts.fallback === 'rest' ) {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
+
     // Load the applicable protos.
-    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos as gax.protobuf.INamespace);
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -271,7 +290,8 @@ export class DuplicateMethodsTestServiceClient {
   }
 
   /**
-   * The DNS address for this API service - same as servicePath.
+   * The DNS address for this API service - same as servicePath,
+   * exists for compatibility reasons.
    * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
@@ -410,14 +430,13 @@ export class DuplicateMethodsTestServiceClient {
         {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
+          callback!(error, response, options, rawResponse);
         }
       : undefined;
     return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
       ?.then(([response, options, rawResponse]: [
         protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
-        {}|undefined
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
       ]) => {
         this._log.info('getIamPolicy response %j', response);
         return [response, options, rawResponse];
@@ -498,14 +517,13 @@ export class DuplicateMethodsTestServiceClient {
         {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('echo response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
+          callback!(error, response, options, rawResponse);
         }
       : undefined;
     return this.innerApiCalls.echo(request, options, wrappedCallback)
       ?.then(([response, options, rawResponse]: [
         protos.google.duplicate_methods_test.v1.IEchoResponse,
-        protos.google.duplicate_methods_test.v1.IEchoRequest|undefined,
-        {}|undefined
+        protos.google.duplicate_methods_test.v1.IEchoRequest|undefined, {}|undefined
       ]) => {
         this._log.info('echo response %j', response);
         return [response, options, rawResponse];
@@ -603,7 +621,7 @@ export class DuplicateMethodsTestServiceClient {
       protos.google.cloud.location.ILocation>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listLocations values %j', values);
-          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+          callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
     this._log.info('listLocations request %j', request);
