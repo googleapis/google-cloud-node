@@ -770,7 +770,7 @@ export class DuplicateMethodsTestServiceClient {
  *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
-  /**
+  setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
       | gax.CallOptions
@@ -818,7 +818,7 @@ export class DuplicateMethodsTestServiceClient {
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  */
-  /**
+  testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
       | gax.CallOptions
