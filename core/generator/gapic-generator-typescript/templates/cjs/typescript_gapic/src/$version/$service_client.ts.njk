@@ -1109,7 +1109,7 @@ export class {{ service.name }}Client {
 {{ location.locationServiceMethods(service)}}
 {% endif -%}
 {%- if service.LongRunningOperationsMixin > 0 %}
-{{ operations.operationsServiceMethods()}}
+{{ operations.operationsServiceMethods(service)}}
 {% endif -%}
 {%- if service.pathTemplates.length > 0 %}
   // --------------------

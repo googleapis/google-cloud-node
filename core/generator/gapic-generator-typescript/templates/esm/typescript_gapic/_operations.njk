@@ -1,4 +1,4 @@
-{%- macro operationsServiceMethods() -%}
+{%- macro operationsServiceMethods(service) -%}
 {#-
   This part will be added into src/version/client.ts.
   If the --service-yaml contains "google.longrunning.Operations", it means the client requires Operations methods [getOperation, listOperationsAsync, cancelOperation, deleteOperation].
