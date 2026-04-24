@@ -16,7 +16,7 @@
   "dependencies": {
     "@google-cloud/compute": "^6.9.0",
     "@sendgrid/mail": "^8.0.0",
-    "nodemailer": "^7.0.0",
+    "nodemailer": "^8.0.5",
     "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
