@@ -23,7 +23,6 @@ import {BigQuery, TableSchema} from '@google-cloud/bigquery';
 import * as protos from '../protos/protos';
 import * as bigquerywriter from '../src';
 import * as protobuf from 'protobufjs';
-import 'protobufjs/ext/descriptor';
 import {ClientOptions} from 'google-gax';
 import * as customerRecordProtoJson from './fixtures/customer_record.json';
 import {JSONEncoder} from '../src/managedwriter/encoder';
