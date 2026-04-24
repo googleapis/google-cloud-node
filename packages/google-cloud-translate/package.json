@@ -17,6 +17,7 @@
   "files": [
     "build/src",
     "build/protos",
+    "!build/protos/**/*.proto",
     "!build/src/**/*.map",
     "!build/src/**/*.map"
   ],

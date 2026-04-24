@@ -13,7 +13,8 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos"
+    "build/protos",
+    "!build/protos/**/*.proto"
   ],
   "keywords": [
     "google apis client",

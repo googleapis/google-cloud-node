@@ -13,6 +13,7 @@
   "files": [
     "build/src",
     "build/protos",
+    "!build/protos/**/*.proto",
     "!build/src/**/*.map"
   ],
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workstations",

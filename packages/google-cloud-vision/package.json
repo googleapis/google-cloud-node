@@ -16,6 +16,7 @@
   "types": "build/src/index.d.ts",
   "files": [
     "build/protos",
+    "!build/protos/**/*.proto",
     "build/src",
     "!build/src/**/*.map"
   ],

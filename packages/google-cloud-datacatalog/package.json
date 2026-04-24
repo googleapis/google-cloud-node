@@ -12,6 +12,7 @@
   "files": [
     "build/src",
     "build/protos",
+    "!build/protos/**/*.proto",
     "AUTHORS",
     "COPYING",
     "!build/src/**/*.map"
