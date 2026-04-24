@@ -164,7 +164,11 @@ async function main(processArgv: string[]) {
     protocParameter = protocParameter[protocParameter.length - 1];
   }
   const protoc = protocParameter ?? protocEnv ?? 'protoc';
-  if (!fs.existsSync(protoc)) {
+  // If we are using a specific file path for protoc (i.e. `./some_dir/protoc`)
+  // than verify the file exists. If we are just using `protoc`, which
+  // is the default, assume protoc exists in the path already (like we do when
+  // running tests).
+  if (protoc.includes(path.sep) && !fs.existsSync(protoc)) {
     throw new Error(
       `ERROR: protoc binary is not found at ${protoc}, use --protoc option to point to your protoc binary`,
     );

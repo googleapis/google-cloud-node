@@ -10885,10 +10885,10 @@ class PipelineValueExpression extends Expression {
   /**
    * @internal
    */
-  _validateUserData(_ignoreUndefinedProperties: boolean): void {
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
     // Casting to bypass type checking becuase _validateUserData does not exist in the public types
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (this.pipeline as any)._validateUserData('PipelineValueExpression');
+    (this.pipeline as any)._validateUserData(ignoreUndefinedProperties);
   }
 }
 
