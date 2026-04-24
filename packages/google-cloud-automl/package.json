@@ -15,6 +15,7 @@
   "main": "build/src/index.js",
   "files": [
     "build/protos",
+    "!build/protos/**/*.proto",
     "build/src"
   ],
   "keywords": [
