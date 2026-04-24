@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, userPromptData) {
-  // [START modelarmor_v1beta_generated_ModelArmor_SanitizeUserPrompt_async]
+function main(name, modelResponseData) {
+  // [START modelarmor_v1beta_generated_ModelArmor_StreamSanitizeModelResponse_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -34,11 +34,15 @@ function main(name, userPromptData) {
    */
   // const name = 'abc123'
   /**
-   *  Required. User prompt data to sanitize.
+   *  Required. Model response data to sanitize.
    */
-  // const userPromptData = {}
+  // const modelResponseData = {}
   /**
-   *  Optional. Metadata related to Multi Language Detection.
+   *  Optional. User Prompt associated with Model response.
+   */
+  // const userPrompt = 'abc123'
+  /**
+   *  Optional. Metadata related for multi language detection.
    */
   // const multiLanguageDetectionMetadata = {}
   /**
@@ -52,20 +56,24 @@ function main(name, userPromptData) {
   // Instantiates a client
   const modelarmorClient = new ModelArmorClient();
 
-  async function callSanitizeUserPrompt() {
+  async function callStreamSanitizeModelResponse() {
     // Construct request
     const request = {
       name,
-      userPromptData,
+      modelResponseData,
     };
 
     // Run request
-    const response = await modelarmorClient.sanitizeUserPrompt(request);
-    console.log(response);
+    const stream = await modelarmorClient.streamSanitizeModelResponse();
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
+    stream.write(request);
+    stream.end();
   }
 
-  callSanitizeUserPrompt();
-  // [END modelarmor_v1beta_generated_ModelArmor_SanitizeUserPrompt_async]
+  callStreamSanitizeModelResponse();
+  // [END modelarmor_v1beta_generated_ModelArmor_StreamSanitizeModelResponse_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name, userPromptData) {
-  // [START modelarmor_v1beta_generated_ModelArmor_SanitizeUserPrompt_async]
+  // [START modelarmor_v1beta_generated_ModelArmor_StreamSanitizeUserPrompt_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -52,7 +52,7 @@ function main(name, userPromptData) {
   // Instantiates a client
   const modelarmorClient = new ModelArmorClient();
 
-  async function callSanitizeUserPrompt() {
+  async function callStreamSanitizeUserPrompt() {
     // Construct request
     const request = {
       name,
@@ -60,12 +60,16 @@ function main(name, userPromptData) {
     };
 
     // Run request
-    const response = await modelarmorClient.sanitizeUserPrompt(request);
-    console.log(response);
+    const stream = await modelarmorClient.streamSanitizeUserPrompt();
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
+    stream.write(request);
+    stream.end();
   }
 
-  callSanitizeUserPrompt();
-  // [END modelarmor_v1beta_generated_ModelArmor_SanitizeUserPrompt_async]
+  callStreamSanitizeUserPrompt();
+  // [END modelarmor_v1beta_generated_ModelArmor_StreamSanitizeUserPrompt_async]
 }
 
 process.on('unhandledRejection', err => {
