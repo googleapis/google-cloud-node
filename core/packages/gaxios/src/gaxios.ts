@@ -628,18 +628,14 @@ export class Gaxios implements FetchCompliance {
     for (const currentPart of multipartOptions) {
       const partContentType =
         currentPart.headers.get('Content-Type') || 'application/octet-stream';
-      const preamble = `--${boundary}
-Content-Type: ${partContentType}
-
-`;
+      const preamble = `--${boundary}\r\nContent-Type: ${partContentType}\r\n\r\n`;
       yield preamble;
       if (typeof currentPart.content === 'string') {
         yield currentPart.content;
       } else {
         yield* currentPart.content;
       }
-      yield '
-';
+      yield '\r\n';
     }
     yield finale;
   }
