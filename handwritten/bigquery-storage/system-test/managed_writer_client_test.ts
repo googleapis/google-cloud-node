@@ -1863,7 +1863,8 @@ describe('managedwriter.WriterClient', () => {
         assert.equal(reconnectedCalled, false);
 
         // add a fake pending write
-        connection['_pendingWrites'].push(new PendingWrite({writeStream: parent}));
+        connection['_pendingWrites'].push(new PendingWrite({}));
+        // connection['_pendingWrites'].push(new PendingWrite({writeStream: parent}));
         conn.emit('error', gerr);
         conn.emit('close');
 
