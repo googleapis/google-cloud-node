@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1955,7 +1955,7 @@ describe('v2.CloudTasksClient', () => {
                 (client.descriptors.page.listQueues.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
-                    ) 
+                    )
             );
         });
 
@@ -2200,7 +2200,7 @@ describe('v2.CloudTasksClient', () => {
                 (client.descriptors.page.listTasks.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
-                    ) 
+                    )
             );
         });
 

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ function main(name) {
    *  Note that this field names the parent container in which the alerting
    *  policies to be listed are stored. To retrieve a single alerting policy
    *  by name, use the
-   *  GetAlertPolicy google.monitoring.v3.AlertPolicyService.GetAlertPolicy 
+   *  GetAlertPolicy google.monitoring.v3.AlertPolicyService.GetAlertPolicy
    *  operation, instead.
    */
   // const name = 'abc123'

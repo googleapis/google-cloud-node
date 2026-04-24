@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1078,7 +1078,7 @@ describe('v3.MetricServiceClient', () => {
                 (client.descriptors.page.listMonitoredResourceDescriptors.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
-                    ) 
+                    )
             );
         });
 
@@ -1323,7 +1323,7 @@ describe('v3.MetricServiceClient', () => {
                 (client.descriptors.page.listMetricDescriptors.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
-                    ) 
+                    )
             );
         });
 
@@ -1568,7 +1568,7 @@ describe('v3.MetricServiceClient', () => {
                 (client.descriptors.page.listTimeSeries.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
-                    ) 
+                    )
             );
         });
 

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ function main(attachmentPoint) {
    *  If present, then retrieve the batch of results following the results from
    *  the preceding call to this method.  `page_token` must be the value of
    *  `next_page_token`
-   *  ListApplicablePoliciesResponse.next_page_token google.iam.v2.ListApplicablePoliciesResponse.next_page_token 
+   *  ListApplicablePoliciesResponse.next_page_token google.iam.v2.ListApplicablePoliciesResponse.next_page_token
    *  from the previous response.  The values of other method parameters should
    *  be identical to those in the previous call.
    */
@@ -55,7 +55,7 @@ function main(attachmentPoint) {
   /**
    *  Limit on the number of policies to include in the response.
    *  Further policies can subsequently be obtained by including the
-   *  ListApplicablePoliciesResponse.next_page_token google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token 
+   *  ListApplicablePoliciesResponse.next_page_token google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token
    *  in a subsequent request.
    *  The minimum is 25, and the maximum is 100.
    */

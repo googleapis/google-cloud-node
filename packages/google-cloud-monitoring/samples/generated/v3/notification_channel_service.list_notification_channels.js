@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ function main(name) {
    *  in which to look for the notification channels; it does not name a
    *  specific channel. To query a specific channel by REST resource name, use
    *  the
-   *  `GetNotificationChannel` google.monitoring.v3.NotificationChannelService.GetNotificationChannel 
+   *  `GetNotificationChannel` google.monitoring.v3.NotificationChannelService.GetNotificationChannel
    *  operation.
    */
   // const name = 'abc123'

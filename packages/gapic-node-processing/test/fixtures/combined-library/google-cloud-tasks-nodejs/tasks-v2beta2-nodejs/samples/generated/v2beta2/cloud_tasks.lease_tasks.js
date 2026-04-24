@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ function main(parent, leaseDuration) {
    *  its schedule_time google.cloud.tasks.v2beta2.Task.schedule_time.
    *  After the worker has successfully finished the work associated
    *  with the task, the worker must call via
-   *  AcknowledgeTask google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask 
+   *  AcknowledgeTask google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask
    *  before the schedule_time google.cloud.tasks.v2beta2.Task.schedule_time.
    *  Otherwise the task will be returned to a later
    *  LeaseTasks google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks  call so that
@@ -73,7 +73,7 @@ function main(parent, leaseDuration) {
    *  retrieved by default because some data, such as payloads, might be
    *  desirable to return only when needed because of its large size or because
    *  of the sensitivity of data that it contains.
-   *  Authorization for FULL google.cloud.tasks.v2beta2.Task.View.FULL 
+   *  Authorization for FULL google.cloud.tasks.v2beta2.Task.View.FULL
    *  requires `cloudtasks.tasks.fullView` Google
    *  IAM (https://cloud.google.com/iam/) permission on the
    *  Task google.cloud.tasks.v2beta2.Task  resource.

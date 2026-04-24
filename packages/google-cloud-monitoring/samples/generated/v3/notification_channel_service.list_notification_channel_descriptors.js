@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ function main(name) {
    *  names (https://cloud.google.com/monitoring/api/v3#project_name) the parent
    *  container in which to look for the descriptors; to retrieve a single
    *  descriptor by name, use the
-   *  GetNotificationChannelDescriptor google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor 
+   *  GetNotificationChannelDescriptor google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor
    *  operation, instead.
    */
   // const name = 'abc123'

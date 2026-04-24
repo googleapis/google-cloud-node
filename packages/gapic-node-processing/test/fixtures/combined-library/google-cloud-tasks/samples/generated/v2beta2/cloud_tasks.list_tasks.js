@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ function main(parent) {
    *  retrieved by default because some data, such as payloads, might be
    *  desirable to return only when needed because of its large size or because
    *  of the sensitivity of data that it contains.
-   *  Authorization for FULL google.cloud.tasks.v2beta2.Task.View.FULL 
+   *  Authorization for FULL google.cloud.tasks.v2beta2.Task.View.FULL
    *  requires `cloudtasks.tasks.fullView` Google
    *  IAM (https://cloud.google.com/iam/) permission on the
    *  Task google.cloud.tasks.v2beta2.Task  resource.
@@ -50,7 +50,7 @@ function main(parent) {
   /**
    *  Maximum page size.
    *  Fewer tasks than requested might be returned, even if more tasks exist; use
-   *  next_page_token google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token 
+   *  next_page_token google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token
    *  in the response to determine if more tasks exist.
    *  The maximum page size is 1000. If unspecified, the page size will be the
    *  maximum.
@@ -60,7 +60,7 @@ function main(parent) {
    *  A token identifying the page of results to return.
    *  To request the first page results, page_token must be empty. To
    *  request the next page of results, page_token must be the value of
-   *  next_page_token google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token 
+   *  next_page_token google.cloud.tasks.v2beta2.ListTasksResponse.next_page_token
    *  returned from the previous call to
    *  ListTasks google.cloud.tasks.v2beta2.CloudTasks.ListTasks  method.
    *  The page token is valid for only 2 hours.

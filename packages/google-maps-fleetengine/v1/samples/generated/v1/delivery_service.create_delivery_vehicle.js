@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ function main(parent, deliveryVehicleId, deliveryVehicle) {
    *  following restrictions:
    *  * Must be a valid Unicode string.
    *  * Limited to a maximum length of 64 characters.
-   *  * Normalized according to Unicode Normalization Form C 
+   *  * Normalized according to Unicode Normalization Form C
    *  (http://www.unicode.org/reports/tr15/).
    *  * May not contain any of the following ASCII characters: '/', ':', '?',
    *  ',', or '#'.

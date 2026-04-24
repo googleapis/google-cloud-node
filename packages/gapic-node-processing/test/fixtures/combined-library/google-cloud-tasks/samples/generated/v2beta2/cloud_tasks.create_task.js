@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ function main(parent, task) {
    *  queue.xml, then another task with the same name can't be created
    *  for ~9 days after the original task was deleted or completed.
    *  Because there is an extra lookup cost to identify duplicate task
-   *  names, these CreateTask google.cloud.tasks.v2beta2.CloudTasks.CreateTask 
+   *  names, these CreateTask google.cloud.tasks.v2beta2.CloudTasks.CreateTask
    *  calls have significantly increased latency. Using hashed strings for the
    *  task id or for the prefix of the task id is recommended. Choosing task ids
    *  that are sequential or have sequential prefixes, for example using a
@@ -73,7 +73,7 @@ function main(parent, task) {
    *  retrieved by default because some data, such as payloads, might be
    *  desirable to return only when needed because of its large size or because
    *  of the sensitivity of data that it contains.
-   *  Authorization for FULL google.cloud.tasks.v2beta2.Task.View.FULL 
+   *  Authorization for FULL google.cloud.tasks.v2beta2.Task.View.FULL
    *  requires `cloudtasks.tasks.fullView` Google
    *  IAM (https://cloud.google.com/iam/) permission on the
    *  Task google.cloud.tasks.v2beta2.Task  resource.

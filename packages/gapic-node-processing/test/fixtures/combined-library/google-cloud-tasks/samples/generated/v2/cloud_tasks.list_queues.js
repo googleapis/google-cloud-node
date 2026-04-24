@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ function main(parent) {
    *  The maximum page size is 9800. If unspecified, the page size will
    *  be the maximum. Fewer queues than requested might be returned,
    *  even if more queues exist; use the
-   *  next_page_token google.cloud.tasks.v2.ListQueuesResponse.next_page_token 
+   *  next_page_token google.cloud.tasks.v2.ListQueuesResponse.next_page_token
    *  in the response to determine if more queues exist.
    */
   // const pageSize = 1234
@@ -57,7 +57,7 @@ function main(parent) {
    *  A token identifying the page of results to return.
    *  To request the first page results, page_token must be empty. To
    *  request the next page of results, page_token must be the value of
-   *  next_page_token google.cloud.tasks.v2.ListQueuesResponse.next_page_token 
+   *  next_page_token google.cloud.tasks.v2.ListQueuesResponse.next_page_token
    *  returned from the previous call to
    *  ListQueues google.cloud.tasks.v2.CloudTasks.ListQueues  method. It is an
    *  error to switch the value of the
