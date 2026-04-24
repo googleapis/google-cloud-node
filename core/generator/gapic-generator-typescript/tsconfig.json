@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "sourceMap": false,
     "lib": ["esnext",  "DOM"],
-    "target": "esnext"
+    "target": "esnext",
   },
   "include": [
     "typescript/**/*.ts",
