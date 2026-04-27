@@ -62,7 +62,7 @@ describe('Channel', () => {
         .stub()
         .callsFake(reqOpts => {
           assert.strictEqual(reqOpts.method, 'POST');
-          assert.strictEqual(reqOpts.url, '/channels/stop');
+          assert.strictEqual(reqOpts.url, '/storage/v1/channels/stop');
           assert.deepStrictEqual(JSON.parse(reqOpts.body), channel.metadata);
 
           return Promise.resolve();

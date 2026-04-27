@@ -99,7 +99,7 @@ describe('Bucket', () => {
           .stub()
           .callsFake((reqOpts, callback) => {
             assert.strictEqual(reqOpts.method, 'POST');
-            assert.strictEqual(reqOpts.url, '/b');
+            assert.strictEqual(reqOpts.url, '/storage/v1/b');
             assert.deepStrictEqual(
               reqOpts.queryParameters!.userProject,
               options.userProject,
@@ -127,7 +127,7 @@ describe('Bucket', () => {
           .stub()
           .callsFake(reqOpts => {
             assert.strictEqual(reqOpts.method, 'DELETE');
-            assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}`);
+            assert.strictEqual(reqOpts.url, `/storage/v1/b/${BUCKET_NAME}`);
             assert.deepStrictEqual(
               reqOpts.queryParameters!.userProject,
               options.userProject,
@@ -156,7 +156,7 @@ describe('Bucket', () => {
           .stub()
           .callsFake(reqOpts => {
             assert.strictEqual(reqOpts.method, 'GET');
-            assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}`);
+            assert.strictEqual(reqOpts.url, `/storage/v1/b/${BUCKET_NAME}`);
             assert.deepStrictEqual(
               reqOpts.queryParameters!.userProject,
               options.userProject,
@@ -185,7 +185,7 @@ describe('Bucket', () => {
           .stub()
           .callsFake(reqOpts => {
             assert.strictEqual(reqOpts.method, 'GET');
-            assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}`);
+            assert.strictEqual(reqOpts.url, `/storage/v1/b/${BUCKET_NAME}`);
             assert.deepStrictEqual(
               reqOpts.queryParameters!.userProject,
               options.userProject,
@@ -214,7 +214,7 @@ describe('Bucket', () => {
           .stub()
           .callsFake(reqOpts => {
             assert.strictEqual(reqOpts.method, 'GET');
-            assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}`);
+            assert.strictEqual(reqOpts.url, `/storage/v1/b/${BUCKET_NAME}`);
             assert.deepStrictEqual(
               reqOpts.queryParameters!.userProject,
               options.userProject,
@@ -247,7 +247,7 @@ describe('Bucket', () => {
           .stub()
           .callsFake(reqOpts => {
             assert.strictEqual(reqOpts.method, 'PATCH');
-            assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}`);
+            assert.strictEqual(reqOpts.url, `/storage/v1/b/${BUCKET_NAME}`);
             assert.deepStrictEqual(
               reqOpts.queryParameters!.versioning,
               options.versioning,
@@ -570,7 +570,10 @@ describe('Bucket', () => {
         .callsFake(reqOpts => {
           const body = JSON.parse(reqOpts.body);
           assert.strictEqual(reqOpts.method, 'POST');
-          assert.strictEqual(reqOpts.url, '/compose');
+          assert.strictEqual(
+            reqOpts.url,
+            '/storage/v1/b/test-bucket/o/destination.txt/compose',
+          );
           assert.strictEqual(body.sourceObjects[0].name, file1.name);
           assert.strictEqual(body.sourceObjects[1].name, file2.name);
           done();
@@ -640,7 +643,10 @@ describe('Bucket', () => {
 
       storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         const body = JSON.parse(reqOpts.body);
-        assert.strictEqual(reqOpts.url, '/compose');
+        assert.strictEqual(
+          reqOpts.url,
+          '/storage/v1/b/test-bucket/o/destination.foo/compose',
+        );
         assert.deepStrictEqual(body, {
           destination: {},
           sourceObjects: [{name: sources[0].name}, {name: sources[1].name}],
@@ -827,7 +833,10 @@ describe('Bucket', () => {
         .stub()
         .callsFake(reqOpts => {
           assert.strictEqual(reqOpts.method, 'POST');
-          assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}/o/watch`);
+          assert.strictEqual(
+            reqOpts.url,
+            `/storage/v1/b/${BUCKET_NAME}/o/watch`,
+          );
 
           const expectedJson = Object.assign({}, config, {
             id: ID,
@@ -955,7 +964,7 @@ describe('Bucket', () => {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(
             reqOpts.url,
-            `/b/${BUCKET_NAME}/notificationConfigs`,
+            `/storage/v1/b/${BUCKET_NAME}/notificationConfigs`,
           );
           assert.deepStrictEqual(JSON.parse(reqOpts.body), expectedJson);
           assert.notStrictEqual(reqOpts.body, options);
@@ -1644,7 +1653,7 @@ describe('Bucket', () => {
       bucket.storageTransport.makeRequest = sandbox
         .stub()
         .callsFake(reqOpts => {
-          assert.strictEqual(reqOpts.url, `/b/${BUCKET_NAME}/o`);
+          assert.strictEqual(reqOpts.url, `/storage/v1/b/${BUCKET_NAME}/o`);
           assert.deepStrictEqual(reqOpts.queryParameters, {});
         });
 
@@ -1917,7 +1926,7 @@ describe('Bucket', () => {
         .callsFake(reqOpts => {
           assert.strictEqual(
             reqOpts.url,
-            `/b/${BUCKET_NAME}/notificationConfigs`,
+            `/storage/v1/b/${BUCKET_NAME}/notificationConfigs`,
           );
           assert.strictEqual(reqOpts.queryParameters, options);
           done();
@@ -2072,7 +2081,7 @@ describe('Bucket', () => {
         .callsFake((reqOpts, callback) => {
           assert.deepStrictEqual(reqOpts, {
             method: 'POST',
-            url: `/b/${BUCKET_NAME}/lockRetentionPolicy`,
+            url: `/storage/v1/b/${BUCKET_NAME}/lockRetentionPolicy`,
             queryParameters: {
               ifMetagenerationMatch: metageneration,
             },
@@ -2293,7 +2302,7 @@ describe('Bucket', () => {
         .callsFake(reqOpts => {
           assert.deepStrictEqual(reqOpts, {
             method: 'POST',
-            url: `/b/${BUCKET_NAME}/restore`,
+            url: `/storage/v1/b/${BUCKET_NAME}/restore`,
             queryParameters: {generation: '123456789'},
           });
           return [];

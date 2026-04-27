@@ -62,7 +62,7 @@ describe('storage/acl', () => {
     it('should make the correct api request', () => {
       acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.url, '/bucket/acl');
+        assert.strictEqual(reqOpts.url, '/storage/v1/b/bucket/acl');
         assert.deepStrictEqual(JSON.parse(reqOpts.body), {
           entity: ENTITY,
           role: ROLE,
@@ -166,7 +166,10 @@ describe('storage/acl', () => {
     it('should make the correct api request', () => {
       acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'DELETE');
-        assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
+        assert.strictEqual(
+          reqOpts.url,
+          `/storage/v1/b/bucket/acl/${encodeURIComponent(ENTITY)}`,
+        );
         return Promise.resolve();
       });
 
@@ -240,7 +243,7 @@ describe('storage/acl', () => {
     describe('all ACL objects', () => {
       it('should make the correct API request', () => {
         acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
-          assert.strictEqual(reqOpts.url, '/bucket/acl');
+          assert.strictEqual(reqOpts.url, '/storage/v1/b/bucket/acl');
 
           return Promise.resolve();
         });
@@ -295,7 +298,10 @@ describe('storage/acl', () => {
     describe('ACL object for an entity', () => {
       it('should get a specific ACL object', () => {
         acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
-          assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
+          assert.strictEqual(
+            reqOpts.url,
+            `/storage/v1/b/bucket/acl/${encodeURIComponent(ENTITY)}`,
+          );
           return Promise.resolve();
         });
 
@@ -408,7 +414,10 @@ describe('storage/acl', () => {
     it('should make the correct API request', () => {
       acl.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
         assert.strictEqual(reqOpts.method, 'PUT');
-        assert.strictEqual(reqOpts.url, `/bucket/acl/${ENTITY}`);
+        assert.strictEqual(
+          reqOpts.url,
+          `/storage/v1/b/bucket/acl/${encodeURIComponent(ENTITY)}`,
+        );
         assert.deepStrictEqual(JSON.parse(reqOpts.body), {role: ROLE});
         return Promise.resolve();
       });

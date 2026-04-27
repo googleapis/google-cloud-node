@@ -76,9 +76,18 @@ describe('headers', () => {
   it('populates x-goog-api-client header (node)', async () => {
     const bucket = storage.bucket('foo-bucket');
     authClient.request = opts => {
+      let apiClientHeader: string | null = '';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (typeof (opts.headers as any).get === 'function') {
+        apiClientHeader = (opts.headers as Headers).get('x-goog-api-client');
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        apiClientHeader = (opts.headers as any)['x-goog-api-client'];
+      }
       assert.ok(
         /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-          (opts.headers as Headers).get('x-goog-api-client')!,
+          apiClientHeader!,
         ),
       );
       return Promise.resolve(gaxiosResponse);
@@ -94,9 +103,18 @@ describe('headers', () => {
   it('populates x-goog-api-client header (deno)', async () => {
     const bucket = storage.bucket('foo-bucket');
     authClient.request = opts => {
+      let apiClientHeader: string | null = '';
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (typeof (opts.headers as any).get === 'function') {
+        apiClientHeader = (opts.headers as Headers).get('x-goog-api-client');
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        apiClientHeader = (opts.headers as any)['x-goog-api-client'];
+      }
       assert.ok(
         /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-          (opts.headers as Headers).get('x-goog-api-client')!,
+          apiClientHeader!,
         ),
       );
       return Promise.resolve(gaxiosResponse);

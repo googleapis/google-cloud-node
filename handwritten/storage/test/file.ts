@@ -156,7 +156,10 @@ describe('File', () => {
           .stub()
           .callsFake(reqOpts => {
             assert.strictEqual(reqOpts.method, 'DELETE');
-            assert.strictEqual(reqOpts.url, '/b/bucket-name/o/file-name.png');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
             assert.deepStrictEqual(
               reqOpts.queryParameters.generation,
               options.generation,
@@ -214,7 +217,10 @@ describe('File', () => {
           .stub()
           .callsFake((reqOpts, callback) => {
             assert.strictEqual(reqOpts.method, 'GET');
-            assert.strictEqual(reqOpts.url, '/b/bucket-name/o/file-name.png');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
             assert.deepStrictEqual(
               reqOpts.queryParameters.generation,
               options.generation,
@@ -272,7 +278,10 @@ describe('File', () => {
           .stub()
           .callsFake((reqOpts, callback) => {
             assert.strictEqual(reqOpts.method, 'GET');
-            assert.strictEqual(reqOpts.url, '/b/bucket-name/o/file-name.png');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
             assert.deepStrictEqual(
               reqOpts.queryParameters.generation,
               options.generation,
@@ -330,7 +339,10 @@ describe('File', () => {
           .stub()
           .callsFake((reqOpts, callback) => {
             assert.strictEqual(reqOpts.method, 'GET');
-            assert.strictEqual(reqOpts.url, '/b/bucket-name/o/file-name.png');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
             assert.deepStrictEqual(
               reqOpts.queryParameters.generation,
               options.generation,
@@ -382,7 +394,10 @@ describe('File', () => {
           .callsFake((reqOpts, callback) => {
             const body = JSON.parse(reqOpts.body);
             assert.strictEqual(reqOpts.method, 'PATCH');
-            assert.strictEqual(reqOpts.url, '/b/bucket-name/o/file-name.png');
+            assert.strictEqual(
+              reqOpts.url,
+              '/storage/v1/b/bucket-name/o/file-name.png',
+            );
             assert.deepStrictEqual(body.temporaryHold, options.temporaryHold);
             callback(null);
             return Promise.resolve();
@@ -448,7 +463,7 @@ describe('File', () => {
     it('should URI encode file names', done => {
       const newFile = new File(BUCKET, 'nested/file.jpg');
 
-      const expectedPath = `/b/${BUCKET.name}/o/${encodeURIComponent(directoryFile.name)}/rewriteTo/b/${
+      const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(directoryFile.name)}/rewriteTo/b/${
         file.bucket.name
       }/o/${encodeURIComponent(newFile.name)}`;
 
@@ -553,6 +568,7 @@ describe('File', () => {
         assert.deepStrictEqual(
           Object.fromEntries((reqOpts.headers as Headers).entries()),
           {
+            'content-type': 'application/json',
             'x-goog-copy-source-encryption-algorithm': 'AES256',
             'x-goog-copy-source-encryption-key': file.encryptionKeyBase64,
             'x-goog-copy-source-encryption-key-sha256': file.encryptionKeyHash,
@@ -566,18 +582,41 @@ describe('File', () => {
 
     it('should set encryption key on the new File instance', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let file: any;
-      // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
-      file = new (File as any)(BUCKET, FILE_NAME);
+      const file = new (File as any)(BUCKET, FILE_NAME);
+      Object.assign(file, {
+        encryptionKey: 'source-key',
+        encryptionKeyBase64: 'base64',
+        encryptionKeyHash: 'hash',
+      });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newFile = new (File as any)(BUCKET, 'new-file');
-      newFile.encryptionKey = 'encryptionKey';
-
-      file.setEncryptionKey = sandbox.stub().callsFake(encryptionKey => {
-        assert.strictEqual(encryptionKey, newFile.encryptionKey);
-        done();
+      Object.assign(newFile, {
+        encryptionKey: 'dest-key',
+        encryptionKeyBase64: 'base64-dest',
+        encryptionKeyHash: 'hash-dest',
       });
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      storageTransport.makeRequest = async (reqOpts: any, callback: any) => {
+        const actualHeaders = Object.fromEntries(reqOpts.headers.entries());
+
+        try {
+          assert.deepStrictEqual(actualHeaders, {
+            'content-type': 'application/json',
+            'x-goog-copy-source-encryption-algorithm': 'AES256',
+            'x-goog-copy-source-encryption-key': 'base64',
+            'x-goog-copy-source-encryption-key-sha256': 'hash',
+            'x-goog-encryption-algorithm': 'AES256',
+            'x-goog-encryption-key': 'base64-dest',
+            'x-goog-encryption-key-sha256': 'hash-dest',
+          });
+          callback?.(null, {done: true}, {});
+          done();
+        } catch (e) {
+          done(e);
+        }
+      };
 
       file.copy(newFile, assert.ifError);
     });
@@ -685,7 +724,7 @@ describe('File', () => {
       it('should allow a string', done => {
         const newFileName = 'new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName, done);
       });
@@ -694,7 +733,7 @@ describe('File', () => {
         const newFileName = '/new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
         // File uri encodes file name when calling this.request during copy
-        const expectedPath = `/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}/rewriteTo/b/${
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}/rewriteTo/b/${
           file.bucket.name
         }/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
@@ -703,20 +742,20 @@ describe('File', () => {
 
       it('should allow a "gs://..." string', done => {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = `/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/other-bucket/o/new-file-name.png`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/other-bucket/o/new-file-name.png`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName, done);
       });
 
       it('should allow a Bucket', done => {
-        const expectedPath = `/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/${BUCKET.name}/o/${file.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(BUCKET, done);
       });
 
       it('should allow a File', done => {
         const newFile = new File(BUCKET, 'new-file');
-        const expectedPath = `/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.name}/o/${file.name}/rewriteTo/b/${BUCKET.name}/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFile, done);
       });
@@ -963,11 +1002,12 @@ describe('File', () => {
       it('should create an authenticated request', () => {
         file.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
           assert.deepStrictEqual(opts, {
-            url: '/b/bucket-name/o/file-name.png',
+            url: '/storage/v1/b/bucket-name/o/file-name.png',
             headers: {
               'Accept-Encoding': 'gzip',
               'Cache-Control': 'no-store',
             },
+            decompress: true,
             responseType: 'stream',
             queryParameters: {
               alt: 'media',
@@ -3649,81 +3689,99 @@ describe('File', () => {
   });
 
   describe('isPublic', () => {
-    it('should execute callback with `true` in response', () => {
+    it('should execute callback with `true` in response', done => {
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          callback(null, {}, {});
+          return Promise.resolve();
+        });
+
       file.isPublic((err, resp) => {
         assert.ifError(err);
         assert.strictEqual(resp, true);
+        done();
       });
     });
 
-    it('should execute callback with `false` in response', () => {
+    it('should execute callback with `false` in response on 403', done => {
       file.storageTransport.makeRequest = sandbox
         .stub()
-        .callsFake((reqOpts, config, callback) => {
+        .callsFake((reqOpts, callback) => {
           const error = new GaxiosError(
             'Permission Denied.',
             {} as GaxiosOptionsPrepared,
           );
-          error.status = 403;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          error.response = {status: 403} as any;
           callback(error);
+          return Promise.resolve();
         });
       file.isPublic((err, resp) => {
         assert.ifError(err);
         assert.strictEqual(resp, false);
+        done();
       });
     });
 
-    it('should propagate non-403 errors to user', () => {
+    it('should propagate non-403 errors to user', done => {
       const error = new GaxiosError('400 Error.', {} as GaxiosOptionsPrepared);
-      error.status = 400;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      error.response = {status: 400} as any;
       file.storageTransport.makeRequest = sandbox
         .stub()
-        .callsFake((reqOpts, config, callback) => {
+        .callsFake((reqOpts, callback) => {
           callback(error);
+          return Promise.resolve();
         });
       file.isPublic(err => {
         assert.strictEqual(err, error);
+        done();
       });
     });
 
     it('should correctly send a GET request', () => {
       file.storageTransport.makeRequest = sandbox
         .stub()
-        .callsFake((reqOpts, config, callback) => {
+        .callsFake((reqOpts, callback) => {
           assert.strictEqual(reqOpts.method, 'GET');
           callback(null);
+          return Promise.resolve();
         });
       file.isPublic(err => {
         assert.ifError(err);
       });
     });
 
-    it('should correctly format URL in the request', () => {
+    it('should correctly format URL in the request', done => {
       file = new File(BUCKET, 'my#file$.png');
-      const expectedURL = `https://storage.googleapis.com/${
-        BUCKET.name
-      }/${encodeURIComponent(file.name)}`;
+      const expectedPath = `/${BUCKET.name}/${encodeURIComponent(file.name)}`;
 
       file.storageTransport.makeRequest = sandbox
         .stub()
-        .callsFake((reqOpts, config, callback) => {
-          assert.strictEqual(reqOpts.uri, expectedURL);
+        .callsFake((reqOpts, callback) => {
+          assert.strictEqual(reqOpts.method, 'GET');
+          assert.strictEqual(reqOpts.url, expectedPath);
           callback(null);
+          return Promise.resolve();
         });
       file.isPublic(err => {
         assert.ifError(err);
+        done();
       });
     });
 
-    it('should not set any headers when there are no interceptors', () => {
+    it('should not set any headers when there are no interceptors', done => {
       file.storageTransport.makeRequest = sandbox
         .stub()
-        .callsFake((reqOpts, config, callback) => {
-          assert.deepStrictEqual(reqOpts.headers, {});
+        .callsFake((reqOpts, callback) => {
+          assert.deepStrictEqual(reqOpts.headers, undefined);
           callback(null);
+          return Promise.resolve();
         });
       file.isPublic(err => {
         assert.ifError(err);
+        done();
       });
     });
   });
@@ -3755,7 +3813,7 @@ describe('File', () => {
     it('should URI encode file names', async () => {
       const newFile = new File(BUCKET, 'nested/file.jpg');
 
-      const expectedPath = `/b/${BUCKET.id}/o/${directoryFile.id}/moveTo/o/${encodeURIComponent(newFile.name)}`;
+      const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${directoryFile.id}/moveTo/o/${encodeURIComponent(newFile.name)}`;
 
       directoryFile.storageTransport.makeRequest = sandbox
         .stub()
@@ -3858,7 +3916,7 @@ describe('File', () => {
       it('should allow a string', async done => {
         const newFileName = 'new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/b/${BUCKET.id}/o/${file.id}/moveTo/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         await file.moveFileAtomic(newFileName);
       });
@@ -3866,21 +3924,21 @@ describe('File', () => {
       it('should allow a string with leading slash.', async done => {
         const newFileName = '/new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
-        const expectedPath = `/b/${BUCKET.id}/o/${file.id}/moveTo/o/${encodeURIComponent(newFile.name)}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
         await file.moveFileAtomic(newFileName);
       });
 
       it('should allow a "gs://..." string', async done => {
         const newFileName = 'gs://other-bucket/new-file-name.png';
-        const expectedPath = `/b/${BUCKET.id}/o/${file.id}/moveTo/o/new-file-name.png`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/new-file-name.png`;
         assertPathEquals(file, expectedPath, done);
         await file.moveFileAtomic(newFileName);
       });
 
       it('should allow a File', async done => {
         const newFile = new File(BUCKET, 'new-file');
-        const expectedPath = `/b/${BUCKET.id}/o/${file.id}/moveTo/o/${newFile.name}`;
+        const expectedPath = `/storage/v1/b/${BUCKET.id}/o/${file.id}/moveTo/o/${newFile.name}`;
         assertPathEquals(file, expectedPath, done);
         await file.moveFileAtomic(newFile);
       });
@@ -4153,7 +4211,7 @@ describe('File', () => {
         .callsFake((reqOpts, callback_) => {
           assert.deepStrictEqual(reqOpts, {
             method: 'POST',
-            url: `/b/${file.bucket.name}/o/${encodeURIComponent(file.name)}/restore`,
+            url: `/storage/v1/b/${file.bucket.name}/o/${encodeURIComponent(file.name)}/restore`,
             queryParameters: {generation: 123},
           });
           assert.strictEqual(callback_, undefined);

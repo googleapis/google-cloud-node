@@ -51,7 +51,8 @@ describe('storage/iam', () => {
         .stub()
         .callsFake((reqOpts, callback) => {
           assert.deepStrictEqual(reqOpts, {
-            url: '/iam',
+            method: 'GET',
+            url: `/storage/v1/b/${BUCKET_INSTANCE.name}/iam`,
             queryParameters: {},
           });
           callback(null);
@@ -107,9 +108,12 @@ describe('storage/iam', () => {
           reqOpts.body = JSON.parse(reqOpts.body);
           assert.deepStrictEqual(reqOpts, {
             method: 'PUT',
-            url: '/iam',
+            url: `/storage/v1/b/${BUCKET_INSTANCE.name}/iam`,
             maxRetries: 0,
-            body: Object.assign(policy, {resourceId: `buckets/${id}`}),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: Object.assign(policy),
             queryParameters: {},
           });
           callback(null);
@@ -147,7 +151,8 @@ describe('storage/iam', () => {
         .stub()
         .callsFake(reqOpts => {
           assert.deepStrictEqual(reqOpts, {
-            url: '/iam/testPermissions',
+            method: 'GET',
+            url: `/storage/v1/b/${BUCKET_INSTANCE.name}/iam/testPermissions`,
             queryParameters: {
               permissions: [permissions],
             },

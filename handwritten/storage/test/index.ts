@@ -187,8 +187,17 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('502 Error', {} as GaxiosOptionsPrepared);
+      const mockConfig = {
+        method: 'GET',
+        url: 'http://127.0.0.1/test',
+        params: {},
+        headers: {},
+      } as unknown as GaxiosOptionsPrepared;
+
+      const error = new GaxiosError('502 Error', mockConfig);
       error.status = 502;
+      error.code = '502';
+
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
 
@@ -225,8 +234,15 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('Broken pipe', {} as GaxiosOptionsPrepared);
-      error.code = 'Socket connection timeout';
+      const mockConfig = {
+        method: 'GET',
+        url: 'http://127.0.0.1/test',
+        headers: {},
+      } as unknown as GaxiosOptionsPrepared;
+
+      const error = new GaxiosError('socket connection timeout', mockConfig);
+
+      error.code = 'ETIMEDOUT';
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
 
@@ -497,7 +513,7 @@ describe('Storage', () => {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(
             reqOpts.url,
-            `/projects/${storage.projectId}/hmacKeys`,
+            `/storage/v1/projects/${storage.projectId}/hmacKeys`,
           );
           assert.strictEqual(
             reqOpts.queryParameters!.serviceAccountEmail,
@@ -625,7 +641,7 @@ describe('Storage', () => {
         .callsFake((reqOpts, callback) => {
           const body = JSON.parse(reqOpts.body);
           assert.strictEqual(reqOpts.method, 'POST');
-          assert.strictEqual(reqOpts.url, '/b');
+          assert.strictEqual(reqOpts.url, '/storage/v1/b');
           assert.strictEqual(
             reqOpts.queryParameters!.project,
             storage.projectId,
@@ -946,7 +962,7 @@ describe('Storage', () => {
       storage.storageTransport.makeRequest = sandbox
         .stub()
         .callsFake(reqOpts => {
-          assert.strictEqual(reqOpts.url, '/b');
+          assert.strictEqual(reqOpts.url, '/storage/v1/b');
           assert.deepStrictEqual(reqOpts.queryParameters, {
             project: storage.projectId,
           });
@@ -1073,7 +1089,10 @@ describe('Storage', () => {
 
     it('should get HmacKeys without a query', done => {
       storage.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
-        assert.strictEqual(opts.uri, `/projects/${storage.projectId}/hmacKeys`);
+        assert.strictEqual(
+          opts.uri,
+          `/storage/v1/projects/${storage.projectId}/hmacKeys`,
+        );
         assert.deepStrictEqual(opts.queryParameters, {});
       });
       storage.getHmacKeys(() => {
@@ -1090,7 +1109,10 @@ describe('Storage', () => {
       };
 
       storage.storageTransport.makeRequest = sandbox.stub().callsFake(opts => {
-        assert.strictEqual(opts.url, `/projects/${storage.projectId}/hmacKeys`);
+        assert.strictEqual(
+          opts.url,
+          `/storage/v1/projects/${storage.projectId}/hmacKeys`,
+        );
         assert.deepStrictEqual(opts.queryParameters, query);
         done();
       });
@@ -1184,7 +1206,7 @@ describe('Storage', () => {
         .callsFake(reqOpts => {
           assert.strictEqual(
             reqOpts.url,
-            `/projects/${storage.projectId}/serviceAccount`,
+            `/storage/v1/projects/${storage.projectId}/serviceAccount`,
           );
           assert.deepStrictEqual(reqOpts.queryParameters, {});
           done();
@@ -1202,7 +1224,7 @@ describe('Storage', () => {
       storage.storageTransport.makeRequest = sandbox
         .stub()
         .callsFake(reqOpts => {
-          assert.strictEqual(reqOpts.queryParameters, options);
+          assert.deepStrictEqual(reqOpts.queryParameters, options);
           done();
         });
 

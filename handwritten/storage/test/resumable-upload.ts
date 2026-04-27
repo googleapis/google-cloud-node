@@ -59,7 +59,9 @@ function mockAuthorizeRequest(
     access_token: 'abc123',
   },
 ) {
-  return nock('https://oauth2.googleapis.com').post('/token').reply(code, data);
+  return nock('https://oauth2.googleapis.com')
+    .post('/token', () => true)
+    .reply(code, data);
 }
 
 describe('resumable-upload', () => {
@@ -1929,7 +1931,18 @@ describe('resumable-upload', () => {
     });
 
     describe('500s', () => {
-      const RESP = {status: 500, data: 'error message from server'};
+      const RESP = {
+        status: 500,
+        statusText: 'Internal Server Error',
+        data: 'error message from server',
+        config: {
+          method: 'GET',
+          url: `${BASE_URI}/${BUCKET}/o`,
+          params: {
+            ifGenerationMatch: 0,
+          },
+        },
+      };
 
       it('should increase the retry count if less than limit', () => {
         up.getRetryDelay = () => 1;
