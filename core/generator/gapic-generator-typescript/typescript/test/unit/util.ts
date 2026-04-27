@@ -22,7 +22,7 @@ import {
   processPathTemplate,
 } from '../../src/util.js';
 import protobuf from 'protobufjs';
-import protoJson from '../../../protos/protos.json' assert {type: 'json'};
+import protoJson from '../../../protos/protos.json' with {type: 'json'};
 import type * as protos from '../../../protos/index.js';
 
 describe('src/util.ts', () => {
