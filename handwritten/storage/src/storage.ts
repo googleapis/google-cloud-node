@@ -343,7 +343,7 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
     // IAM/HMAC are only idempotent if they have an etag (handled in hasPrecondition).
     const isResumable = url.includes('upload_id=');
     const isSpecialMutation =
-      url.includes('/iam') || url.includes('/hmacKeys/');
+      /\/iam($|\?)/.test(url) || /\/hmacKeys\//.test(url);
     isIdempotent = isResumable || !isSpecialMutation;
   } else if (method === 'DELETE') {
     // Deleting a specific object is only idempotent with a precondition.

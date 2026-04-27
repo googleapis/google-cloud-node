@@ -47,6 +47,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import {formatAsUTCISO} from '../src/util.js';
+import {Gaxios} from 'gaxios';
 class HTTPError extends Error {
   code: number;
   constructor(message: string, code: number) {
@@ -3689,13 +3690,14 @@ describe('File', () => {
   });
 
   describe('isPublic', () => {
+    let gaxiosStub: sinon.SinonStub;
+
+    beforeEach(() => {
+      gaxiosStub = sandbox.stub(Gaxios.prototype, 'request');
+    });
+
     it('should execute callback with `true` in response', done => {
-      file.storageTransport.makeRequest = sandbox
-        .stub()
-        .callsFake((reqOpts, callback) => {
-          callback(null, {}, {});
-          return Promise.resolve();
-        });
+      gaxiosStub.resolves({data: {}});
 
       file.isPublic((err, resp) => {
         assert.ifError(err);
@@ -3705,18 +3707,11 @@ describe('File', () => {
     });
 
     it('should execute callback with `false` in response on 403', done => {
-      file.storageTransport.makeRequest = sandbox
-        .stub()
-        .callsFake((reqOpts, callback) => {
-          const error = new GaxiosError(
-            'Permission Denied.',
-            {} as GaxiosOptionsPrepared,
-          );
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          error.response = {status: 403} as any;
-          callback(error);
-          return Promise.resolve();
-        });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const error = new GaxiosError('Permission Denied.', {} as any);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      error.response = {status: 403} as any;
+      gaxiosStub.rejects(error);
       file.isPublic((err, resp) => {
         assert.ifError(err);
         assert.strictEqual(resp, false);
@@ -3724,63 +3719,29 @@ describe('File', () => {
       });
     });
 
-    it('should propagate non-403 errors to user', done => {
-      const error = new GaxiosError('400 Error.', {} as GaxiosOptionsPrepared);
+    it('should propagate non-403/401 errors to user', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      error.response = {status: 400} as any;
-      file.storageTransport.makeRequest = sandbox
-        .stub()
-        .callsFake((reqOpts, callback) => {
-          callback(error);
-          return Promise.resolve();
-        });
+      const error = new GaxiosError('404 Not Found.', {} as any);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      error.response = {status: 404} as any;
+      gaxiosStub.rejects(error);
+
       file.isPublic(err => {
-        assert.strictEqual(err, error);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        assert.strictEqual((err as any).response.status, 404);
         done();
       });
     });
 
-    it('should correctly send a GET request', () => {
-      file.storageTransport.makeRequest = sandbox
-        .stub()
-        .callsFake((reqOpts, callback) => {
-          assert.strictEqual(reqOpts.method, 'GET');
-          callback(null);
-          return Promise.resolve();
-        });
+    it('should correctly format URL and method in the request', done => {
+      gaxiosStub.resolves({data: {}});
+      const expectedUrl = `${file.storage.apiEndpoint}/${BUCKET.name}/${encodeURIComponent(file.name)}`;
+
       file.isPublic(err => {
         assert.ifError(err);
-      });
-    });
-
-    it('should correctly format URL in the request', done => {
-      file = new File(BUCKET, 'my#file$.png');
-      const expectedPath = `/${BUCKET.name}/${encodeURIComponent(file.name)}`;
-
-      file.storageTransport.makeRequest = sandbox
-        .stub()
-        .callsFake((reqOpts, callback) => {
-          assert.strictEqual(reqOpts.method, 'GET');
-          assert.strictEqual(reqOpts.url, expectedPath);
-          callback(null);
-          return Promise.resolve();
-        });
-      file.isPublic(err => {
-        assert.ifError(err);
-        done();
-      });
-    });
-
-    it('should not set any headers when there are no interceptors', done => {
-      file.storageTransport.makeRequest = sandbox
-        .stub()
-        .callsFake((reqOpts, callback) => {
-          assert.deepStrictEqual(reqOpts.headers, undefined);
-          callback(null);
-          return Promise.resolve();
-        });
-      file.isPublic(err => {
-        assert.ifError(err);
+        const callArgs = gaxiosStub.getCall(0).args[0];
+        assert.strictEqual(callArgs.method, 'GET');
+        assert.strictEqual(callArgs.url, expectedUrl);
         done();
       });
     });

@@ -72,6 +72,7 @@ import {
   SetMetadataOptions,
 } from './nodejs-common/service-object.js';
 import {
+  Gaxios,
   GaxiosError,
   GaxiosInterceptor,
   GaxiosOptionsPrepared,
@@ -3284,29 +3285,35 @@ class File extends ServiceObject<File, FileMetadata> {
       undefined,
       callback,
     );
+    const url = `${this.storage.apiEndpoint}/${this.bucket.name}/${encodeURIComponent(this.name)}`;
 
-    const url = `/${this.bucket.name}/${encodeURIComponent(this.name)}`;
-    this.storageTransport
-      .makeRequest(
-        {
-          method: 'GET',
-          url: url,
+    const gaxios = new Gaxios();
+    gaxios
+      .request({
+        method: 'GET',
+        url,
+        retryConfig: {
+          retry: this.storage.retryOptions.maxRetries,
+          noResponseRetries: this.storage.retryOptions.maxRetries,
+          maxRetryDelay: this.storage.retryOptions.maxRetryDelay,
+          retryDelayMultiplier: this.storage.retryOptions.retryDelayMultiplier,
+          shouldRetry: this.storage.retryOptions.retryableErrorFn,
+          totalTimeout: this.storage.retryOptions.totalTimeout,
         },
-        err => {
-          if (!err) {
-            cb(null, true);
-            return;
-          }
-
-          const status = err.response?.status;
-          if (status === 401 || status === 403) {
-            cb(null, false);
-            return;
-          }
+      })
+      .then(() => {
+        cb(null, true);
+      })
+      .catch(err => {
+        const status = err.response?.status;
+        // 401 Unauthorized or 403 Forbidden means the object is NOT public.
+        if (status === 401 || status === 403) {
+          cb(null, false);
+        } else {
+          // Any other error (like 404) is a real error.
           cb(err);
-        },
-      )
-      .catch(err => cb(err));
+        }
+      });
   }
 
   makePrivate(

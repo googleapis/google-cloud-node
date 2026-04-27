@@ -137,8 +137,8 @@ export class StorageTransport {
     const headers = this.#prepareHeaders(reqOpts);
 
     // Interceptor Management
+    this.gaxiosInstance.interceptors.request.clear();
     if (reqOpts.interceptors) {
-      this.gaxiosInstance.interceptors.request.clear();
       for (const inter of reqOpts.interceptors) {
         this.gaxiosInstance.interceptors.request.add(inter);
       }
