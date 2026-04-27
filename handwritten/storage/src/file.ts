@@ -1693,10 +1693,6 @@ class File extends ServiceObject<File, FileMetadata> {
         ...(this.encryptionKeyHeaders || {}),
       } as Headers;
 
-      if (options.decompress === false) {
-        headers['Accept-Encoding'] = 'gzip';
-      }
-
       if (rangeRequest) {
         const start = typeof options.start === 'number' ? options.start : '0';
         const end = typeof options.end === 'number' ? options.end : '';

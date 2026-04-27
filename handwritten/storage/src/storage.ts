@@ -354,7 +354,10 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
   } else if (method === 'POST') {
     // Bucket creation is safe to retry.
     // Object mutations (rewrite/copy) must have a precondition (handled above).
-    isIdempotent = url.includes('/v1/b') && !url.includes('/o');
+    isIdempotent =
+      url.includes('/v1/b') &&
+      !url.includes('/o') &&
+      !url.includes('/notificationConfigs');
   }
   if (!isIdempotent) return false;
 

@@ -169,13 +169,11 @@ export class StorageTransport {
         headers,
         url: requestUrl,
         timeout: this.timeout,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ...({decompress: false} as any),
-        validateStatus: status => {
-          const isResumable =
+        validateStatus: (status: number): boolean => {
+          const isResumable = !!(
             reqOpts.queryParameters?.uploadType === 'resumable' ||
-            reqOpts.url?.toString().includes('uploadType=resumable');
-
+            reqOpts.url?.toString().includes('uploadType=resumable')
+          );
           return (
             (status >= 200 && status < 300) || (isResumable && status === 308)
           );
@@ -190,7 +188,7 @@ export class StorageTransport {
           data.headers = resp.headers;
           data.status = resp.status;
         }
-        return data || resp;
+        return data !== undefined ? data : resp;
       };
 
       if (callback) {
