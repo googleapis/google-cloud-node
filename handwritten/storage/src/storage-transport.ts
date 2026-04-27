@@ -184,11 +184,12 @@ export class StorageTransport {
       const responseHandler = (resp: GaxiosResponse<T>) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = resp.data as any;
-        if (data && typeof data === 'object') {
+        if (data !== null && typeof data === 'object') {
           data.headers = resp.headers;
           data.status = resp.status;
+          return data;
         }
-        return data !== undefined ? data : resp;
+        return resp;
       };
 
       if (callback) {
