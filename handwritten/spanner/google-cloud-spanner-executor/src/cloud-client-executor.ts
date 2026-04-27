@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { ServerDuplexStream, status } from '@grpc/grpc-js';
-import { Spanner } from '../../src';
-import { trace, context, Tracer } from '@opentelemetry/api';
+import {ServerDuplexStream, status} from '@grpc/grpc-js';
+import {Spanner} from '../../src';
+import {trace, context, Tracer} from '@opentelemetry/api';
 import * as protos from '../../protos/protos';
-import { CloudUtil } from './cloud-util';
+import {CloudUtil} from './cloud-util';
 import {
   OutcomeSender,
   ExecutionFlowContextInterface,
@@ -158,7 +158,7 @@ export class CloudClientExecutor {
   public startHandlingRequest(
     req: SpannerAsyncActionRequest,
     executionContext: ExecutionFlowContext,
-  ): { code: number; details: string } {
+  ): {code: number; details: string} {
     const outcomeSender = new OutcomeSender(req.actionId!, executionContext);
 
     if (!req.action) {
@@ -172,7 +172,7 @@ export class CloudClientExecutor {
       outcomeSender.finishWithError(err);
     });
 
-    return { code: status.OK, details: '' };
+    return {code: status.OK, details: ''};
   }
 
   /**
@@ -318,7 +318,7 @@ export class CloudClientExecutor {
           processingUnits: action.processingUnits,
           labels: action.labels,
         },
-        fieldMask: { paths: paths },
+        fieldMask: {paths: paths},
       });
 
       console.log('Waiting for instance update operation to complete...');
@@ -380,7 +380,7 @@ export class CloudClientExecutor {
 
       const outcome = SpannerActionOutcome.create({
         status: CloudExecutor.toProto(status.OK),
-        commitTime: { seconds: 0, nanos: 0 },
+        commitTime: {seconds: 0, nanos: 0},
         adminResult: {
           instanceResponse: {
             listedInstances: instances,
@@ -416,7 +416,7 @@ export class CloudClientExecutor {
 
       const outcome = SpannerActionOutcome.create({
         status: CloudExecutor.toProto(status.OK),
-        commitTime: { seconds: 0, nanos: 0 },
+        commitTime: {seconds: 0, nanos: 0},
         adminResult: {
           instanceResponse: {
             instance: instance,
