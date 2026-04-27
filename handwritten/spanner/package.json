@@ -94,8 +94,7 @@
     "stack-trace": "0.0.10",
     "stream-events": "^1.0.5",
     "teeny-request": "^10.0.0",
-    "through2": "^4.0.2",
-    "uuid": "^11.1.0"
+    "through2": "^4.0.2"
   },
   "devDependencies": {
     "@grpc/reflection": "^1.0.4",
