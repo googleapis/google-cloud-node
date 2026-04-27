@@ -1208,6 +1208,8 @@ export class Upload extends Writable {
         code: resp.status.toString(),
         message: resp.statusText,
         name: resp.statusText,
+        config: resp.config,
+        response: resp,
       } as GaxiosError)
     ) {
       void this.attemptDelayedRetry(resp);

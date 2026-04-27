@@ -444,6 +444,20 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       url = `${this.parent.baseUrl}/${this.parent.id}${url}`;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const encryptionHeaders = (this as any).encryptionKeyHeaders || {};
+
+    const headers = {
+      ...encryptionHeaders,
+      ...methodConfig.reqOpts?.headers,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...(options as any).headers,
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {...options} as any;
+    delete query.headers;
+
     this.storageTransport
       .makeRequest<K>(
         {
@@ -451,9 +465,10 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           responseType: 'json',
           url,
           ...methodConfig.reqOpts,
+          headers,
           queryParameters: {
             ...methodConfig.reqOpts?.queryParameters,
-            ...options,
+            ...query,
           },
         },
         (err, data, resp) => {

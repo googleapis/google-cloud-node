@@ -528,10 +528,10 @@ class Acl extends AclRoleAccessorMethods {
     if (this.parent instanceof File) {
       const file = this.parent as File;
       const bucket = file.parent;
-      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}/o/${encodeURIComponent(file.name)}${url}`;
     } else if (this.parent instanceof Bucket) {
       const bucket = this.parent as Bucket;
-      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}${url}`;
     }
 
     this.storageTransport
@@ -644,14 +644,14 @@ class Acl extends AclRoleAccessorMethods {
       query.userProject = options.userProject;
     }
 
-    let url = `${this.pathPrefix}/${options.entity}`;
+    let url = `${this.pathPrefix}/${encodeURIComponent(options.entity)}`;
     if (this.parent instanceof File) {
       const file = this.parent as File;
       const bucket = file.parent;
-      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}/o/${encodeURIComponent(file.name)}${url}`;
     } else if (this.parent instanceof Bucket) {
       const bucket = this.parent as Bucket;
-      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}${url}`;
     }
 
     this.storageTransport
@@ -768,7 +768,7 @@ class Acl extends AclRoleAccessorMethods {
 
     let url = `${this.pathPrefix}`;
     if (options) {
-      url = `${url}/${options.entity}`;
+      url = `${url}/${encodeURIComponent(options.entity)}`;
       if (options.generation) {
         query.generation = options.generation;
       }
@@ -781,10 +781,10 @@ class Acl extends AclRoleAccessorMethods {
     if (this.parent instanceof File) {
       const file = this.parent as File;
       const bucket = file.parent;
-      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}/o/${encodeURIComponent(file.name)}${url}`;
     } else if (this.parent instanceof Bucket) {
       const bucket = this.parent as Bucket;
-      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}${url}`;
     }
 
     this.storageTransport
@@ -888,14 +888,14 @@ class Acl extends AclRoleAccessorMethods {
       query.userProject = options.userProject;
     }
 
-    let url = `${this.pathPrefix}/${options.entity}`;
+    let url = `${this.pathPrefix}/${encodeURIComponent(options.entity)}`;
     if (this.parent instanceof File) {
       const file = this.parent as File;
       const bucket = file.parent;
-      url = `${bucket.baseUrl}/${bucket.name}/${file.baseUrl}/${file.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}/o/${encodeURIComponent(file.name)}${url}`;
     } else if (this.parent instanceof Bucket) {
       const bucket = this.parent as Bucket;
-      url = `${bucket.baseUrl}/${bucket.name}${url}`;
+      url = `/storage/v1/b/${bucket.name}${url}`;
     }
 
     this.storageTransport

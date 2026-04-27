@@ -81,7 +81,6 @@ import {
   StorageQueryParameters,
   StorageRequestOptions,
 } from './storage-transport.js';
-import * as gaxios from 'gaxios';
 import mime from 'mime';
 
 export type GetExpirationDateResponse = [Date];
@@ -1363,13 +1362,24 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     if (newFile.encryptionKey !== undefined) {
-      this.setEncryptionKey(newFile.encryptionKey!);
+      headers.set('x-goog-encryption-algorithm', 'AES256');
+      headers.set(
+        'x-goog-encryption-key',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (newFile as any).encryptionKeyBase64 || '',
+      );
+      headers.set(
+        'x-goog-encryption-key-sha256',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (newFile as any).encryptionKeyHash || '',
+      );
     } else if (options.destinationKmsKeyName !== undefined) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
     } else if (newFile.kmsKeyName !== undefined) {
       query.destinationKmsKeyName = newFile.kmsKeyName;
     }
+    headers.set('Content-Type', 'application/json');
 
     if (query.destinationKmsKeyName) {
       this.kmsKeyName = query.destinationKmsKeyName;
@@ -1399,7 +1409,7 @@ class File extends ServiceObject<File, FileMetadata> {
       .makeRequest<RewriteResponse>(
         {
           method: 'POST',
-          url: `/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/rewriteTo/b/${
+          url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/rewriteTo/b/${
             destBucket.name
           }/o/${encodeURIComponent(newFile.name)}`,
           queryParameters: query as unknown as StorageQueryParameters,
@@ -1596,6 +1606,8 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       const headers = response.headers;
+      const isStoredCompressed =
+        headers.get('x-goog-stored-content-encoding') === 'gzip';
       const isCompressed = headers.get('content-encoding') === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
 
@@ -1609,7 +1621,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       const transformStreams: Transform[] = [];
 
-      if (shouldRunValidation) {
+      if (shouldRunValidation && !isStoredCompressed) {
         // The x-goog-hash header should be set with a crc32c and md5 hash.
         // ex: headers.set('x-goog-hash', 'crc32c=xxxx,md5=xxxx')
         if (typeof headers.get('x-goog-hash') === 'string') {
@@ -1678,7 +1690,12 @@ class File extends ServiceObject<File, FileMetadata> {
       const headers = {
         'Accept-Encoding': 'gzip',
         'Cache-Control': 'no-store',
+        ...(this.encryptionKeyHeaders || {}),
       } as Headers;
+
+      if (options.decompress === false) {
+        headers['Accept-Encoding'] = 'gzip';
+      }
 
       if (rangeRequest) {
         const start = typeof options.start === 'number' ? options.start : '0';
@@ -1688,11 +1705,13 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       const reqOpts: StorageRequestOptions = {
-        url: `${this.bucket.baseUrl}/${this.bucket.name}${this.baseUrl}/${this.name}`,
+        url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`,
         headers,
         queryParameters: query as unknown as StorageQueryParameters,
         responseType: 'stream',
-      };
+        decompress: options.decompress,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
 
       if (options[GCCL_GCS_CMD_KEY]) {
         reqOpts[GCCL_GCS_CMD_KEY] = options[GCCL_GCS_CMD_KEY];
@@ -2366,6 +2385,18 @@ class File extends ServiceObject<File, FileMetadata> {
         .then(contents => callback?.(null, contents))
         .catch(callback as (err: RequestError) => void);
     }
+  }
+
+  get encryptionKeyHeaders(): Record<string, string> | undefined {
+    if (!this.encryptionKey) {
+      return undefined;
+    }
+
+    return {
+      'x-goog-encryption-algorithm': 'AES256',
+      'x-goog-encryption-key': this.encryptionKey.toString('base64'),
+      'x-goog-encryption-key-sha256': this.encryptionKeyHash!,
+    };
   }
 
   /**
@@ -3252,39 +3283,34 @@ class File extends ServiceObject<File, FileMetadata> {
    */
 
   isPublic(callback?: IsPublicCallback): Promise<IsPublicResponse> | void {
-    // Build any custom headers based on the defined interceptors on the parent
-    // storage object and this object
-    const storageInterceptors = this.storage?.interceptors || [];
-    const fileInterceptors = this.interceptors || [];
-    const allInterceptors = storageInterceptors.concat(fileInterceptors);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const {callback: cb} = normalize<any, IsPublicCallback>(
+      undefined,
+      callback,
+    );
 
-    for (const curInter of allInterceptors) {
-      gaxios.instance.interceptors.request.add(curInter);
-    }
-
-    gaxios
-      .request({
-        method: 'GET',
-        url: `${this.storage.apiEndpoint}/${
-          this.bucket.name
-        }/${encodeURIComponent(this.name)}`,
-        retryConfig: {
-          retry: this.storage.retryOptions.maxRetries,
-          noResponseRetries: this.storage.retryOptions.maxRetries,
-          maxRetryDelay: this.storage.retryOptions.maxRetryDelay,
-          retryDelayMultiplier: this.storage.retryOptions.retryDelayMultiplier,
-          shouldRetry: this.storage.retryOptions.retryableErrorFn,
-          totalTimeout: this.storage.retryOptions.totalTimeout,
+    const url = `/${this.bucket.name}/${encodeURIComponent(this.name)}`;
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'GET',
+          url: url,
         },
-      })
-      .then(() => callback!(null, true))
-      .catch(err => {
-        if (err.status === 403) {
-          callback!(null, false);
-        } else {
-          callback!(err);
-        }
-      });
+        err => {
+          if (!err) {
+            cb(null, true);
+            return;
+          }
+
+          const status = err.response?.status;
+          if (status === 401 || status === 403) {
+            cb(null, false);
+            return;
+          }
+          cb(err);
+        },
+      )
+      .catch(err => cb(err));
   }
 
   makePrivate(
@@ -3630,7 +3656,7 @@ class File extends ServiceObject<File, FileMetadata> {
       .makeRequest(
         {
           method: 'POST',
-          url: `/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/moveTo/o/${encodeURIComponent(newFile.name)}`,
+          url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/moveTo/o/${encodeURIComponent(newFile.name)}`,
           queryParameters: query as StorageQueryParameters,
           body: JSON.stringify(options),
         },
@@ -3961,7 +3987,7 @@ class File extends ServiceObject<File, FileMetadata> {
   async restore(options: RestoreOptions): Promise<File> {
     const file = await this.storageTransport.makeRequest<File>({
       method: 'POST',
-      url: `/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/restore`,
+      url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/restore`,
       queryParameters: options as unknown as StorageQueryParameters,
     });
     return file as File;
@@ -4487,6 +4513,14 @@ class File extends ServiceObject<File, FileMetadata> {
         content: writeStream,
       },
     ];
+
+    const headers: Record<string, string> = {};
+    if (this.encryptionKey) {
+      headers['x-goog-encryption-algorithm'] = 'AES256';
+      headers['x-goog-encryption-key'] = this.encryptionKeyBase64!;
+      headers['x-goog-encryption-key-sha256'] = this.encryptionKeyHash!;
+    }
+    reqOpts.headers = headers;
 
     this.storageTransport
       .makeRequest(reqOpts as StorageRequestOptions, (err, body, resp) => {

@@ -354,7 +354,7 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
       storageTransport: storage.storageTransport,
       parent: storage,
       id: accessId,
-      baseUrl: `/projects/${projectId}/hmacKeys`,
+      baseUrl: `/storage/v1/projects/${projectId}/hmacKeys`,
       methods,
     });
 

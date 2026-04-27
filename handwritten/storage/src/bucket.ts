@@ -1232,7 +1232,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     super({
       storageTransport: storage.storageTransport,
       parent: storage,
-      baseUrl: '/b',
+      baseUrl: '/storage/v1/b',
       id: name,
       createMethod: storage.createBucket.bind(storage),
       methods,
@@ -1688,7 +1688,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       .makeRequest(
         {
           method: 'POST',
-          url: '/compose',
+          url: `/storage/v1/b/${this.name}/o/${encodeURIComponent(destinationFile.name)}/compose`,
           maxRetries,
           body: JSON.stringify({
             destination: {
@@ -1709,6 +1709,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
               return sourceObject;
             }),
           }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
           queryParameters: options as unknown as StorageQueryParameters,
         },
         (err, resp) => {
@@ -2050,6 +2053,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           body: JSON.stringify(convertObjKeysToSnakeCase(body)),
           queryParameters: query as unknown as StorageQueryParameters,
           retry: false,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
         (err, data, resp) => {
           if (err) {

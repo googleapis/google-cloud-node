@@ -141,11 +141,11 @@ export enum IAMExceptionMessages {
  * ```
  */
 class Iam {
-  private resourceId_: string;
+  private bucket: Bucket;
   private storageTransport: StorageTransport;
 
   constructor(bucket: Bucket) {
-    this.resourceId_ = 'buckets/' + bucket.getId();
+    this.bucket = bucket;
     this.storageTransport = bucket.storageTransport;
   }
 
@@ -261,7 +261,8 @@ class Iam {
     this.storageTransport
       .makeRequest(
         {
-          url: '/iam',
+          method: 'GET',
+          url: `/storage/v1/b/${this.bucket.name}/iam`,
           queryParameters: qs as unknown as StorageQueryParameters,
         },
         (err, data, resp) => {
@@ -358,16 +359,10 @@ class Iam {
       .makeRequest(
         {
           method: 'PUT',
-          url: '/iam',
+          url: `/storage/v1/b/${this.bucket.name}/iam`,
           maxRetries,
-          body: JSON.stringify(
-            Object.assign(
-              {
-                resourceId: this.resourceId_,
-              },
-              policy,
-            ),
-          ),
+          body: JSON.stringify(policy),
+          headers: {'Content-Type': 'application/json'},
           queryParameters: options as unknown as StorageQueryParameters,
         },
         (err, data, resp) => {
@@ -467,17 +462,18 @@ class Iam {
       ? permissions
       : [permissions];
 
-    const req = Object.assign(
-      {
-        permissions: permissionsArray,
-      },
-      options,
-    );
+    const req: any = {
+      permissions: permissionsArray,
+    };
+    if (options.userProject) {
+      req.userProject = options.userProject;
+    }
 
     this.storageTransport
       .makeRequest<TestPermissionsResponse>(
         {
-          url: '/iam/testPermissions',
+          method: 'GET',
+          url: `/storage/v1/b/${this.bucket.name}/iam/testPermissions`,
           queryParameters: req as unknown as StorageQueryParameters,
         },
         (err, data, resp) => {

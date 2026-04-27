@@ -43,7 +43,7 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
     const config = {
       parent: storage,
       storageTransport: storage.storageTransport,
-      baseUrl: '/channels',
+      baseUrl: '/storage/v1/channels',
       id: '',
       methods: {},
     };
@@ -89,6 +89,9 @@ class Channel extends ServiceObject<Channel, BaseMetadata> {
           method: 'POST',
           url: `${this.baseUrl}/stop`,
           body: JSON.stringify(this.metadata),
+          headers: {
+            'Content-Type': 'application/json',
+          },
           responseType: 'json',
         },
         (err, data, resp) => {
