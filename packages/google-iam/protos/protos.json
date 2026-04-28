@@ -2444,6 +2444,558 @@
                 "(google.api.resource_definition).pattern": "folders/{folder}/locations/{location}"
               },
               "nested": {
+                "AccessPolicies": {
+                  "options": {
+                    "(google.api.default_host)": "iam.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                  },
+                  "methods": {
+                    "CreateAccessPolicy": {
+                      "requestType": "CreateAccessPolicyRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).post": "/v3beta/{parent=projects/*/locations/*}/accessPolicies",
+                        "(google.api.http).body": "access_policy",
+                        "(google.api.http).additional_bindings.post": "/v3beta/{parent=organizations/*/locations/*}/accessPolicies",
+                        "(google.api.http).additional_bindings.body": "access_policy",
+                        "(google.api.method_signature)": "parent,access_policy,access_policy_id",
+                        "(google.longrunning.operation_info).response_type": "AccessPolicy",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v3beta/{parent=projects/*/locations/*}/accessPolicies",
+                            "body": "access_policy",
+                            "additional_bindings": [
+                              {
+                                "post": "/v3beta/{parent=folders/*/locations/*}/accessPolicies",
+                                "body": "access_policy"
+                              },
+                              {
+                                "post": "/v3beta/{parent=organizations/*/locations/*}/accessPolicies",
+                                "body": "access_policy"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,access_policy,access_policy_id"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "AccessPolicy",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "GetAccessPolicy": {
+                      "requestType": "GetAccessPolicyRequest",
+                      "responseType": "AccessPolicy",
+                      "options": {
+                        "(google.api.http).get": "/v3beta/{name=projects/*/locations/*/accessPolicies/*}",
+                        "(google.api.http).additional_bindings.get": "/v3beta/{name=organizations/*/locations/*/accessPolicies/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3beta/{name=projects/*/locations/*/accessPolicies/*}",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3beta/{name=folders/*/locations/*/accessPolicies/*}"
+                              },
+                              {
+                                "get": "/v3beta/{name=organizations/*/locations/*/accessPolicies/*}"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "UpdateAccessPolicy": {
+                      "requestType": "UpdateAccessPolicyRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).patch": "/v3beta/{access_policy.name=projects/*/locations/*/accessPolicies/*}",
+                        "(google.api.http).body": "access_policy",
+                        "(google.api.http).additional_bindings.patch": "/v3beta/{access_policy.name=organizations/*/locations/*/accessPolicies/*}",
+                        "(google.api.http).additional_bindings.body": "access_policy",
+                        "(google.longrunning.operation_info).response_type": "AccessPolicy",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v3beta/{access_policy.name=projects/*/locations/*/accessPolicies/*}",
+                            "body": "access_policy",
+                            "additional_bindings": [
+                              {
+                                "patch": "/v3beta/{access_policy.name=folders/*/locations/*/accessPolicies/*}",
+                                "body": "access_policy"
+                              },
+                              {
+                                "patch": "/v3beta/{access_policy.name=organizations/*/locations/*/accessPolicies/*}",
+                                "body": "access_policy"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "AccessPolicy",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "DeleteAccessPolicy": {
+                      "requestType": "DeleteAccessPolicyRequest",
+                      "responseType": "google.longrunning.Operation",
+                      "options": {
+                        "(google.api.http).delete": "/v3beta/{name=projects/*/locations/*/accessPolicies/*}",
+                        "(google.api.http).additional_bindings.delete": "/v3beta/{name=organizations/*/locations/*/accessPolicies/*}",
+                        "(google.api.method_signature)": "name",
+                        "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                        "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v3beta/{name=projects/*/locations/*/accessPolicies/*}",
+                            "additional_bindings": [
+                              {
+                                "delete": "/v3beta/{name=folders/*/locations/*/accessPolicies/*}"
+                              },
+                              {
+                                "delete": "/v3beta/{name=organizations/*/locations/*/accessPolicies/*}"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        },
+                        {
+                          "(google.longrunning.operation_info)": {
+                            "response_type": "google.protobuf.Empty",
+                            "metadata_type": "OperationMetadata"
+                          }
+                        }
+                      ]
+                    },
+                    "ListAccessPolicies": {
+                      "requestType": "ListAccessPoliciesRequest",
+                      "responseType": "ListAccessPoliciesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3beta/{parent=projects/*/locations/*}/accessPolicies",
+                        "(google.api.http).additional_bindings.get": "/v3beta/{parent=organizations/*/locations/*}/accessPolicies",
+                        "(google.api.method_signature)": "parent"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3beta/{parent=projects/*/locations/*}/accessPolicies",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3beta/{parent=folders/*/locations/*}/accessPolicies"
+                              },
+                              {
+                                "get": "/v3beta/{parent=organizations/*/locations/*}/accessPolicies"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
+                        }
+                      ]
+                    },
+                    "SearchAccessPolicyBindings": {
+                      "requestType": "SearchAccessPolicyBindingsRequest",
+                      "responseType": "SearchAccessPolicyBindingsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3beta/{name=organizations/*/locations/*/accessPolicies/*}:searchPolicyBindings",
+                        "(google.api.http).additional_bindings.get": "/v3beta/{name=projects/*/locations/*/accessPolicies/*}:searchPolicyBindings",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v3beta/{name=organizations/*/locations/*/accessPolicies/*}:searchPolicyBindings",
+                            "additional_bindings": [
+                              {
+                                "get": "/v3beta/{name=folders/*/locations/*/accessPolicies/*}:searchPolicyBindings"
+                              },
+                              {
+                                "get": "/v3beta/{name=projects/*/locations/*/accessPolicies/*}:searchPolicyBindings"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "CreateAccessPolicyRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/AccessPolicy"
+                      }
+                    },
+                    "accessPolicyId": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "accessPolicy": {
+                      "type": "AccessPolicy",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "GetAccessPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/AccessPolicy"
+                      }
+                    }
+                  }
+                },
+                "UpdateAccessPolicyRequest": {
+                  "fields": {
+                    "accessPolicy": {
+                      "type": "AccessPolicy",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "DeleteAccessPolicyRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/AccessPolicy"
+                      }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "validateOnly": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "force": {
+                      "type": "bool",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListAccessPoliciesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "iam.googleapis.com/AccessPolicy"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListAccessPoliciesResponse": {
+                  "fields": {
+                    "accessPolicies": {
+                      "rule": "repeated",
+                      "type": "AccessPolicy",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "SearchAccessPolicyBindingsRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "iam.googleapis.com/AccessPolicy"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "SearchAccessPolicyBindingsResponse": {
+                  "fields": {
+                    "policyBindings": {
+                      "rule": "repeated",
+                      "type": "PolicyBinding",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "AccessPolicy": {
+                  "options": {
+                    "(google.api.resource).type": "iam.googleapis.com/AccessPolicy",
+                    "(google.api.resource).pattern": "projects/{project}/locations/{location}/accessPolicies/{access_policy}",
+                    "(google.api.resource).plural": "accessPolicies",
+                    "(google.api.resource).singular": "accessPolicy"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "uid": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_info).format": "UUID4",
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "etag": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "annotations": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "createTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "details": {
+                      "type": "AccessPolicyDetails",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "AccessPolicyDetails": {
+                  "fields": {
+                    "rules": {
+                      "rule": "repeated",
+                      "type": "AccessPolicyRule",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "AccessPolicyRule": {
+                  "oneofs": {
+                    "_description": {
+                      "oneof": [
+                        "description"
+                      ]
+                    },
+                    "_effect": {
+                      "oneof": [
+                        "effect"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "description": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
+                    },
+                    "effect": {
+                      "type": "Effect",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "proto3_optional": true
+                      }
+                    },
+                    "principals": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "excludedPrincipals": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "operation": {
+                      "type": "Operation",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "conditions": {
+                      "keyType": "string",
+                      "type": "google.type.Expr",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Operation": {
+                      "fields": {
+                        "permissions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "excludedPermissions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Effect": {
+                      "values": {
+                        "EFFECT_UNSPECIFIED": 0,
+                        "DENY": 1,
+                        "ALLOW": 2
+                      }
+                    }
+                  }
+                },
                 "OperationMetadata": {
                   "fields": {
                     "createTime": {
@@ -2597,7 +3149,8 @@
                       "oneofs": {
                         "target": {
                           "oneof": [
-                            "principalSet"
+                            "principalSet",
+                            "resource"
                           ]
                         }
                       },
@@ -2608,13 +3161,21 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },
                     "PolicyKind": {
                       "values": {
                         "POLICY_KIND_UNSPECIFIED": 0,
-                        "PRINCIPAL_ACCESS_BOUNDARY": 1
+                        "PRINCIPAL_ACCESS_BOUNDARY": 1,
+                        "ACCESS": 2
                       }
                     }
                   }
@@ -2997,6 +3558,13 @@
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).child_type": "iam.googleapis.com/PolicyBinding"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }

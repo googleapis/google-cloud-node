@@ -1,4 +1,6 @@
 [
+  "../../protos/google/iam/v3beta/access_policies_service.proto",
+  "../../protos/google/iam/v3beta/access_policy_resources.proto",
   "../../protos/google/iam/v3beta/operation_metadata.proto",
   "../../protos/google/iam/v3beta/policy_binding_resources.proto",
   "../../protos/google/iam/v3beta/policy_bindings_service.proto",

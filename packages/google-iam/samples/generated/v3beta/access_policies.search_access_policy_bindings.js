@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START iam_v3beta_generated_PolicyBindings_ListPolicyBindings_async]
+function main(name) {
+  // [START iam_v3beta_generated_AccessPolicies_SearchAccessPolicyBindings_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,62 +29,52 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource, which owns the collection of policy
-   *  bindings.
+   *  Required. The name of the access policy.
    *  Format:
-   *  * `projects/{project_id}/locations/{location}`
-   *  * `projects/{project_number}/locations/{location}`
-   *  * `folders/{folder_id}/locations/{location}`
-   *  * `organizations/{organization_id}/locations/{location}`
+   *   `organizations/{organization_id}/locations/{location}/accessPolicies/{access_policy_id}`
+   *   `folders/{folder_id}/locations/{location}/accessPolicies/{access_policy_id}`
+   *   `projects/{project_id}/locations/{location}/accessPolicies/{access_policy_id}`
+   *   `projects/{project_number}/locations/{location}/accessPolicies/{access_policy_id}`
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
    *  Optional. The maximum number of policy bindings to return. The service may
    *  return fewer than this value.
-   *  The default value is 50. The maximum value is 1000.
+   *  If unspecified, at most 50 policy bindings will be returned.
+   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous `ListPolicyBindings` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListPolicyBindings` must
-   *  match the call that provided the page token.
+   *  Optional. A page token, received from a previous
+   *  `SearchAccessPolicyBindingsRequest` call. Provide this to
+   *  retrieve the subsequent page.
+   *  When paginating, all other parameters provided to
+   *  `SearchAccessPolicyBindingsRequest` must match the call
+   *  that provided the page token.
    */
   // const pageToken = 'abc123'
-  /**
-   *  Optional. An expression for filtering the results of the request. Filter
-   *  rules are case insensitive. Some eligible fields for filtering are the
-   *  following:
-   *  + `target`
-   *  + `policy`
-   *  Some examples of filter queries:
-   *  * `target:ex*`: The binding target's name starts with "ex".
-   *  * `target:example`: The binding target's name is `example`.
-   *  * `policy:example`: The binding policy's name is `example`.
-   */
-  // const filter = 'abc123'
 
   // Imports the Iam library
-  const {PolicyBindingsClient} = require('@google-cloud/iam').v3beta;
+  const {AccessPoliciesClient} = require('@google-cloud/iam').v3beta;
 
   // Instantiates a client
-  const iamClient = new PolicyBindingsClient();
+  const iamClient = new AccessPoliciesClient();
 
-  async function callListPolicyBindings() {
+  async function callSearchAccessPolicyBindings() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = iamClient.listPolicyBindingsAsync(request);
+    const iterable = iamClient.searchAccessPolicyBindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListPolicyBindings();
-  // [END iam_v3beta_generated_PolicyBindings_ListPolicyBindings_async]
+  callSearchAccessPolicyBindings();
+  // [END iam_v3beta_generated_AccessPolicies_SearchAccessPolicyBindings_async]
 }
 
 process.on('unhandledRejection', err => {

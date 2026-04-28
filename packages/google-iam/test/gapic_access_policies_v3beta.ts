@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as policybindingsModule from '../src';
+import * as accesspoliciesModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -115,16 +115,16 @@ function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?
     return sinon.stub().returns(asyncIterable);
 }
 
-describe('v3beta.PolicyBindingsClient', () => {
+describe('v3beta.AccessPoliciesClient', () => {
     describe('Common methods', () => {
         it('has apiEndpoint', () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient();
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient();
             const apiEndpoint = client.apiEndpoint;
             assert.strictEqual(apiEndpoint, 'iam.googleapis.com');
         });
 
         it('has universeDomain', () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient();
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient();
             const universeDomain = client.universeDomain;
             assert.strictEqual(universeDomain, "googleapis.com");
         });
@@ -132,7 +132,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         if (typeof process === 'object' && typeof process.emitWarning === 'function') {
             it('throws DeprecationWarning if static servicePath is used', () => {
                 const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = policybindingsModule.v3beta.PolicyBindingsClient.servicePath;
+                const servicePath = accesspoliciesModule.v3beta.AccessPoliciesClient.servicePath;
                 assert.strictEqual(servicePath, 'iam.googleapis.com');
                 assert(stub.called);
                 stub.restore();
@@ -140,20 +140,20 @@ describe('v3beta.PolicyBindingsClient', () => {
 
             it('throws DeprecationWarning if static apiEndpoint is used', () => {
                 const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = policybindingsModule.v3beta.PolicyBindingsClient.apiEndpoint;
+                const apiEndpoint = accesspoliciesModule.v3beta.AccessPoliciesClient.apiEndpoint;
                 assert.strictEqual(apiEndpoint, 'iam.googleapis.com');
                 assert(stub.called);
                 stub.restore();
             });
         }
         it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({universeDomain: 'example.com'});
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({universeDomain: 'example.com'});
             const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'iam.example.com');
         });
 
         it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({universe_domain: 'example.com'});
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({universe_domain: 'example.com'});
             const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'iam.example.com');
         });
@@ -163,7 +163,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 it('sets apiEndpoint from environment variable', () => {
                     const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
                     process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new policybindingsModule.v3beta.PolicyBindingsClient();
+                    const client = new accesspoliciesModule.v3beta.AccessPoliciesClient();
                     const servicePath = client.apiEndpoint;
                     assert.strictEqual(servicePath, 'iam.example.com');
                     if (saved) {
@@ -176,7 +176,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 it('value configured in code has priority over environment variable', () => {
                     const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
                     process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new policybindingsModule.v3beta.PolicyBindingsClient({universeDomain: 'configured.example.com'});
+                    const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({universeDomain: 'configured.example.com'});
                     const servicePath = client.apiEndpoint;
                     assert.strictEqual(servicePath, 'iam.configured.example.com');
                     if (saved) {
@@ -188,55 +188,55 @@ describe('v3beta.PolicyBindingsClient', () => {
             });
         }
         it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new policybindingsModule.v3beta.PolicyBindingsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+            assert.throws(() => { new accesspoliciesModule.v3beta.AccessPoliciesClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
 
         it('has port', () => {
-            const port = policybindingsModule.v3beta.PolicyBindingsClient.port;
+            const port = accesspoliciesModule.v3beta.AccessPoliciesClient.port;
             assert(port);
             assert(typeof port === 'number');
         });
 
         it('should create a client with no option', () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient();
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient();
             assert(client);
         });
 
         it('should create a client with gRPC fallback', () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 fallback: true,
             });
             assert(client);
         });
 
         it('has initialize method and supports deferred initialization', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            assert.strictEqual(client.policyBindingsStub, undefined);
+            assert.strictEqual(client.accessPoliciesStub, undefined);
             await client.initialize();
-            assert(client.policyBindingsStub);
+            assert(client.accessPoliciesStub);
         });
 
         it('has close method for the initialized client', done => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             client.initialize().catch(err => {throw err});
-            assert(client.policyBindingsStub);
+            assert(client.accessPoliciesStub);
             client.close().then(() => {
                 done();
             }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            assert.strictEqual(client.policyBindingsStub, undefined);
+            assert.strictEqual(client.accessPoliciesStub, undefined);
             client.close().then(() => {
                 done();
             }).catch(err => {throw err});
@@ -244,7 +244,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
         it('has getProjectId method', async () => {
             const fakeProjectId = 'fake-project-id';
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -256,7 +256,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
         it('has getProjectId method with callback', async () => {
             const fakeProjectId = 'fake-project-id';
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -275,55 +275,55 @@ describe('v3beta.PolicyBindingsClient', () => {
         });
     });
 
-    describe('getPolicyBinding', () => {
-        it('invokes getPolicyBinding without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+    describe('getAccessPolicy', () => {
+        it('invokes getAccessPolicy without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.GetPolicyBindingRequest()
+              new protos.google.iam.v3beta.GetAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.GetPolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.GetAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v3beta.PolicyBinding()
+              new protos.google.iam.v3beta.AccessPolicy()
             );
-            client.innerApiCalls.getPolicyBinding = stubSimpleCall(expectedResponse);
-            const [response] = await client.getPolicyBinding(request);
+            client.innerApiCalls.getAccessPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAccessPolicy(request);
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getPolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.getAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes getPolicyBinding without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes getAccessPolicy without error using callback', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.GetPolicyBindingRequest()
+              new protos.google.iam.v3beta.GetAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.GetPolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.GetAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
-              new protos.google.iam.v3beta.PolicyBinding()
+              new protos.google.iam.v3beta.AccessPolicy()
             );
-            client.innerApiCalls.getPolicyBinding = stubSimpleCallWithCallback(expectedResponse);
+            client.innerApiCalls.getAccessPolicy = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.getPolicyBinding(
+                 client.getAccessPolicy(
                     request,
-                    (err?: Error|null, result?: protos.google.iam.v3beta.IPolicyBinding|null) => {
+                    (err?: Error|null, result?: protos.google.iam.v3beta.IAccessPolicy|null) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -333,107 +333,107 @@ describe('v3beta.PolicyBindingsClient', () => {
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getPolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.getAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes getPolicyBinding with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes getAccessPolicy with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.GetPolicyBindingRequest()
+              new protos.google.iam.v3beta.GetAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.GetPolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.GetAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.getPolicyBinding = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getPolicyBinding(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getPolicyBinding as SinonStub)
+            client.innerApiCalls.getAccessPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes getPolicyBinding with closed client', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes getAccessPolicy with closed client', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.GetPolicyBindingRequest()
+              new protos.google.iam.v3beta.GetAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.GetPolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.GetAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
-            await assert.rejects(client.getPolicyBinding(request), expectedError);
+            await assert.rejects(client.getAccessPolicy(request), expectedError);
         });
     });
 
-    describe('createPolicyBinding', () => {
-        it('invokes createPolicyBinding without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+    describe('createAccessPolicy', () => {
+        it('invokes createAccessPolicy without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.CreatePolicyBindingRequest()
+              new protos.google.iam.v3beta.CreateAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.CreatePolicyBindingRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.CreateAccessPolicyRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.createPolicyBinding = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createPolicyBinding(request);
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createAccessPolicy(request);
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes createPolicyBinding without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes createAccessPolicy without error using callback', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.CreatePolicyBindingRequest()
+              new protos.google.iam.v3beta.CreateAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.CreatePolicyBindingRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.CreateAccessPolicyRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.createPolicyBinding = stubLongRunningCallWithCallback(expectedResponse);
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.createPolicyBinding(
+                 client.createAccessPolicy(
                     request,
                     (err?: Error|null,
-                     result?: LROperation<protos.google.iam.v3beta.IPolicyBinding, protos.google.iam.v3beta.IOperationMetadata>|null
+                     result?: LROperation<protos.google.iam.v3beta.IAccessPolicy, protos.google.iam.v3beta.IOperationMetadata>|null
                     ) => {
                         if (err) {
                             reject(err);
@@ -442,68 +442,68 @@ describe('v3beta.PolicyBindingsClient', () => {
                         }
                     });
             });
-            const operation = await promise as LROperation<protos.google.iam.v3beta.IPolicyBinding, protos.google.iam.v3beta.IOperationMetadata>;
+            const operation = await promise as LROperation<protos.google.iam.v3beta.IAccessPolicy, protos.google.iam.v3beta.IOperationMetadata>;
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes createPolicyBinding with call error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes createAccessPolicy with call error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.CreatePolicyBindingRequest()
+              new protos.google.iam.v3beta.CreateAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.CreatePolicyBindingRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.CreateAccessPolicyRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.createPolicyBinding = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createPolicyBinding(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes createPolicyBinding with LRO error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes createAccessPolicy with LRO error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.CreatePolicyBindingRequest()
+              new protos.google.iam.v3beta.CreateAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.CreatePolicyBindingRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.CreateAccessPolicyRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.createPolicyBinding = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createPolicyBinding(request);
+            client.innerApiCalls.createAccessPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createAccessPolicy(request);
             await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createPolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes checkCreatePolicyBindingProgress without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes checkCreateAccessPolicyProgress without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -516,14 +516,14 @@ describe('v3beta.PolicyBindingsClient', () => {
             expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreatePolicyBindingProgress(expectedResponse.name);
+            const decodedOperation = await client.checkCreateAccessPolicyProgress(expectedResponse.name);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
         });
 
-        it('invokes checkCreatePolicyBindingProgress with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes checkCreateAccessPolicyProgress with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -531,65 +531,65 @@ describe('v3beta.PolicyBindingsClient', () => {
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreatePolicyBindingProgress(''), expectedError);
+            await assert.rejects(client.checkCreateAccessPolicyProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
     });
 
-    describe('updatePolicyBinding', () => {
-        it('invokes updatePolicyBinding without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+    describe('updateAccessPolicy', () => {
+        it('invokes updateAccessPolicy without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.UpdatePolicyBindingRequest()
+              new protos.google.iam.v3beta.UpdateAccessPolicyRequest()
             );
-            request.policyBinding ??= {};
+            request.accessPolicy ??= {};
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.UpdatePolicyBindingRequest', ['policyBinding', 'name']);
-            request.policyBinding.name = defaultValue1;
-            const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.UpdateAccessPolicyRequest', ['accessPolicy', 'name']);
+            request.accessPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_policy.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.updatePolicyBinding = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updatePolicyBinding(request);
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateAccessPolicy(request);
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes updatePolicyBinding without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes updateAccessPolicy without error using callback', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.UpdatePolicyBindingRequest()
+              new protos.google.iam.v3beta.UpdateAccessPolicyRequest()
             );
-            request.policyBinding ??= {};
+            request.accessPolicy ??= {};
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.UpdatePolicyBindingRequest', ['policyBinding', 'name']);
-            request.policyBinding.name = defaultValue1;
-            const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.UpdateAccessPolicyRequest', ['accessPolicy', 'name']);
+            request.accessPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_policy.name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.updatePolicyBinding = stubLongRunningCallWithCallback(expectedResponse);
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.updatePolicyBinding(
+                 client.updateAccessPolicy(
                     request,
                     (err?: Error|null,
-                     result?: LROperation<protos.google.iam.v3beta.IPolicyBinding, protos.google.iam.v3beta.IOperationMetadata>|null
+                     result?: LROperation<protos.google.iam.v3beta.IAccessPolicy, protos.google.iam.v3beta.IOperationMetadata>|null
                     ) => {
                         if (err) {
                             reject(err);
@@ -598,70 +598,70 @@ describe('v3beta.PolicyBindingsClient', () => {
                         }
                     });
             });
-            const operation = await promise as LROperation<protos.google.iam.v3beta.IPolicyBinding, protos.google.iam.v3beta.IOperationMetadata>;
+            const operation = await promise as LROperation<protos.google.iam.v3beta.IAccessPolicy, protos.google.iam.v3beta.IOperationMetadata>;
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes updatePolicyBinding with call error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes updateAccessPolicy with call error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.UpdatePolicyBindingRequest()
+              new protos.google.iam.v3beta.UpdateAccessPolicyRequest()
             );
-            request.policyBinding ??= {};
+            request.accessPolicy ??= {};
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.UpdatePolicyBindingRequest', ['policyBinding', 'name']);
-            request.policyBinding.name = defaultValue1;
-            const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.UpdateAccessPolicyRequest', ['accessPolicy', 'name']);
+            request.accessPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_policy.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.updatePolicyBinding = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updatePolicyBinding(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes updatePolicyBinding with LRO error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes updateAccessPolicy with LRO error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.UpdatePolicyBindingRequest()
+              new protos.google.iam.v3beta.UpdateAccessPolicyRequest()
             );
-            request.policyBinding ??= {};
+            request.accessPolicy ??= {};
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.UpdatePolicyBindingRequest', ['policyBinding', 'name']);
-            request.policyBinding.name = defaultValue1;
-            const expectedHeaderRequestParams = `policy_binding.name=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.UpdateAccessPolicyRequest', ['accessPolicy', 'name']);
+            request.accessPolicy.name = defaultValue1;
+            const expectedHeaderRequestParams = `access_policy.name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.updatePolicyBinding = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updatePolicyBinding(request);
+            client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateAccessPolicy(request);
             await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updatePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes checkUpdatePolicyBindingProgress without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes checkUpdateAccessPolicyProgress without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -674,14 +674,14 @@ describe('v3beta.PolicyBindingsClient', () => {
             expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdatePolicyBindingProgress(expectedResponse.name);
+            const decodedOperation = await client.checkUpdateAccessPolicyProgress(expectedResponse.name);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
         });
 
-        it('invokes checkUpdatePolicyBindingProgress with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes checkUpdateAccessPolicyProgress with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -689,60 +689,60 @@ describe('v3beta.PolicyBindingsClient', () => {
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdatePolicyBindingProgress(''), expectedError);
+            await assert.rejects(client.checkUpdateAccessPolicyProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
     });
 
-    describe('deletePolicyBinding', () => {
-        it('invokes deletePolicyBinding without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+    describe('deleteAccessPolicy', () => {
+        it('invokes deleteAccessPolicy without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.DeletePolicyBindingRequest()
+              new protos.google.iam.v3beta.DeleteAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.DeletePolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.DeleteAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.deletePolicyBinding = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deletePolicyBinding(request);
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteAccessPolicy(request);
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes deletePolicyBinding without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes deleteAccessPolicy without error using callback', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.DeletePolicyBindingRequest()
+              new protos.google.iam.v3beta.DeleteAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.DeletePolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.DeleteAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.deletePolicyBinding = stubLongRunningCallWithCallback(expectedResponse);
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.deletePolicyBinding(
+                 client.deleteAccessPolicy(
                     request,
                     (err?: Error|null,
                      result?: LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3beta.IOperationMetadata>|null
@@ -757,65 +757,65 @@ describe('v3beta.PolicyBindingsClient', () => {
             const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.iam.v3beta.IOperationMetadata>;
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes deletePolicyBinding with call error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes deleteAccessPolicy with call error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.DeletePolicyBindingRequest()
+              new protos.google.iam.v3beta.DeleteAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.DeletePolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.DeleteAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.deletePolicyBinding = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deletePolicyBinding(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteAccessPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes deletePolicyBinding with LRO error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes deleteAccessPolicy with LRO error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.DeletePolicyBindingRequest()
+              new protos.google.iam.v3beta.DeleteAccessPolicyRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.DeletePolicyBindingRequest', ['name']);
+              getTypeDefaultValue('.google.iam.v3beta.DeleteAccessPolicyRequest', ['name']);
             request.name = defaultValue1;
             const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.deletePolicyBinding = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deletePolicyBinding(request);
+            client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteAccessPolicy(request);
             await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualRequest = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deletePolicyBinding as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteAccessPolicy as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes checkDeletePolicyBindingProgress without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes checkDeleteAccessPolicyProgress without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -828,14 +828,14 @@ describe('v3beta.PolicyBindingsClient', () => {
             expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeletePolicyBindingProgress(expectedResponse.name);
+            const decodedOperation = await client.checkDeleteAccessPolicyProgress(expectedResponse.name);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
         });
 
-        it('invokes checkDeletePolicyBindingProgress with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes checkDeleteAccessPolicyProgress with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -843,63 +843,63 @@ describe('v3beta.PolicyBindingsClient', () => {
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeletePolicyBindingProgress(''), expectedError);
+            await assert.rejects(client.checkDeleteAccessPolicyProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
     });
 
-    describe('listPolicyBindings', () => {
-        it('invokes listPolicyBindings without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+    describe('listAccessPolicies', () => {
+        it('invokes listAccessPolicies without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
             ];
-            client.innerApiCalls.listPolicyBindings = stubSimpleCall(expectedResponse);
-            const [response] = await client.listPolicyBindings(request);
+            client.innerApiCalls.listAccessPolicies = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAccessPolicies(request);
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listPolicyBindings as SinonStub)
+            const actualRequest = (client.innerApiCalls.listAccessPolicies as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listPolicyBindings as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessPolicies as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes listPolicyBindings without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes listAccessPolicies without error using callback', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
             ];
-            client.innerApiCalls.listPolicyBindings = stubSimpleCallWithCallback(expectedResponse);
+            client.innerApiCalls.listAccessPolicies = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.listPolicyBindings(
+                 client.listAccessPolicies(
                     request,
-                    (err?: Error|null, result?: protos.google.iam.v3beta.IPolicyBinding[]|null) => {
+                    (err?: Error|null, result?: protos.google.iam.v3beta.IAccessPolicy[]|null) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -909,61 +909,61 @@ describe('v3beta.PolicyBindingsClient', () => {
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listPolicyBindings as SinonStub)
+            const actualRequest = (client.innerApiCalls.listAccessPolicies as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listPolicyBindings as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessPolicies as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes listPolicyBindings with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes listAccessPolicies with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.listPolicyBindings = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listPolicyBindings(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listPolicyBindings as SinonStub)
+            client.innerApiCalls.listAccessPolicies = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAccessPolicies(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAccessPolicies as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listPolicyBindings as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.listAccessPolicies as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes listPolicyBindingsStream without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes listAccessPoliciesStream without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
             ];
-            client.descriptors.page.listPolicyBindings.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listPolicyBindingsStream(request);
+            client.descriptors.page.listAccessPolicies.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAccessPoliciesStream(request);
             const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.iam.v3beta.PolicyBinding[] = [];
-                stream.on('data', (response: protos.google.iam.v3beta.PolicyBinding) => {
+                const responses: protos.google.iam.v3beta.AccessPolicy[] = [];
+                stream.on('data', (response: protos.google.iam.v3beta.AccessPolicy) => {
                     responses.push(response);
                 });
                 stream.on('end', () => {
@@ -975,35 +975,35 @@ describe('v3beta.PolicyBindingsClient', () => {
             });
             const responses = await promise;
             assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listPolicyBindings.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listPolicyBindings, request));
+            assert((client.descriptors.page.listAccessPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessPolicies, request));
             assert(
-                (client.descriptors.page.listPolicyBindings.createStream as SinonStub)
+                (client.descriptors.page.listAccessPolicies.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
             );
         });
 
-        it('invokes listPolicyBindingsStream with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes listAccessPoliciesStream with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.descriptors.page.listPolicyBindings.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listPolicyBindingsStream(request);
+            client.descriptors.page.listAccessPolicies.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAccessPoliciesStream(request);
             const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.iam.v3beta.PolicyBinding[] = [];
-                stream.on('data', (response: protos.google.iam.v3beta.PolicyBinding) => {
+                const responses: protos.google.iam.v3beta.AccessPolicy[] = [];
+                stream.on('data', (response: protos.google.iam.v3beta.AccessPolicy) => {
                     responses.push(response);
                 });
                 stream.on('end', () => {
@@ -1014,79 +1014,79 @@ describe('v3beta.PolicyBindingsClient', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listPolicyBindings.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listPolicyBindings, request));
+            assert((client.descriptors.page.listAccessPolicies.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAccessPolicies, request));
             assert(
-                (client.descriptors.page.listPolicyBindings.createStream as SinonStub)
+                (client.descriptors.page.listAccessPolicies.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
                     ) 
             );
         });
 
-        it('uses async iteration with listPolicyBindings without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('uses async iteration with listAccessPolicies without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedResponse = [
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
-              generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
+              generateSampleMessage(new protos.google.iam.v3beta.AccessPolicy()),
             ];
-            client.descriptors.page.listPolicyBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.iam.v3beta.IPolicyBinding[] = [];
-            const iterable = client.listPolicyBindingsAsync(request);
+            client.descriptors.page.listAccessPolicies.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.iam.v3beta.IAccessPolicy[] = [];
+            const iterable = client.listAccessPoliciesAsync(request);
             for await (const resource of iterable) {
                 responses.push(resource!);
             }
             assert.deepStrictEqual(responses, expectedResponse);
             assert.deepStrictEqual(
-                (client.descriptors.page.listPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub)
                     .getCall(0).args[1], request);
             assert(
-                (client.descriptors.page.listPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
             );
         });
 
-        it('uses async iteration with listPolicyBindings with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('uses async iteration with listAccessPolicies with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.ListPolicyBindingsRequest()
+              new protos.google.iam.v3beta.ListAccessPoliciesRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.ListPolicyBindingsRequest', ['parent']);
+              getTypeDefaultValue('.google.iam.v3beta.ListAccessPoliciesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.descriptors.page.listPolicyBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listPolicyBindingsAsync(request);
+            client.descriptors.page.listAccessPolicies.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAccessPoliciesAsync(request);
             await assert.rejects(async () => {
-                const responses: protos.google.iam.v3beta.IPolicyBinding[] = [];
+                const responses: protos.google.iam.v3beta.IAccessPolicy[] = [];
                 for await (const resource of iterable) {
                     responses.push(resource!);
                 }
             });
             assert.deepStrictEqual(
-                (client.descriptors.page.listPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub)
                     .getCall(0).args[1], request);
             assert(
-                (client.descriptors.page.listPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.listAccessPolicies.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -1094,55 +1094,55 @@ describe('v3beta.PolicyBindingsClient', () => {
         });
     });
 
-    describe('searchTargetPolicyBindings', () => {
-        it('invokes searchTargetPolicyBindings without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+    describe('searchAccessPolicyBindings', () => {
+        it('invokes searchAccessPolicyBindings without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
             ];
-            client.innerApiCalls.searchTargetPolicyBindings = stubSimpleCall(expectedResponse);
-            const [response] = await client.searchTargetPolicyBindings(request);
+            client.innerApiCalls.searchAccessPolicyBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchAccessPolicyBindings(request);
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.searchTargetPolicyBindings as SinonStub)
+            const actualRequest = (client.innerApiCalls.searchAccessPolicyBindings as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.searchTargetPolicyBindings as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAccessPolicyBindings as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes searchTargetPolicyBindings without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes searchAccessPolicyBindings without error using callback', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
             ];
-            client.innerApiCalls.searchTargetPolicyBindings = stubSimpleCallWithCallback(expectedResponse);
+            client.innerApiCalls.searchAccessPolicyBindings = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.searchTargetPolicyBindings(
+                 client.searchAccessPolicyBindings(
                     request,
                     (err?: Error|null, result?: protos.google.iam.v3beta.IPolicyBinding[]|null) => {
                         if (err) {
@@ -1154,58 +1154,58 @@ describe('v3beta.PolicyBindingsClient', () => {
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.searchTargetPolicyBindings as SinonStub)
+            const actualRequest = (client.innerApiCalls.searchAccessPolicyBindings as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.searchTargetPolicyBindings as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAccessPolicyBindings as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes searchTargetPolicyBindings with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes searchAccessPolicyBindings with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.innerApiCalls.searchTargetPolicyBindings = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.searchTargetPolicyBindings(request), expectedError);
-            const actualRequest = (client.innerApiCalls.searchTargetPolicyBindings as SinonStub)
+            client.innerApiCalls.searchAccessPolicyBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchAccessPolicyBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchAccessPolicyBindings as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.searchTargetPolicyBindings as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.searchAccessPolicyBindings as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes searchTargetPolicyBindingsStream without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes searchAccessPolicyBindingsStream without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
             ];
-            client.descriptors.page.searchTargetPolicyBindings.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.searchTargetPolicyBindingsStream(request);
+            client.descriptors.page.searchAccessPolicyBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchAccessPolicyBindingsStream(request);
             const promise = new Promise((resolve, reject) => {
                 const responses: protos.google.iam.v3beta.PolicyBinding[] = [];
                 stream.on('data', (response: protos.google.iam.v3beta.PolicyBinding) => {
@@ -1220,32 +1220,32 @@ describe('v3beta.PolicyBindingsClient', () => {
             });
             const responses = await promise;
             assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.searchTargetPolicyBindings.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.searchTargetPolicyBindings, request));
+            assert((client.descriptors.page.searchAccessPolicyBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchAccessPolicyBindings, request));
             assert(
-                (client.descriptors.page.searchTargetPolicyBindings.createStream as SinonStub)
+                (client.descriptors.page.searchAccessPolicyBindings.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
             );
         });
 
-        it('invokes searchTargetPolicyBindingsStream with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('invokes searchAccessPolicyBindingsStream with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.descriptors.page.searchTargetPolicyBindings.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.searchTargetPolicyBindingsStream(request);
+            client.descriptors.page.searchAccessPolicyBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchAccessPolicyBindingsStream(request);
             const promise = new Promise((resolve, reject) => {
                 const responses: protos.google.iam.v3beta.PolicyBinding[] = [];
                 stream.on('data', (response: protos.google.iam.v3beta.PolicyBinding) => {
@@ -1259,68 +1259,68 @@ describe('v3beta.PolicyBindingsClient', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.searchTargetPolicyBindings.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.searchTargetPolicyBindings, request));
+            assert((client.descriptors.page.searchAccessPolicyBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchAccessPolicyBindings, request));
             assert(
-                (client.descriptors.page.searchTargetPolicyBindings.createStream as SinonStub)
+                (client.descriptors.page.searchAccessPolicyBindings.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
                     ) 
             );
         });
 
-        it('uses async iteration with searchTargetPolicyBindings without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('uses async iteration with searchAccessPolicyBindings without error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedResponse = [
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
               generateSampleMessage(new protos.google.iam.v3beta.PolicyBinding()),
             ];
-            client.descriptors.page.searchTargetPolicyBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            client.descriptors.page.searchAccessPolicyBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
             const responses: protos.google.iam.v3beta.IPolicyBinding[] = [];
-            const iterable = client.searchTargetPolicyBindingsAsync(request);
+            const iterable = client.searchAccessPolicyBindingsAsync(request);
             for await (const resource of iterable) {
                 responses.push(resource!);
             }
             assert.deepStrictEqual(responses, expectedResponse);
             assert.deepStrictEqual(
-                (client.descriptors.page.searchTargetPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.searchAccessPolicyBindings.asyncIterate as SinonStub)
                     .getCall(0).args[1], request);
             assert(
-                (client.descriptors.page.searchTargetPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.searchAccessPolicyBindings.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
             );
         });
 
-        it('uses async iteration with searchTargetPolicyBindings with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+        it('uses async iteration with searchAccessPolicyBindings with error', async () => {
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.iam.v3beta.SearchTargetPolicyBindingsRequest()
+              new protos.google.iam.v3beta.SearchAccessPolicyBindingsRequest()
             );
             const defaultValue1 =
-              getTypeDefaultValue('.google.iam.v3beta.SearchTargetPolicyBindingsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+              getTypeDefaultValue('.google.iam.v3beta.SearchAccessPolicyBindingsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
             const expectedError = new Error('expected');
-            client.descriptors.page.searchTargetPolicyBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.searchTargetPolicyBindingsAsync(request);
+            client.descriptors.page.searchAccessPolicyBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchAccessPolicyBindingsAsync(request);
             await assert.rejects(async () => {
                 const responses: protos.google.iam.v3beta.IPolicyBinding[] = [];
                 for await (const resource of iterable) {
@@ -1328,10 +1328,10 @@ describe('v3beta.PolicyBindingsClient', () => {
                 }
             });
             assert.deepStrictEqual(
-                (client.descriptors.page.searchTargetPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.searchAccessPolicyBindings.asyncIterate as SinonStub)
                     .getCall(0).args[1], request);
             assert(
-                (client.descriptors.page.searchTargetPolicyBindings.asyncIterate as SinonStub)
+                (client.descriptors.page.searchAccessPolicyBindings.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -1340,7 +1340,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1367,7 +1367,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
         it('invokes getLocation without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1409,7 +1409,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 .getCall(0));
         });
         it('invokes getLocation with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1435,7 +1435,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     describe('listLocationsAsync', () => {
         it('uses async iteration with listLocations without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1474,7 +1474,7 @@ describe('v3beta.PolicyBindingsClient', () => {
             );
         });
         it('uses async iteration with listLocations with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1506,7 +1506,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     describe('getOperation', () => {
         it('invokes getOperation without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1525,7 +1525,7 @@ describe('v3beta.PolicyBindingsClient', () => {
             );
         });
         it('invokes getOperation without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1557,7 +1557,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 .getCall(0));
         });
         it('invokes getOperation with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1573,7 +1573,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     describe('cancelOperation', () => {
         it('invokes cancelOperation without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1592,7 +1592,7 @@ describe('v3beta.PolicyBindingsClient', () => {
             );
         });
         it('invokes cancelOperation without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1624,7 +1624,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 .getCall(0));
         });
         it('invokes cancelOperation with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1640,7 +1640,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     describe('deleteOperation', () => {
         it('invokes deleteOperation without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1659,7 +1659,7 @@ describe('v3beta.PolicyBindingsClient', () => {
             );
         });
         it('invokes deleteOperation without error using callback', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1691,7 +1691,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 .getCall(0));
         });
         it('invokes deleteOperation with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1707,7 +1707,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     describe('listOperationsAsync', () => {
         it('uses async iteration with listOperations without error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1737,7 +1737,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                     .getCall(0).args[1], request);
         });
         it('uses async iteration with listOperations with error', async () => {
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1769,7 +1769,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 access_policy: "accessPolicyValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1815,7 +1815,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 policy_binding: "policyBindingValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1859,7 +1859,7 @@ describe('v3beta.PolicyBindingsClient', () => {
             const expectedParameters = {
                 organization: "organizationValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1890,7 +1890,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 organization: "organizationValue",
                 location: "locationValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1929,7 +1929,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 access_policy: "accessPolicyValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1975,7 +1975,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 policy_binding: "policyBindingValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -2021,7 +2021,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 principal_access_boundary_policy: "principalAccessBoundaryPolicyValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -2067,7 +2067,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 access_policy: "accessPolicyValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -2113,7 +2113,7 @@ describe('v3beta.PolicyBindingsClient', () => {
                 location: "locationValue",
                 policy_binding: "policyBindingValue",
             };
-            const client = new policybindingsModule.v3beta.PolicyBindingsClient({
+            const client = new accesspoliciesModule.v3beta.AccessPoliciesClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
