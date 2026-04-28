@@ -170,7 +170,7 @@ export class TestResources {
       if (name.startsWith(this.testSuiteId)) {
         const parts = name.split('-');
         const createdAt = Number(parts[1]);
-        const timeDiff = (Date.now() - createdAt) / (1000 * 60 * 60);
+        const timeDiff = (this.tokenMaker.timestamp() - createdAt) / (1000 * 60 * 60);
         if (timeDiff >= 2) {
           return true;
         }
