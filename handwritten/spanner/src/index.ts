@@ -564,18 +564,30 @@ class Spanner extends GrpcService {
   }
 
   /** Closes this Spanner client and cleans up all resources used by it. */
-  close(): void {
+  close(): Promise<void>;
+  close(callback: (err: Error | null) => void): void;
+  close(callback?: (err: Error | null) => void): void | Promise<void> {
+    const promises: Promise<void>[] = [];
+
     this.clients_.forEach(c => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const client = c as any;
       if (client.operationsClient && client.operationsClient.close) {
-        client.operationsClient.close();
+        promises.push(client.operationsClient.close());
       }
-      client.close();
+      promises.push(client.close());
     });
-    cleanup().catch(err => {
-      console.error('Error occured during cleanup: ', err);
-    });
+
+    // Wait for all clients to close, then do cleanup
+    const res = Promise.all(promises).then(() => cleanup());
+    if (callback) {
+      res.then(
+        () => callback(null),
+        err => callback(err),
+      );
+    } else {
+      return res;
+    }
   }
 
   /**
