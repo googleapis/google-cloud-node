@@ -62,7 +62,7 @@ export class JSONEncoder {
     const normalized = normalizeDescriptor(
       new DescriptorProto(protoDescriptor),
     );
-    this._type = Type.fromDescriptor(normalized);
+    this._type = Type.fromDescriptor(normalized).setup();
   }
 
   /**
