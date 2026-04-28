@@ -217,14 +217,33 @@ describe('pubsub', () => {
     });
 
     it('should publish a message', async () => {
-      const testTopic = await generateTopic('pub-msg');
-      const topic = testTopic.topic;
-      const message = {
-        data: Buffer.from('message from me'),
-        orderingKey: 'a',
-      };
-
-      const result = await topic.publishMessage(message);
+      const tname = generateTopicName('publish');
+      const sname = generateSubName('publish');
+      
+      const [topic] = await pubsub.topic(tname).get({autoCreate: true});
+      const [subscription] = await topic.subscription(sname).get({autoCreate: true});
+      
+      // --- From sample (publishMessage.js) ---
+      const data = 'Hello, world!';
+      const dataBuffer = Buffer.from(data);
+      const messageId = await topic.publishMessage({data: dataBuffer});
+      console.log(`Message ${messageId} published.`);
+      
+      // --- From test (topics.test.ts) ---
+      const message = await new Promise<Message>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          subscription.removeListener('message', messageHandler);
+          reject(new Error('Timeout'));
+        }, 10000);
+        function messageHandler(m: Message) {
+          clearTimeout(timeout);
+          m.ack();
+          resolve(m);
+        }
+        subscription.once('message', messageHandler);
+      });
+      
+      assert.strictEqual(message.data.toString(), data);
     });
 
     it('should publish a message with attributes', async () => {
