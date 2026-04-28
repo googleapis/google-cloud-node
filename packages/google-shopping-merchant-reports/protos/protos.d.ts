@@ -458,6 +458,9 @@ export namespace google {
                         /** ProductPerformanceView customerCountryCode */
                         customerCountryCode?: (string|null);
 
+                        /** ProductPerformanceView storeType */
+                        storeType?: (google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum|keyof typeof google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum|null);
+
                         /** ProductPerformanceView offerId */
                         offerId?: (string|null);
 
@@ -551,6 +554,9 @@ export namespace google {
 
                         /** ProductPerformanceView customerCountryCode. */
                         public customerCountryCode?: (string|null);
+
+                        /** ProductPerformanceView storeType. */
+                        public storeType?: (google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum|keyof typeof google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum|null);
 
                         /** ProductPerformanceView offerId. */
                         public offerId?: (string|null);
@@ -786,6 +792,12 @@ export namespace google {
                         /** ProductView aggregatedReportingContextStatus */
                         aggregatedReportingContextStatus?: (google.shopping.merchant.reports.v1.ProductView.AggregatedReportingContextStatus|keyof typeof google.shopping.merchant.reports.v1.ProductView.AggregatedReportingContextStatus|null);
 
+                        /** ProductView statusPerReportingContext */
+                        statusPerReportingContext?: (google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext[]|null);
+
+                        /** ProductView reportingContext */
+                        reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
                         /** ProductView itemIssues */
                         itemIssues?: (google.shopping.merchant.reports.v1.ProductView.IItemIssue[]|null);
 
@@ -885,6 +897,12 @@ export namespace google {
 
                         /** ProductView aggregatedReportingContextStatus. */
                         public aggregatedReportingContextStatus?: (google.shopping.merchant.reports.v1.ProductView.AggregatedReportingContextStatus|keyof typeof google.shopping.merchant.reports.v1.ProductView.AggregatedReportingContextStatus|null);
+
+                        /** ProductView statusPerReportingContext. */
+                        public statusPerReportingContext: google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext[];
+
+                        /** ProductView reportingContext. */
+                        public reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
 
                         /** ProductView itemIssues. */
                         public itemIssues: google.shopping.merchant.reports.v1.ProductView.IItemIssue[];
@@ -1418,6 +1436,121 @@ export namespace google {
                                 MERCHANT_ACTION = 1,
                                 PENDING_PROCESSING = 2
                             }
+                        }
+
+                        /** Properties of a StatusPerReportingContext. */
+                        interface IStatusPerReportingContext {
+
+                            /** StatusPerReportingContext reportingContext */
+                            reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
+                            /** StatusPerReportingContext approvedCountries */
+                            approvedCountries?: (string[]|null);
+
+                            /** StatusPerReportingContext disapprovedCountries */
+                            disapprovedCountries?: (string[]|null);
+
+                            /** StatusPerReportingContext pendingCountries */
+                            pendingCountries?: (string[]|null);
+                        }
+
+                        /** Represents a StatusPerReportingContext. */
+                        class StatusPerReportingContext implements IStatusPerReportingContext {
+
+                            /**
+                             * Constructs a new StatusPerReportingContext.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext);
+
+                            /** StatusPerReportingContext reportingContext. */
+                            public reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
+                            /** StatusPerReportingContext approvedCountries. */
+                            public approvedCountries: string[];
+
+                            /** StatusPerReportingContext disapprovedCountries. */
+                            public disapprovedCountries: string[];
+
+                            /** StatusPerReportingContext pendingCountries. */
+                            public pendingCountries: string[];
+
+                            /**
+                             * Creates a new StatusPerReportingContext instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StatusPerReportingContext instance
+                             */
+                            public static create(properties?: google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext): google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext;
+
+                            /**
+                             * Encodes the specified StatusPerReportingContext message. Does not implicitly {@link google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.verify|verify} messages.
+                             * @param message StatusPerReportingContext message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StatusPerReportingContext message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.verify|verify} messages.
+                             * @param message StatusPerReportingContext message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StatusPerReportingContext message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StatusPerReportingContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext;
+
+                            /**
+                             * Decodes a StatusPerReportingContext message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StatusPerReportingContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext;
+
+                            /**
+                             * Verifies a StatusPerReportingContext message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StatusPerReportingContext message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StatusPerReportingContext
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext;
+
+                            /**
+                             * Creates a plain object from a StatusPerReportingContext message. Also converts values to other types if specified.
+                             * @param message StatusPerReportingContext
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StatusPerReportingContext to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StatusPerReportingContext
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** AggregatedReportingContextStatus enum. */
@@ -2874,6 +3007,107 @@ export namespace google {
                             MARKETING_METHOD_ENUM_UNSPECIFIED = 0,
                             ORGANIC = 1,
                             ADS = 2
+                        }
+                    }
+
+                    /** Properties of a StoreType. */
+                    interface IStoreType {
+                    }
+
+                    /** Represents a StoreType. */
+                    class StoreType implements IStoreType {
+
+                        /**
+                         * Constructs a new StoreType.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1.IStoreType);
+
+                        /**
+                         * Creates a new StoreType instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StoreType instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1.IStoreType): google.shopping.merchant.reports.v1.StoreType;
+
+                        /**
+                         * Encodes the specified StoreType message. Does not implicitly {@link google.shopping.merchant.reports.v1.StoreType.verify|verify} messages.
+                         * @param message StoreType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1.IStoreType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StoreType message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1.StoreType.verify|verify} messages.
+                         * @param message StoreType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1.IStoreType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StoreType message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StoreType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1.StoreType;
+
+                        /**
+                         * Decodes a StoreType message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StoreType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1.StoreType;
+
+                        /**
+                         * Verifies a StoreType message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StoreType message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StoreType
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1.StoreType;
+
+                        /**
+                         * Creates a plain object from a StoreType message. Also converts values to other types if specified.
+                         * @param message StoreType
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1.StoreType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StoreType to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StoreType
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StoreType {
+
+                        /** StoreTypeEnum enum. */
+                        enum StoreTypeEnum {
+                            STORE_TYPE_ENUM_UNSPECIFIED = 0,
+                            ONLINE_STORE = 1,
+                            LOCAL_STORES = 2
                         }
                     }
 
