@@ -3062,6 +3062,11 @@
               "methods": [
                 "streamQueryReasoningEngine"
               ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
+              ]
             }
           }
         },
@@ -3071,6 +3076,11 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
               ]
             }
           }

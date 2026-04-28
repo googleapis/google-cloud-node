@@ -64,6 +64,7 @@
     "stream-events": "^1.0.5"
   },
   "overrides": {
+    "@sinonjs/fake-timers": "15.1.1",
     "@google-cloud/common": {
       "google-auth-library": "10.3.0"
     }
