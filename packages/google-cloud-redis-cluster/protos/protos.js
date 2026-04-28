@@ -646,6 +646,9 @@
                          * @property {number} REDIS_HIGHMEM_MEDIUM=2 REDIS_HIGHMEM_MEDIUM value
                          * @property {number} REDIS_HIGHMEM_XLARGE=3 REDIS_HIGHMEM_XLARGE value
                          * @property {number} REDIS_STANDARD_SMALL=4 REDIS_STANDARD_SMALL value
+                         * @property {number} REDIS_HIGHCPU_MEDIUM=7 REDIS_HIGHCPU_MEDIUM value
+                         * @property {number} REDIS_STANDARD_LARGE=8 REDIS_STANDARD_LARGE value
+                         * @property {number} REDIS_HIGHMEM_2XLARGE=9 REDIS_HIGHMEM_2XLARGE value
                          */
                         v1.NodeType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -654,6 +657,9 @@
                             values[valuesById[2] = "REDIS_HIGHMEM_MEDIUM"] = 2;
                             values[valuesById[3] = "REDIS_HIGHMEM_XLARGE"] = 3;
                             values[valuesById[4] = "REDIS_STANDARD_SMALL"] = 4;
+                            values[valuesById[7] = "REDIS_HIGHCPU_MEDIUM"] = 7;
+                            values[valuesById[8] = "REDIS_STANDARD_LARGE"] = 8;
+                            values[valuesById[9] = "REDIS_HIGHMEM_2XLARGE"] = 9;
                             return values;
                         })();
     
@@ -5528,6 +5534,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
@@ -5808,6 +5817,18 @@
                                 case "REDIS_STANDARD_SMALL":
                                 case 4:
                                     message.nodeType = 4;
+                                    break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
                                     break;
                                 }
                                 if (object.persistenceConfig != null) {
@@ -8277,6 +8298,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
@@ -8391,6 +8415,18 @@
                                 case "REDIS_STANDARD_SMALL":
                                 case 4:
                                     message.nodeType = 4;
+                                    break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
                                     break;
                                 }
                                 if (object.replicaCount != null)
@@ -16963,6 +16999,9 @@
                          * @property {number} REDIS_HIGHMEM_MEDIUM=2 REDIS_HIGHMEM_MEDIUM value
                          * @property {number} REDIS_HIGHMEM_XLARGE=3 REDIS_HIGHMEM_XLARGE value
                          * @property {number} REDIS_STANDARD_SMALL=4 REDIS_STANDARD_SMALL value
+                         * @property {number} REDIS_HIGHCPU_MEDIUM=7 REDIS_HIGHCPU_MEDIUM value
+                         * @property {number} REDIS_STANDARD_LARGE=8 REDIS_STANDARD_LARGE value
+                         * @property {number} REDIS_HIGHMEM_2XLARGE=9 REDIS_HIGHMEM_2XLARGE value
                          */
                         v1beta1.NodeType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16971,6 +17010,9 @@
                             values[valuesById[2] = "REDIS_HIGHMEM_MEDIUM"] = 2;
                             values[valuesById[3] = "REDIS_HIGHMEM_XLARGE"] = 3;
                             values[valuesById[4] = "REDIS_STANDARD_SMALL"] = 4;
+                            values[valuesById[7] = "REDIS_HIGHCPU_MEDIUM"] = 7;
+                            values[valuesById[8] = "REDIS_STANDARD_LARGE"] = 8;
+                            values[valuesById[9] = "REDIS_HIGHMEM_2XLARGE"] = 9;
                             return values;
                         })();
     
@@ -21845,6 +21887,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
@@ -22125,6 +22170,18 @@
                                 case "REDIS_STANDARD_SMALL":
                                 case 4:
                                     message.nodeType = 4;
+                                    break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
                                     break;
                                 }
                                 if (object.persistenceConfig != null) {
@@ -24594,6 +24651,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
@@ -24708,6 +24768,18 @@
                                 case "REDIS_STANDARD_SMALL":
                                 case 4:
                                     message.nodeType = 4;
+                                    break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
                                     break;
                                 }
                                 if (object.replicaCount != null)
