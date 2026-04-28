@@ -15,8 +15,6 @@
  */
 export {GoogleAuthOptions} from 'google-auth-library';
 
-export {ServiceConfig, ServiceOptions} from './service.js';
-
 export {
   BaseMetadata,
   DeleteCallback,

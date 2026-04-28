@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ServiceOptions} from './nodejs-common/index.js';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import {Readable} from 'stream';
@@ -29,7 +28,12 @@ import {
   CRC32CValidatorGenerator,
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
 } from './crc32c.js';
-import {DEFAULT_UNIVERSE} from 'google-auth-library';
+import {
+  AuthClient,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
 import {StorageQueryParameters, StorageTransport} from './storage-transport.js';
 import {GaxiosError, GaxiosInterceptor, GaxiosOptionsPrepared} from 'gaxios';
 
@@ -94,7 +98,7 @@ export interface PreconditionOptions {
   ifMetagenerationNotMatch?: number | string;
 }
 
-export interface StorageOptions extends ServiceOptions {
+export interface StorageOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   /**
    * The API endpoint of the service used to make requests.
    * Defaults to `storage.googleapis.com`.
@@ -102,6 +106,13 @@ export interface StorageOptions extends ServiceOptions {
   apiEndpoint?: string;
   crc32cGenerator?: CRC32CValidatorGenerator;
   retryOptions?: RetryOptions;
+  authClient?: AuthClient | GoogleAuth;
+  interceptors_?: GaxiosInterceptor<GaxiosOptionsPrepared>[];
+  email?: string;
+  token?: string;
+  timeout?: number; // http.request.options.timeout
+  userAgent?: string;
+  useAuthWithCustomEndpoint?: boolean;
 }
 
 export interface BucketOptions {
@@ -360,6 +371,14 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
       !url.includes('/notificationConfigs');
   }
   if (!isIdempotent) return false;
+
+  const gcsErrors = err.response?.data?.error?.errors || [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const hasRateLimitReason = gcsErrors.some((e: any) =>
+    ['rateLimitExceeded', 'userRateLimitExceeded'].includes(e.reason),
+  );
+
+  if (hasRateLimitReason) return true;
 
   // Unified Error Detection
   const retryableCodes = [408, 429, 500, 502, 503, 504];
