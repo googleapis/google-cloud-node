@@ -1141,6 +1141,7 @@
                              * @property {google.type.IDate|null} [date] ProductPerformanceView date
                              * @property {google.type.IDate|null} [week] ProductPerformanceView week
                              * @property {string|null} [customerCountryCode] ProductPerformanceView customerCountryCode
+                             * @property {google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum|null} [storeType] ProductPerformanceView storeType
                              * @property {string|null} [offerId] ProductPerformanceView offerId
                              * @property {string|null} [title] ProductPerformanceView title
                              * @property {string|null} [brand] ProductPerformanceView brand
@@ -1213,6 +1214,14 @@
                              * @instance
                              */
                             ProductPerformanceView.prototype.customerCountryCode = null;
+    
+                            /**
+                             * ProductPerformanceView storeType.
+                             * @member {google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum|null|undefined} storeType
+                             * @memberof google.shopping.merchant.reports.v1.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.storeType = null;
     
                             /**
                              * ProductPerformanceView offerId.
@@ -1418,6 +1427,12 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customerCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["customerCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_storeType", {
+                                get: $util.oneOfGetter($oneOfFields = ["storeType"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1639,6 +1654,8 @@
                                     $root.google.shopping.type.Price.encode(message.conversionValue, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                                 if (message.conversionRate != null && Object.hasOwnProperty.call(message, "conversionRate"))
                                     writer.uint32(/* id 28, wireType 1 =*/225).double(message.conversionRate);
+                                if (message.storeType != null && Object.hasOwnProperty.call(message, "storeType"))
+                                    writer.uint32(/* id 32, wireType 0 =*/256).int32(message.storeType);
                                 return writer;
                             };
     
@@ -1689,6 +1706,10 @@
                                         }
                                     case 4: {
                                             message.customerCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 32: {
+                                            message.storeType = reader.int32();
                                             break;
                                         }
                                     case 5: {
@@ -1848,6 +1869,17 @@
                                     properties._customerCountryCode = 1;
                                     if (!$util.isString(message.customerCountryCode))
                                         return "customerCountryCode: string expected";
+                                }
+                                if (message.storeType != null && message.hasOwnProperty("storeType")) {
+                                    properties._storeType = 1;
+                                    switch (message.storeType) {
+                                    default:
+                                        return "storeType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 }
                                 if (message.offerId != null && message.hasOwnProperty("offerId")) {
                                     properties._offerId = 1;
@@ -2016,6 +2048,26 @@
                                 }
                                 if (object.customerCountryCode != null)
                                     message.customerCountryCode = String(object.customerCountryCode);
+                                switch (object.storeType) {
+                                default:
+                                    if (typeof object.storeType === "number") {
+                                        message.storeType = object.storeType;
+                                        break;
+                                    }
+                                    break;
+                                case "STORE_TYPE_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.storeType = 0;
+                                    break;
+                                case "ONLINE_STORE":
+                                case 1:
+                                    message.storeType = 1;
+                                    break;
+                                case "LOCAL_STORES":
+                                case 2:
+                                    message.storeType = 2;
+                                    break;
+                                }
                                 if (object.offerId != null)
                                     message.offerId = String(object.offerId);
                                 if (object.title != null)
@@ -2239,6 +2291,11 @@
                                     if (options.oneofs)
                                         object._conversionRate = "conversionRate";
                                 }
+                                if (message.storeType != null && message.hasOwnProperty("storeType")) {
+                                    object.storeType = options.enums === String ? $root.google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum[message.storeType] === undefined ? message.storeType : $root.google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum[message.storeType] : message.storeType;
+                                    if (options.oneofs)
+                                        object._storeType = "storeType";
+                                }
                                 return object;
                             };
     
@@ -2304,6 +2361,8 @@
                              * @property {google.protobuf.ITimestamp|null} [creationTime] ProductView creationTime
                              * @property {google.type.IDate|null} [expirationDate] ProductView expirationDate
                              * @property {google.shopping.merchant.reports.v1.ProductView.AggregatedReportingContextStatus|null} [aggregatedReportingContextStatus] ProductView aggregatedReportingContextStatus
+                             * @property {Array.<google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext>|null} [statusPerReportingContext] ProductView statusPerReportingContext
+                             * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] ProductView reportingContext
                              * @property {Array.<google.shopping.merchant.reports.v1.ProductView.IItemIssue>|null} [itemIssues] ProductView itemIssues
                              * @property {google.shopping.merchant.reports.v1.ProductView.ClickPotential|null} [clickPotential] ProductView clickPotential
                              * @property {number|Long|null} [clickPotentialRank] ProductView clickPotentialRank
@@ -2319,6 +2378,7 @@
                              */
                             function ProductView(properties) {
                                 this.gtin = [];
+                                this.statusPerReportingContext = [];
                                 this.itemIssues = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2543,6 +2603,22 @@
                             ProductView.prototype.aggregatedReportingContextStatus = null;
     
                             /**
+                             * ProductView statusPerReportingContext.
+                             * @member {Array.<google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext>} statusPerReportingContext
+                             * @memberof google.shopping.merchant.reports.v1.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.statusPerReportingContext = $util.emptyArray;
+    
+                            /**
+                             * ProductView reportingContext.
+                             * @member {google.shopping.type.ReportingContext.ReportingContextEnum|null|undefined} reportingContext
+                             * @memberof google.shopping.merchant.reports.v1.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.reportingContext = null;
+    
+                            /**
                              * ProductView itemIssues.
                              * @member {Array.<google.shopping.merchant.reports.v1.ProductView.IItemIssue>} itemIssues
                              * @memberof google.shopping.merchant.reports.v1.ProductView
@@ -2708,6 +2784,12 @@
                             });
     
                             // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_reportingContext", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportingContext"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_clickPotentialRank", {
                                 get: $util.oneOfGetter($oneOfFields = ["clickPotentialRank"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -2799,6 +2881,11 @@
                                     writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clickPotential);
                                 if (message.clickPotentialRank != null && Object.hasOwnProperty.call(message, "clickPotentialRank"))
                                     writer.uint32(/* id 30, wireType 0 =*/240).int64(message.clickPotentialRank);
+                                if (message.statusPerReportingContext != null && message.statusPerReportingContext.length)
+                                    for (var i = 0; i < message.statusPerReportingContext.length; ++i)
+                                        $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.encode(message.statusPerReportingContext[i], writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                                if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                    writer.uint32(/* id 33, wireType 0 =*/264).int32(message.reportingContext);
                                 return writer;
                             };
     
@@ -2943,6 +3030,16 @@
                                         }
                                     case 26: {
                                             message.aggregatedReportingContextStatus = reader.int32();
+                                            break;
+                                        }
+                                    case 32: {
+                                            if (!(message.statusPerReportingContext && message.statusPerReportingContext.length))
+                                                message.statusPerReportingContext = [];
+                                            message.statusPerReportingContext.push($root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 33: {
+                                            message.reportingContext = reader.int32();
                                             break;
                                         }
                                     case 27: {
@@ -3146,6 +3243,43 @@
                                         break;
                                     }
                                 }
+                                if (message.statusPerReportingContext != null && message.hasOwnProperty("statusPerReportingContext")) {
+                                    if (!Array.isArray(message.statusPerReportingContext))
+                                        return "statusPerReportingContext: array expected";
+                                    for (var i = 0; i < message.statusPerReportingContext.length; ++i) {
+                                        var error = $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.verify(message.statusPerReportingContext[i]);
+                                        if (error)
+                                            return "statusPerReportingContext." + error;
+                                    }
+                                }
+                                if (message.reportingContext != null && message.hasOwnProperty("reportingContext")) {
+                                    properties._reportingContext = 1;
+                                    switch (message.reportingContext) {
+                                    default:
+                                        return "reportingContext: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 13:
+                                    case 14:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 19:
+                                    case 8:
+                                    case 9:
+                                    case 18:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                    case 15:
+                                    case 16:
+                                    case 17:
+                                        break;
+                                    }
+                                }
                                 if (message.itemIssues != null && message.hasOwnProperty("itemIssues")) {
                                     if (!Array.isArray(message.itemIssues))
                                         return "itemIssues: array expected";
@@ -3297,6 +3431,104 @@
                                     message.aggregatedReportingContextStatus = 4;
                                     break;
                                 }
+                                if (object.statusPerReportingContext) {
+                                    if (!Array.isArray(object.statusPerReportingContext))
+                                        throw TypeError(".google.shopping.merchant.reports.v1.ProductView.statusPerReportingContext: array expected");
+                                    message.statusPerReportingContext = [];
+                                    for (var i = 0; i < object.statusPerReportingContext.length; ++i) {
+                                        if (typeof object.statusPerReportingContext[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.reports.v1.ProductView.statusPerReportingContext: object expected");
+                                        message.statusPerReportingContext[i] = $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.fromObject(object.statusPerReportingContext[i]);
+                                    }
+                                }
+                                switch (object.reportingContext) {
+                                default:
+                                    if (typeof object.reportingContext === "number") {
+                                        message.reportingContext = object.reportingContext;
+                                        break;
+                                    }
+                                    break;
+                                case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.reportingContext = 0;
+                                    break;
+                                case "SHOPPING_ADS":
+                                case 1:
+                                    message.reportingContext = 1;
+                                    break;
+                                case "DISCOVERY_ADS":
+                                case 2:
+                                    message.reportingContext = 2;
+                                    break;
+                                case "DEMAND_GEN_ADS":
+                                case 13:
+                                    message.reportingContext = 13;
+                                    break;
+                                case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                case 14:
+                                    message.reportingContext = 14;
+                                    break;
+                                case "VIDEO_ADS":
+                                case 3:
+                                    message.reportingContext = 3;
+                                    break;
+                                case "DISPLAY_ADS":
+                                case 4:
+                                    message.reportingContext = 4;
+                                    break;
+                                case "LOCAL_INVENTORY_ADS":
+                                case 5:
+                                    message.reportingContext = 5;
+                                    break;
+                                case "VEHICLE_INVENTORY_ADS":
+                                case 6:
+                                    message.reportingContext = 6;
+                                    break;
+                                case "FREE_LISTINGS":
+                                case 7:
+                                    message.reportingContext = 7;
+                                    break;
+                                case "FREE_LISTINGS_UCP_CHECKOUT":
+                                case 19:
+                                    message.reportingContext = 19;
+                                    break;
+                                case "FREE_LOCAL_LISTINGS":
+                                case 8:
+                                    message.reportingContext = 8;
+                                    break;
+                                case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                case 9:
+                                    message.reportingContext = 9;
+                                    break;
+                                case "YOUTUBE_AFFILIATE":
+                                case 18:
+                                    message.reportingContext = 18;
+                                    break;
+                                case "YOUTUBE_SHOPPING":
+                                case 10:
+                                    message.reportingContext = 10;
+                                    break;
+                                case "CLOUD_RETAIL":
+                                case 11:
+                                    message.reportingContext = 11;
+                                    break;
+                                case "LOCAL_CLOUD_RETAIL":
+                                case 12:
+                                    message.reportingContext = 12;
+                                    break;
+                                case "PRODUCT_REVIEWS":
+                                case 15:
+                                    message.reportingContext = 15;
+                                    break;
+                                case "MERCHANT_REVIEWS":
+                                case 16:
+                                    message.reportingContext = 16;
+                                    break;
+                                case "YOUTUBE_CHECKOUT":
+                                case 17:
+                                    message.reportingContext = 17;
+                                    break;
+                                }
                                 if (object.itemIssues) {
                                     if (!Array.isArray(object.itemIssues))
                                         throw TypeError(".google.shopping.merchant.reports.v1.ProductView.itemIssues: array expected");
@@ -3359,6 +3591,7 @@
                                 if (options.arrays || options.defaults) {
                                     object.gtin = [];
                                     object.itemIssues = [];
+                                    object.statusPerReportingContext = [];
                                 }
                                 if (options.defaults) {
                                     object.price = null;
@@ -3506,6 +3739,16 @@
                                         object.clickPotentialRank = options.longs === String ? $util.Long.prototype.toString.call(message.clickPotentialRank) : options.longs === Number ? new $util.LongBits(message.clickPotentialRank.low >>> 0, message.clickPotentialRank.high >>> 0).toNumber() : message.clickPotentialRank;
                                     if (options.oneofs)
                                         object._clickPotentialRank = "clickPotentialRank";
+                                }
+                                if (message.statusPerReportingContext && message.statusPerReportingContext.length) {
+                                    object.statusPerReportingContext = [];
+                                    for (var j = 0; j < message.statusPerReportingContext.length; ++j)
+                                        object.statusPerReportingContext[j] = $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.toObject(message.statusPerReportingContext[j], options);
+                                }
+                                if (message.reportingContext != null && message.hasOwnProperty("reportingContext")) {
+                                    object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                    if (options.oneofs)
+                                        object._reportingContext = "reportingContext";
                                 }
                                 return object;
                             };
@@ -4818,6 +5061,452 @@
                                 })();
     
                                 return ItemIssue;
+                            })();
+    
+                            ProductView.StatusPerReportingContext = (function() {
+    
+                                /**
+                                 * Properties of a StatusPerReportingContext.
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView
+                                 * @interface IStatusPerReportingContext
+                                 * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] StatusPerReportingContext reportingContext
+                                 * @property {Array.<string>|null} [approvedCountries] StatusPerReportingContext approvedCountries
+                                 * @property {Array.<string>|null} [disapprovedCountries] StatusPerReportingContext disapprovedCountries
+                                 * @property {Array.<string>|null} [pendingCountries] StatusPerReportingContext pendingCountries
+                                 */
+    
+                                /**
+                                 * Constructs a new StatusPerReportingContext.
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView
+                                 * @classdesc Represents a StatusPerReportingContext.
+                                 * @implements IStatusPerReportingContext
+                                 * @constructor
+                                 * @param {google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext=} [properties] Properties to set
+                                 */
+                                function StatusPerReportingContext(properties) {
+                                    this.approvedCountries = [];
+                                    this.disapprovedCountries = [];
+                                    this.pendingCountries = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StatusPerReportingContext reportingContext.
+                                 * @member {google.shopping.type.ReportingContext.ReportingContextEnum|null|undefined} reportingContext
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @instance
+                                 */
+                                StatusPerReportingContext.prototype.reportingContext = null;
+    
+                                /**
+                                 * StatusPerReportingContext approvedCountries.
+                                 * @member {Array.<string>} approvedCountries
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @instance
+                                 */
+                                StatusPerReportingContext.prototype.approvedCountries = $util.emptyArray;
+    
+                                /**
+                                 * StatusPerReportingContext disapprovedCountries.
+                                 * @member {Array.<string>} disapprovedCountries
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @instance
+                                 */
+                                StatusPerReportingContext.prototype.disapprovedCountries = $util.emptyArray;
+    
+                                /**
+                                 * StatusPerReportingContext pendingCountries.
+                                 * @member {Array.<string>} pendingCountries
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @instance
+                                 */
+                                StatusPerReportingContext.prototype.pendingCountries = $util.emptyArray;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(StatusPerReportingContext.prototype, "_reportingContext", {
+                                    get: $util.oneOfGetter($oneOfFields = ["reportingContext"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new StatusPerReportingContext instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext} StatusPerReportingContext instance
+                                 */
+                                StatusPerReportingContext.create = function create(properties) {
+                                    return new StatusPerReportingContext(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StatusPerReportingContext message. Does not implicitly {@link google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext} message StatusPerReportingContext message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StatusPerReportingContext.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reportingContext);
+                                    if (message.approvedCountries != null && message.approvedCountries.length)
+                                        for (var i = 0; i < message.approvedCountries.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.approvedCountries[i]);
+                                    if (message.disapprovedCountries != null && message.disapprovedCountries.length)
+                                        for (var i = 0; i < message.disapprovedCountries.length; ++i)
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.disapprovedCountries[i]);
+                                    if (message.pendingCountries != null && message.pendingCountries.length)
+                                        for (var i = 0; i < message.pendingCountries.length; ++i)
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.pendingCountries[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StatusPerReportingContext message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1.ProductView.IStatusPerReportingContext} message StatusPerReportingContext message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StatusPerReportingContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StatusPerReportingContext message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext} StatusPerReportingContext
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StatusPerReportingContext.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.reportingContext = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.approvedCountries && message.approvedCountries.length))
+                                                    message.approvedCountries = [];
+                                                message.approvedCountries.push(reader.string());
+                                                break;
+                                            }
+                                        case 3: {
+                                                if (!(message.disapprovedCountries && message.disapprovedCountries.length))
+                                                    message.disapprovedCountries = [];
+                                                message.disapprovedCountries.push(reader.string());
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.pendingCountries && message.pendingCountries.length))
+                                                    message.pendingCountries = [];
+                                                message.pendingCountries.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StatusPerReportingContext message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext} StatusPerReportingContext
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StatusPerReportingContext.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StatusPerReportingContext message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StatusPerReportingContext.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.reportingContext != null && message.hasOwnProperty("reportingContext")) {
+                                        properties._reportingContext = 1;
+                                        switch (message.reportingContext) {
+                                        default:
+                                            return "reportingContext: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 13:
+                                        case 14:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 19:
+                                        case 8:
+                                        case 9:
+                                        case 18:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                        case 15:
+                                        case 16:
+                                        case 17:
+                                            break;
+                                        }
+                                    }
+                                    if (message.approvedCountries != null && message.hasOwnProperty("approvedCountries")) {
+                                        if (!Array.isArray(message.approvedCountries))
+                                            return "approvedCountries: array expected";
+                                        for (var i = 0; i < message.approvedCountries.length; ++i)
+                                            if (!$util.isString(message.approvedCountries[i]))
+                                                return "approvedCountries: string[] expected";
+                                    }
+                                    if (message.disapprovedCountries != null && message.hasOwnProperty("disapprovedCountries")) {
+                                        if (!Array.isArray(message.disapprovedCountries))
+                                            return "disapprovedCountries: array expected";
+                                        for (var i = 0; i < message.disapprovedCountries.length; ++i)
+                                            if (!$util.isString(message.disapprovedCountries[i]))
+                                                return "disapprovedCountries: string[] expected";
+                                    }
+                                    if (message.pendingCountries != null && message.hasOwnProperty("pendingCountries")) {
+                                        if (!Array.isArray(message.pendingCountries))
+                                            return "pendingCountries: array expected";
+                                        for (var i = 0; i < message.pendingCountries.length; ++i)
+                                            if (!$util.isString(message.pendingCountries[i]))
+                                                return "pendingCountries: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StatusPerReportingContext message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext} StatusPerReportingContext
+                                 */
+                                StatusPerReportingContext.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext();
+                                    switch (object.reportingContext) {
+                                    default:
+                                        if (typeof object.reportingContext === "number") {
+                                            message.reportingContext = object.reportingContext;
+                                            break;
+                                        }
+                                        break;
+                                    case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                    case 0:
+                                        message.reportingContext = 0;
+                                        break;
+                                    case "SHOPPING_ADS":
+                                    case 1:
+                                        message.reportingContext = 1;
+                                        break;
+                                    case "DISCOVERY_ADS":
+                                    case 2:
+                                        message.reportingContext = 2;
+                                        break;
+                                    case "DEMAND_GEN_ADS":
+                                    case 13:
+                                        message.reportingContext = 13;
+                                        break;
+                                    case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                    case 14:
+                                        message.reportingContext = 14;
+                                        break;
+                                    case "VIDEO_ADS":
+                                    case 3:
+                                        message.reportingContext = 3;
+                                        break;
+                                    case "DISPLAY_ADS":
+                                    case 4:
+                                        message.reportingContext = 4;
+                                        break;
+                                    case "LOCAL_INVENTORY_ADS":
+                                    case 5:
+                                        message.reportingContext = 5;
+                                        break;
+                                    case "VEHICLE_INVENTORY_ADS":
+                                    case 6:
+                                        message.reportingContext = 6;
+                                        break;
+                                    case "FREE_LISTINGS":
+                                    case 7:
+                                        message.reportingContext = 7;
+                                        break;
+                                    case "FREE_LISTINGS_UCP_CHECKOUT":
+                                    case 19:
+                                        message.reportingContext = 19;
+                                        break;
+                                    case "FREE_LOCAL_LISTINGS":
+                                    case 8:
+                                        message.reportingContext = 8;
+                                        break;
+                                    case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 18:
+                                        message.reportingContext = 18;
+                                        break;
+                                    case "YOUTUBE_SHOPPING":
+                                    case 10:
+                                        message.reportingContext = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.reportingContext = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.reportingContext = 12;
+                                        break;
+                                    case "PRODUCT_REVIEWS":
+                                    case 15:
+                                        message.reportingContext = 15;
+                                        break;
+                                    case "MERCHANT_REVIEWS":
+                                    case 16:
+                                        message.reportingContext = 16;
+                                        break;
+                                    case "YOUTUBE_CHECKOUT":
+                                    case 17:
+                                        message.reportingContext = 17;
+                                        break;
+                                    }
+                                    if (object.approvedCountries) {
+                                        if (!Array.isArray(object.approvedCountries))
+                                            throw TypeError(".google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.approvedCountries: array expected");
+                                        message.approvedCountries = [];
+                                        for (var i = 0; i < object.approvedCountries.length; ++i)
+                                            message.approvedCountries[i] = String(object.approvedCountries[i]);
+                                    }
+                                    if (object.disapprovedCountries) {
+                                        if (!Array.isArray(object.disapprovedCountries))
+                                            throw TypeError(".google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.disapprovedCountries: array expected");
+                                        message.disapprovedCountries = [];
+                                        for (var i = 0; i < object.disapprovedCountries.length; ++i)
+                                            message.disapprovedCountries[i] = String(object.disapprovedCountries[i]);
+                                    }
+                                    if (object.pendingCountries) {
+                                        if (!Array.isArray(object.pendingCountries))
+                                            throw TypeError(".google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext.pendingCountries: array expected");
+                                        message.pendingCountries = [];
+                                        for (var i = 0; i < object.pendingCountries.length; ++i)
+                                            message.pendingCountries[i] = String(object.pendingCountries[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StatusPerReportingContext message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext} message StatusPerReportingContext
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StatusPerReportingContext.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults) {
+                                        object.approvedCountries = [];
+                                        object.disapprovedCountries = [];
+                                        object.pendingCountries = [];
+                                    }
+                                    if (message.reportingContext != null && message.hasOwnProperty("reportingContext")) {
+                                        object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                        if (options.oneofs)
+                                            object._reportingContext = "reportingContext";
+                                    }
+                                    if (message.approvedCountries && message.approvedCountries.length) {
+                                        object.approvedCountries = [];
+                                        for (var j = 0; j < message.approvedCountries.length; ++j)
+                                            object.approvedCountries[j] = message.approvedCountries[j];
+                                    }
+                                    if (message.disapprovedCountries && message.disapprovedCountries.length) {
+                                        object.disapprovedCountries = [];
+                                        for (var j = 0; j < message.disapprovedCountries.length; ++j)
+                                            object.disapprovedCountries[j] = message.disapprovedCountries[j];
+                                    }
+                                    if (message.pendingCountries && message.pendingCountries.length) {
+                                        object.pendingCountries = [];
+                                        for (var j = 0; j < message.pendingCountries.length; ++j)
+                                            object.pendingCountries[j] = message.pendingCountries[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StatusPerReportingContext to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StatusPerReportingContext.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StatusPerReportingContext
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StatusPerReportingContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.reports.v1.ProductView.StatusPerReportingContext";
+                                };
+    
+                                return StatusPerReportingContext;
                             })();
     
                             /**
@@ -10321,6 +11010,199 @@
                             })();
     
                             return MarketingMethod;
+                        })();
+    
+                        v1.StoreType = (function() {
+    
+                            /**
+                             * Properties of a StoreType.
+                             * @memberof google.shopping.merchant.reports.v1
+                             * @interface IStoreType
+                             */
+    
+                            /**
+                             * Constructs a new StoreType.
+                             * @memberof google.shopping.merchant.reports.v1
+                             * @classdesc Represents a StoreType.
+                             * @implements IStoreType
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1.IStoreType=} [properties] Properties to set
+                             */
+                            function StoreType(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new StoreType instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1.IStoreType=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1.StoreType} StoreType instance
+                             */
+                            StoreType.create = function create(properties) {
+                                return new StoreType(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StoreType message. Does not implicitly {@link google.shopping.merchant.reports.v1.StoreType.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1.IStoreType} message StoreType message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StoreType.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StoreType message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1.StoreType.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1.IStoreType} message StoreType message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StoreType.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StoreType message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1.StoreType} StoreType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StoreType.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1.StoreType();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StoreType message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1.StoreType} StoreType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StoreType.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StoreType message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StoreType.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StoreType message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1.StoreType} StoreType
+                             */
+                            StoreType.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1.StoreType)
+                                    return object;
+                                return new $root.google.shopping.merchant.reports.v1.StoreType();
+                            };
+    
+                            /**
+                             * Creates a plain object from a StoreType message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1.StoreType} message StoreType
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StoreType.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this StoreType to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StoreType.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StoreType
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1.StoreType
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StoreType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1.StoreType";
+                            };
+    
+                            /**
+                             * StoreTypeEnum enum.
+                             * @name google.shopping.merchant.reports.v1.StoreType.StoreTypeEnum
+                             * @enum {number}
+                             * @property {number} STORE_TYPE_ENUM_UNSPECIFIED=0 STORE_TYPE_ENUM_UNSPECIFIED value
+                             * @property {number} ONLINE_STORE=1 ONLINE_STORE value
+                             * @property {number} LOCAL_STORES=2 LOCAL_STORES value
+                             */
+                            StoreType.StoreTypeEnum = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STORE_TYPE_ENUM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ONLINE_STORE"] = 1;
+                                values[valuesById[2] = "LOCAL_STORES"] = 2;
+                                return values;
+                            })();
+    
+                            return StoreType;
                         })();
     
                         v1.ReportGranularity = (function() {

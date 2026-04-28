@@ -11,6 +11,7 @@
   "main": "build/src/index.js",
   "files": [
     "build/src",
+    "build/protos",
     "AUTHORS",
     "COPYING",
     "!build/src/**/*.map"

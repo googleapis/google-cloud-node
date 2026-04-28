@@ -1080,6 +1080,9 @@ export namespace google {
 
                         /** ProductAttributes sustainabilityIncentives */
                         sustainabilityIncentives?: (google.shopping.merchant.products.v1.IProductSustainabilityIncentive[]|null);
+
+                        /** ProductAttributes videoLinks */
+                        videoLinks?: (string[]|null);
                     }
 
                     /** Represents a ProductAttributes. */
@@ -1381,6 +1384,9 @@ export namespace google {
 
                         /** ProductAttributes sustainabilityIncentives. */
                         public sustainabilityIncentives: google.shopping.merchant.products.v1.IProductSustainabilityIncentive[];
+
+                        /** ProductAttributes videoLinks. */
+                        public videoLinks: string[];
 
                         /**
                          * Creates a new ProductAttributes instance using the specified properties.
@@ -2336,6 +2342,9 @@ export namespace google {
 
                         /** ProductInstallment creditType */
                         creditType?: (google.shopping.merchant.products.v1.CreditType|keyof typeof google.shopping.merchant.products.v1.CreditType|null);
+
+                        /** ProductInstallment annualPercentageRate */
+                        annualPercentageRate?: (number|null);
                     }
 
                     /** Represents a ProductInstallment. */
@@ -2358,6 +2367,9 @@ export namespace google {
 
                         /** ProductInstallment creditType. */
                         public creditType?: (google.shopping.merchant.products.v1.CreditType|keyof typeof google.shopping.merchant.products.v1.CreditType|null);
+
+                        /** ProductInstallment annualPercentageRate. */
+                        public annualPercentageRate?: (number|null);
 
                         /**
                          * Creates a new ProductInstallment instance using the specified properties.

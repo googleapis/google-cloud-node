@@ -1384,7 +1384,13 @@ export namespace google {
                         SHARED_CORE_NANO = 1,
                         HIGHMEM_MEDIUM = 2,
                         HIGHMEM_XLARGE = 3,
-                        STANDARD_SMALL = 4
+                        STANDARD_SMALL = 4,
+                        CUSTOM_MICRO = 5,
+                        CUSTOM_MINI = 6,
+                        HIGHCPU_MEDIUM = 7,
+                        STANDARD_LARGE = 8,
+                        HIGHMEM_2XLARGE = 9,
+                        CUSTOM_PICO = 10
                     }
 
                     /** Mode enum. */
@@ -7463,7 +7469,13 @@ export namespace google {
                         SHARED_CORE_NANO = 1,
                         HIGHMEM_MEDIUM = 2,
                         HIGHMEM_XLARGE = 3,
-                        STANDARD_SMALL = 4
+                        STANDARD_SMALL = 4,
+                        CUSTOM_MICRO = 5,
+                        CUSTOM_MINI = 6,
+                        HIGHCPU_MEDIUM = 7,
+                        STANDARD_LARGE = 8,
+                        HIGHMEM_2XLARGE = 9,
+                        CUSTOM_PICO = 10
                     }
 
                     /** Mode enum. */

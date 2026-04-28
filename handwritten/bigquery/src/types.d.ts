@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260118
+ * Discovery Revision: 20260408
  */
 
 /**
@@ -892,7 +892,7 @@ declare namespace bigquery {
   };
 
   /**
-   * Data policy option. For more information, see [Mask data by applying data policies to a column](https://cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column/).
+   * Data policy option. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column).
    */
   type IDataPolicyOption = {
     /**
@@ -968,6 +968,10 @@ declare namespace bigquery {
        */
       view?: ITableReference;
     }>;
+    /**
+     * Output only. The origin of the dataset, one of: * (Unset) - Native BigQuery Dataset * BIGLAKE - Dataset is backed by a namespace stored natively in Biglake
+     */
+    catalogSource?: string;
     /**
      * Output only. The time when this dataset was created, in milliseconds since the epoch.
      */
@@ -1096,7 +1100,7 @@ declare namespace bigquery {
       tagValue?: string;
     }>;
     /**
-     * Output only. Same as `type` in `ListFormatDataset`. The type of the dataset, one of: * DEFAULT - only accessible by owner and authorized accounts, * PUBLIC - accessible by everyone, * LINKED - linked dataset, * EXTERNAL - dataset with definition in external metadata catalog.
+     * Output only. Same as `type` in `ListFormatDataset`. The type of the dataset, one of: * DEFAULT - only accessible by owner and authorized accounts, * PUBLIC - accessible by everyone, * LINKED - linked dataset, * EXTERNAL - dataset with definition in external metadata catalog, * BIGLAKE_ICEBERG - a Biglake dataset accessible through the Iceberg API, * BIGLAKE_HIVE - a Biglake dataset accessible through the Hive API.
      */
     type?: string;
   };
@@ -1123,6 +1127,10 @@ declare namespace bigquery {
      * An array of the dataset resources in the project. Each resource contains basic information. For full information about a particular dataset resource, use the Datasets: get method. This property is omitted when there are no datasets in the project.
      */
     datasets?: Array<{
+      /**
+       * Output only. The origin of the dataset, one of: * (Unset) - Native BigQuery Dataset. * BIGLAKE - Dataset is backed by a namespace stored natively in Biglake.
+       */
+      catalogSource?: string;
       /**
        * The dataset reference. Use this property to access specific parts of the dataset's ID, such as project ID or dataset ID.
        */
@@ -1151,6 +1159,10 @@ declare namespace bigquery {
        * The geographic location where the dataset resides.
        */
       location?: string;
+      /**
+       * Output only. Same as `type` in `Dataset`. The type of the dataset, one of: * DEFAULT - only accessible by owner and authorized accounts, * PUBLIC - accessible by everyone, * LINKED - linked dataset, * EXTERNAL - dataset with definition in external metadata catalog, * BIGLAKE_ICEBERG - a Biglake dataset accessible through the Iceberg API, * BIGLAKE_HIVE - a Biglake dataset accessible through the Hive API.
+       */
+      type?: string;
     }>;
     /**
      * Output only. A hash value of the results page. You can use this property to determine if the page has changed since the last request.
@@ -1262,6 +1274,21 @@ declare namespace bigquery {
      * Output only. Number of deleted Rows. populated by DML DELETE, MERGE and TRUNCATE statements.
      */
     deletedRowCount?: string;
+    /**
+     * Output only. DML mode used.
+     */
+    dmlMode?:
+      | 'DML_MODE_UNSPECIFIED'
+      | 'COARSE_GRAINED_DML'
+      | 'FINE_GRAINED_DML';
+    /**
+     * Output only. Reason for disabling fine-grained DML if applicable.
+     */
+    fineGrainedDmlUnusedReason?:
+      | 'FINE_GRAINED_DML_UNUSED_REASON_UNSPECIFIED'
+      | 'MAX_PARTITION_SIZE_EXCEEDED'
+      | 'TABLE_NOT_ENROLLED'
+      | 'DML_IN_MULTI_STATEMENT_TRANSACTION';
     /**
      * Output only. Number of inserted Rows. Populated by DML INSERT and MERGE statements
      */
@@ -1729,7 +1756,7 @@ declare namespace bigquery {
      */
     timestampFormat?: string;
     /**
-     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV. For the CSV Format, Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
+     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, and AVRO. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
      */
     timestampTargetPrecision?: Array<number>;
   };
@@ -1844,6 +1871,119 @@ declare namespace bigquery {
      * Required. The query that defines the view.
      */
     query?: string;
+  };
+
+  /**
+   * Provides error statistics for the query job across all AI function calls.
+   */
+  type IGenAiErrorStats = {
+    /**
+     * A list of unique errors at query level (up to 5, truncated to 100 chars)
+     */
+    errors?: Array<string>;
+  };
+
+  /**
+   * Provides cost optimization statistics for a GenAi function call.
+   */
+  type IGenAiFunctionCostOptimizationStats = {
+    /**
+     * System generated message to provide insights into cost optimization state.
+     */
+    message?: string;
+    /**
+     * Number of rows inferred via cost optimized workflow.
+     */
+    numCostOptimizedRows?: string;
+  };
+
+  /**
+   * Provides error statistics for a GenAi function call.
+   */
+  type IGenAiFunctionErrorStats = {
+    /**
+     * A list of unique errors at function level (up to 5, truncated to 100 chars).
+     */
+    errors?: Array<string>;
+    /**
+     * Number of failed rows processed by the function
+     */
+    numFailedRows?: string;
+  };
+
+  /**
+   * Provides statistics for each Ai function call within a query.
+   */
+  type IGenAiFunctionStats = {
+    /**
+     * Cost optimization stats if applied on the rows processed by the function.
+     */
+    costOptimizationStats?: IGenAiFunctionCostOptimizationStats;
+    /**
+     * Error stats for the function.
+     */
+    errorStats?: IGenAiFunctionErrorStats;
+    /**
+     * Name of the function.
+     */
+    functionName?: string;
+    /**
+     * Number of rows processed by this GenAi function. This includes all cost_optimized, llm_inferred and failed_rows.
+     */
+    numProcessedRows?: string;
+    /**
+     * User input prompt of the function (truncated to 20 chars).
+     */
+    prompt?: string;
+  };
+
+  /**
+   * GenAi stats for the query job.
+   */
+  type IGenAiStats = {
+    /**
+     * Job level error stats across all GenAi functions
+     */
+    errorStats?: IGenAiErrorStats;
+    /**
+     * Function level stats for GenAi Functions. See https://docs.cloud.google.com/bigquery/docs/generative-ai-overview
+     */
+    functionStats?: Array<IGenAiFunctionStats>;
+  };
+
+  /**
+   * Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields).
+   */
+  type IGeneratedColumn = {
+    /**
+     * Definition of the expression used to generate the field.
+     */
+    generatedExpressionInfo?: IGeneratedExpressionInfo;
+    /**
+     * Optional. Dictates when system generated values are used to populate the field.
+     */
+    generatedMode?:
+      | 'GENERATED_MODE_UNSPECIFIED'
+      | 'GENERATED_ALWAYS'
+      | 'GENERATED_BY_DEFAULT';
+  };
+
+  /**
+   * Definition of the expression used to generate the field.
+   */
+  type IGeneratedExpressionInfo = {
+    /**
+     * Optional. Whether the column generation is done asynchronously.
+     */
+    asynchronous?: boolean;
+    /**
+     * Optional. The generation expression (e.g. AI.EMBED(...)) used to generated the field.
+     */
+    generationExpression?: string;
+    /**
+     * Optional. Whether the generated column is stored in the table.
+     */
+    stored?: boolean;
   };
 
   /**
@@ -2164,6 +2304,22 @@ declare namespace bigquery {
       | 'DISABLED_REASON_UNSPECIFIED'
       | 'OTHER'
       | 'UNSUPPORTED_OPERATOR';
+    /**
+     * Output only. Additional human-readable clarification, if available, for DisabledReason.
+     */
+    disabledReasonDetails?: string;
+    /**
+     * Output only. The time at which the first incremental result was written. If the query needed to restart internally, this only describes the final attempt.
+     */
+    firstIncrementalRowTime?: string;
+    /**
+     * Output only. Number of rows that were in the latest result set before query completion.
+     */
+    incrementalRowCount?: string;
+    /**
+     * Output only. The time at which the last incremental result was written. Does not include the final result written after query completion.
+     */
+    lastIncrementalRowTime?: string;
     /**
      * Output only. The time at which the result table's contents were modified. May be absent if no results have been written or the query has completed.
      */
@@ -2677,7 +2833,7 @@ declare namespace bigquery {
      */
     timestampFormat?: string;
     /**
-     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV. For the CSV Format, Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
+     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, and AVRO. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
      */
     timestampTargetPrecision?: Array<number>;
     /**
@@ -3135,6 +3291,10 @@ declare namespace bigquery {
      */
     externalServiceCosts?: Array<IExternalServiceCost>;
     /**
+     * Output only. Statistics related to GenAI usage in the query.
+     */
+    genAiStats?: IGenAiStats;
+    /**
      * Output only. Statistics related to incremental query results, if enabled for the query. This feature is not yet available.
      */
     incrementalResultStats?: IIncrementalResultStats;
@@ -3182,6 +3342,10 @@ declare namespace bigquery {
      * Output only. Describes execution plan for the query.
      */
     queryPlan?: Array<IExplainQueryStage>;
+    /**
+     * Output only. Referenced property graphs for the job. Queries that reference more than 50 property graphs will not have a complete list.
+     */
+    referencedPropertyGraphs?: Array<IPropertyGraphReference>;
     /**
      * Output only. Referenced routines for the job.
      */
@@ -3944,7 +4108,7 @@ declare namespace bigquery {
      */
     nextPageToken?: string;
     /**
-     * Projects to which the user has at least READ access.
+     * Projects to which the user has at least READ access. This field can be omitted if `totalItems` is 0.
      */
     projects?: Array<{
       /**
@@ -3982,6 +4146,24 @@ declare namespace bigquery {
      * Required. ID of the project. Can be either the numeric ID or the assigned ID of the project.
      */
     projectId?: string;
+  };
+
+  /**
+   * Id path of a property graph.
+   */
+  type IPropertyGraphReference = {
+    /**
+     * Required. The ID of the dataset containing this property graph.
+     */
+    datasetId?: string;
+    /**
+     * Required. The ID of the project containing this property graph.
+     */
+    projectId?: string;
+    /**
+     * Required. The ID of the property graph. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.
+     */
+    propertyGraphId?: string;
   };
 
   /**
@@ -4494,6 +4676,10 @@ declare namespace bigquery {
      */
     arguments?: Array<IArgument>;
     /**
+     * Output only. The build status of the routine. This field is only applicable to Python UDFs. [Preview](https://cloud.google.com/products/#product-launch-stages)
+     */
+    buildStatus?: IRoutineBuildStatus;
+    /**
      * Output only. The time when this routine was created, in milliseconds since the epoch.
      */
     creationTime?: string;
@@ -4583,6 +4769,36 @@ declare namespace bigquery {
      * Optional. Use this option to catch many common errors. Error checking is not exhaustive, and successfully creating a procedure doesn't guarantee that the procedure will successfully execute at runtime. If `strictMode` is set to `TRUE`, the procedure body is further checked for errors such as non-existent tables or columns. The `CREATE PROCEDURE` statement fails if the body fails any of these checks. If `strictMode` is set to `FALSE`, the procedure body is checked only for syntax. For procedures that invoke themselves recursively, specify `strictMode=FALSE` to avoid non-existent procedure errors during validation. Default value is `TRUE`.
      */
     strictMode?: boolean;
+  };
+
+  /**
+   * The status of a routine build.
+   */
+  type IRoutineBuildStatus = {
+    /**
+     * Output only. The time taken for the image build. Populated only after the build succeeds or fails.
+     */
+    buildDuration?: string;
+    /**
+     * Output only. The current build state of the routine.
+     */
+    buildState?:
+      | 'BUILD_STATE_UNSPECIFIED'
+      | 'IN_PROGRESS'
+      | 'SUCCEEDED'
+      | 'FAILED';
+    /**
+     * Output only. The time when the build state was updated last.
+     */
+    buildStateUpdateTime?: string;
+    /**
+     * Output only. A result object that will be present only if the build has failed.
+     */
+    errorResult?: IErrorProto;
+    /**
+     * Output only. The size of the image in bytes. Populated only after the build succeeds.
+     */
+    imageSizeBytes?: string;
   };
 
   /**
@@ -5521,6 +5737,10 @@ declare namespace bigquery {
      * Optional. Definition of the foreign data type. Only valid for top-level schema fields (not nested fields). If the type is FOREIGN, this field is required.
      */
     foreignTypeDefinition?: string;
+    /**
+     * Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields).
+     */
+    generatedColumn?: IGeneratedColumn;
     /**
      * Optional. Maximum length of values of this field for STRINGS or BYTES. If max_length is not specified, no maximum length constraint is imposed on this field. If type = "STRING", then max_length represents the maximum UTF-8 length of strings in this field. If type = "BYTES", then max_length represents the maximum number of bytes in this field. It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES".
      */
