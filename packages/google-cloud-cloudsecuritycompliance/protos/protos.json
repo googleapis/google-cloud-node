@@ -778,7 +778,11 @@
                         "CC_CATEGORY_LEGAL_AND_DISCLOSURES": 12,
                         "CC_CATEGORY_VULNERABILITY_MANAGEMENT": 13,
                         "CC_CATEGORY_PRIVACY": 14,
-                        "CC_CATEGORY_BCDR": 15
+                        "CC_CATEGORY_BCDR": 15,
+                        "CC_CATEGORY_ADMIN_ACCESS": 16,
+                        "CC_CATEGORY_DATA_RESIDENCY": 17,
+                        "CC_CATEGORY_RESOURCE_USAGE_RESTRICTION": 18,
+                        "CC_CATEGORY_SERVICE_SPECIFIC": 19
                       }
                     },
                     "CloudProvider": {
@@ -818,7 +822,7 @@
                     "Framework": {
                       "options": {
                         "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/Framework",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/frameworks/{framework}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/frameworks/{framework}",
                         "(google.api.resource).plural": "frameworks",
                         "(google.api.resource).singular": "framework"
                       },
@@ -948,7 +952,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsecuritycompliance.googleapis.com/Framework"
                           }
                         },
                         "majorRevisionId": {
@@ -982,7 +987,7 @@
                     "CloudControl": {
                       "options": {
                         "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/CloudControl",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/cloudControls/{cloud_control}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/cloudControls/{cloud_control}",
                         "(google.api.resource).plural": "cloudControls",
                         "(google.api.resource).singular": "cloudControl"
                       },
@@ -1284,23 +1289,38 @@
                       "fields": {
                         "stringValue": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "boolValue": {
                           "type": "bool",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "stringListValue": {
                           "type": "StringList",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "numberValue": {
                           "type": "double",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "oneofValue": {
                           "type": "Parameter",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1441,6 +1461,133 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Control": {
+                      "options": {
+                        "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/Control",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/controls/{control}",
+                        "(google.api.resource).plural": "controls",
+                        "(google.api.resource).singular": "control"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "family": {
+                          "type": "Family",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "controlFamily": {
+                          "type": "ControlFamily",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "responsibilityType": {
+                          "type": "RegulatoryControlResponsibilityType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "googleResponsibilityDescription": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "googleResponsibilityImplementation": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customerResponsibilityDescription": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customerResponsibilityImplementation": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sharedResponsibilityDescription": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "additionalContentUri": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "relatedFrameworks": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Family": {
+                          "values": {
+                            "FAMILY_UNSPECIFIED": 0,
+                            "AC": 1,
+                            "AT": 2,
+                            "AU": 3,
+                            "CA": 4,
+                            "CM": 5,
+                            "CP": 6,
+                            "IA": 7,
+                            "IR": 8,
+                            "MA": 9,
+                            "MP": 10,
+                            "PE": 11,
+                            "PL": 12,
+                            "PS": 13,
+                            "RA": 14,
+                            "SA": 15,
+                            "SC": 16,
+                            "SI": 17,
+                            "SR": 18
                           }
                         }
                       }
@@ -1633,12 +1780,16 @@
                           "responseType": "ListFrameworksResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/frameworks",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/frameworks",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=organizations/*/locations/*}/frameworks"
+                                "get": "/v1/{parent=organizations/*/locations/*}/frameworks",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/frameworks"
+                                }
                               }
                             },
                             {
@@ -1651,12 +1802,16 @@
                           "responseType": "Framework",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/locations/*/frameworks/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/frameworks/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=organizations/*/locations/*/frameworks/*}"
+                                "get": "/v1/{name=organizations/*/locations/*/frameworks/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/frameworks/*}"
+                                }
                               }
                             },
                             {
@@ -1670,13 +1825,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/frameworks",
                             "(google.api.http).body": "framework",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/frameworks",
+                            "(google.api.http).additional_bindings.body": "framework",
                             "(google.api.method_signature)": "parent,framework,framework_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*/locations/*}/frameworks",
-                                "body": "framework"
+                                "body": "framework",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*}/frameworks",
+                                  "body": "framework"
+                                }
                               }
                             },
                             {
@@ -1690,13 +1851,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{framework.name=organizations/*/locations/*/frameworks/*}",
                             "(google.api.http).body": "framework",
+                            "(google.api.http).additional_bindings.patch": "/v1/{framework.name=projects/*/locations/*/frameworks/*}",
+                            "(google.api.http).additional_bindings.body": "framework",
                             "(google.api.method_signature)": "framework,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{framework.name=organizations/*/locations/*/frameworks/*}",
-                                "body": "framework"
+                                "body": "framework",
+                                "additional_bindings": {
+                                  "patch": "/v1/{framework.name=projects/*/locations/*/frameworks/*}",
+                                  "body": "framework"
+                                }
                               }
                             },
                             {
@@ -1709,12 +1876,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=organizations/*/locations/*/frameworks/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/frameworks/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/{name=organizations/*/locations/*/frameworks/*}"
+                                "delete": "/v1/{name=organizations/*/locations/*/frameworks/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=projects/*/locations/*/frameworks/*}"
+                                }
                               }
                             },
                             {
@@ -1727,12 +1898,16 @@
                           "responseType": "ListCloudControlsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/cloudControls",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/cloudControls",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=organizations/*/locations/*}/cloudControls"
+                                "get": "/v1/{parent=organizations/*/locations/*}/cloudControls",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/cloudControls"
+                                }
                               }
                             },
                             {
@@ -1745,12 +1920,16 @@
                           "responseType": "CloudControl",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/locations/*/cloudControls/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/cloudControls/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=organizations/*/locations/*/cloudControls/*}"
+                                "get": "/v1/{name=organizations/*/locations/*/cloudControls/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/cloudControls/*}"
+                                }
                               }
                             },
                             {
@@ -1764,13 +1943,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/cloudControls",
                             "(google.api.http).body": "cloud_control",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/cloudControls",
+                            "(google.api.http).additional_bindings.body": "cloud_control",
                             "(google.api.method_signature)": "parent,cloud_control,cloud_control_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*/locations/*}/cloudControls",
-                                "body": "cloud_control"
+                                "body": "cloud_control",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*}/cloudControls",
+                                  "body": "cloud_control"
+                                }
                               }
                             },
                             {
@@ -1784,13 +1969,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{cloud_control.name=organizations/*/locations/*/cloudControls/*}",
                             "(google.api.http).body": "cloud_control",
+                            "(google.api.http).additional_bindings.patch": "/v1/{cloud_control.name=projects/*/locations/*/cloudControls/*}",
+                            "(google.api.http).additional_bindings.body": "cloud_control",
                             "(google.api.method_signature)": "cloud_control,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{cloud_control.name=organizations/*/locations/*/cloudControls/*}",
-                                "body": "cloud_control"
+                                "body": "cloud_control",
+                                "additional_bindings": {
+                                  "patch": "/v1/{cloud_control.name=projects/*/locations/*/cloudControls/*}",
+                                  "body": "cloud_control"
+                                }
                               }
                             },
                             {
@@ -1803,12 +1994,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=organizations/*/locations/*/cloudControls/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/cloudControls/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/{name=organizations/*/locations/*/cloudControls/*}"
+                                "delete": "/v1/{name=organizations/*/locations/*/cloudControls/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=projects/*/locations/*/cloudControls/*}"
+                                }
                               }
                             },
                             {
@@ -2065,6 +2260,8 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/frameworkDeployments",
                             "(google.api.http).body": "framework_deployment",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/frameworkDeployments",
+                            "(google.api.http).additional_bindings.body": "framework_deployment",
                             "(google.api.method_signature)": "parent,framework_deployment,framework_deployment_id",
                             "(google.longrunning.operation_info).response_type": "FrameworkDeployment",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.cloudsecuritycompliance.v1.OperationMetadata"
@@ -2073,7 +2270,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=organizations/*/locations/*}/frameworkDeployments",
-                                "body": "framework_deployment"
+                                "body": "framework_deployment",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*}/frameworkDeployments",
+                                  "body": "framework_deployment"
+                                }
                               }
                             },
                             {
@@ -2092,6 +2293,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=organizations/*/locations/*/frameworkDeployments/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/frameworkDeployments/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "google.cloud.cloudsecuritycompliance.v1.OperationMetadata"
@@ -2099,7 +2301,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/{name=organizations/*/locations/*/frameworkDeployments/*}"
+                                "delete": "/v1/{name=organizations/*/locations/*/frameworkDeployments/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=projects/*/locations/*/frameworkDeployments/*}"
+                                }
                               }
                             },
                             {
@@ -2118,12 +2323,16 @@
                           "responseType": "FrameworkDeployment",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/locations/*/frameworkDeployments/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/frameworkDeployments/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=organizations/*/locations/*/frameworkDeployments/*}"
+                                "get": "/v1/{name=organizations/*/locations/*/frameworkDeployments/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/frameworkDeployments/*}"
+                                }
                               }
                             },
                             {
@@ -2136,12 +2345,16 @@
                           "responseType": "ListFrameworkDeploymentsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/frameworkDeployments",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/frameworkDeployments",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=organizations/*/locations/*}/frameworkDeployments"
+                                "get": "/v1/{parent=organizations/*/locations/*}/frameworkDeployments",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/frameworkDeployments"
+                                }
                               }
                             },
                             {
@@ -2154,12 +2367,16 @@
                           "responseType": "CloudControlDeployment",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/locations/*/cloudControlDeployments/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/cloudControlDeployments/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=organizations/*/locations/*/cloudControlDeployments/*}"
+                                "get": "/v1/{name=organizations/*/locations/*/cloudControlDeployments/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/cloudControlDeployments/*}"
+                                }
                               }
                             },
                             {
@@ -2172,12 +2389,16 @@
                           "responseType": "ListCloudControlDeploymentsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/cloudControlDeployments",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/cloudControlDeployments",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=organizations/*/locations/*}/cloudControlDeployments"
+                                "get": "/v1/{parent=organizations/*/locations/*}/cloudControlDeployments",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/cloudControlDeployments"
+                                }
                               }
                             },
                             {
@@ -2193,6 +2414,7 @@
                         "DEPLOYMENT_STATE_VALIDATING": 1,
                         "DEPLOYMENT_STATE_CREATING": 2,
                         "DEPLOYMENT_STATE_DELETING": 3,
+                        "DEPLOYMENT_STATE_UPDATING": 8,
                         "DEPLOYMENT_STATE_FAILED": 4,
                         "DEPLOYMENT_STATE_READY": 5,
                         "DEPLOYMENT_STATE_PARTIALLY_DEPLOYED": 6,
@@ -2202,7 +2424,7 @@
                     "FrameworkDeployment": {
                       "options": {
                         "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/FrameworkDeployment",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}",
                         "(google.api.resource).plural": "frameworkDeployments",
                         "(google.api.resource).singular": "frameworkDeployment"
                       },
@@ -2298,7 +2520,7 @@
                     "CloudControlDeployment": {
                       "options": {
                         "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/CloudControlDeployment",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}",
                         "(google.api.resource).plural": "cloudControlDeployments",
                         "(google.api.resource).singular": "cloudControlDeployment"
                       },
@@ -2881,6 +3103,13 @@
                         "CHOKEPOINT": 9
                       }
                     },
+                    "FrameworkComplianceSummaryView": {
+                      "values": {
+                        "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED": 0,
+                        "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC": 1,
+                        "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL": 2
+                      }
+                    },
                     "ListFrameworkComplianceSummariesRequest": {
                       "fields": {
                         "parent": {
@@ -2908,6 +3137,13 @@
                         "filter": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "view": {
+                          "type": "FrameworkComplianceSummaryView",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3013,6 +3249,13 @@
                         "endTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3244,6 +3487,20 @@
                           "rule": "repeated",
                           "type": "TargetResourceDetails",
                           "id": 10
+                        },
+                        "findingCount": {
+                          "type": "int64",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "controlsPassingTrend": {
+                          "type": "Trend",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3515,6 +3772,24 @@
                         "minorRevisionId": {
                           "type": "int64",
                           "id": 7
+                        }
+                      }
+                    },
+                    "Trend": {
+                      "fields": {
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "valuePercent": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     }
