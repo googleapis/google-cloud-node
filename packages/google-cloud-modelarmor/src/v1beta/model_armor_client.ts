@@ -19,7 +19,7 @@
 /* global window */
 import type * as gax from 'google-gax';
 import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -211,6 +211,13 @@ export class ModelArmorClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'templates')
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamSanitizeUserPrompt: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries),
+      streamSanitizeModelResponse: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.modelarmor.v1beta.ModelArmor', gapicConfig as gax.ClientConfig,
@@ -254,11 +261,18 @@ export class ModelArmorClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const modelArmorStubMethods =
-        ['listTemplates', 'getTemplate', 'createTemplate', 'updateTemplate', 'deleteTemplate', 'getFloorSetting', 'updateFloorSetting', 'sanitizeUserPrompt', 'sanitizeModelResponse'];
+        ['listTemplates', 'getTemplate', 'createTemplate', 'updateTemplate', 'deleteTemplate', 'getFloorSetting', 'updateFloorSetting', 'sanitizeUserPrompt', 'sanitizeModelResponse', 'streamSanitizeUserPrompt', 'streamSanitizeModelResponse'];
     for (const methodName of modelArmorStubMethods) {
       const callPromise = this.modelArmorStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
+            }
             return Promise.reject('The client has already been closed.');
           }
           const func = stub[methodName];
@@ -270,6 +284,7 @@ export class ModelArmorClient {
 
       const descriptor =
         this.descriptors.page[methodName] ||
+        this.descriptors.stream[methodName] ||
         undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
@@ -994,6 +1009,8 @@ export class ModelArmorClient {
  *   Required. User prompt data to sanitize.
  * @param {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} [request.multiLanguageDetectionMetadata]
  *   Optional. Metadata related to Multi Language Detection.
+ * @param {google.cloud.modelarmor.v1beta.StreamingMode} [request.streamingMode]
+ *   Optional. Streaming Mode for StreamSanitize* API.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1095,6 +1112,8 @@ export class ModelArmorClient {
  *   Optional. User Prompt associated with Model response.
  * @param {google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata} [request.multiLanguageDetectionMetadata]
  *   Optional. Metadata related for multi language detection.
+ * @param {google.cloud.modelarmor.v1beta.StreamingMode} [request.streamingMode]
+ *   Optional. Streaming Mode for StreamSanitize* API.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1181,6 +1200,50 @@ export class ModelArmorClient {
         }
         throw error;
       });
+  }
+
+/**
+ * Streaming version of Sanitize User Prompt.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest|SanitizeUserPromptRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse|SanitizeUserPromptResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/model_armor.stream_sanitize_user_prompt.js</caption>
+ * region_tag:modelarmor_v1beta_generated_ModelArmor_StreamSanitizeUserPrompt_async
+ */
+  streamSanitizeUserPrompt(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
+    this._log.info('streamSanitizeUserPrompt stream %j', options);
+    return this.innerApiCalls.streamSanitizeUserPrompt(null, options);
+  }
+
+/**
+ * Streaming version of Sanitizes Model Response.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest|SanitizeModelResponseRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse|SanitizeModelResponseResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/model_armor.stream_sanitize_model_response.js</caption>
+ * region_tag:modelarmor_v1beta_generated_ModelArmor_StreamSanitizeModelResponse_async
+ */
+  streamSanitizeModelResponse(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
+    this._log.info('streamSanitizeModelResponse stream %j', options);
+    return this.innerApiCalls.streamSanitizeModelResponse(null, options);
   }
 
  /**
