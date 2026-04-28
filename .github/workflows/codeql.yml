@@ -1,21 +1,6 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
-#
-# ******** NOTE ********
-# We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
-# supported CodeQL languages.
-#
 name: "CodeQL Advanced"
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   schedule:
     - cron: '0 4 * * *'
 
@@ -82,25 +67,3 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v4
-
-    # If the analyze step fails for one of the languages you are analyzing with
-    # "We were unable to automatically build your code", modify the matrix above
-    # to set the build mode to "manual" for that language. Then modify this step
-    # to build your code.
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-    - name: Run manual build steps
-      if: matrix.build-mode == 'manual'
-      shell: bash
-      run: |
-        echo 'If you are using a "manual" build mode for one or more of the' \
-          'languages you are analyzing, replace this with the commands to build' \
-          'your code, for example:'
-        echo '  make bootstrap'
-        echo '  make release'
-        exit 1
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v4
-      with:
-        category: "/language:${{matrix.language}}"
