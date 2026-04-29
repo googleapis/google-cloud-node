@@ -169477,6 +169477,9 @@ export namespace google {
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
 
+                    /** Tool parallelAiSearch */
+                    parallelAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch|null);
+
                     /** Tool codeExecution */
                     codeExecution?: (google.cloud.aiplatform.v1beta1.Tool.ICodeExecution|null);
 
@@ -169513,6 +169516,9 @@ export namespace google {
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
+
+                    /** Tool parallelAiSearch. */
+                    public parallelAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch|null);
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.cloud.aiplatform.v1beta1.Tool.ICodeExecution|null);
@@ -169711,6 +169717,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GoogleSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ParallelAiSearch. */
+                    interface IParallelAiSearch {
+
+                        /** ParallelAiSearch apiKey */
+                        apiKey?: (string|null);
+
+                        /** ParallelAiSearch customConfigs */
+                        customConfigs?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a ParallelAiSearch. */
+                    class ParallelAiSearch implements IParallelAiSearch {
+
+                        /**
+                         * Constructs a new ParallelAiSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch);
+
+                        /** ParallelAiSearch apiKey. */
+                        public apiKey: string;
+
+                        /** ParallelAiSearch customConfigs. */
+                        public customConfigs?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ParallelAiSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParallelAiSearch instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Encodes the specified ParallelAiSearch message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch.verify|verify} messages.
+                         * @param message ParallelAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParallelAiSearch message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch.verify|verify} messages.
+                         * @param message ParallelAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParallelAiSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParallelAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Decodes a ParallelAiSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParallelAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Verifies a ParallelAiSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParallelAiSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParallelAiSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Creates a plain object from a ParallelAiSearch message. Also converts values to other types if specified.
+                         * @param message ParallelAiSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParallelAiSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParallelAiSearch
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
