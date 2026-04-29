@@ -29,13 +29,6 @@ const execp = promisify(exec);
 
 const root = process.cwd();
 const resultPrefix = /^\.test-out-(.*)$/;
-const baselineZip = path.join(
-  root,
-  'bazel-testlogs',
-  'unit_tests',
-  'test.outputs',
-  'outputs.zip',
-);
 
 function getBaselineDirectory(library: string): string {
   return path.join(root, 'baselines', library);
@@ -79,6 +72,14 @@ async function copyBaseline(library: string, root: string, directory = '.') {
 }
 
 async function main() {
+  // remove old test out folders
+  const oldFolders = (await readdir(root)).filter(file =>
+    file.match(resultPrefix),
+  );
+  for (const oldFolder of oldFolders) {
+    await fsp.rm(oldFolder, {recursive: true});
+  }
+
   // generate test output
   try {
     console.log('Running npm test...');
@@ -88,16 +89,6 @@ async function main() {
   } catch (err) {
     console.log("Tests failed - that's OK, will update baselines.");
   }
-
-  // remove old test out folders
-  const oldFolders = (await readdir(root)).filter(file =>
-    file.match(resultPrefix),
-  );
-  for (const oldFolder of oldFolders) {
-    await fsp.rm(oldFolder, {recursive: true});
-  }
-  // unzip baselines
-  await execp(`unzip -o "${baselineZip}" -d .`);
 
   // get a list of baselines
   const files = await readdir(root);
