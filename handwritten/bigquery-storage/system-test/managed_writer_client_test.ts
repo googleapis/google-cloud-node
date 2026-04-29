@@ -1440,58 +1440,61 @@ describe('managedwriter.WriterClient', () => {
     });
 
     describe('should manage to send data in parallel', () => {
-      it('every 10 request drops the connection', async () => {
-        bqWriteClient.initialize().catch(err => {
-          throw err;
-        });
-        const client = new WriterClient();
-        client.enableWriteRetries(true);
-        client.setMaxRetryAttempts(10);
-        client.setClient(bqWriteClient);
+      for (let i = 0; i < 100; i++) {
+        it('every 10 request drops the connection', async () => {
+          console.log(`running off of upgraded version ${i}`);
+          bqWriteClient.initialize().catch(err => {
+            throw err;
+          });
+          const client = new WriterClient();
+          client.enableWriteRetries(true);
+          client.setMaxRetryAttempts(10);
+          client.setClient(bqWriteClient);
 
-        try {
-          const flakyTableId = generateUuid() + '_reconnect_on_close';
-          const [table] = await bigquery
-            .dataset(flakyDatasetId)
-            .createTable(flakyTableId, {
-              schema,
-              location: flakyRegion,
+          try {
+            const flakyTableId = generateUuid() + '_reconnect_on_close';
+            const [table] = await bigquery
+              .dataset(flakyDatasetId)
+              .createTable(flakyTableId, {
+                schema,
+                location: flakyRegion,
+              });
+            projectId = table.metadata.tableReference.projectId;
+            parent = `projects/${projectId}/datasets/${flakyDatasetId}/tables/${flakyTableId}`;
+
+            const connection = await client.createStreamConnection({
+              streamType: managedwriter.PendingStream,
+              destinationTable: parent,
             });
-          projectId = table.metadata.tableReference.projectId;
-          parent = `projects/${projectId}/datasets/${flakyDatasetId}/tables/${flakyTableId}`;
 
-          const connection = await client.createStreamConnection({
-            streamType: managedwriter.PendingStream,
-            destinationTable: parent,
-          });
+            const writer = new JSONWriter({
+              connection,
+              protoDescriptor,
+            });
 
-          const writer = new JSONWriter({
-            connection,
-            protoDescriptor,
-          });
+            const pendingWrites: PendingWrite[] = [];
+            const iterations = new Array(50).fill(1);
+            let offset = 0;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            for (const _ of iterations) {
+              const rows = generateRows(10);
+              const pw = writer.appendRows(rows, offset);
+              pendingWrites.push(pw);
+              offset += 10;
+            }
 
-          const pendingWrites: PendingWrite[] = [];
-          const iterations = new Array(50).fill(1);
-          let offset = 0;
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          for (const _ of iterations) {
-            const rows = generateRows(10);
-            const pw = writer.appendRows(rows, offset);
-            pendingWrites.push(pw);
-            offset += 10;
+            await Promise.all(pendingWrites.map(pw => pw.getResult()));
+
+            const res = await connection.finalize();
+            connection.close();
+            assert.equal(res?.rowCount, 500);
+
+            writer.close();
+          } finally {
+            client.close();
           }
-
-          await Promise.all(pendingWrites.map(pw => pw.getResult()));
-
-          const res = await connection.finalize();
-          connection.close();
-          assert.equal(res?.rowCount, 500);
-
-          writer.close();
-        } finally {
-          client.close();
-        }
-      }).timeout(2 * 60 * 1000);
+        }).timeout(2 * 60 * 1000);
+      }
 
       it('every 10 request there is a in stream INTERNAL error', async () => {
         bqWriteClient.initialize().catch(err => {
