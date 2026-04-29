@@ -31,10 +31,11 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test"
+    "system-test": "c8 mocha build/system-test",
+    "test": "echo no unit tests for generated libraries 🙈"
   },
   "dependencies": {
-    "google-gax": "^5.1.1"
+    "google-gax": "^5.0.6"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
