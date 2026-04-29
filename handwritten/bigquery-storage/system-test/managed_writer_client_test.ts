@@ -1440,7 +1440,7 @@ describe('managedwriter.WriterClient', () => {
     });
 
     describe('should manage to send data in parallel', () => {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 1000; i++) {
         it('every 10 request drops the connection', async () => {
           console.log(`Test off main ${i}`);
           bqWriteClient.initialize().catch(err => {
