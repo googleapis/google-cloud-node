@@ -1742,6 +1742,18 @@
                               }
                             }
                           ]
+                        },
+                        "StreamSanitizeUserPrompt": {
+                          "requestType": "SanitizeUserPromptRequest",
+                          "requestStream": true,
+                          "responseType": "SanitizeUserPromptResponse",
+                          "responseStream": true
+                        },
+                        "StreamSanitizeModelResponse": {
+                          "requestType": "SanitizeModelResponseRequest",
+                          "requestStream": true,
+                          "responseType": "SanitizeModelResponseResponse",
+                          "responseStream": true
                         }
                       }
                     },
@@ -1792,6 +1804,13 @@
                         "SUCCESS": 1,
                         "PARTIAL": 2,
                         "FAILURE": 3
+                      }
+                    },
+                    "StreamingMode": {
+                      "values": {
+                        "STREAMING_MODE_UNSPECIFIED": 0,
+                        "STREAMING_MODE_BUFFERED": 1,
+                        "STREAMING_MODE_REALTIME": 2
                       }
                     },
                     "Template": {
@@ -1953,6 +1972,11 @@
                           "oneof": [
                             "aiPlatformFloorSetting"
                           ]
+                        },
+                        "_googleMcpServerFloorSetting": {
+                          "oneof": [
+                            "googleMcpServerFloorSetting"
+                          ]
                         }
                       },
                       "fields": {
@@ -2014,6 +2038,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "googleMcpServerFloorSetting": {
+                          "type": "McpServerFloorSetting",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2044,7 +2076,49 @@
                         "IntegratedService": {
                           "values": {
                             "INTEGRATED_SERVICE_UNSPECIFIED": 0,
-                            "AI_PLATFORM": 1
+                            "AI_PLATFORM": 1,
+                            "GOOGLE_MCP_SERVER": 2
+                          }
+                        }
+                      }
+                    },
+                    "McpServerFloorSetting": {
+                      "oneofs": {
+                        "enforcementType": {
+                          "oneof": [
+                            "inspectOnly",
+                            "inspectAndBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inspectOnly": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inspectAndBlock": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableCloudLogging": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "apis": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2438,6 +2512,13 @@
                       }
                     },
                     "SanitizeUserPromptRequest": {
+                      "oneofs": {
+                        "_streamingMode": {
+                          "oneof": [
+                            "streamingMode"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2460,10 +2541,25 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "streamingMode": {
+                          "type": "StreamingMode",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "SanitizeModelResponseRequest": {
+                      "oneofs": {
+                        "_streamingMode": {
+                          "oneof": [
+                            "streamingMode"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2492,6 +2588,14 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "streamingMode": {
+                          "type": "StreamingMode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -2763,6 +2867,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "fileLabel": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2775,7 +2886,8 @@
                             "EXCEL_DOCUMENT": 4,
                             "POWERPOINT_DOCUMENT": 5,
                             "TXT": 6,
-                            "CSV": 7
+                            "CSV": 7,
+                            "ZIP": 9
                           }
                         }
                       }

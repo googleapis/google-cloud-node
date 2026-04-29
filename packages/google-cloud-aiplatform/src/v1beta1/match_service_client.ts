@@ -307,6 +307,9 @@ export class MatchServiceClient {
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
+      onlineEvaluatorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/onlineEvaluators/{online_evaluator}'
+      ),
       persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
       ),
@@ -3195,6 +3198,55 @@ export class MatchServiceClient {
    */
   matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).notebook_runtime_template;
+  }
+
+  /**
+   * Return a fully-qualified onlineEvaluator resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} online_evaluator
+   * @returns {string} Resource name string.
+   */
+  onlineEvaluatorPath(project:string,location:string,onlineEvaluator:string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.render({
+      project: project,
+      location: location,
+      online_evaluator: onlineEvaluator,
+    });
+  }
+
+  /**
+   * Parse the project from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).project;
+  }
+
+  /**
+   * Parse the location from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).location;
+  }
+
+  /**
+   * Parse the online_evaluator from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the online_evaluator.
+   */
+  matchOnlineEvaluatorFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).online_evaluator;
   }
 
   /**

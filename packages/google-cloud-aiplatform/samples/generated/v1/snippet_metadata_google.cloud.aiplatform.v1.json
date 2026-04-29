@@ -9450,7 +9450,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -9478,6 +9478,10 @@
           {
             "name": "encryption_spec",
             "type": ".google.cloud.aiplatform.v1.EncryptionSpec"
+          },
+          {
+            "name": "custom_service_account",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -12188,6 +12192,54 @@
         "method": {
           "shortName": "StreamQueryReasoningEngine",
           "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.StreamQueryReasoningEngine",
+          "service": {
+            "shortName": "ReasoningEngineExecutionService",
+            "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1_generated_ReasoningEngineExecutionService_AsyncQueryReasoningEngine_async",
+      "title": "DataFoundryService asyncQueryReasoningEngine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Async query using a reasoning engine.",
+      "canonical": true,
+      "file": "reasoning_engine_execution_service.async_query_reasoning_engine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsyncQueryReasoningEngine",
+        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.AsyncQueryReasoningEngine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_gcs_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "output_gcs_uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ReasoningEngineExecutionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionServiceClient"
+        },
+        "method": {
+          "shortName": "AsyncQueryReasoningEngine",
+          "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.AsyncQueryReasoningEngine",
           "service": {
             "shortName": "ReasoningEngineExecutionService",
             "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
