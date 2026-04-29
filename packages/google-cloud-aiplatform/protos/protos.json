@@ -4726,6 +4726,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parallelAiSearch": {
+                          "type": "ParallelAiSearch",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -4793,6 +4800,24 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ParallelAiSearch": {
+                          "fields": {
+                            "apiKey": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customConfigs": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -45973,6 +45998,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parallelAiSearch": {
+                          "type": "ParallelAiSearch",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -46040,6 +46072,24 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ParallelAiSearch": {
+                          "fields": {
+                            "apiKey": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customConfigs": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
