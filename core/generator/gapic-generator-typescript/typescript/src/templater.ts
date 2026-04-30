@@ -218,6 +218,7 @@ async function processOneTemplate(
   templateFilename: string,
   api: API,
   id: Namer,
+  skipSystemTest: boolean,
 ) {
   const result: protos.google.protobuf.compiler.CodeGeneratorResponse.File[] =
     [];
@@ -230,7 +231,7 @@ async function processOneTemplate(
   // services.
   outputFilename = outputFilename.replace(/\$version/, api.naming.version);
 
-  if (outputFilename.match(/^(esm\/)?system-test\//)) {
+  if (skipSystemTest && outputFilename.match(/^(esm\/)?system-test\//)) {
     return [];
   }
 
@@ -264,17 +265,25 @@ async function processOneTemplate(
             commonParameters,
             service,
             id,
+            skipSystemTest,
           }),
         );
       }
     }
   } else if (outputFilename.match(/\$service/)) {
     for (const service of api.services) {
+      // Do not generate tests for deprecated services
+      if (
+        service.options.deprecated === true &&
+        outputFilename.match('test/')
+      ) {
+        continue;
+      }
       result.push(
         renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),
           relativeTemplateName,
-          {api, commonParameters, service, id},
+          {api, commonParameters, service, id, skipSystemTest},
         ),
       );
     }
@@ -284,6 +293,7 @@ async function processOneTemplate(
         api,
         commonParameters,
         id,
+        skipSystemTest,
       }),
     );
   }
@@ -311,7 +321,11 @@ async function loadNamerPlugin(basePath: string) {
   return id;
 }
 
-export async function processTemplates(basePath: string, api: API) {
+export async function processTemplates(
+  basePath: string,
+  api: API,
+  skipSystemTest = false,
+) {
   nunjucks.configure(basePath);
   basePath = basePath.replace(/\/*$/, '');
 
@@ -327,6 +341,7 @@ export async function processTemplates(basePath: string, api: API) {
       templateFilename,
       api,
       id,
+      skipSystemTest,
     );
     result.push(...generatedFiles);
   }

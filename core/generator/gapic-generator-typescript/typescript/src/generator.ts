@@ -56,7 +56,11 @@ const templatesDirectory = fs.existsSync(
 )
   ? '../../gapic_generator_typescript/templates'
   : path.join(__dirname, '..', '..', 'templates');
-const defaultTemplates = ['typescript_gapic', 'typescript_samples'];
+const defaultTemplates = [
+  'typescript_gapic',
+  'typescript_packing_test',
+  'typescript_samples',
+];
 const metadataTemplate = 'typescript_gapic_metadata';
 
 export class Generator {
@@ -82,6 +86,7 @@ export class Generator {
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
   format?: string | string[];
+  skipSystemTest?: boolean;
 
   private root: protobuf.Root;
 
@@ -92,6 +97,7 @@ export class Generator {
     this.grpcServiceConfig = {} as protos.grpc.service_config.ServiceConfig;
     this.paramMap = {};
     this.templates = defaultTemplates;
+    this.skipSystemTest = true;
   }
 
   private getParamMap(parameter: string) {
@@ -223,6 +229,15 @@ export class Generator {
     }
   }
 
+  private readSkipSystemTest() {
+    if (this.paramMap['skip-system-test'] === 'false') {
+      this.skipSystemTest = false;
+    }
+    if (this.paramMap['skip-system-test'] === 'true') {
+      this.skipSystemTest = true;
+    }
+  }
+
   private readLegacyProtoLoad() {
     if (this.paramMap['legacy-proto-load'] === 'true') {
       this.legacyProtoLoad = true;
@@ -270,6 +285,7 @@ export class Generator {
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
       this.readFormat();
+      this.readSkipSystemTest();
     }
   }
 
@@ -346,7 +362,11 @@ export class Generator {
       if (!fs.existsSync(location)) {
         throw new Error(`Template directory ${location} does not exist.`);
       }
-      const fileList = await processTemplates(location, api);
+      const fileList = await processTemplates(
+        location,
+        api,
+        this.skipSystemTest,
+      );
       this.response.file.push(...fileList);
     }
   }

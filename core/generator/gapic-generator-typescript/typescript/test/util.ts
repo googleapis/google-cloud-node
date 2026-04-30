@@ -147,6 +147,7 @@ export function runBaselineTest(options: BaselineOptions) {
     if (options.mixins) {
       commandLine += ` --mixins="${options.mixins}"`;
     }
+    commandLine += ' --skip-system-test=false';
     execSync(commandLine);
     assert(equalToBaseline(outputDir, baselineDir));
   });

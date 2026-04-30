@@ -6,6 +6,8 @@
 /docs/
 /out/
 /build/
+{% if not skipSystemTest %}system-test/secrets.js
+system-test/*key.json{% endif %}
 *.lock
 .DS_Store
 package-lock.json
