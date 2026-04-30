@@ -10,7 +10,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "scripts": {
-    "test": "echo nothing to test",
+    "test": "c8 mocha build/test",
     "lint": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -19,9 +19,9 @@
     "pretest": "npm run compile",
     "docs": "mkdir docs && touch docs/noop.html",
     "docs-test": "echo no docs 👻",
-    "presystem-test": "echo nothing to system test",
+    "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "echo nothing to system test",
+    "system-test": "mocha build/system-test",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },

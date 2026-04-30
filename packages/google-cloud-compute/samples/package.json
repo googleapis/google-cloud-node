@@ -11,7 +11,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha test --timeout 1200000"
   },
   "dependencies": {
     "@google-cloud/compute": "^6.9.0",

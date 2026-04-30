@@ -10,7 +10,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha --timeout 1200000 test/*.js"
   },
   "dependencies": {
     "@google-cloud/aiplatform": "^6.6.0"

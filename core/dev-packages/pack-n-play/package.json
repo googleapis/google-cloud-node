@@ -28,8 +28,8 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "samples-test": "echo 'no test'",
-    "system-test": "echo nothing to system test",
-    "test": "echo nothing to test",
+    "system-test": "echo 'no test'",
+    "test": "c8 mocha build/test",
     "prelint": "echo 'no lint'"
   },
   "devDependencies": {

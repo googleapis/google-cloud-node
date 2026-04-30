@@ -12,7 +12,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "c8 mocha test --timeout=800000"
   },
   "dependencies": {
     "@google-cloud/billing-budgets": "^6.1.1"

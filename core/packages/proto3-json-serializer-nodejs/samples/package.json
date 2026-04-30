@@ -8,7 +8,7 @@
   "repository": "googleapis/proto3-json-serializer-nodejs",
   "private": true,
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "c8 mocha system-test"
   },
   "files": [
     "*.js"

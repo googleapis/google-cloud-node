@@ -4,7 +4,7 @@
   "description": "Test a ESM package using pack-n-play",
   "main": "index.js",
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha test/test.js"
   },
   "type": "module",
   "dependencies": {

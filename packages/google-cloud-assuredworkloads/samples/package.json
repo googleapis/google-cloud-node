@@ -10,7 +10,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
     "@google-cloud/assured-workloads": "^5.1.1"

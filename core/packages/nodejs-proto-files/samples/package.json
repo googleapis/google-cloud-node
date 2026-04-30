@@ -11,7 +11,7 @@
   "repository": "googleapis/nodejs-proto-files",
   "private": true,
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha"
   },
   "dependencies": {
     "google-proto-files": "^6.0.0"

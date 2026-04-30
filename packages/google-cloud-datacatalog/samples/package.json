@@ -12,7 +12,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha --timeout 600000"
   },
   "dependencies": {
     "@google-cloud/datacatalog": "^5.2.1"

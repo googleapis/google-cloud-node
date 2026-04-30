@@ -11,7 +11,7 @@
     "!test"
   ],
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
     "@google-cloud/video-transcoder": "^4.4.1"

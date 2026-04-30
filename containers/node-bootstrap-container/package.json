@@ -4,10 +4,10 @@
   "description": "container to bootstrap initial files in a Node library",
   "main": "index.js",
   "scripts": {
-    "test": "echo nothing to test",
+    "test": "mocha tests/",
     "lint": "echo 'FIXME: no lint tests'",
     "samples-test": "echo 'no sample tests'",
-    "system-test": "echo nothing to system test"
+    "system-test": "echo 'no system tests'"
   },
   "repository": {
     "type": "git",

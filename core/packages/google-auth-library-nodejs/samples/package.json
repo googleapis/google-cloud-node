@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "setup": "node scripts/*.js",
-    "test": "echo nothing to test"
+    "test": "mocha --timeout 60000"
   },
   "engines": {
     "node": ">=18"

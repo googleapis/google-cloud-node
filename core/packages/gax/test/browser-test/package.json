@@ -21,7 +21,7 @@
     "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "test": "echo nothing to test"
+    "test": "karma start"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",

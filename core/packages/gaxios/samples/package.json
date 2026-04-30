@@ -5,7 +5,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha"
   },
   "license": "Apache-2.0",
   "dependencies": {

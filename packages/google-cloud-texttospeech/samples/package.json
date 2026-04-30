@@ -11,7 +11,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha --timeout=60000"
   },
   "dependencies": {
     "@google-cloud/text-to-speech": "^6.4.0",

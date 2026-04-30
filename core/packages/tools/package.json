@@ -9,14 +9,14 @@
   ],
   "scripts": {
     "pretest": "npm run prepare",
-    "test": "echo nothing to test",
+    "test": "c8 mocha build/test",
     "lint": "gts check test src",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r test/fixtures build/test",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "precompile": "gts clean",
-    "system-test": "echo nothing to system test",
+    "system-test": "echo 'no system-test'",
     "samples-test": "echo 'no samples'",
     "docs": "echo no docs needed",
     "docs-test": "echo no docs tests"

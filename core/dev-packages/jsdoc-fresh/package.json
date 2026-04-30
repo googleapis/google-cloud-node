@@ -8,7 +8,7 @@
     "test": "echo no tests",
     "fix": "gts fix",
     "docs": "echo no docs needed",
-    "system-test": "echo nothing to system test",
+    "system-test": "echo no system test",
     "samples-test": "echo no samples test",
     "docs-test": "echo no docs tests",
     "compile": "echo no compile script"

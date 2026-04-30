@@ -64,7 +64,7 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "pretest": "npm run prepare",
-    "test": "echo nothing to test",
+    "test": "c8 mocha build/test/unit",
     "lint": "gts check src samples test",
     "clean": "gts clean",
     "compile": "tsc -p . && cp src/*.json build/src && cp -r test/fixtures build/test && cp -r protos build/",
@@ -76,7 +76,7 @@
     "compile-http-protos": "pbjs -t static-module -r http_proto --keep-case google/api/http.proto -p ./protos > protos/http.js && pbts protos/http.js -o protos/http.d.ts",
     "fix": "gts fix",
     "prepare": "npm run compile && cd ../tools && npm i && npm run compile && cd ../gax && pwd && node ../tools/build/src/prepublish.js . && mkdirp build/protos && cp -r protos/* build/protos/ && npm run minify-proto-json",
-    "system-test": "echo nothing to system test",
+    "system-test": "c8 mocha build/test/system-test --timeout 600000 && npm run test-application",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",

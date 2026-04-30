@@ -30,9 +30,9 @@
   "scripts": {
     "prepare": "npm run compile && node ./build/tools/prepublish.js",
     "lint": "gts check",
-    "test": "echo nothing to test",
+    "test": "c8 mocha build/test",
     "fix": "gts fix",
-    "system-test": "echo nothing to system test",
+    "system-test": "echo no system tests 😱",
     "samples-test": "cd samples && npm link ../ && npm test && cd ../",
     "docs": "jsdoc -c .jsdoc.js",
     "clean": "gts clean",

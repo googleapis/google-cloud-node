@@ -12,7 +12,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha test/*.test.js --timeout=600000"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^5.0.0",

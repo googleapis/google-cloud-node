@@ -38,10 +38,10 @@
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "presystem-test": "echo nothing to system test",
-    "system-test": "echo nothing to system test",
+    "presystem-test": "npm run compile",
+    "system-test": "mocha build/system-test --timeout 600000",
     "pretest": "npm run compile",
-    "test": "echo nothing to test",
+    "test": "c8 mocha build/test",
     "precompile": "gts clean"
   },
   "dependencies": {

@@ -11,7 +11,7 @@
   "repository": "googleapis/nodejs-os-login",
   "private": true,
   "scripts": {
-    "test": "echo nothing to test"
+    "test": "mocha"
   },
   "dependencies": {
     "@google-cloud/os-login": "^6.2.1"

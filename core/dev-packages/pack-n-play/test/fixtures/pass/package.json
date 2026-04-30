@@ -13,7 +13,7 @@
   "scripts": {
     "prepare": "npm run compile",
     "compile": "tsc -p .",
-    "test": "echo nothing to test",
+    "test": "mocha build/test",
     "pretest": "npm run compile"
   },
   "keywords": [],

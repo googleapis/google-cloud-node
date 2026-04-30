@@ -8,7 +8,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "echo nothing to test",
+    "test": "c8 mocha build/test",
     "compile": "tsc -p .",
     "pretest": "npm run compile",
     "lint": "gts check",
@@ -18,7 +18,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
-    "system-test": "echo nothing to system test",
+    "system-test": "echo no system test",
     "samples-test": "echo no samples",
     "precompile": "gts clean"
   },

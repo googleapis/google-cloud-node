@@ -25,8 +25,8 @@
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "echo nothing to system test",
-    "test": "echo nothing to test",
+    "system-test": "c8 mocha build/system-test",
+    "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "precompile": "gts clean"
   },

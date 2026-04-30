@@ -4,13 +4,13 @@
   "description": "replace region tags with code samples",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo nothing to test",
+    "test": "c8 mocha test/test.js",
     "lint": "gts check",
     "fix": "gts fix",
     "docs": "echo no docs needed",
     "docs-test": "echo 🙈",
     "samples-test": "echo no samples test",
-    "system-test": "echo nothing to system test",
+    "system-test": "echo no system test",
     "compile": "echo no compile script",
     "prelint": "echo 🙈"
   },
