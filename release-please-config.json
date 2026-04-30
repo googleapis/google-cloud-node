@@ -1,7 +1,7 @@
 {
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
-  "separate-pull-requests": true,
+  "separate-pull-requests": false,
   "commit-batch-size": 10,
   "packages": {
     "packages/gapic-node-processing": {},
