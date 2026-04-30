@@ -1,6 +1,5 @@
 {
   "commit-batch-size": 10,
-  "commit-search-depth": 50000,
   "include-component-in-tag": true,
   "packages": {
     "core/common": {
