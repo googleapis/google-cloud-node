@@ -230,6 +230,10 @@ async function processOneTemplate(
   // services.
   outputFilename = outputFilename.replace(/\$version/, api.naming.version);
 
+  if (outputFilename.match(/^(esm\/)?(test|system-test)\//)) {
+    return [];
+  }
+
   // Check to see if the outputFilename matches the snippet index
   // then, build the object we have the proto interface for
   // pass that object into the template as an argument
@@ -266,13 +270,6 @@ async function processOneTemplate(
     }
   } else if (outputFilename.match(/\$service/)) {
     for (const service of api.services) {
-      // Do not generate tests for deprecated services
-      if (
-        service.options.deprecated === true &&
-        outputFilename.match('test/')
-      ) {
-        continue;
-      }
       result.push(
         renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),

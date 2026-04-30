@@ -56,11 +56,7 @@ const templatesDirectory = fs.existsSync(
 )
   ? '../../gapic_generator_typescript/templates'
   : path.join(__dirname, '..', '..', 'templates');
-const defaultTemplates = [
-  'typescript_gapic',
-  'typescript_packing_test',
-  'typescript_samples',
-];
+const defaultTemplates = ['typescript_gapic', 'typescript_samples'];
 const metadataTemplate = 'typescript_gapic_metadata';
 
 export class Generator {
