@@ -336,6 +336,9 @@ export class Generator {
 
   async processTemplates(api: API) {
     for (const template of this.templates) {
+      if (template === 'is_baseline') {
+        continue;
+      }
       let location = path.join(templatesDirectory, 'cjs', template);
       if (
         this.format &&

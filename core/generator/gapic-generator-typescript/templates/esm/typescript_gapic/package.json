@@ -61,9 +61,9 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    {% if "typescript_packing_test" in templates %}"system-test:cjs": "c8 mocha build/cjs/system-test",
+    {% if "is_baseline" in templates %}"system-test:cjs": "c8 mocha build/cjs/system-test",
     "system-test:esm": "c8 mocha build/esm/system-test",
-    "system-test": "npm run system-test:esm && npm run system-test:cjs",{% endif %}
+    "system-test": "npm run system-test:esm && npm run system-test:cjs",{% else %}"system-test": "echo 'no system tests'",{% endif %}
     "test:cjs": "c8 mocha build/cjs/test",
     "test:esm": "c8 mocha build/esm/test",
     "test": "npm run test:cjs && npm run test:esm",
@@ -94,7 +94,7 @@
     "long": "^5.3.2",
     "mocha": "^11.7.4",
     "typescript": "5.8.3",
-    {% if "typescript_packing_test" in templates %}"pack-n-play": "^4.2.1",{% endif %}
+    {% if "is_baseline" in templates %}"pack-n-play": "^4.2.1",{% endif %}
     "sinon": "^20.0.0",
     "ts-loader": "^8.4.0",
     "webpack": "^5.102.1",
