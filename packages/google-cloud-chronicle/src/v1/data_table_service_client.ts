@@ -177,6 +177,12 @@ export class DataTableServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      dashboardChartPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}'
+      ),
+      dashboardQueryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}'
+      ),
       dataAccessLabelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}'
       ),
@@ -192,11 +198,17 @@ export class DataTableServiceClient {
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}'
       ),
+      featuredContentNativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}'
+      ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      nativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -2115,6 +2127,130 @@ export class DataTableServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified dashboardChart resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} chart
+   * @returns {string} Resource name string.
+   */
+  dashboardChartPath(project:string,location:string,instance:string,chart:string) {
+    return this.pathTemplates.dashboardChartPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      chart: chart,
+    });
+  }
+
+  /**
+   * Parse the project from DashboardChart resource.
+   *
+   * @param {string} dashboardChartName
+   *   A fully-qualified path representing DashboardChart resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDashboardChartName(dashboardChartName: string) {
+    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).project;
+  }
+
+  /**
+   * Parse the location from DashboardChart resource.
+   *
+   * @param {string} dashboardChartName
+   *   A fully-qualified path representing DashboardChart resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDashboardChartName(dashboardChartName: string) {
+    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).location;
+  }
+
+  /**
+   * Parse the instance from DashboardChart resource.
+   *
+   * @param {string} dashboardChartName
+   *   A fully-qualified path representing DashboardChart resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromDashboardChartName(dashboardChartName: string) {
+    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).instance;
+  }
+
+  /**
+   * Parse the chart from DashboardChart resource.
+   *
+   * @param {string} dashboardChartName
+   *   A fully-qualified path representing DashboardChart resource.
+   * @returns {string} A string representing the chart.
+   */
+  matchChartFromDashboardChartName(dashboardChartName: string) {
+    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).chart;
+  }
+
+  /**
+   * Return a fully-qualified dashboardQuery resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} query
+   * @returns {string} Resource name string.
+   */
+  dashboardQueryPath(project:string,location:string,instance:string,query:string) {
+    return this.pathTemplates.dashboardQueryPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      query: query,
+    });
+  }
+
+  /**
+   * Parse the project from DashboardQuery resource.
+   *
+   * @param {string} dashboardQueryName
+   *   A fully-qualified path representing DashboardQuery resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDashboardQueryName(dashboardQueryName: string) {
+    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).project;
+  }
+
+  /**
+   * Parse the location from DashboardQuery resource.
+   *
+   * @param {string} dashboardQueryName
+   *   A fully-qualified path representing DashboardQuery resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDashboardQueryName(dashboardQueryName: string) {
+    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).location;
+  }
+
+  /**
+   * Parse the instance from DashboardQuery resource.
+   *
+   * @param {string} dashboardQueryName
+   *   A fully-qualified path representing DashboardQuery resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromDashboardQueryName(dashboardQueryName: string) {
+    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).instance;
+  }
+
+  /**
+   * Parse the query from DashboardQuery resource.
+   *
+   * @param {string} dashboardQueryName
+   *   A fully-qualified path representing DashboardQuery resource.
+   * @returns {string} A string representing the query.
+   */
+  matchQueryFromDashboardQueryName(dashboardQueryName: string) {
+    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).query;
+  }
+
+  /**
    * Return a fully-qualified dataAccessLabel resource name string.
    *
    * @param {string} project
@@ -2438,6 +2574,68 @@ export class DataTableServiceClient {
   }
 
   /**
+   * Return a fully-qualified featuredContentNativeDashboard resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} featured_content_native_dashboard
+   * @returns {string} Resource name string.
+   */
+  featuredContentNativeDashboardPath(project:string,location:string,instance:string,featuredContentNativeDashboard:string) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      featured_content_native_dashboard: featuredContentNativeDashboard,
+    });
+  }
+
+  /**
+   * Parse the project from FeaturedContentNativeDashboard resource.
+   *
+   * @param {string} featuredContentNativeDashboardName
+   *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).project;
+  }
+
+  /**
+   * Parse the location from FeaturedContentNativeDashboard resource.
+   *
+   * @param {string} featuredContentNativeDashboardName
+   *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).location;
+  }
+
+  /**
+   * Parse the instance from FeaturedContentNativeDashboard resource.
+   *
+   * @param {string} featuredContentNativeDashboardName
+   *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).instance;
+  }
+
+  /**
+   * Parse the featured_content_native_dashboard from FeaturedContentNativeDashboard resource.
+   *
+   * @param {string} featuredContentNativeDashboardName
+   *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
+   * @returns {string} A string representing the featured_content_native_dashboard.
+   */
+  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).featured_content_native_dashboard;
+  }
+
+  /**
    * Return a fully-qualified instance resource name string.
    *
    * @param {string} project
@@ -2520,6 +2718,68 @@ export class DataTableServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified nativeDashboard resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} dashboard
+   * @returns {string} Resource name string.
+   */
+  nativeDashboardPath(project:string,location:string,instance:string,dashboard:string) {
+    return this.pathTemplates.nativeDashboardPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      dashboard: dashboard,
+    });
+  }
+
+  /**
+   * Parse the project from NativeDashboard resource.
+   *
+   * @param {string} nativeDashboardName
+   *   A fully-qualified path representing NativeDashboard resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNativeDashboardName(nativeDashboardName: string) {
+    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).project;
+  }
+
+  /**
+   * Parse the location from NativeDashboard resource.
+   *
+   * @param {string} nativeDashboardName
+   *   A fully-qualified path representing NativeDashboard resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNativeDashboardName(nativeDashboardName: string) {
+    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).location;
+  }
+
+  /**
+   * Parse the instance from NativeDashboard resource.
+   *
+   * @param {string} nativeDashboardName
+   *   A fully-qualified path representing NativeDashboard resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromNativeDashboardName(nativeDashboardName: string) {
+    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).instance;
+  }
+
+  /**
+   * Parse the dashboard from NativeDashboard resource.
+   *
+   * @param {string} nativeDashboardName
+   *   A fully-qualified path representing NativeDashboard resource.
+   * @returns {string} A string representing the dashboard.
+   */
+  matchDashboardFromNativeDashboardName(nativeDashboardName: string) {
+    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).dashboard;
   }
 
   /**

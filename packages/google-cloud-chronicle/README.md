@@ -57,6 +57,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| batch get dashboard charts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_chart_service.batch_get_dashboard_charts.js) |
+| get dashboard chart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_chart_service.get_dashboard_chart.js) |
+| execute dashboard query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_query_service.execute_dashboard_query.js) |
+| get dashboard query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_query_service.get_dashboard_query.js) |
 | create data access label | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_label.js) |
 | create data access scope | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_scope.js) |
 | delete data access label | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_label.js) |
@@ -87,7 +91,22 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get watchlist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.get_watchlist.js) |
 | list watchlists | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.list_watchlists.js) |
 | update watchlist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.update_watchlist.js) |
+| get featured content native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/featured_content_native_dashboard_service.get_featured_content_native_dashboard.js) |
+| install featured content native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/featured_content_native_dashboard_service.install_featured_content_native_dashboard.js) |
+| list featured content native dashboards | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/featured_content_native_dashboard_service.list_featured_content_native_dashboards.js) |
 | get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/instance_service.get_instance.js) |
+| add chart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.add_chart.js) |
+| create native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.create_native_dashboard.js) |
+| delete native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.delete_native_dashboard.js) |
+| duplicate chart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.duplicate_chart.js) |
+| duplicate native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.duplicate_native_dashboard.js) |
+| edit chart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.edit_chart.js) |
+| export native dashboards | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.export_native_dashboards.js) |
+| get native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.get_native_dashboard.js) |
+| import native dashboards | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.import_native_dashboards.js) |
+| list native dashboards | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.list_native_dashboards.js) |
+| remove chart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.remove_chart.js) |
+| update native dashboard | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/native_dashboard_service.update_native_dashboard.js) |
 | create reference list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.create_reference_list.js) |
 | get reference list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.get_reference_list.js) |
 | list reference lists | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.list_reference_lists.js) |
