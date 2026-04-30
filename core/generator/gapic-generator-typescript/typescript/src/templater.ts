@@ -230,7 +230,7 @@ async function processOneTemplate(
   // services.
   outputFilename = outputFilename.replace(/\$version/, api.naming.version);
 
-  if (outputFilename.match(/^(esm\/)?(test|system-test)\//)) {
+  if (outputFilename.match(/^(esm\/)?system-test\//)) {
     return [];
   }
 
