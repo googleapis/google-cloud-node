@@ -48,7 +48,10 @@ function parseSnapshot(text) {
   for (const section of text.trim().split(';')) {
     const idx = section.indexOf('=');
     if (idx <= 0) continue;
-    out[section.slice(0, idx)] = parseWireMap(section.slice(idx + 1));
+    const value = section.slice(idx + 1);
+    out[section.slice(0, idx)] = /^\d+$/.test(value)
+      ? Number(value)
+      : parseWireMap(value);
   }
   return out;
 }
@@ -186,6 +189,9 @@ async function main() {
         maxActiveByTransport: snapshot.maxActiveByTransport || {},
         maxActiveTotal,
         callsByRequestIdChannel: snapshot.callsByRequestIdChannel || {},
+        txnAffinityHits: snapshot.txnAffinityHits || 0,
+        txnAffinityMisses: snapshot.txnAffinityMisses || 0,
+        txnAffinityUnknown: snapshot.txnAffinityUnknown || 0,
       },
       callsByMethod: snapshot.callsByMethod || {},
       rawStats: statsText.trim().split('\n'),

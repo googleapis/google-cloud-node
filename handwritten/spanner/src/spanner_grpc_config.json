@@ -1,7 +1,7 @@
 {
   "channelPool": {
     "maxSize": 10,
-    "maxConcurrentStreamsLowWatermark": 100
+    "maxConcurrentStreamsLowWatermark": 50
   },
   "method": [
     {
@@ -29,49 +29,49 @@
       "name": ["/google.spanner.v1.Spanner/ExecuteSql"],
       "affinity": {
         "command": "BOUND",
-        "affinityKey": "session"
+        "affinityKey": "transaction.id"
       }
     },
     {
       "name": ["/google.spanner.v1.Spanner/ExecuteStreamingSql"],
       "affinity": {
         "command": "BOUND",
-        "affinityKey": "session"
+        "affinityKey": "transaction.id"
       }
     },
     {
       "name": ["/google.spanner.v1.Spanner/Read"],
       "affinity": {
         "command": "BOUND",
-        "affinityKey": "session"
+        "affinityKey": "transaction.id"
       }
     },
     {
       "name": ["/google.spanner.v1.Spanner/StreamingRead"],
       "affinity": {
         "command": "BOUND",
-        "affinityKey": "session"
+        "affinityKey": "transaction.id"
       }
     },
     {
       "name": ["/google.spanner.v1.Spanner/BeginTransaction"],
       "affinity": {
-        "command": "BOUND",
-        "affinityKey": "session"
+        "command": "BIND",
+        "affinityKey": "id"
       }
     },
     {
       "name": ["/google.spanner.v1.Spanner/Commit"],
       "affinity": {
-        "command": "BOUND",
-        "affinityKey": "session"
+        "command": "UNBIND",
+        "affinityKey": "transactionId"
       }
     },
     {
       "name": ["/google.spanner.v1.Spanner/Rollback"],
       "affinity": {
-        "command": "BOUND",
-        "affinityKey": "session"
+        "command": "UNBIND",
+        "affinityKey": "transactionId"
       }
     },
     {

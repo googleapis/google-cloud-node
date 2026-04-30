@@ -16,6 +16,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"flag"
 	"fmt"
 	"log"
@@ -140,6 +141,10 @@ type serverStats struct {
 	callsByTransport        map[string]int
 	callsByMethod           map[string]int
 	callsByRequestIDChannel map[string]int
+	txnTransport            map[string]string
+	txnAffinityMisses       int
+	txnAffinityHits         int
+	txnAffinityUnknown      int
 }
 
 func newServerStats(targetMethod string) *serverStats {
@@ -156,18 +161,30 @@ func (s *serverStats) reset() {
 	s.callsByTransport = map[string]int{}
 	s.callsByMethod = map[string]int{}
 	s.callsByRequestIDChannel = map[string]int{}
+	s.txnTransport = map[string]string{}
+	s.txnAffinityMisses = 0
+	s.txnAffinityHits = 0
+	s.txnAffinityUnknown = 0
 }
 
 func (s *serverStats) unaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	s.recordMethod(info.FullMethod)
-	if info.FullMethod != s.targetMethod {
-		return handler(ctx, req)
-	}
 	transport := transportKey(ctx)
+	if info.FullMethod != s.targetMethod {
+		resp, err := handler(ctx, req)
+		if err == nil {
+			s.recordTransactionAffinity(info.FullMethod, transport, req, resp)
+		}
+		return resp, err
+	}
 	requestIDChannel := requestIDChannel(ctx)
 	s.startTargetRPC(transport, requestIDChannel)
-	defer s.finishTargetRPC(transport)
-	return handler(ctx, req)
+	resp, err := handler(ctx, req)
+	if err == nil {
+		s.recordTransactionAffinity(info.FullMethod, transport, req, resp)
+	}
+	s.finishTargetRPC(transport)
+	return resp, err
 }
 
 func (s *serverStats) streamInterceptor(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
@@ -211,7 +228,58 @@ func (s *serverStats) snapshotWire() string {
 	return "callsByTransport=" + wireMap(s.callsByTransport) +
 		";maxActiveByTransport=" + wireMap(s.maxActiveByTransport) +
 		";callsByMethod=" + wireMap(s.callsByMethod) +
-		";callsByRequestIdChannel=" + wireMap(s.callsByRequestIDChannel)
+		";callsByRequestIdChannel=" + wireMap(s.callsByRequestIDChannel) +
+		fmt.Sprintf(";txnAffinityHits=%d;txnAffinityMisses=%d;txnAffinityUnknown=%d", s.txnAffinityHits, s.txnAffinityMisses, s.txnAffinityUnknown)
+}
+
+func (s *serverStats) recordTransactionAffinity(method, transport string, req, resp interface{}) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	switch method {
+	case commitTransaction:
+		commitReq, ok := req.(*spannerpb.CommitRequest)
+		if !ok || len(commitReq.GetTransactionId()) == 0 {
+			return
+		}
+		txnID := txnKey(commitReq.GetTransactionId())
+		boundTransport, ok := s.txnTransport[txnID]
+		if !ok {
+			s.txnAffinityUnknown++
+			return
+		}
+		if boundTransport == transport {
+			s.txnAffinityHits++
+		} else {
+			s.txnAffinityMisses++
+		}
+		delete(s.txnTransport, txnID)
+	case "/google.spanner.v1.Spanner/Rollback":
+		rollbackReq, ok := req.(*spannerpb.RollbackRequest)
+		if !ok || len(rollbackReq.GetTransactionId()) == 0 {
+			return
+		}
+		txnID := txnKey(rollbackReq.GetTransactionId())
+		boundTransport, ok := s.txnTransport[txnID]
+		if !ok {
+			s.txnAffinityUnknown++
+			return
+		}
+		if boundTransport == transport {
+			s.txnAffinityHits++
+		} else {
+			s.txnAffinityMisses++
+		}
+		delete(s.txnTransport, txnID)
+	case "/google.spanner.v1.Spanner/BeginTransaction":
+		txn, ok := resp.(*spannerpb.Transaction)
+		if ok && len(txn.GetId()) > 0 {
+			s.txnTransport[txnKey(txn.GetId())] = transport
+		}
+	}
+}
+
+func txnKey(id []byte) string {
+	return base64.StdEncoding.EncodeToString(id)
 }
 
 func transportKey(ctx context.Context) string {
