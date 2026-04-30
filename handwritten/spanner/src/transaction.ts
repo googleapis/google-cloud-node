@@ -311,6 +311,7 @@ export class Snapshot extends EventEmitter {
   _traceConfig: traceConfig;
   protected _dbName?: string;
   protected _mutationKey: spannerClient.spanner.v1.Mutation | null;
+  protected _channelHint?: number;
 
   /**
    * The transaction ID.
@@ -620,6 +621,7 @@ export class Snapshot extends EventEmitter {
             method: 'beginTransaction',
             reqOpts,
             gaxOpts,
+            channelHint: this._ensureChannelHint(),
             headers: injectRequestIDIntoHeaders(headers, this.session),
           },
           (
@@ -919,6 +921,7 @@ export class Snapshot extends EventEmitter {
           method: 'streamingRead',
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
+          channelHint: this._ensureChannelHint(),
           headers: injectRequestIDIntoHeaders(
             headers,
             this.session,
@@ -1538,6 +1541,7 @@ export class Snapshot extends EventEmitter {
           method: 'executeStreamingSql',
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
+          channelHint: this._ensureChannelHint(),
           headers: injectRequestIDIntoHeaders(
             headers,
             this.session,
@@ -1852,6 +1856,13 @@ export class Snapshot extends EventEmitter {
    */
   protected _getSpanner(): Spanner {
     return this.session.parent.parent.parent as Spanner;
+  }
+
+  protected _ensureChannelHint(): number | undefined {
+    if (this._channelHint === undefined) {
+      this._channelHint = this._getSpanner()._nextTransactionChannelHint();
+    }
+    return this._channelHint;
   }
 }
 
@@ -2225,6 +2236,7 @@ export class Transaction extends Dml {
           method: 'executeBatchDml',
           reqOpts,
           gaxOpts,
+          channelHint: this._ensureChannelHint(),
           headers: headers,
         },
         (
@@ -2462,6 +2474,7 @@ export class Transaction extends Dml {
             method: 'commit',
             reqOpts,
             gaxOpts: gaxOpts,
+            channelHint: this._ensureChannelHint(),
             headers: injectRequestIDIntoHeaders(
               headers,
               this.session,
@@ -2825,6 +2838,7 @@ export class Transaction extends Dml {
           method: 'rollback',
           reqOpts,
           gaxOpts,
+          channelHint: this._ensureChannelHint(),
           headers: headers,
         },
         (err: null | ServiceError) => {

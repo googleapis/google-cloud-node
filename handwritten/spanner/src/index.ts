@@ -166,6 +166,12 @@ export interface SpannerOptions extends GrpcClientOptions {
   >;
   observabilityOptions?: ObservabilityOptions;
   disableBuiltInMetrics?: boolean;
+  /**
+   * Experimental. Number of independent Spanner data clients/channels to use
+   * for transaction RPCs. When set, grpc-gcp channel pooling is disabled and
+   * read/write transactions are assigned to these clients round-robin.
+   */
+  numChannels?: number;
   interceptors?: any[];
   sessionLabels?: {[key: string]: string};
   /**
@@ -187,6 +193,7 @@ export interface RequestConfig {
   reqOpts: any;
   gaxOpts?: CallOptions;
   headers: {[k: string]: string};
+  channelHint?: number;
 }
 export interface CreateInstanceRequest {
   config?: string;
@@ -327,6 +334,8 @@ class Spanner extends GrpcService {
   private _isInSecureCredentials: boolean;
   private static _isAFEServerTimingEnabled: boolean | undefined;
   readonly _nthClientId: number;
+  private _numChannels: number;
+  private _nextChannelHint: number;
 
   /**
    * Placeholder used to auto populate a column with the commit timestamp.
@@ -399,6 +408,10 @@ class Spanner extends GrpcService {
   }
 
   constructor(options?: SpannerOptions) {
+    const numChannels =
+      options?.numChannels && options.numChannels > 0
+        ? Math.floor(options.numChannels)
+        : 0;
     const scopes: Array<{}> = [];
     const clientClasses = [
       v1.DatabaseAdminClient,
@@ -413,21 +426,33 @@ class Spanner extends GrpcService {
       }
     }
 
-    options = Object.assign(
-      {
-        libName: 'gccl',
-        libVersion: require('../../package.json').version,
-        scopes,
-        // Add grpc keep alive setting
-        'grpc.keepalive_time_ms': 120000,
+    const defaultOptions = {
+      libName: 'gccl',
+      libVersion: require('../../package.json').version,
+      scopes,
+      // Add grpc keep alive setting
+      'grpc.keepalive_time_ms': 120000,
+      grpc,
+    };
+    if (!numChannels) {
+      Object.assign(defaultOptions, {
         // Enable grpc-gcp support
         'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
         'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
         'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig(gcpApiConfig),
-        grpc,
-      },
-      options || {},
-    ) as {} as SpannerOptions;
+      });
+    }
+    options = Object.assign(defaultOptions, options || {}) as {} as SpannerOptions;
+    if (numChannels) {
+      Object.assign(defaultOptions, {
+        // Keep each generated gRPC channel on its own HTTP/2 transport.
+        'grpc.use_local_subchannel_pool': 1,
+      });
+      delete options['grpc.callInvocationTransformer'];
+      delete options['grpc.channelFactoryOverride'];
+      delete options['grpc.gcpApiConfig'];
+      delete options.numChannels;
+    }
 
     const directedReadOptions = options.directedReadOptions
       ? options.directedReadOptions
@@ -505,6 +530,17 @@ class Spanner extends GrpcService {
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;
     this.configureMetrics_(options.disableBuiltInMetrics);
+    this._numChannels = numChannels;
+    this._nextChannelHint = 0;
+  }
+
+  _nextTransactionChannelHint(): number | undefined {
+    if (!this._numChannels) {
+      return undefined;
+    }
+    const channelHint = this._nextChannelHint % this._numChannels;
+    this._nextChannelHint++;
+    return channelHint;
   }
 
   get universeDomain() {
@@ -1681,14 +1717,23 @@ class Spanner extends GrpcService {
         return;
       }
       const clientName = config.client;
+      let channelHint: number | undefined;
+      if (clientName === 'SpannerClient' && this._numChannels) {
+        channelHint =
+          typeof config.channelHint === 'number'
+            ? config.channelHint % this._numChannels
+            : this._nextTransactionChannelHint();
+      }
+      const clientKey =
+        channelHint === undefined ? clientName : `${clientName}:${channelHint}`;
       try {
-        if (!this.clients_.has(clientName)) {
-          this.clients_.set(clientName, new v1[clientName](this.options));
+        if (!this.clients_.has(clientKey)) {
+          this.clients_.set(clientKey, new v1[clientName](this.options));
         }
       } catch (err) {
         callback(err, null);
       }
-      const gaxClient = this.clients_.get(clientName)!;
+      const gaxClient = this.clients_.get(clientKey)!;
       let reqOpts = extend(true, {}, config.reqOpts);
       reqOpts = replaceProjectIdToken(reqOpts, projectId!);
       // It would have been preferable to replace the projectId already in the
