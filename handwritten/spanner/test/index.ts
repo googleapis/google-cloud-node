@@ -2112,6 +2112,7 @@ describe('Spanner', () => {
         [CLOUD_RESOURCE_HEADER]: 'header',
       },
     };
+    const CLIENT_KEY = `${CONFIG.client}:0`;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const FAKE_GAPIC_CLIENT: any = {
@@ -2175,7 +2176,7 @@ describe('Spanner', () => {
           assert.strictEqual(options, spanner.options);
 
           setImmediate(() => {
-            const cachedClient = spanner.clients_.get(CONFIG.client);
+            const cachedClient = spanner.clients_.get(CLIENT_KEY);
             assert.strictEqual(cachedClient, FAKE_GAPIC_CLIENT);
             done();
           });
@@ -2190,7 +2191,7 @@ describe('Spanner', () => {
       fakeV1[CONFIG.client] = () => {
         throw new Error('Should not have re-created client!');
       };
-      spanner.clients_.set(CONFIG.client, FAKE_GAPIC_CLIENT);
+      spanner.clients_.set(CLIENT_KEY, FAKE_GAPIC_CLIENT);
       spanner.prepareGapicRequest_(CONFIG, assert.ifError);
     });
 
