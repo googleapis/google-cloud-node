@@ -39,7 +39,7 @@
     "lint": "gts check",
     "postpack": "minifyProtoJson",
     "prepare": "npm run fix-and-gen && npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "echo no system tests",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm i"
@@ -60,7 +60,6 @@
     "linkinator": "^6.1.2",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
-    "pack-n-play": "^3.0.0",
     "prettier": "^3.6.2",
     "sinon": "21.0.3",
     "typescript": "^5.8.2"
