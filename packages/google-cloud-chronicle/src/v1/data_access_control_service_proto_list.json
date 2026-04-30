@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/chronicle/v1/big_query_export.proto",
   "../../protos/google/cloud/chronicle/v1/dashboard_chart.proto",
   "../../protos/google/cloud/chronicle/v1/dashboard_query.proto",
   "../../protos/google/cloud/chronicle/v1/data_access_control.proto",

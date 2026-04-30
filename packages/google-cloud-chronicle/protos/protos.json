@@ -21,6 +21,233 @@
                     "(google.api.resource_definition).singular": "contentHub"
                   },
                   "nested": {
+                    "BigQueryExportService": {
+                      "options": {
+                        "(google.api.default_host)": "chronicle.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetBigQueryExport": {
+                          "requestType": "GetBigQueryExportRequest",
+                          "responseType": "BigQueryExport",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/bigQueryExport}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/bigQueryExport}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateBigQueryExport": {
+                          "requestType": "UpdateBigQueryExportRequest",
+                          "responseType": "BigQueryExport",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{big_query_export.name=projects/*/locations/*/instances/*/bigQueryExport}",
+                            "(google.api.http).body": "big_query_export",
+                            "(google.api.method_signature)": "big_query_export,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{big_query_export.name=projects/*/locations/*/instances/*/bigQueryExport}",
+                                "body": "big_query_export"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "big_query_export,update_mask"
+                            }
+                          ]
+                        },
+                        "ProvisionBigQueryExport": {
+                          "requestType": "ProvisionBigQueryExportRequest",
+                          "responseType": "BigQueryExport",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*}/bigQueryExport:provision",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*}/bigQueryExport:provision",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "BigQueryExportPackage": {
+                      "values": {
+                        "BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED": 0,
+                        "BIG_QUERY_EXPORT_PACKAGE_BYOBQ": 1,
+                        "BIG_QUERY_EXPORT_PACKAGE_ADVANCED": 2
+                      }
+                    },
+                    "LatestExportJobState": {
+                      "values": {
+                        "LATEST_EXPORT_JOB_STATE_UNSPECIFIED": 0,
+                        "LATEST_EXPORT_JOB_STATE_SUCCESS": 1,
+                        "LATEST_EXPORT_JOB_STATE_FAILED": 2
+                      }
+                    },
+                    "BigQueryExport": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/BigQueryExport",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/bigQueryExport",
+                        "(google.api.resource).plural": "bigQueryExport",
+                        "(google.api.resource).singular": "bigQueryExport"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "provisioned": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "bigQueryExportPackage": {
+                          "type": "BigQueryExportPackage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "entityGraphSettings": {
+                          "type": "DataSourceExportSettings",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "iocMatchesSettings": {
+                          "type": "DataSourceExportSettings",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ruleDetectionsSettings": {
+                          "type": "DataSourceExportSettings",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "udmEventsAggregatesSettings": {
+                          "type": "DataSourceExportSettings",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "udmEventsSettings": {
+                          "type": "DataSourceExportSettings",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DataSourceExportSettings": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "retentionDays": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "latestExportJobState": {
+                          "type": "LatestExportJobState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataFreshnessTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataVolume": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GetBigQueryExportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/BigQueryExport"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateBigQueryExportRequest": {
+                      "fields": {
+                        "bigQueryExport": {
+                          "type": "BigQueryExport",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ProvisionBigQueryExportRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/BigQueryExport"
+                          }
+                        }
+                      }
+                    },
                     "DashboardChartService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
@@ -8322,15 +8549,12 @@
                 }
               }
             },
-            "Any": {
+            "FieldMask": {
               "fields": {
-                "type_url": {
+                "paths": {
+                  "rule": "repeated",
                   "type": "string",
                   "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
                 }
               }
             },
@@ -8346,17 +8570,20 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
-            "FieldMask": {
+            "Any": {
               "fields": {
-                "paths": {
-                  "rule": "repeated",
+                "type_url": {
                   "type": "string",
                   "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
                 }
               }
+            },
+            "Empty": {
+              "fields": {}
             }
           }
         },

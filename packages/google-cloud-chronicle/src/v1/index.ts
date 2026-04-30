@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {BigQueryExportServiceClient} from './big_query_export_service_client';
 export {DashboardChartServiceClient} from './dashboard_chart_service_client';
 export {DashboardQueryServiceClient} from './dashboard_query_service_client';
 export {DataAccessControlServiceClient} from './data_access_control_service_client';

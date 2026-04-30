@@ -26,6 +26,664 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Represents a BigQueryExportService */
+                class BigQueryExportService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new BigQueryExportService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new BigQueryExportService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): BigQueryExportService;
+
+                    /**
+                     * Calls GetBigQueryExport.
+                     * @param request GetBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public getBigQueryExport(request: google.cloud.chronicle.v1.IGetBigQueryExportRequest, callback: google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExportCallback): void;
+
+                    /**
+                     * Calls GetBigQueryExport.
+                     * @param request GetBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBigQueryExport(request: google.cloud.chronicle.v1.IGetBigQueryExportRequest): Promise<google.cloud.chronicle.v1.BigQueryExport>;
+
+                    /**
+                     * Calls UpdateBigQueryExport.
+                     * @param request UpdateBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public updateBigQueryExport(request: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest, callback: google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExportCallback): void;
+
+                    /**
+                     * Calls UpdateBigQueryExport.
+                     * @param request UpdateBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBigQueryExport(request: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest): Promise<google.cloud.chronicle.v1.BigQueryExport>;
+
+                    /**
+                     * Calls ProvisionBigQueryExport.
+                     * @param request ProvisionBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public provisionBigQueryExport(request: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest, callback: google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExportCallback): void;
+
+                    /**
+                     * Calls ProvisionBigQueryExport.
+                     * @param request ProvisionBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public provisionBigQueryExport(request: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest): Promise<google.cloud.chronicle.v1.BigQueryExport>;
+                }
+
+                namespace BigQueryExportService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|getBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type GetBigQueryExportCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BigQueryExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|updateBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type UpdateBigQueryExportCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BigQueryExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|provisionBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type ProvisionBigQueryExportCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BigQueryExport) => void;
+                }
+
+                /** BigQueryExportPackage enum. */
+                enum BigQueryExportPackage {
+                    BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED = 0,
+                    BIG_QUERY_EXPORT_PACKAGE_BYOBQ = 1,
+                    BIG_QUERY_EXPORT_PACKAGE_ADVANCED = 2
+                }
+
+                /** LatestExportJobState enum. */
+                enum LatestExportJobState {
+                    LATEST_EXPORT_JOB_STATE_UNSPECIFIED = 0,
+                    LATEST_EXPORT_JOB_STATE_SUCCESS = 1,
+                    LATEST_EXPORT_JOB_STATE_FAILED = 2
+                }
+
+                /** Properties of a BigQueryExport. */
+                interface IBigQueryExport {
+
+                    /** BigQueryExport name */
+                    name?: (string|null);
+
+                    /** BigQueryExport provisioned */
+                    provisioned?: (boolean|null);
+
+                    /** BigQueryExport bigQueryExportPackage */
+                    bigQueryExportPackage?: (google.cloud.chronicle.v1.BigQueryExportPackage|keyof typeof google.cloud.chronicle.v1.BigQueryExportPackage|null);
+
+                    /** BigQueryExport entityGraphSettings */
+                    entityGraphSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport iocMatchesSettings */
+                    iocMatchesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport ruleDetectionsSettings */
+                    ruleDetectionsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsAggregatesSettings */
+                    udmEventsAggregatesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsSettings */
+                    udmEventsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+                }
+
+                /** Represents a BigQueryExport. */
+                class BigQueryExport implements IBigQueryExport {
+
+                    /**
+                     * Constructs a new BigQueryExport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBigQueryExport);
+
+                    /** BigQueryExport name. */
+                    public name: string;
+
+                    /** BigQueryExport provisioned. */
+                    public provisioned: boolean;
+
+                    /** BigQueryExport bigQueryExportPackage. */
+                    public bigQueryExportPackage: (google.cloud.chronicle.v1.BigQueryExportPackage|keyof typeof google.cloud.chronicle.v1.BigQueryExportPackage);
+
+                    /** BigQueryExport entityGraphSettings. */
+                    public entityGraphSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport iocMatchesSettings. */
+                    public iocMatchesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport ruleDetectionsSettings. */
+                    public ruleDetectionsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsAggregatesSettings. */
+                    public udmEventsAggregatesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsSettings. */
+                    public udmEventsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /**
+                     * Creates a new BigQueryExport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryExport instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBigQueryExport): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Encodes the specified BigQueryExport message. Does not implicitly {@link google.cloud.chronicle.v1.BigQueryExport.verify|verify} messages.
+                     * @param message BigQueryExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBigQueryExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryExport message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BigQueryExport.verify|verify} messages.
+                     * @param message BigQueryExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBigQueryExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryExport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Decodes a BigQueryExport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Verifies a BigQueryExport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryExport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryExport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Creates a plain object from a BigQueryExport message. Also converts values to other types if specified.
+                     * @param message BigQueryExport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BigQueryExport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryExport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryExport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataSourceExportSettings. */
+                interface IDataSourceExportSettings {
+
+                    /** DataSourceExportSettings enabled */
+                    enabled?: (boolean|null);
+
+                    /** DataSourceExportSettings retentionDays */
+                    retentionDays?: (number|null);
+
+                    /** DataSourceExportSettings latestExportJobState */
+                    latestExportJobState?: (google.cloud.chronicle.v1.LatestExportJobState|keyof typeof google.cloud.chronicle.v1.LatestExportJobState|null);
+
+                    /** DataSourceExportSettings dataFreshnessTime */
+                    dataFreshnessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataSourceExportSettings dataVolume */
+                    dataVolume?: (number|Long|string|null);
+                }
+
+                /** Represents a DataSourceExportSettings. */
+                class DataSourceExportSettings implements IDataSourceExportSettings {
+
+                    /**
+                     * Constructs a new DataSourceExportSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataSourceExportSettings);
+
+                    /** DataSourceExportSettings enabled. */
+                    public enabled: boolean;
+
+                    /** DataSourceExportSettings retentionDays. */
+                    public retentionDays: number;
+
+                    /** DataSourceExportSettings latestExportJobState. */
+                    public latestExportJobState: (google.cloud.chronicle.v1.LatestExportJobState|keyof typeof google.cloud.chronicle.v1.LatestExportJobState);
+
+                    /** DataSourceExportSettings dataFreshnessTime. */
+                    public dataFreshnessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataSourceExportSettings dataVolume. */
+                    public dataVolume: (number|Long|string);
+
+                    /**
+                     * Creates a new DataSourceExportSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataSourceExportSettings instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataSourceExportSettings): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Encodes the specified DataSourceExportSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DataSourceExportSettings.verify|verify} messages.
+                     * @param message DataSourceExportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataSourceExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataSourceExportSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataSourceExportSettings.verify|verify} messages.
+                     * @param message DataSourceExportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataSourceExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataSourceExportSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataSourceExportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Decodes a DataSourceExportSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataSourceExportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Verifies a DataSourceExportSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataSourceExportSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataSourceExportSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Creates a plain object from a DataSourceExportSettings message. Also converts values to other types if specified.
+                     * @param message DataSourceExportSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataSourceExportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataSourceExportSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataSourceExportSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBigQueryExportRequest. */
+                interface IGetBigQueryExportRequest {
+
+                    /** GetBigQueryExportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBigQueryExportRequest. */
+                class GetBigQueryExportRequest implements IGetBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new GetBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetBigQueryExportRequest);
+
+                    /** GetBigQueryExportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetBigQueryExportRequest): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified GetBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetBigQueryExportRequest.verify|verify} messages.
+                     * @param message GetBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetBigQueryExportRequest.verify|verify} messages.
+                     * @param message GetBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Decodes a GetBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Verifies a GetBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a GetBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message GetBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBigQueryExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBigQueryExportRequest. */
+                interface IUpdateBigQueryExportRequest {
+
+                    /** UpdateBigQueryExportRequest bigQueryExport */
+                    bigQueryExport?: (google.cloud.chronicle.v1.IBigQueryExport|null);
+
+                    /** UpdateBigQueryExportRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateBigQueryExportRequest. */
+                class UpdateBigQueryExportRequest implements IUpdateBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new UpdateBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest);
+
+                    /** UpdateBigQueryExportRequest bigQueryExport. */
+                    public bigQueryExport?: (google.cloud.chronicle.v1.IBigQueryExport|null);
+
+                    /** UpdateBigQueryExportRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified UpdateBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                     * @param message UpdateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                     * @param message UpdateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Verifies an UpdateBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBigQueryExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisionBigQueryExportRequest. */
+                interface IProvisionBigQueryExportRequest {
+
+                    /** ProvisionBigQueryExportRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ProvisionBigQueryExportRequest. */
+                class ProvisionBigQueryExportRequest implements IProvisionBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new ProvisionBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest);
+
+                    /** ProvisionBigQueryExportRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ProvisionBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisionBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified ProvisionBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ProvisionBigQueryExportRequest.verify|verify} messages.
+                     * @param message ProvisionBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisionBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ProvisionBigQueryExportRequest.verify|verify} messages.
+                     * @param message ProvisionBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisionBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisionBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Decodes a ProvisionBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisionBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Verifies a ProvisionBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisionBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisionBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a ProvisionBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message ProvisionBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ProvisionBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisionBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisionBigQueryExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DashboardChartService */
                 class DashboardChartService extends $protobuf.rpc.Service {
 
@@ -28950,103 +29608,97 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Any. */
-        interface IAny {
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
 
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            /** FieldMask paths */
+            paths?: (string[]|null);
         }
 
-        /** Represents an Any. */
-        class Any implements IAny {
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
 
             /**
-             * Constructs a new Any.
+             * Constructs a new FieldMask.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IAny);
+            constructor(properties?: google.protobuf.IFieldMask);
 
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            /** FieldMask paths. */
+            public paths: string[];
 
             /**
-             * Creates a new Any instance using the specified properties.
+             * Creates a new FieldMask instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Any instance
+             * @returns FieldMask instance
              */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
 
             /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes an Any message from the specified reader or buffer.
+             * Decodes a FieldMask message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Any
+             * @returns FieldMask
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
 
             /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Any
+             * @returns FieldMask
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
 
             /**
-             * Verifies an Any message.
+             * Verifies a FieldMask message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Any
+             * @returns FieldMask
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
 
             /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Any to JSON.
+             * Converts this FieldMask to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Any
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -29156,6 +29808,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|Buffer|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|Buffer|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -29241,103 +29996,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

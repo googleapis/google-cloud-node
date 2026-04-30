@@ -21,6 +21,7 @@
 const chronicle = require('@google-cloud/chronicle');
 
 function main() {
+  const bigQueryExportServiceClient = new chronicle.BigQueryExportServiceClient();
   const dashboardChartServiceClient = new chronicle.DashboardChartServiceClient();
   const dashboardQueryServiceClient = new chronicle.DashboardQueryServiceClient();
   const dataAccessControlServiceClient = new chronicle.DataAccessControlServiceClient();

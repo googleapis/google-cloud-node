@@ -18,6 +18,8 @@
 
 import * as v1 from './v1';
 
+const BigQueryExportServiceClient = v1.BigQueryExportServiceClient;
+type BigQueryExportServiceClient = v1.BigQueryExportServiceClient;
 const DashboardChartServiceClient = v1.DashboardChartServiceClient;
 type DashboardChartServiceClient = v1.DashboardChartServiceClient;
 const DashboardQueryServiceClient = v1.DashboardQueryServiceClient;
@@ -39,7 +41,7 @@ type ReferenceListServiceClient = v1.ReferenceListServiceClient;
 const RuleServiceClient = v1.RuleServiceClient;
 type RuleServiceClient = v1.RuleServiceClient;
 
-export {v1, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient};
-export default {v1, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient};
+export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient};
+export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

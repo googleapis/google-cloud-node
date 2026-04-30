@@ -722,6 +722,52 @@ describe('v1.FeaturedContentNativeDashboardServiceClient', () => {
 
     describe('Path templates', () => {
 
+        describe('bigQueryExport', async () => {
+            const fakePath = "/rendered/path/bigQueryExport";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new featuredcontentnativedashboardserviceModule.v1.FeaturedContentNativeDashboardServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.bigQueryExportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.bigQueryExportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('bigQueryExportPath', () => {
+                const result = client.bigQueryExportPath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBigQueryExportName', () => {
+                const result = client.matchProjectFromBigQueryExportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBigQueryExportName', () => {
+                const result = client.matchLocationFromBigQueryExportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromBigQueryExportName', () => {
+                const result = client.matchInstanceFromBigQueryExportName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('contentHub', async () => {
             const fakePath = "/rendered/path/contentHub";
             const expectedParameters = {

@@ -66,6 +66,1578 @@
                      */
                     var v1 = {};
     
+                    v1.BigQueryExportService = (function() {
+    
+                        /**
+                         * Constructs a new BigQueryExportService service.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BigQueryExportService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function BigQueryExportService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (BigQueryExportService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = BigQueryExportService;
+    
+                        /**
+                         * Creates new BigQueryExportService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {BigQueryExportService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        BigQueryExportService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|getBigQueryExport}.
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @typedef GetBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BigQueryExport} [response] BigQueryExport
+                         */
+    
+                        /**
+                         * Calls GetBigQueryExport.
+                         * @function getBigQueryExport
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetBigQueryExportRequest} request GetBigQueryExportRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExportCallback} callback Node-style callback called with the error, if any, and BigQueryExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BigQueryExportService.prototype.getBigQueryExport = function getBigQueryExport(request, callback) {
+                            return this.rpcCall(getBigQueryExport, $root.google.cloud.chronicle.v1.GetBigQueryExportRequest, $root.google.cloud.chronicle.v1.BigQueryExport, request, callback);
+                        }, "name", { value: "GetBigQueryExport" });
+    
+                        /**
+                         * Calls GetBigQueryExport.
+                         * @function getBigQueryExport
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IGetBigQueryExportRequest} request GetBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BigQueryExport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|updateBigQueryExport}.
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @typedef UpdateBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BigQueryExport} [response] BigQueryExport
+                         */
+    
+                        /**
+                         * Calls UpdateBigQueryExport.
+                         * @function updateBigQueryExport
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateBigQueryExportRequest} request UpdateBigQueryExportRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExportCallback} callback Node-style callback called with the error, if any, and BigQueryExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BigQueryExportService.prototype.updateBigQueryExport = function updateBigQueryExport(request, callback) {
+                            return this.rpcCall(updateBigQueryExport, $root.google.cloud.chronicle.v1.UpdateBigQueryExportRequest, $root.google.cloud.chronicle.v1.BigQueryExport, request, callback);
+                        }, "name", { value: "UpdateBigQueryExport" });
+    
+                        /**
+                         * Calls UpdateBigQueryExport.
+                         * @function updateBigQueryExport
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IUpdateBigQueryExportRequest} request UpdateBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BigQueryExport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|provisionBigQueryExport}.
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @typedef ProvisionBigQueryExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.BigQueryExport} [response] BigQueryExport
+                         */
+    
+                        /**
+                         * Calls ProvisionBigQueryExport.
+                         * @function provisionBigQueryExport
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IProvisionBigQueryExportRequest} request ProvisionBigQueryExportRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExportCallback} callback Node-style callback called with the error, if any, and BigQueryExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BigQueryExportService.prototype.provisionBigQueryExport = function provisionBigQueryExport(request, callback) {
+                            return this.rpcCall(provisionBigQueryExport, $root.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest, $root.google.cloud.chronicle.v1.BigQueryExport, request, callback);
+                        }, "name", { value: "ProvisionBigQueryExport" });
+    
+                        /**
+                         * Calls ProvisionBigQueryExport.
+                         * @function provisionBigQueryExport
+                         * @memberof google.cloud.chronicle.v1.BigQueryExportService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IProvisionBigQueryExportRequest} request ProvisionBigQueryExportRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.BigQueryExport>} Promise
+                         * @variation 2
+                         */
+    
+                        return BigQueryExportService;
+                    })();
+    
+                    /**
+                     * BigQueryExportPackage enum.
+                     * @name google.cloud.chronicle.v1.BigQueryExportPackage
+                     * @enum {number}
+                     * @property {number} BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED=0 BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED value
+                     * @property {number} BIG_QUERY_EXPORT_PACKAGE_BYOBQ=1 BIG_QUERY_EXPORT_PACKAGE_BYOBQ value
+                     * @property {number} BIG_QUERY_EXPORT_PACKAGE_ADVANCED=2 BIG_QUERY_EXPORT_PACKAGE_ADVANCED value
+                     */
+                    v1.BigQueryExportPackage = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BIG_QUERY_EXPORT_PACKAGE_BYOBQ"] = 1;
+                        values[valuesById[2] = "BIG_QUERY_EXPORT_PACKAGE_ADVANCED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * LatestExportJobState enum.
+                     * @name google.cloud.chronicle.v1.LatestExportJobState
+                     * @enum {number}
+                     * @property {number} LATEST_EXPORT_JOB_STATE_UNSPECIFIED=0 LATEST_EXPORT_JOB_STATE_UNSPECIFIED value
+                     * @property {number} LATEST_EXPORT_JOB_STATE_SUCCESS=1 LATEST_EXPORT_JOB_STATE_SUCCESS value
+                     * @property {number} LATEST_EXPORT_JOB_STATE_FAILED=2 LATEST_EXPORT_JOB_STATE_FAILED value
+                     */
+                    v1.LatestExportJobState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LATEST_EXPORT_JOB_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LATEST_EXPORT_JOB_STATE_SUCCESS"] = 1;
+                        values[valuesById[2] = "LATEST_EXPORT_JOB_STATE_FAILED"] = 2;
+                        return values;
+                    })();
+    
+                    v1.BigQueryExport = (function() {
+    
+                        /**
+                         * Properties of a BigQueryExport.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IBigQueryExport
+                         * @property {string|null} [name] BigQueryExport name
+                         * @property {boolean|null} [provisioned] BigQueryExport provisioned
+                         * @property {google.cloud.chronicle.v1.BigQueryExportPackage|null} [bigQueryExportPackage] BigQueryExport bigQueryExportPackage
+                         * @property {google.cloud.chronicle.v1.IDataSourceExportSettings|null} [entityGraphSettings] BigQueryExport entityGraphSettings
+                         * @property {google.cloud.chronicle.v1.IDataSourceExportSettings|null} [iocMatchesSettings] BigQueryExport iocMatchesSettings
+                         * @property {google.cloud.chronicle.v1.IDataSourceExportSettings|null} [ruleDetectionsSettings] BigQueryExport ruleDetectionsSettings
+                         * @property {google.cloud.chronicle.v1.IDataSourceExportSettings|null} [udmEventsAggregatesSettings] BigQueryExport udmEventsAggregatesSettings
+                         * @property {google.cloud.chronicle.v1.IDataSourceExportSettings|null} [udmEventsSettings] BigQueryExport udmEventsSettings
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryExport.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a BigQueryExport.
+                         * @implements IBigQueryExport
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IBigQueryExport=} [properties] Properties to set
+                         */
+                        function BigQueryExport(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryExport name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.name = "";
+    
+                        /**
+                         * BigQueryExport provisioned.
+                         * @member {boolean} provisioned
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.provisioned = false;
+    
+                        /**
+                         * BigQueryExport bigQueryExportPackage.
+                         * @member {google.cloud.chronicle.v1.BigQueryExportPackage} bigQueryExportPackage
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.bigQueryExportPackage = 0;
+    
+                        /**
+                         * BigQueryExport entityGraphSettings.
+                         * @member {google.cloud.chronicle.v1.IDataSourceExportSettings|null|undefined} entityGraphSettings
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.entityGraphSettings = null;
+    
+                        /**
+                         * BigQueryExport iocMatchesSettings.
+                         * @member {google.cloud.chronicle.v1.IDataSourceExportSettings|null|undefined} iocMatchesSettings
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.iocMatchesSettings = null;
+    
+                        /**
+                         * BigQueryExport ruleDetectionsSettings.
+                         * @member {google.cloud.chronicle.v1.IDataSourceExportSettings|null|undefined} ruleDetectionsSettings
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.ruleDetectionsSettings = null;
+    
+                        /**
+                         * BigQueryExport udmEventsAggregatesSettings.
+                         * @member {google.cloud.chronicle.v1.IDataSourceExportSettings|null|undefined} udmEventsAggregatesSettings
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.udmEventsAggregatesSettings = null;
+    
+                        /**
+                         * BigQueryExport udmEventsSettings.
+                         * @member {google.cloud.chronicle.v1.IDataSourceExportSettings|null|undefined} udmEventsSettings
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         */
+                        BigQueryExport.prototype.udmEventsSettings = null;
+    
+                        /**
+                         * Creates a new BigQueryExport instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBigQueryExport=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.BigQueryExport} BigQueryExport instance
+                         */
+                        BigQueryExport.create = function create(properties) {
+                            return new BigQueryExport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryExport message. Does not implicitly {@link google.cloud.chronicle.v1.BigQueryExport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBigQueryExport} message BigQueryExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryExport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.provisioned != null && Object.hasOwnProperty.call(message, "provisioned"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.provisioned);
+                            if (message.bigQueryExportPackage != null && Object.hasOwnProperty.call(message, "bigQueryExportPackage"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.bigQueryExportPackage);
+                            if (message.entityGraphSettings != null && Object.hasOwnProperty.call(message, "entityGraphSettings"))
+                                $root.google.cloud.chronicle.v1.DataSourceExportSettings.encode(message.entityGraphSettings, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.iocMatchesSettings != null && Object.hasOwnProperty.call(message, "iocMatchesSettings"))
+                                $root.google.cloud.chronicle.v1.DataSourceExportSettings.encode(message.iocMatchesSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.ruleDetectionsSettings != null && Object.hasOwnProperty.call(message, "ruleDetectionsSettings"))
+                                $root.google.cloud.chronicle.v1.DataSourceExportSettings.encode(message.ruleDetectionsSettings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.udmEventsAggregatesSettings != null && Object.hasOwnProperty.call(message, "udmEventsAggregatesSettings"))
+                                $root.google.cloud.chronicle.v1.DataSourceExportSettings.encode(message.udmEventsAggregatesSettings, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.udmEventsSettings != null && Object.hasOwnProperty.call(message, "udmEventsSettings"))
+                                $root.google.cloud.chronicle.v1.DataSourceExportSettings.encode(message.udmEventsSettings, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryExport message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BigQueryExport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IBigQueryExport} message BigQueryExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryExport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryExport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.BigQueryExport} BigQueryExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryExport.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.BigQueryExport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.provisioned = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.bigQueryExportPackage = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.entityGraphSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.iocMatchesSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ruleDetectionsSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.udmEventsAggregatesSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.udmEventsSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryExport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.BigQueryExport} BigQueryExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryExport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryExport message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryExport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.provisioned != null && message.hasOwnProperty("provisioned"))
+                                if (typeof message.provisioned !== "boolean")
+                                    return "provisioned: boolean expected";
+                            if (message.bigQueryExportPackage != null && message.hasOwnProperty("bigQueryExportPackage"))
+                                switch (message.bigQueryExportPackage) {
+                                default:
+                                    return "bigQueryExportPackage: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.entityGraphSettings != null && message.hasOwnProperty("entityGraphSettings")) {
+                                var error = $root.google.cloud.chronicle.v1.DataSourceExportSettings.verify(message.entityGraphSettings);
+                                if (error)
+                                    return "entityGraphSettings." + error;
+                            }
+                            if (message.iocMatchesSettings != null && message.hasOwnProperty("iocMatchesSettings")) {
+                                var error = $root.google.cloud.chronicle.v1.DataSourceExportSettings.verify(message.iocMatchesSettings);
+                                if (error)
+                                    return "iocMatchesSettings." + error;
+                            }
+                            if (message.ruleDetectionsSettings != null && message.hasOwnProperty("ruleDetectionsSettings")) {
+                                var error = $root.google.cloud.chronicle.v1.DataSourceExportSettings.verify(message.ruleDetectionsSettings);
+                                if (error)
+                                    return "ruleDetectionsSettings." + error;
+                            }
+                            if (message.udmEventsAggregatesSettings != null && message.hasOwnProperty("udmEventsAggregatesSettings")) {
+                                var error = $root.google.cloud.chronicle.v1.DataSourceExportSettings.verify(message.udmEventsAggregatesSettings);
+                                if (error)
+                                    return "udmEventsAggregatesSettings." + error;
+                            }
+                            if (message.udmEventsSettings != null && message.hasOwnProperty("udmEventsSettings")) {
+                                var error = $root.google.cloud.chronicle.v1.DataSourceExportSettings.verify(message.udmEventsSettings);
+                                if (error)
+                                    return "udmEventsSettings." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryExport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.BigQueryExport} BigQueryExport
+                         */
+                        BigQueryExport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.BigQueryExport)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.BigQueryExport();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.provisioned != null)
+                                message.provisioned = Boolean(object.provisioned);
+                            switch (object.bigQueryExportPackage) {
+                            default:
+                                if (typeof object.bigQueryExportPackage === "number") {
+                                    message.bigQueryExportPackage = object.bigQueryExportPackage;
+                                    break;
+                                }
+                                break;
+                            case "BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED":
+                            case 0:
+                                message.bigQueryExportPackage = 0;
+                                break;
+                            case "BIG_QUERY_EXPORT_PACKAGE_BYOBQ":
+                            case 1:
+                                message.bigQueryExportPackage = 1;
+                                break;
+                            case "BIG_QUERY_EXPORT_PACKAGE_ADVANCED":
+                            case 2:
+                                message.bigQueryExportPackage = 2;
+                                break;
+                            }
+                            if (object.entityGraphSettings != null) {
+                                if (typeof object.entityGraphSettings !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.BigQueryExport.entityGraphSettings: object expected");
+                                message.entityGraphSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.fromObject(object.entityGraphSettings);
+                            }
+                            if (object.iocMatchesSettings != null) {
+                                if (typeof object.iocMatchesSettings !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.BigQueryExport.iocMatchesSettings: object expected");
+                                message.iocMatchesSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.fromObject(object.iocMatchesSettings);
+                            }
+                            if (object.ruleDetectionsSettings != null) {
+                                if (typeof object.ruleDetectionsSettings !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.BigQueryExport.ruleDetectionsSettings: object expected");
+                                message.ruleDetectionsSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.fromObject(object.ruleDetectionsSettings);
+                            }
+                            if (object.udmEventsAggregatesSettings != null) {
+                                if (typeof object.udmEventsAggregatesSettings !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.BigQueryExport.udmEventsAggregatesSettings: object expected");
+                                message.udmEventsAggregatesSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.fromObject(object.udmEventsAggregatesSettings);
+                            }
+                            if (object.udmEventsSettings != null) {
+                                if (typeof object.udmEventsSettings !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.BigQueryExport.udmEventsSettings: object expected");
+                                message.udmEventsSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.fromObject(object.udmEventsSettings);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryExport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {google.cloud.chronicle.v1.BigQueryExport} message BigQueryExport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryExport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.provisioned = false;
+                                object.bigQueryExportPackage = options.enums === String ? "BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED" : 0;
+                                object.entityGraphSettings = null;
+                                object.iocMatchesSettings = null;
+                                object.ruleDetectionsSettings = null;
+                                object.udmEventsAggregatesSettings = null;
+                                object.udmEventsSettings = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.provisioned != null && message.hasOwnProperty("provisioned"))
+                                object.provisioned = message.provisioned;
+                            if (message.bigQueryExportPackage != null && message.hasOwnProperty("bigQueryExportPackage"))
+                                object.bigQueryExportPackage = options.enums === String ? $root.google.cloud.chronicle.v1.BigQueryExportPackage[message.bigQueryExportPackage] === undefined ? message.bigQueryExportPackage : $root.google.cloud.chronicle.v1.BigQueryExportPackage[message.bigQueryExportPackage] : message.bigQueryExportPackage;
+                            if (message.entityGraphSettings != null && message.hasOwnProperty("entityGraphSettings"))
+                                object.entityGraphSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.toObject(message.entityGraphSettings, options);
+                            if (message.iocMatchesSettings != null && message.hasOwnProperty("iocMatchesSettings"))
+                                object.iocMatchesSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.toObject(message.iocMatchesSettings, options);
+                            if (message.ruleDetectionsSettings != null && message.hasOwnProperty("ruleDetectionsSettings"))
+                                object.ruleDetectionsSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.toObject(message.ruleDetectionsSettings, options);
+                            if (message.udmEventsAggregatesSettings != null && message.hasOwnProperty("udmEventsAggregatesSettings"))
+                                object.udmEventsAggregatesSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.toObject(message.udmEventsAggregatesSettings, options);
+                            if (message.udmEventsSettings != null && message.hasOwnProperty("udmEventsSettings"))
+                                object.udmEventsSettings = $root.google.cloud.chronicle.v1.DataSourceExportSettings.toObject(message.udmEventsSettings, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryExport to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryExport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryExport
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.BigQueryExport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryExport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.BigQueryExport";
+                        };
+    
+                        return BigQueryExport;
+                    })();
+    
+                    v1.DataSourceExportSettings = (function() {
+    
+                        /**
+                         * Properties of a DataSourceExportSettings.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IDataSourceExportSettings
+                         * @property {boolean|null} [enabled] DataSourceExportSettings enabled
+                         * @property {number|null} [retentionDays] DataSourceExportSettings retentionDays
+                         * @property {google.cloud.chronicle.v1.LatestExportJobState|null} [latestExportJobState] DataSourceExportSettings latestExportJobState
+                         * @property {google.protobuf.ITimestamp|null} [dataFreshnessTime] DataSourceExportSettings dataFreshnessTime
+                         * @property {number|Long|null} [dataVolume] DataSourceExportSettings dataVolume
+                         */
+    
+                        /**
+                         * Constructs a new DataSourceExportSettings.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a DataSourceExportSettings.
+                         * @implements IDataSourceExportSettings
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IDataSourceExportSettings=} [properties] Properties to set
+                         */
+                        function DataSourceExportSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataSourceExportSettings enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @instance
+                         */
+                        DataSourceExportSettings.prototype.enabled = false;
+    
+                        /**
+                         * DataSourceExportSettings retentionDays.
+                         * @member {number} retentionDays
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @instance
+                         */
+                        DataSourceExportSettings.prototype.retentionDays = 0;
+    
+                        /**
+                         * DataSourceExportSettings latestExportJobState.
+                         * @member {google.cloud.chronicle.v1.LatestExportJobState} latestExportJobState
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @instance
+                         */
+                        DataSourceExportSettings.prototype.latestExportJobState = 0;
+    
+                        /**
+                         * DataSourceExportSettings dataFreshnessTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} dataFreshnessTime
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @instance
+                         */
+                        DataSourceExportSettings.prototype.dataFreshnessTime = null;
+    
+                        /**
+                         * DataSourceExportSettings dataVolume.
+                         * @member {number|Long} dataVolume
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @instance
+                         */
+                        DataSourceExportSettings.prototype.dataVolume = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new DataSourceExportSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataSourceExportSettings=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.DataSourceExportSettings} DataSourceExportSettings instance
+                         */
+                        DataSourceExportSettings.create = function create(properties) {
+                            return new DataSourceExportSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceExportSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DataSourceExportSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataSourceExportSettings} message DataSourceExportSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceExportSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            if (message.retentionDays != null && Object.hasOwnProperty.call(message, "retentionDays"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.retentionDays);
+                            if (message.latestExportJobState != null && Object.hasOwnProperty.call(message, "latestExportJobState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.latestExportJobState);
+                            if (message.dataFreshnessTime != null && Object.hasOwnProperty.call(message, "dataFreshnessTime"))
+                                $root.google.protobuf.Timestamp.encode(message.dataFreshnessTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.dataVolume != null && Object.hasOwnProperty.call(message, "dataVolume"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.dataVolume);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceExportSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataSourceExportSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IDataSourceExportSettings} message DataSourceExportSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceExportSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataSourceExportSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.DataSourceExportSettings} DataSourceExportSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceExportSettings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.DataSourceExportSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retentionDays = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.latestExportJobState = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.dataFreshnessTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dataVolume = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataSourceExportSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.DataSourceExportSettings} DataSourceExportSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceExportSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataSourceExportSettings message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataSourceExportSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                if (!$util.isInteger(message.retentionDays))
+                                    return "retentionDays: integer expected";
+                            if (message.latestExportJobState != null && message.hasOwnProperty("latestExportJobState"))
+                                switch (message.latestExportJobState) {
+                                default:
+                                    return "latestExportJobState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.dataFreshnessTime != null && message.hasOwnProperty("dataFreshnessTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.dataFreshnessTime);
+                                if (error)
+                                    return "dataFreshnessTime." + error;
+                            }
+                            if (message.dataVolume != null && message.hasOwnProperty("dataVolume"))
+                                if (!$util.isInteger(message.dataVolume) && !(message.dataVolume && $util.isInteger(message.dataVolume.low) && $util.isInteger(message.dataVolume.high)))
+                                    return "dataVolume: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataSourceExportSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.DataSourceExportSettings} DataSourceExportSettings
+                         */
+                        DataSourceExportSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.DataSourceExportSettings)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.DataSourceExportSettings();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.retentionDays != null)
+                                message.retentionDays = object.retentionDays | 0;
+                            switch (object.latestExportJobState) {
+                            default:
+                                if (typeof object.latestExportJobState === "number") {
+                                    message.latestExportJobState = object.latestExportJobState;
+                                    break;
+                                }
+                                break;
+                            case "LATEST_EXPORT_JOB_STATE_UNSPECIFIED":
+                            case 0:
+                                message.latestExportJobState = 0;
+                                break;
+                            case "LATEST_EXPORT_JOB_STATE_SUCCESS":
+                            case 1:
+                                message.latestExportJobState = 1;
+                                break;
+                            case "LATEST_EXPORT_JOB_STATE_FAILED":
+                            case 2:
+                                message.latestExportJobState = 2;
+                                break;
+                            }
+                            if (object.dataFreshnessTime != null) {
+                                if (typeof object.dataFreshnessTime !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.DataSourceExportSettings.dataFreshnessTime: object expected");
+                                message.dataFreshnessTime = $root.google.protobuf.Timestamp.fromObject(object.dataFreshnessTime);
+                            }
+                            if (object.dataVolume != null)
+                                if ($util.Long)
+                                    (message.dataVolume = $util.Long.fromValue(object.dataVolume)).unsigned = false;
+                                else if (typeof object.dataVolume === "string")
+                                    message.dataVolume = parseInt(object.dataVolume, 10);
+                                else if (typeof object.dataVolume === "number")
+                                    message.dataVolume = object.dataVolume;
+                                else if (typeof object.dataVolume === "object")
+                                    message.dataVolume = new $util.LongBits(object.dataVolume.low >>> 0, object.dataVolume.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataSourceExportSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {google.cloud.chronicle.v1.DataSourceExportSettings} message DataSourceExportSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataSourceExportSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.enabled = false;
+                                object.retentionDays = 0;
+                                object.latestExportJobState = options.enums === String ? "LATEST_EXPORT_JOB_STATE_UNSPECIFIED" : 0;
+                                object.dataFreshnessTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.dataVolume = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.dataVolume = options.longs === String ? "0" : 0;
+                            }
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                object.retentionDays = message.retentionDays;
+                            if (message.latestExportJobState != null && message.hasOwnProperty("latestExportJobState"))
+                                object.latestExportJobState = options.enums === String ? $root.google.cloud.chronicle.v1.LatestExportJobState[message.latestExportJobState] === undefined ? message.latestExportJobState : $root.google.cloud.chronicle.v1.LatestExportJobState[message.latestExportJobState] : message.latestExportJobState;
+                            if (message.dataFreshnessTime != null && message.hasOwnProperty("dataFreshnessTime"))
+                                object.dataFreshnessTime = $root.google.protobuf.Timestamp.toObject(message.dataFreshnessTime, options);
+                            if (message.dataVolume != null && message.hasOwnProperty("dataVolume"))
+                                if (typeof message.dataVolume === "number")
+                                    object.dataVolume = options.longs === String ? String(message.dataVolume) : message.dataVolume;
+                                else
+                                    object.dataVolume = options.longs === String ? $util.Long.prototype.toString.call(message.dataVolume) : options.longs === Number ? new $util.LongBits(message.dataVolume.low >>> 0, message.dataVolume.high >>> 0).toNumber() : message.dataVolume;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataSourceExportSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataSourceExportSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataSourceExportSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.DataSourceExportSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataSourceExportSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.DataSourceExportSettings";
+                        };
+    
+                        return DataSourceExportSettings;
+                    })();
+    
+                    v1.GetBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBigQueryExportRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IGetBigQueryExportRequest
+                         * @property {string|null} [name] GetBigQueryExportRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBigQueryExportRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a GetBigQueryExportRequest.
+                         * @implements IGetBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IGetBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function GetBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBigQueryExportRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @instance
+                         */
+                        GetBigQueryExportRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.GetBigQueryExportRequest} GetBigQueryExportRequest instance
+                         */
+                        GetBigQueryExportRequest.create = function create(properties) {
+                            return new GetBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetBigQueryExportRequest} message GetBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IGetBigQueryExportRequest} message GetBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.GetBigQueryExportRequest} GetBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBigQueryExportRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.GetBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.GetBigQueryExportRequest} GetBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.GetBigQueryExportRequest} GetBigQueryExportRequest
+                         */
+                        GetBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.GetBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.GetBigQueryExportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.GetBigQueryExportRequest} message GetBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBigQueryExportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.GetBigQueryExportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBigQueryExportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.GetBigQueryExportRequest";
+                        };
+    
+                        return GetBigQueryExportRequest;
+                    })();
+    
+                    v1.UpdateBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBigQueryExportRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IUpdateBigQueryExportRequest
+                         * @property {google.cloud.chronicle.v1.IBigQueryExport|null} [bigQueryExport] UpdateBigQueryExportRequest bigQueryExport
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBigQueryExportRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBigQueryExportRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents an UpdateBigQueryExportRequest.
+                         * @implements IUpdateBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IUpdateBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function UpdateBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBigQueryExportRequest bigQueryExport.
+                         * @member {google.cloud.chronicle.v1.IBigQueryExport|null|undefined} bigQueryExport
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @instance
+                         */
+                        UpdateBigQueryExportRequest.prototype.bigQueryExport = null;
+    
+                        /**
+                         * UpdateBigQueryExportRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @instance
+                         */
+                        UpdateBigQueryExportRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest instance
+                         */
+                        UpdateBigQueryExportRequest.create = function create(properties) {
+                            return new UpdateBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateBigQueryExportRequest} message UpdateBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bigQueryExport != null && Object.hasOwnProperty.call(message, "bigQueryExport"))
+                                $root.google.cloud.chronicle.v1.BigQueryExport.encode(message.bigQueryExport, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IUpdateBigQueryExportRequest} message UpdateBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBigQueryExportRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.UpdateBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.bigQueryExport = $root.google.cloud.chronicle.v1.BigQueryExport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bigQueryExport != null && message.hasOwnProperty("bigQueryExport")) {
+                                var error = $root.google.cloud.chronicle.v1.BigQueryExport.verify(message.bigQueryExport);
+                                if (error)
+                                    return "bigQueryExport." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.UpdateBigQueryExportRequest} UpdateBigQueryExportRequest
+                         */
+                        UpdateBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.UpdateBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.UpdateBigQueryExportRequest();
+                            if (object.bigQueryExport != null) {
+                                if (typeof object.bigQueryExport !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateBigQueryExportRequest.bigQueryExport: object expected");
+                                message.bigQueryExport = $root.google.cloud.chronicle.v1.BigQueryExport.fromObject(object.bigQueryExport);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.UpdateBigQueryExportRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.UpdateBigQueryExportRequest} message UpdateBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.bigQueryExport = null;
+                                object.updateMask = null;
+                            }
+                            if (message.bigQueryExport != null && message.hasOwnProperty("bigQueryExport"))
+                                object.bigQueryExport = $root.google.cloud.chronicle.v1.BigQueryExport.toObject(message.bigQueryExport, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBigQueryExportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.UpdateBigQueryExportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBigQueryExportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.UpdateBigQueryExportRequest";
+                        };
+    
+                        return UpdateBigQueryExportRequest;
+                    })();
+    
+                    v1.ProvisionBigQueryExportRequest = (function() {
+    
+                        /**
+                         * Properties of a ProvisionBigQueryExportRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IProvisionBigQueryExportRequest
+                         * @property {string|null} [parent] ProvisionBigQueryExportRequest parent
+                         */
+    
+                        /**
+                         * Constructs a new ProvisionBigQueryExportRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ProvisionBigQueryExportRequest.
+                         * @implements IProvisionBigQueryExportRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IProvisionBigQueryExportRequest=} [properties] Properties to set
+                         */
+                        function ProvisionBigQueryExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProvisionBigQueryExportRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @instance
+                         */
+                        ProvisionBigQueryExportRequest.prototype.parent = "";
+    
+                        /**
+                         * Creates a new ProvisionBigQueryExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IProvisionBigQueryExportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ProvisionBigQueryExportRequest} ProvisionBigQueryExportRequest instance
+                         */
+                        ProvisionBigQueryExportRequest.create = function create(properties) {
+                            return new ProvisionBigQueryExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProvisionBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ProvisionBigQueryExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IProvisionBigQueryExportRequest} message ProvisionBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProvisionBigQueryExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProvisionBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ProvisionBigQueryExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IProvisionBigQueryExportRequest} message ProvisionBigQueryExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProvisionBigQueryExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProvisionBigQueryExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ProvisionBigQueryExportRequest} ProvisionBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProvisionBigQueryExportRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProvisionBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ProvisionBigQueryExportRequest} ProvisionBigQueryExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProvisionBigQueryExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProvisionBigQueryExportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProvisionBigQueryExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProvisionBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ProvisionBigQueryExportRequest} ProvisionBigQueryExportRequest
+                         */
+                        ProvisionBigQueryExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest)
+                                return object;
+                            var message = new $root.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProvisionBigQueryExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ProvisionBigQueryExportRequest} message ProvisionBigQueryExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProvisionBigQueryExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProvisionBigQueryExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProvisionBigQueryExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProvisionBigQueryExportRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ProvisionBigQueryExportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProvisionBigQueryExportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ProvisionBigQueryExportRequest";
+                        };
+    
+                        return ProvisionBigQueryExportRequest;
+                    })();
+    
                     v1.DashboardChartService = (function() {
     
                         /**
@@ -73643,25 +75215,25 @@
                 return Duration;
             })();
     
-            protobuf.Any = (function() {
+            protobuf.FieldMask = (function() {
     
                 /**
-                 * Properties of an Any.
+                 * Properties of a FieldMask.
                  * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
                  */
     
                 /**
-                 * Constructs a new Any.
+                 * Constructs a new FieldMask.
                  * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
                  * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
                  */
-                function Any(properties) {
+                function FieldMask(properties) {
+                    this.paths = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -73669,91 +75241,80 @@
                 }
     
                 /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
                  * @instance
                  */
-                Any.prototype.type_url = "";
+                FieldMask.prototype.paths = $util.emptyArray;
     
                 /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
+                 * Creates a new FieldMask instance using the specified properties.
                  * @function create
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
                  */
-                Any.create = function create(properties) {
-                    return new Any(properties);
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
                 };
     
                 /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
                  * @function encode
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Any.encode = function encode(message, writer) {
+                FieldMask.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
                     return writer;
                 };
     
                 /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
                     return this.encode(message, writer).ldelim();
                 };
     
                 /**
-                 * Decodes an Any message from the specified reader or buffer.
+                 * Decodes a FieldMask message from the specified reader or buffer.
                  * @function decode
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
+                 * @returns {google.protobuf.FieldMask} FieldMask
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length, error) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.type_url = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.value = reader.bytes();
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
                                 break;
                             }
                         default:
@@ -73765,120 +75326,114 @@
                 };
     
                 /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
+                 * @returns {google.protobuf.FieldMask} FieldMask
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decodeDelimited = function decodeDelimited(reader) {
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
                 };
     
                 /**
-                 * Verifies an Any message.
+                 * Verifies a FieldMask message.
                  * @function verify
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Any.verify = function verify(message) {
+                FieldMask.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
                     return null;
                 };
     
                 /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
+                 * @returns {google.protobuf.FieldMask} FieldMask
                  */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
                     return message;
                 };
     
                 /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
-                 * @param {google.protobuf.Any} message Any
+                 * @param {google.protobuf.FieldMask} message FieldMask
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Any.toObject = function toObject(message, options) {
+                FieldMask.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
                     }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
                     return object;
                 };
     
                 /**
-                 * Converts this Any to JSON.
+                 * Converts this FieldMask to JSON.
                  * @function toJSON
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Any.prototype.toJSON = function toJSON() {
+                FieldMask.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
                 /**
-                 * Gets the default type url for Any
+                 * Gets the default type url for FieldMask
                  * @function getTypeUrl
-                 * @memberof google.protobuf.Any
+                 * @memberof google.protobuf.FieldMask
                  * @static
                  * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns {string} The default type url
                  */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                     if (typeUrlPrefix === undefined) {
                         typeUrlPrefix = "type.googleapis.com";
                     }
-                    return typeUrlPrefix + "/google.protobuf.Any";
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
                 };
     
-                return Any;
+                return FieldMask;
             })();
     
             protobuf.Timestamp = (function() {
@@ -74124,6 +75679,244 @@
                 return Timestamp;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Empty = (function() {
     
                 /**
@@ -74299,227 +76092,6 @@
                 };
     
                 return Empty;
-            })();
-    
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
             })();
     
             return protobuf;

@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DashboardChartService',
-    filename: './dashboard-chart-service.js',
+    library: 'BigQueryExportService',
+    filename: './big-query-export-service.js',
   },
   node: {
     child_process: 'empty',

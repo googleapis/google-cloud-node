@@ -57,6 +57,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| get big query export | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/big_query_export_service.get_big_query_export.js) |
+| provision big query export | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/big_query_export_service.provision_big_query_export.js) |
+| update big query export | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/big_query_export_service.update_big_query_export.js) |
 | batch get dashboard charts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_chart_service.batch_get_dashboard_charts.js) |
 | get dashboard chart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_chart_service.get_dashboard_chart.js) |
 | execute dashboard query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/dashboard_query_service.execute_dashboard_query.js) |

@@ -178,6 +178,9 @@ export class DataAccessControlServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      bigQueryExportPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport'
+      ),
       dashboardChartPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}'
       ),
@@ -1645,6 +1648,55 @@ export class DataAccessControlServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified bigQueryExport resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  bigQueryExportPath(project:string,location:string,instance:string) {
+    return this.pathTemplates.bigQueryExportPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from BigQueryExport resource.
+   *
+   * @param {string} bigQueryExportName
+   *   A fully-qualified path representing BigQueryExport resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBigQueryExportName(bigQueryExportName: string) {
+    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).project;
+  }
+
+  /**
+   * Parse the location from BigQueryExport resource.
+   *
+   * @param {string} bigQueryExportName
+   *   A fully-qualified path representing BigQueryExport resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBigQueryExportName(bigQueryExportName: string) {
+    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).location;
+  }
+
+  /**
+   * Parse the instance from BigQueryExport resource.
+   *
+   * @param {string} bigQueryExportName
+   *   A fully-qualified path representing BigQueryExport resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromBigQueryExportName(bigQueryExportName: string) {
+    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).instance;
+  }
 
   /**
    * Return a fully-qualified dashboardChart resource name string.
