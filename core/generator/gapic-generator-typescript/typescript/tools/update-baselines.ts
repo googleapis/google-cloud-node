@@ -89,15 +89,18 @@ async function main() {
     console.log("Tests failed - that's OK, will update baselines.");
   }
 
-  // remove old test out folders
-  const oldFolders = (await readdir(root)).filter(file =>
-    file.match(resultPrefix),
-  );
-  for (const oldFolder of oldFolders) {
-    await fsp.rm(oldFolder, {recursive: true});
+  // remove old test out folders and unzip if baselineZip exists
+  if (existsSync(baselineZip)) {
+    const oldFolders = (await readdir(root)).filter(file =>
+      file.match(resultPrefix),
+    );
+    for (const oldFolder of oldFolders) {
+      await fsp.rm(oldFolder, {recursive: true});
+    }
+    await execp(`unzip -o "${baselineZip}" -d .`);
+  } else {
+    console.log(`Skipping unzip, baseline zip not found at ${baselineZip}`);
   }
-  // unzip baselines
-  await execp(`unzip -o "${baselineZip}" -d .`);
 
   // get a list of baselines
   const files = await readdir(root);
