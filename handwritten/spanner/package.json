@@ -52,6 +52,7 @@
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "benchwrapper": "node bin/benchwrapper.js",
+    "benchmark:channel-pool-commit": "node scripts/channel-pool-commit-benchmark.js",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean",
     "compile-protos": "compileProtos src",
