@@ -1860,7 +1860,11 @@ export class Snapshot extends EventEmitter {
 
   protected _ensureChannelHint(): number | undefined {
     if (this._channelHint === undefined) {
-      this._channelHint = this._getSpanner()._nextTransactionChannelHint();
+      const spanner = this._getSpanner();
+      this._channelHint =
+        typeof spanner._nextTransactionChannelHint === 'function'
+          ? spanner._nextTransactionChannelHint()
+          : undefined;
     }
     return this._channelHint;
   }

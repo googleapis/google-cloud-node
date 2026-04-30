@@ -229,12 +229,7 @@ describe('Spanner', () => {
       scopes: [],
       grpc,
       'grpc.keepalive_time_ms': 120000,
-      'grpc.callInvocationTransformer':
-        fakeGrpcGcp().gcpCallInvocationTransformer,
-      'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
-      'grpc.gcpApiConfig': {
-        calledWith_: apiConfig,
-      },
+      'grpc.use_local_subchannel_pool': 1,
     });
 
     it('should localize a cached gapic client map', () => {
@@ -255,6 +250,30 @@ describe('Spanner', () => {
       assert.deepStrictEqual(
         getFake(spanner.auth).calledWith_[0],
         EXPECTED_OPTIONS,
+      );
+    });
+
+    it('should use grpc-gcp when a custom grpc.gcpApiConfig is provided', () => {
+      const customGcpApiConfig = {channelPool: {maxSize: 2}};
+      const options = extend({}, OPTIONS, {
+        'grpc.gcpApiConfig': customGcpApiConfig,
+      });
+      const spanner = new Spanner(options);
+      const expectedOptions = extend({}, OPTIONS, {
+        libName: 'gccl',
+        libVersion: require('../../package.json').version,
+        scopes: [],
+        grpc,
+        'grpc.keepalive_time_ms': 120000,
+        'grpc.callInvocationTransformer':
+          fakeGrpcGcp().gcpCallInvocationTransformer,
+        'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
+        'grpc.gcpApiConfig': customGcpApiConfig,
+      });
+
+      assert.deepStrictEqual(
+        getFake(spanner.auth).calledWith_[0],
+        expectedOptions,
       );
     });
 
