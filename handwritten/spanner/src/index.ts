@@ -446,7 +446,10 @@ class Spanner extends GrpcService {
         'grpc.gcpApiConfig': grpcGcp.createGcpApiConfig(gcpApiConfig),
       });
     }
-    options = Object.assign(defaultOptions, options || {}) as {} as SpannerOptions;
+    options = Object.assign(
+      defaultOptions,
+      options || {},
+    ) as {} as SpannerOptions;
     if (numChannels) {
       Object.assign(defaultOptions, {
         // Keep each generated gRPC channel on its own HTTP/2 transport.
