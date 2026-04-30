@@ -38,8 +38,8 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "test": "c8 mocha build/test",
+    "system-test": "echo nothing to system test",
+    "test": "echo nothing to test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm i"
   },

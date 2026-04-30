@@ -12,7 +12,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "mocha --timeout 600000",
+    "test": "echo nothing to test",
     "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix"
   },

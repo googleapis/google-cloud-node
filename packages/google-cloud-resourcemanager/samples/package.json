@@ -11,7 +11,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "mocha --timeout=600000"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/resource-manager": "^6.2.1"

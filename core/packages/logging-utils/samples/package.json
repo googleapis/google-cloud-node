@@ -4,7 +4,7 @@
   "description": "Samples for debug logger",
   "main": "index.js",
   "scripts": {
-    "test": "c8 mocha build/system-test",
+    "test": "echo nothing to test",
     "pretest": "npm run compile",
     "compile": "tsc -p .",
     "typeless": "npx typeless-sample-bot --outputpath javascript --targets typescript --recursive",

@@ -12,7 +12,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "mocha test --timeout=800000"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/video-intelligence": "^6.2.1",

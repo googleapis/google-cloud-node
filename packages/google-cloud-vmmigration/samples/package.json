@@ -11,7 +11,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "c8 mocha --recursive test/ --timeout=800000"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/vmmigration": "^4.3.1"

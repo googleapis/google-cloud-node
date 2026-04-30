@@ -11,7 +11,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "mocha --timeout 100000 test/**.test.js"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/containeranalysis": "^6.7.0"

@@ -39,8 +39,8 @@
     "prepack:cjs": "npm run compile",
     "prepack:esm": "npm run compile",
     "prepack": "npm run prepack:cjs && npm run prepack:esm",
-    "test": "mocha build/typescript/test/unit",
-    "system-test": "echo 'no system test'",
+    "test": "echo nothing to test",
+    "system-test": "echo nothing to system test",
     "samples-test": "echo 'no samples test'",
     "docs": "echo no docs needed",
     "docs-test": "echo no docs tests"

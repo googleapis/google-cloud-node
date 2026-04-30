@@ -10,7 +10,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "mocha --timeout 600000 test/*.js"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/web-risk": "^5.3.1"

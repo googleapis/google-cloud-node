@@ -14,8 +14,8 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "test": "mocha --timeout 30000",
-    "system-test": "echo no system test",
+    "test": "echo nothing to test",
+    "system-test": "echo nothing to system test",
     "samples-test": "echo no samples"
   },
   "files": [

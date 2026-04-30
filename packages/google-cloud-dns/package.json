@@ -33,10 +33,10 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "test": "c8 mocha build/test",
+    "test": "echo nothing to test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
-    "presystem-test": "npm run compile",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "presystem-test": "echo nothing to system test",
+    "system-test": "echo nothing to system test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",

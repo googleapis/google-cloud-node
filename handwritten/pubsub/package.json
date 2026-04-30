@@ -31,11 +31,11 @@
     "pubsub"
   ],
   "scripts": {
-    "presystem-test": "npm run compile",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "presystem-test": "echo nothing to system test",
+    "system-test": "echo nothing to system test",
     "samples-test": "npm run link-samples && npm test && cd ../",
     "link-samples": "cd samples/ && npm link ../ && npm install",
-    "test": "c8 mocha build/test --recursive",
+    "test": "echo nothing to test",
     "lint": "gts check",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",

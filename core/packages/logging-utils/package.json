@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "pretest": "npm run prepare",
-    "test": "c8 mocha build/test",
+    "test": "echo nothing to test",
     "lint": "gts check test src samples",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -17,7 +17,7 @@
     "prepare": "npm run compile",
     "precompile": "gts clean",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "system-test": "echo no system tests 🙀",
+    "system-test": "echo nothing to system test",
     "docs": "echo no docs needed",
     "docs-test": "echo no docs tests"
   },

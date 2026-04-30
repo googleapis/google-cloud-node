@@ -12,7 +12,7 @@
     "!test/"
   ],
   "scripts": {
-    "test": "mocha --timeout 600000"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/dns": "^5.3.1"

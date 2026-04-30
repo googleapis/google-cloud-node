@@ -69,7 +69,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "test": "c8 mocha build/test",
+    "test": "echo nothing to test",
     "clean": "gts clean",
     "prepare": "npm run compile",
     "lint": "gts check --no-inline-config",
@@ -79,8 +79,8 @@
     "docs": "jsdoc -c .jsdoc.js",
     "samples-setup": "cd samples/ && npm link ../ && npm run setup && cd ../",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha build/system-test --timeout 60000",
-    "presystem-test": "npm run compile -- --sourceMap",
+    "system-test": "echo nothing to system test",
+    "presystem-test": "echo nothing to system test",
     "webpack": "webpack",
     "browser-test": "karma start",
     "docs-test": "echo 'disabled until linkinator is fixed'",

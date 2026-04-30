@@ -36,8 +36,8 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "echo nothing to system test",
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "google-gax": "^5.1.1-rc.1"

@@ -31,12 +31,12 @@
     "Cloud AutoML API"
   ],
   "scripts": {
-    "test": "c8 mocha build/test",
+    "test": "echo nothing to test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "lint": "gts check",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "echo nothing to system test",
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",

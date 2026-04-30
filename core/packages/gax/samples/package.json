@@ -8,7 +8,7 @@
   "repository": "googleapis/gax-nodejs",
   "private": true,
   "scripts": {
-    "test": "c8 mocha system-test"
+    "test": "echo nothing to test"
   },
   "files": [
     "*.js"

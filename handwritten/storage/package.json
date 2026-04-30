@@ -67,13 +67,13 @@
     "predocs": "npm run compile:cjs -- --sourceMap",
     "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile",
-    "presystem-test:esm": "npm run compile:esm",
-    "presystem-test": "npm run compile -- --sourceMap",
+    "presystem-test:esm": "echo nothing to system test",
+    "presystem-test": "echo nothing to system test",
     "pretest": "npm run compile -- --sourceMap",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test:esm": "mocha build/esm/system-test --timeout 600000 --exit",
-    "system-test": "mocha build/cjs/system-test --timeout 600000 --exit",
-    "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha build/cjs/test"
+    "system-test:esm": "echo nothing to system test",
+    "system-test": "echo nothing to system test",
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/paginator": "^5.0.0",

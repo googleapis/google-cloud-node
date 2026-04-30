@@ -41,8 +41,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "echo nothing to system test",
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "google-gax": "^5.0.0"

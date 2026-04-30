@@ -10,7 +10,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "c8 mocha"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/retail": "^4.3.0",

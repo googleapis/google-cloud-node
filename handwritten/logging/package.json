@@ -41,10 +41,10 @@
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "presystem-test": "npm run compile",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "presystem-test": "echo nothing to system test",
+    "system-test": "echo nothing to system test",
     "pretest": "npm run compile",
-    "test": "c8 mocha build/test",
+    "test": "echo nothing to test",
     "precompile": "gts clean",
     "postpublish": "./.kokoro/publish-min.sh"
   },

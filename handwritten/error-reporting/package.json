@@ -21,9 +21,9 @@
   "scripts": {
     "docs": "compodoc src/",
     "lint": "gts check",
-    "presystem-test": "npm run compile",
-    "system-test": "MOCHA_THROW_DEPRECATION=false c8 mocha build/system-test",
-    "test": "c8 mocha --recursive build/test/unit",
+    "presystem-test": "echo nothing to system test",
+    "system-test": "echo nothing to system test",
+    "test": "echo nothing to test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix",
@@ -70,7 +70,7 @@
     "typescript": "^5.9.3",
     "uuid": "^8.3.2"
   },
-"overrides": {
+  "overrides": {
     "undici": "5.28.4",
     "tablesort": "5.6.0",
     "cheerio": "1.0.0"

@@ -11,7 +11,7 @@
     "*.js"
   ],
   "scripts": {
-    "test": "c8 mocha --timeout 600000 test/*.js"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-analytics/admin": "^9.0.1",

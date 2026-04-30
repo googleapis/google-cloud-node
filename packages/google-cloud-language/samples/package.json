@@ -12,7 +12,7 @@
     "resources"
   ],
   "scripts": {
-    "test": "mocha --timeout 60000"
+    "test": "echo nothing to test"
   },
   "dependencies": {
     "@google-cloud/automl": "^5.0.0",

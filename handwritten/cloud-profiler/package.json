@@ -11,7 +11,7 @@
   "types": "build/src/index.d.ts",
   "scripts": {
     "test": "echo 'skipping tests for time being'",
-    "system-test": "echo 'skipping tests for time being'",
+    "system-test": "echo nothing to system test",
     "samples-test": "echo 'no sample tests'",
     "clean": "gts clean",
     "compile": "tsc -p .",

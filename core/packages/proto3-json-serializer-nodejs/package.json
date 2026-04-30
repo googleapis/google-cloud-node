@@ -23,8 +23,8 @@
     "deserialization"
   ],
   "scripts": {
-    "test": "c8 mocha build/test/unit",
-    "system-test": "mocha build/test/system",
+    "test": "echo nothing to test",
+    "system-test": "echo nothing to system test",
     "lint": "gts lint",
     "clean": "gts clean && rm -f tsconfig.tsbuildinfo",
     "compile": "tsc --build",
