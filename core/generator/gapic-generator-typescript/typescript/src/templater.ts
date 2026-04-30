@@ -218,7 +218,7 @@ async function processOneTemplate(
   templateFilename: string,
   api: API,
   id: Namer,
-  skipSystemTest: boolean,
+  templates: string[],
 ) {
   const result: protos.google.protobuf.compiler.CodeGeneratorResponse.File[] =
     [];
@@ -230,10 +230,6 @@ async function processOneTemplate(
   // $version is unique (defined in api.naming), but there can be multiple
   // services.
   outputFilename = outputFilename.replace(/\$version/, api.naming.version);
-
-  if (skipSystemTest && outputFilename.match(/^(esm\/)?system-test\//)) {
-    return [];
-  }
 
   // Check to see if the outputFilename matches the snippet index
   // then, build the object we have the proto interface for
@@ -265,7 +261,7 @@ async function processOneTemplate(
             commonParameters,
             service,
             id,
-            skipSystemTest,
+            templates,
           }),
         );
       }
@@ -283,7 +279,7 @@ async function processOneTemplate(
         renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),
           relativeTemplateName,
-          {api, commonParameters, service, id, skipSystemTest},
+          {api, commonParameters, service, id, templates},
         ),
       );
     }
@@ -293,7 +289,7 @@ async function processOneTemplate(
         api,
         commonParameters,
         id,
-        skipSystemTest,
+        templates,
       }),
     );
   }
@@ -324,7 +320,7 @@ async function loadNamerPlugin(basePath: string) {
 export async function processTemplates(
   basePath: string,
   api: API,
-  skipSystemTest = false,
+  templates: string[],
 ) {
   nunjucks.configure(basePath);
   basePath = basePath.replace(/\/*$/, '');
@@ -341,9 +337,10 @@ export async function processTemplates(
       templateFilename,
       api,
       id,
-      skipSystemTest,
+      templates,
     );
     result.push(...generatedFiles);
   }
   return result;
 }
+

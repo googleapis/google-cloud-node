@@ -31,7 +31,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    {% if not skipSystemTest %}"system-test": "c8 mocha build/system-test",{% endif %}
+    {% if "typescript_packing_test" in templates %}"system-test": "c8 mocha build/system-test",{% endif %}
     "test": "c8 mocha build/test"
   },
   "dependencies": {
@@ -48,7 +48,7 @@
     "jsdoc-fresh": "^5.0.2",
     "jsdoc-region-tag": "^4.0.1",
     "mocha": "^11.7.4",
-    {% if not skipSystemTest %}"pack-n-play": "^4.2.1",{% endif %}
+    {% if "typescript_packing_test" in templates %}"pack-n-play": "^4.2.1",{% endif %}
     "typescript": "5.8.3",
     "sinon": "^20.0.0"
   },

@@ -3,5 +3,5 @@
 build/
 docs/
 protos/
-{% if not skipSystemTest %}system-test/{% endif %}
+{% if "typescript_packing_test" in templates %}system-test/{% endif %}
 samples/generated/

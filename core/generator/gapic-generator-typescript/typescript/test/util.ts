@@ -117,9 +117,11 @@ export function runBaselineTest(options: BaselineOptions) {
     if (options.packageName) {
       commandLine += ` --package-name=${options.packageName}`;
     }
-    if (options.template) {
-      commandLine += ` --template="${options.template}"`;
+    let templates = options.template;
+    if (!templates) {
+      templates = 'typescript_gapic;typescript_packing_test;typescript_samples';
     }
+    commandLine += ` --template="${templates}"`;
     if (options.bundleConfig) {
       commandLine += ` --bundle-config="${bundleConfig}"`;
     }
@@ -147,7 +149,6 @@ export function runBaselineTest(options: BaselineOptions) {
     if (options.mixins) {
       commandLine += ` --mixins="${options.mixins}"`;
     }
-    commandLine += ' --skip-system-test=false';
     execSync(commandLine);
     assert(equalToBaseline(outputDir, baselineDir));
   });

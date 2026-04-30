@@ -6,7 +6,7 @@
 /docs/
 /out/
 /build/
-{% if not skipSystemTest %}system-test/secrets.js
+{% if "typescript_packing_test" in templates %}system-test/secrets.js
 system-test/*key.json{% endif %}
 *.lock
 .DS_Store

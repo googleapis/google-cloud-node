@@ -3,7 +3,7 @@
 build/
 docs/
 protos/
-{% if not skipSystemTest %}system-test/
+{% if "typescript_packing_test" in templates %}system-test/
 samples/
 esm/src/**/*.d.ts
 esm/test/**/*.d.ts

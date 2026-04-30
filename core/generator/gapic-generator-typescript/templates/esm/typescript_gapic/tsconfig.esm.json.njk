@@ -36,7 +36,7 @@ limitations under the License.
     "esm/src/**/*.ts",
     "esm/test/*.ts",
     "esm/test/**/*.ts",
-    {% if not skipSystemTest %}"esm/system-test/*.ts",{% endif %}
+    {% if "typescript_packing_test" in templates %}"esm/system-test/*.ts",{% endif %}
     "esm/src/**/*.json",
     "protos/protos.json",
     "esm/src/*.cjs"

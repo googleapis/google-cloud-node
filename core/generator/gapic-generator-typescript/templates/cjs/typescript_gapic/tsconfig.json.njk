@@ -28,7 +28,7 @@ limitations under the License.
     "src/**/*.ts",
     "test/*.ts",
     "test/**/*.ts",
-    {% if not skipSystemTest %}"system-test/*.ts",{% endif %}
+    {% if "typescript_packing_test" in templates %}"system-test/*.ts",{% endif %}
     "src/**/*.json",
     "samples/**/*.json",
     "protos/protos.json"
