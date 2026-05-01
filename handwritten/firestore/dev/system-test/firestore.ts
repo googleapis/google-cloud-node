@@ -1057,6 +1057,23 @@ describe('DocumentReference class', () => {
       });
   });
 
+  it('supports minimum() against non-numeric', () => {
+    const baseData = {min: null}; // null sorts less than numeric values
+    const updateData = {min: FieldValue.minimum(1)};
+    // It is expected that FieldValue.minimum(1, null) results in `1`, because
+    // existing non-numeric field values are ignored.
+    const expectedData = {min: 1};
+
+    const ref = randomCol.doc('doc');
+    return ref
+      .set(baseData)
+      .then(() => ref.update(updateData))
+      .then(() => ref.get())
+      .then(doc => {
+        expect(doc.data()).to.deep.equal(expectedData);
+      });
+  });
+
   it('supports minimum() with set() with merge', () => {
     const baseData = {min: 2};
     const updateData = {min: FieldValue.minimum(1)};
@@ -1066,6 +1083,23 @@ describe('DocumentReference class', () => {
     return ref
       .set(baseData)
       .then(() => ref.set(updateData, {merge: true}))
+      .then(() => ref.get())
+      .then(doc => {
+        expect(doc.data()).to.deep.equal(expectedData);
+      });
+  });
+
+  it('supports maximum() against non-numeric', () => {
+    const baseData = {max: 'any string'}; // a string value sorts greater than numeric values
+    const updateData = {max: FieldValue.maximum(2)};
+    // It is expected that FieldValue.maximum(2, "any string") results in `2`, because
+    // existing non-numeric field values are ignored.
+    const expectedData = {max: 2};
+
+    const ref = randomCol.doc('doc');
+    return ref
+      .set(baseData)
+      .then(() => ref.update(updateData))
       .then(() => ref.get())
       .then(doc => {
         expect(doc.data()).to.deep.equal(expectedData);
