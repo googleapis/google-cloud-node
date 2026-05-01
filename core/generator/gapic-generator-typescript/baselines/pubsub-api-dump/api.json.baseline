@@ -4498,6 +4498,17 @@
       "grpcServiceConfig": {},
       "bundleConfigs": [],
       "internalMethods": [],
+      "iamPolicyMixinFlags": {
+        "enabled": false,
+        "getIamPolicy": true,
+        "setIamPolicy": true,
+        "testIamPermissions": true
+      },
+      "locationMixinFlags": {
+        "enabled": false,
+        "getLocation": true,
+        "listLocations": true
+      },
       "bundleConfigsMethods": [],
       "simpleMethods": [
         {
@@ -5000,6 +5011,13 @@
           ]
         }
       ],
+      "longRunningOperationsMixinFlags": {
+        "enabled": false,
+        "getOperation": true,
+        "cancelOperation": true,
+        "deleteOperation": true,
+        "listOperations": true
+      },
       "hostname": "",
       "port": 0,
       "oauthScopes": [
@@ -9390,6 +9408,17 @@
       "grpcServiceConfig": {},
       "bundleConfigs": [],
       "internalMethods": [],
+      "iamPolicyMixinFlags": {
+        "enabled": false,
+        "getIamPolicy": true,
+        "setIamPolicy": true,
+        "testIamPermissions": true
+      },
+      "locationMixinFlags": {
+        "enabled": false,
+        "getLocation": true,
+        "listLocations": true
+      },
       "bundleConfigsMethods": [],
       "simpleMethods": [
         {
@@ -9738,6 +9767,13 @@
           ]
         }
       ],
+      "longRunningOperationsMixinFlags": {
+        "enabled": false,
+        "getOperation": true,
+        "cancelOperation": true,
+        "deleteOperation": true,
+        "listOperations": true
+      },
       "hostname": "",
       "port": 0,
       "oauthScopes": [
@@ -14926,6 +14962,17 @@
       "grpcServiceConfig": {},
       "bundleConfigs": [],
       "internalMethods": [],
+      "iamPolicyMixinFlags": {
+        "enabled": false,
+        "getIamPolicy": true,
+        "setIamPolicy": true,
+        "testIamPermissions": true
+      },
+      "locationMixinFlags": {
+        "enabled": false,
+        "getLocation": true,
+        "listLocations": true
+      },
       "bundleConfigsMethods": [],
       "simpleMethods": [
         {
@@ -16203,6 +16250,13 @@
           ]
         }
       ],
+      "longRunningOperationsMixinFlags": {
+        "enabled": false,
+        "getOperation": true,
+        "cancelOperation": true,
+        "deleteOperation": true,
+        "listOperations": true
+      },
       "hostname": "",
       "port": 0,
       "oauthScopes": [

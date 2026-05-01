@@ -1,0 +1,151 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-duplicate-methods-test",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.duplicate_methods_test.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "duplicatemethodstest_v1_generated_DuplicateMethodsTestService_GetIamPolicy_async",
+      "title": "DuplicateMethodsTestService getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Native GetIamPolicy method that conflicts with the IAMPolicy mixin.",
+      "canonical": true,
+      "file": "duplicate_methods_test_service.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "DuplicateMethodsTestServiceClient",
+          "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestServiceClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService.GetIamPolicy",
+          "service": {
+            "shortName": "DuplicateMethodsTestService",
+            "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "duplicatemethodstest_v1_generated_DuplicateMethodsTestService_ListLocations_async",
+      "title": "DuplicateMethodsTestService listLocations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Native ListLocations method that conflicts with the Locations mixin.",
+      "canonical": true,
+      "file": "duplicate_methods_test_service.list_locations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLocations",
+        "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService.ListLocations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.location.ListLocationsResponse",
+        "client": {
+          "shortName": "DuplicateMethodsTestServiceClient",
+          "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestServiceClient"
+        },
+        "method": {
+          "shortName": "ListLocations",
+          "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService.ListLocations",
+          "service": {
+            "shortName": "DuplicateMethodsTestService",
+            "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "duplicatemethodstest_v1_generated_DuplicateMethodsTestService_Echo_async",
+      "title": "DuplicateMethodsTestService echo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Another native method to ensure the service is valid and has other methods.",
+      "canonical": true,
+      "file": "duplicate_methods_test_service.echo.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 51,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Echo",
+        "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService.Echo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "content",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.duplicate_methods_test.v1.EchoResponse",
+        "client": {
+          "shortName": "DuplicateMethodsTestServiceClient",
+          "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestServiceClient"
+        },
+        "method": {
+          "shortName": "Echo",
+          "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService.Echo",
+          "service": {
+            "shortName": "DuplicateMethodsTestService",
+            "fullName": "google.duplicate_methods_test.v1.DuplicateMethodsTestService"
+          }
+        }
+      }
+    }
+  ]
+}
