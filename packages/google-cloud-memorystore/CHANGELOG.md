@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.5.0...memorystore-v0.6.0) (2026-05-01)
+
+
+### Features
+
+* [memorystore] [Memorystore for Valkey] Updating new node types added ([#8111](https://github.com/googleapis/google-cloud-node/issues/8111)) ([85d0ae5](https://github.com/googleapis/google-cloud-node/commit/85d0ae5044f6f6503ef449dc58ccd95897374133))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.4.0...memorystore-v0.5.0) (2026-01-16)
 
 
