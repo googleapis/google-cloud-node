@@ -17,7 +17,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ConfigServiceV2Client, LoggingServiceV2Client, MetricsServiceV2Client} from 'logging';
+import {
+  ConfigServiceV2Client,
+  LoggingServiceV2Client,
+  MetricsServiceV2Client,
+} from 'logging';
 
 // check that the client class type name can be used
 function doStuffWithConfigServiceV2Client(client: ConfigServiceV2Client) {

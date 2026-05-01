@@ -16,17 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DuplicateMethodsTestServiceClient} from 'duplicate-methods-test';
+import { DuplicateMethodsTestServiceClient } from 'duplicate-methods-test';
 
 // check that the client class type name can be used
-function doStuffWithDuplicateMethodsTestServiceClient(client: DuplicateMethodsTestServiceClient) {
+function doStuffWithDuplicateMethodsTestServiceClient(
+  client: DuplicateMethodsTestServiceClient,
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const duplicateMethodsTestServiceClient = new DuplicateMethodsTestServiceClient();
-  doStuffWithDuplicateMethodsTestServiceClient(duplicateMethodsTestServiceClient);
+  const duplicateMethodsTestServiceClient =
+    new DuplicateMethodsTestServiceClient();
+  doStuffWithDuplicateMethodsTestServiceClient(
+    duplicateMethodsTestServiceClient,
+  );
 }
 
 main();
