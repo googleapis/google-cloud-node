@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-securitycenter",
-    "version": "0.1.0",
+    "version": "9.3.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -1019,7 +1019,7 @@
       "regionTag": "securitycenter_v1_generated_SecurityCenter_ListDescendantSecurityHealthAnalyticsCustomModules_async",
       "title": "SecurityCenter listDescendantSecurityHealthAnalyticsCustomModules Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns a list of all resident SecurityHealthAnalyticsCustomModules under the given CRM parent and all of the parent’s CRM descendants.",
+      "description": " Returns a list of all resident SecurityHealthAnalyticsCustomModules under the given CRM parent and all of the parent\u2019s CRM descendants.",
       "canonical": true,
       "file": "security_center.list_descendant_security_health_analytics_custom_modules.js",
       "language": "JAVASCRIPT",
