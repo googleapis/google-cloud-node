@@ -273,7 +273,7 @@ export function incrementTransform(
 
 export function minimumTransform(
   field: string,
-  n: number
+  n: number,
 ): api.DocumentTransform.IFieldTransform {
   return {
     fieldPath: field,
@@ -283,7 +283,7 @@ export function minimumTransform(
 
 export function maximumTransform(
   field: string,
-  n: number
+  n: number,
 ): api.DocumentTransform.IFieldTransform {
   return {
     fieldPath: field,

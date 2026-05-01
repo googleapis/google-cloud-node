@@ -583,7 +583,7 @@ class NumericMinimumTransform extends NumericFieldTransform {
 
   toProto(
     serializer: Serializer,
-    fieldPath: FieldPath
+    fieldPath: FieldPath,
   ): api.DocumentTransform.IFieldTransform {
     const encodedOperand = serializer.encodeValue(this.operand)!;
     return {fieldPath: fieldPath.formattedName, minimum: encodedOperand};
@@ -615,7 +615,7 @@ class NumericMaximumTransform extends NumericFieldTransform {
 
   toProto(
     serializer: Serializer,
-    fieldPath: FieldPath
+    fieldPath: FieldPath,
   ): api.DocumentTransform.IFieldTransform {
     const encodedOperand = serializer.encodeValue(this.operand)!;
     return {fieldPath: fieldPath.formattedName, maximum: encodedOperand};

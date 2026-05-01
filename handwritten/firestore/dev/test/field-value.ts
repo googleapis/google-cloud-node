@@ -194,7 +194,7 @@ describe('FieldValue.increment()', () => {
 describe('FieldValue.minimum()', () => {
   it('requires one argument', () => {
     expect(() => (FieldValue as InvalidApiUsage).minimum()).to.throw(
-      'Function "FieldValue.minimum()" requires at least 1 argument.'
+      'Function "FieldValue.minimum()" requires at least 1 argument.',
     );
   });
 
@@ -205,7 +205,7 @@ describe('FieldValue.minimum()', () => {
           foo: FieldValue.minimum('foo' as InvalidApiUsage),
         });
       }).to.throw(
-        'Value for argument "FieldValue.minimum()" is not a valid number'
+        'Value for argument "FieldValue.minimum()" is not a valid number',
       );
     });
   });
@@ -248,7 +248,7 @@ describe('FieldValue.minimum()', () => {
 describe('FieldValue.maximum()', () => {
   it('requires one argument', () => {
     expect(() => (FieldValue as InvalidApiUsage).maximum()).to.throw(
-      'Function "FieldValue.maximum()" requires at least 1 argument.'
+      'Function "FieldValue.maximum()" requires at least 1 argument.',
     );
   });
 
@@ -259,7 +259,7 @@ describe('FieldValue.maximum()', () => {
           foo: FieldValue.maximum('foo' as InvalidApiUsage),
         });
       }).to.throw(
-        'Value for argument "FieldValue.maximum()" is not a valid number'
+        'Value for argument "FieldValue.maximum()" is not a valid number',
       );
     });
   });
