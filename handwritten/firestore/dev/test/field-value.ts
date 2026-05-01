@@ -160,8 +160,11 @@ describe('FieldValue.increment()', () => {
     const arrayUnionA = FieldValue.increment(13.37);
     const arrayUnionB = FieldValue.increment(13.37);
     const arrayUnionC = FieldValue.increment(42);
+    const arrayUnionD = FieldValue.maximum(NaN);
+    const arrayUnionE = FieldValue.maximum(NaN);
     expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
     expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
+    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
   });
 
   it('can be used with set()', () => {
@@ -214,8 +217,11 @@ describe('FieldValue.minimum()', () => {
     const arrayUnionA = FieldValue.minimum(13.37);
     const arrayUnionB = FieldValue.minimum(13.37);
     const arrayUnionC = FieldValue.minimum(42);
+    const arrayUnionD = FieldValue.maximum(NaN);
+    const arrayUnionE = FieldValue.maximum(NaN);
     expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
     expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
+    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
   });
 
   it('can be used with set()', () => {
@@ -268,8 +274,11 @@ describe('FieldValue.maximum()', () => {
     const arrayUnionA = FieldValue.maximum(13.37);
     const arrayUnionB = FieldValue.maximum(13.37);
     const arrayUnionC = FieldValue.maximum(42);
+    const arrayUnionD = FieldValue.maximum(NaN);
+    const arrayUnionE = FieldValue.maximum(NaN);
     expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
     expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
+    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
   });
 
   it('can be used with set()', () => {

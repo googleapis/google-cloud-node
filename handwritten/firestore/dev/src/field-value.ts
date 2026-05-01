@@ -561,7 +561,8 @@ class NumericIncrementTransform extends NumericFieldTransform {
     return (
       this === other ||
       (other instanceof NumericIncrementTransform &&
-        this.operand === other.operand)
+        (this.operand === other.operand ||
+          (Number.isNaN(this.operand) && Number.isNaN(other.operand))))
     );
   }
 }
@@ -593,7 +594,8 @@ class NumericMinimumTransform extends NumericFieldTransform {
     return (
       this === other ||
       (other instanceof NumericMinimumTransform &&
-        this.operand === other.operand)
+        (this.operand === other.operand ||
+          (Number.isNaN(this.operand) && Number.isNaN(other.operand))))
     );
   }
 }
@@ -625,7 +627,8 @@ class NumericMaximumTransform extends NumericFieldTransform {
     return (
       this === other ||
       (other instanceof NumericMaximumTransform &&
-        this.operand === other.operand)
+        (this.operand === other.operand ||
+          (Number.isNaN(this.operand) && Number.isNaN(other.operand))))
     );
   }
 }
