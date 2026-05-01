@@ -335,4 +335,3 @@ export async function processTemplates(basePath: string, api: API) {
   }
   return result;
 }
-
