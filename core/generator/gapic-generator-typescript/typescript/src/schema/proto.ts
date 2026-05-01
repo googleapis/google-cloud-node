@@ -83,6 +83,28 @@ export interface MethodDescriptorProto
   maxResultsParameter?: boolean;
 }
 
+export interface MixinConfig {
+  enabled: boolean;
+}
+
+export interface IamPolicyMixinConfig extends MixinConfig {
+  getIamPolicy: boolean;
+  setIamPolicy: boolean;
+  testIamPermissions: boolean;
+}
+
+export interface LocationMixinConfig extends MixinConfig {
+  getLocation: boolean;
+  listLocations: boolean;
+}
+
+export interface OperationsMixinConfig extends MixinConfig {
+  cancelOperation: boolean;
+  deleteOperation: boolean;
+  getOperation: boolean;
+  listOperations: boolean;
+}
+
 export interface ServiceDescriptorProto
   extends protos.google.protobuf.IServiceDescriptorProto {
   internalMethods: MethodDescriptorProto[];
@@ -111,6 +133,9 @@ export interface ServiceDescriptorProto
   IAMPolicyMixin: number;
   LocationMixin: number;
   LongRunningOperationsMixin: number;
+  iamPolicyMixinFlags?: IamPolicyMixinConfig;
+  locationMixinFlags?: LocationMixinConfig;
+  longRunningOperationsMixinFlags?: OperationsMixinConfig;
   protoFile: string;
   diregapicLRO?: MethodDescriptorProto[];
   httpRules?: protos.google.api.IHttpRule[];
@@ -1031,6 +1056,21 @@ export function augmentService(parameters: AugmentServiceParameters) {
       SelectiveGapicType.INTERNAL,
   );
 
+  const nativeMethods = augmentedService.method || [];
+  const nativeMethodNames = nativeMethods.map(m => m.name);
+  augmentedService.iamPolicyMixinFlags = {
+    enabled: augmentedService.IAMPolicyMixin === 1,
+    getIamPolicy: !nativeMethodNames.includes('GetIamPolicy'),
+    setIamPolicy: !nativeMethodNames.includes('SetIamPolicy'),
+    testIamPermissions: !nativeMethodNames.includes('TestIamPermissions'),
+  };
+
+  augmentedService.locationMixinFlags = {
+    enabled: augmentedService.LocationMixin === 1,
+    getLocation: !nativeMethodNames.includes('GetLocation'),
+    listLocations: !nativeMethodNames.includes('ListLocations'),
+  };
+
   augmentedService.bundleConfigsMethods = augmentedService.method.filter(
     method => method.bundleConfig,
   );
@@ -1070,6 +1110,14 @@ export function augmentService(parameters: AugmentServiceParameters) {
   ) {
     augmentedService.LongRunningOperationsMixin = 1;
   }
+
+  augmentedService.longRunningOperationsMixinFlags = {
+    enabled: augmentedService.LongRunningOperationsMixin === 1,
+    getOperation: !nativeMethodNames.includes('GetOperation'),
+    cancelOperation: !nativeMethodNames.includes('CancelOperation'),
+    deleteOperation: !nativeMethodNames.includes('DeleteOperation'),
+    listOperations: !nativeMethodNames.includes('ListOperations'),
+  };
 
   augmentedService.hostname = '';
   augmentedService.port = 0;
