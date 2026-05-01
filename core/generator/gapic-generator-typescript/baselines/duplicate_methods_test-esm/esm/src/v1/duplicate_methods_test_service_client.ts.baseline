@@ -819,7 +819,7 @@ export class DuplicateMethodsTestServiceClient {
  *   The request object that will be sent.
  * @param {string} request.resource
  *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the a ppropriate value for this field.
+ *   See the operation documentation for the appropriate value for this field.
  * @param {string[]} request.permissions
  *   The set of permissions to check for the `resource`. Permissions with
  *   wildcards (such as '*' or 'storage.*') are not allowed. For more
