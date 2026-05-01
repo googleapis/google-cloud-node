@@ -32,7 +32,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "echo 'no system test",
+    "system-test": "echo 'no system test'",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
