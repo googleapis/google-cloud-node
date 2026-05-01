@@ -152,7 +152,7 @@ export class FieldValue implements firestore.FieldValue {
 
   /**
    * Returns a special value that can be used with set(), create() or update()
-   * that tells the server to increment the the field's current value by the
+   * that tells the server to increment the field's current value by the
    * given value.
    *
    * If either current field value or the operand uses floating point
@@ -184,6 +184,76 @@ export class FieldValue implements firestore.FieldValue {
     // eslint-disable-next-line prefer-rest-params
     validateMinNumberOfArguments('FieldValue.increment', arguments, 1);
     return new NumericIncrementTransform(n);
+  }
+
+  /**
+   * Returns a special value that can be used with set(), create() or update()
+   * that tells the server to set the field to the numeric minimum of the
+   * field's current and the given value.
+   *
+   * If the current field value is not of type 'number', or if the field does
+   * not yet exist, the transformation will set the field to the given value.
+   *
+   * If the existing value and the operand are equivalent, then the field does
+   * not change. For example, `0`, `0.0`, and `-0.0` are all equivalent. If the
+   * operand is `NaN` then the result is always `NaN`.
+   *
+   * @param {number} n The value to compare to the exiting field value.
+   * @return {FieldValue} The FieldValue for use in a call to set(), create() or
+   * update().
+   *
+   * @example
+   * ```
+   * let documentRef = firestore.doc('col/doc');
+   *
+   * documentRef.update(
+   *   'counter', Firestore.FieldValue.minimum(1)
+   * ).then(() => {
+   *   return documentRef.get();
+   * }).then(doc => {
+   *   // doc.get('counter') is the minimum of either the existing value or 1
+   * });
+   * ```
+   */
+  static minimum(n: number): FieldValue {
+    // eslint-disable-next-line prefer-rest-params
+    validateMinNumberOfArguments('FieldValue.minimum', arguments, 1);
+    return new NumericMinimumTransform(n);
+  }
+
+  /**
+   * Returns a special value that can be used with set(), create() or update()
+   * that tells the server to set the field to the numeric maximum of the
+   * field's current and the given value.
+   *
+   * If the current field value is not of type 'number', or if the field does
+   * not yet exist, the transformation will set the field to the given value.
+   *
+   * If the existing value and the operand are equivalent, then the field does
+   * not change. For example, `0`, `0.0`, and `-0.0` are all equivalent. If the
+   * operand is `NaN` then the result is always `NaN`.
+   *
+   * @param {number} n The value to compare to the exiting field value.
+   * @return {FieldValue} The FieldValue for use in a call to set(), create() or
+   * update().
+   *
+   * @example
+   * ```
+   * let documentRef = firestore.doc('col/doc');
+   *
+   * documentRef.update(
+   *   'counter', Firestore.FieldValue.maximum(1)
+   * ).then(() => {
+   *   return documentRef.get();
+   * }).then(doc => {
+   *   // doc.get('counter') is the maximum of either the existing value or 1
+   * });
+   * ```
+   */
+  static maximum(n: number): FieldValue {
+    // eslint-disable-next-line prefer-rest-params
+    validateMinNumberOfArguments('FieldValue.maximum', arguments, 1);
+    return new NumericMaximumTransform(n);
   }
 
   /**
@@ -430,13 +500,12 @@ class ServerTimestampTransform extends FieldTransform {
 }
 
 /**
- * Increments a field value on the backend.
- *
+ * Base class of numeric field transforms.
  * @private
  * @internal
  */
-class NumericIncrementTransform extends FieldTransform {
-  constructor(private readonly operand: number) {
+abstract class NumericFieldTransform extends FieldTransform {
+  constructor(protected readonly operand: number) {
     super();
   }
 
@@ -460,12 +529,24 @@ class NumericIncrementTransform extends FieldTransform {
     return true;
   }
 
-  get methodName(): string {
-    return 'FieldValue.increment';
+  validate(): void {
+    validateNumber(this.methodName + '()', this.operand);
+  }
+}
+
+/**
+ * Increments a field value on the backend.
+ *
+ * @private
+ * @internal
+ */
+class NumericIncrementTransform extends NumericFieldTransform {
+  constructor(operand: number) {
+    super(operand);
   }
 
-  validate(): void {
-    validateNumber('FieldValue.increment()', this.operand);
+  get methodName(): string {
+    return 'FieldValue.increment';
   }
 
   toProto(
@@ -480,6 +561,70 @@ class NumericIncrementTransform extends FieldTransform {
     return (
       this === other ||
       (other instanceof NumericIncrementTransform &&
+        this.operand === other.operand)
+    );
+  }
+}
+
+/**
+ * Sets a field to the minimum of existing or operand.
+ *
+ * @private
+ * @internal
+ */
+class NumericMinimumTransform extends NumericFieldTransform {
+  constructor(operand: number) {
+    super(operand);
+  }
+
+  get methodName(): string {
+    return 'FieldValue.minimum';
+  }
+
+  toProto(
+    serializer: Serializer,
+    fieldPath: FieldPath
+  ): api.DocumentTransform.IFieldTransform {
+    const encodedOperand = serializer.encodeValue(this.operand)!;
+    return {fieldPath: fieldPath.formattedName, minimum: encodedOperand};
+  }
+
+  isEqual(other: firestore.FieldValue): boolean {
+    return (
+      this === other ||
+      (other instanceof NumericMinimumTransform &&
+        this.operand === other.operand)
+    );
+  }
+}
+
+/**
+ * Sets a field to the maximum of existing or operand.
+ *
+ * @private
+ * @internal
+ */
+class NumericMaximumTransform extends NumericFieldTransform {
+  constructor(operand: number) {
+    super(operand);
+  }
+
+  get methodName(): string {
+    return 'FieldValue.maximum';
+  }
+
+  toProto(
+    serializer: Serializer,
+    fieldPath: FieldPath
+  ): api.DocumentTransform.IFieldTransform {
+    const encodedOperand = serializer.encodeValue(this.operand)!;
+    return {fieldPath: fieldPath.formattedName, maximum: encodedOperand};
+  }
+
+  isEqual(other: firestore.FieldValue): boolean {
+    return (
+      this === other ||
+      (other instanceof NumericMaximumTransform &&
         this.operand === other.operand)
     );
   }

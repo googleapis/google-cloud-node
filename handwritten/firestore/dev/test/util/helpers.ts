@@ -271,6 +271,26 @@ export function incrementTransform(
   };
 }
 
+export function minimumTransform(
+  field: string,
+  n: number
+): api.DocumentTransform.IFieldTransform {
+  return {
+    fieldPath: field,
+    minimum: Number.isInteger(n) ? {integerValue: n} : {doubleValue: n},
+  };
+}
+
+export function maximumTransform(
+  field: string,
+  n: number
+): api.DocumentTransform.IFieldTransform {
+  return {
+    fieldPath: field,
+    maximum: Number.isInteger(n) ? {integerValue: n} : {doubleValue: n},
+  };
+}
+
 export function arrayTransform(
   field: string,
   transform: 'appendMissingElements' | 'removeAllFromArray',
