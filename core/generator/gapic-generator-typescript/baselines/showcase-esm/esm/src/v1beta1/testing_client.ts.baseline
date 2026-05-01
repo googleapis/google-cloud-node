@@ -18,15 +18,22 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 // @ts-ignore
 import type * as protos from '../../../protos/protos.js';
 import * as testing_client_config from './testing_client_config.json';
 import fs from 'fs';
 import path from 'path';
-import {fileURLToPath} from 'url';
-import {getJSON} from '../json-helper.cjs';
+import { fileURLToPath } from 'url';
+import { getJSON } from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -35,16 +42,14 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
  * `src/v1beta1/testing_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-const gapicConfig = getJSON(
-  path.join(dirname, 'testing_client_config.json')
-);
+const gapicConfig = getJSON(path.join(dirname, 'testing_client_config.json'));
 
 const jsonProtos = getJSON(
-  path.join(dirname, '..', '..', '..', 'protos/protos.json')
+  path.join(dirname, '..', '..', '..', 'protos/protos.json'),
 );
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 const version = getJSON(
-  path.join(dirname, '..', '..', '..', '..', 'package.json')
+  path.join(dirname, '..', '..', '..', '..', 'package.json'),
 ).version;
 
 /**
@@ -60,7 +65,7 @@ export class TestingClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('showcase');
@@ -72,9 +77,9 @@ export class TestingClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  testingStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  testingStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of TestingClient.
@@ -116,21 +121,42 @@ export class TestingClient {
    *     const client = new TestingClient({fallback: 'rest'}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TestingClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'localhost';
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -155,7 +181,7 @@ export class TestingClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -172,10 +198,7 @@ export class TestingClient {
     const isEsm = true;
     const isEsmString = isEsm ? '-esm' : '-cjs';
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/{process.versions.node}${isEsmString}`);
     } else {
@@ -183,7 +206,7 @@ export class TestingClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -191,61 +214,69 @@ export class TestingClient {
     }
 
     // Load the applicable protos.
-    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos as gax.protobuf.INamespace);
+    this._protos = this._gaxGrpc.loadProtoJSON(
+      jsonProtos as gax.protobuf.INamespace,
+    );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
       blueprintPathTemplate: new this._gaxModule.PathTemplate(
-        'sessions/{session}/tests/{test}/blueprints/{blueprint}'
+        'sessions/{session}/tests/{test}/blueprints/{blueprint}',
       ),
-      roomPathTemplate: new this._gaxModule.PathTemplate(
-        'rooms/{room}'
-      ),
+      roomPathTemplate: new this._gaxModule.PathTemplate('rooms/{room}'),
       roomBlurbPathTemplate: new this._gaxModule.PathTemplate(
-        'rooms/{room}/blurbs/{blurb}'
+        'rooms/{room}/blurbs/{blurb}',
       ),
       roomBlurbsLegacyRoomBlurbPathTemplate: new this._gaxModule.PathTemplate(
-        'rooms/{room}/blurbs/legacy/{legacy_room}.{blurb}'
+        'rooms/{room}/blurbs/legacy/{legacy_room}.{blurb}',
       ),
       sequencePathTemplate: new this._gaxModule.PathTemplate(
-        'sequences/{sequence}'
+        'sequences/{sequence}',
       ),
       sequenceReportPathTemplate: new this._gaxModule.PathTemplate(
-        'sequences/{sequence}/sequenceReport'
+        'sequences/{sequence}/sequenceReport',
       ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
-        'sessions/{session}'
+        'sessions/{session}',
       ),
       testPathTemplate: new this._gaxModule.PathTemplate(
-        'sessions/{session}/tests/{test}'
+        'sessions/{session}/tests/{test}',
       ),
-      userPathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}'
-      ),
+      userPathTemplate: new this._gaxModule.PathTemplate('users/{user}'),
       userProfileBlurbPathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/profile/blurbs/{blurb}'
+        'users/{user}/profile/blurbs/{blurb}',
       ),
-      userProfileBlurbsLegacyUserBlurbPathTemplate: new this._gaxModule.PathTemplate(
-        'users/{user}/profile/blurbs/legacy/{legacy_user}~{blurb}'
-      ),
+      userProfileBlurbsLegacyUserBlurbPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'users/{user}/profile/blurbs/legacy/{legacy_user}~{blurb}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSessions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sessions'),
-      listTests:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tests')
+      listSessions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sessions',
+      ),
+      listTests: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tests',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.showcase.v1beta1.Testing', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.showcase.v1beta1.Testing',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -276,37 +307,49 @@ export class TestingClient {
     // Put together the "service stub" for
     // google.showcase.v1beta1.Testing.
     this.testingStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.showcase.v1beta1.Testing') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.showcase.v1beta1.Testing',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.showcase.v1beta1.Testing,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const testingStubMethods =
-        ['createSession', 'getSession', 'listSessions', 'deleteSession', 'reportSession', 'listTests', 'deleteTest', 'verifyTest'];
+    const testingStubMethods = [
+      'createSession',
+      'getSession',
+      'listSessions',
+      'deleteSession',
+      'reportSession',
+      'listTests',
+      'deleteTest',
+      'verifyTest',
+    ];
     for (const methodName of testingStubMethods) {
       const callPromise = this.testingStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -321,8 +364,14 @@ export class TestingClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'localhost';
   }
@@ -334,8 +383,14 @@ export class TestingClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'localhost';
   }
@@ -375,8 +430,9 @@ export class TestingClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -387,650 +443,869 @@ export class TestingClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a new testing session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.showcase.v1beta1.Session} request.session
- *   The session to be created.
- *   Sessions are immutable once they are created (although they can
- *   be deleted).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.Session|Session}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.create_session.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_CreateSession_async
- */
+  /**
+   * Creates a new testing session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.showcase.v1beta1.Session} request.session
+   *   The session to be created.
+   *   Sessions are immutable once they are created (although they can
+   *   be deleted).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.Session|Session}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.create_session.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_CreateSession_async
+   */
   createSession(
-      request?: protos.google.showcase.v1beta1.ICreateSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.ICreateSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.showcase.v1beta1.ICreateSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.ICreateSessionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createSession(
-      request: protos.google.showcase.v1beta1.ICreateSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.ICreateSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.ICreateSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.ICreateSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSession(
-      request: protos.google.showcase.v1beta1.ICreateSessionRequest,
-      callback: Callback<
-          protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.ICreateSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.ICreateSessionRequest,
+    callback: Callback<
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.ICreateSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSession(
-      request?: protos.google.showcase.v1beta1.ICreateSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.showcase.v1beta1.ICreateSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.ICreateSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.ICreateSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.ICreateSessionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.showcase.v1beta1.ICreateSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.ICreateSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.ICreateSessionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('createSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.ICreateSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.showcase.v1beta1.ISession,
+          | protos.google.showcase.v1beta1.ICreateSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
-    return this.innerApiCalls.createSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.ICreateSessionRequest|undefined, {}|undefined
-      ]) => {
-        this._log.info('createSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.showcase.v1beta1.ISession,
+          protos.google.showcase.v1beta1.ICreateSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a testing session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The session to be retrieved.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.Session|Session}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.get_session.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_GetSession_async
- */
+  /**
+   * Gets a testing session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The session to be retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.Session|Session}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.get_session.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_GetSession_async
+   */
   getSession(
-      request?: protos.google.showcase.v1beta1.IGetSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.IGetSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.showcase.v1beta1.IGetSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.IGetSessionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getSession(
-      request: protos.google.showcase.v1beta1.IGetSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IGetSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.IGetSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSession(
-      request: protos.google.showcase.v1beta1.IGetSessionRequest,
-      callback: Callback<
-          protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IGetSessionRequest,
+    callback: Callback<
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.IGetSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSession(
-      request?: protos.google.showcase.v1beta1.IGetSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.showcase.v1beta1.IGetSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.showcase.v1beta1.ISession,
-          protos.google.showcase.v1beta1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.IGetSessionRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.showcase.v1beta1.IGetSessionRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.IGetSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ISession,
+      protos.google.showcase.v1beta1.IGetSessionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.IGetSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.showcase.v1beta1.ISession,
+          protos.google.showcase.v1beta1.IGetSessionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
-    return this.innerApiCalls.getSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.showcase.v1beta1.ISession,
-        protos.google.showcase.v1beta1.IGetSessionRequest|undefined, {}|undefined
-      ]) => {
-        this._log.info('getSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.showcase.v1beta1.ISession,
+          protos.google.showcase.v1beta1.IGetSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a test session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The session to be deleted.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.delete_session.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_DeleteSession_async
- */
+  /**
+   * Delete a test session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The session to be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.delete_session.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_DeleteSession_async
+   */
   deleteSession(
-      request?: protos.google.showcase.v1beta1.IDeleteSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.showcase.v1beta1.IDeleteSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteSessionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteSession(
-      request: protos.google.showcase.v1beta1.IDeleteSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IDeleteSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSession(
-      request: protos.google.showcase.v1beta1.IDeleteSessionRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IDeleteSessionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSession(
-      request?: protos.google.showcase.v1beta1.IDeleteSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.showcase.v1beta1.IDeleteSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteSessionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.showcase.v1beta1.IDeleteSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteSessionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.showcase.v1beta1.IDeleteSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
-    return this.innerApiCalls.deleteSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteSessionRequest|undefined, {}|undefined
-      ]) => {
-        this._log.info('deleteSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.showcase.v1beta1.IDeleteSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Report on the status of a session.
- * This generates a report detailing which tests have been completed,
- * and an overall rollup.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The session to be reported on.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.ReportSessionResponse|ReportSessionResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.report_session.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_ReportSession_async
- */
+  /**
+   * Report on the status of a session.
+   * This generates a report detailing which tests have been completed,
+   * and an overall rollup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The session to be reported on.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.ReportSessionResponse|ReportSessionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.report_session.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_ReportSession_async
+   */
   reportSession(
-      request?: protos.google.showcase.v1beta1.IReportSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.showcase.v1beta1.IReportSessionResponse,
-        protos.google.showcase.v1beta1.IReportSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.showcase.v1beta1.IReportSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.IReportSessionResponse,
+      protos.google.showcase.v1beta1.IReportSessionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   reportSession(
-      request: protos.google.showcase.v1beta1.IReportSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.showcase.v1beta1.IReportSessionResponse,
-          protos.google.showcase.v1beta1.IReportSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IReportSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.showcase.v1beta1.IReportSessionResponse,
+      protos.google.showcase.v1beta1.IReportSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   reportSession(
-      request: protos.google.showcase.v1beta1.IReportSessionRequest,
-      callback: Callback<
-          protos.google.showcase.v1beta1.IReportSessionResponse,
-          protos.google.showcase.v1beta1.IReportSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IReportSessionRequest,
+    callback: Callback<
+      protos.google.showcase.v1beta1.IReportSessionResponse,
+      protos.google.showcase.v1beta1.IReportSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   reportSession(
-      request?: protos.google.showcase.v1beta1.IReportSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.showcase.v1beta1.IReportSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.showcase.v1beta1.IReportSessionResponse,
-          protos.google.showcase.v1beta1.IReportSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.showcase.v1beta1.IReportSessionResponse,
-          protos.google.showcase.v1beta1.IReportSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.showcase.v1beta1.IReportSessionResponse,
-        protos.google.showcase.v1beta1.IReportSessionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.showcase.v1beta1.IReportSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.showcase.v1beta1.IReportSessionResponse,
+      protos.google.showcase.v1beta1.IReportSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.IReportSessionResponse,
+      protos.google.showcase.v1beta1.IReportSessionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('reportSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.showcase.v1beta1.IReportSessionResponse,
-        protos.google.showcase.v1beta1.IReportSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.showcase.v1beta1.IReportSessionResponse,
+          | protos.google.showcase.v1beta1.IReportSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('reportSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
-    return this.innerApiCalls.reportSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.showcase.v1beta1.IReportSessionResponse,
-        protos.google.showcase.v1beta1.IReportSessionRequest|undefined, {}|undefined
-      ]) => {
-        this._log.info('reportSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .reportSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.showcase.v1beta1.IReportSessionResponse,
+          protos.google.showcase.v1beta1.IReportSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('reportSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Explicitly decline to implement a test.
- *
- * This removes the test from subsequent `ListTests` calls, and
- * attempting to do the test will error.
- *
- * This method will error if attempting to delete a required test.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The test to be deleted.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.delete_test.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_DeleteTest_async
- */
+  /**
+   * Explicitly decline to implement a test.
+   *
+   * This removes the test from subsequent `ListTests` calls, and
+   * attempting to do the test will error.
+   *
+   * This method will error if attempting to delete a required test.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The test to be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.delete_test.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_DeleteTest_async
+   */
   deleteTest(
-      request?: protos.google.showcase.v1beta1.IDeleteTestRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteTestRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.showcase.v1beta1.IDeleteTestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteTestRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteTest(
-      request: protos.google.showcase.v1beta1.IDeleteTestRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteTestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IDeleteTestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteTestRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTest(
-      request: protos.google.showcase.v1beta1.IDeleteTestRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteTestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IDeleteTestRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteTestRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTest(
-      request?: protos.google.showcase.v1beta1.IDeleteTestRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.showcase.v1beta1.IDeleteTestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteTestRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.showcase.v1beta1.IDeleteTestRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteTestRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.showcase.v1beta1.IDeleteTestRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteTestRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.showcase.v1beta1.IDeleteTestRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteTest request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteTestRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.showcase.v1beta1.IDeleteTestRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTest response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
-    return this.innerApiCalls.deleteTest(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.showcase.v1beta1.IDeleteTestRequest|undefined, {}|undefined
-      ]) => {
-        this._log.info('deleteTest response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteTest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.showcase.v1beta1.IDeleteTestRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTest response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Register a response to a test.
- *
- * In cases where a test involves registering a final answer at the
- * end of the test, this method provides the means to do so.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The test to have an answer registered to it.
- * @param {Buffer} request.answer
- *   The answer from the test.
- * @param {Buffer[]} request.answers
- *   The answers from the test if multiple are to be checked
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.VerifyTestResponse|VerifyTestResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.verify_test.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_VerifyTest_async
- */
+  /**
+   * Register a response to a test.
+   *
+   * In cases where a test involves registering a final answer at the
+   * end of the test, this method provides the means to do so.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The test to have an answer registered to it.
+   * @param {Buffer} request.answer
+   *   The answer from the test.
+   * @param {Buffer[]} request.answers
+   *   The answers from the test if multiple are to be checked
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.showcase.v1beta1.VerifyTestResponse|VerifyTestResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.verify_test.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_VerifyTest_async
+   */
   verifyTest(
-      request?: protos.google.showcase.v1beta1.IVerifyTestRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.showcase.v1beta1.IVerifyTestResponse,
-        protos.google.showcase.v1beta1.IVerifyTestRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.showcase.v1beta1.IVerifyTestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.IVerifyTestResponse,
+      protos.google.showcase.v1beta1.IVerifyTestRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   verifyTest(
-      request: protos.google.showcase.v1beta1.IVerifyTestRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.showcase.v1beta1.IVerifyTestResponse,
-          protos.google.showcase.v1beta1.IVerifyTestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IVerifyTestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.showcase.v1beta1.IVerifyTestResponse,
+      protos.google.showcase.v1beta1.IVerifyTestRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   verifyTest(
-      request: protos.google.showcase.v1beta1.IVerifyTestRequest,
-      callback: Callback<
-          protos.google.showcase.v1beta1.IVerifyTestResponse,
-          protos.google.showcase.v1beta1.IVerifyTestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.showcase.v1beta1.IVerifyTestRequest,
+    callback: Callback<
+      protos.google.showcase.v1beta1.IVerifyTestResponse,
+      protos.google.showcase.v1beta1.IVerifyTestRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   verifyTest(
-      request?: protos.google.showcase.v1beta1.IVerifyTestRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.showcase.v1beta1.IVerifyTestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.showcase.v1beta1.IVerifyTestResponse,
-          protos.google.showcase.v1beta1.IVerifyTestRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.showcase.v1beta1.IVerifyTestResponse,
-          protos.google.showcase.v1beta1.IVerifyTestRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.showcase.v1beta1.IVerifyTestResponse,
-        protos.google.showcase.v1beta1.IVerifyTestRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.showcase.v1beta1.IVerifyTestRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.showcase.v1beta1.IVerifyTestResponse,
+      protos.google.showcase.v1beta1.IVerifyTestRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.IVerifyTestResponse,
+      protos.google.showcase.v1beta1.IVerifyTestRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('verifyTest request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.showcase.v1beta1.IVerifyTestResponse,
-        protos.google.showcase.v1beta1.IVerifyTestRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.showcase.v1beta1.IVerifyTestResponse,
+          protos.google.showcase.v1beta1.IVerifyTestRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('verifyTest response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
-    return this.innerApiCalls.verifyTest(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.showcase.v1beta1.IVerifyTestResponse,
-        protos.google.showcase.v1beta1.IVerifyTestRequest|undefined, {}|undefined
-      ]) => {
-        this._log.info('verifyTest response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .verifyTest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.showcase.v1beta1.IVerifyTestResponse,
+          protos.google.showcase.v1beta1.IVerifyTestRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyTest response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists the current test sessions.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of sessions to return per page.
- * @param {string} request.pageToken
- *   The page token, for retrieving subsequent pages.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.showcase.v1beta1.Session|Session}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the current test sessions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of sessions to return per page.
+   * @param {string} request.pageToken
+   *   The page token, for retrieving subsequent pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.showcase.v1beta1.Session|Session}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSessions(
-      request?: protos.google.showcase.v1beta1.IListSessionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.showcase.v1beta1.ISession[],
-        protos.google.showcase.v1beta1.IListSessionsRequest|null,
-        protos.google.showcase.v1beta1.IListSessionsResponse
-      ]>;
+    request?: protos.google.showcase.v1beta1.IListSessionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ISession[],
+      protos.google.showcase.v1beta1.IListSessionsRequest | null,
+      protos.google.showcase.v1beta1.IListSessionsResponse,
+    ]
+  >;
   listSessions(
-      request: protos.google.showcase.v1beta1.IListSessionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.showcase.v1beta1.IListSessionsRequest,
-          protos.google.showcase.v1beta1.IListSessionsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ISession>): void;
+    request: protos.google.showcase.v1beta1.IListSessionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.showcase.v1beta1.IListSessionsRequest,
+      protos.google.showcase.v1beta1.IListSessionsResponse | null | undefined,
+      protos.google.showcase.v1beta1.ISession
+    >,
+  ): void;
   listSessions(
-      request: protos.google.showcase.v1beta1.IListSessionsRequest,
-      callback: PaginationCallback<
-          protos.google.showcase.v1beta1.IListSessionsRequest,
-          protos.google.showcase.v1beta1.IListSessionsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ISession>): void;
+    request: protos.google.showcase.v1beta1.IListSessionsRequest,
+    callback: PaginationCallback<
+      protos.google.showcase.v1beta1.IListSessionsRequest,
+      protos.google.showcase.v1beta1.IListSessionsResponse | null | undefined,
+      protos.google.showcase.v1beta1.ISession
+    >,
+  ): void;
   listSessions(
-      request?: protos.google.showcase.v1beta1.IListSessionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.showcase.v1beta1.IListSessionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.showcase.v1beta1.IListSessionsRequest,
-          protos.google.showcase.v1beta1.IListSessionsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ISession>,
-      callback?: PaginationCallback<
-          protos.google.showcase.v1beta1.IListSessionsRequest,
-          protos.google.showcase.v1beta1.IListSessionsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ISession>):
-      Promise<[
-        protos.google.showcase.v1beta1.ISession[],
-        protos.google.showcase.v1beta1.IListSessionsRequest|null,
-        protos.google.showcase.v1beta1.IListSessionsResponse
-      ]>|void {
+          | protos.google.showcase.v1beta1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.showcase.v1beta1.ISession
+        >,
+    callback?: PaginationCallback<
+      protos.google.showcase.v1beta1.IListSessionsRequest,
+      protos.google.showcase.v1beta1.IListSessionsResponse | null | undefined,
+      protos.google.showcase.v1beta1.ISession
+    >,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ISession[],
+      protos.google.showcase.v1beta1.IListSessionsRequest | null,
+      protos.google.showcase.v1beta1.IListSessionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.showcase.v1beta1.IListSessionsRequest,
-      protos.google.showcase.v1beta1.IListSessionsResponse|null|undefined,
-      protos.google.showcase.v1beta1.ISession>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.showcase.v1beta1.IListSessionsRequest,
+          | protos.google.showcase.v1beta1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.showcase.v1beta1.ISession
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
@@ -1039,175 +1314,196 @@ export class TestingClient {
     this._log.info('listSessions request %j', request);
     return this.innerApiCalls
       .listSessions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.showcase.v1beta1.ISession[],
-        protos.google.showcase.v1beta1.IListSessionsRequest|null,
-        protos.google.showcase.v1beta1.IListSessionsResponse
-      ]) => {
-        this._log.info('listSessions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.showcase.v1beta1.ISession[],
+          protos.google.showcase.v1beta1.IListSessionsRequest | null,
+          protos.google.showcase.v1beta1.IListSessionsResponse,
+        ]) => {
+          this._log.info('listSessions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSessions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of sessions to return per page.
- * @param {string} request.pageToken
- *   The page token, for retrieving subsequent pages.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.showcase.v1beta1.Session|Session} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSessions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of sessions to return per page.
+   * @param {string} request.pageToken
+   *   The page token, for retrieving subsequent pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.showcase.v1beta1.Session|Session} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSessionsStream(
-      request?: protos.google.showcase.v1beta1.IListSessionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.showcase.v1beta1.IListSessionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSessions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of sessions to return per page.
- * @param {string} request.pageToken
- *   The page token, for retrieving subsequent pages.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.showcase.v1beta1.Session|Session}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.list_sessions.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_ListSessions_async
- */
+  /**
+   * Equivalent to `listSessions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of sessions to return per page.
+   * @param {string} request.pageToken
+   *   The page token, for retrieving subsequent pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.showcase.v1beta1.Session|Session}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.list_sessions.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_ListSessions_async
+   */
   listSessionsAsync(
-      request?: protos.google.showcase.v1beta1.IListSessionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.showcase.v1beta1.ISession>{
+    request?: protos.google.showcase.v1beta1.IListSessionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.showcase.v1beta1.ISession> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.showcase.v1beta1.ISession>;
   }
- /**
- * List the tests of a sessesion.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The session.
- * @param {number} request.pageSize
- *   The maximum number of tests to return per page.
- * @param {string} request.pageToken
- *   The page token, for retrieving subsequent pages.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.showcase.v1beta1.Test|Test}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listTestsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List the tests of a sessesion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The session.
+   * @param {number} request.pageSize
+   *   The maximum number of tests to return per page.
+   * @param {string} request.pageToken
+   *   The page token, for retrieving subsequent pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.showcase.v1beta1.Test|Test}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTestsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTests(
-      request?: protos.google.showcase.v1beta1.IListTestsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.showcase.v1beta1.ITest[],
-        protos.google.showcase.v1beta1.IListTestsRequest|null,
-        protos.google.showcase.v1beta1.IListTestsResponse
-      ]>;
+    request?: protos.google.showcase.v1beta1.IListTestsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ITest[],
+      protos.google.showcase.v1beta1.IListTestsRequest | null,
+      protos.google.showcase.v1beta1.IListTestsResponse,
+    ]
+  >;
   listTests(
-      request: protos.google.showcase.v1beta1.IListTestsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.showcase.v1beta1.IListTestsRequest,
-          protos.google.showcase.v1beta1.IListTestsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ITest>): void;
+    request: protos.google.showcase.v1beta1.IListTestsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.showcase.v1beta1.IListTestsRequest,
+      protos.google.showcase.v1beta1.IListTestsResponse | null | undefined,
+      protos.google.showcase.v1beta1.ITest
+    >,
+  ): void;
   listTests(
-      request: protos.google.showcase.v1beta1.IListTestsRequest,
-      callback: PaginationCallback<
-          protos.google.showcase.v1beta1.IListTestsRequest,
-          protos.google.showcase.v1beta1.IListTestsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ITest>): void;
+    request: protos.google.showcase.v1beta1.IListTestsRequest,
+    callback: PaginationCallback<
+      protos.google.showcase.v1beta1.IListTestsRequest,
+      protos.google.showcase.v1beta1.IListTestsResponse | null | undefined,
+      protos.google.showcase.v1beta1.ITest
+    >,
+  ): void;
   listTests(
-      request?: protos.google.showcase.v1beta1.IListTestsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.showcase.v1beta1.IListTestsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.showcase.v1beta1.IListTestsRequest,
-          protos.google.showcase.v1beta1.IListTestsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ITest>,
-      callback?: PaginationCallback<
-          protos.google.showcase.v1beta1.IListTestsRequest,
-          protos.google.showcase.v1beta1.IListTestsResponse|null|undefined,
-          protos.google.showcase.v1beta1.ITest>):
-      Promise<[
-        protos.google.showcase.v1beta1.ITest[],
-        protos.google.showcase.v1beta1.IListTestsRequest|null,
-        protos.google.showcase.v1beta1.IListTestsResponse
-      ]>|void {
+          protos.google.showcase.v1beta1.IListTestsResponse | null | undefined,
+          protos.google.showcase.v1beta1.ITest
+        >,
+    callback?: PaginationCallback<
+      protos.google.showcase.v1beta1.IListTestsRequest,
+      protos.google.showcase.v1beta1.IListTestsResponse | null | undefined,
+      protos.google.showcase.v1beta1.ITest
+    >,
+  ): Promise<
+    [
+      protos.google.showcase.v1beta1.ITest[],
+      protos.google.showcase.v1beta1.IListTestsRequest | null,
+      protos.google.showcase.v1beta1.IListTestsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.showcase.v1beta1.IListTestsRequest,
-      protos.google.showcase.v1beta1.IListTestsResponse|null|undefined,
-      protos.google.showcase.v1beta1.ITest>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.showcase.v1beta1.IListTestsRequest,
+          protos.google.showcase.v1beta1.IListTestsResponse | null | undefined,
+          protos.google.showcase.v1beta1.ITest
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
@@ -1216,106 +1512,110 @@ export class TestingClient {
     this._log.info('listTests request %j', request);
     return this.innerApiCalls
       .listTests(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.showcase.v1beta1.ITest[],
-        protos.google.showcase.v1beta1.IListTestsRequest|null,
-        protos.google.showcase.v1beta1.IListTestsResponse
-      ]) => {
-        this._log.info('listTests values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.showcase.v1beta1.ITest[],
+          protos.google.showcase.v1beta1.IListTestsRequest | null,
+          protos.google.showcase.v1beta1.IListTestsResponse,
+        ]) => {
+          this._log.info('listTests values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listTests`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The session.
- * @param {number} request.pageSize
- *   The maximum number of tests to return per page.
- * @param {string} request.pageToken
- *   The page token, for retrieving subsequent pages.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.showcase.v1beta1.Test|Test} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listTestsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listTests`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The session.
+   * @param {number} request.pageSize
+   *   The maximum number of tests to return per page.
+   * @param {string} request.pageToken
+   *   The page token, for retrieving subsequent pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.showcase.v1beta1.Test|Test} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTestsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTestsStream(
-      request?: protos.google.showcase.v1beta1.IListTestsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.showcase.v1beta1.IListTestsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTests stream %j', request);
     return this.descriptors.page.listTests.createStream(
       this.innerApiCalls.listTests as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listTests`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The session.
- * @param {number} request.pageSize
- *   The maximum number of tests to return per page.
- * @param {string} request.pageToken
- *   The page token, for retrieving subsequent pages.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.showcase.v1beta1.Test|Test}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/testing.list_tests.js</caption>
- * region_tag:localhost_v1beta1_generated_Testing_ListTests_async
- */
+  /**
+   * Equivalent to `listTests`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The session.
+   * @param {number} request.pageSize
+   *   The maximum number of tests to return per page.
+   * @param {string} request.pageToken
+   *   The page token, for retrieving subsequent pages.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.showcase.v1beta1.Test|Test}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/testing.list_tests.js</caption>
+   * region_tag:localhost_v1beta1_generated_Testing_ListTests_async
+   */
   listTestsAsync(
-      request?: protos.google.showcase.v1beta1.IListTestsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.showcase.v1beta1.ITest>{
+    request?: protos.google.showcase.v1beta1.IListTestsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.showcase.v1beta1.ITest> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTests iterate %j', request);
     return this.descriptors.page.listTests.asyncIterate(
       this.innerApiCalls['listTests'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.showcase.v1beta1.ITest>;
   }
   // --------------------
@@ -1330,7 +1630,7 @@ export class TestingClient {
    * @param {string} blueprint
    * @returns {string} Resource name string.
    */
-  blueprintPath(session:string,test:string,blueprint:string) {
+  blueprintPath(session: string, test: string, blueprint: string) {
     return this.pathTemplates.blueprintPathTemplate.render({
       session: session,
       test: test,
@@ -1346,7 +1646,8 @@ export class TestingClient {
    * @returns {string} A string representing the session.
    */
   matchSessionFromBlueprintName(blueprintName: string) {
-    return this.pathTemplates.blueprintPathTemplate.match(blueprintName).session;
+    return this.pathTemplates.blueprintPathTemplate.match(blueprintName)
+      .session;
   }
 
   /**
@@ -1368,7 +1669,8 @@ export class TestingClient {
    * @returns {string} A string representing the blueprint.
    */
   matchBlueprintFromBlueprintName(blueprintName: string) {
-    return this.pathTemplates.blueprintPathTemplate.match(blueprintName).blueprint;
+    return this.pathTemplates.blueprintPathTemplate.match(blueprintName)
+      .blueprint;
   }
 
   /**
@@ -1377,7 +1679,7 @@ export class TestingClient {
    * @param {string} room
    * @returns {string} Resource name string.
    */
-  roomPath(room:string) {
+  roomPath(room: string) {
     return this.pathTemplates.roomPathTemplate.render({
       room: room,
     });
@@ -1401,7 +1703,7 @@ export class TestingClient {
    * @param {string} blurb
    * @returns {string} Resource name string.
    */
-  roomBlurbPath(room:string,blurb:string) {
+  roomBlurbPath(room: string, blurb: string) {
     return this.pathTemplates.roomBlurbPathTemplate.render({
       room: room,
       blurb: blurb,
@@ -1438,7 +1740,11 @@ export class TestingClient {
    * @param {string} blurb
    * @returns {string} Resource name string.
    */
-  roomBlurbsLegacyRoomBlurbPath(room:string,legacyRoom:string,blurb:string) {
+  roomBlurbsLegacyRoomBlurbPath(
+    room: string,
+    legacyRoom: string,
+    blurb: string,
+  ) {
     return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.render({
       room: room,
       legacy_room: legacyRoom,
@@ -1453,8 +1759,12 @@ export class TestingClient {
    *   A fully-qualified path representing room_blurbs_legacy_room_blurb resource.
    * @returns {string} A string representing the room.
    */
-  matchRoomFromRoomBlurbsLegacyRoomBlurbName(roomBlurbsLegacyRoomBlurbName: string) {
-    return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.match(roomBlurbsLegacyRoomBlurbName).room;
+  matchRoomFromRoomBlurbsLegacyRoomBlurbName(
+    roomBlurbsLegacyRoomBlurbName: string,
+  ) {
+    return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.match(
+      roomBlurbsLegacyRoomBlurbName,
+    ).room;
   }
 
   /**
@@ -1464,8 +1774,12 @@ export class TestingClient {
    *   A fully-qualified path representing room_blurbs_legacy_room_blurb resource.
    * @returns {string} A string representing the legacy_room.
    */
-  matchLegacyRoomFromRoomBlurbsLegacyRoomBlurbName(roomBlurbsLegacyRoomBlurbName: string) {
-    return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.match(roomBlurbsLegacyRoomBlurbName).legacy_room;
+  matchLegacyRoomFromRoomBlurbsLegacyRoomBlurbName(
+    roomBlurbsLegacyRoomBlurbName: string,
+  ) {
+    return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.match(
+      roomBlurbsLegacyRoomBlurbName,
+    ).legacy_room;
   }
 
   /**
@@ -1475,8 +1789,12 @@ export class TestingClient {
    *   A fully-qualified path representing room_blurbs_legacy_room_blurb resource.
    * @returns {string} A string representing the blurb.
    */
-  matchBlurbFromRoomBlurbsLegacyRoomBlurbName(roomBlurbsLegacyRoomBlurbName: string) {
-    return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.match(roomBlurbsLegacyRoomBlurbName).blurb;
+  matchBlurbFromRoomBlurbsLegacyRoomBlurbName(
+    roomBlurbsLegacyRoomBlurbName: string,
+  ) {
+    return this.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.match(
+      roomBlurbsLegacyRoomBlurbName,
+    ).blurb;
   }
 
   /**
@@ -1485,7 +1803,7 @@ export class TestingClient {
    * @param {string} sequence
    * @returns {string} Resource name string.
    */
-  sequencePath(sequence:string) {
+  sequencePath(sequence: string) {
     return this.pathTemplates.sequencePathTemplate.render({
       sequence: sequence,
     });
@@ -1508,7 +1826,7 @@ export class TestingClient {
    * @param {string} sequence
    * @returns {string} Resource name string.
    */
-  sequenceReportPath(sequence:string) {
+  sequenceReportPath(sequence: string) {
     return this.pathTemplates.sequenceReportPathTemplate.render({
       sequence: sequence,
     });
@@ -1522,7 +1840,9 @@ export class TestingClient {
    * @returns {string} A string representing the sequence.
    */
   matchSequenceFromSequenceReportName(sequenceReportName: string) {
-    return this.pathTemplates.sequenceReportPathTemplate.match(sequenceReportName).sequence;
+    return this.pathTemplates.sequenceReportPathTemplate.match(
+      sequenceReportName,
+    ).sequence;
   }
 
   /**
@@ -1531,7 +1851,7 @@ export class TestingClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(session:string) {
+  sessionPath(session: string) {
     return this.pathTemplates.sessionPathTemplate.render({
       session: session,
     });
@@ -1555,7 +1875,7 @@ export class TestingClient {
    * @param {string} test
    * @returns {string} Resource name string.
    */
-  testPath(session:string,test:string) {
+  testPath(session: string, test: string) {
     return this.pathTemplates.testPathTemplate.render({
       session: session,
       test: test,
@@ -1590,7 +1910,7 @@ export class TestingClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(user:string) {
+  userPath(user: string) {
     return this.pathTemplates.userPathTemplate.render({
       user: user,
     });
@@ -1614,7 +1934,7 @@ export class TestingClient {
    * @param {string} blurb
    * @returns {string} Resource name string.
    */
-  userProfileBlurbPath(user:string,blurb:string) {
+  userProfileBlurbPath(user: string, blurb: string) {
     return this.pathTemplates.userProfileBlurbPathTemplate.render({
       user: user,
       blurb: blurb,
@@ -1629,7 +1949,9 @@ export class TestingClient {
    * @returns {string} A string representing the user.
    */
   matchUserFromUserProfileBlurbName(userProfileBlurbName: string) {
-    return this.pathTemplates.userProfileBlurbPathTemplate.match(userProfileBlurbName).user;
+    return this.pathTemplates.userProfileBlurbPathTemplate.match(
+      userProfileBlurbName,
+    ).user;
   }
 
   /**
@@ -1640,7 +1962,9 @@ export class TestingClient {
    * @returns {string} A string representing the blurb.
    */
   matchBlurbFromUserProfileBlurbName(userProfileBlurbName: string) {
-    return this.pathTemplates.userProfileBlurbPathTemplate.match(userProfileBlurbName).blurb;
+    return this.pathTemplates.userProfileBlurbPathTemplate.match(
+      userProfileBlurbName,
+    ).blurb;
   }
 
   /**
@@ -1651,12 +1975,18 @@ export class TestingClient {
    * @param {string} blurb
    * @returns {string} Resource name string.
    */
-  userProfileBlurbsLegacyUserBlurbPath(user:string,legacyUser:string,blurb:string) {
-    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.render({
-      user: user,
-      legacy_user: legacyUser,
-      blurb: blurb,
-    });
+  userProfileBlurbsLegacyUserBlurbPath(
+    user: string,
+    legacyUser: string,
+    blurb: string,
+  ) {
+    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.render(
+      {
+        user: user,
+        legacy_user: legacyUser,
+        blurb: blurb,
+      },
+    );
   }
 
   /**
@@ -1666,8 +1996,12 @@ export class TestingClient {
    *   A fully-qualified path representing user_profile_blurbs_legacy_user_blurb resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromUserProfileBlurbsLegacyUserBlurbName(userProfileBlurbsLegacyUserBlurbName: string) {
-    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.match(userProfileBlurbsLegacyUserBlurbName).user;
+  matchUserFromUserProfileBlurbsLegacyUserBlurbName(
+    userProfileBlurbsLegacyUserBlurbName: string,
+  ) {
+    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.match(
+      userProfileBlurbsLegacyUserBlurbName,
+    ).user;
   }
 
   /**
@@ -1677,8 +2011,12 @@ export class TestingClient {
    *   A fully-qualified path representing user_profile_blurbs_legacy_user_blurb resource.
    * @returns {string} A string representing the legacy_user.
    */
-  matchLegacyUserFromUserProfileBlurbsLegacyUserBlurbName(userProfileBlurbsLegacyUserBlurbName: string) {
-    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.match(userProfileBlurbsLegacyUserBlurbName).legacy_user;
+  matchLegacyUserFromUserProfileBlurbsLegacyUserBlurbName(
+    userProfileBlurbsLegacyUserBlurbName: string,
+  ) {
+    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.match(
+      userProfileBlurbsLegacyUserBlurbName,
+    ).legacy_user;
   }
 
   /**
@@ -1688,8 +2026,12 @@ export class TestingClient {
    *   A fully-qualified path representing user_profile_blurbs_legacy_user_blurb resource.
    * @returns {string} A string representing the blurb.
    */
-  matchBlurbFromUserProfileBlurbsLegacyUserBlurbName(userProfileBlurbsLegacyUserBlurbName: string) {
-    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.match(userProfileBlurbsLegacyUserBlurbName).blurb;
+  matchBlurbFromUserProfileBlurbsLegacyUserBlurbName(
+    userProfileBlurbsLegacyUserBlurbName: string,
+  ) {
+    return this.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.match(
+      userProfileBlurbsLegacyUserBlurbName,
+    ).blurb;
   }
 
   /**
@@ -1700,7 +2042,7 @@ export class TestingClient {
    */
   close(): Promise<void> {
     if (this.testingStub && !this._terminated) {
-      return this.testingStub.then(stub => {
+      return this.testingStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
