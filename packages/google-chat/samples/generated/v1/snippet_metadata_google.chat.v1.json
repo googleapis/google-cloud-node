@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-chat",
-    "version": "0.1.0",
+    "version": "0.23.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -747,7 +747,7 @@
       "regionTag": "chat_v1_generated_ChatService_DeleteSpace_async",
       "title": "ChatService deleteSpace Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a named space. Always performs a cascading delete, which means that the space's child resources—like messages posted in the space and memberships in the space—are also deleted. For an example, see [Delete a space](https://developers.google.com/workspace/chat/delete-spaces). Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize): - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) and the authorization scope:     - `https://www.googleapis.com/auth/chat.app.delete` (only in     spaces the app created) - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.delete`     - `https://www.googleapis.com/auth/chat.import` (import mode spaces     only)     - User authentication grants administrator privileges when an     administrator account authenticates, `use_admin_access` is `true`, and     the following authorization scope is used:         - `https://www.googleapis.com/auth/chat.admin.delete`",
+      "description": " Deletes a named space. Always performs a cascading delete, which means that the space's child resources\u2014like messages posted in the space and memberships in the space\u2014are also deleted. For an example, see [Delete a space](https://developers.google.com/workspace/chat/delete-spaces). Supports the following types of [authentication](https://developers.google.com/workspace/chat/authenticate-authorize): - [App authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app) with [administrator approval](https://support.google.com/a?p=chat-app-auth) and the authorization scope:     - `https://www.googleapis.com/auth/chat.app.delete` (only in     spaces the app created) - [User authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user) with one of the following authorization scopes:     - `https://www.googleapis.com/auth/chat.delete`     - `https://www.googleapis.com/auth/chat.import` (import mode spaces     only)     - User authentication grants administrator privileges when an     administrator account authenticates, `use_admin_access` is `true`, and     the following authorization scope is used:         - `https://www.googleapis.com/auth/chat.admin.delete`",
       "canonical": true,
       "file": "chat_service.delete_space.js",
       "language": "JAVASCRIPT",
