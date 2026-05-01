@@ -43,7 +43,11 @@ describe('MultiplexedSession', () => {
 
     return Object.assign(new Session(DATABASE, name), props, {
       create: sandbox.stub().resolves(),
-      transaction: sandbox.stub().returns(new FakeTransaction()),
+      transaction: sandbox.stub().callsFake(() => {
+        const txn = new FakeTransaction();
+        (txn as any)._affinityKey = 'mock-uuid';
+        return txn;
+      }),
     });
   };
 
@@ -185,13 +189,15 @@ describe('MultiplexedSession', () => {
       });
     });
 
-    it('should pass back the session and txn', done => {
-      const fakeTxn = new FakeTransaction() as unknown as Transaction;
+    it('should pass back the session and txn with affinity key', done => {
       sandbox.stub(multiplexedSession, '_getSession').resolves(fakeMuxSession);
       multiplexedSession.getSession((err, session, txn) => {
         assert.ifError(err);
         assert.strictEqual(session, fakeMuxSession);
-        assert.deepStrictEqual(txn, fakeTxn);
+        assert(txn);
+        assert(txn._affinityKey);
+        assert.strictEqual(typeof txn._affinityKey, 'string');
+        assert(txn._affinityKey.length > 0);
         done();
       });
     });
