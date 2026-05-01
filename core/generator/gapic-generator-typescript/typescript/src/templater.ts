@@ -218,7 +218,6 @@ async function processOneTemplate(
   templateFilename: string,
   api: API,
   id: Namer,
-  templates: string[],
 ) {
   const result: protos.google.protobuf.compiler.CodeGeneratorResponse.File[] =
     [];
@@ -261,7 +260,6 @@ async function processOneTemplate(
             commonParameters,
             service,
             id,
-            templates,
           }),
         );
       }
@@ -279,7 +277,7 @@ async function processOneTemplate(
         renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),
           relativeTemplateName,
-          {api, commonParameters, service, id, templates},
+          {api, commonParameters, service, id},
         ),
       );
     }
@@ -289,7 +287,6 @@ async function processOneTemplate(
         api,
         commonParameters,
         id,
-        templates,
       }),
     );
   }
@@ -317,11 +314,7 @@ async function loadNamerPlugin(basePath: string) {
   return id;
 }
 
-export async function processTemplates(
-  basePath: string,
-  api: API,
-  templates: string[],
-) {
+export async function processTemplates(basePath: string, api: API) {
   nunjucks.configure(basePath);
   basePath = basePath.replace(/\/*$/, '');
 
@@ -337,7 +330,6 @@ export async function processTemplates(
       templateFilename,
       api,
       id,
-      templates,
     );
     result.push(...generatedFiles);
   }

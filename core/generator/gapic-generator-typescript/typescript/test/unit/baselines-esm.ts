@@ -97,7 +97,7 @@ describe('Baseline tests: ESM', () => {
     useCommonProto: false,
     mainServiceName: 'ShowcaseService',
     serviceYaml: 'google/showcase/v1beta1/showcase_v1beta1.yaml',
-    template: 'typescript_gapic;typescript_packing_test;is_baseline',
+    template: 'typescript_gapic;typescript_packing_test',
     metadata: true,
     restNumericEnums: true,
     mixins: 'none',
@@ -167,7 +167,7 @@ describe('Baseline tests: ESM', () => {
     protoPath: 'google/showcase/v1beta1/*.proto',
     useCommonProto: false,
     mainServiceName: 'ShowcaseService',
-    template: 'typescript_gapic;is_baseline',
+    template: 'typescript_gapic',
     format: 'esm',
   });
 

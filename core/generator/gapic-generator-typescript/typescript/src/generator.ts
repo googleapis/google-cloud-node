@@ -336,9 +336,6 @@ export class Generator {
 
   async processTemplates(api: API) {
     for (const template of this.templates) {
-      if (template === 'is_baseline') {
-        continue;
-      }
       let location = path.join(templatesDirectory, 'cjs', template);
       if (
         this.format &&
@@ -349,11 +346,7 @@ export class Generator {
       if (!fs.existsSync(location)) {
         throw new Error(`Template directory ${location} does not exist.`);
       }
-      const fileList = await processTemplates(
-        location,
-        api,
-        this.templates,
-      );
+      const fileList = await processTemplates(location, api);
       this.response.file.push(...fileList);
     }
   }

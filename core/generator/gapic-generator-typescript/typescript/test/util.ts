@@ -117,12 +117,9 @@ export function runBaselineTest(options: BaselineOptions) {
     if (options.packageName) {
       commandLine += ` --package-name=${options.packageName}`;
     }
-    let templates = options.template;
-    if (!templates) {
-      templates =
-        'typescript_gapic;typescript_packing_test;typescript_samples;is_baseline';
+    if (options.template) {
+      commandLine += ` --template="${options.template}"`;
     }
-    commandLine += ` --template="${templates}"`;
     if (options.bundleConfig) {
       commandLine += ` --bundle-config="${bundleConfig}"`;
     }

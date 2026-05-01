@@ -3,10 +3,9 @@
 build/
 docs/
 protos/
-{% if "typescript_packing_test" in templates %}system-test/
+system-test/
 samples/
 esm/src/**/*.d.ts
 esm/test/**/*.d.ts
 esm/system-test/**/*.d.ts
-esm/system-test/fixtures/sample/src/*.ts{% else %}samples/
-esm/src/**/*.d.ts{% endif %}
+esm/system-test/fixtures/sample/src/*.ts
