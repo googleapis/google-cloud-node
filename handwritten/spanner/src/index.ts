@@ -327,6 +327,8 @@ class Spanner extends GrpcService {
   private _isInSecureCredentials: boolean;
   private static _isAFEServerTimingEnabled: boolean | undefined;
   readonly _nthClientId: number;
+  private _channelUsage: boolean[] = [];
+  private _numChannels = 10;
 
   /**
    * Placeholder used to auto populate a column with the commit timestamp.
@@ -1681,14 +1683,27 @@ class Spanner extends GrpcService {
         return;
       }
       const clientName = config.client;
+      let gaxClient;
       try {
-        if (!this.clients_.has(clientName)) {
-          this.clients_.set(clientName, new v1[clientName](this.options));
+        if (clientName === 'SpannerClient' && config.clientHint !== undefined) {
+          const poolKey = `SpannerClient_Pool_${config.clientHint}`;
+          if (!this.clients_.has(poolKey)) {
+            const poolOptions = Object.assign({}, this.options, {
+              'grpc.channel_id': config.clientHint,
+            });
+            this.clients_.set(poolKey, new v1.SpannerClient(poolOptions));
+          }
+          gaxClient = this.clients_.get(poolKey)!;
+        } else {
+          if (!this.clients_.has(clientName)) {
+            this.clients_.set(clientName, new v1[clientName](this.options));
+          }
+          gaxClient = this.clients_.get(clientName)!;
         }
       } catch (err) {
         callback(err, null);
+        return;
       }
-      const gaxClient = this.clients_.get(clientName)!;
       let reqOpts = extend(true, {}, config.reqOpts);
       reqOpts = replaceProjectIdToken(reqOpts, projectId!);
       // It would have been preferable to replace the projectId already in the
@@ -1795,6 +1810,33 @@ class Spanner extends GrpcService {
 
       callback(null, wrappedRequestFn);
     });
+  }
+
+  /**
+   * Gets an unused client hint for multiplexed sessions to distribute load.
+   * @private
+   */
+  _getSingleUseClientHint(): number {
+    if (!this._channelUsage.length) {
+      this._numChannels = gcpApiConfig.channelPool?.maxSize || 10;
+      this._channelUsage = new Array(this._numChannels).fill(false);
+    }
+    const idx = this._channelUsage.indexOf(false);
+    if (idx === -1) {
+      return Math.floor(Math.random() * this._numChannels);
+    }
+    this._channelUsage[idx] = true;
+    return idx;
+  }
+
+  /**
+   * Releases a client hint after use.
+   * @private
+   */
+  _releaseClientHint(idx: number) {
+    if (idx >= 0 && idx < this._channelUsage.length) {
+      this._channelUsage[idx] = false;
+    }
   }
 
   /**

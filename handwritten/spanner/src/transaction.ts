@@ -889,6 +889,14 @@ export class Snapshot extends EventEmitter {
       requestTag: requestOptions?.requestTag,
     };
 
+    let clientHint: number | undefined;
+    const isSingleUse = !this.id && !this._options.readWrite;
+    const isMultiplexed = this.session.metadata?.multiplexed;
+
+    if (isSingleUse && isMultiplexed) {
+      clientHint = this._getSpanner()._getSingleUseClientHint();
+    }
+
     return startTrace('Snapshot.createReadStream', traceConfig, span => {
       let attempt = 0;
       const database = this.session.parent as Database;
@@ -919,6 +927,7 @@ export class Snapshot extends EventEmitter {
           method: 'streamingRead',
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
+          clientHint: clientHint,
           headers: injectRequestIDIntoHeaders(
             headers,
             this.session,
@@ -957,11 +966,19 @@ export class Snapshot extends EventEmitter {
               });
             }
           }
+          if (clientHint !== undefined) {
+            this._getSpanner()._releaseClientHint(clientHint);
+            clientHint = undefined;
+          }
           span.end();
         })
         .on('end', err => {
           if (err) {
             setSpanError(span, err);
+          }
+          if (clientHint !== undefined) {
+            this._getSpanner()._releaseClientHint(clientHint);
+            clientHint = undefined;
           }
           span.end();
         });
@@ -1501,6 +1518,14 @@ export class Snapshot extends EventEmitter {
       ...query,
       ...this._traceConfig,
     };
+    let clientHint: number | undefined;
+    const isSingleUse = !this.id && !this._options.readWrite;
+    const isMultiplexed = this.session.metadata?.multiplexed;
+
+    if (isSingleUse && isMultiplexed) {
+      clientHint = this._getSpanner()._getSingleUseClientHint();
+    }
+
     return startTrace('Snapshot.runStream', traceConfig, span => {
       let attempt = 0;
       const database = this.session.parent as Database;
@@ -1538,6 +1563,7 @@ export class Snapshot extends EventEmitter {
           method: 'executeStreamingSql',
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
           gaxOpts: gaxOptions,
+          clientHint: clientHint,
           headers: injectRequestIDIntoHeaders(
             headers,
             this.session,
@@ -1577,11 +1603,19 @@ export class Snapshot extends EventEmitter {
               });
             }
           }
+          if (clientHint !== undefined) {
+            this._getSpanner()._releaseClientHint(clientHint);
+            clientHint = undefined;
+          }
           span.end();
         })
         .on('end', err => {
           if (err) {
             setSpanError(span, err as Error);
+          }
+          if (clientHint !== undefined) {
+            this._getSpanner()._releaseClientHint(clientHint);
+            clientHint = undefined;
           }
           span.end();
         });
