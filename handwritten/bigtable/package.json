@@ -23,11 +23,7 @@
   "author": "Google Inc.",
   "main": "build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "files": [
-    "build/protos",
-    "build/src",
-    "!**/*.map"
-  ],
+  "files": ["build/protos", "build/src", "!**/*.map"],
   "scripts": {
     "compile": "tsc -p . && cp -r proto* build/ && cp -r testproxy/proto* build/testproxy/",
     "compile-protos": "compileProtos src && sh testproxy/compile-protos.sh",

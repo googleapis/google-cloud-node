@@ -9,18 +9,14 @@
           {
             "orderBy": {
               "path": {
-                "field": [
-                  "a"
-                ]
+                "field": ["a"]
               },
               "direction": "asc"
             }
           },
           {
             "endBefore": {
-              "jsonValues": [
-                "[\"ArrayRemove\", 1, 2, 3]"
-              ]
+              "jsonValues": ["[\"ArrayRemove\", 1, 2, 3]"]
             }
           }
         ],

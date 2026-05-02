@@ -94,7 +94,7 @@ export class ErrorsApiTransport extends common.Service {
   async pollForNewEvents(
     service: string,
     time: number,
-    timeout: number
+    timeout: number,
   ): Promise<ErrorEvent[]> {
     const timeLimit = Date.now() + timeout;
     let groupId;
@@ -106,9 +106,9 @@ export class ErrorsApiTransport extends common.Service {
         const groups = await this.getAllGroups();
         if (!groups.length) continue;
         // find an error group that matches the service
-        groups.forEach(group => {
+        groups.forEach((group) => {
           const match = group.affectedServices.find(
-            context => context.service === service
+            (context) => context.service === service,
           );
           if (match) {
             groupId = group.group.groupId;
@@ -121,9 +121,9 @@ export class ErrorsApiTransport extends common.Service {
 
       const events = await this.getGroupEvents(groupId);
       const filteredEvents = events.filter(
-        event =>
+        (event) =>
           event.serviceContext.service === service &&
-          new Date(event.eventTime).getTime() >= time
+          new Date(event.eventTime).getTime() >= time,
       );
       if (filteredEvents.length) {
         return filteredEvents;

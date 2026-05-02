@@ -586,9 +586,9 @@ export class WriteBatch implements firestore.WriteBatch {
         const retryCodes = [StatusCode.ABORTED, ...getRetryCodes('commit')];
 
         return this._commit<api.CommitRequest, api.CommitResponse>({retryCodes})
-          .then(response => {
+          .then((response) => {
             return (response.writeResults || []).map(
-              writeResult =>
+              (writeResult) =>
                 new WriteResult(
                   Timestamp.fromProto(
                     writeResult.updateTime || response.commitTime!,
@@ -596,7 +596,7 @@ export class WriteBatch implements firestore.WriteBatch {
                 ),
             );
           })
-          .catch(err => {
+          .catch((err) => {
             throw wrapError(err, stack);
           });
       },
@@ -634,7 +634,7 @@ export class WriteBatch implements firestore.WriteBatch {
     // just here to ensure type safety.
     const request: api.ICommitRequest = {
       database: this._firestore.formattedName,
-      writes: this._ops.map(op => op.op()),
+      writes: this._ops.map((op) => op.op()),
     };
 
     if (commitOptions?.transactionId) {

@@ -54,7 +54,7 @@ describe('excludeIndexesAndBuildProto', () => {
             );
           }
         }
-        Object.keys(entityProtoSubset).map(property => {
+        Object.keys(entityProtoSubset).map((property) => {
           checkEntityProto(entityProtoSubset[property], `${path}.${property}`);
         });
       }
@@ -270,7 +270,7 @@ describe('excludeIndexesAndBuildProto', () => {
     ];
     for (let depth = 1; depth < maxDepth; depth++) {
       const newElements: GeneratedTestCase[] = [];
-      generatedTestCasesByDepth[depth - 1].forEach(element => {
+      generatedTestCasesByDepth[depth - 1].forEach((element) => {
         const entities = element.entities;
         if (!element.isArray) {
           /**
@@ -327,7 +327,7 @@ describe('excludeIndexesAndBuildProto', () => {
     ),
   ]
     .flat()
-    .forEach(component => {
+    .forEach((component) => {
       testCases.push({
         skipped: false,
         name: `Should encode a generated object ${component.name}`,

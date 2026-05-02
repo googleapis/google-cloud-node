@@ -157,7 +157,7 @@ describe('Bigtable/Cluster', () => {
       assert.strictEqual(Cluster.getStorageType_('SSD'), types.ssd);
     });
 
-    Object.keys(types).forEach(type => {
+    Object.keys(types).forEach((type) => {
       it('should get the storage type for "' + type + '"', () => {
         assert.strictEqual(Cluster.getStorageType_(type), types[type]);
       });
@@ -177,7 +177,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('create', () => {
-    it('should call createCluster from instance', done => {
+    it('should call createCluster from instance', (done) => {
       const options = {};
 
       cluster.instance.createCluster = (
@@ -193,7 +193,7 @@ describe('Bigtable/Cluster', () => {
       cluster.create(options, done);
     });
 
-    it('should not require options', done => {
+    it('should not require options', (done) => {
       cluster.instance.createCluster = (
         id: string,
         options: {},
@@ -226,7 +226,7 @@ describe('Bigtable/Cluster', () => {
       }, /A source table is required to backup\./);
     });
 
-    it('should accept table as a string', done => {
+    it('should accept table as a string', (done) => {
       const table = 'table-name';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -244,7 +244,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should accept table as a Table object', done => {
+    it('should accept table as a Table object', (done) => {
       const table = {
         name: 'table-name',
       };
@@ -264,7 +264,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should not include table in request options', done => {
+    it('should not include table in request options', (done) => {
       const table = 'table-name';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -282,7 +282,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should convert a Date expireTime to a struct', done => {
+    it('should convert a Date expireTime to a struct', (done) => {
       const expireTime = new Date();
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -304,7 +304,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should send correct request', done => {
+    it('should send correct request', (done) => {
       const backupId = 'backup-id';
       const table = 'table-name';
 
@@ -334,7 +334,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const table = 'table-name';
       const gaxOptions = {};
 
@@ -354,7 +354,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should not include gaxOptions in request options', done => {
+    it('should not include gaxOptions in request options', (done) => {
       const table = 'table-name';
       const gaxOptions = {};
 
@@ -374,7 +374,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should execute callback with error and original args', done => {
+    it('should execute callback with error and original args', (done) => {
       const error = new Error('Error.');
       const args = [{}, {}, {}];
 
@@ -397,7 +397,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should execute callback with Backup and original args', done => {
+    it('should execute callback with Backup and original args', (done) => {
       const id = 'backup-id';
       const backupInstance = {};
       const args = [{}, {}, {}];
@@ -428,7 +428,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -446,7 +446,7 @@ describe('Bigtable/Cluster', () => {
       cluster.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -460,7 +460,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       cluster.getMetadata = (gaxOptions: CallOptions) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
@@ -469,7 +469,7 @@ describe('Bigtable/Cluster', () => {
       cluster.exists(assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
 
       cluster.getMetadata = (gaxOptions_: CallOptions) => {
@@ -480,7 +480,7 @@ describe('Bigtable/Cluster', () => {
       cluster.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if error code is 5', done => {
+    it('should return false if error code is 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 5;
@@ -496,7 +496,7 @@ describe('Bigtable/Cluster', () => {
       });
     });
 
-    it('should return error if code is not 5', done => {
+    it('should return error if code is not 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 'NOT-5';
@@ -509,7 +509,7 @@ describe('Bigtable/Cluster', () => {
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       cluster.getMetadata = (gaxOptions: CallOptions, callback: Function) => {
         callback(null, {});
       };
@@ -522,7 +522,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const gaxOptions = {};
       cluster.getMetadata = (gaxOptions_: {}) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
@@ -531,7 +531,7 @@ describe('Bigtable/Cluster', () => {
       cluster.get(gaxOptions, assert.ifError);
     });
 
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       cluster.getMetadata = (gaxOptions: CallOptions) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
@@ -540,7 +540,7 @@ describe('Bigtable/Cluster', () => {
       cluster.get(assert.ifError);
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
 
       cluster.getMetadata = (gaxOptions: CallOptions, callback: Function) => {
@@ -553,7 +553,7 @@ describe('Bigtable/Cluster', () => {
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const metadata = {};
 
       cluster.getMetadata = (gaxOptions: CallOptions, callback: Function) => {
@@ -570,7 +570,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('getBackups', () => {
-    it('should send the correct request', done => {
+    it('should send the correct request', (done) => {
       const options = {a: 'b'};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -591,7 +591,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should locate pagination settings from gaxOptions', done => {
+    it('should locate pagination settings from gaxOptions', (done) => {
       const options = {
         gaxOptions: {
           pageSize: 'size',
@@ -615,7 +615,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should prefer pageSize and pageToken from options over gaxOptions', done => {
+    it('should prefer pageSize and pageToken from options over gaxOptions', (done) => {
       const options = {
         pageSize: 'size-good',
         pageToken: 'token-good',
@@ -635,7 +635,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should remove extraneous pagination settings from request', done => {
+    it('should remove extraneous pagination settings from request', (done) => {
       const options = {
         gaxOptions: {
           pageSize: 'size',
@@ -655,7 +655,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         gaxOptions: {a: 'b'},
       };
@@ -670,21 +670,23 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should not send gaxOptions as request options', done => {
+    it('should not send gaxOptions as request options', (done) => {
       const options = {
         gaxOptions: {a: 'b'},
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.bigtable.request = (config: any) => {
-        assert(Object.keys(options.gaxOptions).every(k => !config.reqOpts[k]));
+        assert(
+          Object.keys(options.gaxOptions).every((k) => !config.reqOpts[k]),
+        );
         done();
       };
 
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should set autoPaginate from options', done => {
+    it('should set autoPaginate from options', (done) => {
       const options = {
         autoPaginate: true,
       };
@@ -698,7 +700,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should prefer autoPaginate from gaxOpts', done => {
+    it('should prefer autoPaginate from gaxOpts', (done) => {
       const options = {
         autoPaginate: false,
         gaxOptions: {
@@ -715,7 +717,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(options, assert.ifError);
     });
 
-    it('should execute callback with error and correct response arguments', done => {
+    it('should execute callback with error and correct response arguments', (done) => {
       const error = new Error('Error.');
       const apiResponse = {};
 
@@ -735,7 +737,7 @@ describe('Bigtable/Cluster', () => {
       );
     });
 
-    it('should execute callback with Backup instances', done => {
+    it('should execute callback with Backup instances', (done) => {
       const rawBackup = {name: 'long/formatted/name', a: 'b'};
       const backupInstance = {};
 
@@ -759,7 +761,7 @@ describe('Bigtable/Cluster', () => {
       });
     });
 
-    it('should create Backup from correct cluster when using - as an id', done => {
+    it('should create Backup from correct cluster when using - as an id', (done) => {
       cluster.id = '-';
 
       const clusterId = 'cluster-id';
@@ -789,7 +791,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackups(assert.ifError);
     });
 
-    it('should execute callback with prepared nextQuery', done => {
+    it('should execute callback with prepared nextQuery', (done) => {
       const options = {pageToken: '1'};
       const nextQuery = {pageToken: '2'};
 
@@ -807,7 +809,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('getBackupsStream', () => {
-    it('should make correct request', done => {
+    it('should make correct request', (done) => {
       const options = {a: 'b'};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -826,7 +828,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackupsStream(options);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {gaxOptions: {}};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -839,12 +841,14 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackupsStream(options);
     });
 
-    it('should not include gaxOptions in reqOpts', done => {
+    it('should not include gaxOptions in reqOpts', (done) => {
       const options = {gaxOptions: {a: 'b'}};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.bigtable.request = (config: any) => {
-        assert(Object.keys(options.gaxOptions).every(k => !config.reqOpts[k]));
+        assert(
+          Object.keys(options.gaxOptions).every((k) => !config.reqOpts[k]),
+        );
         setImmediate(done);
         return new PassThrough();
       };
@@ -852,7 +856,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getBackupsStream(options);
     });
 
-    it('should transform response backups into Backup objects', done => {
+    it('should transform response backups into Backup objects', (done) => {
       const rawBackup = {name: 'long/formatted/name', a: 'b'};
       const backupInstance = {};
       const requestStream = new Readable({
@@ -882,7 +886,7 @@ describe('Bigtable/Cluster', () => {
         });
     });
 
-    it('should create Backup from correct cluster when using - as an id', done => {
+    it('should create Backup from correct cluster when using - as an id', (done) => {
       cluster.id = '-';
 
       const clusterId = 'cluster-id';
@@ -917,7 +921,7 @@ describe('Bigtable/Cluster', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make correct request', done => {
+    it('should make correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -931,7 +935,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getMetadata(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.bigtable.request = (config: any) => {
@@ -941,7 +945,7 @@ describe('Bigtable/Cluster', () => {
       cluster.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const metadata = {};
       cluster.bigtable.request = (config: {}, callback: Function) => {
         callback(null, metadata);
@@ -952,7 +956,7 @@ describe('Bigtable/Cluster', () => {
       });
     });
 
-    it('should execute callback with original arguments', done => {
+    it('should execute callback with original arguments', (done) => {
       const args = [{}, {}];
       cluster.bigtable.request = (config: {}, callback: Function) => {
         callback(...args);
@@ -972,7 +976,7 @@ describe('Bigtable/Cluster', () => {
       cluster.metadata = metadata;
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -1003,7 +1007,7 @@ describe('Bigtable/Cluster', () => {
       }
     });
 
-    it('should respect the nodes option', done => {
+    it('should respect the nodes option', (done) => {
       const options = {
         nodes: 3,
       };
@@ -1017,7 +1021,7 @@ describe('Bigtable/Cluster', () => {
       cluster.setMetadata(options, assert.ifError);
     });
 
-    it('should accept and pass user provided input through', done => {
+    it('should accept and pass user provided input through', (done) => {
       const options = {
         nodes: 3,
         location: 'us-west2-b',
@@ -1038,7 +1042,7 @@ describe('Bigtable/Cluster', () => {
       cluster.setMetadata(options, assert.ifError);
     });
 
-    it('should respect the gaxOptions', done => {
+    it('should respect the gaxOptions', (done) => {
       const options = {
         nodes: 3,
       };
@@ -1055,7 +1059,7 @@ describe('Bigtable/Cluster', () => {
     });
 
     // eslint-disable-next-line no-restricted-properties
-    it('should execute callback with all arguments', done => {
+    it('should execute callback with all arguments', (done) => {
       const args = [{}, {}];
       cluster.bigtable.request = (config: {}, callback: Function) => {
         callback(...args);

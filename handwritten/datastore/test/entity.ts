@@ -811,7 +811,7 @@ describe('entity', () => {
       assert.deepStrictEqual(testEntity.encodeValue(value), expectedValueProto);
     });
 
-    it('should emit warning on out of bounce int', done => {
+    it('should emit warning on out of bounce int', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
       const largeIntValue = 9223372036854775807;
       const property = 'largeInt';
@@ -1235,7 +1235,7 @@ describe('entity', () => {
   });
 
   describe('isKeyComplete', () => {
-    it('should convert key to key proto', done => {
+    it('should convert key to key proto', (done) => {
       const key = new testEntity.Key({
         path: ['Kind', 123],
       });
@@ -1296,7 +1296,7 @@ describe('entity', () => {
       ],
     };
 
-    it('should set the namespace', done => {
+    it('should set the namespace', (done) => {
       testEntity.Key = class {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         constructor(keyOptions: any) {
@@ -1307,7 +1307,7 @@ describe('entity', () => {
       testEntity.keyFromKeyProto(keyProto);
     });
 
-    it('should create a proper Key', done => {
+    it('should create a proper Key', (done) => {
       testEntity.Key = class {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         constructor(keyOptions: any) {
@@ -1333,7 +1333,7 @@ describe('entity', () => {
       assert.strictEqual(testEntity.keyFromKeyProto(keyProto), expectedValue);
     });
 
-    it('should throw if path is invalid', done => {
+    it('should throw if path is invalid', (done) => {
       const keyProtoInvalid = {
         partitionId: {
           namespaceId: 'Namespace',
@@ -1428,7 +1428,7 @@ describe('entity', () => {
       assert.strictEqual(keyProtoWithNs.path[0].name, undefined);
     });
 
-    it('should throw if key contains 0 items', done => {
+    it('should throw if key contains 0 items', (done) => {
       const key = new testEntity.Key({
         path: [],
       });
@@ -1445,7 +1445,7 @@ describe('entity', () => {
       }
     });
 
-    it('should throw if key path contains null ids', done => {
+    it('should throw if key path contains null ids', (done) => {
       const key = new testEntity.Key({
         namespace: 'Namespace',
         path: ['Kind1', null, 'Company'],
@@ -1884,7 +1884,7 @@ describe('entity', () => {
           },
         ];
 
-        testCases.forEach(tc => {
+        testCases.forEach((tc) => {
           it(`should decode and re-encode ${tc.name} correctly`, () => {
             const key = new testEntity.Key({
               path: tc.path,

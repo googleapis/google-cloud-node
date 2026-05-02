@@ -102,7 +102,7 @@ export class ExecutionUtil {
         structuredPipeline,
         transactionOrReadTime,
       );
-      stream.on('error', err => {
+      stream.on('error', (err) => {
         reject(wrapError(err, stack));
       });
       stream.on('data', (data: PipelineStreamElement[]) => {
@@ -153,7 +153,7 @@ export class ExecutionUtil {
     const transform = new Transform({
       objectMode: true,
       transform(chunk: Array<PipelineStreamElement>, encoding, callback) {
-        chunk.forEach(item => {
+        chunk.forEach((item) => {
           if (item.result) {
             this.push(item.result);
           }
@@ -163,7 +163,7 @@ export class ExecutionUtil {
     });
 
     responseStream.pipe(transform);
-    responseStream.on('error', e => transform.destroy(e));
+    responseStream.on('error', (e) => transform.destroy(e));
     return transform;
   }
 
@@ -196,7 +196,7 @@ export class ExecutionUtil {
           }
           callback(undefined, [output]);
         } else {
-          let output: PipelineStreamElement[] = proto.results.map(result => {
+          let output: PipelineStreamElement[] = proto.results.map((result) => {
             const output: PipelineStreamElement = {};
             if (proto.transaction?.length) {
               output.transaction = proto.transaction;
@@ -282,7 +282,7 @@ export class ExecutionUtil {
             request,
             tag,
           );
-          backendStream.on('error', err => {
+          backendStream.on('error', (err) => {
             backendStream.unpipe(stream);
 
             logger(
@@ -301,7 +301,7 @@ export class ExecutionUtil {
           backendStream.pipe(stream);
         } while (await streamActive.promise);
       })
-      .catch(e => {
+      .catch((e) => {
         logger(
           'PipelineUtil._stream',
           tag,
@@ -447,7 +447,7 @@ export function whereConditionsFromCursor(
 ): BooleanExpression {
   // The filterFunc is either greater than or less than
   const filterFunc = position === 'before' ? lessThan : greaterThan;
-  const cursors = cursor.values.map(value => Constant._fromProto(value));
+  const cursors = cursor.values.map((value) => Constant._fromProto(value));
   const size = cursors.length;
 
   let field = orderings[size - 1].expr;
@@ -487,7 +487,7 @@ export function whereConditionsFromCursor(
 
 export function reverseOrderings(orderings: Ordering[]): Ordering[] {
   return orderings.map(
-    o =>
+    (o) =>
       new Ordering(
         o.expr,
         o.direction === 'ascending' ? 'descending' : 'ascending',
@@ -522,15 +522,15 @@ export function toPipelineBooleanExpr(
       case 'ARRAY_CONTAINS':
         return and(field.exists(), field.arrayContains(value));
       case 'IN': {
-        const values = value?.arrayValue?.values?.map(val => constant(val));
+        const values = value?.arrayValue?.values?.map((val) => constant(val));
         return and(field.exists(), field.equalAny(values!));
       }
       case 'ARRAY_CONTAINS_ANY': {
-        const values = value?.arrayValue?.values?.map(val => constant(val));
+        const values = value?.arrayValue?.values?.map((val) => constant(val));
         return and(field.exists(), field.arrayContainsAny(values!));
       }
       case 'NOT_IN': {
-        const values = value?.arrayValue?.values?.map(val => constant(val));
+        const values = value?.arrayValue?.values?.map((val) => constant(val));
         // In Enterprise DB's NOT_IN will match a field that does not exist,
         // therefore we do not want an existence filter for the NOT_IN conversion
         // so the Query and Pipeline behavior are consistent in Enterprise.
@@ -542,13 +542,13 @@ export function toPipelineBooleanExpr(
       case 'AND': {
         const conditions = f
           .getFilters()
-          .map(f => toPipelineBooleanExpr(f, serializer));
+          .map((f) => toPipelineBooleanExpr(f, serializer));
         return and(conditions[0], conditions[1], ...conditions.slice(2));
       }
       case 'OR': {
         const conditions = f
           .getFilters()
-          .map(f => toPipelineBooleanExpr(f, serializer));
+          .map((f) => toPipelineBooleanExpr(f, serializer));
         return or(conditions[0], conditions[1], ...conditions.slice(2));
       }
     }
@@ -797,11 +797,11 @@ export function validateUserDataHelper<
   if (hasUserData(expressionMap)) {
     expressionMap._validateUserData(ignoreUndefinedProperties);
   } else if (Array.isArray(expressionMap)) {
-    expressionMap.forEach(readableData => {
+    expressionMap.forEach((readableData) => {
       readableData._validateUserData(ignoreUndefinedProperties);
     });
   } else {
-    expressionMap.forEach(expr =>
+    expressionMap.forEach((expr) =>
       expr._validateUserData(ignoreUndefinedProperties),
     );
   }

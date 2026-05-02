@@ -144,7 +144,7 @@ export class DocumentReader<AppModelType, DbModelType extends DocumentData> {
 
     if (this.fieldMask) {
       const fieldPaths = this.fieldMask.map(
-        fieldPath => fieldPath.formattedName,
+        (fieldPath) => fieldPath.formattedName,
       );
       request.mask = {fieldPaths};
     }

@@ -45,7 +45,7 @@ export function getRMWRRequest(request: RMWRRequestData): RMRWRequest {
     throw new Error('At least one rule must be provided.');
   }
 
-  const requestRules = arrify(rules).map(rule => {
+  const requestRules = arrify(rules).map((rule) => {
     const column = Mutation.parseColumnName((rule as Rule).column);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ruleData: any = {

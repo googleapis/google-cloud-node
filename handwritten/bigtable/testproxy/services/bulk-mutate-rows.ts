@@ -28,7 +28,7 @@ export const bulkMutateRows: ClientImplMaker<
   IMutateRowsRequest,
   IMutateRowsResult
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {request} = rawRequest;
     const {entries, tableName} = request.request!;
 

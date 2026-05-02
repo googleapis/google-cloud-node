@@ -219,7 +219,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
       assert(client.metastorePartitionServiceStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client =
         new metastorepartitionserviceModule.v1beta.MetastorePartitionServiceClient(
           {
@@ -227,7 +227,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
             projectId: 'bogus',
           },
         );
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.metastorePartitionServiceStub);
@@ -236,12 +236,12 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client =
         new metastorepartitionserviceModule.v1beta.MetastorePartitionServiceClient(
           {
@@ -255,7 +255,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -442,7 +442,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -593,7 +593,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -744,7 +744,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -895,7 +895,7 @@ describe('v1beta.MetastorePartitionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(

@@ -40,7 +40,7 @@ export function buildPropertyTransforms(transforms: PropertyTransform[]) {
     // If the transform has an 'increment', 'maximum' or 'minimum' property then
     // add the corresponding property transform to the propertyTransforms in the
     // request.
-    ['increment', 'maximum', 'minimum'].forEach(type => {
+    ['increment', 'maximum', 'minimum'].forEach((type) => {
       const castedType = type as 'increment' | 'maximum' | 'minimum';
       if (transform[castedType]) {
         propertyTransforms.push({
@@ -55,13 +55,13 @@ export function buildPropertyTransforms(transforms: PropertyTransform[]) {
     // If the transform has an 'appendMissingElements' or 'removeAllFromArray'
     // property then add the corresponding property transform to the
     // propertyTransforms in the request.
-    ['appendMissingElements', 'removeAllFromArray'].forEach(type => {
+    ['appendMissingElements', 'removeAllFromArray'].forEach((type) => {
       const castedType = type as 'appendMissingElements' | 'removeAllFromArray';
       if (transform[castedType]) {
         propertyTransforms.push({
           property,
           [castedType]: {
-            values: transform[castedType].map(element => {
+            values: transform[castedType].map((element) => {
               return entity.encodeValue(element, property) as IValue;
             }),
           },

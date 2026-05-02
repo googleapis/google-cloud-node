@@ -139,7 +139,7 @@ describe('Subscription', () => {
       assert.strictEqual(subscription.projectId, PROJECT_ID);
     });
 
-    it('should localize pubsub request method', done => {
+    it('should localize pubsub request method', (done) => {
       PUBSUB.request = () => {
         done();
       };
@@ -199,7 +199,7 @@ describe('Subscription', () => {
       assert.strictEqual(stub.callCount, 1);
     });
 
-    it('should emit messages', done => {
+    it('should emit messages', (done) => {
       const message = {
         subSpans: {
           processingStart() {},
@@ -215,7 +215,7 @@ describe('Subscription', () => {
       subscriber.emit('message', message);
     });
 
-    it('should emit errors', done => {
+    it('should emit errors', (done) => {
       const error = new Error('err');
 
       subscription.on?.('error', (err: Error) => {
@@ -226,7 +226,7 @@ describe('Subscription', () => {
       subscriber.emit('error', error);
     });
 
-    it('should emit close events', done => {
+    it('should emit close events', (done) => {
       subscription.on?.('close', done);
       subscriber.emit('close');
     });
@@ -335,12 +335,12 @@ describe('Subscription', () => {
   });
 
   describe('close', () => {
-    it('should call the success callback', done => {
+    it('should call the success callback', (done) => {
       sandbox.stub(subscriber, 'close').resolves();
       subscription.close?.(done);
     });
 
-    it('should pass back any errors that occurs', done => {
+    it('should pass back any errors that occurs', (done) => {
       const fakeErr = new Error('err');
 
       sandbox.stub(subscriber, 'close').rejects(fakeErr);
@@ -387,7 +387,7 @@ describe('Subscription', () => {
       assert.deepStrictEqual(options, {});
     });
 
-    it('should return any request errors', done => {
+    it('should return any request errors', (done) => {
       const fakeErr = new Error('err');
       const fakeResponse = {};
       const stub = sandbox.stub(PUBSUB, 'createSubscription');
@@ -403,12 +403,12 @@ describe('Subscription', () => {
       setImmediate(callback, fakeErr as ServiceError, null, fakeResponse);
     });
 
-    it('should update the subscription', done => {
+    it('should update the subscription', (done) => {
       const stub = sandbox.stub(PUBSUB, 'createSubscription');
       const fakeSub = new Subscription(PUBSUB, SUB_FULL_NAME);
       const fakeResponse = {};
 
-      subscription.create?.(err => {
+      subscription.create?.((err) => {
         assert.ifError(err);
         assert.strictEqual(subscription.metadata, fakeResponse);
         done();
@@ -419,7 +419,7 @@ describe('Subscription', () => {
       setImmediate(callback, null, fakeSub, fakeResponse);
     });
 
-    it('should pass back all the things', done => {
+    it('should pass back all the things', (done) => {
       const fakeResponse = {};
       const stub = sandbox.stub(PUBSUB, 'createSubscription');
 
@@ -453,8 +453,8 @@ describe('Subscription', () => {
       }, /A name is required to create a snapshot\./);
     });
 
-    it('should make the correct request', done => {
-      subscription.request = config => {
+    it('should make the correct request', (done) => {
+      subscription.request = (config) => {
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'createSnapshot');
         assert.deepStrictEqual(config.reqOpts, {
@@ -467,10 +467,10 @@ describe('Subscription', () => {
       subscription.createSnapshot?.(SNAPSHOT_NAME, assert.ifError);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const gaxOpts = {};
 
-      subscription.request = config => {
+      subscription.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOpts);
         done();
       };
@@ -478,7 +478,7 @@ describe('Subscription', () => {
       subscription.createSnapshot?.(SNAPSHOT_NAME, gaxOpts, assert.ifError);
     });
 
-    it('should pass back any errors to the callback', done => {
+    it('should pass back any errors to the callback', (done) => {
       const error = new Error('err');
       const apiResponse = {};
 
@@ -494,7 +494,7 @@ describe('Subscription', () => {
       });
     });
 
-    it('should return a snapshot object with metadata', done => {
+    it('should return a snapshot object with metadata', (done) => {
       const apiResponse = {};
       const fakeSnapshot = {};
 
@@ -526,7 +526,7 @@ describe('Subscription', () => {
       };
     });
 
-    it('should return the debug events to the callback', done => {
+    it('should return the debug events to the callback', (done) => {
       subscription.on?.('debug', (msg: DebugMessage) => {
         assert.strictEqual(msg.error, error);
         done();
@@ -542,7 +542,7 @@ describe('Subscription', () => {
       sandbox.stub(subscription, 'close').yields(util.noop);
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       subscription.request = (config: RequestConfig) => {
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'deleteSubscription');
@@ -555,7 +555,7 @@ describe('Subscription', () => {
       subscription.delete?.(assert.ifError);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const gaxOpts = {};
 
       subscription.request = (config: RequestConfig) => {
@@ -575,7 +575,7 @@ describe('Subscription', () => {
         };
       });
 
-      it('should return the api response', done => {
+      it('should return the api response', (done) => {
         subscription.delete?.((err, resp) => {
           assert.ifError(err);
           assert.strictEqual(resp, apiResponse);
@@ -583,12 +583,12 @@ describe('Subscription', () => {
         });
       });
 
-      it('should close the subscriber if open', done => {
+      it('should close the subscriber if open', (done) => {
         const stub = sandbox.stub(subscriber, 'close');
 
         subscription.open?.();
 
-        subscription.delete?.(err => {
+        subscription.delete?.((err) => {
           assert.ifError(err);
           assert.strictEqual(stub.callCount, 1);
           done();
@@ -605,14 +605,14 @@ describe('Subscription', () => {
         };
       });
 
-      it('should return the error to the callback', done => {
-        subscription.delete?.(err => {
+      it('should return the error to the callback', (done) => {
+        subscription.delete?.((err) => {
           assert.strictEqual(err, error);
           done();
         });
       });
 
-      it('should not remove all the listeners', done => {
+      it('should not remove all the listeners', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (subscription as any).removeAllListeners = () => {
           done(new Error('Should not be called.'));
@@ -623,7 +623,7 @@ describe('Subscription', () => {
         });
       });
 
-      it('should not close the subscription', done => {
+      it('should not close the subscription', (done) => {
         subscription.close = async () => {
           done(new Error('Should not be called.'));
         };
@@ -636,7 +636,7 @@ describe('Subscription', () => {
   });
 
   describe('exists', () => {
-    it('should return true if it finds metadata', done => {
+    it('should return true if it finds metadata', (done) => {
       sandbox.stub(subscription, 'getMetadata').yields(null, {});
 
       subscription.exists?.((err, exists) => {
@@ -646,7 +646,7 @@ describe('Subscription', () => {
       });
     });
 
-    it('should return false if a not found error occurs', done => {
+    it('should return false if a not found error occurs', (done) => {
       const error = {code: 5} as ServiceError;
       sandbox.stub(subscription, 'getMetadata').yields(error);
 
@@ -657,7 +657,7 @@ describe('Subscription', () => {
       });
     });
 
-    it('should pass back any other type of error', done => {
+    it('should pass back any other type of error', (done) => {
       const error = {code: 4} as ServiceError;
       sandbox.stub(subscription, 'getMetadata').yields(error);
 
@@ -670,12 +670,12 @@ describe('Subscription', () => {
   });
 
   describe('get', () => {
-    it('should delete the autoCreate option', done => {
+    it('should delete the autoCreate option', (done) => {
       const options = {
         autoCreate: true,
         a: 'a',
       };
-      sandbox.stub(subscription, 'getMetadata').callsFake(gaxOpts => {
+      sandbox.stub(subscription, 'getMetadata').callsFake((gaxOpts) => {
         assert.strictEqual(gaxOpts, options);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         assert.strictEqual((gaxOpts as typeof options).autoCreate, undefined);
@@ -688,7 +688,7 @@ describe('Subscription', () => {
     describe('success', () => {
       const fakeMetadata = {};
 
-      it('should call through to getMetadata', done => {
+      it('should call through to getMetadata', (done) => {
         sandbox
           .stub(subscription, 'getMetadata')
           .callsFake((gaxOpts, callback) => {
@@ -703,7 +703,7 @@ describe('Subscription', () => {
         });
       });
 
-      it('should optionally accept options', done => {
+      it('should optionally accept options', (done) => {
         const options = {};
         sandbox
           .stub(subscription, 'getMetadata')
@@ -717,7 +717,7 @@ describe('Subscription', () => {
     });
 
     describe('error', () => {
-      it('should pass back errors when not auto-creating', done => {
+      it('should pass back errors when not auto-creating', (done) => {
         const error = {code: 4} as ServiceError;
         const apiResponse = {};
         sandbox
@@ -732,7 +732,7 @@ describe('Subscription', () => {
         });
       });
 
-      it('should pass back 404 errors if autoCreate is false', done => {
+      it('should pass back 404 errors if autoCreate is false', (done) => {
         const error = {code: 5} as ServiceError;
         const apiResponse = {};
         sandbox
@@ -747,7 +747,7 @@ describe('Subscription', () => {
         });
       });
 
-      it('should pass back 404 errors if create doesnt exist', done => {
+      it('should pass back 404 errors if create doesnt exist', (done) => {
         const error = {code: 5} as ServiceError;
         const apiResponse = {};
         sandbox
@@ -764,7 +764,7 @@ describe('Subscription', () => {
         });
       });
 
-      it('should create the sub if 404 + autoCreate is true', done => {
+      it('should create the sub if 404 + autoCreate is true', (done) => {
         const error = {code: 5} as ServiceError;
         const apiResponse = {};
 
@@ -775,7 +775,7 @@ describe('Subscription', () => {
           .stub(subscription, 'getMetadata')
           .callsArgWith(1, error, apiResponse);
 
-        sandbox.stub(subscription, 'create').callsFake(options => {
+        sandbox.stub(subscription, 'create').callsFake((options) => {
           assert.strictEqual(options.gaxOpts, fakeOptions);
           done();
         });
@@ -787,8 +787,8 @@ describe('Subscription', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the correct request', done => {
-      subscription.request = config => {
+    it('should make the correct request', (done) => {
+      subscription.request = (config) => {
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'getSubscription');
         assert.deepStrictEqual(config.reqOpts, {
@@ -800,10 +800,10 @@ describe('Subscription', () => {
       subscription.getMetadata?.(assert.ifError);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const gaxOpts = {};
 
-      subscription.request = config => {
+      subscription.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOpts);
         done();
       };
@@ -811,7 +811,7 @@ describe('Subscription', () => {
       subscription.getMetadata?.(gaxOpts, assert.ifError);
     });
 
-    it('should pass back any errors that occur', done => {
+    it('should pass back any errors that occur', (done) => {
       const error = new Error('err');
       const apiResponse = {};
 
@@ -826,7 +826,7 @@ describe('Subscription', () => {
       });
     });
 
-    it('should set the metadata if no error occurs', done => {
+    it('should set the metadata if no error occurs', (done) => {
       const apiResponse = {};
 
       subscription.request = (config, callback: Function) => {
@@ -845,8 +845,8 @@ describe('Subscription', () => {
   describe('modifyPushConfig', () => {
     const fakeConfig = {};
 
-    it('should make the correct request', done => {
-      subscription.request = config => {
+    it('should make the correct request', (done) => {
+      subscription.request = (config) => {
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'modifyPushConfig');
         assert.deepStrictEqual(config.reqOpts, {
@@ -859,10 +859,10 @@ describe('Subscription', () => {
       subscription.modifyPushConfig?.(fakeConfig, assert.ifError);
     });
 
-    it('should optionally accept gaxOpts', done => {
+    it('should optionally accept gaxOpts', (done) => {
       const gaxOpts = {};
 
-      subscription.request = config => {
+      subscription.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOpts);
         done();
       };
@@ -907,7 +907,7 @@ describe('Subscription', () => {
       }, /Either a snapshot name or Date is needed to seek to\./);
     });
 
-    it('should make the correct api request', done => {
+    it('should make the correct api request', (done) => {
       FakeSnapshot.formatName_ = (projectId: string, name: string) => {
         assert.strictEqual(projectId, PROJECT_ID);
         assert.strictEqual(name, FAKE_SNAPSHOT_NAME);
@@ -927,7 +927,7 @@ describe('Subscription', () => {
       subscription.seek?.(FAKE_SNAPSHOT_NAME, assert.ifError);
     });
 
-    it('should optionally accept a Date object', done => {
+    it('should optionally accept a Date object', (done) => {
       const date = new Date();
       const reqOpts = {
         subscription: SUB_FULL_NAME,
@@ -944,7 +944,7 @@ describe('Subscription', () => {
       subscription.seek?.(date, assert.ifError);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const gaxOpts = {};
 
       subscription.request = (config: RequestConfig) => {
@@ -970,7 +970,7 @@ describe('Subscription', () => {
       };
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const formattedMetadata = {
         pushConfig: {
           pushEndpoint: METADATA.pushEndpoint,
@@ -984,7 +984,7 @@ describe('Subscription', () => {
         formattedMetadata,
       );
 
-      Subscription.formatMetadata_ = metadata => {
+      Subscription.formatMetadata_ = (metadata) => {
         assert.strictEqual(metadata, METADATA);
         return formattedMetadata;
       };
@@ -1006,7 +1006,7 @@ describe('Subscription', () => {
       subscription.setMetadata?.(METADATA, done);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const gaxOpts = {};
 
       subscription.request = (config: RequestConfig) => {
@@ -1029,7 +1029,7 @@ describe('Subscription', () => {
   describe('snapshot', () => {
     const SNAPSHOT_NAME = 'a';
 
-    it('should call through to pubsub.snapshot', done => {
+    it('should call through to pubsub.snapshot', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (PUBSUB as any).snapshot = function (name: string) {
         assert.strictEqual(this, subscription);

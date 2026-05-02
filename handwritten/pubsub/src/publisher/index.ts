@@ -111,8 +111,8 @@ export class Publisher {
 
     const allDrains = Promise.all(
       toDrain.map(
-        q =>
-          new Promise<void>(resolve => {
+        (q) =>
+          new Promise<void>((resolve) => {
             const flushResolver = () => {
               resolve();
 
@@ -125,7 +125,7 @@ export class Publisher {
       ),
     );
 
-    const allPublishes = Promise.all(toDrain.map(q => q.publishDrain()));
+    const allPublishes = Promise.all(toDrain.map((q) => q.publishDrain()));
 
     allPublishes
       .then(() => allDrains)

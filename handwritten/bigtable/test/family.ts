@@ -199,7 +199,7 @@ describe('Bigtable/Family', () => {
   });
 
   describe('create', () => {
-    it('should call createFamily from table', done => {
+    it('should call createFamily from table', (done) => {
       const options = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (family as any).table.createFamily = (
@@ -214,7 +214,7 @@ describe('Bigtable/Family', () => {
       family.create(options, done);
     });
 
-    it('should not require options', done => {
+    it('should not require options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (family as any).table.createFamily = (
         name: string,
@@ -229,7 +229,7 @@ describe('Bigtable/Family', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       sandbox.stub(family.bigtable, 'request').callsFake((config, callback) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
         assert.strictEqual(config.method, 'modifyColumnFamilies');
@@ -248,9 +248,9 @@ describe('Bigtable/Family', () => {
       family.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      sandbox.stub(family.bigtable, 'request').callsFake(config => {
+      sandbox.stub(family.bigtable, 'request').callsFake((config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       });
@@ -259,24 +259,24 @@ describe('Bigtable/Family', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
-      sandbox.stub(family, 'getMetadata').callsFake(gaxOptions => {
+    it('should not require gaxOptions', (done) => {
+      sandbox.stub(family, 'getMetadata').callsFake((gaxOptions) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
       });
       family.exists(assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
-      sandbox.stub(family, 'getMetadata').callsFake(gaxOptions_ => {
+      sandbox.stub(family, 'getMetadata').callsFake((gaxOptions_) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
         done();
       });
       family.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if FamilyError', done => {
+    it('should return false if FamilyError', (done) => {
       const error = new FamilyError('Error.');
       sandbox.stub(family, 'getMetadata').callsArgWith(1, error);
       family.exists((err, exists) => {
@@ -286,16 +286,16 @@ describe('Bigtable/Family', () => {
       });
     });
 
-    it('should return error if not FamilyError', done => {
+    it('should return error if not FamilyError', (done) => {
       const error = new Error('Error.');
       sandbox.stub(family, 'getMetadata').callsArgWith(1, error);
-      family.exists(err => {
+      family.exists((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       sandbox.stub(family, 'getMetadata').callsArgWith(1, null, {});
       family.exists((err, exists) => {
         assert.ifError(err);
@@ -306,26 +306,26 @@ describe('Bigtable/Family', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const options = {
         gaxOptions: {},
       };
-      sandbox.stub(family, 'getMetadata').callsFake(gaxOptions => {
+      sandbox.stub(family, 'getMetadata').callsFake((gaxOptions) => {
         assert.strictEqual(gaxOptions, options.gaxOptions);
         done();
       });
       family.get(options, assert.ifError);
     });
 
-    it('should not require an options object', done => {
-      sandbox.stub(family, 'getMetadata').callsFake(gaxOptions => {
+    it('should not require an options object', (done) => {
+      sandbox.stub(family, 'getMetadata').callsFake((gaxOptions) => {
         assert.deepStrictEqual(gaxOptions, undefined);
         done();
       });
       family.get(assert.ifError);
     });
 
-    it('should auto create with a FamilyError error', done => {
+    it('should auto create with a FamilyError error', (done) => {
       const error = new FamilyError(TABLE.id);
       const options = {
         autoCreate: true,
@@ -340,7 +340,7 @@ describe('Bigtable/Family', () => {
       family.get(options, done);
     });
 
-    it('should pass the rules when auto creating', done => {
+    it('should pass the rules when auto creating', (done) => {
       const error = new FamilyError(TABLE.id);
       const options = {
         autoCreate: true,
@@ -357,7 +357,7 @@ describe('Bigtable/Family', () => {
       family.get(options, done);
     });
 
-    it('should not auto create without a FamilyError error', done => {
+    it('should not auto create without a FamilyError error', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 'NOT-5';
@@ -368,34 +368,34 @@ describe('Bigtable/Family', () => {
       family.create = () => {
         throw new Error('Should not create.');
       };
-      family.get(options, err => {
+      family.get(options, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should not auto create unless requested', done => {
+    it('should not auto create unless requested', (done) => {
       const error = new FamilyError(TABLE.id);
       sandbox.stub(family, 'getMetadata').callsArgWith(1, error);
       family.create = () => {
         throw new Error('Should not create.');
       };
-      family.get(err => {
+      family.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
       sandbox.stub(family, 'getMetadata').callsArgWith(1, error);
-      family.get(err => {
+      family.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {};
       sandbox.stub(family, 'getMetadata').callsArgWith(1, null, apiResponse);
       family.get((err, family_, apiResponse_) => {
@@ -408,28 +408,28 @@ describe('Bigtable/Family', () => {
   });
 
   describe('getMetadata', () => {
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      sandbox.stub(family.table, 'getFamilies').callsFake(gaxOptions_ => {
+      sandbox.stub(family.table, 'getFamilies').callsFake((gaxOptions_) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
         done();
       });
       family.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const err = new Error('err');
       const response = {};
       sandbox
         .stub(family.table, 'getFamilies')
         .callsArgWith(1, err, null, response);
-      family.getMetadata(err_ => {
+      family.getMetadata((err_) => {
         assert.strictEqual(err, err_);
         done();
       });
     });
 
-    it('should update the metadata', done => {
+    it('should update the metadata', (done) => {
       const family = new Family(TABLE, FAMILY_NAME);
       family.metadata = {
         a: 'a',
@@ -443,9 +443,9 @@ describe('Bigtable/Family', () => {
       });
     });
 
-    it('should return a custom error if no results', done => {
+    it('should return a custom error if no results', (done) => {
       sandbox.stub(family.table, 'getFamilies').callsArgWith(1, null, []);
-      family.getMetadata(err => {
+      family.getMetadata((err) => {
         assert(err instanceof FamilyError);
         done();
       });
@@ -453,8 +453,8 @@ describe('Bigtable/Family', () => {
   });
 
   describe('setMetadata', () => {
-    it('should provide the proper request options', done => {
-      sandbox.stub(family.bigtable, 'request').callsFake(config => {
+    it('should provide the proper request options', (done) => {
+      sandbox.stub(family.bigtable, 'request').callsFake((config) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
         assert.strictEqual(config.method, 'modifyColumnFamilies');
         assert.strictEqual(config.reqOpts.name, TABLE.name);
@@ -469,7 +469,7 @@ describe('Bigtable/Family', () => {
       family.setMetadata({}, assert.ifError);
     });
 
-    it('should respect the gc rule option', done => {
+    it('should respect the gc rule option', (done) => {
       const formatRule = Family.formatRule_;
 
       const formattedRule = {
@@ -483,11 +483,11 @@ describe('Bigtable/Family', () => {
           d: 'd',
         },
       } as fm.SetFamilyMetadataOptions;
-      sandbox.stub(Family, 'formatRule_').callsFake(rule => {
+      sandbox.stub(Family, 'formatRule_').callsFake((rule) => {
         assert.strictEqual(rule, metadata.rule);
         return formattedRule;
       });
-      sandbox.stub(family.bigtable, 'request').callsFake(config => {
+      sandbox.stub(family.bigtable, 'request').callsFake((config) => {
         assert.deepStrictEqual(config.reqOpts, {
           name: TABLE.name,
           modifications: [
@@ -505,16 +505,16 @@ describe('Bigtable/Family', () => {
       family.setMetadata(metadata, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       sandbox.stub(family.bigtable, 'request').callsArgWith(1, error);
-      family.setMetadata({}, err => {
+      family.setMetadata({}, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should update the metadata property', done => {
+    it('should update the metadata property', (done) => {
       const fakeMetadata = {};
       const response = {
         columnFamilies: {

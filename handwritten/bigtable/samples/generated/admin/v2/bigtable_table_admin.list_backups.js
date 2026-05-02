@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -94,7 +92,7 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  If non-empty, `page_token` should contain a
-   *  next_page_token google.bigtable.admin.v2.ListBackupsResponse.next_page_token 
+   *  next_page_token google.bigtable.admin.v2.ListBackupsResponse.next_page_token
    *  from a previous
    *  ListBackupsResponse google.bigtable.admin.v2.ListBackupsResponse  to the
    *  same `parent` and with the same `filter`.
@@ -116,7 +114,7 @@ function main(parent) {
     // Run request
     const iterable = adminClient.listBackupsAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
@@ -124,7 +122,7 @@ function main(parent) {
   // [END bigtableadmin_v2_generated_BigtableTableAdmin_ListBackups_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(logicalView) {
@@ -62,7 +60,7 @@ function main(logicalView) {
   // [END bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateLogicalView_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

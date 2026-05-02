@@ -262,7 +262,7 @@ describe('Publisher', () => {
       );
     });
 
-    it('should add non-ordered messages to the message queue', done => {
+    it('should add non-ordered messages to the message queue', (done) => {
       const stub = sandbox.stub(publisher.queue, 'add');
       const fakeMessage = {data};
 
@@ -303,7 +303,7 @@ describe('Publisher', () => {
         assert.strictEqual(queue.orderingKey, orderingKey);
       });
 
-      it('should add the ordered message to the correct queue', done => {
+      it('should add the ordered message to the correct queue', (done) => {
         const stub = sandbox.stub(queue, 'add');
 
         publisher.publishMessage(fakeMessage, done);
@@ -318,13 +318,13 @@ describe('Publisher', () => {
         callback(null);
       });
 
-      it('should return an error if the queue encountered an error', done => {
+      it('should return an error if the queue encountered an error', (done) => {
         const error = new Error('err') as PublishError;
         sandbox
           .stub(queue, 'add')
           .callsFake((message, callback) => callback(error));
 
-        publisher.publishMessage(fakeMessage, err => {
+        publisher.publishMessage(fakeMessage, (err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -342,7 +342,7 @@ describe('Publisher', () => {
         assert.strictEqual(publisher.orderedQueues.size, 0);
       });
 
-      it('should drain any ordered queues on flush', done => {
+      it('should drain any ordered queues on flush', (done) => {
         // We have to stub out the regular queue as well, so that the flush() operation finishes.
         sandbox.stub(FakeQueue.prototype, '_publish').callsFake(async () => {
           // Simulate the drain taking longer than the publishes. This can
@@ -369,7 +369,7 @@ describe('Publisher', () => {
         publisher.orderedQueues.clear();
         publisher.publishMessage(fakeMessage, spy);
 
-        publisher.flush(err => {
+        publisher.flush((err) => {
           assert.strictEqual(err, null);
           assert.strictEqual(publisher.orderedQueues.size, 0);
           done();
@@ -465,7 +465,7 @@ describe('Publisher', () => {
       const stubs = [sandbox.stub(publisher.queue, 'updateOptions')];
       assert.deepStrictEqual(publisher.orderedQueues.size, 2);
       stubs.push(
-        ...Array.from(publisher.orderedQueues.values()).map(q =>
+        ...Array.from(publisher.orderedQueues.values()).map((q) =>
           sandbox.stub(q, 'updateOptions'),
         ),
       );
@@ -475,13 +475,13 @@ describe('Publisher', () => {
       };
       publisher.setOptions(newOptions);
 
-      stubs.forEach(s => assert.ok(s.calledOnce));
+      stubs.forEach((s) => assert.ok(s.calledOnce));
     });
   });
 
   describe('flush', () => {
     // The ordered queue drain test is above with the ordered queue tests.
-    it('should drain the main publish queue', done => {
+    it('should drain the main publish queue', (done) => {
       sandbox.stub(publisher.queue, '_publish').callsFake(async () => {
         // Simulate the drain taking longer than the publishes. This can
         // happen if more messages are queued during the publish().
@@ -490,7 +490,7 @@ describe('Publisher', () => {
         });
       });
 
-      publisher.flush(err => {
+      publisher.flush((err) => {
         assert.strictEqual(err, null);
         assert.strictEqual(
           !publisher.queue.batch || publisher.queue.batch.messages.length === 0,

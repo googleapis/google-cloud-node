@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(writeStream) {
@@ -115,9 +113,15 @@ function main(writeStream) {
 
     // Run request
     const stream = await storageClient.appendRows();
-    stream.on('data', (response) => { console.log(response) });
-    stream.on('error', (err) => { throw(err) });
-    stream.on('end', () => { /* API call completed */ });
+    stream.on('data', (response) => {
+      console.log(response);
+    });
+    stream.on('error', (err) => {
+      throw err;
+    });
+    stream.on('end', () => {
+      /* API call completed */
+    });
     stream.write(request);
     stream.end();
   }
@@ -126,7 +130,7 @@ function main(writeStream) {
   // [END bigquerystorage_v1_generated_BigQueryWrite_AppendRows_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

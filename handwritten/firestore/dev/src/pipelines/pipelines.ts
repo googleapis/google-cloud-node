@@ -239,12 +239,12 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
 
     // Validate that all user provided references are for the same Firestore DB
     docs
-      .filter(v => v instanceof DocumentReference)
-      .forEach(dr =>
+      .filter((v) => v instanceof DocumentReference)
+      .forEach((dr) =>
         this._validateReference(dr as firestore.DocumentReference),
       );
 
-    const normalizedDocs: Array<DocumentReference> = docs.map(doc =>
+    const normalizedDocs: Array<DocumentReference> = docs.map((doc) =>
       isString(doc) ? this.db.doc(doc) : (doc as DocumentReference),
     );
 
@@ -355,7 +355,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   ) {}
 
   private _addStage(stage: Stage): Pipeline {
-    const copy = this.stages.map(s => s);
+    const copy = this.stages.map((s) => s);
     copy.push(stage);
     return new Pipeline(this.db, copy);
   }
@@ -495,7 +495,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
       isField(fieldValueOrOptions) || isString(fieldValueOrOptions)
         ? [fieldValueOrOptions, ...additionalFields]
         : fieldValueOrOptions.fields;
-    const convertedFields: Array<Field> = fields.map(f =>
+    const convertedFields: Array<Field> = fields.map((f) =>
       isString(f) ? field(f) : (f as Field),
     );
 
@@ -1843,7 +1843,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   execute(
     pipelineExecuteOptions?: firestore.Pipelines.PipelineExecuteOptions,
   ): Promise<PipelineSnapshot> {
-    return this._execute(undefined, pipelineExecuteOptions).then(response => {
+    return this._execute(undefined, pipelineExecuteOptions).then((response) => {
       const results = response.result || [];
       const executionTime = response.executionTime;
       const stats = response.explainStats;
@@ -1874,7 +1874,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
     );
     return util
       ._getResponse(structuredPipeline, transactionOrReadTime)
-      .then(result => result!);
+      .then((result) => result!);
   }
 
   _toStructuredPipeline(
@@ -1925,14 +1925,14 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
       );
     }
 
-    const stages: IStage[] = this.stages.map(stage =>
+    const stages: IStage[] = this.stages.map((stage) =>
       stage._toProto(resolvedSerializer),
     );
     return {stages};
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.stages.forEach(stage => {
+    this.stages.forEach((stage) => {
       stage._validateUserData(ignoreUndefinedProperties);
     });
   }

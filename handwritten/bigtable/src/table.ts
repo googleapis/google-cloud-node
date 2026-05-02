@@ -717,7 +717,7 @@ export class Table extends TabularApiSurface {
       view: 'name',
       gaxOptions,
     };
-    this.getMetadata(reqOpts, err => {
+    this.getMetadata(reqOpts, (err) => {
       if (err) {
         if (err.code === 5) {
           callback(null, false);
@@ -888,7 +888,7 @@ export class Table extends TabularApiSurface {
         callback(err);
         return;
       }
-      const families = Object.keys(metadata.columnFamilies!).map(familyId => {
+      const families = Object.keys(metadata.columnFamilies!).map((familyId) => {
         const family = this.family(familyId);
         family.metadata = metadata.columnFamilies![familyId];
         return family;
@@ -956,7 +956,7 @@ export class Table extends TabularApiSurface {
         string,
         google.bigtable.admin.v2.Table.IClusterState
       >();
-      Object.keys(metadata.clusterStates!).map(clusterId =>
+      Object.keys(metadata.clusterStates!).map((clusterId) =>
         clusterStates.set(clusterId, metadata.clusterStates![clusterId]),
       );
       callback(null, clusterStates, metadata);

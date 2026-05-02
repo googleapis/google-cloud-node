@@ -118,7 +118,7 @@ export class TableReader {
       stream.on('data', (data: TableRow) => {
         rows.push(data);
       });
-      stream.on('error', err => {
+      stream.on('error', (err) => {
         this.trace('reject called on joined stream', err);
         reject(err);
       });

@@ -41,7 +41,7 @@ function getHandler(Exporter: typeof CloudMonitoringExporter) {
 }
 
 describe('Bigtable/GCPMetricsHandler', () => {
-  it('Should export a value to the GCPMetricsHandler', done => {
+  it('Should export a value to the GCPMetricsHandler', (done) => {
     (async () => {
       /*
       We need to create a timeout here because if we don't then mocha shuts down
@@ -116,11 +116,11 @@ describe('Bigtable/GCPMetricsHandler', () => {
           handler.onOperationComplete(request as OnOperationCompleteData);
         }
       }
-    })().catch(err => {
+    })().catch((err) => {
       done(err);
     });
   });
-  it('Should export a value to two GCPMetricsHandlers', done => {
+  it('Should export a value to two GCPMetricsHandlers', (done) => {
     // This test ensures that when we create two GCPMetricsHandlers much like
     // what we would be doing when calling readRows on two separate tables that
     // the data doesn't store duplicates in the same place and export twice as
@@ -218,11 +218,11 @@ describe('Bigtable/GCPMetricsHandler', () => {
           handler2.onOperationComplete(request as OnOperationCompleteData);
         }
       }
-    })().catch(err => {
+    })().catch((err) => {
       done(err);
     });
   });
-  it('Should write two duplicate points inserted into the metrics handler', done => {
+  it('Should write two duplicate points inserted into the metrics handler', (done) => {
     (async () => {
       /*
       We need to create a timeout here because if we don't then mocha shuts down
@@ -299,7 +299,7 @@ describe('Bigtable/GCPMetricsHandler', () => {
           }
         }
       }
-    })().catch(err => {
+    })().catch((err) => {
       done(err);
     });
   });

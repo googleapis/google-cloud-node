@@ -45,7 +45,7 @@ async function doQuery(queryTxt: string) {
     const stream = client
       .createQueryStream(query)
       .on('error', reject)
-      .on('data', row => {
+      .on('data', (row) => {
         if (numRows === 0) {
           numCols = Object.keys(row).length;
           timeFirstByteMilli = new Date().getTime() - startMilli;

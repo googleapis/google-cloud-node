@@ -42,7 +42,7 @@ function assertOpCount<T extends object>(
   let actualGrpcClientOpCount = 0;
   let actualRestClientOpCount = 0;
 
-  pool._activeClients.forEach(clientConfig => {
+  pool._activeClients.forEach((clientConfig) => {
     if (clientConfig.grpcEnabled) {
       actualGrpcClientOpCount += clientConfig.activeRequestCount;
     } else {
@@ -298,15 +298,15 @@ describe('Client pool', () => {
     // Next X operations can use rest, this will fill the first
     // client and create a new client.
     // The new client should use GRPC since we have transitioned.
-    restPromises.forEach(restPromise => {
+    restPromises.forEach((restPromise) => {
       void clientPool.run(REQUEST_TAG, USE_REST, () => restPromise.promise);
     });
     expect(clientPool.opCount).to.equal(11);
     expect(clientPool.size).to.equal(2);
     assertOpCount(clientPool, 11, 0);
 
-    grpcPromises.forEach(grpcPromise => grpcPromise.resolve());
-    restPromises.forEach(restPromise => restPromise.resolve());
+    grpcPromises.forEach((grpcPromise) => grpcPromise.resolve());
+    restPromises.forEach((restPromise) => restPromise.resolve());
   });
 
   it('does not re-use rest instance after beginning the transition to grpc - multiple rest clients', async () => {
@@ -320,7 +320,7 @@ describe('Client pool', () => {
 
     // First 15 operations can use rest, this will fill the first
     // client and create a new client.
-    restPromises.forEach(restPromise => {
+    restPromises.forEach((restPromise) => {
       void clientPool.run(REQUEST_TAG, USE_REST, () => restPromise.promise);
     });
     expect(clientPool.opCount).to.equal(15);
@@ -329,7 +329,7 @@ describe('Client pool', () => {
 
     // Next 5 operations alternate between gRPC and REST, this will create a new client using gRPC
     let transport = USE_GRPC;
-    grpcPromises.forEach(grpcPromise => {
+    grpcPromises.forEach((grpcPromise) => {
       void clientPool.run(REQUEST_TAG, transport, () => grpcPromise.promise);
       transport = !transport;
     });
@@ -337,8 +337,8 @@ describe('Client pool', () => {
     expect(clientPool.size).to.equal(3);
     assertOpCount(clientPool, 5, 15);
 
-    grpcPromises.forEach(grpcPromise => grpcPromise.resolve());
-    restPromises.forEach(restPromise => restPromise.resolve());
+    grpcPromises.forEach((grpcPromise) => grpcPromise.resolve());
+    restPromises.forEach((restPromise) => restPromise.resolve());
   });
 
   it('does not re-use rest instance after beginning the transition to grpc - grpc client RST_STREAM', async () => {
@@ -354,7 +354,7 @@ describe('Client pool', () => {
       ),
     );
 
-    await grpcOperation.catch(e => e);
+    await grpcOperation.catch((e) => e);
 
     // Run new rest operation
     void clientPool.run(
@@ -381,23 +381,23 @@ describe('Client pool', () => {
     // Create 5 operations, which should schedule 2 operations on the first
     // client, 2 on the second and 1 on the third.
     const operationPromises = deferredPromises(7);
-    void clientPool.run(REQUEST_TAG, USE_REST, client => {
+    void clientPool.run(REQUEST_TAG, USE_REST, (client) => {
       expect(client.count).to.be.equal(1);
       return operationPromises[0].promise;
     });
-    void clientPool.run(REQUEST_TAG, USE_REST, client => {
+    void clientPool.run(REQUEST_TAG, USE_REST, (client) => {
       expect(client.count).to.be.equal(1);
       return operationPromises[1].promise;
     });
-    const thirdOperation = clientPool.run(REQUEST_TAG, USE_REST, client => {
+    const thirdOperation = clientPool.run(REQUEST_TAG, USE_REST, (client) => {
       expect(client.count).to.be.equal(2);
       return operationPromises[2].promise;
     });
-    void clientPool.run(REQUEST_TAG, USE_REST, client => {
+    void clientPool.run(REQUEST_TAG, USE_REST, (client) => {
       expect(client.count).to.be.equal(2);
       return operationPromises[3].promise;
     });
-    void clientPool.run(REQUEST_TAG, USE_REST, client => {
+    void clientPool.run(REQUEST_TAG, USE_REST, (client) => {
       expect(client.count).to.be.equal(3);
       return operationPromises[4].promise;
     });
@@ -408,7 +408,7 @@ describe('Client pool', () => {
 
     // A newly scheduled operation should use the first client that has a free
     // slot.
-    void clientPool.run(REQUEST_TAG, USE_REST, async client => {
+    void clientPool.run(REQUEST_TAG, USE_REST, async (client) => {
       expect(client.count).to.be.equal(2);
     });
   });
@@ -440,7 +440,7 @@ describe('Client pool', () => {
     );
     expect(clientPool.size).to.equal(2);
 
-    operationPromises.forEach(deferred => deferred.resolve());
+    operationPromises.forEach((deferred) => deferred.resolve());
 
     await Promise.all(completionPromises);
     expect(clientPool.size).to.equal(0);
@@ -473,9 +473,9 @@ describe('Client pool', () => {
     );
     expect(clientPool.size).to.equal(2);
 
-    operationPromises.forEach(deferred => deferred.reject(new Error()));
+    operationPromises.forEach((deferred) => deferred.reject(new Error()));
 
-    await Promise.all(completionPromises.map(p => p.catch(() => {})));
+    await Promise.all(completionPromises.map((p) => p.catch(() => {})));
     expect(clientPool.size).to.equal(0);
   });
 
@@ -503,7 +503,7 @@ describe('Client pool', () => {
       () => operationPromises[1].promise,
     );
 
-    operationPromises.forEach(deferred => deferred.resolve());
+    operationPromises.forEach((deferred) => deferred.resolve());
 
     return garbageCollect.promise;
   });
@@ -609,7 +609,7 @@ describe('Client pool', () => {
 
     // Resolve all pending operations. Note that one client is removed, while
     // 3 are kept for further usage.
-    operationPromises.forEach(deferred => deferred.resolve());
+    operationPromises.forEach((deferred) => deferred.resolve());
     await lastOp;
     expect(clientPool.size).to.equal(3);
   });

@@ -147,7 +147,7 @@ export class AggregateQuery<
       > = {};
 
       const stream = this._stream(transactionOrReadTime, explainOptions);
-      stream.on('error', err => {
+      stream.on('error', (err) => {
         reject(wrapError(err, stack));
       });
       stream.on(
@@ -242,7 +242,7 @@ export class AggregateQuery<
           backendStream.resume();
           backendStream.end();
         });
-        backendStream.on('error', err => {
+        backendStream.on('error', (err) => {
           // TODO(group-by) When group-by queries are supported for aggregates
           // consider implementing retries if the stream is making progress
           // receiving results for groups. See the use of lastReceivedDocument
@@ -268,7 +268,7 @@ export class AggregateQuery<
         backendStream.resume();
         backendStream.pipe(stream);
       })
-      .catch(e => stream.destroy(e));
+      .catch((e) => stream.destroy(e));
 
     return stream;
   }

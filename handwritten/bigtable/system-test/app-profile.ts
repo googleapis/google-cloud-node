@@ -43,17 +43,17 @@ describe('📦 App Profile', () => {
         'us-east1-c',
         'us-central2-b',
         'us-west1-b',
-      ].map(location => {
+      ].map((location) => {
         return {
           id: generateId('cluster'),
           location,
         };
       });
-      clusterIds = instanceClusters.map(cluster => cluster.id);
+      clusterIds = instanceClusters.map((cluster) => cluster.id);
       const instanceId = generateId('instance');
       instance = bigtable.instance(instanceId);
       const [, operation] = await instance.create({
-        clusters: instanceClusters.map(cluster => {
+        clusters: instanceClusters.map((cluster) => {
           return {
             ...cluster,
             nodes: 1,
@@ -91,7 +91,7 @@ describe('📦 App Profile', () => {
       const appProfile = await createProfile(instance, options);
       assert.deepStrictEqual(
         new Set(appProfile.metadata?.multiClusterRoutingUseAny?.clusterIds),
-        new Set([...options.routing].map(cluster => cluster.id)),
+        new Set([...options.routing].map((cluster) => cluster.id)),
       );
     });
 
@@ -138,7 +138,7 @@ describe('📦 App Profile', () => {
         new Set(
           appProfileAfterUpdate.metadata?.multiClusterRoutingUseAny?.clusterIds,
         ),
-        new Set([...newOptions.routing].map(cluster => cluster.id)),
+        new Set([...newOptions.routing].map((cluster) => cluster.id)),
       );
     });
   });

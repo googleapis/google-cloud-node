@@ -48,7 +48,7 @@ export const Bool = () => ({type: 'bool' as const});
 export const Timestamp = () => ({type: 'timestamp' as const});
 export const Date = () => ({type: 'date' as const});
 export const Struct = (...fields: FieldType[]): StructType =>
-  StructType.fromTuples(fields.map(value => [value.name, value.type]));
+  StructType.fromTuples(fields.map((value) => [value.name, value.type]));
 export const Array = (elementType: Type): ArrayType => ({
   type: 'array' as const,
   elementType,

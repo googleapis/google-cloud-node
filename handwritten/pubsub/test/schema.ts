@@ -114,7 +114,7 @@ describe('Schema', () => {
 
   it('defaults to FULL when get() is called', async () => {
     let called = false;
-    sandbox.stub(schemaClient, 'getSchema').callsFake(async params => {
+    sandbox.stub(schemaClient, 'getSchema').callsFake(async (params) => {
       assert.strictEqual(params.view, 'FULL');
       called = true;
       return [ischema];

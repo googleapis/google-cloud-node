@@ -67,7 +67,7 @@ export class Fuzzer {
     },
 
     function(this: {[key: string]: () => void; types: () => string[]}) {
-      const availableTypes = this.types().filter(i => i !== 'function');
+      const availableTypes = this.types().filter((i) => i !== 'function');
       const typeToGen = this.types()[_random(0, availableTypes.length - 1)];
       const fnToCall = this[typeToGen];
 
@@ -116,7 +116,7 @@ export class Fuzzer {
       // Deny the ability to nest more objects
       if (currentDepthChecked >= allowedDepthChecked) {
         availableTypes = this.types().filter(
-          i => i !== 'object' && i !== 'array',
+          (i) => i !== 'object' && i !== 'array',
         );
       }
 
@@ -173,7 +173,7 @@ export class Fuzzer {
       // Deny the ability to nest more objects
       if (currentDepth! >= allowedDepth!) {
         availableTypes = availableTypes.filter(
-          i => i !== 'object' && i !== 'array',
+          (i) => i !== 'object' && i !== 'array',
         );
       }
 
@@ -210,8 +210,8 @@ export class Fuzzer {
   };
 
   _maxBy(arr: Array<Array<{}>>) {
-    const max = Math.max(...arr.map(o => o.length));
-    return arr.find(item => item.length === max);
+    const max = Math.max(...arr.map((o) => o.length));
+    return arr.find((item) => item.length === max);
   }
 
   _backFillUnevenTypesArrays(argsTypesArray: Array<Array<{}>>) {
@@ -255,11 +255,11 @@ export class Fuzzer {
     for (let i = 0; i < expectsArgTypes.length; i++) {
       if (!Array.isArray(expectsArgTypes[i])) {
         argsTypesArray.push(
-          this.generate.types().filter(item => item !== expectsArgTypes[i]),
+          this.generate.types().filter((item) => item !== expectsArgTypes[i]),
         );
       } else {
         for (let j = 0; j < expectsArgTypes[i].length; j++) {
-          tmpArray = tmpArray.filter(arg => arg !== expectsArgTypes[i][j]);
+          tmpArray = tmpArray.filter((arg) => arg !== expectsArgTypes[i][j]);
         }
 
         argsTypesArray.push(([] as Array<{}>).concat(tmpArray));

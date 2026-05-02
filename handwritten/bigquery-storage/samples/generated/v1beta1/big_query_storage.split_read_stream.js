@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(originalStream) {
@@ -44,7 +42,8 @@ function main(originalStream) {
   // const fraction = 1234
 
   // Imports the Storage library
-  const {BigQueryStorageClient} = require('@google-cloud/bigquery-storage').v1beta1;
+  const {BigQueryStorageClient} =
+    require('@google-cloud/bigquery-storage').v1beta1;
 
   // Instantiates a client
   const storageClient = new BigQueryStorageClient();
@@ -64,7 +63,7 @@ function main(originalStream) {
   // [END bigquerystorage_v1beta1_generated_BigQueryStorage_SplitReadStream_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

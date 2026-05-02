@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(name, consistencyToken) {
@@ -73,7 +71,7 @@ function main(name, consistencyToken) {
   // [END bigtableadmin_v2_generated_BigtableTableAdmin_CheckConsistency_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

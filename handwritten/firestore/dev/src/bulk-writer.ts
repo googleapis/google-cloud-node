@@ -496,7 +496,7 @@ export class BulkWriter {
    * @private
    * @internal
    */
-  private _errorFn: (error: BulkWriterError) => boolean = error => {
+  private _errorFn: (error: BulkWriterError) => boolean = (error) => {
     const isRetryableDeleteError =
       error.operationType === 'delete' &&
       (error.code as number) === StatusCode.INTERNAL;
@@ -597,7 +597,7 @@ export class BulkWriter {
     data: firestore.WithFieldValue<AppModelType>,
   ): Promise<WriteResult> {
     this._verifyNotClosed();
-    return this._enqueue(documentRef, 'create', bulkCommitBatch =>
+    return this._enqueue(documentRef, 'create', (bulkCommitBatch) =>
       bulkCommitBatch.create(documentRef, data),
     );
   }
@@ -637,7 +637,7 @@ export class BulkWriter {
     precondition?: firestore.Precondition,
   ): Promise<WriteResult> {
     this._verifyNotClosed();
-    return this._enqueue(documentRef, 'delete', bulkCommitBatch =>
+    return this._enqueue(documentRef, 'delete', (bulkCommitBatch) =>
       bulkCommitBatch.delete(documentRef, precondition),
     );
   }
@@ -697,7 +697,7 @@ export class BulkWriter {
     options?: firestore.SetOptions,
   ): Promise<WriteResult> {
     this._verifyNotClosed();
-    return this._enqueue(documentRef, 'set', bulkCommitBatch => {
+    return this._enqueue(documentRef, 'set', (bulkCommitBatch) => {
       if (options) {
         return bulkCommitBatch.set(documentRef, data, options);
       } else {
@@ -761,7 +761,7 @@ export class BulkWriter {
     >
   ): Promise<WriteResult> {
     this._verifyNotClosed();
-    return this._enqueue(documentRef, 'update', bulkCommitBatch =>
+    return this._enqueue(documentRef, 'update', (bulkCommitBatch) =>
       bulkCommitBatch.update(documentRef, dataOrField, ...preconditionOrValues),
     );
   }
@@ -1044,7 +1044,7 @@ export class BulkWriter {
     //
     // This is done here in order to chain the caught promise onto `lastOp`,
     // which ensures that flush() resolves after the operation promise.
-    const userPromise = bulkWriterOp.promise.catch(err => {
+    const userPromise = bulkWriterOp.promise.catch((err) => {
       if (!this._errorHandlerSet) {
         throw err;
       } else {
@@ -1075,12 +1075,12 @@ export class BulkWriter {
     // in order to ensure that it runs and that subsequent operations are
     // enqueued before the next batch is scheduled in `_sendBatch()`.
     return userPromise
-      .then(res => {
+      .then((res) => {
         this._pendingOpsCount--;
         this._processBufferedOps();
         return res;
       })
-      .catch(err => {
+      .catch((err) => {
         this._pendingOpsCount--;
         this._processBufferedOps();
         throw err;

@@ -85,18 +85,18 @@ describe.skip('Universe domain tests', () => {
     // await instance.delete({});
   });
 
-  it('should set the universe with a client option', done => {
+  it('should set the universe with a client option', (done) => {
     const universeDomain = UNIVERSE_DOMAIN_CONSTANT; // or your universe domain if not using emulator
     const options = {
       universeDomain,
     };
     const bigtable = new Bigtable(options);
-    runTest(done, bigtable).catch(err => {
+    runTest(done, bigtable).catch((err) => {
       throw err;
     });
   });
 
-  it('should set the universe domain with a client option for the gapic clients', done => {
+  it('should set the universe domain with a client option for the gapic clients', (done) => {
     const universeDomain = UNIVERSE_DOMAIN_CONSTANT; // or your universe domain if not using emulator
     const options = {
       BigtableClient: {universeDomain},
@@ -104,15 +104,15 @@ describe.skip('Universe domain tests', () => {
       BigtableTableAdminClient: {universeDomain},
     };
     const bigtable = new Bigtable(options);
-    runTest(done, bigtable).catch(err => {
+    runTest(done, bigtable).catch((err) => {
       throw err;
     });
   });
 
-  it('Should set universe domain with an environment variable', done => {
+  it('Should set universe domain with an environment variable', (done) => {
     process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = UNIVERSE_DOMAIN_CONSTANT;
     const bigtable = new Bigtable();
-    runTest(done, bigtable).catch(err => {
+    runTest(done, bigtable).catch((err) => {
       throw err;
     });
   });

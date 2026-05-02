@@ -444,7 +444,7 @@ describe('Bigtable/ClientSideMetrics', () => {
                     .then(() => {
                       done();
                     })
-                    .catch(err => {
+                    .catch((err) => {
                       done(new Error('Metrics have not been published'));
                       done(err);
                     });
@@ -471,7 +471,7 @@ describe('Bigtable/ClientSideMetrics', () => {
       );
     }
 
-    it('should send the metrics to Google Cloud Monitoring for a ReadRows call', done => {
+    it('should send the metrics to Google Cloud Monitoring for a ReadRows call', (done) => {
       (async () => {
         try {
           const bigtable = await mockBigtable(defaultProjectId, done);
@@ -490,11 +490,11 @@ describe('Bigtable/ClientSideMetrics', () => {
           done(new Error('An error occurred while running the script'));
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should send the metrics to Google Cloud Monitoring for a custom endpoint', done => {
+    it('should send the metrics to Google Cloud Monitoring for a custom endpoint', (done) => {
       (async () => {
         try {
           const bigtable = await mockBigtable(
@@ -516,11 +516,11 @@ describe('Bigtable/ClientSideMetrics', () => {
           done(new Error('An error occurred while running the script'));
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should send the metrics to Google Cloud Monitoring for a ReadRows call with a second project', done => {
+    it('should send the metrics to Google Cloud Monitoring for a ReadRows call with a second project', (done) => {
       (async () => {
         try {
           // This is the second project the test is configured to work with:
@@ -541,7 +541,7 @@ describe('Bigtable/ClientSideMetrics', () => {
           done(new Error('An error occurred while running the script'));
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
@@ -604,7 +604,7 @@ describe('Bigtable/ClientSideMetrics', () => {
       );
     }
 
-    it('should send the metrics to Google Cloud Monitoring for a ReadRows call', done => {
+    it('should send the metrics to Google Cloud Monitoring for a ReadRows call', (done) => {
       let testFinished = false;
       /*
       We need to create a timeout here because if we don't then mocha shuts down
@@ -637,11 +637,11 @@ describe('Bigtable/ClientSideMetrics', () => {
           done(new Error('An error occurred while running the script'));
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should send the metrics to Google Cloud Monitoring for a ReadRows call with thirty clients', done => {
+    it('should send the metrics to Google Cloud Monitoring for a ReadRows call with thirty clients', (done) => {
       /*
       We need to create a timeout here because if we don't then mocha shuts down
       the test as it is sleeping before the GCPMetricsHandler has a chance to
@@ -695,7 +695,7 @@ describe('Bigtable/ClientSideMetrics', () => {
           done(e);
           done(new Error('An error occurred while running the script'));
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
@@ -1011,7 +1011,7 @@ describe('Bigtable/ClientSideMetrics', () => {
       return bigtable;
     }
 
-    it('should send the metrics to the metrics handler for a ReadRows call', done => {
+    it('should send the metrics to the metrics handler for a ReadRows call', (done) => {
       (async () => {
         const projectId = defaultProjectId;
         const bigtable = await mockBigtable(
@@ -1025,11 +1025,11 @@ describe('Bigtable/ClientSideMetrics', () => {
         await table.getRows();
         const table2 = instance.table(tableId2);
         await table2.getRows();
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should pass the projectId to the metrics handler properly', done => {
+    it('should pass the projectId to the metrics handler properly', (done) => {
       (async () => {
         try {
           const projectId = SECOND_PROJECT_ID;
@@ -1047,11 +1047,11 @@ describe('Bigtable/ClientSideMetrics', () => {
         } catch (e) {
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should send the metrics to the metrics handler for a single row read', done => {
+    it('should send the metrics to the metrics handler for a single row read', (done) => {
       (async () => {
         try {
           const projectId = SECOND_PROJECT_ID;
@@ -1071,11 +1071,11 @@ describe('Bigtable/ClientSideMetrics', () => {
         } catch (e) {
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should record the right metrics when handling rows through readrows stream', done => {
+    it('should record the right metrics when handling rows through readrows stream', (done) => {
       (async () => {
         try {
           const hrtime = new FakeHRTime();
@@ -1133,11 +1133,11 @@ describe('Bigtable/ClientSideMetrics', () => {
         } catch (e) {
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });
-    it('should record the right metrics when iterating through readrows stream', done => {
+    it('should record the right metrics when iterating through readrows stream', (done) => {
       (async () => {
         try {
           const hrtime = new FakeHRTime();
@@ -1193,7 +1193,7 @@ describe('Bigtable/ClientSideMetrics', () => {
         } catch (e) {
           done(e);
         }
-      })().catch(err => {
+      })().catch((err) => {
         throw err;
       });
     });

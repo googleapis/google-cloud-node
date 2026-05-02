@@ -135,7 +135,7 @@ describe('Order', () => {
 
     docs.sort(firestore.collection('col').comparator());
 
-    expect(docs.map(doc => doc.id)).to.deep.eq([
+    expect(docs.map((doc) => doc.id)).to.deep.eq([
       'doc1',
       'doc2',
       'doc2',

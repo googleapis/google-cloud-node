@@ -514,7 +514,7 @@ export class BigtableInstanceAdminClient {
     ];
     for (const methodName of bigtableInstanceAdminStubMethods) {
       const callPromise = this.bigtableInstanceAdminStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -718,7 +718,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getInstance request %j', request);
@@ -849,7 +849,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listInstances request %j', request);
@@ -1016,7 +1016,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('updateInstance request %j', request);
@@ -1143,7 +1143,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteInstance request %j', request);
@@ -1270,7 +1270,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getCluster request %j', request);
@@ -1402,7 +1402,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listClusters request %j', request);
@@ -1531,7 +1531,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteCluster request %j', request);
@@ -1675,7 +1675,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createAppProfile request %j', request);
@@ -1804,7 +1804,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getAppProfile request %j', request);
@@ -1942,7 +1942,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteAppProfile request %j', request);
@@ -2073,7 +2073,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -2210,7 +2210,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -2340,7 +2340,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -2467,7 +2467,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getLogicalView request %j', request);
@@ -2608,7 +2608,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteLogicalView request %j', request);
@@ -2744,7 +2744,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getMaterializedView request %j', request);
@@ -2894,7 +2894,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteMaterializedView request %j', request);
@@ -3063,7 +3063,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3236,7 +3236,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'instance.name': request.instance!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3419,7 +3419,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3613,7 +3613,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3796,7 +3796,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3970,7 +3970,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'app_profile.name': request.appProfile!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4145,7 +4145,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4320,7 +4320,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'logical_view.name': request.logicalView!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4495,7 +4495,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4670,7 +4670,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'materialized_view.name': request.materializedView!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4846,7 +4846,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4925,7 +4925,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listAppProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listAppProfiles stream %j', request);
@@ -4986,7 +4986,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listAppProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listAppProfiles iterate %j', request);
@@ -5110,7 +5110,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5196,7 +5196,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listHotTablets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listHotTablets stream %j', request);
@@ -5264,7 +5264,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listHotTablets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listHotTablets iterate %j', request);
@@ -5375,7 +5375,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5449,7 +5449,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listLogicalViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listLogicalViews stream %j', request);
@@ -5505,7 +5505,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listLogicalViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listLogicalViews iterate %j', request);
@@ -5616,7 +5616,7 @@ export class BigtableInstanceAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5690,7 +5690,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listMaterializedViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listMaterializedViews stream %j', request);
@@ -5746,7 +5746,7 @@ export class BigtableInstanceAdminClient {
       });
     const defaultCallSettings = this._defaults['listMaterializedViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listMaterializedViews iterate %j', request);
@@ -6439,7 +6439,7 @@ export class BigtableInstanceAdminClient {
    */
   close(): Promise<void> {
     if (this.bigtableInstanceAdminStub && !this._terminated) {
-      return this.bigtableInstanceAdminStub.then(stub => {
+      return this.bigtableInstanceAdminStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

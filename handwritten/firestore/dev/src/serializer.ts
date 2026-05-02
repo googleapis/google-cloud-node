@@ -75,8 +75,8 @@ export class Serializer {
     // Instead of storing the `firestore` object, we store just a reference to
     // its `.doc()` method. This avoid a circular reference, which breaks
     // JSON.stringify().
-    this.createDocumentReference = path => firestore.doc(path);
-    this.createInteger = n =>
+    this.createDocumentReference = (path) => firestore.doc(path);
+    this.createInteger = (n) =>
       firestore._settings.useBigInt ? BigInt(n) : Number(n);
     this.allowUndefined = !!firestore._settings.ignoreUndefinedProperties;
   }
@@ -297,7 +297,7 @@ export class Serializer {
           },
           [VECTOR_MAP_VECTORS_KEY]: {
             arrayValue: {
-              values: rawVector.map(value => {
+              values: rawVector.map((value) => {
                 return {
                   doubleValue: value,
                 };

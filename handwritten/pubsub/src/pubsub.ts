@@ -1214,7 +1214,7 @@ export class PubSub {
         let topics: Topic[];
 
         if (rawTopics) {
-          topics = rawTopics.map(topic => {
+          topics = rawTopics.map((topic) => {
             const topicInstance = this.topic(topic.name);
             topicInstance.metadata = topic;
             return topicInstance;
@@ -1290,7 +1290,7 @@ export class PubSub {
    */
   getClient_(config: GetClientConfig, callback: GetClientCallback) {
     this.getClientAsync_(config).then(
-      client => callback(null, client),
+      (client) => callback(null, client),
       callback,
     );
   }

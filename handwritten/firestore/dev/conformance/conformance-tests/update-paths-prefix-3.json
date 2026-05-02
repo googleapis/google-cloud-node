@@ -7,21 +7,13 @@
         "docRefPath": "projects/projectID/databases/(default)/documents/C/d",
         "fieldPaths": [
           {
-            "field": [
-              "a"
-            ]
+            "field": ["a"]
           },
           {
-            "field": [
-              "a",
-              "d"
-            ]
+            "field": ["a", "d"]
           }
         ],
-        "jsonValues": [
-          "{\"b\": 1}",
-          "2"
-        ],
+        "jsonValues": ["{\"b\": 1}", "2"],
         "isError": true
       }
     }

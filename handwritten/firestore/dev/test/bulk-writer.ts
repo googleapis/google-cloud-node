@@ -105,8 +105,8 @@ export function mergeResponses(
   responses: api.IBatchWriteResponse[],
 ): api.IBatchWriteResponse {
   return {
-    writeResults: responses.map(v => v.writeResults![0]),
-    status: responses.map(v => v.status![0]),
+    writeResults: responses.map((v) => v.writeResults![0]),
+    status: responses.map((v) => v.status![0]),
   };
 }
 
@@ -182,7 +182,7 @@ describe.skip('BulkWriter', () => {
         return responsePromise;
       },
     };
-    return createInstance(overrides).then(firestoreClient => {
+    return createInstance(overrides).then((firestoreClient) => {
       firestore = firestoreClient;
       return firestore.bulkWriter();
     });
@@ -367,7 +367,7 @@ describe.skip('BulkWriter', () => {
     ]);
 
     const doc = firestore.doc('collectionId/doc');
-    void bulkWriter.set(doc, {foo: 'bar'}).catch(err => {
+    void bulkWriter.set(doc, {foo: 'bar'}).catch((err) => {
       incrementOpCount();
       expect(err instanceof BulkWriterError).to.be.true;
       expect(err.code).to.equal(Status.DEADLINE_EXCEEDED);
@@ -676,7 +676,7 @@ describe.skip('BulkWriter', () => {
     ]);
     const ops: string[] = [];
     const writeResults: number[] = [];
-    bulkWriter.onWriteError(error => {
+    bulkWriter.onWriteError((error) => {
       ops.push(error.operationType);
       return true;
     });
@@ -718,7 +718,7 @@ describe.skip('BulkWriter', () => {
     });
     bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
-      .catch(err => {
+      .catch((err) => {
         expect(err.code).to.equal(Status.INTERNAL);
         catchCalled = true;
       });
@@ -769,7 +769,7 @@ describe.skip('BulkWriter', () => {
     });
     void bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('User provided error callback failed');
         errorCaught = true;
       });
@@ -790,7 +790,7 @@ describe.skip('BulkWriter', () => {
     });
     void bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('User provided success callback failed');
         errorCaught = true;
       });
@@ -823,7 +823,7 @@ describe.skip('BulkWriter', () => {
     });
     void bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
-      .then(res => {
+      .then((res) => {
         writeResult = res.writeTime.seconds;
       });
     await bulkWriter.close();
@@ -932,12 +932,12 @@ describe.skip('BulkWriter', () => {
       },
     ]);
     let code: Status = -1 as Status;
-    bulkWriter.onWriteError(error => {
+    bulkWriter.onWriteError((error) => {
       return error.failedAttempts < 3;
     });
     void bulkWriter
       .set(firestore.doc('collectionId/doc'), {foo: 'bar'})
-      .catch(err => {
+      .catch((err) => {
         code = err.code;
       });
     await bulkWriter.close();
@@ -946,8 +946,8 @@ describe.skip('BulkWriter', () => {
 
   it('splits into multiple batches after exceeding maximum batch size', async () => {
     const arrayRange = Array.from(new Array(6), (_, i) => i);
-    const requests = arrayRange.map(i => setOp('doc' + i, 'bar'));
-    const responses = arrayRange.map(i => successResponse(i));
+    const requests = arrayRange.map((i) => setOp('doc' + i, 'bar'));
+    const responses = arrayRange.map((i) => successResponse(i));
     const bulkWriter = await instantiateInstance([
       {
         request: createRequest([requests[0], requests[1]]),
@@ -1110,7 +1110,7 @@ describe.skip('BulkWriter', () => {
       options?: BulkWriterOptions,
     ): Promise<BulkWriter> {
       const overrides: ApiOverride = {
-        batchWrite: request => {
+        batchWrite: (request) => {
           const requestLength = request.writes?.length || 0;
           const responses = mergeResponses(
             Array.from(new Array(requestLength), (_, i) => successResponse(i)),
@@ -1121,15 +1121,15 @@ describe.skip('BulkWriter', () => {
           });
         },
       };
-      return createInstance(overrides).then(firestoreClient => {
+      return createInstance(overrides).then((firestoreClient) => {
         firestore = firestoreClient;
         return firestore.bulkWriter(options);
       });
     }
 
-    it('does not send batches if doing so exceeds the rate limit', done => {
+    it('does not send batches if doing so exceeds the rate limit', (done) => {
       void instantiateInstance({throttling: {maxOpsPerSecond: 5}}).then(
-        bulkWriter => {
+        (bulkWriter) => {
           let timeoutCalled = false;
           setTimeoutHandler((_, timeout) => {
             if (!timeoutCalled && timeout > 0) {
@@ -1172,7 +1172,7 @@ describe.skip('BulkWriter', () => {
           }
         },
       };
-      return createInstance(overrides).then(firestoreClient => {
+      return createInstance(overrides).then((firestoreClient) => {
         firestore = firestoreClient;
         return firestore.bulkWriter();
       });
@@ -1183,7 +1183,7 @@ describe.skip('BulkWriter', () => {
       .create(firestore.doc('collectionId/doc'), {
         foo: 'bar',
       })
-      .then(result => {
+      .then((result) => {
         incrementOpCount();
         writeResult = result;
       });
@@ -1211,7 +1211,7 @@ describe.skip('BulkWriter', () => {
           throw error;
         },
       };
-      return createInstance(overrides).then(firestoreClient => {
+      return createInstance(overrides).then((firestoreClient) => {
         firestore = firestoreClient;
         return firestore.bulkWriter();
       });
@@ -1221,7 +1221,7 @@ describe.skip('BulkWriter', () => {
       .create(firestore.doc('collectionId/doc'), {
         foo: 'bar',
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err instanceof BulkWriterError).to.be.true;
         expect(err.code).to.equal(Status.ABORTED);
         incrementOpCount();
@@ -1249,18 +1249,18 @@ describe.skip('BulkWriter', () => {
           throw error;
         },
       };
-      return createInstance(overrides).then(firestoreClient => {
+      return createInstance(overrides).then((firestoreClient) => {
         firestore = firestoreClient;
         return firestore.bulkWriter();
       });
     }
     const bulkWriter = await instantiateInstance();
-    bulkWriter.onWriteError(err => err.failedAttempts < 5);
+    bulkWriter.onWriteError((err) => err.failedAttempts < 5);
     bulkWriter
       .create(firestore.doc('collectionId/doc'), {
         foo: 'bar',
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err instanceof BulkWriterError).to.be.true;
         expect(err.code).to.equal(Status.RESOURCE_EXHAUSTED);
         incrementOpCount();
@@ -1307,7 +1307,7 @@ describe.skip('BulkWriter', () => {
       },
     ]);
 
-    bulkWriter.onWriteError(err => err.failedAttempts < 5);
+    bulkWriter.onWriteError((err) => err.failedAttempts < 5);
     void bulkWriter.create(firestore.doc('collectionId/doc1'), {
       foo: 'bar',
     });
@@ -1336,7 +1336,7 @@ describe.skip('BulkWriter', () => {
       },
     ]);
 
-    bulkWriter.onWriteError(err => err.failedAttempts < 5);
+    bulkWriter.onWriteError((err) => err.failedAttempts < 5);
     void bulkWriter.create(firestore.doc('collectionId/doc1'), {
       foo: 'bar',
     });
@@ -1354,7 +1354,7 @@ describe.skip('BulkWriter', () => {
           throw new Error('Mock batchWrite failed in test');
         },
       };
-      return createInstance(overrides).then(firestoreClient => {
+      return createInstance(overrides).then((firestoreClient) => {
         firestore = firestoreClient;
         return firestore.bulkWriter();
       });
@@ -1390,14 +1390,14 @@ describe.skip('BulkWriter', () => {
       const bulkWriter = await instantiateInstance();
       void bulkWriter
         .create(firestore.doc('collectionId/doc'), {foo: 'bar'})
-        .catch(err => {
+        .catch((err) => {
           expect(err.message).to.equal('Mock batchWrite failed in test');
           incrementOpCount();
         });
 
       void bulkWriter
         .set(firestore.doc('collectionId/doc2'), {foo: 'bar'})
-        .catch(err => {
+        .catch((err) => {
           expect(err.message).to.equal('Mock batchWrite failed in test');
           incrementOpCount();
         });

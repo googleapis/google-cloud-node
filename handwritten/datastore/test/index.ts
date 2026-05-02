@@ -270,10 +270,10 @@ async.each(
           );
         });
 
-        it('should set default API connection details', done => {
+        it('should set default API connection details', (done) => {
           const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
-          Datastore.prototype.determineBaseUrl_ = customApiEndpoint => {
+          Datastore.prototype.determineBaseUrl_ = (customApiEndpoint) => {
             Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
 
             assert.strictEqual(customApiEndpoint, OPTIONS.apiEndpoint);
@@ -697,7 +697,7 @@ async.each(
       });
 
       describe('export', () => {
-        it('should accept a bucket string destination', done => {
+        it('should accept a bucket string destination', (done) => {
           const bucket = 'bucket';
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -712,7 +712,7 @@ async.each(
           datastore.export({bucket}, assert.ifError);
         });
 
-        it('should remove extraneous gs:// prefix from input', done => {
+        it('should remove extraneous gs:// prefix from input', (done) => {
           const bucket = 'gs://bucket';
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -724,7 +724,7 @@ async.each(
           datastore.export({bucket}, assert.ifError);
         });
 
-        it('should accept a Bucket object destination', done => {
+        it('should accept a Bucket object destination', (done) => {
           const bucket = {name: 'bucket'};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -757,7 +757,7 @@ async.each(
           }, /Both `bucket` and `outputUrlPrefix` were provided\./);
         });
 
-        it('should accept kinds', done => {
+        it('should accept kinds', (done) => {
           const kinds = ['kind1', 'kind2'];
           const config = {bucket: 'bucket', kinds};
 
@@ -783,7 +783,7 @@ async.each(
           }, /Both `entityFilter` and `kinds` were provided\./);
         });
 
-        it('should accept namespaces', done => {
+        it('should accept namespaces', (done) => {
           const namespaces = ['ns1', 'n2'];
           const config = {bucket: 'bucket', namespaces};
 
@@ -812,7 +812,7 @@ async.each(
           }, /Both `entityFilter` and `namespaces` were provided\./);
         });
 
-        it('should remove extraneous properties from request', done => {
+        it('should remove extraneous properties from request', (done) => {
           const config = {
             bucket: 'bucket',
             gaxOptions: {},
@@ -832,7 +832,7 @@ async.each(
           datastore.export(config, assert.ifError);
         });
 
-        it('should send any user input to API', done => {
+        it('should send any user input to API', (done) => {
           const userProperty = 'abc';
           const config = {bucket: 'bucket', userProperty};
 
@@ -845,7 +845,7 @@ async.each(
           datastore.export(config, assert.ifError);
         });
 
-        it('should send correct request', done => {
+        it('should send correct request', (done) => {
           const config = {bucket: 'bucket'};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -859,7 +859,7 @@ async.each(
           datastore.export(config, assert.ifError);
         });
 
-        it('should accept gaxOptions', done => {
+        it('should accept gaxOptions', (done) => {
           const gaxOptions = {};
           const config = {bucket: 'bucket', gaxOptions};
 
@@ -874,7 +874,7 @@ async.each(
       });
 
       describe('getIndexes', () => {
-        it('should send the correct request', done => {
+        it('should send the correct request', (done) => {
           const options = {a: 'b'};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -894,7 +894,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should locate pagination settings from gaxOptions', done => {
+        it('should locate pagination settings from gaxOptions', (done) => {
           const options = {
             gaxOptions: {
               pageSize: 'size',
@@ -918,7 +918,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should prefer pageSize and pageToken from options over gaxOptions', done => {
+        it('should prefer pageSize and pageToken from options over gaxOptions', (done) => {
           const options = {
             pageSize: 'size-good',
             pageToken: 'token-good',
@@ -938,7 +938,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should remove extraneous pagination settings from request', done => {
+        it('should remove extraneous pagination settings from request', (done) => {
           const options = {
             gaxOptions: {
               pageSize: 'size',
@@ -958,7 +958,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should accept gaxOptions', done => {
+        it('should accept gaxOptions', (done) => {
           const options = {
             gaxOptions: {a: 'b'},
           };
@@ -973,7 +973,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should not send gaxOptions as request options', done => {
+        it('should not send gaxOptions as request options', (done) => {
           const options = {
             gaxOptions: {a: 'b'},
           };
@@ -981,7 +981,7 @@ async.each(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           datastore.request_ = (config: any) => {
             assert(
-              Object.keys(options.gaxOptions).every(k => !config.reqOpts[k]),
+              Object.keys(options.gaxOptions).every((k) => !config.reqOpts[k]),
             );
             done();
           };
@@ -989,7 +989,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should set autoPaginate from options', done => {
+        it('should set autoPaginate from options', (done) => {
           const options = {
             autoPaginate: true,
           };
@@ -1006,7 +1006,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should prefer autoPaginate from gaxOpts', done => {
+        it('should prefer autoPaginate from gaxOpts', (done) => {
           const options = {
             autoPaginate: false,
             gaxOptions: {
@@ -1023,7 +1023,7 @@ async.each(
           datastore.getIndexes(options, assert.ifError);
         });
 
-        it('should execute callback with error and correct response arguments', done => {
+        it('should execute callback with error and correct response arguments', (done) => {
           const error = new Error('Error.');
           const apiResponse = {};
 
@@ -1043,7 +1043,7 @@ async.each(
           );
         });
 
-        it('should execute callback with Index instances', done => {
+        it('should execute callback with Index instances', (done) => {
           const rawIndex = {indexId: 'name', a: 'b'};
           const indexInstance = {};
 
@@ -1067,7 +1067,7 @@ async.each(
           });
         });
 
-        it('should execute callback with prepared nextQuery', done => {
+        it('should execute callback with prepared nextQuery', (done) => {
           const options = {pageToken: '1'};
           const nextQuery = {pageToken: '2'};
 
@@ -1088,7 +1088,7 @@ async.each(
       });
 
       describe('getIndexesStream', () => {
-        it('should make correct request', done => {
+        it('should make correct request', (done) => {
           const options = {a: 'b'};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1106,7 +1106,7 @@ async.each(
           datastore.getIndexesStream(options);
         });
 
-        it('should accept gaxOptions', done => {
+        it('should accept gaxOptions', (done) => {
           const options = {gaxOptions: {}};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1119,7 +1119,7 @@ async.each(
           datastore.getIndexesStream(options);
         });
 
-        it('should transform response indexes into Index objects', done => {
+        it('should transform response indexes into Index objects', (done) => {
           const rawIndex = {indexId: 'name', a: 'b'};
           const indexInstance = {};
           const requestStream = new Readable({
@@ -1163,7 +1163,7 @@ async.each(
           }, /Both `file` and `inputUrl` were provided\./);
         });
 
-        it('should accept a file string source', done => {
+        it('should accept a file string source', (done) => {
           const file = 'file';
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1175,7 +1175,7 @@ async.each(
           datastore.import({file}, assert.ifError);
         });
 
-        it('should remove extraneous gs:// prefix from input', done => {
+        it('should remove extraneous gs:// prefix from input', (done) => {
           const file = 'gs://file';
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1187,7 +1187,7 @@ async.each(
           datastore.import({file}, assert.ifError);
         });
 
-        it('should accept a File object source', done => {
+        it('should accept a File object source', (done) => {
           const file = {bucket: {name: 'bucket'}, name: 'file'};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1208,7 +1208,7 @@ async.each(
           }, /An input URL must be provided\./);
         });
 
-        it('should accept kinds', done => {
+        it('should accept kinds', (done) => {
           const kinds = ['kind1', 'kind2'];
           const config = {file: 'file', kinds};
 
@@ -1234,7 +1234,7 @@ async.each(
           }, /Both `entityFilter` and `kinds` were provided\./);
         });
 
-        it('should accept namespaces', done => {
+        it('should accept namespaces', (done) => {
           const namespaces = ['ns1', 'n2'];
           const config = {file: 'file', namespaces};
 
@@ -1263,7 +1263,7 @@ async.each(
           }, /Both `entityFilter` and `namespaces` were provided\./);
         });
 
-        it('should remove extraneous properties from request', done => {
+        it('should remove extraneous properties from request', (done) => {
           const config = {
             file: 'file',
             gaxOptions: {},
@@ -1283,7 +1283,7 @@ async.each(
           datastore.import(config, assert.ifError);
         });
 
-        it('should send any user input to API', done => {
+        it('should send any user input to API', (done) => {
           const userProperty = 'abc';
           const config = {file: 'file', userProperty};
 
@@ -1296,7 +1296,7 @@ async.each(
           datastore.import(config, assert.ifError);
         });
 
-        it('should send correct request', done => {
+        it('should send correct request', (done) => {
           const config = {file: 'file'};
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1310,7 +1310,7 @@ async.each(
           datastore.import(config, assert.ifError);
         });
 
-        it('should accept gaxOptions', done => {
+        it('should accept gaxOptions', (done) => {
           const gaxOptions = {};
           const config = {file: 'file', gaxOptions};
 
@@ -1341,7 +1341,7 @@ async.each(
           sandbox.restore();
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           const preparedEntityObject = {prepared: true};
           const expectedEntityObject = Object.assign({}, preparedEntityObject, {
@@ -1350,7 +1350,7 @@ async.each(
 
           sandbox
             .stub(ds.DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               return preparedEntityObject as {};
             });
@@ -1363,7 +1363,7 @@ async.each(
           datastore.insert(entityObject, assert.ifError);
         });
 
-        it('should pass the correct arguments to save', done => {
+        it('should pass the correct arguments to save', (done) => {
           datastore.save = (entities: Entity[], callback: Function) => {
             assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
               {
@@ -1416,7 +1416,7 @@ async.each(
           sandbox.restore();
         });
 
-        it('should save with keys', done => {
+        it('should save with keys', (done) => {
           const expectedReq = {
             mutations: [
               {
@@ -1480,7 +1480,7 @@ async.each(
           );
         });
 
-        it('should save null value when excludeLargeProperties enabled', done => {
+        it('should save null value when excludeLargeProperties enabled', (done) => {
           const expectedProperties = {
             stringField: {
               stringValue: 'string value',
@@ -1526,7 +1526,7 @@ async.each(
           datastore.save(entities, done);
         });
 
-        it('should allow customization of GAX options', done => {
+        it('should allow customization of GAX options', (done) => {
           const gaxOptions = {};
 
           datastore.request_ = (config: RequestConfig) => {
@@ -1544,7 +1544,7 @@ async.each(
           );
         });
 
-        it('should throw error when value is not provided', done => {
+        it('should throw error when value is not provided', (done) => {
           datastore.request_ = (config: RequestConfig) => {
             done('Should not reach request_ function');
           };
@@ -1574,7 +1574,7 @@ async.each(
           assert.fail('Calling save should have thrown an error');
         });
 
-        it('should throw error when name property does not support toString method', done => {
+        it('should throw error when name property does not support toString method', (done) => {
           datastore.request_ = (config: RequestConfig) => {
             done('Should not reach request_ function');
           };
@@ -1606,13 +1606,13 @@ async.each(
           assert.fail('Calling save should have thrown an error');
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           let prepared = false;
 
           sandbox
             .stub(ds.DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               prepared = true;
               return {
@@ -1630,7 +1630,7 @@ async.each(
           datastore.save(entityObject, assert.ifError);
         });
 
-        it('should save with specific method', done => {
+        it('should save with specific method', (done) => {
           datastore.request_ = (config: RequestConfig, callback: Function) => {
             assert.strictEqual(config.reqOpts!.mutations!.length, 3);
             assert(is.object(config.reqOpts!.mutations![0].insert));
@@ -1674,7 +1674,7 @@ async.each(
           }, /Method auto_insert_id not recognized/);
         });
 
-        it('should not alter the provided data object', done => {
+        it('should not alter the provided data object', (done) => {
           const entities = [
             {
               key,
@@ -1688,7 +1688,7 @@ async.each(
               },
             },
           ];
-          const expectedEntities = entities.map(x => extend(true, {}, x));
+          const expectedEntities = entities.map((x) => extend(true, {}, x));
 
           datastore.request_ = () => {
             // By the time the request is made, the original object has already been
@@ -1700,7 +1700,7 @@ async.each(
           datastore.save(entities, assert.ifError);
         });
 
-        it('should return apiResponse in callback', done => {
+        it('should return apiResponse in callback', (done) => {
           const key = new entity.Key({namespace: 'ns', path: ['Company']});
           const mockCommitResponse = {};
           datastore.request_ = (config: RequestConfig, callback: Function) => {
@@ -1716,7 +1716,7 @@ async.each(
           );
         });
 
-        it('should allow setting the indexed value of a property', done => {
+        it('should allow setting the indexed value of a property', (done) => {
           datastore.request_ = (config: RequestConfig) => {
             const property =
               config.reqOpts!.mutations![0].upsert!.properties!.name;
@@ -1740,7 +1740,7 @@ async.each(
           );
         });
 
-        it('should allow setting the indexed value on arrays', done => {
+        it('should allow setting the indexed value on arrays', (done) => {
           datastore.request_ = (config: RequestConfig) => {
             const property =
               config.reqOpts!.mutations![0].upsert!.properties!.name;
@@ -1767,7 +1767,7 @@ async.each(
           );
         });
 
-        it('should allow exclude property indexed with "*" wildcard from root', done => {
+        it('should allow exclude property indexed with "*" wildcard from root', (done) => {
           const longString = Buffer.alloc(1501, '.').toString();
           const data = {
             longString,
@@ -1815,7 +1815,7 @@ async.each(
                 validateIndex(value);
               });
             } else if (data.entityValue) {
-              Object.keys(data.entityValue.properties).forEach(path => {
+              Object.keys(data.entityValue.properties).forEach((path) => {
                 validateIndex(data.entityValue.properties[path]);
               });
             } else {
@@ -1825,7 +1825,7 @@ async.each(
 
           datastore.request_ = (config: RequestConfig) => {
             const properties = config.reqOpts!.mutations![0].upsert!.properties;
-            Object.keys(properties!).forEach(path => {
+            Object.keys(properties!).forEach((path) => {
               validateIndex(properties![path]);
             });
             done();
@@ -1841,7 +1841,7 @@ async.each(
           );
         });
 
-        it('should allow exclude property indexed with "*" wildcard for object and array', done => {
+        it('should allow exclude property indexed with "*" wildcard for object and array', (done) => {
           const longString = Buffer.alloc(1501, '.').toString();
           const data = {
             longString,
@@ -1889,7 +1889,7 @@ async.each(
                 validateIndex(value);
               });
             } else if (data.entityValue) {
-              Object.keys(data.entityValue.properties).forEach(path => {
+              Object.keys(data.entityValue.properties).forEach((path) => {
                 validateIndex(data.entityValue.properties[path]);
               });
             } else {
@@ -1899,7 +1899,7 @@ async.each(
 
           datastore.request_ = (config: RequestConfig) => {
             const properties = config.reqOpts!.mutations![0].upsert!.properties;
-            Object.keys(properties!).forEach(path => {
+            Object.keys(properties!).forEach((path) => {
               validateIndex(properties![path]);
             });
             done();
@@ -1923,7 +1923,7 @@ async.each(
           );
         });
 
-        it('should allow setting the indexed value on arrays', done => {
+        it('should allow setting the indexed value on arrays', (done) => {
           datastore.request_ = (config: RequestConfig) => {
             const property =
               config.reqOpts!.mutations![0].upsert!.properties!.name;
@@ -1950,7 +1950,7 @@ async.each(
           );
         });
 
-        it('should prepare excludeFromIndexes array for large values', done => {
+        it('should prepare excludeFromIndexes array for large values', (done) => {
           const longString = Buffer.alloc(1501, '.').toString();
           const data = {
             longString,
@@ -2029,7 +2029,7 @@ async.each(
           );
         });
 
-        it('should allow auto setting the indexed value of a property with excludeLargeProperties', done => {
+        it('should allow auto setting the indexed value of a property with excludeLargeProperties', (done) => {
           const longString = Buffer.alloc(1501, '.').toString();
           const data = [
             {
@@ -2061,7 +2061,7 @@ async.each(
           );
         });
 
-        it('should assign ID on keys without them', done => {
+        it('should assign ID on keys without them', (done) => {
           const incompleteKey = new entity.Key({path: ['Incomplete']});
           const incompleteKey2 = new entity.Key({path: ['Incomplete']});
           const completeKey = new entity.Key({path: ['Complete', 'Key']});
@@ -2085,7 +2085,7 @@ async.each(
             callback(null, response);
           };
 
-          sandbox.stub(fakeEntity, 'keyFromKeyProto').callsFake(keyProto => {
+          sandbox.stub(fakeEntity, 'keyFromKeyProto').callsFake((keyProto) => {
             keyProtos.push(keyProto as any);
             return {
               id: ids[keyProtos.length - 1],
@@ -2141,7 +2141,7 @@ async.each(
           sandbox.restore();
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           const preparedEntityObject = {prepared: true};
           const expectedEntityObject = Object.assign({}, preparedEntityObject, {
@@ -2150,7 +2150,7 @@ async.each(
 
           sandbox
             .stub(ds.DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               return preparedEntityObject as {};
             });
@@ -2163,7 +2163,7 @@ async.each(
           datastore.update(entityObject, assert.ifError);
         });
 
-        it('should pass the correct arguments to save', done => {
+        it('should pass the correct arguments to save', (done) => {
           datastore.save = (entities: Entity[], callback: Function) => {
             assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
               {
@@ -2189,7 +2189,7 @@ async.each(
           sandbox.restore();
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           const preparedEntityObject = {prepared: true};
           const expectedEntityObject = Object.assign({}, preparedEntityObject, {
@@ -2198,7 +2198,7 @@ async.each(
 
           sandbox
             .stub(ds.DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               return preparedEntityObject as {};
             });
@@ -2211,7 +2211,7 @@ async.each(
           datastore.upsert(entityObject, assert.ifError);
         });
 
-        it('should pass the correct arguments to save', done => {
+        it('should pass the correct arguments to save', (done) => {
           datastore.save = (entities: Entity[], callback: Function) => {
             assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
               {

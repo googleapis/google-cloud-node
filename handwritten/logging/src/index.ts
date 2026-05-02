@@ -670,7 +670,7 @@ class Logging {
       },
     });
     userStream.once('reading', () => {
-      this.auth.getProjectId().then(projectId => {
+      this.auth.getProjectId().then((projectId) => {
         this.projectId = projectId;
         if (options.log) {
           if (options.filter) {
@@ -823,7 +823,7 @@ class Logging {
       },
     });
 
-    this.auth.getProjectId().then(projectId => {
+    this.auth.getProjectId().then((projectId) => {
       this.projectId = projectId;
 
       if (options.log) {
@@ -1007,7 +1007,7 @@ class Logging {
       },
     });
     userStream.once('reading', () => {
-      this.auth.getProjectId().then(projectId => {
+      this.auth.getProjectId().then((projectId) => {
         this.projectId = projectId;
         const reqOpts = extend({}, options, {
           parent: 'projects/' + this.projectId,
@@ -1190,7 +1190,7 @@ class Logging {
       },
     });
     userStream.once('reading', () => {
-      this.auth.getProjectId().then(projectId => {
+      this.auth.getProjectId().then((projectId) => {
         this.projectId = projectId;
         const reqOpts = extend({}, options, {
           parent: 'projects/' + self.projectId,

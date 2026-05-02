@@ -378,7 +378,7 @@ export class ResourcePath extends Path<ResourcePath> {
   split(relativePath: string): string[] {
     // We may have an empty segment at the beginning or end if they had a
     // leading or trailing slash (which we allow).
-    return relativePath.split('/').filter(segment => segment.length > 0);
+    return relativePath.split('/').filter((segment) => segment.length > 0);
   }
 
   /**
@@ -723,7 +723,7 @@ export class FieldPath extends Path<FieldPath> implements firestore.FieldPath {
    */
   get formattedName(): string {
     return this.segments
-      .map(str => {
+      .map((str) => {
         return UNESCAPED_FIELD_NAME_RE.test(str)
           ? str
           : '`' + str.replace(/\\/g, '\\\\').replace(/`/g, '\\`') + '`';

@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(name, modifications) {
@@ -68,7 +66,7 @@ function main(name, modifications) {
   // [END bigtableadmin_v2_generated_BigtableTableAdmin_ModifyColumnFamilies_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

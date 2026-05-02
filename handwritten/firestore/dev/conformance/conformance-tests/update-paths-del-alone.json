@@ -7,14 +7,10 @@
         "docRefPath": "projects/projectID/databases/(default)/documents/C/d",
         "fieldPaths": [
           {
-            "field": [
-              "a"
-            ]
+            "field": ["a"]
           }
         ],
-        "jsonValues": [
-          "\"Delete\""
-        ],
+        "jsonValues": ["\"Delete\""],
         "request": {
           "database": "projects/projectID/databases/(default)",
           "writes": [
@@ -23,9 +19,7 @@
                 "name": "projects/projectID/databases/(default)/documents/C/d"
               },
               "updateMask": {
-                "fieldPaths": [
-                  "a"
-                ]
+                "fieldPaths": ["a"]
               },
               "currentDocument": {
                 "exists": true

@@ -25,7 +25,7 @@ export const sampleRowKeys: ClientImplMaker<
   ISampleRowKeysRequest,
   ISampleRowKeysResult
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {request} = rawRequest;
     const {clientId, request: sampleRowKeysRequest} = request;
     const {tableName} = sampleRowKeysRequest!;
@@ -42,7 +42,7 @@ export const sampleRowKeys: ClientImplMaker<
       log.info('sampleRowKeys response %o', response);
       return {
         status: {code: grpc.status.OK, details: []},
-        samples: response[0].map(sample => ({
+        samples: response[0].map((sample) => ({
           rowKey: sample.key,
           offsetBytes: sample.offset,
         })),

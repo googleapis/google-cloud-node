@@ -57,7 +57,7 @@ export async function parseMetadata(preparedStatement: PreparedStatement) {
   const values = metadata.columns.map((v, i) => {
     return [metadata.getFieldNameAtIndex(i), executeQueryTypeToPBType(v)];
   });
-  return values.map(v =>
+  return values.map((v) =>
     protos.google.bigtable.v2.ColumnMetadata.create({
       name: v[0] as string,
       type: v[1] as protos.google.bigtable.v2.IType,
@@ -190,7 +190,7 @@ export async function parseRows(
   rows: QueryResultRow[],
 ) {
   const metadata = await getMetadataFromPreparedStatement(preparedStatement);
-  const parsedRows = rows.map(row => {
+  const parsedRows = rows.map((row) => {
     const rowValues = metadata.columns.map((type, i) => {
       const value = row.get(i);
       return convertAnyValueToPb(value, type);

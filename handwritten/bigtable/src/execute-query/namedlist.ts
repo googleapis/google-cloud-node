@@ -67,8 +67,8 @@ export class NamedList<T> {
     tuples: [string | null, T][],
   ): R {
     return new type(
-      tuples.map(tuple => tuple[1]),
-      constructFieldMapping(tuples.map(tuple => tuple[0])),
+      tuples.map((tuple) => tuple[1]),
+      constructFieldMapping(tuples.map((tuple) => tuple[0])),
     );
   }
 

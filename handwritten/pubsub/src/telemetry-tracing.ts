@@ -130,8 +130,8 @@ export class PubsubMessageGetSet {
 
   keys(carrier: MessageWithAttributes): string[] {
     return Object.getOwnPropertyNames(carrier.attributes)
-      .filter(n => n.startsWith(PubsubMessageGetSet.keyPrefix))
-      .map(n => n.substring(PubsubMessageGetSet.keyPrefix.length));
+      .filter((n) => n.startsWith(PubsubMessageGetSet.keyPrefix))
+      .map((n) => n.substring(PubsubMessageGetSet.keyPrefix.length));
   }
 
   protected attributeName(key: string): string {
@@ -488,9 +488,9 @@ export class PubsubSpans {
       'create',
     );
     const links: Link[] = messages
-      .filter(m => m.parentSpan && isSampled(m.parentSpan))
-      .map(m => ({context: m.parentSpan!.spanContext()}) as Link)
-      .filter(l => l.context);
+      .filter((m) => m.parentSpan && isSampled(m.parentSpan))
+      .map((m) => ({context: m.parentSpan!.spanContext()}) as Link)
+      .filter((l) => l.context);
     const span: Span = getTracer().startSpan(
       `${topicName} send`,
       {
@@ -503,7 +503,7 @@ export class PubsubSpans {
     span?.setAttribute('messaging.batch.message_count', messages.length);
     if (span) {
       // Also attempt to link from message spans back to the publish RPC span.
-      messages.forEach(m => {
+      messages.forEach((m) => {
         if (m.parentSpan && isSampled(m.parentSpan)) {
           m.parentSpan.addLink({context: span.spanContext()});
         }
@@ -531,9 +531,9 @@ export class PubsubSpans {
       'receive',
     );
     const links: Link[] = messageSpans
-      .filter(m => m && isSampled(m))
-      .map(m => ({context: m!.spanContext()}) as Link)
-      .filter(l => l.context);
+      .filter((m) => m && isSampled(m))
+      .map((m) => ({context: m!.spanContext()}) as Link)
+      .filter((l) => l.context);
     const span: Span = getTracer().startSpan(
       `${subInfo.subId ?? subInfo.subName} ack`,
       {
@@ -548,7 +548,7 @@ export class PubsubSpans {
 
     if (span) {
       // Also attempt to link from the subscribe span(s) back to the publish RPC span.
-      messageSpans.forEach(m => {
+      messageSpans.forEach((m) => {
         if (m && isSampled(m)) {
           m.addLink({context: span.spanContext()});
         }
@@ -579,9 +579,9 @@ export class PubsubSpans {
       'receive',
     );
     const links: Link[] = messageSpans
-      .filter(m => m && isSampled(m))
-      .map(m => ({context: m!.spanContext()}) as Link)
-      .filter(l => l.context);
+      .filter((m) => m && isSampled(m))
+      .map((m) => ({context: m!.spanContext()}) as Link)
+      .filter((l) => l.context);
     const span: Span = getTracer().startSpan(
       `${subInfo.subId ?? subInfo.subName} ${type}`,
       {
@@ -596,7 +596,7 @@ export class PubsubSpans {
 
     if (span) {
       // Also attempt to link from the subscribe span(s) back to the publish RPC span.
-      messageSpans.forEach(m => {
+      messageSpans.forEach((m) => {
         if (m && isSampled(m)) {
           m.addLink({context: span.spanContext()});
         }
@@ -793,7 +793,7 @@ export function containsSpanContext(message: MessageWithAttributes): boolean {
   }
 
   const keys = Object.getOwnPropertyNames(message.attributes);
-  return !!keys.find(n => n === modernAttributeName);
+  return !!keys.find((n) => n === modernAttributeName);
 }
 
 /**

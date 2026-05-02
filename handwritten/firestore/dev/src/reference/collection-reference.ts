@@ -191,10 +191,10 @@ export class CollectionReference<
               api.IListDocumentsRequest,
               api.IDocument[]
             >('listDocuments', request, tag)
-            .then(documents => {
+            .then((documents) => {
               // Note that the backend already orders these documents by name,
               // so we do not need to manually sort them.
-              return documents.map(doc => {
+              return documents.map((doc) => {
                 const path = QualifiedResourcePath.fromSlashSeparatedString(
                   doc.name!,
                 );

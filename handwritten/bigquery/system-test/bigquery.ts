@@ -131,7 +131,7 @@ describe('BigQuery', () => {
     ]);
   });
 
-  it('should get a list of datasets', done => {
+  it('should get a list of datasets', (done) => {
     bigquery.getDatasets((err, datasets) => {
       assert(datasets!.length > 0);
       assert(datasets![0] instanceof Dataset);
@@ -139,7 +139,7 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should allow limiting API calls', done => {
+  it('should allow limiting API calls', (done) => {
     const maxApiCalls = 1;
     let numRequestsMade = 0;
     const bigquery = new BigQuery();
@@ -152,7 +152,7 @@ describe('BigQuery', () => {
       },
     });
 
-    bigquery.getDatasets({maxApiCalls}, err => {
+    bigquery.getDatasets({maxApiCalls}, (err) => {
       assert.ifError(err);
       assert.strictEqual(numRequestsMade, 1);
       done();
@@ -160,7 +160,7 @@ describe('BigQuery', () => {
   });
 
   it('should return a promise', () => {
-    return bigquery.getDatasets().then(data => {
+    return bigquery.getDatasets().then((data) => {
       const datasets = data[0];
       assert(datasets.length > 0);
       assert(datasets[0] instanceof Dataset);
@@ -198,13 +198,13 @@ describe('BigQuery', () => {
     assert(apiResponse);
   });
 
-  it('should list datasets as a stream', done => {
+  it('should list datasets as a stream', (done) => {
     let datasetEmitted = false;
 
     bigquery
       .getDatasetsStream()
       .on('error', done)
-      .on('data', dataset => {
+      .on('data', (dataset) => {
         datasetEmitted = dataset instanceof Dataset;
       })
       .on('end', () => {
@@ -213,7 +213,7 @@ describe('BigQuery', () => {
       });
   });
 
-  it('should run a query job, then get results', done => {
+  it('should run a query job, then get results', (done) => {
     bigquery.createQueryJob(query, (err, job) => {
       assert.ifError(err);
       assert(job instanceof Job);
@@ -232,28 +232,28 @@ describe('BigQuery', () => {
 
     return bigquery
       .createQueryJob(query)
-      .then(response => {
+      .then((response) => {
         job = response[0];
         return job.promise();
       })
       .then(() => {
         return job.getQueryResults();
       })
-      .then(response => {
+      .then((response) => {
         const rows = response[0];
         assert.strictEqual(rows!.length, 100);
         assert.strictEqual(typeof rows[0].url, 'string');
       });
   });
 
-  it('should get query results as a stream', done => {
+  it('should get query results as a stream', (done) => {
     bigquery.createQueryJob(query, (err, job) => {
       assert.ifError(err);
       const rowsEmitted = new Array<RowMetadata>();
       job!
         .getQueryResultsStream()
         .on('error', done)
-        .on('data', row => rowsEmitted.push(row))
+        .on('data', (row) => rowsEmitted.push(row))
         .on('end', () => {
           assert.strictEqual(rowsEmitted.length, 100);
           assert.strictEqual(typeof rowsEmitted[0].url, 'string');
@@ -262,7 +262,7 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should honor the job prefix option', done => {
+  it('should honor the job prefix option', (done) => {
     const options = {
       query,
       jobPrefix: 'hi-im-a-prefix',
@@ -281,7 +281,7 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should honor the job id option', done => {
+  it('should honor the job id option', (done) => {
     const jobId = `hi-im-a-job-id-${randomUUID()}`;
     const options = {query, jobId};
 
@@ -293,7 +293,7 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should honor the dryRun option', done => {
+  it('should honor the dryRun option', (done) => {
     const options = {
       query,
       dryRun: true,
@@ -306,7 +306,7 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should honor the labels option', done => {
+  it('should honor the labels option', (done) => {
     const options = {
       query,
       labels: {foo: 'bar'},
@@ -319,12 +319,12 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should query as a stream', done => {
+  it('should query as a stream', (done) => {
     let rowsEmitted = 0;
 
     bigquery
       .createQueryStream(query)
-      .on('data', row => {
+      .on('data', (row) => {
         rowsEmitted++;
         assert.strictEqual(typeof row.url, 'string');
       })
@@ -335,7 +335,7 @@ describe('BigQuery', () => {
       });
   });
 
-  it('should query', done => {
+  it('should query', (done) => {
     bigquery.query(query, (err, rows) => {
       assert.ifError(err);
       assert.strictEqual(rows!.length, 100);
@@ -435,7 +435,7 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should allow querying in series', done => {
+  it('should allow querying in series', (done) => {
     bigquery.query(
       query,
       {
@@ -450,7 +450,7 @@ describe('BigQuery', () => {
     );
   });
 
-  it('should accept the dryRun option', done => {
+  it('should accept the dryRun option', (done) => {
     bigquery.query(
       {
         query,
@@ -466,7 +466,7 @@ describe('BigQuery', () => {
     );
   });
 
-  it('should get a list of jobs', done => {
+  it('should get a list of jobs', (done) => {
     bigquery.getJobs({minCreationTime}, (err, jobs) => {
       assert.ifError(err);
       assert(jobs![0] instanceof Job);
@@ -474,13 +474,13 @@ describe('BigQuery', () => {
     });
   });
 
-  it('should list jobs as a stream', done => {
+  it('should list jobs as a stream', (done) => {
     let jobEmitted = false;
 
     bigquery
       .getJobsStream({minCreationTime})
       .on('error', done)
-      .on('data', job => {
+      .on('data', (job) => {
         jobEmitted = job instanceof Job;
       })
       .on('end', () => {
@@ -489,13 +489,13 @@ describe('BigQuery', () => {
       });
   });
 
-  it('should cancel a job', done => {
+  it('should cancel a job', (done) => {
     const query = 'SELECT url FROM `publicdata.samples.github_nested` LIMIT 10';
 
     bigquery.createQueryJob(query, (err, job) => {
       assert.ifError(err);
 
-      job!.cancel(err => {
+      job!.cancel((err) => {
         assert.ifError(err);
 
         job!.on('error', done).on('complete', () => {
@@ -537,7 +537,7 @@ describe('BigQuery', () => {
       );
     });
 
-    it('should get tables', done => {
+    it('should get tables', (done) => {
       dataset.getTables((err, tables) => {
         assert.ifError(err);
         assert(tables![0] instanceof Table);
@@ -545,13 +545,13 @@ describe('BigQuery', () => {
       });
     });
 
-    it('should get tables as a stream', done => {
+    it('should get tables as a stream', (done) => {
       let tableEmitted = false;
 
       dataset
         .getTablesStream()
         .on('error', done)
-        .on('data', table => (tableEmitted = table instanceof Table))
+        .on('data', (table) => (tableEmitted = table instanceof Table))
         .on('end', () => {
           assert.strictEqual(tableEmitted, true);
           done();
@@ -636,27 +636,27 @@ describe('BigQuery', () => {
         let job: Job;
 
         before(() => {
-          return dataset.createQueryJob(QUERY).then(data => {
+          return dataset.createQueryJob(QUERY).then((data) => {
             job = data[0];
           });
         });
 
-        it('should fail if the job location is incorrect', done => {
+        it('should fail if the job location is incorrect', (done) => {
           const badJob = bigquery.job(job.id!, {location: 'US'});
 
-          badJob.cancel(err => {
+          badJob.cancel((err) => {
             assert.strictEqual((err as ApiError).code, 404);
             done();
           });
         });
 
-        it('should cancel a job', done => {
+        it('should cancel a job', (done) => {
           job.cancel(done);
         });
       });
 
       describe('job.getQueryResults', () => {
-        it('should fail if the job location is incorrect', done => {
+        it('should fail if the job location is incorrect', (done) => {
           const badDataset = bigquery.dataset(dataset.id!, {location: 'US'});
 
           badDataset.createQueryJob(
@@ -693,17 +693,17 @@ describe('BigQuery', () => {
         describe('copy', () => {
           const otherTable = dataset.table(generateName('table'));
 
-          it('should fail if the job location is incorrect', done => {
+          it('should fail if the job location is incorrect', (done) => {
             const badTable = dataset.table(table.id!, {location: 'US'});
 
-            badTable.createCopyJob(otherTable, err => {
+            badTable.createCopyJob(otherTable, (err) => {
               assert.notEqual(err, null); // TODO(alvarowolfx): check for 404 ?
               done();
             });
           });
 
           it('should copy the table', () => {
-            return table.createCopyJob(otherTable).then(data => {
+            return table.createCopyJob(otherTable).then((data) => {
               const job = data[0];
 
               assert.strictEqual(job.location, LOCATION);
@@ -720,17 +720,17 @@ describe('BigQuery', () => {
             return bucket.create({location: LOCATION});
           });
 
-          it('should fail if the job location is incorrect', done => {
+          it('should fail if the job location is incorrect', (done) => {
             const badTable = dataset.table(table.id!, {location: 'US'});
 
-            badTable.createExtractJob(extractFile, err => {
+            badTable.createExtractJob(extractFile, (err) => {
               assert.strictEqual((err as ApiError).code, 404);
               done();
             });
           });
 
           it('should extract a table', () => {
-            return table.createExtractJob(extractFile).then(data => {
+            return table.createExtractJob(extractFile).then((data) => {
               const job = data[0];
 
               assert.strictEqual(job.location, LOCATION);
@@ -842,7 +842,7 @@ describe('BigQuery', () => {
 
     after(async () => {
       const [routines] = await dataset.getRoutines();
-      return Promise.all(routines.map(routine => routine.delete()));
+      return Promise.all(routines.map((routine) => routine.delete()));
     });
 
     it('should create a routine via insert', () => {
@@ -869,13 +869,13 @@ describe('BigQuery', () => {
       assert.ok(routines[0] instanceof Routine);
     });
 
-    it('should get the routines as a stream', done => {
+    it('should get the routines as a stream', (done) => {
       const routines: Routine[] = [];
 
       dataset
         .getRoutinesStream()
         .on('error', done)
-        .on('data', routine => {
+        .on('data', (routine) => {
           routines.push(routine);
         })
         .on('end', () => {
@@ -909,7 +909,7 @@ describe('BigQuery', () => {
       assert.deepStrictEqual(table.metadata.schema.fields, SCHEMA);
     });
 
-    it('should get the rows in a table', done => {
+    it('should get the rows in a table', (done) => {
       table.getRows((err, rows) => {
         assert.ifError(err);
         assert(Array.isArray(rows));
@@ -929,7 +929,7 @@ describe('BigQuery', () => {
       assert.equal(rows.length, 0);
     });
 
-    it('should get the rows in a table via stream', done => {
+    it('should get the rows in a table via stream', (done) => {
       table
         .createReadStream()
         .on('error', done)
@@ -937,13 +937,13 @@ describe('BigQuery', () => {
         .on('end', done);
     });
 
-    it('should insert rows via stream', done => {
+    it('should insert rows via stream', (done) => {
       let job: Job;
 
       fs.createReadStream(TEST_DATA_JSON_PATH)
         .pipe(table.createWriteStream('json'))
         .on('error', done)
-        .on('complete', _job => {
+        .on('complete', (_job) => {
           job = _job;
         })
         .on('finish', () => {
@@ -959,7 +959,7 @@ describe('BigQuery', () => {
       });
     });
 
-    it('should insert rows via insert stream', done => {
+    it('should insert rows via insert stream', (done) => {
       const stream = new Readable({objectMode: true});
       stream._read = () => {};
 
@@ -977,7 +977,7 @@ describe('BigQuery', () => {
         });
     });
 
-    it('should return errors from insert stream', done => {
+    it('should return errors from insert stream', (done) => {
       const stream = new Readable({objectMode: true});
       stream._read = () => {};
 
@@ -1076,9 +1076,9 @@ describe('BigQuery', () => {
       const SCHEMA = 'tableId:integer';
 
       before(async () => {
-        TABLES.forEach(t => (t.table = dataset.table(generateName('table'))));
+        TABLES.forEach((t) => (t.table = dataset.table(generateName('table'))));
         await Promise.all(
-          TABLES.map(tableItem => {
+          TABLES.map((tableItem) => {
             const tableInstance = tableItem.table;
             return tableInstance!.create({schema: SCHEMA});
           }),
@@ -1087,7 +1087,7 @@ describe('BigQuery', () => {
         await table1Instance.insert(TABLES[0].data);
       });
 
-      it('should start copying data from current table', done => {
+      it('should start copying data from current table', (done) => {
         const table1 = TABLES[0];
         const table1Instance = table1.table;
 
@@ -1106,7 +1106,7 @@ describe('BigQuery', () => {
         });
       });
 
-      it('should copy data from current table', done => {
+      it('should copy data from current table', (done) => {
         const table1 = TABLES[0];
         const table1Instance = table1.table;
 
@@ -1120,7 +1120,7 @@ describe('BigQuery', () => {
         });
       });
 
-      it('should start copying data from another table', done => {
+      it('should start copying data from another table', (done) => {
         const table1 = TABLES[0];
         const table1Instance = table1.table;
 
@@ -1139,7 +1139,7 @@ describe('BigQuery', () => {
         });
       });
 
-      it('should copy data from another table', done => {
+      it('should copy data from another table', (done) => {
         const table1 = TABLES[0];
         const table1Instance = table1.table;
 
@@ -1157,18 +1157,18 @@ describe('BigQuery', () => {
     describe('loading & extracting', () => {
       const file = bucket.file('kitten-test-data-backup.json');
 
-      before(done => {
+      before((done) => {
         fs.createReadStream(TEST_DATA_JSON_PATH)
           .pipe(file.createWriteStream({}))
           .on('error', done)
           .on('finish', done);
       });
 
-      after(done => {
+      after((done) => {
         file.delete(done);
       });
 
-      it('should start to load data from a storage file', done => {
+      it('should start to load data from a storage file', (done) => {
         table.createLoadJob(file, (err, job) => {
           assert.ifError(err);
           job!.on('error', done).on('complete', () => {
@@ -1177,7 +1177,7 @@ describe('BigQuery', () => {
         });
       });
 
-      it('should load data from a storage file', done => {
+      it('should load data from a storage file', (done) => {
         table.load(file, (err, resp) => {
           assert.ifError(err);
           assert.strictEqual(resp!.status!.state, 'DONE');
@@ -1186,13 +1186,13 @@ describe('BigQuery', () => {
       });
 
       it('should load data from a file via promises', () => {
-        return table.load(file).then(results => {
+        return table.load(file).then((results) => {
           const metadata = results[0];
           assert.strictEqual(metadata!.status!.state, 'DONE');
         });
       });
 
-      it('should return partial errors', done => {
+      it('should return partial errors', (done) => {
         const data = {
           name: 'dave',
         };
@@ -1201,7 +1201,7 @@ describe('BigQuery', () => {
           name: true,
         };
 
-        table.insert([data, improperData], e => {
+        table.insert([data, improperData], (e) => {
           const err = e as {} as GoogleErrorBody;
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           assert.strictEqual((err as any).name, 'PartialFailureError');
@@ -1246,14 +1246,14 @@ describe('BigQuery', () => {
           .then(() => {
             // getting rows immediately after insert
             // results in an empty array
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
               setTimeout(resolve, 2500);
             });
           })
           .then(() => {
             return table.getRows();
           })
-          .then(data => {
+          .then((data) => {
             const rows = data[0];
 
             assert.strictEqual(rows!.length, 1);
@@ -1263,7 +1263,7 @@ describe('BigQuery', () => {
 
       describe('SQL parameters', () => {
         describe('positional', () => {
-          it('should work with strings', done => {
+          it('should work with strings', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1282,7 +1282,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with ints', done => {
+          it('should work with ints', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1301,7 +1301,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with floats', done => {
+          it('should work with floats', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1320,7 +1320,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with numerics', done => {
+          it('should work with numerics', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1338,7 +1338,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with booleans', done => {
+          it('should work with booleans', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1357,7 +1357,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with arrays', done => {
+          it('should work with arrays', (done) => {
             bigquery.query(
               {
                 query: 'SELECT * FROM UNNEST (?)',
@@ -1380,7 +1380,7 @@ describe('BigQuery', () => {
             assert.strictEqual(rows.length, 0);
           });
 
-          it('should work with structs', done => {
+          it('should work with structs', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? obj',
@@ -1415,7 +1415,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with TIMESTAMP types', done => {
+          it('should work with TIMESTAMP types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? timestamp',
@@ -1429,7 +1429,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with DATE types', done => {
+          it('should work with DATE types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? date',
@@ -1443,7 +1443,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with DATETIME types', done => {
+          it('should work with DATETIME types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? datetime',
@@ -1457,7 +1457,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with TIME types', done => {
+          it('should work with TIME types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? time',
@@ -1471,7 +1471,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with GEOGRAPHY types', done => {
+          it('should work with GEOGRAPHY types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? geography',
@@ -1485,7 +1485,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with RANGE types', done => {
+          it('should work with RANGE types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT ? r',
@@ -1509,7 +1509,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with multiple types', done => {
+          it('should work with multiple types', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1562,7 +1562,7 @@ describe('BigQuery', () => {
               },
             ];
 
-            testCases.forEach(testCase => {
+            testCases.forEach((testCase) => {
               it(`should handle ${testCase.name}`, async () => {
                 if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
                   // These tests are only important when the high precision
@@ -1694,7 +1694,7 @@ describe('BigQuery', () => {
         });
 
         describe('named', () => {
-          it('should work with strings', done => {
+          it('should work with strings', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1717,7 +1717,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with ints', done => {
+          it('should work with ints', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1738,7 +1738,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with floats', done => {
+          it('should work with floats', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1759,7 +1759,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with numerics', done => {
+          it('should work with numerics', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1779,7 +1779,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with booleans', done => {
+          it('should work with booleans', (done) => {
             bigquery.query(
               {
                 query: [
@@ -1800,7 +1800,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with arrays', done => {
+          it('should work with arrays', (done) => {
             bigquery.query(
               {
                 query: 'SELECT * FROM UNNEST (@nums)',
@@ -1827,7 +1827,7 @@ describe('BigQuery', () => {
             assert.strictEqual(rows.length, 0);
           });
 
-          it('should work with structs', done => {
+          it('should work with structs', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @obj obj',
@@ -1862,7 +1862,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with TIMESTAMP types', done => {
+          it('should work with TIMESTAMP types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @time timestamp',
@@ -1878,7 +1878,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with DATE types', done => {
+          it('should work with DATE types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @date date',
@@ -1894,7 +1894,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with DATETIME types', done => {
+          it('should work with DATETIME types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @datetime datetime',
@@ -1910,7 +1910,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with TIME types', done => {
+          it('should work with TIME types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @time time',
@@ -1926,7 +1926,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with GEOGRAPHY types', done => {
+          it('should work with GEOGRAPHY types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @place geography',
@@ -1942,7 +1942,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with RANGE types', done => {
+          it('should work with RANGE types', (done) => {
             bigquery.query(
               {
                 query: 'SELECT @r r',
@@ -1961,7 +1961,7 @@ describe('BigQuery', () => {
             );
           });
 
-          it('should work with multiple types', done => {
+          it('should work with multiple types', (done) => {
             bigquery.query(
               {
                 query: [
@@ -2019,7 +2019,7 @@ describe('BigQuery', () => {
               },
             ];
 
-            testCases.forEach(testCase => {
+            testCases.forEach((testCase) => {
               it(`should handle ${testCase.name}`, async () => {
                 if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
                   // These tests are only important when the high precision
@@ -2153,7 +2153,7 @@ describe('BigQuery', () => {
         });
       });
 
-      it('should start extracting data to a storage file', done => {
+      it('should start extracting data to a storage file', (done) => {
         const file = bucket.file('kitten-test-data-backup.json');
         table.createExtractJob(file, (err, job) => {
           assert.ifError(err);
@@ -2163,7 +2163,7 @@ describe('BigQuery', () => {
         });
       });
 
-      it('should extract data to a storage file', done => {
+      it('should extract data to a storage file', (done) => {
         const file = bucket.file('kitten-test-data-backup.json');
         table.extract(file, (err, resp) => {
           assert.ifError(err);
@@ -2302,14 +2302,14 @@ describe('BigQuery', () => {
     before(async () => {
       await table.create({schema});
       await table.insert(testData);
-      await new Promise(r => setTimeout(r, 15000));
+      await new Promise((r) => setTimeout(r, 15000));
     });
 
-    after(done => {
+    after((done) => {
       table.delete(done);
     });
 
-    it('should convert rows back correctly', done => {
+    it('should convert rows back correctly', (done) => {
       table.getRows((err, rows) => {
         assert.ifError(err);
 
@@ -2318,7 +2318,7 @@ describe('BigQuery', () => {
           return;
         }
 
-        rows!.forEach(row => {
+        rows!.forEach((row) => {
           const expectedRow = (EXPECTED_ROWS as {[index: string]: {}})[
             row.Name
           ];
@@ -2352,7 +2352,7 @@ describe('BigQuery', () => {
     });
 
     const deleteBucketPromises = buckets
-      .filter(bucket => {
+      .filter((bucket) => {
         try {
           if (typeof bucket.metadata.timeCreated === 'string') {
             isResourceStale(bucket.metadata.timeCreated);
@@ -2361,9 +2361,9 @@ describe('BigQuery', () => {
           throw Error('timeCreated on type BucketMetadata cannot be undefined');
         }
       })
-      .map(async b => {
+      .map(async (b) => {
         const [files] = await b.getFiles();
-        await Promise.all(files.map(f => f.delete()));
+        await Promise.all(files.map((f) => f.delete()));
         await b.delete();
       });
 

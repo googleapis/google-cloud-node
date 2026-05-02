@@ -7,14 +7,10 @@
         "docRefPath": "projects/projectID/databases/(default)/documents/C/d",
         "fieldPaths": [
           {
-            "field": [
-              "a"
-            ]
+            "field": ["a"]
           }
         ],
-        "jsonValues": [
-          "\"ServerTimestamp\""
-        ],
+        "jsonValues": ["\"ServerTimestamp\""],
         "request": {
           "database": "projects/projectID/databases/(default)",
           "writes": [

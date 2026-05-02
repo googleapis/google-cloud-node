@@ -29,7 +29,7 @@ function clearPackageCache() {
   const packageJsonPath = require.resolve('../../package.json');
   const packageDir = path.dirname(packageJsonPath);
 
-  Object.keys(require.cache).forEach(key => {
+  Object.keys(require.cache).forEach((key) => {
     if (key.startsWith(packageDir) && !key.includes('node_modules')) {
       delete require.cache[key];
     }

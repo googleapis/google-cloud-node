@@ -9,9 +9,7 @@
           {
             "orderBy": {
               "path": {
-                "field": [
-                  "a"
-                ]
+                "field": ["a"]
               },
               "direction": "asc"
             }
@@ -19,9 +17,7 @@
           {
             "orderBy": {
               "path": {
-                "field": [
-                  "b"
-                ]
+                "field": ["b"]
               },
               "direction": "desc"
             }

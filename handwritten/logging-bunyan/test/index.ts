@@ -71,7 +71,7 @@ describe('logging-bunyan', () => {
   FakeWritable.prototype.write = (
     chunk: {},
     encoding: string,
-    callback: Function
+    callback: Function,
   ) => {
     // Function cannot pass as type in setImmediate.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -158,7 +158,7 @@ describe('logging-bunyan', () => {
       assert.strictEqual(fakeLoggingOptions_, OPTIONS);
       assert.strictEqual(
         fakeLogOptions_.jsonFieldsToTruncate,
-        OPTIONS.jsonFieldsToTruncate
+        OPTIONS.jsonFieldsToTruncate,
       );
     });
 
@@ -180,7 +180,7 @@ describe('logging-bunyan', () => {
       new loggingBunyanLib.LoggingBunyan();
     });
 
-    it('should throw if a serviceContext is specified without a service', done => {
+    it('should throw if a serviceContext is specified without a service', (done) => {
       try {
         // tslint:disable-next-line:no-unused-expression
         new loggingBunyanLib.LoggingBunyan({serviceContext: {}});
@@ -188,7 +188,7 @@ describe('logging-bunyan', () => {
         assert.strictEqual(
           (err as Error).message,
           "If 'serviceContext' is specified then " +
-            "'serviceContext.service' is required."
+            "'serviceContext.service' is required.",
         );
         done();
       }
@@ -200,7 +200,7 @@ describe('logging-bunyan', () => {
       new loggingBunyanLib.LoggingBunyan({serviceContext});
     });
 
-    it('should attempt to discover service context if not passed', done => {
+    it('should attempt to discover service context if not passed', (done) => {
       const serviceContext = {service: 'foo'};
       fakeDetectedServiceContext = serviceContext;
       const lb = new loggingBunyanLib.LoggingBunyan();
@@ -211,7 +211,7 @@ describe('logging-bunyan', () => {
       }, 10);
     });
 
-    it('should handle errors in discovering service context', done => {
+    it('should handle errors in discovering service context', (done) => {
       fakeDetectedServiceContext = null;
       const lb = new loggingBunyanLib.LoggingBunyan();
       assert.strictEqual(lb.serviceContext, undefined);
@@ -265,14 +265,14 @@ describe('logging-bunyan', () => {
         assert.strictEqual(
           true,
           LoggingBunyan.properLabels(labels),
-          `expected ${inspect(labels)} to be proper`
+          `expected ${inspect(labels)} to be proper`,
         );
       }
       for (const labels of improperLabels) {
         assert.strictEqual(
           false,
           LoggingBunyan.properLabels(labels),
-          `expected ${inspect(labels)} to be improper`
+          `expected ${inspect(labels)} to be improper`,
         );
       }
     });
@@ -285,10 +285,10 @@ describe('logging-bunyan', () => {
       }, new RegExp('@google-cloud/logging-bunyan only works as a raw bunyan stream type.'));
     });
 
-    it('should properly create an entry', done => {
+    it('should properly create an entry', (done) => {
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: types.StackdriverEntryMetadata
+        record: types.StackdriverEntryMetadata,
       ) => {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingBunyan.resource,
@@ -302,13 +302,13 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(RECORD);
     });
 
-    it('should rename the msg property to message', done => {
+    it('should rename the msg property to message', (done) => {
       const recordWithMsg = Object.assign({msg: 'msg'}, RECORD);
       const recordWithMessage = Object.assign({message: 'msg'}, RECORD);
 
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: types.StackdriverEntryMetadata
+        record: types.StackdriverEntryMetadata,
       ) => {
         assert.deepStrictEqual(record, recordWithMessage);
         done();
@@ -317,7 +317,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(recordWithMsg);
     });
 
-    it('should inject the error stack as the message', done => {
+    it('should inject the error stack as the message', (done) => {
       const record = Object.assign(
         {
           msg: 'msg',
@@ -325,7 +325,7 @@ describe('logging-bunyan', () => {
             stack: 'the stack',
           },
         },
-        RECORD
+        RECORD,
       );
       const expectedRecord = Object.assign(
         {
@@ -336,12 +336,12 @@ describe('logging-bunyan', () => {
           message: 'the stack',
           serviceContext: OPTIONS.serviceContext,
         },
-        RECORD
+        RECORD,
       );
 
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record_: types.StackdriverEntryMetadata
+        record_: types.StackdriverEntryMetadata,
       ) => {
         assert.deepStrictEqual(record_, expectedRecord);
         done();
@@ -350,7 +350,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(record);
     });
 
-    it('should leave message property intact when present', done => {
+    it('should leave message property intact when present', (done) => {
       const record = Object.assign(
         {
           msg: 'msg',
@@ -359,12 +359,12 @@ describe('logging-bunyan', () => {
             stack: 'the stack',
           },
         },
-        RECORD
+        RECORD,
       );
 
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record_: types.StackdriverEntryMetadata
+        record_: types.StackdriverEntryMetadata,
       ) => {
         assert.deepStrictEqual(record_, record);
         done();
@@ -373,7 +373,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(record);
     });
 
-    it('should promote the httpRequest property to metadata', done => {
+    it('should promote the httpRequest property to metadata', (done) => {
       const HTTP_REQUEST = {
         statusCode: 418,
       };
@@ -381,12 +381,12 @@ describe('logging-bunyan', () => {
         {
           httpRequest: HTTP_REQUEST,
         },
-        RECORD
+        RECORD,
       );
 
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: string | types.BunyanLogRecord
+        record: string | types.BunyanLogRecord,
       ) => {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingBunyan.resource,
@@ -401,12 +401,12 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(recordWithRequest);
     });
 
-    it('should promote properly formatted labels to metadata', done => {
+    it('should promote properly formatted labels to metadata', (done) => {
       const labels = {key: 'value', 0: 'value2'};
       const recordWithLabels = {...RECORD, labels};
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: string | types.BunyanLogRecord
+        record: string | types.BunyanLogRecord,
       ) => {
         assert.deepStrictEqual(entryMetadata.labels, labels);
         assert.deepStrictEqual(record, RECORD);
@@ -415,12 +415,12 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(recordWithLabels);
     });
 
-    it('should not promote ill-formatted labels to metadata', done => {
+    it('should not promote ill-formatted labels to metadata', (done) => {
       const labels = {key: -1}; // values must be strings.
       const recordWithLabels = {...RECORD, labels};
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: string | types.BunyanLogRecord
+        record: string | types.BunyanLogRecord,
       ) => {
         assert(entryMetadata.labels === undefined);
         assert.deepStrictEqual(record, recordWithLabels);
@@ -429,7 +429,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(recordWithLabels);
     });
 
-    it('should promote prefixed trace properties to metadata', done => {
+    it('should promote prefixed trace properties to metadata', (done) => {
       const recordWithTrace = Object.assign({}, RECORD);
       // recordWithTrace does not have index signature.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -441,7 +441,7 @@ describe('logging-bunyan', () => {
 
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: string | types.BunyanLogRecord
+        record: string | types.BunyanLogRecord,
       ) => {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingBunyan.resource,
@@ -458,14 +458,14 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(recordWithTrace);
     });
 
-    it('should promote a `false` traceSampled property to metadata', done => {
+    it('should promote a `false` traceSampled property to metadata', (done) => {
       const recordWithTrace = Object.assign({}, RECORD);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_SAMPLED_KEY] = false;
 
       loggingBunyan.cloudLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
-        record: string | types.BunyanLogRecord
+        record: string | types.BunyanLogRecord,
       ) => {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingBunyan.resource,
@@ -490,7 +490,7 @@ describe('logging-bunyan', () => {
       global._google_trace_agent = oldTraceAgent;
     });
 
-    it('should not set trace property if trace unavailable', done => {
+    it('should not set trace property if trace unavailable', (done) => {
       global._google_trace_agent = undefined;
 
       FakeWritable.prototype.write = function (
@@ -498,7 +498,7 @@ describe('logging-bunyan', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         record: any,
         encoding: string,
-        callback: Function
+        callback: Function,
       ) {
         assert.deepStrictEqual(record, RECORD);
         assert.strictEqual(encoding, 'encoding');
@@ -510,7 +510,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.write(RECORD, 'encoding', assert.ifError);
     });
 
-    it('should set prefixed trace property if trace available', done => {
+    it('should set prefixed trace property if trace available', (done) => {
       global._google_trace_agent = {
         getCurrentContextId: () => {
           return 'trace1';
@@ -531,7 +531,7 @@ describe('logging-bunyan', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         record: any,
         encoding: string,
-        callback: Function
+        callback: Function,
       ) {
         // Check that trace field added to record before calling Writable.write
         assert.deepStrictEqual(record, recordWithTrace);
@@ -548,7 +548,7 @@ describe('logging-bunyan', () => {
       loggingBunyan.write(recordWithoutTrace, 'encoding', assert.ifError);
     });
 
-    it('should leave prefixed trace property as is if set', done => {
+    it('should leave prefixed trace property as is if set', (done) => {
       const oldTraceAgent = global._google_trace_agent;
       global._google_trace_agent = {
         getCurrentContextId: () => {
@@ -569,7 +569,7 @@ describe('logging-bunyan', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         record: any,
         encoding: string,
-        callback: Function
+        callback: Function,
       ) {
         assert.deepStrictEqual(record, recordWithTraceAlreadySet);
         assert.strictEqual(encoding, '');
@@ -590,7 +590,7 @@ describe('logging-bunyan', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       record: any,
       encoding: string,
-      callback: Function
+      callback: Function,
     ) {
       assert.deepStrictEqual(record, RECORD);
       assert.strictEqual(encoding, '');
@@ -640,7 +640,7 @@ describe('logging-bunyan', () => {
       fakeLogInstance.write = () => {};
     });
 
-    it('should format the record', done => {
+    it('should format the record', (done) => {
       loggingBunyan.formatEntry_ = (record: string | types.BunyanLogRecord) => {
         assert.strictEqual(record, RECORD);
         done();
@@ -649,7 +649,7 @@ describe('logging-bunyan', () => {
       loggingBunyan._write(RECORD, '', assert.ifError);
     });
 
-    it('should write the record to the log instance', done => {
+    it('should write the record to the log instance', (done) => {
       const entry = {};
 
       loggingBunyan.cloudLog.entry = () => {
@@ -667,7 +667,7 @@ describe('logging-bunyan', () => {
       loggingBunyan._write(RECORD, '', done);
     });
 
-    it('should write the record and call default callback', done => {
+    it('should write the record and call default callback', (done) => {
       let isCallbackCalled = false;
       loggingBunyan.cloudLog.entry = () => {
         return {};
@@ -694,7 +694,7 @@ describe('logging-bunyan', () => {
       fakeLogInstance.write = () => {};
     });
 
-    it('should format the records', done => {
+    it('should format the records', (done) => {
       let numFormatted = 0;
       loggingBunyan.formatEntry_ = (record: string | types.BunyanLogRecord) => {
         assert.strictEqual(record, RECORD);
@@ -706,7 +706,7 @@ describe('logging-bunyan', () => {
       loggingBunyan._writev(RECORDS, assert.ifError);
     });
 
-    it('should write the records to the log instance', done => {
+    it('should write the records to the log instance', (done) => {
       const entry = {};
 
       loggingBunyan.cloudLog.entry = () => {
@@ -737,7 +737,7 @@ describe('logging-bunyan', () => {
       ]);
       assert.deepStrictEqual(
         loggingBunyanLib.BUNYAN_TO_STACKDRIVER,
-        bunyanToStackdriver
+        bunyanToStackdriver,
       );
     });
   });

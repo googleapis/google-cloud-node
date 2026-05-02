@@ -85,7 +85,7 @@ export class QueryPartition<
    */
   get startAt(): unknown[] | undefined {
     if (this._startAt && !this._memoizedStartAt) {
-      this._memoizedStartAt = this._startAt.map(v =>
+      this._memoizedStartAt = this._startAt.map((v) =>
         this._serializer.decodeValue(v),
       );
     }
@@ -121,7 +121,7 @@ export class QueryPartition<
    */
   get endBefore(): unknown[] | undefined {
     if (this._endBefore && !this._memoizedEndBefore) {
-      this._memoizedEndBefore = this._endBefore.map(v =>
+      this._memoizedEndBefore = this._endBefore.map((v) =>
         this._serializer.decodeValue(v),
       );
     }

@@ -101,7 +101,7 @@ const watchQuery = () => {
 const createInstance = (overrides: ApiOverride) => {
   return createInstanceHelper(overrides, {
     projectId: CONFORMANCE_TEST_PROJECT_ID,
-  }).then(firestoreClient => {
+  }).then((firestoreClient) => {
     firestore = firestoreClient;
   });
 };
@@ -259,7 +259,7 @@ const convertProto = {
 function commitHandler(
   spec: ConformanceProto,
 ): UnaryMethod<api.ICommitRequest, api.ICommitResponse> {
-  return request => {
+  return (request) => {
     const actualCommit = COMMIT_REQUEST_TYPE.fromObject(request);
     const expectedCommit = COMMIT_REQUEST_TYPE.fromObject(spec.request);
     expect(actualCommit).to.deep.equal(expectedCommit);
@@ -438,7 +438,7 @@ function runTest(spec: ConformanceProto) {
     return createInstance(overrides).then(() => {
       return new Promise<void>((resolve, reject) => {
         const unlisten = watchQuery().onSnapshot(
-          actualSnap => {
+          (actualSnap) => {
             const expectedSnapshot = expectedSnapshots.shift();
             if (expectedSnapshot) {
               if (
@@ -457,7 +457,7 @@ function runTest(spec: ConformanceProto) {
               reject(new Error('Received unexpected snapshot'));
             }
           },
-          err => {
+          (err) => {
             expect(expectedSnapshots).to.have.length(0);
             unlisten();
             reject(err);
@@ -511,7 +511,7 @@ function runTest(spec: ConformanceProto) {
     () => {
       expect(testSpec.isError || false).to.be.false;
     },
-    err => {
+    (err) => {
       if (!testSpec.isError) {
         throw err;
       }
@@ -602,12 +602,12 @@ describe('Conformance Tests', () => {
       testDataJson = testDataJson.concat(testFile);
     }
 
-    return testDataJson.map(testFile => testFile.tests[0]);
+    return testDataJson.map((testFile) => testFile.tests[0]);
   };
 
   for (const testCase of loadTestCases()) {
-    const isIgnored = ignoredRe.find(re => re.test(testCase.description));
-    const isExclusive = exclusiveRe.find(re => re.test(testCase.description));
+    const isIgnored = ignoredRe.find((re) => re.test(testCase.description));
+    const isExclusive = exclusiveRe.find((re) => re.test(testCase.description));
 
     if (isIgnored || (exclusiveRe.length > 0 && !isExclusive)) {
       xit(`${testCase.description}`, () => {});

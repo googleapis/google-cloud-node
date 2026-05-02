@@ -74,7 +74,7 @@ describe('utils', () => {
       const fakeTimers = sandbox.useFakeTimers(0);
       let resolve = () => {};
       const testString = 'fooby';
-      const testPromise = new Promise<string>(r => {
+      const testPromise = new Promise<string>((r) => {
         resolve = () => r(testString);
       });
       fakeTimers.setTimeout(resolve, 500);
@@ -121,7 +121,7 @@ describe('utils', () => {
       const fakeTimers = sandbox.useFakeTimers(0);
       let resolve = () => {};
       const testString = 'fooby';
-      const testPromise = new Promise<string>(r => {
+      const testPromise = new Promise<string>((r) => {
         resolve = () => r(testString);
       });
       fakeTimers.setTimeout(resolve, 1500);

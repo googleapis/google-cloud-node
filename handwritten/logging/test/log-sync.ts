@@ -102,7 +102,7 @@ describe('LogSync', () => {
     });
 
     afterEach(() => {
-      fs.unlink(TEST_FILE, e => {
+      fs.unlink(TEST_FILE, (e) => {
         console.log(e);
       });
     });
@@ -116,7 +116,7 @@ describe('LogSync', () => {
       return new LogSync(LOGGING, LOG_NAME, buffer);
     }
 
-    it('should use projectId from Logging for log name', done => {
+    it('should use projectId from Logging for log name', (done) => {
       log.write(ENTRIES);
       buffer.end(() => {
         const result = JSON.parse(fs.readFileSync(TEST_FILE, 'utf8'));
@@ -128,7 +128,7 @@ describe('LogSync', () => {
       });
     });
 
-    it('should detect and transform resource from WriteOptions', done => {
+    it('should detect and transform resource from WriteOptions', (done) => {
       const VALUE = 'camel-case-key-val';
       const CUSTOM_RESOURCE = {
         labels: {
@@ -146,7 +146,7 @@ describe('LogSync', () => {
       });
     });
 
-    it('should detect resource from LogEntry next', done => {
+    it('should detect resource from LogEntry next', (done) => {
       log.write(new Entry({resource: {type: 'sometype'}}));
       buffer.end(() => {
         const result = JSON.parse(fs.readFileSync(TEST_FILE, 'utf8'));
@@ -155,7 +155,7 @@ describe('LogSync', () => {
       });
     });
 
-    it('should detect resource from Logging last', done => {
+    it('should detect resource from Logging last', (done) => {
       LOGGING.detectedResource = {type: 'fake resource'};
       log.write(ENTRIES);
       buffer.end(() => {
@@ -165,7 +165,7 @@ describe('LogSync', () => {
       });
     });
 
-    it('should not require options', done => {
+    it('should not require options', (done) => {
       log.write(ENTRY);
       buffer.end(() => {
         const result = fs.readFileSync(TEST_FILE, 'utf8');
@@ -174,7 +174,7 @@ describe('LogSync', () => {
       });
     });
 
-    it('should clobber with labels from WriteOptions', done => {
+    it('should clobber with labels from WriteOptions', (done) => {
       log.write(ENTRY, {labels: {foo: 'bar'}});
       buffer.end(() => {
         const result = JSON.parse(fs.readFileSync(TEST_FILE, 'utf8'));
@@ -211,7 +211,7 @@ describe('LogSync', () => {
       'info',
       'notice',
       'warning',
-    ].forEach(severityMethodName => {
+    ].forEach((severityMethodName) => {
       describe(severityMethodName, () => {
         let severityMethod: Function;
 

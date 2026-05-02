@@ -302,7 +302,7 @@ export class SchemaServiceClient {
     ];
     for (const methodName of schemaServiceStubMethods) {
       const callPromise = this.schemaServiceStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -506,7 +506,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createSchema request %j', request);
@@ -632,7 +632,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getSchema request %j', request);
@@ -757,7 +757,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('commitSchema request %j', request);
@@ -884,7 +884,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('rollbackSchema request %j', request);
@@ -1015,7 +1015,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteSchemaRevision request %j', request);
@@ -1140,7 +1140,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteSchema request %j', request);
@@ -1265,7 +1265,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('validateSchema request %j', request);
@@ -1398,7 +1398,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('validateMessage request %j', request);
@@ -1537,7 +1537,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1609,7 +1609,7 @@ export class SchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listSchemas stream %j', request);
@@ -1663,7 +1663,7 @@ export class SchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listSchemas iterate %j', request);
@@ -1766,7 +1766,7 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1838,7 +1838,7 @@ export class SchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchemaRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listSchemaRevisions stream %j', request);
@@ -1890,7 +1890,7 @@ export class SchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchemaRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listSchemaRevisions iterate %j', request);
@@ -2221,11 +2221,11 @@ export class SchemaServiceClient {
    */
   close(): Promise<void> {
     if (this.schemaServiceStub && !this._terminated) {
-      return this.schemaServiceStub.then(stub => {
+      return this.schemaServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
+        this.iamClient.close().catch((err) => {
           throw err;
         });
       });

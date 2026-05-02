@@ -9,25 +9,19 @@
           {
             "orderBy": {
               "path": {
-                "field": [
-                  "a"
-                ]
+                "field": ["a"]
               },
               "direction": "asc"
             }
           },
           {
             "startAfter": {
-              "jsonValues": [
-                "7"
-              ]
+              "jsonValues": ["7"]
             }
           },
           {
             "endAt": {
-              "jsonValues": [
-                "9"
-              ]
+              "jsonValues": ["9"]
             }
           }
         ],

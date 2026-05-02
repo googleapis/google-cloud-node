@@ -38,8 +38,8 @@ describe('Log Common', () => {
     it('should assign severity to a single entry', () => {
       assert.deepStrictEqual(
         assignSeverityToEntries(ENTRIES[0], SEVERITY)
-          .map(x => x.metadata)
-          .map(x => x.severity),
+          .map((x) => x.metadata)
+          .map((x) => x.severity),
         [SEVERITY],
       );
     });
@@ -47,14 +47,14 @@ describe('Log Common', () => {
     it('should assign severity property to multiple entries', () => {
       assert.deepStrictEqual(
         assignSeverityToEntries(ENTRIES, SEVERITY)
-          .map(x => x.metadata)
-          .map(x => x.severity),
+          .map((x) => x.metadata)
+          .map((x) => x.severity),
         [SEVERITY, SEVERITY, SEVERITY],
       );
     });
 
     it('should not affect original array', () => {
-      const originalEntries = ENTRIES.map(x => extend({}, x));
+      const originalEntries = ENTRIES.map((x) => extend({}, x));
       assignSeverityToEntries(originalEntries, SEVERITY);
       assert.deepStrictEqual(originalEntries, ENTRIES);
     });

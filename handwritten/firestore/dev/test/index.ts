@@ -574,13 +574,13 @@ describe('instantiation', () => {
     }
   });
 
-  it('FIRESTORE_EMULATOR_HOST overrides other endpoint', done => {
+  it('FIRESTORE_EMULATOR_HOST overrides other endpoint', (done) => {
     const oldValue = process.env.FIRESTORE_EMULATOR_HOST;
 
     try {
       process.env.FIRESTORE_EMULATOR_HOST = 'new';
       const firestore = new Firestore.Firestore({servicePath: 'old'});
-      firestore['validateAndApplySettings'] = settings => {
+      firestore['validateAndApplySettings'] = (settings) => {
         expect(settings.servicePath).to.equal('new');
         done();
       };
@@ -594,13 +594,13 @@ describe('instantiation', () => {
     }
   });
 
-  it('FIRESTORE_EMULATOR_HOST keeps user-provided headers', done => {
+  it('FIRESTORE_EMULATOR_HOST keeps user-provided headers', (done) => {
     const oldValue = process.env.FIRESTORE_EMULATOR_HOST;
 
     try {
       process.env.FIRESTORE_EMULATOR_HOST = 'new';
       const firestore = new Firestore.Firestore({customHeaders: {foo: 'bar'}});
-      firestore['validateAndApplySettings'] = settings => {
+      firestore['validateAndApplySettings'] = (settings) => {
         expect(settings.customHeaders.foo).to.equal('bar');
         done();
       };
@@ -644,7 +644,7 @@ describe('instantiation', () => {
         getProjectId: () => Promise.resolve('foo'),
       },
       {projectId: undefined},
-    ).then(async firestore => {
+    ).then(async (firestore) => {
       await firestore.initializeIfNeeded('tag');
       expect(firestore.projectId).to.equal('foo');
       expect(firestore.formattedName).to.equal(
@@ -683,7 +683,7 @@ describe('instantiation', () => {
         getProjectId: () => Promise.reject(new Error('Injected Error')),
       },
       {projectId: undefined},
-    ).then(firestore => {
+    ).then((firestore) => {
       return expect(
         firestore.collection('foo').add({}),
       ).to.eventually.be.rejectedWith('Injected Error');
@@ -799,7 +799,7 @@ describe('instantiation', () => {
 describe('serializer', () => {
   it('supports all types', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         expect(allSupportedTypesProtobufJs.fields).to.deep.eq(
           request.writes![0].update!.fields,
         );
@@ -814,7 +814,7 @@ describe('serializer', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.collection('coll').add(allSupportedTypesInput);
     });
   });
@@ -995,7 +995,7 @@ describe('doc() method', () => {
   let firestore: Firestore.Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -1036,7 +1036,7 @@ describe('collection() method', () => {
   let firestore: Firestore.Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -1071,7 +1071,7 @@ describe('collection() method', () => {
 describe('listCollections() method', () => {
   it('returns collections', () => {
     const overrides: ApiOverride = {
-      listCollectionIds: request => {
+      listCollectionIds: (request) => {
         expect(request).to.deep.eq({
           parent: `projects/${PROJECT_ID}/databases/(default)/documents`,
         });
@@ -1080,8 +1080,8 @@ describe('listCollections() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
-      return firestore.listCollections().then(collections => {
+    return createInstance(overrides).then((firestore) => {
+      return firestore.listCollections().then((collections) => {
         expect(collections[0].path).to.equal('first');
         expect(collections[1].path).to.equal('second');
       });
@@ -1122,10 +1122,10 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .getAll(firestore.doc('collectionId/documentId'))
-        .then(result => {
+        .then((result) => {
           resultEquals(result, found('documentId'));
         });
     });
@@ -1138,13 +1138,13 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .getAll(firestore.doc('collectionId/documentId'))
         .then(() => {
           throw new Error('Unexpected success in Promise');
         })
-        .catch(err => {
+        .catch((err) => {
           expect(err.message).to.equal(
             'Did not receive document for "collectionId/documentId".',
           );
@@ -1162,13 +1162,13 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .getAll(firestore.doc('collectionId/documentId'))
         .then(() => {
           throw new Error('Unexpected success in Promise');
         })
-        .catch(err => {
+        .catch((err) => {
           expect(attempts).to.equal(5);
           expect(err.message).to.equal('Expected exception');
         });
@@ -1189,7 +1189,7 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .doc('collectionId/documentId')
         .get()
@@ -1212,7 +1212,7 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const docs = await firestore.getAll(
         firestore.doc('collectionId/doc1'),
         firestore.doc('collectionId/doc2'),
@@ -1240,7 +1240,7 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       try {
         await firestore.getAll(
           firestore.doc('collectionId/doc1'),
@@ -1278,7 +1278,7 @@ describe('getAll() method', () => {
     const actualErrorAttempts: {[key: number]: number} = {};
 
     const overrides: ApiOverride = {
-      batchGetDocuments: request => {
+      batchGetDocuments: (request) => {
         const errorCode = Number(request!.documents![0].split('/').pop());
         actualErrorAttempts[errorCode] =
           (actualErrorAttempts[errorCode] || 0) + 1;
@@ -1288,7 +1288,7 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const coll = firestore.collection('collectionId');
 
       for (const errorCode of Object.keys(expectedErrorAttempts)) {
@@ -1297,7 +1297,7 @@ describe('getAll() method', () => {
           .then(() => {
             throw new Error('Unexpected success in Promise');
           })
-          .catch(err => {
+          .catch((err) => {
             expect(err.code).to.equal(Number(errorCode));
           });
       }
@@ -1307,7 +1307,7 @@ describe('getAll() method', () => {
   }).timeout(5000);
 
   it('requires at least one argument', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       expect(() => (firestore as InvalidApiUsage).getAll()).to.throw(
         'Function "Firestore.getAll()" requires at least 1 argument.',
       );
@@ -1315,7 +1315,7 @@ describe('getAll() method', () => {
   });
 
   it('validates document references', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       expect(() => firestore.getAll(null as InvalidApiUsage)).to.throw(
         'Element at index 0 is not a valid DocumentReference.',
       );
@@ -1327,13 +1327,13 @@ describe('getAll() method', () => {
       batchGetDocuments: () => stream(found('exists'), missing('missing')),
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .getAll(
           firestore.doc('collectionId/exists'),
           firestore.doc('collectionId/missing'),
         )
-        .then(result => {
+        .then((result) => {
           resultEquals(result, found('exists'), missing('missing'));
         });
     });
@@ -1352,7 +1352,7 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .getAll(
           firestore.doc('collectionId/first'),
@@ -1360,7 +1360,7 @@ describe('getAll() method', () => {
           firestore.doc('collectionId/third'),
           firestore.doc('collectionId/fourth'),
         )
-        .then(result => {
+        .then((result) => {
           resultEquals(
             result,
             found('first'),
@@ -1374,13 +1374,13 @@ describe('getAll() method', () => {
 
   it('accepts same document multiple times', () => {
     const overrides: ApiOverride = {
-      batchGetDocuments: request => {
+      batchGetDocuments: (request) => {
         expect(request!.documents!.length).to.equal(2);
         return stream(found('a'), found('b'));
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .getAll(
           firestore.doc('collectionId/a'),
@@ -1388,7 +1388,7 @@ describe('getAll() method', () => {
           firestore.doc('collectionId/b'),
           firestore.doc('collectionId/a'),
         )
-        .then(result => {
+        .then((result) => {
           resultEquals(result, found('a'), found('a'), found('b'), found('a'));
         });
     });
@@ -1396,7 +1396,7 @@ describe('getAll() method', () => {
 
   it('applies field mask', () => {
     const overrides: ApiOverride = {
-      batchGetDocuments: request => {
+      batchGetDocuments: (request) => {
         expect(request!.mask!.fieldPaths).to.have.members([
           'foo.bar',
           '`foo.bar`',
@@ -1405,7 +1405,7 @@ describe('getAll() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.getAll(firestore.doc('collectionId/a'), {
         fieldMask: ['foo.bar', new FieldPath('foo.bar')],
       });
@@ -1413,7 +1413,7 @@ describe('getAll() method', () => {
   });
 
   it('validates field mask', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       expect(() =>
         firestore.getAll(firestore.doc('collectionId/a'), {
           fieldMask: null,

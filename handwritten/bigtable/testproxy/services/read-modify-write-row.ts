@@ -27,7 +27,7 @@ export const readModifyWriteRow: ClientImplMaker<
   IReadModifyWriteRowRequest,
   IRowResult
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {request} = rawRequest;
     const {clientId, request: readModifyWriteRow} = request;
     const {appProfileId, tableName} = readModifyWriteRow!;

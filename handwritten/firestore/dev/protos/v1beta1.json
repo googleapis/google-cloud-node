@@ -290,12 +290,7 @@
                   }
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "nested": {
                 "Declaration": {
                   "fields": {
@@ -320,12 +315,7 @@
                       "id": 6
                     }
                   },
-                  "reserved": [
-                    [
-                      4,
-                      4
-                    ]
-                  ]
+                  "reserved": [[4, 4]]
                 },
                 "VerificationState": {
                   "values": {
@@ -656,21 +646,10 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "reserved": [
-                [
-                  42,
-                  42
-                ],
-                [
-                  38,
-                  38
-                ]
+                [42, 42],
+                [38, 38]
               ],
               "nested": {
                 "OptimizeMode": {
@@ -727,33 +706,13 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "reserved": [
-                [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
-                  8,
-                  8
-                ],
-                [
-                  9,
-                  9
-                ]
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [8, 8],
+                [9, 9]
               ]
             },
             "FieldOptions": {
@@ -836,21 +795,10 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "reserved": [
-                [
-                  4,
-                  4
-                ],
-                [
-                  18,
-                  18
-                ]
+                [4, 4],
+                [18, 18]
               ],
               "nested": {
                 "CType": {
@@ -915,12 +863,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
+              "extensions": [[1000, 536870911]]
             },
             "EnumOptions": {
               "edition": "proto2",
@@ -953,18 +896,8 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
-              ]
+              "extensions": [[1000, 536870911]],
+              "reserved": [[5, 5]]
             },
             "EnumValueOptions": {
               "edition": "proto2",
@@ -993,12 +926,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
+              "extensions": [[1000, 536870911]]
             },
             "ServiceOptions": {
               "edition": "proto2",
@@ -1020,12 +948,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
+              "extensions": [[1000, 536870911]]
             },
             "MethodOptions": {
               "edition": "proto2",
@@ -1054,12 +977,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "nested": {
                 "IdempotencyLevel": {
                   "values": {
@@ -1185,33 +1103,13 @@
                 }
               },
               "extensions": [
-                [
-                  1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9995,
-                  9999
-                ],
-                [
-                  10000,
-                  10000
-                ]
+                [1000, 1000],
+                [1001, 1001],
+                [1002, 1002],
+                [9995, 9999],
+                [10000, 10000]
               ],
-              "reserved": [
-                [
-                  999,
-                  999
-                ]
-              ],
+              "reserved": [[999, 999]],
               "nested": {
                 "FieldPresence": {
                   "values": {
@@ -1520,10 +1418,7 @@
                 "Precondition": {
                   "oneofs": {
                     "conditionType": {
-                      "oneof": [
-                        "exists",
-                        "updateTime"
-                      ]
+                      "oneof": ["exists", "updateTime"]
                     }
                   },
                   "fields": {
@@ -1540,10 +1435,7 @@
                 "TransactionOptions": {
                   "oneofs": {
                     "mode": {
-                      "oneof": [
-                        "readOnly",
-                        "readWrite"
-                      ]
+                      "oneof": ["readOnly", "readWrite"]
                     }
                   },
                   "fields": {
@@ -1568,9 +1460,7 @@
                     "ReadOnly": {
                       "oneofs": {
                         "consistencySelector": {
-                          "oneof": [
-                            "readTime"
-                          ]
+                          "oneof": ["readTime"]
                         }
                       },
                       "fields": {
@@ -1979,10 +1869,7 @@
                 "GetDocumentRequest": {
                   "oneofs": {
                     "consistencySelector": {
-                      "oneof": [
-                        "transaction",
-                        "readTime"
-                      ]
+                      "oneof": ["transaction", "readTime"]
                     }
                   },
                   "fields": {
@@ -2010,10 +1897,7 @@
                 "ListDocumentsRequest": {
                   "oneofs": {
                     "consistencySelector": {
-                      "oneof": [
-                        "transaction",
-                        "readTime"
-                      ]
+                      "oneof": ["transaction", "readTime"]
                     }
                   },
                   "fields": {
@@ -2148,11 +2032,7 @@
                 "BatchGetDocumentsRequest": {
                   "oneofs": {
                     "consistencySelector": {
-                      "oneof": [
-                        "transaction",
-                        "newTransaction",
-                        "readTime"
-                      ]
+                      "oneof": ["transaction", "newTransaction", "readTime"]
                     }
                   },
                   "fields": {
@@ -2189,10 +2069,7 @@
                 "BatchGetDocumentsResponse": {
                   "oneofs": {
                     "result": {
-                      "oneof": [
-                        "found",
-                        "missing"
-                      ]
+                      "oneof": ["found", "missing"]
                     }
                   },
                   "fields": {
@@ -2291,16 +2168,10 @@
                 "RunQueryRequest": {
                   "oneofs": {
                     "queryType": {
-                      "oneof": [
-                        "structuredQuery"
-                      ]
+                      "oneof": ["structuredQuery"]
                     },
                     "consistencySelector": {
-                      "oneof": [
-                        "transaction",
-                        "newTransaction",
-                        "readTime"
-                      ]
+                      "oneof": ["transaction", "newTransaction", "readTime"]
                     }
                   },
                   "fields": {
@@ -2352,9 +2223,7 @@
                 "PartitionQueryRequest": {
                   "oneofs": {
                     "queryType": {
-                      "oneof": [
-                        "structuredQuery"
-                      ]
+                      "oneof": ["structuredQuery"]
                     }
                   },
                   "fields": {
@@ -2449,10 +2318,7 @@
                 "ListenRequest": {
                   "oneofs": {
                     "targetChange": {
-                      "oneof": [
-                        "addTarget",
-                        "removeTarget"
-                      ]
+                      "oneof": ["addTarget", "removeTarget"]
                     }
                   },
                   "fields": {
@@ -2516,16 +2382,10 @@
                 "Target": {
                   "oneofs": {
                     "targetType": {
-                      "oneof": [
-                        "query",
-                        "documents"
-                      ]
+                      "oneof": ["query", "documents"]
                     },
                     "resumeType": {
-                      "oneof": [
-                        "resumeToken",
-                        "readTime"
-                      ]
+                      "oneof": ["resumeToken", "readTime"]
                     }
                   },
                   "fields": {
@@ -2567,9 +2427,7 @@
                     "QueryTarget": {
                       "oneofs": {
                         "queryType": {
-                          "oneof": [
-                            "structuredQuery"
-                          ]
+                          "oneof": ["structuredQuery"]
                         }
                       },
                       "fields": {
@@ -2820,9 +2678,7 @@
                     "UnaryFilter": {
                       "oneofs": {
                         "operandType": {
-                          "oneof": [
-                            "field"
-                          ]
+                          "oneof": ["field"]
                         }
                       },
                       "fields": {
@@ -2901,11 +2757,7 @@
                 "Write": {
                   "oneofs": {
                     "operation": {
-                      "oneof": [
-                        "update",
-                        "delete",
-                        "transform"
-                      ]
+                      "oneof": ["update", "delete", "transform"]
                     }
                   },
                   "fields": {
@@ -3195,14 +3047,7 @@
             "HttpRule": {
               "oneofs": {
                 "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
+                  "oneof": ["get", "put", "post", "delete", "patch", "custom"]
                 }
               },
               "fields": {

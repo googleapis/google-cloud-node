@@ -314,7 +314,7 @@ export class BigtableClient {
     ];
     for (const methodName of bigtableStubMethods) {
       const callPromise = this.bigtableStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -587,7 +587,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('mutateRow request %j', request);
@@ -787,7 +787,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('checkAndMutateRow request %j', request);
@@ -940,7 +940,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('pingAndWarm request %j', request);
@@ -1132,7 +1132,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('readModifyWriteRow request %j', request);
@@ -1303,7 +1303,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('prepareQuery request %j', request);
@@ -1474,7 +1474,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('readRows stream %j', options);
@@ -1582,7 +1582,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('sampleRowKeys stream %j', options);
@@ -1679,7 +1679,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('mutateRows stream %j', options);
@@ -1722,7 +1722,7 @@ export class BigtableClient {
       this._gaxModule.routingHeader.fromParams({
         table_name: request.tableName ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('generateInitialChangeStreamPartitions stream %j', options);
@@ -1793,7 +1793,7 @@ export class BigtableClient {
       this._gaxModule.routingHeader.fromParams({
         table_name: request.tableName ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('readChangeStream stream %j', options);
@@ -1904,7 +1904,7 @@ export class BigtableClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('executeQuery stream %j', options);
@@ -2142,7 +2142,7 @@ export class BigtableClient {
    */
   close(): Promise<void> {
     if (this.bigtableStub && !this._terminated) {
-      return this.bigtableStub.then(stub => {
+      return this.bigtableStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

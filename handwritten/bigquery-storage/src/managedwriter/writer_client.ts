@@ -334,7 +334,7 @@ export class WriterClient {
   }
 
   close() {
-    this._connections.connectionList.map(conn => {
+    this._connections.connectionList.map((conn) => {
       conn.close();
     });
     this._connections = {

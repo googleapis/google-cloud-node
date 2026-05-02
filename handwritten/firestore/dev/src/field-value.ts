@@ -46,14 +46,14 @@ export class VectorValue implements firestore.VectorValue {
    */
   constructor(values: number[] | undefined) {
     // Making a copy of the parameter.
-    this._values = (values || []).map(n => n);
+    this._values = (values || []).map((n) => n);
   }
 
   /**
    * Returns a copy of the raw number array form of the vector.
    */
   public toArray(): number[] {
-    return this._values.map(n => n);
+    return this._values.map((n) => n);
   }
 
   /**
@@ -69,7 +69,7 @@ export class VectorValue implements firestore.VectorValue {
    * @internal
    */
   static _fromProto(valueArray: api.IValue): VectorValue {
-    const values = valueArray.arrayValue?.values?.map(v => {
+    const values = valueArray.arrayValue?.values?.map((v) => {
       return v.doubleValue!;
     });
     return new VectorValue(values);

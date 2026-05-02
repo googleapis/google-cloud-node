@@ -335,9 +335,9 @@ export class Subscription extends EventEmitter {
 
     this._subscriber = new Subscriber(this, options);
     this._subscriber
-      .on('error', err => this.emit('error', err))
-      .on('debug', msg => this.emit('debug', msg))
-      .on('message', message => this.emit('message', message))
+      .on('error', (err) => this.emit('error', err))
+      .on('debug', (msg) => this.emit('debug', msg))
+      .on('message', (message) => this.emit('message', message))
       .on('close', () => this.emit('close'));
 
     this._listen();
@@ -689,7 +689,7 @@ export class Subscription extends EventEmitter {
   exists(): Promise<ExistsResponse>;
   exists(callback: ExistsCallback): void;
   exists(callback?: ExistsCallback): void | Promise<ExistsResponse> {
-    this.getMetadata(err => {
+    this.getMetadata((err) => {
       if (!err) {
         callback!(null, true);
         return;
@@ -1157,7 +1157,7 @@ export class Subscription extends EventEmitter {
    * @private
    */
   private _listen(): void {
-    this.on('newListener', event => {
+    this.on('newListener', (event) => {
       if (!this.isOpen && event === 'message') {
         this._subscriber.open();
       }

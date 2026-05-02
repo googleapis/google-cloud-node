@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent, requests) {
@@ -48,7 +46,8 @@ function main(parent, requests) {
   // const traceId = 'abc123'
 
   // Imports the Storage library
-  const {MetastorePartitionServiceClient} = require('@google-cloud/storage').v1beta;
+  const {MetastorePartitionServiceClient} =
+    require('@google-cloud/storage').v1beta;
 
   // Instantiates a client
   const storageClient = new MetastorePartitionServiceClient();
@@ -61,7 +60,8 @@ function main(parent, requests) {
     };
 
     // Run request
-    const response = await storageClient.batchUpdateMetastorePartitions(request);
+    const response =
+      await storageClient.batchUpdateMetastorePartitions(request);
     console.log(response);
   }
 
@@ -69,7 +69,7 @@ function main(parent, requests) {
   // [END bigquerystorage_v1beta_generated_MetastorePartitionService_BatchUpdateMetastorePartitions_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

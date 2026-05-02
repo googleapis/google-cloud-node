@@ -190,7 +190,7 @@ describe('Timestamp Output Format System Tests', () => {
     },
   );
 
-  it('should make a request with ISO8601_STRING when no format options are being used', done => {
+  it('should make a request with ISO8601_STRING when no format options are being used', (done) => {
     if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
       done();
       return;
@@ -205,7 +205,7 @@ describe('Timestamp Output Format System Tests', () => {
           resolve(innerPromise as Promise<RequestResponse>);
         },
       );
-      table.request = reqOpts => {
+      table.request = (reqOpts) => {
         table.request = originalRequest;
         if (
           reqOpts.qs['formatOptions.timestampOutputFormat'] === 'ISO8601_STRING'

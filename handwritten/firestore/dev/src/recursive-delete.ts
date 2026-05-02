@@ -195,7 +195,7 @@ export class RecursiveDelete {
     this.streamInProgress = true;
     let streamedDocsCount = 0;
     stream
-      .on('error', err => {
+      .on('error', (err) => {
         err.code = StatusCode.UNAVAILABLE;
         err.stack = 'Failed to fetch children documents: ' + err.stack;
         this.lastError = err;
@@ -285,7 +285,9 @@ export class RecursiveDelete {
   private onQueryEnd(): void {
     this.documentsPending = false;
     if (this.ref instanceof DocumentReference) {
-      this.writer.delete(this.ref).catch(err => this.incrementErrorCount(err));
+      this.writer
+        .delete(this.ref)
+        .catch((err) => this.incrementErrorCount(err));
     }
     void this.writer.flush().then(async () => {
       if (this.lastError === undefined) {
@@ -321,7 +323,7 @@ export class RecursiveDelete {
     this.pendingOpsCount++;
     void this.writer
       .delete(docRef)
-      .catch(err => {
+      .catch((err) => {
         this.incrementErrorCount(err);
       })
       .then(() => {

@@ -47,7 +47,7 @@ function isGrouping(rule: IGcRule): rule is GcGrouping {
 }
 
 function nonGroupKeys(rule: IGcRule): string[] {
-  return Object.keys(rule).filter(k => k !== 'union' && k !== 'intersection');
+  return Object.keys(rule).filter((k) => k !== 'union' && k !== 'intersection');
 }
 
 function isRuleItem(rule: IGcRule): rule is GcRuleItem {

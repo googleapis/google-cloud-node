@@ -25,19 +25,13 @@ module.exports = {
     template: './node_modules/jsdoc-fresh',
     recurse: true,
     verbose: true,
-    destination: './docs/'
+    destination: './docs/',
   },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
+  plugins: ['plugins/markdown', 'jsdoc-region-tag'],
   source: {
     excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
-    ],
-    includePattern: '\\.js$'
+    include: ['build/src', 'protos'],
+    includePattern: '\\.js$',
   },
   templates: {
     copyright: 'Copyright 2025 Google LLC',
@@ -46,10 +40,10 @@ module.exports = {
     systemName: '@google-cloud/bigtable',
     theme: 'lumen',
     default: {
-      outputSourceFiles: false
-    }
+      outputSourceFiles: false,
+    },
   },
   markdown: {
-    idInHeadings: true
-  }
+    idInHeadings: true,
+  },
 };

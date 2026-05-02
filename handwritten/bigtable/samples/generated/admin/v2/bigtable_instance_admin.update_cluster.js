@@ -16,11 +16,15 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
-function main(location, state, nodeScalingFactor, defaultStorageType, encryptionConfig) {
+function main(
+  location,
+  state,
+  nodeScalingFactor,
+  defaultStorageType,
+  encryptionConfig,
+) {
   // [START bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -94,7 +98,7 @@ function main(location, state, nodeScalingFactor, defaultStorageType, encryption
   // [END bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateCluster_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

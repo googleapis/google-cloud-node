@@ -247,12 +247,12 @@ describe('v1.SchemaServiceClient', () => {
       assert(client.schemaServiceStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new schemaserviceModule.v1.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.schemaServiceStub);
@@ -261,12 +261,12 @@ describe('v1.SchemaServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new schemaserviceModule.v1.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -277,7 +277,7 @@ describe('v1.SchemaServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -442,7 +442,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createSchema(request), expectedError);
@@ -571,7 +571,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getSchema(request), expectedError);
@@ -703,7 +703,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.commitSchema(request), expectedError);
@@ -835,7 +835,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.rollbackSchema(request), expectedError);
@@ -968,7 +968,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteSchemaRevision(request), expectedError);
@@ -1100,7 +1100,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteSchema(request), expectedError);
@@ -1232,7 +1232,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.validateSchema(request), expectedError);
@@ -1364,7 +1364,7 @@ describe('v1.SchemaServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.validateMessage(request), expectedError);
@@ -2036,7 +2036,7 @@ describe('v1.SchemaServiceClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -2146,7 +2146,7 @@ describe('v1.SchemaServiceClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -2259,7 +2259,7 @@ describe('v1.SchemaServiceClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });

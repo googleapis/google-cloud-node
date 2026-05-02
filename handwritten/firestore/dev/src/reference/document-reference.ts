@@ -273,7 +273,7 @@ export class DocumentReference<
               api.IListCollectionIdsRequest,
               string[]
             >('listCollectionIds', request, tag)
-            .then(collectionIds => {
+            .then((collectionIds) => {
               const collections: Array<CollectionReference> = [];
 
               // We can just sort this list using the default comparator since it

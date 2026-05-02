@@ -216,7 +216,7 @@ export class OperationMetricsCollector {
         const totalMilliseconds = Number(
           (endTime - this.attemptStartTime) / BigInt(1000000),
         );
-        this.handlers.forEach(metricsHandler => {
+        this.handlers.forEach((metricsHandler) => {
           if (metricsHandler.onAttemptComplete) {
             metricsHandler.onAttemptComplete({
               attemptLatency: totalMilliseconds,
@@ -306,7 +306,7 @@ export class OperationMetricsCollector {
           (endTime - this.operationStartTime) / BigInt(1000000),
         );
         {
-          this.handlers.forEach(metricsHandler => {
+          this.handlers.forEach((metricsHandler) => {
             if (metricsHandler.onOperationComplete) {
               metricsHandler.onOperationComplete({
                 status: status[finalOperationStatus],

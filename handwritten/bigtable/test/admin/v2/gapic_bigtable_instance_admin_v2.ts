@@ -287,12 +287,12 @@ describe('v2.BigtableInstanceAdminClient', () => {
       assert(client.bigtableInstanceAdminStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new bigtableinstanceadminModule.admin.InstanceAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.bigtableInstanceAdminStub);
@@ -301,12 +301,12 @@ describe('v2.BigtableInstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new bigtableinstanceadminModule.admin.InstanceAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -317,7 +317,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -482,7 +482,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -614,7 +614,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.listInstances(request), expectedError);
@@ -746,7 +746,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateInstance(request), expectedError);
@@ -878,7 +878,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteInstance(request), expectedError);
@@ -1010,7 +1010,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -1142,7 +1142,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.listClusters(request), expectedError);
@@ -1274,7 +1274,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteCluster(request), expectedError);
@@ -1406,7 +1406,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createAppProfile(request), expectedError);
@@ -1538,7 +1538,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getAppProfile(request), expectedError);
@@ -1670,7 +1670,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteAppProfile(request), expectedError);
@@ -1802,7 +1802,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1934,7 +1934,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2067,7 +2067,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2199,7 +2199,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getLogicalView(request), expectedError);
@@ -2331,7 +2331,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteLogicalView(request), expectedError);
@@ -2464,7 +2464,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getMaterializedView(request), expectedError);
@@ -2600,7 +2600,7 @@ describe('v2.BigtableInstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(

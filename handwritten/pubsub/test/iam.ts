@@ -100,8 +100,8 @@ describe('IAM', () => {
   });
 
   describe('getPolicy', () => {
-    it('should make the correct API request', done => {
-      iam.request = config => {
+    it('should make the correct API request', (done) => {
+      iam.request = (config) => {
         const reqOpts = {resource: iam.id};
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'getIamPolicy');
@@ -113,10 +113,10 @@ describe('IAM', () => {
       iam.getPolicy(assert.ifError);
     });
 
-    it('should accept gax options', done => {
+    it('should accept gax options', (done) => {
       const gaxOpts = {};
 
-      iam.request = config => {
+      iam.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOpts);
         done();
       };
@@ -135,8 +135,8 @@ describe('IAM', () => {
       }, /A policy object is required\./);
     });
 
-    it('should make the correct API request', done => {
-      iam.request = config => {
+    it('should make the correct API request', (done) => {
+      iam.request = (config) => {
         const reqOpts = {resource: iam.id, policy};
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'setIamPolicy');
@@ -148,7 +148,7 @@ describe('IAM', () => {
       iam.setPolicy(policy, assert.ifError);
     });
 
-    it('should accept gax options', done => {
+    it('should accept gax options', (done) => {
       const gaxOpts = {};
 
       iam.request = (config: RequestConfig) => {
@@ -168,11 +168,11 @@ describe('IAM', () => {
       }, /Permissions are required\./);
     });
 
-    it('should make the correct API request', done => {
+    it('should make the correct API request', (done) => {
       const permissions = 'storage.bucket.list';
       const reqOpts = {resource: iam.id, permissions: [permissions]};
 
-      iam.request = config => {
+      iam.request = (config) => {
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'testIamPermissions');
         assert.deepStrictEqual(config.reqOpts, reqOpts);
@@ -183,11 +183,11 @@ describe('IAM', () => {
       iam.testPermissions(permissions, assert.ifError);
     });
 
-    it('should accept gax options', done => {
+    it('should accept gax options', (done) => {
       const permissions = 'storage.bucket.list';
       const gaxOpts = {};
 
-      iam.request = config => {
+      iam.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOpts);
         done();
       };
@@ -195,7 +195,7 @@ describe('IAM', () => {
       iam.testPermissions(permissions, gaxOpts, assert.ifError);
     });
 
-    it('should send an error back if the request fails', done => {
+    it('should send an error back if the request fails', (done) => {
       const permissions = ['storage.bucket.list'];
       const error = new Error('Error.');
       const apiResponse = {};
@@ -212,7 +212,7 @@ describe('IAM', () => {
       });
     });
 
-    it('should pass back a hash of permissions the user has', done => {
+    it('should pass back a hash of permissions the user has', (done) => {
       const permissions = ['storage.bucket.list', 'storage.bucket.consume'];
       const apiResponse = {
         permissions: ['storage.bucket.consume'],

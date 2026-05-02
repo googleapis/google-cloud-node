@@ -118,7 +118,7 @@ describe('middleware/express/make-middleware', () => {
         assert.strictEqual((fakeRequest as any).log, FAKE_CHILD_LOGGER);
       });
 
-      it('should emit a request log when response is finished', done => {
+      it('should emit a request log when response is finished', (done) => {
         getOrInjectContextValue = FAKE_TRACE_CONTEXT;
         const fakeRequest = makeFakeRequest();
         const fakeResponse = makeFakeResponse();

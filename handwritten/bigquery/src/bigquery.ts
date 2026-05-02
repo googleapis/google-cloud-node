@@ -606,24 +606,24 @@ export class BigQuery extends Service {
     let schemaFields: TableField[] = extend(true, [], schema?.fields);
     let selectedFields: string[] = extend(true, [], options.selectedFields);
     if (options.selectedFields && options.selectedFields!.length > 0) {
-      const selectedFieldsArray = options.selectedFields!.map(c => {
+      const selectedFieldsArray = options.selectedFields!.map((c) => {
         return c.split('.');
       });
 
       const currentFields = selectedFieldsArray
-        .map(c => c.shift())
-        .filter(c => c !== undefined);
+        .map((c) => c.shift())
+        .filter((c) => c !== undefined);
 
       //filter schema fields based on selected fields.
       schemaFields = schemaFields.filter(
-        field =>
+        (field) =>
           currentFields
-            .map(c => c!.toLowerCase())
+            .map((c) => c!.toLowerCase())
             .indexOf(field.name!.toLowerCase()) >= 0,
       );
       selectedFields = selectedFieldsArray
-        .filter(c => c.length > 0)
-        .map(c => c.join('.'));
+        .filter((c) => c.length > 0)
+        .map((c) => c.join('.'));
     }
 
     return toArray(rows).map(mergeSchema).map(flattenRows);
@@ -633,7 +633,7 @@ export class BigQuery extends Service {
         const schemaField = schemaFields[index];
         let value = field.v;
         if (schemaField && schemaField.mode === 'REPEATED') {
-          value = (value as TableRowField[]).map(val => {
+          value = (value as TableRowField[]).map((val) => {
             return convertSchemaFieldValue(schemaField, val.v, {
               ...options,
               selectedFields,
@@ -1091,7 +1091,7 @@ export class BigQuery extends Service {
     } else if (isObject(providedType)) {
       return {
         type: 'STRUCT',
-        structTypes: Object.keys(providedType).map(prop => {
+        structTypes: Object.keys(providedType).map((prop) => {
           return {
             name: prop,
             type: BigQuery.getTypeDescriptorFromProvidedType_(
@@ -1182,7 +1182,7 @@ export class BigQuery extends Service {
     } else if (isObject(value)) {
       return {
         type: 'STRUCT',
-        structTypes: Object.keys(value as object).map(prop => {
+        structTypes: Object.keys(value as object).map((prop) => {
           return {
             name: prop,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1239,7 +1239,7 @@ export class BigQuery extends Service {
     const typeName = queryParameter!.parameterType!.type!;
     if (typeName === 'ARRAY') {
       queryParameter.parameterValue!.arrayValues = (value as Array<{}>).map(
-        itemValue => {
+        (itemValue) => {
           const value = BigQuery._getValue(itemValue, parameterType.arrayType!);
           if (isObject(value) || isArray(value)) {
             if (isArray(providedType)) {

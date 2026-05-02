@@ -210,7 +210,7 @@ describe('Bigtable/Instance', () => {
       assert.strictEqual(Instance.getTypeType_('PRODUCTION'), types.production);
     });
 
-    Object.keys(types).forEach(type => {
+    Object.keys(types).forEach((type) => {
       it(`should get the storage type for "${type}"`, () => {
         assert.strictEqual(Instance.getTypeType_(type), types[type]);
       });
@@ -218,7 +218,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('create', () => {
-    it('should call createInstance from bigtable', done => {
+    it('should call createInstance from bigtable', (done) => {
       const options = {} as inst.InstanceOptions;
       (instance.bigtable.createInstance as Function) = (
         id: string,
@@ -234,7 +234,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('createAppProfile', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -258,7 +258,7 @@ describe('Bigtable/Instance', () => {
       );
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         routing: 'any',
         gaxOptions: {},
@@ -274,7 +274,7 @@ describe('Bigtable/Instance', () => {
     describe('should respect the routing option with', () => {
       const cluster = new FakeCluster({} as inst.Instance, CLUSTER_ID);
 
-      it("an 'any' value", done => {
+      it("an 'any' value", (done) => {
         const options = {
           routing: 'any',
         } as AppProfileOptions;
@@ -289,7 +289,7 @@ describe('Bigtable/Instance', () => {
         instance.createAppProfile(APP_PROFILE_ID, options, assert.ifError);
       });
 
-      it('a cluster value', done => {
+      it('a cluster value', (done) => {
         const options = {routing: cluster};
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (instance.bigtable.request as Function) = (config: any) => {
@@ -302,10 +302,10 @@ describe('Bigtable/Instance', () => {
         instance.createAppProfile(APP_PROFILE_ID, options, assert.ifError);
       });
 
-      it('a set of cluster objects', done => {
+      it('a set of cluster objects', (done) => {
         const clusterIds = ['my-cluster1', 'my-cluster2'];
         const clusters = clusterIds.map(
-          cluster => new FakeCluster(instance, cluster),
+          (cluster) => new FakeCluster(instance, cluster),
         );
         const options = {routing: new Set(clusters)};
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -320,7 +320,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should respect the allowTransactionalWrites option', done => {
+    it('should respect the allowTransactionalWrites option', (done) => {
       const cluster = instance.cluster(CLUSTER_ID);
       const options = {
         routing: cluster,
@@ -338,7 +338,7 @@ describe('Bigtable/Instance', () => {
       instance.createAppProfile(APP_PROFILE_ID, options, assert.ifError);
     });
 
-    it('should respect the description option', done => {
+    it('should respect the description option', (done) => {
       const options = {
         routing: 'any',
         description: 'My App Profile',
@@ -354,7 +354,7 @@ describe('Bigtable/Instance', () => {
       instance.createAppProfile(APP_PROFILE_ID, options, assert.ifError);
     });
 
-    it('should respect the ignoreWarnings option', done => {
+    it('should respect the ignoreWarnings option', (done) => {
       const options = {
         routing: 'any',
         ignoreWarnings: true,
@@ -367,7 +367,7 @@ describe('Bigtable/Instance', () => {
       instance.createAppProfile(APP_PROFILE_ID, options, assert.ifError);
     });
 
-    it('should execute callback with arguments from GAPIC', done => {
+    it('should execute callback with arguments from GAPIC', (done) => {
       const response = {};
       sandbox
         .stub(instance.bigtable, 'request')
@@ -391,7 +391,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('createCluster', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -432,7 +432,7 @@ describe('Bigtable/Instance', () => {
       }
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         nodes: 2,
         gaxOptions: {},
@@ -445,7 +445,7 @@ describe('Bigtable/Instance', () => {
       instance.createCluster(CLUSTER_ID, options, assert.ifError);
     });
 
-    it('should respect the location option', done => {
+    it('should respect the location option', (done) => {
       const options = {
         location: 'us-central2-d',
         nodes: 2,
@@ -462,7 +462,7 @@ describe('Bigtable/Instance', () => {
       instance.createCluster(CLUSTER_ID, options, assert.ifError);
     });
 
-    it('should respect the nodes option', done => {
+    it('should respect the nodes option', (done) => {
       const options = {
         nodes: 3,
         location: 'us-central2-c',
@@ -475,13 +475,13 @@ describe('Bigtable/Instance', () => {
       instance.createCluster(CLUSTER_ID, options, assert.ifError);
     });
 
-    it('should respect the storage option', done => {
+    it('should respect the storage option', (done) => {
       const options = {
         storage: 'ssd',
         nodes: 2,
       } as CreateClusterOptions;
       const fakeStorageType = 2;
-      sandbox.stub(FakeCluster, 'getStorageType_').callsFake(type => {
+      sandbox.stub(FakeCluster, 'getStorageType_').callsFake((type) => {
         assert.strictEqual(type, options.storage);
         return fakeStorageType;
       });
@@ -496,7 +496,7 @@ describe('Bigtable/Instance', () => {
       instance.createCluster(CLUSTER_ID, options, assert.ifError);
     });
 
-    it('should respect the key option', done => {
+    it('should respect the key option', (done) => {
       const key = 'kms-key-name';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -514,7 +514,7 @@ describe('Bigtable/Instance', () => {
       );
     });
 
-    it('should handle clusters with an encryption object', done => {
+    it('should handle clusters with an encryption object', (done) => {
       const key = 'kms-key-name';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -548,7 +548,7 @@ describe('Bigtable/Instance', () => {
       }, /The cluster cannot have both `encryption` and `key` defined\./);
     });
 
-    it('should execute callback with arguments from GAPIC', done => {
+    it('should execute callback with arguments from GAPIC', (done) => {
       const response = {};
       sandbox
         .stub(instance.bigtable, 'request')
@@ -582,7 +582,7 @@ describe('Bigtable/Instance', () => {
       }, /An id is required to create a table\./);
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -596,7 +596,7 @@ describe('Bigtable/Instance', () => {
       instance.createTable(TABLE_ID, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -608,7 +608,7 @@ describe('Bigtable/Instance', () => {
       instance.createTable(TABLE_ID, options, assert.ifError);
     });
 
-    it('should set the initial split keys', done => {
+    it('should set the initial split keys', (done) => {
       const options = {
         splits: ['a', 'b'],
       };
@@ -622,7 +622,7 @@ describe('Bigtable/Instance', () => {
     });
 
     describe('creating column families', () => {
-      it('should accept a family name', done => {
+      it('should accept a family name', (done) => {
         const options = {
           families: ['a', 'b'],
         };
@@ -637,7 +637,7 @@ describe('Bigtable/Instance', () => {
         instance.createTable(TABLE_ID, options, assert.ifError);
       });
 
-      it('should accept a garbage collection object', done => {
+      it('should accept a garbage collection object', (done) => {
         const options = {
           families: [
             {
@@ -664,12 +664,12 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return a Table object', done => {
+    it('should return a Table object', (done) => {
       const response = {
         name: TABLE_NAME,
       };
       const fakeTable = {} as Table;
-      sandbox.stub(instance, 'table').callsFake(id => {
+      sandbox.stub(instance, 'table').callsFake((id) => {
         assert.strictEqual(id, response.name.split('/').pop());
         return fakeTable;
       });
@@ -693,7 +693,7 @@ describe('Bigtable/Instance', () => {
       }, /A table id is required to restore from a backup\./);
     });
 
-    it('should restore from a provided Backup instance', done => {
+    it('should restore from a provided Backup instance', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const backup = new FakeBackup() as any;
       const table = 'table';
@@ -714,7 +714,7 @@ describe('Bigtable/Instance', () => {
       );
     });
 
-    it('should create a Backup using the provided name', done => {
+    it('should create a Backup using the provided name', (done) => {
       const clusterId = 'my-cluster';
       const backupId = 'my-backup';
       const backup = `instances/${instance.id}/clusters/${clusterId}/backups/${backupId}`;
@@ -746,7 +746,7 @@ describe('Bigtable/Instance', () => {
       );
     });
 
-    it('should respect a Backup from a different instance', done => {
+    it('should respect a Backup from a different instance', (done) => {
       const diffInstanceId = 'diff-instance';
       const clusterId = 'my-cluster';
       const backupId = 'my-backup';
@@ -802,7 +802,7 @@ describe('Bigtable/Instance', () => {
       }, /A complete backup name \(path\) is required or a Backup object\./);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const backup = new FakeBackup() as any;
       const table = 'table';
@@ -836,7 +836,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       (instance.bigtable.request as Function) = (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         config: any,
@@ -853,7 +853,7 @@ describe('Bigtable/Instance', () => {
       instance.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -865,7 +865,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       (instance.getMetadata as Function) = (gaxOptions: {}) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
@@ -873,7 +873,7 @@ describe('Bigtable/Instance', () => {
       instance.exists(assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
       (instance.getMetadata as Function) = (gaxOptions_: {}) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
@@ -882,7 +882,7 @@ describe('Bigtable/Instance', () => {
       instance.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if error code is 5', done => {
+    it('should return false if error code is 5', (done) => {
       const error = new Error('Error.') as ServiceError;
       error.code = 5;
       sandbox.stub(instance, 'getMetadata').callsArgWith(1, error);
@@ -893,17 +893,17 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return error if code is not 5', done => {
+    it('should return error if code is not 5', (done) => {
       const error = new Error('Error.') as ServiceError;
       error.code = 'NOT-5' as {} as number;
       sandbox.stub(instance, 'getMetadata').callsArgWith(1, error);
-      instance.exists(err => {
+      instance.exists((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       sandbox.stub(instance, 'getMetadata').callsArgWith(1, null, {});
       instance.exists((err, exists) => {
         assert.ifError(err);
@@ -914,7 +914,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const gaxOptions = {};
       (instance.getMetadata as Function) = (gaxOptions_: {}) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
@@ -923,7 +923,7 @@ describe('Bigtable/Instance', () => {
       instance.get(gaxOptions, assert.ifError);
     });
 
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       (instance.getMetadata as Function) = (gaxOptions: {}) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
@@ -931,16 +931,16 @@ describe('Bigtable/Instance', () => {
       instance.get(assert.ifError);
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
       sandbox.stub(instance, 'getMetadata').callsArgWith(1, error);
-      instance.get(err => {
+      instance.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const metadata = {};
       sandbox.stub(instance, 'getMetadata').callsArgWith(1, null, metadata);
       instance.get((err, instance_, metadata_) => {
@@ -953,7 +953,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('getAppProfiles', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -967,7 +967,7 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfiles(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -977,7 +977,7 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfiles(gaxOptions, assert.ifError);
     });
 
-    it('should pass pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageToken from gaxOptions into reqOpts', (done) => {
       const pageToken = 'token';
       const gaxOptions = {pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
@@ -999,7 +999,7 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfiles(gaxOptions, assert.ifError);
     });
 
-    it('should pass pageSize from gaxOptions into reqOpts', done => {
+    it('should pass pageSize from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const gaxOptions = {pageSize, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
@@ -1021,16 +1021,16 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfiles(gaxOptions, assert.ifError);
     });
 
-    it('should return error from gapic', done => {
+    it('should return error from gapic', (done) => {
       const error = new Error('Error.');
       sandbox.stub(instance.bigtable, 'request').callsArgWith(1, error);
-      instance.getAppProfiles(err => {
+      instance.getAppProfiles((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return an array of AppProfile objects', done => {
+    it('should return an array of AppProfile objects', (done) => {
       const response = [{name: 'a'}, {name: 'b'}];
       sandbox
         .stub(instance.bigtable, 'request')
@@ -1055,7 +1055,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       const stub = sandbox.stub(pumpify, 'obj');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1072,7 +1072,7 @@ describe('Bigtable/Instance', () => {
       assert.strictEqual(stub.getCall(0).args[0][0], returnStream);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {timeout: 1000};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1083,7 +1083,7 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfilesStream(gaxOptions);
     });
 
-    it('should pass pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageToken from gaxOptions into reqOpts', (done) => {
       const pageToken = 'token';
       const gaxOptions = {pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
@@ -1106,7 +1106,7 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfilesStream(gaxOptions);
     });
 
-    it('should pass pageSize from gaxOptions into reqOpts', done => {
+    it('should pass pageSize from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const gaxOptions = {pageSize, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
@@ -1129,7 +1129,7 @@ describe('Bigtable/Instance', () => {
       instance.getAppProfilesStream(gaxOptions);
     });
 
-    it('should return error from gapic', done => {
+    it('should return error from gapic', (done) => {
       const error = new Error('Error.');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = () => {
@@ -1139,13 +1139,13 @@ describe('Bigtable/Instance', () => {
         returnStream.destroy(error);
       });
 
-      instance.getAppProfilesStream().on('error', err => {
+      instance.getAppProfilesStream().on('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return a decorated error with failedLocations list', done => {
+    it('should return a decorated error with failedLocations list', (done) => {
       let counter = 0;
       let failedLocations: string[] = [];
       const pages = [
@@ -1191,10 +1191,10 @@ describe('Bigtable/Instance', () => {
       };
 
       setImmediate(() => {
-        pages.forEach(p => {
+        pages.forEach((p) => {
           failedLocations = failedLocations.concat(p.response.failedLocations);
           returnStream.emit('response', p.response);
-          p.appProfiles.forEach(a => {
+          p.appProfiles.forEach((a) => {
             returnStream.push(a);
             counter++;
           });
@@ -1204,7 +1204,7 @@ describe('Bigtable/Instance', () => {
       const appProfiles: AppProfile[] = [];
       instance
         .getAppProfilesStream()
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(appProfiles.length, counter);
           assert.deepStrictEqual(
             err,
@@ -1216,7 +1216,7 @@ describe('Bigtable/Instance', () => {
           );
           done();
         })
-        .on('data', appProfile => {
+        .on('data', (appProfile) => {
           assert(appProfile instanceof FakeAppProfile);
           appProfiles.push(appProfile);
         })
@@ -1225,7 +1225,7 @@ describe('Bigtable/Instance', () => {
         });
     });
 
-    it('should return an array of AppProfile objects', done => {
+    it('should return an array of AppProfile objects', (done) => {
       const response = [
         {
           name: '/projects/my-project/instances/my-instance/appProfiles/my-appProfile-a',
@@ -1239,7 +1239,7 @@ describe('Bigtable/Instance', () => {
         return returnStream;
       };
       setImmediate(() => {
-        response.forEach(r => {
+        response.forEach((r) => {
           returnStream.push(r);
         });
         returnStream.push(null);
@@ -1249,7 +1249,7 @@ describe('Bigtable/Instance', () => {
       instance
         .getAppProfilesStream()
         .on('error', assert.ifError)
-        .on('data', appProfile => {
+        .on('data', (appProfile) => {
           assert(appProfile instanceof FakeAppProfile);
           appProfiles.push(appProfile);
         })
@@ -1270,7 +1270,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('getBackups', () => {
-    it('should correctly call Cluster#getBackups', done => {
+    it('should correctly call Cluster#getBackups', (done) => {
       const options = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1309,7 +1309,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('getClusters', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -1323,7 +1323,7 @@ describe('Bigtable/Instance', () => {
       instance.getClusters(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1333,16 +1333,16 @@ describe('Bigtable/Instance', () => {
       instance.getClusters(gaxOptions, assert.ifError);
     });
 
-    it('should return error from gapic', done => {
+    it('should return error from gapic', (done) => {
       const error = new Error('Error.');
       sandbox.stub(instance.bigtable, 'request').callsArgWith(1, error);
-      instance.getClusters(err => {
+      instance.getClusters((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return an array of cluster objects', done => {
+    it('should return an array of cluster objects', (done) => {
       const response = {
         clusters: [
           {
@@ -1375,7 +1375,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('getIamPolicy', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -1388,7 +1388,7 @@ describe('Bigtable/Instance', () => {
       (instance.getIamPolicy as Function)(assert.ifError);
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const requestedPolicyVersion = 0;
       const gaxOptions = {};
       const options: GetIamPolicyOptions = {gaxOptions, requestedPolicyVersion};
@@ -1404,7 +1404,7 @@ describe('Bigtable/Instance', () => {
       instance.getIamPolicy(options, assert.ifError);
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const error = new Error('error');
       sandbox.stub(instance.bigtable, 'request').callsArgWith(1, error);
       (instance.getIamPolicy as Function)((err: Error) => {
@@ -1423,7 +1423,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make correct request', done => {
+    it('should make correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -1437,7 +1437,7 @@ describe('Bigtable/Instance', () => {
       instance.getMetadata(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1447,7 +1447,7 @@ describe('Bigtable/Instance', () => {
       instance.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const metadata = {};
       sandbox
         .stub(instance.bigtable, 'request')
@@ -1458,7 +1458,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should execute callback with original arguments', done => {
+    it('should execute callback with original arguments', (done) => {
       const args = [{}, {}, {}];
       (instance.bigtable.request as Function) = (
         config: {},
@@ -1482,7 +1482,7 @@ describe('Bigtable/Instance', () => {
       full: 4,
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -1495,7 +1495,7 @@ describe('Bigtable/Instance', () => {
       instance.getTables(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -1507,7 +1507,7 @@ describe('Bigtable/Instance', () => {
       instance.getTables(options, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1533,7 +1533,7 @@ describe('Bigtable/Instance', () => {
       instance.getTables({gaxOptions}, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1570,8 +1570,8 @@ describe('Bigtable/Instance', () => {
       instance.getTables(options, assert.ifError);
     });
 
-    Object.keys(views).forEach(view => {
-      it('should set the "' + view + '" view', done => {
+    Object.keys(views).forEach((view) => {
+      it('should set the "' + view + '" view', (done) => {
         const options = {
           view,
         } as GetTablesOptions;
@@ -1584,7 +1584,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return an array of table objects', done => {
+    it('should return an array of table objects', (done) => {
       const response = [
         {
           name: '/projects/my-project/instances/my-instance/tables/my-table-a',
@@ -1614,7 +1614,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return original GAPIC response arguments', done => {
+    it('should return original GAPIC response arguments', (done) => {
       const response = [{}, null, {}, {}];
       (instance.bigtable.request as Function) = (
         config: {},
@@ -1631,7 +1631,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const error = new Error('Error');
       (instance.bigtable.request as Function) = (
         config: {},
@@ -1639,7 +1639,7 @@ describe('Bigtable/Instance', () => {
       ) => {
         callback(error);
       };
-      instance.getTables(err => {
+      instance.getTables((err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1661,7 +1661,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       const stub = sandbox.stub(pumpify, 'obj');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1677,7 +1677,7 @@ describe('Bigtable/Instance', () => {
       assert.strictEqual(stub.getCall(0).args[0][0], returnStream);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -1690,8 +1690,8 @@ describe('Bigtable/Instance', () => {
       instance.getTablesStream(options);
     });
 
-    Object.keys(views).forEach(view => {
-      it('should set the "' + view + '" view', done => {
+    Object.keys(views).forEach((view) => {
+      it('should set the "' + view + '" view', (done) => {
         const options = {
           view,
         } as GetTablesOptions;
@@ -1705,7 +1705,7 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return an error from gapic', done => {
+    it('should return an error from gapic', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = () => {
         return returnStream;
@@ -1714,13 +1714,13 @@ describe('Bigtable/Instance', () => {
       setImmediate(() => {
         returnStream.destroy(error);
       });
-      instance.getTablesStream().on('error', err => {
+      instance.getTablesStream().on('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return an array of table objects', done => {
+    it('should return an array of table objects', (done) => {
       const response = [
         {
           name: '/projects/my-project/instances/my-instance/tables/my-table-a',
@@ -1741,7 +1741,7 @@ describe('Bigtable/Instance', () => {
         return fakeTables[tableCount++];
       };
       setImmediate(() => {
-        response.forEach(r => {
+        response.forEach((r) => {
           returnStream.push(r);
         });
         returnStream.push(null);
@@ -1751,7 +1751,7 @@ describe('Bigtable/Instance', () => {
       instance
         .getTablesStream()
         .on('error', assert.ifError)
-        .on('data', table => {
+        .on('data', (table) => {
           tables.push(table);
         })
         .on('end', () => {
@@ -1763,7 +1763,7 @@ describe('Bigtable/Instance', () => {
         });
     });
 
-    it('should transform into Table objects', done => {
+    it('should transform into Table objects', (done) => {
       const returnStream = new PassThrough({
         objectMode: true,
       });
@@ -1785,7 +1785,7 @@ describe('Bigtable/Instance', () => {
       instance
         .getTablesStream()
         .on('error', assert.ifError)
-        .on('data', table => {
+        .on('data', (table) => {
           assert(table instanceof FakeTable);
           tables.push(table);
         })
@@ -1798,7 +1798,7 @@ describe('Bigtable/Instance', () => {
 
   describe('setIamPolicy', () => {
     const policy = {} as Policy;
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -1811,7 +1811,7 @@ describe('Bigtable/Instance', () => {
       instance.setIamPolicy(policy, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1821,7 +1821,7 @@ describe('Bigtable/Instance', () => {
       instance.setIamPolicy(policy, gaxOptions, assert.ifError);
     });
 
-    it('should pass policy to bigtable.request', done => {
+    it('should pass policy to bigtable.request', (done) => {
       const policy: Policy = {
         bindings: [
           {
@@ -1843,7 +1843,7 @@ describe('Bigtable/Instance', () => {
       instance.setIamPolicy(policy, assert.ifError);
     });
 
-    it('should encode policy etag', done => {
+    it('should encode policy etag', (done) => {
       const policy = {etag: 'ABS'};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1856,10 +1856,10 @@ describe('Bigtable/Instance', () => {
       instance.setIamPolicy(policy, assert.ifError);
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const error = new Error('error');
       sandbox.stub(instance.bigtable, 'request').callsArgWith(1, error);
-      instance.setIamPolicy(policy, err => {
+      instance.setIamPolicy(policy, (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1875,7 +1875,7 @@ describe('Bigtable/Instance', () => {
   });
 
   describe('setMetadata', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       const metadata = {displayName: 'updateDisplayName'};
       const expectedMetadata = {
         instance: {name: instance.name, displayName: 'updateDisplayName'},
@@ -1894,7 +1894,7 @@ describe('Bigtable/Instance', () => {
       instance.setMetadata(metadata, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1904,19 +1904,19 @@ describe('Bigtable/Instance', () => {
       instance.setMetadata({}, gaxOptions, assert.ifError);
     });
 
-    it('should update metadata property with API response', done => {
+    it('should update metadata property with API response', (done) => {
       const response = {};
       sandbox
         .stub(instance.bigtable, 'request')
         .callsArgWith(1, null, response);
-      instance.setMetadata({}, err => {
+      instance.setMetadata({}, (err) => {
         assert.ifError(err);
         assert.strictEqual(instance.metadata, response);
         done();
       });
     });
 
-    it('should execute callback with all arguments', done => {
+    it('should execute callback with all arguments', (done) => {
       const args = [{}, {}, {}];
       (instance.bigtable.request as Function) = (
         config: {},
@@ -1946,7 +1946,7 @@ describe('Bigtable/Instance', () => {
 
   describe('testIamPermissions', () => {
     const permissions = 'bigtable.tables.get';
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -1959,7 +1959,7 @@ describe('Bigtable/Instance', () => {
       instance.testIamPermissions(permissions, assert.ifError);
     });
 
-    it('should accept permissions as array', done => {
+    it('should accept permissions as array', (done) => {
       const permissions = ['bigtable.tables.get', 'bigtable.tables.list'];
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1969,7 +1969,7 @@ describe('Bigtable/Instance', () => {
       instance.testIamPermissions(permissions, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (instance.bigtable.request as Function) = (config: any) => {
@@ -1979,7 +1979,7 @@ describe('Bigtable/Instance', () => {
       instance.testIamPermissions(permissions, gaxOptions, assert.ifError);
     });
 
-    it('should unpack permissions from resp object', done => {
+    it('should unpack permissions from resp object', (done) => {
       const testPermissions = ['bigtable.tables.get', 'bigtable.tables.list'];
       (instance.bigtable.request as Function) = (
         config: {},
@@ -1995,11 +1995,11 @@ describe('Bigtable/Instance', () => {
       });
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const permission = 'bigtable.tables.get';
       const error = new Error('error');
       sandbox.stub(instance.bigtable, 'request').callsArgWith(1, error);
-      instance.testIamPermissions(permission, err => {
+      instance.testIamPermissions(permission, (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -2065,7 +2065,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
   });
 
   describe('execute', () => {
-    it('parses non-composite types', done => {
+    it('parses non-composite types', (done) => {
       const preparedStatement = createPreparedStatement(
         ['int64', pbType({int64Type: {}})],
         ['float64', pbType({float64Type: {}})],
@@ -2119,7 +2119,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('parses multiple rows', done => {
+    it('parses multiple rows', (done) => {
       const preparedStatement = createPreparedStatement([
         'f1',
         pbType({int64Type: {}}),
@@ -2145,7 +2145,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('handles nulls properly', done => {
+    it('handles nulls properly', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -2192,7 +2192,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('handles nulls for all types', done => {
+    it('handles nulls for all types', (done) => {
       const preparedStatement = createPreparedStatement(
         ['int64', pbType({int64Type: {}})],
         ['float64', pbType({float64Type: {}})],
@@ -2332,7 +2332,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('parses multiple rows in one batch', done => {
+    it('parses multiple rows in one batch', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -2382,7 +2382,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('parses an array of ints', done => {
+    it('parses an array of ints', (done) => {
       const preparedStatement = createPreparedStatement([
         'f1',
         pbType({arrayType: {elementType: pbType({int64Type: {}})}}),
@@ -2413,7 +2413,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('parses a struct', done => {
+    it('parses a struct', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         [
@@ -2469,7 +2469,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('parses a map', done => {
+    it('parses a map', (done) => {
       const preparedStatement = createPreparedStatement([
         'f1',
         pbType({
@@ -2550,7 +2550,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('map retains last encountered value for duplicate key', done => {
+    it('map retains last encountered value for duplicate key', (done) => {
       const preparedStatement = createPreparedStatement([
         'f1',
         pbType({
@@ -2603,7 +2603,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('accessing duplicated struct field throws', done => {
+    it('accessing duplicated struct field throws', (done) => {
       const preparedStatement = createPreparedStatement([
         'structColumn',
         pbType({
@@ -2642,7 +2642,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('unsupported kind in metadata is detected', done => {
+    it('unsupported kind in metadata is detected', (done) => {
       const type = {kind: 'unknown-type'};
       const BIGTABLE2 = {
         projectName: 'projects/my-project2',
@@ -2666,7 +2666,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('unsupported map key type throws', done => {
+    it('unsupported map key type throws', (done) => {
       const BIGTABLE2 = {
         projectName: 'projects/my-project2',
         projectId: 'my-project2',
@@ -2692,7 +2692,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('map with null key is rejected', done => {
+    it('map with null key is rejected', (done) => {
       const preparedStatement = createPreparedStatement([
         'map',
         pbType({
@@ -2721,7 +2721,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('map with null value is ok', done => {
+    it('map with null value is ok', (done) => {
       const preparedStatement = createPreparedStatement([
         'map',
         pbType({
@@ -2750,7 +2750,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('bigints are correctly converted to longs', done => {
+    it('bigints are correctly converted to longs', (done) => {
       const preparedStatement = new PreparedStatement(
         BIGTABLE,
         createPrepareQueryResponse(['f', pbType({int64Type: {}})]),
@@ -2782,7 +2782,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
             k: BigInt('-9223372036854775808'), // - 2^63
           },
         } as any,
-        err => {
+        (err) => {
           assert.equal(err, null);
           assert.strictEqual(requests.length, 1);
           const reqOpts = requests[0]
@@ -3052,7 +3052,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('null value is accepted', done => {
+    it('null value is accepted', (done) => {
       const preparedStatement = new PreparedStatement(
         BIGTABLE,
         createPrepareQueryResponse(['f', pbType({int64Type: {}})]),
@@ -3080,7 +3080,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('parameter type is used for null', done => {
+    it('parameter type is used for null', (done) => {
       const preparedStatement = new PreparedStatement(
         BIGTABLE,
         createPrepareQueryResponse(['f', pbType({int64Type: {}})]),
@@ -3174,7 +3174,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('duplicate struct field names are not accessible by name', done => {
+    it('duplicate struct field names are not accessible by name', (done) => {
       const preparedStatement = createPreparedStatement([
         's',
         pbType({
@@ -3207,7 +3207,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('duplicate row field names are not accessible by name', done => {
+    it('duplicate row field names are not accessible by name', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -3251,7 +3251,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       );
     });
 
-    it('unfinished batch is detected', done => {
+    it('unfinished batch is detected', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -3266,7 +3266,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('token without batch ending detected', done => {
+    it('token without batch ending detected', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -3281,7 +3281,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('reset works', done => {
+    it('reset works', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -3323,7 +3323,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('partial row after token detected', done => {
+    it('partial row after token detected', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -3345,7 +3345,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('partial row after batch checksum detected', done => {
+    it('partial row after batch checksum detected', (done) => {
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],
         ['f2', pbType({int64Type: {}})],
@@ -3368,7 +3368,7 @@ describe('Bigtable/ExecuteQueryInstance', () => {
       });
     });
 
-    it('cheksum fail detected', done => {
+    it('cheksum fail detected', (done) => {
       checksumIsValid = false;
       const preparedStatement = createPreparedStatement(
         ['f1', pbType({int64Type: {}})],

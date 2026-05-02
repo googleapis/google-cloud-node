@@ -377,7 +377,7 @@ export class MetricsServiceV2Client {
     ];
     for (const methodName of metricsServiceV2StubMethods) {
       const callPromise = this.metricsServiceV2Stub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2713,7 +2713,7 @@ export class MetricsServiceV2Client {
    */
   close(): Promise<void> {
     if (this.metricsServiceV2Stub && !this._terminated) {
-      return this.metricsServiceV2Stub.then(stub => {
+      return this.metricsServiceV2Stub.then((stub) => {
         this._terminated = true;
         stub.close();
       });

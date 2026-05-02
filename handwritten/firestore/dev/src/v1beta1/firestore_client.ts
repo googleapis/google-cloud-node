@@ -330,7 +330,7 @@ export class FirestoreClient {
     ];
     for (const methodName of firestoreStubMethods) {
       const callPromise = this.firestoreStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -551,7 +551,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getDocument request %j', request);
@@ -696,7 +696,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         'document.name': request.document!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('updateDocument request %j', request);
@@ -828,7 +828,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteDocument request %j', request);
@@ -966,7 +966,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('beginTransaction request %j', request);
@@ -1099,7 +1099,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('commit request %j', request);
@@ -1226,7 +1226,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('rollback request %j', request);
@@ -1367,7 +1367,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchWrite request %j', request);
@@ -1509,7 +1509,7 @@ export class FirestoreClient {
         parent: request.parent ?? '',
         collection_id: request.collectionId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createDocument request %j', request);
@@ -1609,7 +1609,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchGetDocuments stream %j', options);
@@ -1661,7 +1661,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('runQuery stream %j', options);
@@ -1683,7 +1683,7 @@ export class FirestoreClient {
    * region_tag:firestore_v1beta1_generated_Firestore_Write_async
    */
   write(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('write stream %j', options);
@@ -1705,7 +1705,7 @@ export class FirestoreClient {
    * region_tag:firestore_v1beta1_generated_Firestore_Listen_async
    */
   listen(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listen stream %j', options);
@@ -1829,7 +1829,7 @@ export class FirestoreClient {
         parent: request.parent ?? '',
         collection_id: request.collectionId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1925,7 +1925,7 @@ export class FirestoreClient {
       });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listDocuments stream %j', request);
@@ -2003,7 +2003,7 @@ export class FirestoreClient {
       });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listDocuments iterate %j', request);
@@ -2144,7 +2144,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -2246,7 +2246,7 @@ export class FirestoreClient {
       });
     const defaultCallSettings = this._defaults['partitionQuery'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('partitionQuery stream %j', request);
@@ -2330,7 +2330,7 @@ export class FirestoreClient {
       });
     const defaultCallSettings = this._defaults['partitionQuery'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('partitionQuery iterate %j', request);
@@ -2438,7 +2438,7 @@ export class FirestoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -2509,7 +2509,7 @@ export class FirestoreClient {
       });
     const defaultCallSettings = this._defaults['listCollectionIds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listCollectionIds stream %j', request);
@@ -2562,7 +2562,7 @@ export class FirestoreClient {
       });
     const defaultCallSettings = this._defaults['listCollectionIds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listCollectionIds iterate %j', request);
@@ -2581,7 +2581,7 @@ export class FirestoreClient {
    */
   close(): Promise<void> {
     if (this.firestoreStub && !this._terminated) {
-      return this.firestoreStub.then(stub => {
+      return this.firestoreStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

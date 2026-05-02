@@ -1035,7 +1035,7 @@ class Transaction extends DatastoreRequest {
         }
       }
       return fn();
-    })().catch(err => {
+    })().catch((err) => {
       throw err;
     });
   }
@@ -1062,7 +1062,7 @@ class Transaction extends DatastoreRequest {
       } else {
         fn();
       }
-    })().catch(err => {
+    })().catch((err) => {
       throw err;
     });
   }

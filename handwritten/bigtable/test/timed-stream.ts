@@ -72,7 +72,7 @@ describe('Bigtable/TimedStream', () => {
         timedStream.on('data', async (chunk: any) => {
           // Simulate 1 second of busy work
           const sleep = (ms: number) =>
-            new Promise(resolve => setTimeout(resolve, ms));
+            new Promise((resolve) => setTimeout(resolve, ms));
           await sleep(1000);
         });
         timedStream.on('end', () => {
@@ -99,7 +99,7 @@ describe('Bigtable/TimedStream', () => {
             /* empty */
           }
           const sleep = (ms: number) =>
-            new Promise(resolve => setTimeout(resolve, ms));
+            new Promise((resolve) => setTimeout(resolve, ms));
           await sleep(1000);
         });
         timedStream.on('end', () => {
@@ -124,7 +124,7 @@ describe('Bigtable/TimedStream', () => {
           const startTime = Date.now();
           // Simulate 1 second of busy work
           const sleep = (ms: number) =>
-            new Promise(resolve => setTimeout(resolve, ms));
+            new Promise((resolve) => setTimeout(resolve, ms));
           await sleep(1000);
           // Simulate 1 second of busy work
           while (Date.now() - startTime < 1000) {
@@ -145,7 +145,7 @@ describe('Bigtable/TimedStream', () => {
     describe('with delay from server', () => {
       it('should measure the total time accurately for a series of 10 rows', function (done) {
         this.timeout(200000);
-        const dataEvents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i =>
+        const dataEvents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
           i.toString(),
         );
         const sourceStream = new PassThrough();
@@ -192,7 +192,7 @@ describe('Bigtable/TimedStream', () => {
         for (let i = 0; i < 40; i++) {
           eventNumbers.push(i);
         }
-        const dataEvents = eventNumbers.map(i => i.toString());
+        const dataEvents = eventNumbers.map((i) => i.toString());
         const sourceStream = new PassThrough();
         const timedStream = new UserStream();
         // @ts-ignore
@@ -263,7 +263,7 @@ describe('Bigtable/TimedStream', () => {
         for await (const chunk of timedStream as unknown as PassThrough) {
           // Simulate 1 second of busy work
           const sleep = (ms: number) =>
-            new Promise(resolve => setTimeout(resolve, ms));
+            new Promise((resolve) => setTimeout(resolve, ms));
           await sleep(1000);
         }
         const totalMilliseconds = timedStream.getTotalDurationMs();
@@ -273,7 +273,7 @@ describe('Bigtable/TimedStream', () => {
     describe('with delay from server', () => {
       it('should measure the total time accurately for a series of 10 rows', function (done) {
         this.timeout(200000);
-        const dataEvents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i =>
+        const dataEvents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
           i.toString(),
         );
         const sourceStream = new PassThrough();
@@ -317,7 +317,7 @@ describe('Bigtable/TimedStream', () => {
         for (let i = 0; i < 40; i++) {
           eventNumbers.push(i);
         }
-        const dataEvents = eventNumbers.map(i => i.toString());
+        const dataEvents = eventNumbers.map((i) => i.toString());
         const sourceStream = new PassThrough();
         const timedStream = new UserStream();
         // @ts-ignore

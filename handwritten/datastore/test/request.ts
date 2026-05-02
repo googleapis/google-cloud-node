@@ -139,7 +139,7 @@ describe('Request', () => {
 
     it('should throw if the key is complete', () => {
       sandbox.stub(entity, 'keyToKeyProto');
-      sandbox.stub(entity, 'isKeyComplete').callsFake(key => {
+      sandbox.stub(entity, 'isKeyComplete').callsFake((key) => {
         assert.strictEqual(key, INCOMPLETE_KEY);
         return true;
       });
@@ -149,10 +149,10 @@ describe('Request', () => {
       }, new RegExp('An incomplete key should be provided.'));
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const keyProto = {} as KeyProto;
       sandbox.stub(entity, 'isKeyComplete');
-      sandbox.stub(entity, 'keyToKeyProto').callsFake(key => {
+      sandbox.stub(entity, 'keyToKeyProto').callsFake((key) => {
         assert.strictEqual(key, INCOMPLETE_KEY);
         return keyProto;
       });
@@ -172,7 +172,7 @@ describe('Request', () => {
       request.allocateIds(INCOMPLETE_KEY, OPTIONS, assert.ifError);
     });
 
-    it('should allow a numeric shorthand for allocations', done => {
+    it('should allow a numeric shorthand for allocations', (done) => {
       sandbox.stub(entity, 'isKeyComplete');
       sandbox.stub(entity, 'keyToKeyProto');
       request.request_ = (config: RequestConfig) => {
@@ -182,7 +182,7 @@ describe('Request', () => {
       request.allocateIds(INCOMPLETE_KEY, ALLOCATIONS, assert.ifError);
     });
 
-    it('should allow customization of GAX options', done => {
+    it('should allow customization of GAX options', (done) => {
       sandbox.stub(entity, 'isKeyComplete');
       sandbox.stub(entity, 'keyToKeyProto');
       const options = Object.assign({}, OPTIONS, {
@@ -207,7 +207,7 @@ describe('Request', () => {
         };
       });
 
-      it('should exec callback with error & API response', done => {
+      it('should exec callback with error & API response', (done) => {
         sandbox.stub(entity, 'isKeyComplete');
         sandbox.stub(entity, 'keyToKeyProto');
         request.allocateIds(
@@ -235,11 +235,11 @@ describe('Request', () => {
         };
       });
 
-      it('should create and return Keys & API response', done => {
+      it('should create and return Keys & API response', (done) => {
         const key = {} as entity.Key;
         sandbox.stub(entity, 'isKeyComplete');
         sandbox.stub(entity, 'keyToKeyProto');
-        sandbox.stub(entity, 'keyFromKeyProto').callsFake(keyProto => {
+        sandbox.stub(entity, 'keyFromKeyProto').callsFake((keyProto) => {
           assert.strictEqual(keyProto, API_RESPONSE.keys[0]);
           return key;
         });
@@ -268,8 +268,8 @@ describe('Request', () => {
       }, /At least one Key object is required/);
     });
 
-    it('should convert key to key proto', done => {
-      sandbox.stub(entity, 'keyToKeyProto').callsFake(key_ => {
+    it('should convert key to key proto', (done) => {
+      sandbox.stub(entity, 'keyToKeyProto').callsFake((key_) => {
         assert.strictEqual(key_, key);
         done();
         return {} as KeyProto;
@@ -278,7 +278,7 @@ describe('Request', () => {
       request.createReadStream(key).on('error', done);
     });
 
-    it('should make correct request when stream is ready', done => {
+    it('should make correct request when stream is ready', (done) => {
       request.request_ = (config: RequestConfig) => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'lookup');
@@ -292,7 +292,7 @@ describe('Request', () => {
       stream.emit('reading');
     });
 
-    it('should allow customization of GAX options', done => {
+    it('should allow customization of GAX options', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -305,7 +305,7 @@ describe('Request', () => {
       request.createReadStream(key, options).on('error', done).emit('reading');
     });
 
-    it('should allow setting strong read consistency', done => {
+    it('should allow setting strong read consistency', (done) => {
       request.request_ = (config: RequestConfig) => {
         assert.strictEqual(config.reqOpts!.readOptions!.readConsistency, 1);
         done();
@@ -317,7 +317,7 @@ describe('Request', () => {
         .emit('reading');
     });
 
-    it('should allow setting strong eventual consistency', done => {
+    it('should allow setting strong eventual consistency', (done) => {
       request.request_ = (config: RequestConfig) => {
         assert.strictEqual(config.reqOpts!.readOptions!.readConsistency, 2);
         done();
@@ -341,7 +341,7 @@ describe('Request', () => {
         };
       });
 
-      it('should emit error', done => {
+      it('should emit error', (done) => {
         request
           .createReadStream(key)
           .on('data', () => {})
@@ -351,7 +351,7 @@ describe('Request', () => {
           });
       });
 
-      it('should end stream', done => {
+      it('should end stream', (done) => {
         const stream = request.createReadStream(key);
         stream
           .on('data', () => {})
@@ -363,7 +363,7 @@ describe('Request', () => {
           });
       });
 
-      it('should emit an error from results decoding', done => {
+      it('should emit an error from results decoding', (done) => {
         const largeInt = '922337203685477850';
         const propertyName = 'points';
         request.request_ = (config: RequestConfig, callback: Function) => {
@@ -467,8 +467,8 @@ describe('Request', () => {
         };
       });
 
-      it('should format the results', done => {
-        sandbox.stub(entity, 'formatArray').callsFake(arr => {
+      it('should format the results', (done) => {
+        sandbox.stub(entity, 'formatArray').callsFake((arr) => {
           assert.strictEqual(arr, apiResponse.found);
           setImmediate(done);
           return arr;
@@ -484,7 +484,7 @@ describe('Request', () => {
         beforeEach(() => {
           formtArrayStub = sandbox
             .stub(entity, 'formatArray')
-            .callsFake(arr => {
+            .callsFake((arr) => {
               assert.strictEqual(arr, apiResponse.found);
               return arr;
             });
@@ -494,7 +494,7 @@ describe('Request', () => {
           formtArrayStub.restore();
         });
 
-        it('should pass `wrapNumbers` to formatArray as undefined by default', done => {
+        it('should pass `wrapNumbers` to formatArray as undefined by default', (done) => {
           request.createReadStream(key).on('error', done).resume();
 
           setImmediate(() => {
@@ -504,7 +504,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to formatArray as bolean', done => {
+        it('should pass `wrapNumbers` to formatArray as bolean', (done) => {
           request
             .createReadStream(key, {wrapNumbers: true})
             .on('error', done)
@@ -517,7 +517,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to formatArray as IntegerTypeCastOptions', done => {
+        it('should pass `wrapNumbers` to formatArray as IntegerTypeCastOptions', (done) => {
           const integerTypeCastOptions = {
             integerTypeCastFunction: () => {},
             properties: 'that',
@@ -537,7 +537,7 @@ describe('Request', () => {
         });
       });
 
-      it('should continue looking for deferred results', done => {
+      it('should continue looking for deferred results', (done) => {
         let numTimesCalled = 0;
 
         request.request_ = (config: RequestConfig, callback: Function) => {
@@ -559,7 +559,7 @@ describe('Request', () => {
         request.createReadStream(key).on('error', done).emit('reading');
       });
 
-      it('should push results to the stream', done => {
+      it('should push results to the stream', (done) => {
         request
           .createReadStream(key)
           .on('error', done)
@@ -570,7 +570,7 @@ describe('Request', () => {
           .emit('reading');
       });
 
-      it('should not push more results if stream was ended', done => {
+      it('should not push more results if stream was ended', (done) => {
         let entitiesEmitted = 0;
 
         request.request_ = (config: RequestConfig, callback: Function) => {
@@ -592,7 +592,7 @@ describe('Request', () => {
           .emit('reading');
       });
 
-      it('should not get more results if stream was ended', done => {
+      it('should not get more results if stream was ended', (done) => {
         let lookupCount = 0;
 
         request.request_ = (config: RequestConfig, callback: Function) => {
@@ -616,7 +616,7 @@ describe('Request', () => {
   });
 
   describe('delete', () => {
-    it('should delete by key', done => {
+    it('should delete by key', (done) => {
       request.request_ = (config: RequestConfig, callback: Function) => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'commit');
@@ -626,7 +626,7 @@ describe('Request', () => {
       request.delete(key, done);
     });
 
-    it('should return apiResponse in callback', done => {
+    it('should return apiResponse in callback', (done) => {
       const resp = {success: true};
       request.request_ = (config: RequestConfig, callback: Function) => {
         callback(null!, resp);
@@ -641,7 +641,7 @@ describe('Request', () => {
       );
     });
 
-    it('should multi delete by keys', done => {
+    it('should multi delete by keys', (done) => {
       request.request_ = (config: RequestConfig, callback: Function) => {
         assert.strictEqual(config.reqOpts!.mutations!.length, 2);
         callback(null!);
@@ -649,7 +649,7 @@ describe('Request', () => {
       request.delete([key, key], done);
     });
 
-    it('should allow customization of GAX options', done => {
+    it('should allow customization of GAX options', (done) => {
       const gaxOptions = {};
       request.request_ = (config: RequestConfig) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
@@ -673,7 +673,7 @@ describe('Request', () => {
   });
 
   describe('get', () => {
-    it('should pass along readTime for reading snapshots', done => {
+    it('should pass along readTime for reading snapshots', (done) => {
       const savedTime = Date.now();
       request.request_ = (config: RequestConfig, callback: RequestCallback) => {
         assert.deepStrictEqual(config, {
@@ -722,14 +722,14 @@ describe('Request', () => {
         request.createReadStream = sandbox.spy(() => {
           const stream = new Transform({objectMode: true});
           setImmediate(() => {
-            fakeEntities.forEach(entity => stream.push(entity));
+            fakeEntities.forEach((entity) => stream.push(entity));
             stream.push(null);
           });
           return stream;
         });
       });
 
-      it('should return an array of entities', done => {
+      it('should return an array of entities', (done) => {
         const options = {};
 
         request.get(keys, options, (err: Error, entities: Entity[]) => {
@@ -742,7 +742,7 @@ describe('Request', () => {
         });
       });
 
-      it('should return a single entity', done => {
+      it('should return a single entity', (done) => {
         request.get(key, (err: Error, entity: Entity) => {
           assert.ifError(err);
           assert.strictEqual(entity, fakeEntities[0]);
@@ -750,14 +750,14 @@ describe('Request', () => {
         });
       });
 
-      it('should allow options to be omitted', done => {
+      it('should allow options to be omitted', (done) => {
         request.get(keys, (err: Error) => {
           assert.ifError(err);
           done();
         });
       });
 
-      it('should default options to an object', done => {
+      it('should default options to an object', (done) => {
         request.get(keys, null!, (err: Error) => {
           assert.ifError(err);
           const spy = (request.createReadStream as Any).getCall(0);
@@ -767,7 +767,7 @@ describe('Request', () => {
       });
 
       describe('should pass `wrapNumbers` to createReadStream', () => {
-        it('should pass `wrapNumbers` to createReadStream as undefined by default', done => {
+        it('should pass `wrapNumbers` to createReadStream as undefined by default', (done) => {
           request.get(keys, (err: Error) => {
             assert.ifError(err);
 
@@ -778,7 +778,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to createReadStream as boolean', done => {
+        it('should pass `wrapNumbers` to createReadStream as boolean', (done) => {
           request.get(keys, {wrapNumbers: true}, (err: Error) => {
             assert.ifError(err);
 
@@ -792,7 +792,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to createReadStream as IntegerTypeCastOptions', done => {
+        it('should pass `wrapNumbers` to createReadStream as IntegerTypeCastOptions', (done) => {
           const integerTypeCastOptions = {
             integerTypeCastFunction: () => {},
             properties: 'that',
@@ -834,7 +834,7 @@ describe('Request', () => {
         });
       });
 
-      it('send an error to the callback', done => {
+      it('send an error to the callback', (done) => {
         request.get(key, (err: Error) => {
           assert.strictEqual(err, error);
           done();
@@ -848,12 +848,12 @@ describe('Request', () => {
       request.request_ = () => {};
     });
 
-    it('should clone the query', done => {
+    it('should clone the query', (done) => {
       let query = new FakeQuery();
       query.namespace = 'namespace';
       query = extend(true, new FakeQuery(), query);
 
-      sandbox.stub(entity, 'queryToQueryProto').callsFake(query_ => {
+      sandbox.stub(entity, 'queryToQueryProto').callsFake((query_) => {
         assert.notStrictEqual(query_, query);
         assert.deepStrictEqual(query_, query);
         done();
@@ -863,7 +863,7 @@ describe('Request', () => {
       request.runQueryStream(query).on('error', done).emit('reading');
     });
 
-    it('should make correct request when the stream is ready', done => {
+    it('should make correct request when the stream is ready', (done) => {
       const query = {namespace: 'namespace'};
       const queryProto = {} as QueryProto;
 
@@ -886,7 +886,7 @@ describe('Request', () => {
       request.runQueryStream(query).on('error', done).emit('reading');
     });
 
-    it('should allow customization of GAX options', done => {
+    it('should allow customization of GAX options', (done) => {
       sandbox.stub(entity, 'queryToQueryProto');
       const options = {
         gaxOptions: {},
@@ -900,7 +900,7 @@ describe('Request', () => {
       request.runQueryStream({}, options).on('error', done).emit('reading');
     });
 
-    it('should allow setting strong read consistency', done => {
+    it('should allow setting strong read consistency', (done) => {
       sandbox.stub(entity, 'queryToQueryProto');
       request.request_ = (config: RequestConfig) => {
         assert.strictEqual(config.reqOpts!.readOptions!.readConsistency, 1);
@@ -913,7 +913,7 @@ describe('Request', () => {
         .emit('reading');
     });
 
-    it('should allow setting strong eventual consistency', done => {
+    it('should allow setting strong eventual consistency', (done) => {
       sandbox.stub(entity, 'queryToQueryProto');
       request.request_ = (config: RequestConfig) => {
         assert.strictEqual(config.reqOpts!.readOptions!.readConsistency, 2);
@@ -935,7 +935,7 @@ describe('Request', () => {
         };
       });
 
-      it('should emit error on a stream', done => {
+      it('should emit error on a stream', (done) => {
         sandbox.stub(entity, 'queryToQueryProto');
         request
           .runQueryStream({})
@@ -946,7 +946,7 @@ describe('Request', () => {
           .emit('reading');
       });
 
-      it('should emit an error when encoding fails', done => {
+      it('should emit an error when encoding fails', (done) => {
         const error = new Error('Encoding error.');
         sandbox.stub(entity, 'queryToQueryProto').throws(error);
         request
@@ -958,7 +958,7 @@ describe('Request', () => {
           .emit('reading');
       });
 
-      it('should emit an error from results decoding', done => {
+      it('should emit an error from results decoding', (done) => {
         const largeInt = '922337203685477850';
         const propertyName = 'points';
         sandbox.stub(entity, 'queryToQueryProto');
@@ -1022,15 +1022,15 @@ describe('Request', () => {
 
         formatArrayStub = sandbox
           .stub(entity, 'formatArray')
-          .callsFake(array => {
+          .callsFake((array) => {
             return array;
           });
       });
 
-      it('should format results', done => {
+      it('should format results', (done) => {
         sandbox.stub(entity, 'queryToQueryProto');
         formatArrayStub.restore();
-        sandbox.stub(entity, 'formatArray').callsFake(array => {
+        sandbox.stub(entity, 'formatArray').callsFake((array) => {
           assert.strictEqual(array, apiResponse.batch.entityResults);
           return array;
         });
@@ -1055,12 +1055,12 @@ describe('Request', () => {
           formatArrayStub.restore();
           formatArrayStub = sandbox
             .stub(entity, 'formatArray')
-            .callsFake(array => {
+            .callsFake((array) => {
               return array;
             });
         });
 
-        it('should pass `wrapNumbers` to formatArray as undefined by default', done => {
+        it('should pass `wrapNumbers` to formatArray as undefined by default', (done) => {
           request.runQueryStream({}).on('error', assert.ifError).resume();
 
           setImmediate(() => {
@@ -1070,7 +1070,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to formatArray as boolean', done => {
+        it('should pass `wrapNumbers` to formatArray as boolean', (done) => {
           request
             .runQueryStream({}, {wrapNumbers: true})
             .on('error', assert.ifError)
@@ -1083,7 +1083,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to formatArray as IntegerTypeCastOptions', done => {
+        it('should pass `wrapNumbers` to formatArray as IntegerTypeCastOptions', (done) => {
           const integerTypeCastOptions = {
             integerTypeCastFunction: () => {},
             properties: 'that',
@@ -1103,7 +1103,7 @@ describe('Request', () => {
         });
       });
 
-      it('should re-run query if not finished', done => {
+      it('should re-run query if not finished', (done) => {
         const query = {
           limitVal: 1,
           offsetVal: 8,
@@ -1119,7 +1119,7 @@ describe('Request', () => {
         let offsetCalled = false;
 
         formatArrayStub.restore();
-        sandbox.stub(entity, 'formatArray').callsFake(array => {
+        sandbox.stub(entity, 'formatArray').callsFake((array) => {
           assert.strictEqual(
             array,
             entityResultsPerApiCall[timesRequestCalled],
@@ -1157,14 +1157,14 @@ describe('Request', () => {
           return this;
         };
 
-        sandbox.stub(FakeQuery.prototype, 'offset').callsFake(offset_ => {
+        sandbox.stub(FakeQuery.prototype, 'offset').callsFake((offset_) => {
           const offset = query.offsetVal - apiResponse.batch.skippedResults;
           assert.strictEqual(offset_, offset);
           offsetCalled = true;
           return {} as FakeQuery;
         });
 
-        sandbox.stub(FakeQuery.prototype, 'limit').callsFake(limit_ => {
+        sandbox.stub(FakeQuery.prototype, 'limit').callsFake((limit_) => {
           if (timesRequestCalled === 1) {
             assert.strictEqual(
               limit_,
@@ -1177,7 +1177,7 @@ describe('Request', () => {
           return {} as FakeQuery;
         });
 
-        sandbox.stub(entity, 'queryToQueryProto').callsFake(query_ => {
+        sandbox.stub(entity, 'queryToQueryProto').callsFake((query_) => {
           if (timesRequestCalled > 1) {
             assert.strictEqual(query_, query);
           }
@@ -1212,7 +1212,7 @@ describe('Request', () => {
           });
       });
 
-      it('should handle large limitless queries', done => {
+      it('should handle large limitless queries', (done) => {
         let timesRequestCalled = 0;
 
         const query = {
@@ -1246,7 +1246,7 @@ describe('Request', () => {
           });
       });
 
-      it('should not push more results if stream was ended', done => {
+      it('should not push more results if stream was ended', (done) => {
         let timesRequestCalled = 0;
         let entitiesEmitted = 0;
 
@@ -1280,7 +1280,7 @@ describe('Request', () => {
           });
       });
 
-      it('should not get more results if stream was ended', done => {
+      it('should not get more results if stream was ended', (done) => {
         let timesRequestCalled = 0;
         sandbox.stub(entity, 'queryToQueryProto');
         request.request_ = (config: RequestConfig, callback: Function) => {
@@ -1314,7 +1314,7 @@ describe('Request', () => {
           setImmediate(() => {
             stream.emit('info', fakeInfo);
 
-            fakeEntities.forEach(entity => {
+            fakeEntities.forEach((entity) => {
               stream.push(entity);
             });
 
@@ -1325,7 +1325,7 @@ describe('Request', () => {
         });
       });
 
-      it('should return an array of entities', done => {
+      it('should return an array of entities', (done) => {
         const options = {};
 
         request.runQuery(
@@ -1345,7 +1345,7 @@ describe('Request', () => {
       });
 
       describe('should pass `wrapNumbers` to runQueryStream', () => {
-        it('should pass `wrapNumbers` to runQueryStream as undefined by default', done => {
+        it('should pass `wrapNumbers` to runQueryStream as undefined by default', (done) => {
           request.runQuery(query, (err: Error) => {
             assert.ifError(err);
 
@@ -1355,7 +1355,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to runQueryStream boolean', done => {
+        it('should pass `wrapNumbers` to runQueryStream boolean', (done) => {
           request.runQuery(query, {wrapNumbers: true}, (err: Error) => {
             assert.ifError(err);
 
@@ -1365,7 +1365,7 @@ describe('Request', () => {
           });
         });
 
-        it('should pass `wrapNumbers` to runQueryStream as IntegerTypeCastOptions', done => {
+        it('should pass `wrapNumbers` to runQueryStream as IntegerTypeCastOptions', (done) => {
           const integerTypeCastOptions = {
             integerTypeCastFunction: () => {},
             properties: 'that',
@@ -1392,14 +1392,14 @@ describe('Request', () => {
         });
       });
 
-      it('should allow options to be omitted', done => {
+      it('should allow options to be omitted', (done) => {
         request.runQuery(query, (err: Error) => {
           assert.ifError(err);
           done();
         });
       });
 
-      it('should default options to an object', done => {
+      it('should default options to an object', (done) => {
         request.runQuery(query, null, (err: Error) => {
           assert.ifError(err);
 
@@ -1425,7 +1425,7 @@ describe('Request', () => {
         });
       });
 
-      it('send an error to the callback', done => {
+      it('send an error to the callback', (done) => {
         request.runQuery(query, (err: Error) => {
           assert.strictEqual(err, error);
           done();
@@ -1486,7 +1486,7 @@ describe('Request', () => {
 
     afterEach(() => sandbox.restore());
 
-    it('should return merge object for entity', done => {
+    it('should return merge object for entity', (done) => {
       const updatedEntityObject = {
         status: 'merged',
       };
@@ -1501,7 +1501,7 @@ describe('Request', () => {
       request.merge({key, data: updatedEntityObject}, done);
     });
 
-    it('should return merge objects for entities', done => {
+    it('should return merge objects for entities', (done) => {
       const updatedEntityObject = [
         {
           id: 1,
@@ -1532,7 +1532,7 @@ describe('Request', () => {
       );
     });
 
-    it('transaction should rollback if error on transaction run!', done => {
+    it('transaction should rollback if error on transaction run!', (done) => {
       sandbox
         .stub(transaction, 'run')
         .callsFake((gaxOption, callback?: Function) => {
@@ -1546,7 +1546,7 @@ describe('Request', () => {
       });
     });
 
-    it('transaction should rollback if error for for transaction get!', done => {
+    it('transaction should rollback if error for for transaction get!', (done) => {
       sandbox.stub(transaction, 'get').rejects(new Error('Error'));
 
       request.merge({key, data: null}, (err: Error) => {
@@ -1555,7 +1555,7 @@ describe('Request', () => {
       });
     });
 
-    it('transaction should rollback if error for for transaction commit!', done => {
+    it('transaction should rollback if error for for transaction commit!', (done) => {
       sandbox.stub(transaction, 'commit').rejects(new Error('Error'));
 
       request.merge({key, data: null}, (err: Error) => {
@@ -1564,7 +1564,7 @@ describe('Request', () => {
       });
     });
 
-    it('should avoid the rollback exception in transaction.run', done => {
+    it('should avoid the rollback exception in transaction.run', (done) => {
       sandbox
         .stub(transaction, 'run')
         .callsFake((gaxOption, callback?: Function) => {
@@ -1582,7 +1582,7 @@ describe('Request', () => {
       });
     });
 
-    it('should avoid the rollback exception in transaction.get/commit', done => {
+    it('should avoid the rollback exception in transaction.get/commit', (done) => {
       sandbox.restore();
       sandbox.stub(transaction, 'get').rejects(new Error('Error.'));
 
@@ -1628,14 +1628,14 @@ describe('Request', () => {
       };
     });
 
-    it('should get the project ID', done => {
+    it('should get the project ID', (done) => {
       request.datastore.auth.getProjectId = () => {
         done();
       };
       request.prepareGaxRequest_(CONFIG, assert.ifError);
     });
 
-    it('should return error if getting project ID failed', done => {
+    it('should return error if getting project ID failed', (done) => {
       const error = new Error('Error.');
 
       request.datastore.auth.getProjectId = (callback: Function) => {
@@ -1661,7 +1661,7 @@ describe('Request', () => {
       assert.strictEqual(client, fakeClient);
     });
 
-    it('should return the cached client', done => {
+    it('should return the cached client', (done) => {
       v1FakeClientOverride = () => {
         done(new Error('Should not re-instantiate a GAX client.'));
       };
@@ -1673,7 +1673,7 @@ describe('Request', () => {
       });
     });
 
-    it('should send gaxOpts', done => {
+    it('should send gaxOpts', (done) => {
       request.datastore.clients_ = new Map();
       request.datastore.clients_.set(CONFIG.client, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1690,7 +1690,7 @@ describe('Request', () => {
       });
     });
 
-    it('should send google-cloud-resource-prefix', done => {
+    it('should send google-cloud-resource-prefix', (done) => {
       request.datastore.clients_ = new Map();
       request.datastore.clients_.set(CONFIG.client, {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1709,7 +1709,7 @@ describe('Request', () => {
     });
 
     describe('commit', () => {
-      it('should set the mode', done => {
+      it('should set the mode', (done) => {
         request.datastore.clients_ = new Map();
         request.datastore.clients_.set(CONFIG.client, {
           commit(reqOpts: RequestOptions) {
@@ -1737,7 +1737,7 @@ describe('Request', () => {
         request.id = TRANSACTION_ID;
       });
 
-      it('should set the commit transaction info', done => {
+      it('should set the commit transaction info', (done) => {
         request.datastore.clients_ = new Map();
         request.datastore.clients_.set(CONFIG.client, {
           commit(reqOpts: RequestOptions) {
@@ -1759,7 +1759,7 @@ describe('Request', () => {
         );
       });
 
-      it('should set the rollback transaction info', done => {
+      it('should set the rollback transaction info', (done) => {
         request.datastore.clients_ = new Map();
         request.datastore.clients_.set(CONFIG.client, {
           rollback(reqOpts: RequestOptions) {
@@ -1780,7 +1780,7 @@ describe('Request', () => {
         );
       });
 
-      it('should set the lookup transaction info', done => {
+      it('should set the lookup transaction info', (done) => {
         const config = extend(true, {}, CONFIG, {
           method: 'lookup',
         });
@@ -1805,7 +1805,7 @@ describe('Request', () => {
         );
       });
 
-      it('should set the runQuery transaction info', done => {
+      it('should set the runQuery transaction info', (done) => {
         const config = extend(true, {}, CONFIG, {
           method: 'runQuery',
         });
@@ -1850,7 +1850,7 @@ describe('Request', () => {
   describe('request_', () => {
     const CONFIG = {};
 
-    it('should pass config to prepare function', done => {
+    it('should pass config to prepare function', (done) => {
       request.prepareGaxRequest_ = (config: {}) => {
         assert.strictEqual(config, CONFIG);
         done();
@@ -1859,7 +1859,7 @@ describe('Request', () => {
       request.request_(CONFIG, assert.ifError);
     });
 
-    it('should execute callback with error from prepare function', done => {
+    it('should execute callback with error from prepare function', (done) => {
       const error = new Error('Error.');
 
       request.prepareGaxRequest_ = (config: {}, callback: Function) => {
@@ -1872,7 +1872,7 @@ describe('Request', () => {
       });
     });
 
-    it('should execute returned request function with callback', done => {
+    it('should execute returned request function with callback', (done) => {
       const requestFn = (callback: Function) => {
         callback(); // done()
       };
@@ -1897,7 +1897,7 @@ describe('Request', () => {
       };
     });
 
-    it('should expose an abort function', done => {
+    it('should expose an abort function', (done) => {
       GAX_STREAM.cancel = done;
 
       const requestStream = request.requestStream_(CONFIG);
@@ -1905,7 +1905,7 @@ describe('Request', () => {
       requestStream.abort();
     });
 
-    it('should prepare the request once reading', done => {
+    it('should prepare the request once reading', (done) => {
       request.prepareGaxRequest_ = (config: {}) => {
         assert.strictEqual(config, CONFIG);
         done();
@@ -1915,7 +1915,7 @@ describe('Request', () => {
       requestStream.emit('reading');
     });
 
-    it('should destroy the stream with prepare error', done => {
+    it('should destroy the stream with prepare error', (done) => {
       const error = new Error('Error.');
       request.prepareGaxRequest_ = (config: {}, callback: Function) => {
         callback(error);
@@ -1928,7 +1928,7 @@ describe('Request', () => {
       });
     });
 
-    it('should destroy the stream with GAX error', done => {
+    it('should destroy the stream with GAX error', (done) => {
       const error = new Error('Error.');
       const requestStream = request.requestStream_(CONFIG);
       requestStream.emit('reading');
@@ -1939,7 +1939,7 @@ describe('Request', () => {
       });
     });
 
-    it('should emit response from GAX stream', done => {
+    it('should emit response from GAX stream', (done) => {
       const response = {};
       const requestStream = request.requestStream_(CONFIG);
       requestStream.emit('reading');

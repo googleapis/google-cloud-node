@@ -136,7 +136,7 @@ export class ErrorReporting {
     this._client = new AuthClient(this._config, this._logger);
 
     if (this._config.getReportUnhandledRejections()) {
-      process.on('unhandledRejection', reason => {
+      process.on('unhandledRejection', (reason) => {
         this._logger.warn(
           'UnhandledPromiseRejectionWarning: ' +
             'Unhandled promise rejection: ' +

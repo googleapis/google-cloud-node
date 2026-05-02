@@ -142,7 +142,7 @@ describe('ack-metadata', () => {
 
     const results = processAckErrorInfo(error);
 
-    ackIds.forEach(id => {
+    ackIds.forEach((id) => {
       const ackError = results.get(id);
       const expected = expectedResults.get(id);
       assert.deepStrictEqual(ackError, expected);

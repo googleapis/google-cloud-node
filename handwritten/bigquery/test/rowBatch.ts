@@ -104,7 +104,7 @@ describe('RowBatch', () => {
         .fill({
           data: Buffer.from('Hello!'),
         })
-        .forEach(row => {
+        .forEach((row) => {
           batch.add(row, () => {});
         });
 

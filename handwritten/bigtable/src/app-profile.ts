@@ -210,7 +210,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
         if (isClusterArray(routingAsArray)) {
           // Runs if routing is a set and every element in it is a cluster
           appProfile.multiClusterRoutingUseAny = {
-            clusterIds: routingAsArray.map(cluster => cluster.id),
+            clusterIds: routingAsArray.map((cluster) => cluster.id),
           };
         } else if (isStringArray(routingAsArray)) {
           // Runs if routing is a set and every element in it is a string
@@ -345,7 +345,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
     const gaxOptions =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    this.getMetadata(gaxOptions, err => {
+    this.getMetadata(gaxOptions, (err) => {
       if (err) {
         if (err.code === 5) {
           callback(null, false);
@@ -491,7 +491,7 @@ Please use the format 'my-app-profile' or '${instance.name}/appProfiles/my-app-p
       'multiClusterRoutingUseAny',
       'allowTransactionalWrites',
     ];
-    fieldsForMask.forEach(field => {
+    fieldsForMask.forEach((field) => {
       if ((reqOpts.appProfile as {[index: string]: string})![field]) {
         reqOpts.updateMask!.paths!.push(snakeCase(field));
       }

@@ -259,12 +259,12 @@ describe('v1.SubscriberClient', () => {
       assert(client.subscriberStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new subscriberModule.v1.SubscriberClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.subscriberStub);
@@ -273,12 +273,12 @@ describe('v1.SubscriberClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new subscriberModule.v1.SubscriberClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -289,7 +289,7 @@ describe('v1.SubscriberClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -455,7 +455,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createSubscription(request), expectedError);
@@ -587,7 +587,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getSubscription(request), expectedError);
@@ -724,7 +724,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateSubscription(request), expectedError);
@@ -857,7 +857,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteSubscription(request), expectedError);
@@ -989,7 +989,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.modifyAckDeadline(request), expectedError);
@@ -1121,7 +1121,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.acknowledge(request), expectedError);
@@ -1246,7 +1246,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.pull(request), expectedError);
@@ -1378,7 +1378,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.modifyPushConfig(request), expectedError);
@@ -1510,7 +1510,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.snapshot = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getSnapshot(request), expectedError);
@@ -1642,7 +1642,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createSnapshot(request), expectedError);
@@ -1778,7 +1778,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.snapshot.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateSnapshot(request), expectedError);
@@ -1910,7 +1910,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.snapshot = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteSnapshot(request), expectedError);
@@ -2035,7 +2035,7 @@ describe('v1.SubscriberClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.seek(request), expectedError);
@@ -2788,7 +2788,7 @@ describe('v1.SubscriberClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -2898,7 +2898,7 @@ describe('v1.SubscriberClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -3011,7 +3011,7 @@ describe('v1.SubscriberClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });

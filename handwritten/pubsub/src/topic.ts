@@ -401,7 +401,7 @@ export class Topic {
   exists(): Promise<ExistsResponse>;
   exists(callback: ExistsCallback): void;
   exists(callback?: ExistsCallback): void | Promise<ExistsResponse> {
-    this.getMetadata(err => {
+    this.getMetadata((err) => {
       if (!err) {
         callback!(null, true);
         return;

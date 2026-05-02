@@ -4,16 +4,13 @@
     "resolveJsonModule": true,
     "outDir": "build",
     "rootDir": "dev",
-    "lib": [
-      "es2023",
-      "dom"
-    ],
+    "lib": ["es2023", "dom"],
     "useUnknownInCatchVariables": false,
     "composite": false,
     "incremental": false,
     "declaration": true,
     "declarationDir": "build/types",
-    "stripInternal": false,
+    "stripInternal": false
   },
   "include": [
     "dev/src/*.d.ts",

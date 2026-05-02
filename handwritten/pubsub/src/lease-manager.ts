@@ -335,7 +335,7 @@ export class LeaseManager extends EventEmitter {
         if (this._subscriber.isExactlyOnceDelivery) {
           message
             .modAckWithResponse(deadline.totalOf('second'))
-            .catch(e => {
+            .catch((e) => {
               // In the case of a permanent failure (temporary failures are retried),
               // we need to stop trying to lease-manage the message.
               message.ackFailed(e as AckError);

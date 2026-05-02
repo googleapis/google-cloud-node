@@ -68,7 +68,7 @@ describe('Index', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const gaxOptions = {};
       index.getMetadata = (options: {}) => {
         assert.strictEqual(options, gaxOptions);
@@ -77,7 +77,7 @@ describe('Index', () => {
       index.get(gaxOptions, assert.ifError);
     });
 
-    it('should not require an options object', done => {
+    it('should not require an options object', (done) => {
       index.getMetadata = (options: {}) => {
         assert.deepStrictEqual(options, {});
         done();
@@ -85,7 +85,7 @@ describe('Index', () => {
       index.get(assert.ifError);
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
       index.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(error);
@@ -96,7 +96,7 @@ describe('Index', () => {
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {};
       index.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(null, apiResponse);
@@ -111,7 +111,7 @@ describe('Index', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       index.datastore.request_ = (config: any) => {
         assert.strictEqual(config.client, 'DatastoreAdminClient');
@@ -126,7 +126,7 @@ describe('Index', () => {
       index.getMetadata(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       index.datastore.request_ = (config: {gaxOpts: {}}) => {
@@ -137,7 +137,7 @@ describe('Index', () => {
       index.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should update the metadata', done => {
+    it('should update the metadata', (done) => {
       const response = {};
       index.datastore.request_ = (config: {}, callback: Function) => {
         callback(null, response);

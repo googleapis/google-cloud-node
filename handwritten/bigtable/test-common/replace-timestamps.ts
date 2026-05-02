@@ -28,9 +28,9 @@ export function replaceTimestamps(
   newStartTime: [number, number],
   newEndTime: [number, number],
 ) {
-  request.scopeMetrics.forEach(scopeMetric => {
-    scopeMetric.metrics.forEach(metric => {
-      metric.dataPoints.forEach(dataPoint => {
+  request.scopeMetrics.forEach((scopeMetric) => {
+    scopeMetric.metrics.forEach((metric) => {
+      metric.dataPoints.forEach((dataPoint) => {
         dataPoint.startTime = newStartTime;
         dataPoint.endTime = newEndTime;
       });

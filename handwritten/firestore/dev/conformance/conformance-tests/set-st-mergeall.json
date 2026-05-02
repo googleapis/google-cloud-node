@@ -22,9 +22,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "a"
-                ]
+                "fieldPaths": ["a"]
               },
               "updateTransforms": [
                 {

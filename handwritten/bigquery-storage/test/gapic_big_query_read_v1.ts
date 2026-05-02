@@ -210,12 +210,12 @@ describe('v1.BigQueryReadClient', () => {
       assert(client.bigQueryReadStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new bigqueryreadModule.v1.BigQueryReadClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.bigQueryReadStub);
@@ -224,12 +224,12 @@ describe('v1.BigQueryReadClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new bigqueryreadModule.v1.BigQueryReadClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -240,7 +240,7 @@ describe('v1.BigQueryReadClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -409,7 +409,7 @@ describe('v1.BigQueryReadClient', () => {
       );
       request.readSession.table = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createReadSession(request), expectedError);
@@ -541,7 +541,7 @@ describe('v1.BigQueryReadClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.splitReadStream(request), expectedError);
@@ -700,7 +700,7 @@ describe('v1.BigQueryReadClient', () => {
       );
       request.readStream = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       const stream = client.readRows(request, {

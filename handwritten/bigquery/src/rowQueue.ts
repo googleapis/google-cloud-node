@@ -171,7 +171,7 @@ export class RowQueue {
         const partialFailures = (resp?.insertErrors || []).map(
           (insertError: GoogleErrorBody) => {
             return {
-              errors: insertError.errors!.map(error => {
+              errors: insertError.errors!.map((error) => {
                 return {
                   message: error.message,
                   reason: error.reason,
@@ -189,10 +189,10 @@ export class RowQueue {
             response: resp,
           } as GoogleErrorBody);
 
-          callbacks.forEach(callback => callback!(err, resp));
+          callbacks.forEach((callback) => callback!(err, resp));
           this.stream.emit('error', err);
         } else {
-          callbacks.forEach(callback => callback!(err, resp));
+          callbacks.forEach((callback) => callback!(err, resp));
           this.stream.emit('response', resp);
           cb?.(err, resp);
         }

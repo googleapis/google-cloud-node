@@ -324,7 +324,7 @@ export class Query<
             `Invalid Query. A non-empty array is required for '${operator}' filters.`,
           );
         }
-        value = value.map(el => this.validateReference(el));
+        value = value.map((el) => this.validateReference(el));
       } else {
         value = this.validateReference(value);
       }
@@ -345,8 +345,8 @@ export class Query<
   _parseCompositeFilter(compositeFilterData: CompositeFilter): FilterInternal {
     const parsedFilters = compositeFilterData
       ._getFilters()
-      .map(filter => this._parseFilter(filter))
-      .filter(parsedFilter => parsedFilter.getFilters().length > 0);
+      .map((filter) => this._parseFilter(filter))
+      .filter((parsedFilter) => parsedFilter.getFilters().length > 0);
 
     // For composite filters containing 1 filter, return the only filter.
     // For example: AND(FieldFilter1) == FieldFilter1
@@ -765,7 +765,7 @@ export class Query<
     // projections
     const projections = this._queryOptions.projection?.fields || [];
     if (projections.length > 0) {
-      const projectionFields = projections.map(p => field(p.fieldPath!));
+      const projectionFields = projections.map((p) => field(p.fieldPath!));
       pipeline = pipeline.select(
         projectionFields[0],
         ...projectionFields.slice(1),
@@ -777,7 +777,7 @@ export class Query<
     // for generating existsConditions, because existence filters
     // will have already been added in the call to `toPipelineBooleanExpr`
     const existsConditions = this.createImplicitOrderBy(true).map(
-      fieldOrder => {
+      (fieldOrder) => {
         return field(fieldOrder.field).exists();
       },
     );
@@ -788,7 +788,7 @@ export class Query<
       pipeline = pipeline.where(existsConditions[0]);
     }
 
-    const orderings = this.createImplicitOrderBy().map(fieldOrder => {
+    const orderings = this.createImplicitOrderBy().map((fieldOrder) => {
       let dir: 'ascending' | 'descending' | undefined = undefined;
       switch (fieldOrder.direction) {
         case 'ASCENDING': {
@@ -934,7 +934,7 @@ export class Query<
   private createImplicitOrderBy(ignoreInequalityFields = false): FieldOrder[] {
     const fieldOrders = this._queryOptions.fieldOrders.slice();
     const fieldsNormalized = new Set([
-      ...fieldOrders.map(item => item.field.toString()),
+      ...fieldOrders.map((item) => item.field.toString()),
     ]);
 
     /** The order of the implicit ordering always matches the last explicit order by. */
@@ -1440,7 +1440,7 @@ export class Query<
       },
     });
     responseStream.pipe(transform);
-    responseStream.on('error', e => transform.destroy(e));
+    responseStream.on('error', (e) => transform.destroy(e));
     return transform;
   }
 
@@ -1495,7 +1495,7 @@ export class Query<
         ? this.createImplicitOrderBy()
         : this._queryOptions.fieldOrders;
 
-      structuredQuery.orderBy = fieldOrders.map(order => {
+      structuredQuery.orderBy = fieldOrders.map((order) => {
         // Flip the orderBy directions since we want the last results
         const dir =
           order.direction === 'DESCENDING' ? 'ASCENDING' : 'DESCENDING';
@@ -1598,7 +1598,7 @@ export class Query<
     }
 
     if (fieldOrders.length > 0) {
-      structuredQuery.orderBy = fieldOrders.map(o => o.toProto());
+      structuredQuery.orderBy = fieldOrders.map((o) => o.toProto());
     } else if (this._queryOptions.limitType === LimitType.Last) {
       throw new Error(
         'limitToLast() queries require specifying at least one orderBy() clause.',

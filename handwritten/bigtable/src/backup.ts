@@ -390,7 +390,7 @@ Please use the format 'my-backup' or '${cluster.name}/backups/my-backup'.`);
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
 
-    this.getMetadata(gaxOptions, err => {
+    this.getMetadata(gaxOptions, (err) => {
       if (err) {
         if (err.code === 5) {
           callback(null, false);

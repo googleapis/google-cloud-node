@@ -288,7 +288,7 @@ export class BigQueryWriteClient {
     ];
     for (const methodName of bigQueryWriteStubMethods) {
       const callPromise = this.bigQueryWriteStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -516,7 +516,7 @@ export class BigQueryWriteClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createWriteStream request %j', request);
@@ -663,7 +663,7 @@ export class BigQueryWriteClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getWriteStream request %j', request);
@@ -808,7 +808,7 @@ export class BigQueryWriteClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('finalizeWriteStream request %j', request);
@@ -959,7 +959,7 @@ export class BigQueryWriteClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchCommitWriteStreams request %j', request);
@@ -1106,7 +1106,7 @@ export class BigQueryWriteClient {
       this._gaxModule.routingHeader.fromParams({
         write_stream: request.writeStream ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('flushRows request %j', request);
@@ -1199,7 +1199,7 @@ export class BigQueryWriteClient {
    * region_tag:bigquerystorage_v1_generated_BigQueryWrite_AppendRows_async
    */
   appendRows(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('appendRows stream %j', options);
@@ -1484,7 +1484,7 @@ export class BigQueryWriteClient {
    */
   close(): Promise<void> {
     if (this.bigQueryWriteStub && !this._terminated) {
-      return this.bigQueryWriteStub.then(stub => {
+      return this.bigQueryWriteStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

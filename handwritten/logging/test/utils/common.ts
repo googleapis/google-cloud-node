@@ -63,7 +63,7 @@ describe('ObjectToStructConverter', () => {
       const inputValue = {};
       const convertedValue = {};
 
-      objectToStructConverter.encodeValue_ = value => {
+      objectToStructConverter.encodeValue_ = (value) => {
         assert.strictEqual(value, inputValue);
         return convertedValue;
       };
@@ -86,7 +86,7 @@ describe('ObjectToStructConverter', () => {
       });
     });
 
-    it('should not include undefined values', done => {
+    it('should not include undefined values', (done) => {
       objectToStructConverter.encodeValue_ = () => {
         done(new Error('Should not be called'));
       };
@@ -100,7 +100,7 @@ describe('ObjectToStructConverter', () => {
       done();
     });
 
-    it('should add seen objects to set then empty set', done => {
+    it('should add seen objects to set then empty set', (done) => {
       const obj = {};
       let objectAdded: {};
 
@@ -171,7 +171,7 @@ describe('ObjectToStructConverter', () => {
 
       it('should convert objects', () => {
         const convertedValue = {};
-        objectToStructConverter.convert = value => {
+        objectToStructConverter.convert = (value) => {
           assert.strictEqual(value, VALUE);
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           return convertedValue as any;

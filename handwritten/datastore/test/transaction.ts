@@ -135,7 +135,7 @@ async.each(
           assert.strictEqual(transaction.readOnly, true);
         });
 
-        it('should localize request function', done => {
+        it('should localize request function', (done) => {
           const fakeDataset: Any = {
             request_: {
               bind(context: {}) {
@@ -267,7 +267,7 @@ async.each(
             const dataClient = this.dataClient;
             // Check here that function hasn't been mocked out already
             // Ensures that this mocking object is not being misused.
-            this.functionsMocked.forEach(fn => {
+            this.functionsMocked.forEach((fn) => {
               if (fn.name === functionName) {
                 throw Error(`${functionName} has already been mocked out`);
               }
@@ -305,7 +305,7 @@ async.each(
           // This resets Gapic functions mocked out by the tests to what they originally were.
           // Resetting mocked out Gapic functions ensures other tests don't use these mocked out functions.
           resetGapicFunctions() {
-            this.functionsMocked.forEach(functionMocked => {
+            this.functionsMocked.forEach((functionMocked) => {
               if (this.dataClient) {
                 this.dataClient[functionMocked.name] =
                   functionMocked.mockedFunction;
@@ -338,7 +338,7 @@ async.each(
               assert.strictEqual(error['message'], testErrorMessage);
             }
           });
-          it('should send back the error when using a callback', done => {
+          it('should send back the error when using a callback', (done) => {
             const commitCallback: CommitCallback = (
               error: Error | null | undefined,
               response?: google.datastore.v1.ICommitResponse,
@@ -395,7 +395,7 @@ async.each(
                 assert.strictEqual(error['message'], testErrorMessage);
               }
             });
-            it('should send back the error when using a callback', done => {
+            it('should send back the error when using a callback', (done) => {
               const commitCallback: CommitCallback = (
                 error: Error | null | undefined,
                 response?: google.datastore.v1.ICommitResponse,
@@ -428,7 +428,7 @@ async.each(
                 await transactionWrapper.transaction.commit();
               assert.strictEqual(commitResults, testCommitResp);
             });
-            it('should send back the response when using a callback', done => {
+            it('should send back the response when using a callback', (done) => {
               const commitCallback: CommitCallback = (
                 error: Error | null | undefined,
                 response?: google.datastore.v1.ICommitResponse,
@@ -502,7 +502,7 @@ async.each(
                 assert.strictEqual(error['message'], testErrorMessage);
               }
             });
-            it('should send back the error when using a callback', done => {
+            it('should send back the error when using a callback', (done) => {
               const runAggregateQueryCallback: RequestCallback = (
                 error: Error | null | undefined,
                 response?: unknown,
@@ -542,7 +542,7 @@ async.each(
                 runAggregationQueryUserResp,
               );
             });
-            it('should send back the response when using a callback', done => {
+            it('should send back the response when using a callback', (done) => {
               const runAggregateQueryCallback: CommitCallback = (
                 error: Error | null | undefined,
                 response?: unknown,
@@ -607,7 +607,7 @@ async.each(
                 assert.strictEqual(error['message'], testErrorMessage);
               }
             });
-            it('should send back the error when using a callback', done => {
+            it('should send back the error when using a callback', (done) => {
               const callback: RunQueryCallback = (
                 error: Error | null | undefined,
                 entities?: Entity[],
@@ -642,7 +642,7 @@ async.each(
               assert.deepStrictEqual(runQueryResults, runQueryUserResp);
               assert.deepStrictEqual(info, runQueryUserInfo);
             });
-            it('should send back the response when using a callback', done => {
+            it('should send back the response when using a callback', (done) => {
               const callback: RunQueryCallback = (
                 error: Error | null | undefined,
                 entities?: Entity[],
@@ -724,7 +724,7 @@ async.each(
                 assert.strictEqual(error['message'], testErrorMessage);
               }
             });
-            it('should send back the error when using a callback', done => {
+            it('should send back the error when using a callback', (done) => {
               const callback: GetCallback = (
                 err?: Error | null,
                 entity?: Entities,
@@ -757,7 +757,7 @@ async.each(
               const result = results[transactionWrapper.datastore.KEY];
               assert.deepStrictEqual(result.name, getUserResp);
             });
-            it('should send back the response when using a callback', done => {
+            it('should send back the response when using a callback', (done) => {
               const callback: GetCallback = (
                 err?: Error | null,
                 entity?: Entities,
@@ -1007,7 +1007,7 @@ async.each(
               );
             });
 
-            it('should call the callbacks in the proper order with run and commit', done => {
+            it('should call the callbacks in the proper order with run and commit', (done) => {
               const tester = new TransactionOrderTester(
                 transactionWrapper,
                 done,
@@ -1023,7 +1023,7 @@ async.each(
               transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               tester.push(UserCodeEvent.CUSTOM_EVENT)();
             });
-            it('should call the callbacks in the proper order with commit', done => {
+            it('should call the callbacks in the proper order with commit', (done) => {
               const tester = new TransactionOrderTester(
                 transactionWrapper,
                 done,
@@ -1037,7 +1037,7 @@ async.each(
               transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               tester.push(UserCodeEvent.CUSTOM_EVENT)();
             });
-            it('should call the callbacks in the proper order with two run calls', done => {
+            it('should call the callbacks in the proper order with two run calls', (done) => {
               const tester = new TransactionOrderTester(
                 transactionWrapper,
                 done,
@@ -1052,7 +1052,7 @@ async.each(
               transaction.run(tester.push(UserCodeEvent.RUN_CALLBACK));
               tester.push(UserCodeEvent.CUSTOM_EVENT)();
             });
-            it('should call the callbacks in the proper order with commit and then run', done => {
+            it('should call the callbacks in the proper order with commit and then run', (done) => {
               const tester = new TransactionOrderTester(
                 transactionWrapper,
                 done,
@@ -1172,7 +1172,7 @@ async.each(
                   request: commitRequest,
                 },
               ];
-              it('should verify that there is a BeginTransaction call while beginning later', done => {
+              it('should verify that there is a BeginTransaction call while beginning later', (done) => {
                 const tester = new TransactionOrderTester(
                   transactionWrapper,
                   done,
@@ -1189,7 +1189,7 @@ async.each(
                 });
                 transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               });
-              it('should verify that there is a BeginTransaction call while beginning early', done => {
+              it('should verify that there is a BeginTransaction call while beginning early', (done) => {
                 const tester = new TransactionOrderTester(
                   transactionWrapper,
                   done,
@@ -1210,7 +1210,7 @@ async.each(
               });
             });
             describe('lookup, lookup, put, commit', () => {
-              it('should verify that there is no BeginTransaction call while beginning later', done => {
+              it('should verify that there is no BeginTransaction call while beginning later', (done) => {
                 const expectedRequests = [
                   {
                     call: GapicFunctionName.BEGIN_TRANSACTION,
@@ -1251,7 +1251,7 @@ async.each(
                 });
                 transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               });
-              it('should verify that there is a BeginTransaction call while beginning early', done => {
+              it('should verify that there is a BeginTransaction call while beginning early', (done) => {
                 const expectedRequests = [
                   {
                     call: GapicFunctionName.BEGIN_TRANSACTION,
@@ -1404,7 +1404,7 @@ async.each(
             );
           });
           describe('lookup, lookup, put, commit', () => {
-            it('without using transaction.run', done => {
+            it('without using transaction.run', (done) => {
               let lookupCallCount = 0;
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
@@ -1474,7 +1474,7 @@ async.each(
                 }
               })();
             });
-            it('with using transaction.run', done => {
+            it('with using transaction.run', (done) => {
               let beginCount = 0;
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
@@ -1538,7 +1538,7 @@ async.each(
             });
           });
           describe('runQuery, lookup, put, commit', () => {
-            it('without using transaction.run', done => {
+            it('without using transaction.run', (done) => {
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
@@ -1605,7 +1605,7 @@ async.each(
                 }
               })();
             });
-            it('with using transaction.run', done => {
+            it('with using transaction.run', (done) => {
               let beginCount = 0;
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
@@ -1679,7 +1679,7 @@ async.each(
             });
           });
           describe('runAggregationQuery, lookup, put, commit', () => {
-            it('without using transaction.run', done => {
+            it('without using transaction.run', (done) => {
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
@@ -1752,7 +1752,7 @@ async.each(
                 }
               })();
             });
-            it('with using transaction.run', done => {
+            it('with using transaction.run', (done) => {
               let beginCount = 0;
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
@@ -1832,7 +1832,7 @@ async.each(
             });
           });
           describe('put, put, lookup, commit', () => {
-            it('without using transaction.run', done => {
+            it('without using transaction.run', (done) => {
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
@@ -1889,7 +1889,7 @@ async.each(
                 }
               })();
             });
-            it('with using transaction.run', done => {
+            it('with using transaction.run', (done) => {
               let beginCount = 0;
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
@@ -1953,7 +1953,7 @@ async.each(
             });
           });
           describe('put, commit', () => {
-            it('without using transaction.run', done => {
+            it('without using transaction.run', (done) => {
               let beginCount = 0;
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
@@ -2004,7 +2004,7 @@ async.each(
                 }
               })();
             });
-            it('with using transaction.run', done => {
+            it('with using transaction.run', (done) => {
               // This gets called when the program reaches the gapic layer.
               // It ensures the data that reaches the gapic layer is correct.
               let beginCount = 0;
@@ -2146,7 +2146,7 @@ async.each(
               assert.strictEqual(error['message'], testErrorMessage);
             }
           });
-          it('should send back the error when using a callback', done => {
+          it('should send back the error when using a callback', (done) => {
             const runCallback: RunCallback = (
               error: Error | null,
               transaction: Transaction | null,
@@ -2176,7 +2176,7 @@ async.each(
             assert.strictEqual(transaction, transactionWithoutMock);
             assert.strictEqual(resp, testRunResp);
           });
-          it('should send back the response when using a callback', done => {
+          it('should send back the response when using a callback', (done) => {
             const runCallback: RunCallback = (
               error: Error | null,
               transaction: Transaction | null,
@@ -2197,7 +2197,7 @@ async.each(
       });
 
       describe('commit', () => {
-        beforeEach(done => {
+        beforeEach((done) => {
           transaction.id = TRANSACTION_ID;
           transaction.request_ = (config, callback) => {
             callback(null, {
@@ -2215,8 +2215,8 @@ async.each(
           sinon.restore();
         });
 
-        it('should commit', done => {
-          transaction.request_ = config => {
+        it('should commit', (done) => {
+          transaction.request_ = (config) => {
             assert.strictEqual(config.client, 'DatastoreClient');
             assert.strictEqual(config.method, 'commit');
             assert.deepStrictEqual(config.gaxOpts, {});
@@ -2225,10 +2225,10 @@ async.each(
           void transaction.commit();
         });
 
-        it('should accept gaxOptions', done => {
+        it('should accept gaxOptions', (done) => {
           const gaxOptions = {};
 
-          transaction.request_ = config => {
+          transaction.request_ = (config) => {
             assert.deepStrictEqual(config.gaxOpts, {});
             done();
           };
@@ -2236,7 +2236,7 @@ async.each(
           void transaction.commit(gaxOptions);
         });
 
-        it('should skip the commit', done => {
+        it('should skip the commit', (done) => {
           transaction.skipCommit = true;
 
           // If called, the test will blow up.
@@ -2262,7 +2262,7 @@ async.each(
             };
           });
 
-          it('should pass the commit error to the callback', done => {
+          it('should pass the commit error to the callback', (done) => {
             transaction.commit((err, resp) => {
               assert.strictEqual(err, error);
               assert.strictEqual(resp, apiResponse);
@@ -2271,7 +2271,7 @@ async.each(
           });
         });
 
-        it('should pass apiResponse to callback', done => {
+        it('should pass apiResponse to callback', (done) => {
           const resp = {success: true};
           transaction.request_ = (config, callback) => {
             callback(null, resp);
@@ -2300,12 +2300,12 @@ async.each(
 
           const deleteStub = sinon
             .stub(Datastore.prototype, 'delete')
-            .callsFake(a => {
+            .callsFake((a) => {
               args.push(a);
             });
           const saveStub = sinon
             .stub(Datastore.prototype, 'save')
-            .callsFake(a => {
+            .callsFake((a) => {
               args.push(a);
             });
 
@@ -2344,7 +2344,7 @@ async.each(
           assert.strictEqual(saveStub.calledOnce, true);
         });
 
-        it('should not squash key-incomplete mutations', done => {
+        it('should not squash key-incomplete mutations', (done) => {
           transaction.save({key: key(['Product']), data: ''});
           transaction.save({key: key(['Product']), data: ''});
 
@@ -2360,7 +2360,7 @@ async.each(
           void transaction.commit();
         });
 
-        it('should send the built request object', done => {
+        it('should send the built request object', (done) => {
           transaction.requests_ = [
             {
               mutations: [{a: 'b'}, {c: 'd'}],
@@ -2370,7 +2370,7 @@ async.each(
             },
           ];
 
-          transaction.request_ = config => {
+          transaction.request_ = (config) => {
             assert.deepStrictEqual(config.reqOpts, {
               mutations: [{a: 'b'}, {c: 'd'}, {e: 'f'}, {g: 'h'}],
             });
@@ -2448,7 +2448,7 @@ async.each(
           sinon.restore();
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           const preparedEntityObject = {prepared: true};
           const expectedEntityObject = Object.assign({}, preparedEntityObject, {
@@ -2457,7 +2457,7 @@ async.each(
 
           sinon
             .stub(DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               return preparedEntityObject as {};
             });
@@ -2470,7 +2470,7 @@ async.each(
           transaction.insert(entityObject);
         });
 
-        it('should pass the correct arguments to save', done => {
+        it('should pass the correct arguments to save', (done) => {
           transaction.save = (entities: Entity[]) => {
             assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
               {
@@ -2491,7 +2491,7 @@ async.each(
       });
 
       describe('rollback', () => {
-        beforeEach(done => {
+        beforeEach((done) => {
           // The transaction state needs to be set to IN_PROGRESS in order for
           // the rollback function to reach request_.
           transaction.request_ = (
@@ -2505,8 +2505,8 @@ async.each(
           });
         });
 
-        it('should rollback', done => {
-          transaction.request_ = config => {
+        it('should rollback', (done) => {
+          transaction.request_ = (config) => {
             assert.strictEqual(config.client, 'DatastoreClient');
             assert.strictEqual(config.method, 'rollback');
             assert.deepStrictEqual(config.gaxOpts, {});
@@ -2515,10 +2515,10 @@ async.each(
           void transaction.rollback();
         });
 
-        it('should allow setting gaxOptions', done => {
+        it('should allow setting gaxOptions', (done) => {
           const gaxOptions = {};
 
-          transaction.request_ = config => {
+          transaction.request_ = (config) => {
             assert.strictEqual(config.gaxOpts, gaxOptions);
             done();
           };
@@ -2526,18 +2526,18 @@ async.each(
           void transaction.rollback(gaxOptions);
         });
 
-        it('should pass error to callback', done => {
+        it('should pass error to callback', (done) => {
           const error = new Error('Error.');
           transaction.request_ = (config, callback) => {
             callback(error);
           };
-          transaction.rollback(err => {
+          transaction.rollback((err) => {
             assert.deepStrictEqual(err, error);
             done();
           });
         });
 
-        it('should pass apiResponse to callback', done => {
+        it('should pass apiResponse to callback', (done) => {
           const resp = {success: true};
           transaction.request_ = (config, callback) => {
             callback(null, resp);
@@ -2549,7 +2549,7 @@ async.each(
           });
         });
 
-        it('should set skipCommit', done => {
+        it('should set skipCommit', (done) => {
           transaction.request_ = (config, callback) => {
             callback();
           };
@@ -2559,7 +2559,7 @@ async.each(
           });
         });
 
-        it('should set skipCommit when rollback errors', done => {
+        it('should set skipCommit when rollback errors', (done) => {
           transaction.request_ = (config, callback) => {
             callback(new Error('Error.'));
           };
@@ -2571,8 +2571,8 @@ async.each(
       });
 
       describe('run', () => {
-        it('should make the correct API request', done => {
-          transaction.request_ = config => {
+        it('should make the correct API request', (done) => {
+          transaction.request_ = (config) => {
             assert.strictEqual(config.client, 'DatastoreClient');
             assert.strictEqual(config.method, 'beginTransaction');
             assert.deepStrictEqual(config.reqOpts, {transactionOptions: {}});
@@ -2583,10 +2583,10 @@ async.each(
           transaction.run(assert.ifError);
         });
 
-        it('should allow setting gaxOptions', done => {
+        it('should allow setting gaxOptions', (done) => {
           const gaxOptions = {};
 
-          transaction.request_ = config => {
+          transaction.request_ = (config) => {
             assert.strictEqual(config.gaxOpts, gaxOptions);
             done();
           };
@@ -2595,7 +2595,7 @@ async.each(
         });
 
         describe('options.readOnly', () => {
-          it('should respect the readOnly option', done => {
+          it('should respect the readOnly option', (done) => {
             const options = {
               readOnly: true,
             };
@@ -2611,10 +2611,10 @@ async.each(
             transaction.run(options, assert.ifError);
           });
 
-          it('should respect the global readOnly option', done => {
+          it('should respect the global readOnly option', (done) => {
             transaction.readOnly = true;
 
-            transaction.request_ = config => {
+            transaction.request_ = (config) => {
               assert.deepStrictEqual(
                 config.reqOpts!.transactionOptions!.readOnly,
                 {},
@@ -2627,12 +2627,12 @@ async.each(
         });
 
         describe('options.transactionId', () => {
-          it('should respect the transactionId option', done => {
+          it('should respect the transactionId option', (done) => {
             const options = {
               transactionId: 'transaction-id',
             };
 
-            transaction.request_ = config => {
+            transaction.request_ = (config) => {
               assert.deepStrictEqual(
                 config.reqOpts!.transactionOptions!.readWrite,
                 {
@@ -2645,10 +2645,10 @@ async.each(
             transaction.run(options, assert.ifError);
           });
 
-          it('should respect the global transactionId option', done => {
+          it('should respect the global transactionId option', (done) => {
             transaction.id = 'transaction-id';
 
-            transaction.request_ = config => {
+            transaction.request_ = (config) => {
               assert.deepStrictEqual(
                 config.reqOpts!.transactionOptions!.readWrite,
                 {
@@ -2663,7 +2663,7 @@ async.each(
         });
 
         describe('options.transactionOptions', () => {
-          it('should allow full override of transactionOptions', done => {
+          it('should allow full override of transactionOptions', (done) => {
             transaction.readOnly = true;
 
             const options = {
@@ -2698,7 +2698,7 @@ async.each(
             };
           });
 
-          it('should pass error & API response to callback', done => {
+          it('should pass error & API response to callback', (done) => {
             transaction.run((err, transaction, apiResponse_) => {
               assert.strictEqual(err, error);
               assert.strictEqual(transaction, null);
@@ -2719,7 +2719,7 @@ async.each(
             };
           });
 
-          it('should set transaction id', done => {
+          it('should set transaction id', (done) => {
             delete transaction.id;
             transaction.run((err: Error | null) => {
               assert.ifError(err);
@@ -2728,7 +2728,7 @@ async.each(
             });
           });
 
-          it('should exec callback with Transaction & apiResponse', done => {
+          it('should exec callback with Transaction & apiResponse', (done) => {
             transaction.run((err, transaction_, apiResponse_) => {
               assert.ifError(err);
               assert.strictEqual(transaction_, transaction);
@@ -2753,7 +2753,7 @@ async.each(
           );
           transaction.modifiedEntities_.forEach((queuedEntity: Entity) => {
             assert.strictEqual(queuedEntity.method, 'save');
-            const match = entities.filter(ent => {
+            const match = entities.filter((ent) => {
               return ent.key === queuedEntity.entity.key;
             })[0];
             assert.deepStrictEqual(queuedEntity.args, [match]);
@@ -2766,7 +2766,7 @@ async.each(
           sinon.restore();
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           const preparedEntityObject = {prepared: true};
           const expectedEntityObject = Object.assign({}, preparedEntityObject, {
@@ -2775,7 +2775,7 @@ async.each(
 
           sinon
             .stub(DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               return preparedEntityObject as {};
             });
@@ -2788,7 +2788,7 @@ async.each(
           transaction.update(entityObject);
         });
 
-        it('should pass the correct arguments to save', done => {
+        it('should pass the correct arguments to save', (done) => {
           transaction.save = (entities: Entity[]) => {
             assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
               {
@@ -2813,7 +2813,7 @@ async.each(
           sinon.restore();
         });
 
-        it('should prepare entity objects', done => {
+        it('should prepare entity objects', (done) => {
           const entityObject = {};
           const preparedEntityObject = {prepared: true};
           const expectedEntityObject = Object.assign({}, preparedEntityObject, {
@@ -2822,7 +2822,7 @@ async.each(
 
           sinon
             .stub(DatastoreRequest, 'prepareEntityObject_')
-            .callsFake(obj => {
+            .callsFake((obj) => {
               assert.strictEqual(obj, entityObject);
               return preparedEntityObject as {};
             });
@@ -2835,7 +2835,7 @@ async.each(
           transaction.upsert(entityObject);
         });
 
-        it('should pass the correct arguments to save', done => {
+        it('should pass the correct arguments to save', (done) => {
           transaction.save = (entities: Entity[]) => {
             assert.deepStrictEqual(JSON.parse(JSON.stringify(entities)), [
               {

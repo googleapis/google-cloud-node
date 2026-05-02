@@ -3,18 +3,9 @@
     "google.pubsub.v1.Subscriber": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": [
-          "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ],
-        "unknown_aborted_unavailable": [
-          "UNKNOWN",
-          "ABORTED",
-          "UNAVAILABLE"
-        ],
-        "unavailable": [
-          "UNAVAILABLE"
-        ],
+        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
+        "unknown_aborted_unavailable": ["UNKNOWN", "ABORTED", "UNAVAILABLE"],
+        "unavailable": ["UNAVAILABLE"],
         "unknown_aborted_internal_unavailable": [
           "UNKNOWN",
           "ABORTED",

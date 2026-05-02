@@ -24,4 +24,4 @@ export const createClusterOptionsList: CreateClusterOptions[] = [
     maxServeNodes: 3,
     cpuUtilizationPercent: 50,
   },
-].map(option => Object.assign(option, {location: 'us-central2-d'}));
+].map((option) => Object.assign(option, {location: 'us-central2-d'}));

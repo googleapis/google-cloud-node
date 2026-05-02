@@ -72,9 +72,9 @@ async function main(
 
     for (let i = 0; i < numQueries; i++) {
       const startTime = performance.now();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         const [rows] = await tx.run(generateReadQuery());
-        rows.forEach(row => {
+        rows.forEach((row) => {
           const json = row.toJSON();
           console.log(`SingerId: ${json.SingerId}`);
         });
@@ -99,7 +99,7 @@ async function main(
 
     for (let i = 0; i < numQueries; i++) {
       const startTime = performance.now();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         const id = Math.floor(Math.random() * 10000) + 1;
         const name = randomUUID();
         tx.upsert('Singers', [{SingerId: id, FirstName: name}]);
@@ -123,9 +123,9 @@ async function main(
 
     for (let i = 0; i < numQueries; i++) {
       const startTime = performance.now();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         const [rows] = await tx.run(generateReadQuery());
-        rows.forEach(row => {
+        rows.forEach((row) => {
           const json = row.toJSON();
           console.log(`SingerId: ${json.SingerId}`);
         });
@@ -233,7 +233,7 @@ async function main(
     await Promise.all(promises);
     // print the time taken by each thread
     console.log('excution time taken by threads are: ');
-    thread_execution_times.forEach(executionTime => {
+    thread_execution_times.forEach((executionTime) => {
       console.log(executionTime);
     });
   }
@@ -254,7 +254,7 @@ async function main(
   }
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

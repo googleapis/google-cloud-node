@@ -365,7 +365,7 @@ server.head('/hello/:name', respond);
     },
   ];
 
-  TS_CODE_SAMPLES.forEach(sample => {
+  TS_CODE_SAMPLES.forEach((sample) => {
     it(sample.description, async () => {
       await packNTest({
         sample,
@@ -373,7 +373,7 @@ server.head('/hello/:name', respond);
     }).timeout(2 * 60 * 1000);
   });
 
-  JS_CODE_SAMPLES.forEach(sample => {
+  JS_CODE_SAMPLES.forEach((sample) => {
     it(sample.description, async () => {
       await packNTest({
         sample,

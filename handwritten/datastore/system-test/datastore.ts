@@ -82,12 +82,12 @@ async.each(
         async function deleteEntities(kind: string) {
           const query = datastore.createQuery(kind).select('__key__');
           const [entities] = await datastore.runQuery(query);
-          const keys = entities.map(entity => {
+          const keys = entities.map((entity) => {
             return entity[datastore.KEY];
           });
           await datastore.delete(keys);
         }
-        await Promise.all(testKinds.map(kind => deleteEntities(kind)));
+        await Promise.all(testKinds.map((kind) => deleteEntities(kind)));
       });
       it('should allocate IDs', async () => {
         const keys = await datastore.allocateIds(datastore.key('Kind'), 10);
@@ -442,7 +442,7 @@ async.each(
             // Save all data to the secondary database
             const secondaryIndices = [1, 2, 3];
             const secondaryData: DatastoreData[] = secondaryIndices.map(
-              number => {
+              (number) => {
                 const authorName = 'secondary author ' + number.toString();
                 const keyName = 'secondary key ' + number.toString();
                 const postData = Object.assign({}, post);
@@ -454,7 +454,9 @@ async.each(
               },
             );
             await Promise.all(
-              secondaryData.map(async datum => secondaryDatastore.save(datum)),
+              secondaryData.map(async (datum) =>
+                secondaryDatastore.save(datum),
+              ),
             );
             // Next, ensure that the default database has the right records
             const query = defaultDatastore
@@ -469,7 +471,7 @@ async.each(
             );
             // Next, ensure that the other database has the right records
             await Promise.all(
-              secondaryData.map(async datum => {
+              secondaryData.map(async (datum) => {
                 const query = secondaryDatastore
                   .createQuery('Post')
                   .hasAncestor(datum.key);
@@ -481,13 +483,15 @@ async.each(
             // Cleanup
             await defaultDatastore.delete(defaultPostKey);
             await Promise.all(
-              secondaryData.map(datum => secondaryDatastore.delete(datum.key)),
+              secondaryData.map((datum) =>
+                secondaryDatastore.delete(datum.key),
+              ),
             );
           });
         });
         it('should save/get/delete from a snapshot', async () => {
           function sleep(ms: number) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+            return new Promise((resolve) => setTimeout(resolve, ms));
           }
           const post2 = {
             title: 'Another way to make pizza',
@@ -661,7 +665,7 @@ async.each(
           assert.strictEqual(entities.length, 2);
           await datastore.delete([key1, key2]);
         });
-        it('should get multiple entities in a stream', done => {
+        it('should get multiple entities in a stream', (done) => {
           const key1 = datastore.key('Post');
           const key2 = datastore.key('Post');
           datastore.save(
@@ -669,7 +673,7 @@ async.each(
               {key: key1, data: post},
               {key: key2, data: post},
             ],
-            err => {
+            (err) => {
               assert.ifError(err);
               let numEntitiesEmitted = 0;
               datastore
@@ -772,7 +776,7 @@ async.each(
           ['Rickard', 'Character', 'Eddard', 'Character', 'Robb'],
           ['Rickard', 'Character', 'Eddard', 'Character', 'Bran'],
           ['Rickard', 'Character', 'Eddard', 'Character', 'Jon Snow'],
-        ].map(path => {
+        ].map((path) => {
           return datastore.key(['Book', 'GoT', 'Character'].concat(path));
         });
         const characters = [
@@ -830,7 +834,7 @@ async.each(
           // the time on the server is far enough ahead to be sure to be later than timeBeforeDataCreation
           // so that when we read at timeBeforeDataCreation we get a snapshot of data before the save.
           function sleep(ms: number) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+            return new Promise((resolve) => setTimeout(resolve, ms));
           }
           const keysToSave = keys.map((key, index) => {
             return {
@@ -876,7 +880,7 @@ async.each(
           const [results] = await datastore.runQuery(q);
           assert.strictEqual(results!.length, limit);
         });
-        it('should run a query as a stream', done => {
+        it('should run a query as a stream', (done) => {
           const q = datastore.createQuery('Character').hasAncestor(ancestor);
           let resultsReturned = 0;
           datastore
@@ -888,7 +892,7 @@ async.each(
               done();
             });
         });
-        it('should run a datastore query as a stream via query#runStream', done => {
+        it('should run a datastore query as a stream via query#runStream', (done) => {
           const q = datastore.createQuery('Character').hasAncestor(ancestor);
           let resultsReturned = 0;
           q.runStream()
@@ -899,7 +903,7 @@ async.each(
               done();
             });
         });
-        it('should run a transaction query as a stream via query#runStream', done => {
+        it('should run a transaction query as a stream via query#runStream', (done) => {
           const transaction = datastore.transaction({readOnly: true});
           const q = transaction.createQuery('Character').hasAncestor(ancestor);
           let resultsReturned = 0;
@@ -911,7 +915,7 @@ async.each(
               done();
             });
         });
-        it('should not go over a limit with a stream', done => {
+        it('should not go over a limit with a stream', (done) => {
           const limit = 3;
           const q = datastore
             .createQuery('Character')
@@ -1200,8 +1204,8 @@ async.each(
                 }
                 assert(!info.explainMetrics);
                 assert.deepStrictEqual(
-                  entities.sort(compare).map(entity => entity.name),
-                  [...characters].sort(compare).map(entity => entity.name),
+                  entities.sort(compare).map((entity) => entity.name),
+                  [...characters].sort(compare).map((entity) => entity.name),
                 );
                 await transaction.commit();
               });
@@ -1263,8 +1267,8 @@ async.each(
                   assert.fail('transaction failed');
                 }
                 assert.deepStrictEqual(
-                  entities.sort(compare).map(entity => entity.name),
-                  [...characters].sort(compare).map(entity => entity.name),
+                  entities.sort(compare).map((entity) => entity.name),
+                  [...characters].sort(compare).map((entity) => entity.name),
                 );
                 assert(info.explainMetrics);
                 checkQueryExecutionStats(info.explainMetrics.executionStats);
@@ -1387,8 +1391,8 @@ async.each(
               const [entities, info] = await datastore.runQuery(q);
               assert(!info.explainMetrics);
               assert.deepStrictEqual(
-                entities.sort(compare).map(entity => entity.name),
-                [...characters].sort(compare).map(entity => entity.name),
+                entities.sort(compare).map((entity) => entity.name),
+                [...characters].sort(compare).map((entity) => entity.name),
               );
             });
             it('should run a query with explain options and no analyze option specified', async () => {
@@ -1420,8 +1424,8 @@ async.each(
                 explainOptions: {analyze: true},
               });
               assert.deepStrictEqual(
-                entities.sort(compare).map(entity => entity.name),
-                [...characters].sort(compare).map(entity => entity.name),
+                entities.sort(compare).map((entity) => entity.name),
+                [...characters].sort(compare).map((entity) => entity.name),
               );
               assert(info.explainMetrics);
               checkQueryExecutionStats(info.explainMetrics.executionStats);
@@ -1437,8 +1441,8 @@ async.each(
               const [entities, info] = await q.run();
               assert(!info.explainMetrics);
               assert.deepStrictEqual(
-                entities.sort(compare).map(entity => entity.name),
-                [...characters].sort(compare).map(entity => entity.name),
+                entities.sort(compare).map((entity) => entity.name),
+                [...characters].sort(compare).map((entity) => entity.name),
               );
             });
             it('should run a query with explain options and no value set for analyze', async () => {
@@ -1468,8 +1472,8 @@ async.each(
                 explainOptions: {analyze: true},
               });
               assert.deepStrictEqual(
-                entities.sort(compare).map(entity => entity.name),
-                [...characters].sort(compare).map(entity => entity.name),
+                entities.sort(compare).map((entity) => entity.name),
+                [...characters].sort(compare).map((entity) => entity.name),
               );
               assert(info.explainMetrics);
               checkQueryExecutionStats(info.explainMetrics.executionStats);
@@ -1500,7 +1504,7 @@ async.each(
                     entities
                       .sort(compare)
                       .map((entity: Entity) => entity?.name),
-                    [...characters].sort(compare).map(entity => entity.name),
+                    [...characters].sort(compare).map((entity) => entity.name),
                   );
                   assert(!savedInfo.explainMetrics);
                   resolve();
@@ -1583,7 +1587,7 @@ async.each(
                     entities
                       .sort(compare)
                       .map((entity: Entity) => entity?.name),
-                    [...characters].sort(compare).map(entity => entity.name),
+                    [...characters].sort(compare).map((entity) => entity.name),
                   );
                   assert(savedInfo.explainMetrics);
                   checkQueryExecutionStats(
@@ -2226,7 +2230,7 @@ async.each(
           // Paths:
           ['Rickard'],
           ['Rickard', 'Character', 'Eddard'],
-        ].map(path => {
+        ].map((path) => {
           return datastore.key(['Book', 'GoT', 'Character'].concat(path));
         });
         const characters = [
@@ -2281,7 +2285,7 @@ async.each(
           // Paths:
           ['Rickard'],
           ['Rickard', 'Character', 'Eddard'],
-        ].map(path => {
+        ].map((path) => {
           return datastore.key(['Book', 'GoT', 'Character'].concat(path));
         });
         const characters = [
@@ -2773,7 +2777,7 @@ async.each(
           // so that when we read at timeBeforeDataCreation we get a snapshot of data before the save.
           const key = datastore.key(['Company', 'Google']);
           function sleep(ms: number) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+            return new Promise((resolve) => setTimeout(resolve, ms));
           }
           // Save for a key so that a read time can be accessed for snapshot reads.
           const emptyData = {
@@ -2902,7 +2906,7 @@ async.each(
             const query = datastore.createQuery('Company');
             const [results] = await datastore.runQuery(query);
             assert.deepStrictEqual(
-              results.map(result => result.rating),
+              results.map((result) => result.rating),
               [100, 100],
             );
           });
@@ -3065,12 +3069,12 @@ async.each(
           );
           assert.ok(firstIndex.metadata!.ancestor, 'has the ancestor property');
         });
-        it('should get all indexes as a stream', done => {
+        it('should get all indexes as a stream', (done) => {
           const indexes: Index[] = [];
           datastore
             .getIndexesStream()
             .on('error', done)
-            .on('data', index => {
+            .on('data', (index) => {
               indexes.push(index);
             })
             .on('end', () => {
@@ -3102,7 +3106,7 @@ async.each(
           if (retries === 0) return; // no retry on the first attempt.
           // see: https://cloud.google.com/storage/docs/exponential-backoff:
           const ms = Math.pow(2, retries) * 500 + Math.random() * 1000;
-          return new Promise(done => {
+          return new Promise((done) => {
             console.info(
               `retrying "${test.test?.title}" after attempt ${currentAttempt} in ${ms}ms`,
             );
@@ -3979,15 +3983,17 @@ async.each(
               datastore.request_ = requestSpy;
               const result = await datastore.save(testParameters.saveArg);
               // Clean the data from the server first before comparing:
-              result.forEach(serverResult => {
+              result.forEach((serverResult) => {
                 delete serverResult['indexUpdates'];
-                serverResult.mutationResults?.forEach(mutationResult => {
+                serverResult.mutationResults?.forEach((mutationResult) => {
                   delete mutationResult['updateTime'];
                   delete mutationResult['createTime'];
                   delete mutationResult['version'];
-                  mutationResult.transformResults?.forEach(transformResult => {
-                    delete transformResult['timestampValue'];
-                  });
+                  mutationResult.transformResults?.forEach(
+                    (transformResult) => {
+                      delete transformResult['timestampValue'];
+                    },
+                  );
                 });
               });
               // Now the data should have fixed values.
@@ -5623,15 +5629,17 @@ async.each(
               datastore.request_ = requestSpy;
               const result = await datastore.save(testParameters.saveArg);
               // Clean the data from the server first before comparing:
-              result.forEach(serverResult => {
+              result.forEach((serverResult) => {
                 delete serverResult['indexUpdates'];
-                serverResult.mutationResults?.forEach(mutationResult => {
+                serverResult.mutationResults?.forEach((mutationResult) => {
                   delete mutationResult['updateTime'];
                   delete mutationResult['createTime'];
                   delete mutationResult['version'];
-                  mutationResult.transformResults?.forEach(transformResult => {
-                    delete transformResult['timestampValue'];
-                  });
+                  mutationResult.transformResults?.forEach(
+                    (transformResult) => {
+                      delete transformResult['timestampValue'];
+                    },
+                  );
                 });
               });
               // Now the data should have fixed values.

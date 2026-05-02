@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main() {
@@ -53,13 +51,12 @@ function main() {
 
   async function callListIndexes() {
     // Construct request
-    const request = {
-    };
+    const request = {};
 
     // Run request
     const iterable = adminClient.listIndexesAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
@@ -67,7 +64,7 @@ function main() {
   // [END datastore_v1_generated_DatastoreAdmin_ListIndexes_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

@@ -51,7 +51,7 @@ describe('stage option serialization', () => {
   }> = [
     {
       name: 'collection stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().collection({
           collection: 'foo',
           rawOptions,
@@ -66,7 +66,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'collection group stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().collectionGroup({
           collectionId: 'foo',
           rawOptions,
@@ -81,7 +81,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'documents stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().documents({
           docs: ['foo/bar'],
           rawOptions,
@@ -89,14 +89,14 @@ describe('stage option serialization', () => {
     },
     {
       name: 'database stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().database({
           rawOptions,
         }),
     },
     {
       name: 'distinct stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -108,7 +108,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'findNearest stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -122,7 +122,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'select stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -134,7 +134,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'unnest stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -146,7 +146,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'addFields stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -158,7 +158,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'aggregate stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -170,7 +170,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'limit stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().database().limit({
           limit: 1,
           rawOptions,
@@ -179,7 +179,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'offset stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().database().offset({
           offset: 1,
           rawOptions,
@@ -188,7 +188,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'removeFields stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -200,7 +200,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'replaceWith stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().database().replaceWith({
           map: 'foo',
           rawOptions,
@@ -209,7 +209,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'sample stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().database().sample({
           documents: 100,
           rawOptions,
@@ -218,7 +218,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'sample stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -230,7 +230,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'union stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore.pipeline().database().union({
           other: firestore.pipeline().database(),
           rawOptions,
@@ -239,7 +239,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'where stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -251,7 +251,7 @@ describe('stage option serialization', () => {
     },
     {
       name: 'search stage',
-      pipeline: firestore =>
+      pipeline: (firestore) =>
         firestore
           .pipeline()
           .database()
@@ -337,7 +337,7 @@ describe('stage option serialization', () => {
     },
   ];
 
-  testDefinitions.forEach(testDefinition => {
+  testDefinitions.forEach((testDefinition) => {
     it(testDefinition.name, async () => {
       const spy = sinon.fake.returns(stream());
       const firestore = await createInstance({

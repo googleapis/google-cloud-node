@@ -81,13 +81,13 @@ describe('Manual handler', () => {
         done();
       }, 1000);
     });
-    it('Should callback to the supplied function', done => {
+    it('Should callback to the supplied function', (done) => {
       const r = report('malarkey', () => {
         done();
       });
       assert(r.message.match(/malarkey/), 'string error should propagate');
     });
-    it('replace the error string with the additional message', done => {
+    it('replace the error string with the additional message', (done) => {
       const r = report('monkey', 'wrench', () => {
         done();
       });
@@ -97,7 +97,7 @@ describe('Manual handler', () => {
         'additional message should replace',
       );
     });
-    it('Should allow a full array of optional arguments', done => {
+    it('Should allow a full array of optional arguments', (done) => {
       const r = report('donkey', {method: 'FETCH'}, 'cart', () => {
         done();
       });
@@ -109,7 +109,7 @@ describe('Manual handler', () => {
       assert.strictEqual(r.message, 'sour', 'additional message replace');
       assert.strictEqual(r.context.httpRequest.method, 'SIP');
     });
-    it('Should allow a lack of additional message', done => {
+    it('Should allow a lack of additional message', (done) => {
       const r = report('ticky', {method: 'TACKEY'}, () => {
         done();
       });
@@ -119,7 +119,7 @@ describe('Manual handler', () => {
       );
       assert.strictEqual(r.context.httpRequest.method, 'TACKEY');
     });
-    it('Should ignore arguments', done => {
+    it('Should ignore arguments', (done) => {
       const r = report(
         'hockey',
         (() => {
@@ -132,7 +132,7 @@ describe('Manual handler', () => {
         'string after callback should be ignored',
       );
     });
-    it('Should ignore arguments', done => {
+    it('Should ignore arguments', (done) => {
       const r = report(
         'passkey',
         (() => {
@@ -142,13 +142,13 @@ describe('Manual handler', () => {
       );
       assert.notStrictEqual(r.context.httpRequest.method, 'HONK');
     });
-    it('Should allow null arguments as placeholders', done => {
+    it('Should allow null arguments as placeholders', (done) => {
       const r = report('pokey', null!, null!, () => {
         done();
       });
       assert(r.message.match(/pokey/), 'string error should propagate');
     });
-    it('Should allow explicit undefined', done => {
+    it('Should allow explicit undefined', (done) => {
       const r = report(
         'Turkey',
         undefined as unknown as Request,
@@ -159,7 +159,7 @@ describe('Manual handler', () => {
       );
       assert(r.message.match(/Turkey/), 'string error should propagate');
     });
-    it('Should allow request to be supplied as undefined', done => {
+    it('Should allow request to be supplied as undefined', (done) => {
       const r = report(
         'turnkey',
         undefined as unknown as Request,
@@ -170,7 +170,7 @@ describe('Manual handler', () => {
       );
       assert.strictEqual(r.message, 'solution', 'error should propagate');
     });
-    it('Should allow additional message', done => {
+    it('Should allow additional message', (done) => {
       const r = report(
         'Mickey',
         {method: 'SNIFF'},
@@ -232,7 +232,7 @@ describe('Manual handler', () => {
         ].join('\n'),
       );
     });
-    it('Should accept message and callback function', done => {
+    it('Should accept message and callback function', (done) => {
       const oldMsg = 'builder test';
       report(new ErrorMessage().setMessage(oldMsg), () => {
         done();

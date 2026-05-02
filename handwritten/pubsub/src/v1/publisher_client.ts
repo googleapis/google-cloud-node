@@ -326,7 +326,7 @@ export class PublisherClient {
     ];
     for (const methodName of publisherStubMethods) {
       const callPromise = this.publisherStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -567,7 +567,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createTopic request %j', request);
@@ -696,7 +696,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         'topic.name': request.topic!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('updateTopic request %j', request);
@@ -822,7 +822,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('publish request %j', request);
@@ -945,7 +945,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getTopic request %j', request);
@@ -1072,7 +1072,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteTopic request %j', request);
@@ -1198,7 +1198,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         subscription: request.subscription ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('detachSubscription request %j', request);
@@ -1333,7 +1333,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1401,7 +1401,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listTopics stream %j', request);
@@ -1451,7 +1451,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listTopics iterate %j', request);
@@ -1558,7 +1558,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1628,7 +1628,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listTopicSubscriptions stream %j', request);
@@ -1678,7 +1678,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listTopicSubscriptions iterate %j', request);
@@ -1783,7 +1783,7 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         topic: request.topic ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1853,7 +1853,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listTopicSnapshots stream %j', request);
@@ -1903,7 +1903,7 @@ export class PublisherClient {
       });
     const defaultCallSettings = this._defaults['listTopicSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listTopicSnapshots iterate %j', request);
@@ -2305,11 +2305,11 @@ export class PublisherClient {
    */
   close(): Promise<void> {
     if (this.publisherStub && !this._terminated) {
-      return this.publisherStub.then(stub => {
+      return this.publisherStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
+        this.iamClient.close().catch((err) => {
           throw err;
         });
       });

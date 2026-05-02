@@ -69,10 +69,10 @@ function main(resourceNames) {
 
     // Run request
     const stream = await loggingClient.tailLogEntries();
-    stream.on('data', response => {
+    stream.on('data', (response) => {
       console.log(response);
     });
-    stream.on('error', err => {
+    stream.on('error', (err) => {
       throw err;
     });
     stream.on('end', () => {
@@ -86,7 +86,7 @@ function main(resourceNames) {
   // [END logging_v2_generated_LoggingServiceV2_TailLogEntries_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

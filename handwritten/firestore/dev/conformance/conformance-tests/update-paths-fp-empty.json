@@ -10,9 +10,7 @@
             "field": []
           }
         ],
-        "jsonValues": [
-          "1"
-        ],
+        "jsonValues": ["1"],
         "isError": true
       }
     }

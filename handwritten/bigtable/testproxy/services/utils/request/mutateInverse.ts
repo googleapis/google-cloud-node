@@ -33,7 +33,7 @@ export function mutationParseInverse(req: {
       method = Mutation.methods.INSERT;
       const localData = {} as any;
 
-      req.mutations.forEach(m => {
+      req.mutations.forEach((m) => {
         const cell = m.setCell;
         if (cell) {
           const family = cell.familyName!;
@@ -54,13 +54,13 @@ export function mutationParseInverse(req: {
       data = localData;
     } else if (
       req.mutations.some(
-        m => m.deleteFromColumn || m.deleteFromFamily || m.deleteFromRow,
+        (m) => m.deleteFromColumn || m.deleteFromFamily || m.deleteFromRow,
       )
     ) {
       method = Mutation.methods.DELETE;
       const localData: Data[] = [];
 
-      req.mutations.forEach(m => {
+      req.mutations.forEach((m) => {
         if (m.deleteFromColumn) {
           const col = m.deleteFromColumn;
 

@@ -548,7 +548,7 @@ export class ConfigServiceV2Client {
     ];
     for (const methodName of configServiceV2StubMethods) {
       const callPromise = this.configServiceV2Stub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -6541,7 +6541,7 @@ export class ConfigServiceV2Client {
    */
   close(): Promise<void> {
     if (this.configServiceV2Stub && !this._terminated) {
-      return this.configServiceV2Stub.then(stub => {
+      return this.configServiceV2Stub.then((stub) => {
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

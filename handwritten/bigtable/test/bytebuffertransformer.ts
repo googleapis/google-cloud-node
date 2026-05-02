@@ -48,14 +48,14 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
   });
 
   describe('processProtoRowsBatch', () => {
-    it('empty result', done => {
+    it('empty result', (done) => {
       assert.throws(() => {
         byteBuffer.processProtoRowsBatch({});
       }, /Error: Response did not contain any results!/);
       done();
     });
 
-    it('just checksum', done => {
+    it('just checksum', (done) => {
       const response1 = createProtoRows(undefined, undefined, undefined, {
         intValue: 1,
       });
@@ -87,7 +87,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('checksum flushes the buffer', done => {
+    it('checksum flushes the buffer', (done) => {
       const response1 = createProtoRows(undefined, undefined, undefined, {
         intValue: 1,
       });
@@ -123,7 +123,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('just reset', done => {
+    it('just reset', (done) => {
       const responseWithReset = createProtoRows(undefined, undefined, true);
 
       // send a reset
@@ -132,7 +132,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('reset empties the buffer', done => {
+    it('reset empties the buffer', (done) => {
       // we first prepare the byteBuffer with a few messages
       // then we send a reset and observe that the queue and
       // buffer have been emptied and only the new message
@@ -168,7 +168,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('reset empties the queue and buffer', done => {
+    it('reset empties the queue and buffer', (done) => {
       // we first prepare the byteBuffer with a few messages
       // then we send a reset and observe that the queue and
       // buffer have been emptied and only the new message
@@ -216,7 +216,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('token triggers push', done => {
+    it('token triggers push', (done) => {
       let pushedData = null;
       byteBuffer.push = (data: any) => {
         pushedData = data;
@@ -258,7 +258,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('separate token', done => {
+    it('separate token', (done) => {
       let pushedData = null;
       byteBuffer.push = (data: any) => {
         pushedData = data;
@@ -288,7 +288,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('checksum without data throws', done => {
+    it('checksum without data throws', (done) => {
       const responseWithChecksum = createProtoRows(undefined, 111, undefined);
 
       // send a checksum
@@ -299,7 +299,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('token without checksum throws', done => {
+    it('token without checksum throws', (done) => {
       let pushedData = null;
       byteBuffer.push = (data: any) => {
         pushedData = data;
@@ -328,7 +328,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('token without data', done => {
+    it('token without data', (done) => {
       let pushedData = null;
       byteBuffer.push = (data: any) => {
         pushedData = data;
@@ -349,7 +349,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('cheksum properly calculated', done => {
+    it('cheksum properly calculated', (done) => {
       checksumValidStub.restore();
       const response = createProtoRows(
         'token1',
@@ -362,7 +362,7 @@ describe('Bigtable/ExecuteQueryByteBufferTransformer', () => {
       done();
     });
 
-    it('invalid cheksum throws', done => {
+    it('invalid cheksum throws', (done) => {
       checksumValidStub.restore();
       const response = createProtoRows(
         'token1',

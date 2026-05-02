@@ -9,9 +9,7 @@
           {
             "where": {
               "path": {
-                "field": [
-                  "a"
-                ]
+                "field": ["a"]
               },
               "op": "==",
               "jsonValue": "[\"ArrayUnion\", 1, 2, 3]"

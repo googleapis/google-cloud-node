@@ -384,7 +384,7 @@ function runTransaction<T>(
         return response(request.response as api.ICommitResponse);
       }
     },
-    rollback: actual => {
+    rollback: (actual) => {
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('rollback');
       expect(actual).to.deep.eq(request.request);
@@ -394,13 +394,13 @@ function runTransaction<T>(
         return response({});
       }
     },
-    batchGetDocuments: actual => {
+    batchGetDocuments: (actual) => {
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('getDocument');
       expect(actual).to.deep.eq(request.request);
       return request.stream!;
     },
-    runQuery: actual => {
+    runQuery: (actual) => {
       const request = expectedRequests.shift()!;
       expect(request.type).to.equal('query');
       actual = extend(true, {}, actual); // Remove undefined properties
@@ -409,7 +409,7 @@ function runTransaction<T>(
     },
   };
 
-  return createInstance(overrides).then(async firestore => {
+  return createInstance(overrides).then(async (firestore) => {
     try {
       setTimeoutHandler((callback, timeout) => {
         if (timeout > 0) {
@@ -424,7 +424,7 @@ function runTransaction<T>(
         callback();
       });
 
-      return await firestore.runTransaction(transaction => {
+      return await firestore.runTransaction((transaction) => {
         const docRef = firestore.doc('collectionId/documentId');
         return transactionCallback(transaction, docRef);
       }, transactionOptions);
@@ -432,7 +432,7 @@ function runTransaction<T>(
       setTimeoutHandler(setTimeout);
       expect(expectedRequests.length).to.equal(
         0,
-        'Missing requests: ' + expectedRequests.map(r => r.type).join(', '),
+        'Missing requests: ' + expectedRequests.map((r) => r.type).join(', '),
       );
     }
   });
@@ -448,7 +448,7 @@ describe('successful transactions', () => {
   it('returns value', () => {
     return runTransaction(/* transactionOptions= */ {}, () => {
       return Promise.resolve('bar');
-    }).then(val => {
+    }).then((val) => {
       expect(val).to.equal('bar');
     });
   });
@@ -656,7 +656,7 @@ describe('failed transactions', () => {
       beginTransaction: () => Promise.reject(),
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       expect(() => (firestore as InvalidApiUsage).runTransaction()).to.throw(
         'Value for argument "updateFunction" is not a valid function.',
       );
@@ -668,7 +668,7 @@ describe('failed transactions', () => {
       beginTransaction: () => Promise.reject(),
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       expect(() =>
         firestore.runTransaction(() => Promise.resolve(), {
           maxAttempts: 'foo' as InvalidApiUsage,
@@ -697,13 +697,13 @@ describe('failed transactions', () => {
   });
 
   it('handles exception', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       firestore.requestStream = () => {
         return Promise.reject(new Error('Expected exception'));
       };
 
       return expect(
-        firestore.runTransaction(async trans => {
+        firestore.runTransaction(async (trans) => {
           // Need to perform a read or write otherwise transaction is a no-op
           // with zero requests
           await trans.get(firestore.doc('collectionId/documentId'));
@@ -773,7 +773,7 @@ describe('transaction operations', () => {
     return runTransaction(
       /* transactionOptions= */ {},
       (transaction, docRef) => {
-        return transaction.get(docRef).then(doc => {
+        return transaction.get(docRef).then((doc) => {
           expect(doc.id).to.equal('documentId');
         });
       },
@@ -844,7 +844,7 @@ describe('transaction operations', () => {
       /* transactionOptions= */ {},
       (transaction, docRef) => {
         const query = docRef.parent.where('foo', '==', 'bar');
-        return transaction.get(query).then(results => {
+        return transaction.get(query).then((results) => {
           expect(results.docs[0].id).to.equal('documentId');
         });
       },
@@ -880,7 +880,7 @@ describe('transaction operations', () => {
       },
       (transaction, docRef) => {
         const query = docRef.parent.where('foo', '==', 'bar');
-        return transaction.get(query).then(results => {
+        return transaction.get(query).then((results) => {
           expect(results.docs[0].id).to.equal('documentId');
         });
       },
@@ -895,7 +895,7 @@ describe('transaction operations', () => {
         const firstDoc = docRef.parent.doc('firstDocument');
         const secondDoc = docRef.parent.doc('secondDocument');
 
-        return transaction.getAll(firstDoc, secondDoc).then(docs => {
+        return transaction.getAll(firstDoc, secondDoc).then((docs) => {
           expect(docs.length).to.equal(2);
           expect(docs[0].id).to.equal('firstDocument');
           expect(docs[1].id).to.equal('secondDocument');
@@ -947,13 +947,13 @@ describe('transaction operations', () => {
 
         // Reads in parallel
         await Promise.all([
-          transaction.get(firstDoc).then(doc => {
+          transaction.get(firstDoc).then((doc) => {
             expect(doc.id).to.equal('firstDocument');
           }),
-          transaction.get(secondDoc).then(doc => {
+          transaction.get(secondDoc).then((doc) => {
             expect(doc.id).to.equal('secondDocument');
           }),
-          transaction.get(query).then(results => {
+          transaction.get(query).then((results) => {
             expect(results.docs[0].id).to.equal('documentId');
           }),
         ]);
@@ -963,7 +963,7 @@ describe('transaction operations', () => {
         const doc = await transaction.get(thirdDoc);
         expect(doc.id).to.equal('thirdDocument');
 
-        await transaction.get(query).then(results => {
+        await transaction.get(query).then((results) => {
           expect(results.docs[0].id).to.equal('documentId');
         });
       },
@@ -986,13 +986,13 @@ describe('transaction operations', () => {
 
         // Reads in parallel
         await Promise.all([
-          transaction.get(firstDoc).then(doc => {
+          transaction.get(firstDoc).then((doc) => {
             expect(doc.id).to.equal('firstDocument');
           }),
-          transaction.get(secondDoc).then(doc => {
+          transaction.get(secondDoc).then((doc) => {
             expect(doc.id).to.equal('secondDocument');
           }),
-          transaction.get(query).then(results => {
+          transaction.get(query).then((results) => {
             expect(results.docs[0].id).to.equal('documentId');
           }),
         ]);
@@ -1002,7 +1002,7 @@ describe('transaction operations', () => {
         const doc = await transaction.get(thirdDoc);
         expect(doc.id).to.equal('thirdDocument');
 
-        await transaction.get(query).then(results => {
+        await transaction.get(query).then((results) => {
           expect(results.docs[0].id).to.equal('documentId');
         });
       },

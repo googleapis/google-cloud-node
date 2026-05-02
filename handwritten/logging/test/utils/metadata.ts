@@ -24,7 +24,7 @@ const fakeGcpMetadata = {
   instance(path: string) {
     if (instanceOverride) {
       const override = Array.isArray(instanceOverride)
-        ? instanceOverride.find(entry => entry.path === path)
+        ? instanceOverride.find((entry) => entry.path === path)
         : instanceOverride;
 
       if (override.path) {

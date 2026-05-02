@@ -189,11 +189,11 @@ export class EnabledTraceUtil implements TraceUtil {
           let result = fn(new Span(otelSpan));
           if (result instanceof Promise) {
             result = result
-              .then(value => {
+              .then((value) => {
                 otelSpan.end();
                 return value;
               })
-              .catch(error => {
+              .catch((error) => {
                 this.endSpan(otelSpan, error);
                 // Returns a Promise.reject the same as the underlying function.
                 return Promise.reject(error);

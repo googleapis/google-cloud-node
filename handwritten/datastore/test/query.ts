@@ -55,7 +55,7 @@ describe('Query', () => {
         new Query(SCOPE, undefined, KINDS),
         new Query(SCOPE, 0 as {} as string, KINDS),
         new Query(SCOPE, KINDS),
-      ].forEach(query => {
+      ].forEach((query) => {
         assert.strictEqual(query.namespace, null);
       });
     });
@@ -131,7 +131,7 @@ describe('Query', () => {
           const addAggregationsAggregate = generateAggregateQuery();
           addAggregationsAggregate.addAggregations(aggregateFields);
           const addAggregationAggregate = generateAggregateQuery();
-          aggregateFields.forEach(aggregateField =>
+          aggregateFields.forEach((aggregateField) =>
             addAggregationAggregate.addAggregation(aggregateField),
           );
           assert.deepStrictEqual(
@@ -148,7 +148,7 @@ describe('Query', () => {
           it('should compare equivalent count aggregation queries', () => {
             compareAggregations(
               generateAggregateQuery().count('total1').count('total2'),
-              ['total1', 'total2'].map(alias =>
+              ['total1', 'total2'].map((alias) =>
                 AggregateField.count().alias(alias),
               ),
             );
@@ -209,7 +209,7 @@ describe('Query', () => {
   });
 
   describe('filter', () => {
-    it('should issue a warning when a Filter instance is not provided', done => {
+    it('should issue a warning when a Filter instance is not provided', (done) => {
       const onWarning = (warning: {message: unknown}) => {
         assert.strictEqual(
           warning.message,
@@ -221,7 +221,7 @@ describe('Query', () => {
       process.on('warning', onWarning);
       new Query(['kind1']).filter('name', 'Stephen');
     });
-    it('should not issue a warning again when a Filter instance is not provided', done => {
+    it('should not issue a warning again when a Filter instance is not provided', (done) => {
       const onWarning = () => {
         assert.fail();
       };
@@ -319,7 +319,7 @@ describe('Query', () => {
       assert.strictEqual(filter.val, 'Stephen');
     });
   });
-  it('should not issue a warning when an EntityFilter instance is provided', done => {
+  it('should not issue a warning when an EntityFilter instance is provided', (done) => {
     const onWarning = () => {
       assert.fail();
     };
@@ -535,7 +535,7 @@ describe('Query', () => {
   });
 
   describe('run', () => {
-    it('should call the parent instance runQuery correctly', done => {
+    it('should call the parent instance runQuery correctly', (done) => {
       const args = [{}, () => {}];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

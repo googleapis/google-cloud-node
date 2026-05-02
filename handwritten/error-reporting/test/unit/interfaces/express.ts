@@ -78,13 +78,13 @@ describe('expressInterface', () => {
       );
     });
     describe('Calling back to express builtins', () => {
-      it('Should callback to next', done => {
+      it('Should callback to next', (done) => {
         const nextCb = () => {
           done();
         };
         validBoundHandler(testError, null!, null!, nextCb);
       });
-      it('Should callback to sendError', done => {
+      it('Should callback to sendError', (done) => {
         const sendError = () => {
           done();
         };

@@ -129,7 +129,7 @@ class AggregateQuery {
    *
    */
   toProto(): any {
-    return this.aggregations.map(aggregation => aggregation.toProto());
+    return this.aggregations.map((aggregation) => aggregation.toProto());
   }
 }
 

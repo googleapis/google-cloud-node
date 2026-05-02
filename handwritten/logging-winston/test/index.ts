@@ -171,7 +171,7 @@ describe('logging-winston', () => {
       lastFakeLoggingArgs = [];
     });
 
-    it('should properly call common.log', done => {
+    it('should properly call common.log', (done) => {
       const args = Object.assign({}, METADATA, {
         level: LEVEL,
         message: MESSAGE,

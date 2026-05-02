@@ -549,7 +549,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
     } as google.bigtable.admin.v2.CreateTableRequest;
 
     if (options.splits) {
-      reqOpts.initialSplits = options.splits.map(key => ({
+      reqOpts.initialSplits = options.splits.map((key) => ({
         key,
       }));
     }
@@ -667,7 +667,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
-    this.getMetadata(gaxOptions, err => {
+    this.getMetadata(gaxOptions, (err) => {
       if (err) {
         if (err.code === 5) {
           callback(null, false);
@@ -766,7 +766,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
           callback(err);
           return;
         }
-        const appProfiles = resp!.map(appProfileObj => {
+        const appProfiles = resp!.map((appProfileObj) => {
           const appProfile = this.appProfile(
             appProfileObj.name!.split('/').pop()!,
           );
@@ -859,7 +859,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
       reqOpts,
       gaxOpts,
     });
-    stream.on('response', apiResp => {
+    stream.on('response', (apiResp) => {
       if (arrify(apiResp.failedLocations).length > 0) {
         failedLocations = failedLocations.concat(apiResp.failedLocations);
       }
@@ -981,7 +981,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
           callback(err);
           return;
         }
-        const clusters = resp!.clusters!.map(clusterObj => {
+        const clusters = resp!.clusters!.map((clusterObj) => {
           const cluster = this.cluster(clusterObj.name!.split('/').pop()!);
           cluster.metadata = clusterObj;
           return cluster;
@@ -1164,7 +1164,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
       },
       (...args) => {
         if (args[1]) {
-          args[1] = args[1].map(tableObj => {
+          args[1] = args[1].map((tableObj) => {
             const table = this.table(tableObj.name!.split('/').pop()!);
             table.metadata = tableObj;
             return table;
@@ -1423,7 +1423,7 @@ Please use the format 'my-instance' or '${bigtable.projectName}/instances/my-ins
     } as google.bigtable.admin.v2.IPartialUpdateInstanceRequest;
     const fieldsForMask = ['displayName', 'type', 'labels'];
 
-    fieldsForMask.forEach(field => {
+    fieldsForMask.forEach((field) => {
       if (field in reqOpts.instance!) {
         reqOpts.updateMask!.paths!.push(snakeCase(field));
       }

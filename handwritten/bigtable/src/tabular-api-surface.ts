@@ -530,7 +530,7 @@ export class PartialFailureError extends Error {
     super();
     this.errors = errors;
     this.name = 'PartialFailureError';
-    let messages = errors.map(e => e.message);
+    let messages = errors.map((e) => e.message);
     if (messages.length > 1) {
       messages = messages.map((message, i) => `    ${i + 1}. ${message}`);
       messages.unshift(

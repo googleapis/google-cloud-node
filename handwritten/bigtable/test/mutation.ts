@@ -214,7 +214,7 @@ describe('Bigtable/Mutation', () => {
     beforeEach(() => {
       sandbox.stub(global, 'Date').returns(fakeTime);
       convertCalls = [];
-      sandbox.stub(Mutation, 'convertToBytes').callsFake(value => {
+      sandbox.stub(Mutation, 'convertToBytes').callsFake((value) => {
         convertCalls.push(value);
         return value;
       });
@@ -314,7 +314,7 @@ describe('Bigtable/Mutation', () => {
 
     beforeEach(() => {
       convertCalls = [];
-      sandbox.stub(Mutation, 'convertToBytes').callsFake(value => {
+      sandbox.stub(Mutation, 'convertToBytes').callsFake((value) => {
         convertCalls.push(value);
         return value;
       });
@@ -479,7 +479,7 @@ describe('Bigtable/Mutation', () => {
     let convertCalls: any[] = [];
 
     beforeEach(() => {
-      sandbox.stub(Mutation, 'convertToBytes').callsFake(value => {
+      sandbox.stub(Mutation, 'convertToBytes').callsFake((value) => {
         convertCalls.push(value);
         return value;
       });
@@ -494,7 +494,7 @@ describe('Bigtable/Mutation', () => {
         data: [],
       };
       const mutation = new Mutation(data);
-      sandbox.stub(Mutation, 'encodeSetCell').callsFake(_data => {
+      sandbox.stub(Mutation, 'encodeSetCell').callsFake((_data) => {
         assert.strictEqual(_data, data.data);
         return fakeEncoded;
       });
@@ -511,7 +511,7 @@ describe('Bigtable/Mutation', () => {
         method: 'delete',
         data: [],
       };
-      sandbox.stub(Mutation, 'encodeDelete').callsFake(_data => {
+      sandbox.stub(Mutation, 'encodeDelete').callsFake((_data) => {
         assert.strictEqual(_data, data.data);
         return fakeEncoded;
       });

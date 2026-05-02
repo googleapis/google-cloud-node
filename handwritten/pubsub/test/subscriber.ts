@@ -566,7 +566,7 @@ describe('Subscriber', () => {
       assert.strictEqual(stub.callCount, 1);
     });
 
-    it('should remove the message from inv. after queue flushes', done => {
+    it('should remove the message from inv. after queue flushes', (done) => {
       const ackQueue: FakeAckQueue = stubs.get('ackQueue');
       const inventory: FakeLeaseManager = stubs.get('inventory');
 
@@ -624,7 +624,7 @@ describe('Subscriber', () => {
       assert.strictEqual(shutdownStub.callCount, 1);
     });
 
-    it('should emit a close event', done => {
+    it('should emit a close event', (done) => {
       subscriber.on('close', done);
       void subscriber.close();
     });
@@ -1008,13 +1008,13 @@ describe('Subscriber', () => {
       assert.strictEqual(stream.options, streamingOptions);
     });
 
-    it('should emit stream errors', done => {
+    it('should emit stream errors', (done) => {
       subscriber.open();
 
       const stream: FakeMessageStream = stubs.get('messageStream');
       const fakeError = new Error('err');
 
-      subscriber.on('error', err => {
+      subscriber.on('error', (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
@@ -1022,7 +1022,7 @@ describe('Subscriber', () => {
       stream.emit('error', fakeError);
     });
 
-    it('should close the subscriber if stream closes unexpectedly', done => {
+    it('should close the subscriber if stream closes unexpectedly', (done) => {
       const stub = sandbox.stub(subscriber, 'close');
       const stream: FakeMessageStream = stubs.get('messageStream');
 
@@ -1034,7 +1034,7 @@ describe('Subscriber', () => {
       });
     });
 
-    it('should add messages to the inventory', done => {
+    it('should add messages to the inventory', (done) => {
       const message = new Message(subscriber, RECEIVED_MESSAGE);
 
       subscriber.open();

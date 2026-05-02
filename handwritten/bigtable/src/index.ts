@@ -1028,10 +1028,10 @@ export class Bigtable {
           .on('error', (err: Error) => {
             stream.destroy(err);
           })
-          .on('metadata', metadata => {
+          .on('metadata', (metadata) => {
             stream.emit('metadata', metadata);
           })
-          .on('response', response => {
+          .on('response', (response) => {
             stream.emit('response', response);
           })
           .pipe(stream);
@@ -1045,13 +1045,13 @@ export class Bigtable {
    */
   async close(): Promise<void[]> {
     // Close all of the clients.
-    const combined = Object.keys(this.api).map(clientType =>
+    const combined = Object.keys(this.api).map((clientType) =>
       this.api[clientType].close(),
     );
     const results = await Promise.all(combined);
 
     // Clear them out of our cache.
-    Object.keys(this.api).forEach(clientType => {
+    Object.keys(this.api).forEach((clientType) => {
       delete this.api[clientType];
     });
 

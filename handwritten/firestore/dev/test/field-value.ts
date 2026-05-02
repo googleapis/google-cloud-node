@@ -32,7 +32,7 @@ import {
 
 function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
   it("can't be used inside arrays", () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const docRef = firestore.doc('coll/doc');
       const expectedErr = new RegExp(
         `${methodName}\\(\\) cannot be used inside of an array`,
@@ -49,7 +49,7 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
   });
 
   it("can't be used inside arrayUnion()", () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const docRef = firestore.doc('collectionId/documentId');
       expect(() => docRef.set({foo: FieldValue.arrayUnion(sentinel)})).to.throw(
         `Element at index 0 is not a valid array element. ${methodName}() cannot be used inside of an array.`,
@@ -58,7 +58,7 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
   });
 
   it("can't be used inside arrayRemove()", () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const docRef = firestore.doc('collectionId/documentId');
       expect(() =>
         docRef.set({foo: FieldValue.arrayRemove(sentinel)}),
@@ -69,7 +69,7 @@ function genericFieldValueTests(methodName: string, sentinel: FieldValue) {
   });
 
   it("can't be used with queries", () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const collRef = firestore.collection('coll');
       expect(() => collRef.where('a', '==', sentinel)).to.throw(
         `Value for argument "value" is not a valid query constraint. ${methodName}() can only be used in set(), create() or update().`,
@@ -98,7 +98,7 @@ describe('FieldValue.arrayUnion()', () => {
 
   it('can be used with set()', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: document('documentId', 'foo', 'bar'),
           transforms: [
@@ -113,7 +113,7 @@ describe('FieldValue.arrayUnion()', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({
         foo: 'bar',
         field: FieldValue.arrayUnion('foo', 'bar'),
@@ -123,7 +123,7 @@ describe('FieldValue.arrayUnion()', () => {
   });
 
   it('must not contain directly nested arrays', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const docRef = firestore.doc('collectionId/documentId');
       expect(() => docRef.set({foo: FieldValue.arrayUnion([])})).to.throw(
         'Element at index 0 is not a valid array element. Nested arrays are ' +
@@ -143,7 +143,7 @@ describe('FieldValue.increment()', () => {
   });
 
   it('validates that operand is number', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       expect(() => {
         return firestore.doc('collectionId/documentId').set({
           foo: FieldValue.increment('foo' as InvalidApiUsage),
@@ -164,7 +164,7 @@ describe('FieldValue.increment()', () => {
 
   it('can be used with set()', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: document('documentId', 'foo', 'bar'),
           transforms: [
@@ -177,7 +177,7 @@ describe('FieldValue.increment()', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({
         foo: 'bar',
         field: FieldValue.increment(42),
@@ -206,7 +206,7 @@ describe('FieldValue.arrayRemove()', () => {
 
   it('can be used with set()', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: document('documentId', 'foo', 'bar'),
           transforms: [
@@ -220,7 +220,7 @@ describe('FieldValue.arrayRemove()', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({
         foo: 'bar',
         field: FieldValue.arrayRemove('foo', 'bar'),
@@ -230,7 +230,7 @@ describe('FieldValue.arrayRemove()', () => {
   });
 
   it('must not contain directly nested arrays', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const docRef = firestore.doc('collectionId/documentId');
       expect(() => docRef.set({foo: FieldValue.arrayRemove([])})).to.throw(
         'Element at index 0 is not a valid array element. Nested arrays are ' +
@@ -254,7 +254,7 @@ describe('FieldValue.serverTimestamp()', () => {
 
   it('can be used with set()', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: document('documentId', 'foo', 'bar'),
           transforms: [serverTimestamp('field'), serverTimestamp('map.field')],
@@ -265,7 +265,7 @@ describe('FieldValue.serverTimestamp()', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({
         foo: 'bar',
         field: FieldValue.serverTimestamp(),

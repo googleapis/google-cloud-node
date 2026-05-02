@@ -59,7 +59,7 @@ export function snakecaseKeys(
   for (const key in labels) {
     const replaced = key.replace(
       /[A-Z]/g,
-      letter => `_${letter.toLowerCase()}`,
+      (letter) => `_${letter.toLowerCase()}`,
     );
     Object.defineProperty(
       labels,
@@ -85,7 +85,7 @@ export function assignSeverityToEntries(
   entries: Entry | Entry[],
   severity: string,
 ): Entry[] {
-  return (arrify(entries) as Entry[]).map(entry => {
+  return (arrify(entries) as Entry[]).map((entry) => {
     const metadata = extend(true, {}, entry.metadata, {
       severity,
     });

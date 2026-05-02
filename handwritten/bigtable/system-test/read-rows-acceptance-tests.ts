@@ -66,17 +66,19 @@ const CellChunk = root.lookupType(
   'google.bigtable.v2.ReadRowsResponse.CellChunk',
 );
 describe('Read Row Acceptance tests', () => {
-  testcases.forEach(test => {
-    it(test.name, done => {
+  testcases.forEach((test) => {
+    it(test.name, (done) => {
       const table = new Table({id: 'xyz'} as Instance, 'my-table');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const results: any[] = [];
       const rawResults = test.results || [];
-      const errorCount = rawResults.filter(result => result.error).length;
+      const errorCount = rawResults.filter((result) => result.error).length;
       rawResults
-        .filter(result => !result.error)
-        .forEach(result => {
-          const existingRow = results.find(filter => filter.key === result.rk);
+        .filter((result) => !result.error)
+        .forEach((result) => {
+          const existingRow = results.find(
+            (filter) => filter.key === result.rk,
+          );
           const row = existingRow || {key: result.rk, data: {}};
           const data = row.data;
           if (typeof existingRow === 'undefined') {
@@ -109,7 +111,7 @@ describe('Read Row Acceptance tests', () => {
 
         setImmediate(() => {
           test.chunks_base64
-            .map(chunk => {
+            .map((chunk) => {
               const cellChunk = CellChunk.decode(
                 Buffer.from(chunk as string, 'base64'),
               ); //.decode64(chunk);
@@ -123,14 +125,14 @@ describe('Read Row Acceptance tests', () => {
               });
               return readRowsResponse;
             })
-            .forEach(readRowsResponse => stream.push(readRowsResponse));
+            .forEach((readRowsResponse) => stream.push(readRowsResponse));
           stream.push(null);
         });
 
         return stream;
       };
 
-      const tableRows = results.map(rawRow => {
+      const tableRows = results.map((rawRow) => {
         const row = new Row(table, rawRow.key);
         row.data = rawRow.data;
         return row;
@@ -143,11 +145,11 @@ describe('Read Row Acceptance tests', () => {
 
       table
         .createReadStream({})
-        .on('error', err => {
+        .on('error', (err) => {
           errors.push(err);
           verify();
         })
-        .on('data', row => {
+        .on('data', (row) => {
           rows.push(row);
         })
         .on('end', () => {

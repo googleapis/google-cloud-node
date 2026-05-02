@@ -636,7 +636,7 @@ class Table extends ServiceObject {
     }
 
     if (body.schema && body.schema.fields) {
-      body.schema.fields = body.schema.fields.map(field => {
+      body.schema.fields = body.schema.fields.map((field) => {
         if (field.fields) {
           field.type = 'RECORD';
         }
@@ -839,7 +839,7 @@ class Table extends ServiceObject {
         callback!(err, resp);
         return;
       }
-      job!.on('error', callback!).on('complete', metadata => {
+      job!.on('error', callback!).on('complete', (metadata) => {
         callback!(null, metadata);
       });
     });
@@ -1038,7 +1038,7 @@ class Table extends ServiceObject {
     cb?: JobCallback,
   ): void | Promise<JobResponse> {
     const sourceTables = toArray(source) as Table[];
-    sourceTables.forEach(sourceTable => {
+    sourceTables.forEach((sourceTable) => {
       if (!(sourceTable instanceof Table)) {
         throw new Error('Source must be a Table object.');
       }
@@ -1058,7 +1058,7 @@ class Table extends ServiceObject {
             tableId: this.id,
           },
 
-          sourceTables: sourceTables.map(sourceTable => {
+          sourceTables: sourceTables.map((sourceTable) => {
             return {
               datasetId: sourceTable.dataset.id,
               projectId: sourceTable.dataset.projectId,
@@ -1193,7 +1193,7 @@ class Table extends ServiceObject {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
 
     options = extend(true, options, {
-      destinationUris: toArray(destination).map(dest => {
+      destinationUris: toArray(destination).map((dest) => {
         if (!util.isCustomType(dest, 'storage/file')) {
           throw new Error('Destination must be a File object.');
         }
@@ -1371,7 +1371,7 @@ class Table extends ServiceObject {
 
     this._createLoadJob(source, metadata).then(
       ([resp]) => callback!(null, resp, resp.metadata),
-      err => callback!(err),
+      (err) => callback!(err),
     );
   }
 
@@ -1444,7 +1444,7 @@ class Table extends ServiceObject {
     }
 
     extend(true, body.configuration?.load, metadata, {
-      sourceUris: toArray(source).map(src => {
+      sourceUris: toArray(source).map((src) => {
         if (!util.isCustomType(src, 'storage/file')) {
           throw new Error('Source must be a File object.');
         }
@@ -1657,7 +1657,7 @@ class Table extends ServiceObject {
     });
     stream.on('job', (job: Job) => {
       job
-        .on('error', err => {
+        .on('error', (err) => {
           stream.destroy(err);
         })
         .on('complete', () => {
@@ -1763,7 +1763,7 @@ class Table extends ServiceObject {
         callback!(err, resp);
         return;
       }
-      job!.on('error', callback!).on('complete', metadata => {
+      job!.on('error', callback!).on('complete', (metadata) => {
         callback!(null, metadata);
       });
     });
@@ -2122,11 +2122,11 @@ class Table extends ServiceObject {
     const promise = this._insertAndCreateTable(rows, options);
     if (callback) {
       promise.then(
-        resp => callback(null, resp),
-        err => callback(err, null),
+        (resp) => callback(null, resp),
+        (err) => callback(err, null),
       );
     } else {
-      return promise.then(r => [r]);
+      return promise.then((r) => [r]);
     }
   }
 
@@ -2164,7 +2164,7 @@ class Table extends ServiceObject {
     // table creation after failed access is subject to failure caching and
     // eventual consistency, see:
     // https://github.com/googleapis/google-cloud-python/issues/4553#issuecomment-350110292
-    await new Promise(resolve => setTimeout(resolve, delay));
+    await new Promise((resolve) => setTimeout(resolve, delay));
     return this._insertAndCreateTable(rows, options);
   }
 
@@ -2194,8 +2194,8 @@ class Table extends ServiceObject {
       } catch (e) {
         error = e as GoogleErrorBody;
         rows = (((e as GoogleErrorBody).errors || []) as PartialInsertFailure[])
-          .filter(err => !!err.row)
-          .map(err => err.row);
+          .filter((err) => !!err.row)
+          .map((err) => err.row);
 
         if (!rows.length) {
           break;
@@ -2256,7 +2256,7 @@ class Table extends ServiceObject {
     const partialFailures = (resp.insertErrors || []).map(
       (insertError: GoogleErrorBody) => {
         return {
-          errors: insertError.errors!.map(error => {
+          errors: insertError.errors!.map((error) => {
             return {
               message: error.message,
               reason: error.reason,
@@ -2410,7 +2410,7 @@ class Table extends ServiceObject {
         return;
       }
 
-      job!.on('error', callback!).on('complete', metadata => {
+      job!.on('error', callback!).on('complete', (metadata) => {
         callback!(null, metadata);
       });
     });

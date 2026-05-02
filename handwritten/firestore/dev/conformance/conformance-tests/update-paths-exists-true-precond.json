@@ -10,14 +10,10 @@
         },
         "fieldPaths": [
           {
-            "field": [
-              "a"
-            ]
+            "field": ["a"]
           }
         ],
-        "jsonValues": [
-          "1"
-        ],
+        "jsonValues": ["1"],
         "request": {
           "database": "projects/projectID/databases/(default)",
           "writes": [
@@ -31,9 +27,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "a"
-                ]
+                "fieldPaths": ["a"]
               },
               "currentDocument": {
                 "exists": true

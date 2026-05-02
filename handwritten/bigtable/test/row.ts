@@ -57,19 +57,19 @@ const TABLE = {
 
 const FakeMutation = {
   methods: Mutation.methods,
-  convertToBytes: sandbox.spy(value => {
+  convertToBytes: sandbox.spy((value) => {
     if (value === ROW_ID) {
       return CONVERTED_ROW_ID;
     }
     return value;
   }),
-  convertFromBytes: sandbox.spy(value => {
+  convertFromBytes: sandbox.spy((value) => {
     return value;
   }),
-  parseColumnName: sandbox.spy(column => {
+  parseColumnName: sandbox.spy((column) => {
     return Mutation.parseColumnName(column);
   }),
-  parse: sandbox.spy(entry => {
+  parse: sandbox.spy((entry) => {
     return {
       mutations: entry,
     };
@@ -77,7 +77,7 @@ const FakeMutation = {
 };
 
 const FakeFilter = {
-  parse: sandbox.spy(filter => {
+  parse: sandbox.spy((filter) => {
     return filter;
   }),
 };
@@ -143,7 +143,7 @@ describe('Bigtable/Row', () => {
 
   afterEach(() => {
     sandbox.restore();
-    Object.keys(FakeMutation).forEach(spy => {
+    Object.keys(FakeMutation).forEach((spy) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((FakeMutation as any)[spy].resetHistory) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -179,7 +179,7 @@ describe('Bigtable/Row', () => {
 
     beforeEach(() => {
       convert = FakeMutation.convertFromBytes;
-      FakeMutation.convertFromBytes = sandbox.spy(val => {
+      FakeMutation.convertFromBytes = sandbox.spy((val) => {
         return val.replace('unconverted', 'converted');
       });
     });
@@ -615,7 +615,7 @@ describe('Bigtable/Row', () => {
   });
 
   describe('create', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       (row.table.mutate as Function) = (entry: Entry, gaxOptions: {}) => {
         assert.strictEqual(entry.key, row.id);
         assert.strictEqual(entry.data, undefined);
@@ -626,7 +626,7 @@ describe('Bigtable/Row', () => {
       row.create(assert.ifError);
     });
 
-    it('should accept data to populate the row', done => {
+    it('should accept data to populate the row', (done) => {
       const options = {
         entry: {
           a: 'a',
@@ -640,7 +640,7 @@ describe('Bigtable/Row', () => {
       row.create(options, assert.ifError);
     });
 
-    it('should accept options when inserting data', done => {
+    it('should accept options when inserting data', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -651,7 +651,7 @@ describe('Bigtable/Row', () => {
       row.create(options, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const err = new Error('err');
       const response = {};
       sandbox.stub(row.table, 'mutate').callsArgWith(2, err, response);
@@ -663,7 +663,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should return the Row instance', done => {
+    it('should return the Row instance', (done) => {
       const response = {};
       sandbox.stub(row.table, 'mutate').callsArgWith(2, null, response);
       row.create((err, row_, apiResponse) => {
@@ -690,7 +690,7 @@ describe('Bigtable/Row', () => {
       }, /At least one rule must be provided\./);
     });
 
-    it('should read/modify/write rules', done => {
+    it('should read/modify/write rules', (done) => {
       (row.bigtable.request as Function) = (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         config: any,
@@ -717,7 +717,7 @@ describe('Bigtable/Row', () => {
       row.createRules(rules, done);
     });
 
-    it('should use an appProfileId', done => {
+    it('should use an appProfileId', (done) => {
       const bigtableInstance = row.bigtable;
       bigtableInstance.appProfileId = 'app-profile-id-12345';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -731,7 +731,7 @@ describe('Bigtable/Row', () => {
       row.createRules(rules, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (row.bigtable.request as Function) = (config: any) => {
@@ -743,7 +743,7 @@ describe('Bigtable/Row', () => {
   });
 
   describe('delete', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       (row.table.mutate as Function) = (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutation: any,
@@ -758,7 +758,7 @@ describe('Bigtable/Row', () => {
       row.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       (row.table.mutate as Function) = (mutation: {}, gaxOptions_: {}) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
@@ -767,7 +767,7 @@ describe('Bigtable/Row', () => {
       row.delete(gaxOptions, done);
     });
 
-    it('should remove existing data', done => {
+    it('should remove existing data', (done) => {
       const gaxOptions = {};
       (row.table.mutate as Function) = (mutation: {}, gaxOptions_: {}) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
@@ -781,7 +781,7 @@ describe('Bigtable/Row', () => {
   describe('deleteCells', () => {
     const columns = ['a:b', 'c'];
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       (row.table.mutate as Function) = (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutation: any,
@@ -797,7 +797,7 @@ describe('Bigtable/Row', () => {
       row.deleteCells(columns, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       sandbox.stub(row.table, 'mutate').callsFake((mutation, gaxOptions_) => {
         assert.strictEqual(gaxOptions_, gaxOptions);
@@ -806,7 +806,7 @@ describe('Bigtable/Row', () => {
       row.deleteCells(columns, gaxOptions, done);
     });
 
-    it('should remove existing data', done => {
+    it('should remove existing data', (done) => {
       sandbox.stub(row.table, 'mutate').callsArg(2);
       row.deleteCells(columns, done);
       assert.strictEqual(row.data, undefined);
@@ -814,8 +814,8 @@ describe('Bigtable/Row', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
-      sandbox.stub(row, 'getMetadata').callsFake(gaxOptions => {
+    it('should not require gaxOptions', (done) => {
+      sandbox.stub(row, 'getMetadata').callsFake((gaxOptions) => {
         assert.deepStrictEqual(gaxOptions, {
           filter: [
             {
@@ -835,9 +835,9 @@ describe('Bigtable/Row', () => {
       row.exists(assert.ifError);
     });
 
-    it('should add filter to the read row options', done => {
+    it('should add filter to the read row options', (done) => {
       const gaxOptions = {};
-      sandbox.stub(row, 'getMetadata').callsFake(gaxOptions_ => {
+      sandbox.stub(row, 'getMetadata').callsFake((gaxOptions_) => {
         assert.deepStrictEqual(gaxOptions_, {
           filter: [
             {
@@ -857,12 +857,12 @@ describe('Bigtable/Row', () => {
       row.exists(gaxOptions, assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {
         testProperty: true,
       } as CallOptions;
 
-      sandbox.stub(row, 'getMetadata').callsFake(gaxOptions_ => {
+      sandbox.stub(row, 'getMetadata').callsFake((gaxOptions_) => {
         assert.strictEqual(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (gaxOptions_ as any).testProperty,
@@ -875,7 +875,7 @@ describe('Bigtable/Row', () => {
       row.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if error is RowError', done => {
+    it('should return false if error is RowError', (done) => {
       const error = new RowError('Error.');
       sandbox.stub(row, 'getMetadata').callsArgWith(1, error);
       row.exists((err, exists) => {
@@ -885,16 +885,16 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should return error if not RowError', done => {
+    it('should return error if not RowError', (done) => {
       const error = new Error('Error.');
       sandbox.stub(row, 'getMetadata').callsArgWith(1, error);
-      row.exists(err => {
+      row.exists((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       sandbox.stub(row, 'getMetadata').callsArgWith(1, null, {});
       row.exists((err, exists) => {
         assert.ifError(err);
@@ -927,7 +927,7 @@ describe('Bigtable/Row', () => {
       FakeFilter.parse.resetHistory();
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       const filter = {
         column: 'a',
       };
@@ -988,25 +988,25 @@ describe('Bigtable/Row', () => {
       );
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const filter = {
         column: 'a',
       };
       const gaxOptions = {};
-      sandbox.stub(row.bigtable, 'request').callsFake(config => {
+      sandbox.stub(row.bigtable, 'request').callsFake((config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       });
       row.filter(filter, {gaxOptions}, assert.ifError);
     });
 
-    it('should use an appProfileId', done => {
+    it('should use an appProfileId', (done) => {
       const filter = {
         column: 'a',
       };
       const bigtableInstance = row.bigtable;
       bigtableInstance.appProfileId = 'app-profile-id-12345';
-      sandbox.stub(bigtableInstance, 'request').callsFake(config => {
+      sandbox.stub(bigtableInstance, 'request').callsFake((config) => {
         assert.strictEqual(
           config.reqOpts.appProfileId,
           bigtableInstance.appProfileId,
@@ -1016,7 +1016,7 @@ describe('Bigtable/Row', () => {
       row.filter(filter, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const err = new Error('err');
       const response = {};
       sandbox.stub(row.bigtable, 'request').callsArgWith(1, err, response);
@@ -1032,7 +1032,7 @@ describe('Bigtable/Row', () => {
       );
     });
 
-    it('should return a matched flag', done => {
+    it('should return a matched flag', (done) => {
       const response = {
         predicateMatched: true,
       };
@@ -1084,7 +1084,7 @@ describe('Bigtable/Row', () => {
       row = new Row(TABLE, ROW_ID);
       return row;
     }
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const fn = (reqOpts: any) => {
         assert.strictEqual(reqOpts.keys[0], ROW_ID);
@@ -1096,7 +1096,7 @@ describe('Bigtable/Row', () => {
       row.get(assert.ifError);
     });
 
-    it('should create a filter for a single column', done => {
+    it('should create a filter for a single column', (done) => {
       const keys = ['a:b'];
 
       const expectedFilter = [
@@ -1119,7 +1119,7 @@ describe('Bigtable/Row', () => {
       row.get(keys, assert.ifError);
     });
 
-    it('should create a filter for multiple columns', done => {
+    it('should create a filter for multiple columns', (done) => {
       const keys = ['a:b', 'c:d'];
 
       const expectedFilter = [
@@ -1161,7 +1161,7 @@ describe('Bigtable/Row', () => {
       row.get(keys, assert.ifError);
     });
 
-    it('should respect supplying only family names', done => {
+    it('should respect supplying only family names', (done) => {
       const keys = ['a'];
 
       const expectedFilter = [
@@ -1182,7 +1182,7 @@ describe('Bigtable/Row', () => {
       row.get(keys, assert.ifError);
     });
 
-    it('should respect the options object', done => {
+    it('should respect the options object', (done) => {
       const keys = ['a:b'];
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const options: any = {
@@ -1223,7 +1223,7 @@ describe('Bigtable/Row', () => {
       row.get(keys, options, assert.ifError);
     });
 
-    it('should respect the options object with filter for multiple columns', done => {
+    it('should respect the options object with filter for multiple columns', (done) => {
       const keys = ['a:b', 'c:d'];
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1278,7 +1278,7 @@ describe('Bigtable/Row', () => {
       row.get(keys, options, assert.ifError);
     });
 
-    it('should respect filter in options object', done => {
+    it('should respect filter in options object', (done) => {
       const keys = [] as string[];
 
       const options = {
@@ -1297,7 +1297,7 @@ describe('Bigtable/Row', () => {
       row.get(keys, options, assert.ifError);
     });
 
-    it('should accept options without keys', done => {
+    it('should accept options without keys', (done) => {
       const options = {
         decode: false,
       };
@@ -1313,7 +1313,7 @@ describe('Bigtable/Row', () => {
       row.get(options, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       const row = getRowInstanceForErrResp(error as ServiceError);
       row.get((err, row) => {
@@ -1323,7 +1323,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should return a custom error if the row is not found', done => {
+    it('should return a custom error if the row is not found', (done) => {
       const row = getRowInstanceForErrResp(null, []);
       row.get((err, row_) => {
         assert(err instanceof RowError);
@@ -1333,7 +1333,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should update the row data upon success', done => {
+    it('should update the row data upon success', (done) => {
       const fakeRow = new Row(TABLE, ROW_ID);
       fakeRow.data = {
         a: 'a',
@@ -1348,7 +1348,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should return only data for the keys provided', done => {
+    it('should return only data for the keys provided', (done) => {
       const fakeRow = new Row(TABLE, ROW_ID);
 
       fakeRow.data = {
@@ -1371,7 +1371,7 @@ describe('Bigtable/Row', () => {
   });
 
   describe('getMetadata', () => {
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       sandbox.stub(row, 'get').callsArgWith(1, error);
       row.getMetadata((err, metadata) => {
@@ -1381,7 +1381,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should return metadata to the callback', done => {
+    it('should return metadata to the callback', (done) => {
       const fakeMetadata = {
         a: 'a',
         b: 'b',
@@ -1395,7 +1395,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should accept an options object', done => {
+    it('should accept an options object', (done) => {
       const fakeMetadata = {};
       const fakeOptions = {
         decode: false,
@@ -1435,7 +1435,7 @@ describe('Bigtable/Row', () => {
       formatFamiliesSpy.restore();
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       sandbox
         .stub(FakeRowDataUtil, 'createRulesUtil')
         .callsFake((reqOpts, properties, gaxOptions, cb) => {
@@ -1447,16 +1447,16 @@ describe('Bigtable/Row', () => {
       row.increment(COLUMN_NAME, assert.ifError);
     });
 
-    it('should optionally accept an increment amount', done => {
+    it('should optionally accept an increment amount', (done) => {
       const increment = 10;
-      sandbox.stub(FakeRowDataUtil, 'createRulesUtil').callsFake(reqOpts => {
+      sandbox.stub(FakeRowDataUtil, 'createRulesUtil').callsFake((reqOpts) => {
         assert.strictEqual((reqOpts as rw.Rule).increment, increment);
         done();
       });
       row.increment(COLUMN_NAME, increment, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       sandbox
         .stub(FakeRowDataUtil, 'createRulesUtil')
@@ -1467,7 +1467,7 @@ describe('Bigtable/Row', () => {
       row.increment(COLUMN_NAME, gaxOptions, assert.ifError);
     });
 
-    it('should accept increment amount and gaxOptions', done => {
+    it('should accept increment amount and gaxOptions', (done) => {
       const increment = 10;
       const gaxOptions = {};
       sandbox
@@ -1480,7 +1480,7 @@ describe('Bigtable/Row', () => {
       row.increment(COLUMN_NAME, increment, gaxOptions, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       const response = {};
       sandbox
@@ -1494,7 +1494,7 @@ describe('Bigtable/Row', () => {
       });
     });
 
-    it('should pass back the updated value to the callback', done => {
+    it('should pass back the updated value to the callback', (done) => {
       const fakeValue = 10;
       const response = {
         row: {
@@ -1539,7 +1539,7 @@ describe('Bigtable/Row', () => {
       },
     };
 
-    it('should insert an object', done => {
+    it('should insert an object', (done) => {
       const fn = (
         table: TabularApiSurface,
         metricsCollector: OperationMetricsCollector,
@@ -1556,7 +1556,7 @@ describe('Bigtable/Row', () => {
       savedRow.save(data, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       const fn = (
         table: TabularApiSurface,
@@ -1572,7 +1572,7 @@ describe('Bigtable/Row', () => {
       savedRow.save(data, gaxOptions, assert.ifError);
     });
 
-    it('should remove existing data', done => {
+    it('should remove existing data', (done) => {
       const gaxOptions = {};
       const fn = (
         table: TabularApiSurface,

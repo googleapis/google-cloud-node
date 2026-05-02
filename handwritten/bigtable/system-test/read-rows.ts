@@ -165,7 +165,7 @@ describe('Bigtable/Table', () => {
       responses = null;
       rowKeysRead = [];
       requestedOptions = [];
-      stub = sinon.stub(bigtable, 'request').callsFake(cfg => {
+      stub = sinon.stub(bigtable, 'request').callsFake((cfg) => {
         const reqOpts = (cfg as any).reqOpts;
         const requestOptions = {} as google.bigtable.v2.IRowSet;
         if (reqOpts.rows && reqOpts.rows.rowRanges) {
@@ -174,7 +174,7 @@ describe('Bigtable/Table', () => {
             (range: any) => {
               const convertedRowRange = {} as {[index: string]: string};
               Object.keys(range).forEach(
-                key => (convertedRowRange[key] = range[key].asciiSlice()),
+                (key) => (convertedRowRange[key] = range[key].asciiSlice()),
               );
               return convertedRowRange;
             },
@@ -204,7 +204,7 @@ describe('Bigtable/Table', () => {
       stub.restore();
     });
 
-    tests.forEach(test => {
+    tests.forEach((test) => {
       it(test.name, (done: mocha.Done) => {
         responses = test.responses;
         TABLE.maxRetries = test.max_retries;

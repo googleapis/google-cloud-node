@@ -11,29 +11,19 @@
           "libraryClient": "MetastorePartitionServiceClient",
           "rpcs": {
             "BatchCreateMetastorePartitions": {
-              "methods": [
-                "batchCreateMetastorePartitions"
-              ]
+              "methods": ["batchCreateMetastorePartitions"]
             },
             "BatchDeleteMetastorePartitions": {
-              "methods": [
-                "batchDeleteMetastorePartitions"
-              ]
+              "methods": ["batchDeleteMetastorePartitions"]
             },
             "BatchUpdateMetastorePartitions": {
-              "methods": [
-                "batchUpdateMetastorePartitions"
-              ]
+              "methods": ["batchUpdateMetastorePartitions"]
             },
             "ListMetastorePartitions": {
-              "methods": [
-                "listMetastorePartitions"
-              ]
+              "methods": ["listMetastorePartitions"]
             },
             "StreamMetastorePartitions": {
-              "methods": [
-                "streamMetastorePartitions"
-              ]
+              "methods": ["streamMetastorePartitions"]
             }
           }
         },
@@ -41,24 +31,16 @@
           "libraryClient": "MetastorePartitionServiceClient",
           "rpcs": {
             "BatchCreateMetastorePartitions": {
-              "methods": [
-                "batchCreateMetastorePartitions"
-              ]
+              "methods": ["batchCreateMetastorePartitions"]
             },
             "BatchDeleteMetastorePartitions": {
-              "methods": [
-                "batchDeleteMetastorePartitions"
-              ]
+              "methods": ["batchDeleteMetastorePartitions"]
             },
             "BatchUpdateMetastorePartitions": {
-              "methods": [
-                "batchUpdateMetastorePartitions"
-              ]
+              "methods": ["batchUpdateMetastorePartitions"]
             },
             "ListMetastorePartitions": {
-              "methods": [
-                "listMetastorePartitions"
-              ]
+              "methods": ["listMetastorePartitions"]
             }
           }
         }

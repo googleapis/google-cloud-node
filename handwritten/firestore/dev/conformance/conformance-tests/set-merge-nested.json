@@ -8,10 +8,7 @@
         "option": {
           "fields": [
             {
-              "field": [
-                "h",
-                "g"
-              ]
+              "field": ["h", "g"]
             }
           ]
         },
@@ -35,9 +32,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "h.g"
-                ]
+                "fieldPaths": ["h.g"]
               }
             }
           ]

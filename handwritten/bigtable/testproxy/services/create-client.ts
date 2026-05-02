@@ -45,7 +45,7 @@ export const createClient: ClientImplMaker<
   ICreateClientRequest,
   ICreateClientResponse
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     // TODO: Handle refresh periods
     const {request} = rawRequest;
     const clientConfig = JSON.parse(

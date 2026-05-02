@@ -135,7 +135,7 @@ export class ReadSession {
     await this.getOrCreateSession(options);
 
     const mergedStream = mergeStreams(
-      this._readStreams.map(r => {
+      this._readStreams.map((r) => {
         const stream = r.getRowsStream();
         return stream;
       }),
@@ -147,7 +147,7 @@ export class ReadSession {
   }
 
   close() {
-    this._readStreams.forEach(rs => {
+    this._readStreams.forEach((rs) => {
       rs.close();
     });
   }

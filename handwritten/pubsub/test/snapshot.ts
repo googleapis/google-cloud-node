@@ -133,7 +133,7 @@ describe('Snapshot', () => {
           snapshot = new Snapshot(subscription, SNAPSHOT_NAME);
         });
 
-        it('should call createSnapshot', done => {
+        it('should call createSnapshot', (done) => {
           const fakeOpts = {};
           sandbox
             .stub(subscription, 'createSnapshot')
@@ -146,7 +146,7 @@ describe('Snapshot', () => {
           snapshot.create(fakeOpts, assert.ifError);
         });
 
-        it('should return any request errors', done => {
+        it('should return any request errors', (done) => {
           const fakeError = new Error('err');
           const fakeResponse = {};
           const stub = sandbox.stub(subscription, 'createSnapshot');
@@ -162,7 +162,7 @@ describe('Snapshot', () => {
           setImmediate(callback, fakeError as ServiceError, null, fakeResponse);
         });
 
-        it('should return the correct snapshot', done => {
+        it('should return the correct snapshot', (done) => {
           const fakeSnapshot = new Snapshot(SUBSCRIPTION, SNAPSHOT_NAME);
           const fakeResponse = {};
           const stub = sandbox.stub(subscription, 'createSnapshot');
@@ -179,8 +179,8 @@ describe('Snapshot', () => {
         });
       });
 
-      it('should call the seek method', done => {
-        sandbox.stub(subscription, 'seek').callsFake(snapshot => {
+      it('should call the seek method', (done) => {
+        sandbox.stub(subscription, 'seek').callsFake((snapshot) => {
           assert.strictEqual(snapshot, FULL_SNAPSHOT_NAME);
           done();
         });
@@ -225,7 +225,7 @@ describe('Snapshot', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       snapshot.parent.request = (config: RequestConfig, callback: Function) => {
         assert.strictEqual(config.client, 'SubscriberClient');
         assert.strictEqual(config.method, 'deleteSnapshot');

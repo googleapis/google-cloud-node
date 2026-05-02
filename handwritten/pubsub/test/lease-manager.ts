@@ -181,13 +181,13 @@ describe('LeaseManager', () => {
       assert.strictEqual(leaseManager.bytes, message.length);
     });
 
-    it('should dispatch the message if allowExcessMessages is true', done => {
+    it('should dispatch the message if allowExcessMessages is true', (done) => {
       const fakeMessage = new FakeMessage() as {} as Message;
 
       leaseManager.isFull = () => true;
       leaseManager.setOptions({allowExcessMessages: true});
 
-      subscriber.on('message', message => {
+      subscriber.on('message', (message) => {
         assert.strictEqual(message, fakeMessage);
         done();
       });
@@ -195,7 +195,7 @@ describe('LeaseManager', () => {
       leaseManager.add(fakeMessage);
     });
 
-    it('should make a log message about the dispatch', done => {
+    it('should make a log message about the dispatch', (done) => {
       const fakeMessage = new FakeMessage() as {} as Message;
       fakeMessage.id = 'a';
       fakeMessage.ackId = 'b';
@@ -253,13 +253,13 @@ describe('LeaseManager', () => {
       assert.strictEqual(fakeLog.args![2] as string, 'b');
     });
 
-    it('should dispatch the message if the inventory is not full', done => {
+    it('should dispatch the message if the inventory is not full', (done) => {
       const fakeMessage = new FakeMessage() as {} as Message;
 
       leaseManager.isFull = () => false;
       leaseManager.setOptions({allowExcessMessages: false});
 
-      subscriber.on('message', message => {
+      subscriber.on('message', (message) => {
         assert.strictEqual(message, fakeMessage);
         done();
       });
@@ -267,7 +267,7 @@ describe('LeaseManager', () => {
       leaseManager.add(fakeMessage);
     });
 
-    it('should not dispatch the message if the inventory is full', done => {
+    it('should not dispatch the message if the inventory is full', (done) => {
       const fakeMessage = new FakeMessage() as {} as Message;
 
       leaseManager.isFull = () => true;
@@ -299,7 +299,7 @@ describe('LeaseManager', () => {
       assert.strictEqual(fakeLog.called, false);
     });
 
-    it('should not dispatch the message if the sub closes', done => {
+    it('should not dispatch the message if the sub closes', (done) => {
       const fakeMessage = new FakeMessage() as {} as Message;
 
       leaseManager.isFull = () => false;
@@ -313,7 +313,7 @@ describe('LeaseManager', () => {
       setImmediate(done);
     });
 
-    it('should emit the full event if it becomes full', done => {
+    it('should emit the full event if it becomes full', (done) => {
       leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
 
       leaseManager.on('full', done);
@@ -363,11 +363,13 @@ describe('LeaseManager', () => {
 
       it('should not schedule a lease extension if already in progress', () => {
         const messages = [new FakeMessage(), new FakeMessage()];
-        const stubs = messages.map(message => sandbox.stub(message, 'modAck'));
+        const stubs = messages.map((message) =>
+          sandbox.stub(message, 'modAck'),
+        );
 
         // since only 1 timeout should be set, even if add messages at different
         // times, they should all get extended at the same time
-        messages.forEach(message => {
+        messages.forEach((message) => {
           leaseManager.add(message as {} as Message);
           clock.tick(halfway);
         });
@@ -385,7 +387,7 @@ describe('LeaseManager', () => {
         subscriber.maxExtensionTime = Duration.from({
           seconds: maxExtensionSeconds,
         });
-        badMessages.forEach(message =>
+        badMessages.forEach((message) =>
           leaseManager.add(message as {} as Message),
         );
         clock.tick(halfway);
@@ -417,7 +419,7 @@ describe('LeaseManager', () => {
         assert.strictEqual(deadline, subscriber.ackDeadline);
       });
 
-      it('should remove and ackFailed any messages that fail to ack', done => {
+      it('should remove and ackFailed any messages that fail to ack', (done) => {
         (subscriber as unknown as FakeSubscriber).isExactlyOnceDelivery = true;
 
         subscriber.maxExtensionTime = Duration.from({minutes: 600});
@@ -468,7 +470,7 @@ describe('LeaseManager', () => {
       assert.strictEqual(leaseManager.size, 0);
     });
 
-    it('should emit the free event if it was full', done => {
+    it('should emit the free event if it was full', (done) => {
       leaseManager.setOptions({maxMessages: 1});
       leaseManager.add(new FakeMessage() as {} as Message);
       leaseManager.on('free', done);
@@ -558,7 +560,7 @@ describe('LeaseManager', () => {
       assert.strictEqual(leaseManager.bytes, 0);
     });
 
-    it('should emit the free event if there is free space', done => {
+    it('should emit the free event if there is free space', (done) => {
       const message = new FakeMessage() as {} as Message;
 
       leaseManager.setOptions({maxMessages: 1});
@@ -571,12 +573,12 @@ describe('LeaseManager', () => {
       });
     });
 
-    it('should remove a message from the pending state', done => {
+    it('should remove a message from the pending state', (done) => {
       const pending = new FakeMessage() as {} as Message;
 
       leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
 
-      subscriber.on('message', message => {
+      subscriber.on('message', (message) => {
         if (message === pending) {
           done(new Error('Pending messages should not be emitted.'));
         }
@@ -590,13 +592,13 @@ describe('LeaseManager', () => {
       setImmediate(done);
     });
 
-    it('should dispense a pending message', done => {
+    it('should dispense a pending message', (done) => {
       const temp = new FakeMessage() as {} as Message;
       const pending = new FakeMessage() as {} as Message;
 
       leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
 
-      subscriber.on('message', message => {
+      subscriber.on('message', (message) => {
         if (message === temp) {
           return;
         }

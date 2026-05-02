@@ -65,7 +65,7 @@ async function main() {
   startServer(service);
 }
 
-main().catch(e => {
+main().catch((e) => {
   console.error('error during tests', e);
   process.exitCode = 1;
 });

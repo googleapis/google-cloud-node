@@ -447,7 +447,7 @@ class DatastoreRequest {
             .map(entity.keyToKeyProto);
 
           split(entities, stream)
-            .then(streamEnded => {
+            .then((streamEnded) => {
               if (streamEnded) {
                 return;
               }
@@ -459,7 +459,7 @@ class DatastoreRequest {
 
               stream.push(null);
             })
-            .catch(err => {
+            .catch((err) => {
               throw err;
             });
         },
@@ -541,7 +541,7 @@ class DatastoreRequest {
       typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
 
     const reqOpts = {
-      mutations: arrify(keys).map(key => {
+      mutations: arrify(keys).map((key) => {
         return {
           delete: entity.keyToKeyProto(key),
         };
@@ -800,7 +800,7 @@ class DatastoreRequest {
             .map((aggregateProperties: any) =>
               Object.fromEntries(
                 new Map(
-                  Object.keys(aggregateProperties).map(key => [
+                  Object.keys(aggregateProperties).map((key) => [
                     key,
                     entity.decodeValueProto(aggregateProperties[key]),
                   ]),
@@ -936,7 +936,7 @@ class DatastoreRequest {
     try {
       this.runQueryStream(query, options)
         .on('error', callback)
-        .on('info', info_ => {
+        .on('info', (info_) => {
           info = info_;
         })
         .pipe(
@@ -1052,7 +1052,7 @@ class DatastoreRequest {
 
       // Emit each result right away, then get the rest if necessary.
       split(entities, stream)
-        .then(streamEnded => {
+        .then((streamEnded) => {
           if (streamEnded) {
             return;
           }
@@ -1077,7 +1077,7 @@ class DatastoreRequest {
 
           makeRequest(query);
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     };

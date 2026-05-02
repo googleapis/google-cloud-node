@@ -84,11 +84,11 @@ class FakeMetricsConfigManager extends ClientSideMetricsConfigManager {
 }
 
 const FakeFamily = createFake(Family);
-FakeFamily.formatRule_ = sinon.spy(rule => rule);
+FakeFamily.formatRule_ = sinon.spy((rule) => rule);
 
 const FakeRow = createFake(Row);
 
-FakeRow.formatChunks_ = sinon.spy(chunks => {
+FakeRow.formatChunks_ = sinon.spy((chunks) => {
   return chunks;
 });
 
@@ -98,25 +98,25 @@ FakeChunkTransformer.prototype._transform = function (
   enc: {},
   next: Function,
 ) {
-  rows.forEach(row => this.push(row));
+  rows.forEach((row) => this.push(row));
   next();
 };
 
 const FakeMutation = {
   methods: Mutation.methods,
-  convertToBytes: sinon.spy(value => {
+  convertToBytes: sinon.spy((value) => {
     return value;
   }),
-  convertFromBytes: sinon.spy(value => {
+  convertFromBytes: sinon.spy((value) => {
     return value;
   }),
-  parse: sinon.spy(value => {
+  parse: sinon.spy((value) => {
     return value;
   }),
 };
 
 const FakeFilter = {
-  parse: sinon.spy(value => {
+  parse: sinon.spy((value) => {
     return value;
   }),
   createRange: () => {
@@ -208,7 +208,7 @@ describe('Bigtable/Table', () => {
   });
 
   afterEach(() => {
-    Object.keys(FakeMutation).forEach(spy => {
+    Object.keys(FakeMutation).forEach((spy) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((FakeMutation as any)[spy].reset) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -280,7 +280,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('create', () => {
-    it('should call createTable from instance', done => {
+    it('should call createTable from instance', (done) => {
       const options = {};
 
       table.instance.createTable = (
@@ -296,7 +296,7 @@ describe('Bigtable/Table', () => {
       table.create(options, done);
     });
 
-    it('should not require options', done => {
+    it('should not require options', (done) => {
       table.instance.createTable = (
         id: string,
         options: {},
@@ -331,7 +331,7 @@ describe('Bigtable/Table', () => {
       }, /A configuration object is required\./);
     });
 
-    it('should get replication states', done => {
+    it('should get replication states', (done) => {
       table.getReplicationStates = () => {
         done();
       };
@@ -339,7 +339,7 @@ describe('Bigtable/Table', () => {
       table.createBackup(BACKUP_ID, CONFIG, assert.ifError);
     });
 
-    it('should pass gaxOptions when getting replication states', done => {
+    it('should pass gaxOptions when getting replication states', (done) => {
       const config = {gaxOptions: {}};
 
       table.getReplicationStates = (gaxOptions: {}) => {
@@ -350,7 +350,7 @@ describe('Bigtable/Table', () => {
       table.createBackup(BACKUP_ID, config, assert.ifError);
     });
 
-    it('should execute callback with error if getting replication states fails', done => {
+    it('should execute callback with error if getting replication states fails', (done) => {
       const error = new Error('Error.');
 
       table.getReplicationStates = (gaxOptions: {}, callback: Function) => {
@@ -363,7 +363,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should create a Cluster with the id of the first available cluster', done => {
+    it('should create a Cluster with the id of the first available cluster', (done) => {
       table.instance.cluster = (id: string) => {
         assert.strictEqual(id, READY_CLUSTER_ID);
         setImmediate(done);
@@ -377,7 +377,7 @@ describe('Bigtable/Table', () => {
       table.createBackup(BACKUP_ID, CONFIG, assert.ifError);
     });
 
-    it('should accept READY_OPTIMIZING status', done => {
+    it('should accept READY_OPTIMIZING status', (done) => {
       const readyClusterId = 'unique-cluster-id';
       const replicationStates = new Map();
       replicationStates.set('a', {replicationState: 'NOT_READY'});
@@ -398,7 +398,7 @@ describe('Bigtable/Table', () => {
       table.createBackup(BACKUP_ID, CONFIG, assert.ifError);
     });
 
-    it('should return error if no clusters are available', done => {
+    it('should return error if no clusters are available', (done) => {
       const replicationStates = new Map();
       replicationStates.set('a', {replicationState: 'NOT_READY'});
       replicationStates.set('b', {replicationState: 'NOT_READY'});
@@ -416,7 +416,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should correctly create a Backup from the Cluster', done => {
+    it('should correctly create a Backup from the Cluster', (done) => {
       table.instance.cluster = () => {
         return {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -512,7 +512,7 @@ describe('Bigtable/Table', () => {
       }, /An id is required to create a family\./);
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -534,7 +534,7 @@ describe('Bigtable/Table', () => {
       table.createFamily(COLUMN_ID, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
@@ -544,7 +544,7 @@ describe('Bigtable/Table', () => {
       table.createFamily(COLUMN_ID, {gaxOptions}, assert.ifError);
     });
 
-    it('should respect the gc rule option', done => {
+    it('should respect the gc rule option', (done) => {
       const rule = {
         a: 'a',
         b: 'b',
@@ -572,7 +572,7 @@ describe('Bigtable/Table', () => {
       table.createFamily(COLUMN_ID, {rule}, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       const response = {};
       table.bigtable.request = (config: {}, callback: Function) => {
@@ -589,7 +589,7 @@ describe('Bigtable/Table', () => {
       );
     });
 
-    it('should return a Family object', done => {
+    it('should return a Family object', (done) => {
       const response = {
         name: 'response-family-name',
       };
@@ -597,7 +597,7 @@ describe('Bigtable/Table', () => {
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(null, response);
       };
-      sandbox.stub(table, 'family').callsFake(id => {
+      sandbox.stub(table, 'family').callsFake((id) => {
         assert.strictEqual(id, FAMILY_ID);
         return fakeFamily;
       });
@@ -615,7 +615,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('createReadStream', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableClient');
@@ -630,7 +630,7 @@ describe('Bigtable/Table', () => {
       table.createReadStream();
     });
 
-    it('should use an appProfileId', done => {
+    it('should use an appProfileId', (done) => {
       const bigtableInstance = table.bigtable;
       bigtableInstance.appProfileId = 'app-profile-id-12345';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -644,7 +644,7 @@ describe('Bigtable/Table', () => {
       table.createReadStream();
     });
 
-    it('should abort request on end', done => {
+    it('should abort request on end', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = () => {
         const requestStream = new PassThrough({
@@ -663,7 +663,7 @@ describe('Bigtable/Table', () => {
     });
 
     describe('options', () => {
-      it('should accept gaxOptions', done => {
+      it('should accept gaxOptions', (done) => {
         const gaxOptions = {};
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -675,7 +675,7 @@ describe('Bigtable/Table', () => {
         table.createReadStream({gaxOptions});
       });
 
-      it('should retrieve a range of rows', done => {
+      it('should retrieve a range of rows', (done) => {
         const options = {
           start: 'gwashington',
           end: 'alincoln',
@@ -705,13 +705,13 @@ describe('Bigtable/Table', () => {
         table.createReadStream(options);
       });
 
-      it('should retrieve multiple rows', done => {
+      it('should retrieve multiple rows', (done) => {
         const options = {
           keys: ['gwashington', 'alincoln'],
         };
         const convertedKeys = ['a', 'b'];
 
-        const convertSpy = (FakeMutation.convertToBytes = sinon.spy(key => {
+        const convertSpy = (FakeMutation.convertToBytes = sinon.spy((key) => {
           const keyIndex = options.keys.indexOf(key);
           return convertedKeys[keyIndex];
         }));
@@ -728,7 +728,7 @@ describe('Bigtable/Table', () => {
         table.createReadStream(options);
       });
 
-      it('should retrieve multiple ranges', done => {
+      it('should retrieve multiple ranges', (done) => {
         const options = {
           ranges: [
             {
@@ -776,7 +776,7 @@ describe('Bigtable/Table', () => {
         table.createReadStream(options);
       });
 
-      it('should parse a filter object', done => {
+      it('should parse a filter object', (done) => {
         const options = {
           filter: [{}],
         };
@@ -799,7 +799,7 @@ describe('Bigtable/Table', () => {
         table.createReadStream(options);
       });
 
-      it('should allow setting a row limit', done => {
+      it('should allow setting a row limit', (done) => {
         const options = {
           limit: 10,
         };
@@ -908,7 +908,7 @@ describe('Bigtable/Table', () => {
           (TableUtils as any).createPrefixRange.restore();
         });
 
-        it('should transform the prefix into a range', done => {
+        it('should transform the prefix into a range', (done) => {
           const fakeRange = {};
           const fakePrefixRange = {
             start: 'a',
@@ -942,7 +942,7 @@ describe('Bigtable/Table', () => {
           table.createReadStream({prefix: fakePrefix});
         });
 
-        it('should accept multiple prefixes', done => {
+        it('should accept multiple prefixes', (done) => {
           const prefixes = ['abc', 'def'];
           const prefixRanges = [
             {start: 'abc', end: 'abd'},
@@ -1024,7 +1024,7 @@ describe('Bigtable/Table', () => {
           enc: {},
           next: Function,
         ) {
-          formattedRows.forEach(row => this.push(row));
+          formattedRows.forEach((row) => this.push(row));
           next();
         };
         FakeChunkTransformer.prototype._flush = (cb: Function) => {
@@ -1048,7 +1048,7 @@ describe('Bigtable/Table', () => {
         };
       });
 
-      it('should stream Row objects', done => {
+      it('should stream Row objects', (done) => {
         const rows: Row[] = [];
 
         table
@@ -1069,7 +1069,7 @@ describe('Bigtable/Table', () => {
           });
       });
 
-      it('should allow a stream to end early', done => {
+      it('should allow a stream to end early', (done) => {
         const rows: Row[] = [];
         const stream = table
           .createReadStream()
@@ -1118,7 +1118,7 @@ describe('Bigtable/Table', () => {
       //   };
       // });
 
-      it('should emit an error event', done => {
+      it('should emit an error event', (done) => {
         table.bigtable.request = () => {
           const stream = new PassThrough({
             objectMode: true,
@@ -1138,7 +1138,7 @@ describe('Bigtable/Table', () => {
           })
           .on('data', done);
       });
-      it('should emit an error event when chunk format returns error', done => {
+      it('should emit an error event when chunk format returns error', (done) => {
         table.bigtable.request = () => {
           const stream = new PassThrough({
             objectMode: true,
@@ -1166,7 +1166,7 @@ describe('Bigtable/Table', () => {
           })
           .on('data', done);
       });
-      it('should emit an error event when chunktransformer returns error on flush end', done => {
+      it('should emit an error event when chunktransformer returns error on flush end', (done) => {
         table.bigtable.request = () => {
           const stream = new PassThrough({
             objectMode: true,
@@ -1190,7 +1190,7 @@ describe('Bigtable/Table', () => {
           .on('data', done);
       });
     });
-    it('Should respect the timeout parameter passed in for UNAVAILABLE error', done => {
+    it('Should respect the timeout parameter passed in for UNAVAILABLE error', (done) => {
       // The timeout is 2 seconds, but the error is received after 3 seconds
       // so the client doesn't retry because more than 2 seconds have elapsed.
       const requestSpy = (table.bigtable.request = sinon.spy(() => {
@@ -1213,7 +1213,7 @@ describe('Bigtable/Table', () => {
         done();
       });
     });
-    it('Should respect the timeout parameter passed in for DEADLINE_EXCEEDED error', done => {
+    it('Should respect the timeout parameter passed in for DEADLINE_EXCEEDED error', (done) => {
       // The timeout is 2 seconds, but the error is received after 3 seconds
       // so the client doesn't retry because more than 2 seconds have elapsed.
       const requestSpy = (table.bigtable.request = sinon.spy(() => {
@@ -1265,7 +1265,7 @@ describe('Bigtable/Table', () => {
           enc: {},
           next: Function,
         ) {
-          rows.forEach(row => this.push(row));
+          rows.forEach((row) => this.push(row));
           this.lastRowKey = rows[rows.length - 1].key;
           next();
         };
@@ -1315,7 +1315,7 @@ describe('Bigtable/Table', () => {
 
         setTimeoutSpy = sandbox
           .stub(global, 'setTimeout')
-          .callsFake(fn => (fn as Function)());
+          .callsFake((fn) => (fn as Function)());
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         table.bigtable.request = (config: any) => {
@@ -1342,7 +1342,7 @@ describe('Bigtable/Table', () => {
         }
       });
 
-      it('should do a retry the stream is interrupted', done => {
+      it('should do a retry the stream is interrupted', (done) => {
         emitters = [
           ((stream: Writable) => {
             stream.emit('error', makeRetryableError());
@@ -1358,7 +1358,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should not retry CANCELLED errors', done => {
+      it('should not retry CANCELLED errors', (done) => {
         emitters = [
           ((stream: Writable) => {
             const cancelledError = new Error(
@@ -1375,7 +1375,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should not retry over maxRetries', done => {
+      it('should not retry over maxRetries', (done) => {
         const error = new Error('retry me!') as ServiceError;
         error.code = 4;
 
@@ -1398,7 +1398,7 @@ describe('Bigtable/Table', () => {
           .resume();
       });
 
-      it('should have a range which starts after the last read key', done => {
+      it('should have a range which starts after the last read key', (done) => {
         emitters = [
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ((stream: any) => {
@@ -1422,7 +1422,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should move the active range start to after the last read key', done => {
+      it('should move the active range start to after the last read key', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'a'}]);
@@ -1446,7 +1446,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should remove ranges which were already read', done => {
+      it('should remove ranges which were already read', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'a'}]);
@@ -1480,7 +1480,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should remove the keys which were already read', done => {
+      it('should remove the keys which were already read', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'a'}]);
@@ -1498,7 +1498,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should not retry if limit is reached', done => {
+      it('should not retry if limit is reached', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'a'}]);
@@ -1518,7 +1518,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should not retry if all the keys are read', done => {
+      it('should not retry if all the keys are read', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'a'}]);
@@ -1532,7 +1532,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('shouldn not retry if all the ranges are read', done => {
+      it('shouldn not retry if all the ranges are read', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'c'}]);
@@ -1554,7 +1554,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('shouldn not retry with keys and ranges that are read', done => {
+      it('shouldn not retry with keys and ranges that are read', (done) => {
         emitters = [
           ((stream: Duplex) => {
             stream.push([{key: 'a1'}]);
@@ -1574,7 +1574,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should retry received rst stream errors', done => {
+      it('should retry received rst stream errors', (done) => {
         const rstStreamError = new Error('Received Rst_stream') as ServiceError;
         rstStreamError.code = 13;
         emitters = [
@@ -1599,7 +1599,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -1617,7 +1617,7 @@ describe('Bigtable/Table', () => {
       table.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1633,7 +1633,7 @@ describe('Bigtable/Table', () => {
   describe('deleteRows', () => {
     const prefix = 'a';
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -1646,7 +1646,7 @@ describe('Bigtable/Table', () => {
       table.deleteRows(prefix, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1658,7 +1658,7 @@ describe('Bigtable/Table', () => {
       table.deleteRows(prefix, gaxOptions, assert.ifError);
     });
 
-    it('should respect the row key prefix option', done => {
+    it('should respect the row key prefix option', (done) => {
       const fakePrefix = 'b';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const spy = ((FakeMutation as any).convertToBytes = sinon.spy(
@@ -1685,7 +1685,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.getMetadata = (options_: any) => {
         assert.deepStrictEqual(options_.gaxOptions, {});
@@ -1694,7 +1694,7 @@ describe('Bigtable/Table', () => {
       table.exists(assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.getMetadata = (options_: any) => {
@@ -1704,7 +1704,7 @@ describe('Bigtable/Table', () => {
       table.exists(gaxOptions, assert.ifError);
     });
 
-    it('should pass view = name to getMetadata', done => {
+    it('should pass view = name to getMetadata', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.getMetadata = (options_: any) => {
@@ -1714,7 +1714,7 @@ describe('Bigtable/Table', () => {
       table.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if error code is 5', done => {
+    it('should return false if error code is 5', (done) => {
       const error = new Error('Error.') as ServiceError;
       error.code = 5;
       table.getMetadata = (gaxOptions: {}, callback: Function) => {
@@ -1727,7 +1727,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return error if code is not 5', done => {
+    it('should return error if code is not 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 'NOT-5';
@@ -1740,7 +1740,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       table.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(null, {});
       };
@@ -1770,7 +1770,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -1782,7 +1782,7 @@ describe('Bigtable/Table', () => {
       table.get(options, assert.ifError);
     });
 
-    it('should not require an options object', done => {
+    it('should not require an options object', (done) => {
       table.getMetadata = (options: {}) => {
         assert.deepStrictEqual(options, {gaxOptions: undefined});
         done();
@@ -1790,7 +1790,7 @@ describe('Bigtable/Table', () => {
       table.get(assert.ifError);
     });
 
-    it('should auto create with error code 5', done => {
+    it('should auto create with error code 5', (done) => {
       const error = new Error('Error.') as ServiceError;
       error.code = 5;
 
@@ -1812,7 +1812,7 @@ describe('Bigtable/Table', () => {
       table.get(options, done);
     });
 
-    it('should not auto create without error code 5', done => {
+    it('should not auto create without error code 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 'NOT-5';
@@ -1835,7 +1835,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should not auto create unless requested', done => {
+    it('should not auto create unless requested', (done) => {
       const error = new Error('Error.') as ServiceError;
       error.code = 5;
 
@@ -1853,7 +1853,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
       table.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(error);
@@ -1864,7 +1864,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {};
       table.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(null, apiResponse);
@@ -1879,7 +1879,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('getIamPolicy', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -1892,7 +1892,7 @@ describe('Bigtable/Table', () => {
       table.getIamPolicy(assert.ifError);
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const requestedPolicyVersion = 0;
       const gaxOptions = {};
       const options = {gaxOptions, requestedPolicyVersion};
@@ -1909,7 +1909,7 @@ describe('Bigtable/Table', () => {
       table.getIamPolicy(options, assert.ifError);
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const error = new Error('error');
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(error);
@@ -1932,7 +1932,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('getReplicationStates', () => {
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1944,7 +1944,7 @@ describe('Bigtable/Table', () => {
       table.getReplicationStates(gaxOptions, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       const response = {};
       table.getMetadata = (options: {}, callback: Function) => {
@@ -1956,7 +1956,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return a map of cluster states', done => {
+    it('should return a map of cluster states', (done) => {
       const response = {
         clusterStates: {
           cluster1: 'READY',
@@ -1980,7 +1980,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('getFamilies', () => {
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.getMetadata = (options: any) => {
@@ -1991,7 +1991,7 @@ describe('Bigtable/Table', () => {
       table.getFamilies(gaxOptions, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       const response = {};
       table.getMetadata = (options: {}, callback: Function) => {
@@ -2003,7 +2003,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return an array of Family objects', done => {
+    it('should return an array of Family objects', (done) => {
       const metadata = {
         a: 'b',
       };
@@ -2019,7 +2019,7 @@ describe('Bigtable/Table', () => {
       table.getMetadata = (options: {}, callback: Function) => {
         callback(null, response);
       };
-      sandbox.stub(table, 'family').callsFake(id => {
+      sandbox.stub(table, 'family').callsFake((id) => {
         assert.strictEqual(id, 'test');
         return fakeFamily;
       });
@@ -2035,7 +2035,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('waitForReplication', () => {
-    it('should return the error to the callback', done => {
+    it('should return the error to the callback', (done) => {
       const error = new Error('err');
 
       table.bigtable.request = (config: {}, callback: Function) => {
@@ -2048,7 +2048,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should call checkConsistency', done => {
+    it('should call checkConsistency', (done) => {
       const consistencyToken = 'sample-token12345';
 
       table.generateConsistencyToken = (callback: Function) => {
@@ -2088,7 +2088,7 @@ describe('Bigtable/Table', () => {
         clock.restore();
       });
 
-      it('should return true if token is consistent', done => {
+      it('should return true if token is consistent', (done) => {
         responses = [
           (config: {}, callback: Function) =>
             callback(null, {consistencyToken: 'sample-token12345'}),
@@ -2114,7 +2114,7 @@ describe('Bigtable/Table', () => {
         clock.runAll();
       });
 
-      it('should retry checkConsistency', done => {
+      it('should retry checkConsistency', (done) => {
         responses = [
           (config: {}, callback: Function) =>
             callback(null, {consistencyToken: 'sample-token12345'}),
@@ -2147,7 +2147,7 @@ describe('Bigtable/Table', () => {
         clock.runAll();
       });
 
-      it('should return false after 10 min if inconsistency repeats', done => {
+      it('should return false after 10 min if inconsistency repeats', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         table.bigtable.request = (config: any, callback: Function) => {
           if (config.method === 'generateConsistencyToken') {
@@ -2168,7 +2168,7 @@ describe('Bigtable/Table', () => {
         clock.runAll();
       });
 
-      it('should return error if checkonsistency returns error', done => {
+      it('should return error if checkonsistency returns error', (done) => {
         const error = new Error('consistency-check error');
 
         responses = [
@@ -2189,7 +2189,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('generateConsistencyToken', () => {
-    it('should provide proper request options', done => {
+    it('should provide proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -2200,7 +2200,7 @@ describe('Bigtable/Table', () => {
       table.generateConsistencyToken(assert.ifError);
     });
 
-    it('should return a consistencyToken', done => {
+    it('should return a consistencyToken', (done) => {
       const cToken = 'sample-token-123456';
       const response = {
         consistencyToken: cToken,
@@ -2217,7 +2217,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const error = new Error('err');
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(error);
@@ -2231,7 +2231,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('checkConsistency', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       const cToken = 'consistency-token-123';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -2249,7 +2249,7 @@ describe('Bigtable/Table', () => {
     describe('error', () => {
       const error = new Error('err');
 
-      it('should return the error to the callback', done => {
+      it('should return the error to the callback', (done) => {
         table.bigtable.request = (config: {}, callback: Function) => {
           callback(error);
         };
@@ -2262,7 +2262,7 @@ describe('Bigtable/Table', () => {
     });
 
     describe('success', () => {
-      it('should return true if consistent', done => {
+      it('should return true if consistent', (done) => {
         table.bigtable.request = (config: {}, callback: Function) => {
           callback(null, {consistent: true});
         };
@@ -2274,7 +2274,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should return false if not consistent', done => {
+      it('should return false if not consistent', (done) => {
         table.bigtable.request = (config: {}, callback: Function) => {
           callback(null, {consistent: false});
         };
@@ -2299,7 +2299,7 @@ describe('Bigtable/Table', () => {
       (Table as any).VIEWS = views;
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -2316,7 +2316,7 @@ describe('Bigtable/Table', () => {
       table.getMetadata(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = {
         gaxOptions: {},
       };
@@ -2330,8 +2330,8 @@ describe('Bigtable/Table', () => {
       table.getMetadata(options, assert.ifError);
     });
 
-    Object.keys(views).forEach(view => {
-      it('should set the "' + view + '" view', done => {
+    Object.keys(views).forEach((view) => {
+      it('should set the "' + view + '" view', (done) => {
         const options = {
           view,
         };
@@ -2344,7 +2344,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should update the metadata', done => {
+    it('should update the metadata', (done) => {
       const response = {};
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(null, response);
@@ -2357,7 +2357,7 @@ describe('Bigtable/Table', () => {
       });
     });
 
-    it('should execute callback with original arguments', done => {
+    it('should execute callback with original arguments', (done) => {
       const args = [{}, {}, {}];
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(...args);
@@ -2384,7 +2384,7 @@ describe('Bigtable/Table', () => {
           });
 
           setImmediate(() => {
-            fakeRows.forEach(row => {
+            fakeRows.forEach((row) => {
               stream.push(row);
             });
 
@@ -2406,7 +2406,7 @@ describe('Bigtable/Table', () => {
         table = new Table(INSTANCE, TABLE_ID);
       });
 
-      it('should return the rows to the callback', done => {
+      it('should return the rows to the callback', (done) => {
         const options = {};
 
         table.getRows(options, (err: Error, rows: Row[]) => {
@@ -2420,7 +2420,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should optionally accept options', done => {
+      it('should optionally accept options', (done) => {
         table.getRows((err: Error, rows: Row[]) => {
           assert.ifError(err);
           assert.deepStrictEqual(rows, fakeRows);
@@ -2458,7 +2458,7 @@ describe('Bigtable/Table', () => {
         table = new Table(INSTANCE, TABLE_ID);
       });
 
-      it('should return the error to the callback', done => {
+      it('should return the error to the callback', (done) => {
         table.getRows((err: Error) => {
           assert.strictEqual(err, error);
           done();
@@ -2468,7 +2468,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('insert', () => {
-    it('should create an "insert" mutation', done => {
+    it('should create an "insert" mutation', (done) => {
       const fakeEntries = [
         {
           key: 'a',
@@ -2499,7 +2499,7 @@ describe('Bigtable/Table', () => {
       table.insert(fakeEntries, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.mutate = (entries: {}, options: any) => {
@@ -2516,13 +2516,13 @@ describe('Bigtable/Table', () => {
     let parseSpy: sinon.SinonSpy;
 
     beforeEach(() => {
-      parseSpy = FakeMutation.parse = sinon.spy(value => {
+      parseSpy = FakeMutation.parse = sinon.spy((value) => {
         const entryIndex = entries.indexOf(value);
         return fakeEntries[entryIndex];
       });
     });
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       const stream = new PassThrough({objectMode: true});
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -2546,7 +2546,7 @@ describe('Bigtable/Table', () => {
       table.mutate(entries, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -2557,7 +2557,7 @@ describe('Bigtable/Table', () => {
       table.mutate(entries, {gaxOptions}, assert.ifError);
     });
 
-    it('should use an appProfileId', done => {
+    it('should use an appProfileId', (done) => {
       const bigtableInstance = table.bigtable;
       bigtableInstance.appProfileId = 'app-profile-id-12345';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -2571,7 +2571,7 @@ describe('Bigtable/Table', () => {
       table.mutate(done);
     });
 
-    it('should parse the mutations', done => {
+    it('should parse the mutations', (done) => {
       table.bigtable.request = () => {
         assert.strictEqual(FakeMutation.parse.called, true);
         done();
@@ -2579,7 +2579,7 @@ describe('Bigtable/Table', () => {
       table.mutate(entries, done);
     });
 
-    it('should allow raw mutations', done => {
+    it('should allow raw mutations', (done) => {
       table.bigtable.request = () => {
         assert.strictEqual(FakeMutation.parse.called, false);
         done();
@@ -2605,7 +2605,7 @@ describe('Bigtable/Table', () => {
           };
         });
 
-        it('should return error', done => {
+        it('should return error', (done) => {
           table.mutate(entries, (err: Error) => {
             assert.strictEqual(err, error);
             done();
@@ -2630,7 +2630,7 @@ describe('Bigtable/Table', () => {
           };
         });
 
-        it('should return the error to the callback', done => {
+        it('should return the error to the callback', (done) => {
           table.maxRetries = 0;
           table.mutate(entries, (err: Error) => {
             assert.strictEqual(err, error);
@@ -2668,7 +2668,7 @@ describe('Bigtable/Table', () => {
           };
         });
 
-        it('should return a PartialFailureError', done => {
+        it('should return a PartialFailureError', (done) => {
           const newEntries = [
             {
               key: 'a',
@@ -2727,7 +2727,7 @@ describe('Bigtable/Table', () => {
         };
       });
 
-      it('should execute callback', done => {
+      it('should execute callback', (done) => {
         table.maxRetries = 0;
         table.mutate(entries, done);
       });
@@ -2782,7 +2782,7 @@ describe('Bigtable/Table', () => {
         };
       });
 
-      it('should send attempt header', done => {
+      it('should send attempt header', (done) => {
         table.mutate(entries, () => {
           assert.strictEqual(requestArgs.length, 2);
           assert.strictEqual(
@@ -2801,12 +2801,12 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should succeed after a retry', done => {
+      it('should succeed after a retry', (done) => {
         table.maxRetries = 1;
         table.mutate(entries, done);
       });
 
-      it('should retry the same failed entry', done => {
+      it('should retry the same failed entry', (done) => {
         table.maxRetries = 1;
         table.mutate(entries, () => {
           assert.strictEqual(entryRequests[0].length, 2);
@@ -2846,7 +2846,7 @@ describe('Bigtable/Table', () => {
         };
       });
 
-      it('should send back errors for each pending entry', done => {
+      it('should send back errors for each pending entry', (done) => {
         const mutateEntries = [
           {
             key: 'a',
@@ -2896,7 +2896,7 @@ describe('Bigtable/Table', () => {
           },
         );
       });
-      it('should not retry unretriable errors', done => {
+      it('should not retry unretriable errors', (done) => {
         const unretriableError = new Error('not retryable') as ServiceError;
         unretriableError.code = 3; // INVALID_ARGUMENT
         emitters = [
@@ -2911,7 +2911,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should retry retryable errors', done => {
+      it('should retry retryable errors', (done) => {
         const error = new Error('retryable') as ServiceError;
         error.code = 14; // Unavailable
         emitters = [
@@ -2929,7 +2929,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should not retry more than maxRetries times', done => {
+      it('should not retry more than maxRetries times', (done) => {
         const error = new Error('retryable') as ServiceError;
         error.code = 14; // Unavailable
         emitters = [
@@ -2950,7 +2950,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should send attempt header', done => {
+      it('should send attempt header', (done) => {
         const error = new Error('retryable') as ServiceError;
         error.code = 14; // Unavailable
         emitters = [
@@ -3000,7 +3000,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('sampleRowKeys', () => {
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       table.sampleRowKeysStream = (gaxOptions_: {}) => {
@@ -3030,7 +3030,7 @@ describe('Bigtable/Table', () => {
           });
 
           setImmediate(() => {
-            fakeKeys.forEach(key => {
+            fakeKeys.forEach((key) => {
               stream.push(key);
             });
 
@@ -3041,7 +3041,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should return the keys to the callback', done => {
+      it('should return the keys to the callback', (done) => {
         table.sampleRowKeys((err: Error, keys: {}) => {
           assert.ifError(err);
           assert.deepStrictEqual(keys, fakeKeys);
@@ -3067,7 +3067,7 @@ describe('Bigtable/Table', () => {
         });
       });
 
-      it('should return the error to the callback', done => {
+      it('should return the error to the callback', (done) => {
         table.sampleRowKeys((err: Error) => {
           assert.strictEqual(err, error);
           done();
@@ -3077,7 +3077,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('sampleRowKeysStream', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableClient');
@@ -3095,7 +3095,7 @@ describe('Bigtable/Table', () => {
       table.sampleRowKeysStream();
     });
 
-    it('should use an appProfileId', done => {
+    it('should use an appProfileId', (done) => {
       const bigtableInstance = table.bigtable;
       bigtableInstance.appProfileId = 'app-profile-id-12345';
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -3110,7 +3110,7 @@ describe('Bigtable/Table', () => {
       table.sampleRowKeysStream(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -3146,7 +3146,7 @@ describe('Bigtable/Table', () => {
           });
 
           setImmediate(() => {
-            fakeKeys.forEach(key => {
+            fakeKeys.forEach((key) => {
               stream.push(key);
             });
 
@@ -3157,7 +3157,7 @@ describe('Bigtable/Table', () => {
         };
       });
 
-      it('should stream key objects', done => {
+      it('should stream key objects', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const keys: any[] = [];
 
@@ -3194,7 +3194,7 @@ describe('Bigtable/Table', () => {
         };
       });
 
-      it('should emit an error event', done => {
+      it('should emit an error event', (done) => {
         table
           .sampleRowKeysStream()
           .on('error', (err: Error) => {
@@ -3208,7 +3208,7 @@ describe('Bigtable/Table', () => {
 
   describe('setIamPolicy', () => {
     const policy = {};
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -3221,7 +3221,7 @@ describe('Bigtable/Table', () => {
       table.setIamPolicy(policy, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -3232,7 +3232,7 @@ describe('Bigtable/Table', () => {
       table.setIamPolicy(policy, gaxOptions, assert.ifError);
     });
 
-    it('should pass policy to bigtable.request', done => {
+    it('should pass policy to bigtable.request', (done) => {
       const policy: tblTypes.Policy = {
         bindings: [
           {
@@ -3255,7 +3255,7 @@ describe('Bigtable/Table', () => {
       table.setIamPolicy(policy, assert.ifError);
     });
 
-    it('should encode policy etag', done => {
+    it('should encode policy etag', (done) => {
       const policy = {etag: 'ABS'};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
@@ -3268,7 +3268,7 @@ describe('Bigtable/Table', () => {
       table.setIamPolicy(policy, assert.ifError);
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const error = new Error('error');
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(error);
@@ -3291,7 +3291,7 @@ describe('Bigtable/Table', () => {
 
   describe('testIamPermissions', () => {
     const permissions = 'bigtable.tables.get';
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -3304,7 +3304,7 @@ describe('Bigtable/Table', () => {
       table.testIamPermissions(permissions, assert.ifError);
     });
 
-    it('should accept permissions as array', done => {
+    it('should accept permissions as array', (done) => {
       const permissions = ['bigtable.tables.get', 'bigtable.tables.list'];
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
@@ -3314,7 +3314,7 @@ describe('Bigtable/Table', () => {
       table.testIamPermissions(permissions, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any) => {
@@ -3324,7 +3324,7 @@ describe('Bigtable/Table', () => {
       table.testIamPermissions(permissions, gaxOptions, assert.ifError);
     });
 
-    it('should unpack permissions from resp object', done => {
+    it('should unpack permissions from resp object', (done) => {
       const testPermissions = ['bigtable.tables.get', 'bigtable.tables.list'];
       table.bigtable.request = (config: {}, callback: Function) => {
         callback(null, {permissions: testPermissions});
@@ -3340,7 +3340,7 @@ describe('Bigtable/Table', () => {
       );
     });
 
-    it('should return error', done => {
+    it('should return error', (done) => {
       const permission = 'bigtable.tables.get';
       const error = new Error('error');
       table.bigtable.request = (config: {}, callback: Function) => {
@@ -3364,7 +3364,7 @@ describe('Bigtable/Table', () => {
   });
 
   describe('truncate', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       table.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -3378,7 +3378,7 @@ describe('Bigtable/Table', () => {
       table.truncate(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

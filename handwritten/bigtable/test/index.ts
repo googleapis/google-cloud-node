@@ -389,7 +389,7 @@ describe('Bigtable', () => {
       clusters: [CLUSTER],
     };
 
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -409,8 +409,8 @@ describe('Bigtable', () => {
         currentRequestInput = config;
       };
       const instanceOptionsList: InstanceOptions[] = createClusterOptionsList
-        .map(options => Object.assign({}, options, {id: 'my-cluster'}))
-        .map(options => {
+        .map((options) => Object.assign({}, options, {id: 'my-cluster'}))
+        .map((options) => {
           return {
             clusters: options,
           };
@@ -429,7 +429,7 @@ describe('Bigtable', () => {
       }
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       const options = Object.assign({}, OPTIONS, {gaxOptions});
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -440,7 +440,7 @@ describe('Bigtable', () => {
       bigtable.createInstance(INSTANCE_ID, options, assert.ifError);
     });
 
-    it('should respect the displayName option', done => {
+    it('should respect the displayName option', (done) => {
       const options = Object.assign(
         {},
         {
@@ -459,7 +459,7 @@ describe('Bigtable', () => {
       bigtable.createInstance(INSTANCE_ID, options, assert.ifError);
     });
 
-    it('should respect the type option', done => {
+    it('should respect the type option', (done) => {
       const options = Object.assign({}, {type: 'development'}, OPTIONS);
       const fakeTypeType = 99;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -475,7 +475,7 @@ describe('Bigtable', () => {
       bigtable.createInstance(INSTANCE_ID, options, assert.ifError);
     });
 
-    it('should respect the labels option', done => {
+    it('should respect the labels option', (done) => {
       const options = Object.assign(
         {},
         {
@@ -493,7 +493,7 @@ describe('Bigtable', () => {
       bigtable.createInstance(INSTANCE_ID, options, assert.ifError);
     });
 
-    it('should respect the clusters option', done => {
+    it('should respect the clusters option', (done) => {
       const fakeLocation = Cluster.getLocation_(
         PROJECT_ID,
         OPTIONS.clusters[0].location,
@@ -519,7 +519,7 @@ describe('Bigtable', () => {
       bigtable.createInstance(INSTANCE_ID, OPTIONS, assert.ifError);
     });
 
-    it('should handle clusters with a CMEK key', done => {
+    it('should handle clusters with a CMEK key', (done) => {
       const key = 'kms-key-name';
 
       FakeCluster.getLocation_ = () => {};
@@ -551,7 +551,7 @@ describe('Bigtable', () => {
       );
     });
 
-    it('should handle clusters with an encryption object', done => {
+    it('should handle clusters with an encryption object', (done) => {
       const key = 'kms-key-name';
 
       FakeCluster.getLocation_ = () => {};
@@ -610,7 +610,7 @@ describe('Bigtable', () => {
       }, /A cluster was provided with both `encryption` and `key` defined\./);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       bigtable.request = (config: {}, callback: Function) => {
         callback(error);
@@ -627,7 +627,7 @@ describe('Bigtable', () => {
       );
     });
 
-    it('should return an instance to the callback', done => {
+    it('should return an instance to the callback', (done) => {
       const response = {
         name: 'my-operation',
       };
@@ -686,7 +686,7 @@ describe('Bigtable', () => {
   });
 
   describe('getInstances', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -700,7 +700,7 @@ describe('Bigtable', () => {
       bigtable.getInstances(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       bigtable.request = (config: any) => {
@@ -710,7 +710,7 @@ describe('Bigtable', () => {
       bigtable.getInstances(gaxOptions, assert.ifError);
     });
 
-    it('should return an error to the callback', done => {
+    it('should return an error to the callback', (done) => {
       const error = new Error('err');
       bigtable.request = (config: {}, callback: Function) => {
         callback(error);
@@ -721,7 +721,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should return an array of instance objects and failed locations', done => {
+    it('should return an array of instance objects and failed locations', (done) => {
       const response = {
         instances: [
           {
@@ -803,14 +803,14 @@ describe('Bigtable', () => {
     });
 
     describe('prepareGaxRequest', () => {
-      it('should get the project ID', done => {
+      it('should get the project ID', (done) => {
         bigtable.getProjectId_ = () => {
           done();
         };
         bigtable.request(CONFIG, assert.ifError);
       });
 
-      it('should return error if getting project ID failed', done => {
+      it('should return error if getting project ID failed', (done) => {
         const error = new Error('Error.');
         bigtable.getProjectId_ = (callback: Function) => {
           callback(error);
@@ -835,7 +835,7 @@ describe('Bigtable', () => {
         assert.strictEqual(bigtable.api[CONFIG.client], fakeClient);
       });
 
-      it('should use the cached client', done => {
+      it('should use the cached client', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeV2 as any)[CONFIG.client] = function () {
           done(new Error('Should not re-instantiate a GAX client.'));
@@ -844,7 +844,7 @@ describe('Bigtable', () => {
         done();
       });
 
-      it('should not call replace project ID token', done => {
+      it('should not call replace project ID token', (done) => {
         replaceProjectIdTokenOverride = sinon.spy();
         bigtable.api[CONFIG.client][CONFIG.method] = {
           bind() {
@@ -868,7 +868,7 @@ describe('Bigtable', () => {
         };
       });
 
-      it('should replace the project ID token', done => {
+      it('should replace the project ID token', (done) => {
         const replacedReqOpts = {};
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         replaceProjectIdTokenOverride = (reqOpts: any, projectId: string) => {
@@ -887,7 +887,7 @@ describe('Bigtable', () => {
         bigtable.request(CONFIG, assert.ifError);
       });
 
-      it('should not replace token when project ID not detected', done => {
+      it('should not replace token when project ID not detected', (done) => {
         replaceProjectIdTokenOverride = () => {
           throw new Error('Should not have tried to replace token.');
         };
@@ -906,7 +906,7 @@ describe('Bigtable', () => {
     });
 
     describe('makeRequestCallback', () => {
-      it('should prepare the request', done => {
+      it('should prepare the request', (done) => {
         bigtable.api[CONFIG.client][CONFIG.method] = {
           bind(gaxClient: {}, reqOpts: {}, gaxOpts: {}) {
             assert.strictEqual(gaxClient, bigtable.api[CONFIG.client]);
@@ -920,7 +920,7 @@ describe('Bigtable', () => {
         bigtable.request(CONFIG, assert.ifError);
       });
 
-      it('should execute callback with error', done => {
+      it('should execute callback with error', (done) => {
         const error = new Error('Error.');
         bigtable.api[CONFIG.client][CONFIG.method] = (...args: Array<{}>) => {
           const callback: Function = [].slice.call(args).pop()!;
@@ -1006,7 +1006,7 @@ describe('Bigtable', () => {
       //   requestStream.emit('reading');
       // });
 
-      it('should expose an abort function', done => {
+      it('should expose an abort function', (done) => {
         GAX_STREAM.cancel = done;
 
         const requestStream = bigtable.request(CONFIG);
@@ -1014,7 +1014,7 @@ describe('Bigtable', () => {
         requestStream.abort();
       });
 
-      it('should prepare the request once reading', done => {
+      it('should prepare the request once reading', (done) => {
         bigtable.api[CONFIG.client][CONFIG.method] = {
           bind(gaxClient: {}, reqOpts: {}, gaxOpts: {}) {
             assert.strictEqual(gaxClient, bigtable.api[CONFIG.client]);
@@ -1031,7 +1031,7 @@ describe('Bigtable', () => {
         requestStream.emit('reading');
       });
 
-      it('should destroy the stream with prepare error', done => {
+      it('should destroy the stream with prepare error', (done) => {
         const error = new Error('Error.');
         bigtable.getProjectId_ = (callback: Function) => {
           callback(error);
@@ -1044,7 +1044,7 @@ describe('Bigtable', () => {
         });
       });
 
-      it('should destroy the stream with GAX error', done => {
+      it('should destroy the stream with GAX error', (done) => {
         const error = new Error('Error.');
         const requestStream = bigtable.request(CONFIG);
         requestStream.emit('reading');
@@ -1055,7 +1055,7 @@ describe('Bigtable', () => {
         });
       });
 
-      it('should re-emit request event from gax-stream', done => {
+      it('should re-emit request event from gax-stream', (done) => {
         const requestStream = bigtable.request(CONFIG);
         requestStream.emit('reading');
         requestStream.on('request', done);
@@ -1063,7 +1063,7 @@ describe('Bigtable', () => {
       });
     });
 
-    gapicStreamingMethods.forEach(method => {
+    gapicStreamingMethods.forEach((method) => {
       describe('makeGapicStreamRequest', () => {
         describe(method, () => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1089,7 +1089,7 @@ describe('Bigtable', () => {
             };
           });
 
-          it('should expose an abort function', done => {
+          it('should expose an abort function', (done) => {
             GAX_STREAM.cancel = done;
 
             const requestStream = bigtable.request(config);
@@ -1097,7 +1097,7 @@ describe('Bigtable', () => {
             requestStream.abort();
           });
 
-          it('should prepare the request once reading', done => {
+          it('should prepare the request once reading', (done) => {
             bigtable.api[config.client][config.method] = {
               bind(gaxClient: {}, reqOpts: {}, gaxOpts: {}) {
                 assert.strictEqual(gaxClient, bigtable.api[config.client]);
@@ -1114,7 +1114,7 @@ describe('Bigtable', () => {
             requestStream.emit('reading');
           });
 
-          it('should destroy the stream with prepare error', done => {
+          it('should destroy the stream with prepare error', (done) => {
             const error = new Error('Error.');
             bigtable.getProjectId_ = (callback: Function) => {
               callback(error);
@@ -1127,7 +1127,7 @@ describe('Bigtable', () => {
             });
           });
 
-          it('should destroy the stream with GAX error', done => {
+          it('should destroy the stream with GAX error', (done) => {
             const error = new Error('Error.');
             const requestStream = bigtable.request(config);
             requestStream.emit('reading');
@@ -1138,7 +1138,7 @@ describe('Bigtable', () => {
             });
           });
 
-          it('should emit response from GAX stream', done => {
+          it('should emit response from GAX stream', (done) => {
             const response = {};
             const requestStream = bigtable.request(config);
             requestStream.emit('reading');
@@ -1162,7 +1162,7 @@ describe('Bigtable', () => {
       };
     });
 
-    it('should return the provided project ID', done => {
+    it('should return the provided project ID', (done) => {
       const providedProjectId = 'provided-project-id';
       bigtable.auth.getProjectId = () => {
         throw new Error('Auth client should not be called.');
@@ -1175,7 +1175,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should return any project ID if in custom endpoint', done => {
+    it('should return any project ID if in custom endpoint', (done) => {
       bigtable.auth.getProjectId = () => {
         throw new Error('Auth client should not be called.');
       };
@@ -1188,7 +1188,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should return error if project ID detection failed', done => {
+    it('should return error if project ID detection failed', (done) => {
       const error = new Error('Error.');
       bigtable.auth.getProjectId = (callback: Function) => {
         callback(error);
@@ -1200,7 +1200,7 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should get and cache the project ID if not provided', done => {
+    it('should get and cache the project ID if not provided', (done) => {
       const detectedProjectId = 'detected-project-id';
       bigtable.auth.getProjectId = (callback: Function) => {
         callback(null, detectedProjectId);
@@ -1215,7 +1215,7 @@ describe('Bigtable', () => {
     });
   });
   describe('close', () => {
-    it('should have failed request after close is called', done => {
+    it('should have failed request after close is called', (done) => {
       bigtable.close().then(() => {
         bigtable.getInstances((err: Error) => {
           if (err) {

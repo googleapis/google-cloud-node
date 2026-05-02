@@ -94,7 +94,7 @@ function createInstruments(exporter: PushMetricExporter): MetricsInstruments {
     'application_latencies',
     'throttling_latencies',
   ].map(
-    name =>
+    (name) =>
       new View({
         instrumentName: name,
         name,

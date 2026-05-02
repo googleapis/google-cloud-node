@@ -28,13 +28,13 @@ const sinon = sn.createSandbox();
 
 const FakeMutation = {
   methods: Mutation.methods,
-  convertToBytes: sinon.spy(value => {
+  convertToBytes: sinon.spy((value) => {
     if (value === ROW_ID) {
       return CONVERTED_ROW_ID;
     }
     return value;
   }),
-  convertFromBytes: sinon.spy(value => {
+  convertFromBytes: sinon.spy((value) => {
     return value;
   }),
 };
@@ -108,7 +108,7 @@ describe('Bigtable/ChunkTransformer', () => {
       commitSpy = sinon.spy(chunkTransformer, 'commit');
       destroySpy = sinon.spy(chunkTransformer, 'destroy');
     });
-    it('should destroy when row key is defined ', done => {
+    it('should destroy when row key is defined ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -116,14 +116,14 @@ describe('Bigtable/ChunkTransformer', () => {
       chunkTransformer.row = {key: 'abc'};
       processNewRowSpy.call(chunkTransformer, {});
     });
-    it('should destroy when chunk key is undefined ', done => {
+    it('should destroy when chunk key is undefined ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
       });
       processNewRowSpy.call(chunkTransformer, {});
     });
-    it('should destroy when resetRow is true ', done => {
+    it('should destroy when resetRow is true ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -133,14 +133,14 @@ describe('Bigtable/ChunkTransformer', () => {
         resetRow: true,
       });
     });
-    it('should destroy when resetRow ', done => {
+    it('should destroy when resetRow ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
       });
       processNewRowSpy.call(chunkTransformer, {resetRow: true});
     });
-    it('should destroy when row key is equal to previous row key ', done => {
+    it('should destroy when row key is equal to previous row key ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -152,14 +152,14 @@ describe('Bigtable/ChunkTransformer', () => {
         resetRow: false,
       });
     });
-    it('should destroy when family name is undefined ', done => {
+    it('should destroy when family name is undefined ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
       });
       processNewRowSpy.call(chunkTransformer, {rowKey: 'key'});
     });
-    it('should destroy when qualifier is undefined ', done => {
+    it('should destroy when qualifier is undefined ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -169,7 +169,7 @@ describe('Bigtable/ChunkTransformer', () => {
         familyName: 'family',
       });
     });
-    it('should destroy when valueSize>0 and commitRow=true ', done => {
+    it('should destroy when valueSize>0 and commitRow=true ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -304,7 +304,7 @@ describe('Bigtable/ChunkTransformer', () => {
       commitSpy = sinon.spy(chunkTransformer, 'commit');
       destroySpy = sinon.spy(chunkTransformer, 'destroy');
     });
-    it('should destroy when resetRow and rowkey', done => {
+    it('should destroy when resetRow and rowkey', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -314,7 +314,7 @@ describe('Bigtable/ChunkTransformer', () => {
         rowKey: 'key',
       });
     });
-    it('should destroy when resetRow and familyName', done => {
+    it('should destroy when resetRow and familyName', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -324,7 +324,7 @@ describe('Bigtable/ChunkTransformer', () => {
         familyName: 'family',
       });
     });
-    it('should destroy when resetRow and qualifier', done => {
+    it('should destroy when resetRow and qualifier', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -334,7 +334,7 @@ describe('Bigtable/ChunkTransformer', () => {
         qualifier: 'qualifier',
       });
     });
-    it('should destroy when resetRow and value', done => {
+    it('should destroy when resetRow and value', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -344,7 +344,7 @@ describe('Bigtable/ChunkTransformer', () => {
         value: 'value',
       });
     });
-    it('should destroy when resetRow and timestampMicros', done => {
+    it('should destroy when resetRow and timestampMicros', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -354,7 +354,7 @@ describe('Bigtable/ChunkTransformer', () => {
         timestampMicros: 10,
       });
     });
-    it('should destroy when rowKey not equal to lastRowKey', done => {
+    it('should destroy when rowKey not equal to lastRowKey', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -362,7 +362,7 @@ describe('Bigtable/ChunkTransformer', () => {
       chunkTransformer.row = {key: 'key1'};
       processRowInProgressSpy.call(chunkTransformer, {rowKey: 'key'});
     });
-    it('should destroy when valueSize>0 and commitRow=true ', done => {
+    it('should destroy when valueSize>0 and commitRow=true ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -372,7 +372,7 @@ describe('Bigtable/ChunkTransformer', () => {
         commitRow: true,
       });
     });
-    it('should destroy when familyName without qualifier ', done => {
+    it('should destroy when familyName without qualifier ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -681,7 +681,7 @@ describe('Bigtable/ChunkTransformer', () => {
       commitSpy = sinon.spy(chunkTransformer, 'commit');
       destroySpy = sinon.spy(chunkTransformer, 'destroy');
     });
-    it('should destroy when resetRow and rowkey', done => {
+    it('should destroy when resetRow and rowkey', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -691,7 +691,7 @@ describe('Bigtable/ChunkTransformer', () => {
         rowKey: 'key',
       });
     });
-    it('should destroy when resetRow and familyName', done => {
+    it('should destroy when resetRow and familyName', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -701,7 +701,7 @@ describe('Bigtable/ChunkTransformer', () => {
         familyName: 'family',
       });
     });
-    it('should destroy when resetRow and qualifier', done => {
+    it('should destroy when resetRow and qualifier', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -711,7 +711,7 @@ describe('Bigtable/ChunkTransformer', () => {
         qualifier: 'qualifier',
       });
     });
-    it('should destroy when resetRow and value', done => {
+    it('should destroy when resetRow and value', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -721,7 +721,7 @@ describe('Bigtable/ChunkTransformer', () => {
         value: 'value',
       });
     });
-    it('should destroy when resetRow and timestampMicros', done => {
+    it('should destroy when resetRow and timestampMicros', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -731,7 +731,7 @@ describe('Bigtable/ChunkTransformer', () => {
         timestampMicros: 10,
       });
     });
-    it('should destroy when valueSize>0 and commitRow=true ', done => {
+    it('should destroy when valueSize>0 and commitRow=true ', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called);
         done();
@@ -929,7 +929,7 @@ describe('Bigtable/ChunkTransformer', () => {
       const err = callback.getCall(0).args[0];
       assert(!err, 'did not expect error');
     });
-    it('should call destroy when there is uncommitted row', done => {
+    it('should call destroy when there is uncommitted row', (done) => {
       chunkTransformer.on('error', () => {
         assert(destroySpy.called, 'did not destroyed');
         done();
@@ -1192,7 +1192,7 @@ describe('Bigtable/ChunkTransformer', () => {
     });
   });
   describe('destroy', () => {
-    it('should emit error when destroy is called with error', done => {
+    it('should emit error when destroy is called with error', (done) => {
       const error = new Error('destroy error');
       chunkTransformer.on('error', (err: Error) => {
         assert.strictEqual(err, error, 'did not emit error');
@@ -1200,7 +1200,7 @@ describe('Bigtable/ChunkTransformer', () => {
       });
       chunkTransformer.destroy(error);
     });
-    it('should not emit if transform is already destroyed', done => {
+    it('should not emit if transform is already destroyed', (done) => {
       chunkTransformer.on('close', () => {
         done();
       });

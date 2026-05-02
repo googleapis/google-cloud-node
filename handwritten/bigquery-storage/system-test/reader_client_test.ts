@@ -50,7 +50,7 @@ const generateUuid = () =>
 const datasetId = generateUuid();
 
 const sleep = (ms: number) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 
@@ -186,7 +186,7 @@ describe('reader.ReaderClient', () => {
 
   describe('Read', () => {
     it('should invoke createReadSession and createReadStream without errors', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -306,7 +306,7 @@ describe('reader.ReaderClient', () => {
           },
         ]);
 
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -360,7 +360,7 @@ describe('reader.ReaderClient', () => {
   });
   describe('ArrowTableReader', () => {
     it('should allow to read a table as an Arrow byte stream', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -415,7 +415,7 @@ describe('reader.ReaderClient', () => {
     });
 
     it('should allow to read a table as a stream of Arrow Record Batches', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -454,7 +454,7 @@ describe('reader.ReaderClient', () => {
 
   describe('TableReader', () => {
     it('should allow to read a table as a stream', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -703,7 +703,7 @@ describe('reader.ReaderClient', () => {
     });
 
     it('should allow to read a table as tabledata.list RowsResponse', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -735,7 +735,7 @@ describe('reader.ReaderClient', () => {
     });
 
     it('should allow to read a table with long running query', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -773,7 +773,7 @@ describe('reader.ReaderClient', () => {
 
   describe('Error Scenarios', () => {
     it('send request with mismatched selected fields', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -818,7 +818,7 @@ describe('reader.ReaderClient', () => {
     });
 
     it('should trigger reconnection when intermitent error happens', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();
@@ -856,7 +856,7 @@ describe('reader.ReaderClient', () => {
 
   describe('close', () => {
     it('should invoke close without errors', async () => {
-      bqReadClient.initialize().catch(err => {
+      bqReadClient.initialize().catch((err) => {
         throw err;
       });
       const client = new ReadClient();

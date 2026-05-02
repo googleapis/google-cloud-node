@@ -4,10 +4,7 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
-    "lib": [
-      "es2023",
-      "dom"
-    ]
+    "lib": ["es2023", "dom"]
   },
   "include": [
     "src/*.ts",

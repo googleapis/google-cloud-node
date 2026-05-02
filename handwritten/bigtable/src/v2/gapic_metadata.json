@@ -11,59 +11,37 @@
           "libraryClient": "BigtableClient",
           "rpcs": {
             "MutateRow": {
-              "methods": [
-                "mutateRow"
-              ]
+              "methods": ["mutateRow"]
             },
             "CheckAndMutateRow": {
-              "methods": [
-                "checkAndMutateRow"
-              ]
+              "methods": ["checkAndMutateRow"]
             },
             "PingAndWarm": {
-              "methods": [
-                "pingAndWarm"
-              ]
+              "methods": ["pingAndWarm"]
             },
             "ReadModifyWriteRow": {
-              "methods": [
-                "readModifyWriteRow"
-              ]
+              "methods": ["readModifyWriteRow"]
             },
             "PrepareQuery": {
-              "methods": [
-                "prepareQuery"
-              ]
+              "methods": ["prepareQuery"]
             },
             "ReadRows": {
-              "methods": [
-                "readRows"
-              ]
+              "methods": ["readRows"]
             },
             "SampleRowKeys": {
-              "methods": [
-                "sampleRowKeys"
-              ]
+              "methods": ["sampleRowKeys"]
             },
             "MutateRows": {
-              "methods": [
-                "mutateRows"
-              ]
+              "methods": ["mutateRows"]
             },
             "GenerateInitialChangeStreamPartitions": {
-              "methods": [
-                "generateInitialChangeStreamPartitions"
-              ]
+              "methods": ["generateInitialChangeStreamPartitions"]
             },
             "ReadChangeStream": {
-              "methods": [
-                "readChangeStream"
-              ]
+              "methods": ["readChangeStream"]
             },
             "ExecuteQuery": {
-              "methods": [
-                "executeQuery"
-              ]
+              "methods": ["executeQuery"]
             }
           }
         },
@@ -71,29 +49,19 @@
           "libraryClient": "BigtableClient",
           "rpcs": {
             "MutateRow": {
-              "methods": [
-                "mutateRow"
-              ]
+              "methods": ["mutateRow"]
             },
             "CheckAndMutateRow": {
-              "methods": [
-                "checkAndMutateRow"
-              ]
+              "methods": ["checkAndMutateRow"]
             },
             "PingAndWarm": {
-              "methods": [
-                "pingAndWarm"
-              ]
+              "methods": ["pingAndWarm"]
             },
             "ReadModifyWriteRow": {
-              "methods": [
-                "readModifyWriteRow"
-              ]
+              "methods": ["readModifyWriteRow"]
             },
             "PrepareQuery": {
-              "methods": [
-                "prepareQuery"
-              ]
+              "methods": ["prepareQuery"]
             }
           }
         }

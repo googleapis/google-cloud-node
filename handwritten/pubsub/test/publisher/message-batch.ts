@@ -135,7 +135,7 @@ describe('MessageBatch', () => {
         .fill({
           data: Buffer.from('Hello!'),
         })
-        .forEach(message => {
+        .forEach((message) => {
           batch.add(message, sandbox.spy());
         });
 

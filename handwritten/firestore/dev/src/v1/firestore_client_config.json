@@ -3,20 +3,14 @@
     "google.firestore.v1.Firestore": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": [
-          "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ],
+        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
         "deadline_exceeded_resource_exhausted_internal_unavailable": [
           "DEADLINE_EXCEEDED",
           "RESOURCE_EXHAUSTED",
           "INTERNAL",
           "UNAVAILABLE"
         ],
-        "resource_exhausted_unavailable": [
-          "RESOURCE_EXHAUSTED",
-          "UNAVAILABLE"
-        ],
+        "resource_exhausted_unavailable": ["RESOURCE_EXHAUSTED", "UNAVAILABLE"],
         "deadline_exceeded_internal_unavailable": [
           "DEADLINE_EXCEEDED",
           "INTERNAL",

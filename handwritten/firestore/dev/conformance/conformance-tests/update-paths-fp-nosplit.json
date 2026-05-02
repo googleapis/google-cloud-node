@@ -7,15 +7,10 @@
         "docRefPath": "projects/projectID/databases/(default)/documents/C/d",
         "fieldPaths": [
           {
-            "field": [
-              "a.b",
-              "f.g"
-            ]
+            "field": ["a.b", "f.g"]
           }
         ],
-        "jsonValues": [
-          "{\"n.o\": 7}"
-        ],
+        "jsonValues": ["{\"n.o\": 7}"],
         "request": {
           "database": "projects/projectID/databases/(default)",
           "writes": [
@@ -41,9 +36,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "`a.b`.`f.g`"
-                ]
+                "fieldPaths": ["`a.b`.`f.g`"]
               },
               "currentDocument": {
                 "exists": true

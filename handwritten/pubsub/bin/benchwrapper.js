@@ -49,7 +49,7 @@ function recv(call, callback) {
     },
   });
 
-  sub.on('message', message => {
+  sub.on('message', (message) => {
     message.ack();
   });
 
@@ -70,7 +70,7 @@ console.log(`starting on localhost:${argv.port}`);
 server.bindAsync(
   `0.0.0.0:${argv.port}`,
   grpc.ServerCredentials.createInsecure(),
-  err => {
+  (err) => {
     if (err) {
       throw err;
     } else {

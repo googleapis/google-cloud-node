@@ -1,7 +1,5 @@
 {
   "tests": [
-
-
     {
       "name": "simple read",
       "max_retries": 3,
@@ -11,158 +9,131 @@
           "rowRanges": [{}]
         }
       ],
-      "responses": [
-        { "row_keys": [ "a", "b", "c" ] }
-      ],
-      "row_keys_read": [
-        [ "a", "b", "c" ]
-      ]
+      "responses": [{"row_keys": ["a", "b", "c"]}],
+      "row_keys_read": [["a", "b", "c"]]
     },
-
-
 
     {
       "name": "retries a failed read",
       "max_retries": 3,
       "request_options": [
-        { "rowKeys": [],
-          "rowRanges": [{}]
-        },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "b" } ] }
+        {"rowKeys": [], "rowRanges": [{}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "b"}]}
       ],
       "responses": [
-        { "row_keys": [ "a", "b" ], "end_with_error": 4 },
-        { "row_keys": [ "c" ] }
+        {"row_keys": ["a", "b"], "end_with_error": 4},
+        {"row_keys": ["c"]}
       ],
-      "row_keys_read": [
-        [ "a", "b" ],
-        [ "c" ]
-      ]
+      "row_keys_read": [["a", "b"], ["c"]]
     },
-
-
 
     {
       "name": "fails after all available retries",
       "max_retries": 3,
       "request_options": [
-        { "rowKeys": [],
-          "rowRanges": [{}]
-        },
-        { "rowKeys": [],
-          "rowRanges": [{}]
-        },
-        { "rowKeys": [],
-          "rowRanges": [{}]
-        },
-        { "rowKeys": [],
-          "rowRanges": [{}]
-        }
+        {"rowKeys": [], "rowRanges": [{}]},
+        {"rowKeys": [], "rowRanges": [{}]},
+        {"rowKeys": [], "rowRanges": [{}]},
+        {"rowKeys": [], "rowRanges": [{}]}
       ],
       "responses": [
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 }
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4}
       ],
-      "row_keys_read": [
-        [], [], [], []
-      ],
+      "row_keys_read": [[], [], [], []],
       "error": 4
     },
-
-
-
 
     {
       "name": "resets the retry counter after a successful read",
       "max_retries": 4,
       "request_options": [
-        { "rowKeys": [],
-          "rowRanges": [{}]
-        },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "a" } ] },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "a" } ] },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "a" } ] },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "a" } ] },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "b" } ] },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "b" } ] },
-        { "rowKeys": [], "rowRanges": [ { "startKeyOpen": "b" } ] }
+        {"rowKeys": [], "rowRanges": [{}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "a"}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "a"}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "a"}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "a"}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "b"}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "b"}]},
+        {"rowKeys": [], "rowRanges": [{"startKeyOpen": "b"}]}
       ],
       "responses": [
-        { "row_keys": [ "a" ], "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "row_keys": [ "b" ], "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "row_keys": [ "c" ] }
+        {"row_keys": ["a"], "end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"row_keys": ["b"], "end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"row_keys": ["c"]}
       ],
-      "row_keys_read": [
-        [ "a" ], [], [], [], [ "b" ], [], [], [ "c" ]
-      ]
+      "row_keys_read": [["a"], [], [], [], ["b"], [], [], ["c"]]
     },
-
-
 
     {
       "name": "moves the start point of a range being consumed",
       "max_retries": 3,
       "createReadStream_options": {
-        "ranges": [{
-          "start": "a",
-          "end": "z"
-        }]
+        "ranges": [
+          {
+            "start": "a",
+            "end": "z"
+          }
+        ]
       },
       "request_options": [
-        { "rowKeys": [],  "rowRanges": [ { "startKeyClosed": "a", "endKeyClosed": "z" } ] },
-        { "rowKeys": [],  "rowRanges": [ { "startKeyOpen": "b", "endKeyClosed": "z" } ] }
+        {
+          "rowKeys": [],
+          "rowRanges": [{"startKeyClosed": "a", "endKeyClosed": "z"}]
+        },
+        {
+          "rowKeys": [],
+          "rowRanges": [{"startKeyOpen": "b", "endKeyClosed": "z"}]
+        }
       ],
       "responses": [
-        { "row_keys": [ "a", "b" ], "end_with_error": 4 },
-        { "row_keys": [ "c" ] }
+        {"row_keys": ["a", "b"], "end_with_error": 4},
+        {"row_keys": ["c"]}
       ],
-      "row_keys_read": [
-        [ "a", "b" ],
-        [ "c" ]
-      ]
+      "row_keys_read": [["a", "b"], ["c"]]
     },
-
-
 
     {
       "name": "removes ranges already consumed",
       "max_retries": 3,
       "createReadStream_options": {
-        "ranges": [{
-          "start": "a",
-          "end": "c"
-        }, {
-          "start": "x",
-          "end": "z"
-        }]
+        "ranges": [
+          {
+            "start": "a",
+            "end": "c"
+          },
+          {
+            "start": "x",
+            "end": "z"
+          }
+        ]
       },
       "request_options": [
-        { "rowKeys": [], 
+        {
+          "rowKeys": [],
           "rowRanges": [
-          { "startKeyClosed": "a", "endKeyClosed": "c" },
-          { "startKeyClosed": "x", "endKeyClosed": "z" }
-        ] },
-        { "rowKeys": [],
-          "rowRanges": [ { "startKeyClosed": "x", "endKeyClosed": "z" } ] }
+            {"startKeyClosed": "a", "endKeyClosed": "c"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
+          ]
+        },
+        {
+          "rowKeys": [],
+          "rowRanges": [{"startKeyClosed": "x", "endKeyClosed": "z"}]
+        }
       ],
       "responses": [
-        { "row_keys": [ "a", "b", "c" ], "end_with_error": 4 },
-        { "row_keys": [ "x" ] }
+        {"row_keys": ["a", "b", "c"], "end_with_error": 4},
+        {"row_keys": ["x"]}
       ],
-      "row_keys_read": [
-        [ "a", "b", "c" ],
-        [ "x" ]
-      ]
+      "row_keys_read": [["a", "b", "c"], ["x"]]
     },
-
-
 
     {
       "name": "removes keys already read",
@@ -171,19 +142,15 @@
         "keys": ["a", "b", "x"]
       },
       "request_options": [
-        { "rowKeys": [ "a", "b", "x" ], "rowRanges": [] },
-        { "rowKeys": [ "x" ], "rowRanges": [] }
+        {"rowKeys": ["a", "b", "x"], "rowRanges": []},
+        {"rowKeys": ["x"], "rowRanges": []}
       ],
       "responses": [
-        { "row_keys": [ "a", "b", "c" ], "end_with_error": 4 },
-        { "row_keys": [ "x" ] }
+        {"row_keys": ["a", "b", "c"], "end_with_error": 4},
+        {"row_keys": ["x"]}
       ],
-      "row_keys_read": [
-        [ "a", "b", "c" ],
-        [ "x" ]
-      ]
+      "row_keys_read": [["a", "b", "c"], ["x"]]
     },
-
 
     {
       "name": "adjust the limit based on the number of rows read",
@@ -192,142 +159,133 @@
         "limit": 10
       },
       "request_options": [
-        { "rowKeys": [], "rowRanges": [{}], "rowsLimit": 10 },
-        { "rowsLimit": 8, "rowKeys":[], "rowRanges": [ { "startKeyOpen": "b" } ] }
+        {"rowKeys": [], "rowRanges": [{}], "rowsLimit": 10},
+        {"rowsLimit": 8, "rowKeys": [], "rowRanges": [{"startKeyOpen": "b"}]}
       ],
       "responses": [
-        { "row_keys": [ "a", "b" ], "end_with_error": 4 },
-        { "row_keys": [ "x" ] }
+        {"row_keys": ["a", "b"], "end_with_error": 4},
+        {"row_keys": ["x"]}
       ],
-      "row_keys_read": [
-        [ "a", "b" ],
-        [ "x" ]
-      ]
+      "row_keys_read": [["a", "b"], ["x"]]
     },
-
-
-
-
 
     {
       "name": "does the previous 5 things in one giant test case",
       "max_retries": 4,
       "createReadStream_options": {
         "limit": 10,
-        "ranges": [{
-          "start": "a",
-          "end": "c"
-        }, {
-          "start": "p",
-          "end": "s"
-        }, {
-          "start": "x",
-          "end": "z"
-        }],
-        "keys": [ "a", "b", "c", "p", "q", "r", "s", "x", "y", "z" ]
+        "ranges": [
+          {
+            "start": "a",
+            "end": "c"
+          },
+          {
+            "start": "p",
+            "end": "s"
+          },
+          {
+            "start": "x",
+            "end": "z"
+          }
+        ],
+        "keys": ["a", "b", "c", "p", "q", "r", "s", "x", "y", "z"]
       },
       "request_options": [
         {
-          "rowKeys": [ "a", "b", "c", "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["a", "b", "c", "p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 10,
           "rowRanges": [
-            { "startKeyClosed": "a", "endKeyClosed": "c" },
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyClosed": "a", "endKeyClosed": "c"},
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "b", "c", "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["b", "c", "p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 9,
           "rowRanges": [
-            { "startKeyOpen": "a", "endKeyClosed": "c" },
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyOpen": "a", "endKeyClosed": "c"},
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "c", "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["c", "p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 8,
           "rowRanges": [
-            { "startKeyOpen": "b", "endKeyClosed": "c" },
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyOpen": "b", "endKeyClosed": "c"},
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "c", "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["c", "p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 8,
           "rowRanges": [
-            { "startKeyOpen": "b", "endKeyClosed": "c" },
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyOpen": "b", "endKeyClosed": "c"},
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "c", "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["c", "p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 8,
           "rowRanges": [
-            { "startKeyOpen": "b", "endKeyClosed": "c" },
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyOpen": "b", "endKeyClosed": "c"},
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "c", "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["c", "p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 8,
           "rowRanges": [
-            { "startKeyOpen": "b", "endKeyClosed": "c" },
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyOpen": "b", "endKeyClosed": "c"},
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "p", "q", "r", "s", "x", "y", "z" ],
+          "rowKeys": ["p", "q", "r", "s", "x", "y", "z"],
           "rowsLimit": 7,
           "rowRanges": [
-            { "startKeyClosed": "p", "endKeyClosed": "s" },
-            { "startKeyClosed": "x", "endKeyClosed": "z" }
+            {"startKeyClosed": "p", "endKeyClosed": "s"},
+            {"startKeyClosed": "x", "endKeyClosed": "z"}
           ]
         },
         {
-          "rowKeys": [ "y", "z" ],
+          "rowKeys": ["y", "z"],
           "rowsLimit": 2,
-          "rowRanges": [
-            { "startKeyOpen": "x", "endKeyClosed": "z" }
-          ]
+          "rowRanges": [{"startKeyOpen": "x", "endKeyClosed": "z"}]
         },
         {
-          "rowKeys": [ "z" ],
+          "rowKeys": ["z"],
           "rowsLimit": 1,
-          "rowRanges": [
-            { "startKeyOpen": "y", "endKeyClosed": "z" }
-          ]
+          "rowRanges": [{"startKeyOpen": "y", "endKeyClosed": "z"}]
         }
       ],
       "responses": [
-        { "row_keys": [ "a" ], "end_with_error": 4 },
-        { "row_keys": [ "b" ], "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "end_with_error": 4 },
-        { "row_keys": [ "c" ], "end_with_error": 4 },
-        { "row_keys": [ "p", "q", "r", "s", "x" ], "end_with_error": 4 },
-        { "row_keys": [ "y" ], "end_with_error": 4 },
-        { "row_keys": [ "z" ] }
+        {"row_keys": ["a"], "end_with_error": 4},
+        {"row_keys": ["b"], "end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"end_with_error": 4},
+        {"row_keys": ["c"], "end_with_error": 4},
+        {"row_keys": ["p", "q", "r", "s", "x"], "end_with_error": 4},
+        {"row_keys": ["y"], "end_with_error": 4},
+        {"row_keys": ["z"]}
       ],
       "row_keys_read": [
-        [ "a" ],
-        [ "b" ],
+        ["a"],
+        ["b"],
         [],
         [],
         [],
-        [ "c" ],
-        [ "p", "q", "r", "s", "x" ],
-        [ "y" ],
-        [ "z" ]
+        ["c"],
+        ["p", "q", "r", "s", "x"],
+        ["y"],
+        ["z"]
       ]
     }
-
-
   ]
 }

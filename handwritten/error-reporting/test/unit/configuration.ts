@@ -121,7 +121,7 @@ describe('Configuration class', () => {
       it('Should print a deprecation warning if "ignoreEvnironmentCheck" is used', () => {
         let warnText = '';
         const logger = {
-          warn: text => {
+          warn: (text) => {
             warnText += text + '\n';
           },
         } as Logger;
@@ -137,7 +137,7 @@ describe('Configuration class', () => {
       it('Should print a warning if both "ignoreEnvironmentCheck" and "reportMode" are specified', () => {
         let warnText = '';
         const logger = {
-          warn: text => {
+          warn: (text) => {
             warnText += text + '\n';
           },
         } as Logger;

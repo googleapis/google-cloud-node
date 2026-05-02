@@ -83,14 +83,16 @@ describe('recursiveDelete() method:', () => {
   ): Promise<Firestore.Firestore> {
     const overrides: ApiOverride = {
       runQuery: () => {
-        return stream(...childrenDocs.map(docId => result(docId)));
+        return stream(...childrenDocs.map((docId) => result(docId)));
       },
-      batchWrite: request => {
+      batchWrite: (request) => {
         const documents = childrenDocs;
         if (deleteDocRef.length > 0) {
           documents.push(deleteDocRef);
         }
-        const expected = createRequest(documents.map(docId => deleteOp(docId)));
+        const expected = createRequest(
+          documents.map((docId) => deleteOp(docId)),
+        );
         try {
           expect(request.writes).to.deep.equal(expected.writes);
         } catch (e) {
@@ -131,7 +133,7 @@ describe('recursiveDelete() method:', () => {
 
     it('for root-level collections', async () => {
       const overrides: ApiOverride = {
-        runQuery: req => {
+        runQuery: (req) => {
           queryEquals(
             req,
             select('__name__'),
@@ -155,7 +157,7 @@ describe('recursiveDelete() method:', () => {
 
     it('for nested collections', async () => {
       const overrides: ApiOverride = {
-        runQuery: req => {
+        runQuery: (req) => {
           queryEqualsWithParent(
             req,
             'root/doc',
@@ -182,7 +184,7 @@ describe('recursiveDelete() method:', () => {
 
     it('documents', async () => {
       const overrides: ApiOverride = {
-        runQuery: req => {
+        runQuery: (req) => {
           queryEqualsWithParent(
             req,
             'root/doc',
@@ -202,7 +204,7 @@ describe('recursiveDelete() method:', () => {
     it('creates retry query after stream exception with last received doc', async () => {
       let callCount = 0;
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           callCount++;
           if (callCount === 1) {
             return stream(result('doc1'), new Error('failed in test'));
@@ -271,7 +273,7 @@ describe('recursiveDelete() method:', () => {
       // thrown errors do not result in the recursiveDelete() method failing.
       const called: number[] = [];
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           if (called.length === 0) {
             queryEquals(
               request,
@@ -465,7 +467,7 @@ describe('recursiveDelete() method:', () => {
       const codes: Status[] = [];
       const refs: string[] = [];
       const bulkWriter = firestore.bulkWriter();
-      bulkWriter.onWriteError(err => {
+      bulkWriter.onWriteError((err) => {
         codes.push(err.code as unknown as Status);
         refs.push(err.documentRef.path);
         return false;
@@ -542,7 +544,7 @@ describe('recursiveDelete() method:', () => {
           requestCounter++;
           return streamPromise;
         },
-        batchWrite: request => {
+        batchWrite: (request) => {
           const expected = createRequest([
             deleteOp('a'),
             deleteOp('b'),
@@ -566,15 +568,15 @@ describe('recursiveDelete() method:', () => {
     it('handles multiple calls to recursiveDelete()', async () => {
       let requestCounter = 0;
       const docIds = ['a', 'b', 'c'];
-      const streamItems = docIds.map(docId => [result(docId)]);
-      const expected = docIds.map(docId => createRequest([deleteOp(docId)]));
+      const streamItems = docIds.map((docId) => [result(docId)]);
+      const expected = docIds.map((docId) => createRequest([deleteOp(docId)]));
       const responses = docIds.map(() => successResponse(1));
 
       const overrides: ApiOverride = {
         runQuery: () => {
           return stream(...streamItems[requestCounter]);
         },
-        batchWrite: request => {
+        batchWrite: (request) => {
           try {
             expect(request.writes).to.deep.equal(
               expected[requestCounter]!.writes,

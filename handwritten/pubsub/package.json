@@ -14,10 +14,7 @@
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "files": [
-    "build/protos",
-    "build/src"
-  ],
+  "files": ["build/protos", "build/src"],
   "keywords": [
     "google apis client",
     "google api client",

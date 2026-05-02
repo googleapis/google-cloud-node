@@ -4,9 +4,7 @@
     "rootDir": ".",
     "outDir": "build",
     "types": ["node"],
-    "skipLibCheck": false,
+    "skipLibCheck": false
   },
-  "include": [
-    "src/*.ts"
-  ]
+  "include": ["src/*.ts"]
 }

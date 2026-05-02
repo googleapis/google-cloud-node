@@ -280,12 +280,12 @@ describe('v1beta1.FirestoreClient', () => {
       assert(client.firestoreStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new firestoreModule.FirestoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.firestoreStub);
@@ -294,12 +294,12 @@ describe('v1beta1.FirestoreClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new firestoreModule.FirestoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -310,7 +310,7 @@ describe('v1beta1.FirestoreClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -475,7 +475,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getDocument(request), expectedError);
@@ -611,7 +611,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.document.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateDocument(request), expectedError);
@@ -743,7 +743,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteDocument(request), expectedError);
@@ -875,7 +875,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.beginTransaction(request), expectedError);
@@ -1004,7 +1004,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.commit(request), expectedError);
@@ -1133,7 +1133,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.rollback(request), expectedError);
@@ -1265,7 +1265,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.batchWrite(request), expectedError);
@@ -1417,7 +1417,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.collectionId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createDocument(request), expectedError);
@@ -1578,7 +1578,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       const stream = client.batchGetDocuments(request, {
@@ -1753,7 +1753,7 @@ describe('v1beta1.FirestoreClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       const stream = client.runQuery(request, {

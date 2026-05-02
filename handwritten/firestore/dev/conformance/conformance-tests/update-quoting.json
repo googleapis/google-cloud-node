@@ -31,9 +31,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "_0.`1`.`+2`"
-                ]
+                "fieldPaths": ["_0.`1`.`+2`"]
               },
               "currentDocument": {
                 "exists": true

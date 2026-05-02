@@ -29,7 +29,7 @@ const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + 10 * 1000;
 const LOG_NAME = `winston-system-test-${crypto.randomBytes(16).toString('hex')}`;
 
 function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 describe(__filename, () => {
@@ -58,7 +58,7 @@ describe(__filename, () => {
     it('should write request correlated log entries', function () {
       this.timeout(TEST_TIMEOUT);
       // eslint-disable-next-line no-async-promise-executor
-      return new Promise<void>(async resolve => {
+      return new Promise<void>(async (resolve) => {
         const logger = winston.createLogger();
         const mw = await elb.makeMiddleware(logger, {
           logName: LOG_NAME,

@@ -14,11 +14,7 @@
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "files": [
-    "build/src",
-    "!build/src/**/*.map",
-    "CODE_OF_CONDUCT.md"
-  ],
+  "files": ["build/src", "!build/src/**/*.map", "CODE_OF_CONDUCT.md"],
   "keywords": [
     "google apis client",
     "google api client",

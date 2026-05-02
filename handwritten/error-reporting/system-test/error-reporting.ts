@@ -65,7 +65,7 @@ class InstancedEnv {
   }
 
   sterilizeProcess() {
-    envKeys.forEach(key => delete process.env[key]);
+    envKeys.forEach((key) => delete process.env[key]);
     return this;
   }
 
@@ -140,7 +140,7 @@ function shouldRun() {
 }
 
 function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 if (!shouldRun()) {
@@ -213,7 +213,7 @@ describe('Request/Response lifecycle mocking', () => {
   it(
     'Should provide the key as a query string on outgoing requests when ' +
       'using an API key',
-    done => {
+    (done) => {
       env.sterilizeProcess().setProjectId().setProduction();
       const key = env.apiKey;
       const logger = createLogger({logLevel: 5});
@@ -237,7 +237,7 @@ describe('Request/Response lifecycle mocking', () => {
     },
   );
 
-  it('Should still execute the request with a callback-less invocation', done => {
+  it('Should still execute the request with a callback-less invocation', (done) => {
     fakeService.reply(200, () => {
       done();
     });
@@ -380,7 +380,7 @@ describe('Expected Behavior', () => {
     env.sterilizeProcess();
   });
 
-  it('Should not call auth and should callback with an error in a configuration that cannot report errors', done => {
+  it('Should not call auth and should callback with an error in a configuration that cannot report errors', (done) => {
     env.sterilizeProcess().setKeyFilename().setProjectId();
     const scope = nock('https://www.googleapis.com:443')
       .post('/oauth2/v4/token')
@@ -402,7 +402,7 @@ describe('Expected Behavior', () => {
     });
   });
 
-  it('Should succeed in its request given a valid project id', done => {
+  it('Should succeed in its request given a valid project id', (done) => {
     env.sterilizeProcess().setKeyFilename();
     const logger = createLogger({logLevel: 5});
     const cfg = new Configuration(
@@ -423,7 +423,7 @@ describe('Expected Behavior', () => {
     });
   });
 
-  it('Should succeed in its request given a valid project number', done => {
+  it('Should succeed in its request given a valid project number', (done) => {
     env.sterilizeProcess().setKeyFilename();
     const logger = createLogger({logLevel: 5});
     const cfg = new Configuration(
@@ -532,7 +532,7 @@ describe('error-reporting', () => {
           'Failed to get groups from the Error Reporting API',
         );
 
-        const filteredGroups = allGroups!.filter(errItem => {
+        const filteredGroups = allGroups!.filter((errItem) => {
           return (
             errItem &&
             errItem.representative &&
@@ -644,7 +644,7 @@ describe('error-reporting', () => {
     const errOb = expectedTopOfStack();
     await verifyReporting(
       errOb,
-      message => {
+      (message) => {
         return message.startsWith('Error: ' + errorId + '\n');
       },
       1,
@@ -657,7 +657,7 @@ describe('error-reporting', () => {
     const errorId = buildName('with-string');
     await verifyReporting(
       errorId,
-      message => {
+      (message) => {
         return message.startsWith(errorId + '\n');
       },
       1,
@@ -669,7 +669,7 @@ describe('error-reporting', () => {
     this.timeout(TIMEOUT);
     await verifyReporting(
       undefined,
-      message => {
+      (message) => {
         return message.startsWith('undefined\n');
       },
       1,
@@ -681,7 +681,7 @@ describe('error-reporting', () => {
     this.timeout(TIMEOUT);
     await verifyReporting(
       null,
-      message => {
+      (message) => {
         return message.startsWith('null\n');
       },
       1,
@@ -693,7 +693,7 @@ describe('error-reporting', () => {
     this.timeout(TIMEOUT);
     await verifyReporting(
       {someKey: 'someValue'},
-      message => {
+      (message) => {
         return message.startsWith("{ someKey: 'someValue' }\n");
       },
       1,
@@ -706,7 +706,7 @@ describe('error-reporting', () => {
     const num = new Date().getTime();
     await verifyReporting(
       num,
-      message => {
+      (message) => {
         return message.startsWith('' + num + '\n');
       },
       1,
@@ -719,7 +719,7 @@ describe('error-reporting', () => {
     const bool = true;
     await verifyReporting(
       bool,
-      message => {
+      (message) => {
         return message.startsWith('true\n');
       },
       1,
@@ -745,7 +745,7 @@ describe('error-reporting', () => {
     async function callingSiteFunction() {
       await verifyReporting(
         errOb,
-        message => {
+        (message) => {
           // Verify that the stack trace of the constructed error
           // uses the stack trace at the point where the error was constructed
           // and not the stack trace at the point where the `report` method

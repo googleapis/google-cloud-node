@@ -133,7 +133,7 @@ describe('BigQuery/Model', () => {
       model.bigQuery.createJob = sinon.stub();
     });
 
-    it('should call createJob correctly', done => {
+    it('should call createJob correctly', (done) => {
       model.bigQuery.createJob = (reqOpts: JobOptions) => {
         assert.deepStrictEqual(reqOpts.configuration!.extract!.sourceModel, {
           datasetId: model.dataset.id,
@@ -147,7 +147,7 @@ describe('BigQuery/Model', () => {
       model.createExtractJob(URI, assert.ifError);
     });
 
-    it('should accept just a destination and a callback', done => {
+    it('should accept just a destination and a callback', (done) => {
       model.bigQuery.createJob = (reqOpts: JobOptions, callback: Function) => {
         callback(null, {jobReference: {jobId: 'job-id'}});
       };
@@ -156,7 +156,7 @@ describe('BigQuery/Model', () => {
     });
 
     describe('formats', () => {
-      it('should accept ML_TF_SAVED_MODEL', done => {
+      it('should accept ML_TF_SAVED_MODEL', (done) => {
         model.bigQuery.createJob = (reqOpts: JobOptions) => {
           const extract = reqOpts.configuration!.extract!;
           assert.strictEqual(extract.destinationFormat, 'ML_TF_SAVED_MODEL');
@@ -170,7 +170,7 @@ describe('BigQuery/Model', () => {
         );
       });
 
-      it('ML_XGBOOST_BOOSTER', done => {
+      it('ML_XGBOOST_BOOSTER', (done) => {
         model.bigQuery.createJob = (reqOpts: JobOptions) => {
           const extract = reqOpts.configuration!.extract!;
           assert.strictEqual(extract.destinationFormat, 'ML_XGBOOST_BOOSTER');
@@ -184,7 +184,7 @@ describe('BigQuery/Model', () => {
         );
       });
 
-      it('should parse out full gs:// urls from files', done => {
+      it('should parse out full gs:// urls from files', (done) => {
         isCustomTypeOverride = () => {
           return true;
         };
@@ -200,7 +200,7 @@ describe('BigQuery/Model', () => {
         model.createExtractJob(FILE, assert.ifError);
       });
 
-      it('should check if a destination is a File', done => {
+      it('should check if a destination is a File', (done) => {
         isCustomTypeOverride = (dest: {}, type: string) => {
           assert.strictEqual(dest, FILE);
           assert.strictEqual(type, 'storage/file');
@@ -235,7 +235,7 @@ describe('BigQuery/Model', () => {
         }, /Destination format not recognized/);
       });
 
-      it('should accept a job prefix', done => {
+      it('should accept a job prefix', (done) => {
         const fakeJobPrefix = 'abc-';
         const options = {
           jobPrefix: fakeJobPrefix,
@@ -257,7 +257,7 @@ describe('BigQuery/Model', () => {
         model.createExtractJob(URI, options, done);
       });
 
-      it('should accept a reservation id', done => {
+      it('should accept a reservation id', (done) => {
         const options = {
           reservation: 'reservation/1',
         };
@@ -276,7 +276,7 @@ describe('BigQuery/Model', () => {
         model.createExtractJob(URI, options, done);
       });
 
-      it('should accept a job id', done => {
+      it('should accept a job id', (done) => {
         const jobId = 'job-id';
         const options = {jobId};
 
@@ -296,7 +296,7 @@ describe('BigQuery/Model', () => {
         model.createExtractJob(URI, options, done);
       });
 
-      it('should pass the callback to createJob', done => {
+      it('should pass the callback to createJob', (done) => {
         model.bigQuery.createJob = (
           reqOpts: JobOptions,
           callback: Function,
@@ -308,7 +308,7 @@ describe('BigQuery/Model', () => {
         model.createExtractJob(URI, {}, done);
       });
 
-      it('should optionally accept options', done => {
+      it('should optionally accept options', (done) => {
         model.bigQuery.createJob = (
           reqOpts: JobOptions,
           callback: Function,
@@ -337,7 +337,7 @@ describe('BigQuery/Model', () => {
       };
     });
 
-    it('should pass the arguments to createExtractJob', done => {
+    it('should pass the arguments to createExtractJob', (done) => {
       const fakeDestination = {};
       const fakeMetadata = {};
 
@@ -350,7 +350,7 @@ describe('BigQuery/Model', () => {
       model.extract(fakeDestination, fakeMetadata, assert.ifError);
     });
 
-    it('should optionally accept metadata', done => {
+    it('should optionally accept metadata', (done) => {
       model.createExtractJob = (destination: {}, metadata: {}) => {
         assert.deepStrictEqual(metadata, {});
         done();
@@ -359,7 +359,7 @@ describe('BigQuery/Model', () => {
       model.extract({}, assert.ifError);
     });
 
-    it('should return any createExtractJob errors', done => {
+    it('should return any createExtractJob errors', (done) => {
       const error = new Error('err');
       const response = {};
 
@@ -378,7 +378,7 @@ describe('BigQuery/Model', () => {
       });
     });
 
-    it('should return any job errors', done => {
+    it('should return any job errors', (done) => {
       const error = new Error('err');
 
       model.extract({}, (err: Error) => {
@@ -389,7 +389,7 @@ describe('BigQuery/Model', () => {
       fakeJob.emit('error', error);
     });
 
-    it('should return the metadata on complete', done => {
+    it('should return the metadata on complete', (done) => {
       const metadata = {};
 
       model.extract({}, (err: Error, resp: {}) => {

@@ -8,9 +8,7 @@
         "option": {
           "fields": [
             {
-              "field": [
-                "b"
-              ]
+              "field": ["b"]
             }
           ]
         },

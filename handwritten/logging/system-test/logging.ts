@@ -119,14 +119,14 @@ describe('Logging', () => {
       return Promise.all(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (objects as any[])
-          .filter(o => {
+          .filter((o) => {
             const name = o.name || o.id;
             if (!name.startsWith(TESTS_PREFIX)) {
               return false;
             }
             return getDateFromGeneratedName(name) < oneHourAgo;
           })
-          .map(o => {
+          .map((o) => {
             const name = o.name || o.id;
             try {
               o.delete();
@@ -247,7 +247,7 @@ describe('Logging', () => {
         assert(sinks.length > 0);
       });
 
-      it('should list sinks as a stream', done => {
+      it('should list sinks as a stream', (done) => {
         const logstream: Duplex = logging
           .getSinksStream({pageSize: 1})
           .on('error', done)
@@ -257,7 +257,7 @@ describe('Logging', () => {
           });
       });
 
-      it('should get metadata', done => {
+      it('should get metadata', (done) => {
         logging
           .getSinksStream({pageSize: 1})
           .on('error', done)
@@ -358,7 +358,7 @@ describe('Logging', () => {
         assert(logs.length > 0);
       });
 
-      it('should list logs as a stream', done => {
+      it('should list logs as a stream', (done) => {
         const stream: Duplex = logging
           .getLogsStream({pageSize: 1})
           .on('error', done)
@@ -369,10 +369,10 @@ describe('Logging', () => {
       });
     });
 
-    it('should list log entries', done => {
+    it('should list log entries', (done) => {
       const {log, logEntries} = getTestLog();
 
-      log.write(logEntries, options, err => {
+      log.write(logEntries, options, (err) => {
         assert.ifError(err);
 
         getEntriesFromLog(
@@ -383,7 +383,7 @@ describe('Logging', () => {
             // Instrumentation log entry is added automatically, so we should discount it
             assert.strictEqual(entries!.length - 1, logEntries.length);
             let entry: Entry | undefined;
-            entries!.forEach(ent => {
+            entries!.forEach((ent) => {
               if (
                 ent &&
                 ent.data?.[instrumentation.DIAGNOSTIC_INFO_KEY]?.[
@@ -406,10 +406,10 @@ describe('Logging', () => {
       });
     });
 
-    it('should list log entries as a stream', done => {
+    it('should list log entries as a stream', (done) => {
       const {log, logEntries} = getTestLog();
 
-      log.write(logEntries, options, err => {
+      log.write(logEntries, options, (err) => {
         assert.ifError(err);
 
         const logstream: Duplex = logging
@@ -423,11 +423,11 @@ describe('Logging', () => {
       });
     });
 
-    it('should tail log entries as a stream', done => {
+    it('should tail log entries as a stream', (done) => {
       const {log, logEntries} = getTestLog();
 
       const logInterval = setInterval(() => {
-        log.write(logEntries, options, err => {
+        log.write(logEntries, options, (err) => {
           assert.ifError(err);
         });
       }, 10000);
@@ -453,14 +453,14 @@ describe('Logging', () => {
       let logExpected: Log;
       let logEntriesExpected: Entry[];
 
-      before(done => {
+      before((done) => {
         const {log, logEntries} = getTestLog();
         logExpected = log;
         logEntriesExpected = logEntries;
         log.write(logEntries, options, done);
       });
 
-      it('should list log entries', done => {
+      it('should list log entries', (done) => {
         getEntriesFromLog(
           logExpected,
           {numExpectedMessages: logEntriesExpected.length},
@@ -472,7 +472,7 @@ describe('Logging', () => {
         );
       });
 
-      it('should list log entries as a stream', done => {
+      it('should list log entries as a stream', (done) => {
         const logstream = logExpected
           .getEntriesStream({
             autoPaginate: false,
@@ -485,9 +485,9 @@ describe('Logging', () => {
           });
       });
 
-      it('should tail log entries as a stream', done => {
+      it('should tail log entries as a stream', (done) => {
         const logInterval = setInterval(() => {
-          logExpected.write(logEntriesExpected, options, err => {
+          logExpected.write(logEntriesExpected, options, (err) => {
             assert.ifError(err);
           });
         }, 10000);
@@ -503,7 +503,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a single entry to a log', done => {
+    it('should write a single entry to a log', (done) => {
       const {log, logEntries} = getTestLog();
       log.write(logEntries[0], options, done);
     });
@@ -513,10 +513,10 @@ describe('Logging', () => {
       await log.write(logEntries[1], options);
     });
 
-    it('should write multiple entries to a log', done => {
+    it('should write multiple entries to a log', (done) => {
       const {log, logEntries} = getTestLog();
 
-      log.write(logEntries, options, err => {
+      log.write(logEntries, options, (err) => {
         assert.ifError(err);
 
         getEntriesFromLog(
@@ -525,7 +525,7 @@ describe('Logging', () => {
           (err, entries) => {
             assert.ifError(err);
 
-            assert.deepStrictEqual(entries!.map(x => x.data).reverse(), [
+            assert.deepStrictEqual(entries!.map((x) => x.data).reverse(), [
               'log entry 1',
               {delegate: 'my_username'},
               {
@@ -546,7 +546,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should preserve order of entries', done => {
+    it('should preserve order of entries', (done) => {
       const {log} = getTestLog();
 
       const entry1 = log.entry('1');
@@ -556,13 +556,13 @@ describe('Logging', () => {
         const entry3 = log.entry({timestamp: entry2.metadata.timestamp}, '3');
 
         // Re-arrange to confirm the timestamp is sent and honored.
-        log.write([entry2, entry3, entry1], options, err => {
+        log.write([entry2, entry3, entry1], options, (err) => {
           assert.ifError(err);
 
           getEntriesFromLog(log, {numExpectedMessages: 3}, (err, entries) => {
             assert.ifError(err);
             assert.deepStrictEqual(
-              entries!.map(x => x.data),
+              entries!.map((x) => x.data),
               ['3', '2', '1'],
             );
             done();
@@ -571,7 +571,7 @@ describe('Logging', () => {
       }, 1000);
     });
 
-    it('should preserve order for sequential write calls', done => {
+    it('should preserve order for sequential write calls', (done) => {
       const {log} = getTestLog();
       const messages = ['1', '2', '3', '4', '5'];
 
@@ -586,7 +586,7 @@ describe('Logging', () => {
           (err, entries) => {
             assert.ifError(err);
             assert.deepStrictEqual(
-              entries!.reverse().map(x => x.data),
+              entries!.reverse().map((x) => x.data),
               messages,
             );
             done();
@@ -595,7 +595,7 @@ describe('Logging', () => {
       })();
     });
 
-    it('should write an entry with primitive values', done => {
+    it('should write an entry with primitive values', (done) => {
       const {log} = getTestLog();
 
       const logEntry = log.entry({
@@ -605,7 +605,7 @@ describe('Logging', () => {
         shouldNotBeSaved: undefined,
       });
 
-      log.write(logEntry, options, err => {
+      log.write(logEntry, options, (err) => {
         assert.ifError(err);
 
         getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
@@ -624,7 +624,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a log with metadata', done => {
+    it('should write a log with metadata', (done) => {
       const {log} = getTestLog();
 
       const metadata = Object.assign({}, options, {
@@ -637,7 +637,7 @@ describe('Logging', () => {
 
       const logEntry = log.entry(metadata, data);
 
-      log.write(logEntry, err => {
+      log.write(logEntry, (err) => {
         assert.ifError(err);
 
         getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
@@ -651,14 +651,14 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a structured httpRequest log with no message', done => {
+    it('should write a structured httpRequest log with no message', (done) => {
       const {log} = getTestLog();
       const metadata = {
         httpRequest: {status: 200},
       };
       const logEntry = log.entry(metadata);
 
-      log.write(logEntry, err => {
+      log.write(logEntry, (err) => {
         assert.ifError(err);
         getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
           assert.ifError(err);
@@ -673,18 +673,18 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a request log with x-cloud-trace-context header', done => {
+    it('should write a request log with x-cloud-trace-context header', (done) => {
       const {log} = getTestLog();
       const URL = 'http://www.google.com';
       // Use the response of a http request as the incomingmessage request obj.
-      http.get(URL, res => {
+      http.get(URL, (res) => {
         res.url = URL;
         res.headers = {
           'x-cloud-trace-context': '1/2;o=1',
         };
         const metadata = {httpRequest: res};
         const logEntry = log.entry(metadata, 'some log message');
-        log.write(logEntry, err => {
+        log.write(logEntry, (err) => {
           assert.ifError(err);
           getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
             assert.ifError(err);
@@ -704,11 +704,11 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a http request log with traceparent header', done => {
+    it('should write a http request log with traceparent header', (done) => {
       const {log} = getTestLog();
       const URL = 'http://www.google.com';
       // Use the response of a http request as the incomingmessage request obj.
-      http.get(URL, res => {
+      http.get(URL, (res) => {
         res.url = URL;
         res.headers = {
           traceparent:
@@ -716,7 +716,7 @@ describe('Logging', () => {
         };
         const metadata = {httpRequest: res};
         const logEntry = log.entry(metadata, 'some log message');
-        log.write(logEntry, err => {
+        log.write(logEntry, (err) => {
           assert.ifError(err);
           getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
             assert.ifError(err);
@@ -755,8 +755,8 @@ describe('Logging', () => {
         sdk.shutdown();
       });
 
-      it('should not overwrite user defined trace and spans with OpenTelemetry context', done => {
-        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', span => {
+      it('should not overwrite user defined trace and spans with OpenTelemetry context', (done) => {
+        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', (span) => {
           const {log} = getTestLog();
           const spanTestMessage = 'span test log message';
           const metadata = {
@@ -765,7 +765,7 @@ describe('Logging', () => {
             traceSampled: false,
           };
           const logEntry = log.entry(metadata, spanTestMessage);
-          log.write(logEntry, err => {
+          log.write(logEntry, (err) => {
             assert.ifError(err);
             getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
               assert.ifError(err);
@@ -784,15 +784,15 @@ describe('Logging', () => {
         done();
       });
 
-      it('should write a log with trace and spans from OpenTelemetry context', done => {
-        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', span => {
+      it('should write a log with trace and spans from OpenTelemetry context', (done) => {
+        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', (span) => {
           const traceId = span.spanContext().traceId;
           const spanId = span.spanContext().spanId;
           const traceSampled = (span.spanContext().traceFlags & 1) !== 0;
           const {log} = getTestLog();
           const spanTestMessage = 'span test log message';
           const logEntry = log.entry(spanTestMessage);
-          log.write(logEntry, err => {
+          log.write(logEntry, (err) => {
             assert.ifError(err);
             getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
               assert.ifError(err);
@@ -811,12 +811,12 @@ describe('Logging', () => {
         done();
       });
 
-      it('should write a log with OpenTelemetry trace and spans and ignore http requests traceparent header', done => {
+      it('should write a log with OpenTelemetry trace and spans and ignore http requests traceparent header', (done) => {
         const {log} = getTestLog();
         const URL = 'http://www.google.com';
-        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', span => {
+        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', (span) => {
           // Use the response of a http request as the incomingmessage request obj.
-          http.get(URL, res => {
+          http.get(URL, (res) => {
             res.url = URL;
             res.headers = {
               traceparent:
@@ -829,7 +829,7 @@ describe('Logging', () => {
             const spanId = span.spanContext().spanId;
             const traceSampled = (span.spanContext().traceFlags & 1) !== 0;
 
-            log.write(logEntry, err => {
+            log.write(logEntry, (err) => {
               assert.ifError(err);
               getEntriesFromLog(
                 log,
@@ -861,12 +861,12 @@ describe('Logging', () => {
         done();
       });
 
-      it('should write a log with OpenTelemetry trace and spans and ignore http requests x-cloud-trace-context header', done => {
+      it('should write a log with OpenTelemetry trace and spans and ignore http requests x-cloud-trace-context header', (done) => {
         const {log} = getTestLog();
         const URL = 'http://www.google.com';
-        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', span => {
+        trace.getTracer(TESTS_PREFIX).startActiveSpan('foo', (span) => {
           // Use the response of a http request as the incomingmessage request obj.
-          http.get(URL, res => {
+          http.get(URL, (res) => {
             res.url = URL;
             res.headers = {
               'x-cloud-trace-context': '1/2;o=1',
@@ -876,7 +876,7 @@ describe('Logging', () => {
             const traceId = span.spanContext().traceId;
             const spanId = span.spanContext().spanId;
             const traceSampled = (span.spanContext().traceFlags & 1) !== 0;
-            log.write(logEntry, err => {
+            log.write(logEntry, (err) => {
               assert.ifError(err);
               getEntriesFromLog(
                 log,
@@ -909,11 +909,11 @@ describe('Logging', () => {
       });
     });
 
-    it('should set the default resource', done => {
+    it('should set the default resource', (done) => {
       const {log} = getTestLog();
       const text = 'entry-text';
       const entry = log.entry(text);
-      log.write(entry, err => {
+      log.write(entry, (err) => {
         assert.ifError(err);
         getEntriesFromLog(log, {numExpectedMessages: 1}, (err, entries) => {
           assert.ifError(err);
@@ -932,7 +932,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a log with camelcase resource label keys', done => {
+    it('should write a log with camelcase resource label keys', (done) => {
       const {log, logEntries} = getTestLog();
       log.write(
         logEntries,
@@ -949,42 +949,42 @@ describe('Logging', () => {
       );
     });
 
-    it('should write to a log with alert helper', done => {
+    it('should write to a log with alert helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.alert(logEntries, options, done);
     });
 
-    it('should write to a log with critical helper', done => {
+    it('should write to a log with critical helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.critical(logEntries, options, done);
     });
 
-    it('should write to a log with debug helper', done => {
+    it('should write to a log with debug helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.debug(logEntries, options, done);
     });
 
-    it('should write to a log with emergency helper', done => {
+    it('should write to a log with emergency helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.emergency(logEntries, options, done);
     });
 
-    it('should write to a log with error helper', done => {
+    it('should write to a log with error helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.error(logEntries, options, done);
     });
 
-    it('should write to a log with info helper', done => {
+    it('should write to a log with info helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.info(logEntries, options, done);
     });
 
-    it('should write to a log with notice helper', done => {
+    it('should write to a log with notice helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.notice(logEntries, options, done);
     });
 
-    it('should write to a log with warning helper', done => {
+    it('should write to a log with warning helper', (done) => {
       const {log, logEntries} = getTestLog();
       log.warning(logEntries, options, done);
     });

@@ -52,7 +52,7 @@ describe('Bundle Builder', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -170,10 +170,10 @@ describe('Bundle Builder', () => {
 
     // Verify named query
     const namedQuery = elements.find(
-      e => e.namedQuery?.name === 'test-query',
+      (e) => e.namedQuery?.name === 'test-query',
     )!.namedQuery;
     const newNamedQuery = elements.find(
-      e => e.namedQuery?.name === 'test-query-new',
+      (e) => e.namedQuery?.name === 'test-query-new',
     )!.namedQuery;
     expect(namedQuery).to.deep.equal({
       name: 'test-query',
@@ -369,7 +369,7 @@ describe('Bundle Builder using BigInt', () => {
 
   beforeEach(() => {
     return createInstance(undefined, {useBigInt: true}).then(
-      firestoreInstance => {
+      (firestoreInstance) => {
         firestore = firestoreInstance;
       },
     );

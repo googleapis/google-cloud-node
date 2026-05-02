@@ -92,7 +92,7 @@ export abstract class Expression
     const values = [second, ...others];
     return new FunctionExpression('add', [
       this,
-      ...values.map(value => valueToDefaultExpr(value)),
+      ...values.map((value) => valueToDefaultExpr(value)),
     ]);
   }
 
@@ -173,7 +173,7 @@ export abstract class Expression
     return new FunctionExpression('multiply', [
       this,
       valueToDefaultExpr(second),
-      ...others.map(value => valueToDefaultExpr(value)),
+      ...others.map((value) => valueToDefaultExpr(value)),
     ]);
   }
 
@@ -466,7 +466,7 @@ export abstract class Expression
     ...otherArrays: Array<Expression | unknown[]>
   ): FunctionExpression {
     const elements = [secondArray, ...otherArrays];
-    const exprValues = elements.map(value => valueToDefaultExpr(value));
+    const exprValues = elements.map((value) => valueToDefaultExpr(value));
     return new FunctionExpression('array_concat', [this, ...exprValues]);
   }
 
@@ -3346,7 +3346,7 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
    * @internal
    */
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.params.forEach(expr => {
+    this.params.forEach((expr) => {
       return expr._validateUserData(ignoreUndefinedProperties);
     });
   }
@@ -3382,7 +3382,7 @@ export class AggregateFunction implements AggregateFunction, HasUserData {
     return {
       functionValue: {
         name: this.name,
-        args: this.params.map(p => p._toProto(serializer)),
+        args: this.params.map((p) => p._toProto(serializer)),
       },
     };
   }
@@ -3468,7 +3468,7 @@ class ListOfExprs extends Expression {
   _toProto(serializer: Serializer): api.IValue {
     return {
       arrayValue: {
-        values: this.exprs.map(p => p._toProto(serializer)!),
+        values: this.exprs.map((p) => p._toProto(serializer)!),
       },
     };
   }
@@ -3478,7 +3478,7 @@ class ListOfExprs extends Expression {
    * @internal
    */
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.exprs.forEach(expr => {
+    this.exprs.forEach((expr) => {
       return expr._validateUserData(ignoreUndefinedProperties);
     });
   }
@@ -3812,7 +3812,7 @@ export class MapValue extends Expression {
    * @internal
    */
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.plainObject.forEach(expr => {
+    this.plainObject.forEach((expr) => {
       return expr._validateUserData(ignoreUndefinedProperties);
     });
   }
@@ -3843,7 +3843,7 @@ export class FunctionExpression extends Expression {
     return {
       functionValue: {
         name: this._methodName,
-        args: this.params.map(p => cast<Expression>(p)._toProto(serializer)),
+        args: this.params.map((p) => cast<Expression>(p)._toProto(serializer)),
       },
     };
   }
@@ -3853,7 +3853,7 @@ export class FunctionExpression extends Expression {
    * @internal
    */
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    this.params.forEach(expr => {
+    this.params.forEach((expr) => {
       return expr._validateUserData(ignoreUndefinedProperties);
     });
   }
@@ -3976,8 +3976,8 @@ class ArrayFunctionExpr extends FunctionExpression {
       functionValue: {
         name: this._methodName,
         args: this.values
-          .filter(v => !!v)
-          .map(value => value!._toProto(serializer)),
+          .filter((v) => !!v)
+          .map((value) => value!._toProto(serializer)),
       },
     };
   }
@@ -4991,7 +4991,7 @@ export function _mapValue(plainObject: Record<string, unknown>): MapValue {
  */
 export function array(elements: unknown[]): FunctionExpression {
   return new ArrayFunctionExpr(
-    elements.map(element => {
+    elements.map((element) => {
       return element !== undefined ? valueToDefaultExpr(element) : undefined;
     }),
   );
@@ -5491,7 +5491,7 @@ export function arrayConcat(
   secondArray: Expression | unknown[],
   ...otherArrays: Array<Expression | unknown[]>
 ): FunctionExpression {
-  const exprValues = otherArrays.map(element => valueToDefaultExpr(element));
+  const exprValues = otherArrays.map((element) => valueToDefaultExpr(element));
   return fieldOrExpression(firstArray).arrayConcat(
     fieldOrExpression(secondArray),
     ...exprValues,
@@ -6050,7 +6050,7 @@ export function logicalMaximum(
 ): FunctionExpression {
   return fieldOrExpression(first).logicalMaximum(
     valueToDefaultExpr(second),
-    ...others.map(value => valueToDefaultExpr(value)),
+    ...others.map((value) => valueToDefaultExpr(value)),
   );
 }
 
@@ -6104,7 +6104,7 @@ export function logicalMinimum(
 ): FunctionExpression {
   return fieldOrExpression(first).logicalMinimum(
     valueToDefaultExpr(second),
-    ...others.map(value => valueToDefaultExpr(value)),
+    ...others.map((value) => valueToDefaultExpr(value)),
   );
 }
 

@@ -172,8 +172,8 @@ function convertArrowValue(fieldValue: any, type: DataType): any {
   }
   if (DataType.isStruct(type)) {
     const tableRow: TableRow = {};
-    Object.keys(fieldValue).forEach(key => {
-      const elemType = type.children.find(f => f.name === key);
+    Object.keys(fieldValue).forEach((key) => {
+      const elemType = type.children.find((f) => f.name === key);
       if (!tableRow.f) {
         tableRow.f = [];
       }

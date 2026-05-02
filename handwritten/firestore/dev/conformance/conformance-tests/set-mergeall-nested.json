@@ -31,10 +31,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "h.f",
-                  "h.g"
-                ]
+                "fieldPaths": ["h.f", "h.g"]
               }
             }
           ]

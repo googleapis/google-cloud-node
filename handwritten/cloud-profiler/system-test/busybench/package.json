@@ -4,9 +4,7 @@
   "description": "",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
-  "files": [
-    "build/src"
-  ],
+  "files": ["build/src"],
   "engines": {
     "node": ">=14.0.0"
   },

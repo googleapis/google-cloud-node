@@ -83,7 +83,7 @@ export class QueryUtil<
         retryWithCursor,
         explainOptions,
       )
-        .on('error', err => {
+        .on('error', (err) => {
           reject(wrapError(err, stack));
         })
         .on('data', (data: QueryStreamElement<AppModelType, DbModelType>) => {
@@ -167,7 +167,7 @@ export class QueryUtil<
     });
 
     responseStream.pipe(transform);
-    responseStream.on('error', e => transform.destroy(e));
+    responseStream.on('error', (e) => transform.destroy(e));
     return transform;
   }
 
@@ -285,7 +285,7 @@ export class QueryUtil<
             request,
             tag,
           );
-          backendStream.on('error', err => {
+          backendStream.on('error', (err) => {
             backendStream.unpipe(stream);
 
             // If a non-transactional query failed, attempt to restart.
@@ -409,7 +409,7 @@ export class QueryUtil<
           backendStream.pipe(stream);
         } while (await streamActive.promise);
       })
-      .catch(e => stream.destroy(e));
+      .catch((e) => stream.destroy(e));
 
     return stream;
   }

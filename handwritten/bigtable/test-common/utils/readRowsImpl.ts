@@ -272,7 +272,7 @@ class ReadRowsRequestHandler {
   ): Promise<void> {
     // an asynchronous function to write a response object to stream, reused several times below.
     // captures `cancelled` variable
-    return new Promise<void>(resolve => {
+    return new Promise<void>((resolve) => {
       const debugLog = this.debugLog;
       const stream = this.stream;
       setTimeout(async () => {
@@ -296,7 +296,7 @@ class ReadRowsRequestHandler {
         if (!canSendMore) {
           // Before doing any more writing with the stream, drain the stream.
           debugLog('awaiting for back pressure');
-          await new Promise<void>(resolve => {
+          await new Promise<void>((resolve) => {
             this.stopWaiting = resolve;
             stream.once('drain', resolve);
           });

@@ -247,7 +247,7 @@ describe('logging-common', () => {
       loggingCommon.log('zero', 'test message');
     });
 
-    it('should properly create an entry', done => {
+    it('should properly create an entry', (done) => {
       loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingCommon.resource,
@@ -262,7 +262,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, METADATA, assert.ifError);
     });
 
-    it('should append stack when metadata is an error', done => {
+    it('should append stack when metadata is an error', (done) => {
       const error = {
         stack: 'the stack',
       };
@@ -279,7 +279,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, error, assert.ifError);
     });
 
-    it('should use stack when metadata is err without message', done => {
+    it('should use stack when metadata is err without message', (done) => {
       const error = {
         stack: 'the stack',
       };
@@ -296,7 +296,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, '', error, assert.ifError);
     });
 
-    it('should inspect metadata when inspectMetadata is set', done => {
+    it('should inspect metadata when inspectMetadata is set', (done) => {
       loggingCommon.inspectMetadata = true;
 
       loggingCommon.cloudLog.entry = (_: {}, data: {}) => {
@@ -318,7 +318,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, METADATA, assert.ifError);
     });
 
-    it('should promote httpRequest property to metadata', done => {
+    it('should promote httpRequest property to metadata', (done) => {
       const HTTP_REQUEST = {
         statusCode: 418,
       };
@@ -343,7 +343,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
     });
 
-    it('should promote timestamp property to metadata', done => {
+    it('should promote timestamp property to metadata', (done) => {
       const date = new Date();
       const metadataWithRequest = Object.assign(
         {
@@ -366,7 +366,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
     });
 
-    it('should promote labels from metadata to log entry', done => {
+    it('should promote labels from metadata to log entry', (done) => {
       const LABELS = {labelKey: 'labelValue'};
       const metadataWithLabels = Object.assign({labels: LABELS}, METADATA);
 
@@ -384,7 +384,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithLabels, assert.ifError);
     });
 
-    it('should promote prefixed trace properties to metadata', done => {
+    it('should promote prefixed trace properties to metadata', (done) => {
       const metadataWithTrace = Object.assign({}, METADATA);
       const loggingTraceKey = loggingCommonLib.LOGGING_TRACE_KEY;
       const loggingSpanKey = loggingCommonLib.LOGGING_SPAN_KEY;
@@ -413,7 +413,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithTrace, assert.ifError);
     });
 
-    it('should promote a false traceSampled value to metadata', done => {
+    it('should promote a false traceSampled value to metadata', (done) => {
       const metadataWithTrace = Object.assign({}, METADATA);
       const loggingSampledKey = loggingCommonLib.LOGGING_SAMPLED_KEY;
       // metadataWithTrace does not have index signature.
@@ -434,7 +434,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithTrace, assert.ifError);
     });
 
-    it('should set trace metadata from agent if available', done => {
+    it('should set trace metadata from agent if available', (done) => {
       const oldTraceAgent = global._google_trace_agent;
       global._google_trace_agent = {
         getCurrentContextId: () => {
@@ -509,7 +509,7 @@ describe('logging-common', () => {
       global._google_trace_agent = oldTraceAgent;
     });
 
-    it('should write to the log', done => {
+    it('should write to the log', (done) => {
       const entry = {};
 
       loggingCommon.cloudLog.entry = () => {
@@ -527,7 +527,7 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, METADATA, done);
     });
 
-    it('should add instrumentation log entry', done => {
+    it('should add instrumentation log entry', (done) => {
       loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
         return new Entry(entryMetadata, data);
       };
@@ -548,7 +548,7 @@ describe('logging-common', () => {
       loggingCommon.log(INFO, MESSAGE, METADATA, done);
     });
 
-    it('should add instrumentation log entry with info log level', done => {
+    it('should add instrumentation log entry with info log level', (done) => {
       loggingCommon.cloudLog.entry = (entryMetadata: {}, data: {}) => {
         return new Entry(entryMetadata, data);
       };
@@ -590,7 +590,7 @@ describe('logging-common', () => {
       loggingCommon = new loggingCommonLib.LoggingCommon(opts);
     });
 
-    it('should properly create an entry with labels and [prefix] message', done => {
+    it('should properly create an entry with labels and [prefix] message', (done) => {
       loggingCommon.cloudLog.entry = (entryMetadata1: {}, data1: {}) => {
         assert.deepStrictEqual(entryMetadata1, {
           resource: loggingCommon.resource,

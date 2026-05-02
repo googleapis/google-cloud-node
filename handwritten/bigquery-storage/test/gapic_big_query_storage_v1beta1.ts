@@ -212,12 +212,12 @@ describe('v1beta1.BigQueryStorageClient', () => {
       assert(client.bigQueryStorageStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.bigQueryStorageStub);
@@ -226,12 +226,12 @@ describe('v1beta1.BigQueryStorageClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -242,7 +242,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -435,7 +435,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.tableReference.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createReadSession(request), expectedError);
@@ -575,7 +575,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.session.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -714,7 +714,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.stream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.finalizeStream(request), expectedError);
@@ -850,7 +850,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.originalStream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.splitReadStream(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.readPosition.stream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       const stream = client.readRows(request, {

@@ -86,7 +86,7 @@ describe('Cloud Trace Log Correlation', () => {
     delete global._google_trace_agent;
   });
 
-  it('Works when using supporting default metadata', done => {
+  it('Works when using supporting default metadata', (done) => {
     const transport = new loggingWinstonLib.LoggingWinston();
     const logger = winston.createLogger({
       transports: [transport],
@@ -112,7 +112,7 @@ describe('Cloud Trace Log Correlation', () => {
    * may no longer be a necessary API, as Winston 3 has fixed its context
    * propagation issue.
    */
-  it('Does not work without using supporting default metadata', done => {
+  it('Does not work without using supporting default metadata', (done) => {
     const transport = new loggingWinstonLib.LoggingWinston();
     const logger = winston.createLogger({
       transports: [transport],
@@ -131,7 +131,7 @@ describe('Cloud Trace Log Correlation', () => {
     });
   });
 
-  it('Calls default callback when present', done => {
+  it('Calls default callback when present', (done) => {
     const transport = new loggingWinstonLib.LoggingWinston({
       defaultCallback: () => {
         isCallbackCalled = true;
@@ -147,8 +147,8 @@ describe('Cloud Trace Log Correlation', () => {
     });
   });
 
-  [null, {}, {getWriterProjectId: () => 'project1'}].forEach(testCase => {
-    it(`Doesn't crash when a non-compatible Trace Agent is present: ${testCase}`, done => {
+  [null, {}, {getWriterProjectId: () => 'project1'}].forEach((testCase) => {
+    it(`Doesn't crash when a non-compatible Trace Agent is present: ${testCase}`, (done) => {
       global._google_trace_agent = testCase;
       const transport = new loggingWinstonLib.LoggingWinston();
       const logger = winston.createLogger({
@@ -176,8 +176,8 @@ describe('Cloud Trace Log Correlation', () => {
       getCurrentContextId: () => null,
       getWriterProjectId: () => 'project1',
     },
-  ].forEach(testCase => {
-    it(`Doesn't crash when a Trace Agent field is not present: ${testCase}`, done => {
+  ].forEach((testCase) => {
+    it(`Doesn't crash when a Trace Agent field is not present: ${testCase}`, (done) => {
       global._google_trace_agent = testCase;
       const transport = new loggingWinstonLib.LoggingWinston();
       const logger = winston.createLogger({

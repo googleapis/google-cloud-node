@@ -487,7 +487,7 @@ abstract class Watch<
             request,
             this.requestTag,
           )
-          .then(backendStream => {
+          .then((backendStream) => {
             if (!this.isActive) {
               logger(
                 'Watch.initStream',
@@ -511,7 +511,7 @@ abstract class Watch<
               this.resetIdleTimeout();
               this.onData(proto);
             })
-              .on('error', err => {
+              .on('error', (err) => {
                 if (this.currentStream === backendStream) {
                   this.currentStream = null;
                   this.maybeReopenStream(err);
@@ -529,7 +529,7 @@ abstract class Watch<
             this.currentStream!.resume();
           });
       })
-      .catch(err => {
+      .catch((err) => {
         this.closeStream(err);
       });
   }
@@ -789,19 +789,19 @@ abstract class Watch<
         this.docMap.get(name2)!,
       );
     });
-    changeSet.deletes.forEach(name => {
+    changeSet.deletes.forEach((name) => {
       const change = this.deleteDoc(name);
       appliedChanges.push(change);
     });
 
     changeSet.adds.sort(this.getComparator());
-    changeSet.adds.forEach(snapshot => {
+    changeSet.adds.forEach((snapshot) => {
       const change = this.addDoc(snapshot);
       appliedChanges.push(change);
     });
 
     changeSet.updates.sort(this.getComparator());
-    changeSet.updates.forEach(snapshot => {
+    changeSet.updates.forEach((snapshot) => {
       const change = this.modifyDoc(snapshot);
       if (change) {
         appliedChanges.push(change);

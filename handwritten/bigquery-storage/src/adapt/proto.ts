@@ -123,7 +123,7 @@ function convertStorageSchemaToFileDescriptorInternal(
     addChangeSequenceNumber: false,
     addChangeType: false,
   };
-  opts.forEach(f => {
+  opts.forEach((f) => {
     adaptOpts = f(adaptOpts);
   });
 

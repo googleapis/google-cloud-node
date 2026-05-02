@@ -178,7 +178,7 @@ describe('Topic', () => {
       assert.strictEqual(topic.pubsub, PUBSUB);
     });
 
-    it('should localize the request function', done => {
+    it('should localize the request function', (done) => {
       PUBSUB.request = () => {
         done();
       };
@@ -208,7 +208,7 @@ describe('Topic', () => {
   });
 
   describe('create', () => {
-    it('should call the parent createTopic method', done => {
+    it('should call the parent createTopic method', (done) => {
       const options_ = {};
 
       PUBSUB.createTopic = (name: string, options: CallOptions) => {
@@ -222,7 +222,7 @@ describe('Topic', () => {
   });
 
   describe('createSubscription', () => {
-    it('should call the parent createSubscription method', done => {
+    it('should call the parent createSubscription method', (done) => {
       const NAME = 'sub-name';
       const OPTIONS = {a: 'a'};
 
@@ -242,7 +242,7 @@ describe('Topic', () => {
   });
 
   describe('delete', () => {
-    it('should make the proper request', done => {
+    it('should make the proper request', (done) => {
       topic.request = (config: RequestConfig) => {
         assert.strictEqual(config.client, 'PublisherClient');
         assert.strictEqual(config.method, 'deleteTopic');
@@ -253,7 +253,7 @@ describe('Topic', () => {
       topic.delete(assert.ifError);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const options = {};
 
       topic.request = (config: RequestConfig) => {
@@ -266,7 +266,7 @@ describe('Topic', () => {
   });
 
   describe('get', () => {
-    it('should delete the autoCreate option', done => {
+    it('should delete the autoCreate option', (done) => {
       const options = {
         autoCreate: true,
         a: 'a',
@@ -294,7 +294,7 @@ describe('Topic', () => {
         };
       });
 
-      it('should call through to getMetadata', done => {
+      it('should call through to getMetadata', (done) => {
         topic.get(
           (err: Error, _topic: Topic, resp: google.pubsub.v1.ITopic) => {
             assert.ifError(err);
@@ -305,7 +305,7 @@ describe('Topic', () => {
         );
       });
 
-      it('should optionally accept options', done => {
+      it('should optionally accept options', (done) => {
         const options = {};
 
         topic.getMetadata = (gaxOpts: CallOptions) => {
@@ -318,7 +318,7 @@ describe('Topic', () => {
     });
 
     describe('error', () => {
-      it('should pass back errors when not auto-creating', done => {
+      it('should pass back errors when not auto-creating', (done) => {
         const error = {code: 4} as ServiceError;
         const apiResponse = {} as Topic;
 
@@ -339,7 +339,7 @@ describe('Topic', () => {
         );
       });
 
-      it('should pass back 404 errors if autoCreate is false', done => {
+      it('should pass back 404 errors if autoCreate is false', (done) => {
         const error = {code: 5} as ServiceError;
         const apiResponse = {} as Topic;
 
@@ -360,7 +360,7 @@ describe('Topic', () => {
         );
       });
 
-      it('should create the topic if 404 + autoCreate is true', done => {
+      it('should create the topic if 404 + autoCreate is true', (done) => {
         const error = {code: 5} as ServiceError;
         const apiResponse = {} as Topic;
 
@@ -386,7 +386,7 @@ describe('Topic', () => {
   });
 
   describe('exists', () => {
-    it('should return true if it finds metadata', done => {
+    it('should return true if it finds metadata', (done) => {
       topic.getMetadata = (callback: GetTopicMetadataCallback) => {
         callback(null, {});
       };
@@ -398,7 +398,7 @@ describe('Topic', () => {
       });
     });
 
-    it('should return false if a not found error occurs', done => {
+    it('should return false if a not found error occurs', (done) => {
       const error = {code: 5} as ServiceError;
       topic.getMetadata = (callback: GetTopicMetadataCallback) => {
         callback(error);
@@ -411,7 +411,7 @@ describe('Topic', () => {
       });
     });
 
-    it('should pass back any other type of error', done => {
+    it('should pass back any other type of error', (done) => {
       const error = {code: 4} as ServiceError;
 
       topic.getMetadata = (callback: GetTopicMetadataCallback) => {
@@ -427,7 +427,7 @@ describe('Topic', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the proper request', done => {
+    it('should make the proper request', (done) => {
       topic.request = (config: RequestConfig) => {
         assert.strictEqual(config.client, 'PublisherClient');
         assert.strictEqual(config.method, 'getTopic');
@@ -438,7 +438,7 @@ describe('Topic', () => {
       topic.getMetadata(assert.ifError);
     });
 
-    it('should optionally accept gax options', done => {
+    it('should optionally accept gax options', (done) => {
       const options = {};
 
       topic.request = (config: RequestConfig) => {
@@ -449,7 +449,7 @@ describe('Topic', () => {
       topic.getMetadata(options, assert.ifError);
     });
 
-    it('should pass back any errors that occur', done => {
+    it('should pass back any errors that occur', (done) => {
       const error = new Error('err') as ServiceError;
       const apiResponse = {};
 
@@ -467,7 +467,7 @@ describe('Topic', () => {
       });
     });
 
-    it('should set the metadata if no error occurs', done => {
+    it('should set the metadata if no error occurs', (done) => {
       const apiResponse = {};
 
       topic.request = (
@@ -487,7 +487,7 @@ describe('Topic', () => {
   });
 
   describe('getSubscriptions', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       interface testOptions {
         a: string;
         b: string;
@@ -533,7 +533,7 @@ describe('Topic', () => {
       topic.getSubscriptions(options, assert.ifError);
     });
 
-    it('should accept only a callback', done => {
+    it('should accept only a callback', (done) => {
       topic.request = (config: RequestConfig) => {
         assert.deepStrictEqual(config.reqOpts, {topic: topic.name});
         assert.deepStrictEqual(config.gaxOpts, {autoPaginate: undefined});
@@ -543,7 +543,7 @@ describe('Topic', () => {
       topic.getSubscriptions(assert.ifError);
     });
 
-    it('should create subscription objects', done => {
+    it('should create subscription objects', (done) => {
       const fakeSubs = ['a', 'b', 'c'];
 
       topic.subscription = (name: string) => {
@@ -570,7 +570,7 @@ describe('Topic', () => {
       });
     });
 
-    it('should pass all params to the callback', done => {
+    it('should pass all params to the callback', (done) => {
       const err_ = new Error('err');
       const subs_ = undefined;
       const nextQuery_ = {};
@@ -740,7 +740,7 @@ describe('Topic', () => {
   });
 
   describe('subscription', () => {
-    it('should pass correct arguments to pubsub#subscription', done => {
+    it('should pass correct arguments to pubsub#subscription', (done) => {
       const subscriptionName = 'subName';
       const opts = {};
 
@@ -756,7 +756,7 @@ describe('Topic', () => {
       topic.subscription(subscriptionName, opts);
     });
 
-    it('should attach the topic instance to the options', done => {
+    it('should attach the topic instance to the options', (done) => {
       topic.parent.subscription = (
         name: string,
         options: SubscriptionOptions,
@@ -768,7 +768,7 @@ describe('Topic', () => {
       topic.subscription();
     });
 
-    it('should return the result', done => {
+    it('should return the result', (done) => {
       topic.parent.subscription = () => {
         return done;
       };

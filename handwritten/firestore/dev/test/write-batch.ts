@@ -48,7 +48,7 @@ describe('set() method', () => {
   let writeBatch: WriteBatch;
 
   beforeEach(() => {
-    return createInstance().then(firestoreClient => {
+    return createInstance().then((firestoreClient) => {
       firestore = firestoreClient;
       writeBatch = firestore.batch();
     });
@@ -104,7 +104,7 @@ describe('delete() method', () => {
   let writeBatch: WriteBatch;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
       writeBatch = firestore.batch();
     });
@@ -130,7 +130,7 @@ describe('update() method', () => {
   let writeBatch: WriteBatch;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
       writeBatch = firestore.batch();
     });
@@ -175,7 +175,7 @@ describe('create() method', () => {
   let writeBatch: WriteBatch;
 
   beforeEach(() => {
-    return createInstance().then(firestoreClient => {
+    return createInstance().then((firestoreClient) => {
       firestore = firestoreClient;
       writeBatch = firestore.batch();
     });
@@ -294,7 +294,7 @@ describe('batch support', () => {
         });
       },
     };
-    return createInstance(overrides).then(firestoreClient => {
+    return createInstance(overrides).then((firestoreClient) => {
       firestore = firestoreClient;
       writeBatch = firestore.batch();
     });
@@ -317,7 +317,7 @@ describe('batch support', () => {
     writeBatch.create(documentName, {});
     writeBatch.delete(documentName);
 
-    return writeBatch.commit().then(resp => {
+    return writeBatch.commit().then((resp) => {
       verifyResponse(resp);
     });
   });
@@ -331,7 +331,7 @@ describe('batch support', () => {
       .create(documentName, {})
       .delete(documentName)
       .commit()
-      .then(resp => {
+      .then((resp) => {
         verifyResponse(resp);
       });
   });
@@ -347,7 +347,7 @@ describe('batch support', () => {
       .then(() => {
         throw new Error('Unexpected success in Promise');
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('Expected exception');
       });
   });
@@ -422,14 +422,14 @@ describe('batch support', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       const documentName = firestore.doc('col/doc');
 
       const batch = firestore.batch();
       batch.set(documentName, {});
       batch.set(documentName, {});
 
-      return batch.commit().then(results => {
+      return batch.commit().then((results) => {
         expect(results[0].isEqual(results[1])).to.be.true;
       });
     });

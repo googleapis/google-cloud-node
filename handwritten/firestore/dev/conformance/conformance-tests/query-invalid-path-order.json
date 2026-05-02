@@ -9,10 +9,7 @@
           {
             "orderBy": {
               "path": {
-                "field": [
-                  "*",
-                  ""
-                ]
+                "field": ["*", ""]
               },
               "direction": "asc"
             }

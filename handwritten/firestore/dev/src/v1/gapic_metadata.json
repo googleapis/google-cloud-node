@@ -11,74 +11,46 @@
           "libraryClient": "FirestoreClient",
           "rpcs": {
             "GetDocument": {
-              "methods": [
-                "getDocument"
-              ]
+              "methods": ["getDocument"]
             },
             "UpdateDocument": {
-              "methods": [
-                "updateDocument"
-              ]
+              "methods": ["updateDocument"]
             },
             "DeleteDocument": {
-              "methods": [
-                "deleteDocument"
-              ]
+              "methods": ["deleteDocument"]
             },
             "BeginTransaction": {
-              "methods": [
-                "beginTransaction"
-              ]
+              "methods": ["beginTransaction"]
             },
             "Commit": {
-              "methods": [
-                "commit"
-              ]
+              "methods": ["commit"]
             },
             "Rollback": {
-              "methods": [
-                "rollback"
-              ]
+              "methods": ["rollback"]
             },
             "BatchWrite": {
-              "methods": [
-                "batchWrite"
-              ]
+              "methods": ["batchWrite"]
             },
             "CreateDocument": {
-              "methods": [
-                "createDocument"
-              ]
+              "methods": ["createDocument"]
             },
             "BatchGetDocuments": {
-              "methods": [
-                "batchGetDocuments"
-              ]
+              "methods": ["batchGetDocuments"]
             },
             "RunQuery": {
-              "methods": [
-                "runQuery"
-              ]
+              "methods": ["runQuery"]
             },
             "ExecutePipeline": {
-              "methods": [
-                "executePipeline"
-              ]
+              "methods": ["executePipeline"]
             },
             "RunAggregationQuery": {
-              "methods": [
-                "runAggregationQuery"
-              ]
+              "methods": ["runAggregationQuery"]
             },
             "Write": {
-              "methods": [
-                "write"
-              ]
+              "methods": ["write"]
             },
             "Listen": {
-              "methods": [
-                "listen"
-              ]
+              "methods": ["listen"]
             },
             "ListDocuments": {
               "methods": [
@@ -107,44 +79,28 @@
           "libraryClient": "FirestoreClient",
           "rpcs": {
             "GetDocument": {
-              "methods": [
-                "getDocument"
-              ]
+              "methods": ["getDocument"]
             },
             "UpdateDocument": {
-              "methods": [
-                "updateDocument"
-              ]
+              "methods": ["updateDocument"]
             },
             "DeleteDocument": {
-              "methods": [
-                "deleteDocument"
-              ]
+              "methods": ["deleteDocument"]
             },
             "BeginTransaction": {
-              "methods": [
-                "beginTransaction"
-              ]
+              "methods": ["beginTransaction"]
             },
             "Commit": {
-              "methods": [
-                "commit"
-              ]
+              "methods": ["commit"]
             },
             "Rollback": {
-              "methods": [
-                "rollback"
-              ]
+              "methods": ["rollback"]
             },
             "BatchWrite": {
-              "methods": [
-                "batchWrite"
-              ]
+              "methods": ["batchWrite"]
             },
             "CreateDocument": {
-              "methods": [
-                "createDocument"
-              ]
+              "methods": ["createDocument"]
             },
             "ListDocuments": {
               "methods": [

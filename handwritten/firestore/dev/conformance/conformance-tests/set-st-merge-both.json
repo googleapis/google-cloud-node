@@ -8,14 +8,10 @@
         "option": {
           "fields": [
             {
-              "field": [
-                "a"
-              ]
+              "field": ["a"]
             },
             {
-              "field": [
-                "b"
-              ]
+              "field": ["b"]
             }
           ]
         },
@@ -33,9 +29,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "a"
-                ]
+                "fieldPaths": ["a"]
               },
               "updateTransforms": [
                 {

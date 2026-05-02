@@ -104,7 +104,7 @@ describe('Bigtable/AuthorizedViews', () => {
          * @param done The function to call when ending the mocha test
          */
         function setupReadRows(done: mocha.Done) {
-          mockCallbackRequest(done, requestCount => {
+          mockCallbackRequest(done, (requestCount) => {
             return {
               client: 'BigtableClient',
               method: 'readRows',
@@ -139,7 +139,7 @@ describe('Bigtable/AuthorizedViews', () => {
           });
         }
 
-        it('requests for createReadStream should match', done => {
+        it('requests for createReadStream should match', (done) => {
           setupReadRows(done);
           (async () => {
             const opts = {
@@ -155,11 +155,11 @@ describe('Bigtable/AuthorizedViews', () => {
             await table.createReadStream(opts);
             await view.createReadStream(opts);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
-        it('requests for getRows should match', done => {
+        it('requests for getRows should match', (done) => {
           setupReadRows(done);
           (async () => {
             const opts = {
@@ -175,7 +175,7 @@ describe('Bigtable/AuthorizedViews', () => {
             await table.getRows(opts);
             await view.getRows(opts);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
@@ -188,7 +188,7 @@ describe('Bigtable/AuthorizedViews', () => {
          * @param done The function to call when ending the mocha test
          */
         function setupMutateRows(done: mocha.Done) {
-          mockCallbackRequest(done, requestCount => {
+          mockCallbackRequest(done, (requestCount) => {
             return {
               client: 'BigtableClient',
               method: 'mutateRows',
@@ -222,7 +222,7 @@ describe('Bigtable/AuthorizedViews', () => {
             };
           });
         }
-        it('requests for mutate should match', done => {
+        it('requests for mutate should match', (done) => {
           (async () => {
             setupMutateRows(done);
             const mutation = {
@@ -245,11 +245,11 @@ describe('Bigtable/AuthorizedViews', () => {
             view.maxRetries = 0;
             await view.mutate(mutation, {gaxOptions});
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
-        it('requests for insert should match', done => {
+        it('requests for insert should match', (done) => {
           (async () => {
             setupMutateRows(done);
             const mutation = {
@@ -271,7 +271,7 @@ describe('Bigtable/AuthorizedViews', () => {
             view.maxRetries = 0;
             await view.insert(mutation, gaxOptions);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
@@ -284,7 +284,7 @@ describe('Bigtable/AuthorizedViews', () => {
          * @param done The function to call when ending the mocha test
          */
         function setupSampleRowKeys(done: mocha.Done) {
-          mockCallbackRequest(done, requestCount => {
+          mockCallbackRequest(done, (requestCount) => {
             return {
               client: 'BigtableClient',
               method: 'sampleRowKeys',
@@ -297,7 +297,7 @@ describe('Bigtable/AuthorizedViews', () => {
             };
           });
         }
-        it('requests for sampleRowKeys should match', done => {
+        it('requests for sampleRowKeys should match', (done) => {
           setupSampleRowKeys(done);
           (async () => {
             const opts = {
@@ -306,18 +306,18 @@ describe('Bigtable/AuthorizedViews', () => {
             await table.sampleRowKeys(opts);
             await view.sampleRowKeys(opts);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
-        it('requests for sampleRowKeysStream should match', done => {
+        it('requests for sampleRowKeysStream should match', (done) => {
           setupSampleRowKeys(done);
           (async () => {
             const gaxOptions = {maxRetries: 4};
             await table.sampleRowKeysStream(gaxOptions);
             await view.sampleRowKeysStream(gaxOptions);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
@@ -341,7 +341,7 @@ describe('Bigtable/AuthorizedViews', () => {
         function setupReadModifyWriteRow(done: mocha.Done) {
           mockCallbackRequest(
             done,
-            requestCount => {
+            (requestCount) => {
               return {
                 client: 'BigtableClient',
                 method: 'readModifyWriteRow',
@@ -389,7 +389,7 @@ describe('Bigtable/AuthorizedViews', () => {
           );
         }
 
-        it('requests for createRules should match', done => {
+        it('requests for createRules should match', (done) => {
           setupReadModifyWriteRow(done);
           (async () => {
             const rule = {
@@ -400,11 +400,11 @@ describe('Bigtable/AuthorizedViews', () => {
             await row.createRules(rule, gaxOpts);
             await view.createRules({rules: rule, rowId: rowId}, gaxOpts);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
-        it('requests for increment should match', done => {
+        it('requests for increment should match', (done) => {
           setupReadModifyWriteRow(done);
           (async () => {
             // Change the response so that format families can run.
@@ -413,7 +413,7 @@ describe('Bigtable/AuthorizedViews', () => {
             await row.increment(column, 7, gaxOpts);
             await view.increment({column, rowId}, 7, gaxOpts);
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });
@@ -428,7 +428,7 @@ describe('Bigtable/AuthorizedViews', () => {
         function setupCheckAndMutateRow(done: mocha.Done) {
           mockCallbackRequest(
             done,
-            requestCount => {
+            (requestCount) => {
               return {
                 client: 'BigtableClient',
                 method: 'checkAndMutateRow',
@@ -482,7 +482,7 @@ describe('Bigtable/AuthorizedViews', () => {
           );
         }
 
-        it('requests for filter should match', done => {
+        it('requests for filter should match', (done) => {
           setupCheckAndMutateRow(done);
           (async () => {
             const filter: RawFilter = {
@@ -507,7 +507,7 @@ describe('Bigtable/AuthorizedViews', () => {
               },
             );
             done();
-          })().catch(err => {
+          })().catch((err) => {
             throw err;
           });
         });

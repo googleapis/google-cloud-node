@@ -168,7 +168,7 @@ describe('Sink', () => {
     const FILTER = 'filter';
 
     it('should call set metadata', async () => {
-      sandbox.stub(sink, 'setMetadata').callsFake(async metadata => {
+      sandbox.stub(sink, 'setMetadata').callsFake(async (metadata) => {
         assert.strictEqual(metadata.filter, FILTER);
         return [];
       });
@@ -203,7 +203,7 @@ describe('Sink', () => {
       };
       sink.setMetadata(METADATA).then(
         () => {},
-        err => assert.strictEqual(err, error),
+        (err) => assert.strictEqual(err, error),
       );
     });
 

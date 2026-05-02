@@ -154,7 +154,7 @@ export class TableAdminClient extends BigtableTableAdminClient {
       if (isConsistent) {
         return;
       } else {
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           setTimeout(resolve, checkIntervalSeconds * 1000);
         });
       }

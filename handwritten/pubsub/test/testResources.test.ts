@@ -74,11 +74,11 @@ describe('testResources (unit)', () => {
     assert.strictEqual(filtered.length, 2);
     assert.strictEqual(
       1,
-      filtered.filter(r => r.name?.includes('bob-9871')).length,
+      filtered.filter((r) => r.name?.includes('bob-9871')).length,
     );
     assert.strictEqual(
       1,
-      filtered.filter(r => r.name?.includes('bob-5782')).length,
+      filtered.filter((r) => r.name?.includes('bob-5782')).length,
     );
   });
 });

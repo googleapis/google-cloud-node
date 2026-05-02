@@ -255,8 +255,8 @@ export class MessageStream extends PassThrough {
     tracker.receivedStatus = false;
 
     stream
-      .on('error', err => this._onError(index, err))
-      .once('status', status => this._onStatus(index, status))
+      .on('error', (err) => this._onError(index, err))
+      .once('status', (status) => this._onStatus(index, status))
       .on('data', (data: PullResponse) => this._onData(index, data));
   }
 
@@ -386,7 +386,7 @@ export class MessageStream extends PassThrough {
       'sending keepAlive to %i streams',
       this._streams.length,
     );
-    this._streams.forEach(tracker => {
+    this._streams.forEach((tracker) => {
       // It's possible that a status event fires off (signaling the rpc being
       // closed) but the stream hasn't drained yet. Writing to such a stream will
       // result in a `write after end` error.

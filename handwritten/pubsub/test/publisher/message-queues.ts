@@ -220,7 +220,7 @@ describe('Message Queues', () => {
 
           assert.strictEqual(err, error);
 
-          callbacks.forEach(callback => {
+          callbacks.forEach((callback) => {
             const [err] = callback.lastCall.args;
             assert.strictEqual(err, error);
           });
@@ -272,7 +272,7 @@ describe('Message Queues', () => {
       const spy = sandbox.spy();
       const fakeMessage: p.PubsubMessage = {};
 
-      it('should publish immediately if unable to fit message', done => {
+      it('should publish immediately if unable to fit message', (done) => {
         const addStub = sandbox.stub(queue.batch, 'add');
         sandbox.stub(queue.batch, 'canFit').returns(false);
 
@@ -377,7 +377,7 @@ describe('Message Queues', () => {
           spies = [sandbox.spy(), sandbox.spy()] as p.PublishCallback[];
         });
 
-        it('should begin another publish(drain) if there are pending batches', done => {
+        it('should begin another publish(drain) if there are pending batches', (done) => {
           const stub = sandbox.stub(queue, '_publish');
           let once = false;
           stub.callsFake(async () => {
@@ -424,7 +424,7 @@ describe('Message Queues', () => {
           assert.strictEqual(stub.callCount, 1);
         });
 
-        it('should emit "drain" if there is nothing left to publish', done => {
+        it('should emit "drain" if there is nothing left to publish', (done) => {
           const spy = sandbox.spy();
           sandbox.stub(queue, '_publish').callsFake(async () => {});
 
@@ -536,7 +536,7 @@ describe('Message Queues', () => {
       });
 
       describe('without a batch in flight', () => {
-        it('should publish immediately if it cannot fit the message', done => {
+        it('should publish immediately if it cannot fit the message', (done) => {
           const addStub = sandbox.stub(batch, 'add');
 
           sandbox.stub(batch, 'canFit').withArgs(fakeMessage).returns(false);
@@ -617,13 +617,13 @@ describe('Message Queues', () => {
         clock.restore();
       });
 
-      it('should set a timeout that will call publish', done => {
+      it('should set a timeout that will call publish', (done) => {
         sandbox.stub(queue, 'publish').callsFake(async () => done());
         queue.beginNextPublish();
         clock.tick(maxMilliseconds);
       });
 
-      it('should factor in the time the batch has been sitting', done => {
+      it('should factor in the time the batch has been sitting', (done) => {
         const halfway = maxMilliseconds / 2;
         sandbox.stub(queue, 'publish').callsFake(async () => done());
         queue.currentBatch.created = Date.now() - halfway;
@@ -672,7 +672,7 @@ describe('Message Queues', () => {
 
         assert.strictEqual(queue.batches.length, 0);
 
-        spies.forEach(spy => {
+        spies.forEach((spy) => {
           assert.ok(spy.calledWith(error));
         });
       });
@@ -790,12 +790,12 @@ describe('Message Queues', () => {
         assert.strictEqual(queue.error, undefined);
       });
 
-      it('should emit the drain event if there are no more batches', done => {
+      it('should emit the drain event if there are no more batches', (done) => {
         queue.on('drain', done);
         queue.resumePublishing();
       });
 
-      it('should not emit the drain event if publishing continues', done => {
+      it('should not emit the drain event if publishing continues', (done) => {
         queue.on('drain', () => done(new Error('Should not be called.')));
         queue.resumePublishing();
 

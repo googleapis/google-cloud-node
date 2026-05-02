@@ -11,29 +11,19 @@
           "libraryClient": "BigQueryStorageClient",
           "rpcs": {
             "CreateReadSession": {
-              "methods": [
-                "createReadSession"
-              ]
+              "methods": ["createReadSession"]
             },
             "BatchCreateReadSessionStreams": {
-              "methods": [
-                "batchCreateReadSessionStreams"
-              ]
+              "methods": ["batchCreateReadSessionStreams"]
             },
             "FinalizeStream": {
-              "methods": [
-                "finalizeStream"
-              ]
+              "methods": ["finalizeStream"]
             },
             "SplitReadStream": {
-              "methods": [
-                "splitReadStream"
-              ]
+              "methods": ["splitReadStream"]
             },
             "ReadRows": {
-              "methods": [
-                "readRows"
-              ]
+              "methods": ["readRows"]
             }
           }
         },
@@ -41,24 +31,16 @@
           "libraryClient": "BigQueryStorageClient",
           "rpcs": {
             "CreateReadSession": {
-              "methods": [
-                "createReadSession"
-              ]
+              "methods": ["createReadSession"]
             },
             "BatchCreateReadSessionStreams": {
-              "methods": [
-                "batchCreateReadSessionStreams"
-              ]
+              "methods": ["batchCreateReadSessionStreams"]
             },
             "FinalizeStream": {
-              "methods": [
-                "finalizeStream"
-              ]
+              "methods": ["finalizeStream"]
             },
             "SplitReadStream": {
-              "methods": [
-                "splitReadStream"
-              ]
+              "methods": ["splitReadStream"]
             }
           }
         }

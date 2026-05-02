@@ -51,11 +51,11 @@ function Read(call, callback) {
   let tx;
   database
     .getSnapshot()
-    .then(data => {
+    .then((data) => {
       tx = data[0];
       return tx.run(call.request.query);
     })
-    .then(data => {
+    .then((data) => {
       const [rows] = data;
       // Just iterate over all rows.
       rows.forEach(() => {});
@@ -77,14 +77,14 @@ function Insert(call, callback) {
       callback(err);
       return;
     }
-    call.request.singers.forEach(singer => {
+    call.request.singers.forEach((singer) => {
       transaction.insert('Singers', {
         SingerId: singer.id,
         FirstName: singer.first_name,
         LastName: singer.last_name,
       });
     });
-    transaction.commit(err => {
+    transaction.commit((err) => {
       if (err) {
         callback(err);
       } else {
@@ -117,7 +117,7 @@ function Update(call, callback) {
       }
       // Iterate over all rowCounts.
       rowCounts.forEach(() => {});
-      transaction.commit(err => {
+      transaction.commit((err) => {
         if (err) {
           callback(err);
         } else {
@@ -139,7 +139,7 @@ console.log('starting benchwrapper for Spanner on localhost:' + argv.port);
 server.bindAsync(
   '0.0.0.0:' + argv.port,
   grpc.ServerCredentials.createInsecure(),
-  err => {
+  (err) => {
     if (err) {
       console.error(err);
       return;

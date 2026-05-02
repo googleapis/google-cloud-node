@@ -73,15 +73,9 @@
     "tmp": "0.2.4",
     "typescript": "5.1.6"
   },
-  "files": [
-    "build/src",
-    "build/third_party/cloud-debug-nodejs"
-  ],
+  "files": ["build/src", "build/third_party/cloud-debug-nodejs"],
   "nyc": {
-    "exclude": [
-      "build/test",
-      "build/system-test"
-    ]
+    "exclude": ["build/test", "build/system-test"]
   },
   "engines": {
     "node": ">=14.0.0"

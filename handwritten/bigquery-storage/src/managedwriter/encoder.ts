@@ -75,10 +75,10 @@ export class JSONEncoder {
    */
   encodeRows(rows: JSONObject[]): Uint8Array[] {
     const serializedRows = rows
-      .map(r => {
+      .map((r) => {
         return this.convertRow(r, this._type);
       })
-      .map(r => {
+      .map((r) => {
         return this.encodeRow(r);
       });
     return serializedRows;
@@ -95,7 +95,7 @@ export class JSONEncoder {
 
   private convertRow(source: JSONObject, ptype: protobuf.Type): JSONObject {
     const row = extend(true, {}, source);
-    const keys = Object.keys(row).map(key => {
+    const keys = Object.keys(row).map((key) => {
       if (!isProtoCompatible(key)) {
         const newFieldName = generatePlaceholderFieldName(key);
         // swap original key with placeholder field name
@@ -141,7 +141,7 @@ export class JSONEncoder {
     }
     if (Array.isArray(value)) {
       const subType = this.getSubType(key, ptype);
-      return value.map(v => {
+      return value.map((v) => {
         if (this.isPlainObject(v)) {
           return this.convertRow(v as JSONObject, subType);
         }

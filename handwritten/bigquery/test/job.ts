@@ -179,7 +179,7 @@ describe('BigQuery/Job', () => {
   });
 
   describe('cancel', () => {
-    it('should make the correct API request', done => {
+    it('should make the correct API request', (done) => {
       job.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/cancel');
@@ -189,7 +189,7 @@ describe('BigQuery/Job', () => {
       job.cancel(assert.ifError);
     });
 
-    it('should include the job location', done => {
+    it('should include the job location', (done) => {
       const job = new Job(BIGQUERY, JOB_ID, {location: LOCATION});
 
       job.request = (reqOpts: DecorateRequestOptions) => {
@@ -227,7 +227,7 @@ describe('BigQuery/Job', () => {
       };
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       BIGQUERY.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '/queries/' + JOB_ID);
         done();
@@ -236,7 +236,7 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(assert.ifError);
     });
 
-    it('should optionally accept options', done => {
+    it('should optionally accept options', (done) => {
       const options = {a: 'b'};
       const expectedOptions = Object.assign(
         {location: undefined, 'formatOptions.useInt64Timestamp': true},
@@ -251,7 +251,7 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(options, assert.ifError);
     });
 
-    it('should inherit the location', done => {
+    it('should inherit the location', (done) => {
       const job = new Job(BIGQUERY, JOB_ID, {location: LOCATION});
 
       BIGQUERY.request = (reqOpts: DecorateRequestOptions) => {
@@ -265,7 +265,7 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(assert.ifError);
     });
 
-    it('should delete any cached jobs', done => {
+    it('should delete any cached jobs', (done) => {
       const options = {job: {}, a: 'b'};
       const expectedOptions = {
         location: undefined,
@@ -281,7 +281,7 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(options, assert.ifError);
     });
 
-    it('should return any errors to the callback', done => {
+    it('should return any errors to the callback', (done) => {
       const error = new Error('err');
       const response = {};
 
@@ -301,7 +301,7 @@ describe('BigQuery/Job', () => {
       });
     });
 
-    it('should return the rows and response to the callback', done => {
+    it('should return the rows and response to the callback', (done) => {
       job.getQueryResults((err: {}, rows: {}, nextQuery: {}, resp: {}) => {
         assert.ifError(err);
         assert.deepStrictEqual(rows, []);
@@ -310,7 +310,7 @@ describe('BigQuery/Job', () => {
       });
     });
 
-    it('should merge the rows with the schema', done => {
+    it('should merge the rows with the schema', (done) => {
       const response = {
         schema: {},
         rows: [],
@@ -341,7 +341,7 @@ describe('BigQuery/Job', () => {
       });
     });
 
-    it('it should wrap integers', done => {
+    it('it should wrap integers', (done) => {
       const response = {
         schema: {},
         rows: [],
@@ -372,7 +372,7 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(options, assert.ifError);
     });
 
-    it('it should parse JSON', done => {
+    it('it should parse JSON', (done) => {
       const response = {
         schema: {},
         rows: [],
@@ -403,7 +403,7 @@ describe('BigQuery/Job', () => {
       job.getQueryResults(options, assert.ifError);
     });
 
-    it('should skip parsing if skipParsing is true', done => {
+    it('should skip parsing if skipParsing is true', (done) => {
       const response = {
         schema: {},
         rows: [{f: [{v: 'hi'}]}],
@@ -426,7 +426,7 @@ describe('BigQuery/Job', () => {
       });
     });
 
-    it('should not delete resp.rows if skipParsing is true', done => {
+    it('should not delete resp.rows if skipParsing is true', (done) => {
       const options: QueryResultsOptions = {
         skipParsing: true,
       };
@@ -454,7 +454,7 @@ describe('BigQuery/Job', () => {
       );
     });
 
-    it('should return the query when the job is not complete', done => {
+    it('should return the query when the job is not complete', (done) => {
       BIGQUERY.request = (
         reqOpts: DecorateRequestOptions,
         callback: Function,
@@ -472,7 +472,7 @@ describe('BigQuery/Job', () => {
       });
     });
 
-    it('should return an error when the job is not complete & timeout is overridden', done => {
+    it('should return an error when the job is not complete & timeout is overridden', (done) => {
       const options = {job: {}, timeoutMs: 1000};
       const message = `The query did not complete before ${options.timeoutMs}ms`;
       const response = {
@@ -498,7 +498,7 @@ describe('BigQuery/Job', () => {
       );
     });
 
-    it('should delete resp.rows if skipParsing is false by default', done => {
+    it('should delete resp.rows if skipParsing is false by default', (done) => {
       const options: QueryResultsOptions = {};
 
       const rawRows = [{f: [{v: 'hi'}]}];
@@ -524,7 +524,7 @@ describe('BigQuery/Job', () => {
       );
     });
 
-    it('should populate nextQuery when more results exist', done => {
+    it('should populate nextQuery when more results exist', (done) => {
       job.getQueryResults(
         options,
         (err: Error, rows: {}, nextQuery: QueryResultsOptions) => {
@@ -543,7 +543,7 @@ describe('BigQuery/Job', () => {
   });
 
   describe('getQueryResultsAsStream_', () => {
-    it('should call getQueryResults correctly', done => {
+    it('should call getQueryResults correctly', (done) => {
       const options = {a: 'b', c: 'd'};
 
       job.getQueryResults = (
@@ -563,7 +563,7 @@ describe('BigQuery/Job', () => {
   });
 
   describe('poll_', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       job.getMetadata = () => {
         done();
       };
@@ -580,7 +580,7 @@ describe('BigQuery/Job', () => {
         };
       });
 
-      it('should return an error', done => {
+      it('should return an error', (done) => {
         job.poll_((err: Error) => {
           assert.strictEqual(err, error);
           done();
@@ -605,8 +605,8 @@ describe('BigQuery/Job', () => {
         };
       });
 
-      it('should detect and return an error from the response', done => {
-        sandbox.stub(util, 'ApiError').callsFake(body => {
+      it('should detect and return an error from the response', (done) => {
+        sandbox.stub(util, 'ApiError').callsFake((body) => {
           assert.strictEqual(body, apiResponse.status);
           return error;
         });
@@ -635,7 +635,7 @@ describe('BigQuery/Job', () => {
         };
       });
 
-      it('should execute callback', done => {
+      it('should execute callback', (done) => {
         job.poll_((err: Error, metadata: {}) => {
           assert.ifError(err);
           assert.strictEqual(metadata, undefined);
@@ -657,7 +657,7 @@ describe('BigQuery/Job', () => {
         };
       });
 
-      it('should emit complete with metadata', done => {
+      it('should emit complete with metadata', (done) => {
         job.poll_((err: Error, metadata: {}) => {
           assert.ifError(err);
           assert.strictEqual(metadata, apiResponse);

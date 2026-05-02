@@ -3,13 +3,8 @@
     "google.pubsub.v1.Publisher": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": [
-          "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ],
-        "unavailable": [
-          "UNAVAILABLE"
-        ],
+        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
+        "unavailable": ["UNAVAILABLE"],
         "cancelled_unknown_deadline_exceeded_resource_exhausted_aborted_internal_unavailable": [
           "CANCELLED",
           "UNKNOWN",
@@ -19,11 +14,7 @@
           "INTERNAL",
           "UNAVAILABLE"
         ],
-        "unknown_aborted_unavailable": [
-          "UNKNOWN",
-          "ABORTED",
-          "UNAVAILABLE"
-        ]
+        "unknown_aborted_unavailable": ["UNKNOWN", "ABORTED", "UNAVAILABLE"]
       },
       "retry_params": {
         "default": {

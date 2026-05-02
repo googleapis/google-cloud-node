@@ -414,7 +414,7 @@ export class LoggingServiceV2Client {
     ];
     for (const methodName of loggingServiceV2StubMethods) {
       const callPromise = this.loggingServiceV2Stub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -3208,7 +3208,7 @@ export class LoggingServiceV2Client {
    */
   close(): Promise<void> {
     if (this.loggingServiceV2Stub && !this._terminated) {
-      return this.loggingServiceV2Stub.then(stub => {
+      return this.loggingServiceV2Stub.then((stub) => {
         this._terminated = true;
         stub.close();
       });

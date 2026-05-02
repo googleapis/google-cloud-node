@@ -10,14 +10,10 @@
             "select": {
               "fields": [
                 {
-                  "field": [
-                    "a"
-                  ]
+                  "field": ["a"]
                 },
                 {
-                  "field": [
-                    "b"
-                  ]
+                  "field": ["b"]
                 }
               ]
             }

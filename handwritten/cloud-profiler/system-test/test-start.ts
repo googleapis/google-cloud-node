@@ -106,32 +106,32 @@ describe('start', () => {
     nock.restore();
     assert.ok(
       uploadedProfiles.length >= 2,
-      'Expected 2 or more profiles to be uploaded'
+      'Expected 2 or more profiles to be uploaded',
     );
   });
   it('should have uploaded wall profile with samples first', async () => {
     const wall = uploadedProfiles[0];
     const decodedBytes = Buffer.from(wall.profileBytes as string, 'base64');
     const unzippedBytes = (await promisify(zlib.gunzip)(
-      decodedBytes
+      decodedBytes,
     )) as Uint8Array;
     const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
     assert.strictEqual(wall.profileType, 'WALL');
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[0].type as number],
-      'sample'
+      'sample',
     );
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[1].type as number],
-      'wall'
+      'wall',
     );
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[0].unit as number],
-      'count'
+      'count',
     );
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[1].unit as number],
-      'microseconds'
+      'microseconds',
     );
     assert.ok(outProfile.sample.length > 0, 'Expected 1 or more samples');
   });
@@ -139,25 +139,25 @@ describe('start', () => {
     const heap = uploadedProfiles[1];
     const decodedBytes = Buffer.from(heap.profileBytes as string, 'base64');
     const unzippedBytes = (await promisify(zlib.gunzip)(
-      decodedBytes
+      decodedBytes,
     )) as Uint8Array;
     const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
     assert.strictEqual(heap.profileType, 'HEAP');
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[0].type as number],
-      'objects'
+      'objects',
     );
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[1].type as number],
-      'space'
+      'space',
     );
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[0].unit as number],
-      'count'
+      'count',
     );
     assert.strictEqual(
       outProfile.stringTable[outProfile.sampleType[1].unit as number],
-      'bytes'
+      'bytes',
     );
   });
 });

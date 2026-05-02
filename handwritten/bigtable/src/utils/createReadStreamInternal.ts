@@ -268,7 +268,7 @@ export function createReadStreamInternal(
       }
 
       // Remove rowKeys already read.
-      rowKeys = rowKeys.filter(rowKey =>
+      rowKeys = rowKeys.filter((rowKey) =>
         TableUtils.greaterThan(rowKey, lastRowKey as string),
       );
 
@@ -295,7 +295,7 @@ export function createReadStreamInternal(
       Mutation.convertToBytes,
     ) as {} as Uint8Array[];
 
-    reqOpts.rows.rowRanges = ranges.map(range =>
+    reqOpts.rows.rowRanges = ranges.map((range) =>
       Filter.createRange(
         range.start as BoundData,
         range.end as BoundData,
@@ -413,7 +413,7 @@ export function createReadStreamInternal(
           userStream.emit('error', error);
         }
       })
-      .on('data', _ => {
+      .on('data', (_) => {
         // Reset error count after a successful read so the backoff
         // time won't keep increasing when as stream had multiple errors
         numConsecutiveErrors = 0;

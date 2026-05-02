@@ -122,7 +122,7 @@ export class TestResources {
    */
   filterForTest(testId: string, allResources: Resource[]): Resource[] {
     const prefix = this.getPrefix(testId);
-    return allResources.filter(n => n.name?.includes(prefix));
+    return allResources.filter((n) => n.name?.includes(prefix));
   }
 
   /**
@@ -132,7 +132,7 @@ export class TestResources {
    */
   filterForCurrentRun(allResources: Resource[]): Resource[] {
     const prefix = this.getPrefix();
-    return allResources.filter(n => n.name?.includes(prefix));
+    return allResources.filter((n) => n.name?.includes(prefix));
   }
 
   /**
@@ -142,7 +142,7 @@ export class TestResources {
    * still be in use.
    */
   filterForSuite(allResources: Resource[]): Resource[] {
-    return allResources.filter(n => n.name?.includes(this.testSuiteId));
+    return allResources.filter((n) => n.name?.includes(this.testSuiteId));
   }
 
   /**
@@ -154,7 +154,7 @@ export class TestResources {
    */
   filterForCleanup(allResources: Resource[]): Resource[] {
     const currentRunPrefix = this.getPrefix();
-    return allResources.filter(n => {
+    return allResources.filter((n) => {
       let name = n.name || undefined;
       if (name === undefined) {
         return false;

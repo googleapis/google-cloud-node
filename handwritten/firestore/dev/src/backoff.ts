@@ -283,7 +283,7 @@ export class ExponentialBackoff {
     this.currentBaseMs = Math.min(this.currentBaseMs, this.maxDelayMs);
     this._retryCount += 1;
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.awaitingBackoffCompletion = true;
 
       delayExecution(() => {

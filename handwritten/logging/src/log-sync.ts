@@ -427,7 +427,7 @@ class LogSync implements LogSeverityFunctions {
     this.formattedName_ = formatLogName(this.logging.projectId, this.name);
     try {
       // Make sure to add instrumentation info
-      structuredEntries = populateInstrumentationInfo(entry)[0].map(entry => {
+      structuredEntries = populateInstrumentationInfo(entry)[0].map((entry) => {
         if (!(entry instanceof Entry)) {
           entry = this.entry(entry);
         }

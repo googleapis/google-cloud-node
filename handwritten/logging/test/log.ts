@@ -808,7 +808,7 @@ describe('Log', () => {
       'info',
       'notice',
       'warning',
-    ].forEach(severityMethodName => {
+    ].forEach((severityMethodName) => {
       describe(severityMethodName, () => {
         let severityMethod: Function;
 

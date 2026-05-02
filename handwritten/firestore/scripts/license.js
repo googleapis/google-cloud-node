@@ -43,7 +43,7 @@ function iterateThroughFiles(dirNameRead) {
   console.log(dirNameRead);
   if (fs.existsSync(path.join(dirNameRead))) {
     const files = fs.readdirSync(dirNameRead);
-    files.forEach(file => {
+    files.forEach((file) => {
       const fileName = file.toString();
       const readName = path.join(dirNameRead, fileName);
       if (fs.statSync(readName).isDirectory()) {

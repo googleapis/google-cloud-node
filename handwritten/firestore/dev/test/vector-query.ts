@@ -52,7 +52,7 @@ export function findNearestQuery(
             __type__: {stringValue: '__vector__'},
             value: {
               arrayValue: {
-                values: queryVector.map(n => {
+                values: queryVector.map((n) => {
                   return {doubleValue: n};
                 }),
               },
@@ -71,7 +71,7 @@ describe('Vector(findNearest) query interface', () => {
 
   beforeEach(() => {
     setTimeoutHandler(setImmediate);
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -416,7 +416,7 @@ describe('Vector(findNearest) query interface', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery('foo', 'EQUAL', 'bar'),
@@ -426,7 +426,7 @@ describe('Vector(findNearest) query interface', () => {
       },
     };
 
-    return createInstance(overrides).then(firestoreInstance => {
+    return createInstance(overrides).then((firestoreInstance) => {
       firestore = firestoreInstance;
       const query: Query = firestore.collection('collectionId');
       const vectorQuery = query
@@ -480,10 +480,10 @@ describe('Vector(findNearest) query interface', () => {
     'DOT_PRODUCT',
     'COSINE',
   ];
-  distanceMeasure.forEach(distanceMeasure => {
+  distanceMeasure.forEach((distanceMeasure) => {
     it(`returns results when distanceMeasure is ${distanceMeasure}`, async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             findNearestQuery('embedding', [1], 2, distanceMeasure),
@@ -492,7 +492,7 @@ describe('Vector(findNearest) query interface', () => {
         },
       };
 
-      return createInstance(overrides).then(firestoreInstance => {
+      return createInstance(overrides).then((firestoreInstance) => {
         firestore = firestoreInstance;
         const query = firestore.collection('collectionId').findNearest({
           vectorField: 'embedding',
@@ -500,7 +500,7 @@ describe('Vector(findNearest) query interface', () => {
           limit: 2,
           distanceMeasure: distanceMeasure,
         });
-        return query.get().then(results => {
+        return query.get().then((results) => {
           expect(results.size).to.equal(2);
           expect(results.empty).to.be.false;
           expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
@@ -510,7 +510,7 @@ describe('Vector(findNearest) query interface', () => {
 
           let count = 0;
 
-          results.forEach(doc => {
+          results.forEach((doc) => {
             expect(doc instanceof DocumentSnapshot).to.be.true;
             expect(doc.createTime.isEqual(new Timestamp(1, 2))).to.be.true;
             expect(doc.updateTime.isEqual(new Timestamp(3, 4))).to.be.true;
@@ -526,14 +526,14 @@ describe('Vector(findNearest) query interface', () => {
 
   it('successful return without ending the stream on get()', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, findNearestQuery('vector', [1], 10, 'COSINE'));
         return streamWithoutEnd(result('first'), result('second', true));
       },
     };
 
     let counter = 0;
-    return createInstance(overrides).then(firestoreInstance => {
+    return createInstance(overrides).then((firestoreInstance) => {
       firestore = firestoreInstance;
       const query = firestore.collection('collectionId').findNearest({
         vectorField: 'vector',
@@ -541,7 +541,7 @@ describe('Vector(findNearest) query interface', () => {
         limit: 10,
         distanceMeasure: 'COSINE',
       });
-      return query.get().then(results => {
+      return query.get().then((results) => {
         expect(++counter).to.equal(1);
         expect(results.size).to.equal(2);
         expect(results.empty).to.be.false;
@@ -572,7 +572,7 @@ describe('Vector(findNearest) query interface', () => {
       .then(() => {
         throw new Error('Unexpected success in Promise');
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('Expected error');
         expect(attempts).to.equal(1);
       });
@@ -588,7 +588,7 @@ describe('Vector(findNearest) query interface', () => {
       },
     };
 
-    return createInstance(overrides).then(firestoreInstance => {
+    return createInstance(overrides).then((firestoreInstance) => {
       firestore = firestoreInstance;
       return firestore
         .collection('collectionId')
@@ -602,7 +602,7 @@ describe('Vector(findNearest) query interface', () => {
         .then(() => {
           throw new Error('Unexpected success in Promise');
         })
-        .catch(err => {
+        .catch((err) => {
           expect(err.message).to.equal('Expected error');
           expect(attempts).to.equal(5);
         });

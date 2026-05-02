@@ -24,7 +24,7 @@ export const closeClient: ClientImplMaker<
   ICloseClientRequest,
   ICloseClientResponse
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const request = rawRequest.request;
     const {clientId} = request;
     const bigtable = clientMap.get(clientId!);

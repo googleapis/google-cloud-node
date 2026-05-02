@@ -34,7 +34,7 @@ describe('aggregate query interface', () => {
 
   beforeEach(() => {
     setTimeoutHandler(setImmediate);
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -95,7 +95,7 @@ describe('aggregate query interface', () => {
     firestore = await createInstance(overrides);
 
     const query = firestore.collection('collectionId').count();
-    return query.get().then(results => {
+    return query.get().then((results) => {
       expect(results.data().count).to.be.equal(99);
       expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
       expect(results.query).to.be.equal(query);
@@ -112,7 +112,7 @@ describe('aggregate query interface', () => {
       readTime: {seconds: 5, nanos: 6},
     };
     const overrides: ApiOverride = {
-      runAggregationQuery: request => {
+      runAggregationQuery: (request) => {
         let actualStructuredQuery =
           request!.structuredAggregationQuery?.structuredQuery;
         actualStructuredQuery = extend(true, {}, actualStructuredQuery);
@@ -148,7 +148,7 @@ describe('aggregate query interface', () => {
       .collection('collectionId')
       .where('foo', '>', 'bar')
       .count();
-    return query.get().then(results => {
+    return query.get().then((results) => {
       expect(results.data().count).to.be.equal(99);
     });
   });
@@ -167,7 +167,7 @@ describe('aggregate query interface', () => {
       .then(() => {
         throw new Error('Unexpected success in Promise');
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('Expected error');
         expect(attempts).to.equal(1);
       });
@@ -189,7 +189,7 @@ describe('aggregate query interface', () => {
       .then(() => {
         throw new Error('Unexpected success in Promise');
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('Expected error');
         expect(attempts).to.equal(5);
       });
@@ -211,7 +211,7 @@ describe('aggregate query interface', () => {
       .then(() => {
         throw new Error('Unexpected success in Promise');
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err.message).to.equal('No AggregateQuery results');
         expect(attempts).to.equal(1);
       });

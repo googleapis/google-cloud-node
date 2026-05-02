@@ -94,7 +94,7 @@ describe('TestProxy/CheckAndMutateRow', () => {
   describe('Ensure the proper request is passed to the Gapic Layer', () => {
     const clientId = 'TestCheckAndMutateRow_NoRetry_TransientError';
     testCases.forEach((checkAndMutateRowRequest, index) => {
-      it(`Run test ${index}`, done => {
+      it(`Run test ${index}`, (done) => {
         (async () => {
           const clientMap = new Map();
           const createClientFunction = createClient({clientMap});
@@ -153,7 +153,7 @@ describe('TestProxy/CheckAndMutateRow', () => {
               if (callback) {
                 callback(null, {});
               }
-              return new Promise(resolve => {
+              return new Promise((resolve) => {
                 const response: protos.google.bigtable.v2.ICheckAndMutateRowResponse =
                   {};
                 resolve([response, {}, undefined]);
@@ -177,7 +177,7 @@ describe('TestProxy/CheckAndMutateRow', () => {
             );
           });
           done();
-        })().catch(err => {
+        })().catch((err) => {
           throw err;
         });
       });

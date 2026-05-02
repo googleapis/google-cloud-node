@@ -215,7 +215,7 @@ describe('MessageStream', () => {
     describe('options', () => {
       describe('defaults', () => {
         it('should default highWaterMark to 0', () => {
-          client.streams.forEach(stream => {
+          client.streams.forEach((stream) => {
             assert.strictEqual(stream.readableState.highWaterMark, 0);
           });
         });
@@ -230,7 +230,7 @@ describe('MessageStream', () => {
         it('should pull pullTimeouts default from config file', () => {
           const expectedDeadline = now + FAKE_STREAMING_PULL_TIMEOUT;
 
-          client.streams.forEach(stream => {
+          client.streams.forEach((stream) => {
             const deadline = stream.options.deadline;
             assert.strictEqual(deadline, expectedDeadline);
           });
@@ -265,7 +265,7 @@ describe('MessageStream', () => {
             defaultOptions.subscription.maxStreams,
           );
 
-          client.streams.forEach(stream => {
+          client.streams.forEach((stream) => {
             assert.strictEqual(
               stream.readableState.highWaterMark,
               highWaterMark,
@@ -296,7 +296,7 @@ describe('MessageStream', () => {
   });
 
   describe('destroy', () => {
-    it('should noop if already destroyed', done => {
+    it('should noop if already destroyed', (done) => {
       messageStream.on('close', done);
 
       messageStream.destroy();
@@ -310,31 +310,31 @@ describe('MessageStream', () => {
 
     it('should stop keeping the streams alive', () => {
       const frequency = 30000;
-      const stubs = client.streams.map(stream => {
+      const stubs = client.streams.map((stream) => {
         return sandbox.stub(stream, 'write').throws();
       });
 
       messageStream.destroy();
       sandbox.clock.tick(frequency * 2); // for good measure
 
-      stubs.forEach(stub => {
+      stubs.forEach((stub) => {
         assert.strictEqual(stub.callCount, 0);
       });
     });
 
     it('should unpipe and cancel all underlying streams', () => {
       const stubs = [
-        ...client.streams.map(stream => {
+        ...client.streams.map((stream) => {
           return sandbox.stub(stream, 'unpipe').withArgs(messageStream);
         }),
-        ...client.streams.map(stream => {
+        ...client.streams.map((stream) => {
           return sandbox.stub(stream, 'cancel');
         }),
       ];
 
       messageStream.destroy();
 
-      stubs.forEach(stub => {
+      stubs.forEach((stub) => {
         assert.strictEqual(stub.callCount, 1);
       });
     });
@@ -342,7 +342,7 @@ describe('MessageStream', () => {
 
   describe('pull stream lifecycle', () => {
     describe('initialization', () => {
-      it('should pipe to the message stream', done => {
+      it('should pipe to the message stream', (done) => {
         const fakeResponses = [{}, {}, {}, {}, {}];
         const received: object[] = [];
 
@@ -357,14 +357,14 @@ describe('MessageStream', () => {
         process.nextTick(() => messageStream.end());
       });
 
-      it('should not end the message stream', done => {
+      it('should not end the message stream', (done) => {
         messageStream
           .on('data', () => {})
           .on('end', () => {
             done(new Error('Should not be called.'));
           });
 
-        client.streams.forEach(stream => stream.push(null));
+        client.streams.forEach((stream) => stream.push(null));
         process.nextTick(done);
       });
     });
@@ -378,7 +378,7 @@ describe('MessageStream', () => {
         const ms = new MessageStream(subscriber);
 
         const prom = defer();
-        ms.on('error', err => {
+        ms.on('error', (err) => {
           assert.strictEqual(err, fakeError);
           assert.strictEqual(ms.destroyed, true);
           prom.resolve();
@@ -432,10 +432,10 @@ describe('MessageStream', () => {
         await prom.promise;
       });
 
-      it('should emit non-status errors', done => {
+      it('should emit non-status errors', (done) => {
         const fakeError = new Error('err');
 
-        messageStream.on('error', err => {
+        messageStream.on('error', (err) => {
           assert.strictEqual(err, fakeError);
           done();
         });
@@ -443,7 +443,7 @@ describe('MessageStream', () => {
         client.streams[0].emit('error', fakeError);
       });
 
-      it('should ignore status errors', done => {
+      it('should ignore status errors', (done) => {
         const [stream] = client.streams;
         const status = {code: 0};
 
@@ -454,7 +454,7 @@ describe('MessageStream', () => {
         process.nextTick(done);
       });
 
-      it('should ignore errors that come in after the status', done => {
+      it('should ignore errors that come in after the status', (done) => {
         const [stream] = client.streams;
 
         messageStream.on('error', done);
@@ -466,7 +466,7 @@ describe('MessageStream', () => {
     });
 
     describe('on status', () => {
-      it('should wait for end to fire before creating a new stream', done => {
+      it('should wait for end to fire before creating a new stream', (done) => {
         const [stream] = client.streams;
         const expectedCount = stream.listenerCount('end') + 1;
 
@@ -482,7 +482,7 @@ describe('MessageStream', () => {
         });
       });
 
-      it('should create a new stream if stream already ended', done => {
+      it('should create a new stream if stream already ended', (done) => {
         const [stream] = client.streams;
 
         messageStream.on('error', done);
@@ -501,7 +501,7 @@ describe('MessageStream', () => {
         });
       });
 
-      it('should destroy the msg stream if status is not retryable', done => {
+      it('should destroy the msg stream if status is not retryable', (done) => {
         const fakeStatus = {
           code: 5,
           details: 'Err',
@@ -515,7 +515,7 @@ describe('MessageStream', () => {
           done();
         });
 
-        client.streams.forEach(stream => {
+        client.streams.forEach((stream) => {
           stream.emit('status', fakeStatus);
           stream.push(null);
         });
@@ -525,13 +525,13 @@ describe('MessageStream', () => {
     describe('keeping streams alive', () => {
       it('should keep the streams alive', () => {
         const frequency = 30000;
-        const stubs = client.streams.map(stream => {
+        const stubs = client.streams.map((stream) => {
           return sandbox.stub(stream, 'write');
         });
 
         sandbox.clock.tick(frequency * 1.5);
 
-        stubs.forEach(stub => {
+        stubs.forEach((stub) => {
           const [data] = stub.lastCall.args;
           assert.deepStrictEqual(data, {});
         });
@@ -539,7 +539,7 @@ describe('MessageStream', () => {
     });
 
     it('should allow updating the ack deadline', async () => {
-      const stubs = client.streams.map(stream => {
+      const stubs = client.streams.map((stream) => {
         return sandbox.stub(stream, 'write');
       });
 
@@ -549,7 +549,7 @@ describe('MessageStream', () => {
         streamAckDeadlineSeconds: 10,
       };
 
-      stubs.forEach(stub => {
+      stubs.forEach((stub) => {
         const [data] = stub.lastCall.args;
         assert.deepStrictEqual(data, expected);
       });

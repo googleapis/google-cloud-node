@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import {MetricServiceClient} from '@google-cloud/monitoring';
 
 describe('Bigtable/MetricServiceClientCredentials', () => {
-  it('should pass the credentials and universe domain to the exporter', done => {
+  it('should pass the credentials and universe domain to the exporter', (done) => {
     const clientOptions = {
       metricsEnabled: true,
       sslCreds: grpc.credentials.createInsecure(),
@@ -82,7 +82,7 @@ describe('Bigtable/MetricServiceClientCredentials', () => {
     const projectIdUsed = await client.getProjectId();
     assert.strictEqual(projectIdUsed, SECOND_PROJECT_ID);
   });
-  it('should pass the credentials and universe domain to the metric service client', done => {
+  it('should pass the credentials and universe domain to the metric service client', (done) => {
     const clientOptions = {
       metricsEnabled: true,
       sslCreds: grpc.credentials.createInsecure(),

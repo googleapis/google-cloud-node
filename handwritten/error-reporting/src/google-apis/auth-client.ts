@@ -117,7 +117,7 @@ export class RequestHandler extends Service {
     } else if (tryAuthenticate) {
       this.authClient.getAccessToken().then(
         () => {},
-        err => {
+        (err) => {
           this._logger.error(
             [
               'Unable to find credential information on instance. This library',

@@ -25,10 +25,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "a",
-                  "b"
-                ]
+                "fieldPaths": ["a", "b"]
               }
             }
           ]

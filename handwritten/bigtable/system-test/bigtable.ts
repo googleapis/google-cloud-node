@@ -74,15 +74,15 @@ describe('Bigtable', () => {
   async function reapInstances() {
     const [instances] = await bigtable.getInstances();
     const testInstances = instances
-      .filter(i => i.id.match(PREFIX))
-      .filter(i => {
+      .filter((i) => i.id.match(PREFIX))
+      .filter((i) => {
         const timeCreated = i.metadata!.labels!.time_created as {} as Date;
         // Only delete stale resources.
         const oneHourAgo = new Date(Date.now() - 3600000);
         return !timeCreated || timeCreated <= oneHourAgo;
       });
     // need to delete backups first due to instance deletion precondition
-    const deleteBackupPromises = testInstances.map(instance =>
+    const deleteBackupPromises = testInstances.map((instance) =>
       reapBackups(instance),
     );
     for (const backupPromise of deleteBackupPromises) {
@@ -144,9 +144,9 @@ describe('Bigtable', () => {
     const instances = [INSTANCE, DIFF_INSTANCE, CMEK_INSTANCE, INSTANCE_HDD];
 
     // need to delete backups first due to instance deletion precondition
-    await Promise.all(instances.map(instance => reapBackups(instance)));
+    await Promise.all(instances.map((instance) => reapBackups(instance)));
     await Promise.all(
-      instances.map(instance => {
+      instances.map((instance) => {
         q.push(async () => {
           try {
             await instance.delete();
@@ -192,7 +192,7 @@ describe('Bigtable', () => {
     it('should get an Iam Policy for the instance', async () => {
       const policyProperties = ['version', 'bindings', 'etag'];
       const [policy] = await INSTANCE.getIamPolicy();
-      policyProperties.forEach(property => {
+      policyProperties.forEach((property) => {
         assert(property in policy);
       });
     });
@@ -202,7 +202,7 @@ describe('Bigtable', () => {
       const [grantedPermissions] =
         await INSTANCE.testIamPermissions(permissions);
       assert.strictEqual(grantedPermissions.length, permissions.length);
-      permissions.forEach(permission => {
+      permissions.forEach((permission) => {
         assert.strictEqual(grantedPermissions.includes(permission), true);
       });
     });
@@ -226,7 +226,7 @@ describe('Bigtable', () => {
 
       const [policy] = await instance.getIamPolicy();
       const [updatedPolicy] = await instance.setIamPolicy(policy);
-      Object.keys(policy).forEach(key => assert(key in updatedPolicy));
+      Object.keys(policy).forEach((key) => assert(key in updatedPolicy));
 
       await instance.delete();
     });
@@ -337,11 +337,11 @@ describe('Bigtable', () => {
       assert(appProfiles.length > 0);
     });
 
-    it('should retrieve a list of app profiles in stream mode', done => {
+    it('should retrieve a list of app profiles in stream mode', (done) => {
       const appProfiles: AppProfile[] = [];
       INSTANCE.getAppProfilesStream()
         .on('error', done)
-        .on('data', appProfile => {
+        .on('data', (appProfile) => {
           assert(appProfile instanceof AppProfile);
           appProfiles.push(appProfile);
         })
@@ -447,11 +447,11 @@ describe('Bigtable', () => {
       assert(tables[0] instanceof Table);
     });
 
-    it('should retrieve a list of tables in stream mode', done => {
+    it('should retrieve a list of tables in stream mode', (done) => {
       const tables: Table[] = [];
       INSTANCE.getTablesStream()
         .on('error', done)
-        .on('data', table => {
+        .on('data', (table) => {
           assert(table instanceof Table);
           tables.push(table);
         })
@@ -479,7 +479,7 @@ describe('Bigtable', () => {
     it('should get an Iam Policy for the table', async () => {
       const policyProperties = ['version', 'bindings', 'etag'];
       const [policy] = await TABLE.getIamPolicy();
-      policyProperties.forEach(property => {
+      policyProperties.forEach((property) => {
         assert(property in policy);
       });
     });
@@ -488,7 +488,7 @@ describe('Bigtable', () => {
       const permissions = ['bigtable.tables.get', 'bigtable.tables.readRows'];
       const [grantedPermissions] = await TABLE.testIamPermissions(permissions);
       assert.strictEqual(grantedPermissions.length, permissions.length);
-      permissions.forEach(permission => {
+      permissions.forEach((permission) => {
         assert.strictEqual(grantedPermissions.includes(permission), true);
       });
     });
@@ -499,7 +499,7 @@ describe('Bigtable', () => {
 
       const [policy] = await table.getIamPolicy();
       const [updatedPolicy] = await table.setIamPolicy(policy);
-      Object.keys(policy).forEach(key => assert(key in updatedPolicy));
+      Object.keys(policy).forEach((key) => assert(key in updatedPolicy));
 
       await table.delete();
     });
@@ -540,8 +540,8 @@ describe('Bigtable', () => {
       assert.strictEqual(typeof token, 'string');
     });
 
-    it('should return error for checkConsistency of invalid token', done => {
-      TABLE.checkConsistency('dummy-token', err => {
+    it('should return error for checkConsistency of invalid token', (done) => {
+      TABLE.checkConsistency('dummy-token', (err) => {
         assert.strictEqual(err!.code, 3);
         done();
       });
@@ -601,7 +601,7 @@ describe('Bigtable', () => {
       const [families] = await TABLE.getFamilies();
       assert.strictEqual(families.length, 3);
       assert(families[0] instanceof Family);
-      assert.notStrictEqual(-1, families.map(f => f.id).indexOf(FAMILY.id));
+      assert.notStrictEqual(-1, families.map((f) => f.id).indexOf(FAMILY.id));
     });
 
     it('should get a family', async () => {
@@ -949,11 +949,11 @@ describe('Bigtable', () => {
         assert(rows[0] instanceof Row);
       });
 
-      it('should get rows via stream', done => {
+      it('should get rows via stream', (done) => {
         const rows: Row[] = [];
         TABLE.createReadStream()
           .on('error', done)
-          .on('data', row => {
+          .on('data', (row) => {
             assert(row instanceof Row);
             rows.push(row);
           })
@@ -963,11 +963,11 @@ describe('Bigtable', () => {
           });
       });
 
-      it('should should cancel request if stream ended early', done => {
+      it('should should cancel request if stream ended early', (done) => {
         const rows: Row[] = [];
         const stream = TABLE.createReadStream()
           .on('error', done)
-          .on('data', row => {
+          .on('data', (row) => {
             stream.end();
             rows.push(row);
           })
@@ -1031,7 +1031,7 @@ describe('Bigtable', () => {
         assert(keys.length > 0);
       });
 
-      it('should get sample row keys via stream', done => {
+      it('should get sample row keys via stream', (done) => {
         const keys: string[] = [];
         TABLE.sampleRowKeysStream()
           .on('error', done)
@@ -1078,7 +1078,7 @@ describe('Bigtable', () => {
         await new Promise<void>((resolve, reject) => {
           const stream = TABLE.createReadStream()
             .on('error', reject)
-            .on('data', row => {
+            .on('data', (row) => {
               rows.push(row);
               stream.end();
             })
@@ -1096,7 +1096,7 @@ describe('Bigtable', () => {
           };
           const [rows] = await TABLE.getRows({filter});
           assert.strictEqual(rows.length, 3);
-          const keys = rows.map(row => row.id).sort();
+          const keys = rows.map((row) => row.id).sort();
           assert.deepStrictEqual(keys, ['alincoln', 'jadams', 'tjefferson']);
         });
 
@@ -1141,7 +1141,7 @@ describe('Bigtable', () => {
           ];
 
           const [rows] = await TABLE.getRows({filter});
-          rows.forEach(row => {
+          rows.forEach((row) => {
             const keys = Object.keys(row.data.follows).sort();
             assert.deepStrictEqual(keys, ['gwashington', 'jadams']);
           });
@@ -1233,7 +1233,7 @@ describe('Bigtable', () => {
           ];
           const [rows] = await TABLE.getRows({filter});
           assert.strictEqual(rows.length, 2);
-          const ids = rows.map(row => row.id).sort();
+          const ids = rows.map((row) => row.id).sort();
           assert.deepStrictEqual(ids, ['gwashington', 'tjefferson']);
         });
 
@@ -1242,9 +1242,9 @@ describe('Bigtable', () => {
             label: 'test-label',
           };
           const [rows] = await TABLE.getRows({filter});
-          rows.forEach(row => {
+          rows.forEach((row) => {
             const follows = row.data.follows;
-            Object.keys(follows).forEach(column => {
+            Object.keys(follows).forEach((column) => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               follows[column].forEach((cell: any) => {
                 assert.deepStrictEqual(cell.labels, [filter.label]);
@@ -1258,7 +1258,7 @@ describe('Bigtable', () => {
             row: /[a-z]+on$/,
           };
           const [rows] = await TABLE.getRows({filter});
-          const keys = rows.map(row => row.id).sort();
+          const keys = rows.map((row) => row.id).sort();
           assert.deepStrictEqual(keys, ['gwashington', 'tjefferson']);
         });
 
@@ -1473,15 +1473,15 @@ describe('Bigtable', () => {
       const [backups] = await INSTANCE.getBackups();
       assert(Array.isArray(backups));
       assert(backups.length > 0);
-      assert(backups.some(backup => backup.id === BACKUP.id));
+      assert(backups.some((backup) => backup.id === BACKUP.id));
     });
 
-    it('should get backups in an instance as a stream', done => {
+    it('should get backups in an instance as a stream', (done) => {
       const backups: Backup[] = [];
 
       INSTANCE.getBackupsStream()
         .on('error', done)
-        .on('data', backup => {
+        .on('data', (backup) => {
           backups.push(backup);
         })
         .on('end', () => {
@@ -1494,15 +1494,15 @@ describe('Bigtable', () => {
       const [backups] = await CLUSTER.getBackups();
       assert(Array.isArray(backups));
       assert(backups.length > 0);
-      assert(backups.some(backup => backup.id === BACKUP.id));
+      assert(backups.some((backup) => backup.id === BACKUP.id));
     });
 
-    it('should get backups in a cluster as a stream', done => {
+    it('should get backups in a cluster as a stream', (done) => {
       const backups: Backup[] = [];
 
       CLUSTER.getBackupsStream()
         .on('error', done)
-        .on('data', backup => {
+        .on('data', (backup) => {
           backups.push(backup);
         })
         .on('end', () => {
@@ -1558,7 +1558,7 @@ describe('Bigtable', () => {
       const policyProperties = ['version', 'bindings', 'etag'];
       const [policy] = await BACKUP.getIamPolicy();
 
-      policyProperties.forEach(property => {
+      policyProperties.forEach((property) => {
         assert(property in policy);
       });
     });
@@ -1567,7 +1567,7 @@ describe('Bigtable', () => {
       const permissions = ['bigtable.backups.get', 'bigtable.backups.delete'];
       const [grantedPermissions] = await BACKUP.testIamPermissions(permissions);
       assert.strictEqual(grantedPermissions.length, permissions.length);
-      permissions.forEach(permission => {
+      permissions.forEach((permission) => {
         assert.strictEqual(grantedPermissions.includes(permission), true);
       });
     });
@@ -1578,7 +1578,7 @@ describe('Bigtable', () => {
       const [policy] = await backup.getIamPolicy();
       const [updatedPolicy] = await backup.setIamPolicy(policy);
 
-      Object.keys(policy).forEach(key => assert(key in updatedPolicy));
+      Object.keys(policy).forEach((key) => assert(key in updatedPolicy));
     });
     describe('copying backups', () => {
       // The server requires the copy backup time to be sufficiently ahead of
@@ -1595,7 +1595,7 @@ describe('Bigtable', () => {
       beforeEach(async () => {
         // Sleep here for just over a minute so that the system tests don't
         // experience quota issues due to too many requests per minute.
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           setTimeout(resolve, 60001);
         });
       });
@@ -1610,7 +1610,9 @@ describe('Bigtable', () => {
       ) {
         // Get a list of backup ids before the copy
         const [backupsBeforeCopy] = await instance.getBackups();
-        const backupIdsBeforeCopy = backupsBeforeCopy.map(backup => backup.id);
+        const backupIdsBeforeCopy = backupsBeforeCopy.map(
+          (backup) => backup.id,
+        );
         // Copy the backup
         const [newBackup, operation] = await backup.copy(config);
         try {
@@ -1637,7 +1639,7 @@ describe('Bigtable', () => {
           // Check that there is now one more backup
           const [backupsAfterCopy] = await instance.getBackups();
           const newBackups = backupsAfterCopy.filter(
-            backup => !backupIdsBeforeCopy.includes(backup.id),
+            (backup) => !backupIdsBeforeCopy.includes(backup.id),
           );
           assert.strictEqual(newBackups.length, 1);
           const [fetchedNewBackup] = newBackups;
@@ -1906,7 +1908,7 @@ describe('Bigtable', () => {
 
     beforeEach(async () => {
       // This is not ideal, but we are running into quota issues for admin API access.
-      await new Promise(r => setTimeout(r, 60 * 1000));
+      await new Promise((r) => setTimeout(r, 60 * 1000));
     });
 
     before(async () => {
@@ -2159,12 +2161,12 @@ describe('Bigtable', () => {
           },
         });
       });
-      it('should call createReadStream for the authorized view', done => {
+      it('should call createReadStream for the authorized view', (done) => {
         (async () => {
           try {
             const stream = await authorizedView.createReadStream();
             let receivedDataCount = 0;
-            stream.on('data', row => {
+            stream.on('data', (row) => {
               assert.strictEqual(row.id, rowId);
               assert.deepStrictEqual(row.data, {
                 [familyName]: {
@@ -2183,7 +2185,7 @@ describe('Bigtable', () => {
           } catch (e: unknown) {
             done(e);
           }
-        })().catch(err => {
+        })().catch((err) => {
           throw err;
         });
       });
@@ -2323,7 +2325,7 @@ describe('Bigtable', () => {
           convertBufferToInt(Buffer.from(rowId)) + 1,
         );
       });
-      it('should call sampleRowKeysStream for the authorized view', done => {
+      it('should call sampleRowKeysStream for the authorized view', (done) => {
         (async () => {
           try {
             const stream = await authorizedView.sampleRowKeysStream();
@@ -2345,13 +2347,13 @@ describe('Bigtable', () => {
           } catch (e: unknown) {
             done(e);
           }
-        })().catch(err => {
+        })().catch((err) => {
           throw err;
         });
       });
     });
     describe('CheckAndMutate grpc calls', () => {
-      it('should error when the request is made for the row key not in a view', done => {
+      it('should error when the request is made for the row key not in a view', (done) => {
         (async () => {
           try {
             try {
@@ -2383,11 +2385,11 @@ describe('Bigtable', () => {
             // Will reach this point if there is an assertion error.
             done(e);
           }
-        })().catch(err => {
+        })().catch((err) => {
           throw err;
         });
       });
-      it('should call filter for the authorized view', done => {
+      it('should call filter for the authorized view', (done) => {
         (async () => {
           try {
             // Add the row so that the cell offset filter takes effect:
@@ -2473,7 +2475,7 @@ describe('Bigtable', () => {
           } catch (e: unknown) {
             done(e);
           }
-        })().catch(err => {
+        })().catch((err) => {
           throw err;
         });
       });

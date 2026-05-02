@@ -30,7 +30,7 @@ const serviceConfigEnv = {
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
 };
 function sterilizeServiceConfigEnv() {
-  Object.keys(serviceConfigEnv).forEach(key => {
+  Object.keys(serviceConfigEnv).forEach((key) => {
     delete process.env[key];
   });
 }

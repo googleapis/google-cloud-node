@@ -671,7 +671,7 @@ export class Firestore implements firestore.Firestore {
         );
         return client;
       },
-      /* clientDestructor= */ client => client.close(),
+      /* clientDestructor= */ (client) => client.close(),
     );
 
     logger('Firestore', null, 'Initialized Firestore');
@@ -1096,8 +1096,8 @@ export class Firestore implements firestore.Firestore {
     let convertFields: (data: ApiMapValue) => ApiMapValue;
 
     if (encoding === undefined || encoding === 'protobufJS') {
-      convertTimestamp = data => data as google.protobuf.ITimestamp;
-      convertFields = data => data;
+      convertTimestamp = (data) => data as google.protobuf.ITimestamp;
+      convertFields = (data) => data;
     } else if (encoding === 'json') {
       // Google Cloud Functions calls us with Proto3 JSON format data, which we
       // must convert to Protobuf JS.
@@ -1381,7 +1381,7 @@ export class Firestore implements firestore.Firestore {
             const reader = new DocumentReader(this, documents, fieldMask);
             return reader.get(tag);
           })
-          .catch(err => {
+          .catch((err) => {
             throw wrapError(err, stack);
           });
       },
@@ -1576,7 +1576,7 @@ export class Firestore implements firestore.Firestore {
         this._projectId = await this._clientPool.run(
           requestTag,
           /* requiresGrpc= */ false,
-          gapicClient => gapicClient.getProjectId(),
+          (gapicClient) => gapicClient.getProjectId(),
         );
         logger(
           'Firestore.initializeIfNeeded',
@@ -1778,7 +1778,7 @@ export class Firestore implements firestore.Firestore {
       }
 
       backendStream.on('data', () => streamReady());
-      backendStream.on('error', err => streamFailed(err));
+      backendStream.on('error', (err) => streamFailed(err));
       backendStream.on('end', () => streamEnded());
       backendStream.on('close', () => streamEnded());
       backendStream.on('finish', () => streamEnded());
@@ -1792,7 +1792,7 @@ export class Firestore implements firestore.Firestore {
           'Sending request: %j',
           request,
         );
-        backendStream.write(request, 'utf-8', err => {
+        backendStream.write(request, 'utf-8', (err) => {
           if (err) {
             streamFailed(err);
           } else {
@@ -1833,7 +1833,7 @@ export class Firestore implements firestore.Firestore {
     return this._clientPool.run(
       requestTag,
       /* requiresGrpc= */ false,
-      async gapicClient => {
+      async (gapicClient) => {
         try {
           logger(
             'Firestore.request',
@@ -1891,73 +1891,79 @@ export class Firestore implements firestore.Firestore {
     return this._retry(methodName, requestTag, () => {
       const result = new Deferred<Duplex>();
 
-      void this._clientPool.run(requestTag, bidrectional, async gapicClient => {
-        logger(
-          'Firestore.requestStream',
-          requestTag,
-          'Sending request: %j',
-          request,
-        );
-
-        this._traceUtil
-          .currentSpan()
-          .addEvent(`Firestore.${methodName}: Start`);
-
-        try {
-          const stream = bidirectional
-            ? gapicClient[methodName](callOptions)
-            : gapicClient[methodName](request, callOptions);
-          const logStream = new Transform({
-            objectMode: true,
-            transform: (chunk, encoding, callback) => {
-              logger(
-                'Firestore.requestStream',
-                requestTag,
-                'Received response: %j',
-                chunk,
-              );
-              numResponses++;
-              if (numResponses === 1) {
-                this._traceUtil
-                  .currentSpan()
-                  .addEvent(`Firestore.${methodName}: First response received`);
-              } else if (numResponses % NUM_RESPONSES_PER_TRACE_EVENT === 0) {
-                this._traceUtil
-                  .currentSpan()
-                  .addEvent(
-                    `Firestore.${methodName}: Received ${numResponses} responses`,
-                  );
-              }
-              callback();
-            },
-          });
-          stream.pipe(logStream);
-
-          const lifetime = new Deferred<void>();
-          const resultStream = await this._initializeStream(
-            stream,
-            lifetime,
+      void this._clientPool.run(
+        requestTag,
+        bidrectional,
+        async (gapicClient) => {
+          logger(
+            'Firestore.requestStream',
             requestTag,
-            bidirectional ? request : undefined,
+            'Sending request: %j',
+            request,
           );
-          resultStream.on('end', () => {
-            stream.end();
-            this._traceUtil
-              .currentSpan()
-              .addEvent(`Firestore.${methodName}: Completed`, {
-                [ATTRIBUTE_KEY_NUM_RESPONSES]: numResponses,
-              });
-          });
-          result.resolve(resultStream);
 
-          // While we return the stream to the callee early, we don't want to
-          // release the GAPIC client until the callee has finished processing the
-          // stream.
-          return lifetime.promise;
-        } catch (e) {
-          result.reject(e);
-        }
-      });
+          this._traceUtil
+            .currentSpan()
+            .addEvent(`Firestore.${methodName}: Start`);
+
+          try {
+            const stream = bidirectional
+              ? gapicClient[methodName](callOptions)
+              : gapicClient[methodName](request, callOptions);
+            const logStream = new Transform({
+              objectMode: true,
+              transform: (chunk, encoding, callback) => {
+                logger(
+                  'Firestore.requestStream',
+                  requestTag,
+                  'Received response: %j',
+                  chunk,
+                );
+                numResponses++;
+                if (numResponses === 1) {
+                  this._traceUtil
+                    .currentSpan()
+                    .addEvent(
+                      `Firestore.${methodName}: First response received`,
+                    );
+                } else if (numResponses % NUM_RESPONSES_PER_TRACE_EVENT === 0) {
+                  this._traceUtil
+                    .currentSpan()
+                    .addEvent(
+                      `Firestore.${methodName}: Received ${numResponses} responses`,
+                    );
+                }
+                callback();
+              },
+            });
+            stream.pipe(logStream);
+
+            const lifetime = new Deferred<void>();
+            const resultStream = await this._initializeStream(
+              stream,
+              lifetime,
+              requestTag,
+              bidirectional ? request : undefined,
+            );
+            resultStream.on('end', () => {
+              stream.end();
+              this._traceUtil
+                .currentSpan()
+                .addEvent(`Firestore.${methodName}: Completed`, {
+                  [ATTRIBUTE_KEY_NUM_RESPONSES]: numResponses,
+                });
+            });
+            result.resolve(resultStream);
+
+            // While we return the stream to the callee early, we don't want to
+            // release the GAPIC client until the callee has finished processing the
+            // stream.
+            return lifetime.promise;
+          } catch (e) {
+            result.reject(e);
+          }
+        },
+      );
 
       return result.promise;
     });

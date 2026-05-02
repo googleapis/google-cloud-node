@@ -98,7 +98,7 @@ export class MessageBatch {
    * @internal
    */
   end(): BatchResults {
-    this.messages.forEach(m => m.publishSchedulerSpan?.end());
+    this.messages.forEach((m) => m.publishSchedulerSpan?.end());
     return {
       messages: this.messages,
       callbacks: this.callbacks,

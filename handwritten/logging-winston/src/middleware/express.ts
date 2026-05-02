@@ -52,7 +52,7 @@ export async function makeMiddleware(
 
   // If no custom transports are provided, use default or instantiate one.
   const cloudTransport = logger.transports.find(
-    t => t instanceof LoggingWinston,
+    (t) => t instanceof LoggingWinston,
   );
 
   // If user provides a custom transport, always add it to the logger.

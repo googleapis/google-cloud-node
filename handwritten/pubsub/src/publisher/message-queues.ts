@@ -131,12 +131,12 @@ export abstract class MessageQueue extends EventEmitter {
     // Make sure we have a projectId filled in to update telemetry spans.
     // The overall spans may not have the correct projectId because it wasn't
     // known at the time publishMessage was called.
-    const spanMessages = messages.filter(m => !!m.parentSpan);
+    const spanMessages = messages.filter((m) => !!m.parentSpan);
     if (spanMessages.length) {
       if (!topic.pubsub.isIdResolved) {
         await topic.pubsub.getClientConfig();
       }
-      spanMessages.forEach(m => {
+      spanMessages.forEach((m) => {
         tracing.PubsubSpans.updatePublisherTopicName(m.parentSpan!, topic.name);
         tracing.PubsubEvents.publishStart(m);
       });
@@ -168,12 +168,12 @@ export abstract class MessageQueue extends EventEmitter {
       }
     } catch (e) {
       const err = e as ServiceError;
-      callbacks.forEach(callback => callback(err));
+      callbacks.forEach((callback) => callback(err));
 
       throw e;
     } finally {
       rpcSpan?.end();
-      messages.forEach(m => {
+      messages.forEach((m) => {
         // We're finished with both the RPC and the whole publish operation,
         // so close out all of the related spans.
         tracing.PubsubEvents.publishEnd(m);
@@ -316,7 +316,7 @@ export class OrderedQueue extends MessageQueue {
   // This needs to update our existing message batches.
   updateOptions() {
     super.updateOptions();
-    this.batches.forEach(b => b.setOptions(this.batchOptions));
+    this.batches.forEach((b) => b.setOptions(this.batchOptions));
   }
 
   /**
@@ -414,7 +414,7 @@ export class OrderedQueue extends MessageQueue {
     // reject all pending publishes
     while (this.batches.length) {
       const {callbacks} = this.batches.pop()!;
-      callbacks.forEach(callback => callback(err));
+      callbacks.forEach((callback) => callback(err));
     }
   }
   /**

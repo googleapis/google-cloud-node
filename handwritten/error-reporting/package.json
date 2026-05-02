@@ -14,10 +14,7 @@
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "files": [
-    "build/src",
-    "!build/src/**/*.map"
-  ],
+  "files": ["build/src", "!build/src/**/*.map"],
   "scripts": {
     "docs": "compodoc src/",
     "lint": "gts check",
@@ -70,7 +67,7 @@
     "typescript": "^5.9.3",
     "uuid": "^8.3.2"
   },
-"overrides": {
+  "overrides": {
     "undici": "5.28.4",
     "tablesort": "5.6.0",
     "cheerio": "1.0.0"

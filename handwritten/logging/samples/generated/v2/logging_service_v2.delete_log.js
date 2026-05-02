@@ -61,7 +61,7 @@ function main(logName) {
   // [END logging_v2_generated_LoggingServiceV2_DeleteLog_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

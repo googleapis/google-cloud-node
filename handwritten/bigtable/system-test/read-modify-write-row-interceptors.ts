@@ -235,10 +235,10 @@ describe('Bigtable/ReadModifyWriteRowInterceptorMetrics', () => {
     assert.strictEqual(testMetricsHandler.requestsHandled.length, 2);
 
     const attemptCompleteData = testMetricsHandler.requestsHandled.find(
-      m => (m as {attemptLatency?: number}).attemptLatency !== undefined,
+      (m) => (m as {attemptLatency?: number}).attemptLatency !== undefined,
     ) as OnAttemptCompleteData | undefined;
     const operationCompleteData = testMetricsHandler.requestsHandled.find(
-      m => (m as {operationLatency?: number}).operationLatency !== undefined,
+      (m) => (m as {operationLatency?: number}).operationLatency !== undefined,
     ) as OnOperationCompleteData | undefined;
 
     assert.ok(attemptCompleteData, 'OnAttemptCompleteData should be present');

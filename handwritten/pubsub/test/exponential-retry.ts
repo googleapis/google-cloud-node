@@ -207,7 +207,7 @@ describe('exponential retry class', () => {
     clock.tick(300);
     assert.deepStrictEqual(callbackCounts, [2, 0]);
     assert.deepStrictEqual(
-      callbackTimes.map(d => d.milliseconds),
+      callbackTimes.map((d) => d.milliseconds),
       [300, 0],
     );
 
@@ -220,7 +220,7 @@ describe('exponential retry class', () => {
     // while the second item should've retried once and quit.
     assert.deepStrictEqual(callbackCounts, [2, 1]);
     assert.deepStrictEqual(
-      callbackTimes.map(d => d.milliseconds),
+      callbackTimes.map((d) => d.milliseconds),
       [300, 100],
     );
 

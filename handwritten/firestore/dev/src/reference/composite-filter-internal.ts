@@ -70,7 +70,7 @@ export class CompositeFilterInternal extends FilterInternal {
     const proto: api.StructuredQuery.IFilter = {
       compositeFilter: {
         op: this.operator,
-        filters: this.filters.map(filter => filter.toProto()),
+        filters: this.filters.map((filter) => filter.toProto()),
       },
     };
 

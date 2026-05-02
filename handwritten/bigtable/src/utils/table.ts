@@ -43,7 +43,7 @@ export class TableUtils {
           'prefixes should be used exclusively to ranges/start/end/prefix.',
         );
       }
-      options.prefixes.forEach(prefix => {
+      options.prefixes.forEach((prefix) => {
         ranges.push(this.createPrefixRange(prefix));
       });
     }

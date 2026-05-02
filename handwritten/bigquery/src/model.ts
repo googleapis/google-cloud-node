@@ -398,7 +398,7 @@ class Model extends ServiceObject {
 
     options = extend(true, options, {
       destinationUris: (toArray(destination) as Array<File | string>).map(
-        dest => {
+        (dest) => {
           if (util.isCustomType(dest, 'storage/file')) {
             return (
               'gs://' + (dest as File).bucket.name + '/' + (dest as File).name
@@ -555,7 +555,7 @@ class Model extends ServiceObject {
         return;
       }
 
-      job!.on('error', callback!).on('complete', metadata => {
+      job!.on('error', callback!).on('complete', (metadata) => {
         callback!(null, metadata);
       });
     });

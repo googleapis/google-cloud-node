@@ -143,7 +143,7 @@ describe('Client Initialization Testing', () => {
               callback(null, 'some-project-id');
             };
           });
-          it('should set the rest parameter in the data client when calling prepareGaxRequest_', done => {
+          it('should set the rest parameter in the data client when calling prepareGaxRequest_', (done) => {
             // This request does lazy initialization of the gapic layer Datastore client.
             request.prepareGaxRequest_(
               {client: clientName, method: 'lookup'},
@@ -152,7 +152,7 @@ describe('Client Initialization Testing', () => {
               },
             );
           });
-          it('should set the rest parameter in the data client when calling request_', done => {
+          it('should set the rest parameter in the data client when calling request_', (done) => {
             // This request does lazy initialization of the gapic layer Datastore client.
             request.request_({client: clientName, method: 'lookup'}, () => {
               compareRequest(request, testParameters.expectedFallback, done);

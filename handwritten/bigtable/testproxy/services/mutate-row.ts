@@ -25,7 +25,7 @@ export const mutateRow: ClientImplMaker<
   IMutateRowRequest,
   IMutateRowResult
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {request} = rawRequest;
     const {request: mutateRequest} = request;
     const {mutations, tableName, rowKey} = mutateRequest!;

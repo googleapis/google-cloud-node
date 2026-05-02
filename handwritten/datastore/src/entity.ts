@@ -664,7 +664,7 @@ export namespace entity {
 
     if (Array.isArray(value)) {
       valueProto.arrayValue = {
-        values: value.map(val => entity.encodeValue(val, property)),
+        values: value.map((val) => entity.encodeValue(val, property)),
       };
       return valueProto;
     }
@@ -918,7 +918,7 @@ export namespace entity {
         });
       } else if (firstPathPartIsEntity) {
         if (firstPathPart === '') {
-          Object.keys(entity.properties!).forEach(path => {
+          Object.keys(entity.properties!).forEach((path) => {
             const newPath = entity.properties![path].arrayValue
               ? path + '[].*'
               : path + '.*';
@@ -929,7 +929,7 @@ export namespace entity {
             const parentEntity = entity.properties![firstPathPart].entityValue;
 
             if (parentEntity) {
-              Object.keys(parentEntity.properties).forEach(path => {
+              Object.keys(parentEntity.properties).forEach((path) => {
                 const newPath = parentEntity.properties[path].arrayValue
                   ? path + '[].*'
                   : path + '.*';
@@ -979,7 +979,7 @@ export namespace entity {
     results: ResponseResult[],
     wrapNumbers?: boolean | IntegerTypeCastOptions,
   ) {
-    return results.map(result => {
+    return results.map((result) => {
       const ent = entity.entityFromEntityProto(result.entity!, wrapNumbers);
       ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity!.key!);
       return ent;
@@ -1207,19 +1207,19 @@ export namespace entity {
     };
 
     const queryProto: QueryProto = {
-      distinctOn: query.groupByVal.map(groupBy => {
+      distinctOn: query.groupByVal.map((groupBy) => {
         return {
           name: groupBy,
         };
       }),
 
-      kind: query.kinds.map(kind => {
+      kind: query.kinds.map((kind) => {
         return {
           name: kind,
         };
       }),
 
-      order: query.orders.map(order => {
+      order: query.orders.map((order) => {
         return {
           property: {
             name: order.name,
@@ -1228,7 +1228,7 @@ export namespace entity {
         };
       }),
 
-      projection: query.selectVal.map(select => {
+      projection: query.selectVal.map((select) => {
         return {
           property: {
             name: select,
@@ -1259,7 +1259,7 @@ export namespace entity {
     if (query.filters.length > 0 || query.entityFilters.length > 0) {
       // Convert all legacy filters into new property filter objects
       const filters = query.filters.map(
-        filter => new PropertyFilter(filter.name, filter.op, filter.val),
+        (filter) => new PropertyFilter(filter.name, filter.op, filter.val),
       );
       const entityFilters = query.entityFilters;
       const allFilters = entityFilters.concat(filters);

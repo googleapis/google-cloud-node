@@ -231,11 +231,11 @@ export class Mutation {
   static encodeSetCell(data: Data): SetCellObj[] {
     const mutations: SetCellObj[] = [];
 
-    Object.keys(data).forEach(familyName => {
+    Object.keys(data).forEach((familyName) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const family = (data as any)[familyName];
 
-      Object.keys(family).forEach(cellName => {
+      Object.keys(family).forEach((cellName) => {
         let cell = family[cellName];
 
         if (!is.object(cell) || cell instanceof Buffer) {
@@ -327,7 +327,7 @@ export class Mutation {
       ];
     }
 
-    return (arrify(data) as Data[]).map(mutation => {
+    return (arrify(data) as Data[]).map((mutation) => {
       if (is.string(mutation)) {
         mutation = {
           column: mutation,

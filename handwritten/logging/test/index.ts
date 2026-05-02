@@ -295,7 +295,7 @@ describe('Logging', () => {
         return type === 'bigquery/dataset';
       };
 
-      logging.setAclForDataset_ = async config => {
+      logging.setAclForDataset_ = async (config) => {
         assert.strictEqual(config, CONFIG);
       };
 
@@ -314,7 +314,7 @@ describe('Logging', () => {
         return type === 'pubsub/topic';
       };
 
-      logging.setAclForTopic_ = async config => {
+      logging.setAclForTopic_ = async (config) => {
         assert.strictEqual(config, CONFIG);
       };
 
@@ -333,7 +333,7 @@ describe('Logging', () => {
         return type === 'storage/bucket';
       };
 
-      logging.setAclForBucket_ = async config => {
+      logging.setAclForBucket_ = async (config) => {
         assert.strictEqual(config, CONFIG);
       };
 
@@ -444,7 +444,7 @@ describe('Logging', () => {
         it('should resolve Promise Sink & API response', async () => {
           const sink = {} as Sink;
 
-          logging.sink = name_ => {
+          logging.sink = (name_) => {
             assert.strictEqual(name_, SINK_NAME);
             return sink;
           };
@@ -643,7 +643,9 @@ describe('Logging', () => {
       });
 
       it('should reject promise with error', () => {
-        logging.getEntries().then(noop, err => assert.strictEqual(err, error));
+        logging
+          .getEntries()
+          .then(noop, (err) => assert.strictEqual(err, error));
       });
     });
 
@@ -689,7 +691,7 @@ describe('Logging', () => {
       logging.auth.getProjectId = async () => PROJECT_ID;
     });
 
-    it('should make request once reading', done => {
+    it('should make request once reading', (done) => {
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
         gaxOpts: {},
@@ -716,7 +718,7 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should set logName filter if has logName flag', done => {
+    it('should set logName filter if has logName flag', (done) => {
       const logName = 'log-name';
       logging = new LOGGING({projectId: PROJECT_ID});
       logging.loggingService.listLogEntriesStream = (
@@ -752,7 +754,7 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should add logName filter to user provided filter', done => {
+    it('should add logName filter to user provided filter', (done) => {
       const logName = 'log-name';
       const OPTIONS_WITH_FILTER = extend(
         {
@@ -794,24 +796,24 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should destroy request stream if gax fails', done => {
+    it('should destroy request stream if gax fails', (done) => {
       const error = new Error('Error.');
       logging.loggingService.listLogEntriesStream = () => {
         throw error;
       };
       const stream = logging.getEntriesStream(OPTIONS);
       stream.emit('reading');
-      stream.once('error', err => {
+      stream.once('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should destroy request stream if gaxStream catches error', done => {
+    it('should destroy request stream if gaxStream catches error', (done) => {
       const error = new Error('Error.');
       const stream = logging.getEntriesStream(OPTIONS);
       stream.emit('reading');
-      stream.on('error', err => {
+      stream.on('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -820,7 +822,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should return if in snippet sandbox', done => {
+    it('should return if in snippet sandbox', (done) => {
       logging.setProjectId = async () => {
         return done(new Error('Should not have gotten project ID'));
       };
@@ -834,9 +836,9 @@ describe('Logging', () => {
       done();
     });
 
-    it('should convert results from request to Entry', done => {
+    it('should convert results from request to Entry', (done) => {
       const stream = logging.getEntriesStream(OPTIONS);
-      stream.on('data', entry => {
+      stream.on('data', (entry) => {
         const argsPassedToFromApiResponse_ = entry[0];
         assert.strictEqual(argsPassedToFromApiResponse_, RESULT);
         done();
@@ -844,7 +846,7 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should expose abort function', done => {
+    it('should expose abort function', (done) => {
       GAX_STREAM.cancel = done;
       const stream = logging.getEntriesStream(OPTIONS) as AbortableDuplex;
       stream.emit('reading');
@@ -910,7 +912,7 @@ describe('Logging', () => {
         };
         logging
           .getLogs(OPTIONS)
-          .then(noop, err => assert.strictEqual(err, error));
+          .then(noop, (err) => assert.strictEqual(err, error));
       });
     });
 
@@ -925,7 +927,7 @@ describe('Logging', () => {
 
       it('should resolve promise with Logs & API resp', async () => {
         const logInstance = {} as Log;
-        logging.log = name => {
+        logging.log = (name) => {
           assert.strictEqual(name, RESPONSE[0]);
           return logInstance;
         };
@@ -955,7 +957,7 @@ describe('Logging', () => {
       (logging.auth.getProjectId as Function) = async () => {};
     });
 
-    it('should make request once reading', done => {
+    it('should make request once reading', (done) => {
       logging.loggingService.listLogsStream = (reqOpts: {}, gaxOpts: {}) => {
         assert.deepStrictEqual(reqOpts, {
           parent: 'projects/' + logging.projectId,
@@ -978,24 +980,24 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should destroy request stream if gax fails', done => {
+    it('should destroy request stream if gax fails', (done) => {
       const error = new Error('Error.');
       logging.loggingService.listLogsStream = () => {
         throw error;
       };
       const stream = logging.getLogsStream(OPTIONS);
       stream.emit('reading');
-      stream.once('error', err => {
+      stream.once('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should destroy request stream if gaxStream catches error', done => {
+    it('should destroy request stream if gaxStream catches error', (done) => {
       const error = new Error('Error.');
       const stream = logging.getLogsStream(OPTIONS);
       stream.emit('reading');
-      stream.on('error', err => {
+      stream.on('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1004,7 +1006,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should convert results from request to Log', done => {
+    it('should convert results from request to Log', (done) => {
       const stream = logging.getLogsStream(OPTIONS);
 
       const logInstance = {} as Log;
@@ -1014,7 +1016,7 @@ describe('Logging', () => {
         return logInstance;
       };
 
-      stream.on('data', log => {
+      stream.on('data', (log) => {
         assert.strictEqual(log, logInstance);
         done();
       });
@@ -1022,7 +1024,7 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should expose abort function', done => {
+    it('should expose abort function', (done) => {
       GAX_STREAM.cancel = done;
       const stream = logging.getLogsStream(OPTIONS) as AbortableDuplex;
       stream.emit('reading');
@@ -1081,7 +1083,7 @@ describe('Logging', () => {
         };
         logging
           .getSinks(OPTIONS)
-          .then(noop, err => assert.strictEqual(err, error));
+          .then(noop, (err) => assert.strictEqual(err, error));
       });
     });
 
@@ -1104,7 +1106,7 @@ describe('Logging', () => {
 
       it('should resolve promise with Logs & API resp', async () => {
         const sinkInstance = {} as Sink;
-        logging.sink = name => {
+        logging.sink = (name) => {
           assert.strictEqual(name, ARGS[0]![0].name);
           return sinkInstance;
         };
@@ -1137,7 +1139,7 @@ describe('Logging', () => {
       (logging.auth.getProjectId as Function) = async () => {};
     });
 
-    it('should make request once reading', done => {
+    it('should make request once reading', (done) => {
       logging.configService.listSinksStream = (reqOpts: {}, gaxOpts: {}) => {
         assert.deepStrictEqual(reqOpts, {
           parent: 'projects/' + logging.projectId,
@@ -1160,24 +1162,24 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should destroy request stream if gax fails', done => {
+    it('should destroy request stream if gax fails', (done) => {
       const error = new Error('Error.');
       logging.configService.listSinksStream = () => {
         throw error;
       };
       const stream = logging.getSinksStream(OPTIONS);
       stream.emit('reading');
-      stream.once('error', err => {
+      stream.once('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should destroy request stream if gaxStream catches error', done => {
+    it('should destroy request stream if gaxStream catches error', (done) => {
       const error = new Error('Error.');
       const stream = logging.getSinksStream(OPTIONS);
       stream.emit('reading');
-      stream.on('error', err => {
+      stream.on('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1186,7 +1188,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should return if in snippet sandbox', done => {
+    it('should return if in snippet sandbox', (done) => {
       logging.setProjectId = async () => {
         return done(new Error('Should not have gotten project ID'));
       };
@@ -1200,7 +1202,7 @@ describe('Logging', () => {
       done();
     });
 
-    it('should convert results from request to Sink', done => {
+    it('should convert results from request to Sink', (done) => {
       const stream = logging.getSinksStream(OPTIONS);
 
       const sinkInstance = {} as Sink;
@@ -1210,7 +1212,7 @@ describe('Logging', () => {
         return sinkInstance;
       };
 
-      stream.on('data', sink => {
+      stream.on('data', (sink) => {
         assert.strictEqual(sink, sinkInstance);
         assert.strictEqual(sink.metadata, RESULT);
         done();
@@ -1219,7 +1221,7 @@ describe('Logging', () => {
       stream.emit('reading');
     });
 
-    it('should expose abort function', done => {
+    it('should expose abort function', (done) => {
       GAX_STREAM.cancel = done;
       const stream = logging.getSinksStream(OPTIONS) as AbortableDuplex;
       stream.emit('reading');
@@ -1292,12 +1294,12 @@ describe('Logging', () => {
     });
 
     describe('prepareGaxRequest', () => {
-      it('should get the project ID', done => {
+      it('should get the project ID', (done) => {
         (logging.auth.getProjectId as Function) = () => done();
         logging.request(CONFIG, assert.ifError);
       });
 
-      it('should cache the project ID', done => {
+      it('should cache the project ID', (done) => {
         (logging.auth.getProjectId as Function) = () => {
           setImmediate(() => {
             assert.strictEqual(logging.projectId, PROJECT_ID);
@@ -1308,14 +1310,14 @@ describe('Logging', () => {
         logging.request(CONFIG, assert.ifError);
       });
 
-      it('should return error if getting project ID failed', done => {
+      it('should return error if getting project ID failed', (done) => {
         const error = new Error('Error.');
 
         (logging.auth.getProjectId as Function) = (callback: Function) => {
           callback(error);
         };
 
-        logging.request(CONFIG, err => {
+        logging.request(CONFIG, (err) => {
           assert.deepStrictEqual(err, error);
           done();
         });
@@ -1337,7 +1339,7 @@ describe('Logging', () => {
         assert.strictEqual(logging.api[CONFIG.client], fakeClient);
       });
 
-      it('should use the cached client', done => {
+      it('should use the cached client', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (fakeV2 as any)[CONFIG.client] = () => {
           done(new Error('Should not re-instantiate a GAX client.'));
@@ -1346,7 +1348,7 @@ describe('Logging', () => {
         done();
       });
 
-      it('should replace the project ID token', done => {
+      it('should replace the project ID token', (done) => {
         const replacedReqOpts = {};
         replaceProjectIdTokenOverride = (reqOpts: {}, projectId: string) => {
           assert.notStrictEqual(reqOpts, CONFIG.reqOpts);
@@ -1369,7 +1371,7 @@ describe('Logging', () => {
     });
 
     describe('makeRequestCallback', () => {
-      it('should return if in snippet sandbox', done => {
+      it('should return if in snippet sandbox', (done) => {
         (logging.auth.getProjectId as Function) = () => {
           done(new Error('Should not have gotten project ID.'));
         };
@@ -1383,7 +1385,7 @@ describe('Logging', () => {
         done();
       });
 
-      it('should prepare the request', done => {
+      it('should prepare the request', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (logging.api as any)[CONFIG.client][CONFIG.method] = {
           bind(gaxClient: {}, reqOpts: {}, gaxOpts: {}) {
@@ -1397,7 +1399,7 @@ describe('Logging', () => {
         logging.request(CONFIG, assert.ifError);
       });
 
-      it('should execute callback with error', done => {
+      it('should execute callback with error', (done) => {
         const error = new Error('Error.');
 
         logging.api[CONFIG.client][CONFIG.method] = (...args: Array<{}>) => {
@@ -1405,7 +1407,7 @@ describe('Logging', () => {
           callback(error);
         };
 
-        logging.request(CONFIG, err => {
+        logging.request(CONFIG, (err) => {
           assert.deepStrictEqual(err, error);
           done();
         });
@@ -1437,7 +1439,7 @@ describe('Logging', () => {
         };
       });
 
-      it('should return if in snippet sandbox', done => {
+      it('should return if in snippet sandbox', (done) => {
         (logging.auth.getProjectId as Function) = () => {
           done(new Error('Should not have gotten project ID.'));
         };
@@ -1453,14 +1455,14 @@ describe('Logging', () => {
         done();
       });
 
-      it('should expose an abort function', done => {
+      it('should expose an abort function', (done) => {
         GAX_STREAM.cancel = done;
         const requestStream = logging.request(CONFIG) as AbortableDuplex;
         requestStream.emit('reading');
         requestStream.abort();
       });
 
-      it('should prepare the request once reading', done => {
+      it('should prepare the request once reading', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (logging.api as any)[CONFIG.client][CONFIG.method] = {
           bind(gaxClient: {}, reqOpts: {}, gaxOpts: {}) {
@@ -1476,7 +1478,7 @@ describe('Logging', () => {
         requestStream.emit('reading');
       });
 
-      it('should destroy the stream with prepare error', done => {
+      it('should destroy the stream with prepare error', (done) => {
         const error = new Error('Error.');
 
         (logging.auth.getProjectId as Function) = (callback: Function) => {
@@ -1486,19 +1488,19 @@ describe('Logging', () => {
         const requestStream = logging.request(CONFIG);
         requestStream.emit('reading');
 
-        requestStream.on('error', err => {
+        requestStream.on('error', (err) => {
           assert.deepStrictEqual(err, error);
           done();
         });
       });
 
-      it('should destroy the stream with GAX error', done => {
+      it('should destroy the stream with GAX error', (done) => {
         const error = new Error('Error.');
 
         const requestStream = logging.request(CONFIG);
         requestStream.emit('reading');
 
-        requestStream.on('error', err => {
+        requestStream.on('error', (err) => {
           assert.deepStrictEqual(err, error);
           done();
         });
@@ -1563,7 +1565,7 @@ describe('Logging', () => {
       it('should return error', () => {
         logging
           .setAclForBucket_(CONFIG)
-          .then(noop, err => assert.deepStrictEqual(err, error));
+          .then(noop, (err) => assert.deepStrictEqual(err, error));
       });
     });
 
@@ -1612,7 +1614,7 @@ describe('Logging', () => {
         it('should reject with error', () => {
           logging
             .setAclForDataset_(CONFIG)
-            .then(noop, err => assert.deepStrictEqual(err, error));
+            .then(noop, (err) => assert.deepStrictEqual(err, error));
         });
       });
 
@@ -1660,7 +1662,7 @@ describe('Logging', () => {
           it('should reject with error', () => {
             logging
               .setAclForDataset_(CONFIG)
-              .then(noop, err => assert.deepStrictEqual(err, error));
+              .then(noop, (err) => assert.deepStrictEqual(err, error));
           });
         });
 
@@ -1719,7 +1721,7 @@ describe('Logging', () => {
         it('should throw error', () => {
           logging
             .setAclForTopic_(CONFIG)
-            .then(noop, err => assert.deepStrictEqual(err, error));
+            .then(noop, (err) => assert.deepStrictEqual(err, error));
         });
       });
 
@@ -1766,7 +1768,7 @@ describe('Logging', () => {
           it('should throw error', () => {
             logging
               .setAclForTopic_(CONFIG)
-              .then(noop, err => assert.deepStrictEqual(err, error));
+              .then(noop, (err) => assert.deepStrictEqual(err, error));
           });
         });
 

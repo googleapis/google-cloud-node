@@ -82,7 +82,7 @@ describe('Partition Query', () => {
 
   beforeEach(() => {
     setTimeoutHandler(setImmediate);
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -112,7 +112,7 @@ describe('Partition Query', () => {
   ) {
     if (startAt) {
       expect(
-        partition.startAt?.map(value => (value as DocumentReference).path),
+        partition.startAt?.map((value) => (value as DocumentReference).path),
       ).to.have.members([startAt]);
     } else {
       expect(partition.startAt).to.be.undefined;
@@ -120,7 +120,7 @@ describe('Partition Query', () => {
 
     if (endBefore) {
       expect(
-        partition.endBefore?.map(value => (value as DocumentReference).path),
+        partition.endBefore?.map((value) => (value as DocumentReference).path),
       ).to.have.members([endBefore]);
     } else {
       expect(partition.endBefore).to.be.undefined;
@@ -134,7 +134,7 @@ describe('Partition Query', () => {
     };
 
     const overrides: ApiOverride = {
-      partitionQueryStream: request => {
+      partitionQueryStream: (request) => {
         partitionQueryEquals(
           request,
           /* partitionCount= */ desiredPartitionsCount - 1,
@@ -143,7 +143,7 @@ describe('Partition Query', () => {
         return stream(cursorValue);
       },
     };
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const query = firestore.collectionGroup('collectionId');
 
       const result = await getPartitions(query, desiredPartitionsCount);
@@ -157,7 +157,7 @@ describe('Partition Query', () => {
   it('does not issue RPC if only a single partition is requested', () => {
     const desiredPartitionsCount = 1;
 
-    return createInstance().then(async firestore => {
+    return createInstance().then(async (firestore) => {
       const query = firestore.collectionGroup('collectionId');
 
       const result = await getPartitions(query, desiredPartitionsCount);
@@ -168,7 +168,7 @@ describe('Partition Query', () => {
   });
 
   it('validates partition count', () => {
-    return createInstance().then(firestore => {
+    return createInstance().then((firestore) => {
       const query = firestore.collectionGroup('collectionId');
       return expect(getPartitions(query, 0)).to.eventually.be.rejectedWith(
         'Value for argument "desiredPartitionCount" must be within [1, Infinity] inclusive, but was: 0',
@@ -191,7 +191,7 @@ describe('Partition Query', () => {
     ];
 
     const overrides: ApiOverride = {
-      partitionQueryStream: request => {
+      partitionQueryStream: (request) => {
         partitionQueryEquals(
           request,
           /* partitionCount= */ desiredPartitionsCount - 1,
@@ -206,7 +206,7 @@ describe('Partition Query', () => {
           },
         );
       },
-      runQuery: request => {
+      runQuery: (request) => {
         const startAt = expectedStartAt.shift();
         if (startAt) {
           expect(request!.structuredQuery!.startAt).to.deep.equal({
@@ -229,7 +229,7 @@ describe('Partition Query', () => {
         return emptyQueryStream();
       },
     };
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const query = firestore.collectionGroup('collectionId');
 
       const partitions = await getPartitions(query, desiredPartitionsCount);
@@ -250,7 +250,7 @@ describe('Partition Query', () => {
     const desiredPartitionsCount = 2;
 
     const overrides: ApiOverride = {
-      partitionQueryStream: request => {
+      partitionQueryStream: (request) => {
         partitionQueryEquals(
           request,
           /* partitionCount= */ desiredPartitionsCount - 1,
@@ -260,14 +260,14 @@ describe('Partition Query', () => {
           values: [{integerValue: bigIntValue.toString()}],
         });
       },
-      runQuery: request => {
+      runQuery: (request) => {
         expect(
           request!.structuredQuery!.endAt!.values![0].integerValue,
         ).to.equal(bigIntValue.toString());
         return emptyQueryStream();
       },
     };
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const query = firestore.collectionGroup('collectionId');
 
       const result = await getPartitions(query, desiredPartitionsCount);
@@ -297,7 +297,7 @@ describe('Partition Query', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const query = firestore.collectionGroup('collectionId');
 
       const partitions = await getPartitions(query, desiredPartitionsCount);

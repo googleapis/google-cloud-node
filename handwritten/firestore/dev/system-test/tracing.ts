@@ -351,7 +351,7 @@ describe.skipEnterprise('Tracing Tests', () => {
       SPAN_NAME_TEST_ROOT,
       {},
       customContext,
-      async span => {
+      async (span) => {
         await fn();
         span.end();
       },
@@ -362,7 +362,7 @@ describe.skipEnterprise('Tracing Tests', () => {
   async function waitForCompletedInMemorySpans(): Promise<boolean> {
     await tracerProvider.forceFlush();
     await inMemorySpanExporter.forceFlush();
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return true;
   }
 
@@ -381,7 +381,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
     // Querying the trace from Cloud Trace immediately is almost always going
     // to fail. So we have an initial delay before making our first attempt.
-    await new Promise(resolve =>
+    await new Promise((resolve) =>
       setTimeout(resolve, GET_TRACE_INITIAL_WAIT_MILLIS),
     );
 
@@ -418,7 +418,7 @@ describe.skipEnterprise('Tracing Tests', () => {
           null,
           `Could not fetch a full trace from the server. Retrying in ${GET_TRACE_RETRY_BACKOFF_MILLIS}ms.`,
         );
-        await new Promise(resolve =>
+        await new Promise((resolve) =>
           setTimeout(resolve, GET_TRACE_RETRY_BACKOFF_MILLIS),
         );
       }
@@ -452,7 +452,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
   function buildSpanMapsFromInMemorySpanExporter(): void {
     const spans = inMemorySpanExporter.getFinishedSpans();
-    spans.forEach(span => {
+    spans.forEach((span) => {
       const id = span?.spanContext().spanId;
       const parentId = span?.parentSpanContext?.spanId;
       if (!parentId || span.name === SPAN_NAME_TEST_ROOT) {
@@ -473,7 +473,7 @@ describe.skipEnterprise('Tracing Tests', () => {
 
   function buildSpanMapsFromCloudTraceInfo(): void {
     const spans = cloudTraceInfo.spans;
-    spans?.forEach(span => {
+    spans?.forEach((span) => {
       const id = span.spanId;
       const parentId = span.parentSpanId;
       if (!parentId || span.name === SPAN_NAME_TEST_ROOT) {
@@ -951,7 +951,7 @@ describe.skipEnterprise('Tracing Tests', () => {
       const docRef2 = randomCol.doc('bar');
 
       await runFirestoreOperationInRootSpan(async () => {
-        return firestore.runTransaction(async transaction => {
+        return firestore.runTransaction(async (transaction) => {
           await transaction.get(docRef1);
           await transaction.getAll(docRef1, docRef2);
           await transaction.get(randomCol.limit(1));

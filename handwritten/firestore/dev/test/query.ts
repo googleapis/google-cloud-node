@@ -570,7 +570,7 @@ describe('query interface', () => {
 
   it('accepts all variations', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery('foo', 'EQUAL', 'bar'),
@@ -595,7 +595,7 @@ describe('query interface', () => {
 
   it('supports empty gets', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request);
         return stream({readTime: {seconds: 5, nanos: 6}});
       },
@@ -611,7 +611,7 @@ describe('query interface', () => {
 
   it('supports alwaysUseImplicitOrderBy with limitToLast', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           where(fieldFilters('foo', 'GREATER_THAN_OR_EQUAL', 'bar')),
@@ -666,15 +666,15 @@ describe('query interface', () => {
     expect(attempts).to.equal(5);
   });
 
-  it('supports empty streams', done => {
+  it('supports empty streams', (done) => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request);
         return stream({readTime: {seconds: 5, nanos: 6}});
       },
     };
 
-    void createInstance(overrides).then(firestoreInstance => {
+    void createInstance(overrides).then((firestoreInstance) => {
       firestore = firestoreInstance;
       const query = firestore.collection('collectionId');
       query
@@ -690,7 +690,7 @@ describe('query interface', () => {
 
   it('returns results', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request);
         return stream(result('first'), result('second'));
       },
@@ -708,7 +708,7 @@ describe('query interface', () => {
 
     let count = 0;
 
-    results.forEach(doc => {
+    results.forEach((doc) => {
       expect(doc instanceof DocumentSnapshot).to.be.true;
       expect(doc.createTime.isEqual(new Timestamp(1, 2))).to.be.true;
       expect(doc.updateTime.isEqual(new Timestamp(3, 4))).to.be.true;
@@ -722,7 +722,7 @@ describe('query interface', () => {
   // Test Logical Termination on get()
   it('successful return without ending the stream on get()', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request);
         return streamWithoutEnd(result('first'), result('second', true));
       },
@@ -832,7 +832,7 @@ describe('query interface', () => {
     ];
 
     const overrides: ApiOverride = {
-      runQuery: x => {
+      runQuery: (x) => {
         ++attempts;
 
         // Validate that runQuery is called with cursor of the lastReceivedDocument
@@ -977,7 +977,7 @@ describe('query interface', () => {
     expect(attempts).to.equal(1);
   });
 
-  it('handles stream exception after initialization (with stream())', done => {
+  it('handles stream exception after initialization (with stream())', (done) => {
     const responses = [
       () => stream(result('first'), new Error('Expected error')),
       () => stream(result('second')),
@@ -986,12 +986,12 @@ describe('query interface', () => {
       runQuery: () => responses.shift()!(),
     };
 
-    void createInstance(overrides).then(firestoreInstance => {
+    void createInstance(overrides).then((firestoreInstance) => {
       firestore = firestoreInstance;
       const result = firestore.collection('collectionId').stream();
 
       let resultCount = 0;
-      result.on('data', doc => {
+      result.on('data', (doc) => {
         expect(doc).to.be.an.instanceOf(QueryDocumentSnapshot);
         ++resultCount;
       });
@@ -1002,22 +1002,22 @@ describe('query interface', () => {
     });
   });
 
-  it('streams results', done => {
+  it('streams results', (done) => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request);
         return stream(result('first'), result('second'));
       },
     };
 
-    void createInstance(overrides).then(firestoreInstance => {
+    void createInstance(overrides).then((firestoreInstance) => {
       firestore = firestoreInstance;
       const query = firestore.collection('collectionId');
       let received = 0;
 
       query
         .stream()
-        .on('data', doc => {
+        .on('data', (doc) => {
           expect(doc).to.be.an.instanceOf(DocumentSnapshot);
           ++received;
         })
@@ -1029,22 +1029,22 @@ describe('query interface', () => {
   });
 
   // Test Logical Termination on stream()
-  it('successful return without ending the stream on stream()', done => {
+  it('successful return without ending the stream on stream()', (done) => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request);
         return streamWithoutEnd(result('first'), result('second', true));
       },
     };
 
     let endCounter = 0;
-    void createInstance(overrides).then(firestore => {
+    void createInstance(overrides).then((firestore) => {
       const query = firestore.collection('collectionId');
       let received = 0;
 
       query
         .stream()
-        .on('data', doc => {
+        .on('data', (doc) => {
           expect(doc).to.be.an.instanceOf(DocumentSnapshot);
           ++received;
         })
@@ -1062,20 +1062,20 @@ describe('query interface', () => {
   it('for Query.withConverter()', async () => {
     const doc = document('documentId', 'author', 'author', 'title', 'post');
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: doc,
         });
         requestEquals(request, expectedRequest);
         return response(writeResult(1));
       },
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, fieldFiltersQuery('title', 'EQUAL', 'post'));
         return stream({document: doc, readTime: {seconds: 5, nanos: 6}});
       },
     };
 
-    return createInstance(overrides).then(async firestoreInstance => {
+    return createInstance(overrides).then(async (firestoreInstance) => {
       firestore = firestoreInstance;
       await firestore
         .collection('collectionId')
@@ -1094,13 +1094,13 @@ describe('query interface', () => {
   it('propagates withConverter() through QueryOptions', async () => {
     const doc = document('documentId', 'author', 'author', 'title', 'post');
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, fieldFiltersQuery('title', 'EQUAL', 'post'));
         return stream({document: doc, readTime: {seconds: 5, nanos: 6}});
       },
     };
 
-    return createInstance(overrides).then(async firestoreInstance => {
+    return createInstance(overrides).then(async (firestoreInstance) => {
       firestore = firestoreInstance;
       const coll = firestore
         .collection('collectionId')
@@ -1116,13 +1116,13 @@ describe('query interface', () => {
   it('withConverter(null) applies the default converter', async () => {
     const doc = document('documentId', 'author', 'author', 'title', 'post');
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, fieldFiltersQuery('title', 'EQUAL', 'post'));
         return stream({document: doc, readTime: {seconds: 5, nanos: 6}});
       },
     };
 
-    return createInstance(overrides).then(async firestoreInstance => {
+    return createInstance(overrides).then(async (firestoreInstance) => {
       firestore = firestoreInstance;
       const coll = await firestore
         .collection('collectionId')
@@ -1137,7 +1137,7 @@ describe('query interface', () => {
 
   it('supports OR query with cursor', () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           where(
@@ -1155,7 +1155,7 @@ describe('query interface', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestoreInstance => {
+    return createInstance(overrides).then(async (firestoreInstance) => {
       firestore = firestoreInstance;
       let query: Query = firestore.collection('collectionId');
       query = query
@@ -1181,7 +1181,7 @@ describe('where() interface', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, fieldFiltersQuery('foo', 'EQUAL', 'bar'));
         return emptyQueryStream();
       },
@@ -1204,7 +1204,7 @@ describe('where() interface', () => {
       },
     };
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery(
@@ -1266,7 +1266,7 @@ describe('where() interface', () => {
 
   it('accepts object', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery('foo', 'EQUAL', {
@@ -1290,7 +1290,7 @@ describe('where() interface', () => {
 
   it('supports field path objects for field paths', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery(
@@ -1315,7 +1315,7 @@ describe('where() interface', () => {
 
   it('supports strings for FieldPath.documentId()', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery('__name__', 'EQUAL', {
@@ -1337,7 +1337,7 @@ describe('where() interface', () => {
 
   it('supports reference array for IN queries', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery('__name__', 'IN', {
@@ -1369,7 +1369,7 @@ describe('where() interface', () => {
 
   it('Fields of IN queries are not used in implicit order by', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           fieldFiltersQuery('foo', 'IN', {
@@ -1538,7 +1538,7 @@ describe('where() interface', () => {
 
   it('supports unary filters', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           unaryFiltersQuery('foo', 'IS_NAN', 'bar', 'IS_NULL'),
@@ -1557,7 +1557,7 @@ describe('where() interface', () => {
 
   it('supports unary filters', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           unaryFiltersQuery('foo', 'IS_NOT_NAN', 'bar', 'IS_NOT_NULL'),
@@ -1614,7 +1614,7 @@ describe('where() interface', () => {
 
   it('supports composite filters - outer OR', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           where(
@@ -1658,7 +1658,7 @@ describe('where() interface', () => {
 
   it('supports composite filters - outer AND', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           where(
@@ -1702,7 +1702,7 @@ describe('where() interface', () => {
 
   it('supports implicit AND filters', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           where(
@@ -1735,7 +1735,7 @@ describe('where() interface', () => {
 
   it('supports single filter composite filters', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           where(fieldFilter('a', 'GREATER_THAN', {integerValue: 10})),
@@ -1770,7 +1770,7 @@ describe('orderBy() interface', () => {
 
   it('accepts empty string', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'ASCENDING'));
 
         return emptyQueryStream();
@@ -1785,7 +1785,7 @@ describe('orderBy() interface', () => {
 
   it('accepts asc', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'ASCENDING'));
 
         return emptyQueryStream();
@@ -1800,7 +1800,7 @@ describe('orderBy() interface', () => {
 
   it('accepts desc', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'DESCENDING'));
 
         return emptyQueryStream();
@@ -1824,7 +1824,7 @@ describe('orderBy() interface', () => {
 
   it('accepts field path', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo.bar', 'ASCENDING', 'bar.foo', 'ASCENDING'),
@@ -1887,7 +1887,7 @@ describe('orderBy() interface', () => {
 
   it('concatenates orders', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy(
@@ -1925,7 +1925,7 @@ describe('limit() interface', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, limit(10));
         return emptyQueryStream();
       },
@@ -1946,7 +1946,7 @@ describe('limit() interface', () => {
 
   it('uses latest limit', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, limit(3));
         return emptyQueryStream();
       },
@@ -1970,7 +1970,7 @@ describe('limitToLast() interface', () => {
 
   it('reverses order constraints', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'DESCENDING'), limit(10));
         return emptyQueryStream();
       },
@@ -1984,7 +1984,7 @@ describe('limitToLast() interface', () => {
 
   it('reverses cursors', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'DESCENDING'),
@@ -2004,13 +2004,13 @@ describe('limitToLast() interface', () => {
 
   it('reverses results', () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'DESCENDING'), limit(2));
         return stream(result('second'), result('first'));
       },
     };
 
-    return createInstance(overrides).then(async firestoreInstance => {
+    return createInstance(overrides).then(async (firestoreInstance) => {
       firestore = firestoreInstance;
       let query: Query = firestore.collection('collectionId');
       query = query.orderBy('foo').limitToLast(2);
@@ -2044,7 +2044,7 @@ describe('limitToLast() interface', () => {
 
   it('uses latest limitToLast', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'DESCENDING'), limit(3));
         return emptyQueryStream();
       },
@@ -2124,7 +2124,7 @@ describe('offset() interface', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, offset(10));
         return emptyQueryStream();
       },
@@ -2145,7 +2145,7 @@ describe('offset() interface', () => {
 
   it('uses latest offset', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, offset(3));
         return emptyQueryStream();
       },
@@ -2169,7 +2169,7 @@ describe('select() interface', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, select('a', 'b.c'));
         return emptyQueryStream();
       },
@@ -2196,7 +2196,7 @@ describe('select() interface', () => {
 
   it('uses latest field mask', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, select('bar'));
         return emptyQueryStream();
       },
@@ -2210,7 +2210,7 @@ describe('select() interface', () => {
 
   it('implicitly adds FieldPath.documentId()', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, select('__name__'));
         return emptyQueryStream();
       },
@@ -2234,7 +2234,7 @@ describe('startAt() interface', () => {
 
   it('accepts fields', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING', 'bar', 'ASCENDING'),
@@ -2253,7 +2253,7 @@ describe('startAt() interface', () => {
 
   it('accepts FieldPath.documentId()', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('__name__', 'ASCENDING'),
@@ -2337,7 +2337,7 @@ describe('startAt() interface', () => {
 
   it('can specify document snapshot', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('__name__', 'ASCENDING'),
@@ -2360,7 +2360,7 @@ describe('startAt() interface', () => {
 
   it("doesn't append documentId() twice", async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('__name__', 'ASCENDING'),
@@ -2386,7 +2386,7 @@ describe('startAt() interface', () => {
 
   it('appends orderBy for DocumentReference cursors', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('__name__', 'ASCENDING'),
@@ -2410,7 +2410,7 @@ describe('startAt() interface', () => {
 
   it('can extract implicit direction for document snapshot', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING', '__name__', 'ASCENDING'),
@@ -2434,7 +2434,7 @@ describe('startAt() interface', () => {
 
   it('can extract explicit direction for document snapshot', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'DESCENDING', '__name__', 'DESCENDING'),
@@ -2460,7 +2460,7 @@ describe('startAt() interface', () => {
 
   it('can specify document snapshot with inequality filter', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('c', 'ASCENDING', '__name__', 'ASCENDING'),
@@ -2503,7 +2503,7 @@ describe('startAt() interface', () => {
 
   it('ignores equality filter with document snapshot cursor', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('__name__', 'ASCENDING'),
@@ -2531,7 +2531,7 @@ describe('startAt() interface', () => {
   describe('inequality fields are implicitly ordered lexicographically for cursors', () => {
     it('upper and lower case characters', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2593,7 +2593,7 @@ describe('startAt() interface', () => {
 
     it('characters and numbers', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2651,7 +2651,7 @@ describe('startAt() interface', () => {
 
     it('nested fields', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2712,7 +2712,7 @@ describe('startAt() interface', () => {
 
     it('special characters', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2773,7 +2773,7 @@ describe('startAt() interface', () => {
 
     it('field name with dot', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2837,7 +2837,7 @@ describe('startAt() interface', () => {
 
     it('composite filter', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2911,7 +2911,7 @@ describe('startAt() interface', () => {
 
     it('explicit orderby', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -2963,7 +2963,7 @@ describe('startAt() interface', () => {
 
     it('explicit order by direction', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -3011,7 +3011,7 @@ describe('startAt() interface', () => {
 
     it('last explicit order by direction', async () => {
       const overrides: ApiOverride = {
-        runQuery: request => {
+        runQuery: (request) => {
           queryEquals(
             request,
             orderBy(
@@ -3092,7 +3092,7 @@ describe('startAt() interface', () => {
 
   it('can overspecify order by', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING', 'bar', 'ASCENDING'),
@@ -3118,7 +3118,7 @@ describe('startAt() interface', () => {
 
   it('uses latest value', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'ASCENDING'), startAt(true, 'bar'));
 
         return emptyQueryStream();
@@ -3143,7 +3143,7 @@ describe('startAfter() interface', () => {
 
   it('accepts fields', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING', 'bar', 'ASCENDING'),
@@ -3169,7 +3169,7 @@ describe('startAfter() interface', () => {
 
   it('uses latest value', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING'),
@@ -3198,7 +3198,7 @@ describe('endAt() interface', () => {
 
   it('accepts fields', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING', 'bar', 'ASCENDING'),
@@ -3224,7 +3224,7 @@ describe('endAt() interface', () => {
 
   it('uses latest value', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'ASCENDING'), endAt(false, 'bar'));
 
         return emptyQueryStream();
@@ -3249,7 +3249,7 @@ describe('endBefore() interface', () => {
 
   it('accepts fields', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING', 'bar', 'ASCENDING'),
@@ -3275,7 +3275,7 @@ describe('endBefore() interface', () => {
 
   it('uses latest value', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, orderBy('foo', 'ASCENDING'), endAt(true, 'bar'));
 
         return emptyQueryStream();
@@ -3292,7 +3292,7 @@ describe('endBefore() interface', () => {
     let expectedComponents = [limit(10)];
 
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, ...expectedComponents);
         return emptyQueryStream();
       },
@@ -3315,7 +3315,7 @@ describe('endBefore() interface', () => {
 describe('collectionGroup queries', () => {
   it('serialize correctly', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           allDescendants(),
@@ -3377,7 +3377,7 @@ describe('query resumption', () => {
     const sliced = startAtEnd
       ? documentIds.slice(-1 * numDocs)
       : documentIds.slice(0, numDocs);
-    let runQueryResponses = sliced.map(documentId => result(documentId));
+    let runQueryResponses = sliced.map((documentId) => result(documentId));
     if (startAtEnd) {
       runQueryResponses = runQueryResponses.reverse();
     }
@@ -3431,7 +3431,7 @@ describe('query resumption', () => {
 
     const runQueryResponses = documentIds
       .slice(begin, end)
-      .map(documentId => result(documentId));
+      .map((documentId) => result(documentId));
 
     let numDocsReturned = 0;
     for (const runQueryResponse of reverseOrder
@@ -3500,7 +3500,7 @@ describe('query resumption', () => {
     // Set up the mocked responses from Watch.
     let requestNum = 0;
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         requestNum++;
         switch (requestNum) {
           case 1:
@@ -3532,7 +3532,7 @@ describe('query resumption', () => {
 
     // Verify that the async iterator returned the correct documents and,
     // especially, does not have duplicate results.
-    const actualDocumentIds = snapshots.map(snapshot => snapshot.id);
+    const actualDocumentIds = snapshots.map((snapshot) => snapshot.id);
     expect(actualDocumentIds).to.eql(documentIds);
   });
 
@@ -3543,7 +3543,7 @@ describe('query resumption', () => {
     // Set up the mocked responses from Watch.
     let requestNum = 0;
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         requestNum++;
         switch (requestNum) {
           case 1:
@@ -3574,7 +3574,7 @@ describe('query resumption', () => {
 
     // Verify that we got the correct number of results, and the results match
     // the documents we expect.
-    const actualDocumentIds = snapshots.map(snapshot => snapshot.id);
+    const actualDocumentIds = snapshots.map((snapshot) => snapshot.id);
     expect(actualDocumentIds.length).to.eql(limit);
     expect(actualDocumentIds).to.eql(documentIds.slice(0, limit));
   });
@@ -3586,7 +3586,7 @@ describe('query resumption', () => {
     // Set up the mocked responses from Watch.
     let requestNum = 0;
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         requestNum++;
         switch (requestNum) {
           case 1:
@@ -3619,7 +3619,7 @@ describe('query resumption', () => {
 
     // Verify that we got the correct number of results, and the results match
     // the documents we expect.
-    const actualDocumentIds = snapshots.docs.map(snapshot => snapshot.id);
+    const actualDocumentIds = snapshots.docs.map((snapshot) => snapshot.id);
     expect(actualDocumentIds.length).to.eql(limit);
     // slice(-limit) returns the last `limit` documents in the array.
     expect(actualDocumentIds).to.eql(documentIds.slice(-limit));
@@ -3632,7 +3632,7 @@ describe('query resumption', () => {
     // Set up the mocked responses from Watch.
     let requestNum = 0;
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         requestNum++;
         switch (requestNum) {
           case 1:
@@ -3673,7 +3673,7 @@ describe('query resumption', () => {
 
     // Verify that we got the correct number of results, and the results match
     // the documents we expect.
-    const actualDocumentIds = snapshots.map(snapshot => snapshot.id);
+    const actualDocumentIds = snapshots.map((snapshot) => snapshot.id);
     expect(actualDocumentIds.length).to.eql(limit);
     expect(actualDocumentIds).to.eql(documentIds.slice(0, limit));
   });
@@ -3685,7 +3685,7 @@ describe('query resumption', () => {
     // Set up the mocked responses from Watch.
     let requestNum = 0;
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         requestNum++;
         switch (requestNum) {
           case 1:
@@ -3728,7 +3728,7 @@ describe('query resumption', () => {
 
     // Verify that we got the correct number of results, and the results match
     // the documents we expect.
-    const actualDocumentIds = snapshots.docs.map(snapshot => snapshot.id);
+    const actualDocumentIds = snapshots.docs.map((snapshot) => snapshot.id);
     expect(actualDocumentIds.length).to.eql(limit);
     // slice(-limit) returns the last `limit` documents in the array.
     expect(actualDocumentIds).to.eql(documentIds.slice(-limit));

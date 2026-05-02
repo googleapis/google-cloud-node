@@ -21,7 +21,7 @@ export const createMetadata = (
   return google.bigtable.v2.ExecuteQueryResponse.create({
     metadata: {
       protoSchema: {
-        columns: values.map(v =>
+        columns: values.map((v) =>
           google.bigtable.v2.ColumnMetadata.create({
             name: v[0],
             type: v[1],
@@ -74,7 +74,7 @@ export const createProtoRows = (
 ): google.bigtable.v2.ExecuteQueryResponse => {
   const bytes = google.bigtable.v2.ProtoRows.encode(
     google.bigtable.v2.ProtoRows.create({
-      values: values.map(v => google.bigtable.v2.Value.create(v)),
+      values: values.map((v) => google.bigtable.v2.Value.create(v)),
     }),
   ).finish();
 

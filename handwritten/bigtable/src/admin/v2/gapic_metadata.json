@@ -11,139 +11,85 @@
           "libraryClient": "BigtableInstanceAdminClient",
           "rpcs": {
             "GetInstance": {
-              "methods": [
-                "getInstance"
-              ]
+              "methods": ["getInstance"]
             },
             "ListInstances": {
-              "methods": [
-                "listInstances"
-              ]
+              "methods": ["listInstances"]
             },
             "UpdateInstance": {
-              "methods": [
-                "updateInstance"
-              ]
+              "methods": ["updateInstance"]
             },
             "DeleteInstance": {
-              "methods": [
-                "deleteInstance"
-              ]
+              "methods": ["deleteInstance"]
             },
             "GetCluster": {
-              "methods": [
-                "getCluster"
-              ]
+              "methods": ["getCluster"]
             },
             "ListClusters": {
-              "methods": [
-                "listClusters"
-              ]
+              "methods": ["listClusters"]
             },
             "DeleteCluster": {
-              "methods": [
-                "deleteCluster"
-              ]
+              "methods": ["deleteCluster"]
             },
             "CreateAppProfile": {
-              "methods": [
-                "createAppProfile"
-              ]
+              "methods": ["createAppProfile"]
             },
             "GetAppProfile": {
-              "methods": [
-                "getAppProfile"
-              ]
+              "methods": ["getAppProfile"]
             },
             "DeleteAppProfile": {
-              "methods": [
-                "deleteAppProfile"
-              ]
+              "methods": ["deleteAppProfile"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "getIamPolicy"
-              ]
+              "methods": ["getIamPolicy"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "setIamPolicy"
-              ]
+              "methods": ["setIamPolicy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
+              "methods": ["testIamPermissions"]
             },
             "GetLogicalView": {
-              "methods": [
-                "getLogicalView"
-              ]
+              "methods": ["getLogicalView"]
             },
             "DeleteLogicalView": {
-              "methods": [
-                "deleteLogicalView"
-              ]
+              "methods": ["deleteLogicalView"]
             },
             "GetMaterializedView": {
-              "methods": [
-                "getMaterializedView"
-              ]
+              "methods": ["getMaterializedView"]
             },
             "DeleteMaterializedView": {
-              "methods": [
-                "deleteMaterializedView"
-              ]
+              "methods": ["deleteMaterializedView"]
             },
             "CreateInstance": {
-              "methods": [
-                "createInstance"
-              ]
+              "methods": ["createInstance"]
             },
             "PartialUpdateInstance": {
-              "methods": [
-                "partialUpdateInstance"
-              ]
+              "methods": ["partialUpdateInstance"]
             },
             "CreateCluster": {
-              "methods": [
-                "createCluster"
-              ]
+              "methods": ["createCluster"]
             },
             "UpdateCluster": {
-              "methods": [
-                "updateCluster"
-              ]
+              "methods": ["updateCluster"]
             },
             "PartialUpdateCluster": {
-              "methods": [
-                "partialUpdateCluster"
-              ]
+              "methods": ["partialUpdateCluster"]
             },
             "UpdateAppProfile": {
-              "methods": [
-                "updateAppProfile"
-              ]
+              "methods": ["updateAppProfile"]
             },
             "CreateLogicalView": {
-              "methods": [
-                "createLogicalView"
-              ]
+              "methods": ["createLogicalView"]
             },
             "UpdateLogicalView": {
-              "methods": [
-                "updateLogicalView"
-              ]
+              "methods": ["updateLogicalView"]
             },
             "CreateMaterializedView": {
-              "methods": [
-                "createMaterializedView"
-              ]
+              "methods": ["createMaterializedView"]
             },
             "UpdateMaterializedView": {
-              "methods": [
-                "updateMaterializedView"
-              ]
+              "methods": ["updateMaterializedView"]
             },
             "ListAppProfiles": {
               "methods": [
@@ -179,139 +125,85 @@
           "libraryClient": "BigtableInstanceAdminClient",
           "rpcs": {
             "GetInstance": {
-              "methods": [
-                "getInstance"
-              ]
+              "methods": ["getInstance"]
             },
             "ListInstances": {
-              "methods": [
-                "listInstances"
-              ]
+              "methods": ["listInstances"]
             },
             "UpdateInstance": {
-              "methods": [
-                "updateInstance"
-              ]
+              "methods": ["updateInstance"]
             },
             "DeleteInstance": {
-              "methods": [
-                "deleteInstance"
-              ]
+              "methods": ["deleteInstance"]
             },
             "GetCluster": {
-              "methods": [
-                "getCluster"
-              ]
+              "methods": ["getCluster"]
             },
             "ListClusters": {
-              "methods": [
-                "listClusters"
-              ]
+              "methods": ["listClusters"]
             },
             "DeleteCluster": {
-              "methods": [
-                "deleteCluster"
-              ]
+              "methods": ["deleteCluster"]
             },
             "CreateAppProfile": {
-              "methods": [
-                "createAppProfile"
-              ]
+              "methods": ["createAppProfile"]
             },
             "GetAppProfile": {
-              "methods": [
-                "getAppProfile"
-              ]
+              "methods": ["getAppProfile"]
             },
             "DeleteAppProfile": {
-              "methods": [
-                "deleteAppProfile"
-              ]
+              "methods": ["deleteAppProfile"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "getIamPolicy"
-              ]
+              "methods": ["getIamPolicy"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "setIamPolicy"
-              ]
+              "methods": ["setIamPolicy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
+              "methods": ["testIamPermissions"]
             },
             "GetLogicalView": {
-              "methods": [
-                "getLogicalView"
-              ]
+              "methods": ["getLogicalView"]
             },
             "DeleteLogicalView": {
-              "methods": [
-                "deleteLogicalView"
-              ]
+              "methods": ["deleteLogicalView"]
             },
             "GetMaterializedView": {
-              "methods": [
-                "getMaterializedView"
-              ]
+              "methods": ["getMaterializedView"]
             },
             "DeleteMaterializedView": {
-              "methods": [
-                "deleteMaterializedView"
-              ]
+              "methods": ["deleteMaterializedView"]
             },
             "CreateInstance": {
-              "methods": [
-                "createInstance"
-              ]
+              "methods": ["createInstance"]
             },
             "PartialUpdateInstance": {
-              "methods": [
-                "partialUpdateInstance"
-              ]
+              "methods": ["partialUpdateInstance"]
             },
             "CreateCluster": {
-              "methods": [
-                "createCluster"
-              ]
+              "methods": ["createCluster"]
             },
             "UpdateCluster": {
-              "methods": [
-                "updateCluster"
-              ]
+              "methods": ["updateCluster"]
             },
             "PartialUpdateCluster": {
-              "methods": [
-                "partialUpdateCluster"
-              ]
+              "methods": ["partialUpdateCluster"]
             },
             "UpdateAppProfile": {
-              "methods": [
-                "updateAppProfile"
-              ]
+              "methods": ["updateAppProfile"]
             },
             "CreateLogicalView": {
-              "methods": [
-                "createLogicalView"
-              ]
+              "methods": ["createLogicalView"]
             },
             "UpdateLogicalView": {
-              "methods": [
-                "updateLogicalView"
-              ]
+              "methods": ["updateLogicalView"]
             },
             "CreateMaterializedView": {
-              "methods": [
-                "createMaterializedView"
-              ]
+              "methods": ["createMaterializedView"]
             },
             "UpdateMaterializedView": {
-              "methods": [
-                "updateMaterializedView"
-              ]
+              "methods": ["updateMaterializedView"]
             },
             "ListAppProfiles": {
               "methods": [
@@ -351,161 +243,97 @@
           "libraryClient": "BigtableTableAdminClient",
           "rpcs": {
             "CreateTable": {
-              "methods": [
-                "createTable"
-              ]
+              "methods": ["createTable"]
             },
             "GetTable": {
-              "methods": [
-                "getTable"
-              ]
+              "methods": ["getTable"]
             },
             "DeleteTable": {
-              "methods": [
-                "deleteTable"
-              ]
+              "methods": ["deleteTable"]
             },
             "GetAuthorizedView": {
-              "methods": [
-                "getAuthorizedView"
-              ]
+              "methods": ["getAuthorizedView"]
             },
             "DeleteAuthorizedView": {
-              "methods": [
-                "deleteAuthorizedView"
-              ]
+              "methods": ["deleteAuthorizedView"]
             },
             "ModifyColumnFamilies": {
-              "methods": [
-                "modifyColumnFamilies"
-              ]
+              "methods": ["modifyColumnFamilies"]
             },
             "DropRowRange": {
-              "methods": [
-                "dropRowRange"
-              ]
+              "methods": ["dropRowRange"]
             },
             "GenerateConsistencyToken": {
-              "methods": [
-                "generateConsistencyToken"
-              ]
+              "methods": ["generateConsistencyToken"]
             },
             "CheckConsistency": {
-              "methods": [
-                "checkConsistency"
-              ]
+              "methods": ["checkConsistency"]
             },
             "GetSnapshot": {
-              "methods": [
-                "getSnapshot"
-              ]
+              "methods": ["getSnapshot"]
             },
             "DeleteSnapshot": {
-              "methods": [
-                "deleteSnapshot"
-              ]
+              "methods": ["deleteSnapshot"]
             },
             "GetBackup": {
-              "methods": [
-                "getBackup"
-              ]
+              "methods": ["getBackup"]
             },
             "UpdateBackup": {
-              "methods": [
-                "updateBackup"
-              ]
+              "methods": ["updateBackup"]
             },
             "DeleteBackup": {
-              "methods": [
-                "deleteBackup"
-              ]
+              "methods": ["deleteBackup"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "getIamPolicy"
-              ]
+              "methods": ["getIamPolicy"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "setIamPolicy"
-              ]
+              "methods": ["setIamPolicy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
+              "methods": ["testIamPermissions"]
             },
             "GetSchemaBundle": {
-              "methods": [
-                "getSchemaBundle"
-              ]
+              "methods": ["getSchemaBundle"]
             },
             "DeleteSchemaBundle": {
-              "methods": [
-                "deleteSchemaBundle"
-              ]
+              "methods": ["deleteSchemaBundle"]
             },
             "CreateTableFromSnapshot": {
-              "methods": [
-                "createTableFromSnapshot"
-              ]
+              "methods": ["createTableFromSnapshot"]
             },
             "UpdateTable": {
-              "methods": [
-                "updateTable"
-              ]
+              "methods": ["updateTable"]
             },
             "UndeleteTable": {
-              "methods": [
-                "undeleteTable"
-              ]
+              "methods": ["undeleteTable"]
             },
             "CreateAuthorizedView": {
-              "methods": [
-                "createAuthorizedView"
-              ]
+              "methods": ["createAuthorizedView"]
             },
             "UpdateAuthorizedView": {
-              "methods": [
-                "updateAuthorizedView"
-              ]
+              "methods": ["updateAuthorizedView"]
             },
             "SnapshotTable": {
-              "methods": [
-                "snapshotTable"
-              ]
+              "methods": ["snapshotTable"]
             },
             "CreateBackup": {
-              "methods": [
-                "createBackup"
-              ]
+              "methods": ["createBackup"]
             },
             "RestoreTable": {
-              "methods": [
-                "restoreTable"
-              ]
+              "methods": ["restoreTable"]
             },
             "CopyBackup": {
-              "methods": [
-                "copyBackup"
-              ]
+              "methods": ["copyBackup"]
             },
             "CreateSchemaBundle": {
-              "methods": [
-                "createSchemaBundle"
-              ]
+              "methods": ["createSchemaBundle"]
             },
             "UpdateSchemaBundle": {
-              "methods": [
-                "updateSchemaBundle"
-              ]
+              "methods": ["updateSchemaBundle"]
             },
             "ListTables": {
-              "methods": [
-                "listTables",
-                "listTablesStream",
-                "listTablesAsync"
-              ]
+              "methods": ["listTables", "listTablesStream", "listTablesAsync"]
             },
             "ListAuthorizedViews": {
               "methods": [
@@ -541,161 +369,97 @@
           "libraryClient": "BigtableTableAdminClient",
           "rpcs": {
             "CreateTable": {
-              "methods": [
-                "createTable"
-              ]
+              "methods": ["createTable"]
             },
             "GetTable": {
-              "methods": [
-                "getTable"
-              ]
+              "methods": ["getTable"]
             },
             "DeleteTable": {
-              "methods": [
-                "deleteTable"
-              ]
+              "methods": ["deleteTable"]
             },
             "GetAuthorizedView": {
-              "methods": [
-                "getAuthorizedView"
-              ]
+              "methods": ["getAuthorizedView"]
             },
             "DeleteAuthorizedView": {
-              "methods": [
-                "deleteAuthorizedView"
-              ]
+              "methods": ["deleteAuthorizedView"]
             },
             "ModifyColumnFamilies": {
-              "methods": [
-                "modifyColumnFamilies"
-              ]
+              "methods": ["modifyColumnFamilies"]
             },
             "DropRowRange": {
-              "methods": [
-                "dropRowRange"
-              ]
+              "methods": ["dropRowRange"]
             },
             "GenerateConsistencyToken": {
-              "methods": [
-                "generateConsistencyToken"
-              ]
+              "methods": ["generateConsistencyToken"]
             },
             "CheckConsistency": {
-              "methods": [
-                "checkConsistency"
-              ]
+              "methods": ["checkConsistency"]
             },
             "GetSnapshot": {
-              "methods": [
-                "getSnapshot"
-              ]
+              "methods": ["getSnapshot"]
             },
             "DeleteSnapshot": {
-              "methods": [
-                "deleteSnapshot"
-              ]
+              "methods": ["deleteSnapshot"]
             },
             "GetBackup": {
-              "methods": [
-                "getBackup"
-              ]
+              "methods": ["getBackup"]
             },
             "UpdateBackup": {
-              "methods": [
-                "updateBackup"
-              ]
+              "methods": ["updateBackup"]
             },
             "DeleteBackup": {
-              "methods": [
-                "deleteBackup"
-              ]
+              "methods": ["deleteBackup"]
             },
             "GetIamPolicy": {
-              "methods": [
-                "getIamPolicy"
-              ]
+              "methods": ["getIamPolicy"]
             },
             "SetIamPolicy": {
-              "methods": [
-                "setIamPolicy"
-              ]
+              "methods": ["setIamPolicy"]
             },
             "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
+              "methods": ["testIamPermissions"]
             },
             "GetSchemaBundle": {
-              "methods": [
-                "getSchemaBundle"
-              ]
+              "methods": ["getSchemaBundle"]
             },
             "DeleteSchemaBundle": {
-              "methods": [
-                "deleteSchemaBundle"
-              ]
+              "methods": ["deleteSchemaBundle"]
             },
             "CreateTableFromSnapshot": {
-              "methods": [
-                "createTableFromSnapshot"
-              ]
+              "methods": ["createTableFromSnapshot"]
             },
             "UpdateTable": {
-              "methods": [
-                "updateTable"
-              ]
+              "methods": ["updateTable"]
             },
             "UndeleteTable": {
-              "methods": [
-                "undeleteTable"
-              ]
+              "methods": ["undeleteTable"]
             },
             "CreateAuthorizedView": {
-              "methods": [
-                "createAuthorizedView"
-              ]
+              "methods": ["createAuthorizedView"]
             },
             "UpdateAuthorizedView": {
-              "methods": [
-                "updateAuthorizedView"
-              ]
+              "methods": ["updateAuthorizedView"]
             },
             "SnapshotTable": {
-              "methods": [
-                "snapshotTable"
-              ]
+              "methods": ["snapshotTable"]
             },
             "CreateBackup": {
-              "methods": [
-                "createBackup"
-              ]
+              "methods": ["createBackup"]
             },
             "RestoreTable": {
-              "methods": [
-                "restoreTable"
-              ]
+              "methods": ["restoreTable"]
             },
             "CopyBackup": {
-              "methods": [
-                "copyBackup"
-              ]
+              "methods": ["copyBackup"]
             },
             "CreateSchemaBundle": {
-              "methods": [
-                "createSchemaBundle"
-              ]
+              "methods": ["createSchemaBundle"]
             },
             "UpdateSchemaBundle": {
-              "methods": [
-                "updateSchemaBundle"
-              ]
+              "methods": ["updateSchemaBundle"]
             },
             "ListTables": {
-              "methods": [
-                "listTables",
-                "listTablesStream",
-                "listTablesAsync"
-              ]
+              "methods": ["listTables", "listTablesStream", "listTablesAsync"]
             },
             "ListAuthorizedViews": {
               "methods": [

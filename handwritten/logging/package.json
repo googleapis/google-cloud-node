@@ -24,10 +24,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "main": "build/src/index.js",
-  "files": [
-    "build/src",
-    "build/protos"
-  ],
+  "files": ["build/src", "build/protos"],
   "scripts": {
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r proto* build/",

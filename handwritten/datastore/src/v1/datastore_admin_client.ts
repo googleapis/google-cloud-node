@@ -396,7 +396,7 @@ export class DatastoreAdminClient {
     ];
     for (const methodName of datastoreAdminStubMethods) {
       const callPromise = this.datastoreAdminStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -595,7 +595,7 @@ export class DatastoreAdminClient {
         project_id: request.projectId ?? '',
         index_id: request.indexId ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getIndex request %j', request);
@@ -754,7 +754,7 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -949,7 +949,7 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1134,7 +1134,7 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1316,7 +1316,7 @@ export class DatastoreAdminClient {
         project_id: request.projectId ?? '',
         index_id: request.indexId ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1478,7 +1478,7 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1547,7 +1547,7 @@ export class DatastoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listIndexes stream %j', request);
@@ -1598,7 +1598,7 @@ export class DatastoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listIndexes iterate %j', request);
@@ -1840,7 +1840,7 @@ export class DatastoreAdminClient {
    */
   close(): Promise<void> {
     if (this.datastoreAdminStub && !this._terminated) {
-      return this.datastoreAdminStub.then(stub => {
+      return this.datastoreAdminStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

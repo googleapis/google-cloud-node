@@ -141,7 +141,7 @@ describe('restifyInterface', () => {
         });
       });
       describe('Exercise the uncaughtException event path', () => {
-        it('Should call the sendError function property', done => {
+        it('Should call the sendError function property', (done) => {
           client.sendError = () => {
             assert(true, 'sendError should be called');
             done();

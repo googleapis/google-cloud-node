@@ -103,7 +103,7 @@ describe('BigQuery/Routine', () => {
       });
     });
 
-    it('should configure create method', done => {
+    it('should configure create method', (done) => {
       const config = {a: 'b'};
 
       const dataset = extend(true, {}, DATASET, {
@@ -122,7 +122,7 @@ describe('BigQuery/Routine', () => {
   });
 
   describe('setMetadata', () => {
-    it('should update the metadata', done => {
+    it('should update the metadata', (done) => {
       const currentMetadata = {a: 'b'};
       const newMetadata = {c: 'd'};
       const expectedMetadata = Object.assign({}, currentMetadata, newMetadata);
@@ -144,7 +144,7 @@ describe('BigQuery/Routine', () => {
       routine.setMetadata(newMetadata, done);
     });
 
-    it('should return an error if getting metadata fails', done => {
+    it('should return an error if getting metadata fails', (done) => {
       const error = new Error('Error.');
       routine.getMetadata = (callback: Function) => {
         callback(error);

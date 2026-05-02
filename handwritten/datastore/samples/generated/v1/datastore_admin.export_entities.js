@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(projectId, outputUrlPrefix) {
@@ -52,7 +50,7 @@ function main(projectId, outputUrlPrefix) {
    *  considerations (https://cloud.google.com/storage/docs/naming#object-considerations).
    *  The resulting files will be nested deeper than the specified URL prefix.
    *  The final output URL will be provided in the
-   *  google.datastore.admin.v1.ExportEntitiesResponse.output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url 
+   *  google.datastore.admin.v1.ExportEntitiesResponse.output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url
    *  field. That value should be used for subsequent ImportEntities operations.
    *  By nesting the data files deeper, the same Cloud Storage bucket can be used
    *  in multiple ExportEntities operations without conflict.
@@ -82,7 +80,7 @@ function main(projectId, outputUrlPrefix) {
   // [END datastore_v1_generated_DatastoreAdmin_ExportEntities_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

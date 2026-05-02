@@ -208,7 +208,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('create', () => {
-    it('should call createBackup from cluster', done => {
+    it('should call createBackup from cluster', (done) => {
       const config = {};
 
       backup.cluster.createBackup = (
@@ -235,7 +235,7 @@ describe('Bigtable/Backup', () => {
       };
     });
 
-    it('should correctly copy backup from the cluster to a custom project', done => {
+    it('should correctly copy backup from the cluster to a custom project', (done) => {
       const destinationProjectId = generateId('project');
       const bigtable = new Bigtable({projectId: destinationProjectId});
       const backupId = generateId('backup');
@@ -286,7 +286,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       backup.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -301,7 +301,7 @@ describe('Bigtable/Backup', () => {
       backup.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       backup.bigtable.request = (config: {gaxOpts: {}}) => {
@@ -314,7 +314,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       backup.getMetadata = (options: {}) => {
         assert.deepStrictEqual(options, {});
         done();
@@ -322,7 +322,7 @@ describe('Bigtable/Backup', () => {
       backup.exists(assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
       backup.getMetadata = (options: {}) => {
         assert.strictEqual(options, gaxOptions);
@@ -331,7 +331,7 @@ describe('Bigtable/Backup', () => {
       backup.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if error code is 5', done => {
+    it('should return false if error code is 5', (done) => {
       const error = new Error('Error.') as ServiceError;
       error.code = 5;
       backup.getMetadata = (gaxOptions: {}, callback: Function) => {
@@ -344,7 +344,7 @@ describe('Bigtable/Backup', () => {
       });
     });
 
-    it('should return error if code is not 5', done => {
+    it('should return error if code is not 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 'NOT-5';
@@ -358,7 +358,7 @@ describe('Bigtable/Backup', () => {
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       backup.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(null, {});
       };
@@ -371,7 +371,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const gaxOptions = {};
       backup.getMetadata = (options: {}) => {
         assert.strictEqual(options, gaxOptions);
@@ -380,7 +380,7 @@ describe('Bigtable/Backup', () => {
       backup.get(gaxOptions, assert.ifError);
     });
 
-    it('should not require an options object', done => {
+    it('should not require an options object', (done) => {
       backup.getMetadata = (options: {}) => {
         assert.deepStrictEqual(options, {});
         done();
@@ -388,7 +388,7 @@ describe('Bigtable/Backup', () => {
       backup.get(assert.ifError);
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
       backup.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(error);
@@ -399,7 +399,7 @@ describe('Bigtable/Backup', () => {
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {};
       backup.getMetadata = (gaxOptions: {}, callback: Function) => {
         callback(null, apiResponse);
@@ -418,7 +418,7 @@ describe('Bigtable/Backup', () => {
       sinon.restore();
     });
 
-    it('should correctly call Table#getIamPolicy()', done => {
+    it('should correctly call Table#getIamPolicy()', (done) => {
       sinon.stub(Table.prototype, 'getIamPolicy').callsFake((opt, callback) => {
         assert.deepStrictEqual(opt, {});
         callback(); // done()
@@ -426,7 +426,7 @@ describe('Bigtable/Backup', () => {
       backup.getIamPolicy(done);
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const options = {gaxOptions: {}, requestedPolicyVersion: 1};
 
       sinon.stub(Table.prototype, 'getIamPolicy').callsFake((opt, callback) => {
@@ -438,7 +438,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       backup.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableTableAdminClient');
@@ -453,7 +453,7 @@ describe('Bigtable/Backup', () => {
       backup.getMetadata(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       backup.bigtable.request = (config: {gaxOpts: {}}) => {
@@ -464,7 +464,7 @@ describe('Bigtable/Backup', () => {
       backup.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should update the metadata', done => {
+    it('should update the metadata', (done) => {
       const response = {};
       backup.bigtable.request = (config: {}, callback: Function) => {
         callback(null, response);
@@ -479,7 +479,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('restore', () => {
-    it('should delegate to Backup#restoreTo()', done => {
+    it('should delegate to Backup#restoreTo()', (done) => {
       const tableId = 'table-id';
       const callback = assert.ifError;
 
@@ -497,7 +497,7 @@ describe('Bigtable/Backup', () => {
       backup.restore(tableId, callback);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const tableId = 'table-id';
       const gaxOptions = {};
 
@@ -513,7 +513,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('restoreTo', () => {
-    it('should send the correct request', done => {
+    it('should send the correct request', (done) => {
       const tableId = 'table-id';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -532,7 +532,7 @@ describe('Bigtable/Backup', () => {
       (backup as backupTypes.Backup).restoreTo({tableId}, assert.ifError);
     });
 
-    it('should accept instance as instanceId', done => {
+    it('should accept instance as instanceId', (done) => {
       const tableId = 'table-id';
       const instance = 'diff-instance';
 
@@ -554,7 +554,7 @@ describe('Bigtable/Backup', () => {
       );
     });
 
-    it('should accept instance as instanceName', done => {
+    it('should accept instance as instanceName', (done) => {
       const tableId = 'table-id';
       const instance = `${backup.bigtable.projectName}/instances/diff-instance`;
 
@@ -573,7 +573,7 @@ describe('Bigtable/Backup', () => {
       );
     });
 
-    it('should accept instance as Instance object', done => {
+    it('should accept instance as Instance object', (done) => {
       const tableId = 'table-id';
       const instanceName = `${backup.bigtable.projectName}/instances/diff-instance`;
       const instance = new FakeInstance(backup.bigtable, instanceName);
@@ -587,7 +587,7 @@ describe('Bigtable/Backup', () => {
       backup.restoreTo({tableId, instance}, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const tableId = 'table-id';
       const gaxOptions = {};
 
@@ -602,7 +602,7 @@ describe('Bigtable/Backup', () => {
       );
     });
 
-    it('should execute callback with error', done => {
+    it('should execute callback with error', (done) => {
       const tableId = 'table-id';
       const error = new Error('Error.');
       const args = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
@@ -623,7 +623,7 @@ describe('Bigtable/Backup', () => {
       );
     });
 
-    it('should execute callback with created Table', done => {
+    it('should execute callback with created Table', (done) => {
       const tableId = 'table-id';
       const args = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
       const tableInstance = {};
@@ -653,7 +653,7 @@ describe('Bigtable/Backup', () => {
   });
 
   describe('setMetadata', () => {
-    it('should send the correct request', done => {
+    it('should send the correct request', (done) => {
       const metadata = {
         testProperty: 'value',
       };
@@ -678,7 +678,7 @@ describe('Bigtable/Backup', () => {
       backup.setMetadata(metadata, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const metadata = {};
       const gaxOptions = {};
 
@@ -690,7 +690,7 @@ describe('Bigtable/Backup', () => {
       backup.setMetadata(metadata, gaxOptions, assert.ifError);
     });
 
-    it('should convert expireTime Date to struct', done => {
+    it('should convert expireTime Date to struct', (done) => {
       const metadata = {
         expireTime: new Date(),
       };
@@ -710,7 +710,7 @@ describe('Bigtable/Backup', () => {
       backup.setMetadata(metadata, assert.ifError);
     });
 
-    it('should execute the callback and update the metadata', done => {
+    it('should execute the callback and update the metadata', (done) => {
       const metadata = {};
       const response = {};
 
@@ -736,7 +736,7 @@ describe('Bigtable/Backup', () => {
       sinon.restore();
     });
     const policy = {};
-    it('should correctly call Table#setIamPolicy()', done => {
+    it('should correctly call Table#setIamPolicy()', (done) => {
       sinon
         .stub(Table.prototype, 'setIamPolicy')
         .callsFake((_policy, gaxOpts, callback) => {
@@ -747,7 +747,7 @@ describe('Bigtable/Backup', () => {
       backup.setIamPolicy(policy, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       sinon
@@ -767,7 +767,7 @@ describe('Bigtable/Backup', () => {
     });
 
     const permissions = 'bigtable.backups.get';
-    it('should properly call Table#testIamPermissions', done => {
+    it('should properly call Table#testIamPermissions', (done) => {
       sinon
         .stub(Table.prototype, 'testIamPermissions')
         .callsFake((_permissions, gaxOpts, callback) => {
@@ -778,7 +778,7 @@ describe('Bigtable/Backup', () => {
       backup.testIamPermissions(permissions, done);
     });
 
-    it('should accept permissions as array', done => {
+    it('should accept permissions as array', (done) => {
       const permissions = [
         'bigtable.backups.get',
         'bigtable.backups.delete',
@@ -795,7 +795,7 @@ describe('Bigtable/Backup', () => {
       backup.testIamPermissions(permissions, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       sinon
         .stub(Table.prototype, 'testIamPermissions')

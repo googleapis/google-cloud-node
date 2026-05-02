@@ -11,29 +11,19 @@
           "libraryClient": "DatastoreAdminClient",
           "rpcs": {
             "GetIndex": {
-              "methods": [
-                "getIndex"
-              ]
+              "methods": ["getIndex"]
             },
             "ExportEntities": {
-              "methods": [
-                "exportEntities"
-              ]
+              "methods": ["exportEntities"]
             },
             "ImportEntities": {
-              "methods": [
-                "importEntities"
-              ]
+              "methods": ["importEntities"]
             },
             "CreateIndex": {
-              "methods": [
-                "createIndex"
-              ]
+              "methods": ["createIndex"]
             },
             "DeleteIndex": {
-              "methods": [
-                "deleteIndex"
-              ]
+              "methods": ["deleteIndex"]
             },
             "ListIndexes": {
               "methods": [
@@ -48,29 +38,19 @@
           "libraryClient": "DatastoreAdminClient",
           "rpcs": {
             "GetIndex": {
-              "methods": [
-                "getIndex"
-              ]
+              "methods": ["getIndex"]
             },
             "ExportEntities": {
-              "methods": [
-                "exportEntities"
-              ]
+              "methods": ["exportEntities"]
             },
             "ImportEntities": {
-              "methods": [
-                "importEntities"
-              ]
+              "methods": ["importEntities"]
             },
             "CreateIndex": {
-              "methods": [
-                "createIndex"
-              ]
+              "methods": ["createIndex"]
             },
             "DeleteIndex": {
-              "methods": [
-                "deleteIndex"
-              ]
+              "methods": ["deleteIndex"]
             },
             "ListIndexes": {
               "methods": [

@@ -96,7 +96,7 @@ export class IndexTestHelper {
   }
 
   private toHashedIds(docs: string[]): string[] {
-    return docs.map(docId => this.toHashedId(docId));
+    return docs.map((docId) => this.toHashedId(docId));
   }
 
   // Adds test-specific fields to a document, including the testId and expiration date.
@@ -197,7 +197,7 @@ export class IndexTestHelper {
   // Retrieves multiple documents from Firestore with test-specific fields removed.
   async getDocs<T>(query_: Query<T>): Promise<QuerySnapshot<T>> {
     const querySnapshot = await this.query(query_).get();
-    querySnapshot.forEach(doc => {
+    querySnapshot.forEach((doc) => {
       this.removeTestSpecificFieldsFromDoc(doc);
     });
     return querySnapshot;

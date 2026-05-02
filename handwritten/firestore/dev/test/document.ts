@@ -67,7 +67,7 @@ describe('DocumentReference interface', () => {
   let documentRef: DocumentReference;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
       documentRef = firestore.doc('collectionId/documentId');
     });
@@ -112,7 +112,7 @@ describe('serialize document', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -121,7 +121,7 @@ describe('serialize document', () => {
 
   it('serializes to Protobuf JS', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -134,7 +134,7 @@ describe('serialize document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({
         bytes: Buffer.from('AG=', 'base64'),
       });
@@ -204,7 +204,7 @@ describe('serialize document', () => {
 
   it('serializes large numbers into doubles', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -226,7 +226,7 @@ describe('serialize document', () => {
 
   it('serializes negative zero into double', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -248,7 +248,7 @@ describe('serialize document', () => {
 
   it('serializes date before 1970', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -278,7 +278,7 @@ describe('serialize document', () => {
     }
 
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -302,7 +302,7 @@ describe('serialize document', () => {
 
   it('supports BigInt', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -323,7 +323,7 @@ describe('serialize document', () => {
 
   it('serializes unicode keys', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -342,7 +342,7 @@ describe('serialize document', () => {
 
   it('accepts both blob formats', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -370,7 +370,7 @@ describe('serialize document', () => {
 
   it('supports NaN and Infinity', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const fields = request.writes![0].update!.fields!;
         expect(fields.nanValue.doubleValue).to.be.a('number');
         expect(fields.nanValue.doubleValue).to.be.NaN;
@@ -438,7 +438,7 @@ describe('serialize document', () => {
 
   it('is able to write a document reference with cycles', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -465,7 +465,7 @@ describe('serialize document', () => {
 
   it('is able to translate FirestoreVector to internal representation with set', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -706,7 +706,7 @@ describe('deserialize document', () => {
 describe('get document', () => {
   it('returns document', async () => {
     const overrides: ApiOverride = {
-      batchGetDocuments: request => {
+      batchGetDocuments: (request) => {
         requestEquals(request, retrieve('documentId'));
 
         return stream(
@@ -763,7 +763,7 @@ describe('get document', () => {
     expect(result.get('foo')).to.not.exist;
   });
 
-  it('throws error', done => {
+  it('throws error', (done) => {
     const overrides: ApiOverride = {
       batchGetDocuments: () => {
         const error = new GoogleError('RPC Error');
@@ -772,11 +772,11 @@ describe('get document', () => {
       },
     };
 
-    void createInstance(overrides).then(firestore => {
+    void createInstance(overrides).then((firestore) => {
       firestore
         .doc('collectionId/documentId')
         .get()
-        .catch(err => {
+        .catch((err) => {
           expect(err.message).to.equal('RPC Error');
           done();
         });
@@ -814,7 +814,7 @@ describe('delete document', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreClient => {
+    return createInstance().then((firestoreClient) => {
       firestore = firestoreClient;
     });
   });
@@ -823,7 +823,7 @@ describe('delete document', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(request, remove('documentId'));
 
         return response(writeResult(1));
@@ -836,7 +836,7 @@ describe('delete document', () => {
 
   it('returns update time', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(request, remove('documentId'));
 
         return response({
@@ -857,7 +857,7 @@ describe('delete document', () => {
 
   it('with last update time precondition', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           remove('documentId', {
@@ -926,7 +926,7 @@ describe('set document', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreClient => {
+    return createInstance().then((firestoreClient) => {
       firestore = firestoreClient;
     });
   });
@@ -935,7 +935,7 @@ describe('set document', () => {
 
   it('supports empty map', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -946,14 +946,14 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({});
     });
   });
 
   it('supports nested empty map', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -966,14 +966,14 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({a: {}});
     });
   });
 
   it('skips merges with just field transform', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -986,7 +986,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set(
         {
           a: FieldValue.serverTimestamp(),
@@ -999,7 +999,7 @@ describe('set document', () => {
 
   it('sends empty non-merge write even with just field transform', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1011,7 +1011,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set({
         a: FieldValue.serverTimestamp(),
         b: {c: FieldValue.serverTimestamp()},
@@ -1021,7 +1021,7 @@ describe('set document', () => {
 
   it('supports document merges', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1041,7 +1041,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .doc('collectionId/documentId')
         .set({a: 'b', c: {d: 'e'}, f: FieldValue.delete()}, {merge: true});
@@ -1050,7 +1050,7 @@ describe('set document', () => {
 
   it('supports document merges with field mask', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1086,7 +1086,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set(
         {
           a: 'foo',
@@ -1103,7 +1103,7 @@ describe('set document', () => {
 
   it('supports document merges with empty field mask', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1115,7 +1115,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set(
         {},
         {
@@ -1127,7 +1127,7 @@ describe('set document', () => {
 
   it('supports document merges with field mask and empty maps', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1161,7 +1161,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set(
         {
           a: {b: {}},
@@ -1174,7 +1174,7 @@ describe('set document', () => {
 
   it('supports document merges with field mask and field transform', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1191,7 +1191,7 @@ describe('set document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').set(
         {
           a: FieldValue.serverTimestamp(),
@@ -1211,7 +1211,7 @@ describe('set document', () => {
 
   it('supports empty merge', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1229,7 +1229,7 @@ describe('set document', () => {
 
   it('supports nested empty merge', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1254,7 +1254,7 @@ describe('set document', () => {
 
   it('supports partials with merge', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1279,7 +1279,7 @@ describe('set document', () => {
 
   it('supports partials with mergeFields', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1304,7 +1304,7 @@ describe('set document', () => {
 
   it("doesn't split on dots", async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -1386,7 +1386,7 @@ describe('create document', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreClient => {
+    return createInstance().then((firestoreClient) => {
       firestore = firestoreClient;
     });
   });
@@ -1395,7 +1395,7 @@ describe('create document', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(request, create({document: document('documentId')}));
         return response(writeResult(1));
       },
@@ -1407,7 +1407,7 @@ describe('create document', () => {
 
   it('returns update time', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(request, create({document: document('documentId')}));
 
         return response({
@@ -1435,7 +1435,7 @@ describe('create document', () => {
 
   it('supports field transform', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           create({
@@ -1459,7 +1459,7 @@ describe('create document', () => {
 
   it('supports nested empty map', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           create({
@@ -1507,7 +1507,7 @@ describe('update document', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreClient => {
+    return createInstance().then((firestoreClient) => {
       firestore = firestoreClient;
     });
   });
@@ -1516,7 +1516,7 @@ describe('update document', () => {
 
   it('generates proto', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1534,7 +1534,7 @@ describe('update document', () => {
 
   it('supports nested field transform', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1559,7 +1559,7 @@ describe('update document', () => {
 
   it('skips write for single field transform', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1579,7 +1579,7 @@ describe('update document', () => {
 
   it('supports nested empty map', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1599,7 +1599,7 @@ describe('update document', () => {
 
   it('supports nested delete', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({document: document('documentId'), mask: updateMask('a.b')}),
@@ -1616,7 +1616,7 @@ describe('update document', () => {
 
   it('allows explicitly specifying {exists:true} precondition', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1636,7 +1636,7 @@ describe('update document', () => {
 
   it('returns update time', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1671,7 +1671,7 @@ describe('update document', () => {
 
   it('with last update time precondition', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1754,7 +1754,7 @@ describe('update document', () => {
 
   it('with top-level document', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1774,7 +1774,7 @@ describe('update document', () => {
 
   it('with nested document', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1828,7 +1828,7 @@ describe('update document', () => {
 
   it('with two nested fields ', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1885,7 +1885,7 @@ describe('update document', () => {
 
   it('with nested field and document transform ', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -1936,7 +1936,7 @@ describe('update document', () => {
 
   it('with field with dot ', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -2094,7 +2094,7 @@ describe('update document', () => {
 
   it('with field delete', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -2106,7 +2106,7 @@ describe('update document', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore.doc('collectionId/documentId').update({
         foo: FieldValue.delete(),
         bar: 'foobar',
@@ -2118,7 +2118,7 @@ describe('update document', () => {
 describe('listCollections() method', () => {
   it('sorts results', () => {
     const overrides: ApiOverride = {
-      listCollectionIds: request => {
+      listCollectionIds: (request) => {
         expect(request).to.deep.eq({
           parent: `projects/${PROJECT_ID}/databases/(default)/documents/coll/doc`,
         });
@@ -2127,11 +2127,11 @@ describe('listCollections() method', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .doc('coll/doc')
         .listCollections()
-        .then(collections => {
+        .then((collections) => {
           expect(collections[0].path).to.equal('coll/doc/first');
           expect(collections[1].path).to.equal('coll/doc/second');
         });
@@ -2143,7 +2143,7 @@ describe('withConverter() support', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -2153,7 +2153,7 @@ describe('withConverter() support', () => {
   it('for DocumentReference.get()', async () => {
     const doc = document('documentId', 'author', 'author', 'title', 'post');
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: doc,
         });
@@ -2172,7 +2172,7 @@ describe('withConverter() support', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const docRef = firestore
         .collection('collectionId')
         .doc('documentId')
@@ -2187,7 +2187,7 @@ describe('withConverter() support', () => {
   });
 
   it('withConverter(null) applies the default converter', async () => {
-    return createInstance().then(async firestore => {
+    return createInstance().then(async (firestore) => {
       const docRef = firestore
         .collection('collectionId')
         .doc('documentId')

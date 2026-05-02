@@ -1005,7 +1005,7 @@ export class Subscriber extends EventEmitter {
     ) {
       const waitTimeout = timeout.subtract(FINAL_NACK_TIMEOUT);
 
-      const emptyPromise = new Promise<void>(r => {
+      const emptyPromise = new Promise<void>((r) => {
         this._inventory.on('empty', r);
       });
 
@@ -1024,14 +1024,14 @@ export class Subscriber extends EventEmitter {
     // Grab everything left in inventory. This includes messages that have already
     // been dispatched to user callbacks.
     const remaining = this._inventory.clear();
-    remaining.forEach(m => m.nack());
+    remaining.forEach((m) => m.nack());
 
     // Wait for user callbacks to complete.
     const flushCompleted = this._waitForFlush();
     await this.#awaitTimeoutAndCheck(flushCompleted, timeout);
 
     // Clean up OTel spans for any remaining messages.
-    remaining.forEach(m => {
+    remaining.forEach((m) => {
       m.subSpans.shutdown();
       m.endParentSpan();
     });
@@ -1181,8 +1181,8 @@ export class Subscriber extends EventEmitter {
     this._stream = new MessageStream(this, streamingOptions);
 
     this._stream
-      .on('error', err => this.emit('error', err))
-      .on('debug', msg => this.emit('debug', msg))
+      .on('error', (err) => this.emit('error', err))
+      .on('debug', (msg) => this.emit('debug', msg))
       .on('data', (data: PullResponse) => this._onData(data))
       .once('close', () => this.close());
 
@@ -1190,7 +1190,7 @@ export class Subscriber extends EventEmitter {
       .on('full', () => this._stream.pause())
       .on('free', () => this._stream.resume());
 
-    this._stream.start().catch(err => {
+    this._stream.start().catch((err) => {
       this.emit('error', err);
       void this.close();
     });

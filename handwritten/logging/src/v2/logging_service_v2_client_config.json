@@ -3,10 +3,7 @@
     "google.logging.v2.LoggingServiceV2": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": [
-          "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ],
+        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
         "deadline_exceeded_internal_unavailable": [
           "DEADLINE_EXCEEDED",
           "INTERNAL",

@@ -38,7 +38,7 @@ function handwrittenLayerMutations(
   gapicLayerMutations: google.bigtable.v2.IMutation[],
 ) {
   return gapicLayerMutations
-    .map(mutation =>
+    .map((mutation) =>
       createFlatMutationsListWithFnInverse(
         [
           {
@@ -75,7 +75,7 @@ export const checkAndMutateRow: ClientImplMaker<
   ICheckAndMutateRowRequest,
   ICheckAndMutateRowResult
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {request} = rawRequest;
     const {clientId, request: checkAndMutateRowRequest} = request;
     const {appProfileId, falseMutations, rowKey, tableName, trueMutations} =

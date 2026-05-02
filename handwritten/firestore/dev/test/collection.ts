@@ -39,7 +39,7 @@ describe('Collection interface', () => {
   let firestore: Firestore;
 
   beforeEach(() => {
-    return createInstance().then(firestoreInstance => {
+    return createInstance().then((firestoreInstance) => {
       firestore = firestoreInstance;
     });
   });
@@ -97,7 +97,7 @@ describe('Collection interface', () => {
 
   it('has add() method', () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         // Verify that the document name uses an auto-generated id.
         const docIdRe =
           /^projects\/test-project\/databases\/\(default\)\/documents\/collectionId\/[a-zA-Z0-9]{20}$/;
@@ -136,12 +136,12 @@ describe('Collection interface', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       const collectionRef = firestore.collection('collectionId');
       const promise = collectionRef.add({});
       expect(promise).to.be.an.instanceOf(Promise);
 
-      return promise.then(documentRef => {
+      return promise.then((documentRef) => {
         expect(documentRef).to.be.an.instanceOf(DocumentReference);
         expect(collectionRef.id).to.equal('collectionId');
         expect(documentRef.id).to.have.length(20);
@@ -151,7 +151,7 @@ describe('Collection interface', () => {
 
   it('has list() method', () => {
     const overrides: ApiOverride = {
-      listDocuments: request => {
+      listDocuments: (request) => {
         expect(request).to.deep.eq({
           parent: `${DATABASE_ROOT}/documents/a/b`,
           collectionId: 'c',
@@ -163,11 +163,11 @@ describe('Collection interface', () => {
       },
     };
 
-    return createInstance(overrides).then(firestore => {
+    return createInstance(overrides).then((firestore) => {
       return firestore
         .collection('a/b/c')
         .listDocuments()
-        .then(documentRefs => {
+        .then((documentRefs) => {
           expect(documentRefs[0].id).to.equal('first');
           expect(documentRefs[1].id).to.equal('second');
         });
@@ -185,7 +185,7 @@ describe('Collection interface', () => {
   it('for CollectionReference.withConverter().doc()', async () => {
     const doc = document('documentId', 'author', 'author', 'title', 'post');
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         const expectedRequest = set({
           document: doc,
         });
@@ -204,7 +204,7 @@ describe('Collection interface', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const docRef = firestore
         .collection('collectionId')
         .withConverter(postConverter)
@@ -220,7 +220,7 @@ describe('Collection interface', () => {
   it('for CollectionReference.withConverter().add()', async () => {
     let doc = document('dummy');
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         // Extract the auto-generated document ID.
         const docId = request.writes![0].update!.name!;
         const docIdSplit = docId.split('/');
@@ -265,7 +265,7 @@ describe('Collection interface', () => {
       },
     };
 
-    return createInstance(overrides).then(async firestore => {
+    return createInstance(overrides).then(async (firestore) => {
       const docRef = await firestore
         .collection('collectionId')
         .withConverter(postConverter)
@@ -278,7 +278,7 @@ describe('Collection interface', () => {
   });
 
   it('withConverter(null) applies the default converter', async () => {
-    return createInstance().then(async firestore => {
+    return createInstance().then(async (firestore) => {
       const docRef = firestore
         .collection('collectionId')
         .withConverter(postConverter)
@@ -289,7 +289,7 @@ describe('Collection interface', () => {
   });
 
   it('drops the converter when calling CollectionReference<T>.parent()', () => {
-    return createInstance().then(async firestore => {
+    return createInstance().then(async (firestore) => {
       const postsCollection = firestore
         .collection('users/user1/posts')
         .withConverter(postConverter);

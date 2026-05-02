@@ -7,14 +7,10 @@
         "docRefPath": "projects/projectID/databases/(default)/documents/C/d",
         "fieldPaths": [
           {
-            "field": [
-              "a"
-            ]
+            "field": ["a"]
           }
         ],
-        "jsonValues": [
-          "{\"b\": \"Delete\"}"
-        ],
+        "jsonValues": ["{\"b\": \"Delete\"}"],
         "isError": true
       }
     }

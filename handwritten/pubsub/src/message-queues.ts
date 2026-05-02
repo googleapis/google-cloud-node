@@ -175,7 +175,7 @@ export abstract class MessageQueue {
     this.numInFlightRequests = this.numPendingRequests = 0;
     requests = requests.concat(this._retrier.close());
     const isExactlyOnceDelivery = this._subscriber.isExactlyOnceDelivery;
-    requests.forEach(r => {
+    requests.forEach((r) => {
       if (r.responsePromise) {
         if (isExactlyOnceDelivery) {
           r.responsePromise.reject(
@@ -497,17 +497,17 @@ export abstract class MessageQueue {
     // stream message if an unknown error happens during ack.
     const others = toError.get(AckResponses.Other);
     if (others?.length) {
-      const otherIds = others.map(e => e.message.ackId);
+      const otherIds = others.map((e) => e.message.ackId);
       const debugMsg = new BatchError(rpcError, otherIds, operation);
       this._subscriber.emit('debug', debugMsg);
     }
 
     // Take care of following up on all the Promises.
-    toSucceed.forEach(m => {
+    toSucceed.forEach((m) => {
       m.responsePromise?.resolve();
     });
     for (const e of toError.entries()) {
-      e[1].forEach(m => {
+      e[1].forEach((m) => {
         const exc = new AckError(e[0], rpcError.message);
         m.responsePromise?.reject(exc);
       });
@@ -567,7 +567,7 @@ export class AckQueue extends MessageQueue {
    */
   protected async _sendBatch(batch: QueuedMessages): Promise<QueuedMessages> {
     const responseSpan = tracing.PubsubSpans.createAckRpcSpan(
-      batch.map(b => b.message.tracingSpan),
+      batch.map((b) => b.message.tracingSpan),
       this._subscriber.name,
       'AckQueue._sendBatch',
     );
@@ -587,7 +587,7 @@ export class AckQueue extends MessageQueue {
       // emulate previous behaviour by resolving all pending Promises with
       // a success status, and then throwing a BatchError for debug logging.
       if (!this._subscriber.isExactlyOnceDelivery) {
-        batch.forEach(m => {
+        batch.forEach((m) => {
           m.responsePromise?.resolve();
         });
         throw new BatchError(e as GoogleError, ackIds, 'ack');
@@ -601,7 +601,7 @@ export class AckQueue extends MessageQueue {
           const err = e as Error;
           this._subscriber.emit('debug', new DebugMessage(err.message, err));
           const exc = new AckError(AckResponses.Other, 'Code error');
-          batch.forEach(m => {
+          batch.forEach((m) => {
             m.responsePromise?.reject(exc);
           });
           responseSpan?.end();
@@ -652,14 +652,14 @@ export class ModAckQueue extends MessageQueue {
     );
 
     const callOptions = this.getCallOptions();
-    const modAckRequests = Object.keys(modAckTable).map(async deadline => {
+    const modAckRequests = Object.keys(modAckTable).map(async (deadline) => {
       const messages = modAckTable[deadline];
-      const ackIds = messages.map(m => m.message.ackId);
+      const ackIds = messages.map((m) => m.message.ackId);
       const ackDeadlineSeconds = Number(deadline);
       const reqOpts = {subscription, ackIds, ackDeadlineSeconds};
 
       const responseSpan = tracing.PubsubSpans.createModackRpcSpan(
-        messages.map(b => b.message.tracingSpan),
+        messages.map((b) => b.message.tracingSpan),
         this._subscriber.name,
         ackDeadlineSeconds === 0 ? 'nack' : 'modack',
         'ModAckQueue._sendBatch',
@@ -679,7 +679,7 @@ export class ModAckQueue extends MessageQueue {
         // emulate previous behaviour by resolving all pending Promises with
         // a success status, and then throwing a BatchError for debug logging.
         if (!this._subscriber.isExactlyOnceDelivery) {
-          batch.forEach(m => {
+          batch.forEach((m) => {
             m.responsePromise?.resolve();
           });
           throw new BatchError(e as GoogleError, ackIds, 'modAck');

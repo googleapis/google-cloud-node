@@ -9,10 +9,7 @@
           {
             "where": {
               "path": {
-                "field": [
-                  "*",
-                  ""
-                ]
+                "field": ["*", ""]
               },
               "op": "==",
               "jsonValue": "4"

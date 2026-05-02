@@ -54,13 +54,13 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
   ): Promise<PaginatedResults> => {
     return (startAfter ? query.startAfter(startAfter) : query)
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         if (snapshot.empty) {
           return {pages: 0, docs: []};
         } else {
           const docs = snapshot.docs;
           return paginateResults(query, docs[docs.length - 1]).then(
-            nextPage => {
+            (nextPage) => {
               return {
                 pages: nextPage.pages + 1,
                 docs: docs.concat(nextPage.docs),
@@ -105,10 +105,10 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     if (data.length > 0) {
       if (typeof data[0] === 'string') {
-        const actualIds = result.docs.map(docSnapshot => docSnapshot.id);
+        const actualIds = result.docs.map((docSnapshot) => docSnapshot.id);
         expect(actualIds).to.deep.equal(data);
       } else {
-        result.forEach(doc => {
+        result.forEach((doc) => {
           expect(doc.data()).to.deep.equal(data.shift());
         });
       }
@@ -120,8 +120,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const pipeline = query.firestore.pipeline().createFrom(query);
     const pipelineResults = await pipeline.execute();
 
-    expect(pipelineResults.results.map(r => r._fieldsProto)).to.deep.equal(
-      queryResults.docs.map(s => s._fieldsProto),
+    expect(pipelineResults.results.map((r) => r._fieldsProto)).to.deep.equal(
+      queryResults.docs.map((s) => s._fieldsProto),
     );
     return queryResults;
   }
@@ -133,8 +133,8 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const pipeline = query.query.firestore.pipeline().createFrom(query);
     const pipelineResults = await pipeline.execute();
 
-    expect(pipelineResults.results.map(r => r._fieldsProto)).to.deep.equal(
-      queryResults.docs.map(s => s._fieldsProto),
+    expect(pipelineResults.results.map((r) => r._fieldsProto)).to.deep.equal(
+      queryResults.docs.map((s) => s._fieldsProto),
     );
     return queryResults;
   }
@@ -158,7 +158,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       .then(() => {
         return randomCol.select('foo').get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
       });
   });
@@ -170,7 +170,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       .then(() => {
         return randomCol.select().get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].ref.id).to.deep.equal('doc');
         expect(res.docs[0].data()).to.deep.equal({});
       });
@@ -183,7 +183,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       .then(() => {
         return compareQueryAndPipeline(randomCol.where('foo', '==', 'bar'));
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
       });
   });
@@ -197,7 +197,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           randomCol.where('foo', '==', NaN).where('bar', '==', null),
         );
       })
-      .then(res => {
+      .then((res) => {
         expect(
           typeof res.docs[0].get('foo') === 'number' &&
             isNaN(res.docs[0].get('foo')),
@@ -216,7 +216,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           randomCol.where('foo', 'array-contains', 'bar'),
         ),
       )
-      .then(res => {
+      .then((res) => {
         expect(res.size).to.equal(1);
         expect(res.docs[0].get('foo')).to.deep.equal(['bar']);
       });
@@ -513,7 +513,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     expect(res.docs[3].get('foo')).to.equal(5);
     expect(res.docs[4].get('foo')).to.equal(6);
 
-    res.docs.forEach(ds => expect(ds.get('embedding')).to.be.undefined);
+    res.docs.forEach((ds) => expect(ds.get('embedding')).to.be.undefined);
   });
 
   it('supports findNearest limits', async () => {
@@ -725,7 +725,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           randomCol.where(FieldPath.documentId(), '>=', 'bar'),
         );
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs.length).to.equal(1);
       });
   });
@@ -750,14 +750,14 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           randomCol.orderBy(FieldPath.documentId()),
         );
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].data()).to.deep.equal({foo: 'a'});
         expect(res.docs[1].data()).to.deep.equal({foo: 'b'});
       });
   });
 
   it('can run get() on empty collection', async () => {
-    return compareQueryAndPipeline(randomCol).then(res => {
+    return compareQueryAndPipeline(randomCol).then((res) => {
       return expect(res.empty);
     });
   });
@@ -894,7 +894,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     return batch
       .commit()
       .then(() => paginateResults(query))
-      .then(results => {
+      .then((results) => {
         expect(results.pages).to.equal(4);
         expect(results.docs).to.have.length(10);
       });
@@ -917,7 +917,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     return batch
       .commit()
       .then(() => paginateResults(query))
-      .then(results => {
+      .then((results) => {
         expect(results.pages).to.equal(3);
         expect(results.docs).to.have.length(9);
       });
@@ -935,7 +935,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     return batch
       .commit()
       .then(() => paginateResults(query))
-      .then(results => {
+      .then((results) => {
         expect(results.pages).to.equal(4);
         expect(results.docs).to.have.length(10);
       });
@@ -972,7 +972,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     expectDocs(res, {foo: 'a'});
   });
 
-  it('has stream() method', done => {
+  it('has stream() method', (done) => {
     let received = 0;
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
@@ -980,7 +980,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     void Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'b'})]).then(() => {
       return randomCol
         .stream()
-        .on('data', d => {
+        .on('data', (d) => {
           expect(d).to.be.an.instanceOf(DocumentSnapshot);
           ++received;
         })
@@ -1033,7 +1033,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     const querySnapshot = await compareQueryAndPipeline(
       firestore.collectionGroup(collectionGroup),
     );
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal([
       'cg-doc1',
       'cg-doc2',
       'cg-doc3',
@@ -1071,7 +1071,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .startAt('a/b')
         .endAt('a/b0')
         .get();
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+      expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal([
         'cg-doc2',
         'cg-doc3',
         'cg-doc4',
@@ -1083,7 +1083,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .startAfter('a/b')
         .endBefore(`a/b/${collectionGroup}/cg-doc3`)
         .get();
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+      expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal(['cg-doc2']);
     },
   );
 
@@ -1116,7 +1116,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           .where(FieldPath.documentId(), '>=', 'a/b')
           .where(FieldPath.documentId(), '<=', 'a/b0'),
       );
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+      expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal([
         'cg-doc2',
         'cg-doc3',
         'cg-doc4',
@@ -1128,7 +1128,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
           .where(FieldPath.documentId(), '>', 'a/b')
           .where(FieldPath.documentId(), '<', `a/b/${collectionGroup}/cg-doc3`),
       );
-      expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+      expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal(['cg-doc2']);
     },
   );
 
@@ -1552,7 +1552,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
     }
 
     function waitForSnapshot(): Promise<QuerySnapshot> {
-      return currentDeferred.promise!.then(snapshot => {
+      return currentDeferred.promise!.then((snapshot) => {
         resetPromise();
         return snapshot;
       });
@@ -1592,16 +1592,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       const ref2 = randomCol.doc('doc2');
 
       const unsubscribe = randomCol.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject!(err);
         },
       );
 
       return waitForSnapshot()
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {docs: [], docChanges: []});
           // Add a result.
           return ref1.set({foo: 'a'});
@@ -1609,7 +1609,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {foo: 'a'})],
             docChanges: [added('doc1', {foo: 'a'})],
@@ -1620,7 +1620,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {foo: 'a'}), snapshot('doc2', {foo: 'b'})],
             docChanges: [added('doc2', {foo: 'b'})],
@@ -1631,7 +1631,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {foo: 'a'}), snapshot('doc2', {bar: 'c'})],
             docChanges: [modified('doc2', {bar: 'c'})],
@@ -1646,16 +1646,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
       const query = randomCol.where('included', '==', 'yes');
       const unsubscribe = query.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject(err);
         },
       );
 
       return waitForSnapshot()
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {docs: [], docChanges: []});
           // Add a result.
           return ref1.set({included: 'yes'});
@@ -1663,7 +1663,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [added('doc1', {included: 'yes'})],
@@ -1674,7 +1674,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [
               snapshot('doc1', {included: 'yes'}),
@@ -1688,7 +1688,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [removed('doc2', {included: 'yes'})],
@@ -1702,16 +1702,16 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       const ref2 = randomCol.doc('doc2');
 
       const unsubscribe = randomCol.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject(err);
         },
       );
 
       return waitForSnapshot()
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {docs: [], docChanges: []});
           // Add a result.
           return ref1.set({included: 'yes'});
@@ -1719,7 +1719,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [added('doc1', {included: 'yes'})],
@@ -1730,7 +1730,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [
               snapshot('doc1', {included: 'yes'}),
@@ -1744,7 +1744,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [removed('doc2', {included: 'yes'})],
@@ -1765,7 +1765,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       const unsubscribe = randomCol
         .orderBy('doc')
         .limitToLast(2)
-        .onSnapshot(snapshot => currentDeferred.resolve(snapshot));
+        .onSnapshot((snapshot) => currentDeferred.resolve(snapshot));
 
       const results = await waitForSnapshot();
       snapshotsEqual(results, {
@@ -1813,10 +1813,10 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       const orderedQuery = randomCol.orderBy('embedding');
 
       const unsubscribe = orderedQuery.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject!(err);
         },
       );
@@ -2336,7 +2336,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       const modifiedCollection = modifiedFirestore.collection(collection.id);
       const query = modifiedCollection.where('sort', '>', 1);
       const snapshot = await query.get();
-      const result = snapshot.docs.map(d => d.id);
+      const result = snapshot.docs.map((d) => d.id);
 
       // since alwaysUseImplicitOrderBy is true, we expect strict ordering.
       expect(result).to.deep.equal(expectedOrder);

@@ -16,11 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
-function main(displayName, state, createTime, satisfiesPzs, satisfiesPzi, tags) {
+function main(
+  displayName,
+  state,
+  createTime,
+  satisfiesPzs,
+  satisfiesPzi,
+  tags,
+) {
   // [START bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -112,7 +117,7 @@ function main(displayName, state, createTime, satisfiesPzs, satisfiesPzi, tags) 
   // [END bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

@@ -247,7 +247,7 @@ describe('v2.MetricsServiceV2Client', () => {
       assert(client.metricsServiceV2Stub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -259,7 +259,7 @@ describe('v2.MetricsServiceV2Client', () => {
       });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',

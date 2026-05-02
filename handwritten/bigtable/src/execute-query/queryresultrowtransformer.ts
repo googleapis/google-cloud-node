@@ -132,7 +132,7 @@ export class ExecuteQueryStreamTransformWithMetadata
     ) {
       return null;
     }
-    return value.arrayValue.values.map(value =>
+    return value.arrayValue.values.map((value) =>
       this.valueToJsType(
         value as google.bigtable.v2.Value,
         metadata.elementType,
@@ -188,7 +188,7 @@ export class ExecuteQueryStreamTransformWithMetadata
     const values: google.bigtable.v2.Value[] = value.arrayValue
       .values as google.bigtable.v2.Value[];
     return new EncodedKeyMap(
-      values.map(value => {
+      values.map((value) => {
         // Types are ensured by checking metadata.keyType.type earlier.
         const pair = value?.arrayValue?.values as google.bigtable.v2.Value[];
         const keyValue = this.valueToJsType(pair[0], metadata.keyType) as

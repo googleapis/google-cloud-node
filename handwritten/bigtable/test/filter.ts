@@ -22,7 +22,7 @@ import {Row} from '../src/row';
 const sandbox = sinon.createSandbox();
 
 const FakeMutation = {
-  convertToBytes: sandbox.spy(value => {
+  convertToBytes: sandbox.spy((value) => {
     return value;
   }),
   createTimeRange: sandbox.stub(),
@@ -211,7 +211,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('all', () => {
-    it('should create a pass all filter when set to true', done => {
+    it('should create a pass all filter when set to true', (done) => {
       filter.set = (filterName, value) => {
         assert.strictEqual(filterName, 'passAllFilter');
         assert.strictEqual(value, true);
@@ -221,7 +221,7 @@ describe('Bigtable/Filter', () => {
       filter.all(true);
     });
 
-    it('should create a block all filter when set to false', done => {
+    it('should create a block all filter when set to false', (done) => {
       filter.set = (filterName, value) => {
         assert.strictEqual(filterName, 'blockAllFilter');
         assert.strictEqual(value, true);
@@ -233,7 +233,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('column', () => {
-    it('should set the column qualifier regex filter', done => {
+    it('should set the column qualifier regex filter', (done) => {
       const column = {
         name: 'fake-column',
       };
@@ -252,7 +252,7 @@ describe('Bigtable/Filter', () => {
       filter.column(column);
     });
 
-    it('should handle a binary encoded buffer regex filter', done => {
+    it('should handle a binary encoded buffer regex filter', (done) => {
       const column = {
         name: Buffer.from('æ', 'binary'),
       };
@@ -267,7 +267,7 @@ describe('Bigtable/Filter', () => {
       filter.column(column);
     });
 
-    it('should accept the short-hand version of column', done => {
+    it('should accept the short-hand version of column', (done) => {
       const column = 'fake-column';
 
       filter.set = (filterName, value) => {
@@ -279,7 +279,7 @@ describe('Bigtable/Filter', () => {
       filter.column(column);
     });
 
-    it('should accept the cells per column limit filter', done => {
+    it('should accept the cells per column limit filter', (done) => {
       const column = {
         cellLimit: 10,
       };
@@ -293,7 +293,7 @@ describe('Bigtable/Filter', () => {
       filter.column(column);
     });
 
-    it('should accept the column range filter', done => {
+    it('should accept the column range filter', (done) => {
       const fakeRange = {
         a: 'a',
         b: 'b',
@@ -315,7 +315,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('condition', () => {
-    it('should create a condition filter', done => {
+    it('should create a condition filter', (done) => {
       const condition = {
         test: {a: 'a'},
         pass: {b: 'b'},
@@ -340,7 +340,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('family', () => {
-    it('should create a family name regex filter', done => {
+    it('should create a family name regex filter', (done) => {
       const familyName = 'fake-family';
       const spy = sandbox.stub(Filter, 'convertToRegExpString').returnsArg(0);
       filter.set = (filterName, value) => {
@@ -355,7 +355,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('interleave', () => {
-    it('should create an interleave filter', done => {
+    it('should create an interleave filter', (done) => {
       const fakeFilters = [{}, {}, {}];
 
       const spy = sandbox.stub(Filter, 'parse').returnsArg(0);
@@ -377,7 +377,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('label', () => {
-    it('should apply the label transformer', done => {
+    it('should apply the label transformer', (done) => {
       const label = 'label';
 
       filter.set = (filterName, value) => {
@@ -391,7 +391,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('row', () => {
-    it('should apply the row key regex filter', done => {
+    it('should apply the row key regex filter', (done) => {
       const row = {
         key: 'gwashinton',
       };
@@ -413,7 +413,7 @@ describe('Bigtable/Filter', () => {
       filter.row(row);
     });
 
-    it('should accept the short-hand version of row key', done => {
+    it('should accept the short-hand version of row key', (done) => {
       const rowKey = 'gwashington';
       filter.set = (filterName, value) => {
         assert.strictEqual(filterName, 'rowKeyRegexFilter');
@@ -423,7 +423,7 @@ describe('Bigtable/Filter', () => {
       filter.row(rowKey);
     });
 
-    it('should set the row sample filter', done => {
+    it('should set the row sample filter', (done) => {
       const row = {
         sample: 10,
       };
@@ -435,7 +435,7 @@ describe('Bigtable/Filter', () => {
       filter.row(row as {} as Row);
     });
 
-    it('should set the cells per row offset filter', done => {
+    it('should set the cells per row offset filter', (done) => {
       const row = {
         cellOffset: 10,
       };
@@ -447,7 +447,7 @@ describe('Bigtable/Filter', () => {
       filter.row(row);
     });
 
-    it('should set the cells per row limit filter', done => {
+    it('should set the cells per row limit filter', (done) => {
       const row = {
         cellLimit: 10,
       };
@@ -470,7 +470,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('sink', () => {
-    it('should set the sink filter', done => {
+    it('should set the sink filter', (done) => {
       const sink = true;
       filter.set = (filterName, value) => {
         assert.strictEqual(filterName, 'sink');
@@ -482,7 +482,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('time', () => {
-    it('should set the timestamp range filter', done => {
+    it('should set the timestamp range filter', (done) => {
       const fakeTimeRange = {
         start: 10,
         end: 10,
@@ -520,7 +520,7 @@ describe('Bigtable/Filter', () => {
   });
 
   describe('value', () => {
-    it('should set the value regex filter', done => {
+    it('should set the value regex filter', (done) => {
       const value = {
         value: 'fake-value',
       };
@@ -551,7 +551,7 @@ describe('Bigtable/Filter', () => {
       filter.value(value);
     });
 
-    it('should accept the short-hand version of value', done => {
+    it('should accept the short-hand version of value', (done) => {
       const value = 'fake-value';
 
       const fakeRegExValue = 'abcd';
@@ -581,7 +581,7 @@ describe('Bigtable/Filter', () => {
       filter.value(value);
     });
 
-    it('should accept the value range filter', done => {
+    it('should accept the value range filter', (done) => {
       const fakeRange = {
         a: 'a',
         b: 'b',
@@ -601,7 +601,7 @@ describe('Bigtable/Filter', () => {
       filter.value(value);
     });
 
-    it('should apply the strip label transformer', done => {
+    it('should apply the strip label transformer', (done) => {
       const value = {
         strip: true,
       };

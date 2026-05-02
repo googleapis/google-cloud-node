@@ -23,7 +23,7 @@ export const removeClient: ClientImplMaker<
   IRemoveClientRequest,
   IRemoveClientResponse
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const request = rawRequest.request;
     const {clientId} = request;
     const bigtable = clientMap.get(clientId!);

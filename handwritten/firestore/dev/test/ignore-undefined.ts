@@ -43,7 +43,7 @@ const FOO_MAP = {
 describe('ignores undefined values', () => {
   it('in set()', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -65,7 +65,7 @@ describe('ignores undefined values', () => {
 
   it('in set({ merge: true })', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           set({
@@ -91,7 +91,7 @@ describe('ignores undefined values', () => {
 
   it('in create()', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           create({
@@ -113,7 +113,7 @@ describe('ignores undefined values', () => {
 
   it('in update()', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -139,7 +139,7 @@ describe('ignores undefined values', () => {
 
   it('with top-level field in update()', async () => {
     const overrides: ApiOverride = {
-      commit: request => {
+      commit: (request) => {
         requestEquals(
           request,
           update({
@@ -162,7 +162,7 @@ describe('ignores undefined values', () => {
 
   it('in query filters', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(request, fieldFiltersQuery('foo', 'EQUAL', FOO_MAP));
         return emptyQueryStream();
       },
@@ -179,7 +179,7 @@ describe('ignores undefined values', () => {
 
   it('in query cursors', async () => {
     const overrides: ApiOverride = {
-      runQuery: request => {
+      runQuery: (request) => {
         queryEquals(
           request,
           orderBy('foo', 'ASCENDING'),

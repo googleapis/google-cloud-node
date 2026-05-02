@@ -867,7 +867,7 @@ export class DocumentMask {
      */
     const applyDocumentMask: (
       data: firestore.DocumentData,
-    ) => firestore.DocumentData = data => {
+    ) => firestore.DocumentData = (data) => {
       const remainingPaths = this._sortedPaths.slice(0);
 
       const processObject: (
@@ -876,7 +876,7 @@ export class DocumentMask {
       ) => firestore.DocumentData | null = (currentData, currentPath) => {
         let result: firestore.DocumentData | null = null;
 
-        Object.keys(currentData).forEach(key => {
+        Object.keys(currentData).forEach((key) => {
           const childPath = currentPath
             ? currentPath.append(key)
             : new FieldPath(key);
@@ -1075,7 +1075,7 @@ export class DocumentTransform<
   validate(): void {
     const allowUndefined =
       !!this.ref.firestore._settings.ignoreUndefinedProperties;
-    this.transforms.forEach(transform => transform.validate(allowUndefined));
+    this.transforms.forEach((transform) => transform.validate(allowUndefined));
   }
 
   /**

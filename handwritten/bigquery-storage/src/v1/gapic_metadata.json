@@ -11,19 +11,13 @@
           "libraryClient": "BigQueryReadClient",
           "rpcs": {
             "CreateReadSession": {
-              "methods": [
-                "createReadSession"
-              ]
+              "methods": ["createReadSession"]
             },
             "SplitReadStream": {
-              "methods": [
-                "splitReadStream"
-              ]
+              "methods": ["splitReadStream"]
             },
             "ReadRows": {
-              "methods": [
-                "readRows"
-              ]
+              "methods": ["readRows"]
             }
           }
         },
@@ -31,14 +25,10 @@
           "libraryClient": "BigQueryReadClient",
           "rpcs": {
             "CreateReadSession": {
-              "methods": [
-                "createReadSession"
-              ]
+              "methods": ["createReadSession"]
             },
             "SplitReadStream": {
-              "methods": [
-                "splitReadStream"
-              ]
+              "methods": ["splitReadStream"]
             }
           }
         }
@@ -50,34 +40,22 @@
           "libraryClient": "BigQueryWriteClient",
           "rpcs": {
             "CreateWriteStream": {
-              "methods": [
-                "createWriteStream"
-              ]
+              "methods": ["createWriteStream"]
             },
             "GetWriteStream": {
-              "methods": [
-                "getWriteStream"
-              ]
+              "methods": ["getWriteStream"]
             },
             "FinalizeWriteStream": {
-              "methods": [
-                "finalizeWriteStream"
-              ]
+              "methods": ["finalizeWriteStream"]
             },
             "BatchCommitWriteStreams": {
-              "methods": [
-                "batchCommitWriteStreams"
-              ]
+              "methods": ["batchCommitWriteStreams"]
             },
             "FlushRows": {
-              "methods": [
-                "flushRows"
-              ]
+              "methods": ["flushRows"]
             },
             "AppendRows": {
-              "methods": [
-                "appendRows"
-              ]
+              "methods": ["appendRows"]
             }
           }
         },
@@ -85,29 +63,19 @@
           "libraryClient": "BigQueryWriteClient",
           "rpcs": {
             "CreateWriteStream": {
-              "methods": [
-                "createWriteStream"
-              ]
+              "methods": ["createWriteStream"]
             },
             "GetWriteStream": {
-              "methods": [
-                "getWriteStream"
-              ]
+              "methods": ["getWriteStream"]
             },
             "FinalizeWriteStream": {
-              "methods": [
-                "finalizeWriteStream"
-              ]
+              "methods": ["finalizeWriteStream"]
             },
             "BatchCommitWriteStreams": {
-              "methods": [
-                "batchCommitWriteStreams"
-              ]
+              "methods": ["batchCommitWriteStreams"]
             },
             "FlushRows": {
-              "methods": [
-                "flushRows"
-              ]
+              "methods": ["flushRows"]
             }
           }
         }

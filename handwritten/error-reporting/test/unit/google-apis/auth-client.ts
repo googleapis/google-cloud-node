@@ -110,7 +110,7 @@ describe('RequestHandler', () => {
     );
   });
 
-  it('should not request OAuth2 token if error reporting is disabled', done => {
+  it('should not request OAuth2 token if error reporting is disabled', (done) => {
     verifyReportedMessage(
       {reportMode: 'never'},
       null, // no access token error
@@ -121,7 +121,7 @@ describe('RequestHandler', () => {
     );
   });
 
-  it('should not issue a warning if disabled and can communicate with the API', done => {
+  it('should not issue a warning if disabled and can communicate with the API', (done) => {
     process.env.NODE_ENV = 'production';
     verifyReportedMessage(
       {reportMode: 'never'},
@@ -133,7 +133,7 @@ describe('RequestHandler', () => {
     );
   });
 
-  it('should not issue a warning if disabled and cannot communicate with the API', done => {
+  it('should not issue a warning if disabled and cannot communicate with the API', (done) => {
     process.env.NODE_ENV = 'dev';
     verifyReportedMessage(
       {reportMode: 'never'},
@@ -145,7 +145,7 @@ describe('RequestHandler', () => {
     );
   });
 
-  it('should not issue a warning if enabled and can communicate with the API', done => {
+  it('should not issue a warning if enabled and can communicate with the API', (done) => {
     process.env.NODE_ENV = 'production';
     verifyReportedMessage(
       {reportMode: 'production'},
@@ -155,7 +155,7 @@ describe('RequestHandler', () => {
     );
   });
 
-  it('should not issue a warning with a default config and can communicate with the API', done => {
+  it('should not issue a warning with a default config and can communicate with the API', (done) => {
     process.env.NODE_ENV = 'production';
     verifyReportedMessage(
       {},
@@ -175,7 +175,7 @@ describe('RequestHandler', () => {
     });
   });
 
-  it('should issue a warning if enabled and cannot communicate with the API', done => {
+  it('should issue a warning if enabled and cannot communicate with the API', (done) => {
     process.env.NODE_ENV = 'dev';
     verifyReportedMessage(
       {reportMode: 'production'},
@@ -193,7 +193,7 @@ describe('RequestHandler', () => {
     );
   });
 
-  it('should issue a warning with a default config and cannot communicate with the API', done => {
+  it('should issue a warning with a default config and cannot communicate with the API', (done) => {
     process.env.NODE_ENV = 'dev';
     verifyReportedMessage(
       {},

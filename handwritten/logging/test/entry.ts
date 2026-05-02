@@ -219,7 +219,7 @@ describe('Entry', () => {
       assert.strictEqual(json.jsonPayload, converted);
     });
 
-    it('should pass removeCircular to objToStruct_', done => {
+    it('should pass removeCircular to objToStruct_', (done) => {
       fakeObjToStruct = (
         obj: {},
         options: common.ObjectToStructConverterConfig,
@@ -331,7 +331,7 @@ describe('Entry', () => {
       it('should detect open telemetry trace and span if open telemetry context present', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', (span) => {
             const json = entry.toJSON();
             assert.strictEqual(
               json.trace,
@@ -348,7 +348,7 @@ describe('Entry', () => {
       it('should  detect open telemetry trace and span if open telemetry context and headers present', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', (span) => {
             const req = {
               method: 'GET',
             } as unknown as http.IncomingMessage;
@@ -373,7 +373,7 @@ describe('Entry', () => {
       it('should not overwrite user defined trace and span when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', (span) => {
             entry.metadata.spanId = '1';
             entry.metadata.trace = '1';
             entry.metadata.traceSampled = false;
@@ -509,7 +509,7 @@ describe('Entry', () => {
       it('should detect open telemetry trace and span if open telemetry context present', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', (span) => {
             const json = entry.toStructuredJSON();
             assert.strictEqual(
               json[entryTypes.TRACE_KEY],
@@ -529,7 +529,7 @@ describe('Entry', () => {
       it('should  detect open telemetry trace and span if open telemetry context and headers present', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', (span) => {
             const req = {
               method: 'GET',
             } as unknown as http.IncomingMessage;
@@ -557,7 +557,7 @@ describe('Entry', () => {
       it('should not overwrite user defined trace and span when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', span => {
+          .startActiveSpan('foo', (span) => {
             entry.metadata.spanId = '1';
             entry.metadata.trace = '1';
             entry.metadata.traceSampled = false;

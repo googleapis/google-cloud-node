@@ -216,10 +216,10 @@ function expectResults(
 ): void {
   if (data.length > 0) {
     if (typeof data[0] === 'string') {
-      const actualIds = result.results.map(result => result.id);
+      const actualIds = result.results.map((result) => result.id);
       expect(actualIds).to.deep.equal(data);
     } else {
-      result.results.forEach(r => {
+      result.results.forEach((r) => {
         expect(r.data()).to.deep.equal(data.shift());
       });
     }
@@ -384,7 +384,7 @@ describe.skipClassic('Pipeline class', () => {
       });
 
       it('can execute delete stage within a transaction', async () => {
-        const promise = firestore.runTransaction(async transaction => {
+        const promise = firestore.runTransaction(async (transaction) => {
           const deletePpl = firestore
             .pipeline()
             .collection(dmlCol.path)
@@ -545,7 +545,7 @@ describe.skipClassic('Pipeline class', () => {
 
       let snapshot = await pipeline.execute();
       expect(snapshot.results.length).to.equal(10);
-      snapshot.results.forEach(doc => {
+      snapshot.results.forEach((doc) => {
         expect(doc.createTime).to.not.be.null;
         expect(doc.updateTime).to.not.be.null;
 
@@ -561,14 +561,14 @@ describe.skipClassic('Pipeline class', () => {
       });
 
       const wb = firestore.batch();
-      snapshot.results.forEach(doc => {
+      snapshot.results.forEach((doc) => {
         wb.update(doc.ref!, {newField: 'value'});
       });
       await wb.commit();
 
       snapshot = await pipeline.execute();
       expect(snapshot.results.length).to.equal(10);
-      snapshot.results.forEach(doc => {
+      snapshot.results.forEach((doc) => {
         expect(doc.createTime).to.not.be.null;
         expect(doc.updateTime).to.not.be.null;
         expect(doc.createTime!.toDate().valueOf()).to.be.lessThan(
@@ -608,7 +608,7 @@ describe.skipClassic('Pipeline class', () => {
 
       expect(snapshot.results.length).to.equal(8);
 
-      snapshot.results.forEach(doc => {
+      snapshot.results.forEach((doc) => {
         expect(doc.updateTime).to.be.undefined;
         expect(doc.createTime).to.be.undefined;
       });
@@ -1909,7 +1909,7 @@ describe.skipClassic('Pipeline class', () => {
 
           const statusDetails = err['statusDetails'] as Array<object>;
 
-          const foundExplainStats = statusDetails.find(x => {
+          const foundExplainStats = statusDetails.find((x) => {
             return (
               'type_url' in x &&
               x['type_url'] ===
@@ -5928,7 +5928,7 @@ describe.skipClassic('Pipeline class', () => {
 
       let snapshot = await pipeline.limit(pageSize).execute();
 
-      snapshot.results.forEach(r => console.log(JSON.stringify(r.data())));
+      snapshot.results.forEach((r) => console.log(JSON.stringify(r.data())));
 
       expectResults(
         snapshot,
@@ -6048,7 +6048,7 @@ describe.skipClassic('Pipeline class', () => {
   });
 
   describe('stream', () => {
-    it('full results as expected', done => {
+    it('full results as expected', (done) => {
       const ppl = firestore
         .pipeline()
         .collection(randomCol.path)
@@ -6070,7 +6070,7 @@ describe.skipClassic('Pipeline class', () => {
 
       let received = 0;
       snapshotStream
-        .on('data', d => {
+        .on('data', (d) => {
           expect(d).to.be.an.instanceOf(PipelineResult);
           const rslt = d as PipelineResult;
           expect(rslt.id).to.equal(expected.shift());
@@ -6082,13 +6082,13 @@ describe.skipClassic('Pipeline class', () => {
         });
     });
 
-    it('empty snapshot', done => {
+    it('empty snapshot', (done) => {
       const ppl = firestore.pipeline().collection(randomCol.path).limit(0);
       const snapshotStream = ppl.stream();
 
       let received = 0;
       snapshotStream
-        .on('data', _ => {
+        .on('data', (_) => {
           ++received;
         })
         .on('end', () => {
@@ -6097,7 +6097,7 @@ describe.skipClassic('Pipeline class', () => {
         });
     });
 
-    it('document transform', done => {
+    it('document transform', (done) => {
       const ppl = firestore
         .pipeline()
         .collection(randomCol.path)
@@ -6113,7 +6113,7 @@ describe.skipClassic('Pipeline class', () => {
 
       let received = 0;
       snapshotStream
-        .on('data', d => {
+        .on('data', (d) => {
           expect(d).to.be.an.instanceOf(PipelineResult);
           const rslt = d as PipelineResult;
           expect(rslt.data()).to.deep.equal(expected.shift());
@@ -6142,7 +6142,7 @@ describe.skipClassic('Pipeline class', () => {
         );
         return await fn();
       } finally {
-        await Promise.all(refs.map(r => r.delete()));
+        await Promise.all(refs.map((r) => r.delete()));
       }
     }
 
@@ -7021,8 +7021,8 @@ describe.skipClassic('Pipeline search', () => {
     const collectionSnapshot = await collection.get();
     const expectedDocIds = Object.keys(restaurantDocs);
     const deletes = collectionSnapshot.docs
-      .filter(ds => expectedDocIds.indexOf(ds.id) < 0)
-      .map(ds => ds.ref.delete());
+      .filter((ds) => expectedDocIds.indexOf(ds.id) < 0)
+      .map((ds) => ds.ref.delete());
     await Promise.all(deletes);
 
     // Add/overwrite all restaurant docs
@@ -8094,7 +8094,7 @@ describe.skipClassic('Query to Pipeline', () => {
       async (collRef, db) => {
         const query1 = collRef.where('bar', '==', NaN);
         const classicSnapshot = await query1.get();
-        const classicData = classicSnapshot.docs.map(d => d.data());
+        const classicData = classicSnapshot.docs.map((d) => d.data());
 
         const snapshot = await execute(db.pipeline().createFrom(query1));
         verifyResults(snapshot, ...classicData);
@@ -8113,7 +8113,7 @@ describe.skipClassic('Query to Pipeline', () => {
         const query1 = collRef.where('bar', '!=', NaN);
 
         const classicSnapshot = await query1.get();
-        const classicData = classicSnapshot.docs.map(d => d.data());
+        const classicData = classicSnapshot.docs.map((d) => d.data());
 
         const snapshot = await execute(db.pipeline().createFrom(query1));
         verifyResults(snapshot, ...classicData);
@@ -8130,7 +8130,7 @@ describe.skipClassic('Query to Pipeline', () => {
       async (collRef, db) => {
         const query1 = collRef.where('bar', '==', null);
         const classicSnapshot = await query1.get();
-        const classicData = classicSnapshot.docs.map(d => d.data());
+        const classicData = classicSnapshot.docs.map((d) => d.data());
 
         const snapshot = await execute(db.pipeline().createFrom(query1));
         verifyResults(snapshot, ...classicData);
@@ -8147,7 +8147,7 @@ describe.skipClassic('Query to Pipeline', () => {
       async (collRef, db) => {
         const query1 = collRef.where('bar', '!=', null);
         const classicSnapshot = await query1.get();
-        const classicData = classicSnapshot.docs.map(d => d.data());
+        const classicData = classicSnapshot.docs.map((d) => d.data());
         const snapshot = await execute(db.pipeline().createFrom(query1));
         verifyResults(snapshot, ...classicData);
       },

@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(readPosition) {
@@ -36,7 +34,8 @@ function main(readPosition) {
   // const readPosition = {}
 
   // Imports the Storage library
-  const {BigQueryStorageClient} = require('@google-cloud/bigquery-storage').v1beta1;
+  const {BigQueryStorageClient} =
+    require('@google-cloud/bigquery-storage').v1beta1;
 
   // Instantiates a client
   const storageClient = new BigQueryStorageClient();
@@ -49,16 +48,22 @@ function main(readPosition) {
 
     // Run request
     const stream = await storageClient.readRows(request);
-    stream.on('data', (response) => { console.log(response) });
-    stream.on('error', (err) => { throw(err) });
-    stream.on('end', () => { /* API call completed */ });
+    stream.on('data', (response) => {
+      console.log(response);
+    });
+    stream.on('error', (err) => {
+      throw err;
+    });
+    stream.on('end', () => {
+      /* API call completed */
+    });
   }
 
   callReadRows();
   // [END bigquerystorage_v1beta1_generated_BigQueryStorage_ReadRows_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

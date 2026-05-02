@@ -282,7 +282,7 @@ export class BigQueryReadClient {
     ];
     for (const methodName of bigQueryReadStubMethods) {
       const callPromise = this.bigQueryReadStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -542,7 +542,7 @@ export class BigQueryReadClient {
       this._gaxModule.routingHeader.fromParams({
         'read_session.table': request.readSession!.table ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createReadSession request %j', request);
@@ -704,7 +704,7 @@ export class BigQueryReadClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('splitReadStream request %j', request);
@@ -793,7 +793,7 @@ export class BigQueryReadClient {
       this._gaxModule.routingHeader.fromParams({
         read_stream: request.readStream ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('readRows stream %j', options);
@@ -1078,7 +1078,7 @@ export class BigQueryReadClient {
    */
   close(): Promise<void> {
     if (this.bigQueryReadStub && !this._terminated) {
-      return this.bigQueryReadStub.then(stub => {
+      return this.bigQueryReadStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

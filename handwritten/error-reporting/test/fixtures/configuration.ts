@@ -20,6 +20,6 @@ import {
 
 export class FakeConfiguration extends Configuration {
   constructor(config: ConfigurationOptions | undefined, logger?: Logger) {
-    super(config, logger || (({warn() {}} as {}) as Logger));
+    super(config, logger || ({warn() {}} as {} as Logger));
   }
 }

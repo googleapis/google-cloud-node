@@ -48,7 +48,7 @@ const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 const ONE_HOUR_API = 'timeRange.period=PERIOD_1_HOUR';
 
 function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export class ErrorsApiTransport extends common.Service {
@@ -110,9 +110,9 @@ export class ErrorsApiTransport extends common.Service {
         const groups = await this.getAllGroups();
         if (!groups.length) continue;
         // find an error group that matches the service
-        groups.forEach(group => {
+        groups.forEach((group) => {
           const match = group.affectedServices.find(
-            context => context.service === service,
+            (context) => context.service === service,
           );
           if (match) {
             groupId = group.group.groupId;
@@ -125,7 +125,7 @@ export class ErrorsApiTransport extends common.Service {
 
       const events = await this.getGroupEvents(groupId);
       const filteredEvents = events.filter(
-        event =>
+        (event) =>
           event.serviceContext.service === service &&
           new Date(event.eventTime).getTime() >= time,
       );

@@ -53,7 +53,7 @@ export class MetadataConsumer {
         return Types.Date();
       case 'structType':
         return Types.Struct(
-          ...type.structType!.fields!.map(field => ({
+          ...type.structType!.fields!.map((field) => ({
             name: field.fieldName as string | null,
             type: MetadataConsumer.parsePBType(
               field.type as google.bigtable.v2.Type,
@@ -105,7 +105,7 @@ export class MetadataConsumer {
     }
 
     return Types.ResultSetMetadata.fromTuples(
-      columns.map(column => {
+      columns.map((column) => {
         if (column.name === null || column.name === '') {
           throw new Error(`Invalid column name "${column.name}"`);
         } else {

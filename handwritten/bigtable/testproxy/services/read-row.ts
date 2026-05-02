@@ -29,7 +29,7 @@ import {GoogleError} from 'google-gax';
 export const readRow: ClientImplMaker<IReadRowRequest, IRowResult> = ({
   clientMap,
 }) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {clientId, rowKey, tableName} = rawRequest.request;
     const columns = {};
 

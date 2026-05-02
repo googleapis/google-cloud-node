@@ -8,10 +8,7 @@
         "option": {
           "fields": [
             {
-              "field": [
-                "b",
-                "c"
-              ]
+              "field": ["b", "c"]
             }
           ]
         },
@@ -24,9 +21,7 @@
                 "name": "projects/projectID/databases/(default)/documents/C/d"
               },
               "updateMask": {
-                "fieldPaths": [
-                  "b.c"
-                ]
+                "fieldPaths": ["b.c"]
               }
             }
           ]

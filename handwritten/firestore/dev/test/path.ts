@@ -105,7 +105,7 @@ describe('ResourcePath', () => {
       'projects//databases/DDD/documents',
     ];
 
-    invalidPaths.forEach(invalidPath => {
+    invalidPaths.forEach((invalidPath) => {
       expect(() => {
         QualifiedResourcePath.fromSlashSeparatedString(invalidPath);
       }).to.throw(`Resource name '${invalidPath}' is not valid`);

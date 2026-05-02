@@ -62,7 +62,7 @@ function formatOptions(argv) {
 }
 
 function parseKeyValuePairs(pairs) {
-  return pairs.map(pair => pair.split('='));
+  return pairs.map((pair) => pair.split('='));
 }
 
 function parseWorkloadFile(filePath) {
@@ -74,7 +74,7 @@ function printMetrics(workload) {
   const numBucket = workload.options.get('numBucket');
   let totalOps = 0;
 
-  workload.operations.forEach(operation => {
+  workload.operations.forEach((operation) => {
     totalOps += workload.latencies[operation].length;
   });
 
@@ -83,7 +83,7 @@ function printMetrics(workload) {
     [OVERALL], Throughput(ops/sec), ${totalOps / (workload.duration / 1000)}`,
   );
 
-  workload.operations.forEach(operation => {
+  workload.operations.forEach((operation) => {
     const lats = workload.latencies[operation].sort((a, b) => a - b);
     const ops = lats.length;
     const opName = `[${operation.toUpperCase()}]`;
@@ -118,7 +118,7 @@ function runWorkload(database, options) {
     .loadKeys()
     .then(() => workload.run())
     .then(() => printMetrics(workload))
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 }
 
 function runWorkloads(argv) {

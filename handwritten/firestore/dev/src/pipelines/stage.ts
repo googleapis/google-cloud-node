@@ -65,7 +65,7 @@ export class RemoveFields implements Stage {
   _toProto(serializer: Serializer): api.Pipeline.IStage {
     return {
       name: this.name,
-      args: this.options.fields.map(f => serializer.encodeValue(f)!),
+      args: this.options.fields.map((f) => serializer.encodeValue(f)!),
       options: this.optionsUtil.getOptionsProto(
         serializer,
         this.options,
@@ -289,13 +289,13 @@ export class DocumentsSource implements Stage {
   readonly formattedPaths: string[];
 
   constructor(private options: InternalDocumentsStageOptions) {
-    this.formattedPaths = options.docs.map(ref => '/' + ref.path);
+    this.formattedPaths = options.docs.map((ref) => '/' + ref.path);
   }
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
     return {
       name: this.name,
-      args: this.formattedPaths.map(p => serializer.encodeReference(p)!),
+      args: this.formattedPaths.map((p) => serializer.encodeReference(p)!),
       options: this.optionsUtil.getOptionsProto(
         serializer,
         this.options,
@@ -710,7 +710,7 @@ export class Sort implements Stage {
   _toProto(serializer: Serializer): api.Pipeline.IStage {
     return {
       name: this.name,
-      args: this.options.orderings.map(o => serializer.encodeValue(o)!),
+      args: this.options.orderings.map((o) => serializer.encodeValue(o)!),
       options: this.optionsUtil.getOptionsProto(
         serializer,
         this.options,
@@ -893,7 +893,7 @@ export class RawStage implements Stage {
   _toProto(serializer: Serializer): api.Pipeline.IStage {
     return {
       name: this.name,
-      args: this.params.map(o => o._toProto(serializer)),
+      args: this.params.map((o) => o._toProto(serializer)),
       options: this.optionsUtil.getOptionsProto(
         serializer,
         {},

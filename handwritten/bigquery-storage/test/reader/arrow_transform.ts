@@ -92,10 +92,10 @@ describe('Arrow Transform', () => {
       .pipe(new ArrowRecordBatchTransform())
       .pipe(new ArrowRecordBatchTableRowTransform());
 
-    const consumeRows = new Promise<any[]>(resolve => {
+    const consumeRows = new Promise<any[]>((resolve) => {
       const rows: any[] = [];
       pipeline
-        .on('data', data => rows.push(data))
+        .on('data', (data) => rows.push(data))
         .on('end', () => resolve(rows));
     });
     const tableRows = await consumeRows;

@@ -43,7 +43,7 @@ describe('TestProxy/ReadModifyWriteRow', () => {
   ];
   describe('Ensure the proper request is passed to the Gapic Layer', () => {
     testCases.forEach((readModifyWriteRowRequest, index) => {
-      it(`Run test ${index}`, done => {
+      it(`Run test ${index}`, (done) => {
         (async () => {
           const clientMap = new Map();
           const createClientFunction = createClient({clientMap});
@@ -103,7 +103,7 @@ describe('TestProxy/ReadModifyWriteRow', () => {
             if (callback) {
               callback(null, {});
             }
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
               const response: protos.google.bigtable.v2.IReadModifyWriteRowResponse =
                 {};
               resolve([response, {}, undefined]);
@@ -129,7 +129,7 @@ describe('TestProxy/ReadModifyWriteRow', () => {
             );
           });
           done();
-        })().catch(err => {
+        })().catch((err) => {
           throw err;
         });
       });

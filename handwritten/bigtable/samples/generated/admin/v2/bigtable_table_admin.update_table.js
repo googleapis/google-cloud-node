@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(table, updateMask) {
@@ -75,7 +73,7 @@ function main(table, updateMask) {
   // [END bigtableadmin_v2_generated_BigtableTableAdmin_UpdateTable_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

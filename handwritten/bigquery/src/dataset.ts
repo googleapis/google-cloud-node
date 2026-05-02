@@ -944,7 +944,7 @@ class Dataset extends ServiceObject {
           });
         }
 
-        const models = (resp.models || []).map(modelObject => {
+        const models = (resp.models || []).map((modelObject) => {
           const model = this.model(modelObject.modelReference!.modelId!);
           model.metadata = modelObject;
           return model;
@@ -1058,7 +1058,7 @@ class Dataset extends ServiceObject {
           });
         }
 
-        const routines = (resp.routines || []).map(metadata => {
+        const routines = (resp.routines || []).map((metadata) => {
           const routine = this.routine(metadata.routineReference!.routineId!);
           routine.metadata = metadata;
           return routine;

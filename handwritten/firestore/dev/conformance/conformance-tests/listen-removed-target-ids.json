@@ -17,9 +17,7 @@
                 "createTime": "1970-01-01T00:00:01Z",
                 "updateTime": "1970-01-01T00:00:01Z"
               },
-              "targetIds": [
-                1
-              ]
+              "targetIds": [1]
             }
           },
           {
@@ -44,9 +42,7 @@
                 "createTime": "1970-01-01T00:00:01Z",
                 "updateTime": "1970-01-01T00:00:01Z"
               },
-              "removedTargetIds": [
-                1
-              ]
+              "removedTargetIds": [1]
             }
           },
           {

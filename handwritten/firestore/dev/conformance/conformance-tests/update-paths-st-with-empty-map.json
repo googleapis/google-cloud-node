@@ -7,14 +7,10 @@
         "docRefPath": "projects/projectID/databases/(default)/documents/C/d",
         "fieldPaths": [
           {
-            "field": [
-              "a"
-            ]
+            "field": ["a"]
           }
         ],
-        "jsonValues": [
-          "{\"b\": {}, \"c\": \"ServerTimestamp\"}"
-        ],
+        "jsonValues": ["{\"b\": {}, \"c\": \"ServerTimestamp\"}"],
         "request": {
           "database": "projects/projectID/databases/(default)",
           "writes": [
@@ -36,9 +32,7 @@
                 }
               },
               "updateMask": {
-                "fieldPaths": [
-                  "a"
-                ]
+                "fieldPaths": ["a"]
               },
               "updateTransforms": [
                 {

@@ -8,9 +8,7 @@
         "clauses": [
           {
             "startAt": {
-              "jsonValues": [
-                "2"
-              ]
+              "jsonValues": ["2"]
             }
           }
         ],

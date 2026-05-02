@@ -9,10 +9,7 @@
   },
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "files": [
-    "build/src",
-    "build/protos"
-  ],
+  "files": ["build/src", "build/protos"],
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",

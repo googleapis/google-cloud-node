@@ -40,7 +40,7 @@ export async function setupBigtable(
       break;
     }
   }
-  const tables = tableIds.map(tableId => instance.table(tableId));
+  const tables = tableIds.map((tableId) => instance.table(tableId));
   for (const currentTable of tables) {
     const [tableExists] = await currentTable.exists();
     if (!tableExists) {
@@ -67,7 +67,7 @@ export async function setupBigtableWithInsert(
 ) {
   await setupBigtable(bigtable, columnFamilyId, instanceId, tableIds);
   const instance = bigtable.instance(instanceId);
-  const tables = tableIds.map(tableId => instance.table(tableId));
+  const tables = tableIds.map((tableId) => instance.table(tableId));
   for (const currentTable of tables) {
     await currentTable.insert([
       {

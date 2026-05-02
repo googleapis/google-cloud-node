@@ -284,7 +284,7 @@ export class BigQueryStorageClient {
     ];
     for (const methodName of bigQueryStorageStubMethods) {
       const callPromise = this.bigQueryStorageStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -539,7 +539,7 @@ export class BigQueryStorageClient {
         'table_reference.dataset_id':
           request.tableReference!.datasetId?.toString() ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createReadSession request %j', request);
@@ -689,7 +689,7 @@ export class BigQueryStorageClient {
       this._gaxModule.routingHeader.fromParams({
         'session.name': request.session!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchCreateReadSessionStreams request %j', request);
@@ -845,7 +845,7 @@ export class BigQueryStorageClient {
       this._gaxModule.routingHeader.fromParams({
         'stream.name': request.stream!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('finalizeStream request %j', request);
@@ -1008,7 +1008,7 @@ export class BigQueryStorageClient {
       this._gaxModule.routingHeader.fromParams({
         'original_stream.name': request.originalStream!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('splitReadStream request %j', request);
@@ -1097,7 +1097,7 @@ export class BigQueryStorageClient {
       this._gaxModule.routingHeader.fromParams({
         'read_position.stream.name': request.readPosition!.stream!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('readRows stream %j', options);
@@ -1240,7 +1240,7 @@ export class BigQueryStorageClient {
    */
   close(): Promise<void> {
     if (this.bigQueryStorageStub && !this._terminated) {
-      return this.bigQueryStorageStub.then(stub => {
+      return this.bigQueryStorageStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

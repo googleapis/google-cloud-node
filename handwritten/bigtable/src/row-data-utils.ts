@@ -126,7 +126,7 @@ class RowDataUtils {
 
     function createFlatMutationsList(entries: FilterConfigOption[]) {
       const e2 = arrify(entries).map(
-        entry => Mutation.parse(entry as Mutation).mutations!,
+        (entry) => Mutation.parse(entry as Mutation).mutations!,
       );
       return e2.reduce((a, b) => a.concat(b), []);
     }
@@ -138,15 +138,15 @@ class RowDataUtils {
   ) {
     const data = {} as {[index: string]: {}};
     options = options || {};
-    families.forEach(family => {
+    families.forEach((family) => {
       const familyData = (data[family.name!] = {}) as {
         [index: string]: {};
       };
-      family.columns!.forEach(column => {
+      family.columns!.forEach((column) => {
         const qualifier = Mutation.convertFromBytes(
           column.qualifier as string,
         ) as string;
-        familyData[qualifier] = column.cells!.map(cell => {
+        familyData[qualifier] = column.cells!.map((cell) => {
           let value = cell.value;
           if (options!.decode !== false) {
             value = Mutation.convertFromBytes(value as Bytes, {
@@ -190,7 +190,7 @@ class RowDataUtils {
       throw new Error('At least one rule must be provided.');
     }
 
-    rules = arrify(rules).map(rule => {
+    rules = arrify(rules).map((rule) => {
       const column = Mutation.parseColumnName((rule as Rule).column);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const ruleData: any = {

@@ -426,7 +426,9 @@ async function multipleWriteBursts() {
           RND_WAIT_TIME_BETWEEN_REQUESTS,
         );
         await Promise.all(writePromises);
-        await new Promise(resolve => setTimeout(resolve, WAIT_BETWEEN_BURSTS));
+        await new Promise((resolve) =>
+          setTimeout(resolve, WAIT_BETWEEN_BURSTS),
+        );
       }
       if (incStep) {
         console.timeEnd(`multipleWriteBursts incStep ${incStep}`);
@@ -458,8 +460,8 @@ async function oneReadTransactionPerSecond() {
         RND_WAIT_TIME_BETWEEN_REQUESTS,
         0,
       );
-      readPromises.forEach(p =>
-        p.then(t => {
+      readPromises.forEach((p) =>
+        p.then((t) => {
           console.log(`Time taken: ${t}ms`);
         }),
       );
@@ -497,8 +499,8 @@ async function oneWriteTransactionPerSecond() {
         NUM_TRANSACTIONS,
         RND_WAIT_TIME_BETWEEN_REQUESTS,
       );
-      writePromises.forEach(p =>
-        p.then(t => {
+      writePromises.forEach((p) =>
+        p.then((t) => {
           console.log(`Time taken: ${t}ms`);
         }),
       );
@@ -541,13 +543,13 @@ async function oneReadAndOneWriteTransactionPerSecond() {
         NUM_WRITE_TRANSACTIONS,
         RND_WAIT_TIME_BETWEEN_REQUESTS,
       );
-      readPromises.forEach(p =>
-        p.then(t => {
+      readPromises.forEach((p) =>
+        p.then((t) => {
           console.log(`Read tx: ${t}ms`);
         }),
       );
-      writePromises.forEach(p =>
-        p.then(t => {
+      writePromises.forEach((p) =>
+        p.then((t) => {
           console.log(`Write tx: ${t}ms`);
         }),
       );
@@ -627,14 +629,14 @@ function queueReadOperations(
   const promises: Promise<number>[] = [];
   for (let run = 0; run < numRequests; run++) {
     promises.unshift(
-      new Promise<number>(resolve => {
+      new Promise<number>((resolve) => {
         setTimeout(async () => {
           const t1 = performance.now();
           let p: Promise<void>;
           database
             .runStream(selectSql)
             .on('data', async () => {
-              p = new Promise<void>(r => {
+              p = new Promise<void>((r) => {
                 setTimeout(() => {
                   r();
                 }, Math.random() * holdSessionTime);
@@ -679,11 +681,11 @@ function queueWriteOperations(
                 tx!
                   .commit()
                   .then(() => resolve(performance.now() - t1))
-                  .catch(err => {
+                  .catch((err) => {
                     rejects(err);
                   }),
               )
-              .catch(err => {
+              .catch((err) => {
                 rejects(err);
               });
           });

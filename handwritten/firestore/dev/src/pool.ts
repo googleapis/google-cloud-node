@@ -309,7 +309,7 @@ export class ClientPool<T extends object> {
   get opCount(): number {
     let activeOperationCount = 0;
     this.activeClients.forEach(
-      metadata => (activeOperationCount += metadata.activeRequestCount),
+      (metadata) => (activeOperationCount += metadata.activeRequestCount),
     );
     return activeOperationCount;
   }
@@ -362,7 +362,7 @@ export class ClientPool<T extends object> {
         await this.release(requestTag, client);
         return Promise.reject(err);
       })
-      .then(async res => {
+      .then(async (res) => {
         await this.release(requestTag, client);
         return res;
       });
@@ -424,7 +424,7 @@ class LazyLogStringForAllClientIds<T extends object> {
       .sort()
       .join(', ');
     const failedClientsDescription = Array.from(this.failedClients)
-      .map(client => `${this.clientIdByClient.get(client)}`)
+      .map((client) => `${this.clientIdByClient.get(client)}`)
       .sort()
       .join(', ');
 

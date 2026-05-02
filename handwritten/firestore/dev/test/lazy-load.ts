@@ -17,7 +17,7 @@ import {expect} from 'chai';
 
 function isModuleLoaded(moduleName: string) {
   return !!Object.keys(require.cache).find(
-    path => path.indexOf(`node_modules/${moduleName}`) !== -1,
+    (path) => path.indexOf(`node_modules/${moduleName}`) !== -1,
   );
 }
 

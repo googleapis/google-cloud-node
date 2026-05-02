@@ -245,12 +245,12 @@ describe('v1.PublisherClient', () => {
       assert(client.publisherStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new publisherModule.v1.PublisherClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.publisherStub);
@@ -259,12 +259,12 @@ describe('v1.PublisherClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new publisherModule.v1.PublisherClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -275,7 +275,7 @@ describe('v1.PublisherClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -436,7 +436,7 @@ describe('v1.PublisherClient', () => {
       ]);
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createTopic(request), expectedError);
@@ -572,7 +572,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateTopic(request), expectedError);
@@ -701,7 +701,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.publish(request), expectedError);
@@ -830,7 +830,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getTopic(request), expectedError);
@@ -962,7 +962,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteTopic(request), expectedError);
@@ -1095,7 +1095,7 @@ describe('v1.PublisherClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.detachSubscription(request), expectedError);
@@ -2048,7 +2048,7 @@ describe('v1.PublisherClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -2158,7 +2158,7 @@ describe('v1.PublisherClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -2271,7 +2271,7 @@ describe('v1.PublisherClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });

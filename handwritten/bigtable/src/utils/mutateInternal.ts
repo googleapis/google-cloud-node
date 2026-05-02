@@ -149,7 +149,7 @@ export function mutateInternal(
       (err as ServiceError & {errors?: ServiceError[]}).errors =
         mutationErrors.concat(
           [...pendingEntryIndices]
-            .filter(index => !mutationErrorsByEntryIndex.has(index))
+            .filter((index) => !mutationErrorsByEntryIndex.has(index))
             .map(() => err),
         );
       collectMetricsCallback(err, err);
@@ -212,7 +212,7 @@ export function mutateInternal(
         onBatchResponse(err);
       })
       .on('data', (obj: google.bigtable.v2.IMutateRowsResponse) => {
-        obj.entries!.forEach(entry => {
+        obj.entries!.forEach((entry) => {
           const originalEntry = entryBatch[entry.index as number];
           const originalEntriesIndex = entryToIndex.get(originalEntry)!;
 

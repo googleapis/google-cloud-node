@@ -139,7 +139,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
   });
 
   describe('happy_path', () => {
-    it('responses within timeout', done => {
+    it('responses within timeout', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -223,7 +223,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
   });
 
   describe('queryPlanErrors', () => {
-    it('one query plan error', done => {
+    it('one query plan error', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -285,7 +285,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('query plan expired error', done => {
+    it('query plan expired error', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -384,7 +384,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('query plan expired error after data was recieved', done => {
+    it('query plan expired error after data was recieved', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -489,7 +489,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('query plan expired error after token', done => {
+    it('query plan expired error after token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -557,7 +557,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
   });
 
   describe('streamEnding', () => {
-    it('empty stream', done => {
+    it('empty stream', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -615,7 +615,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('unexpected end after some data before token', done => {
+    it('unexpected end after some data before token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -678,7 +678,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('unexpected end before a token', done => {
+    it('unexpected end before a token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -759,7 +759,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('empty response - query returned no rows', done => {
+    it('empty response - query returned no rows', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -824,7 +824,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
   });
 
   describe('streamErrors', () => {
-    it('retryable error before anything', done => {
+    it('retryable error before anything', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -921,7 +921,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('retryable error before token', done => {
+    it('retryable error before token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1028,7 +1028,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('retryable error before token, byteBuffer keeps emitting data', done => {
+    it('retryable error before token, byteBuffer keeps emitting data', (done) => {
       // in this test we simulate a situation where even though the
       // error was emitted, a data event emitted after it. This can
       // happen if an event is buffered in the readable part of the byteBuffer
@@ -1150,7 +1150,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('retryable error before token then expire', done => {
+    it('retryable error before token then expire', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1288,7 +1288,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('retryable error after token then expire', done => {
+    it('retryable error after token then expire', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1390,7 +1390,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('non-retryable error before token', done => {
+    it('non-retryable error before token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1463,7 +1463,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('non-retryable error after token', done => {
+    it('non-retryable error after token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1538,7 +1538,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
   });
 
   describe('timeouts', () => {
-    it('timeout immediately', done => {
+    it('timeout immediately', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1578,7 +1578,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('timeout after PQ', done => {
+    it('timeout after PQ', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1631,7 +1631,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('timeout before token', done => {
+    it('timeout before token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1684,7 +1684,7 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
       );
     });
 
-    it('timeout after token', done => {
+    it('timeout after token', (done) => {
       const bigtableStream = new PassThrough({
         objectMode: true,
         highWaterMark: 0,
@@ -1771,7 +1771,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
   });
 
   describe('happy_path', () => {
-    it('getting prepared query plan', done => {
+    it('getting prepared query plan', (done) => {
       const preparedStatement = new PreparedStatement(
         BIGTABLE,
         createPrepareQueryResponse(['f', pbType({int64Type: {}})]),
@@ -1787,7 +1787,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
       clock.runAll();
     });
 
-    it('getting prepared query plan close to validUntil', done => {
+    it('getting prepared query plan close to validUntil', (done) => {
       const resp = createPrepareQueryResponse(['f', pbType({int64Type: {}})]);
       let pqRequestCb = null;
       let requestCounter = 0;
@@ -1840,7 +1840,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
       clock.runAll();
     });
 
-    it('getting prepared query plan past validUntil', done => {
+    it('getting prepared query plan past validUntil', (done) => {
       const resp = createPrepareQueryResponse(['f', pbType({int64Type: {}})]);
       const someTimestamp = 1740000000;
       resp.validUntil = google.protobuf.Timestamp.create({
@@ -1866,7 +1866,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
       clock.runAll();
     });
 
-    it('multiple getData calls result in only one request', done => {
+    it('multiple getData calls result in only one request', (done) => {
       const originalResp = createPrepareQueryResponse([
         'f1',
         pbType({int64Type: {}}),
@@ -1935,7 +1935,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
   });
 
   describe('other_cases', () => {
-    it('getting data after expiration hangs', done => {
+    it('getting data after expiration hangs', (done) => {
       const resp = createPrepareQueryResponse(['f', pbType({int64Type: {}})]);
       const preparedStatement = new PreparedStatement(
         BIGTABLE,
@@ -1969,7 +1969,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
       done();
     });
 
-    it('plan expired during getData callback', done => {
+    it('plan expired during getData callback', (done) => {
       const resp = createPrepareQueryResponse(['f', pbType({int64Type: {}})]);
       const preparedStatement = new PreparedStatement(
         BIGTABLE,
@@ -2013,7 +2013,7 @@ describe('Bigtable/ExecuteQueryPreparedStatementObject', () => {
       done();
     });
 
-    it('plan refresh failed', done => {
+    it('plan refresh failed', (done) => {
       const resp = createPrepareQueryResponse(['f', pbType({int64Type: {}})]);
       const preparedStatement = new PreparedStatement(
         BIGTABLE,

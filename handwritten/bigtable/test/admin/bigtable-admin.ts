@@ -101,7 +101,7 @@ describe('waitForConsistency', () => {
       assert.ok(false, 'should not have been called');
     });
 
-    sandbox.stub(client, 'checkConsistency').callsFake(req => {
+    sandbox.stub(client, 'checkConsistency').callsFake((req) => {
       assert.strictEqual(req.consistencyToken, token);
       return [
         {
@@ -131,7 +131,7 @@ describe('waitForConsistency', () => {
     const fakeTimers = sandbox.useFakeTimers(config);
 
     const client = new TableAdminClient();
-    sandbox.stub(client, 'generateConsistencyToken').callsFake(tn => {
+    sandbox.stub(client, 'generateConsistencyToken').callsFake((tn) => {
       assert.strictEqual(tn.name, tableName);
       return [
         {
@@ -143,7 +143,7 @@ describe('waitForConsistency', () => {
     let consistent = false;
     const checkStub = sandbox
       .stub(client, 'checkConsistency')
-      .callsFake(req => {
+      .callsFake((req) => {
         assert.strictEqual(req.consistencyToken, consistencyToken);
         const rv = {
           consistent,

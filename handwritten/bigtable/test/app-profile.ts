@@ -166,7 +166,7 @@ describe('Bigtable/AppProfile', () => {
       it('should use multi cluster routing when providing an array of clusters', () => {
         const clusterIds = ['clusterId1', 'clusterId2'];
         const clusters = clusterIds.map(
-          clusterId => new FakeCluster(INSTANCE, clusterId),
+          (clusterId) => new FakeCluster(INSTANCE, clusterId),
         );
         const formattedAppProfile = AppProfile.formatAppProfile_({
           routing: new Set(clusters),
@@ -192,7 +192,7 @@ describe('Bigtable/AppProfile', () => {
   });
 
   describe('create', () => {
-    it('should call createAppProfile from instance', done => {
+    it('should call createAppProfile from instance', (done) => {
       const options = {};
 
       appProfile.instance.createAppProfile = (
@@ -211,7 +211,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.create(options, done);
     });
 
-    it('should not require options', done => {
+    it('should not require options', (done) => {
       appProfile.instance.createAppProfile = (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         id: any,
@@ -229,7 +229,7 @@ describe('Bigtable/AppProfile', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       appProfile.bigtable.request = (config: any, callback: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -245,7 +245,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.delete(done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -257,7 +257,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.delete({gaxOptions}, assert.ifError);
     });
 
-    it('should accept ignoreWarnings', done => {
+    it('should accept ignoreWarnings', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       appProfile.bigtable.request = (config: any) => {
         assert.strictEqual(config.reqOpts.ignoreWarnings, true);
@@ -269,7 +269,7 @@ describe('Bigtable/AppProfile', () => {
   });
 
   describe('exists', () => {
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       appProfile.getMetadata = (gaxOptions: CallOptions) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
@@ -278,7 +278,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.exists(assert.ifError);
     });
 
-    it('should pass gaxOptions to getMetadata', done => {
+    it('should pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
 
       appProfile.getMetadata = (gaxOptions_: CallOptions) => {
@@ -289,7 +289,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.exists(gaxOptions, assert.ifError);
     });
 
-    it('should return false if error code is 5', done => {
+    it('should return false if error code is 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 5;
@@ -308,7 +308,7 @@ describe('Bigtable/AppProfile', () => {
       });
     });
 
-    it('should return error if code is not 5', done => {
+    it('should return error if code is not 5', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = new Error('Error.');
       error.code = 'NOT-5';
@@ -326,7 +326,7 @@ describe('Bigtable/AppProfile', () => {
       });
     });
 
-    it('should return true if no error', done => {
+    it('should return true if no error', (done) => {
       appProfile.getMetadata = (
         gaxOptions: CallOptions,
         callback: Function,
@@ -343,7 +343,7 @@ describe('Bigtable/AppProfile', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const gaxOptions = {};
 
       appProfile.getMetadata = (gaxOptions_: CallOptions) => {
@@ -354,7 +354,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.get(gaxOptions, assert.ifError);
     });
 
-    it('should not require gaxOptions', done => {
+    it('should not require gaxOptions', (done) => {
       appProfile.getMetadata = (gaxOptions: CallOptions) => {
         assert.deepStrictEqual(gaxOptions, {});
         done();
@@ -363,7 +363,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.get(assert.ifError);
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
 
       appProfile.getMetadata = (
@@ -379,7 +379,7 @@ describe('Bigtable/AppProfile', () => {
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const metadata = {};
 
       appProfile.getMetadata = (
@@ -399,7 +399,7 @@ describe('Bigtable/AppProfile', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make correct request', done => {
+    it('should make correct request', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       appProfile.bigtable.request = (config: any) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -417,7 +417,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.getMetadata(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -429,7 +429,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const metadata = {};
 
       appProfile.bigtable.request = (config: {}, callback: Function) => {
@@ -442,7 +442,7 @@ describe('Bigtable/AppProfile', () => {
       });
     });
 
-    it('should execute callback with original arguments', done => {
+    it('should execute callback with original arguments', (done) => {
       const args = [{}, {}, {}];
 
       appProfile.bigtable.request = (config: {}, callback: Function) => {
@@ -457,7 +457,7 @@ describe('Bigtable/AppProfile', () => {
   });
 
   describe('setMetadata', () => {
-    it('should provide the proper request options', done => {
+    it('should provide the proper request options', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       appProfile.bigtable.request = (config: any, callback: Function) => {
         assert.strictEqual(config.client, 'BigtableInstanceAdminClient');
@@ -469,7 +469,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.setMetadata({}, done);
     });
 
-    it('should respect the description option', done => {
+    it('should respect the description option', (done) => {
       const options = {description: 'my-description'};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -488,7 +488,7 @@ describe('Bigtable/AppProfile', () => {
       appProfile.setMetadata(options, assert.ifError);
     });
 
-    it('should respect the ignoreWarnings option', done => {
+    it('should respect the ignoreWarnings option', (done) => {
       const options = {ignoreWarnings: true};
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -504,7 +504,7 @@ describe('Bigtable/AppProfile', () => {
       const clusterId = 'my-cluster';
       const cluster = new FakeCluster(INSTANCE, clusterId);
 
-      it("has an 'any' value", done => {
+      it("has an 'any' value", (done) => {
         const options = {routing: 'any'};
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -525,7 +525,7 @@ describe('Bigtable/AppProfile', () => {
         appProfile.setMetadata(options, assert.ifError);
       });
 
-      it('has a cluster value', done => {
+      it('has a cluster value', (done) => {
         const options = {routing: cluster};
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -547,7 +547,7 @@ describe('Bigtable/AppProfile', () => {
       });
     });
 
-    it('should execute callback with all arguments', done => {
+    it('should execute callback with all arguments', (done) => {
       const args = [{}, {}, {}];
       appProfile.bigtable.request = (config: {}, callback: Function) => {
         callback(...args);

@@ -205,7 +205,7 @@ describe('v1.DatastoreClient', () => {
       assert(client.datastoreStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -219,7 +219,7 @@ describe('v1.DatastoreClient', () => {
       });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new datastoreModule.v1.DatastoreClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',

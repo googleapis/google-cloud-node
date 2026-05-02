@@ -25,7 +25,7 @@ function isResourceStale(creationTime: number) {
 
 export async function cleanupDatasets(client: BigQuery, datasetPrefix: string) {
   let [datasets] = await client.getDatasets();
-  datasets = datasets.filter(dataset => dataset.id?.includes(datasetPrefix));
+  datasets = datasets.filter((dataset) => dataset.id?.includes(datasetPrefix));
 
   for (const dataset of datasets) {
     let isDatasetStable = false;

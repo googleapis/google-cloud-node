@@ -158,7 +158,7 @@ class Log implements LogSeverityFunctions {
       options.jsonFieldsToTruncate !== undefined
     ) {
       const filteredList = options.jsonFieldsToTruncate.filter(
-        str =>
+        (str) =>
           str !== null &&
           !this.jsonFieldsToTruncate.includes(str) &&
           str.startsWith('jsonPayload'),
@@ -1043,7 +1043,7 @@ class Log implements LogSeverityFunctions {
    * @throws if there is an error during serialization.
    */
   private decorateEntries(entries: Entry[]): EntryJson[] {
-    return entries.map(entry => {
+    return entries.map((entry) => {
       if (!(entry instanceof Entry)) {
         entry = this.entry(entry);
       }
@@ -1067,7 +1067,7 @@ class Log implements LogSeverityFunctions {
    * @returns {object|string} truncated JSON log entry.
    */
   private truncateEntries(entries: EntryJson[]) {
-    return entries.forEach(entry => {
+    return entries.forEach((entry) => {
       if (this.maxEntrySize === undefined) return;
 
       const payloadSize = JSON.stringify(entry).length;

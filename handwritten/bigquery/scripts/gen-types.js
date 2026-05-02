@@ -40,8 +40,8 @@ function overridedRender() {
   const source = this.template({
     title: this.title ? this.converter.toJSDoc(this.title) : '',
     name: this.name,
-    schemas: this.schemas.map(schema => this.converter.createType(schema)),
-    resources: this.resources.map(resource => resource.render()),
+    schemas: this.schemas.map((schema) => this.converter.createType(schema)),
+    resources: this.resources.map((resource) => resource.render()),
   });
 
   let header = LICENSE + '\n';

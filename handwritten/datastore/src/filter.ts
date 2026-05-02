@@ -154,7 +154,7 @@ class CompositeFilter extends EntityFilter {
   toProto(): any {
     return {
       compositeFilter: {
-        filters: this.filters.map(filter => filter.toProto()),
+        filters: this.filters.map((filter) => filter.toProto()),
         op: this.op,
       },
     };

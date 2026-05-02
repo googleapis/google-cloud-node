@@ -44,7 +44,7 @@ describe('Bigtable/Errors', () => {
 
   before(async () => {
     // make sure we have everything initialized before starting tests
-    const port = await new Promise<string>(resolve => {
+    const port = await new Promise<string>((resolve) => {
       server = new MockServer(resolve);
     });
     bigtable = new Bigtable({
@@ -89,7 +89,7 @@ describe('Bigtable/Errors', () => {
             ReadRows: emitTableNotExistsError,
           });
         });
-        it('should produce human readable error when passing through gax', done => {
+        it('should produce human readable error when passing through gax', (done) => {
           const readStream = table.createReadStream({});
           readStream.on('error', (err: GoogleError) => {
             checkTableNotExistError(err);
@@ -158,7 +158,7 @@ describe('BigtableAdminClient/Errors', () => {
 
   before(async () => {
     // make sure we have everything initialized before starting tests
-    const port = await new Promise<string>(resolve => {
+    const port = await new Promise<string>((resolve) => {
       server = new MockServer(resolve);
     });
     bigtable = new Bigtable({

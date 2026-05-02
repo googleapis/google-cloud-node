@@ -31,7 +31,7 @@ export const executeQuery: ClientImplMaker<
   IExecuteQueryRequest,
   IExecuteQueryResult
 > = ({clientMap}) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const {request} = rawRequest;
     const {clientId} = request;
     const queryRequest = request.request!;

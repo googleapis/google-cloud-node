@@ -531,7 +531,7 @@ export class Row {
       },
       gaxOptions,
     );
-    this.getMetadata(options as GetRowOptions, err => {
+    this.getMetadata(options as GetRowOptions, (err) => {
       if (err) {
         if (err instanceof RowError) {
           callback(null, false);
@@ -641,7 +641,7 @@ export class Row {
 
     // if there is column filter
     if (columns.length) {
-      const filters = columns.map(Mutation.parseColumnName).map(column => {
+      const filters = columns.map(Mutation.parseColumnName).map((column) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const colmFilters: any = [{family: column.family}];
         if (column.qualifier) {

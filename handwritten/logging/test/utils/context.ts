@@ -122,7 +122,7 @@ describe('context', () => {
       it('should ignore a default trace context when open telemetry context detected', () => {
         trace
           .getTracer('nodejs-logging-context-test')
-          .startActiveSpan('foo', parentSpan => {
+          .startActiveSpan('foo', (parentSpan) => {
             const req = {
               method: 'GET',
             } as http.IncomingMessage;
@@ -144,7 +144,7 @@ describe('context', () => {
       it('should return a formatted open telemetry trace context', () => {
         trace
           .getTracer('nodejs-context-test')
-          .startActiveSpan('foo', parentSpan => {
+          .startActiveSpan('foo', (parentSpan) => {
             const req = {headers: {}} as http.IncomingMessage;
             const projectId = 'myProj';
             const context = getOrInjectContext(req, projectId);
@@ -164,7 +164,7 @@ describe('context', () => {
       it('should ignore W3C trace context and return open telemetry context', () => {
         trace
           .getTracer('nodejs-context-test')
-          .startActiveSpan('foo', parentSpan => {
+          .startActiveSpan('foo', (parentSpan) => {
             const projectId = 'myProj';
             const req = {
               headers: {
@@ -189,7 +189,7 @@ describe('context', () => {
       it('should ignore google trace context and return open telemetry context', () => {
         trace
           .getTracer('nodejs-context-test')
-          .startActiveSpan('foo', parentSpan => {
+          .startActiveSpan('foo', (parentSpan) => {
             const projectId = 'myProj';
             const req = {
               headers: {['x-cloud-trace-context']: '1/2;o=1'},
@@ -211,7 +211,7 @@ describe('context', () => {
       it('should ignore injecting Google trace context option', () => {
         trace
           .getTracer('nodejs-context-test')
-          .startActiveSpan('foo', parentSpan => {
+          .startActiveSpan('foo', (parentSpan) => {
             const projectId = 'myProj';
             const req = {headers: {}} as http.IncomingMessage;
             const context = getOrInjectContext(req, projectId, true);
@@ -339,7 +339,7 @@ describe('context', () => {
       it('should extract trace context from open telemetry context', () => {
         trace
           .getTracer('nodejs-context-test')
-          .startActiveSpan('boo', parentSpan => {
+          .startActiveSpan('boo', (parentSpan) => {
             const req = {headers: {}} as http.IncomingMessage;
             const projectId = 'myProj';
             const context = getOrInjectContext(req, projectId);

@@ -166,7 +166,7 @@ describe('Firestore class', () => {
       .then(() => {
         return firestore.getAll(ref1, ref2);
       })
-      .then(docs => {
+      .then((docs) => {
         expect(docs.length).to.equal(2);
       });
   });
@@ -292,7 +292,7 @@ describe('Firestore class', () => {
       let metrics: ExplainMetrics | null = null;
       const stream = randomCol.explainStream();
       const promise = new Promise<boolean>((resolve, reject) => {
-        stream.on('data', data => {
+        stream.on('data', (data) => {
           ++totalResponses;
           if (data.document) {
             ++totalDocuments;
@@ -328,7 +328,7 @@ describe('Firestore class', () => {
     let metrics: ExplainMetrics | null = null;
     const stream = randomCol.explainStream({analyze: false});
     const promise = new Promise<boolean>((resolve, reject) => {
-      stream.on('data', data => {
+      stream.on('data', (data) => {
         ++totalResponses;
         if (data.document) {
           ++totalDocuments;
@@ -365,7 +365,7 @@ describe('Firestore class', () => {
       .where('foo', '==', 1)
       .explainStream({analyze: true});
     const promise = new Promise<boolean>((resolve, reject) => {
-      stream.on('data', data => {
+      stream.on('data', (data) => {
         ++totalResponses;
         if (data.document) {
           ++totalDocuments;
@@ -544,7 +544,7 @@ describe('Firestore class', () => {
       .then(() => {
         return firestore.getAll(...[ref1, ref2]);
       })
-      .then(docs => {
+      .then((docs) => {
         expect(docs.length).to.equal(2);
       });
   });
@@ -556,7 +556,7 @@ describe('Firestore class', () => {
       .then(() => {
         return firestore.getAll(ref1, {fieldMask: ['foo']});
       })
-      .then(docs => {
+      .then((docs) => {
         expect(docs[0].data()).to.deep.equal({foo: 'a'});
       });
   });
@@ -568,7 +568,7 @@ describe('Firestore class', () => {
       .then(() => {
         return firestore.getAll(...[ref1, ref2], {fieldMask: ['f']});
       })
-      .then(docs => {
+      .then((docs) => {
         expect(docs[0].data()).to.deep.equal({f: 'a'});
         expect(docs[1].data()).to.deep.equal({f: 'a'});
       });
@@ -782,10 +782,10 @@ describe('CollectionReference class', () => {
   it('has add() method', () => {
     return randomCol
       .add({foo: 'a'})
-      .then(ref => {
+      .then((ref) => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('a');
       });
   });
@@ -802,11 +802,11 @@ describe('CollectionReference class', () => {
     const documentRefs = await randomCol.listDocuments();
     const documents = await firestore.getAll(...documentRefs);
 
-    const existingDocs = documents.filter(doc => doc.exists);
-    const missingDocs = documents.filter(doc => !doc.exists);
+    const existingDocs = documents.filter((doc) => doc.exists);
+    const missingDocs = documents.filter((doc) => !doc.exists);
 
-    expect(existingDocs.map(doc => doc.id)).to.have.members(['a', 'c']);
-    expect(missingDocs.map(doc => doc.id)).to.have.members(['b']);
+    expect(existingDocs.map((doc) => doc.id)).to.have.members(['a', 'c']);
+    expect(missingDocs.map((doc) => doc.id)).to.have.members(['b']);
   });
 
   // showMissing is not supported in Enterprise
@@ -825,7 +825,7 @@ describe('CollectionReference class', () => {
       const documentRefs = await randomCol.listDocuments();
 
       const actualDocIds = documentRefs
-        .map(dr => dr.id)
+        .map((dr) => dr.id)
         .sort((a, b) => a.localeCompare(b));
 
       expect(actualDocIds).to.deep.equal(expectedResults);
@@ -887,7 +887,7 @@ describe('DocumentReference class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('a');
       });
   });
@@ -920,7 +920,7 @@ describe('DocumentReference class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         const data = doc.data()!;
         expect(data.pathValue.path).to.equal(
           (allSupportedTypesObject.pathValue as DocumentReference).path,
@@ -941,7 +941,7 @@ describe('DocumentReference class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         const actualValue = doc.data()!.nanValue;
         expect(actualValue).to.be.a('number');
         expect(actualValue).to.be.NaN;
@@ -956,9 +956,9 @@ describe('DocumentReference class', () => {
     return ref
       .set({bigIntValue})
       .then(() => ref.get())
-      .then(doc => ref.set(doc.data()!))
+      .then((doc) => ref.set(doc.data()!))
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         const actualValue = doc.data()!.bigIntValue;
         expect(actualValue).to.be.a('bigint');
         expect(actualValue).to.equal(bigIntValue);
@@ -986,7 +986,7 @@ describe('DocumentReference class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         setTimestamp = doc.get('f');
         expect(setTimestamp).to.be.an.instanceOf(Timestamp);
         expect(doc.data()).to.deep.equal({
@@ -1000,7 +1000,7 @@ describe('DocumentReference class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         const updateTimestamp = doc.get('a');
         expect(setTimestamp).to.be.an.instanceOf(Timestamp);
         expect(doc.data()).to.deep.equal({
@@ -1022,7 +1022,7 @@ describe('DocumentReference class', () => {
       .set(baseData)
       .then(() => ref.update(updateData))
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal(expectedData);
       });
   });
@@ -1037,7 +1037,7 @@ describe('DocumentReference class', () => {
       .set(baseData)
       .then(() => ref.set(updateData, {merge: true}))
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal(expectedData);
       });
   });
@@ -1065,7 +1065,7 @@ describe('DocumentReference class', () => {
       .set(baseObject)
       .then(() => ref.update(updateObject))
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal(expectedObject);
       });
   });
@@ -1093,7 +1093,7 @@ describe('DocumentReference class', () => {
       .set(baseObject)
       .then(() => ref.update(updateObject))
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal(expectedObject);
       });
   });
@@ -1106,7 +1106,7 @@ describe('DocumentReference class', () => {
         ref.set({'a.2': 'foo', nested: {'b.2': 'bar'}}, {merge: true}),
       )
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         const data = doc.data();
         expect(data).to.deep.equal({
           'a.1': 'foo',
@@ -1125,7 +1125,7 @@ describe('DocumentReference class', () => {
       .set({a: 'b'})
       .then(() => ref.set({c: FieldValue.serverTimestamp()}, {merge: true}))
       .then(() => ref.get())
-      .then(doc => {
+      .then((doc) => {
         const updateTimestamp = doc.get('c');
         expect(updateTimestamp).to.be.an.instanceOf(Timestamp);
         expect(doc.data()).to.deep.equal({
@@ -1139,13 +1139,13 @@ describe('DocumentReference class', () => {
     const ref = randomCol.doc('doc');
     return ref
       .set({foo: 'a'})
-      .then(res => {
+      .then((res) => {
         return ref.update({foo: 'b'}, {lastUpdateTime: res.writeTime});
       })
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('b');
       });
   });
@@ -1178,7 +1178,7 @@ describe('DocumentReference class', () => {
         deleted = true;
         return ref.get();
       })
-      .then(result => {
+      .then((result) => {
         expect(deleted).to.be.true;
         expect(result.exists).to.be.false;
       });
@@ -1214,14 +1214,14 @@ describe('DocumentReference class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal({'!.\\`': {'!.\\`': 'value'}});
         return ref.update(new FieldPath('!.\\`', '!.\\`'), 'new-value');
       })
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal({'!.\\`': {'!.\\`': 'new-value'}});
       });
   });
@@ -1243,7 +1243,7 @@ describe('DocumentReference class', () => {
       .then(() => {
         return randomCol.doc('doc').listCollections();
       })
-      .then(response => {
+      .then((response) => {
         expect(response).to.have.length(collections.length);
         for (let i = 0; i < response.length; ++i) {
           expect(response[i].id).to.equal(collections[i]);
@@ -1313,7 +1313,7 @@ describe('DocumentReference class', () => {
         .then(() => {
           return ref.get();
         })
-        .then(snap => {
+        .then((snap) => {
           if (!snap.exists) {
             expect(expectedState[i]).to.be.null;
           } else {
@@ -1425,7 +1425,7 @@ describe('DocumentReference class', () => {
         .then(() => {
           return ref.get();
         })
-        .then(snap => {
+        .then((snap) => {
           times.push(snap.get('time'));
           expect(snap.data()).to.deep.equal(expectedState[i](times));
         });
@@ -1470,7 +1470,7 @@ describe('DocumentReference class', () => {
     }
 
     function waitForSnapshot(): Promise<DocumentSnapshot> {
-      return currentDeferred.promise!.then(snapshot => {
+      return currentDeferred.promise!.then((snapshot) => {
         resetPromise();
         return snapshot as DocumentSnapshot;
       });
@@ -1485,16 +1485,16 @@ describe('DocumentReference class', () => {
       let updateTime: Timestamp;
 
       const unsubscribe = ref.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject(err);
         },
       );
 
       return waitForSnapshot()
-        .then(snapshot => {
+        .then((snapshot) => {
           expect(snapshot.exists).to.be.false;
 
           // Add the document.
@@ -1503,7 +1503,7 @@ describe('DocumentReference class', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(snapshot => {
+        .then((snapshot) => {
           expect(snapshot.exists).to.be.true;
           expect(snapshot.get('foo')).to.equal('a');
           readTime = snapshot.readTime;
@@ -1516,7 +1516,7 @@ describe('DocumentReference class', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(snapshot => {
+        .then((snapshot) => {
           expect(snapshot.exists).to.be.true;
           expect(snapshot.get('foo')).to.equal('b');
           expect(snapshot.createTime!.isEqual(createTime)).to.be.true;
@@ -1534,16 +1534,16 @@ describe('DocumentReference class', () => {
       const ref = randomCol.doc('doc');
 
       const unsubscribe = ref.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject(err);
         },
       );
 
       return waitForSnapshot()
-        .then(snapshot => {
+        .then((snapshot) => {
           expect(snapshot.exists).to.be.false;
 
           // Add the document.
@@ -1552,7 +1552,7 @@ describe('DocumentReference class', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(snapshot => {
+        .then((snapshot) => {
           expect(snapshot.exists).to.be.true;
 
           // Delete the document.
@@ -1561,13 +1561,13 @@ describe('DocumentReference class', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(snapshot => {
+        .then((snapshot) => {
           expect(snapshot.exists).to.be.false;
           unsubscribe();
         });
     });
 
-    it('handles multiple docs', done => {
+    it('handles multiple docs', (done) => {
       const doc1 = randomCol.doc();
       const doc2 = randomCol.doc();
 
@@ -1599,18 +1599,18 @@ describe('DocumentReference class', () => {
           run.shift()!();
         }
       };
-      const unsubscribe1 = doc1.onSnapshot(snapshot => {
+      const unsubscribe1 = doc1.onSnapshot((snapshot) => {
         expect(snapshot.exists).to.equal(exists1.shift());
         maybeRun();
       });
 
-      const unsubscribe2 = doc2.onSnapshot(snapshot => {
+      const unsubscribe2 = doc2.onSnapshot((snapshot) => {
         expect(snapshot.exists).to.equal(exists2.shift());
         maybeRun();
       });
     });
 
-    it('handles multiple streams on same doc', done => {
+    it('handles multiple streams on same doc', (done) => {
       const doc = randomCol.doc();
 
       // Document transitions from non-existent to existent to non-existent.
@@ -1640,12 +1640,12 @@ describe('DocumentReference class', () => {
         }
       };
 
-      const unsubscribe1 = doc.onSnapshot(snapshot => {
+      const unsubscribe1 = doc.onSnapshot((snapshot) => {
         expect(snapshot.exists).to.equal(exists1.shift());
         maybeRun();
       });
 
-      const unsubscribe2 = doc.onSnapshot(snapshot => {
+      const unsubscribe2 = doc.onSnapshot((snapshot) => {
         expect(snapshot.exists).to.equal(exists2.shift());
         maybeRun();
       });
@@ -1667,7 +1667,7 @@ describe('DocumentReference class', () => {
 
         unsubscribeCallbacks[i] = randomCol
           .where('i', '>', i)
-          .onSnapshot(snapshot => {
+          .onSnapshot((snapshot) => {
             if (snapshot.size === 0) {
               emptyResults[i].resolve();
             } else if (snapshot.size === 1) {
@@ -1676,10 +1676,10 @@ describe('DocumentReference class', () => {
           });
       }
 
-      await Promise.all(emptyResults.map(d => d.promise));
+      await Promise.all(emptyResults.map((d) => d.promise));
       await ref.set({i: 1337});
-      await Promise.all(documentResults.map(d => d.promise));
-      unsubscribeCallbacks.forEach(c => c());
+      await Promise.all(documentResults.map((d) => d.promise));
+      unsubscribeCallbacks.forEach((c) => c());
     });
 
     it('handles query snapshots with converters', async () => {
@@ -1689,7 +1689,7 @@ describe('DocumentReference class', () => {
       const unsubscribe = randomCol
         .where('title', '==', 'post')
         .withConverter(postConverter)
-        .onSnapshot(snapshot => {
+        .onSnapshot((snapshot) => {
           if (snapshot.size === 0) {
             setupDeferred.resolve();
           }
@@ -1774,7 +1774,7 @@ describe('DocumentReference class', () => {
 
     const unlisten = randomCol
       .where('purpose', '==', 'vector tests')
-      .onSnapshot(snap => {
+      .onSnapshot((snap) => {
         expected[idx].resolve();
         idx += 1;
         if (snap.docs.length > 0) {
@@ -1856,7 +1856,7 @@ describe('runs query on a large collection', () => {
   afterEach(() => verifyInstance(firestore));
 
   it('can get()', () => {
-    return randomCol.get().then(res => {
+    return randomCol.get().then((res) => {
       expect(res.size).to.equal(1000);
     });
   });
@@ -1889,13 +1889,13 @@ describe.skipEnterprise('Query class - Standard DB', () => {
   ): Promise<PaginatedResults> => {
     return (startAfter ? query.startAfter(startAfter) : query)
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         if (snapshot.empty) {
           return {pages: 0, docs: []};
         } else {
           const docs = snapshot.docs;
           return paginateResults(query, docs[docs.length - 1]).then(
-            nextPage => {
+            (nextPage) => {
               return {
                 pages: nextPage.pages + 1,
                 docs: docs.concat(nextPage.docs),
@@ -1940,10 +1940,10 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
     if (data.length > 0) {
       if (typeof data[0] === 'string') {
-        const actualIds = result.docs.map(docSnapshot => docSnapshot.id);
+        const actualIds = result.docs.map((docSnapshot) => docSnapshot.id);
         expect(actualIds).to.deep.equal(data);
       } else {
-        result.forEach(doc => {
+        result.forEach((doc) => {
           expect(doc.data()).to.deep.equal(data.shift());
         });
       }
@@ -1969,7 +1969,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .then(() => {
         return randomCol.select('foo').get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
       });
   });
@@ -1981,7 +1981,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .then(() => {
         return randomCol.select().get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].ref.id).to.deep.equal('doc');
         expect(res.docs[0].data()).to.deep.equal({});
       });
@@ -1994,7 +1994,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .then(() => {
         return randomCol.where('foo', '==', 'bar').get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].data()).to.deep.equal({foo: 'bar'});
       });
   });
@@ -2006,7 +2006,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .then(() => {
         return randomCol.where('foo', '==', NaN).where('bar', '==', null).get();
       })
-      .then(res => {
+      .then((res) => {
         expect(
           typeof res.docs[0].get('foo') === 'number' &&
             isNaN(res.docs[0].get('foo')),
@@ -2021,7 +2021,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       randomCol.add({foo: []}),
     ])
       .then(() => randomCol.where('foo', 'array-contains', 'bar').get())
-      .then(res => {
+      .then((res) => {
         expect(res.size).to.equal(1);
         expect(res.docs[0].get('foo')).to.deep.equal(['bar']);
       });
@@ -2341,7 +2341,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       expect(res.docs[3].get('foo')).to.equal(5);
       expect(res.docs[4].get('foo')).to.equal(6);
 
-      res.docs.forEach(ds => expect(ds.get('embedding')).to.be.undefined);
+      res.docs.forEach((ds) => expect(ds.get('embedding')).to.be.undefined);
     });
 
     it('supports findNearest limits', async () => {
@@ -2972,7 +2972,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .then(() => {
         return randomCol.where(FieldPath.documentId(), '>=', 'bar').get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs.length).to.equal(1);
       });
   });
@@ -2995,14 +2995,14 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .then(() => {
         return randomCol.orderBy(FieldPath.documentId()).get();
       })
-      .then(res => {
+      .then((res) => {
         expect(res.docs[0].data()).to.deep.equal({foo: 'a'});
         expect(res.docs[1].data()).to.deep.equal({foo: 'b'});
       });
   });
 
   it('can run get() on empty collection', async () => {
-    return randomCol.get().then(res => {
+    return randomCol.get().then((res) => {
       return expect(res.empty);
     });
   });
@@ -3129,7 +3129,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     return batch
       .commit()
       .then(() => paginateResults(query))
-      .then(results => {
+      .then((results) => {
         expect(results.pages).to.equal(4);
         expect(results.docs).to.have.length(10);
       });
@@ -3147,7 +3147,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     return batch
       .commit()
       .then(() => paginateResults(query))
-      .then(results => {
+      .then((results) => {
         expect(results.pages).to.equal(3);
         expect(results.docs).to.have.length(9);
       });
@@ -3165,7 +3165,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     return batch
       .commit()
       .then(() => paginateResults(query))
-      .then(results => {
+      .then((results) => {
         expect(results.pages).to.equal(4);
         expect(results.docs).to.have.length(10);
       });
@@ -3202,7 +3202,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     expectDocs(res, {foo: 'a'});
   });
 
-  it('has stream() method', done => {
+  it('has stream() method', (done) => {
     let received = 0;
     const ref1 = randomCol.doc('doc1');
     const ref2 = randomCol.doc('doc2');
@@ -3210,7 +3210,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     void Promise.all([ref1.set({foo: 'a'}), ref2.set({foo: 'b'})]).then(() => {
       return randomCol
         .stream()
-        .on('data', d => {
+        .on('data', (d) => {
           expect(d).to.be.an.instanceOf(DocumentSnapshot);
           ++received;
         })
@@ -3263,7 +3263,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .collectionGroup(collectionGroup)
       .orderBy(FieldPath.documentId())
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal([
       'cg-doc1',
       'cg-doc2',
       'cg-doc3',
@@ -3298,7 +3298,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .startAt('a/b')
       .endAt('a/b0')
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal([
       'cg-doc2',
       'cg-doc3',
       'cg-doc4',
@@ -3310,7 +3310,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .startAfter('a/b')
       .endBefore(`a/b/${collectionGroup}/cg-doc3`)
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+    expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal(['cg-doc2']);
   });
 
   it('can query collection groups with where filters on arbitrary documentId', async () => {
@@ -3339,7 +3339,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .where(FieldPath.documentId(), '<=', 'a/b0')
       .orderBy(FieldPath.documentId())
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal([
+    expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal([
       'cg-doc2',
       'cg-doc3',
       'cg-doc4',
@@ -3350,7 +3350,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       .where(FieldPath.documentId(), '>', 'a/b')
       .where(FieldPath.documentId(), '<', `a/b/${collectionGroup}/cg-doc3`)
       .get();
-    expect(querySnapshot.docs.map(d => d.id)).to.deep.equal(['cg-doc2']);
+    expect(querySnapshot.docs.map((d) => d.id)).to.deep.equal(['cg-doc2']);
   });
 
   it('can query large collections', async () => {
@@ -3765,7 +3765,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
     }
 
     function waitForSnapshot(): Promise<QuerySnapshot> {
-      return currentDeferred.promise!.then(snapshot => {
+      return currentDeferred.promise!.then((snapshot) => {
         resetPromise();
         return snapshot;
       });
@@ -3805,16 +3805,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       const ref2 = randomCol.doc('doc2');
 
       const unsubscribe = randomCol.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject!(err);
         },
       );
 
       return waitForSnapshot()
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {docs: [], docChanges: []});
           // Add a result.
           return ref1.set({foo: 'a'});
@@ -3822,7 +3822,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {foo: 'a'})],
             docChanges: [added('doc1', {foo: 'a'})],
@@ -3833,7 +3833,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {foo: 'a'}), snapshot('doc2', {foo: 'b'})],
             docChanges: [added('doc2', {foo: 'b'})],
@@ -3844,7 +3844,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {foo: 'a'}), snapshot('doc2', {bar: 'c'})],
             docChanges: [modified('doc2', {bar: 'c'})],
@@ -3859,16 +3859,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
 
       const query = randomCol.where('included', '==', 'yes');
       const unsubscribe = query.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject(err);
         },
       );
 
       return waitForSnapshot()
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {docs: [], docChanges: []});
           // Add a result.
           return ref1.set({included: 'yes'});
@@ -3876,7 +3876,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [added('doc1', {included: 'yes'})],
@@ -3887,7 +3887,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [
               snapshot('doc1', {included: 'yes'}),
@@ -3901,7 +3901,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [removed('doc2', {included: 'yes'})],
@@ -3915,16 +3915,16 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       const ref2 = randomCol.doc('doc2');
 
       const unsubscribe = randomCol.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject(err);
         },
       );
 
       return waitForSnapshot()
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {docs: [], docChanges: []});
           // Add a result.
           return ref1.set({included: 'yes'});
@@ -3932,7 +3932,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [added('doc1', {included: 'yes'})],
@@ -3943,7 +3943,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [
               snapshot('doc1', {included: 'yes'}),
@@ -3957,7 +3957,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         .then(() => {
           return waitForSnapshot();
         })
-        .then(results => {
+        .then((results) => {
           snapshotsEqual(results, {
             docs: [snapshot('doc1', {included: 'yes'})],
             docChanges: [removed('doc2', {included: 'yes'})],
@@ -3978,7 +3978,7 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       const unsubscribe = randomCol
         .orderBy('doc')
         .limitToLast(2)
-        .onSnapshot(snapshot => currentDeferred.resolve(snapshot));
+        .onSnapshot((snapshot) => currentDeferred.resolve(snapshot));
 
       const results = await waitForSnapshot();
       snapshotsEqual(results, {
@@ -4050,9 +4050,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
             ];
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
 
@@ -4103,9 +4103,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         ];
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
 
@@ -4156,10 +4156,10 @@ describe.skipEnterprise('Query class - Standard DB', () => {
       const orderedQuery = randomCol.orderBy('embedding');
 
       const unsubscribe = orderedQuery.onSnapshot(
-        snapshot => {
+        (snapshot) => {
           currentDeferred.resolve(snapshot);
         },
-        err => {
+        (err) => {
           currentDeferred.reject!(err);
         },
       );
@@ -4218,9 +4218,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
         const watchSnapshot = await waitForSnapshot();
@@ -4249,9 +4249,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
         const watchSnapshot = await waitForSnapshot();
@@ -4280,9 +4280,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
         const watchSnapshot = await waitForSnapshot();
@@ -4311,9 +4311,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         const query = collection.orderBy('value');
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
         const watchSnapshot = await waitForSnapshot();
@@ -4355,9 +4355,9 @@ describe.skipEnterprise('Query class - Standard DB', () => {
         ];
 
         const getSnapshot = await query.get();
-        expect(getSnapshot.docs.map(d => d.id)).to.deep.equal(expectedDocs);
+        expect(getSnapshot.docs.map((d) => d.id)).to.deep.equal(expectedDocs);
 
-        const unsubscribe = query.onSnapshot(snapshot =>
+        const unsubscribe = query.onSnapshot((snapshot) =>
           currentDeferred.resolve(snapshot),
         );
         const watchSnapshot = await waitForSnapshot();
@@ -4784,7 +4784,7 @@ describe('count queries', () => {
 
   describe('Run within Transaction', () => {
     countTests(async (q, n) => {
-      const res = await firestore.runTransaction(f => f.get(q));
+      const res = await firestore.runTransaction((f) => f.get(q));
       expect(res.data().count).to.equal(n);
     });
   });
@@ -4937,7 +4937,7 @@ describe('count queries using aggregate api', () => {
 
   describe('Run within Transaction', () => {
     countTests(async (q, n) => {
-      const res = await firestore.runTransaction(f => f.get(q));
+      const res = await firestore.runTransaction((f) => f.get(q));
       expect(res.data().count).to.equal(n);
     });
   });
@@ -5108,7 +5108,7 @@ describe('Aggregation queries', () => {
     [key: string]: DocumentData;
   }): Promise<Awaited<WriteResult>[]> {
     const sets: Array<Promise<WriteResult>> = [];
-    Object.keys(docs).forEach(key => {
+    Object.keys(docs).forEach((key) => {
       sets.push(col.doc(key).set(docs[key]));
     });
     return Promise.all(sets);
@@ -5118,14 +5118,14 @@ describe('Aggregation queries', () => {
     const doc = col.doc();
     const writeResult: WriteResult = await doc.create({some: 'data'});
 
-    const count = await firestore.runTransaction(t => t.get(col.count()), {
+    const count = await firestore.runTransaction((t) => t.get(col.count()), {
       readOnly: true,
       readTime: writeResult.writeTime,
     });
     expect(count.data().count).to.equal(1);
 
     const countBefore = await firestore.runTransaction(
-      t => t.get(col.count()),
+      (t) => t.get(col.count()),
       {
         readOnly: true,
         readTime: Timestamp.fromMillis(writeResult.writeTime.toMillis() - 1),
@@ -6785,13 +6785,13 @@ describe('Transaction class', () => {
     return ref
       .set({foo: 'bar'})
       .then(() => {
-        return firestore.runTransaction(updateFunction => {
-          return updateFunction.get(ref).then(doc => {
+        return firestore.runTransaction((updateFunction) => {
+          return updateFunction.get(ref).then((doc) => {
             return Promise.resolve(doc.get('foo'));
           });
         });
       })
-      .then(res => {
+      .then((res) => {
         expect(res).to.equal('bar');
       });
   });
@@ -6801,13 +6801,13 @@ describe('Transaction class', () => {
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({}), ref2.set({})])
       .then(() => {
-        return firestore.runTransaction(updateFunction => {
-          return updateFunction.getAll(ref1, ref2).then(docs => {
+        return firestore.runTransaction((updateFunction) => {
+          return updateFunction.getAll(ref1, ref2).then((docs) => {
             return Promise.resolve(docs.length);
           });
         });
       })
-      .then(res => {
+      .then((res) => {
         expect(res).to.equal(2);
       });
   });
@@ -6817,13 +6817,13 @@ describe('Transaction class', () => {
     const ref2 = randomCol.doc('doc2');
     return Promise.all([ref1.set({}), ref2.set({})])
       .then(() => {
-        return firestore.runTransaction(updateFunction => {
-          return updateFunction.getAll(...[ref1, ref2]).then(docs => {
+        return firestore.runTransaction((updateFunction) => {
+          return updateFunction.getAll(...[ref1, ref2]).then((docs) => {
             return Promise.resolve(docs.length);
           });
         });
       })
-      .then(res => {
+      .then((res) => {
         expect(res).to.equal(2);
       });
   });
@@ -6832,12 +6832,12 @@ describe('Transaction class', () => {
     const ref1 = randomCol.doc('doc1');
     return ref1.set({foo: 'a', bar: 'b'}).then(() => {
       return firestore
-        .runTransaction(updateFunction => {
+        .runTransaction((updateFunction) => {
           return updateFunction
             .getAll(ref1, {fieldMask: ['foo']})
             .then(([doc]) => doc);
         })
-        .then(doc => {
+        .then((doc) => {
           expect(doc.data()).to.deep.equal({foo: 'a'});
         });
     });
@@ -6851,12 +6851,12 @@ describe('Transaction class', () => {
       ref2.set({f: 'a', b: 'b'}),
     ]).then(() => {
       return firestore
-        .runTransaction(updateFunction => {
+        .runTransaction((updateFunction) => {
           return updateFunction
             .getAll(...[ref1, ref2], {fieldMask: ['f']})
-            .then(docs => docs);
+            .then((docs) => docs);
         })
-        .then(docs => {
+        .then((docs) => {
           expect(docs[0].data()).to.deep.equal({f: 'a'});
           expect(docs[1].data()).to.deep.equal({f: 'a'});
         });
@@ -6869,7 +6869,7 @@ describe('Transaction class', () => {
     await ref1.set(new Post('post1', 'author1'));
     await ref2.set(new Post('post2', 'author2'));
 
-    const docs = await firestore.runTransaction(updateFunction => {
+    const docs = await firestore.runTransaction((updateFunction) => {
       return updateFunction.getAll(ref1, ref2);
     });
 
@@ -6880,7 +6880,7 @@ describe('Transaction class', () => {
   it('set() and get() support withConverter()', async () => {
     const ref = randomCol.doc('doc1').withConverter(postConverter);
     await ref.set(new Post('post', 'author'));
-    await firestore.runTransaction(async txn => {
+    await firestore.runTransaction(async (txn) => {
       await txn.get(ref);
       await txn.set(ref, new Post('new post', 'author'));
     });
@@ -6894,13 +6894,13 @@ describe('Transaction class', () => {
     return ref
       .set({foo: 'bar'})
       .then(() => {
-        return firestore.runTransaction(updateFunction => {
-          return updateFunction.get(query).then(res => {
+        return firestore.runTransaction((updateFunction) => {
+          return updateFunction.get(query).then((res) => {
             return Promise.resolve(res.docs[0].get('foo'));
           });
         });
       })
-      .then(res => {
+      .then((res) => {
         expect(res).to.equal('bar');
       });
   });
@@ -6908,14 +6908,14 @@ describe('Transaction class', () => {
   it('has set() method', () => {
     const ref = randomCol.doc('doc');
     return firestore
-      .runTransaction(updateFunction => {
+      .runTransaction((updateFunction) => {
         updateFunction.set(ref, {foo: 'foobar'});
         return Promise.resolve();
       })
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('foobar');
       });
   });
@@ -6928,7 +6928,7 @@ describe('Transaction class', () => {
         moo: 'chicken',
       })
       .then(() => {
-        return firestore.runTransaction(updateFunction => {
+        return firestore.runTransaction((updateFunction) => {
           return updateFunction.get(ref).then(() => {
             updateFunction.update(ref, {
               boo: FieldValue.arrayRemove('sebastian'),
@@ -6940,7 +6940,7 @@ describe('Transaction class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.data()).to.deep.equal({
           boo: ['ghost'],
           moo: 'cow',
@@ -6954,7 +6954,7 @@ describe('Transaction class', () => {
     return ref
       .set({foo: 'bar'})
       .then(() => {
-        return firestore.runTransaction(updateFunction => {
+        return firestore.runTransaction((updateFunction) => {
           updateFunction.delete(ref);
           return Promise.resolve();
         });
@@ -6963,7 +6963,7 @@ describe('Transaction class', () => {
         success = true;
         return ref.get();
       })
-      .then(result => {
+      .then((result) => {
         expect(success).to.be.true;
         expect(result.exists).to.be.false;
       });
@@ -6975,7 +6975,7 @@ describe('Transaction class', () => {
 
     let attempts = 0;
 
-    const promise = firestore.runTransaction(async transaction => {
+    const promise = firestore.runTransaction(async (transaction) => {
       ++attempts;
       transaction.update(ref, {foo: 'b'});
     });
@@ -7008,7 +7008,7 @@ describe('Transaction class', () => {
       // and be retried.
       const contentionPromise = [new Deferred<void>(), new Deferred<void>()];
 
-      const firstTransaction = firestore.runTransaction(async transaction => {
+      const firstTransaction = firestore.runTransaction(async (transaction) => {
         ++attempts;
         await transaction.get(ref);
         contentionPromise[0].resolve();
@@ -7016,13 +7016,15 @@ describe('Transaction class', () => {
         transaction.set(ref, {first: true}, {merge: true});
       });
 
-      const secondTransaction = firestore.runTransaction(async transaction => {
-        ++attempts;
-        await transaction.get(ref);
-        contentionPromise[1].resolve();
-        await contentionPromise[0].promise;
-        transaction.set(ref, {second: true}, {merge: true});
-      });
+      const secondTransaction = firestore.runTransaction(
+        async (transaction) => {
+          ++attempts;
+          await transaction.get(ref);
+          contentionPromise[1].resolve();
+          await contentionPromise[0].promise;
+          transaction.set(ref, {second: true}, {merge: true});
+        },
+      );
 
       await firstTransaction;
       await secondTransaction;
@@ -7038,7 +7040,7 @@ describe('Transaction class', () => {
     const ref = randomCol.doc('doc');
     await ref.set({foo: 'bar'});
     const snapshot = await firestore.runTransaction(
-      updateFunction => updateFunction.get(ref),
+      (updateFunction) => updateFunction.get(ref),
       {readOnly: true},
     );
     expect(snapshot.exists).to.be.true;
@@ -7049,7 +7051,7 @@ describe('Transaction class', () => {
     const writeResult = await ref.set({foo: 1});
     await ref.set({foo: 2});
     const snapshot = await firestore.runTransaction(
-      updateFunction => updateFunction.get(ref),
+      (updateFunction) => updateFunction.get(ref),
       {readOnly: true, readTime: writeResult.writeTime},
     );
     expect(snapshot.exists).to.be.true;
@@ -7081,7 +7083,7 @@ describe('WriteBatch class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('a');
       });
   });
@@ -7095,7 +7097,7 @@ describe('WriteBatch class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('a');
       });
   });
@@ -7110,7 +7112,7 @@ describe('WriteBatch class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('title')).to.equal('olive');
         expect(doc.get('author')).to.equal('author');
       });
@@ -7125,7 +7127,7 @@ describe('WriteBatch class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('a');
       });
   });
@@ -7153,7 +7155,7 @@ describe('WriteBatch class', () => {
       .then(() => {
         return ref.get();
       })
-      .then(doc => {
+      .then((doc) => {
         expect(doc.get('foo')).to.equal('b');
       });
   });
@@ -7162,7 +7164,7 @@ describe('WriteBatch class', () => {
     const batch = firestore.batch();
     batch.set(randomCol.doc(), {foo: 'a'});
     batch.set(randomCol.doc(), {foo: FieldValue.serverTimestamp()});
-    return batch.commit().then(writeResults => {
+    return batch.commit().then((writeResults) => {
       expect(writeResults).to.have.length(2);
     });
   });
@@ -7176,7 +7178,7 @@ describe('WriteBatch class', () => {
       .then(() => {
         expect.fail();
       })
-      .catch(err => {
+      .catch((err) => {
         expect(err.message.match(/No document to update/));
       });
   });
@@ -7194,7 +7196,7 @@ describe('WriteBatch class', () => {
         success = true;
         return ref.get();
       })
-      .then(result => {
+      .then((result) => {
         expect(success).to.be.true;
         expect(result.exists).to.be.false;
       });
@@ -7224,35 +7226,35 @@ describe('QuerySnapshot class', () => {
 
   it('has query property', () => {
     return querySnapshot
-      .then(snapshot => {
+      .then((snapshot) => {
         return snapshot.query.get();
       })
-      .then(snapshot => {
+      .then((snapshot) => {
         expect(snapshot.size).to.equal(2);
       });
   });
 
   it('has empty property', () => {
     return querySnapshot
-      .then(snapshot => {
+      .then((snapshot) => {
         expect(snapshot.empty).to.be.false;
         expect(snapshot.readTime).to.exist;
         return snapshot.query.where('foo', '==', 'bar').get();
       })
-      .then(snapshot => {
+      .then((snapshot) => {
         expect(snapshot.empty).to.be.true;
         expect(snapshot.readTime).to.exist;
       });
   });
 
   it('has size property', () => {
-    return querySnapshot.then(snapshot => {
+    return querySnapshot.then((snapshot) => {
       expect(snapshot.size).to.equal(2);
     });
   });
 
   it('has docs property', () => {
-    return querySnapshot.then(snapshot => {
+    return querySnapshot.then((snapshot) => {
       expect(snapshot.docs).to.have.length(2);
       expect(snapshot.docs[0].get('foo')).to.equal('a');
     });
@@ -7261,8 +7263,8 @@ describe('QuerySnapshot class', () => {
   it('has forEach() method', () => {
     let count = 0;
 
-    return querySnapshot.then(snapshot => {
-      snapshot.forEach(doc => {
+    return querySnapshot.then((snapshot) => {
+      snapshot.forEach((doc) => {
         expect(doc.get('foo')).to.equal('a');
         ++count;
       });
@@ -7461,14 +7463,14 @@ describe('BulkWriter class', () => {
   it('can retry failed writes with a provided callback', async () => {
     let retryCount = 0;
     let code: Status = -1 as Status;
-    writer.onWriteError(error => {
+    writer.onWriteError((error) => {
       retryCount = error.failedAttempts;
       return error.failedAttempts < 3;
     });
 
     // Use an invalid document name that the backend will reject.
     const ref = randomCol.doc('__doc__');
-    writer.create(ref, {foo: 'bar'}).catch(err => {
+    writer.create(ref, {foo: 'bar'}).catch((err) => {
       code = err.code;
     });
     await writer.close();
@@ -7489,11 +7491,11 @@ describe('Client initialization', () => {
       /* skip */ boolean?,
     ]
   > = [
-    ['CollectionReference.get()', randomColl => randomColl.get()],
-    ['CollectionReference.add()', randomColl => randomColl.add({})],
+    ['CollectionReference.get()', (randomColl) => randomColl.get()],
+    ['CollectionReference.add()', (randomColl) => randomColl.add({})],
     [
       'CollectionReference.stream()',
-      randomColl => {
+      (randomColl) => {
         const deferred = new Deferred<void>();
         randomColl.stream().on('finish', () => {
           deferred.resolve();
@@ -7504,14 +7506,14 @@ describe('Client initialization', () => {
     [
       'CollectionReference.listDocuments()',
 
-      randomColl => {
+      (randomColl) => {
         if (process.env.RUN_ENTERPRISE_TESTS) return Promise.resolve();
         return randomColl.listDocuments();
       },
     ],
     [
       'CollectionReference.onSnapshot()',
-      randomColl => {
+      (randomColl) => {
         const deferred = new Deferred<void>();
         const unsubscribe = randomColl.onSnapshot(() => {
           unsubscribe();
@@ -7520,12 +7522,12 @@ describe('Client initialization', () => {
         return deferred.promise;
       },
     ],
-    ['DocumentReference.get()', randomColl => randomColl.doc().get()],
-    ['DocumentReference.create()', randomColl => randomColl.doc().create({})],
-    ['DocumentReference.set()', randomColl => randomColl.doc().set({})],
+    ['DocumentReference.get()', (randomColl) => randomColl.doc().get()],
+    ['DocumentReference.create()', (randomColl) => randomColl.doc().create({})],
+    ['DocumentReference.set()', (randomColl) => randomColl.doc().set({})],
     [
       'DocumentReference.update()',
-      async randomColl => {
+      async (randomColl) => {
         const update = randomColl.doc().update('foo', 'bar');
 
         // Don't validate the error message when running against the emulator.
@@ -7541,10 +7543,10 @@ describe('Client initialization', () => {
         }
       },
     ],
-    ['DocumentReference.delete()', randomColl => randomColl.doc().delete()],
+    ['DocumentReference.delete()', (randomColl) => randomColl.doc().delete()],
     [
       'DocumentReference.listCollections()',
-      randomColl => {
+      (randomColl) => {
         // TODO enterprise waiting on b/469490062, skip for now
         if (isEnterprise()) return Promise.resolve();
         return randomColl.doc().listCollections();
@@ -7552,7 +7554,7 @@ describe('Client initialization', () => {
     ],
     [
       'DocumentReference.onSnapshot()',
-      randomColl => {
+      (randomColl) => {
         const deferred = new Deferred<void>();
         const unsubscribe = randomColl.doc().onSnapshot(() => {
           unsubscribe();
@@ -7563,7 +7565,7 @@ describe('Client initialization', () => {
     ],
     [
       'CollectionGroup.getPartitions()',
-      async randomColl => {
+      async (randomColl) => {
         // Requires PartitionQuery support
         if (process.env.RUN_ENTERPRISE_TESTS) return;
 
@@ -7579,14 +7581,18 @@ describe('Client initialization', () => {
     ],
     [
       'Firestore.runTransaction()',
-      randomColl => randomColl.firestore.runTransaction(t => t.get(randomColl)),
+      (randomColl) =>
+        randomColl.firestore.runTransaction((t) => t.get(randomColl)),
     ],
     [
       'Firestore.getAll()',
-      randomColl => randomColl.firestore.getAll(randomColl.doc()),
+      (randomColl) => randomColl.firestore.getAll(randomColl.doc()),
     ],
-    ['Firestore.batch()', randomColl => randomColl.firestore.batch().commit()],
-    ['Firestore.terminate()', randomColl => randomColl.firestore.terminate()],
+    [
+      'Firestore.batch()',
+      (randomColl) => randomColl.firestore.batch().commit(),
+    ],
+    ['Firestore.terminate()', (randomColl) => randomColl.firestore.terminate()],
   ];
 
   for (const [description, op, skip] of ops) {
@@ -8511,7 +8517,7 @@ describe('Types test', () => {
     it('Transaction.set()', async () => {
       const ref = doc.withConverter(testConverter);
 
-      return firestore.runTransaction(async tx => {
+      return firestore.runTransaction(async (tx) => {
         // Requires full object if {merge: true} is not set.
         // @ts-expect-error Should fail to transpile.
         tx.set(ref, {
@@ -8545,7 +8551,7 @@ describe('Types test', () => {
     it('Transaction.update()', async () => {
       const ref = doc.withConverter(testConverter);
 
-      return firestore.runTransaction(async tx => {
+      return firestore.runTransaction(async (tx) => {
         tx.update(ref, {
           outerArr: [],
           nested: {

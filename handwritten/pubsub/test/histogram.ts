@@ -102,7 +102,7 @@ describe('Histogram', () => {
     }
 
     it('should return the nth percentile', () => {
-      range(100, 201).forEach(value => {
+      range(100, 201).forEach((value) => {
         histogram.add(value * 1000);
       });
 

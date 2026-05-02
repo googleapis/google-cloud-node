@@ -284,12 +284,12 @@ describe('v1.FirestoreAdminClient', () => {
       assert(client.firestoreAdminStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new firestoreadminModule.FirestoreAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.firestoreAdminStub);
@@ -298,12 +298,12 @@ describe('v1.FirestoreAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new firestoreadminModule.FirestoreAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -314,7 +314,7 @@ describe('v1.FirestoreAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -476,7 +476,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getIndex(request), expectedError);
@@ -608,7 +608,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteIndex(request), expectedError);
@@ -737,7 +737,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getField(request), expectedError);
@@ -869,7 +869,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getDatabase(request), expectedError);
@@ -1001,7 +1001,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.listDatabases(request), expectedError);
@@ -1133,7 +1133,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createUserCreds(request), expectedError);
@@ -1265,7 +1265,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getUserCreds(request), expectedError);
@@ -1397,7 +1397,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.listUserCreds(request), expectedError);
@@ -1529,7 +1529,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.enableUserCreds(request), expectedError);
@@ -1661,7 +1661,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.disableUserCreds(request), expectedError);
@@ -1793,7 +1793,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.resetUserPassword(request), expectedError);
@@ -1925,7 +1925,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteUserCreds(request), expectedError);
@@ -2054,7 +2054,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -2186,7 +2186,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.listBackups(request), expectedError);
@@ -2318,7 +2318,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteBackup(request), expectedError);
@@ -2451,7 +2451,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createBackupSchedule(request), expectedError);
@@ -2583,7 +2583,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getBackupSchedule(request), expectedError);
@@ -2716,7 +2716,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.listBackupSchedules(request), expectedError);
@@ -2853,7 +2853,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.backupSchedule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateBackupSchedule(request), expectedError);
@@ -2986,7 +2986,7 @@ describe('v1.FirestoreAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteBackupSchedule(request), expectedError);
@@ -5784,7 +5784,7 @@ describe('v1.FirestoreAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -5868,7 +5868,7 @@ describe('v1.FirestoreAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -5952,7 +5952,7 @@ describe('v1.FirestoreAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });

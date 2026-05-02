@@ -74,7 +74,7 @@ function main(parent) {
   // [END logging_v2_generated_ConfigServiceV2_ListBuckets_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

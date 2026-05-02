@@ -280,7 +280,7 @@ export class MetastorePartitionServiceClient {
     ];
     for (const methodName of metastorePartitionServiceStubMethods) {
       const callPromise = this.metastorePartitionServiceStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -515,7 +515,7 @@ export class MetastorePartitionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchCreateMetastorePartitions request %j', request);
@@ -675,7 +675,7 @@ export class MetastorePartitionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchDeleteMetastorePartitions request %j', request);
@@ -834,7 +834,7 @@ export class MetastorePartitionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchUpdateMetastorePartitions request %j', request);
@@ -1004,7 +1004,7 @@ export class MetastorePartitionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listMetastorePartitions request %j', request);
@@ -1075,7 +1075,7 @@ export class MetastorePartitionServiceClient {
    * region_tag:bigquerystorage_v1beta_generated_MetastorePartitionService_StreamMetastorePartitions_async
    */
   streamMetastorePartitions(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('streamMetastorePartitions stream %j', options);
@@ -1214,7 +1214,7 @@ export class MetastorePartitionServiceClient {
    */
   close(): Promise<void> {
     if (this.metastorePartitionServiceStub && !this._terminated) {
-      return this.metastorePartitionServiceStub.then(stub => {
+      return this.metastorePartitionServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

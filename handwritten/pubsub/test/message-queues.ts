@@ -194,7 +194,7 @@ describe('MessageQueues', () => {
         sandbox
           .stub(messageQueue, '_sendBatch')
           .callsFake((batch: messageTypes.QueuedMessages) => {
-            batch.forEach(m => {
+            batch.forEach((m) => {
               m.responsePromise?.resolve();
             });
             return Promise.resolve([]);
@@ -247,12 +247,12 @@ describe('MessageQueues', () => {
         assert.ok(batch[0].responsePromise?.resolve);
       });
 
-      it('should emit any errors as debug events', done => {
+      it('should emit any errors as debug events', (done) => {
         const fakeError = new Error('err');
 
         sandbox.stub(messageQueue.batches, 'push').throws(fakeError);
 
-        subscriber.on('debug', msg => {
+        subscriber.on('debug', (msg) => {
           assert.strictEqual(msg.message, fakeError.message);
           done();
         });
@@ -399,7 +399,7 @@ describe('MessageQueues', () => {
         ackIds: messages.map(({ackId}) => ackId),
       };
 
-      messages.forEach(message => ackQueue.add(message as Message));
+      messages.forEach((message) => ackQueue.add(message as Message));
       await ackQueue.flush('test');
 
       const [reqOpts] = stub.lastCall.args;
@@ -412,7 +412,7 @@ describe('MessageQueues', () => {
       sandbox.stub(fakeSubscriber.client, 'acknowledge').resolves();
       const fakeLog = new FakeLog(messageTypes.logs.ackBatch);
 
-      messages.forEach(message => ackQueue.add(message as Message));
+      messages.forEach((message) => ackQueue.add(message as Message));
       await ackQueue.flush('logtest');
 
       fakeLog.remove();
@@ -438,14 +438,14 @@ describe('MessageQueues', () => {
       assert.strictEqual(callOptions, fakeCallOptions);
     });
 
-    it('should throw a BatchError on "debug" if unable to ack due to grpc error', done => {
+    it('should throw a BatchError on "debug" if unable to ack due to grpc error', (done) => {
       const messages = [
         new FakeMessage(),
         new FakeMessage(),
         new FakeMessage(),
       ];
 
-      const ackIds = messages.map(message => message.ackId);
+      const ackIds = messages.map((message) => message.ackId);
 
       const fakeError = new Error('Err.') as GoogleError;
       fakeError.code = Status.DATA_LOSS;
@@ -470,7 +470,7 @@ describe('MessageQueues', () => {
         }
       });
 
-      messages.forEach(message => ackQueue.add(message as Message));
+      messages.forEach((message) => ackQueue.add(message as Message));
       void ackQueue.flush('test');
     });
 
@@ -500,7 +500,7 @@ describe('MessageQueues', () => {
 
       it('should trigger Promise resolves on no errors', async () => {
         const messages = [fakeMessage(), fakeMessage(), fakeMessage()];
-        messages.forEach(m => ackQueue.add(m));
+        messages.forEach((m) => ackQueue.add(m));
 
         sandbox.stub(fakeSubscriber.client, 'acknowledge').resolves();
         const proms = ackQueue.requests.map(
@@ -522,7 +522,7 @@ describe('MessageQueues', () => {
           [messages[0].ackId]: 'TRANSIENT_CAT_ATE_HOMEWORK',
         };
 
-        messages.forEach(m => ackQueue.add(m));
+        messages.forEach((m) => ackQueue.add(m));
 
         sandbox.stub(fakeSubscriber.client, 'acknowledge').rejects(fakeError);
         const proms = ackQueue.requests.map(
@@ -551,7 +551,7 @@ describe('MessageQueues', () => {
           [messages[1].ackId]: 'TRANSIENT_CAT_ATE_HOMEWORK',
         };
 
-        messages.forEach(m => ackQueue.add(m));
+        messages.forEach((m) => ackQueue.add(m));
 
         sandbox.stub(fakeSubscriber.client, 'acknowledge').rejects(fakeError);
 
@@ -658,7 +658,7 @@ describe('MessageQueues', () => {
         ackIds: messages.map(({ackId}) => ackId),
       };
 
-      messages.forEach(message =>
+      messages.forEach((message) =>
         modAckQueue.add(message as Message, deadline),
       );
       await modAckQueue.flush('test');
@@ -673,7 +673,7 @@ describe('MessageQueues', () => {
       sandbox.stub(fakeSubscriber.client, 'modifyAckDeadline').resolves();
       const fakeLog = new FakeLog(messageTypes.logs.ackBatch);
 
-      messages.forEach(message => modAckQueue.add(message as Message));
+      messages.forEach((message) => modAckQueue.add(message as Message));
       await modAckQueue.flush('logtest');
 
       fakeLog.remove();
@@ -717,10 +717,10 @@ describe('MessageQueues', () => {
         ackIds: messages2.map(({ackId}) => ackId),
       };
 
-      messages1.forEach(message =>
+      messages1.forEach((message) =>
         modAckQueue.add(message as Message, deadline1),
       );
-      messages2.forEach(message =>
+      messages2.forEach((message) =>
         modAckQueue.add(message as Message, deadline2),
       );
       await modAckQueue.flush('test');
@@ -746,14 +746,14 @@ describe('MessageQueues', () => {
       assert.strictEqual(callOptions, fakeCallOptions);
     });
 
-    it('should throw a BatchError on "debug" if unable to modAck due to gRPC error', done => {
+    it('should throw a BatchError on "debug" if unable to modAck due to gRPC error', (done) => {
       const messages = [
         new FakeMessage(),
         new FakeMessage(),
         new FakeMessage(),
       ];
 
-      const ackIds = messages.map(message => message.ackId);
+      const ackIds = messages.map((message) => message.ackId);
 
       const fakeError = new Error('Err.') as GoogleError;
       fakeError.code = Status.DATA_LOSS;
@@ -781,7 +781,7 @@ describe('MessageQueues', () => {
         }
       });
 
-      messages.forEach(message => modAckQueue.add(message as Message));
+      messages.forEach((message) => modAckQueue.add(message as Message));
       void modAckQueue.flush('test');
     });
 
@@ -810,7 +810,7 @@ describe('MessageQueues', () => {
 
       it('should trigger Promise resolves on no errors', async () => {
         const messages = [fakeMessage(), fakeMessage(), fakeMessage()];
-        messages.forEach(m => modAckQueue.add(m));
+        messages.forEach((m) => modAckQueue.add(m));
 
         sandbox.stub(fakeSubscriber.client, 'modifyAckDeadline').resolves();
         const proms = modAckQueue.requests.map(
@@ -832,7 +832,7 @@ describe('MessageQueues', () => {
           [messages[0].ackId]: 'TRANSIENT_CAT_ATE_HOMEWORK',
         };
 
-        messages.forEach(m => modAckQueue.add(m));
+        messages.forEach((m) => modAckQueue.add(m));
 
         sandbox
           .stub(fakeSubscriber.client, 'modifyAckDeadline')
@@ -863,7 +863,7 @@ describe('MessageQueues', () => {
           [messages[1].ackId]: 'TRANSIENT_CAT_ATE_HOMEWORK',
         };
 
-        messages.forEach(m => modAckQueue.add(m));
+        messages.forEach((m) => modAckQueue.add(m));
 
         sandbox
           .stub(fakeSubscriber.client, 'modifyAckDeadline')

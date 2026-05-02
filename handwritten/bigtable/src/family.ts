@@ -299,7 +299,7 @@ Please use the format 'follows' or '${table.name}/columnFamilies/my-family'.`);
     const callback = typeof opts === 'function' ? opts : cb!;
     const gaxOptions = typeof opts === 'object' ? opts : {};
 
-    this.getMetadata(gaxOptions, err => {
+    this.getMetadata(gaxOptions, (err) => {
       if (err) {
         if (err instanceof FamilyError) {
           callback(null, false);

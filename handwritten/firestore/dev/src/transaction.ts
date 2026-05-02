@@ -328,7 +328,7 @@ export class Transaction implements firestore.Transaction {
       return this.withLazyStartedTransaction(
         pipeline,
         this.executePipelineFn,
-      ).then(results => {
+      ).then((results) => {
         const executionTime = results.reduce((maxTime, result) => {
           return result._executionTime &&
             result._executionTime?.valueOf() > maxTime.valueOf()
@@ -616,7 +616,7 @@ export class Transaction implements firestore.Transaction {
         // otherwise blocking.
         this._firestore
           .request('rollback', request, this._requestTag)
-          .catch(err => {
+          .catch((err) => {
             logger(
               'Firestore.runTransaction',
               this._requestTag,
@@ -641,7 +641,7 @@ export class Transaction implements firestore.Transaction {
   ): Promise<T> {
     return this._firestore._traceUtil.startActiveSpan(
       SPAN_NAME_TRANSACTION_RUN,
-      async span => {
+      async (span) => {
         // No backoff is set for readonly transactions (i.e. attempts == 1)
         if (!this._writeBatch) {
           return this.runTransactionOnce(updateFunction);
@@ -749,15 +749,15 @@ export class Transaction implements firestore.Transaction {
       // operation has resolved and we don't expect a transaction ID in the
       // response because we are not starting a new transaction
       return this._transactionIdPromise
-        .then(opts => resultFn.call(this, param, opts))
-        .then(r => r.result);
+        .then((opts) => resultFn.call(this, param, opts))
+        .then((r) => r.result);
     } else {
       if (this._readOnlyReadTime) {
         // We do not start a transaction for read-only transactions
         // do not set _prevTransactionId
         return resultFn
           .call(this, param, this._readOnlyReadTime)
-          .then(r => r.result);
+          .then((r) => r.result);
       } else {
         // This is the first read of the transaction so we create the appropriate
         // options for lazily starting the transaction inside this first read op
@@ -774,7 +774,7 @@ export class Transaction implements firestore.Transaction {
 
         // Ensure the _transactionIdPromise is set synchronously so that
         // subsequent operations will not race to start another transaction
-        this._transactionIdPromise = resultPromise.then(r => {
+        this._transactionIdPromise = resultPromise.then((r) => {
           if (!r.transaction) {
             // Illegal state
             // The read operation was provided with new transaction options but did not return a transaction ID
@@ -784,7 +784,7 @@ export class Transaction implements firestore.Transaction {
           return r.transaction;
         });
 
-        return resultPromise.then(r => r.result);
+        return resultPromise.then((r) => r.result);
       }
     }
   }
@@ -921,7 +921,7 @@ export function parseGetAllArguments<
   validateReadOptions('options', readOptions, {optional: true});
   const fieldMask =
     readOptions && readOptions.fieldMask
-      ? readOptions.fieldMask.map(fieldPath =>
+      ? readOptions.fieldMask.map((fieldPath) =>
           FieldPath.fromArgument(fieldPath),
         )
       : undefined;

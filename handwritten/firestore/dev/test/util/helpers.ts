@@ -280,7 +280,7 @@ export function arrayTransform(
     fieldPath: field,
   };
 
-  fieldTransform[transform] = {values: values.map(val => value(val))};
+  fieldTransform[transform] = {values: values.map((val) => value(val))};
 
   return fieldTransform;
 }

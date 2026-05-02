@@ -516,7 +516,7 @@ export class FirestoreAdminClient {
     ];
     for (const methodName of firestoreAdminStubMethods) {
       const callPromise = this.firestoreAdminStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -713,7 +713,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getIndex request %j', request);
@@ -840,7 +840,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteIndex request %j', request);
@@ -967,7 +967,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getField request %j', request);
@@ -1094,7 +1094,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getDatabase request %j', request);
@@ -1225,7 +1225,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listDatabases request %j', request);
@@ -1369,7 +1369,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createUserCreds request %j', request);
@@ -1499,7 +1499,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getUserCreds request %j', request);
@@ -1629,7 +1629,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listUserCreds request %j', request);
@@ -1764,7 +1764,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('enableUserCreds request %j', request);
@@ -1899,7 +1899,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('disableUserCreds request %j', request);
@@ -2034,7 +2034,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('resetUserPassword request %j', request);
@@ -2172,7 +2172,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteUserCreds request %j', request);
@@ -2300,7 +2300,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getBackup request %j', request);
@@ -2444,7 +2444,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listBackups request %j', request);
@@ -2574,7 +2574,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteBackup request %j', request);
@@ -2714,7 +2714,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createBackupSchedule request %j', request);
@@ -2854,7 +2854,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getBackupSchedule request %j', request);
@@ -2993,7 +2993,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listBackupSchedules request %j', request);
@@ -3132,7 +3132,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_schedule.name': request.backupSchedule!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('updateBackupSchedule request %j', request);
@@ -3272,7 +3272,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteBackupSchedule request %j', request);
@@ -3429,7 +3429,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3616,7 +3616,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'field.name': request.field!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -3823,7 +3823,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4014,7 +4014,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4207,7 +4207,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4388,7 +4388,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4559,7 +4559,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'database.name': request.database!.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4733,7 +4733,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -4948,7 +4948,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5186,7 +5186,7 @@ export class FirestoreAdminClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5349,7 +5349,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5421,7 +5421,7 @@ export class FirestoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listIndexes stream %j', request);
@@ -5475,7 +5475,7 @@ export class FirestoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listIndexes iterate %j', request);
@@ -5592,7 +5592,7 @@ export class FirestoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -5670,7 +5670,7 @@ export class FirestoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listFields'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listFields stream %j', request);
@@ -5730,7 +5730,7 @@ export class FirestoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listFields'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listFields iterate %j', request);
@@ -6498,11 +6498,11 @@ export class FirestoreAdminClient {
    */
   close(): Promise<void> {
     if (this.firestoreAdminStub && !this._terminated) {
-      return this.firestoreAdminStub.then(stub => {
+      return this.firestoreAdminStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
+        this.locationsClient.close().catch((err) => {
           throw err;
         });
         void this.operationsClient.close();

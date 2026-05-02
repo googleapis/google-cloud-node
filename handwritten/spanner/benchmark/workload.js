@@ -64,8 +64,8 @@ class Workload {
   loadKeys() {
     return this.database
       .run(`SELECT u.id FROM ${this.options.get('table')} u`)
-      .then(data => data[0].map(row => row[0].value))
-      .then(keys => (this.keys = keys));
+      .then((data) => data[0].map((row) => row[0].value))
+      .then((keys) => (this.keys = keys));
   }
 
   run() {
@@ -113,7 +113,7 @@ class Workload {
     const field = `field${random(9)}`;
     const value = crypto.randomBytes(100).toString('hex');
 
-    return this.database.runTransactionAsync(transaction => {
+    return this.database.runTransactionAsync((transaction) => {
       transaction.update(tableName, {id, [field]: value});
       return transaction.commit();
     });

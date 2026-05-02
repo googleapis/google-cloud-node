@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent, appProfileId, appProfile) {
@@ -72,7 +70,7 @@ function main(parent, appProfileId, appProfile) {
   // [END bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateAppProfile_async]
 }
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.error(err.message);
   process.exitCode = 1;
 });

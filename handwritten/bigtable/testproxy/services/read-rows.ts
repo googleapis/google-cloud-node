@@ -69,7 +69,7 @@ const getReadRowsRequest = (request: IReadRowsRequest) => {
 export const readRows: ClientImplMaker<IReadRowsRequest, IRowsResult> = ({
   clientMap,
 }) =>
-  normalizeCallback(async rawRequest => {
+  normalizeCallback(async (rawRequest) => {
     const request = rawRequest.request;
     const {clientId} = request;
     const readRowsRequest = getReadRowsRequest(request);

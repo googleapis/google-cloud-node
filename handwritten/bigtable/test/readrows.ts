@@ -67,7 +67,7 @@ describe('Bigtable/ReadRows', () => {
 
   before(async () => {
     // make sure we have everything initialized before starting tests
-    const port = await new Promise<string>(resolve => {
+    const port = await new Promise<string>((resolve) => {
       server = new MockServer(resolve);
     });
     bigtable = new Bigtable({
@@ -117,7 +117,7 @@ describe('Bigtable/ReadRows', () => {
     });
   });
 
-  it('should create read stream and read synchronously using Transform stream', done => {
+  it('should create read stream and read synchronously using Transform stream', (done) => {
     service.setService({
       ReadRows: ReadRowsImpl.createService(
         STANDARD_SERVICE_WITHOUT_ERRORS,
@@ -214,7 +214,7 @@ describe('Bigtable/ReadRows', () => {
     pipeline(readStream, transform, passThrough, () => {});
   });
 
-  it('should be able to stop reading from the read stream', done => {
+  it('should be able to stop reading from the read stream', (done) => {
     // pick any key to stop after
     const stopAfter = 42;
 
@@ -378,7 +378,7 @@ describe('Bigtable/ReadRows', () => {
       }) as ServerImplementationInterface,
     });
     const sleep = (ms: number) => {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     };
     (async () => {
       try {
@@ -393,14 +393,14 @@ describe('Bigtable/ReadRows', () => {
           await sleep(50);
         }
         const expectedResults = Array.from(Array(150).keys())
-          .map(i => '00000000' + i.toString())
-          .map(i => i.slice(-8));
+          .map((i) => '00000000' + i.toString())
+          .map((i) => i.slice(-8));
         assert.deepStrictEqual(dataResults, expectedResults);
         done();
       } catch (error) {
         done(error);
       }
-    })().catch(err => {
+    })().catch((err) => {
       throw err;
     });
   });
@@ -427,7 +427,7 @@ describe('Bigtable/ReadRows', () => {
       // Adds an event to the end of the event loop `ticks` times
       // This creates a predictable delay using the event loop and
       // allows the streams to create a predictable amount of back pressure.
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const nextEventLoop = () => {
           if (ticks > 0) {
             ticks = ticks - 1;
@@ -453,14 +453,14 @@ describe('Bigtable/ReadRows', () => {
           await sleep(4000);
         }
         const expectedResults = Array.from(Array(150).keys())
-          .map(i => '00000000' + i.toString())
-          .map(i => i.slice(-8));
+          .map((i) => '00000000' + i.toString())
+          .map((i) => i.slice(-8));
         assert.deepStrictEqual(dataResults, expectedResults);
         done();
       } catch (error) {
         done(error);
       }
-    })().catch(err => {
+    })().catch((err) => {
       throw err;
     });
   });
@@ -475,7 +475,7 @@ describe('Bigtable/ReadRows', () => {
       keyFrom: STANDARD_KEY_FROM,
       keyTo: STANDARD_KEY_TO,
       deadlineExceededError: true,
-      hook: request => {
+      hook: (request) => {
         requests.push(request);
       },
       debugLog,

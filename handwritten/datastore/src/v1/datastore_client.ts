@@ -299,7 +299,7 @@ export class DatastoreClient {
     ];
     for (const methodName of datastoreStubMethods) {
       const callPromise = this.datastoreStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -527,7 +527,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('lookup request %j', request);
@@ -679,7 +679,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('runQuery request %j', request);
@@ -827,7 +827,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('runAggregationQuery request %j', request);
@@ -965,7 +965,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('beginTransaction request %j', request);
@@ -1125,7 +1125,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('commit request %j', request);
@@ -1260,7 +1260,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('rollback request %j', request);
@@ -1396,7 +1396,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('allocateIds request %j', request);
@@ -1532,7 +1532,7 @@ export class DatastoreClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('reserveIds request %j', request);
@@ -1794,7 +1794,7 @@ export class DatastoreClient {
    */
   close(): Promise<void> {
     if (this.datastoreStub && !this._terminated) {
-      return this.datastoreStub.then(stub => {
+      return this.datastoreStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

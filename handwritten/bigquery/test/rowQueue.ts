@@ -136,7 +136,7 @@ describe('Queues', () => {
       const spy = sandbox.spy();
       const fakeRowMetadata: t.RowMetadata = {name: 'Turing'};
 
-      it('should publish immediately if unable to fit message', done => {
+      it('should publish immediately if unable to fit message', (done) => {
         const clock = sandbox.useFakeTimers();
         const addStub = sandbox.stub(queue.batch, 'add');
         sandbox.stub(queue.batch, 'canFit').returns(false);
@@ -263,7 +263,7 @@ describe('Queues', () => {
       ];
 
       const dataApiFormat = {
-        rows: data.map(row => {
+        rows: data.map((row) => {
           return {
             json: row,
           };
@@ -322,17 +322,17 @@ describe('Queues', () => {
         assert.strictEqual(uri, '/insertAll');
       });
 
-      it('should pass back any request errors', done => {
+      it('should pass back any request errors', (done) => {
         queue = new q.RowQueue(fakeTable, dup, {});
 
         sandbox.stub(fakeTable, 'request').callsFake((config, callback) => {
           return callback(error, config);
         });
 
-        queue._insert(rows, callbacks, err => {
+        queue._insert(rows, callbacks, (err) => {
           assert.strictEqual(err, error);
 
-          callbacks.forEach(callback => {
+          callbacks.forEach((callback) => {
             const [err] = callback.lastCall.args;
             assert.strictEqual(err, error);
           });
@@ -340,7 +340,7 @@ describe('Queues', () => {
         done();
       });
 
-      it('should execute callback with API response', done => {
+      it('should execute callback with API response', (done) => {
         const row0Error = {errors: [{message: 'Error.', reason: 'notFound'}]};
         const apiResponse = {insertErrors: [row0Error]};
 
@@ -355,7 +355,7 @@ describe('Queues', () => {
         queue._insert(rows, callbacks, (err, apiResponse_) => {
           assert.strictEqual(err, error);
 
-          callbacks.forEach(callback => {
+          callbacks.forEach((callback) => {
             const [err] = callback.lastCall.args;
             assert.strictEqual(err, error);
           });

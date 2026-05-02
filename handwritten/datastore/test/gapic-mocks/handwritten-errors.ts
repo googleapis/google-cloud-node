@@ -53,7 +53,7 @@ describe('HandwrittenLayerErrors', () => {
         description: string;
       }) => {
         describe(testParameters.description, () => {
-          it('should error when runQuery is used', done => {
+          it('should error when runQuery is used', (done) => {
             const transaction = datastore.transaction();
             const query = datastore.createQuery('Task');
             errorOnGapicCall(datastore, clientName, done); // Test fails if Gapic layer receives a call.
@@ -63,7 +63,7 @@ describe('HandwrittenLayerErrors', () => {
               getCallbackExpectingError(done, testParameters.expectedError),
             );
           });
-          it('should error when runQueryStream is used', done => {
+          it('should error when runQueryStream is used', (done) => {
             const transaction = datastore.transaction();
             const query = datastore.createQuery('Task');
             errorOnGapicCall(datastore, clientName, done); // Test fails if Gapic layer receives a call.
@@ -75,7 +75,7 @@ describe('HandwrittenLayerErrors', () => {
               done();
             }
           });
-          it('should error when runAggregationQuery is used', done => {
+          it('should error when runAggregationQuery is used', (done) => {
             const transaction = datastore.transaction();
             const query = datastore.createQuery('Task');
             const aggregate = datastore
@@ -88,7 +88,7 @@ describe('HandwrittenLayerErrors', () => {
               getCallbackExpectingError(done, testParameters.expectedError),
             );
           });
-          it('should error when get is used', done => {
+          it('should error when get is used', (done) => {
             const transaction = datastore.transaction();
             const keys = datastore.key(['Company', 'Google']);
             errorOnGapicCall(datastore, clientName, done); // Test fails if Gapic layer receives a call.
@@ -98,7 +98,7 @@ describe('HandwrittenLayerErrors', () => {
               getCallbackExpectingError(done, testParameters.expectedError),
             );
           });
-          it('should error when createReadStream is used', done => {
+          it('should error when createReadStream is used', (done) => {
             const transaction = datastore.transaction();
             const keys = datastore.key(['Company', 'Google']);
             errorOnGapicCall(datastore, clientName, done); // Test fails if Gapic layer receives a call.

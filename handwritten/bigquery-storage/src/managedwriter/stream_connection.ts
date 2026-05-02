@@ -339,7 +339,7 @@ export class StreamConnection extends EventEmitter {
     try {
       const request = pw.getRequest();
       this._pendingWrites.unshift(pw);
-      this._connection?.write(request, err => {
+      this._connection?.write(request, (err) => {
         this.trace('wrote pending write', err, this._pendingWrites.length);
         if (err) {
           pw._markDone(err); //TODO: add retries
