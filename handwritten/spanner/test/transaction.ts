@@ -185,12 +185,12 @@ describe('Transaction', () => {
         assert.deepStrictEqual(headers, snapshot.commonHeaders_);
       });
 
-      it('should accept gaxOptions', done => {
+      it('should accept gaxOptions', (done) => {
         const gaxOptions = {
           timeout: 1000,
         };
 
-        snapshot.request = config => {
+        snapshot.request = (config) => {
           assert.strictEqual(config.gaxOpts, gaxOptions);
           done();
         };
@@ -214,45 +214,45 @@ describe('Transaction', () => {
         assert.deepStrictEqual(reqOpts.options, expectedOptions);
       });
 
-      it('should return any request errors', done => {
+      it('should return any request errors', (done) => {
         const fakeError = new Error('err');
 
         REQUEST.callsFake((_, callback) => callback(fakeError));
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           assert.strictEqual(err, fakeError);
           done();
         });
       });
 
-      it('should localize `id`', done => {
+      it('should localize `id`', (done) => {
         REQUEST.callsFake((_, callback) => callback(null, BEGIN_RESPONSE));
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           assert.ifError(err);
           assert.strictEqual(snapshot.id, BEGIN_RESPONSE.id);
           done();
         });
       });
 
-      it('should localize the response as `metadata`', done => {
+      it('should localize the response as `metadata`', (done) => {
         REQUEST.callsFake((_, callback) => callback(null, BEGIN_RESPONSE));
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           assert.ifError(err);
           assert.strictEqual(snapshot.metadata, BEGIN_RESPONSE);
           done();
         });
       });
 
-      it('should localize `readTimestamp` if present', done => {
+      it('should localize `readTimestamp` if present', (done) => {
         const expectedTimestamp = new PreciseDate(0);
         const readTimestamp = {seconds: 0, nanos: 0};
         const response = Object.assign({readTimestamp}, BEGIN_RESPONSE);
 
         REQUEST.callsFake((_, callback) => callback(null, response));
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           assert.ifError(err);
           assert.deepStrictEqual(snapshot.readTimestamp, expectedTimestamp);
           assert.strictEqual(snapshot.readTimestampProto, readTimestamp);
@@ -260,7 +260,7 @@ describe('Transaction', () => {
         });
       });
 
-      it('should localize precommitToken if present', done => {
+      it('should localize precommitToken if present', (done) => {
         const precommitToken = {
           precommitToken: Buffer.from('precommit-token-begin'),
           seqNum: 1,
@@ -269,14 +269,14 @@ describe('Transaction', () => {
 
         REQUEST.callsFake((_, callback) => callback(null, response));
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           assert.ifError(err);
           assert.strictEqual(snapshot._latestPreCommitToken, precommitToken);
           done();
         });
       });
 
-      it('should return the response', done => {
+      it('should return the response', (done) => {
         REQUEST.callsFake((_, callback) => callback(null, BEGIN_RESPONSE));
 
         snapshot.begin((err, resp) => {
@@ -291,7 +291,7 @@ describe('Transaction', () => {
       const TABLE = 'my-table-123';
 
       beforeEach(() => {
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) => makeRequest());
       });
 
       it('should send the correct request', () => {
@@ -403,7 +403,9 @@ describe('Transaction', () => {
       it('should update the `resumeToken` for subsequent requests', () => {
         const fakeToken = 'fake-token-123';
 
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest(fakeToken));
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) =>
+          makeRequest(fakeToken),
+        );
         snapshot.createReadStream(TABLE);
 
         const {reqOpts} = REQUEST_STREAM.lastCall.args[0];
@@ -526,12 +528,12 @@ describe('Transaction', () => {
         assert.strictEqual(snapshot.ended, true);
       });
 
-      it('should emit an "end" event', done => {
+      it('should emit an "end" event', (done) => {
         snapshot.on('end', done);
         snapshot.end();
       });
 
-      it('should noop if already ended', done => {
+      it('should noop if already ended', (done) => {
         snapshot.on('end', done);
         snapshot.end();
         snapshot.end();
@@ -560,10 +562,10 @@ describe('Transaction', () => {
         assert.strictEqual(request, fakeRequest);
       });
 
-      it('should return any request errors', done => {
+      it('should return any request errors', (done) => {
         const fakeError = new Error('err');
 
-        snapshot.read(TABLE, {}, err => {
+        snapshot.read(TABLE, {}, (err) => {
           assert.strictEqual(err, fakeError);
           done();
         });
@@ -571,7 +573,7 @@ describe('Transaction', () => {
         fakeStream.emit('error', fakeError);
       });
 
-      it('should concatenate rows and return them on "end" event', done => {
+      it('should concatenate rows and return them on "end" event', (done) => {
         const fakeRows = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
 
         snapshot.read(TABLE, {}, (err, rows) => {
@@ -580,11 +582,11 @@ describe('Transaction', () => {
           done();
         });
 
-        fakeRows.forEach(row => fakeStream.emit('data', row));
+        fakeRows.forEach((row) => fakeStream.emit('data', row));
         fakeStream.emit('end');
       });
 
-      it('should optionally accept a request object', done => {
+      it('should optionally accept a request object', (done) => {
         snapshot.read(TABLE, done);
         fakeStream.emit('end');
       });
@@ -609,10 +611,10 @@ describe('Transaction', () => {
         assert.strictEqual(query, QUERY);
       });
 
-      it('should return any request errors', done => {
+      it('should return any request errors', (done) => {
         const fakeError = new Error('err');
 
-        snapshot.run(QUERY, err => {
+        snapshot.run(QUERY, (err) => {
           assert.strictEqual(err, fakeError);
           done();
         });
@@ -620,7 +622,7 @@ describe('Transaction', () => {
         fakeStream.emit('error', fakeError);
       });
 
-      it('should concatenate rows and return them on "end" event', done => {
+      it('should concatenate rows and return them on "end" event', (done) => {
         const fakeRows = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
 
         snapshot.run(QUERY, (err, rows) => {
@@ -629,11 +631,11 @@ describe('Transaction', () => {
           done();
         });
 
-        fakeRows.forEach(row => fakeStream.emit('data', row));
+        fakeRows.forEach((row) => fakeStream.emit('data', row));
         fakeStream.emit('end');
       });
 
-      it('should pass back `stats` if available', done => {
+      it('should pass back `stats` if available', (done) => {
         const fakeStats = {};
 
         snapshot.run(QUERY, (err, rows, stats) => {
@@ -653,7 +655,7 @@ describe('Transaction', () => {
       };
 
       beforeEach(() => {
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) => makeRequest());
       });
 
       it('should send the correct request', () => {
@@ -860,7 +862,7 @@ describe('Transaction', () => {
         assert.deepStrictEqual(reqOpts.params, expectedParams);
       });
 
-      it('should return an error stream for invalid parameters', done => {
+      it('should return an error stream for invalid parameters', (done) => {
         REQUEST_STREAM.resetHistory();
 
         const fakeQuery = Object.assign({}, QUERY, {
@@ -868,7 +870,7 @@ describe('Transaction', () => {
         });
 
         const stream = snapshot.runStream(fakeQuery);
-        stream.on('error', error => {
+        stream.on('error', (error) => {
           assert.strictEqual(
             error.message,
             'Value of type undefined not recognized.',
@@ -1371,19 +1373,19 @@ describe('Transaction', () => {
         },
       ];
 
-      it('should accept gaxOptions', done => {
+      it('should accept gaxOptions', (done) => {
         const gaxOptions = {};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.gaxOpts, gaxOptions);
           done();
         };
         transaction.batchUpdate(STRING_STATEMENTS, gaxOptions, assert.ifError);
       });
 
-      it('should set transactionTag', done => {
+      it('should set transactionTag', (done) => {
         const transactionTag = 'bar';
         transaction.requestOptions = {transactionTag};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.deepStrictEqual(config.reqOpts.requestOptions, {
             transactionTag,
           });
@@ -1392,10 +1394,10 @@ describe('Transaction', () => {
         transaction.batchUpdate(STRING_STATEMENTS, assert.ifError);
       });
 
-      it('should set requestTag', done => {
+      it('should set requestTag', (done) => {
         const requestTag = 'foo';
         const options: BatchUpdateOptions = {requestOptions: {requestTag}};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.deepStrictEqual(config.reqOpts.requestOptions, {
             requestTag,
           });
@@ -1404,7 +1406,7 @@ describe('Transaction', () => {
         transaction.batchUpdate(STRING_STATEMENTS, options, assert.ifError);
       });
 
-      it('should set both tags and accept gaxOptions', done => {
+      it('should set both tags and accept gaxOptions', (done) => {
         const transactionTag = 'bar';
         transaction.requestOptions = {transactionTag};
 
@@ -1414,7 +1416,7 @@ describe('Transaction', () => {
           requestOptions: {requestTag},
           gaxOptions,
         };
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.deepStrictEqual(config.reqOpts.requestOptions, {
             transactionTag,
             requestTag,
@@ -1425,8 +1427,8 @@ describe('Transaction', () => {
         transaction.batchUpdate(STRING_STATEMENTS, options, assert.ifError);
       });
 
-      it('should return an error if statements are missing', done => {
-        transaction.batchUpdate(null, err => {
+      it('should return an error if statements are missing', (done) => {
+        transaction.batchUpdate(null, (err) => {
           assert.strictEqual(
             err.message,
             'batchUpdate requires at least 1 DML statement.',
@@ -1437,8 +1439,8 @@ describe('Transaction', () => {
         });
       });
 
-      it('should return an error if statements are empty', done => {
-        transaction.batchUpdate([], err => {
+      it('should return an error if statements are empty', (done) => {
+        transaction.batchUpdate([], (err) => {
           assert.strictEqual(
             err.message,
             'batchUpdate requires at least 1 DML statement.',
@@ -1477,7 +1479,7 @@ describe('Transaction', () => {
 
       it('should encode sql string statements', () => {
         const stub = sandbox.stub(transaction, 'request');
-        const expectedStatements = STRING_STATEMENTS.map(sql => ({sql}));
+        const expectedStatements = STRING_STATEMENTS.map((sql) => ({sql}));
 
         transaction.batchUpdate(STRING_STATEMENTS, assert.ifError);
 
@@ -1493,7 +1495,7 @@ describe('Transaction', () => {
         assert.deepStrictEqual(reqOpts.statements, FORMATTED_STATEMENTS);
       });
 
-      it('should wrap and return any request errors', done => {
+      it('should wrap and return any request errors', (done) => {
         const stub = sandbox.stub(transaction, 'request');
         const fakeError = new Error('err');
         const fakeResponse = {};
@@ -1514,7 +1516,7 @@ describe('Transaction', () => {
         setImmediate(requestCallback, fakeError, fakeResponse);
       });
 
-      it('should return a list of row counts upon success', done => {
+      it('should return a list of row counts upon success', (done) => {
         const stub = sandbox.stub(transaction, 'request');
         const expectedRowCounts = [5, 7];
         const fakeResponse = {
@@ -1538,7 +1540,7 @@ describe('Transaction', () => {
         setImmediate(requestCallback, null, fakeResponse);
       });
 
-      it('should return list of 0s for row counts when stats or rowCount value is empty', done => {
+      it('should return list of 0s for row counts when stats or rowCount value is empty', (done) => {
         const stub = sandbox.stub(transaction, 'request');
         const expectedRowCounts = [0, 0];
         const fakeResponse = {
@@ -1559,7 +1561,7 @@ describe('Transaction', () => {
         setImmediate(requestCallback, null, fakeResponse);
       });
 
-      it('should return both error and row counts for partial failures', done => {
+      it('should return both error and row counts for partial failures', (done) => {
         const stub = sandbox.stub(transaction, 'request');
         const expectedRowCounts = [6, 8];
         const fakeResponse = {
@@ -1589,7 +1591,7 @@ describe('Transaction', () => {
         setImmediate(requestCallback, null, fakeResponse);
       });
 
-      it('should return precommitToken in the api response', done => {
+      it('should return precommitToken in the api response', (done) => {
         const stub = sandbox.stub(transaction, 'request');
         const expectedRowCounts = [5, 7];
         const fakeResponse = {
@@ -1639,19 +1641,19 @@ describe('Transaction', () => {
         );
       });
 
-      it('should accept gaxOptions', done => {
+      it('should accept gaxOptions', (done) => {
         const gaxOptions = {};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.gaxOpts, gaxOptions);
           done();
         };
         transaction.begin(gaxOptions, assert.ifError);
       });
 
-      it('should set transaction tag', done => {
+      it('should set transaction tag', (done) => {
         const transactionTag = 'bar';
         transaction.requestOptions = {transactionTag};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.deepStrictEqual(config.reqOpts.requestOptions, {
             transactionTag,
           });
@@ -1856,20 +1858,20 @@ describe('Transaction', () => {
         );
       });
 
-      it('should accept gaxOptions as CallOptions', done => {
+      it('should accept gaxOptions as CallOptions', (done) => {
         const gaxOptions = {
           retry: {
             retryCodes: [DEADLINE_EXCEEDED_STATUS_CODE],
           },
         };
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.gaxOpts, gaxOptions);
           done();
         };
         transaction.commit(gaxOptions, assert.ifError);
       });
 
-      it('should accept commit options', done => {
+      it('should accept commit options', (done) => {
         const maxCommitDelay = new google.protobuf.Duration({
           seconds: 0, // 0 seconds
           nanos: 100000000, // 100,000,000 nanoseconds = 100 milliseconds
@@ -1878,14 +1880,14 @@ describe('Transaction', () => {
           returnCommitStats: true,
           maxCommitDelay: maxCommitDelay,
         };
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.reqOpts.returnCommitStats, true);
           done();
         };
         transaction.commit(options, assert.ifError);
       });
 
-      it('should accept commit and gaxOptions', done => {
+      it('should accept commit and gaxOptions', (done) => {
         const gaxOptions = {
           retry: {
             retryCodes: [DEADLINE_EXCEEDED_STATUS_CODE],
@@ -1895,7 +1897,7 @@ describe('Transaction', () => {
           returnCommitStats: true,
           gaxOptions,
         };
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.reqOpts.returnCommitStats, true);
           assert.strictEqual(config.gaxOpts, gaxOptions);
           done();
@@ -1903,20 +1905,20 @@ describe('Transaction', () => {
         transaction.commit(options, assert.ifError);
       });
 
-      it('should accept gaxOptions in CommitOptions', done => {
+      it('should accept gaxOptions in CommitOptions', (done) => {
         const options = {gaxOptions: {}};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.gaxOpts, options.gaxOptions);
           done();
         };
         transaction.commit(options, assert.ifError);
       });
 
-      it('should accept requestOptions', done => {
+      it('should accept requestOptions', (done) => {
         const options = {
           requestOptions: {priority: RequestOptions.Priority.PRIORITY_MEDIUM},
         };
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(
             config.reqOpts.requestOptions,
             options.requestOptions,
@@ -1926,13 +1928,13 @@ describe('Transaction', () => {
         transaction.commit(options, assert.ifError);
       });
 
-      it('should accept precommitToken', done => {
+      it('should accept precommitToken', (done) => {
         const precommitToken = {
           precommitToken: Buffer.from('precommit-token-commit'),
           seqNum: 1,
         };
         transaction._latestPreCommitToken = precommitToken;
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.reqOpts.precommitToken, precommitToken);
           done();
         };
@@ -1951,13 +1953,13 @@ describe('Transaction', () => {
         assert.strictEqual(reqOpts.transactionId, id);
       });
 
-      it('should set transactionTag when not single use transaction', done => {
+      it('should set transactionTag when not single use transaction', (done) => {
         const id = 'transaction-id-123';
         const transactionTag = 'bar';
         transaction.id = id;
         transaction.requestOptions = {transactionTag};
 
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(
             config.reqOpts.requestOptions.transactionTag,
             transactionTag,
@@ -2261,7 +2263,7 @@ describe('Transaction', () => {
         const fakeKeys = ['a', 'b'];
 
         const expectedKeySet = {
-          keys: fakeKeys.map(key => {
+          keys: fakeKeys.map((key) => {
             return {
               values: [{stringValue: key}],
             };
@@ -2292,7 +2294,7 @@ describe('Transaction', () => {
         const expectedColumns = Object.keys(fakeKeyVals).sort();
         const expectedValues = [
           {
-            values: expectedColumns.map(column => {
+            values: expectedColumns.map((column) => {
               return {stringValue: fakeKeyVals[column]};
             }),
           },
@@ -2323,7 +2325,7 @@ describe('Transaction', () => {
         const expectedColumns = Object.keys(fakeKeyVals).sort();
         const expectedValues = [
           {
-            values: expectedColumns.map(column => {
+            values: expectedColumns.map((column) => {
               return {stringValue: fakeKeyVals[column]};
             }),
           },
@@ -2350,9 +2352,9 @@ describe('Transaction', () => {
         transaction.id = ID;
       });
 
-      it('should not return an error if the `id` is not set', done => {
+      it('should not return an error if the `id` is not set', (done) => {
         delete transaction.id;
-        transaction.rollback(err => {
+        transaction.rollback((err) => {
           assert.deepStrictEqual(err, null);
           done();
         });
@@ -2381,9 +2383,9 @@ describe('Transaction', () => {
         );
       });
 
-      it('should accept gaxOptions', done => {
+      it('should accept gaxOptions', (done) => {
         const gaxOptions = {};
-        transaction.request = config => {
+        transaction.request = (config) => {
           assert.strictEqual(config.gaxOpts, gaxOptions);
           done();
         };
@@ -2427,7 +2429,7 @@ describe('Transaction', () => {
         const expectedColumns = Object.keys(fakeKeyVals).sort();
         const expectedValues = [
           {
-            values: expectedColumns.map(column => {
+            values: expectedColumns.map((column) => {
               return {stringValue: fakeKeyVals[column]};
             }),
           },
@@ -2458,7 +2460,7 @@ describe('Transaction', () => {
         const expectedColumns = Object.keys(fakeKeyVals).sort();
         const expectedValues = [
           {
-            values: expectedColumns.map(column => {
+            values: expectedColumns.map((column) => {
               return {stringValue: fakeKeyVals[column]};
             }),
           },
@@ -2489,9 +2491,9 @@ describe('Transaction', () => {
         ];
 
         const expectedColumns = Object.keys(rows[0]).sort();
-        const expectedValues = rows.map(row => {
+        const expectedValues = rows.map((row) => {
           return {
-            values: expectedColumns.map(column => {
+            values: expectedColumns.map((column) => {
               return {stringValue: row[column]};
             }),
           };
@@ -2704,15 +2706,15 @@ describe('Transaction', () => {
 
     describe('runStream', () => {
       before(() => {
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) => makeRequest());
       });
 
-      it('should send the correct options', done => {
+      it('should send the correct options', (done) => {
         const QUERY: ExecuteSqlRequest = {
           sql: 'SELET * FROM `MyTable`',
         };
 
-        transaction.requestStream = config => {
+        transaction.requestStream = (config) => {
           assert.strictEqual(config.client, 'SpannerClient');
           assert.strictEqual(config.method, 'executeStreamingSql');
           assert.deepStrictEqual(
@@ -2731,7 +2733,7 @@ describe('Transaction', () => {
         transaction.runStream(QUERY);
       });
 
-      it('should set transaction tag when not `singleUse`', done => {
+      it('should set transaction tag when not `singleUse`', (done) => {
         const QUERY: ExecuteSqlRequest = {
           sql: 'SELET * FROM `MyTable`',
         };
@@ -2742,7 +2744,7 @@ describe('Transaction', () => {
         const id = 'transaction-id-123';
         transaction.id = id;
 
-        transaction.requestStream = config => {
+        transaction.requestStream = (config) => {
           assert.deepStrictEqual(config.reqOpts.requestOptions, {
             transactionTag,
           });
@@ -2752,7 +2754,7 @@ describe('Transaction', () => {
         transaction.runStream(QUERY);
       });
 
-      it('should return a precommitToken in response', done => {
+      it('should return a precommitToken in response', (done) => {
         const QUERY: ExecuteSqlRequest = {
           sql: 'SELET * FROM `MyTable`',
         };
@@ -2767,7 +2769,7 @@ describe('Transaction', () => {
         const stream = transaction.runStream(QUERY);
         assert.strictEqual(stream, fakeStream);
 
-        stream.on('response', resp => {
+        stream.on('response', (resp) => {
           assert.deepStrictEqual(resp.precommitToken, fakePrecommitToken);
           done();
         });
@@ -2780,7 +2782,7 @@ describe('Transaction', () => {
 
     describe('createReadStream', () => {
       before(() => {
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) => makeRequest());
       });
 
       it('should send the correct options', () => {
@@ -2832,7 +2834,7 @@ describe('Transaction', () => {
         });
       });
 
-      it('should return a precommitToken in response', done => {
+      it('should return a precommitToken in response', (done) => {
         const TABLE = 'my-table-123';
         const fakeStream = new EventEmitter();
         const fakePrecommitToken = {
@@ -2845,7 +2847,7 @@ describe('Transaction', () => {
         const stream = transaction.createReadStream(TABLE);
         assert.strictEqual(stream, fakeStream);
 
-        stream.on('response', resp => {
+        stream.on('response', (resp) => {
           assert.deepStrictEqual(resp.precommitToken, fakePrecommitToken);
           done();
         });
@@ -2855,7 +2857,7 @@ describe('Transaction', () => {
         });
       });
 
-      it('should override the precommitToken with the value that has higher seqNum received in response', done => {
+      it('should override the precommitToken with the value that has higher seqNum received in response', (done) => {
         const TABLE = 'my-table-123';
         const fakeStream = new EventEmitter();
         const fakePrecommitToken1 = {
@@ -2882,7 +2884,7 @@ describe('Transaction', () => {
 
         let responseCount = 0;
 
-        stream.on('response', resp => {
+        stream.on('response', (resp) => {
           responseCount++;
           if (responseCount === 1) {
             assert.deepStrictEqual(resp.precommitToken, fakePrecommitToken1);

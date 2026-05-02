@@ -103,11 +103,11 @@ export function transformResourceMetricToTimeSeriesArray(
       // Takes each metric array and flattens it into one array
       .flatMap(({metrics}) =>
         // Only keeps metrics that match our spanner metric names
-        metrics.filter(metric => METRIC_NAMES.has(metric.descriptor.name)),
+        metrics.filter((metric) => METRIC_NAMES.has(metric.descriptor.name)),
       )
       // Flatmap the data points in each metric to create a TimeSeries for each point
-      .flatMap(metric =>
-        metric.dataPoints.flatMap(dataPoint =>
+      .flatMap((metric) =>
+        metric.dataPoints.flatMap((dataPoint) =>
           _createTimeSeries(metric, dataPoint, resource, projectId),
         ),
       )
@@ -269,7 +269,7 @@ function _transformHistogramValue(value: Histogram) {
       bucketOptions: {
         explicitBuckets: {bounds: value.buckets.boundaries},
       },
-      bucketCounts: value.buckets.counts.map(value => value.toString()),
+      bucketCounts: value.buckets.counts.map((value) => value.toString()),
     },
   };
 }
@@ -312,7 +312,7 @@ function _transformExponentialHistogramValue(value: ExponentialHistogram) {
       count: value.count.toString(),
       mean,
       bucketOptions,
-      bucketCounts: bucketCounts.map(value => value.toString()),
+      bucketCounts: bucketCounts.map((value) => value.toString()),
     },
   };
 }

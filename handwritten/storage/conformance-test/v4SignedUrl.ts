@@ -93,9 +93,9 @@ interface BucketAction {
 const testFile = fs.readFileSync(
   path.join(
     getDirName(),
-    '../../../conformance-test/test-data/v4SignedUrl.json'
+    '../../../conformance-test/test-data/v4SignedUrl.json',
   ),
-  'utf-8'
+  'utf-8',
 );
 
 const testCases = JSON.parse(testFile);
@@ -105,7 +105,7 @@ const v4SignedPolicyCases: V4SignedPolicyTestCase[] =
 
 const SERVICE_ACCOUNT = path.join(
   getDirName(),
-  '../../../conformance-test/fixtures/signing-service-account.json'
+  '../../../conformance-test/fixtures/signing-service-account.json',
 );
 
 let storage: Storage;
@@ -122,7 +122,7 @@ describe('v4 conformance test', () => {
   });
 
   describe('v4 signed url', () => {
-    v4SignedUrlCases.forEach(testCase => {
+    v4SignedUrlCases.forEach((testCase) => {
       it(testCase.description, async () => {
         const NOW = new Date(testCase.timestamp);
         fakeTimer = sinon.useFakeTimers(NOW);
@@ -143,7 +143,7 @@ describe('v4 conformance test', () => {
         const host = testCase.hostname
           ? new URL(
               (testCase.scheme ? testCase.scheme + '://' : '') +
-                testCase.hostname
+                testCase.hostname,
             )
           : undefined;
         const origin = testCase.bucketBoundHostname
@@ -151,7 +151,7 @@ describe('v4 conformance test', () => {
           : undefined;
         const {bucketBoundHostname, virtualHostedStyle} = parseUrlStyle(
           testCase.urlStyle,
-          origin
+          origin,
         );
         const extensionHeaders = testCase.headers;
         const queryParams = testCase.queryParameters;
@@ -204,14 +204,14 @@ describe('v4 conformance test', () => {
         // Order-insensitive comparison of query params
         assert.deepStrictEqual(
           querystring.parse(actual.search),
-          querystring.parse(expected.search)
+          querystring.parse(expected.search),
         );
       });
     });
   });
 
   describe('v4 signed policy', () => {
-    v4SignedPolicyCases.forEach(testCase => {
+    v4SignedPolicyCases.forEach((testCase) => {
       it(testCase.description, async () => {
         const input = testCase.policyInput;
         const NOW = new Date(input.timestamp);
@@ -247,7 +247,7 @@ describe('v4 conformance test', () => {
           : undefined;
         const {bucketBoundHostname, virtualHostedStyle} = parseUrlStyle(
           input.urlStyle,
-          origin
+          origin,
         );
         options.virtualHostedStyle = virtualHostedStyle;
         options.bucketBoundHostname = bucketBoundHostname;
@@ -260,11 +260,11 @@ describe('v4 conformance test', () => {
         assert.strictEqual(policy.url, testCase.policyOutput.url);
         const outputFields = testCase.policyOutput.fields;
         const decodedPolicy = JSON.parse(
-          Buffer.from(policy.fields.policy, 'base64').toString()
+          Buffer.from(policy.fields.policy, 'base64').toString(),
         );
         assert.deepStrictEqual(
           decodedPolicy,
-          JSON.parse(testCase.policyOutput.expectedDecodedPolicy)
+          JSON.parse(testCase.policyOutput.expectedDecodedPolicy),
         );
 
         assert.deepStrictEqual(policy.fields, outputFields);
@@ -275,7 +275,7 @@ describe('v4 conformance test', () => {
 
 function parseUrlStyle(
   style?: keyof typeof UrlStyle,
-  origin?: string
+  origin?: string,
 ): {bucketBoundHostname?: string; virtualHostedStyle?: boolean} {
   if (style === UrlStyle.BUCKET_BOUND_HOSTNAME) {
     return {bucketBoundHostname: origin};

@@ -440,9 +440,9 @@ class Database extends common.GrpcServiceObject {
           let timeout;
           const promises = [
             new Promise<void>(
-              resolve => (timeout = setTimeout(resolve, 10000)),
+              (resolve) => (timeout = setTimeout(resolve, 10000)),
             ),
-            new Promise<void>(resolve => {
+            new Promise<void>((resolve) => {
               pool
                 .on('available', () => {
                   if (pool._pending === 0) {
@@ -729,7 +729,7 @@ class Database extends common.GrpcServiceObject {
       headers,
     );
 
-    startTrace('Database.batchCreateSessions', this._traceConfig, span => {
+    startTrace('Database.batchCreateSessions', this._traceConfig, (span) => {
       this.request<google.spanner.v1.IBatchCreateSessionsResponse>(
         {
           client: 'SpannerClient',
@@ -746,7 +746,7 @@ class Database extends common.GrpcServiceObject {
             return;
           }
 
-          const sessions = (resp!.session || []).map(metadata => {
+          const sessions = (resp!.session || []).map((metadata) => {
             const session = this.session(metadata.name!);
             session._observabilityOptions = this._traceConfig!.opts;
             session.metadata = metadata;
@@ -907,7 +907,7 @@ class Database extends common.GrpcServiceObject {
     return startTrace(
       'Database.createBatchTransaction',
       this._traceConfig,
-      span => {
+      (span) => {
         this.sessionFactory_.getSession((err, session) => {
           if (err) {
             setSpanError(span, err);
@@ -1054,7 +1054,7 @@ class Database extends common.GrpcServiceObject {
       addLeaderAwareRoutingHeader(headers);
     }
 
-    startTrace('Database.createSession', this._traceConfig, span => {
+    startTrace('Database.createSession', this._traceConfig, (span) => {
       this.request<google.spanner.v1.ISession>(
         {
           client: 'SpannerClient',
@@ -1333,7 +1333,7 @@ class Database extends common.GrpcServiceObject {
 
     const NOT_FOUND = 5;
 
-    this.getMetadata(gaxOptions, err => {
+    this.getMetadata(gaxOptions, (err) => {
       if (err && (err as ApiError).code !== NOT_FOUND) {
         callback!(err);
         return;
@@ -1977,7 +1977,7 @@ class Database extends common.GrpcServiceObject {
       this.commonHeaders_,
     );
 
-    return startTrace('Database.getSessions', this._traceConfig, span => {
+    return startTrace('Database.getSessions', this._traceConfig, (span) => {
       this.request<
         google.spanner.v1.ISession,
         google.spanner.v1.IListSessionsResponse
@@ -1995,7 +1995,7 @@ class Database extends common.GrpcServiceObject {
           }
           let sessionInstances: Session[] | null = null;
           if (sessions) {
-            sessionInstances = sessions.map(metadata => {
+            sessionInstances = sessions.map((metadata) => {
               const session = self.session(metadata.name!);
               session.metadata = metadata;
               session._observabilityOptions = this._traceConfig!.opts;
@@ -2179,7 +2179,7 @@ class Database extends common.GrpcServiceObject {
       return;
     }
 
-    return startTrace('Database.getSnapshot', this._traceConfig, span => {
+    return startTrace('Database.getSnapshot', this._traceConfig, (span) => {
       this.sessionFactory_.getSession((err, session) => {
         if (err) {
           setSpanError(span, err);
@@ -2190,7 +2190,7 @@ class Database extends common.GrpcServiceObject {
 
         const snapshot = session!.snapshot(options, this.queryOptions_);
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           if (err) {
             setSpanError(span, err);
             if (
@@ -2290,7 +2290,7 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
         transactionTag: options.requestOptions?.transactionTag,
       },
-      span => {
+      (span) => {
         this.sessionFactory_.getSessionForReadWrite(
           (err, session, transaction) => {
             if (!err) {
@@ -2913,20 +2913,20 @@ class Database extends common.GrpcServiceObject {
         ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
       },
-      span => {
+      (span) => {
         this.runStream(query, options)
-          .on('error', err => {
+          .on('error', (err) => {
             setSpanError(span, err);
             span.end();
             callback!(err as grpc.ServiceError, rows, stats, metadata);
           })
-          .on('response', response => {
+          .on('response', (response) => {
             if (response.metadata) {
               metadata = response.metadata;
             }
           })
-          .on('stats', _stats => (stats = _stats))
-          .on('data', row => {
+          .on('stats', (_stats) => (stats = _stats))
+          .on('data', (row) => {
             rows.push(row);
           })
           .on('end', () => {
@@ -2969,7 +2969,7 @@ class Database extends common.GrpcServiceObject {
         requestTag: (query as RunPartitionedUpdateOptions)?.requestOptions
           ?.requestTag,
       },
-      span => {
+      (span) => {
         this.sessionFactory_.getSessionForPartitionedOps((err, session) => {
           if (err) {
             setSpanError(span, err);
@@ -3000,7 +3000,7 @@ class Database extends common.GrpcServiceObject {
     if (typeof query !== 'string' && query.excludeTxnFromChangeStreams) {
       transaction.excludeTxnFromChangeStreams();
     }
-    transaction.begin(err => {
+    transaction.begin((err) => {
       if (err) {
         this.sessionFactory_.release(session!);
         callback!(err, 0);
@@ -3161,7 +3161,7 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
         requestTag: (query as ExecuteSqlRequest)?.requestOptions?.requestTag,
       },
-      span => {
+      (span) => {
         this.sessionFactory_.getSession((err, session) => {
           if (err) {
             setSpanError(span, err);
@@ -3184,7 +3184,7 @@ class Database extends common.GrpcServiceObject {
           };
           dataStream
             .once('data', () => (dataReceived = true))
-            .once('error', err => {
+            .once('error', (err) => {
               setSpanError(span, err);
 
               if (
@@ -3215,13 +3215,15 @@ class Database extends common.GrpcServiceObject {
                 snapshot.end();
               }
             })
-            .on('stats', stats => proxyStream.emit('stats', stats))
-            .on('response', response => proxyStream.emit('response', response))
+            .on('stats', (stats) => proxyStream.emit('stats', stats))
+            .on('response', (response) =>
+              proxyStream.emit('response', response),
+            )
             .once('end', endListener)
             .pipe(proxyStream);
         });
 
-        finished(proxyStream, err => {
+        finished(proxyStream, (err) => {
           if (err) {
             setSpanError(span, err);
           }
@@ -3346,7 +3348,7 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
         transactionTag: options.requestOptions?.transactionTag,
       },
-      span => {
+      (span) => {
         this.sessionFactory_.getSessionForReadWrite(
           (err, session?, transaction?) => {
             if (err) {
@@ -3391,7 +3393,7 @@ class Database extends common.GrpcServiceObject {
               options,
             );
 
-            runner.run().then(release, err => {
+            runner.run().then(release, (err) => {
               setSpanError(span, err!);
 
               if (isSessionNotFoundError(err)) {
@@ -3501,7 +3503,7 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
         transactionTag: options?.requestOptions?.transactionTag,
       },
-      async span => {
+      async (span) => {
         // Loop to retry 'Session not found' errors.
         // (and yes, we like while (true) more than for (;;) here)
         // eslint-disable-next-line no-constant-condition
@@ -3618,7 +3620,7 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
         transactionTag: options?.requestOptions?.transactionTag,
       },
-      span => {
+      (span) => {
         this.sessionFactory_.getSessionForReadWrite((err, session) => {
           if (err) {
             proxyStream.destroy(err);
@@ -3633,7 +3635,7 @@ class Database extends common.GrpcServiceObject {
             {} as spannerClient.spanner.v1.BatchWriteRequest,
             {
               session: session!.formattedName_!,
-              mutationGroups: mutationGroups.map(mg => mg.proto()),
+              mutationGroups: mutationGroups.map((mg) => mg.proto()),
               requestOptions: options?.requestOptions,
               excludeTxnFromChangeStream: options?.excludeTxnFromChangeStreams,
             },
@@ -3648,7 +3650,7 @@ class Database extends common.GrpcServiceObject {
           });
           dataStream
             .once('data', () => (dataReceived = true))
-            .once('error', err => {
+            .once('error', (err) => {
               setSpanError(span, err);
 
               if (
@@ -3766,47 +3768,51 @@ class Database extends common.GrpcServiceObject {
         ? (optionsOrCallback as WriteAtLeastOnceOptions)
         : {};
 
-    return startTrace('Database.writeAtLeastOnce', this._traceConfig, span => {
-      this.sessionFactory_.getSession((err, session?, transaction?) => {
-        if (
-          err &&
-          isSessionNotFoundError(err as grpc.ServiceError) &&
-          !this.sessionFactory_.isMultiplexedEnabled()
-        ) {
-          span.addEvent('No session available', {
-            'session.id': session?.id,
-          });
-          span.end();
-          this.writeAtLeastOnce(mutations, options, cb!);
-          return;
-        }
-        if (err) {
-          setSpanError(span, err);
-          span.end();
-          cb!(err as grpc.ServiceError);
-          return;
-        }
-        span.addEvent('Using Session', {'session.id': session?.id});
-        this._releaseOnEnd(session!, transaction!, span);
-        try {
-          transaction!.setReadWriteTransactionOptions(
-            options as RunTransactionOptions,
-          );
-          transaction?.setQueuedMutations(mutations.proto());
-          return transaction?.commit(options, (err, resp) => {
-            if (err) {
-              setSpanError(span, err);
-            }
+    return startTrace(
+      'Database.writeAtLeastOnce',
+      this._traceConfig,
+      (span) => {
+        this.sessionFactory_.getSession((err, session?, transaction?) => {
+          if (
+            err &&
+            isSessionNotFoundError(err as grpc.ServiceError) &&
+            !this.sessionFactory_.isMultiplexedEnabled()
+          ) {
+            span.addEvent('No session available', {
+              'session.id': session?.id,
+            });
             span.end();
-            cb!(err, resp);
-          });
-        } catch (e) {
-          setSpanErrorAndException(span, e as Error);
-          span.end();
-          throw e;
-        }
-      });
-    });
+            this.writeAtLeastOnce(mutations, options, cb!);
+            return;
+          }
+          if (err) {
+            setSpanError(span, err);
+            span.end();
+            cb!(err as grpc.ServiceError);
+            return;
+          }
+          span.addEvent('Using Session', {'session.id': session?.id});
+          this._releaseOnEnd(session!, transaction!, span);
+          try {
+            transaction!.setReadWriteTransactionOptions(
+              options as RunTransactionOptions,
+            );
+            transaction?.setQueuedMutations(mutations.proto());
+            return transaction?.commit(options, (err, resp) => {
+              if (err) {
+                setSpanError(span, err);
+              }
+              span.end();
+              cb!(err, resp);
+            });
+          } catch (e) {
+            setSpanErrorAndException(span, e as Error);
+            span.end();
+            throw e;
+          }
+        });
+      },
+    );
   }
 
   /**

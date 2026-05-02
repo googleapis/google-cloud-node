@@ -45,12 +45,12 @@ const makeAuthRequestFactoryCache = util.makeAuthenticatedRequestFactory;
 let makeAuthenticatedRequestFactoryOverride:
   | null
   | ((
-      config: MakeAuthenticatedRequestFactoryConfig
+      config: MakeAuthenticatedRequestFactoryConfig,
     ) => MakeAuthenticatedRequest);
 
 util.makeAuthenticatedRequestFactory = function (
   this: Util,
-  config: MakeAuthenticatedRequestFactoryConfig
+  config: MakeAuthenticatedRequestFactoryConfig,
 ) {
   if (makeAuthenticatedRequestFactoryOverride) {
     return makeAuthenticatedRequestFactoryOverride.call(this, config);
@@ -101,7 +101,7 @@ describe('Service', () => {
       const authenticatedRequest = {} as MakeAuthenticatedRequest;
 
       makeAuthenticatedRequestFactoryOverride = (
-        config: MakeAuthenticatedRequestFactoryConfig
+        config: MakeAuthenticatedRequestFactoryConfig,
       ) => {
         const expectedConfig = {
           ...CONFIG,
@@ -296,7 +296,7 @@ describe('Service', () => {
       service.interceptors = [{request}];
 
       const originalGlobalInterceptors = [].slice.call(
-        service.globalInterceptors
+        service.globalInterceptors,
       );
       const originalLocalInterceptors = [].slice.call(service.interceptors);
 
@@ -304,7 +304,7 @@ describe('Service', () => {
 
       assert.deepStrictEqual(
         service.globalInterceptors,
-        originalGlobalInterceptors
+        originalGlobalInterceptors,
       );
       assert.deepStrictEqual(service.interceptors, originalLocalInterceptors);
     });
@@ -327,7 +327,7 @@ describe('Service', () => {
   });
 
   describe('getProjectId', () => {
-    it('should get the project ID from the auth client', done => {
+    it('should get the project ID from the auth client', (done) => {
       service.authClient = {
         getProjectId() {
           done();
@@ -337,7 +337,7 @@ describe('Service', () => {
       service.getProjectId(assert.ifError);
     });
 
-    it('should return error from auth client', done => {
+    it('should return error from auth client', (done) => {
       const error = new Error('Error.');
 
       service.authClient = {
@@ -352,7 +352,7 @@ describe('Service', () => {
       });
     });
 
-    it('should update and return the project ID if found', done => {
+    it('should update and return the project ID if found', (done) => {
       const service = new Service(fakeCfg, {});
       const projectId = 'detected-project-id';
 
@@ -386,11 +386,11 @@ describe('Service', () => {
       };
     });
 
-    it('should compose the correct request', done => {
+    it('should compose the correct request', (done) => {
       const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
       service.makeAuthenticatedRequest = (
         reqOpts_: DecorateRequestOptions,
-        callback: BodyResponseCallback
+        callback: BodyResponseCallback,
       ) => {
         assert.notStrictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, expectedUri);
@@ -400,7 +400,7 @@ describe('Service', () => {
       service.request_(reqOpts, () => done());
     });
 
-    it('should support absolute uris', done => {
+    it('should support absolute uris', (done) => {
       const expectedUri = 'http://www.google.com';
 
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
@@ -411,7 +411,7 @@ describe('Service', () => {
       service.request_({uri: expectedUri}, assert.ifError);
     });
 
-    it('should trim slashes', done => {
+    it('should trim slashes', (done) => {
       const reqOpts = {
         uri: '//1/2//',
       };
@@ -426,7 +426,7 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
-    it('should replace path/:subpath with path:subpath', done => {
+    it('should replace path/:subpath with path:subpath', (done) => {
       const reqOpts = {
         uri: ':test',
       };
@@ -439,7 +439,7 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
-    it('should not set timeout', done => {
+    it('should not set timeout', (done) => {
       service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts_.timeout, undefined);
         done();
@@ -447,7 +447,7 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
-    it('should set reqOpt.timeout', done => {
+    it('should set reqOpt.timeout', (done) => {
       const timeout = 10000;
       const config = {...CONFIG};
       const options = {...OPTIONS, timeout};
@@ -460,11 +460,11 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
-    it('should add the User Agent', done => {
+    it('should add the User Agent', (done) => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
           reqOpts.headers!['User-Agent'],
-          getUserAgentString()
+          getUserAgentString(),
         );
         done();
       };
@@ -472,13 +472,13 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
-    it('should add the api-client header', done => {
+    it('should add the api-client header', (done) => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         const pkg = service.packageJson;
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`,
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
@@ -487,14 +487,14 @@ describe('Service', () => {
       service.request_(reqOpts, assert.ifError);
     });
 
-    it('should add the `gccl-gcs-cmd` to the api-client header when provided', done => {
+    it('should add the `gccl-gcs-cmd` to the api-client header when provided', (done) => {
       const expected = 'example.expected/value';
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         const pkg = service.packageJson;
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`,
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
@@ -502,20 +502,20 @@ describe('Service', () => {
 
       service.request_(
         {...reqOpts, [GCCL_GCS_CMD_KEY]: expected},
-        assert.ifError
+        assert.ifError,
       );
     });
 
     describe('projectIdRequired', () => {
       describe('false', () => {
-        it('should include the projectId', done => {
+        it('should include the projectId', (done) => {
           const config = {...CONFIG, projectIdRequired: false};
           const service = new Service(config, OPTIONS);
 
           const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
 
           service.makeAuthenticatedRequest = (
-            reqOpts_: DecorateRequestOptions
+            reqOpts_: DecorateRequestOptions,
           ) => {
             assert.strictEqual(reqOpts_.uri, expectedUri);
 
@@ -527,7 +527,7 @@ describe('Service', () => {
       });
 
       describe('true', () => {
-        it('should not include the projectId', done => {
+        it('should not include the projectId', (done) => {
           const config = {...CONFIG, projectIdRequired: true};
           const service = new Service(config, OPTIONS);
 
@@ -539,7 +539,7 @@ describe('Service', () => {
           ].join('/');
 
           service.makeAuthenticatedRequest = (
-            reqOpts_: DecorateRequestOptions
+            reqOpts_: DecorateRequestOptions,
           ) => {
             assert.strictEqual(reqOpts_.uri, expectedUri);
 
@@ -549,7 +549,7 @@ describe('Service', () => {
           service.request_(reqOpts, assert.ifError);
         });
 
-        it('should use projectId override', done => {
+        it('should use projectId override', (done) => {
           const config = {...CONFIG, projectIdRequired: true};
           const service = new Service(config, OPTIONS);
           const projectOverride = 'turing';
@@ -564,7 +564,7 @@ describe('Service', () => {
           ].join('/');
 
           service.makeAuthenticatedRequest = (
-            reqOpts_: DecorateRequestOptions
+            reqOpts_: DecorateRequestOptions,
           ) => {
             assert.strictEqual(reqOpts_.uri, expectedUri);
 
@@ -579,7 +579,7 @@ describe('Service', () => {
     describe('request interceptors', () => {
       type FakeRequestOptions = DecorateRequestOptions & {a: string; b: string};
 
-      it('should include request interceptors', done => {
+      it('should include request interceptors', (done) => {
         const requestInterceptors = [
           (reqOpts: FakeRequestOptions) => {
             reqOpts.a = 'a';
@@ -604,7 +604,7 @@ describe('Service', () => {
         service.request_(reqOpts, assert.ifError);
       });
 
-      it('should combine reqOpts interceptors', done => {
+      it('should combine reqOpts interceptors', (done) => {
         const requestInterceptors = [
           (reqOpts: FakeRequestOptions) => {
             reqOpts.a = 'a';
@@ -637,7 +637,7 @@ describe('Service', () => {
     });
 
     describe('error handling', () => {
-      it('should re-throw any makeAuthenticatedRequest callback error', done => {
+      it('should re-throw any makeAuthenticatedRequest callback error', (done) => {
         const err = new Error('🥓');
         const res = {body: undefined};
         service.makeAuthenticatedRequest = (_: void, callback: Function) => {
@@ -671,12 +671,12 @@ describe('Service', () => {
       await service.request(fakeOpts);
     });
 
-    it('should accept a callback', done => {
+    it('should accept a callback', (done) => {
       const fakeOpts = {};
       const response = {body: {abc: '123'}, statusCode: 200};
       Service.prototype.request_ = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(reqOpts, fakeOpts);
         callback(null, response.body, response);

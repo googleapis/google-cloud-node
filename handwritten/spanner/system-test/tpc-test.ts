@@ -94,7 +94,7 @@ describe.skip('Universe domain tests', () => {
 
     console.log(`Reading rows in the table ${table.name}`);
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
       const json = row.toJSON();
       console.log(
         `VenueId: ${json.VenueId}, VenueName: ${json.VenueName}, Capacity: ${json.Capacity}`,

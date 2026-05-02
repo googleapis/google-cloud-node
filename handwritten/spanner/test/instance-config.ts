@@ -99,7 +99,7 @@ describe('InstanceConfig', () => {
       assert(instanceConfig.formattedName_, formattedName);
     });
 
-    it('should localize the request function', done => {
+    it('should localize the request function', (done) => {
       const spannerInstance = extend({}, SPANNER);
 
       spannerInstance.request = function () {
@@ -112,7 +112,7 @@ describe('InstanceConfig', () => {
       (instanceConfig as any).request();
     });
 
-    it('should inherit from ServiceObject', done => {
+    it('should inherit from ServiceObject', (done) => {
       const options = {};
       const spannerInstance = extend({}, SPANNER, {
         createInstanceConfig(name, options_, callback) {
@@ -162,7 +162,7 @@ describe('InstanceConfig', () => {
       instanceConfig.parent = SPANNER;
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       instanceConfig.request = (config, callback: Function) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'deleteInstanceConfig');
@@ -177,7 +177,7 @@ describe('InstanceConfig', () => {
       instanceConfig.delete(done);
     });
 
-    it('should remove the InstanceConfig from the cache', done => {
+    it('should remove the InstanceConfig from the cache', (done) => {
       const cache = instanceConfig.parent.instanceConfigs_;
 
       instanceConfig.request = (config, callback) => {
@@ -187,14 +187,14 @@ describe('InstanceConfig', () => {
       cache.set(instanceConfig.id, instanceConfig);
       assert.strictEqual(cache.get(instanceConfig.id), instanceConfig);
 
-      instanceConfig.delete(err => {
+      instanceConfig.delete((err) => {
         assert.ifError(err);
         assert.strictEqual(cache.has(instanceConfig.id), false);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       instanceConfig.request = (config, callback: Function) => {
@@ -250,16 +250,16 @@ describe('InstanceConfig', () => {
       sandbox.restore();
     });
 
-    it('should call getInstanceConfig', done => {
+    it('should call getInstanceConfig', (done) => {
       const options = {};
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      sandbox.stub(SPANNER, 'getInstanceConfig').callsFake(_ => done());
+      sandbox.stub(SPANNER, 'getInstanceConfig').callsFake((_) => done());
 
       instanceConfig.get(options, assert.ifError);
     });
 
-    it('should accept and pass gaxOptions to getInstanceConfig', done => {
+    it('should accept and pass gaxOptions to getInstanceConfig', (done) => {
       const gaxOptions = {};
 
       sandbox.stub(SPANNER, 'getInstanceConfig').callsFake((_, options) => {
@@ -270,26 +270,26 @@ describe('InstanceConfig', () => {
       instanceConfig.get({gaxOptions}, assert.ifError);
     });
 
-    it('should not require an options object', done => {
+    it('should not require an options object', (done) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      sandbox.stub(SPANNER, 'getInstanceConfig').callsFake(_ => done());
+      sandbox.stub(SPANNER, 'getInstanceConfig').callsFake((_) => done());
       instanceConfig.get(assert.ifError);
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.') as grpc.ServiceError;
 
       sandbox
         .stub(SPANNER, 'getInstanceConfig')
         .callsFake((_, opts_: {}, callback) => callback!(error));
 
-      instanceConfig.get(err => {
+      instanceConfig.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {} as instConfig.IInstanceConfig;
       sandbox
         .stub(SPANNER, 'getInstanceConfig')
@@ -346,9 +346,9 @@ describe('InstanceConfig', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      instanceConfig.request = config => {
+      instanceConfig.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };

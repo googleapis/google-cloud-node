@@ -97,10 +97,10 @@ describe('HmacKey', () => {
       assert(ctorArg.baseUrl, '/projects/another-project/hmacKeys');
     });
 
-    it('should correctly call setMetadata', done => {
+    it('should correctly call setMetadata', (done) => {
       hmacKey.setMetadata = (metadata: HmacKeyMetadata, callback: Function) => {
         assert.deepStrictEqual(metadata.accessId, ACCESS_ID);
-        Promise.resolve([]).then(resp => callback(null, ...resp));
+        Promise.resolve([]).then((resp) => callback(null, ...resp));
       };
 
       hmacKey.setMetadata({accessId: ACCESS_ID}, done);

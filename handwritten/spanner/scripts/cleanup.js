@@ -27,13 +27,13 @@ const CURRENT_DATE = new Date();
 async function deleteStaleInstances(labelFilter) {
   const [instances] = await spanner.getInstances({});
 
-  const filtered = instances.filter(instance => {
+  const filtered = instances.filter((instance) => {
     return labelFilter(instance.metadata.labels);
   });
 
   const limit = pLimit(5);
   await Promise.all(
-    filtered.map(instance =>
+    filtered.map((instance) =>
       limit(() =>
         setTimeout(() => {
           instance.delete();
@@ -46,7 +46,7 @@ async function deleteStaleInstances(labelFilter) {
 describe('Clean up', () => {
   it('should clean up stale instances', async () => {
     // Remove instances with label { created: Date } that's older than STALE_THRESHOLD
-    const labelFilter = labels => {
+    const labelFilter = (labels) => {
       if (labels.created) {
         const creationDate = new Date(labels.created * 1000);
         return (

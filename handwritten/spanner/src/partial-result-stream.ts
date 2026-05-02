@@ -335,7 +335,7 @@ export class PartialResultStream extends Transform implements ResultEvents {
     }
 
     let res = true;
-    values.forEach(value => {
+    values.forEach((value) => {
       res = this._addValue(value) && res;
       if (!res) {
         this.emit('paused');
@@ -597,7 +597,7 @@ export function partialResultStream(
 
   // need types for events-intercept
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (requestsStream as any).intercept('error', err =>
+  (requestsStream as any).intercept('error', (err) =>
     // Retry __after__ all pending data has been processed to ensure that the
     // checkpoint stream is reset at the correct position.
     setImmediate(() => retry(err)),

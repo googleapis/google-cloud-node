@@ -507,10 +507,7 @@
         "expiration": 10,
         "timestamp": "2020-01-23T04:35:30Z",
         "conditions": {
-          "startsWith": [
-            "$acl",
-            "public"
-          ]
+          "startsWith": ["$acl", "public"]
         }
       },
       "policyOutput": {
@@ -535,10 +532,7 @@
         "expiration": 10,
         "timestamp": "2020-01-23T04:35:30Z",
         "conditions": {
-          "contentLengthRange": [
-            246,
-            266
-          ]
+          "contentLengthRange": [246, 266]
         }
       },
       "policyOutput": {

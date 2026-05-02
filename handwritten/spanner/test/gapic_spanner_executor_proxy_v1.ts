@@ -204,13 +204,13 @@ describe('v1.SpannerExecutorProxyClient', () => {
       assert(client.spannerExecutorProxyStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client =
         new spannerexecutorproxyModule.v1.SpannerExecutorProxyClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.spannerExecutorProxyStub);
@@ -219,12 +219,12 @@ describe('v1.SpannerExecutorProxyClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client =
         new spannerexecutorproxyModule.v1.SpannerExecutorProxyClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -236,7 +236,7 @@ describe('v1.SpannerExecutorProxyClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });

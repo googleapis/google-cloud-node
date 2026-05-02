@@ -55,7 +55,7 @@ type FakeServiceObject = any;
 interface InternalServiceObject {
   request_: (
     reqOpts: DecorateRequestOptions,
-    callback?: BodyResponseCallback
+    callback?: BodyResponseCallback,
   ) => void | r.Request;
   createMethod?: Function;
   methods: SO.Methods;
@@ -63,7 +63,7 @@ interface InternalServiceObject {
 }
 
 function asInternal(
-  serviceObject: SO.ServiceObject<InternalServiceObject, SO.BaseMetadata>
+  serviceObject: SO.ServiceObject<InternalServiceObject, SO.BaseMetadata>,
 ) {
   return serviceObject as {} as InternalServiceObject;
 }
@@ -112,7 +112,7 @@ describe('ServiceObject', () => {
     it('should localize the createMethod', () => {
       assert.strictEqual(
         asInternal(serviceObject).createMethod,
-        CONFIG.createMethod
+        CONFIG.createMethod,
       );
     });
 
@@ -152,20 +152,20 @@ describe('ServiceObject', () => {
       const serviceObject = new ServiceObject(config);
       assert.strictEqual(
         typeof serviceObject.getRequestInterceptors,
-        'function'
+        'function',
       );
     });
   });
 
   describe('create', () => {
-    it('should call createMethod', done => {
+    it('should call createMethod', (done) => {
       const config = {...CONFIG, createMethod};
       const options = {};
 
       function createMethod(
         id: string,
         options_: {},
-        callback: (err: Error | null, a: {}, b: {}) => void
+        callback: (err: Error | null, a: {}, b: {}) => void,
       ) {
         assert.strictEqual(id, config.id);
         assert.strictEqual(options_, options);
@@ -176,7 +176,7 @@ describe('ServiceObject', () => {
       serviceObject.create(options, done);
     });
 
-    it('should not require options', done => {
+    it('should not require options', (done) => {
       const config = {...CONFIG, createMethod};
 
       function createMethod(id: string, options: Function, callback: Function) {
@@ -190,14 +190,14 @@ describe('ServiceObject', () => {
       serviceObject.create(done);
     });
 
-    it('should update id with metadata id', done => {
+    it('should update id with metadata id', (done) => {
       const config = {...CONFIG, createMethod};
       const options = {};
 
       function createMethod(
         id: string,
         options_: {},
-        callback: (err: Error | null, a: {}, b: {}) => void
+        callback: (err: Error | null, a: {}, b: {}) => void,
       ) {
         assert.strictEqual(id, config.id);
         assert.strictEqual(options_, options);
@@ -210,7 +210,7 @@ describe('ServiceObject', () => {
       done();
     });
 
-    it('should pass error to callback', done => {
+    it('should pass error to callback', (done) => {
       const config = {...CONFIG, createMethod};
       const options = {};
       const error = new Error('Error.');
@@ -227,7 +227,7 @@ describe('ServiceObject', () => {
           assert.strictEqual(instance, null);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -259,7 +259,7 @@ describe('ServiceObject', () => {
       assert.strictEqual(instance_.metadata, instance.metadata);
     });
 
-    it('should execute callback with any amount of arguments', done => {
+    it('should execute callback with any amount of arguments', (done) => {
       const config = {...CONFIG, createMethod};
       const options = {};
 
@@ -279,7 +279,7 @@ describe('ServiceObject', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       sandbox
         .stub(ServiceObject.prototype, 'request')
         .callsFake((reqOpts, callback) => {
@@ -293,7 +293,7 @@ describe('ServiceObject', () => {
       serviceObject.delete(assert.ifError);
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const options = {queryOptionProperty: true};
       sandbox
         .stub(ServiceObject.prototype, 'request')
@@ -307,7 +307,7 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, assert.ifError);
     });
 
-    it('should override method and uri field in request with methodConfig', done => {
+    it('should override method and uri field in request with methodConfig', (done) => {
       const methodConfig = {
         reqOpts: {
           uri: 'v2',
@@ -324,7 +324,7 @@ describe('ServiceObject', () => {
           const cb = callback as BodyResponseCallback;
           assert.deepStrictEqual(
             serviceObject.methods.delete,
-            cachedMethodConfig
+            cachedMethodConfig,
           );
           assert.deepStrictEqual(opts.uri, 'v2');
           assert.deepStrictEqual(opts.method, 'PATCH');
@@ -337,7 +337,7 @@ describe('ServiceObject', () => {
       serviceObject.delete();
     });
 
-    it('should respect ignoreNotFound option', done => {
+    it('should respect ignoreNotFound option', (done) => {
       const options = {ignoreNotFound: true};
       const error = new ApiError({code: 404, response: {} as r.Response});
       sandbox.stub(ServiceObject.prototype, 'request').callsArgWith(1, error);
@@ -348,7 +348,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should propagate other then 404 error', done => {
+    it('should propagate other then 404 error', (done) => {
       const options = {ignoreNotFound: true};
       const error = new ApiError({code: 406, response: {} as r.Response});
       sandbox.stub(ServiceObject.prototype, 'request').callsArgWith(1, error);
@@ -359,7 +359,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should not pass ignoreNotFound to request', done => {
+    it('should not pass ignoreNotFound to request', (done) => {
       const options = {ignoreNotFound: true};
       sandbox
         .stub(ServiceObject.prototype, 'request')
@@ -373,7 +373,7 @@ describe('ServiceObject', () => {
       serviceObject.delete(options, assert.ifError);
     });
 
-    it('should extend the defaults with request options', done => {
+    it('should extend the defaults with request options', (done) => {
       const methodConfig = {
         reqOpts: {
           qs: {
@@ -392,7 +392,7 @@ describe('ServiceObject', () => {
           const cb = callback as BodyResponseCallback;
           assert.deepStrictEqual(
             serviceObject.methods.delete,
-            cachedMethodConfig
+            cachedMethodConfig,
           );
           assert.deepStrictEqual(opts.qs, {
             defaultProperty: true,
@@ -420,7 +420,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with correct arguments', done => {
+    it('should execute callback with correct arguments', (done) => {
       const error = new Error('🦃');
       sandbox.stub(ServiceObject.prototype, 'request').callsArgWith(1, error);
       const serviceObject = new ServiceObject(CONFIG);
@@ -433,12 +433,12 @@ describe('ServiceObject', () => {
   });
 
   describe('exists', () => {
-    it('should call get', done => {
+    it('should call get', (done) => {
       sandbox.stub(serviceObject, 'get').callsFake(() => done());
       serviceObject.exists(() => {});
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const options = {queryOptionProperty: true};
       sandbox
         .stub(ServiceObject.prototype, 'get')
@@ -452,7 +452,7 @@ describe('ServiceObject', () => {
       serviceObject.exists(options, assert.ifError);
     });
 
-    it('should execute callback with false if 404', done => {
+    it('should execute callback with false if 404', (done) => {
       const error = new ApiError('');
       error.code = 404;
       sandbox.stub(serviceObject, 'get').callsArgWith(1, error);
@@ -463,7 +463,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with error if not 404', done => {
+    it('should execute callback with error if not 404', (done) => {
       const error = new ApiError('');
       error.code = 500;
       sandbox.stub(serviceObject, 'get').callsArgWith(1, error);
@@ -474,7 +474,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with true if no error', done => {
+    it('should execute callback with true if no error', (done) => {
       sandbox.stub(serviceObject, 'get').callsArgWith(1, null);
       serviceObject.exists((err: Error, exists: boolean) => {
         assert.ifError(err);
@@ -485,7 +485,7 @@ describe('ServiceObject', () => {
   });
 
   describe('get', () => {
-    it('should get the metadata', done => {
+    it('should get the metadata', (done) => {
       serviceObject.getMetadata = promisify((): void => {
         done();
       });
@@ -493,35 +493,35 @@ describe('ServiceObject', () => {
       serviceObject.get(assert.ifError);
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const options = {};
       serviceObject.getMetadata = promisify(
         (options_: SO.GetMetadataOptions): void => {
           assert.deepStrictEqual(options, options_);
           done();
-        }
+        },
       );
       serviceObject.exists(options, assert.ifError);
     });
 
-    it('handles not getting a config', done => {
+    it('handles not getting a config', (done) => {
       serviceObject.getMetadata = promisify((): void => {
         done();
       });
       (serviceObject as FakeServiceObject).get(assert.ifError);
     });
 
-    it('should execute callback with error & metadata', done => {
+    it('should execute callback with error & metadata', (done) => {
       const error = new Error('Error.');
       const metadata = {} as SO.BaseMetadata;
 
       serviceObject.getMetadata = promisify(
         (
           options: SO.GetMetadataOptions,
-          callback: SO.MetadataCallback<SO.BaseMetadata>
+          callback: SO.MetadataCallback<SO.BaseMetadata>,
         ) => {
           callback(error, metadata);
-        }
+        },
       );
 
       serviceObject.get((err, instance, metadata_) => {
@@ -533,16 +533,16 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with instance & metadata', done => {
+    it('should execute callback with instance & metadata', (done) => {
       const metadata = {} as SO.BaseMetadata;
 
       serviceObject.getMetadata = promisify(
         (
           options: SO.GetMetadataOptions,
-          callback: SO.MetadataCallback<SO.BaseMetadata>
+          callback: SO.MetadataCallback<SO.BaseMetadata>,
         ) => {
           callback(null, metadata);
-        }
+        },
       );
 
       serviceObject.get((err, instance, metadata_) => {
@@ -570,10 +570,10 @@ describe('ServiceObject', () => {
         serviceObject.getMetadata = promisify(
           (
             options: SO.GetMetadataOptions,
-            callback: SO.MetadataCallback<SO.BaseMetadata>
+            callback: SO.MetadataCallback<SO.BaseMetadata>,
           ) => {
             callback(ERROR, METADATA);
-          }
+          },
         );
       });
 
@@ -583,33 +583,33 @@ describe('ServiceObject', () => {
         assert.deepStrictEqual(AUTO_CREATE_CONFIG, expectedConfig);
       });
 
-      it('should not auto create if there is no create method', done => {
+      it('should not auto create if there is no create method', (done) => {
         (serviceObject as FakeServiceObject).create = undefined;
 
-        serviceObject.get(AUTO_CREATE_CONFIG, err => {
+        serviceObject.get(AUTO_CREATE_CONFIG, (err) => {
           assert.strictEqual(err, ERROR);
           done();
         });
       });
 
-      it('should pass config to create if it was provided', done => {
+      it('should pass config to create if it was provided', (done) => {
         const expectedConfig = {maxResults: 5} as SO.GetConfig;
         const config = {...AUTO_CREATE_CONFIG, ...expectedConfig};
 
-        sandbox.stub(serviceObject, 'create').callsFake(config_ => {
+        sandbox.stub(serviceObject, 'create').callsFake((config_) => {
           assert.deepStrictEqual(config_, expectedConfig);
           done();
         });
         serviceObject.get(config, assert.ifError);
       });
 
-      it('should pass only a callback to create if no config', done => {
+      it('should pass only a callback to create if no config', (done) => {
         sandbox.stub(serviceObject, 'create').callsArgWith(0, null);
         serviceObject.get(AUTO_CREATE_CONFIG, done);
       });
 
       describe('error', () => {
-        it('should execute callback with error & API response', done => {
+        it('should execute callback with error & API response', (done) => {
           const error = new Error('Error.');
           const apiResponse = {} as r.Response;
 
@@ -622,7 +622,7 @@ describe('ServiceObject', () => {
                 callback!(null); // done()
               });
               callback!(error, null, apiResponse);
-            }
+            },
           );
 
           serviceObject.get(AUTO_CREATE_CONFIG, (err, instance, resp) => {
@@ -633,10 +633,10 @@ describe('ServiceObject', () => {
           });
         });
 
-        it('should refresh the metadata after a 409', done => {
+        it('should refresh the metadata after a 409', (done) => {
           const error = new ApiError('errrr');
           error.code = 409;
-          sandbox.stub(serviceObject, 'create').callsFake(callback => {
+          sandbox.stub(serviceObject, 'create').callsFake((callback) => {
             sandbox.stub(serviceObject, 'get').callsFake((cfgOrCb, cb) => {
               const config = typeof cfgOrCb === 'object' ? cfgOrCb : {};
               const callback = typeof cfgOrCb === 'function' ? cfgOrCb : cb;
@@ -652,11 +652,11 @@ describe('ServiceObject', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       sandbox.stub(ServiceObject.prototype, 'request').callsFake(function (
         this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
         reqOpts,
-        callback
+        callback,
       ) {
         const opts = reqOpts as r.OptionsWithUri;
         const cb = callback as BodyResponseCallback;
@@ -668,7 +668,7 @@ describe('ServiceObject', () => {
       serviceObject.getMetadata(() => {});
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const options = {queryOptionProperty: true};
       sandbox
         .stub(ServiceObject.prototype, 'request')
@@ -682,7 +682,7 @@ describe('ServiceObject', () => {
       serviceObject.getMetadata(options, assert.ifError);
     });
 
-    it('should override uri field in request with methodConfig', done => {
+    it('should override uri field in request with methodConfig', (done) => {
       const methodConfig = {
         reqOpts: {
           uri: 'v2',
@@ -698,7 +698,7 @@ describe('ServiceObject', () => {
           const cb = callback as BodyResponseCallback;
           assert.deepStrictEqual(
             serviceObject.methods.getMetadata,
-            cachedMethodConfig
+            cachedMethodConfig,
           );
           assert.deepStrictEqual(opts.uri, 'v2');
           done();
@@ -710,7 +710,7 @@ describe('ServiceObject', () => {
       serviceObject.getMetadata();
     });
 
-    it('should extend the defaults with request options', done => {
+    it('should extend the defaults with request options', (done) => {
       const methodConfig = {
         reqOpts: {
           qs: {
@@ -729,7 +729,7 @@ describe('ServiceObject', () => {
           const cb = callback as BodyResponseCallback;
           assert.deepStrictEqual(
             serviceObject.methods.getMetadata,
-            cachedMethodConfig
+            cachedMethodConfig,
           );
           assert.deepStrictEqual(opts.qs, {
             defaultProperty: true,
@@ -748,7 +748,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with error & apiResponse', done => {
+    it('should execute callback with error & apiResponse', (done) => {
       const error = new Error('ಠ_ಠ');
       sandbox.stub(ServiceObject.prototype, 'request').callsArgWith(1, error);
       serviceObject.getMetadata((err: Error, metadata: {}) => {
@@ -758,7 +758,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const apiResponse = {};
       sandbox
         .stub(ServiceObject.prototype, 'request')
@@ -770,7 +770,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with metadata & API response', done => {
+    it('should execute callback with metadata & API response', (done) => {
       const apiResponse = {};
       const requestResponse = {body: apiResponse};
       sandbox
@@ -820,7 +820,7 @@ describe('ServiceObject', () => {
 
       serviceObject.parent.getRequestInterceptors = () => {
         return serviceObject.parent.interceptors.map(
-          interceptor => interceptor.request
+          (interceptor) => interceptor.request,
         );
       };
 
@@ -841,21 +841,21 @@ describe('ServiceObject', () => {
       serviceObject.interceptors = [{request}];
 
       const originalParentInterceptors = [].slice.call(
-        serviceObject.parent.interceptors
+        serviceObject.parent.interceptors,
       );
       const originalLocalInterceptors = [].slice.call(
-        serviceObject.interceptors
+        serviceObject.interceptors,
       );
 
       serviceObject.getRequestInterceptors();
 
       assert.deepStrictEqual(
         serviceObject.parent.interceptors,
-        originalParentInterceptors
+        originalParentInterceptors,
       );
       assert.deepStrictEqual(
         serviceObject.interceptors,
-        originalLocalInterceptors
+        originalLocalInterceptors,
       );
     });
 
@@ -877,12 +877,12 @@ describe('ServiceObject', () => {
   });
 
   describe('setMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const metadata = {metadataProperty: true};
       sandbox.stub(ServiceObject.prototype, 'request').callsFake(function (
         this: SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
         reqOpts,
-        callback
+        callback,
       ) {
         const opts = reqOpts as r.OptionsWithUri;
         const cb = callback as BodyResponseCallback;
@@ -896,7 +896,7 @@ describe('ServiceObject', () => {
       serviceObject.setMetadata(metadata, () => {});
     });
 
-    it('should accept options', done => {
+    it('should accept options', (done) => {
       const metadata = {};
       const options = {queryOptionProperty: true};
       sandbox
@@ -911,7 +911,7 @@ describe('ServiceObject', () => {
       serviceObject.setMetadata(metadata, options, () => {});
     });
 
-    it('should override uri and method with methodConfig', done => {
+    it('should override uri and method with methodConfig', (done) => {
       const methodConfig = {
         reqOpts: {
           uri: 'v2',
@@ -927,7 +927,7 @@ describe('ServiceObject', () => {
           const cb = callback as BodyResponseCallback;
           assert.deepStrictEqual(
             serviceObject.methods.setMetadata,
-            cachedMethodConfig
+            cachedMethodConfig,
           );
           assert.deepStrictEqual(opts.uri, 'v2');
           assert.deepStrictEqual(opts.method, 'PUT');
@@ -940,7 +940,7 @@ describe('ServiceObject', () => {
       serviceObject.setMetadata({});
     });
 
-    it('should extend the defaults with request options', done => {
+    it('should extend the defaults with request options', (done) => {
       const methodConfig = {
         reqOpts: {
           qs: {
@@ -958,7 +958,7 @@ describe('ServiceObject', () => {
           const cb = callback as BodyResponseCallback;
           assert.deepStrictEqual(
             serviceObject.methods.setMetadata,
-            cachedMethodConfig
+            cachedMethodConfig,
           );
           assert.deepStrictEqual(opts.qs, {
             defaultProperty: true,
@@ -976,11 +976,11 @@ describe('ServiceObject', () => {
         {
           optionalProperty: true,
           thisPropertyWasOverridden: true,
-        }
+        },
       );
     });
 
-    it('should execute callback with error & apiResponse', done => {
+    it('should execute callback with error & apiResponse', (done) => {
       const error = new Error('Error.');
       sandbox.stub(ServiceObject.prototype, 'request').callsArgWith(1, error);
       serviceObject.setMetadata({}, (err: Error, apiResponse_: {}) => {
@@ -990,7 +990,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const apiResponse = {};
       sandbox
         .stub(ServiceObject.prototype, 'request')
@@ -1002,7 +1002,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should execute callback with metadata & API response', done => {
+    it('should execute callback with metadata & API response', (done) => {
       const body = {};
       const apiResponse = {body};
       sandbox
@@ -1024,7 +1024,7 @@ describe('ServiceObject', () => {
       };
     });
 
-    it('should compose the correct request', done => {
+    it('should compose the correct request', (done) => {
       const expectedUri = [
         serviceObject.baseUrl,
         serviceObject.id,
@@ -1040,7 +1040,7 @@ describe('ServiceObject', () => {
       asInternal(serviceObject).request_(reqOpts, () => done());
     });
 
-    it('should not require a service object ID', done => {
+    it('should not require a service object ID', (done) => {
       const expectedUri = [serviceObject.baseUrl, reqOpts.uri].join('/');
       serviceObject.parent.request = (reqOpts, callback) => {
         assert.strictEqual(reqOpts.uri, expectedUri);
@@ -1050,7 +1050,7 @@ describe('ServiceObject', () => {
       asInternal(serviceObject).request_(reqOpts, () => done());
     });
 
-    it('should support absolute uris', done => {
+    it('should support absolute uris', (done) => {
       const expectedUri = 'http://www.google.com';
       serviceObject.parent.request = (reqOpts, callback) => {
         assert.strictEqual(reqOpts.uri, expectedUri);
@@ -1061,7 +1061,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should remove empty components', done => {
+    it('should remove empty components', (done) => {
       const reqOpts = {uri: ''};
       const expectedUri = [
         serviceObject.baseUrl,
@@ -1075,12 +1075,12 @@ describe('ServiceObject', () => {
       asInternal(serviceObject).request_(reqOpts, () => done());
     });
 
-    it('should trim slashes', done => {
+    it('should trim slashes', (done) => {
       const reqOpts = {
         uri: '//1/2//',
       };
       const expectedUri = [serviceObject.baseUrl, serviceObject.id, '1/2'].join(
-        '/'
+        '/',
       );
       serviceObject.parent.request = (reqOpts_, callback) => {
         assert.strictEqual(reqOpts_.uri, expectedUri);
@@ -1113,20 +1113,20 @@ describe('ServiceObject', () => {
       sandbox
         .stub(
           parent.parent as SO.ServiceObject<FakeServiceObject, SO.BaseMetadata>,
-          'request'
+          'request',
         )
         .callsFake((reqOpts, callback) => {
           assert.deepStrictEqual(
             reqOpts.interceptors_![0].request({} as DecorateRequestOptions),
             {
               child: true,
-            }
+            },
           );
           assert.deepStrictEqual(
             reqOpts.interceptors_![1].request({} as DecorateRequestOptions),
             {
               parent: true,
-            }
+            },
           );
           callback(null, null, {} as r.Response);
         });
@@ -1134,7 +1134,7 @@ describe('ServiceObject', () => {
       await child.request_({uri: ''});
     });
 
-    it('should pass a clone of the interceptors', done => {
+    it('should pass a clone of the interceptors', (done) => {
       asInternal(serviceObject).interceptors.push({
         request(reqOpts: DecorateRequestOptions) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1148,7 +1148,7 @@ describe('ServiceObject', () => {
           asInternal(serviceObject).interceptors;
         assert.deepStrictEqual(
           reqOpts.interceptors_,
-          serviceObjectInterceptors
+          serviceObjectInterceptors,
         );
         assert.notStrictEqual(reqOpts.interceptors_, serviceObjectInterceptors);
         callback(null, null, {} as r.Response);
@@ -1165,7 +1165,7 @@ describe('ServiceObject', () => {
         reqOpts.uri,
       ].join('/');
 
-      serviceObject.parent.requestStream = reqOpts_ => {
+      serviceObject.parent.requestStream = (reqOpts_) => {
         assert.notStrictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, expectedUri);
         assert.deepStrictEqual(reqOpts_.interceptors_, []);
@@ -1190,7 +1190,7 @@ describe('ServiceObject', () => {
       await serviceObject.request(fakeOptions);
     });
 
-    it('should accept a callback', done => {
+    it('should accept a callback', (done) => {
       const response = {body: {abc: '123'}, statusCode: 200} as r.Response;
       sandbox
         .stub(asInternal(serviceObject), 'request_')
@@ -1203,7 +1203,7 @@ describe('ServiceObject', () => {
       });
     });
 
-    it('should return response with a request error and callback', done => {
+    it('should return response with a request error and callback', (done) => {
       const errorBody = '🤮';
       const response = {body: {error: errorBody}, statusCode: 500};
       const err = new Error(errorBody);
@@ -1225,7 +1225,7 @@ describe('ServiceObject', () => {
     it('should call through to request_', async () => {
       const fakeOptions = {} as DecorateRequestOptions;
       const serviceObject = new ServiceObject(CONFIG);
-      asInternal(serviceObject).request_ = reqOpts => {
+      asInternal(serviceObject).request_ = (reqOpts) => {
         assert.deepStrictEqual(reqOpts, {shouldReturnStream: true});
       };
       serviceObject.requestStream(fakeOptions);

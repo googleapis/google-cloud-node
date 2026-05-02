@@ -74,7 +74,7 @@ describe('startTrace', () => {
   });
 
   it('with TracerProvider in global configuration', () => {
-    startTrace('mySpan', {}, span => {
+    startTrace('mySpan', {}, (span) => {
       span.end();
 
       assert.equal(
@@ -96,8 +96,8 @@ describe('startTrace', () => {
     startTrace(
       'aSpan',
       {opts: {tracerProvider: overridingProvider}},
-      async span => {
-        await new Promise(resolve => setTimeout(resolve, 400));
+      async (span) => {
+        await new Promise((resolve) => setTimeout(resolve, 400));
         span.end();
 
         const gotSpansFromGlobal = globalExporter.getFinishedSpans();
@@ -130,7 +130,7 @@ describe('startTrace', () => {
       tableName: 'table',
       dbName: 'projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID',
     };
-    startTrace('aSpan', opts, span => {
+    startTrace('aSpan', opts, (span) => {
       assert.equal(
         span.attributes[ATTR_OTEL_SCOPE_NAME],
         TRACER_NAME,
@@ -183,7 +183,7 @@ describe('startTrace', () => {
 
   it('with enableExtendedTracing=true, no sql value set', () => {
     const opts = {opts: {enableExtendedTracing: true}};
-    startTrace('aSpan', opts, span => {
+    startTrace('aSpan', opts, (span) => {
       assert.equal(
         span.attributes[SEMATTRS_DB_STATEMENT],
         undefined,
@@ -198,7 +198,7 @@ describe('startTrace', () => {
       sql: 'SELECT CURRENT_TIMESTAMP()',
     };
 
-    startTrace('aSpan', opts, span => {
+    startTrace('aSpan', opts, (span) => {
       assert.equal(
         span.attributes[SEMATTRS_DB_STATEMENT],
         'SELECT CURRENT_TIMESTAMP()',
@@ -213,7 +213,7 @@ describe('startTrace', () => {
       sql: 'SELECt CURRENT_TIMESTAMP()',
     };
 
-    startTrace('aSpan', opts, span => {
+    startTrace('aSpan', opts, (span) => {
       assert.equal(
         span.attributes[SEMATTRS_DB_STATEMENT],
         undefined,
@@ -229,7 +229,7 @@ describe('startTrace', () => {
       sql: req,
     };
 
-    startTrace('aSpan', opts, span => {
+    startTrace('aSpan', opts, (span) => {
       assert.equal(
         span.attributes[SEMATTRS_DB_STATEMENT],
         'SELECT 1=1',
@@ -245,7 +245,7 @@ describe('startTrace', () => {
       sql: req,
     };
 
-    startTrace('aSpan', opts, span => {
+    startTrace('aSpan', opts, (span) => {
       assert.equal(
         span.attributes[SEMATTRS_DB_STATEMENT],
         req.sql,
@@ -266,8 +266,8 @@ describe('startTrace', () => {
     startTrace(
       'aSpan',
       {opts: {tracerProvider: overridingProvider}},
-      async span => {
-        await new Promise(resolve => setTimeout(resolve, 400));
+      async (span) => {
+        await new Promise((resolve) => setTimeout(resolve, 400));
         span.end();
 
         const gotSpansFromGlobal = globalExporter.getFinishedSpans();
@@ -321,7 +321,7 @@ describe('getActiveOrNoopSpan', () => {
   });
 
   it('with a started span should return the currently active one', () => {
-    startTrace('aSpan', {}, span => {
+    startTrace('aSpan', {}, (span) => {
       const activeSpan = getActiveOrNoopSpan();
       assert.strictEqual(
         span.name,
@@ -381,7 +381,7 @@ describe('setError', () => {
   });
 
   it('passing in null error or null span should have no effect', () => {
-    startTrace('aSpan', {opts: {tracerProvider: provider}}, span => {
+    startTrace('aSpan', {opts: {tracerProvider: provider}}, (span) => {
       const status1 = span.status;
       let res = setSpanError(span, null);
       assert.strictEqual(res, false, 'nothing was set');
@@ -398,7 +398,7 @@ describe('setError', () => {
   });
 
   it('a non-empty string should set the message', () => {
-    startTrace('aSpan', {opts: {tracerProvider: provider}}, span => {
+    startTrace('aSpan', {opts: {tracerProvider: provider}}, (span) => {
       const res = setSpanError(span, 'this one');
       assert.strictEqual(res, true, 'value was set');
       span.end();
@@ -436,7 +436,7 @@ describe('setErrorAndException', () => {
   });
 
   it('passing in null error or null span should have no effect', () => {
-    startTrace('aSpan', {opts: {tracerProvider: provider}}, span => {
+    startTrace('aSpan', {opts: {tracerProvider: provider}}, (span) => {
       const status1 = span.status;
       let res = setSpanErrorAndException(span, null);
       assert.strictEqual(res, false, 'nothing was set');
@@ -453,7 +453,7 @@ describe('setErrorAndException', () => {
   });
 
   it('a non-empty string should set the message', () => {
-    startTrace('aSpan', {opts: {tracerProvider: provider}}, span => {
+    startTrace('aSpan', {opts: {tracerProvider: provider}}, (span) => {
       const res = setSpanErrorAndException(span, 'this one');
       assert.strictEqual(res, true, 'value was set');
       span.end();

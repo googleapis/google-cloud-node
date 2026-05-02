@@ -187,10 +187,10 @@ describe('SessionFactory', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
-      it('should retrieve a regular session from the pool', done => {
+      it('should retrieve a regular session from the pool', (done) => {
         (
           sandbox.stub(sessionFactory.pool_, 'getSession') as sinon.SinonStub
-        ).callsFake(callback => callback(null, fakeSession));
+        ).callsFake((callback) => callback(null, fakeSession));
         sessionFactory.getSession((err, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(resp, fakeSession);
@@ -198,11 +198,11 @@ describe('SessionFactory', () => {
         });
       });
 
-      it('should propagate errors when regular session retrieval fails', done => {
+      it('should propagate errors when regular session retrieval fails', (done) => {
         const fakeError = new Error();
         (
           sandbox.stub(sessionFactory.pool_, 'getSession') as sinon.SinonStub
-        ).callsFake(callback => callback(fakeError, null));
+        ).callsFake((callback) => callback(fakeError, null));
         sessionFactory.getSession((err, resp) => {
           assert.strictEqual(err, fakeError);
           assert.strictEqual(resp, null);
@@ -212,13 +212,13 @@ describe('SessionFactory', () => {
     });
 
     describe('when multiplexed session is default', () => {
-      it('should return the multiplexed session', done => {
+      it('should return the multiplexed session', (done) => {
         (
           sandbox.stub(
             sessionFactory.multiplexedSession_,
             'getSession',
           ) as sinon.SinonStub
-        ).callsFake(callback => callback(null, fakeMuxSession));
+        ).callsFake((callback) => callback(null, fakeMuxSession));
         sessionFactory.getSession((err, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(resp, fakeMuxSession);
@@ -228,14 +228,14 @@ describe('SessionFactory', () => {
         });
       });
 
-      it('should propagate error when multiplexed session return fails', done => {
+      it('should propagate error when multiplexed session return fails', (done) => {
         const fakeError = new Error();
         (
           sandbox.stub(
             sessionFactory.multiplexedSession_,
             'getSession',
           ) as sinon.SinonStub
-        ).callsFake(callback => callback(fakeError, null));
+        ).callsFake((callback) => callback(fakeError, null));
         sessionFactory.getSession((err, resp) => {
           assert.strictEqual(err, fakeError);
           assert.strictEqual(resp, null);
@@ -257,10 +257,10 @@ describe('SessionFactory', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
 
-      it('should retrieve a regular session from the pool', done => {
+      it('should retrieve a regular session from the pool', (done) => {
         (
           sandbox.stub(sessionFactory.pool_, 'getSession') as sinon.SinonStub
-        ).callsFake(callback => callback(null, fakeSession));
+        ).callsFake((callback) => callback(null, fakeSession));
         sessionFactory.getSessionForReadWrite((err, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(resp, fakeSession);
@@ -268,11 +268,11 @@ describe('SessionFactory', () => {
         });
       });
 
-      it('should propagate errors when regular session retrieval fails', done => {
+      it('should propagate errors when regular session retrieval fails', (done) => {
         const fakeError = new Error();
         (
           sandbox.stub(sessionFactory.pool_, 'getSession') as sinon.SinonStub
-        ).callsFake(callback => callback(fakeError, null));
+        ).callsFake((callback) => callback(fakeError, null));
         sessionFactory.getSessionForReadWrite((err, resp) => {
           assert.strictEqual(err, fakeError);
           assert.strictEqual(resp, null);
@@ -282,13 +282,13 @@ describe('SessionFactory', () => {
     });
 
     describe('when multiplexed session for r/w not disabled', () => {
-      it('should return the multiplexed session', done => {
+      it('should return the multiplexed session', (done) => {
         (
           sandbox.stub(
             sessionFactory.multiplexedSession_,
             'getSession',
           ) as sinon.SinonStub
-        ).callsFake(callback => callback(null, fakeMuxSession));
+        ).callsFake((callback) => callback(null, fakeMuxSession));
         sessionFactory.getSessionForReadWrite((err, resp) => {
           assert.strictEqual(err, null);
           assert.strictEqual(resp, fakeMuxSession);
@@ -298,14 +298,14 @@ describe('SessionFactory', () => {
         });
       });
 
-      it('should propagate error when multiplexed session return fails', done => {
+      it('should propagate error when multiplexed session return fails', (done) => {
         const fakeError = new Error();
         (
           sandbox.stub(
             sessionFactory.multiplexedSession_,
             'getSession',
           ) as sinon.SinonStub
-        ).callsFake(callback => callback(fakeError, null));
+        ).callsFake((callback) => callback(fakeError, null));
         sessionFactory.getSessionForReadWrite((err, resp) => {
           assert.strictEqual(err, fakeError);
           assert.strictEqual(resp, null);

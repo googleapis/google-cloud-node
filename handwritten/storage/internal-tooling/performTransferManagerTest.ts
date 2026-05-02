@@ -82,7 +82,7 @@ async function performTestCleanup(fileOrFiles: File[] | File | string[]) {
   const filesToDelete = Array.isArray(fileOrFiles)
     ? fileOrFiles
     : [fileOrFiles];
-  const promises = filesToDelete.map(f => {
+  const promises = filesToDelete.map((f) => {
     let fileToDelete = f;
     if (typeof f === 'string') {
       fileToDelete = bucket.file(f);

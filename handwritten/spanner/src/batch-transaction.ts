@@ -182,7 +182,7 @@ class BatchTransaction extends Snapshot {
     return startTrace(
       'BatchTransaction.createQueryPartitions',
       traceConfig,
-      span => {
+      (span) => {
         const headers: {[k: string]: string} = {};
         if (this._getSpanner().routeToLeaderEnabled) {
           addLeaderAwareRoutingHeader(headers);
@@ -232,7 +232,7 @@ class BatchTransaction extends Snapshot {
     return startTrace(
       'BatchTransaction.createPartitions_',
       traceConfig,
-      span => {
+      (span) => {
         const query = extend({}, config.reqOpts, {
           session: this.session.formattedName_,
           transaction: {id: this.id},
@@ -252,7 +252,7 @@ class BatchTransaction extends Snapshot {
             return;
           }
 
-          const partitions = resp.partitions.map(partition => {
+          const partitions = resp.partitions.map((partition) => {
             return extend({}, query, partition);
           });
 
@@ -322,7 +322,7 @@ class BatchTransaction extends Snapshot {
     return startTrace(
       'BatchTransaction.createReadPartitions',
       traceConfig,
-      span => {
+      (span) => {
         const reqOpts = Object.assign({}, options, {
           keySet: Snapshot.encodeKeySet(options),
         });

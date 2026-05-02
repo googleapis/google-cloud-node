@@ -211,7 +211,7 @@ export class WorkerProxy {
           e,
         );
         // Wait briefly before retrying to avoid tight loop
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
     }
     const shutdown = () => {
@@ -221,7 +221,7 @@ export class WorkerProxy {
         this.openTelemetrySdk
           .shutdown()
           .then(() => console.info('Tracing terminated'))
-          .catch(error => console.error('Error terminating tracing', error))
+          .catch((error) => console.error('Error terminating tracing', error))
           // eslint-disable-next-line n/no-process-exit
           .finally(() => process.exit(0));
       });
@@ -230,19 +230,19 @@ export class WorkerProxy {
     process.on('SIGTERM', shutdown);
     process.on('SIGINT', shutdown);
 
-    process.on('uncaughtException', err => {
+    process.on('uncaughtException', (err) => {
       console.error('Uncaught Exception:', err);
       shutdown();
     });
 
-    process.on('unhandledRejection', reason => {
+    process.on('unhandledRejection', (reason) => {
       console.error('Unhandled Rejection:', reason);
       shutdown();
     });
   }
 }
 if (require.main === module) {
-  WorkerProxy.main(process.argv.slice(2)).catch(err => {
+  WorkerProxy.main(process.argv.slice(2)).catch((err) => {
     console.error('Failed to start worker proxy: ', err);
     throw err;
   });

@@ -359,7 +359,7 @@ const COMPRESSIBLE_MIME_REGEX = new RegExp(
     /|application\/xml|application\/xml-dtd|font\/otf|font\/ttf|image\/bmp|image\/vnd.adobe.photoshop|image\/vnd.microsoft.icon/,
     /|image\/vnd.ms-dds|image\/x-icon|image\/x-ms-bmp|message\/rfc822|model\/gltf-binary|\+json|\+text|\+xml|\+yaml/,
   ]
-    .map(r => r.source)
+    .map((r) => r.source)
     .join(''),
   'i',
 );
@@ -1328,7 +1328,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback
+        callback,
       );
       if (validationError) return validationError;
     }
@@ -1613,10 +1613,12 @@ class File extends ServiceObject<File, FileMetadata> {
     ) => {
       if (err) {
         // Get error message from the body.
-        this.getBufferFromReadable(rawResponseStream as Readable).then(body => {
-          err.message = body.toString('utf8');
-          throughStream.destroy(err);
-        });
+        this.getBufferFromReadable(rawResponseStream as Readable).then(
+          (body) => {
+            err.message = body.toString('utf8');
+            throughStream.destroy(err);
+          },
+        );
 
         return;
       }
@@ -1724,10 +1726,10 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       this.requestStream(reqOpts)
-        .on('error', err => {
+        .on('error', (err) => {
           throughStream.destroy(err);
         })
-        .on('response', res => {
+        .on('response', (res) => {
           throughStream.emit('response', res);
           util.handleResp(null, res, null, onResponse);
         })
@@ -2106,7 +2108,7 @@ class File extends ServiceObject<File, FileMetadata> {
      * write stream sets this callback via its `final` handler.
      * @param error An optional error
      */
-    let pipelineCallback: (error?: Error | null) => void = error => {
+    let pipelineCallback: (error?: Error | null) => void = (error) => {
       writeStream.destroy(error || undefined);
     };
 
@@ -2126,7 +2128,7 @@ class File extends ServiceObject<File, FileMetadata> {
     // If the write stream, which is returned to the caller, catches an error we need to make sure that
     // at least one of the streams in the pipeline below gets notified so that they
     // all get cleaned up / destroyed.
-    writeStream.once('error', e => {
+    writeStream.once('error', (e) => {
       emitStream.destroy(e);
     });
     // If the write stream is closed, cleanup the pipeline below by calling destroy on one of the streams.
@@ -2170,9 +2172,11 @@ class File extends ServiceObject<File, FileMetadata> {
     // Handing off emitted events to users
     emitStream.on('reading', () => writeStream.emit('reading'));
     emitStream.on('writing', () => writeStream.emit('writing'));
-    fileWriteStream.on('uri', evt => writeStream.emit('uri', evt));
-    fileWriteStream.on('progress', evt => writeStream.emit('progress', evt));
-    fileWriteStream.on('response', resp => writeStream.emit('response', resp));
+    fileWriteStream.on('uri', (evt) => writeStream.emit('uri', evt));
+    fileWriteStream.on('progress', (evt) => writeStream.emit('progress', evt));
+    fileWriteStream.on('response', (resp) =>
+      writeStream.emit('response', resp),
+    );
     fileWriteStream.once('metadata', () => {
       fileWriteStreamMetadataReceived = true;
     });
@@ -2191,7 +2195,7 @@ class File extends ServiceObject<File, FileMetadata> {
         emitStream,
         ...(transformStreams as [Transform]),
         fileWriteStream,
-        async e => {
+        async (e) => {
           if (e) {
             return pipelineCallback(e);
           }
@@ -2274,7 +2278,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     super
       .delete(options)
-      .then(resp => cb!(null, ...resp))
+      .then((resp) => cb!(null, ...resp))
       .catch(cb!)
       .finally(() => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -2380,7 +2384,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (destination) {
       fileStream
         .on('error', callback)
-        .once('data', data => {
+        .once('data', (data) => {
           receivedData = true;
           // We know that the file exists the server - now we can truncate/write to a file
           const writable = fs.createWriteStream(destination);
@@ -2409,7 +2413,7 @@ class File extends ServiceObject<File, FileMetadata> {
         });
     } else {
       this.getBufferFromReadable(fileStream)
-        .then(contents => callback?.(null, contents))
+        .then((contents) => callback?.(null, contents))
         .catch(callback as (err: RequestError) => void);
     }
   }
@@ -2471,7 +2475,7 @@ class File extends ServiceObject<File, FileMetadata> {
       .digest('base64');
 
     this.encryptionKeyInterceptor = {
-      request: reqOpts => {
+      request: (reqOpts) => {
         reqOpts.headers = reqOpts.headers || {};
         reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
         reqOpts.headers['x-goog-encryption-key'] = this.encryptionKeyBase64;
@@ -2532,7 +2536,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     super
       .get(options)
-      .then(resp => cb!(null, ...resp))
+      .then((resp) => cb!(null, ...resp))
       .catch(cb!);
   }
 
@@ -2729,7 +2733,7 @@ class File extends ServiceObject<File, FileMetadata> {
       if (!Array.isArray((options.equals as string[][])[0])) {
         options.equals = [options.equals as string[]];
       }
-      (options.equals as string[][]).forEach(condition => {
+      (options.equals as string[][]).forEach((condition) => {
         if (!Array.isArray(condition) || condition.length !== 2) {
           throw new Error(FileExceptionMessages.EQUALS_CONDITION_TWO_ELEMENTS);
         }
@@ -2741,7 +2745,7 @@ class File extends ServiceObject<File, FileMetadata> {
       if (!Array.isArray((options.startsWith as string[][])[0])) {
         options.startsWith = [options.startsWith as string[]];
       }
-      (options.startsWith as string[][]).forEach(condition => {
+      (options.startsWith as string[][]).forEach((condition) => {
         if (!Array.isArray(condition) || condition.length !== 2) {
           throw new Error(FileExceptionMessages.STARTS_WITH_TWO_ELEMENTS);
         }
@@ -2785,14 +2789,14 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
     this.storage.authClient.sign(policyBase64, options.signingEndpoint).then(
-      signature => {
+      (signature) => {
         callback(null, {
           string: policyString,
           base64: policyBase64,
           signature,
         });
       },
-      err => {
+      (err) => {
         callback(new SigningError(err.message));
       },
     );
@@ -3001,7 +3005,7 @@ class File extends ServiceObject<File, FileMetadata> {
       }
     };
 
-    sign().then(res => callback!(null, res), callback!);
+    sign().then((res) => callback!(null, res), callback!);
   }
 
   getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedUrlResponse>;
@@ -3238,7 +3242,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     this.signer
       .getSignedUrl(signConfig)
-      .then(signedUrl => callback!(null, signedUrl), callback!);
+      .then((signedUrl) => callback!(null, signedUrl), callback!);
   }
 
   isPublic(): Promise<IsPublicResponse>;
@@ -4169,7 +4173,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const validationError = handleContextValidation(
       options.metadata?.contexts,
-      callback
+      callback,
     );
     if (validationError) return validationError;
 
@@ -4214,7 +4218,7 @@ class File extends ServiceObject<File, FileMetadata> {
               .on('finish', () => resolve())
               .end(data);
           } else {
-            pipeline(data, writable, err => {
+            pipeline(data, writable, (err) => {
               if (err) {
                 if (typeof data !== 'function') {
                   // Only PipelineSourceFunction can be retried. Async-iterables
@@ -4287,7 +4291,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     super
       .setMetadata(metadata, options)
-      .then(resp => cb!(null, ...resp))
+      .then((resp) => cb!(null, ...resp))
       .catch(cb!)
       .finally(() => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -4467,20 +4471,20 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     uploadStream
-      .on('response', resp => {
+      .on('response', (resp) => {
         dup.emit('response', resp);
       })
-      .on('uri', uri => {
+      .on('uri', (uri) => {
         dup.emit('uri', uri);
       })
-      .on('metadata', metadata => {
+      .on('metadata', (metadata) => {
         this.metadata = metadata;
         dup.emit('metadata');
       })
       .on('finish', () => {
         dup.emit('complete');
       })
-      .on('progress', evt => dup.emit('progress', evt));
+      .on('progress', (evt) => dup.emit('progress', evt));
 
     dup.setWritable(uploadStream);
     this.storage.retryOptions.autoRetry = this.instanceRetryValue;

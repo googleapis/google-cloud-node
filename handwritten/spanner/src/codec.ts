@@ -250,7 +250,7 @@ export class Struct extends Array<Field> {
    * @return {Struct}
    */
   static fromJSON(json: Json): Struct {
-    const fields = Object.keys(json || {}).map(name => {
+    const fields = Object.keys(json || {}).map((name) => {
       const value = json[name];
       return {name, value};
     });
@@ -807,7 +807,7 @@ function convertValueToJson(value: Value, options: JSONOptions): Value {
   }
 
   if (Array.isArray(value)) {
-    return value.map(child => convertValueToJson(child, options));
+    return value.map((child) => convertValueToJson(child, options));
   }
 
   if (value instanceof ProtoMessage || value instanceof ProtoEnum) {
@@ -919,7 +919,7 @@ function decode(
       break;
     case spannerClient.spanner.v1.TypeCode.ARRAY:
     case 'ARRAY':
-      decoded = decoded.map(value => {
+      decoded = decoded.map((value) => {
         return decode(
           value,
           type.arrayElementType! as spannerClient.spanner.v1.Type,
@@ -1002,7 +1002,7 @@ function encodeValue(value: Value): Value {
   }
 
   if (value instanceof Struct) {
-    return Array.from(value).map(field => encodeValue(field.value));
+    return Array.from(value).map((field) => encodeValue(field.value));
   }
 
   if (isArray(value)) {
@@ -1307,7 +1307,7 @@ function createTypeObject(
 
   if (code === 'STRUCT') {
     type.structType = {
-      fields: toArray(config.fields!).map(field => {
+      fields: toArray(config.fields!).map((field) => {
         return {name: field.name, type: codec.createTypeObject(field)};
       }),
     };

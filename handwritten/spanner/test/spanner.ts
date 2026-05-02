@@ -243,7 +243,7 @@ class XGoogRequestHeaderInterceptor {
       .build();
 
     const responder = new grpcModule.ResponderBuilder()
-      .withStart(next => next(listener))
+      .withStart((next) => next(listener))
       .build();
     return new grpcModule.ServerInterceptingCall(call, responder);
   }
@@ -387,7 +387,7 @@ describe('Spanner with mock server', () => {
         const [rows] = await database.run(query);
         assert.strictEqual(rows.length, 3);
         let i = 0;
-        (rows as Row[]).forEach(row => {
+        (rows as Row[]).forEach((row) => {
           i++;
           const [numCol, nameCol] = row;
           assert.strictEqual(numCol.name, 'NUM');
@@ -407,7 +407,7 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase();
       try {
         await database.run(query);
-        spannerMock.getMetadata().forEach(metadata => {
+        spannerMock.getMetadata().forEach((metadata) => {
           assert.strictEqual(
             metadata.get(CLOUD_RESOURCE_HEADER)[0],
             `projects/test-project/instances/instance/databases/${database.id}`,
@@ -430,7 +430,7 @@ describe('Spanner with mock server', () => {
       } finally {
         await database.close();
       }
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -463,7 +463,7 @@ describe('Spanner with mock server', () => {
         snapshot.end();
         await database.close();
       }
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ReadRequest).table === 'foo';
       }) as v1.ReadRequest;
       assert.ok(request, 'no ReadRequest found');
@@ -479,7 +479,7 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase();
       await database.runTransactionAsync(
         {requestOptions: {transactionTag: 'transaction-tag'}},
-        async tx => {
+        async (tx) => {
           await tx!.batchUpdate([insertSql, insertSql], {
             requestOptions: {
               priority: RequestOptions.Priority.PRIORITY_MEDIUM,
@@ -491,7 +491,7 @@ describe('Spanner with mock server', () => {
         },
       );
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteBatchDmlRequest).statements;
       }) as v1.ExecuteBatchDmlRequest;
       assert.ok(request, 'no ExecuteBatchDmlRequest found');
@@ -509,13 +509,13 @@ describe('Spanner with mock server', () => {
       const nextBatchRequest = spannerMock
         .getRequests()
         .reverse()
-        .find(val => {
+        .find((val) => {
           return (val as v1.ExecuteBatchDmlRequest).statements;
         }) as v1.ExecuteBatchDmlRequest;
       assert.ok(nextBatchRequest, 'no ExecuteBatchDmlRequest found');
       assert.ok(nextBatchRequest.transaction?.id, 'no transaction ID');
 
-      const commitRequest = spannerMock.getRequests().find(val => {
+      const commitRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).mutations;
       }) as v1.CommitRequest;
       assert.strictEqual(commitRequest.requestOptions!.requestTag, '');
@@ -536,13 +536,13 @@ describe('Spanner with mock server', () => {
         mock.StatementResult.updateCount(1, err),
       );
 
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         await tx!.batchUpdate([sql, insertSql]);
         await tx!.batchUpdate([sql, insertSql]);
         return await tx.commit();
       });
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteBatchDmlRequest).statements;
       }) as v1.ExecuteBatchDmlRequest;
       assert.ok(request, 'no ExecuteBatchDmlRequest found');
@@ -550,7 +550,7 @@ describe('Spanner with mock server', () => {
       const nextBatchRequest = spannerMock
         .getRequests()
         .reverse()
-        .find(val => {
+        .find((val) => {
           return (val as v1.ExecuteBatchDmlRequest).statements;
         }) as v1.ExecuteBatchDmlRequest;
       assert.ok(nextBatchRequest, 'no ExecuteBatchDmlRequest found');
@@ -561,7 +561,7 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase();
       await database.runTransactionAsync(
         {requestOptions: {transactionTag: 'transaction-tag'}},
-        async tx => {
+        async (tx) => {
           await tx!.runUpdate({
             sql: insertSql,
             requestOptions: {
@@ -573,7 +573,7 @@ describe('Spanner with mock server', () => {
         },
       );
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -588,7 +588,7 @@ describe('Spanner with mock server', () => {
         request.requestOptions!.transactionTag,
         'transaction-tag',
       );
-      const commitRequest = spannerMock.getRequests().find(val => {
+      const commitRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).mutations;
       }) as v1.CommitRequest;
       assert.strictEqual(commitRequest.requestOptions!.requestTag, '');
@@ -605,7 +605,7 @@ describe('Spanner with mock server', () => {
           readLockMode: ReadLockMode.OPTIMISTIC,
           requestOptions: {transactionTag: 'transaction-tag'},
         },
-        async tx => {
+        async (tx) => {
           try {
             return await tx.read('foo', {
               keySet: {all: true},
@@ -627,9 +627,9 @@ describe('Spanner with mock server', () => {
         },
       );
       // awaiting 10ms for begin call to finish its execution
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ReadRequest).table === 'foo';
       }) as v1.ReadRequest;
       assert.ok(request, 'no ReadRequest found');
@@ -643,7 +643,7 @@ describe('Spanner with mock server', () => {
         request.requestOptions!.transactionTag,
         'transaction-tag',
       );
-      const beginTxnRequest = spannerMock.getRequests().find(val => {
+      const beginTxnRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.strictEqual(
@@ -658,7 +658,7 @@ describe('Spanner with mock server', () => {
         const [rows] = await database.run({sql: selectSql, json: true});
         assert.strictEqual(rows.length, 3);
         let i = 0;
-        (rows as Json[]).forEach(row => {
+        (rows as Json[]).forEach((row) => {
           i++;
           assert.strictEqual(row.NUM, i);
           assert.strictEqual(row.NAME, numberToEnglishWord(i));
@@ -674,7 +674,7 @@ describe('Spanner with mock server', () => {
         const [rows] = await database.run(selectAllTypes);
         assert.strictEqual(rows.length, 3);
         let i = 0;
-        (rows as Row[]).forEach(row => {
+        (rows as Row[]).forEach((row) => {
           i++;
           const [
             boolCol,
@@ -791,7 +791,7 @@ describe('Spanner with mock server', () => {
         });
         assert.strictEqual(rows.length, 3);
         let i = 0;
-        (rows as Json[]).forEach(row => {
+        (rows as Json[]).forEach((row) => {
           i++;
           if (i === 3) {
             assert.ok(row.COLBOOL === null);
@@ -1034,7 +1034,7 @@ describe('Spanner with mock server', () => {
       }
     });
 
-    it('should emit query statistics', done => {
+    it('should emit query statistics', (done) => {
       const database = newTestDatabase();
       let rowCount = 0;
       let stats: ResultSetStats;
@@ -1044,7 +1044,7 @@ describe('Spanner with mock server', () => {
           queryMode: google.spanner.v1.ExecuteSqlRequest.QueryMode.PROFILE,
         })
         .on('data', () => rowCount++)
-        .on('stats', _stats => (stats = _stats))
+        .on('stats', (_stats) => (stats = _stats))
         .on('end', () => {
           assert.strictEqual(rowCount, 3);
           assert.ok(stats);
@@ -1056,13 +1056,13 @@ describe('Spanner with mock server', () => {
         });
     });
 
-    it('should emit query statistics from snapshot', done => {
+    it('should emit query statistics from snapshot', (done) => {
       const database = newTestDatabase();
       let rowCount = 0;
       let stats: ResultSetStats;
       database
         .getSnapshot()
-        .then(response => {
+        .then((response) => {
           const [snapshot] = response;
           snapshot
             .runStream({
@@ -1070,7 +1070,7 @@ describe('Spanner with mock server', () => {
               queryMode: google.spanner.v1.ExecuteSqlRequest.QueryMode.PROFILE,
             })
             .on('data', () => rowCount++)
-            .on('stats', _stats => (stats = _stats))
+            .on('stats', (_stats) => (stats = _stats))
             .on('end', () => {
               assert.strictEqual(rowCount, 3);
               assert.ok(stats);
@@ -1082,10 +1082,10 @@ describe('Spanner with mock server', () => {
                 .catch(() => done());
             });
         })
-        .catch(err => done(err));
+        .catch((err) => done(err));
     });
 
-    it('should call callback with statistics', done => {
+    it('should call callback with statistics', (done) => {
       const database = newTestDatabase();
       database.run(
         {
@@ -1137,7 +1137,7 @@ describe('Spanner with mock server', () => {
       try {
         const updated = await executeSimpleUpdate(database, update);
         assert.deepStrictEqual(updated, [1]);
-        const request = spannerMock.getRequests().find(val => {
+        const request = spannerMock.getRequests().find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
         assert.ok(request, 'no ExecuteSqlRequest found');
@@ -1238,7 +1238,7 @@ describe('Spanner with mock server', () => {
       }
     });
 
-    it('should retry UNAVAILABLE from executeStreamingSql with a callback', done => {
+    it('should retry UNAVAILABLE from executeStreamingSql with a callback', (done) => {
       const database = newTestDatabase();
       const err = {
         message: 'Temporary unavailable',
@@ -1268,11 +1268,11 @@ describe('Spanner with mock server', () => {
             assert.deepStrictEqual(gotStreamingCalls, wantStreamingCalls);
             done();
           })
-          .catch(err => done(err));
+          .catch((err) => done(err));
       });
     });
 
-    it('should not retry non-retryable error from executeStreamingSql with a callback', done => {
+    it('should not retry non-retryable error from executeStreamingSql with a callback', (done) => {
       const database = newTestDatabase();
       const err = {
         message: 'Non-retryable error',
@@ -1281,17 +1281,17 @@ describe('Spanner with mock server', () => {
         spannerMock.executeStreamingSql,
         SimulatedExecutionTime.ofError(err),
       );
-      database.run(selectSql, err => {
+      database.run(selectSql, (err) => {
         assert.ok(err, 'Missing expected error');
         assert.strictEqual(err!.message, '2 UNKNOWN: Non-retryable error');
         database
           .close()
           .then(() => done())
-          .catch(err => done(err));
+          .catch((err) => done(err));
       });
     });
 
-    it('should emit non-retryable error to runStream', done => {
+    it('should emit non-retryable error to runStream', (done) => {
       const database = newTestDatabase();
       const err = {
         message: 'Test error',
@@ -1303,14 +1303,14 @@ describe('Spanner with mock server', () => {
       const rows: Row[] = [];
       const stream = database.runStream(selectSql);
       stream
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err.message, '2 UNKNOWN: Test error');
           database
             .close()
             .then(() => done())
-            .catch(err => done(err));
+            .catch((err) => done(err));
         })
-        .on('data', row => rows.push(row))
+        .on('data', (row) => rows.push(row))
         .on('end', () => {
           if (rows.length) {
             assert.fail('Should not receive data');
@@ -1533,7 +1533,7 @@ describe('Spanner with mock server', () => {
       }
     });
 
-    it('should handle missing parameters in query stream', done => {
+    it('should handle missing parameters in query stream', (done) => {
       const sql =
         'SELECT * FROM tableId WHERE namedParameter = @namedParameter';
       const database = newTestDatabase();
@@ -1560,7 +1560,7 @@ describe('Spanner with mock server', () => {
               .then(() => {
                 done(assert.fail('missing error'));
               })
-              .catch(err => done(err));
+              .catch((err) => done(err));
           });
       });
     });
@@ -1574,7 +1574,7 @@ describe('Spanner with mock server', () => {
         params: {namedParameter: undefined},
         sql,
       };
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         try {
           await tx.runUpdate(q);
           assert.fail('missing expected exception');
@@ -1591,7 +1591,7 @@ describe('Spanner with mock server', () => {
 
     describe('PartialResultStream', () => {
       const streamIndexes = [1, 2];
-      streamIndexes.forEach(index => {
+      streamIndexes.forEach((index) => {
         it('should retry UNAVAILABLE during streaming', async () => {
           const database = newTestDatabase();
           const err = {
@@ -1620,7 +1620,7 @@ describe('Spanner with mock server', () => {
           );
           const database = newTestDatabase();
 
-          await database.runTransactionAsync(async tx => {
+          await database.runTransactionAsync(async (tx) => {
             await tx.run(selectSql);
             await tx.commit();
           });
@@ -1628,8 +1628,8 @@ describe('Spanner with mock server', () => {
 
           const requests = spannerMock
             .getRequests()
-            .filter(val => (val as v1.ExecuteSqlRequest).sql)
-            .map(req => req as v1.ExecuteSqlRequest);
+            .filter((val) => (val as v1.ExecuteSqlRequest).sql)
+            .map((req) => req as v1.ExecuteSqlRequest);
           assert.strictEqual(requests.length, 2);
           assert.ok(
             requests[0].transaction?.begin!.readWrite,
@@ -1657,7 +1657,7 @@ describe('Spanner with mock server', () => {
           );
           const database = newTestDatabase();
 
-          await database.runTransactionAsync(async tx => {
+          await database.runTransactionAsync(async (tx) => {
             const [rows1, rows2] = await Promise.all([
               tx!.run(selectSql),
               tx!.run(selectSql),
@@ -1670,8 +1670,8 @@ describe('Spanner with mock server', () => {
 
           const requests = spannerMock
             .getRequests()
-            .filter(val => (val as v1.ExecuteSqlRequest).sql)
-            .map(req => req as v1.ExecuteSqlRequest);
+            .filter((val) => (val as v1.ExecuteSqlRequest).sql)
+            .map((req) => req as v1.ExecuteSqlRequest);
           assert.strictEqual(requests.length, 3);
           assert.ok(
             requests[0].transaction?.begin!.readWrite,
@@ -1687,8 +1687,8 @@ describe('Spanner with mock server', () => {
           );
           const commitRequests = spannerMock
             .getRequests()
-            .filter(val => (val as v1.CommitRequest).mutations)
-            .map(req => req as v1.CommitRequest);
+            .filter((val) => (val as v1.CommitRequest).mutations)
+            .map((req) => req as v1.CommitRequest);
           assert.strictEqual(commitRequests.length, 1);
           assert.deepStrictEqual(
             requests[1].transaction!.id,
@@ -1701,9 +1701,9 @@ describe('Spanner with mock server', () => {
           const beginTxnRequests = spannerMock
             .getRequests()
             .filter(
-              val => (val as v1.BeginTransactionRequest).options?.readWrite,
+              (val) => (val as v1.BeginTransactionRequest).options?.readWrite,
             )
-            .map(req => req as v1.BeginTransactionRequest);
+            .map((req) => req as v1.BeginTransactionRequest);
           assert.deepStrictEqual(beginTxnRequests.length, 0);
         });
 
@@ -1733,7 +1733,7 @@ describe('Spanner with mock server', () => {
           await database.close();
         });
 
-        it('should retry UNAVAILABLE during streaming with a callback', done => {
+        it('should retry UNAVAILABLE during streaming with a callback', (done) => {
           const database = newTestDatabase();
           const err = {
             message: 'Temporary unavailable',
@@ -1750,11 +1750,11 @@ describe('Spanner with mock server', () => {
             database
               .close()
               .then(() => done())
-              .catch(err => done(err));
+              .catch((err) => done(err));
           });
         });
 
-        it('should not retry non-retryable error during streaming with a callback', done => {
+        it('should not retry non-retryable error during streaming with a callback', (done) => {
           const database = newTestDatabase();
           const err = {
             message: 'Non-retryable error',
@@ -1764,7 +1764,7 @@ describe('Spanner with mock server', () => {
             spannerMock.executeStreamingSql,
             SimulatedExecutionTime.ofError(err),
           );
-          database.run(selectSql, err => {
+          database.run(selectSql, (err) => {
             assert.ok(err, 'Missing expected error');
             assert.strictEqual(err!.message, '2 UNKNOWN: Non-retryable error');
             assert.deepStrictEqual(
@@ -1774,11 +1774,11 @@ describe('Spanner with mock server', () => {
             database
               .close()
               .then(() => done())
-              .catch(err => done(err));
+              .catch((err) => done(err));
           });
         });
 
-        it('should emit non-retryable error during streaming to stream', done => {
+        it('should emit non-retryable error during streaming to stream', (done) => {
           const database = newTestDatabase();
           const err = {
             message: 'Non-retryable error',
@@ -1791,7 +1791,7 @@ describe('Spanner with mock server', () => {
           const receivedRows: Row[] = [];
           database
             .runStream(selectSql)
-            .on('error', err => {
+            .on('error', (err) => {
               assert.strictEqual(err.message, '2 UNKNOWN: Non-retryable error');
               assert.strictEqual(receivedRows.length, index);
               assert.deepStrictEqual(
@@ -1801,11 +1801,11 @@ describe('Spanner with mock server', () => {
               database
                 .close()
                 .then(() => done())
-                .catch(err => done(err));
+                .catch((err) => done(err));
             })
             // We will receive data for the partial result sets that are
             // returned before the error occurs.
-            .on('data', row => {
+            .on('data', (row) => {
               receivedRows.push(row);
             })
             .on('end', () => {
@@ -1834,7 +1834,7 @@ describe('Spanner with mock server', () => {
       await database.close();
     });
 
-    it('should retry UNAVAILABLE on update', done => {
+    it('should retry UNAVAILABLE on update', (done) => {
       const database = newTestDatabase();
       const err = {
         message: 'Temporary unavailable',
@@ -1855,14 +1855,14 @@ describe('Spanner with mock server', () => {
               database
                 .close()
                 .then(() => done())
-                .catch(err => done(err));
+                .catch((err) => done(err));
             })
             .catch(() => {});
         });
       });
     });
 
-    it('should not retry non-retryable error on update', done => {
+    it('should not retry non-retryable error on update', (done) => {
       const database = newTestDatabase();
       const err = {
         message: 'Permanent error',
@@ -1879,7 +1879,7 @@ describe('Spanner with mock server', () => {
       database.runTransaction((err, tx) => {
         assert.ifError(err);
         attempts++;
-        tx!.runUpdate(insertSql, err => {
+        tx!.runUpdate(insertSql, (err) => {
           assert.ok(err, 'Missing expected error');
           assert.deepStrictEqual(
             (err as RequestIDError).requestID,
@@ -1895,7 +1895,7 @@ describe('Spanner with mock server', () => {
               database
                 .close()
                 .then(() => done())
-                .catch(err => done(err));
+                .catch((err) => done(err));
             })
             .catch(done);
         });
@@ -1930,7 +1930,7 @@ describe('Spanner with mock server', () => {
 
       it('should execute with leader aware routing enabled in a read/write transaction', async () => {
         const database = newTestDatabase();
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           await tx!.runUpdate({
             sql: insertSql,
           });
@@ -1938,7 +1938,7 @@ describe('Spanner with mock server', () => {
         });
         await database.close();
         let metadataCountWithLAREnabled = 0;
-        spannerMock.getMetadata().forEach(metadata => {
+        spannerMock.getMetadata().forEach((metadata) => {
           if (metadata.get(LEADER_AWARE_ROUTING_HEADER)[0] !== undefined) {
             metadataCountWithLAREnabled++;
             assert.strictEqual(
@@ -1952,14 +1952,14 @@ describe('Spanner with mock server', () => {
 
       it('should execute with leader aware routing disabled in a read/write transaction', async () => {
         const database = newTestDatabaseWithLARDisabled();
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           await tx!.runUpdate({
             sql: insertSql,
           });
           return await tx.commit();
         });
         await database.close();
-        spannerMock.getMetadata().forEach(metadata => {
+        spannerMock.getMetadata().forEach((metadata) => {
           assert.strictEqual(
             metadata.get(LEADER_AWARE_ROUTING_HEADER)[0],
             undefined,
@@ -1974,7 +1974,7 @@ describe('Spanner with mock server', () => {
       it('should make a request to CreateSession', async () => {
         const database = newTestDatabase();
         await database.run('SELECT 1');
-        const requests = spannerMock.getRequests().find(val => {
+        const requests = spannerMock.getRequests().find((val) => {
           return (val as v1.CreateSessionRequest).session;
         }) as v1.CreateSessionRequest;
         assert.ok(requests, 'CreateSessionRequest should be called');
@@ -1985,7 +1985,7 @@ describe('Spanner with mock server', () => {
         );
       });
 
-      it('should execute the transaction(database.run) successfully using multiplexed session', done => {
+      it('should execute the transaction(database.run) successfully using multiplexed session', (done) => {
         const query = {
           sql: selectSql,
         } as ExecuteSqlRequest;
@@ -2004,7 +2004,7 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('should execute the transaction(database.getSnapshot) successfully using multiplexed session', done => {
+      it('should execute the transaction(database.getSnapshot) successfully using multiplexed session', (done) => {
         const database = newTestDatabase();
         const pool = (database.sessionFactory_ as SessionFactory)
           .pool_ as SessionPool;
@@ -2021,7 +2021,7 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('should execute the transaction(database.writeAtLeastOnce) successfully using multiplexed session', done => {
+      it('should execute the transaction(database.writeAtLeastOnce) successfully using multiplexed session', (done) => {
         const database = newTestDatabase();
         const mutations = new MutationSet();
         mutations.upsert('Singers', {
@@ -2061,7 +2061,7 @@ describe('Spanner with mock server', () => {
           spannerMock.createSession,
           SimulatedExecutionTime.ofError(err),
         );
-        const database = newTestDatabase().on('error', err => {
+        const database = newTestDatabase().on('error', (err) => {
           assert.strictEqual(err.code, Status.NOT_FOUND);
         });
         try {
@@ -2079,7 +2079,7 @@ describe('Spanner with mock server', () => {
         }
       });
 
-      it('should fail the transaction, if query returns session not found error', done => {
+      it('should fail the transaction, if query returns session not found error', (done) => {
         const query = {
           sql: selectSql,
         } as ExecuteSqlRequest;
@@ -2111,7 +2111,7 @@ describe('Spanner with mock server', () => {
       it('should make a request to BatchCreateSessions', async () => {
         const database = newTestDatabase();
         await database.run('SELECT 1');
-        const requests = spannerMock.getRequests().find(val => {
+        const requests = spannerMock.getRequests().find((val) => {
           return (val as v1.BatchCreateSessionsRequest).sessionTemplate;
         }) as v1.BatchCreateSessionsRequest;
         assert.ok(requests, 'BatchCreateSessionsRequest should be called');
@@ -2122,7 +2122,7 @@ describe('Spanner with mock server', () => {
         );
       });
 
-      it('should execute the transaction(database.run) successfully using regular session', done => {
+      it('should execute the transaction(database.run) successfully using regular session', (done) => {
         const query = {
           sql: selectSql,
         } as ExecuteSqlRequest;
@@ -2141,7 +2141,7 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('should execute the transaction(database.getSnapshot) successfully using regular session', done => {
+      it('should execute the transaction(database.getSnapshot) successfully using regular session', (done) => {
         const database = newTestDatabase({min: 1, max: 1});
         const pool = (database.sessionFactory_ as SessionFactory)
           .pool_ as SessionPool;
@@ -2158,7 +2158,7 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('should execute the transaction(database.writeAtLeastOnce) successfully using regular session', done => {
+      it('should execute the transaction(database.writeAtLeastOnce) successfully using regular session', (done) => {
         const database = newTestDatabase({min: 1, max: 1});
         const mutations = new MutationSet();
         mutations.upsert('Singers', {
@@ -2190,7 +2190,7 @@ describe('Spanner with mock server', () => {
 
   describe('partitioned ops', () => {
     describe('default session mode for partitioned ops', () => {
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', done => {
+      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', (done) => {
         const database = newTestDatabase({min: 1, max: 1});
         const pool = (database.sessionFactory_ as SessionFactory)
           .pool_ as SessionPool;
@@ -2216,7 +2216,7 @@ describe('Spanner with mock server', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', done => {
+      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', (done) => {
         const database = newTestDatabase({min: 1, max: 1});
         const pool = (database.sessionFactory_ as SessionFactory)
           .pool_ as SessionPool;
@@ -2244,7 +2244,7 @@ describe('Spanner with mock server', () => {
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
       });
 
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', done => {
+      it('should execute the transaction(database.runPartitionedUpdate) successfully using multiplexed session', (done) => {
         const database = newTestDatabase({min: 1, max: 1});
         const pool = (database.sessionFactory_ as SessionFactory)
           .pool_ as SessionPool;
@@ -2274,7 +2274,7 @@ describe('Spanner with mock server', () => {
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
       });
 
-      it('should execute the transaction(database.runPartitionedUpdate) successfully using regular/pool session', done => {
+      it('should execute the transaction(database.runPartitionedUpdate) successfully using regular/pool session', (done) => {
         const database = newTestDatabase({min: 1, max: 1});
         const pool = (database.sessionFactory_ as SessionFactory)
           .pool_ as SessionPool;
@@ -2298,7 +2298,7 @@ describe('Spanner with mock server', () => {
 
   describe('batch write', () => {
     describe('default session mode for r/w', () => {
-      it('should use multiplexed session', done => {
+      it('should use multiplexed session', (done) => {
         const mutationGroup = new MutationGroup();
         mutationGroup.upsert('FOO', {
           Id: '1',
@@ -2315,7 +2315,7 @@ describe('Spanner with mock server', () => {
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
-          .on('data', response => {
+          .on('data', (response) => {
             // ensure that response is coming
             assert.notEqual(response.commitTimestamp, null);
             // multiplexed session will get created by default
@@ -2337,7 +2337,7 @@ describe('Spanner with mock server', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
-      it('should use multiplexed session', done => {
+      it('should use multiplexed session', (done) => {
         const mutationGroup = new MutationGroup();
         mutationGroup.upsert('FOO', {
           Id: '1',
@@ -2354,7 +2354,7 @@ describe('Spanner with mock server', () => {
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
-          .on('data', response => {
+          .on('data', (response) => {
             // ensure that response is coming
             assert.notEqual(response.commitTimestamp, null);
             // multiplexed session will get created by default during client initialization
@@ -2375,7 +2375,7 @@ describe('Spanner with mock server', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
 
-      it('should use multiplexed session', done => {
+      it('should use multiplexed session', (done) => {
         const mutationGroup = new MutationGroup();
         mutationGroup.upsert('FOO', {
           Id: '1',
@@ -2392,7 +2392,7 @@ describe('Spanner with mock server', () => {
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
-          .on('data', response => {
+          .on('data', (response) => {
             // ensure that response is not null
             assert.notEqual(response.commitTimestamp, null);
             // multiplexed session will get created by default
@@ -2415,7 +2415,7 @@ describe('Spanner with mock server', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
 
-      it('should use regular session', done => {
+      it('should use regular session', (done) => {
         const mutationGroup = new MutationGroup();
         mutationGroup.upsert('FOO', {
           Id: '1',
@@ -2432,7 +2432,7 @@ describe('Spanner with mock server', () => {
         database
           .batchWriteAtLeastOnce([mutationGroup])
           .on('error', done)
-          .on('data', response => {
+          .on('data', (response) => {
             // ensure that response is coming
             assert.notEqual(response.commitTimestamp, null);
             assert.strictEqual(
@@ -2454,7 +2454,7 @@ describe('Spanner with mock server', () => {
       optimizerVersion: string,
       optimizerStatisticsPackage: string,
     ) {
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -2512,7 +2512,7 @@ describe('Spanner with mock server', () => {
         }
       });
 
-      it('transaction.run', done => {
+      it('transaction.run', (done) => {
         const query = {
           sql: selectSql,
           queryOptions: QueryOptions.create({
@@ -2541,7 +2541,7 @@ describe('Spanner with mock server', () => {
         } as ExecuteSqlRequest;
         const database = newTestDatabase();
         try {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(query);
             verifyQueryOptions(OPTIMIZER_VERSION, OPTIMIZER_STATISTICS_PACKAGE);
             await transaction.commit();
@@ -2675,7 +2675,7 @@ describe('Spanner with mock server', () => {
         }
       });
 
-      it('transaction.run', done => {
+      it('transaction.run', (done) => {
         const database = newTestDatabase();
         database.runTransaction(async (err, transaction) => {
           assert.ifError(err);
@@ -2687,7 +2687,7 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('transaction.run with query-options', done => {
+      it('transaction.run with query-options', (done) => {
         const database = newTestDatabase();
         database.runTransaction(async (err, transaction) => {
           assert.ifError(err);
@@ -2705,7 +2705,7 @@ describe('Spanner with mock server', () => {
         });
       });
 
-      it('transaction.run with database-with-query-options', done => {
+      it('transaction.run with database-with-query-options', (done) => {
         const database = newTestDatabase(undefined, {
           optimizerVersion: 'version-in-db-opts',
           optimizerStatisticsPackage: 'stats-package-in-db-opts',
@@ -2723,7 +2723,7 @@ describe('Spanner with mock server', () => {
       it('async transaction.run', async () => {
         const database = newTestDatabase();
         try {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(selectSql);
             verifyQueryOptions(OPTIMIZER_VERSION, OPTIMIZER_STATISTICS_PACKAGE);
             await transaction.commit();
@@ -2736,7 +2736,7 @@ describe('Spanner with mock server', () => {
       it('async transaction.run with query-options', async () => {
         const database = newTestDatabase();
         try {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run({
               sql: selectSql,
               queryOptions: {
@@ -2758,7 +2758,7 @@ describe('Spanner with mock server', () => {
           optimizerStatisticsPackage: 'stats-package-in-db-opts',
         });
         try {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(selectSql);
             verifyQueryOptions(OPTIMIZER_VERSION, OPTIMIZER_STATISTICS_PACKAGE);
             await transaction.commit();
@@ -2803,7 +2803,7 @@ describe('Spanner with mock server', () => {
         }
       });
 
-      it('transaction.run', done => {
+      it('transaction.run', (done) => {
         const database = newTestDatabase();
         database.runTransaction(async (err, transaction) => {
           assert.ifError(err);
@@ -2818,7 +2818,7 @@ describe('Spanner with mock server', () => {
       it('async transaction.run', async () => {
         const database = newTestDatabase();
         try {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(selectSql);
             verifyQueryOptions(OPTIMIZER_VERSION, OPTIMIZER_STATISTICS_PACKAGE);
             await transaction.commit();
@@ -2845,7 +2845,7 @@ describe('Spanner with mock server', () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
     });
 
-    it('should retry "Session not found" errors on Database.run()', done => {
+    it('should retry "Session not found" errors on Database.run()', (done) => {
       const db = newTestDatabase({
         incStep: 1,
         min: 0,
@@ -2879,7 +2879,7 @@ describe('Spanner with mock server', () => {
           }
           db.close()
             .then(() => done())
-            .catch(err => assert.fail(err));
+            .catch((err) => assert.fail(err));
         });
       });
     });
@@ -2896,7 +2896,7 @@ describe('Spanner with mock server', () => {
       let rowCount = 0;
       db.runStream(selectSql)
         .on('data', () => rowCount++)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.fail(err);
         })
         .on('end', () => {
@@ -2904,7 +2904,7 @@ describe('Spanner with mock server', () => {
         });
     });
 
-    it('should retry multiple "Session not found" errors on Database.run()', done => {
+    it('should retry multiple "Session not found" errors on Database.run()', (done) => {
       const db = newTestDatabase();
       for (let i = 0; i < 10; i++) {
         spannerMock.setExecutionTime(
@@ -2924,7 +2924,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should not retry "Session not found" errors halfway a stream', done => {
+    it('should not retry "Session not found" errors halfway a stream', (done) => {
       const db = newTestDatabase();
       spannerMock.setExecutionTime(
         spannerMock.executeStreamingSql,
@@ -2934,7 +2934,7 @@ describe('Spanner with mock server', () => {
           streamIndex: 1,
         } as MockError),
       );
-      db.run(selectSql, err => {
+      db.run(selectSql, (err) => {
         if (err) {
           assert.ok(isSessionNotFoundError(err));
           done();
@@ -2944,7 +2944,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for Database.getSnapshot() with callbacks', done => {
+    it('should retry "Session not found" errors for Database.getSnapshot() with callbacks', (done) => {
       const db = newTestDatabase();
       const sessionNotFound = {
         code: grpc.status.NOT_FOUND,
@@ -2971,7 +2971,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for a query on a session on Database.runTransaction()', done => {
+    it('should retry "Session not found" errors for a query on a session on Database.runTransaction()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3001,7 +3001,7 @@ describe('Spanner with mock server', () => {
             assert.ifError(err);
             // sessions length is 3 as the list will contain default multiplexed session as well.
             assert.strictEqual(sessions!.length, 3);
-            transaction!.commit(err => {
+            transaction!.commit((err) => {
               assert.ifError(err);
               db.close(done);
             });
@@ -3010,7 +3010,7 @@ describe('Spanner with mock server', () => {
       });
     }
 
-    it('should retry "Session not found" errors for Commit on a session on Database.runTransaction()', done => {
+    it('should retry "Session not found" errors for Commit on a session on Database.runTransaction()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3026,7 +3026,7 @@ describe('Spanner with mock server', () => {
         db.runTransaction((err, transaction) => {
           assert.ifError(err);
           transaction!.insert('FOO', {Id: 1, Name: 'foo'});
-          transaction!.commit(err => {
+          transaction!.commit((err) => {
             assert.ifError(err);
             db.getSessions((err, sessions) => {
               assert.ifError(err);
@@ -3039,7 +3039,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for Database.getSnapshot()', done => {
+    it('should retry "Session not found" errors for Database.getSnapshot()', (done) => {
       const db = newTestDatabase();
       spannerMock.setExecutionTime(
         spannerMock.beginTransaction,
@@ -3049,11 +3049,11 @@ describe('Spanner with mock server', () => {
         } as MockError),
       );
       db.getSnapshot()
-        .then(response => {
+        .then((response) => {
           const [snapshot] = response;
           snapshot
             .run(selectSql)
-            .then(response => {
+            .then((response) => {
               const [rows] = response;
               assert.strictEqual(rows.length, 3);
               snapshot.end();
@@ -3064,7 +3064,7 @@ describe('Spanner with mock server', () => {
         .catch(done);
     });
 
-    it('should retry "Session not found" errors for runUpdate on a session on Database.runTransaction()', done => {
+    it('should retry "Session not found" errors for runUpdate on a session on Database.runTransaction()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3082,7 +3082,7 @@ describe('Spanner with mock server', () => {
           transaction!.runUpdate(insertSql, (err, updateCount) => {
             assert.ifError(err);
             assert.strictEqual(updateCount, 1);
-            transaction!.commit(err => {
+            transaction!.commit((err) => {
               assert.ifError(err);
               db.getSessions((err, sessions) => {
                 assert.ifError(err);
@@ -3096,7 +3096,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for executeBatchDml on a session on Database.runTransaction()', done => {
+    it('should retry "Session not found" errors for executeBatchDml on a session on Database.runTransaction()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3116,7 +3116,7 @@ describe('Spanner with mock server', () => {
             (err, updateCounts) => {
               assert.ifError(err);
               assert.deepStrictEqual(updateCounts, [1, 1]);
-              transaction!.commit(err => {
+              transaction!.commit((err) => {
                 assert.ifError(err);
                 db.getSessions((err, sessions) => {
                   assert.ifError(err);
@@ -3131,7 +3131,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for a query on a session on Database.runTransactionAsync()', done => {
+    it('should retry "Session not found" errors for a query on a session on Database.runTransactionAsync()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3169,7 +3169,7 @@ describe('Spanner with mock server', () => {
       }
     }
 
-    it('should retry "Session not found" errors for Commit on a session on Database.runTransactionAsync()', done => {
+    it('should retry "Session not found" errors for Commit on a session on Database.runTransactionAsync()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3201,7 +3201,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for runUpdate on a session on Database.runTransactionAsync()', done => {
+    it('should retry "Session not found" errors for runUpdate on a session on Database.runTransactionAsync()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3234,7 +3234,7 @@ describe('Spanner with mock server', () => {
       });
     });
 
-    it('should retry "Session not found" errors for executeBatchDml on a session on Database.runTransactionAsync()', done => {
+    it('should retry "Session not found" errors for executeBatchDml on a session on Database.runTransactionAsync()', (done) => {
       const db = newTestDatabase({min: 1, incStep: 1});
       const pool = db.pool_ as SessionPool;
       // Wait until one session with a transaction has been created.
@@ -3315,7 +3315,7 @@ describe('Spanner with mock server', () => {
           assert.strictEqual(rows.length, 3);
           // Note that we do not call transaction.end(). This will cause a session leak.
         })
-        .catch(reason => {
+        .catch((reason) => {
           assert.fail(reason);
         });
       await db
@@ -3679,7 +3679,7 @@ describe('Spanner with mock server', () => {
           },
         ] as MockError[]),
       );
-      const database = newTestDatabase().on('error', err => {
+      const database = newTestDatabase().on('error', (err) => {
         assert.strictEqual(err.code, Status.PERMISSION_DENIED);
       });
       try {
@@ -3765,7 +3765,7 @@ describe('Spanner with mock server', () => {
       const [tx1] = await database.getSnapshot();
       const [tx2] = await database.getSnapshot();
       assert.strictEqual(pool.size, pool.options.incStep);
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         if (!tx) {
           assert.fail('Transaction failed');
         }
@@ -3813,7 +3813,7 @@ describe('Spanner with mock server', () => {
       snapshot.end();
       await database.close();
       // Filter for CreateSession requests specifically.
-      const request = spannerMock.getRequests().filter(val => {
+      const request = spannerMock.getRequests().filter((val) => {
         return (val as v1.CreateSessionRequest).session?.multiplexed;
       }) as v1.CreateSessionRequest[];
 
@@ -3848,7 +3848,7 @@ describe('Spanner with mock server', () => {
       snapshots.forEach(([snapshot]) => snapshot.end());
 
       // assert there was only one CreateSession request was sent
-      const request = spannerMock.getRequests().filter(val => {
+      const request = spannerMock.getRequests().filter((val) => {
         return (val as v1.CreateSessionRequest).session?.multiplexed;
       }) as v1.CreateSessionRequest[];
 
@@ -3871,7 +3871,7 @@ describe('Spanner with mock server', () => {
       // Mock: Delay 50ms per call, fail next 2 requests (Startup + Retry)
       spannerMock.setExecutionTime(spannerMock.createSession, {
         simulateExecutionTime: async () => {
-          await new Promise(resolve => setTimeout(resolve, 50));
+          await new Promise((resolve) => setTimeout(resolve, 50));
         },
         errors: [err, err],
       } as any);
@@ -3880,7 +3880,7 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase();
 
       // wait to ensure 1st request finishes and locks are cleared
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Trigger Concurrent RPCs (The Retry)
       // Now that we are idle, these 3 requests will trigger a retry.
@@ -3898,7 +3898,7 @@ describe('Spanner with mock server', () => {
       await assert.rejects(rpcPromises[2], /Simulated failure/);
 
       // Verify exactly 2 create session request
-      const request = spannerMock.getRequests().filter(val => {
+      const request = spannerMock.getRequests().filter((val) => {
         return (val as v1.CreateSessionRequest).session?.multiplexed;
       }) as v1.CreateSessionRequest[];
 
@@ -3920,7 +3920,7 @@ describe('Spanner with mock server', () => {
       // Mock: Delay 50ms to keep request pending, then fail
       spannerMock.setExecutionTime(spannerMock.createSession, {
         simulateExecutionTime: async () => {
-          await new Promise(resolve => setTimeout(resolve, 50));
+          await new Promise((resolve) => setTimeout(resolve, 50));
         },
         errors: [err],
       } as any);
@@ -3941,7 +3941,7 @@ describe('Spanner with mock server', () => {
       await assert.rejects(rpcPromises[2], /Simulated failure/);
 
       // Verify exactly 1 create session request
-      const request = spannerMock.getRequests().filter(val => {
+      const request = spannerMock.getRequests().filter((val) => {
         return (val as v1.CreateSessionRequest).session?.multiplexed;
       }) as v1.CreateSessionRequest[];
 
@@ -3977,7 +3977,7 @@ describe('Spanner with mock server', () => {
       await database.close();
     });
 
-    it('should retry on aborted query with callback', done => {
+    it('should retry on aborted query with callback', (done) => {
       let attempts = 0;
       const database = newTestDatabase();
       let rowCount = 0;
@@ -3998,9 +3998,9 @@ describe('Spanner with mock server', () => {
               database
                 .close()
                 .then(() => done())
-                .catch(err => done(err));
+                .catch((err) => done(err));
             })
-            .catch(err => done(err));
+            .catch((err) => done(err));
         });
       });
     });
@@ -4028,10 +4028,10 @@ describe('Spanner with mock server', () => {
       assert.strictEqual(attempts, 2);
       const requests = spannerMock
         .getRequests()
-        .filter(val => {
+        .filter((val) => {
           return (val as v1.ExecuteSqlRequest).sql === selectSql;
         })
-        .map(req => req as v1.ExecuteSqlRequest);
+        .map((req) => req as v1.ExecuteSqlRequest);
 
       // First request will fail and second blocked request will get discarded, once Abort error is received.
       assert.strictEqual(requests.length, 3);
@@ -4047,13 +4047,13 @@ describe('Spanner with mock server', () => {
       });
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       const commitRequests = spannerMock
         .getRequests()
-        .filter(val => (val as v1.CommitRequest).mutations)
-        .map(req => req as v1.CommitRequest);
+        .filter((val) => (val as v1.CommitRequest).mutations)
+        .map((req) => req as v1.CommitRequest);
       assert.strictEqual(commitRequests.length, 1);
       await database.close();
     });
@@ -4069,7 +4069,9 @@ describe('Spanner with mock server', () => {
           attempts++;
           return transaction
             .runUpdate(insertSql)
-            .then(updateCount => transaction.commit().then(() => updateCount));
+            .then((updateCount) =>
+              transaction.commit().then(() => updateCount),
+            );
         },
       );
       assert.strictEqual(updated, 1);
@@ -4077,7 +4079,7 @@ describe('Spanner with mock server', () => {
       await database.close();
     });
 
-    it('should retry on aborted update statement with callback', done => {
+    it('should retry on aborted update statement with callback', (done) => {
       let attempts = 0;
       const database = newTestDatabase();
       database.runTransaction((err, transaction) => {
@@ -4088,14 +4090,14 @@ describe('Spanner with mock server', () => {
         attempts++;
         transaction!.runUpdate(insertSql, (err, rowCount) => {
           assert.ifError(err);
-          transaction!.commit(err => {
+          transaction!.commit((err) => {
             assert.ifError(err);
             assert.strictEqual(rowCount, 1);
             assert.strictEqual(attempts, 2);
             database
               .close()
               .then(() => done())
-              .catch(err => done(err));
+              .catch((err) => done(err));
           });
         });
       });
@@ -4113,11 +4115,11 @@ describe('Spanner with mock server', () => {
           streamIndex: 1,
         } as MockError),
       );
-      const response = await database.runTransactionAsync(transaction => {
+      const response = await database.runTransactionAsync((transaction) => {
         attempts++;
         return transaction
           .batchUpdate([insertSql, updateSql])
-          .then(response => transaction.commit().then(() => response));
+          .then((response) => transaction.commit().then(() => response));
       });
       const updateCounts = response[0];
       assert.deepStrictEqual(updateCounts, [1, 2]);
@@ -4131,7 +4133,7 @@ describe('Spanner with mock server', () => {
       const [updated] = await database.runTransactionAsync(
         (transaction): Promise<number[]> => {
           void transaction.begin();
-          return transaction.runUpdate(insertSql).then(updateCount => {
+          return transaction.runUpdate(insertSql).then((updateCount) => {
             if (!attempts) {
               spannerMock.abortTransaction(transaction);
             }
@@ -4154,7 +4156,7 @@ describe('Spanner with mock server', () => {
           (transaction): Promise<number[]> => {
             void transaction.begin();
             attempts++;
-            return transaction.runUpdate(insertSql).then(updateCount => {
+            return transaction.runUpdate(insertSql).then((updateCount) => {
               // Always abort the transaction.
               spannerMock.abortTransaction(transaction);
               return transaction.commit().then(() => updateCount);
@@ -4181,7 +4183,7 @@ describe('Spanner with mock server', () => {
       const [updated] = await database.runTransactionAsync(
         (transaction): Promise<number[]> => {
           void transaction.begin();
-          return transaction.runUpdate(insertSql).then(updateCount => {
+          return transaction.runUpdate(insertSql).then((updateCount) => {
             if (!attempts) {
               spannerMock.setExecutionTime(
                 spannerMock.commit,
@@ -4378,7 +4380,7 @@ describe('Spanner with mock server', () => {
             requestTag: 'request-tag',
           },
         });
-        const request = spannerMock.getRequests().find(val => {
+        const request = spannerMock.getRequests().find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
         assert.ok(request, 'no ExecuteSqlRequest found');
@@ -4397,7 +4399,7 @@ describe('Spanner with mock server', () => {
           sql: updateSql,
           excludeTxnFromChangeStreams: true,
         });
-        const beginTxnRequest = spannerMock.getRequests().find(val => {
+        const beginTxnRequest = spannerMock.getRequests().find((val) => {
           return (val as v1.BeginTransactionRequest).options
             ?.excludeTxnFromChangeStreams;
         }) as v1.BeginTransactionRequest;
@@ -4414,7 +4416,7 @@ describe('Spanner with mock server', () => {
     describe('should be able to select correct mutation key in case of mutation(s) only transaction(s)', () => {
       it('should select the insertOrUpdate(upsert)/delete(deleteRows) mutation key over insert', async () => {
         const database = newTestDatabase();
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           tx.upsert('foo', [
             {id: 1, name: 'One'},
             {id: 2, name: 'Two'},
@@ -4427,7 +4429,7 @@ describe('Spanner with mock server', () => {
 
         const beginTransactionRequest = spannerMock
           .getRequests()
-          .filter(val => {
+          .filter((val) => {
             return (val as v1.BeginTransactionRequest).mutationKey;
           }) as v1.BeginTransactionRequest[];
 
@@ -4452,7 +4454,7 @@ describe('Spanner with mock server', () => {
           "Expected either 'insertOrUpdate' or 'delete' key.",
         );
 
-        const commitRequest = spannerMock.getRequests().filter(val => {
+        const commitRequest = spannerMock.getRequests().filter((val) => {
           return (val as v1.CommitRequest).precommitToken;
         }) as v1.CommitRequest[];
 
@@ -4463,7 +4465,7 @@ describe('Spanner with mock server', () => {
 
       it('should select the mutation key with highest number of values when insert key(s) are present', async () => {
         const database = newTestDatabase();
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           tx.insert('foo', [
             {id: randomUUID(), name: 'One'},
             {id: randomUUID(), name: 'Two'},
@@ -4475,7 +4477,7 @@ describe('Spanner with mock server', () => {
 
         const beginTransactionRequest = spannerMock
           .getRequests()
-          .filter(val => {
+          .filter((val) => {
             return (val as v1.BeginTransactionRequest).mutationKey;
           }) as v1.BeginTransactionRequest[];
 
@@ -4501,7 +4503,7 @@ describe('Spanner with mock server', () => {
         // assert that insert mutation key with highest number of rows has been selected
         assert.strictEqual(selectedMutationKey.insert?.values?.length, 3);
 
-        const commitRequest = spannerMock.getRequests().filter(val => {
+        const commitRequest = spannerMock.getRequests().filter((val) => {
           return (val as v1.CommitRequest).precommitToken;
         }) as v1.CommitRequest[];
 
@@ -4543,7 +4545,7 @@ describe('Spanner with mock server', () => {
 
                   const beginTxnRequest = spannerMock
                     .getRequests()
-                    .find(val => {
+                    .find((val) => {
                       return (val as v1.BeginTransactionRequest).options
                         ?.readWrite;
                     }) as v1.BeginTransactionRequest;
@@ -4617,7 +4619,7 @@ describe('Spanner with mock server', () => {
           assert.strictEqual(attempts, 2);
           await database.close();
 
-          const beginTxnRequest = spannerMock.getRequests().find(val => {
+          const beginTxnRequest = spannerMock.getRequests().find((val) => {
             return (val as v1.BeginTransactionRequest).options?.readWrite;
           }) as v1.BeginTransactionRequest;
           const txnId =
@@ -4673,7 +4675,7 @@ describe('Spanner with mock server', () => {
           assert.strictEqual(attempts, 2);
           await database.close();
 
-          const beginTxnRequest = spannerMock.getRequests().find(val => {
+          const beginTxnRequest = spannerMock.getRequests().find((val) => {
             return (val as v1.BeginTransactionRequest).options?.readWrite;
           }) as v1.BeginTransactionRequest;
           const txnId =
@@ -4733,7 +4735,7 @@ describe('Spanner with mock server', () => {
           assert.strictEqual(rowCount, 18);
           assert.strictEqual(attempts, 3);
           await database.close();
-          const beginTxnRequest = spannerMock.getRequests().filter(val => {
+          const beginTxnRequest = spannerMock.getRequests().filter((val) => {
             return (val as v1.BeginTransactionRequest).options?.readWrite;
           }) as v1.BeginTransactionRequest[];
           // begin transaction request must have been called twice
@@ -4789,7 +4791,7 @@ describe('Spanner with mock server', () => {
             message: 'Simulated error for commit abortion',
             code: grpc.status.ABORTED,
           } as MockError;
-          await database.runTransactionAsync(async tx => {
+          await database.runTransactionAsync(async (tx) => {
             attempts++;
             transactionObjects.push(tx);
             try {
@@ -4820,9 +4822,9 @@ describe('Spanner with mock server', () => {
           const beginTxnRequest = spannerMock
             .getRequests()
             .filter(
-              val => (val as v1.BeginTransactionRequest).options?.readWrite,
+              (val) => (val as v1.BeginTransactionRequest).options?.readWrite,
             )
-            .map(req => req as v1.BeginTransactionRequest);
+            .map((req) => req as v1.BeginTransactionRequest);
           // begin must have been requested twice
           // one during explicit begin on unsucessful inline begin
           // another time during retrying of aborted transaction
@@ -4889,7 +4891,7 @@ describe('Spanner with mock server', () => {
           // assert on number of attempts
           assert.strictEqual(attempts, 2);
           await database.close();
-          const beginTxnRequest = spannerMock.getRequests().find(val => {
+          const beginTxnRequest = spannerMock.getRequests().find((val) => {
             return (val as v1.BeginTransactionRequest).options?.readWrite;
           }) as v1.BeginTransactionRequest;
           const txnId =
@@ -4948,7 +4950,7 @@ describe('Spanner with mock server', () => {
           commitTimestamp: mock.now(),
         };
 
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           // mock commit request
           tx.request = (config: any, callback: Function) => {
             const cb = callback as (err: any, response: any) => void;
@@ -5000,7 +5002,7 @@ describe('Spanner with mock server', () => {
     // parallel transactions
     describe('parallel transactions', async () => {
       async function readAndMutations(database) {
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           await tx.run(selectSql);
           await tx.run(selectSql);
           tx.upsert('foo', [
@@ -5021,7 +5023,7 @@ describe('Spanner with mock server', () => {
         // wait for the transaction to complete its execution
         await Promise.all(promises);
 
-        const commitRequest = spannerMock.getRequests().filter(val => {
+        const commitRequest = spannerMock.getRequests().filter((val) => {
           return (val as v1.CommitRequest).precommitToken;
         }) as v1.CommitRequest[];
 
@@ -5063,7 +5065,7 @@ describe('Spanner with mock server', () => {
       );
       await transaction.begin();
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.ok(request, 'no BeginTransactionRequest found');
@@ -5080,14 +5082,14 @@ describe('Spanner with mock server', () => {
 
     it('should use inline begin transaction', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         await tx!.run(selectSql);
         await tx!.run(insertSql);
         await tx.commit();
       });
       await database.close();
 
-      let request = spannerMock.getRequests().find(val => {
+      let request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5098,13 +5100,13 @@ describe('Spanner with mock server', () => {
         .getRequests()
         .slice()
         .reverse()
-        .find(val => {
+        .find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
       assert.strictEqual(request.sql, insertSql);
       assert.ok(request.transaction!.id, 'TransactionID is not set.');
-      const beginTxnRequest = spannerMock.getRequests().find(val => {
+      const beginTxnRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.ok(!beginTxnRequest, 'beginTransaction was called');
@@ -5112,7 +5114,7 @@ describe('Spanner with mock server', () => {
 
     it('should catch an exception error during invalid queries while using inline begin transaction', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         try {
           await Promise.all([tx!.run(selectSql), tx!.run(invalidSql)]);
           await tx.commit();
@@ -5130,7 +5132,7 @@ describe('Spanner with mock server', () => {
     it('should apply blind writes only once', async () => {
       const database = newTestDatabase();
       let attempts = 0;
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         attempts++;
         if (attempts === 1) {
           spannerMock.abortTransaction(tx);
@@ -5144,14 +5146,14 @@ describe('Spanner with mock server', () => {
       assert.strictEqual(2, attempts);
       // Verify that we have 2 ExecuteSqlRequests. The first one should use inline-begin. The second one should use a
       // transaction ID.
-      const firstExecuteSqlRequest = spannerMock.getRequests().find(val => {
+      const firstExecuteSqlRequest = spannerMock.getRequests().find((val) => {
         return (
           (val as v1.ExecuteSqlRequest).sql === insertSql &&
           (val as v1.ExecuteSqlRequest).transaction?.begin
         );
       }) as v1.ExecuteSqlRequest;
       assert.ok(firstExecuteSqlRequest.transaction?.begin?.readWrite);
-      const secondExecuteSqlRequest = spannerMock.getRequests().find(val => {
+      const secondExecuteSqlRequest = spannerMock.getRequests().find((val) => {
         return (
           (val as v1.ExecuteSqlRequest).sql === insertSql &&
           (val as v1.ExecuteSqlRequest).transaction?.id
@@ -5161,17 +5163,17 @@ describe('Spanner with mock server', () => {
       // Verify that we have a BeginTransaction request for the retry.
       const beginTxnRequests = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequests.length, 1);
       // Verify that we have a single Commit request, and that the Commit request contains only one mutation.
       assert.strictEqual(
         1,
-        spannerMock.getRequests().filter(val => {
+        spannerMock.getRequests().filter((val) => {
           return (val as v1.CommitRequest).mutations;
         }).length,
       );
-      const commitRequest = spannerMock.getRequests().find(val => {
+      const commitRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).mutations;
       }) as v1.CommitRequest;
       assert.ok(commitRequest, 'Commit was called');
@@ -5194,7 +5196,7 @@ describe('Spanner with mock server', () => {
       await database.close();
 
       // Verify that we don't have a BeginTransaction request for the transaction.
-      const beginTxnRequest = spannerMock.getRequests().find(val => {
+      const beginTxnRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.deepStrictEqual(beginTxnRequest, undefined);
@@ -5203,11 +5205,11 @@ describe('Spanner with mock server', () => {
       // contains only two mutations and uses a single-use read/write transaction.
       assert.strictEqual(
         1,
-        spannerMock.getRequests().filter(val => {
+        spannerMock.getRequests().filter((val) => {
           return (val as v1.CommitRequest).mutations;
         }).length,
       );
-      const commitRequest = spannerMock.getRequests().find(val => {
+      const commitRequest = spannerMock.getRequests().find((val) => {
         const request = val as v1.CommitRequest;
         return request.mutations || request.singleUseTransaction?.readWrite;
       }) as v1.CommitRequest;
@@ -5241,7 +5243,7 @@ describe('Spanner with mock server', () => {
       await database.writeAtLeastOnce(mutations, {});
 
       // get the request sent to mock server
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).mutations;
       }) as v1.CommitRequest;
 
@@ -5267,7 +5269,7 @@ describe('Spanner with mock server', () => {
       };
       await database.writeAtLeastOnce(mutations, options);
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).singleUseTransaction?.isolationLevel;
       }) as v1.CommitRequest;
       assert.strictEqual(
@@ -5282,14 +5284,14 @@ describe('Spanner with mock server', () => {
         {
           excludeTxnFromChangeStreams: true,
         },
-        async tx => {
+        async (tx) => {
           await tx!.insert('foo', {id: 1, value: 'One'});
           await tx.commit();
         },
       );
       await database.close();
 
-      const beginTxnRequest = spannerMock.getRequests().find(val => {
+      const beginTxnRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.strictEqual(
@@ -5304,14 +5306,14 @@ describe('Spanner with mock server', () => {
         {
           readLockMode: ReadLockMode.OPTIMISTIC,
         },
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           await tx.commit();
         },
       );
       await database.close();
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5327,14 +5329,14 @@ describe('Spanner with mock server', () => {
         {
           excludeTxnFromChangeStreams: true,
         },
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           await tx.commit();
         },
       );
       await database.close();
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5350,14 +5352,14 @@ describe('Spanner with mock server', () => {
         {
           isolationLevel: IsolationLevel.REPEATABLE_READ,
         },
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           await tx.commit();
         },
       );
       await database.close();
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5378,13 +5380,13 @@ describe('Spanner with mock server', () => {
       });
       instance = spanner.instance('instance');
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         await tx!.run(selectSql);
         await tx.commit();
       });
       await database.close();
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5410,14 +5412,14 @@ describe('Spanner with mock server', () => {
           readLockMode: ReadLockMode.OPTIMISTIC,
           excludeTxnFromChangeStreams: true,
         },
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           await tx.commit();
         },
       );
       await database.close();
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5450,14 +5452,14 @@ describe('Spanner with mock server', () => {
         {
           isolationLevel: IsolationLevel.REPEATABLE_READ,
         },
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           await tx.commit();
         },
       );
       await database.close();
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5467,7 +5469,7 @@ describe('Spanner with mock server', () => {
       );
     });
 
-    it('should use optimistic lock for runTransaction', done => {
+    it('should use optimistic lock for runTransaction', (done) => {
       const database = newTestDatabase();
       database.runTransaction(
         {
@@ -5479,7 +5481,7 @@ describe('Spanner with mock server', () => {
           await tx!.commit();
           await database.close();
 
-          const request = spannerMock.getRequests().find(val => {
+          const request = spannerMock.getRequests().find((val) => {
             return (val as v1.ExecuteSqlRequest).sql;
           }) as v1.ExecuteSqlRequest;
           assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5492,7 +5494,7 @@ describe('Spanner with mock server', () => {
       );
     });
 
-    it('should use exclude transaction from change stream for runTransaction', done => {
+    it('should use exclude transaction from change stream for runTransaction', (done) => {
       const database = newTestDatabase();
       database.runTransaction(
         {excludeTxnFromChangeStreams: true},
@@ -5502,7 +5504,7 @@ describe('Spanner with mock server', () => {
           await tx!.commit();
           await database.close();
 
-          const request = spannerMock.getRequests().find(val => {
+          const request = spannerMock.getRequests().find((val) => {
             return (val as v1.ExecuteSqlRequest).sql;
           }) as v1.ExecuteSqlRequest;
           assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5515,7 +5517,7 @@ describe('Spanner with mock server', () => {
       );
     });
 
-    it('should use isolationLevel for runTransaction', done => {
+    it('should use isolationLevel for runTransaction', (done) => {
       const database = newTestDatabase();
       database.runTransaction(
         {isolationLevel: IsolationLevel.REPEATABLE_READ},
@@ -5525,7 +5527,7 @@ describe('Spanner with mock server', () => {
           await tx!.commit();
           await database.close();
 
-          const request = spannerMock.getRequests().find(val => {
+          const request = spannerMock.getRequests().find((val) => {
             return (val as v1.ExecuteSqlRequest).sql;
           }) as v1.ExecuteSqlRequest;
           assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5546,7 +5548,7 @@ describe('Spanner with mock server', () => {
       });
       const transaction = promise[0];
       await transaction.run('SELECT 1').then(() => {
-        const request = spannerMock.getRequests().find(val => {
+        const request = spannerMock.getRequests().find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
         assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5567,7 +5569,7 @@ describe('Spanner with mock server', () => {
         isolationLevel: IsolationLevel.REPEATABLE_READ,
       });
       await transaction.run('SELECT 1').then(() => {
-        const request = spannerMock.getRequests().find(val => {
+        const request = spannerMock.getRequests().find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
         assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5586,20 +5588,20 @@ describe('Spanner with mock server', () => {
         {
           readLockMode: ReadLockMode.OPTIMISTIC,
         },
-        async tx => {
+        async (tx) => {
           session1 = tx!.session.id;
           await tx!.run(selectSql);
           await tx.commit();
         },
       );
       spannerMock.resetRequests();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         session2 = tx!.session.id;
         await tx!.run(selectSql);
         await tx.commit();
       });
       assert.strictEqual(session1, session2);
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5611,7 +5613,7 @@ describe('Spanner with mock server', () => {
 
     it('should only inline one begin transaction', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         const rowCount1 = getRowCountFromStreamingSql(tx!, {sql: selectSql});
         const rowCount2 = getRowCountFromStreamingSql(tx!, {sql: selectSql});
         await Promise.all([rowCount1, rowCount2]);
@@ -5619,7 +5621,7 @@ describe('Spanner with mock server', () => {
       });
       await database.close();
 
-      let request = spannerMock.getRequests().find(val => {
+      let request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5630,13 +5632,13 @@ describe('Spanner with mock server', () => {
         .getRequests()
         .slice()
         .reverse()
-        .find(val => {
+        .find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
       assert.strictEqual(request.sql, selectSql);
       assert.ok(request.transaction!.id, 'TransactionID is not set.');
-      const beginTxnRequest = spannerMock.getRequests().find(val => {
+      const beginTxnRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.ok(!beginTxnRequest, 'beginTransaction was called');
@@ -5644,7 +5646,7 @@ describe('Spanner with mock server', () => {
 
     it('should handle parallel request with inline begin transaction', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         const rowCount1 = getRowCountFromStreamingSql(tx!, {sql: selectSql});
         const rowCount2 = getRowCountFromStreamingSql(tx!, {sql: selectSql});
         const rowCount3 = getRowCountFromStreamingSql(tx!, {sql: selectSql});
@@ -5653,7 +5655,7 @@ describe('Spanner with mock server', () => {
       });
       await database.close();
 
-      let request = spannerMock.getRequests().find(val => {
+      let request = spannerMock.getRequests().find((val) => {
         return (val as v1.ExecuteSqlRequest).sql;
       }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
@@ -5664,13 +5666,13 @@ describe('Spanner with mock server', () => {
         .getRequests()
         .slice()
         .reverse()
-        .find(val => {
+        .find((val) => {
           return (val as v1.ExecuteSqlRequest).sql;
         }) as v1.ExecuteSqlRequest;
       assert.ok(request, 'no ExecuteSqlRequest found');
       assert.strictEqual(request.sql, selectSql);
       assert.ok(request.transaction!.id, 'TransactionID is not set.');
-      const beginTxnRequest = spannerMock.getRequests().find(val => {
+      const beginTxnRequest = spannerMock.getRequests().find((val) => {
         return (val as v1.BeginTransactionRequest).options?.readWrite;
       }) as v1.BeginTransactionRequest;
       assert.ok(!beginTxnRequest, 'beginTransaction was called');
@@ -5679,7 +5681,7 @@ describe('Spanner with mock server', () => {
     it('should use beginTransaction on retry', async () => {
       const database = newTestDatabase();
       let attempts = 0;
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         await tx!.run(selectSql);
         if (!attempts) {
           spannerMock.abortTransaction(tx);
@@ -5691,15 +5693,15 @@ describe('Spanner with mock server', () => {
       await database.close();
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
     });
 
     it('should use beginTransaction on retry for parallel queries', async () => {
       const database = newTestDatabase();
       let attempts = 0;
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         await Promise.all([tx!.run(selectSql), tx!.run(selectSql)]);
         if (!attempts) {
           spannerMock.abortTransaction(tx);
@@ -5711,8 +5713,8 @@ describe('Spanner with mock server', () => {
       await database.close();
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
     });
 
@@ -5721,7 +5723,7 @@ describe('Spanner with mock server', () => {
       let attempts = 0;
       await database.runTransactionAsync(
         {excludeTxnFromChangeStreams: true},
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           if (!attempts) {
             spannerMock.abortTransaction(tx);
@@ -5735,8 +5737,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options?.excludeTxnFromChangeStreams,
@@ -5751,7 +5753,7 @@ describe('Spanner with mock server', () => {
         {
           readLockMode: ReadLockMode.OPTIMISTIC,
         },
-        async tx => {
+        async (tx) => {
           await tx!.run(selectSql);
           if (!attempts) {
             spannerMock.abortTransaction(tx);
@@ -5765,8 +5767,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options!.readWrite!.readLockMode,
@@ -5776,7 +5778,7 @@ describe('Spanner with mock server', () => {
 
     it('should use beginTransaction on retry for unknown reason', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         try {
           await tx.runUpdate(invalidSql);
           assert.fail('missing expected error');
@@ -5797,8 +5799,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
     });
 
@@ -5808,7 +5810,7 @@ describe('Spanner with mock server', () => {
         {
           excludeTxnFromChangeStreams: true,
         },
-        async tx => {
+        async (tx) => {
           try {
             await tx.runUpdate(invalidSql);
             assert.fail('missing expected error');
@@ -5826,8 +5828,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options?.excludeTxnFromChangeStreams,
@@ -5837,7 +5839,7 @@ describe('Spanner with mock server', () => {
 
     it('should use beginTransaction for streaming on retry for unknown reason', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         try {
           await getRowCountFromStreamingSql(tx!, {sql: invalidSql});
           assert.fail('missing expected error');
@@ -5858,8 +5860,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
     });
 
@@ -5869,7 +5871,7 @@ describe('Spanner with mock server', () => {
         {
           excludeTxnFromChangeStreams: true,
         },
-        async tx => {
+        async (tx) => {
           try {
             await getRowCountFromStreamingSql(tx!, {sql: invalidSql});
             assert.fail('missing expected error');
@@ -5891,8 +5893,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options?.excludeTxnFromChangeStreams,
@@ -5910,7 +5912,7 @@ describe('Spanner with mock server', () => {
         SimulatedExecutionTime.ofError(err),
       );
       try {
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           await tx!.run(selectSql);
           spannerMock.abortTransaction(tx);
           await tx!.run(insertSql);
@@ -5941,7 +5943,7 @@ describe('Spanner with mock server', () => {
       transaction.insert('foo', {id: 1, name: 'One'});
       await transaction.commit();
       await database.close();
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).singleUseTransaction?.readWrite;
       }) as v1.CommitRequest;
       assert.ok(request, 'no CommitRequest found');
@@ -5958,7 +5960,7 @@ describe('Spanner with mock server', () => {
 
     it('should run begin transaction on blind commit', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         tx.insert('foo', {id: 1, name: 'One'});
         await tx.commit();
       });
@@ -5966,8 +5968,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
     });
 
@@ -5977,7 +5979,7 @@ describe('Spanner with mock server', () => {
         {
           excludeTxnFromChangeStreams: true,
         },
-        async tx => {
+        async (tx) => {
           tx.insert('foo', {id: 1, name: 'One'});
           await tx.commit();
         },
@@ -5986,8 +5988,8 @@ describe('Spanner with mock server', () => {
 
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options?.excludeTxnFromChangeStreams,
@@ -6005,7 +6007,7 @@ describe('Spanner with mock server', () => {
         SimulatedExecutionTime.ofError(err),
       );
       try {
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           tx.insert('foo', {id: 1, name: 'One'});
           await tx.commit();
         });
@@ -6037,7 +6039,7 @@ describe('Spanner with mock server', () => {
           {
             excludeTxnFromChangeStreams: true,
           },
-          async tx => {
+          async (tx) => {
             tx.insert('foo', {id: 1, name: 'One'});
             await tx.commit();
           },
@@ -6045,8 +6047,10 @@ describe('Spanner with mock server', () => {
       } catch (e) {
         const beginTxnRequest = spannerMock
           .getRequests()
-          .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-          .map(req => req as v1.BeginTransactionRequest);
+          .filter(
+            (val) => (val as v1.BeginTransactionRequest).options?.readWrite,
+          )
+          .map((req) => req as v1.BeginTransactionRequest);
         assert.deepStrictEqual(beginTxnRequest.length, 1);
         assert.strictEqual(
           beginTxnRequest[0].options?.excludeTxnFromChangeStreams,
@@ -6075,7 +6079,7 @@ describe('Spanner with mock server', () => {
         },
       );
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).mutations;
       }) as v1.CommitRequest;
       assert.ok(request, 'no CommitRequest found');
@@ -6102,8 +6106,8 @@ describe('Spanner with mock server', () => {
       );
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options?.excludeTxnFromChangeStreams,
@@ -6120,8 +6124,8 @@ describe('Spanner with mock server', () => {
       await database.table('foo').upsert({id: 1, name: 'bar'}, options);
       const beginTxnRequest = spannerMock
         .getRequests()
-        .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-        .map(req => req as v1.BeginTransactionRequest);
+        .filter((val) => (val as v1.BeginTransactionRequest).options?.readWrite)
+        .map((req) => req as v1.BeginTransactionRequest);
       assert.deepStrictEqual(beginTxnRequest.length, 1);
       assert.strictEqual(
         beginTxnRequest[0].options?.isolationLevel,
@@ -6136,7 +6140,7 @@ describe('Spanner with mock server', () => {
         .table('foo')
         .upsert({id: 1, value: {key1: 'value1', key2: 'value2'}});
 
-      const request = spannerMock.getRequests().find(val => {
+      const request = spannerMock.getRequests().find((val) => {
         return (val as v1.CommitRequest).mutations;
       }) as v1.CommitRequest;
       assert.ok(request, 'no CommitRequest found');
@@ -6207,7 +6211,7 @@ describe('Spanner with mock server', () => {
 
         const beginTransactionRequest = spannerMock
           .getRequests()
-          .filter(val => {
+          .filter((val) => {
             return (val as v1.BeginTransactionRequest).mutationKey;
           }) as v1.BeginTransactionRequest[];
 
@@ -6238,7 +6242,7 @@ describe('Spanner with mock server', () => {
           'delete key must have been selected',
         );
 
-        const commitRequest = spannerMock.getRequests().filter(val => {
+        const commitRequest = spannerMock.getRequests().filter((val) => {
           return (val as v1.CommitRequest).precommitToken;
         }) as v1.CommitRequest[];
 
@@ -6887,11 +6891,11 @@ describe('Spanner with mock server', () => {
       assert.strictEqual(configs.length, 1);
     });
 
-    it('should return all instance configs in a stream', done => {
+    it('should return all instance configs in a stream', (done) => {
       let count = 0;
       const stream = spanner.getInstanceConfigsStream();
       stream
-        .on('error', err => {
+        .on('error', (err) => {
           assert.fail(err);
         })
         .on('data', () => count++)
@@ -6927,7 +6931,7 @@ describe('Spanner with mock server', () => {
       assert.strictEqual(instances.length, 1);
     });
 
-    it('should list all instances with a callback', done => {
+    it('should list all instances with a callback', (done) => {
       spanner.getInstances((err, instances) => {
         assert.ifError(err);
         assert.strictEqual(instances!.length, 2);
@@ -6941,13 +6945,13 @@ describe('Spanner with mock server', () => {
           config: 'test-instance-config',
           nodes: 10,
         })
-        .then(data => {
+        .then((data) => {
           const operation = data[1];
           return operation.promise() as Promise<
             [Instance, CreateInstanceMetadata, object]
           >;
         })
-        .then(response => {
+        .then((response) => {
           return response;
         });
       assert.strictEqual(
@@ -6964,13 +6968,13 @@ describe('Spanner with mock server', () => {
           nodes: 10,
           displayName: 'some new instance',
         })
-        .then(data => {
+        .then((data) => {
           const operation = data[1];
           return operation.promise() as Promise<
             [Instance, CreateInstanceMetadata, object]
           >;
         })
-        .then(response => {
+        .then((response) => {
           return response;
         });
       assert.strictEqual(
@@ -6981,7 +6985,7 @@ describe('Spanner with mock server', () => {
       assert.strictEqual(createdInstance.displayName, 'some new instance');
     });
 
-    it('should create an instance using a callback', done => {
+    it('should create an instance using a callback', (done) => {
       spanner.createInstance(
         'new-instance',
         {
@@ -6996,7 +7000,7 @@ describe('Spanner with mock server', () => {
             `projects/${spanner.projectId}/instances/new-instance`,
           );
           assert.ok(operation, 'no operation returned');
-          operation!.on('error', assert.ifError).on('complete', instance => {
+          operation!.on('error', assert.ifError).on('complete', (instance) => {
             // Instance created successfully.
             assert.strictEqual(
               instance.name,
@@ -7015,13 +7019,13 @@ describe('Spanner with mock server', () => {
           config: 'test-instance-config',
           processingUnits: 500,
         })
-        .then(data => {
+        .then((data) => {
           const operation = data[1];
           return operation.promise() as Promise<
             [Instance, CreateInstanceMetadata, object]
           >;
         })
-        .then(response => {
+        .then((response) => {
           return response;
         });
       assert.strictEqual(
@@ -7039,12 +7043,12 @@ describe('Spanner with mock server', () => {
           nodeCount: 20,
           displayName: 'Production instance with 20 nodes',
         })
-        .then(data => {
+        .then((data) => {
           return data[0].promise() as Promise<
             [google.spanner.admin.instance.v1.Instance]
           >;
         })
-        .then(instance => {
+        .then((instance) => {
           return instance;
         });
       assert.strictEqual(updatedInstance.nodeCount, 20);
@@ -7069,11 +7073,11 @@ describe('Spanner with mock server', () => {
     it('should create a database', async () => {
       const [createdDatabase] = await instance
         .createDatabase('new-database')
-        .then(data => {
+        .then((data) => {
           const operation = data[1];
           return operation.promise();
         })
-        .then(database => {
+        .then((database) => {
           return database as [google.spanner.admin.database.v1.Database];
         });
       assert.strictEqual(
@@ -7104,7 +7108,7 @@ describe('Spanner with mock server', () => {
   // and tests the database/instance suffix is an iteration of
   // each afresh invocation of newTestDatabase, which has been
   // causing test flakes.
-  it('Check for span annotations', done => {
+  it('Check for span annotations', (done) => {
     const exporter = new InMemorySpanExporter();
     const provider = new NodeTracerProvider({
       sampler: new AlwaysOnSampler(),
@@ -7118,7 +7122,7 @@ describe('Spanner with mock server', () => {
     });
 
     const opts: typeof ObservabilityOptions = {tracerProvider: provider};
-    startTrace('aSpan', {opts: opts}, async span => {
+    startTrace('aSpan', {opts: opts}, async (span) => {
       instance._observabilityOptions = opts;
       const database = newTestDatabase();
       database._observabilityOptions = opts;
@@ -7142,9 +7146,9 @@ describe('Spanner with mock server', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -7182,7 +7186,7 @@ describe('Spanner with mock server', () => {
   });
 
   describe('session-factory', () => {
-    it('should not propagate any error when disabling GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS after client initialization', done => {
+    it('should not propagate any error when disabling GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS after client initialization', (done) => {
       const database = newTestDatabase();
       // disable env after database creation
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
@@ -7218,7 +7222,7 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase();
       let rowCount = 0;
       const maxAttempts = 4;
-      await database.runTransactionAsync(async transaction => {
+      await database.runTransactionAsync(async (transaction) => {
         attempts++;
         if (attempts < maxAttempts) {
           spannerMock.abortTransaction(transaction!);
@@ -7285,7 +7289,7 @@ describe('Spanner with mock server', () => {
 
     it('check span attributes for x-goog-spanner-request-id', async () => {
       const database = newTestDatabase();
-      await database.runTransactionAsync(async transaction => {
+      await database.runTransactionAsync(async (transaction) => {
         await transaction!.run(selectSql);
         await transaction!.commit();
       });
@@ -7300,7 +7304,7 @@ describe('Spanner with mock server', () => {
         'CloudSpanner.Transaction.commit',
       ];
 
-      spans.forEach(span => {
+      spans.forEach((span) => {
         if (rpcMakingSpans.includes(span.name)) {
           assert.strictEqual(
             X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR in span.attributes,
@@ -7324,13 +7328,13 @@ function executeSimpleUpdate(
     .runTransactionAsync<[number]>((transaction): Promise<[number]> => {
       return transaction
         .runUpdate(update)
-        .then(rowCount => {
+        .then((rowCount) => {
           return rowCount;
         })
-        .then(rowCount => {
+        .then((rowCount) => {
           return transaction.commit().then(() => rowCount);
         })
-        .then(rowCount => {
+        .then((rowCount) => {
           return rowCount;
         })
         .catch(() => {
@@ -7341,7 +7345,7 @@ function executeSimpleUpdate(
           return [-1];
         });
     })
-    .then(updated => {
+    .then((updated) => {
       return updated;
     });
 }
@@ -7355,7 +7359,7 @@ function getRowCountFromStreamingSql(
     let errored = false;
     context
       .runStream(query)
-      .on('error', err => {
+      .on('error', (err) => {
         errored = true;
         return reject(err);
       })
@@ -7369,5 +7373,5 @@ function getRowCountFromStreamingSql(
 }
 
 function sleep(ms): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

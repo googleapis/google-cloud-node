@@ -34,12 +34,7 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              "extensions": [[536000000, 536000000]]
             },
             "Edition": {
               "edition": "proto2",
@@ -243,12 +238,7 @@
                   }
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "nested": {
                 "Declaration": {
                   "fields": {
@@ -273,12 +263,7 @@
                       "id": 6
                     }
                   },
-                  "reserved": [
-                    [
-                      4,
-                      4
-                    ]
-                  ]
+                  "reserved": [[4, 4]]
                 },
                 "VerificationState": {
                   "values": {
@@ -461,13 +446,7 @@
                   "id": 3
                 }
               },
-              "reserved": [
-                [
-                  4,
-                  4
-                ],
-                "stream"
-              ]
+              "reserved": [[4, 4], "stream"]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -620,23 +599,8 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  42,
-                  42
-                ],
-                "php_generic_services",
-                [
-                  38,
-                  38
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
+              "reserved": [[42, 42], "php_generic_services", [38, 38]],
               "nested": {
                 "OptimizeMode": {
                   "values": {
@@ -692,33 +656,13 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "reserved": [
-                [
-                  4,
-                  4
-                ],
-                [
-                  5,
-                  5
-                ],
-                [
-                  6,
-                  6
-                ],
-                [
-                  8,
-                  8
-                ],
-                [
-                  9,
-                  9
-                ]
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [8, 8],
+                [9, 9]
               ]
             },
             "FieldOptions": {
@@ -806,21 +750,10 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "reserved": [
-                [
-                  4,
-                  4
-                ],
-                [
-                  18,
-                  18
-                ]
+                [4, 4],
+                [18, 18]
               ],
               "nested": {
                 "CType": {
@@ -905,12 +838,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
+              "extensions": [[1000, 536870911]]
             },
             "EnumOptions": {
               "edition": "proto2",
@@ -943,18 +871,8 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
-              "reserved": [
-                [
-                  5,
-                  5
-                ]
-              ]
+              "extensions": [[1000, 536870911]],
+              "reserved": [[5, 5]]
             },
             "EnumValueOptions": {
               "edition": "proto2",
@@ -987,12 +905,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
+              "extensions": [[1000, 536870911]]
             },
             "ServiceOptions": {
               "edition": "proto2",
@@ -1014,12 +927,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ]
+              "extensions": [[1000, 536870911]]
             },
             "MethodOptions": {
               "edition": "proto2",
@@ -1048,12 +956,7 @@
                   "id": 999
                 }
               },
-              "extensions": [
-                [
-                  1000,
-                  536870911
-                ]
-              ],
+              "extensions": [[1000, 536870911]],
               "nested": {
                 "IdempotencyLevel": {
                   "values": {
@@ -1207,25 +1110,11 @@
                 }
               },
               "extensions": [
-                [
-                  1000,
-                  9994
-                ],
-                [
-                  9995,
-                  9999
-                ],
-                [
-                  10000,
-                  10000
-                ]
+                [1000, 9994],
+                [9995, 9999],
+                [10000, 10000]
               ],
-              "reserved": [
-                [
-                  999,
-                  999
-                ]
-              ],
+              "reserved": [[999, 999]],
               "nested": {
                 "FieldPresence": {
                   "values": {
@@ -1255,12 +1144,7 @@
                     "VERIFY": 2,
                     "NONE": 3
                   },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  "reserved": [[1, 1]]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -1285,12 +1169,7 @@
                 },
                 "VisibilityFeature": {
                   "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
+                  "reserved": [[1, 536870911]],
                   "nested": {
                     "DefaultSymbolVisibility": {
                       "values": {
@@ -1338,17 +1217,7 @@
                       "id": 5
                     }
                   },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  "reserved": [[1, 1], [2, 2], "features"]
                 }
               }
             },
@@ -1361,12 +1230,7 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
+              "extensions": [[536000000, 536000000]],
               "nested": {
                 "Location": {
                   "fields": {
@@ -2377,9 +2241,7 @@
                         "BackupScheduleSpec": {
                           "oneofs": {
                             "scheduleSpec": {
-                              "oneof": [
-                                "cronSpec"
-                              ]
+                              "oneof": ["cronSpec"]
                             }
                           },
                           "fields": {
@@ -3187,9 +3049,7 @@
                         "RestoreInfo": {
                           "oneofs": {
                             "sourceInfo": {
-                              "oneof": [
-                                "backupInfo"
-                              ]
+                              "oneof": ["backupInfo"]
                             }
                           },
                           "fields": {
@@ -3611,9 +3471,7 @@
                         "RestoreDatabaseRequest": {
                           "oneofs": {
                             "source": {
-                              "oneof": [
-                                "backup"
-                              ]
+                              "oneof": ["backup"]
                             }
                           },
                           "fields": {
@@ -3689,9 +3547,7 @@
                         "RestoreDatabaseMetadata": {
                           "oneofs": {
                             "sourceInfo": {
-                              "oneof": [
-                                "backupInfo"
-                              ]
+                              "oneof": ["backupInfo"]
                             }
                           },
                           "fields": {
@@ -4571,10 +4427,7 @@
                         "ReplicaComputeCapacity": {
                           "oneofs": {
                             "computeCapacity": {
-                              "oneof": [
-                                "nodeCount",
-                                "processingUnits"
-                              ]
+                              "oneof": ["nodeCount", "processingUnits"]
                             }
                           },
                           "fields": {
@@ -4624,16 +4477,10 @@
                             "AutoscalingLimits": {
                               "oneofs": {
                                 "minLimit": {
-                                  "oneof": [
-                                    "minNodes",
-                                    "minProcessingUnits"
-                                  ]
+                                  "oneof": ["minNodes", "minProcessingUnits"]
                                 },
                                 "maxLimit": {
-                                  "oneof": [
-                                    "maxNodes",
-                                    "maxProcessingUnits"
-                                  ]
+                                  "oneof": ["maxNodes", "maxProcessingUnits"]
                                 }
                               },
                               "fields": {
@@ -5272,10 +5119,7 @@
                           },
                           "oneofs": {
                             "computeCapacity": {
-                              "oneof": [
-                                "nodeCount",
-                                "processingUnits"
-                              ]
+                              "oneof": ["nodeCount", "processingUnits"]
                             }
                           },
                           "fields": {
@@ -5787,9 +5631,7 @@
                     "ReadAction": {
                       "oneofs": {
                         "_index": {
-                          "oneof": [
-                            "index"
-                          ]
+                          "oneof": ["index"]
                         }
                       },
                       "fields": {
@@ -5853,14 +5695,10 @@
                     "DmlAction": {
                       "oneofs": {
                         "_autocommitIfSupported": {
-                          "oneof": [
-                            "autocommitIfSupported"
-                          ]
+                          "oneof": ["autocommitIfSupported"]
                         },
                         "_lastStatement": {
-                          "oneof": [
-                            "lastStatement"
-                          ]
+                          "oneof": ["lastStatement"]
                         }
                       },
                       "fields": {
@@ -5887,9 +5725,7 @@
                     "BatchDmlAction": {
                       "oneofs": {
                         "_lastStatements": {
-                          "oneof": [
-                            "lastStatements"
-                          ]
+                          "oneof": ["lastStatements"]
                         }
                       },
                       "fields": {
@@ -5925,9 +5761,7 @@
                           ]
                         },
                         "_arrayType": {
-                          "oneof": [
-                            "arrayType"
-                          ]
+                          "oneof": ["arrayType"]
                         }
                       },
                       "fields": {
@@ -5987,9 +5821,7 @@
                     "KeyRange": {
                       "oneofs": {
                         "_type": {
-                          "oneof": [
-                            "type"
-                          ]
+                          "oneof": ["type"]
                         }
                       },
                       "fields": {
@@ -6136,9 +5968,7 @@
                     "PartitionedUpdateAction": {
                       "oneofs": {
                         "_options": {
-                          "oneof": [
-                            "options"
-                          ]
+                          "oneof": ["options"]
                         }
                       },
                       "fields": {
@@ -6158,14 +5988,10 @@
                         "ExecutePartitionedUpdateOptions": {
                           "oneofs": {
                             "_rpcPriority": {
-                              "oneof": [
-                                "rpcPriority"
-                              ]
+                              "oneof": ["rpcPriority"]
                             },
                             "_tag": {
-                              "oneof": [
-                                "tag"
-                              ]
+                              "oneof": ["tag"]
                             }
                           },
                           "fields": {
@@ -6190,14 +6016,10 @@
                     "StartTransactionAction": {
                       "oneofs": {
                         "_concurrency": {
-                          "oneof": [
-                            "concurrency"
-                          ]
+                          "oneof": ["concurrency"]
                         },
                         "_executionOptions": {
-                          "oneof": [
-                            "executionOptions"
-                          ]
+                          "oneof": ["executionOptions"]
                         }
                       },
                       "fields": {
@@ -6532,9 +6354,7 @@
                     "UpdateUserInstanceConfigAction": {
                       "oneofs": {
                         "_displayName": {
-                          "oneof": [
-                            "displayName"
-                          ]
+                          "oneof": ["displayName"]
                         }
                       },
                       "fields": {
@@ -6587,14 +6407,10 @@
                     "ListCloudInstanceConfigsAction": {
                       "oneofs": {
                         "_pageSize": {
-                          "oneof": [
-                            "pageSize"
-                          ]
+                          "oneof": ["pageSize"]
                         },
                         "_pageToken": {
-                          "oneof": [
-                            "pageToken"
-                          ]
+                          "oneof": ["pageToken"]
                         }
                       },
                       "fields": {
@@ -6621,19 +6437,13 @@
                     "CreateCloudInstanceAction": {
                       "oneofs": {
                         "_nodeCount": {
-                          "oneof": [
-                            "nodeCount"
-                          ]
+                          "oneof": ["nodeCount"]
                         },
                         "_processingUnits": {
-                          "oneof": [
-                            "processingUnits"
-                          ]
+                          "oneof": ["processingUnits"]
                         },
                         "_autoscalingConfig": {
-                          "oneof": [
-                            "autoscalingConfig"
-                          ]
+                          "oneof": ["autoscalingConfig"]
                         }
                       },
                       "fields": {
@@ -6684,24 +6494,16 @@
                     "UpdateCloudInstanceAction": {
                       "oneofs": {
                         "_displayName": {
-                          "oneof": [
-                            "displayName"
-                          ]
+                          "oneof": ["displayName"]
                         },
                         "_nodeCount": {
-                          "oneof": [
-                            "nodeCount"
-                          ]
+                          "oneof": ["nodeCount"]
                         },
                         "_processingUnits": {
-                          "oneof": [
-                            "processingUnits"
-                          ]
+                          "oneof": ["processingUnits"]
                         },
                         "_autoscalingConfig": {
-                          "oneof": [
-                            "autoscalingConfig"
-                          ]
+                          "oneof": ["autoscalingConfig"]
                         }
                       },
                       "fields": {
@@ -6767,14 +6569,10 @@
                     "CreateCloudDatabaseAction": {
                       "oneofs": {
                         "_dialect": {
-                          "oneof": [
-                            "dialect"
-                          ]
+                          "oneof": ["dialect"]
                         },
                         "_protoDescriptors": {
-                          "oneof": [
-                            "protoDescriptors"
-                          ]
+                          "oneof": ["protoDescriptors"]
                         }
                       },
                       "fields": {
@@ -6818,9 +6616,7 @@
                     "UpdateCloudDatabaseDdlAction": {
                       "oneofs": {
                         "_protoDescriptors": {
-                          "oneof": [
-                            "protoDescriptors"
-                          ]
+                          "oneof": ["protoDescriptors"]
                         }
                       },
                       "fields": {
@@ -6893,9 +6689,7 @@
                     "ChangeQuorumCloudDatabaseAction": {
                       "oneofs": {
                         "_databaseUri": {
-                          "oneof": [
-                            "databaseUri"
-                          ]
+                          "oneof": ["databaseUri"]
                         }
                       },
                       "fields": {
@@ -6965,19 +6759,13 @@
                     "ListCloudInstancesAction": {
                       "oneofs": {
                         "_filter": {
-                          "oneof": [
-                            "filter"
-                          ]
+                          "oneof": ["filter"]
                         },
                         "_pageSize": {
-                          "oneof": [
-                            "pageSize"
-                          ]
+                          "oneof": ["pageSize"]
                         },
                         "_pageToken": {
-                          "oneof": [
-                            "pageToken"
-                          ]
+                          "oneof": ["pageToken"]
                         }
                       },
                       "fields": {
@@ -7091,9 +6879,7 @@
                     "CreateCloudBackupAction": {
                       "oneofs": {
                         "_versionTime": {
-                          "oneof": [
-                            "versionTime"
-                          ]
+                          "oneof": ["versionTime"]
                         }
                       },
                       "fields": {
@@ -7315,10 +7101,7 @@
                     "StartBatchTransactionAction": {
                       "oneofs": {
                         "param": {
-                          "oneof": [
-                            "batchTxnTime",
-                            "tid"
-                          ]
+                          "oneof": ["batchTxnTime", "tid"]
                         }
                       },
                       "fields": {
@@ -7347,14 +7130,10 @@
                     "GenerateDbPartitionsForReadAction": {
                       "oneofs": {
                         "_desiredBytesPerPartition": {
-                          "oneof": [
-                            "desiredBytesPerPartition"
-                          ]
+                          "oneof": ["desiredBytesPerPartition"]
                         },
                         "_maxPartitionCount": {
-                          "oneof": [
-                            "maxPartitionCount"
-                          ]
+                          "oneof": ["maxPartitionCount"]
                         }
                       },
                       "fields": {
@@ -7386,9 +7165,7 @@
                     "GenerateDbPartitionsForQueryAction": {
                       "oneofs": {
                         "_desiredBytesPerPartition": {
-                          "oneof": [
-                            "desiredBytesPerPartition"
-                          ]
+                          "oneof": ["desiredBytesPerPartition"]
                         }
                       },
                       "fields": {
@@ -7408,14 +7185,10 @@
                     "BatchPartition": {
                       "oneofs": {
                         "_table": {
-                          "oneof": [
-                            "table"
-                          ]
+                          "oneof": ["table"]
                         },
                         "_index": {
-                          "oneof": [
-                            "index"
-                          ]
+                          "oneof": ["index"]
                         }
                       },
                       "fields": {
@@ -7454,29 +7227,19 @@
                     "ExecuteChangeStreamQuery": {
                       "oneofs": {
                         "_endTime": {
-                          "oneof": [
-                            "endTime"
-                          ]
+                          "oneof": ["endTime"]
                         },
                         "_partitionToken": {
-                          "oneof": [
-                            "partitionToken"
-                          ]
+                          "oneof": ["partitionToken"]
                         },
                         "_heartbeatMilliseconds": {
-                          "oneof": [
-                            "heartbeatMilliseconds"
-                          ]
+                          "oneof": ["heartbeatMilliseconds"]
                         },
                         "_deadlineSeconds": {
-                          "oneof": [
-                            "deadlineSeconds"
-                          ]
+                          "oneof": ["deadlineSeconds"]
                         },
                         "_cloudDatabaseRole": {
-                          "oneof": [
-                            "cloudDatabaseRole"
-                          ]
+                          "oneof": ["cloudDatabaseRole"]
                         }
                       },
                       "fields": {
@@ -7533,44 +7296,28 @@
                     "SpannerActionOutcome": {
                       "oneofs": {
                         "_status": {
-                          "oneof": [
-                            "status"
-                          ]
+                          "oneof": ["status"]
                         },
                         "_commitTime": {
-                          "oneof": [
-                            "commitTime"
-                          ]
+                          "oneof": ["commitTime"]
                         },
                         "_readResult": {
-                          "oneof": [
-                            "readResult"
-                          ]
+                          "oneof": ["readResult"]
                         },
                         "_queryResult": {
-                          "oneof": [
-                            "queryResult"
-                          ]
+                          "oneof": ["queryResult"]
                         },
                         "_transactionRestarted": {
-                          "oneof": [
-                            "transactionRestarted"
-                          ]
+                          "oneof": ["transactionRestarted"]
                         },
                         "_batchTxnId": {
-                          "oneof": [
-                            "batchTxnId"
-                          ]
+                          "oneof": ["batchTxnId"]
                         },
                         "_adminResult": {
-                          "oneof": [
-                            "adminResult"
-                          ]
+                          "oneof": ["adminResult"]
                         },
                         "_snapshotIsolationTxnReadTimestamp": {
-                          "oneof": [
-                            "snapshotIsolationTxnReadTimestamp"
-                          ]
+                          "oneof": ["snapshotIsolationTxnReadTimestamp"]
                         }
                       },
                       "fields": {
@@ -7769,19 +7516,13 @@
                     "ReadResult": {
                       "oneofs": {
                         "_index": {
-                          "oneof": [
-                            "index"
-                          ]
+                          "oneof": ["index"]
                         },
                         "_requestIndex": {
-                          "oneof": [
-                            "requestIndex"
-                          ]
+                          "oneof": ["requestIndex"]
                         },
                         "_rowType": {
-                          "oneof": [
-                            "rowType"
-                          ]
+                          "oneof": ["rowType"]
                         }
                       },
                       "fields": {
@@ -7820,9 +7561,7 @@
                     "QueryResult": {
                       "oneofs": {
                         "_rowType": {
-                          "oneof": [
-                            "rowType"
-                          ]
+                          "oneof": ["rowType"]
                         }
                       },
                       "fields": {
@@ -7843,11 +7582,7 @@
                     "ChangeStreamRecord": {
                       "oneofs": {
                         "record": {
-                          "oneof": [
-                            "dataChange",
-                            "childPartition",
-                            "heartbeat"
-                          ]
+                          "oneof": ["dataChange", "childPartition", "heartbeat"]
                         }
                       },
                       "fields": {
@@ -8541,10 +8276,7 @@
                 "DirectedReadOptions": {
                   "oneofs": {
                     "replicas": {
-                      "oneof": [
-                        "includeReplicas",
-                        "excludeReplicas"
-                      ]
+                      "oneof": ["includeReplicas", "excludeReplicas"]
                     }
                   },
                   "fields": {
@@ -9045,10 +8777,7 @@
                 "CommitRequest": {
                   "oneofs": {
                     "transaction": {
-                      "oneof": [
-                        "transactionId",
-                        "singleUseTransaction"
-                      ]
+                      "oneof": ["transactionId", "singleUseTransaction"]
                     }
                   },
                   "fields": {
@@ -9181,9 +8910,7 @@
                 "CommitResponse": {
                   "oneofs": {
                     "MultiplexedSessionRetry": {
-                      "oneof": [
-                        "precommitToken"
-                      ]
+                      "oneof": ["precommitToken"]
                     }
                   },
                   "fields": {
@@ -9218,11 +8945,7 @@
                 "TransactionOptions": {
                   "oneofs": {
                     "mode": {
-                      "oneof": [
-                        "readWrite",
-                        "partitionedDml",
-                        "readOnly"
-                      ]
+                      "oneof": ["readWrite", "partitionedDml", "readOnly"]
                     }
                   },
                   "fields": {
@@ -9342,11 +9065,7 @@
                 "TransactionSelector": {
                   "oneofs": {
                     "selector": {
-                      "oneof": [
-                        "singleUse",
-                        "id",
-                        "begin"
-                      ]
+                      "oneof": ["singleUse", "id", "begin"]
                     }
                   },
                   "fields": {
@@ -9379,16 +9098,10 @@
                 "KeyRange": {
                   "oneofs": {
                     "startKeyType": {
-                      "oneof": [
-                        "startClosed",
-                        "startOpen"
-                      ]
+                      "oneof": ["startClosed", "startOpen"]
                     },
                     "endKeyType": {
-                      "oneof": [
-                        "endClosed",
-                        "endOpen"
-                      ]
+                      "oneof": ["endClosed", "endOpen"]
                     }
                   },
                   "fields": {
@@ -9517,11 +9230,7 @@
                 "KeyRecipe": {
                   "oneofs": {
                     "target": {
-                      "oneof": [
-                        "tableName",
-                        "indexName",
-                        "operationUid"
-                      ]
+                      "oneof": ["tableName", "indexName", "operationUid"]
                     }
                   },
                   "fields": {
@@ -9547,11 +9256,7 @@
                     "Part": {
                       "oneofs": {
                         "valueType": {
-                          "oneof": [
-                            "identifier",
-                            "value",
-                            "random"
-                          ]
+                          "oneof": ["identifier", "value", "random"]
                         }
                       },
                       "fields": {
@@ -10012,10 +9717,7 @@
                 "ResultSetStats": {
                   "oneofs": {
                     "rowCount": {
-                      "oneof": [
-                        "rowCountExact",
-                        "rowCountLowerBound"
-                      ]
+                      "oneof": ["rowCountExact", "rowCountLowerBound"]
                     }
                   },
                   "fields": {
@@ -10540,14 +10242,7 @@
             "HttpRule": {
               "oneofs": {
                 "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
+                  "oneof": ["get", "put", "post", "delete", "patch", "custom"]
                 }
               },
               "fields": {
@@ -11061,10 +10756,7 @@
             "Operation": {
               "oneofs": {
                 "result": {
-                  "oneof": [
-                    "error",
-                    "response"
-                  ]
+                  "oneof": ["error", "response"]
                 }
               },
               "fields": {

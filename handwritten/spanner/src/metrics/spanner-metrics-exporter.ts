@@ -61,7 +61,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     }
 
     this._lastExported = now;
-    this._exportAsync(metrics).then(resultCallback, err => {
+    this._exportAsync(metrics).then(resultCallback, (err) => {
       resultCallback({code: ExportResultCode.FAILED, error: err});
     });
   }
@@ -89,9 +89,9 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
     };
     await Promise.all(
       this._partitionList(timeSeriesList, MAX_BATCH_EXPORT_SIZE).map(
-        async batchedTimeSeries => this._sendTimeSeries(batchedTimeSeries),
+        async (batchedTimeSeries) => this._sendTimeSeries(batchedTimeSeries),
       ),
-    ).catch(e => {
+    ).catch((e) => {
       if (!this._metricsExportFailureLogged) {
         const error = e as {code: number};
         let msg = 'Send TimeSeries failed:';

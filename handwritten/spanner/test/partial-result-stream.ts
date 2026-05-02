@@ -76,18 +76,18 @@ describe('PartialResultStream', () => {
       require('../../test/data/streaming-read-acceptance-test.json').tests;
 
     beforeEach(() => {
-      sandbox.stub(codec, 'decode').callsFake(value => value);
+      sandbox.stub(codec, 'decode').callsFake((value) => value);
     });
 
-    TESTS.forEach(test => {
-      it(`should pass acceptance test: ${test.name}`, done => {
+    TESTS.forEach((test) => {
+      it(`should pass acceptance test: ${test.name}`, (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const values: any[] = [];
         const stream = new PartialResultStream({});
 
         stream
           .on('error', done)
-          .on('data', row => {
+          .on('data', (row) => {
             values.push(row.map(({value}) => value));
           })
           .on('end', () => {
@@ -95,7 +95,7 @@ describe('PartialResultStream', () => {
             done();
           });
 
-        test.chunks.forEach(chunk => {
+        test.chunks.forEach((chunk) => {
           const parsed = JSON.parse(chunk);
           // for whatever reason the acceptance test values come as raw values
           // where as grpc gives them to us as google.protobuf.Value objects
@@ -118,10 +118,10 @@ describe('PartialResultStream', () => {
 
     afterEach(() => stream.destroy());
 
-    it('should emit the response', done => {
+    it('should emit the response', (done) => {
       const stream = new PartialResultStream({});
 
-      stream.on('error', done).on('response', response => {
+      stream.on('error', done).on('response', (response) => {
         assert.strictEqual(response, RESULT);
         done();
       });
@@ -129,8 +129,8 @@ describe('PartialResultStream', () => {
       stream.write(RESULT);
     });
 
-    it('should emit the result stats', done => {
-      stream.on('error', done).on('stats', stats => {
+    it('should emit the result stats', (done) => {
+      stream.on('error', done).on('stats', (stats) => {
         assert.strictEqual(stats, STATS);
         done();
       });
@@ -138,7 +138,7 @@ describe('PartialResultStream', () => {
       stream.write(RESULT);
     });
 
-    it('should "skip" responses with empty values', done => {
+    it('should "skip" responses with empty values', (done) => {
       const fakeResponse = Object.assign({}, RESULT, {values: []});
       const shouldNotBeCalled = () => {
         done(new Error('Should not be called.'));
@@ -147,7 +147,7 @@ describe('PartialResultStream', () => {
       stream
         .on('error', done)
         .on('data', shouldNotBeCalled)
-        .on('response', response => {
+        .on('response', (response) => {
           assert.strictEqual(response, fakeResponse);
           done();
         });
@@ -155,8 +155,8 @@ describe('PartialResultStream', () => {
       stream.write(fakeResponse);
     });
 
-    it('should emit rows', done => {
-      stream.on('error', done).on('data', row => {
+    it('should emit rows', (done) => {
+      stream.on('error', done).on('data', (row) => {
         assert.deepStrictEqual(row, EXPECTED_ROW);
         done();
       });
@@ -164,14 +164,14 @@ describe('PartialResultStream', () => {
       stream.write(RESULT);
     });
 
-    it('should emit rows as JSON', done => {
+    it('should emit rows as JSON', (done) => {
       const jsonOptions = {};
       const stream = new PartialResultStream({json: true, jsonOptions});
 
       const fakeJson = {};
       const stub = sandbox.stub(codec, 'convertFieldsToJson').returns(fakeJson);
 
-      stream.on('error', done).on('data', json => {
+      stream.on('error', done).on('data', (json) => {
         assert.deepStrictEqual(json, fakeJson);
 
         const [row, options] = stub.lastCall.args;
@@ -184,7 +184,7 @@ describe('PartialResultStream', () => {
     });
 
     describe('destroy', () => {
-      it('should ponyfill the destroy method', done => {
+      it('should ponyfill the destroy method', (done) => {
         const fakeError = new Error('err');
 
         const errorStub = sandbox.stub().withArgs(fakeError);
@@ -201,13 +201,13 @@ describe('PartialResultStream', () => {
       });
     });
 
-    it('should not lose data if paused when last chunk is received', done => {
+    it('should not lose data if paused when last chunk is received', (done) => {
       const stream = new PartialResultStream({});
       // Pause the stream initially to force buffering
       stream.pause();
 
       const rows: any[] = [];
-      stream.on('data', row => rows.push(row));
+      stream.on('data', (row) => rows.push(row));
       stream.on('end', () => {
         try {
           // We expect 2 rows.
@@ -257,7 +257,7 @@ describe('PartialResultStream', () => {
       stream = partialResultStream(() => fakeRequestStream);
     });
 
-    it('should only push rows when there is a token', done => {
+    it('should only push rows when there is a token', (done) => {
       const expectedRow = sinon.match(EXPECTED_ROW);
       const stub = sandbox
         .stub()
@@ -282,7 +282,7 @@ describe('PartialResultStream', () => {
       fakeRequestStream.push(null);
     });
 
-    it('should not queue more than 10 results', done => {
+    it('should not queue more than 10 results', (done) => {
       for (let i = 0; i < 11; i += 1) {
         fakeRequestStream.push(RESULT);
       }
@@ -290,14 +290,14 @@ describe('PartialResultStream', () => {
       fakeRequestStream.push(null);
 
       stream.on('error', done).pipe(
-        concat(rows => {
+        concat((rows) => {
           assert.strictEqual(rows.length, 11);
           done();
         }),
       );
     });
 
-    it('should retry if the initial call returned a retryable error', done => {
+    it('should retry if the initial call returned a retryable error', (done) => {
       // This test will emit two rows total:
       // - UNAVAILABLE error (should retry)
       // - Two rows
@@ -325,7 +325,7 @@ describe('PartialResultStream', () => {
         return firstFakeRequestStream;
       });
 
-      requestFnStub.onCall(1).callsFake(resumeToken => {
+      requestFnStub.onCall(1).callsFake((resumeToken) => {
         assert.ok(
           !resumeToken,
           'Retry should be called with empty resume token',
@@ -346,14 +346,14 @@ describe('PartialResultStream', () => {
       partialResultStream(requestFnStub)
         .on('error', done)
         .pipe(
-          concat(rows => {
+          concat((rows) => {
             assert.strictEqual(rows.length, 2);
             done();
           }),
         );
     });
 
-    it('should get Deadline exceeded error if timeout has reached', done => {
+    it('should get Deadline exceeded error if timeout has reached', (done) => {
       const fakeCheckpointStream = through.obj();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (fakeCheckpointStream as any).reset = () => {};
@@ -378,14 +378,14 @@ describe('PartialResultStream', () => {
 
       partialResultStream(requestFnStub, {gaxOptions: {timeout: 0}})
         .on('data', () => {})
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err.code, grpc.status.DEADLINE_EXCEEDED);
           assert.strictEqual(requestFnStub.callCount, 1);
           done();
         });
     });
 
-    it('should resume if there was a retryable error', done => {
+    it('should resume if there was a retryable error', (done) => {
       // This test will emit four rows total:
       // - Two rows
       // - Error event (should retry)
@@ -420,7 +420,7 @@ describe('PartialResultStream', () => {
         return firstFakeRequestStream;
       });
 
-      requestFnStub.onCall(1).callsFake(resumeToken => {
+      requestFnStub.onCall(1).callsFake((resumeToken) => {
         assert.strictEqual(resumeToken, RESULT_WITH_TOKEN.resumeToken);
 
         setTimeout(() => {
@@ -438,14 +438,14 @@ describe('PartialResultStream', () => {
       partialResultStream(requestFnStub)
         .on('error', done)
         .pipe(
-          concat(rows => {
+          concat((rows) => {
             assert.strictEqual(rows.length, 4);
             done();
           }),
         );
     });
 
-    it('should emit non-retryable error', done => {
+    it('should emit non-retryable error', (done) => {
       // This test will emit two rows and then an error.
       const fakeCheckpointStream = through.obj();
       sandbox.stub(checkpointStream, 'obj').returns(fakeCheckpointStream);
@@ -474,10 +474,10 @@ describe('PartialResultStream', () => {
 
       const receivedRows: Row[] = [];
       partialResultStream(requestFnStub)
-        .on('data', row => {
+        .on('data', (row) => {
           receivedRows.push(row);
         })
-        .on('error', err => {
+        .on('error', (err) => {
           // We should receive two rows before we get an error.
           assert.strictEqual(receivedRows.length, 2);
           assert.strictEqual(err.code, grpc.status.DATA_LOSS);
@@ -486,13 +486,13 @@ describe('PartialResultStream', () => {
         });
     });
 
-    it('should emit rows and error when there is no token', done => {
+    it('should emit rows and error when there is no token', (done) => {
       const expectedRow = sinon.match(EXPECTED_ROW);
       const error = new Error('Error.');
 
       const dataStub = sandbox.stub().withArgs(expectedRow);
 
-      stream.on('data', dataStub).on('error', err => {
+      stream.on('data', dataStub).on('error', (err) => {
         assert.strictEqual(err, error);
         assert.strictEqual(dataStub.callCount, 3);
         done();

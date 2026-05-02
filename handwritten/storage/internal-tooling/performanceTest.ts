@@ -96,14 +96,14 @@ function createWorker() {
     argv: process.argv.slice(2),
   });
 
-  w.on('message', data => {
+  w.on('message', (data) => {
     log('Successfully completed iteration.', argv.debug as boolean);
     recordResult(data);
     if (iterationsRemaining > 0) {
       createWorker();
     }
   });
-  w.on('error', e => {
+  w.on('error', (e) => {
     log(e, true, true);
     // BBMC will not report errors unless the process is terminated with a non zero code.
     // eslint-disable-next-line no-process-exit

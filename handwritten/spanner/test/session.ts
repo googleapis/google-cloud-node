@@ -160,7 +160,7 @@ describe('Session', () => {
     });
 
     describe('createMethod', () => {
-      it('should create and return a Session', done => {
+      it('should create and return a Session', (done) => {
         const options = {};
 
         const apiResponse = {};
@@ -197,7 +197,7 @@ describe('Session', () => {
         );
       });
 
-      it('should check for options', done => {
+      it('should check for options', (done) => {
         const databaseInstance = extend({}, DATABASE, {
           createSession(options, callback) {
             assert.deepStrictEqual(options, {});
@@ -216,7 +216,7 @@ describe('Session', () => {
         });
       });
 
-      it('should return an error from creating a Session', done => {
+      it('should return an error from creating a Session', (done) => {
         const error = new Error('Error.');
         const apiResponse = {};
 
@@ -281,10 +281,10 @@ describe('Session', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
-      session.request = config => {
+      session.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -293,7 +293,7 @@ describe('Session', () => {
   });
 
   describe('getMetadata', () => {
-    it('should correctly call and return the request using callback', done => {
+    it('should correctly call and return the request using callback', (done) => {
       const requestReturnValue = {};
 
       session.request = (config, callback) => {
@@ -323,7 +323,7 @@ describe('Session', () => {
     it('should correctly call and return the request using promise', async () => {
       const requestReturnValue = {};
 
-      session.request = config => {
+      session.request = (config) => {
         assert.strictEqual(config.client, 'SpannerClient');
         assert.strictEqual(config.method, 'getSession');
         assert.deepStrictEqual(config.reqOpts, {
@@ -337,7 +337,7 @@ describe('Session', () => {
             session.commonHeaders_,
           ),
         );
-        return new Promise(resolve => resolve(requestReturnValue));
+        return new Promise((resolve) => resolve(requestReturnValue));
       };
 
       const returnValue = await session.getMetadata();
@@ -350,7 +350,7 @@ describe('Session', () => {
       function callback() {}
 
       session.parent.parent.parent.routeToLeaderEnabled = false;
-      session.request = config => {
+      session.request = (config) => {
         assert.strictEqual(config.client, 'SpannerClient');
         assert.strictEqual(config.method, 'getSession');
         assert.deepStrictEqual(config.reqOpts, {
@@ -365,33 +365,33 @@ describe('Session', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept and pass gaxOptions to request', done => {
+    it('should accept and pass gaxOptions to request', (done) => {
       const gaxOptions = {};
-      session.request = config => {
+      session.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
       session.getMetadata(gaxOptions, assert.ifError);
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const metadata = {};
       session.request = (config, callback) => {
         callback(null, metadata);
       };
-      session.getMetadata(err => {
+      session.getMetadata((err) => {
         assert.ifError(err);
         assert.strictEqual(session.metadata, metadata);
         done();
       });
     });
 
-    it('should call callback with error', done => {
+    it('should call callback with error', (done) => {
       const error = new Error('Error');
       session.request = (config, callback) => {
         callback(error);
       };
-      session.getMetadata(err => {
+      session.getMetadata((err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -424,9 +424,9 @@ describe('Session', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      session.request = config => {
+      session.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };

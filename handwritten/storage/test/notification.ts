@@ -135,12 +135,12 @@ describe('Notification', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const options = {};
 
       BUCKET.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, 'notificationConfigs/123');
@@ -151,10 +151,10 @@ describe('Notification', () => {
       notification.delete(options, done);
     });
 
-    it('should optionally accept options', done => {
+    it('should optionally accept options', (done) => {
       BUCKET.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.deepStrictEqual(reqOpts.qs, {});
         callback(); // the done fn
@@ -163,10 +163,10 @@ describe('Notification', () => {
       notification.delete(done);
     });
 
-    it('should optionally accept a callback', done => {
+    it('should optionally accept a callback', (done) => {
       BUCKET.request = (
         _reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(); // the done fn
       };
@@ -176,7 +176,7 @@ describe('Notification', () => {
   });
 
   describe('get', () => {
-    it('should get the metadata', done => {
+    it('should get the metadata', (done) => {
       notification.getMetadata = () => {
         done();
       };
@@ -184,7 +184,7 @@ describe('Notification', () => {
       notification.get(assert.ifError);
     });
 
-    it('should accept an options object', done => {
+    it('should accept an options object', (done) => {
       const options = {};
 
       notification.getMetadata = (options_: {}) => {
@@ -195,7 +195,7 @@ describe('Notification', () => {
       notification.get(options, assert.ifError);
     });
 
-    it('should execute callback with error & metadata', done => {
+    it('should execute callback with error & metadata', (done) => {
       const error = new Error('Error.');
       const metadata = {};
 
@@ -212,7 +212,7 @@ describe('Notification', () => {
       });
     });
 
-    it('should execute callback with instance & metadata', done => {
+    it('should execute callback with instance & metadata', (done) => {
       const metadata = {};
 
       notification.getMetadata = (_options: {}, callback: Function) => {
@@ -245,12 +245,12 @@ describe('Notification', () => {
         };
       });
 
-      it('should pass config to create if it was provided', done => {
+      it('should pass config to create if it was provided', (done) => {
         const config = Object.assign(
           {},
           {
             maxResults: 5,
-          }
+          },
         );
 
         notification.get = (config_: {}) => {
@@ -261,7 +261,7 @@ describe('Notification', () => {
         notification.get(config);
       });
 
-      it('should pass only a callback to create if no config', done => {
+      it('should pass only a callback to create if no config', (done) => {
         notification.create = (callback: Function) => {
           callback(); // done()
         };
@@ -270,7 +270,7 @@ describe('Notification', () => {
       });
 
       describe('error', () => {
-        it('should execute callback with error & API response', done => {
+        it('should execute callback with error & API response', (done) => {
           const error = new Error('Error.');
           const apiResponse = {};
 
@@ -290,11 +290,11 @@ describe('Notification', () => {
               assert.strictEqual(instance, null);
               assert.strictEqual(resp, apiResponse);
               done();
-            }
+            },
           );
         });
 
-        it('should refresh the metadata after a 409', done => {
+        it('should refresh the metadata after a 409', (done) => {
           const error = {
             code: 409,
           };
@@ -315,7 +315,7 @@ describe('Notification', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const options = {};
 
       BUCKET.request = (reqOpts: DecorateRequestOptions) => {
@@ -327,7 +327,7 @@ describe('Notification', () => {
       notification.getMetadata(options, assert.ifError);
     });
 
-    it('should optionally accept options', done => {
+    it('should optionally accept options', (done) => {
       BUCKET.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -336,13 +336,13 @@ describe('Notification', () => {
       notification.getMetadata(assert.ifError);
     });
 
-    it('should return any errors to the callback', done => {
+    it('should return any errors to the callback', (done) => {
       const error = new Error('err');
       const response = {};
 
       BUCKET.request = (
         _reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error, response, response);
       };
@@ -355,12 +355,12 @@ describe('Notification', () => {
       });
     });
 
-    it('should set and return the metadata', done => {
+    it('should set and return the metadata', (done) => {
       const response = {};
 
       BUCKET.request = (
         _reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(null, response, response);
       };

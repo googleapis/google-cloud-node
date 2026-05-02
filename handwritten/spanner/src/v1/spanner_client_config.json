@@ -3,14 +3,8 @@
     "google.spanner.v1.Spanner": {
       "retry_codes": {
         "non_idempotent": [],
-        "idempotent": [
-          "DEADLINE_EXCEEDED",
-          "UNAVAILABLE"
-        ],
-        "resource_exhausted_unavailable": [
-          "RESOURCE_EXHAUSTED",
-          "UNAVAILABLE"
-        ]
+        "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
+        "resource_exhausted_unavailable": ["RESOURCE_EXHAUSTED", "UNAVAILABLE"]
       },
       "retry_params": {
         "default": {

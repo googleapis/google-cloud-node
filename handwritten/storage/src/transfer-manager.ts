@@ -260,7 +260,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async initiateUpload(headers: Headers = {}): Promise<void> {
     const url = `${this.baseUrl}?uploads`;
-    return AsyncRetry(async bail => {
+    return AsyncRetry(async (bail) => {
       try {
         const res = await this.authClient.request({
           headers: this.#setGoogApiClientHeaders(headers),
@@ -307,7 +307,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
     }
 
-    return AsyncRetry(async bail => {
+    return AsyncRetry(async (bail) => {
       try {
         const res = await this.authClient.request({
           url,
@@ -342,7 +342,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const body = `<CompleteMultipartUpload>${this.xmlBuilder.build(
       parts,
     )}</CompleteMultipartUpload>`;
-    return AsyncRetry(async bail => {
+    return AsyncRetry(async (bail) => {
       try {
         const res = await this.authClient.request({
           headers: this.#setGoogApiClientHeaders(),
@@ -369,7 +369,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    */
   async abortUpload(): Promise<void> {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
-    return AsyncRetry(async bail => {
+    return AsyncRetry(async (bail) => {
       try {
         const res = await this.authClient.request({
           url,
@@ -611,7 +611,7 @@ export class TransferManager {
     let files: File[] = [];
 
     const baseDestination = path.resolve(
-      options.passthroughOptions?.destination || '.'
+      options.passthroughOptions?.destination || '.',
     );
 
     if (!Array.isArray(filesOrFolder)) {
@@ -620,7 +620,7 @@ export class TransferManager {
       });
       files = directoryFiles[0];
     } else {
-      files = filesOrFolder.map(curFile => {
+      files = filesOrFolder.map((curFile) => {
         if (typeof curFile === 'string') {
           return this.bucket.file(curFile);
         }
@@ -705,7 +705,7 @@ export class TransferManager {
             await fsp.mkdir(path.dirname(destination), {recursive: true});
 
             const resp = (await file.download(
-              passThroughOptionsCopy
+              passThroughOptionsCopy,
             )) as DownloadResponseWithStatus;
 
             finalResults[i] = {
@@ -723,7 +723,7 @@ export class TransferManager {
             errorResp.error = err as Error;
             finalResults[i] = errorResp;
           }
-        })
+        }),
       );
     }
 
@@ -922,7 +922,7 @@ export class TransferManager {
           promises = [];
         }
         promises.push(
-          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation))
+          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation)),
         );
       }
       await Promise.all(promises);

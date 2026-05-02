@@ -209,11 +209,11 @@ describe('EndToEnd', async () => {
       );
     });
 
-    it('getSnapshot', done => {
+    it('getSnapshot', (done) => {
       database.getSnapshot((err, transaction) => {
         assert.ifError(err);
 
-        transaction!.run('SELECT 1', async err => {
+        transaction!.run('SELECT 1', async (err) => {
           assert.ifError(err);
           transaction!.end();
           const expectedSpanNames = [
@@ -238,7 +238,7 @@ describe('EndToEnd', async () => {
       });
     });
 
-    it('getTransaction', done => {
+    it('getTransaction', (done) => {
       database.getTransaction(async (err, transaction) => {
         assert.ifError(err);
         assert.ok(transaction);
@@ -256,7 +256,7 @@ describe('EndToEnd', async () => {
       });
     });
 
-    it('runStream', done => {
+    it('runStream', (done) => {
       database
         .runStream('SELECT 1')
         .on('data', () => {})
@@ -300,7 +300,7 @@ describe('EndToEnd', async () => {
       );
     });
 
-    it('runTransaction', done => {
+    it('runTransaction', (done) => {
       database.runTransaction(async (err, transaction) => {
         assert.ifError(err);
         await transaction!.run('SELECT 1');
@@ -330,7 +330,7 @@ describe('EndToEnd', async () => {
     });
 
     it('runTransactionAsync', async () => {
-      await database.runTransactionAsync(async transaction => {
+      await database.runTransactionAsync(async (transaction) => {
         await transaction!.run('SELECT 1');
       });
 
@@ -352,7 +352,7 @@ describe('EndToEnd', async () => {
       );
     });
 
-    it('writeAtLeastOnce', done => {
+    it('writeAtLeastOnce', (done) => {
       const blankMutations = new MutationSet();
       database.writeAtLeastOnce(blankMutations, async (err, response) => {
         assert.ifError(err);
@@ -376,8 +376,8 @@ describe('EndToEnd', async () => {
       });
     });
 
-    it('batchCreateSessions', done => {
-      database.batchCreateSessions(5, async err => {
+    it('batchCreateSessions', (done) => {
+      database.batchCreateSessions(5, async (err) => {
         assert.ifError(err);
         const expectedSpanNames = ['CloudSpanner.Database.batchCreateSessions'];
         const expectedEventNames = [];
@@ -554,9 +554,9 @@ describe('ObservabilityOptions injection and propagation', async () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -578,7 +578,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
           'Transaction Creation Done',
         ];
         assert.strictEqual(
-          actualEventNames.every(value => expectedEventNames.includes(value)),
+          actualEventNames.every((value) => expectedEventNames.includes(value)),
           true,
           `Unexpected events:\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
         );
@@ -589,7 +589,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       }
     });
 
-    it('Transaction.begin+Dml.runUpdate', done => {
+    it('Transaction.begin+Dml.runUpdate', (done) => {
       database.getTransaction(async (err, tx) => {
         assert.ifError(err);
 
@@ -597,7 +597,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
         traceExporter.reset();
 
         await tx!.begin();
-        tx!.runUpdate(updateSql, async err => {
+        tx!.runUpdate(updateSql, async (err) => {
           assert.ifError(err);
           tx!.end();
 
@@ -609,9 +609,9 @@ describe('ObservabilityOptions injection and propagation', async () => {
 
           const actualSpanNames: string[] = [];
           const actualEventNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -634,7 +634,9 @@ describe('ObservabilityOptions injection and propagation', async () => {
             'Starting stream',
           ];
           assert.deepStrictEqual(
-            actualEventNames.every(value => expectedEventNames.includes(value)),
+            actualEventNames.every((value) =>
+              expectedEventNames.includes(value),
+            ),
             true,
             `Unexpected events:\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
           );
@@ -644,7 +646,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       });
     });
 
-    it('runStream', done => {
+    it('runStream', (done) => {
       let rowCount = 0;
       database.getTransaction((err, tx) => {
         assert.ifError(err);
@@ -664,9 +666,9 @@ describe('ObservabilityOptions injection and propagation', async () => {
 
             const actualSpanNames: string[] = [];
             const actualEventNames: string[] = [];
-            spans.forEach(span => {
+            spans.forEach((span) => {
               actualSpanNames.push(span.name);
-              span.events.forEach(event => {
+              span.events.forEach((event) => {
                 actualEventNames.push(event.name);
               });
             });
@@ -698,7 +700,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       });
     });
 
-    it('rollback', done => {
+    it('rollback', (done) => {
       database.getTransaction(async (err, tx) => {
         assert.ifError(err);
 
@@ -707,7 +709,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
 
         await tx!.begin();
 
-        tx!.runUpdate(updateSql, async err => {
+        tx!.runUpdate(updateSql, async (err) => {
           assert.ifError(err);
           tx!.rollback(async () => {
             tx!.end();
@@ -719,9 +721,9 @@ describe('ObservabilityOptions injection and propagation', async () => {
 
             const actualSpanNames: string[] = [];
             const actualEventNames: string[] = [];
-            spans.forEach(span => {
+            spans.forEach((span) => {
               actualSpanNames.push(span.name);
-              span.events.forEach(event => {
+              span.events.forEach((event) => {
                 actualEventNames.push(event.name);
               });
             });
@@ -745,7 +747,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
               'Starting stream',
             ];
             assert.strictEqual(
-              actualEventNames.every(value =>
+              actualEventNames.every((value) =>
                 expectedEventNames.includes(value),
               ),
               true,
@@ -814,9 +816,9 @@ describe('ObservabilityOptions injection and propagation', async () => {
       withAllSpansHaveDBName(spansFromInjected);
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spansFromInjected.forEach(span => {
+      spansFromInjected.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -898,9 +900,9 @@ describe('E2E traces with async/await', async () => {
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       actualSpanNames.push(span.name);
-      span.events.forEach(event => {
+      span.events.forEach((event) => {
         actualEventNames.push(event.name);
       });
     });
@@ -1009,7 +1011,7 @@ describe('E2E traces with async/await', async () => {
 
       const [rows] = await database.run(query);
 
-      rows.forEach(row => {
+      rows.forEach((row) => {
         row.toJSON();
       });
 
@@ -1020,7 +1022,7 @@ describe('E2E traces with async/await', async () => {
     assertAsyncAwaitExpectations();
   });
 
-  it('callback correctly parents trace spans', done => {
+  it('callback correctly parents trace spans', (done) => {
     function main(onComplete) {
       const instance = spanner.instance('testing');
       const database = instance.database('db-1');
@@ -1030,7 +1032,7 @@ describe('E2E traces with async/await', async () => {
       };
 
       database.run(query, (err, rows) => {
-        rows.forEach(row => {
+        rows.forEach((row) => {
           row.toJSON();
         });
 
@@ -1119,9 +1121,9 @@ SELECT 1p
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       actualSpanNames.push(span.name);
-      span.events.forEach(event => {
+      span.events.forEach((event) => {
         actualEventNames.push(event.name);
       });
     });
@@ -1248,11 +1250,11 @@ SELECT 1p
     assertRunBadSyntaxExpectations();
   });
 
-  it('database.run with bad syntax: callback', done => {
+  it('database.run with bad syntax: callback', (done) => {
     const instance = spanner.instance('instance');
     const database = instance.database('database');
 
-    database.run(selectSql1p, err => {
+    database.run(selectSql1p, (err) => {
       assert.ok(err);
       provider.forceFlush();
       assertRunBadSyntaxExpectations();
@@ -1269,9 +1271,9 @@ SELECT 1p
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       actualSpanNames.push(span.name);
-      span.events.forEach(event => {
+      span.events.forEach((event) => {
         actualEventNames.push(event.name);
       });
     });
@@ -1400,7 +1402,7 @@ SELECT 1p
     };
 
     try {
-      await database.runTransactionAsync(async transaction => {
+      await database.runTransactionAsync(async (transaction) => {
         try {
           await transaction!.run(update);
         } finally {
@@ -1532,7 +1534,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
       traceExporter.reset();
     });
     const streamIndexes = [1, 2];
-    streamIndexes.forEach(index => {
+    streamIndexes.forEach((index) => {
       it('should retry UNAVAILABLE during streaming', async () => {
         const database = newTestDatabase();
         const err = {
@@ -1561,7 +1563,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         );
         const database = newTestDatabase();
 
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           await tx.run(selectSql);
           await tx.commit();
         });
@@ -1569,8 +1571,8 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
         const requests = spannerMock
           .getRequests()
-          .filter(val => (val as v1.ExecuteSqlRequest).sql)
-          .map(req => req as v1.ExecuteSqlRequest);
+          .filter((val) => (val as v1.ExecuteSqlRequest).sql)
+          .map((req) => req as v1.ExecuteSqlRequest);
         assert.strictEqual(requests.length, 2);
         assert.ok(
           requests[0].transaction?.begin!.readWrite,
@@ -1598,7 +1600,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         );
         const database = newTestDatabase();
 
-        await database.runTransactionAsync(async tx => {
+        await database.runTransactionAsync(async (tx) => {
           const [rows1, rows2] = await Promise.all([
             tx!.run(selectSql),
             tx!.run(selectSql),
@@ -1611,8 +1613,8 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
         const requests = spannerMock
           .getRequests()
-          .filter(val => (val as v1.ExecuteSqlRequest).sql)
-          .map(req => req as v1.ExecuteSqlRequest);
+          .filter((val) => (val as v1.ExecuteSqlRequest).sql)
+          .map((req) => req as v1.ExecuteSqlRequest);
         assert.strictEqual(requests.length, 3);
         assert.ok(
           requests[0].transaction?.begin!.readWrite,
@@ -1628,8 +1630,8 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         );
         const commitRequests = spannerMock
           .getRequests()
-          .filter(val => (val as v1.CommitRequest).mutations)
-          .map(req => req as v1.CommitRequest);
+          .filter((val) => (val as v1.CommitRequest).mutations)
+          .map((req) => req as v1.CommitRequest);
         assert.strictEqual(commitRequests.length, 1);
         assert.deepStrictEqual(
           requests[1].transaction!.id,
@@ -1641,8 +1643,10 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         );
         const beginTxnRequests = spannerMock
           .getRequests()
-          .filter(val => (val as v1.BeginTransactionRequest).options?.readWrite)
-          .map(req => req as v1.BeginTransactionRequest);
+          .filter(
+            (val) => (val as v1.BeginTransactionRequest).options?.readWrite,
+          )
+          .map((req) => req as v1.BeginTransactionRequest);
         assert.deepStrictEqual(beginTxnRequests.length, 0);
       });
 
@@ -1668,7 +1672,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         await database.close();
       });
 
-      it('should retry UNAVAILABLE during streaming with a callback', done => {
+      it('should retry UNAVAILABLE during streaming with a callback', (done) => {
         const database = newTestDatabase();
         const err = {
           message: 'Temporary unavailable',
@@ -1685,11 +1689,11 @@ describe('Traces for ExecuteStream broken stream retries', () => {
           database
             .close()
             .then(() => done())
-            .catch(err => done(err));
+            .catch((err) => done(err));
         });
       });
 
-      it('should not retry non-retryable error during streaming with a callback', done => {
+      it('should not retry non-retryable error during streaming with a callback', (done) => {
         const database = newTestDatabase();
         const err = {
           message: 'Non-retryable error',
@@ -1699,17 +1703,17 @@ describe('Traces for ExecuteStream broken stream retries', () => {
           spannerMock.executeStreamingSql,
           mock.SimulatedExecutionTime.ofError(err),
         );
-        database.run(selectSql, err => {
+        database.run(selectSql, (err) => {
           assert.ok(err, 'Missing expected error');
           assert.strictEqual(err!.message, '2 UNKNOWN: Non-retryable error');
           database
             .close()
             .then(() => done())
-            .catch(err => done(err));
+            .catch((err) => done(err));
         });
       });
 
-      it('should emit non-retryable error during streaming to stream', done => {
+      it('should emit non-retryable error during streaming to stream', (done) => {
         const database = newTestDatabase();
 
         const err = {
@@ -1725,13 +1729,13 @@ describe('Traces for ExecuteStream broken stream retries', () => {
           .runStream(selectSql)
           // We will receive data for the partial result sets that are
           // returned before the error occurs.
-          .on('data', row => {
+          .on('data', (row) => {
             receivedRows.push(row);
           })
           .on('end', () => {
             assert.fail('Missing expected error');
           })
-          .on('error', err => {
+          .on('error', (err) => {
             assert.strictEqual(err.message, '2 UNKNOWN: Non-retryable error');
             database
               .close()
@@ -1744,9 +1748,9 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
                 const actualSpanNames: string[] = [];
                 const actualEventNames: string[] = [];
-                spans.forEach(span => {
+                spans.forEach((span) => {
                   actualSpanNames.push(span.name);
-                  span.events.forEach(event => {
+                  span.events.forEach((event) => {
                     actualEventNames.push(event.name);
                   });
                 });
@@ -1778,7 +1782,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
                 done();
               })
-              .catch(err => done(err));
+              .catch((err) => done(err));
           });
       });
     });
@@ -1810,9 +1814,9 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       actualSpanNames.push(span.name);
-      span.events.forEach(event => {
+      span.events.forEach((event) => {
         actualEventNames.push(event.name);
       });
     });
@@ -1859,7 +1863,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
       mock.SimulatedExecutionTime.ofError(err),
     );
 
-    await database.runTransactionAsync(async tx => {
+    await database.runTransactionAsync(async (tx) => {
       const [updateCount] = await tx!.runUpdate(insertSql);
       assert.strictEqual(updateCount, 1);
       await tx!.commit();
@@ -1872,9 +1876,9 @@ describe('Traces for ExecuteStream broken stream retries', () => {
     const spans = traceExporter.getFinishedSpans();
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       actualSpanNames.push(span.name);
-      span.events.forEach(event => {
+      span.events.forEach((event) => {
         actualEventNames.push(event.name);
       });
     });
@@ -1929,9 +1933,9 @@ describe('Traces for ExecuteStream broken stream retries', () => {
     );
     let attempts = 0;
 
-    await database.runTransactionAsync(async tx => {
+    await database.runTransactionAsync(async (tx) => {
       attempts++;
-      await tx!.runUpdate(insertSql, err => {
+      await tx!.runUpdate(insertSql, (err) => {
         assert.ok(err, 'Missing expected error');
         assert.strictEqual(err!.code, grpc.status.INVALID_ARGUMENT);
         assert.strictEqual(attempts, 1);
@@ -2001,7 +2005,7 @@ describe('End to end tracing headers', () => {
       await txn.run('SELECT 1');
       let metadataCountWithE2EHeader = 0;
       let metadataCountWithTraceParent = 0;
-      spannerMock.getMetadata().forEach(metadata => {
+      spannerMock.getMetadata().forEach((metadata) => {
         if (metadata.get(END_TO_END_TRACING_HEADER)[0] !== undefined) {
           metadataCountWithE2EHeader++;
           assert.strictEqual(

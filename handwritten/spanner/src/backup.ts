@@ -583,7 +583,7 @@ class Backup {
         gaxOpts,
         headers: this.resourceHeader_,
       },
-      err => {
+      (err) => {
         callback!(err);
       },
     );

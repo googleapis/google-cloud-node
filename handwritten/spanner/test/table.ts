@@ -111,7 +111,7 @@ describe('Table', () => {
   });
 
   describe('create', () => {
-    it('should create a table from the database', done => {
+    it('should create a table from the database', (done) => {
       const schema = 'schema';
 
       table.database = {
@@ -124,7 +124,7 @@ describe('Table', () => {
       table.create(schema, done);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOpts = {};
 
       table.database = {
@@ -155,12 +155,12 @@ describe('Table', () => {
         .callsFake((_, callback) => callback(null, transaction));
     });
 
-    it('should destroy the user stream if unable to get a snapshot', done => {
+    it('should destroy the user stream if unable to get a snapshot', (done) => {
       const fakeError = new Error('err');
 
       getSnapshotStub.callsFake((options, callback) => callback(fakeError));
 
-      table.createReadStream(REQUEST).on('error', err => {
+      table.createReadStream(REQUEST).on('error', (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
@@ -176,11 +176,11 @@ describe('Table', () => {
       assert.strictEqual(options, fakeOptions);
     });
 
-    it('should destroy the user stream and end the txn on error', done => {
+    it('should destroy the user stream and end the txn on error', (done) => {
       const endStub = sandbox.stub(transaction, 'end');
       const fakeError = new Error('err');
 
-      table.createReadStream(REQUEST).on('error', err => {
+      table.createReadStream(REQUEST).on('error', (err) => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(endStub.callCount, 1);
         done();
@@ -189,24 +189,24 @@ describe('Table', () => {
       fakeReadStream.destroy(fakeError);
     });
 
-    it('should pipe data into the user stream', done => {
+    it('should pipe data into the user stream', (done) => {
       const expectedData = [{}, {}, {}];
       const received: Array<{}> = [];
 
       table
         .createReadStream(REQUEST)
         .on('error', done)
-        .on('data', data => received.push(data))
+        .on('data', (data) => received.push(data))
         .on('end', () => {
           assert.deepStrictEqual(received, expectedData);
           done();
         });
 
-      expectedData.forEach(data => fakeReadStream.write(data));
+      expectedData.forEach((data) => fakeReadStream.write(data));
       fakeReadStream.end();
     });
 
-    it('should end the transaction on stream end', done => {
+    it('should end the transaction on stream end', (done) => {
       sandbox.stub(transaction, 'end').callsFake(done);
       table.createReadStream(REQUEST).on('error', done);
       fakeReadStream.end();
@@ -219,7 +219,7 @@ describe('Table', () => {
         getDatabaseDialect: () => {
           return 'GOOGLE_STANDARD_SQL';
         },
-        updateSchema: schema => {
+        updateSchema: (schema) => {
           assert.strictEqual(schema, 'DROP TABLE `table-name`');
         },
       };
@@ -246,7 +246,7 @@ describe('Table', () => {
         getDatabaseDialect: () => {
           return 'GOOGLE_STANDARD_SQL';
         },
-        updateSchema: schema => {
+        updateSchema: (schema) => {
           assert.strictEqual(schema, 'DROP TABLE `schema`.`table-name`');
         },
       };
@@ -273,7 +273,7 @@ describe('Table', () => {
         getDatabaseDialect: () => {
           return 'POSTGRESQL';
         },
-        updateSchema: schema => {
+        updateSchema: (schema) => {
           assert.strictEqual(schema, `DROP TABLE "${table.name}"`);
         },
       };
@@ -302,7 +302,7 @@ describe('Table', () => {
         getDatabaseDialect: () => {
           return 'POSTGRESQL';
         },
-        updateSchema: schema => {
+        updateSchema: (schema) => {
           assert.strictEqual(schema, `DROP TABLE "schema"."${table.name}"`);
         },
       };
@@ -325,10 +325,10 @@ describe('Table', () => {
       tableWithSchema.delete(callback);
     });
 
-    it('should accept and pass gaxOptions to updateSchema', done => {
+    it('should accept and pass gaxOptions to updateSchema', (done) => {
       const gaxOptions = {};
       table.database = {
-        getDatabaseDialect: gaxOptionsFromTable => {
+        getDatabaseDialect: (gaxOptionsFromTable) => {
           assert.strictEqual(gaxOptionsFromTable, gaxOptions);
           return 'GOOGLE_STANDARD_SQL';
         },
@@ -344,83 +344,83 @@ describe('Table', () => {
   describe('deleteRows', () => {
     const KEYS = ['key'];
 
-    it('should return an error if unable to get a txn', done => {
+    it('should return an error if unable to get a txn', (done) => {
       const fakeError = new Error('err');
 
       sandbox
         .stub(DATABASE, 'runTransaction')
         .callsFake((opts, callback) => callback(fakeError));
 
-      table.deleteRows(KEYS, err => {
+      table.deleteRows(KEYS, (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
       table.deleteRows(KEYS, gaxOptions, assert.ifError);
     });
 
-    it('should accept commit options', done => {
+    it('should accept commit options', (done) => {
       const deleteRowsOptions = {returnCommitStats: true};
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, deleteRowsOptions);
         done();
       };
       table.deleteRows(KEYS, deleteRowsOptions, assert.ifError);
     });
 
-    it('should accept gax options in commit options', done => {
+    it('should accept gax options in commit options', (done) => {
       const deleteRowsOptions = {
         returnCommitStats: true,
         gaxOptions: {},
       };
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, deleteRowsOptions);
         done();
       };
       table.deleteRows(KEYS, deleteRowsOptions, assert.ifError);
     });
 
-    it('should accept requestOptions', done => {
+    it('should accept requestOptions', (done) => {
       const deleteRowsOptions = {
         requestOptions: {priority: RequestOptions.Priority.PRIORITY_HIGH},
       };
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, deleteRowsOptions);
         done();
       };
       table.deleteRows(KEYS, deleteRowsOptions, assert.ifError);
     });
 
-    it('should accept isolationLevel option', done => {
+    it('should accept isolationLevel option', (done) => {
       const deleteRowsOptions = {
         isolationLevel: IsolationLevel.REPEATABLE_READ,
       };
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, deleteRowsOptions);
         done();
       };
       table.deleteRows(KEYS, deleteRowsOptions, assert.ifError);
     });
 
-    it('should accept readLockMode option', done => {
+    it('should accept readLockMode option', (done) => {
       const deleteRowsOptions = {
         readLockMode: ReadLockMode.OPTIMISTIC,
       };
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, deleteRowsOptions);
         done();
       };
       table.deleteRows(KEYS, deleteRowsOptions, assert.ifError);
     });
 
-    it('should delete the rows via transaction', done => {
+    it('should delete the rows via transaction', (done) => {
       const stub = (
         sandbox.stub(transaction, 'deleteRows') as sinon.SinonStub
       ).withArgs(table.name, KEYS);
@@ -429,7 +429,7 @@ describe('Table', () => {
         callback();
       });
 
-      table.deleteRows(KEYS, err => {
+      table.deleteRows(KEYS, (err) => {
         assert.ifError(err);
         assert.strictEqual(stub.callCount, 1);
         done();
@@ -438,7 +438,7 @@ describe('Table', () => {
   });
 
   describe('drop', () => {
-    it('should call through to Table#delete', done => {
+    it('should call through to Table#delete', (done) => {
       const returnVal = Promise.resolve();
 
       table.delete = (gaxOptions, callback) => {
@@ -451,9 +451,9 @@ describe('Table', () => {
       assert.strictEqual(promise, returnVal);
     });
 
-    it('should accept and pass gaxOptions to Table#delete', done => {
+    it('should accept and pass gaxOptions to Table#delete', (done) => {
       const gaxOptions = {};
-      table.delete = gaxOptionsFromDrop => {
+      table.delete = (gaxOptionsFromDrop) => {
         assert.strictEqual(gaxOptionsFromDrop, gaxOptions);
         done();
       };
@@ -464,38 +464,38 @@ describe('Table', () => {
   describe('insert', () => {
     const ROW = {};
 
-    it('should return any runTransaction errors', done => {
+    it('should return any runTransaction errors', (done) => {
       const fakeError = new Error('err');
 
       sandbox
         .stub(DATABASE, 'runTransaction')
         .callsFake((opts, callback) => callback(fakeError));
 
-      table.insert(ROW, err => {
+      table.insert(ROW, (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
     });
 
-    it('should insert via transaction', done => {
+    it('should insert via transaction', (done) => {
       const stub = (
         sandbox.stub(transaction, 'insert') as sinon.SinonStub
       ).withArgs(table.name, ROW);
 
-      table.insert(ROW, err => {
+      table.insert(ROW, (err) => {
         assert.ifError(err);
         assert.strictEqual(stub.callCount, 1);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       (sandbox.stub(transaction, 'insert') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
@@ -503,13 +503,13 @@ describe('Table', () => {
       table.insert(ROW, gaxOptions, assert.ifError);
     });
 
-    it('should accept commit options', done => {
+    it('should accept commit options', (done) => {
       const insertRowsOptions = {returnCommitStats: true};
       (sandbox.stub(transaction, 'insert') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, insertRowsOptions);
         done();
       };
@@ -517,7 +517,7 @@ describe('Table', () => {
       table.insert(ROW, insertRowsOptions, assert.ifError);
     });
 
-    it('should accept gax options in commit options', done => {
+    it('should accept gax options in commit options', (done) => {
       const insertRowsOptions = {
         returnCommitStats: true,
         gaxOptions: {},
@@ -526,7 +526,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, insertRowsOptions);
         done();
       };
@@ -534,7 +534,7 @@ describe('Table', () => {
       table.insert(ROW, insertRowsOptions, assert.ifError);
     });
 
-    it('should accept requestOptions', done => {
+    it('should accept requestOptions', (done) => {
       const insertRowsOptions = {
         requestOptions: {priority: RequestOptions.Priority.PRIORITY_HIGH},
       };
@@ -542,7 +542,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, insertRowsOptions);
         done();
       };
@@ -550,7 +550,7 @@ describe('Table', () => {
       table.insert(ROW, insertRowsOptions, assert.ifError);
     });
 
-    it('should accept isolationLevel options', done => {
+    it('should accept isolationLevel options', (done) => {
       const insertRowsOptions = {
         isolationLevel: IsolationLevel.REPEATABLE_READ,
       };
@@ -558,7 +558,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, insertRowsOptions);
         done();
       };
@@ -566,7 +566,7 @@ describe('Table', () => {
       table.insert(ROW, insertRowsOptions, assert.ifError);
     });
 
-    it('should accept readLockMode options', done => {
+    it('should accept readLockMode options', (done) => {
       const insertRowsOptions = {
         readLockMode: ReadLockMode.OPTIMISTIC,
       };
@@ -574,7 +574,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, insertRowsOptions);
         done();
       };
@@ -584,7 +584,7 @@ describe('Table', () => {
   });
 
   describe('read', () => {
-    it('should call and collect results from a stream', done => {
+    it('should call and collect results from a stream', (done) => {
       const keyVals = [];
 
       const rows = [{}, {}];
@@ -614,7 +614,7 @@ describe('Table', () => {
       });
     });
 
-    it('should accept an options object', done => {
+    it('should accept an options object', (done) => {
       const OPTIONS = {};
 
       table.createReadStream = (keyVals, options) => {
@@ -632,7 +632,7 @@ describe('Table', () => {
       table.read([], OPTIONS, done);
     });
 
-    it('should execute callback with error', done => {
+    it('should execute callback with error', (done) => {
       const error = new Error('Error.');
 
       table.createReadStream = () => {
@@ -643,7 +643,7 @@ describe('Table', () => {
         return stream;
       };
 
-      table.read([], err => {
+      table.read([], (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -653,38 +653,38 @@ describe('Table', () => {
   describe('replace', () => {
     const ROW = {};
 
-    it('should return any runTransaction errors', done => {
+    it('should return any runTransaction errors', (done) => {
       const fakeError = new Error('err');
 
       sandbox
         .stub(DATABASE, 'runTransaction')
         .callsFake((opts, callback) => callback(fakeError));
 
-      table.replace(ROW, err => {
+      table.replace(ROW, (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
     });
 
-    it('should replace via transaction', done => {
+    it('should replace via transaction', (done) => {
       const stub = (
         sandbox.stub(transaction, 'replace') as sinon.SinonStub
       ).withArgs(table.name, ROW);
 
-      table.replace(ROW, err => {
+      table.replace(ROW, (err) => {
         assert.ifError(err);
         assert.strictEqual(stub.callCount, 1);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       (sandbox.stub(transaction, 'replace') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
@@ -692,13 +692,13 @@ describe('Table', () => {
       table.replace(ROW, gaxOptions, assert.ifError);
     });
 
-    it('should accept commit options', done => {
+    it('should accept commit options', (done) => {
       const replaceRowsOptions = {returnCommitStats: true};
       (sandbox.stub(transaction, 'replace') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, replaceRowsOptions);
         done();
       };
@@ -706,7 +706,7 @@ describe('Table', () => {
       table.replace(ROW, replaceRowsOptions, assert.ifError);
     });
 
-    it('should accept gax options in commit options', done => {
+    it('should accept gax options in commit options', (done) => {
       const replaceRowsOptions = {
         returnCommitStats: true,
         gaxOptions: {},
@@ -715,7 +715,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, replaceRowsOptions);
         done();
       };
@@ -723,7 +723,7 @@ describe('Table', () => {
       table.replace(ROW, replaceRowsOptions, assert.ifError);
     });
 
-    it('should accept requestOptions', done => {
+    it('should accept requestOptions', (done) => {
       const replaceRowsOptions = {
         requestOptions: {priority: RequestOptions.Priority.PRIORITY_HIGH},
       };
@@ -731,7 +731,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, replaceRowsOptions);
         done();
       };
@@ -739,7 +739,7 @@ describe('Table', () => {
       table.replace(ROW, replaceRowsOptions, assert.ifError);
     });
 
-    it('should accept isolationLevel options', done => {
+    it('should accept isolationLevel options', (done) => {
       const replaceRowsOptions = {
         isolationLevel: IsolationLevel.REPEATABLE_READ,
       };
@@ -747,7 +747,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, replaceRowsOptions);
         done();
       };
@@ -755,7 +755,7 @@ describe('Table', () => {
       table.replace(ROW, replaceRowsOptions, assert.ifError);
     });
 
-    it('should accept readLockMode options', done => {
+    it('should accept readLockMode options', (done) => {
       const replaceRowsOptions = {
         readLockMode: ReadLockMode.OPTIMISTIC,
       };
@@ -763,7 +763,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, replaceRowsOptions);
         done();
       };
@@ -775,38 +775,38 @@ describe('Table', () => {
   describe('update', () => {
     const ROW = {};
 
-    it('should return any runTransaction errors', done => {
+    it('should return any runTransaction errors', (done) => {
       const fakeError = new Error('err');
 
       sandbox
         .stub(DATABASE, 'runTransaction')
         .callsFake((opts, callback) => callback(fakeError));
 
-      table.update(ROW, err => {
+      table.update(ROW, (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
     });
 
-    it('should update via transaction', done => {
+    it('should update via transaction', (done) => {
       const stub = (
         sandbox.stub(transaction, 'update') as sinon.SinonStub
       ).withArgs(table.name, ROW);
 
-      table.update(ROW, err => {
+      table.update(ROW, (err) => {
         assert.ifError(err);
         assert.strictEqual(stub.callCount, 1);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       (sandbox.stub(transaction, 'update') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
@@ -814,13 +814,13 @@ describe('Table', () => {
       table.update(ROW, gaxOptions, assert.ifError);
     });
 
-    it('should accept commit options', done => {
+    it('should accept commit options', (done) => {
       const updateRowsOptions = {returnCommitStats: true};
       (sandbox.stub(transaction, 'update') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, updateRowsOptions);
         done();
       };
@@ -828,7 +828,7 @@ describe('Table', () => {
       table.update(ROW, updateRowsOptions, assert.ifError);
     });
 
-    it('should accept gax options in commit options', done => {
+    it('should accept gax options in commit options', (done) => {
       const updateRowsOptions = {
         returnCommitStats: true,
         gaxOptions: {},
@@ -837,7 +837,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, updateRowsOptions);
         done();
       };
@@ -845,7 +845,7 @@ describe('Table', () => {
       table.update(ROW, updateRowsOptions, assert.ifError);
     });
 
-    it('should accept requestOptions', done => {
+    it('should accept requestOptions', (done) => {
       const updateRowsOptions = {
         requestOptions: {priority: RequestOptions.Priority.PRIORITY_LOW},
       };
@@ -853,7 +853,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, updateRowsOptions);
         done();
       };
@@ -861,7 +861,7 @@ describe('Table', () => {
       table.update(ROW, updateRowsOptions, assert.ifError);
     });
 
-    it('should accept isolationLevel option', done => {
+    it('should accept isolationLevel option', (done) => {
       const updateRowsOptions = {
         isolationLevel: IsolationLevel.REPEATABLE_READ,
       };
@@ -869,7 +869,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, updateRowsOptions);
         done();
       };
@@ -877,7 +877,7 @@ describe('Table', () => {
       table.update(ROW, updateRowsOptions, assert.ifError);
     });
 
-    it('should accept readLockMode option', done => {
+    it('should accept readLockMode option', (done) => {
       const updateRowsOptions = {
         readLockMode: ReadLockMode.OPTIMISTIC,
       };
@@ -885,7 +885,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, updateRowsOptions);
         done();
       };
@@ -897,38 +897,38 @@ describe('Table', () => {
   describe('upsert', () => {
     const ROW = {};
 
-    it('should return any runTransaction errors', done => {
+    it('should return any runTransaction errors', (done) => {
       const fakeError = new Error('err');
 
       sandbox
         .stub(DATABASE, 'runTransaction')
         .callsFake((opts, callback) => callback(fakeError));
 
-      table.upsert(ROW, err => {
+      table.upsert(ROW, (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
     });
 
-    it('should upsert via transaction', done => {
+    it('should upsert via transaction', (done) => {
       const stub = (
         sandbox.stub(transaction, 'upsert') as sinon.SinonStub
       ).withArgs(table.name, ROW);
 
-      table.upsert(ROW, err => {
+      table.upsert(ROW, (err) => {
         assert.ifError(err);
         assert.strictEqual(stub.callCount, 1);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
       (sandbox.stub(transaction, 'upsert') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
@@ -936,13 +936,13 @@ describe('Table', () => {
       table.upsert(ROW, gaxOptions, assert.ifError);
     });
 
-    it('should accept commit options', done => {
+    it('should accept commit options', (done) => {
       const upsertRowsOptions = {returnCommitStats: true};
       (sandbox.stub(transaction, 'upsert') as sinon.SinonStub).withArgs(
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, upsertRowsOptions);
         done();
       };
@@ -950,7 +950,7 @@ describe('Table', () => {
       table.upsert(ROW, upsertRowsOptions, assert.ifError);
     });
 
-    it('should accept gax options in commit options', done => {
+    it('should accept gax options in commit options', (done) => {
       const upsertRowsOptions = {
         returnCommitStats: true,
         gaxOptions: {},
@@ -959,7 +959,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, upsertRowsOptions);
         done();
       };
@@ -967,7 +967,7 @@ describe('Table', () => {
       table.upsert(ROW, upsertRowsOptions, assert.ifError);
     });
 
-    it('should accept requestOptions', done => {
+    it('should accept requestOptions', (done) => {
       const upsertRowsOptions = {
         requestOptions: {priority: RequestOptions.Priority.PRIORITY_MEDIUM},
       };
@@ -975,7 +975,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, upsertRowsOptions);
         done();
       };
@@ -983,7 +983,7 @@ describe('Table', () => {
       table.upsert(ROW, upsertRowsOptions, assert.ifError);
     });
 
-    it('should accept isolationLevel option', done => {
+    it('should accept isolationLevel option', (done) => {
       const upsertRowsOptions = {
         isolationLevel: IsolationLevel.REPEATABLE_READ,
       };
@@ -991,7 +991,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, upsertRowsOptions);
         done();
       };
@@ -999,7 +999,7 @@ describe('Table', () => {
       table.upsert(ROW, upsertRowsOptions, assert.ifError);
     });
 
-    it('should accept readLockMode option', done => {
+    it('should accept readLockMode option', (done) => {
       const upsertRowsOptions = {
         readLockMode: ReadLockMode.OPTIMISTIC,
       };
@@ -1007,7 +1007,7 @@ describe('Table', () => {
         table.name,
         ROW,
       );
-      transaction.commit = options => {
+      transaction.commit = (options) => {
         assert.strictEqual(options, upsertRowsOptions);
         done();
       };

@@ -308,14 +308,14 @@ describe('SessionPool', () => {
       sessionPool._destroy = sandbox.stub().resolves();
     });
 
-    it('should clear the inventory', done => {
+    it('should clear the inventory', (done) => {
       sessionPool.close(() => {
         assert.strictEqual(sessionPool.size, 0);
         done();
       });
     });
 
-    it('should stop housekeeping', done => {
+    it('should stop housekeeping', (done) => {
       sessionPool._stopHouseKeeping = done;
       sessionPool.close(noop);
     });
@@ -327,38 +327,38 @@ describe('SessionPool', () => {
       assert.strictEqual(sessionPool.isOpen, false);
     });
 
-    it('should emit the close event', done => {
+    it('should emit the close event', (done) => {
       sessionPool.on('close', done);
       sessionPool.close(noop);
     });
 
-    it('should destroy all the sessions', done => {
+    it('should destroy all the sessions', (done) => {
       const sessions = [...inventory.sessions, ...inventory.borrowed];
 
       let destroyed = 0;
 
-      sessionPool._destroy = async session => {
+      sessionPool._destroy = async (session) => {
         assert.strictEqual(session, sessions[destroyed++]);
       };
 
-      sessionPool.close(err => {
+      sessionPool.close((err) => {
         assert.ifError(err);
         assert.strictEqual(destroyed, sessions.length);
         done();
       });
     });
 
-    it('should execute the callback on idle', done => {
+    it('should execute the callback on idle', (done) => {
       const stub = sandbox.stub(sessionPool._requests, 'onIdle').resolves();
 
-      sessionPool.close(err => {
+      sessionPool.close((err) => {
         assert.ifError(err);
         assert.strictEqual(stub.callCount, 1);
         done();
       });
     });
 
-    it('should return a leak error', done => {
+    it('should return a leak error', (done) => {
       const fakeLeaks = ['a', 'b'];
 
       sandbox.stub(sessionPool, '_getLeaks').returns(fakeLeaks);
@@ -376,7 +376,7 @@ describe('SessionPool', () => {
   });
 
   describe('getSession', () => {
-    it('should acquire a session', done => {
+    it('should acquire a session', (done) => {
       const fakeSession = createSession();
 
       sandbox.stub(sessionPool, '_acquire').resolves(fakeSession);
@@ -388,18 +388,18 @@ describe('SessionPool', () => {
       });
     });
 
-    it('should pass any errors to the callback', done => {
+    it('should pass any errors to the callback', (done) => {
       const error = new Error('err');
 
       sandbox.stub(sessionPool, '_acquire').rejects(error);
 
-      sessionPool.getSession(err => {
+      sessionPool.getSession((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should pass back the session and txn', done => {
+    it('should pass back the session and txn', (done) => {
       const fakeTxn = new FakeTransaction() as unknown as Transaction;
       const fakeSession = createSession();
 
@@ -432,7 +432,7 @@ describe('SessionPool', () => {
       return sessionPool._onClose;
     });
 
-    it('should start housekeeping', done => {
+    it('should start housekeeping', (done) => {
       sessionPool._startHouseKeeping = done;
       sessionPool.open();
     });
@@ -442,7 +442,7 @@ describe('SessionPool', () => {
       assert.strictEqual(sessionPool.isOpen, true);
     });
 
-    it('should emit the open event', done => {
+    it('should emit the open event', (done) => {
       sessionPool.on('open', done);
       sessionPool.open();
     });
@@ -466,7 +466,7 @@ describe('SessionPool', () => {
         process.removeListener('unhandledRejection', originalRejection!);
       }
 
-      process.once('unhandledRejection', err => {
+      process.once('unhandledRejection', (err) => {
         assert.ifError(err);
       });
 
@@ -490,7 +490,7 @@ describe('SessionPool', () => {
         process.removeListener('unhandledRejection', originalRejection!);
       }
 
-      process.once('unhandledRejection', err => {
+      process.once('unhandledRejection', (err) => {
         assert.ifError(err);
       });
 
@@ -514,7 +514,7 @@ describe('SessionPool', () => {
         process.removeListener('unhandledRejection', originalRejection!);
       }
 
-      process.once('unhandledRejection', err => {
+      process.once('unhandledRejection', (err) => {
         assert.ifError(err);
       });
 
@@ -578,7 +578,7 @@ describe('SessionPool', () => {
         inventory.borrowed.add(fakeSession);
       });
 
-      it('should release the read/write session', done => {
+      it('should release the read/write session', (done) => {
         prepStub.resolves();
         sandbox
           .stub(sessionPool, '_release')
@@ -613,8 +613,8 @@ describe('SessionPool', () => {
     it('should return a timeout error if a timeout happens', async () => {
       sessionPool.options.acquireTimeout = 1;
 
-      sessionPool._acquires.add = fn => {
-        return new Promise(r => setTimeout(r, 3)).then(fn);
+      sessionPool._acquires.add = (fn) => {
+        return new Promise((r) => setTimeout(r, 3)).then(fn);
       };
 
       try {
@@ -646,7 +646,7 @@ describe('SessionPool', () => {
       const badSession = createSession();
       const goodSession = createSession();
 
-      sessionPool._isValidSession = session => session === goodSession;
+      sessionPool._isValidSession = (session) => session === goodSession;
       inventory.borrowed.add(badSession);
       inventory.borrowed.add(goodSession);
 
@@ -837,14 +837,14 @@ describe('SessionPool', () => {
       assert.strictEqual(stub.callCount, 1);
     });
 
-    it('should emit any errors', done => {
+    it('should emit any errors', (done) => {
       const error = new Error('err');
       const fakeSession = createSession();
       const stub = fakeSession.delete as sinon.SinonStub;
 
       stub.rejects(error);
 
-      sessionPool.on('error', err => {
+      sessionPool.on('error', (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -956,12 +956,12 @@ describe('SessionPool', () => {
       assert.strictEqual(stub.callCount, 0);
     });
 
-    it('should emit any request errors that occur', done => {
+    it('should emit any request errors that occur', (done) => {
       const error = new Error('err');
 
       stub.rejects(error);
 
-      sessionPool._fill().catch(err => {
+      sessionPool._fill().catch((err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1012,7 +1012,7 @@ describe('SessionPool', () => {
     let startTime: number;
 
     beforeEach(() => {
-      sessionPool._onClose = new Promise(resolve => {
+      sessionPool._onClose = new Promise((resolve) => {
         sessionPool.on('close', resolve);
       });
       sessionPool.options.max = 0;
@@ -1334,7 +1334,7 @@ describe('SessionPool', () => {
   });
 
   describe('_startHouseKeeping', () => {
-    it('should set an interval to evict idle sessions', done => {
+    it('should set an interval to evict idle sessions', (done) => {
       const expectedInterval = sessionPool.options.idlesAfter! * 60000;
       const clock = sandbox.useFakeTimers();
 
@@ -1344,7 +1344,7 @@ describe('SessionPool', () => {
       clock.tick(expectedInterval);
     });
 
-    it('should set an interval to ping sessions', done => {
+    it('should set an interval to ping sessions', (done) => {
       const expectedInterval = sessionPool.options.keepAlive! * 60000;
       const clock = sandbox.useFakeTimers();
 
@@ -1380,9 +1380,9 @@ describe('SessionPool', () => {
       sessionPool._isValidSession = () => true;
     });
 
-    it('annotations when acquiring a session', done => {
+    it('annotations when acquiring a session', (done) => {
       const topLevelSpanName = 'testSessionPool.acquire';
-      startTrace(topLevelSpanName, {}, async span => {
+      startTrace(topLevelSpanName, {}, async (span) => {
         const fakeSession = createSession();
         const now = Date.now();
 
@@ -1412,7 +1412,7 @@ describe('SessionPool', () => {
         });
 
         const gotEventNames: string[] = [];
-        events.forEach(event => {
+        events.forEach((event) => {
           gotEventNames.push(event.name);
         });
 

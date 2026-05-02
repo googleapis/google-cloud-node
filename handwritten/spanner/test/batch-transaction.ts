@@ -138,7 +138,7 @@ describe('BatchTransaction', () => {
   });
 
   describe('close', () => {
-    it('should end the transaction', done => {
+    it('should end the transaction', (done) => {
       batchTransaction.end = done;
 
       batchTransaction.close();
@@ -278,7 +278,7 @@ describe('BatchTransaction', () => {
       assert.deepStrictEqual(reqOpts.transaction, {id: ID});
     });
 
-    it('should pass headers', done => {
+    it('should pass headers', (done) => {
       batchTransaction.createPartitions_(CONFIG, assert.ifError);
       const {headers} = REQUEST.lastCall.args[0];
       assert.deepStrictEqual(headers, {
@@ -288,7 +288,7 @@ describe('BatchTransaction', () => {
       done();
     });
 
-    it('should return any request errors', done => {
+    it('should return any request errors', (done) => {
       const error = new Error('err');
       const response = {};
 
@@ -302,7 +302,7 @@ describe('BatchTransaction', () => {
       });
     });
 
-    it('should return the prepared partition configs', done => {
+    it('should return the prepared partition configs', (done) => {
       const expectedQuery = {
         a: 'b',
         session: SESSION.formattedName_,
@@ -321,7 +321,7 @@ describe('BatchTransaction', () => {
       });
     });
 
-    it('should update the transaction with returned metadata', done => {
+    it('should update the transaction with returned metadata', (done) => {
       const response = extend({}, RESPONSE, {
         transaction: {
           id: ID,
@@ -523,7 +523,7 @@ describe('BatchTransaction', () => {
     it('should make query streams for query partitions', () => {
       const partition = {sql: 'SELECT * FROM Singers'};
 
-      batchTransaction.runStream = query => {
+      batchTransaction.runStream = (query) => {
         assert.strictEqual(query, partition);
         return STREAM;
       };

@@ -515,7 +515,7 @@ export class Util {
     onComplete = onComplete || util.noop;
 
     const writeStream = new ProgressStream();
-    writeStream.on('progress', evt => dup.emit('progress', evt));
+    writeStream.on('progress', (evt) => dup.emit('progress', evt));
     dup.setWritable(writeStream);
 
     const defaultReqOpts = {
@@ -961,7 +961,7 @@ export class Util {
     }
 
     if (Array.isArray(reqOpts.multipart)) {
-      reqOpts.multipart = (reqOpts.multipart as []).map(part => {
+      reqOpts.multipart = (reqOpts.multipart as []).map((part) => {
         return replaceProjectIdToken(part, projectId);
       });
     }

@@ -124,9 +124,9 @@ describe('SessionPool', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -177,9 +177,9 @@ describe('SessionPool', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });

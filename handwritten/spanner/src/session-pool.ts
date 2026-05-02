@@ -290,7 +290,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
    * @return {string}
    */
   static formatTrace(frames: trace.StackFrame[]): string {
-    const stack = frames.map(frame => {
+    const stack = frames.map((frame) => {
       const name = frame.getFunctionName() || frame.getMethodName();
       const file = frame.getFileName();
       const lineno = frame.getLineNumber();
@@ -434,7 +434,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
     this._stopHouseKeeping();
     this.emit('close');
 
-    sessions.forEach(session => this._destroy(session));
+    sessions.forEach((session) => this._destroy(session));
 
     this._requests
       .onIdle()
@@ -451,7 +451,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
 
         callback(error);
       })
-      .catch(err => callback(err));
+      .catch((err) => callback(err));
   }
 
   /**
@@ -483,7 +483,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
    */
   getSession(callback: GetSessionCallback): void {
     this._acquire().then(
-      session => callback(null, session, session.txn!),
+      (session) => callback(null, session, session.txn!),
       callback,
     );
   }
@@ -496,13 +496,13 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
    * @return {Promise}
    */
   open(): void {
-    this._onClose = new Promise(resolve => this.once('close', resolve));
+    this._onClose = new Promise((resolve) => this.once('close', resolve));
     this._startHouseKeeping();
 
     this.isOpen = true;
     this.emit('open');
 
-    this._fill().catch(err => {
+    this._fill().catch((err) => {
       // Ignore `Database not found` error. This allows a user to call instance.database('db-name')
       // for a database that does not yet exist with SessionPoolOptions.min > 0.
       if (
@@ -688,50 +688,54 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
       opts: this._observabilityOptions,
       dbName: this.database.formattedName_,
     };
-    return startTrace('SessionPool.createSessions', traceConfig, async span => {
-      span.addEvent(`Requesting ${amount} sessions`);
+    return startTrace(
+      'SessionPool.createSessions',
+      traceConfig,
+      async (span) => {
+        span.addEvent(`Requesting ${amount} sessions`);
 
-      // while we can request as many sessions be created as we want, the backend
-      // will return at most 100 at a time, hence the need for a while loop.
-      while (amount > 0) {
-        let sessions: Session[] | null = null;
+        // while we can request as many sessions be created as we want, the backend
+        // will return at most 100 at a time, hence the need for a while loop.
+        while (amount > 0) {
+          let sessions: Session[] | null = null;
 
-        span.addEvent(`Creating ${amount} sessions`);
+          span.addEvent(`Creating ${amount} sessions`);
 
-        try {
-          [sessions] = await this.database.batchCreateSessions({
-            count: amount,
-            labels: labels,
-            databaseRole: databaseRole,
+          try {
+            [sessions] = await this.database.batchCreateSessions({
+              count: amount,
+              labels: labels,
+              databaseRole: databaseRole,
+            });
+
+            amount -= sessions.length;
+            nReturned += sessions.length;
+          } catch (e) {
+            this._pending -= amount;
+            this.emit('createError', e);
+            span.addEvent(
+              `Requested for ${nRequested} sessions returned ${nReturned}`,
+            );
+            setSpanErrorAndException(span, e as Error);
+            span.end();
+            throw e;
+          }
+
+          sessions.forEach((session: Session) => {
+            setImmediate(() => {
+              this._inventory.borrowed.add(session);
+              this._pending -= 1;
+              this.release(session);
+            });
           });
-
-          amount -= sessions.length;
-          nReturned += sessions.length;
-        } catch (e) {
-          this._pending -= amount;
-          this.emit('createError', e);
-          span.addEvent(
-            `Requested for ${nRequested} sessions returned ${nReturned}`,
-          );
-          setSpanErrorAndException(span, e as Error);
-          span.end();
-          throw e;
         }
 
-        sessions.forEach((session: Session) => {
-          setImmediate(() => {
-            this._inventory.borrowed.add(session);
-            this._pending -= 1;
-            this.release(session);
-          });
-        });
-      }
-
-      span.addEvent(
-        `Requested for ${nRequested} sessions returned ${nReturned}`,
-      );
-      span.end();
-    });
+        span.addEvent(
+          `Requested for ${nRequested} sessions returned ${nReturned}`,
+        );
+        span.end();
+      },
+    );
   }
 
   /**
@@ -804,7 +808,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
     const idlesAfter = this.options.idlesAfter! * 60000;
     const sessions: Session[] = this._inventory.sessions;
 
-    return sessions.filter(session => {
+    return sessions.filter((session) => {
       return Date.now() - session.lastUsed! >= idlesAfter;
     });
   }
@@ -861,7 +865,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
           onceCloseListener,
         );
       }),
-      new Promise(resolve => {
+      new Promise((resolve) => {
         this.once(availableEvent, resolve);
         removeListener = this.removeListener.bind(
           this,
@@ -993,7 +997,7 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
    */
   async _pingIdleSessions(): Promise<void> {
     const sessions = this._getIdleSessions();
-    const pings = sessions.map(session => this._ping(session));
+    const pings = sessions.map((session) => this._ping(session));
 
     await Promise.all(pings);
     try {

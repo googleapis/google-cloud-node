@@ -1664,7 +1664,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback
+        callback,
       );
       if (validationError) return validationError;
     }
@@ -1725,7 +1725,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             contentEncoding: destinationFile.metadata.contentEncoding,
             contexts: options.contexts || destinationFile.metadata.contexts,
           },
-          sourceObjects: (sources as File[]).map(source => {
+          sourceObjects: (sources as File[]).map((source) => {
             const sourceObject = {
               name: source.name,
             } as SourceObject;
@@ -2183,7 +2183,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     const errors = [] as Error[];
 
     const deleteFile = (file: File) => {
-      return file.delete(query).catch(err => {
+      return file.delete(query).catch((err) => {
         if (!query.force) {
           throw err;
         }
@@ -2203,7 +2203,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             promises = [];
           }
           promises.push(
-            limit(() => deleteFile(curFile)).catch(e => {
+            limit(() => deleteFile(curFile)).catch((e) => {
               filesStream.destroy();
               throw e;
             }),
@@ -3287,7 +3287,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     this.signer
       .getSignedUrl(signConfig)
-      .then(signedUrl => callback!(null, signedUrl), callback!);
+      .then((signedUrl) => callback!(null, signedUrl), callback!);
   }
 
   lock(metageneration: number | string): Promise<BucketLockResponse>;
@@ -3531,7 +3531,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         return Promise.resolve([] as File[]);
       };
       internalCall()
-        .then(files => callback!(null, files))
+        .then((files) => callback!(null, files))
         .catch(callback!);
     });
   }
@@ -3667,7 +3667,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         }
         return [];
       })
-      .then(files => callback!(null, files), callback);
+      .then((files) => callback!(null, files), callback);
   }
 
   /**
@@ -3880,7 +3880,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
 
     super
       .setMetadata(metadata, options)
-      .then(resp => cb!(null, ...resp))
+      .then((resp) => cb!(null, ...resp))
       .catch(cb!)
       .finally(() => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -4142,7 +4142,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       'getMetadata',
       'setMetadata',
     ];
-    methods.forEach(method => {
+    methods.forEach((method) => {
       const methodConfig = this.methods[method];
       if (typeof methodConfig === 'object') {
         if (typeof methodConfig.reqOpts === 'object') {
@@ -4439,7 +4439,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             fs.createReadStream(pathString)
               .on('error', bail)
               .pipe(writable)
-              .on('error', err => {
+              .on('error', (err) => {
                 if (
                   this.storage.retryOptions.autoRetry &&
                   this.storage.retryOptions.retryableErrorFn!(err)
@@ -4614,14 +4614,14 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     this.getFiles(options)
       .then(([files]) => {
         const limit = pLimit(MAX_PARALLEL_LIMIT);
-        const promises = files.map(file => {
+        const promises = files.map((file) => {
           return limit(() => processFile(file));
         });
         return Promise.all(promises);
       })
       .then(
         () => callback!(errors.length > 0 ? errors : null, updatedFiles),
-        err => callback!(err, updatedFiles),
+        (err) => callback!(err, updatedFiles),
       );
   }
 

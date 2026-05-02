@@ -78,10 +78,11 @@ describe('Test metrics with mock server', () => {
   }
 
   function getMetricData(resourceMetrics, metricName: string) {
-    const filteredMetrics = resourceMetrics.scopeMetrics.flatMap(scopeMetric =>
-      scopeMetric.metrics.filter(
-        metric => metric.descriptor.name === metricName,
-      ),
+    const filteredMetrics = resourceMetrics.scopeMetrics.flatMap(
+      (scopeMetric) =>
+        scopeMetric.metrics.filter(
+          (metric) => metric.descriptor.name === metricName,
+        ),
     );
     assert.ok(
       filteredMetrics.length > 0,
@@ -96,16 +97,17 @@ describe('Test metrics with mock server', () => {
   }
 
   function hasMetricData(resourceMetrics, metricName: string): boolean {
-    const filteredMetrics = resourceMetrics.scopeMetrics.flatMap(scopeMetric =>
-      scopeMetric.metrics.filter(
-        metric => metric.descriptor.name === metricName,
-      ),
+    const filteredMetrics = resourceMetrics.scopeMetrics.flatMap(
+      (scopeMetric) =>
+        scopeMetric.metrics.filter(
+          (metric) => metric.descriptor.name === metricName,
+        ),
     );
     return filteredMetrics.length > 0;
   }
 
   function getAggregatedValue(metricsData: any, attributes: any) {
-    const dataPoint = metricsData.dataPoints.filter(dp =>
+    const dataPoint = metricsData.dataPoints.filter((dp) =>
       compareAttributes(dp.attributes, attributes),
     );
     assert.strictEqual(
@@ -267,7 +269,7 @@ describe('Test metrics with mock server', () => {
       );
 
       let totalOperationLatency = 0;
-      methods.forEach(method => {
+      methods.forEach((method) => {
         const attributes = {
           ...commonAttributes,
           database: `database-${dbCounter}`,
@@ -467,7 +469,7 @@ describe('Test metrics with mock server', () => {
       assert.ok(!hasMetricData(resourceMetrics, METRIC_NAME_GFE_LATENCIES));
       assert.ok(!hasMetricData(resourceMetrics, METRIC_NAME_AFE_LATENCIES));
       const methods = ['createSession', 'executeStreamingSql'];
-      methods.forEach(method => {
+      methods.forEach((method) => {
         const attributes = {
           ...commonAttributes,
           database: `database-${dbCounter}`,
@@ -525,7 +527,7 @@ describe('Test metrics with mock server', () => {
           },
         },
       };
-      await database.runTransactionAsync(async tx => {
+      await database.runTransactionAsync(async (tx) => {
         await tx.run(selectSql);
         // Commit RPC will be retried by GAX
         await tx.commit({gaxOptions: GAX_OPTIONS});
@@ -692,7 +694,7 @@ describe('Test metrics with mock server', () => {
       );
 
       let totalOperationLatency = 0;
-      methods.forEach(method => {
+      methods.forEach((method) => {
         const attributes = {
           ...commonAttributes,
           database: `database-${dbCounter}`,

@@ -393,7 +393,7 @@ describe('GrpcService', () => {
     it('should set the correct user-agent', () => {
       const userAgent = 'user-agent/0.0.0';
 
-      getUserAgentFromPackageJsonOverride = packageJson => {
+      getUserAgentFromPackageJsonOverride = (packageJson) => {
         assert.strictEqual(packageJson, CONFIG.packageJson);
         return userAgent;
       };
@@ -405,7 +405,7 @@ describe('GrpcService', () => {
     it('should set the primary_user_agent from user-agent', () => {
       const userAgent = 'user-agent/0.0.0';
 
-      getUserAgentFromPackageJsonOverride = packageJson => {
+      getUserAgentFromPackageJsonOverride = (packageJson) => {
         assert.strictEqual(packageJson, CONFIG.packageJson);
         return userAgent;
       };
@@ -525,15 +525,17 @@ describe('GrpcService', () => {
       const options = {};
       const obj = {};
       const convertedObject = {};
-      sinon.stub(GrpcService, 'ObjectToStructConverter').callsFake(options_ => {
-        assert.strictEqual(options_, options);
-        return {
-          convert(obj_) {
-            assert.strictEqual(obj_, obj);
-            return convertedObject;
-          },
-        };
-      });
+      sinon
+        .stub(GrpcService, 'ObjectToStructConverter')
+        .callsFake((options_) => {
+          assert.strictEqual(options_, options);
+          return {
+            convert(obj_) {
+              assert.strictEqual(obj_, obj);
+              return convertedObject;
+            },
+          };
+        });
       assert.strictEqual(
         GrpcService.objToStruct_(obj, options),
         convertedObject,
@@ -552,7 +554,7 @@ describe('GrpcService', () => {
         },
       };
 
-      sinon.stub(GrpcService, 'decodeValue_').callsFake(value => {
+      sinon.stub(GrpcService, 'decodeValue_').callsFake((value) => {
         assert.strictEqual(value, inputValue);
         return decodedValue;
       });
@@ -585,10 +587,10 @@ describe('GrpcService', () => {
       delete glob.GCLOUD_SANDBOX_ENV;
     });
 
-    it('should access the specified service proto object', done => {
+    it('should access the specified service proto object', (done) => {
       retryRequestOverride = () => {};
 
-      grpcService.getService_ = protoOpts => {
+      grpcService.getService_ = (protoOpts) => {
         assert.strictEqual(protoOpts, PROTO_OPTS);
         setImmediate(done);
         return ProtoService;
@@ -617,13 +619,13 @@ describe('GrpcService', () => {
         const error = new Error('Error.');
 
         beforeEach(() => {
-          grpcService.getGrpcCredentials_ = callback => {
+          grpcService.getGrpcCredentials_ = (callback) => {
             callback(error);
           };
         });
 
-        it('should execute callback with error', done => {
-          grpcService.request(PROTO_OPTS, REQ_OPTS, err => {
+        it('should execute callback with error', (done) => {
+          grpcService.request(PROTO_OPTS, REQ_OPTS, (err) => {
             assert.strictEqual(err, error);
             done();
           });
@@ -634,12 +636,12 @@ describe('GrpcService', () => {
         const authClient = {};
 
         beforeEach(() => {
-          grpcService.getGrpcCredentials_ = callback => {
+          grpcService.getGrpcCredentials_ = (callback) => {
             callback(null, authClient);
           };
         });
 
-        it('should make the gRPC request again', done => {
+        it('should make the gRPC request again', (done) => {
           grpcService.getService_ = () => {
             assert.strictEqual(grpcService.grpcCredentials, authClient);
             setImmediate(done);
@@ -664,7 +666,7 @@ describe('GrpcService', () => {
         };
       });
 
-      it('should use retry-request', done => {
+      it('should use retry-request', (done) => {
         const error = {};
         const response = {};
 
@@ -705,7 +707,7 @@ describe('GrpcService', () => {
         assert.strictEqual(nonRetryErrors.every(shouldRetryFn), false);
       });
 
-      it('should treat a retriable error as an HTTP response', done => {
+      it('should treat a retriable error as an HTTP response', (done) => {
         const grpcError500 = {code: 2};
 
         grpcService.getService_ = () => {
@@ -744,7 +746,7 @@ describe('GrpcService', () => {
         assert.strictEqual(request, grpcRequest);
       });
 
-      it('should exec callback with response error as error', done => {
+      it('should exec callback with response error as error', (done) => {
         const grpcError500 = {code: 2};
 
         grpcService.getService_ = () => {
@@ -766,7 +768,7 @@ describe('GrpcService', () => {
         retryRequestOptions.request({}, retryRequestCallback);
       });
 
-      it('should exec callback with unknown error', done => {
+      it('should exec callback with unknown error', (done) => {
         const unknownError = {a: 'a'};
 
         grpcService.getService_ = () => {
@@ -791,10 +793,10 @@ describe('GrpcService', () => {
 
     describe('request option decoration', () => {
       describe('decoration success', () => {
-        it('should decorate the request', done => {
+        it('should decorate the request', (done) => {
           const decoratedRequest = {};
 
-          grpcService.decorateRequest_ = reqOpts => {
+          grpcService.decorateRequest_ = (reqOpts) => {
             assert.deepStrictEqual(reqOpts, REQ_OPTS);
             return decoratedRequest;
           };
@@ -815,12 +817,12 @@ describe('GrpcService', () => {
       describe('decoration error', () => {
         const error = new Error('Error.');
 
-        it('should return a thrown error to the callback', done => {
+        it('should return a thrown error to the callback', (done) => {
           grpcService.decorateRequest_ = () => {
             throw error;
           };
 
-          grpcService.request(PROTO_OPTS, REQ_OPTS, err => {
+          grpcService.request(PROTO_OPTS, REQ_OPTS, (err) => {
             assert.strictEqual(err, error);
             done();
           });
@@ -829,7 +831,7 @@ describe('GrpcService', () => {
     });
 
     describe('retry request', () => {
-      it('should make the correct request on the service', done => {
+      it('should make the correct request on the service', (done) => {
         grpcService.getService_ = () => {
           return {
             method(reqOpts) {
@@ -842,7 +844,7 @@ describe('GrpcService', () => {
         grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
       });
 
-      it('should pass the grpc metadata with the request', done => {
+      it('should pass the grpc metadata with the request', (done) => {
         grpcService.getService_ = () => {
           return {
             method(reqOpts, metadata) {
@@ -855,7 +857,7 @@ describe('GrpcService', () => {
         grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
       });
 
-      it('should set a deadline if a timeout is provided', done => {
+      it('should set a deadline if a timeout is provided', (done) => {
         const expectedDeadlineRange = [
           Date.now() + PROTO_OPTS.timeout - 250,
           Date.now() + PROTO_OPTS.timeout + 250,
@@ -893,7 +895,7 @@ describe('GrpcService', () => {
               };
             };
 
-            grpcService.request(PROTO_OPTS, REQ_OPTS, err => {
+            grpcService.request(PROTO_OPTS, REQ_OPTS, (err) => {
               assert.strictEqual(err.code, httpError.code);
             });
           }
@@ -914,7 +916,7 @@ describe('GrpcService', () => {
           };
         });
 
-        it('should execute callback with response', done => {
+        it('should execute callback with response', (done) => {
           grpcService.request(PROTO_OPTS, REQ_OPTS, (err, resp) => {
             assert.ifError(err);
             assert.strictEqual(resp, RESPONSE);
@@ -977,13 +979,13 @@ describe('GrpcService', () => {
         const error = new Error('err');
 
         beforeEach(() => {
-          grpcService.getGrpcCredentials_ = callback => {
+          grpcService.getGrpcCredentials_ = (callback) => {
             callback(error);
           };
         });
 
-        it('should execute callback with error', done => {
-          grpcService.requestStream(PROTO_OPTS, REQ_OPTS).on('error', err => {
+        it('should execute callback with error', (done) => {
+          grpcService.requestStream(PROTO_OPTS, REQ_OPTS).on('error', (err) => {
             assert.strictEqual(err, error);
             done();
           });
@@ -994,12 +996,12 @@ describe('GrpcService', () => {
         const authClient = {};
 
         beforeEach(() => {
-          grpcService.getGrpcCredentials_ = callback => {
+          grpcService.getGrpcCredentials_ = (callback) => {
             callback(null, authClient);
           };
         });
 
-        it('should make the gRPC request again', done => {
+        it('should make the gRPC request again', (done) => {
           grpcService.getService_ = () => {
             assert.strictEqual(grpcService.grpcCredentials, authClient);
             setImmediate(done);
@@ -1011,8 +1013,8 @@ describe('GrpcService', () => {
       });
     });
 
-    it('should get the proto service', done => {
-      grpcService.getService_ = protoOpts => {
+    it('should get the proto service', (done) => {
+      grpcService.getService_ = (protoOpts) => {
         assert.strictEqual(protoOpts, PROTO_OPTS);
         setImmediate(done);
         return new ProtoService();
@@ -1021,11 +1023,11 @@ describe('GrpcService', () => {
       grpcService.requestStream(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
-    it('should set the deadline', done => {
+    it('should set the deadline', (done) => {
       const createDeadline = GrpcService.createDeadline_;
       const fakeDeadline = createDeadline(PROTO_OPTS.timeout);
 
-      GrpcService.createDeadline_ = timeout => {
+      GrpcService.createDeadline_ = (timeout) => {
         assert.strictEqual(timeout, PROTO_OPTS.timeout);
         return fakeDeadline;
       };
@@ -1046,7 +1048,7 @@ describe('GrpcService', () => {
       grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
     });
 
-    it('should pass the grpc metadata with the request', done => {
+    it('should pass the grpc metadata with the request', (done) => {
       ProtoService.prototype.method = (reqOpts, metadata) => {
         assert.strictEqual(metadata, grpcService.grpcMetadata);
         setImmediate(done);
@@ -1072,15 +1074,15 @@ describe('GrpcService', () => {
       });
 
       describe('requestStream() success', () => {
-        it('should decorate the request', done => {
+        it('should decorate the request', (done) => {
           const decoratedRequest = {};
 
-          grpcService.decorateRequest_ = reqOpts => {
+          grpcService.decorateRequest_ = (reqOpts) => {
             assert.strictEqual(reqOpts, REQ_OPTS);
             return decoratedRequest;
           };
 
-          ProtoService.prototype.method = reqOpts => {
+          ProtoService.prototype.method = (reqOpts) => {
             assert.strictEqual(reqOpts, decoratedRequest);
             setImmediate(done);
             return new PassThrough({objectMode: true});
@@ -1093,14 +1095,14 @@ describe('GrpcService', () => {
       });
 
       describe('requestStream() error', () => {
-        it('should end stream with a thrown error', done => {
+        it('should end stream with a thrown error', (done) => {
           const error = new Error('Error.');
 
           grpcService.decorateRequest_ = () => {
             throw error;
           };
 
-          grpcService.requestStream(PROTO_OPTS, REQ_OPTS).on('error', err => {
+          grpcService.requestStream(PROTO_OPTS, REQ_OPTS).on('error', (err) => {
             assert.strictEqual(err, error);
             done();
           });
@@ -1148,7 +1150,7 @@ describe('GrpcService', () => {
         );
       });
 
-      it('should emit the metadata event as a response event', done => {
+      it('should emit the metadata event as a response event', (done) => {
         const fakeStream = new PassThrough({objectMode: true});
 
         ProtoService.prototype.method = () => {
@@ -1159,7 +1161,7 @@ describe('GrpcService', () => {
           return options.request();
         };
 
-        fakeStream.on('error', done).on('response', resp => {
+        fakeStream.on('error', done).on('response', (resp) => {
           assert.deepStrictEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[0]);
           done();
         });
@@ -1168,7 +1170,7 @@ describe('GrpcService', () => {
         fakeStream.emit('metadata');
       });
 
-      it('should forward `request` events', done => {
+      it('should forward `request` events', (done) => {
         const requestStream = grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
 
         requestStream.on('request', () => {
@@ -1178,11 +1180,11 @@ describe('GrpcService', () => {
         retryStream.emit('request');
       });
 
-      it('should emit the response error', done => {
+      it('should emit the response error', (done) => {
         const grpcError500 = {code: 2};
         const requestStream = grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
 
-        requestStream.destroy = err => {
+        requestStream.destroy = (err) => {
           assert.deepStrictEqual(err, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
           done();
         };
@@ -1226,12 +1228,12 @@ describe('GrpcService', () => {
       delete glob.GCLOUD_SANDBOX_ENV;
     });
 
-    it('should get the proto service', done => {
+    it('should get the proto service', (done) => {
       ProtoService.prototype.method = () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return (duplexify as any).obj();
       };
-      grpcService.getService_ = protoOpts => {
+      grpcService.getService_ = (protoOpts) => {
         assert.strictEqual(protoOpts, PROTO_OPTS);
         setImmediate(done);
         return new ProtoService();
@@ -1240,11 +1242,11 @@ describe('GrpcService', () => {
       grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
     });
 
-    it('should set the deadline', done => {
+    it('should set the deadline', (done) => {
       const createDeadline = GrpcService.createDeadline_;
       const fakeDeadline = createDeadline(PROTO_OPTS.timeout);
 
-      GrpcService.createDeadline_ = timeout => {
+      GrpcService.createDeadline_ = (timeout) => {
         assert.strictEqual(timeout, PROTO_OPTS.timeout);
         return fakeDeadline;
       };
@@ -1265,7 +1267,7 @@ describe('GrpcService', () => {
       grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
     });
 
-    it('should pass the grpc metadata with the request', done => {
+    it('should pass the grpc metadata with the request', (done) => {
       ProtoService.prototype.method = (reqOpts, metadata) => {
         assert.strictEqual(metadata, grpcService.grpcMetadata);
         setImmediate(done);
@@ -1288,17 +1290,17 @@ describe('GrpcService', () => {
         const error = new Error('err');
 
         beforeEach(() => {
-          grpcService.getGrpcCredentials_ = callback => {
+          grpcService.getGrpcCredentials_ = (callback) => {
             setImmediate(() => {
               callback(error);
             });
           };
         });
 
-        it('should execute callback with error', done => {
+        it('should execute callback with error', (done) => {
           grpcService
             .requestWritableStream(PROTO_OPTS, REQ_OPTS)
-            .on('error', err => {
+            .on('error', (err) => {
               assert.strictEqual(err, error);
               done();
             });
@@ -1309,12 +1311,12 @@ describe('GrpcService', () => {
         const authClient = {};
 
         beforeEach(() => {
-          grpcService.getGrpcCredentials_ = callback => {
+          grpcService.getGrpcCredentials_ = (callback) => {
             callback(null, authClient);
           };
         });
 
-        it('should make the gRPC request again', done => {
+        it('should make the gRPC request again', (done) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const stream = (duplexify as any).obj();
           ProtoService.prototype.method = () => {
@@ -1343,15 +1345,15 @@ describe('GrpcService', () => {
       });
 
       describe('requestWritableStream() success', () => {
-        it('should decorate the request', done => {
+        it('should decorate the request', (done) => {
           const decoratedRequest = {};
 
-          grpcService.decorateRequest_ = reqOpts => {
+          grpcService.decorateRequest_ = (reqOpts) => {
             assert.strictEqual(reqOpts, REQ_OPTS);
             return decoratedRequest;
           };
 
-          ProtoService.prototype.method = reqOpts => {
+          ProtoService.prototype.method = (reqOpts) => {
             assert.strictEqual(reqOpts, decoratedRequest);
             setImmediate(done);
             return new PassThrough({objectMode: true});
@@ -1364,14 +1366,14 @@ describe('GrpcService', () => {
       describe('requestWritableStream() error', () => {
         const error = new Error('Error.');
 
-        it('should end stream with a thrown error', done => {
+        it('should end stream with a thrown error', (done) => {
           grpcService.decorateRequest_ = () => {
             throw error;
           };
 
           grpcService
             .requestWritableStream(PROTO_OPTS, REQ_OPTS)
-            .on('error', err => {
+            .on('error', (err) => {
               assert.strictEqual(err, error);
               done();
             });
@@ -1384,13 +1386,13 @@ describe('GrpcService', () => {
 
       beforeEach(() => {
         delete grpcService.grpcCredentials;
-        grpcService.getGrpcCredentials_ = callback => {
+        grpcService.getGrpcCredentials_ = (callback) => {
           callback(null, authClient);
         };
         sinon.spy(GrpcService, 'decorateStatus_');
       });
 
-      it('should emit response', done => {
+      it('should emit response', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const stream = (duplexify as any).obj();
         ProtoService.prototype.method = () => {
@@ -1403,7 +1405,7 @@ describe('GrpcService', () => {
 
         grpcService
           .requestWritableStream(PROTO_OPTS, REQ_OPTS)
-          .on('response', status => {
+          .on('response', (status) => {
             assert.strictEqual(status, 'foo');
             assert.strictEqual(GrpcService.decorateStatus_.callCount, 1);
             assert(GrpcService.decorateStatus_.calledWith('foo'));
@@ -1423,12 +1425,12 @@ describe('GrpcService', () => {
 
       beforeEach(() => {
         delete grpcService.grpcCredentials;
-        grpcService.getGrpcCredentials_ = callback => {
+        grpcService.getGrpcCredentials_ = (callback) => {
           callback(null, authClient);
         };
       });
 
-      it('should emit a decorated error', done => {
+      it('should emit a decorated error', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const grpcStream = (duplexify as any).obj();
         ProtoService.prototype.method = () => {
@@ -1448,7 +1450,7 @@ describe('GrpcService', () => {
 
         const stream = grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
 
-        stream.on('error', err => {
+        stream.on('error', (err) => {
           assert.strictEqual(err, expectedDecoratedError);
           assert.strictEqual(GrpcService.decorateError_.callCount, 1);
           assert(GrpcService.decorateError_.calledWith(error));
@@ -1461,7 +1463,7 @@ describe('GrpcService', () => {
         });
       });
 
-      it('should emit the original error', done => {
+      it('should emit the original error', (done) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const grpcStream = (duplexify as any).obj();
         ProtoService.prototype.method = () => grpcStream;
@@ -1472,7 +1474,7 @@ describe('GrpcService', () => {
         const error = new Error('Error.');
         sinon.stub(GrpcService, 'decorateError_').returns(null!);
         const stream = grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
-        stream.on('error', err => {
+        stream.on('error', (err) => {
           assert.strictEqual(err, error);
           assert.strictEqual(GrpcService.decorateError_.callCount, 1);
           assert(GrpcService.decorateError_.calledWith(error));
@@ -1565,7 +1567,7 @@ describe('GrpcService', () => {
       const errorMap = GrpcService.GRPC_ERROR_CODE_TO_HTTP;
       const codes = Object.keys(errorMap);
 
-      codes.forEach(code => {
+      codes.forEach((code) => {
         const error = new Error();
         const extended = GrpcService.decorateGrpcResponse_(error, {code});
 
@@ -1690,7 +1692,7 @@ describe('GrpcService', () => {
   });
 
   describe('getGrpcCredentials_', () => {
-    it('should get credentials from the auth client', done => {
+    it('should get credentials from the auth client', (done) => {
       grpcService.authClient = {
         async getClient() {
           return '';
@@ -1711,8 +1713,8 @@ describe('GrpcService', () => {
         };
       });
 
-      it('should execute callback with error', done => {
-        grpcService.getGrpcCredentials_(err => {
+      it('should execute callback with error', (done) => {
+        grpcService.getGrpcCredentials_((err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -1732,7 +1734,7 @@ describe('GrpcService', () => {
         };
       });
 
-      it('should return grpcCredentials', done => {
+      it('should return grpcCredentials', (done) => {
         grpcService.getGrpcCredentials_((err, grpcCredentials) => {
           assert.ifError(err);
           assert(grpcCredentials.constructor.name.match(/credentials/i));
@@ -1740,35 +1742,35 @@ describe('GrpcService', () => {
         });
       });
 
-      it('should set projectId', done => {
-        grpcService.getGrpcCredentials_(err => {
+      it('should set projectId', (done) => {
+        grpcService.getGrpcCredentials_((err) => {
           assert.ifError(err);
           assert.strictEqual(grpcService.projectId, AUTH_CLIENT.projectId);
           done();
         });
       });
 
-      it('should not change projectId that was already set', done => {
+      it('should not change projectId that was already set', (done) => {
         grpcService.projectId = 'project-id';
 
-        grpcService.getGrpcCredentials_(err => {
+        grpcService.getGrpcCredentials_((err) => {
           assert.ifError(err);
           assert.strictEqual(grpcService.projectId, AUTH_CLIENT.projectId);
           done();
         });
       });
 
-      it('should change placeholder projectId', done => {
+      it('should change placeholder projectId', (done) => {
         grpcService.projectId = '{{projectId}}';
 
-        grpcService.getGrpcCredentials_(err => {
+        grpcService.getGrpcCredentials_((err) => {
           assert.ifError(err);
           assert.strictEqual(grpcService.projectId, AUTH_CLIENT.projectId);
           done();
         });
       });
 
-      it('should not update projectId if it was not found', done => {
+      it('should not update projectId if it was not found', (done) => {
         grpcService.projectId = 'project-id';
 
         grpcService.authClient = {
@@ -1779,7 +1781,7 @@ describe('GrpcService', () => {
           },
         };
 
-        grpcService.getGrpcCredentials_(err => {
+        grpcService.getGrpcCredentials_((err) => {
           assert.ifError(err);
           assert.strictEqual(grpcService.projectId, grpcService.projectId);
           done();
@@ -1967,7 +1969,7 @@ describe('GrpcService', () => {
         const inputValue = {};
         const convertedValue = {};
 
-        objectToStructConverter.encodeValue_ = value => {
+        objectToStructConverter.encodeValue_ = (value) => {
           assert.strictEqual(value, inputValue);
           return convertedValue;
         };
@@ -1989,7 +1991,7 @@ describe('GrpcService', () => {
         });
       });
 
-      it('should not include undefined values', done => {
+      it('should not include undefined values', (done) => {
         objectToStructConverter.encodeValue_ = () => {
           done(new Error('Should not be called'));
         };
@@ -2003,7 +2005,7 @@ describe('GrpcService', () => {
         done();
       });
 
-      it('should add seen objects to set then empty set', done => {
+      it('should add seen objects to set then empty set', (done) => {
         const obj = {};
         let objectAdded;
 
@@ -2073,7 +2075,7 @@ describe('GrpcService', () => {
         it('should convert objects', () => {
           const convertedValue = {};
 
-          objectToStructConverter.convert = value => {
+          objectToStructConverter.convert = (value) => {
             assert.strictEqual(value, VALUE);
             return convertedValue;
           };

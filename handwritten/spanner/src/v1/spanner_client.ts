@@ -313,7 +313,7 @@ export class SpannerClient {
     ];
     for (const methodName of spannerStubMethods) {
       const callPromise = this.spannerStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -539,7 +539,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('createSession request %j', request);
@@ -675,7 +675,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchCreateSessions request %j', request);
@@ -801,7 +801,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getSession request %j', request);
@@ -925,7 +925,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('deleteSession request %j', request);
@@ -1158,7 +1158,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('executeSql request %j', request);
@@ -1325,7 +1325,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('executeBatchDml request %j', request);
@@ -1537,7 +1537,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('read request %j', request);
@@ -1676,7 +1676,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('beginTransaction request %j', request);
@@ -1844,7 +1844,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('commit request %j', request);
@@ -1976,7 +1976,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('rollback request %j', request);
@@ -2152,7 +2152,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('partitionQuery request %j', request);
@@ -2315,7 +2315,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('partitionRead request %j', request);
@@ -2490,7 +2490,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('executeStreamingSql stream %j', options);
@@ -2604,7 +2604,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('streamingRead stream %j', options);
@@ -2659,7 +2659,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchWrite stream %j', options);
@@ -2767,7 +2767,7 @@ export class SpannerClient {
       this._gaxModule.routingHeader.fromParams({
         database: request.database ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -2847,7 +2847,7 @@ export class SpannerClient {
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listSessions stream %j', request);
@@ -2909,7 +2909,7 @@ export class SpannerClient {
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listSessions iterate %j', request);
@@ -3047,7 +3047,7 @@ export class SpannerClient {
    */
   close(): Promise<void> {
     if (this.spannerStub && !this._terminated) {
-      return this.spannerStub.then(stub => {
+      return this.spannerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

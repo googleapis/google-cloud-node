@@ -279,12 +279,12 @@ describe('v1.InstanceAdminClient', () => {
       assert(client.instanceAdminStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.instanceAdminStub);
@@ -293,12 +293,12 @@ describe('v1.InstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -309,7 +309,7 @@ describe('v1.InstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -474,7 +474,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getInstanceConfig(request), expectedError);
@@ -607,7 +607,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteInstanceConfig(request), expectedError);
@@ -739,7 +739,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -871,7 +871,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteInstance(request), expectedError);
@@ -1003,7 +1003,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1135,7 +1135,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1268,7 +1268,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1401,7 +1401,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getInstancePartition(request), expectedError);
@@ -1537,7 +1537,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -4645,7 +4645,7 @@ describe('v1.InstanceAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -4729,7 +4729,7 @@ describe('v1.InstanceAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -4813,7 +4813,7 @@ describe('v1.InstanceAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });

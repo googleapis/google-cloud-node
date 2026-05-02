@@ -167,8 +167,8 @@ describe('Export', () => {
       .stub(exporter as any, '_sendTimeSeries')
       .resolves();
 
-    await new Promise<ExportResult>(resolve => {
-      exporter.export(resourceMetrics, result => {
+    await new Promise<ExportResult>((resolve) => {
+      exporter.export(resourceMetrics, (result) => {
         if (result.error) {
           console.error(result.error);
         }
@@ -193,8 +193,8 @@ describe('Export', () => {
       .stub(exporter as any, '_sendTimeSeries')
       .resolves();
 
-    await new Promise<ExportResult>(resolve => {
-      exporter.export(resourceMetrics, result => {
+    await new Promise<ExportResult>((resolve) => {
+      exporter.export(resourceMetrics, (result) => {
         if (result.error) {
           console.error(result.error);
         }
@@ -218,7 +218,7 @@ describe('Export', () => {
 
     exporter.export(resourceMetrics, resultCallbackSpy);
 
-    await new Promise(resolve => setImmediate(resolve));
+    await new Promise((resolve) => setImmediate(resolve));
 
     const callbackResult = resultCallbackSpy.getCall(0).args[0];
     assert.strictEqual(callbackResult.code, ExportResultCode.FAILED);
@@ -243,7 +243,7 @@ describe('Export', () => {
 
     exporter.export(resourceMetrics, resultCallbackSpy);
 
-    await new Promise(resolve => setImmediate(resolve));
+    await new Promise((resolve) => setImmediate(resolve));
 
     // Confirm number of metrics for each batch
     const expectedNumberOfCalls = Math.ceil(

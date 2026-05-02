@@ -508,7 +508,7 @@ export class Upload extends Writable {
       if (this.uri) {
         this.continueUploading();
       } else {
-        this.createURI(err => {
+        this.createURI((err) => {
           if (err) {
             return this.destroy(err);
           }
@@ -720,7 +720,7 @@ export class Upload extends Writable {
    * @returns If there will be more chunks to read in the future
    */
   private async waitForNextChunk(): Promise<boolean> {
-    const willBeMoreChunks = await new Promise<boolean>(resolve => {
+    const willBeMoreChunks = await new Promise<boolean>((resolve) => {
       // There's data available - it should be digested
       if (this.writeBuffers.length) {
         return resolve(true);
@@ -787,7 +787,7 @@ export class Upload extends Writable {
     if (!callback) {
       return this.createURIAsync();
     }
-    this.createURIAsync().then(r => callback(null, r), callback);
+    this.createURIAsync().then((r) => callback(null, r), callback);
   }
 
   protected async createURIAsync(): Promise<string> {
@@ -1252,7 +1252,7 @@ export class Upload extends Writable {
         throw e;
       }
 
-      await new Promise(res => setTimeout(res, retryDelay));
+      await new Promise((res) => setTimeout(res, retryDelay));
 
       return this.checkUploadStatus(config);
     }
@@ -1470,7 +1470,7 @@ export function createURI(
   if (!callback) {
     return up.createURI();
   }
-  up.createURI().then(r => callback(null, r), callback);
+  up.createURI().then((r) => callback(null, r), callback);
 }
 
 /**

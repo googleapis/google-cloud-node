@@ -5,7 +5,5 @@
     "outDir": "build",
     "types": ["node"]
   },
-  "include": [
-    "src/*.ts"
-  ]
+  "include": ["src/*.ts"]
 }

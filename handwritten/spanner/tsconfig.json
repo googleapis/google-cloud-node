@@ -5,10 +5,7 @@
     "outDir": "build",
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "include": [
     "src/*.ts",

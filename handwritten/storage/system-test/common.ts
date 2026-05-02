@@ -38,7 +38,7 @@ describe('Common', () => {
       });
     });
 
-    it('should send a request and receive a response', done => {
+    it('should send a request and receive a response', (done) => {
       const mockResponse = 'response';
       const mockServer = new http.Server((req, res) => {
         res.end(mockResponse);
@@ -61,7 +61,7 @@ describe('Common', () => {
             } catch (e) {
               mockServer.close(() => done(e));
             }
-          }
+          },
         );
       });
     });
@@ -87,7 +87,7 @@ describe('Common', () => {
           {
             uri: `http://localhost:${port}/mock-endpoint-retry`,
           },
-          err => {
+          (err) => {
             try {
               assert.strictEqual((err! as common.ApiError).code, 408);
               assert.strictEqual(numRequestAttempts, 4);
@@ -95,7 +95,7 @@ describe('Common', () => {
             } catch (e) {
               mockServer.close(() => done(e)); // Cleanup even if assertion fails
             }
-          }
+          },
         );
       });
     });
@@ -122,7 +122,7 @@ describe('Common', () => {
           // without risking hitting a real service on the runner.
           uri: 'http://localhost:1/mock-endpoint-no-response',
         },
-        err => {
+        (err) => {
           assert(err?.message.includes('ECONNREFUSED'));
           const timeResponse = Date.now();
           assert(timeResponse - timeRequest > minExpectedResponseTime);

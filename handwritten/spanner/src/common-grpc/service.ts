@@ -436,11 +436,11 @@ export class GrpcService extends Service {
     this.protos = {};
     const protoServices = config.protoServices;
 
-    Object.keys(protoServices).forEach(name => {
+    Object.keys(protoServices).forEach((name) => {
       const protoConfig = protoServices[name];
       const services = this.loadProtoFile(protoConfig.path, config);
       const serviceKey = ['google', protoConfig.service, name]
-        .filter(x => x)
+        .filter((x) => x)
         .join('.');
       const service = services[serviceKey] as ServiceDefinition & {
         baseUrl?: string;
@@ -683,7 +683,7 @@ export class GrpcService extends Service {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (retryRequest(null!, retryOpts) as any)
-      .on('error', err => {
+      .on('error', (err) => {
         const grpcError = GrpcService.decorateError_(err);
         stream.destroy(grpcError || err);
       })
@@ -750,11 +750,11 @@ export class GrpcService extends Service {
       grpcMetadata,
       grpcOpts,
     )
-      .on('status', status => {
+      .on('status', (status) => {
         const grcpStatus = GrpcService.decorateStatus_(status);
         stream.emit('response', grcpStatus || status);
       })
-      .on('error', err => {
+      .on('error', (err) => {
         const grpcError = GrpcService.decorateError_(err);
         stream.destroy(grpcError || err);
       });
@@ -1005,7 +1005,7 @@ export class GrpcService extends Service {
    * @param {?error} callback.err - An error getting an auth client.
    */
   private getGrpcCredentials_(callback) {
-    this.authClient.getClient().then(client => {
+    this.authClient.getClient().then((client) => {
       const credentials = this.grpc!.credentials.combineChannelCredentials(
         this.grpc!.credentials.createSsl(),
         grpc.credentials.createFromGoogleCredential({

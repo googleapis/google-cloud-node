@@ -96,7 +96,7 @@ async function uploadInParallel(
 async function downloadInParallel(bucket: Bucket, options: DownloadOptions) {
   const promises: Promise<DownloadResponse>[] = [];
   const [files] = await bucket.getFiles();
-  files.forEach(file => {
+  files.forEach((file) => {
     promises.push(file.download(options));
   });
   await Promise.all(promises).catch(console.error);

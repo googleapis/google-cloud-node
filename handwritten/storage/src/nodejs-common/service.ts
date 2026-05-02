@@ -171,8 +171,8 @@ export class Service {
     return ([] as Interceptor[]).slice
       .call(this.globalInterceptors)
       .concat(this.interceptors)
-      .filter(interceptor => typeof interceptor.request === 'function')
-      .map(interceptor => interceptor.request);
+      .filter((interceptor) => typeof interceptor.request === 'function')
+      .map((interceptor) => interceptor.request);
   }
 
   /**
@@ -188,7 +188,7 @@ export class Service {
     if (!callback) {
       return this.getProjectIdAsync();
     }
-    this.getProjectIdAsync().then(p => callback(null, p), callback);
+    this.getProjectIdAsync().then((p) => callback(null, p), callback);
   }
 
   protected async getProjectIdAsync(): Promise<string> {
@@ -238,7 +238,7 @@ export class Service {
     }
 
     reqOpts.uri = uriComponents
-      .map(uriComponent => {
+      .map((uriComponent) => {
         const trimSlashesRegex = /^\/*|\/*$/g;
         return uriComponent.replace(trimSlashesRegex, '');
       })
@@ -252,13 +252,13 @@ export class Service {
     const interceptorArray = Array.isArray(reqOpts.interceptors_)
       ? reqOpts.interceptors_
       : [];
-    interceptorArray.forEach(interceptor => {
+    interceptorArray.forEach((interceptor) => {
       if (typeof interceptor.request === 'function') {
         requestInterceptors.push(interceptor.request);
       }
     });
 
-    requestInterceptors.forEach(requestInterceptor => {
+    requestInterceptors.forEach((requestInterceptor) => {
       reqOpts = requestInterceptor(reqOpts);
     });
 

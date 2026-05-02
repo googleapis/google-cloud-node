@@ -42,8 +42,8 @@ describe('codec', () => {
   });
 
   beforeEach(() => {
-    sandbox.stub(GrpcService, 'encodeValue_').callsFake(value => value);
-    sandbox.stub(GrpcService, 'decodeValue_').callsFake(value => value);
+    sandbox.stub(GrpcService, 'encodeValue_').callsFake((value) => value);
+    sandbox.stub(GrpcService, 'decodeValue_').callsFake((value) => value);
   });
 
   afterEach(() => sandbox.restore());
@@ -649,7 +649,7 @@ describe('codec', () => {
           undefined,
         ];
 
-        invalidStrings.forEach(str => {
+        invalidStrings.forEach((str) => {
           assert.throws(
             () => {
               codec.Interval.fromISO8601(str);
@@ -877,7 +877,7 @@ describe('codec', () => {
           new codec.Interval(-12, 0, BigInt('0')),
         ];
 
-        testCases.forEach(interval => {
+        testCases.forEach((interval) => {
           const isoString = interval.toISO8601();
           const roundtripInterval = codec.Interval.fromISO8601(isoString);
           assert.deepStrictEqual(roundtripInterval, interval);
@@ -1916,7 +1916,7 @@ describe('codec', () => {
 
   describe('convertToListValue', () => {
     beforeEach(() => {
-      sandbox.stub(codec, 'encode').callsFake(value => {
+      sandbox.stub(codec, 'encode').callsFake((value) => {
         return {stringValue: value};
       });
     });
@@ -2020,7 +2020,7 @@ describe('codec', () => {
         },
       };
 
-      Object.keys(typeMap).forEach(key => {
+      Object.keys(typeMap).forEach((key) => {
         const type = codec.createTypeObject(key);
         assert.deepStrictEqual(type, typeMap[key]);
       });

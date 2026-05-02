@@ -67,8 +67,8 @@ describe('headers', () => {
     }
     assert.ok(
       /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-        requests[0].headers['x-goog-api-client']
-      )
+        requests[0].headers['x-goog-api-client'],
+      ),
     );
   });
 
@@ -89,8 +89,8 @@ describe('headers', () => {
     }
     assert.ok(
       /^gl-deno\/0.00.0 gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-        requests[1].headers['x-goog-api-client']
-      )
+        requests[1].headers['x-goog-api-client'],
+      ),
     );
   });
 });

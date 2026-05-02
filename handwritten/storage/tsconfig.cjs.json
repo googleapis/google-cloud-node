@@ -5,7 +5,7 @@
     "outDir": "build/cjs",
     "resolveJsonModule": true,
     "sourceMap": false,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/*.ts",

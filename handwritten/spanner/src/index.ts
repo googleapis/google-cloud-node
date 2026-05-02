@@ -561,7 +561,7 @@ class Spanner extends GrpcService {
 
   /** Closes this Spanner client and cleans up all resources used by it. */
   close(): void {
-    this.clients_.forEach(c => {
+    this.clients_.forEach((c) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const client = c as any;
       if (client.operationsClient && client.operationsClient.close) {
@@ -569,7 +569,7 @@ class Spanner extends GrpcService {
       }
       client.close();
     });
-    cleanup().catch(err => {
+    cleanup().catch((err) => {
       console.error('Error occured during cleanup: ', err);
     });
   }
@@ -875,7 +875,7 @@ class Spanner extends GrpcService {
       (err, instances, nextPageRequest, ...args) => {
         let instanceInstances: Instance[] | null = null;
         if (instances) {
-          instanceInstances = instances.map(instance => {
+          instanceInstances = instances.map((instance) => {
             const instanceInstance = self.instance(instance.name);
             instanceInstance.metadata = instance;
             return instanceInstance;
@@ -1701,12 +1701,12 @@ class Spanner extends GrpcService {
           this.projectFormattedName_,
           projectId!,
         );
-        this.instances_.forEach(instance => {
+        this.instances_.forEach((instance) => {
           instance.formattedName_ = replaceProjectIdToken(
             instance.formattedName_,
             projectId!,
           );
-          instance.databases_.forEach(database => {
+          instance.databases_.forEach((database) => {
             database.formattedName_ = replaceProjectIdToken(
               database.formattedName_,
               projectId!,
@@ -1771,7 +1771,7 @@ class Spanner extends GrpcService {
             const res = requestFn(...args);
             const stream = res as EventEmitter;
             if (stream) {
-              stream.on('error', err => {
+              stream.on('error', (err) => {
                 injectRequestIDIntoError(config, err as Error);
               });
             }
@@ -1784,7 +1784,7 @@ class Spanner extends GrpcService {
             return new Promise((resolve, reject) => {
               requestFn(...args)
                 .then(resolve)
-                .catch(err => {
+                .catch((err) => {
                   injectRequestIDIntoError(config, err as Error);
                   reject(err);
                 });
@@ -1843,11 +1843,11 @@ class Spanner extends GrpcService {
             const result = requestFn();
             if (result && typeof result.then === 'function') {
               result
-                .then(val => {
+                .then((val) => {
                   metricsTracer?.recordOperationCompletion();
                   resolve(val);
                 })
-                .catch(error => {
+                .catch((error) => {
                   metricsTracer?.recordOperationCompletion();
                   reject(error);
                 });
@@ -1892,7 +1892,7 @@ class Spanner extends GrpcService {
           return;
         }
         requestFn()
-          .on('error', err => {
+          .on('error', (err) => {
             stream.destroy(err);
           })
           .pipe(stream);
@@ -2209,7 +2209,7 @@ process.on('beforeExit', () => {
   const done = cleanup();
   if (done && typeof done.then === 'function') {
     // Handle promise rejection
-    done.catch(err => {
+    done.catch((err) => {
       console.error('Cleanup error before exit:', err);
     });
   }

@@ -81,7 +81,7 @@ const fakeGrpcGcp = () => {
   return {
     gcpChannelFactoryOverride: {},
     gcpCallInvocationTransformer: {},
-    createGcpApiConfig: apiConfig => {
+    createGcpApiConfig: (apiConfig) => {
       return {
         calledWith_: apiConfig,
       };
@@ -899,10 +899,10 @@ describe('Spanner', () => {
       }, /A configuration object is required to create an instance\./);
     });
 
-    it('should set the correct defaults on the request', done => {
+    it('should set the correct defaults on the request', (done) => {
       const stub = sandbox.stub(FakeInstance, 'formatName_').returns(PATH);
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         const [projectId, name] = stub.lastCall.args;
         assert.strictEqual(projectId, spanner.projectId);
         assert.strictEqual(name, NAME);
@@ -938,11 +938,11 @@ describe('Spanner', () => {
       assert.strictEqual(name, PATH);
     });
 
-    it('should accept the displayName', done => {
+    it('should accept the displayName', (done) => {
       const displayName = 'my-instance';
       const config = Object.assign({}, CONFIG, {displayName});
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.reqOpts.instance.displayName, displayName);
         done();
       };
@@ -950,12 +950,12 @@ describe('Spanner', () => {
       spanner.createInstance(NAME, config, assert.ifError);
     });
 
-    it('should accept the edition', done => {
+    it('should accept the edition', (done) => {
       const edition =
         protos.google.spanner.admin.instance.v1.Instance.Edition.STANDARD;
       const config = Object.assign({}, CONFIG, {edition});
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.reqOpts.instance.edition, edition);
         done();
       };
@@ -963,11 +963,11 @@ describe('Spanner', () => {
       spanner.createInstance(NAME, config, assert.ifError);
     });
 
-    it('should create an instance with processing units', done => {
+    it('should create an instance with processing units', (done) => {
       const processingUnits = 500;
       const config = Object.assign({}, CONFIG, {processingUnits});
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(
           config.reqOpts.instance.processingUnits,
           processingUnits,
@@ -989,9 +989,9 @@ describe('Spanner', () => {
       }, /Only one of nodeCount or processingUnits can be specified\./);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const cfg = Object.assign({}, CONFIG, {gaxOptions: {}});
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.gaxOpts, cfg.gaxOptions);
         done();
       };
@@ -1012,11 +1012,11 @@ describe('Spanner', () => {
     });
 
     describe('config.config', () => {
-      it('should format a name', done => {
+      it('should format a name', (done) => {
         const name = 'config-name';
         const config = extend({}, CONFIG, {config: name});
         const originalConfig = extend({}, config);
-        spanner.request = config_ => {
+        spanner.request = (config_) => {
           assert.deepStrictEqual(config, originalConfig);
           const reqOpts = config_.reqOpts;
           assert.strictEqual(
@@ -1039,7 +1039,7 @@ describe('Spanner', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         spanner.createInstance(NAME, CONFIG, (err, instance, op, resp) => {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(instance, null);
@@ -1060,7 +1060,7 @@ describe('Spanner', () => {
         };
       });
 
-      it('should create an Instance and return an Operation', done => {
+      it('should create an Instance and return an Operation', (done) => {
         const formattedName = 'formatted-name';
         sandbox.stub(FakeInstance, 'formatName_').returns(formattedName);
         const fakeInstanceInstance = {} as spnr.Instance;
@@ -1091,12 +1091,12 @@ describe('Spanner', () => {
       spanner.request = util.noop;
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const expectedReqOpts = extend({}, OPTIONS, {
         parent: 'projects/' + spanner.projectId,
       });
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'listInstances');
 
@@ -1113,7 +1113,7 @@ describe('Spanner', () => {
       spanner.getInstances(OPTIONS as GetInstancesOptions, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1128,7 +1128,7 @@ describe('Spanner', () => {
       );
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1141,7 +1141,7 @@ describe('Spanner', () => {
       spanner.getInstances(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1164,7 +1164,7 @@ describe('Spanner', () => {
 
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1177,8 +1177,8 @@ describe('Spanner', () => {
       spanner.getInstances(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      spanner.request = config => {
+    it('should not require options', (done) => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: 'projects/' + spanner.projectId,
         });
@@ -1200,7 +1200,7 @@ describe('Spanner', () => {
         };
       });
 
-      it('should execute callback with original arguments', done => {
+      it('should execute callback with original arguments', (done) => {
         spanner.getInstances(OPTIONS as GetInstancesOptions, (...args) => {
           assert.deepStrictEqual(args, GAX_RESPONSE_ARGS);
           done();
@@ -1223,10 +1223,10 @@ describe('Spanner', () => {
         };
       });
 
-      it('should create and return Instance objects', done => {
+      it('should create and return Instance objects', (done) => {
         const fakeInstanceInstance = {} as spnr.Instance;
 
-        spanner.instance = name => {
+        spanner.instance = (name) => {
           assert.strictEqual(name, INSTANCES[0].name);
           return fakeInstanceInstance;
         };
@@ -1243,7 +1243,7 @@ describe('Spanner', () => {
         });
       });
 
-      it('should return a complete nextQuery object', done => {
+      it('should return a complete nextQuery object', (done) => {
         const pageSize = 1;
         const filter = 'filter';
         const NEXTPAGEREQUEST = {
@@ -1288,7 +1288,7 @@ describe('Spanner', () => {
         parent: 'projects/' + spanner.projectId,
       });
 
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'listInstancesStream');
 
@@ -1319,7 +1319,7 @@ describe('Spanner', () => {
       );
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1354,7 +1354,7 @@ describe('Spanner', () => {
       );
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1369,7 +1369,7 @@ describe('Spanner', () => {
     });
 
     it('should not require options', () => {
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: 'projects/' + spanner.projectId,
         });
@@ -1422,12 +1422,12 @@ describe('Spanner', () => {
       }, /Base instance config is required to create an instance config\./);
     });
 
-    it('should set the correct defaults on the request', done => {
+    it('should set the correct defaults on the request', (done) => {
       const stub = sandbox
         .stub(FakeInstanceConfig, 'formatName_')
         .returns(PATH);
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         const [projectId, name] = stub.lastCall.args;
         assert.strictEqual(projectId, spanner.projectId);
         assert.strictEqual(name, NAME);
@@ -1463,11 +1463,11 @@ describe('Spanner', () => {
       assert.strictEqual(name, PATH);
     });
 
-    it('should accept the displayName', done => {
+    it('should accept the displayName', (done) => {
       const displayName = 'my-instance-config-display-name';
       const config = Object.assign({}, CONFIG, {displayName});
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(
           config.reqOpts.instanceConfig.displayName,
           displayName,
@@ -1478,9 +1478,9 @@ describe('Spanner', () => {
       spanner.createInstanceConfig(NAME, config, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const cfg = Object.assign({}, CONFIG, {gaxOptions: {}});
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.gaxOpts, cfg.gaxOptions);
         done();
       };
@@ -1497,7 +1497,7 @@ describe('Spanner', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         spanner.createInstanceConfig(
           NAME,
           CONFIG,
@@ -1522,7 +1522,7 @@ describe('Spanner', () => {
         };
       });
 
-      it('should create an Instance and return an Operation', done => {
+      it('should create an Instance and return an Operation', (done) => {
         const formattedName = 'formatted-name';
         sandbox.stub(FakeInstanceConfig, 'formatName_').returns(formattedName);
         const fakeInstanceConfigInstanceConfig = {} as spnr.InstanceConfig;
@@ -1566,7 +1566,7 @@ describe('Spanner', () => {
 
       const returnValue = {};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'listInstanceConfigs');
 
@@ -1585,7 +1585,7 @@ describe('Spanner', () => {
       assert.strictEqual(returnedValue, returnValue);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1600,7 +1600,7 @@ describe('Spanner', () => {
       );
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1613,7 +1613,7 @@ describe('Spanner', () => {
       spanner.getInstanceConfigs(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1635,7 +1635,7 @@ describe('Spanner', () => {
       );
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1648,8 +1648,8 @@ describe('Spanner', () => {
       spanner.getInstanceConfigs(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      spanner.request = config => {
+    it('should not require options', (done) => {
+      spanner.request = (config) => {
         const reqOpts = config.reqOpts;
         assert.deepStrictEqual(reqOpts, {
           parent: 'projects/' + spanner.projectId,
@@ -1662,7 +1662,7 @@ describe('Spanner', () => {
       spanner.getInstanceConfigs(assert.ifError);
     });
 
-    it('should return a complete nextQuery object', done => {
+    it('should return a complete nextQuery object', (done) => {
       const pageSize = 1;
       const filter = 'filter';
       const NEXTPAGEREQUEST = {
@@ -1700,7 +1700,7 @@ describe('Spanner', () => {
     } as spnr.GetInstanceConfigOperationsOptions;
     const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const gaxOpts = {
         timeout: 1000,
       };
@@ -1710,7 +1710,7 @@ describe('Spanner', () => {
         parent: spanner.projectFormattedName_,
       });
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'listInstanceConfigOperations');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -1725,7 +1725,7 @@ describe('Spanner', () => {
       spanner.getInstanceConfigOperations(options, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1740,7 +1740,7 @@ describe('Spanner', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1752,7 +1752,7 @@ describe('Spanner', () => {
       spanner.getInstanceConfigOperations(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1774,7 +1774,7 @@ describe('Spanner', () => {
         {pageSize: optionsPageSize, pageToken: optionsPageToken},
       );
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1786,8 +1786,8 @@ describe('Spanner', () => {
       spanner.getInstanceConfigOperations(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      spanner.request = config => {
+    it('should not require options', (done) => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: spanner.projectFormattedName_,
         });
@@ -1799,7 +1799,7 @@ describe('Spanner', () => {
       spanner.getInstanceConfigOperations(assert.ifError);
     });
 
-    it('should return a complete nextQuery object', done => {
+    it('should return a complete nextQuery object', (done) => {
       const pageSize = 1;
       const filter = 'filter';
       const NEXT_PAGE_REQUEST = {
@@ -1851,7 +1851,7 @@ describe('Spanner', () => {
       delete expectedOptions.gaxOptions;
       const returnValue = {};
 
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'listInstanceConfigsStream');
 
@@ -1877,7 +1877,7 @@ describe('Spanner', () => {
       };
       const returnValue = {};
 
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'listInstanceConfigsStream');
 
@@ -1909,7 +1909,7 @@ describe('Spanner', () => {
       delete expectedReqOpts.gaxOptions;
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.requestStream = config => {
+      spanner.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1949,7 +1949,7 @@ describe('Spanner', () => {
       delete expectedReqOpts.gaxOptions;
       const expectedGaxOpts = {timeout: 1000};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1981,7 +1981,7 @@ describe('Spanner', () => {
 
       const returnValue = {};
 
-      spanner.request = config => {
+      spanner.request = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'getInstanceConfig');
 
@@ -2004,8 +2004,8 @@ describe('Spanner', () => {
       assert.strictEqual(returnedValue, returnValue);
     });
 
-    it('should not require options', done => {
-      spanner.request = config => {
+    it('should not require options', (done) => {
+      spanner.request = (config) => {
         const reqOpts = config.reqOpts;
         assert.deepStrictEqual(reqOpts, {
           name: `projects/${spanner.projectId}/instanceConfigs/nam1`,
@@ -2102,7 +2102,7 @@ describe('Spanner', () => {
     beforeEach(() => {
       FAKE_GAPIC_CLIENT[CONFIG.method] = util.noop;
 
-      asAny(spanner).auth.getProjectId = callback => {
+      asAny(spanner).auth.getProjectId = (callback) => {
         callback(null, PROJECT_ID);
       };
 
@@ -2113,7 +2113,7 @@ describe('Spanner', () => {
       };
     });
 
-    it('should get the project ID from google-auth-library', done => {
+    it('should get the project ID from google-auth-library', (done) => {
       asAny(spanner).auth.getProjectId = () => {
         done();
       };
@@ -2121,20 +2121,20 @@ describe('Spanner', () => {
       spanner.prepareGapicRequest_(CONFIG, assert.ifError);
     });
 
-    it('should return an error from google-auth-library', done => {
+    it('should return an error from google-auth-library', (done) => {
       const error = new Error('Error.');
 
-      asAny(spanner).auth.getProjectId = callback => {
+      asAny(spanner).auth.getProjectId = (callback) => {
         callback(error);
       };
 
-      spanner.prepareGapicRequest_(CONFIG, err => {
+      spanner.prepareGapicRequest_(CONFIG, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should be able to catch any error from google-gax-library', done => {
+    it('should be able to catch any error from google-gax-library', (done) => {
       const error = new Error('Error.');
 
       fakeV1[CONFIG.client] = class {
@@ -2144,13 +2144,13 @@ describe('Spanner', () => {
         }
       };
 
-      spanner.prepareGapicRequest_(CONFIG, err => {
+      spanner.prepareGapicRequest_(CONFIG, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should create and cache a gapic client', done => {
+    it('should create and cache a gapic client', (done) => {
       fakeV1[CONFIG.client] = class {
         constructor(options) {
           assert.strictEqual(options, spanner.options);
@@ -2175,7 +2175,7 @@ describe('Spanner', () => {
       spanner.prepareGapicRequest_(CONFIG, assert.ifError);
     });
 
-    it('should replace project ID tokens within the reqOpts', done => {
+    it('should replace project ID tokens within the reqOpts', (done) => {
       const replacedReqOpts = {};
 
       replaceProjectIdTokenOverride = (reqOpts, projectId) => {
@@ -2187,7 +2187,7 @@ describe('Spanner', () => {
         return replacedReqOpts;
       };
 
-      FAKE_GAPIC_CLIENT[CONFIG.method] = reqOpts => {
+      FAKE_GAPIC_CLIENT[CONFIG.method] = (reqOpts) => {
         assert.strictEqual(reqOpts, replacedReqOpts);
         done();
       };
@@ -2197,8 +2197,8 @@ describe('Spanner', () => {
       });
     });
 
-    it('should return the gax client method with correct args', done => {
-      replaceProjectIdTokenOverride = reqOpts => {
+    it('should return the gax client method with correct args', (done) => {
+      replaceProjectIdTokenOverride = (reqOpts) => {
         return reqOpts;
       };
       const expectedGaxOpts = extend(true, {}, CONFIG.gaxOpts, {
@@ -2238,8 +2238,8 @@ describe('Spanner', () => {
         assert.strictEqual(returnedValue, undefined);
       });
 
-      it('should prepare the gapic request', done => {
-        spanner.prepareGapicRequest_ = config => {
+      it('should prepare the gapic request', (done) => {
+        spanner.prepareGapicRequest_ = (config) => {
           assert.strictEqual(config, CONFIG);
           done();
         };
@@ -2247,20 +2247,20 @@ describe('Spanner', () => {
         spanner.request(CONFIG, assert.ifError);
       });
 
-      it('should execute callback with error', done => {
+      it('should execute callback with error', (done) => {
         const error = new Error('Error.');
 
         spanner.prepareGapicRequest_ = (config, callback) => {
           callback(error);
         };
 
-        spanner.request(CONFIG, err => {
+        spanner.request(CONFIG, (err) => {
           assert.strictEqual(err, error);
           done();
         });
       });
 
-      it('should pass callback to request function', done => {
+      it('should pass callback to request function', (done) => {
         function gapicRequestFn(callback) {
           callback(); // done()
         }
@@ -2279,8 +2279,8 @@ describe('Spanner', () => {
         assert(returnedValue instanceof Promise);
       });
 
-      it('should prepare the gapic request', done => {
-        spanner.prepareGapicRequest_ = config => {
+      it('should prepare the gapic request', (done) => {
+        spanner.prepareGapicRequest_ = (config) => {
           assert.strictEqual(config, CONFIG);
           done();
         };
@@ -2288,14 +2288,14 @@ describe('Spanner', () => {
         spanner.request(CONFIG);
       });
 
-      it('should reject the promise', done => {
+      it('should reject the promise', (done) => {
         const error = new Error('Error.');
 
         spanner.prepareGapicRequest_ = (config, callback) => {
           callback(error);
         };
 
-        spanner.request(CONFIG).catch(err => {
+        spanner.request(CONFIG).catch((err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -2312,7 +2312,7 @@ describe('Spanner', () => {
           callback(null, gapicRequestFn);
         };
 
-        return spanner.request(CONFIG).then(result => {
+        return spanner.request(CONFIG).then((result) => {
           assert.strictEqual(result, gapicRequestFnResult);
         });
       });
@@ -2326,8 +2326,8 @@ describe('Spanner', () => {
       spanner.prepareGapicRequest_ = util.noop;
     });
 
-    it('should prepare the gapic request', done => {
-      spanner.prepareGapicRequest_ = config => {
+    it('should prepare the gapic request', (done) => {
+      spanner.prepareGapicRequest_ = (config) => {
         assert.strictEqual(config, CONFIG);
         done();
       };
@@ -2335,7 +2335,7 @@ describe('Spanner', () => {
       spanner.requestStream(CONFIG).emit('reading');
     });
 
-    it('should destroy the stream with an error', done => {
+    it('should destroy the stream with an error', (done) => {
       const error = new Error('Error.');
 
       spanner.prepareGapicRequest_ = (config, callback) => {
@@ -2344,14 +2344,14 @@ describe('Spanner', () => {
 
       spanner
         .requestStream(CONFIG)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err, error);
           done();
         })
         .emit('reading');
     });
 
-    it('should pipe the request stream to the user stream', done => {
+    it('should pipe the request stream to the user stream', (done) => {
       const requestStream = through.obj();
       const data = {};
 
@@ -2367,14 +2367,14 @@ describe('Spanner', () => {
 
       spanner
         .requestStream(CONFIG)
-        .on('data', data_ => {
+        .on('data', (data_) => {
           assert.strictEqual(data_, data);
           done();
         })
         .emit('reading');
     });
 
-    it('should pass errors from the request stream', done => {
+    it('should pass errors from the request stream', (done) => {
       const requestStream = through.obj();
       const error = new Error('Error.');
 
@@ -2390,7 +2390,7 @@ describe('Spanner', () => {
 
       spanner
         .requestStream(CONFIG)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err, error);
           done();
         })

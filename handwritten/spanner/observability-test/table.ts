@@ -126,7 +126,7 @@ describe('Table', () => {
 
   function spanNames(spans) {
     const actualSpanNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       actualSpanNames.push(span.name);
     });
     return actualSpanNames;
@@ -139,7 +139,7 @@ describe('Table', () => {
     assert.strictEqual(attributes['db.name'], 'formatted-db-name');
   }
 
-  it('deleteRows', done => {
+  it('deleteRows', (done) => {
     const KEYS = ['key'];
     const stub = (
       sandbox.stub(transaction, 'deleteRows') as sinon.SinonStub
@@ -149,7 +149,7 @@ describe('Table', () => {
       callback();
     });
 
-    table.deleteRows(KEYS, mutateRowsOptions, err => {
+    table.deleteRows(KEYS, mutateRowsOptions, (err) => {
       assert.ifError(err);
       assert.strictEqual(stub.callCount, 1);
       const spans = getExportedSpans(1);
@@ -165,12 +165,12 @@ describe('Table', () => {
     });
   });
 
-  it('insert', done => {
+  it('insert', (done) => {
     const stub = (
       sandbox.stub(transaction, 'insert') as sinon.SinonStub
     ).withArgs(table.name, ROW);
 
-    table.insert(ROW, mutateRowsOptions, err => {
+    table.insert(ROW, mutateRowsOptions, (err) => {
       assert.ifError(err);
       assert.strictEqual(stub.callCount, 1);
       const spans = getExportedSpans(1);
@@ -186,13 +186,13 @@ describe('Table', () => {
     });
   });
 
-  it('insert with an error', done => {
+  it('insert with an error', (done) => {
     const fakeError = new Error('err');
     sandbox
       .stub(DATABASE, 'runTransaction')
       .callsFake((opts, callback) => callback(fakeError));
 
-    table.insert(ROW, mutateRowsOptions, err => {
+    table.insert(ROW, mutateRowsOptions, (err) => {
       assert.strictEqual(err, fakeError);
 
       const gotSpans = getExportedSpans(1);
@@ -220,12 +220,12 @@ describe('Table', () => {
     });
   });
 
-  it('upsert', done => {
+  it('upsert', (done) => {
     const stub = (
       sandbox.stub(transaction, 'upsert') as sinon.SinonStub
     ).withArgs(table.name, ROW);
 
-    table.upsert(ROW, mutateRowsOptions, err => {
+    table.upsert(ROW, mutateRowsOptions, (err) => {
       assert.ifError(err);
       assert.strictEqual(stub.callCount, 1);
 
@@ -244,13 +244,13 @@ describe('Table', () => {
     });
   });
 
-  it('upsert with an error', done => {
+  it('upsert with an error', (done) => {
     const fakeError = new Error('err');
     sandbox
       .stub(DATABASE, 'runTransaction')
       .callsFake((opts, callback) => callback(fakeError));
 
-    table.upsert(ROW, mutateRowsOptions, err => {
+    table.upsert(ROW, mutateRowsOptions, (err) => {
       assert.strictEqual(err, fakeError);
 
       const gotSpans = getExportedSpans(1);
@@ -279,12 +279,12 @@ describe('Table', () => {
     });
   });
 
-  it('replace', done => {
+  it('replace', (done) => {
     const stub = (
       sandbox.stub(transaction, 'replace') as sinon.SinonStub
     ).withArgs(table.name, ROW);
 
-    table.replace(ROW, mutateRowsOptions, err => {
+    table.replace(ROW, mutateRowsOptions, (err) => {
       assert.ifError(err);
       assert.strictEqual(stub.callCount, 1);
 
@@ -303,13 +303,13 @@ describe('Table', () => {
     });
   });
 
-  it('replace with an error', done => {
+  it('replace with an error', (done) => {
     const fakeError = new Error('err');
     sandbox
       .stub(DATABASE, 'runTransaction')
       .callsFake((opts, callback) => callback(fakeError));
 
-    table.replace(ROW, mutateRowsOptions, err => {
+    table.replace(ROW, mutateRowsOptions, (err) => {
       assert.strictEqual(err, fakeError);
       const gotSpans = getExportedSpans(1);
       const gotSpanStatus = gotSpans[0].status;

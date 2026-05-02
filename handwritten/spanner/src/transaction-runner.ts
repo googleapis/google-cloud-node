@@ -265,7 +265,7 @@ export abstract class Runner<T> {
       this.attempts += 1;
 
       const delay = this.getNextDelay(lastError);
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
 
     throw new DeadlineError(lastError!);

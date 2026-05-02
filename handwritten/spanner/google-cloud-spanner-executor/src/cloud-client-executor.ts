@@ -139,7 +139,7 @@ export class CloudClientExecutor {
         message: 'Invalid request: No action present',
       });
     }
-    this.executeAction(outcomeSender, req.action).catch(err => {
+    this.executeAction(outcomeSender, req.action).catch((err) => {
       console.error('Unhandled exception in action execution:', err);
       outcomeSender.finishWithError(err);
     });
@@ -156,7 +156,7 @@ export class CloudClientExecutor {
   ): Promise<void> {
     const actionType =
       Object.keys(action).find(
-        k =>
+        (k) =>
           action[k as keyof typeof action] !== undefined &&
           !!this.actionRegistry[k],
       ) || 'unknown';
@@ -196,7 +196,7 @@ export class CloudClientExecutor {
   ): Promise<void> {
     try {
       const adminType = Object.keys(action).find(
-        k =>
+        (k) =>
           action[k as keyof typeof action] !== undefined &&
           !!this.adminActionRegistry[k],
       );

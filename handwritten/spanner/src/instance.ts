@@ -438,7 +438,7 @@ class Instance extends common.GrpcServiceObject {
       (err, backups, nextPageRequest, ...args) => {
         let backupInstances: Backup[] | null = null;
         if (backups) {
-          backupInstances = backups.map(backup => {
+          backupInstances = backups.map((backup) => {
             const backupInstance = this.backup(backup.name!);
             backupInstance.metadata = backup;
             return backupInstance;
@@ -1058,7 +1058,7 @@ class Instance extends common.GrpcServiceObject {
       name: this.formattedName_,
     };
     void Promise.all(
-      Array.from(this.databases_.values()).map(database => {
+      Array.from(this.databases_.values()).map((database) => {
         return database.close();
       }),
     )
@@ -1133,7 +1133,7 @@ class Instance extends common.GrpcServiceObject {
 
     const NOT_FOUND = 5;
 
-    this.getMetadata({gaxOptions}, err => {
+    this.getMetadata({gaxOptions}, (err) => {
       if (err && err.code !== NOT_FOUND) {
         callback!(err, null);
         return;
@@ -1372,7 +1372,7 @@ class Instance extends common.GrpcServiceObject {
       (err, rowDatabases, nextPageRequest, ...args) => {
         let databases: Database[] | null = null;
         if (rowDatabases) {
-          databases = rowDatabases.map(database => {
+          databases = rowDatabases.map((database) => {
             const databaseInstance = self.database(database.name!, {min: 0});
             databaseInstance.metadata = database;
             databaseInstance._observabilityOptions = this._observabilityOptions;

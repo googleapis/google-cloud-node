@@ -100,7 +100,7 @@ describe('resumable-upload', () => {
     setTimeout(done(), ms);
   }
 
-  it('should work', done => {
+  it('should work', (done) => {
     let uploadSucceeded = false;
     fs.createReadStream(filePath)
       .on('error', done)
@@ -113,7 +113,7 @@ describe('resumable-upload', () => {
         }),
       )
       .on('error', done)
-      .on('response', resp => {
+      .on('response', (resp) => {
         uploadSucceeded = resp.status === 200;
       })
       .on('finish', () => {
@@ -210,7 +210,7 @@ describe('resumable-upload', () => {
     assert.equal(resp.headers['content-length'], '0');
   });
 
-  it('should return a non-resumable failed upload', done => {
+  it('should return a non-resumable failed upload', (done) => {
     const metadata = {
       metadata: {largeString: 'a'.repeat(2.1e6)},
     };
@@ -244,7 +244,7 @@ describe('resumable-upload', () => {
         file.createWriteStream({
           chunkSize,
         }),
-        e => (e ? reject(e) : resolve()),
+        (e) => (e ? reject(e) : resolve()),
       ),
     );
 
@@ -280,18 +280,18 @@ describe('resumable-upload', () => {
         resumeCRC32C,
       });
 
-      writable.on('uri', link => {
+      writable.on('uri', (link) => {
         uri = link;
         uriGenerated++;
       });
 
-      writable.on('crc32c', crc32c => {
+      writable.on('crc32c', (crc32c) => {
         resumeCRC32C = crc32c;
         crc32cGenerated++;
       });
 
       await new Promise<void>((resolve, reject) =>
-        pipeline(readable, writable, e => (e ? reject(e) : resolve())),
+        pipeline(readable, writable, (e) => (e ? reject(e) : resolve())),
       );
     }
 
@@ -314,7 +314,7 @@ describe('resumable-upload', () => {
     before(async () => {
       crc32c = (await CRC32C.fromFile(filePath)).toString();
     });
-    it('should upload successfully when crc32c calculation is enabled', done => {
+    it('should upload successfully when crc32c calculation is enabled', (done) => {
       let uploadSucceeded = false;
 
       fs.createReadStream(filePath)
@@ -328,7 +328,7 @@ describe('resumable-upload', () => {
             retryOptions: retryOptions,
           }),
         )
-        .on('error', err => {
+        .on('error', (err) => {
           console.log(err);
           done(
             new Error(
@@ -336,7 +336,7 @@ describe('resumable-upload', () => {
             ),
           );
         })
-        .on('response', resp => {
+        .on('response', (resp) => {
           uploadSucceeded = resp.status === 200;
         })
         .on('finish', () => {
@@ -345,7 +345,7 @@ describe('resumable-upload', () => {
         });
     });
 
-    it('should destroy the stream on a checksum mismatch (client-provided hash mismatch)', done => {
+    it('should destroy the stream on a checksum mismatch (client-provided hash mismatch)', (done) => {
       const EXPECTED_ERROR_MESSAGE_PART = `Provided CRC32C "${KNOWN_CRC32C_OF_ZEROS}" doesn't match calculated CRC32C`;
 
       fs.createReadStream(filePath)

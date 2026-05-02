@@ -11,9 +11,7 @@
           "libraryClient": "SpannerExecutorProxyClient",
           "rpcs": {
             "ExecuteActionAsync": {
-              "methods": [
-                "executeActionAsync"
-              ]
+              "methods": ["executeActionAsync"]
             }
           }
         },

@@ -274,12 +274,12 @@ describe('Spanner', () => {
     try {
       if (generateInstanceForTest) {
         // Sleep for 30 seconds before cleanup, just in case
-        await new Promise(resolve => setTimeout(resolve, 30000));
+        await new Promise((resolve) => setTimeout(resolve, 30000));
         // Deleting all backups before an instance can be deleted.
         await Promise.all(
-          RESOURCES_TO_CLEAN.filter(resource => resource instanceof Backup).map(
-            backup => backup.delete(GAX_OPTIONS),
-          ),
+          RESOURCES_TO_CLEAN.filter(
+            (resource) => resource instanceof Backup,
+          ).map((backup) => backup.delete(GAX_OPTIONS)),
         );
         /**
          * Deleting instances created during this test.
@@ -288,8 +288,8 @@ describe('Spanner', () => {
          */
         await Promise.all(
           RESOURCES_TO_CLEAN.filter(
-            resource => resource instanceof Instance,
-          ).map(async instance => {
+            (resource) => resource instanceof Instance,
+          ).map(async (instance) => {
             await deleteInstance(instance);
           }),
         );
@@ -301,7 +301,7 @@ describe('Spanner', () => {
          */
         const limit = pLimit(5);
         await Promise.all(
-          RESOURCES_TO_CLEAN.map(resource =>
+          RESOURCES_TO_CLEAN.map((resource) =>
             limit(() => resource.delete(GAX_OPTIONS)),
           ),
         );
@@ -554,7 +554,7 @@ describe('Spanner', () => {
       };
     }
 
-    const incorrectValueType = async table => {
+    const incorrectValueType = async (table) => {
       try {
         await table.insert({BoolValue: 'abc'});
         assert.fail('Expected an error to be thrown, but it was not.');
@@ -574,7 +574,7 @@ describe('Spanner', () => {
     });
 
     describe('uneven rows', () => {
-      const differentlyOrderedRows = async dialect => {
+      const differentlyOrderedRows = async (dialect) => {
         const data = [
           {
             Key: generateName('id'),
@@ -809,7 +809,7 @@ describe('Spanner', () => {
         await int64Insert(Spanner.POSTGRESQL, null);
       });
 
-      const int64OutOfBounds = async dialect => {
+      const int64OutOfBounds = async (dialect) => {
         const value = '9223372036854775807';
         const {row} = await insert({IntValue: value}, dialect);
         assert.throws(() => {
@@ -825,7 +825,7 @@ describe('Spanner', () => {
         await int64OutOfBounds(Spanner.POSTGRESQL);
       });
 
-      const int64WrapOutOfBounds = async dialect => {
+      const int64WrapOutOfBounds = async (dialect) => {
         const value = '9223372036854775807';
         const {row} = await insert({IntValue: value}, dialect);
         const expected = Spanner.int(value);
@@ -1455,7 +1455,7 @@ describe('Spanner', () => {
     });
 
     describe('timestamps', () => {
-      const timestampInsert = async dialect => {
+      const timestampInsert = async (dialect) => {
         const date = Spanner.timestamp();
         const {row} = await insert({TimestampValue: date}, dialect);
         const time = row.toJSON().TimestampValue.getTime();
@@ -1470,7 +1470,7 @@ describe('Spanner', () => {
         await timestampInsert(Spanner.POSTGRESQL);
       });
 
-      const timestampInsertNull = async dialect => {
+      const timestampInsertNull = async (dialect) => {
         const {row} = await insert({TimestampValue: null}, dialect);
         assert.strictEqual(row.toJSON().TimestampValue, null);
       };
@@ -1532,7 +1532,7 @@ describe('Spanner', () => {
     });
 
     describe('dates', () => {
-      const dateInsert = async dialect => {
+      const dateInsert = async (dialect) => {
         const {row} = await insert({DateValue: Spanner.date()}, dialect);
         assert.deepStrictEqual(
           Spanner.date(row.toJSON().DateValue),
@@ -1548,7 +1548,7 @@ describe('Spanner', () => {
         await dateInsert(Spanner.POSTGRESQL);
       });
 
-      const dateInsertNull = async dialect => {
+      const dateInsertNull = async (dialect) => {
         const {row} = await insert({DateValue: null}, dialect);
         assert.strictEqual(row.toJSON().DateValue, null);
       };
@@ -1809,7 +1809,7 @@ describe('Spanner', () => {
     });
 
     describe('commit timestamp', () => {
-      const commitTimestamp = async dialect => {
+      const commitTimestamp = async (dialect) => {
         const data = {CommitTimestamp: Spanner.COMMIT_TIMESTAMP};
 
         const {row, insertResp} = await insert(data, dialect);
@@ -1878,12 +1878,12 @@ describe('Spanner', () => {
       assert(instances.length > 0);
     });
 
-    it('should list the instances in stream mode', done => {
+    it('should list the instances in stream mode', (done) => {
       spanner
         .getInstancesStream()
         .on('error', done)
         .pipe(
-          concat(instances => {
+          concat((instances) => {
             assert(instances.length > 0);
             done();
           }),
@@ -1958,7 +1958,7 @@ describe('Spanner', () => {
        * @see {@link https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.admin.instance.v1#google.spanner.admin.instance.v1.InstanceAdmin.DeleteInstanceConfig}
        */
       await Promise.all(
-        INSTANCE_CONFIGS_TO_CLEAN.map(instanceConfig =>
+        INSTANCE_CONFIGS_TO_CLEAN.map((instanceConfig) =>
           instanceConfig.delete({gaxOpts: GAX_OPTIONS}),
         ),
       );
@@ -1982,12 +1982,12 @@ describe('Spanner', () => {
       assert(instanceConfigs.length > 0);
     });
 
-    it('should list the instanceConfigs in stream mode', done => {
+    it('should list the instanceConfigs in stream mode', (done) => {
       spanner
         .getInstanceConfigsStream()
         .on('error', done)
         .pipe(
-          concat(instanceConfigs => {
+          concat((instanceConfigs) => {
             assert(instanceConfigs.length > 0);
             done();
           }),
@@ -2026,7 +2026,7 @@ describe('Spanner', () => {
       const [operationsWithoutFilter] =
         await spanner.getInstanceConfigOperations();
       const operationForCurrentInstanceConfig = operationsWithoutFilter!.find(
-        operation =>
+        (operation) =>
           operation.name &&
           operation.name.includes(instanceConfig.formattedName_),
       );
@@ -2101,7 +2101,7 @@ describe('Spanner', () => {
 
   describe('Databases', () => {
     const TABLE_NAME = 'SingersTest';
-    const autoCreateDatabase = async databaseId => {
+    const autoCreateDatabase = async (databaseId) => {
       const database = instance.database(generateName(databaseId));
       await database.get({autoCreate: true} as GetDatabaseConfig);
       RESOURCES_TO_CLEAN.push(database);
@@ -2135,7 +2135,7 @@ describe('Spanner', () => {
       const [databases] = await instance.getDatabases();
       assert(databases!.length > 0);
       // check if enableDropProtection is populated for databases.
-      databases!.map(db => {
+      databases!.map((db) => {
         assert.notStrictEqual(db.metadata.enableDropProtection, null);
       });
     });
@@ -2145,12 +2145,12 @@ describe('Spanner', () => {
       assert(databases.length > 0);
     });
 
-    it('should list the databases in stream mode', done => {
+    it('should list the databases in stream mode', (done) => {
       instance
         .getDatabasesStream()
         .on('error', done)
         .pipe(
-          concat(databases => {
+          concat((databases) => {
             assert(databases.length > 0);
             done();
           }),
@@ -2181,7 +2181,7 @@ describe('Spanner', () => {
       const [statements] = await database.getSchema();
       assert.ok(
         statements.some(
-          s =>
+          (s) =>
             replaceNewLinesAndSpacing(s, dialect) ===
             replaceNewLinesAndSpacing(createTableStatement, dialect),
         ),
@@ -2255,7 +2255,7 @@ describe('Spanner', () => {
       // Validate operation has at least the create operation for the database.
       assert.ok(databaseOperations.length > 0);
       const databaseCreateOperation = databaseOperations.find(
-        op =>
+        (op) =>
           op.metadata!.type_url ===
           'type.googleapis.com/google.spanner.admin.database.v1.CreateDatabaseMetadata',
       );
@@ -2327,7 +2327,7 @@ describe('Spanner', () => {
           this.skip();
         }
         await createUserDefinedDatabaseRole(DATABASE, 'CREATE ROLE parent');
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       it('POSTGRESQL should create a user defined role', async function () {
@@ -2335,7 +2335,7 @@ describe('Spanner', () => {
           this.skip();
         }
         await createUserDefinedDatabaseRole(PG_DATABASE, 'CREATE ROLE parent');
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       const grantAccessToRole = async (
@@ -2362,7 +2362,7 @@ describe('Spanner', () => {
           'CREATE ROLE child',
           'GRANT SELECT ON TABLE Singers TO ROLE child',
         );
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       it('POSTGRESQL should grant access to a user defined role', async function () {
@@ -2374,7 +2374,7 @@ describe('Spanner', () => {
           'CREATE ROLE child',
           'GRANT SELECT ON TABLE singers TO child',
         );
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       const userDefinedDatabaseRoleRevoked = async (
@@ -2409,7 +2409,7 @@ describe('Spanner', () => {
           'GRANT SELECT ON TABLE Singers TO ROLE orphan',
           'REVOKE SELECT ON TABLE Singers FROM ROLE orphan',
         );
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       it('POSTGRESQL should revoke permissions of a user defined role', async function () {
@@ -2422,7 +2422,7 @@ describe('Spanner', () => {
           'GRANT SELECT ON TABLE singers TO orphan',
           'REVOKE SELECT ON TABLE singers FROM orphan',
         );
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       const userDefinedDatabaseRoleDropped = async (
@@ -2451,7 +2451,7 @@ describe('Spanner', () => {
           'CREATE ROLE new_parent',
           'DROP ROLE new_parent',
         );
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       it('POSTGRESQL should drop the user defined role', async function () {
@@ -2463,7 +2463,7 @@ describe('Spanner', () => {
           'CREATE ROLE new_parent',
           'DROP ROLE new_parent',
         );
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
       });
 
       const grantAccessSuccess = async (database, grantPermissionQuery) => {
@@ -2552,7 +2552,7 @@ describe('Spanner', () => {
         );
       });
 
-      const listDatabaseRoles = async database => {
+      const listDatabaseRoles = async (database) => {
         const [updateRole] = await database.updateSchema([
           'CREATE ROLE new_parent',
         ]);
@@ -2562,7 +2562,7 @@ describe('Spanner', () => {
         assert.ok(databaseRoles.length > 0);
         assert.ok(
           databaseRoles.find(
-            role =>
+            (role) =>
               role.name ===
               database.formattedName_ + '/databaseRoles/new_parent',
           ),
@@ -2583,7 +2583,7 @@ describe('Spanner', () => {
         await listDatabaseRoles(PG_DATABASE);
       });
 
-      const getIamPolicy = async database => {
+      const getIamPolicy = async (database) => {
         const [policy] = await database.getIamPolicy();
         assert.strictEqual(policy!.version, 0);
         assert.deepStrictEqual(policy!.bindings, []);
@@ -2603,7 +2603,7 @@ describe('Spanner', () => {
         await getIamPolicy(PG_DATABASE);
       });
 
-      const setIamPolicy = async database => {
+      const setIamPolicy = async (database) => {
         const newBinding = {
           role: 'roles/spanner.fineGrainedAccessUser',
           members: [`user:${IAM_MEMBER}`],
@@ -2694,7 +2694,7 @@ describe('Spanner', () => {
 
         const [schema] = await database.getSchema();
         assert.strictEqual(
-          schema.filter(x => x.includes('FKShoppingCartsCustomerId')).length,
+          schema.filter((x) => x.includes('FKShoppingCartsCustomerId')).length,
           1,
         );
       };
@@ -2730,7 +2730,8 @@ describe('Spanner', () => {
         await operationAddConstraint.promise();
         const [schema] = await database.getSchema();
         assert.strictEqual(
-          schema.filter(x => x.includes('FKShoppingCartsCustomerName')).length,
+          schema.filter((x) => x.includes('FKShoppingCartsCustomerName'))
+            .length,
           1,
         );
 
@@ -2743,7 +2744,8 @@ describe('Spanner', () => {
         await operationDropConstraint.promise();
         const [schema1] = await database.getSchema();
         assert.strictEqual(
-          schema1.filter(x => x.includes('FKShoppingCartsCustomerName')).length,
+          schema1.filter((x) => x.includes('FKShoppingCartsCustomerName'))
+            .length,
           0,
         );
       };
@@ -2761,7 +2763,7 @@ describe('Spanner', () => {
         await alterDatabaseWithFKADC(Spanner.POSTGRESQL, fkadc_database_pg);
       });
 
-      const insertAndDeleteRowWithFKADC = async database => {
+      const insertAndDeleteRowWithFKADC = async (database) => {
         const customersTable = database.table('Customers');
         await customersTable.insert({
           CustomerId: 1,
@@ -2797,7 +2799,7 @@ describe('Spanner', () => {
         await insertAndDeleteRowWithFKADC(fkadc_database_pg);
       });
 
-      const insertRowErrorWithFKADC = async database => {
+      const insertRowErrorWithFKADC = async (database) => {
         const cartsTable = database.table('ShoppingCarts');
         await cartsTable.insert({
           CartId: 2,
@@ -2830,8 +2832,10 @@ describe('Spanner', () => {
         }
       });
 
-      const insertAndDeleteInSameTransactionErrorWithFKADC = async database => {
-        await database.runTransactionAsync(async transaction => {
+      const insertAndDeleteInSameTransactionErrorWithFKADC = async (
+        database,
+      ) => {
+        await database.runTransactionAsync(async (transaction) => {
           transaction!.insert('Customers', {
             CustomerId: 2,
             CustomerName: 'John',
@@ -2858,43 +2862,44 @@ describe('Spanner', () => {
         await insertAndDeleteInSameTransactionErrorWithFKADC(fkadc_database_pg);
       });
 
-      const insertReferencingKeyAndDeleteReferencedKeyErrorWithFKADC =
-        async database => {
-          const customersTable = database.table('Customers');
-          const cartsTable = database.table('ShoppingCarts');
-          await customersTable.insert([
-            {
-              CustomerId: 2,
-              CustomerName: 'Marc',
-            },
-            {
-              CustomerId: 3,
-              CustomerName: 'John',
-            },
-          ]);
-          await cartsTable.insert({
-            CartId: 2,
+      const insertReferencingKeyAndDeleteReferencedKeyErrorWithFKADC = async (
+        database,
+      ) => {
+        const customersTable = database.table('Customers');
+        const cartsTable = database.table('ShoppingCarts');
+        await customersTable.insert([
+          {
             CustomerId: 2,
             CustomerName: 'Marc',
-          });
+          },
+          {
+            CustomerId: 3,
+            CustomerName: 'John',
+          },
+        ]);
+        await cartsTable.insert({
+          CartId: 2,
+          CustomerId: 2,
+          CustomerName: 'Marc',
+        });
 
-          await database.runTransactionAsync(async transaction => {
-            transaction!.update('ShoppingCarts', {
-              CartId: 2,
-              CustomerId: 3,
-              CustomerName: 'John',
-            });
-            transaction!.deleteRows('Customers', [2]);
-            try {
-              await transaction!.commit();
-            } catch (err) {
-              assert.match(
-                (err as grpc.ServiceError).message.toLowerCase(),
-                /9 failed_precondition: cannot modify a row in the table `shoppingcarts` because a referential action is deleting it in the same transaction\./,
-              );
-            }
+        await database.runTransactionAsync(async (transaction) => {
+          transaction!.update('ShoppingCarts', {
+            CartId: 2,
+            CustomerId: 3,
+            CustomerName: 'John',
           });
-        };
+          transaction!.deleteRows('Customers', [2]);
+          try {
+            await transaction!.commit();
+          } catch (err) {
+            assert.match(
+              (err as grpc.ServiceError).message.toLowerCase(),
+              /9 failed_precondition: cannot modify a row in the table `shoppingcarts` because a referential action is deleting it in the same transaction\./,
+            );
+          }
+        });
+      };
 
       it('GOOGLE_STANDARD_SQL should throw error when insert a referencing key and delete a referenced key', async () => {
         const fkadc_database = instance.database(fkadc_database_id);
@@ -2910,15 +2915,16 @@ describe('Spanner', () => {
         );
       });
 
-      const deleteRuleOnInformationSchemaReferentialConstraints =
-        async database => {
-          const [transaction] = await database.getSnapshot();
-          const [rows] = await transaction!.run(
-            "SELECT DELETE_RULE FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME = 'FKShoppingCartsCustomerId'",
-          );
-          assert.strictEqual(rows[0][0].value, 'CASCADE');
-          transaction!.end();
-        };
+      const deleteRuleOnInformationSchemaReferentialConstraints = async (
+        database,
+      ) => {
+        const [transaction] = await database.getSnapshot();
+        const [rows] = await transaction!.run(
+          "SELECT DELETE_RULE FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME = 'FKShoppingCartsCustomerId'",
+        );
+        assert.strictEqual(rows[0][0].value, 'CASCADE');
+        transaction!.end();
+      };
 
       it('GOOGLE_STANDARD_SQL should test information schema referential constraints', async () => {
         const fkadc_database = instance.database(fkadc_database_id);
@@ -3035,7 +3041,7 @@ describe('Spanner', () => {
       );
     });
 
-    const pastBackupExpirationTimeError = async database1 => {
+    const pastBackupExpirationTimeError = async (database1) => {
       // Create backup.
       const backupName = generateName('backup');
       const backupExpiryDate = futureDateByHours(-12);
@@ -3079,13 +3085,13 @@ describe('Spanner', () => {
       assert.ok(backups.length > 0);
       assert.ok(
         backups.find(
-          backup => backup.formattedName_ === googleSqlBackup1.formattedName_,
+          (backup) => backup.formattedName_ === googleSqlBackup1.formattedName_,
         ),
       );
       if (!SKIP_POSTGRESQL_BACKUP_TESTS) {
         assert.ok(
           backups.find(
-            backup =>
+            (backup) =>
               backup.formattedName_ === postgreSqlBackup1.formattedName_,
           ),
         );
@@ -3110,13 +3116,13 @@ describe('Spanner', () => {
       assert.strictEqual(totalPages.length, totalPageSize);
       assert.ok(
         totalPages.find(
-          backup => backup.formattedName_ === googleSqlBackup1.formattedName_,
+          (backup) => backup.formattedName_ === googleSqlBackup1.formattedName_,
         ),
       );
       if (!SKIP_POSTGRESQL_BACKUP_TESTS) {
         assert.ok(
           totalPages.find(
-            backup =>
+            (backup) =>
               backup.formattedName_ === postgreSqlBackup1.formattedName_,
           ),
         );
@@ -3153,7 +3159,7 @@ describe('Spanner', () => {
       const [rows] = await restoreDatabase
         .table(TABLE_NAME)
         .read({columns: ['SingerId', 'Name']});
-      const results = rows.map(row => row.toJSON);
+      const results = rows.map((row) => row.toJSON);
       assert.strictEqual(results.length, 1);
 
       // Validate restore info of database.
@@ -3224,7 +3230,7 @@ describe('Spanner', () => {
       );
     });
 
-    const updateBackupExpiry = async backup1 => {
+    const updateBackupExpiry = async (backup1) => {
       // Update backup expiry date.
       const updatedBackupExpiryDate = futureDateByHours(24);
       await backup1.updateExpireTime(updatedBackupExpiryDate);
@@ -3249,7 +3255,7 @@ describe('Spanner', () => {
       await updateBackupExpiry(postgreSqlBackup1);
     });
 
-    const pastBackupUpdateExpiryDateFail = async backup1 => {
+    const pastBackupUpdateExpiryDateFail = async (backup1) => {
       // Attempt to update expiry date to the past.
       const expiryDateInPast = futureDateByHours(-24);
       try {
@@ -3274,7 +3280,7 @@ describe('Spanner', () => {
       await pastBackupUpdateExpiryDateFail(postgreSqlBackup1);
     });
 
-    const deleteBackup = async backup2 => {
+    const deleteBackup = async (backup2) => {
       // Delete backup.
       await backup2.delete();
 
@@ -3296,7 +3302,7 @@ describe('Spanner', () => {
       // Without a filter.
       const [operationsWithoutFilter] = await instance.getBackupOperations();
       const operationForCurrentBackup = operationsWithoutFilter.find(
-        operation =>
+        (operation) =>
           operation.name && operation.name.includes(backup1.formattedName_),
       );
       assert.ok(operationForCurrentBackup);
@@ -3412,7 +3418,7 @@ describe('Spanner', () => {
 
       assert.strictEqual(sessions.length, count);
 
-      await Promise.all(sessions.map(session => session.delete()));
+      await Promise.all(sessions.map((session) => session.delete()));
     });
 
     it('should have created the session with database database role', async function () {
@@ -3448,7 +3454,7 @@ describe('Spanner', () => {
 
       assert.strictEqual(sessions.length, count);
       await Promise.all(
-        sessions.map(async session => {
+        sessions.map(async (session) => {
           const metadata = await session.getMetadata();
           assert.strictEqual('parent_role', metadata[0].databaseRole);
           await session.delete();
@@ -3468,7 +3474,7 @@ describe('Spanner', () => {
 
       assert.strictEqual(sessions.length, count);
       await Promise.all(
-        sessions.map(async session => {
+        sessions.map(async (session) => {
           const metadata = await session.getMetadata();
           assert.strictEqual('child_role', metadata[0].databaseRole);
           await session.delete();
@@ -3488,7 +3494,7 @@ describe('Spanner', () => {
 
       assert.strictEqual(sessions.length, count);
       await Promise.all(
-        sessions.map(async session => {
+        sessions.map(async (session) => {
           const metadata = await session.getMetadata();
           assert.strictEqual('orphan_role', metadata[0].databaseRole);
           await session.delete();
@@ -3543,7 +3549,7 @@ describe('Spanner', () => {
       await onPromiseOperationComplete(postgreSqlCreateTable);
     });
 
-    const nonExistentTable = async database => {
+    const nonExistentTable = async (database) => {
       const table = database.table(generateName('nope'));
 
       try {
@@ -3562,7 +3568,7 @@ describe('Spanner', () => {
       await nonExistentTable(PG_DATABASE);
     });
 
-    const nonExistentColumn = async table => {
+    const nonExistentColumn = async (table) => {
       try {
         await table.insert({SingerId: generateName('id'), Nope: 'abc'});
         assert.fail('Expected an error to be thrown, but it was not.');
@@ -3588,7 +3594,7 @@ describe('Spanner', () => {
           SingerId: id,
           Name: name,
         },
-        err => {
+        (err) => {
           assert.ifError(err);
 
           let rows: Array<{}> = [];
@@ -3599,12 +3605,12 @@ describe('Spanner', () => {
               columns: ['SingerId', 'Name'],
             })
             .on('error', done)
-            .on('data', row => {
+            .on('data', (row) => {
               rows.push(row);
             })
             .on('end', () => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              rows = rows.map(x => (x as any).toJSON());
+              rows = rows.map((x) => (x as any).toJSON());
 
               assert.deepStrictEqual(rows, [
                 {
@@ -3619,11 +3625,11 @@ describe('Spanner', () => {
       );
     };
 
-    it('GOOGLE_STANDARD_SQL should read rows as a stream', done => {
+    it('GOOGLE_STANDARD_SQL should read rows as a stream', (done) => {
       readRowsStream(done, googleSqlTable);
     });
 
-    it('POSTGRESQL should read rows as a stream', done => {
+    it('POSTGRESQL should read rows as a stream', (done) => {
       readRowsStream(done, postgreSqlTable);
     });
 
@@ -3636,7 +3642,7 @@ describe('Spanner', () => {
           SingerId: id,
           Name: name,
         },
-        err => {
+        (err) => {
           assert.ifError(err);
 
           const rows: Array<{}> = [];
@@ -3648,7 +3654,7 @@ describe('Spanner', () => {
               json: true,
             })
             .on('error', done)
-            .on('data', row => rows.push(row))
+            .on('data', (row) => rows.push(row))
             .on('end', () => {
               assert.deepStrictEqual(rows, [
                 {
@@ -3663,11 +3669,11 @@ describe('Spanner', () => {
       );
     };
 
-    it('GOOGLE_STANDARD_SQL should automatically convert to JSON', done => {
+    it('GOOGLE_STANDARD_SQL should automatically convert to JSON', (done) => {
       automaticallyConvertToJson(done, googleSqlTable);
     });
 
-    it('POSTGRESQL should automatically convert to JSON', done => {
+    it('POSTGRESQL should automatically convert to JSON', (done) => {
       automaticallyConvertToJson(done, postgreSqlTable);
     });
 
@@ -3679,7 +3685,7 @@ describe('Spanner', () => {
           SingerId: id,
           Int: 8,
         },
-        err => {
+        (err) => {
           assert.ifError(err);
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -3693,7 +3699,7 @@ describe('Spanner', () => {
               jsonOptions: {wrapNumbers: true},
             })
             .on('error', done)
-            .on('data', row => {
+            .on('data', (row) => {
               rows.push(row);
             })
             .on('end', () => {
@@ -3704,11 +3710,11 @@ describe('Spanner', () => {
       );
     };
 
-    it('GOOGLE_STANDARD_SQL should automatically convert to JSON with options', done => {
+    it('GOOGLE_STANDARD_SQL should automatically convert to JSON with options', (done) => {
       automaticallyConvertToJsonWithOptions(done, googleSqlTable);
     });
 
-    it('POSTGRESQL should automatically convert to JSON with options', done => {
+    it('POSTGRESQL should automatically convert to JSON with options', (done) => {
       automaticallyConvertToJsonWithOptions(done, postgreSqlTable);
     });
 
@@ -3721,10 +3727,10 @@ describe('Spanner', () => {
           SingerId: id,
           Name: name,
         },
-        err => {
+        (err) => {
           assert.ifError(err);
 
-          table.deleteRows([id], err => {
+          table.deleteRows([id], (err) => {
             assert.ifError(err);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const rows: any[] = [];
@@ -3735,7 +3741,7 @@ describe('Spanner', () => {
                 columns: ['SingerId'],
               })
               .on('error', done)
-              .on('data', row => {
+              .on('data', (row) => {
                 rows.push(row);
               })
               .on('end', () => {
@@ -3747,11 +3753,11 @@ describe('Spanner', () => {
       );
     };
 
-    it('GOOGLE_STANDARD_SQL should insert and delete a row', done => {
+    it('GOOGLE_STANDARD_SQL should insert and delete a row', (done) => {
       insertAndDeleteSingleRow(done, googleSqlTable);
     });
 
-    it('POSTGRESQL should insert and delete a row', done => {
+    it('POSTGRESQL should insert and delete a row', (done) => {
       insertAndDeleteSingleRow(done, postgreSqlTable);
     });
 
@@ -3772,10 +3778,10 @@ describe('Spanner', () => {
             Name: name,
           },
         ],
-        err => {
+        (err) => {
           assert.ifError(err);
 
-          table.deleteRows([id, id2], err => {
+          table.deleteRows([id, id2], (err) => {
             assert.ifError(err);
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -3787,7 +3793,7 @@ describe('Spanner', () => {
                 columns: ['SingerId'],
               })
               .on('error', done)
-              .on('data', row => {
+              .on('data', (row) => {
                 rows.push(row);
               })
               .on('end', () => {
@@ -3799,11 +3805,11 @@ describe('Spanner', () => {
       );
     };
 
-    it('GOOGLE_STANDARD_SQL should insert and delete multiple rows', done => {
+    it('GOOGLE_STANDARD_SQL should insert and delete multiple rows', (done) => {
       insertAndDeleteMultipleRows(done, googleSqlTable);
     });
 
-    it('POSTGRESQL should insert and delete multiple rows', done => {
+    it('POSTGRESQL should insert and delete multiple rows', (done) => {
       insertAndDeleteMultipleRows(done, postgreSqlTable);
     });
 
@@ -3881,7 +3887,7 @@ describe('Spanner', () => {
       // We just want the two most recent ones.
       rows!.splice(0, rows!.length - 2);
 
-      const rowJson = rows!.map(x => x.toJSON());
+      const rowJson = rows!.map((x) => x.toJSON());
 
       assert.strictEqual(rowJson[0].SingerId, id1);
       assert.strictEqual(rowJson[0].Name, name1);
@@ -3906,7 +3912,7 @@ describe('Spanner', () => {
       );
     });
 
-    const insertThenReplaceRow = async table => {
+    const insertThenReplaceRow = async (table) => {
       const originalRow = {
         SingerId: generateName('id'),
         Name: generateName('name'),
@@ -3935,7 +3941,7 @@ describe('Spanner', () => {
       await insertThenReplaceRow(postgreSqlTable);
     });
 
-    const insertThenUpdateRow = async table => {
+    const insertThenUpdateRow = async (table) => {
       const originalRow = {
         SingerId: generateName('id'),
         Name: generateName('name'),
@@ -4091,7 +4097,7 @@ describe('Spanner', () => {
         const stream = database
           .runStream(query, options)
           .on('error', done)
-          .once('data', row_ => {
+          .once('data', (row_) => {
             row = row_;
             stream.end();
           })
@@ -4110,7 +4116,7 @@ describe('Spanner', () => {
           });
       };
 
-      it('GOOGLE_STANDARD_SQL should query in stream mode', done => {
+      it('GOOGLE_STANDARD_SQL should query in stream mode', (done) => {
         const query = {
           sql: `SELECT * FROM ${TABLE_NAME} WHERE SingerId=@id`,
           params: {id: ID},
@@ -4118,7 +4124,7 @@ describe('Spanner', () => {
         queryStreamMode(done, DATABASE, query, GOOGLE_SQL_EXPECTED_ROW);
       });
 
-      it('POSTGRESQL should query in stream mode', done => {
+      it('POSTGRESQL should query in stream mode', (done) => {
         const query = {
           sql: `SELECT * FROM ${TABLE_NAME} WHERE "SingerId"=$1`,
           params: {p1: ID},
@@ -4133,13 +4139,13 @@ describe('Spanner', () => {
         const mutationGroup = new MutationGroup();
         mutationGroup.upsert(TABLE_NAME, {SingerId: ID, Name: NAME});
         DATABASE.batchWriteAtLeastOnce([mutationGroup], {})
-          .on('data', data => {
+          .on('data', (data) => {
             assert.strictEqual(data.status.code, 0);
           })
           .on('end', () => {
             done();
           })
-          .on('error', error => {
+          .on('error', (error) => {
             done(error);
           });
       });
@@ -4179,10 +4185,10 @@ describe('Spanner', () => {
           mutationGroup2,
           mutationGroup3,
         ])
-          .on('data', data => {
+          .on('data', (data) => {
             actualStatusCode.push(data.status.code);
           })
-          .on('error', error => {
+          .on('error', (error) => {
             done(error);
           })
           .on('end', () => {
@@ -4203,22 +4209,22 @@ describe('Spanner', () => {
         const mutationGroup = new MutationGroup();
         mutationGroup.upsert(TABLE_NAME, {SingerId: ID, Name: NAME});
         PG_DATABASE.batchWriteAtLeastOnce([mutationGroup], {})
-          .on('data', data => {
+          .on('data', (data) => {
             assert.strictEqual(data.status.code, 0);
           })
           .on('end', () => {
             done();
           })
-          .on('error', error => {
+          .on('error', (error) => {
             done(error);
           });
       });
 
-      it('GOOGLE_STANDARD_SQL should allow "SELECT 1" queries', done => {
+      it('GOOGLE_STANDARD_SQL should allow "SELECT 1" queries', (done) => {
         DATABASE.run('SELECT 1', done);
       });
 
-      it('POSTGRESQL should allow "SELECT 1" queries', done => {
+      it('POSTGRESQL should allow "SELECT 1" queries', (done) => {
         PG_DATABASE.run('SELECT 1', done);
       });
 
@@ -4284,7 +4290,7 @@ describe('Spanner', () => {
         assert.strictEqual(metadata.rowType!.fields![7].name, 'HasGear');
       });
 
-      const invalidQueries = async database => {
+      const invalidQueries = async (database) => {
         try {
           await database.run('SELECT Apples AND Oranges');
         } catch (err: any) {
@@ -4505,7 +4511,7 @@ describe('Spanner', () => {
 
             const [rows] = await DATABASE.run(query);
 
-            const expected = values.map(val => {
+            const expected = values.map((val) => {
               return isNumber(val) ? {value: String(val)} : val;
             });
 
@@ -4867,7 +4873,7 @@ describe('Spanner', () => {
             };
 
             const [rows] = await DATABASE.run(query);
-            const expected = values.map(val => {
+            const expected = values.map((val) => {
               return isNumber(val) ? Spanner.float32(val) : val;
             });
 
@@ -5016,7 +5022,7 @@ describe('Spanner', () => {
 
             const [rows] = await DATABASE.run(query);
 
-            const expected = values.map(val => {
+            const expected = values.map((val) => {
               return isNumber(val) ? {value: val + ''} : val;
             });
 
@@ -5095,7 +5101,7 @@ describe('Spanner', () => {
 
             const [rows] = await DATABASE.run(query);
 
-            const expected = values.map(val => {
+            const expected = values.map((val) => {
               return isNumber(val) ? {value: val} : val;
             });
 
@@ -5215,7 +5221,7 @@ describe('Spanner', () => {
 
             const [rows] = await DATABASE.run(query);
 
-            const expected = values.map(val => {
+            const expected = values.map((val) => {
               return isNumber(val) ? {value: val + ''} : val;
             });
 
@@ -5616,7 +5622,7 @@ describe('Spanner', () => {
             };
 
             const [rows] = await DATABASE.run(query);
-            const returnedValues = rows[0][0].value.map(val => {
+            const returnedValues = rows[0][0].value.map((val) => {
               return isNull(val) ? val : Spanner.date(val);
             });
 
@@ -5893,7 +5899,7 @@ describe('Spanner', () => {
             };
             let rows;
             [rows] = await DATABASE.run(query);
-            rows = rows.map(row => row.toJSON());
+            rows = rows.map((row) => row.toJSON());
 
             assert.strictEqual(rows.length, 2);
             assert.strictEqual(rows[0].threadid, 12);
@@ -6401,7 +6407,7 @@ describe('Spanner', () => {
         Name: generateName('name'),
       };
 
-      const updateRow = async table => {
+      const updateRow = async (table) => {
         const row = {
           SingerId: ROW.SingerId,
           Name: generateName('name'),
@@ -6424,7 +6430,7 @@ describe('Spanner', () => {
         await updateRow(postgreSqlTable);
       });
 
-      const insertRow = async table => {
+      const insertRow = async (table) => {
         await table.upsert(ROW);
         const [rows] = await table.read({
           keys: [ROW.SingerId],
@@ -6552,7 +6558,7 @@ describe('Spanner', () => {
 
             assert.strictEqual(rows.length, 3);
 
-            rows = rows.map(row => {
+            rows = rows.map((row) => {
               return row.toJSON();
             });
 
@@ -6596,7 +6602,7 @@ describe('Spanner', () => {
             assert.ifError(err);
             assert.strictEqual(rows.length, 2);
 
-            rows = rows.map(row => {
+            rows = rows.map((row) => {
               return row.toJSON();
             });
 
@@ -6619,7 +6625,7 @@ describe('Spanner', () => {
             assert.ifError(err);
             assert.strictEqual(rows.length, 3);
 
-            rows = rows.map(row => {
+            rows = rows.map((row) => {
               return row.toJSON();
             });
 
@@ -6643,7 +6649,7 @@ describe('Spanner', () => {
             assert.ifError(err);
             assert.strictEqual(rows.length, 2);
 
-            rows = rows.map(row => {
+            rows = rows.map((row) => {
               return row.toJSON();
             });
 
@@ -6695,7 +6701,7 @@ describe('Spanner', () => {
             assert.ifError(err);
             assert.strictEqual(rows.length, 3);
 
-            rows = rows.map(row => {
+            rows = rows.map((row) => {
               return row.toJSON();
             });
 
@@ -6704,7 +6710,7 @@ describe('Spanner', () => {
             assert.strictEqual(rows[2].Key, 'k7');
           },
         },
-      ].forEach(test => {
+      ].forEach((test) => {
         // test normally
         it(`GOOGLE_STANDARD_SQL ${test.test}`, async () => {
           let rows;
@@ -6734,16 +6740,16 @@ describe('Spanner', () => {
           );
 
           if (query.keys) {
-            query.keys = query.keys.map(key => {
+            query.keys = query.keys.map((key) => {
               return key.replace('k', 'v');
             });
           }
 
           if (query.ranges) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            query.ranges = (query as any).ranges.map(range_ => {
+            query.ranges = (query as any).ranges.map((range_) => {
               const range = extend({}, range_);
-              Object.keys(range).forEach(bound => {
+              Object.keys(range).forEach((bound) => {
                 if (range[bound]) {
                   range[bound] = range[bound].replace('k', 'v');
                 }
@@ -6784,7 +6790,7 @@ describe('Spanner', () => {
         await database.close();
       });
 
-      const readInvalidTable = async database => {
+      const readInvalidTable = async (database) => {
         const table = database.table('ReadTestTablezzz');
 
         const query = {
@@ -6807,7 +6813,7 @@ describe('Spanner', () => {
         await readInvalidTable(PG_DATABASE);
       });
 
-      const readInvalidColumn = async table => {
+      const readInvalidColumn = async (table) => {
         const query = {
           keys: ['k1'],
           columns: ['ohnoes'],
@@ -6828,7 +6834,7 @@ describe('Spanner', () => {
         await readInvalidColumn(postgreSqlTable);
       });
 
-      const failDeadlineExceed = async table => {
+      const failDeadlineExceed = async (table) => {
         const query = {
           keys: ['k1'],
           columns: ALL_COLUMNS,
@@ -6881,7 +6887,7 @@ describe('Spanner', () => {
       const [rows] = await DATABASE.run(`SELECT * FROM ${TABLE_NAME}`);
       assert.ok(
         rows!.some(
-          r =>
+          (r) =>
             JSON.stringify(r.toJSON()) ===
             JSON.stringify({SingerId: id, Name: name}),
         ),
@@ -6911,7 +6917,7 @@ describe('Spanner', () => {
       // We just want the two most recent ones.
       rows!.splice(0, rows!.length - 2);
 
-      const rowJson = rows!.map(x => x.toJSON());
+      const rowJson = rows!.map((x) => x.toJSON());
 
       assert.deepStrictEqual(rowJson, [
         {
@@ -6925,7 +6931,7 @@ describe('Spanner', () => {
       ]);
     });
 
-    it('should read rows as a stream', done => {
+    it('should read rows as a stream', (done) => {
       const id = generateName('id');
       const name = generateName('name');
 
@@ -6934,7 +6940,7 @@ describe('Spanner', () => {
           SingerId: id,
           Name: name,
         },
-        err => {
+        (err) => {
           assert.ifError(err);
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -6946,11 +6952,11 @@ describe('Spanner', () => {
               columns: ['SingerId', 'name'],
             })
             .on('error', done)
-            .on('data', row => {
+            .on('data', (row) => {
               rows.push(row);
             })
             .on('end', () => {
-              rows = rows.map(x => x.toJSON());
+              rows = rows.map((x) => x.toJSON());
 
               assert.deepStrictEqual(rows, [
                 {
@@ -6972,7 +6978,7 @@ describe('Spanner', () => {
       await table.insert({SingerId: id, Name: name});
       let rows;
       [rows] = await table.read({keys: [id], columns: ['SingerId', 'Name']});
-      rows = rows!.map(x => x.toJSON());
+      rows = rows!.map((x) => x.toJSON());
 
       assert.deepStrictEqual(rows, [
         {
@@ -7138,7 +7144,7 @@ describe('Spanner', () => {
         const [rows] = await transaction!.run(query);
         assert.strictEqual(rows.length, 2);
 
-        const rowJson = rows.map(x => x.toJSON());
+        const rowJson = rows.map((x) => x.toJSON());
 
         assert.strictEqual(rowJson[0].Key, 'k0');
         assert.strictEqual(rowJson[0].StringValue, 'v0');
@@ -7338,7 +7344,7 @@ describe('Spanner', () => {
     describe('dml', () => {
       before(async () => {
         const psqlTransaction = await PG_DATABASE.runTransactionAsync(
-          async transaction => {
+          async (transaction) => {
             await transaction!.runUpdate({
               sql:
                 'INSERT INTO ' +
@@ -7354,7 +7360,7 @@ describe('Spanner', () => {
         );
 
         const gsqlTransaction = DATABASE.runTransactionAsync(
-          async transaction => {
+          async (transaction) => {
             await transaction!.runUpdate({
               sql:
                 'INSERT INTO ' +
@@ -7373,7 +7379,7 @@ describe('Spanner', () => {
       });
 
       const rowCountRunUpdate = async (database, query) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           const [rowCount] = await transaction!.runUpdate(query);
           assert.strictEqual(rowCount, 1);
           await transaction!.rollback();
@@ -7407,7 +7413,7 @@ describe('Spanner', () => {
       });
 
       const rowCountRun = async (database, query) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           const [rows, stats] = await transaction!.run(query);
           const rowCount = Math.floor(stats[stats.rowCount!] as number);
           assert.strictEqual(rowCount, 1);
@@ -7446,14 +7452,14 @@ describe('Spanner', () => {
         updateQuery,
         selectQuery,
       ) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           const [insertRowCount] = await transaction!.runUpdate(insertQuery);
           assert.strictEqual(insertRowCount, 1);
           const [updateRowCount] = await transaction!.runUpdate(updateQuery);
           assert.strictEqual(updateRowCount, 1);
           let rows;
           [rows] = await transaction!.run(selectQuery);
-          rows = rows.map(row => row.toJSON());
+          rows = rows.map((row) => row.toJSON());
           assert.strictEqual(rows.length, 1);
           assert.deepStrictEqual(rows[0], {
             Key: 'k1000',
@@ -7522,11 +7528,11 @@ describe('Spanner', () => {
         updateQuery,
         selectQuery,
       ) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           await transaction!.runUpdate(updateQuery);
           let rows;
           [rows] = await transaction!.run(selectQuery);
-          rows = rows.map(row => row.toJSON());
+          rows = rows.map((row) => row.toJSON());
           assert.strictEqual(rows.length, 1);
           assert.strictEqual(rows[0].StringValue, 'abcd');
           await transaction!.rollback();
@@ -7570,13 +7576,13 @@ describe('Spanner', () => {
         updateQuery,
         selectQuery,
       ) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           await transaction!.runUpdate(updateQuery);
           await transaction!.rollback();
           let rows;
           [rows] = await database.run(selectQuery);
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          rows = rows.map(row => (row as any).toJSON());
+          rows = rows.map((row) => (row as any).toJSON());
           assert.notStrictEqual(rows[0].StringValue, 'abcd');
         });
       };
@@ -7614,7 +7620,7 @@ describe('Spanner', () => {
       });
 
       const handleDmlAndInsert = async (database, insertQuery, selectQuery) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           await transaction!.runUpdate(insertQuery);
           transaction!.insert('TxnTable', {
             Key: 'k1002',
@@ -7737,7 +7743,7 @@ describe('Spanner', () => {
           updateQuery,
           deletequery,
         ) => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             const [insertRowCount] = await transaction!.runUpdate(insertQuery);
             assert.strictEqual(insertRowCount, 1);
             const [updateRowCount] = await transaction!.runUpdate(updateQuery);
@@ -7772,12 +7778,12 @@ describe('Spanner', () => {
           );
         });
 
-        const assertRowsAndRowCount = data => {
+        const assertRowsAndRowCount = (data) => {
           const rows = data[0];
           const stats = data[1];
           const rowCount = Math.floor(stats[stats.rowCount!] as number);
           assert.strictEqual(rowCount, 1);
-          rows.forEach(row => {
+          rows.forEach((row) => {
             const json = row.toJSON();
             assert.strictEqual(json.Key, key);
             assert.strictEqual(json.StringValue, str);
@@ -7790,7 +7796,7 @@ describe('Spanner', () => {
           updateQuery,
           deletequery,
         ) => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             const rows = await transaction!.run(insertQuery);
             assertRowsAndRowCount(rows);
             const updateRowsCount = await transaction!.run(updateQuery);
@@ -7858,7 +7864,7 @@ describe('Spanner', () => {
           updateQuery,
           deleteQuery,
         ) => {
-          const rowCounts = await database.runTransactionAsync(async txn => {
+          const rowCounts = await database.runTransactionAsync(async (txn) => {
             const [rowCounts] = await txn.batchUpdate([
               insertquery,
               updateQuery,
@@ -7943,7 +7949,7 @@ describe('Spanner', () => {
           return {Key: `longpdml${i}`, StringValue: 'a'};
         });
 
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           transaction.insert('TxnTable', tableData);
           await transaction.commit();
         });
@@ -8041,7 +8047,7 @@ describe('Spanner', () => {
       };
 
       const executeSingleStatement = async (database, insert) => {
-        const rowCounts = await database.runTransactionAsync(async txn => {
+        const rowCounts = await database.runTransactionAsync(async (txn) => {
           const [rowCounts] = await txn.batchUpdate([insert]);
           await txn.rollback();
           return rowCounts;
@@ -8058,8 +8064,8 @@ describe('Spanner', () => {
         await executeSingleStatement(PG_DATABASE, postgreSqlInsert);
       });
 
-      const noStatementError = async database => {
-        const err = await database.runTransactionAsync(async txn => {
+      const noStatementError = async (database) => {
+        const err = await database.runTransactionAsync(async (txn) => {
           let err;
 
           try {
@@ -8088,7 +8094,7 @@ describe('Spanner', () => {
       });
 
       const multipleDependingStatements = async (database, insert, update) => {
-        const rowCounts = await database.runTransactionAsync(async txn => {
+        const rowCounts = await database.runTransactionAsync(async (txn) => {
           const [rowCounts] = await txn.batchUpdate([insert, update]);
           await txn.rollback();
           return rowCounts;
@@ -8114,7 +8120,7 @@ describe('Spanner', () => {
       });
 
       const runAfterRunUpdate = async (database, insert, update) => {
-        const rowCounts = await database.runTransactionAsync(async txn => {
+        const rowCounts = await database.runTransactionAsync(async (txn) => {
           await txn.runUpdate(insert);
           const [rowCounts] = await txn.batchUpdate([update]);
           await txn.rollback();
@@ -8133,7 +8139,7 @@ describe('Spanner', () => {
       });
 
       const runBeforeRunUpdate = async (database, insert, update) => {
-        const rowCounts = await database.runTransactionAsync(async txn => {
+        const rowCounts = await database.runTransactionAsync(async (txn) => {
           const [rowCounts] = await txn.batchUpdate([insert]);
           await txn.runUpdate(update);
           await txn.rollback();
@@ -8161,7 +8167,7 @@ describe('Spanner', () => {
         borked,
         update,
       ) => {
-        const err = await database.runTransactionAsync(async txn => {
+        const err = await database.runTransactionAsync(async (txn) => {
           let err;
 
           try {
@@ -8205,7 +8211,7 @@ describe('Spanner', () => {
         insert,
         borked,
       ) => {
-        const err = await database.runTransactionAsync(async txn => {
+        const err = await database.runTransactionAsync(async (txn) => {
           let err;
 
           try {
@@ -8241,7 +8247,7 @@ describe('Spanner', () => {
 
     describe('read/write', () => {
       const mismatchedColumnError = async (database, table) => {
-        await database.runTransactionAsync(transaction => {
+        await database.runTransactionAsync((transaction) => {
           const rows = [
             {
               Key: 'k1',
@@ -8296,7 +8302,7 @@ describe('Spanner', () => {
       });
 
       const commitTransaction = async (database, table) => {
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           transaction!.insert(table.name, {
             Key: 'k5',
             StringValue: 'v5',
@@ -8316,7 +8322,7 @@ describe('Spanner', () => {
 
       describe('parallel transactions', async () => {
         async function insertAndCommitTransaction(database, sync, table, key) {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             // read from table TxnTable
             await transaction.run('SELECT * FROM TxnTable');
 
@@ -8345,7 +8351,7 @@ describe('Spanner', () => {
           const promises: Promise<void>[] = [];
           let resolvePromise;
           const commitPromise = new Promise(
-            resolve => (resolvePromise = resolve),
+            (resolve) => (resolvePromise = resolve),
           );
           const sync = {
             target: 2, // both the transactions to be ready
@@ -8366,8 +8372,8 @@ describe('Spanner', () => {
         });
       });
 
-      const rollbackTransaction = async database => {
-        await database.runTransactionAsync(async transaction => {
+      const rollbackTransaction = async (database) => {
+        await database.runTransactionAsync(async (transaction) => {
           await transaction!.run('SELECT * FROM TxnTable');
           await transaction!.rollback();
         });
@@ -8395,14 +8401,14 @@ describe('Spanner', () => {
         });
 
         const readConcurrentTransaction = async (database, table) => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await incrementValue();
             const value = await getValue(transaction);
             assert.strictEqual(value, defaultRowValues.NumberValue + 1);
           });
 
           async function incrementValue() {
-            await database.runTransactionAsync(async transaction => {
+            await database.runTransactionAsync(async (transaction) => {
               const value = await getValue(transaction);
               transaction!.update(table.name, {
                 Key: defaultRowValues.Key,
@@ -8442,14 +8448,14 @@ describe('Spanner', () => {
         });
 
         const queryConcurrentTransaction = async (database, table, query) => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await incrementValue();
             const value = await getValue(transaction);
             assert.strictEqual(value, defaultRowValues.NumberValue + 1);
           });
 
           async function incrementValue() {
-            await database.runTransactionAsync(async transaction => {
+            await database.runTransactionAsync(async (transaction) => {
               const value = await getValue(transaction);
               transaction!.update(table.name, {
                 Key: defaultRowValues.Key,
@@ -8512,14 +8518,14 @@ describe('Spanner', () => {
           StringValue: 'abc',
         };
         const runOtherTransaction = async () => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(query);
             transaction.insert(table.name, expectedRow);
             await transaction.commit();
           });
         };
 
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           attempts++;
           const [rows] = await transaction.run(query);
           if (attempts === 1) {
@@ -8578,14 +8584,14 @@ describe('Spanner', () => {
         };
 
         const runOtherTransaction = async () => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(query);
             transaction.insert(table.name, expectedRow);
             await transaction.commit();
           });
         };
 
-        await database.runTransactionAsync(async transaction => {
+        await database.runTransactionAsync(async (transaction) => {
           attempts++;
           const [rows] = await transaction.run(query);
           transaction.insert(table.name, {
@@ -8638,7 +8644,7 @@ describe('Spanner', () => {
 
         const query = `SELECT * FROM ${table.name}`;
         const runOtherTransaction = async () => {
-          await database.runTransactionAsync(async transaction => {
+          await database.runTransactionAsync(async (transaction) => {
             await transaction.run(query);
             transaction.insert(table.name, {
               Key: generateName('key'),
@@ -8648,7 +8654,7 @@ describe('Spanner', () => {
         };
         await assert.rejects(
           async () => {
-            await database.runTransactionAsync(options, async transaction => {
+            await database.runTransactionAsync(options, async (transaction) => {
               await transaction.run(query);
               transaction.insert(table.name, {
                 Key: generateName('key'),
@@ -8697,7 +8703,7 @@ describe('Spanner', () => {
           },
         };
 
-        await DATABASE.runTransactionAsync(async transaction => {
+        await DATABASE.runTransactionAsync(async (transaction) => {
           const expectedErrorMessage =
             'Directed reads can only be performed in a read-only transaction.';
           try {
@@ -8712,13 +8718,13 @@ describe('Spanner', () => {
         });
       });
 
-      const handleReadAndMutation = async database => {
-        await database.runTransactionAsync(async transaction => {
+      const handleReadAndMutation = async (database) => {
+        await database.runTransactionAsync(async (transaction) => {
           try {
             await transaction.run('SELECT abc');
           } catch (err) {
             // add a sleep to let the explicit begin call finish
-            await new Promise<void>(resolve => {
+            await new Promise<void>((resolve) => {
               setTimeout(() => {
                 resolve();
               }, 4000);
@@ -8740,7 +8746,7 @@ describe('Spanner', () => {
     describe('batch transactions', () => {
       before(async () => {
         if (!IS_EMULATOR_ENABLED) {
-          await DATABASE.runTransactionAsync(async transaction => {
+          await DATABASE.runTransactionAsync(async (transaction) => {
             await transaction!.runUpdate({
               sql:
                 'INSERT INTO ' +
@@ -8772,9 +8778,9 @@ describe('Spanner', () => {
         const [partitions] =
           await transaction!.createQueryPartitions(selectQuery);
         assert.deepStrictEqual(partitions.length, 1);
-        partitions.forEach(async partition => {
+        partitions.forEach(async (partition) => {
           const [results] = await transaction!.execute(partition);
-          row_count += results.map(row => row.toJSON()).length;
+          row_count += results.map((row) => row.toJSON()).length;
           assert.deepStrictEqual(row_count, 1);
           await transaction!.close();
         });
@@ -8797,9 +8803,9 @@ describe('Spanner', () => {
         const [transaction] = await DATABASE.createBatchTransaction();
         const [partitions] = await transaction!.createReadPartitions(QUERY);
         assert.deepStrictEqual(partitions.length, 1);
-        partitions.forEach(async partition => {
+        partitions.forEach(async (partition) => {
           const [results] = await transaction!.execute(partition);
-          read_row_count += results.map(row => row.toJSON()).length;
+          read_row_count += results.map((row) => row.toJSON()).length;
           assert.deepStrictEqual(read_row_count, 1);
           await transaction!.close();
         });
@@ -8824,10 +8830,10 @@ describe('Spanner', () => {
             await transaction.createQueryPartitions(selectQuery);
           assert.deepStrictEqual(queryPartitions.length, 1);
 
-          const promises = queryPartitions.map(async queryPartition => {
+          const promises = queryPartitions.map(async (queryPartition) => {
             const [results]: RunResponse =
               await transaction.execute(queryPartition);
-            row_count += results.map(row => row.toJSON()).length;
+            row_count += results.map((row) => row.toJSON()).length;
             assert.strictEqual(row_count, 1);
           });
 
@@ -8857,10 +8863,10 @@ describe('Spanner', () => {
             await transaction.createReadPartitions(QUERY);
           assert.deepStrictEqual(readPartitions.length, 1);
 
-          const promises = readPartitions.map(async readPartition => {
+          const promises = readPartitions.map(async (readPartition) => {
             const [results]: ReadResponse =
               await transaction.execute(readPartition);
-            read_row_count += results.map(row => row.toJSON()).length;
+            read_row_count += results.map((row) => row.toJSON()).length;
             assert.strictEqual(read_row_count, 1);
           });
 
@@ -8897,7 +8903,7 @@ async function deleteOldTestInstances() {
     return currentTimestampSeconds - timestampCreated >= 60 * 60 * 4;
   }
   const toDelete = instances.filter(
-    instance =>
+    (instance) =>
       instance.id.includes(PREFIX) &&
       isOld(Number(instance.metadata!.labels!.created)),
   );
@@ -8914,19 +8920,19 @@ function deleteInstanceArray(instanceArray) {
   const delay = 500;
   const limit = pLimit(5);
   return Promise.all(
-    instanceArray.map(instance =>
+    instanceArray.map((instance) =>
       limit(() => setTimeout(deleteInstance, delay, instance)),
     ),
   );
 }
 async function deleteInstance(instance: Instance) {
   const [backups] = await instance.getBackups();
-  await Promise.all(backups.map(backup => backup.delete(GAX_OPTIONS)));
+  await Promise.all(backups.map((backup) => backup.delete(GAX_OPTIONS)));
   return instance.delete(GAX_OPTIONS);
 }
 
 function wait(time) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
 }

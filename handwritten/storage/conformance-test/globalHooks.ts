@@ -28,8 +28,8 @@ export async function mochaGlobalSetup(this: any) {
   this.suite._timeout = TIMEOUT_FOR_DOCKER_OPS;
   await getTestBenchDockerImage();
   await runTestBenchDockerImage();
-  await new Promise(resolve =>
-    setTimeout(resolve, TIME_TO_WAIT_FOR_CONTAINER_READY)
+  await new Promise((resolve) =>
+    setTimeout(resolve, TIME_TO_WAIT_FOR_CONTAINER_READY),
   );
 }
 

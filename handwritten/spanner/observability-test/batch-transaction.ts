@@ -152,8 +152,8 @@ describe('BatchTransaction', () => {
     types: {},
   };
 
-  it('createQueryPartitions', done => {
-    batchTransaction.createQueryPartitions(QUERY, err => {
+  it('createQueryPartitions', (done) => {
+    batchTransaction.createQueryPartitions(QUERY, (err) => {
       assert.ifError(err);
       traceExporter.forceFlush();
       const spans = traceExporter.getFinishedSpans();
@@ -165,7 +165,7 @@ describe('BatchTransaction', () => {
       });
 
       const actualSpanNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
       });
 
@@ -212,12 +212,12 @@ describe('BatchTransaction', () => {
     });
   });
 
-  it('createReadPartitions', done => {
+  it('createReadPartitions', (done) => {
     const REQUEST = sandbox.stub();
     const response = {};
     REQUEST.callsFake((_, callback) => callback(null, response));
 
-    batchTransaction.createReadPartitions(QUERY, err => {
+    batchTransaction.createReadPartitions(QUERY, (err) => {
       assert.ifError(err);
       traceExporter.forceFlush();
       const spans = traceExporter.getFinishedSpans();
@@ -229,7 +229,7 @@ describe('BatchTransaction', () => {
       });
 
       const actualSpanNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
       });
       const expectedSpanNames = [

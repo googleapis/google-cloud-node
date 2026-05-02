@@ -74,7 +74,7 @@ export class MetricsTracerFactory {
       (async () => {
         const location = await MetricsTracerFactory._detectClientLocation();
         this._location = location.length > 0 ? location : 'global';
-      })().catch(error => {
+      })().catch((error) => {
         throw error;
       });
     }

@@ -294,7 +294,7 @@ class Table {
 
       snapshot!
         .createReadStream(this.name, request)
-        .on('error', err => {
+        .on('error', (err) => {
           proxyStream.destroy(err);
           snapshot!.end();
         })
@@ -1112,7 +1112,7 @@ class Table {
         ?.transactionTag,
     };
 
-    startTrace('Table.' + method, traceConfig, span => {
+    startTrace('Table.' + method, traceConfig, (span) => {
       const requestOptions =
         'requestOptions' in options ? options.requestOptions : {};
 

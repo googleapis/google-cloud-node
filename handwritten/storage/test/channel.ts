@@ -94,7 +94,7 @@ describe('Channel', () => {
   });
 
   describe('stop', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       channel.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/stop');
@@ -106,13 +106,13 @@ describe('Channel', () => {
       channel.stop(assert.ifError);
     });
 
-    it('should execute callback with error & API response', done => {
+    it('should execute callback with error & API response', (done) => {
       const error = {};
       const apiResponse = {};
 
       channel.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         callback(error, apiResponse);
       };
@@ -124,10 +124,10 @@ describe('Channel', () => {
       });
     });
 
-    it('should not require a callback', done => {
+    it('should not require a callback', (done) => {
       channel.request = (
         reqOpts: DecorateRequestOptions,
-        callback: Function
+        callback: Function,
       ) => {
         assert.doesNotThrow(() => callback());
         done();

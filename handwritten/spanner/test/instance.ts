@@ -125,7 +125,7 @@ describe('Instance', () => {
       assert(instance.formattedName_, formattedName);
     });
 
-    it('should localize the request function', done => {
+    it('should localize the request function', (done) => {
       const spannerInstance = extend({}, SPANNER);
 
       spannerInstance.request = function () {
@@ -138,7 +138,7 @@ describe('Instance', () => {
       (instance as any).request();
     });
 
-    it('should localize the requestStream function', done => {
+    it('should localize the requestStream function', (done) => {
       const spannerInstance = extend({}, SPANNER);
       const CONFIG = {};
 
@@ -152,7 +152,7 @@ describe('Instance', () => {
       instance.requestStream(CONFIG as RequestConfig);
     });
 
-    it('should inherit from ServiceObject', done => {
+    it('should inherit from ServiceObject', (done) => {
       const options = {};
       const spannerInstance = extend({}, SPANNER, {
         createInstance(name, options_, callback) {
@@ -210,8 +210,8 @@ describe('Instance', () => {
       }, /A name is required to create a database\./);
     });
 
-    it('should make the correct default request', done => {
-      instance.request = config => {
+    it('should make the correct default request', (done) => {
+      instance.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'createDatabase');
         assert.deepStrictEqual(config.reqOpts, {
@@ -227,8 +227,8 @@ describe('Instance', () => {
       instance.createDatabase(NAME, assert.ifError);
     });
 
-    it('should accept options', done => {
-      instance.request = config => {
+    it('should accept options', (done) => {
+      instance.request = (config) => {
         assert.deepStrictEqual(OPTIONS, ORIGINAL_OPTIONS);
 
         const expectedReqOpts = extend(
@@ -247,7 +247,7 @@ describe('Instance', () => {
       instance.createDatabase(NAME, OPTIONS, assert.ifError);
     });
 
-    it('should not alter the original options', done => {
+    it('should not alter the original options', (done) => {
       const options = Object.assign({}, OPTIONS, {
         poolOptions: {},
         poolCtor: {},
@@ -258,7 +258,7 @@ describe('Instance', () => {
         callback();
       };
 
-      instance.createDatabase(NAME, options, err => {
+      instance.createDatabase(NAME, options, (err) => {
         if (err) {
           assert.ifError(err);
         }
@@ -267,9 +267,9 @@ describe('Instance', () => {
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const options = Object.assign({}, OPTIONS, {gaxOptions: {}});
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.gaxOpts, options.gaxOptions);
         assert.strictEqual(config.reqOpts.gaxOptions, undefined);
 
@@ -279,8 +279,8 @@ describe('Instance', () => {
       instance.createDatabase(NAME, options, assert.ifError);
     });
 
-    it('should only use the name in the createStatement', done => {
-      instance.request = config => {
+    it('should only use the name in the createStatement', (done) => {
+      instance.request = (config) => {
         const expectedReqOpts = extend(
           {
             parent: instance.formattedName_,
@@ -298,7 +298,7 @@ describe('Instance', () => {
     });
 
     describe('options.poolOptions/poolCtor', () => {
-      it('should allow specifying session pool options', done => {
+      it('should allow specifying session pool options', (done) => {
         const poolOptions = {};
 
         const options = extend({}, OPTIONS, {
@@ -319,7 +319,7 @@ describe('Instance', () => {
         instance.createDatabase(PATH, options, assert.ifError);
       });
 
-      it('should allow specifying session pool constructor', done => {
+      it('should allow specifying session pool constructor', (done) => {
         const poolCtor = {};
 
         const options = extend({}, OPTIONS, {
@@ -342,14 +342,14 @@ describe('Instance', () => {
     });
 
     describe('options.schema', () => {
-      it('should arrify and rename to extraStatements', done => {
+      it('should arrify and rename to extraStatements', (done) => {
         const SCHEMA = 'schema';
 
         const options = extend({}, OPTIONS, {
           schema: SCHEMA,
         });
 
-        instance.request = config => {
+        instance.request = (config) => {
           assert.deepStrictEqual(config.reqOpts.extraStatements, [SCHEMA]);
           assert.strictEqual(config.reqOpts.schema, undefined);
           done();
@@ -358,14 +358,14 @@ describe('Instance', () => {
         instance.createDatabase(NAME, options, assert.ifError);
       });
 
-      it('should arrify and rename to extraStatements from array style schema filed', done => {
+      it('should arrify and rename to extraStatements from array style schema filed', (done) => {
         const SCHEMA = ['schema', 'schema2'];
 
         const options = extend({}, OPTIONS, {
           schema: SCHEMA,
         });
 
-        instance.request = config => {
+        instance.request = (config) => {
           assert.deepStrictEqual(config.reqOpts.extraStatements, SCHEMA);
           assert.strictEqual(config.reqOpts.schema, undefined);
           done();
@@ -385,7 +385,7 @@ describe('Instance', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         instance.createDatabase(NAME, OPTIONS, (err, db, op, resp) => {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(op, null);
@@ -405,10 +405,10 @@ describe('Instance', () => {
         };
       });
 
-      it('should exec callback with a Database and Operation', done => {
+      it('should exec callback with a Database and Operation', (done) => {
         const fakeDatabaseInstance = {};
 
-        instance.database = name => {
+        instance.database = (name) => {
           assert.strictEqual(name, NAME);
           return fakeDatabaseInstance as Database;
         };
@@ -516,7 +516,7 @@ describe('Instance', () => {
       instance.parent = SPANNER;
     });
 
-    it('should close all cached databases', done => {
+    it('should close all cached databases', (done) => {
       let closed = false;
 
       instance.databases_.set('key', {
@@ -535,7 +535,7 @@ describe('Instance', () => {
       instance.delete(assert.ifError);
     });
 
-    it('should ignore closing errors', done => {
+    it('should ignore closing errors', (done) => {
       instance.databases_.set('key', {
         close() {
           return Promise.reject(new Error('err'));
@@ -549,7 +549,7 @@ describe('Instance', () => {
       instance.delete(assert.ifError);
     });
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       instance.request = (config, callback: Function) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'deleteInstance');
@@ -564,7 +564,7 @@ describe('Instance', () => {
       instance.delete(done);
     });
 
-    it('should remove the Instance from the cache', done => {
+    it('should remove the Instance from the cache', (done) => {
       const cache = instance.parent.instances_;
 
       instance.request = (config, callback) => {
@@ -574,14 +574,14 @@ describe('Instance', () => {
       cache.set(instance.id, instance);
       assert.strictEqual(cache.get(instance.id), instance);
 
-      instance.delete(err => {
+      instance.delete((err) => {
         assert.ifError(err);
         assert.strictEqual(cache.has(instance.id), false);
         done();
       });
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
       instance.request = (config, callback: Function) => {
@@ -596,7 +596,7 @@ describe('Instance', () => {
   describe('exists', () => {
     afterEach(() => sandbox.restore());
 
-    it('should return any non-404 like errors', done => {
+    it('should return any non-404 like errors', (done) => {
       const error = {code: 3};
 
       sandbox
@@ -620,7 +620,7 @@ describe('Instance', () => {
       });
     });
 
-    it('should return true if error is absent', done => {
+    it('should return true if error is absent', (done) => {
       sandbox
         .stub(instance, 'getMetadata')
         .callsFake(
@@ -642,7 +642,7 @@ describe('Instance', () => {
       });
     });
 
-    it('should return false if not found error if present', done => {
+    it('should return false if not found error if present', (done) => {
       const error = {code: 5};
 
       sandbox
@@ -667,9 +667,9 @@ describe('Instance', () => {
       });
     });
 
-    it('should accept and pass gaxOptions to getMetadata', done => {
+    it('should accept and pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
-      (instance.getMetadata as Function) = options => {
+      (instance.getMetadata as Function) = (options) => {
         assert.strictEqual(options.gaxOptions, gaxOptions);
         done();
       };
@@ -678,7 +678,7 @@ describe('Instance', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const options = {};
 
       sandbox.stub(instance, 'getMetadata').callsFake(() => done());
@@ -686,9 +686,9 @@ describe('Instance', () => {
       instance.get(options, assert.ifError);
     });
 
-    it('should accept and pass gaxOptions to getMetadata', done => {
+    it('should accept and pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
-      (instance.getMetadata as Function) = options => {
+      (instance.getMetadata as Function) = (options) => {
         assert.strictEqual(options.gaxOptions, gaxOptions);
         done();
       };
@@ -696,7 +696,7 @@ describe('Instance', () => {
       instance.get({gaxOptions}, assert.ifError);
     });
 
-    it('should not require an options object', done => {
+    it('should not require an options object', (done) => {
       sandbox.stub(instance, 'getMetadata').callsFake(() => done());
 
       instance.get(assert.ifError);
@@ -748,13 +748,13 @@ describe('Instance', () => {
         };
       });
 
-      it('should accet and pass createInstanceRequest options to create', done => {
+      it('should accet and pass createInstanceRequest options to create', (done) => {
         const config = 'config';
         const nodes = 1;
         const displayName = 'displayName';
         const labels = {label: 'mayLabael'};
 
-        instance.create = options => {
+        instance.create = (options) => {
           assert.strictEqual(options.fieldNames, undefined);
           assert.strictEqual(options.autoCreate, undefined);
           assert.deepStrictEqual(options, {config, nodes, displayName, labels});
@@ -773,10 +773,10 @@ describe('Instance', () => {
         );
       });
 
-      it('should accept and pass gaxOptions to instance#create', done => {
+      it('should accept and pass gaxOptions to instance#create', (done) => {
         const gaxOptions = {timeout: 1000};
         const options = Object.assign({}, OPTIONS, {gaxOptions});
-        instance.create = options => {
+        instance.create = (options) => {
           assert.deepStrictEqual(options.gaxOptions, gaxOptions);
           done();
         };
@@ -784,10 +784,10 @@ describe('Instance', () => {
         instance.get(options, assert.ifError);
       });
 
-      it('should call create', done => {
+      it('should call create', (done) => {
         const createOptions: {autoCreate?: {}} = Object.assign({}, OPTIONS);
         delete createOptions.autoCreate;
-        instance.create = options => {
+        instance.create = (options) => {
           assert.deepStrictEqual(options, createOptions);
           done();
         };
@@ -795,33 +795,33 @@ describe('Instance', () => {
         instance.get(OPTIONS, assert.ifError);
       });
 
-      it('should return error if create failed', done => {
+      it('should return error if create failed', (done) => {
         const error = new Error('Error.');
 
         instance.create = (options, callback) => {
           callback(error);
         };
 
-        instance.get(OPTIONS, err => {
+        instance.get(OPTIONS, (err) => {
           assert.strictEqual(err, error);
           done();
         });
       });
 
-      it('should return operation error', done => {
+      it('should return operation error', (done) => {
         const error = new Error('Error.');
 
         setImmediate(() => {
           OPERATION.listeners['error'](error);
         });
 
-        instance.get(OPTIONS, err => {
+        instance.get(OPTIONS, (err) => {
           assert.strictEqual(err, error);
           done();
         });
       });
 
-      it('should execute callback if opereation succeeded', done => {
+      it('should execute callback if opereation succeeded', (done) => {
         const metadata = {};
 
         setImmediate(() => {
@@ -838,7 +838,7 @@ describe('Instance', () => {
       });
     });
 
-    it('should not auto create without error code 5', done => {
+    it('should not auto create without error code 5', (done) => {
       const error = new Error('Error.') as grpc.ServiceError;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (error as any).code = 'NOT-5';
@@ -855,13 +855,13 @@ describe('Instance', () => {
         throw new Error('Should not create.');
       };
 
-      instance.get(options, err => {
+      instance.get(options, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should not auto create unless requested', done => {
+    it('should not auto create unless requested', (done) => {
       const error = new ApiError('Error.') as grpc.ServiceError;
       error.code = 5;
 
@@ -873,26 +873,26 @@ describe('Instance', () => {
         throw new Error('Should not create.');
       };
 
-      instance.get(err => {
+      instance.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.') as grpc.ServiceError;
 
       sandbox
         .stub(instance, 'getMetadata')
         .callsFake((opts_: {}, callback) => callback!(error));
 
-      instance.get(err => {
+      instance.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {} as inst.IInstance;
 
       sandbox
@@ -916,13 +916,13 @@ describe('Instance', () => {
     } as inst.GetDatabasesOptions;
     const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const expectedReqOpts = extend({}, OPTIONS, {
         parent: instance.formattedName_,
       });
       delete expectedReqOpts.gaxOptions;
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'listDatabases');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -939,7 +939,7 @@ describe('Instance', () => {
       instance.getDatabases(OPTIONS, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
@@ -954,7 +954,7 @@ describe('Instance', () => {
       );
       delete expectedReqOpts.gaxOptions;
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -966,7 +966,7 @@ describe('Instance', () => {
       instance.getDatabases(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
@@ -988,7 +988,7 @@ describe('Instance', () => {
       );
       delete expectedReqOpts.gaxOptions;
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1000,8 +1000,8 @@ describe('Instance', () => {
       instance.getDatabases(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      instance.request = config => {
+    it('should not require options', (done) => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: instance.formattedName_,
         });
@@ -1023,7 +1023,7 @@ describe('Instance', () => {
         };
       });
 
-      it('should execute callback with original arguments', done => {
+      it('should execute callback with original arguments', (done) => {
         instance.getDatabases(OPTIONS, (...args) => {
           assert.deepStrictEqual(args, REQUEST_RESPONSE_ARGS);
           done();
@@ -1047,7 +1047,7 @@ describe('Instance', () => {
         };
       });
 
-      it('should create and return Database objects', done => {
+      it('should create and return Database objects', (done) => {
         const fakeDatabaseInstance = {};
 
         instance.database = (name, options) => {
@@ -1068,7 +1068,7 @@ describe('Instance', () => {
         });
       });
 
-      it('should return a complete nextQuery object', done => {
+      it('should return a complete nextQuery object', (done) => {
         const pageSize = 1;
         const filter = 'filter';
         const NEXTPAGEREQUEST = {
@@ -1113,7 +1113,7 @@ describe('Instance', () => {
       });
       delete expectedReqOpts.gaxOptions;
 
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'listDatabasesStream');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -1144,7 +1144,7 @@ describe('Instance', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1180,7 +1180,7 @@ describe('Instance', () => {
       );
       delete expectedReqOpts.gaxOptions;
 
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1194,7 +1194,7 @@ describe('Instance', () => {
     });
 
     it('should not require options', () => {
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: instance.formattedName_,
         });
@@ -1215,7 +1215,7 @@ describe('Instance', () => {
 
       function callback() {}
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'getInstance');
         assert.deepStrictEqual(config.reqOpts, {
@@ -1230,10 +1230,10 @@ describe('Instance', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept `fieldNames` as string', done => {
+    it('should accept `fieldNames` as string', (done) => {
       const fieldNames = 'nodeCount';
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           fieldMask: {
             paths: toArray(fieldNames).map(snakeCase),
@@ -1245,10 +1245,10 @@ describe('Instance', () => {
       instance.getMetadata({fieldNames}, assert.ifError);
     });
 
-    it('should accept `fieldNames` as string array', done => {
+    it('should accept `fieldNames` as string array', (done) => {
       const fieldNames = ['name', 'labels', 'nodeCount'];
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           fieldMask: {
             paths: fieldNames.map(snakeCase),
@@ -1260,16 +1260,16 @@ describe('Instance', () => {
       instance.getMetadata({fieldNames}, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
       instance.getMetadata({gaxOptions}, assert.ifError);
     });
 
-    it('should update metadata', done => {
+    it('should update metadata', (done) => {
       const metadata = {};
       instance.request = (config, callback) => {
         callback(null, metadata);
@@ -1279,12 +1279,12 @@ describe('Instance', () => {
         done();
       });
 
-      it('should call callback with error', done => {
+      it('should call callback with error', (done) => {
         const error = new Error('Error');
         instance.request = (config, callback) => {
           callback(error);
         };
-        instance.getMetadata(err => {
+        instance.getMetadata((err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -1329,9 +1329,9 @@ describe('Instance', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -1351,7 +1351,7 @@ describe('Instance', () => {
     } as inst.GetBackupsOptions;
     const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const gaxOpts = {
         timeout: 1000,
       };
@@ -1361,7 +1361,7 @@ describe('Instance', () => {
         parent: instance.formattedName_,
       });
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'listBackups');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -1377,7 +1377,7 @@ describe('Instance', () => {
       instance.getBackups(options, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1391,7 +1391,7 @@ describe('Instance', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1403,7 +1403,7 @@ describe('Instance', () => {
       instance.getBackups(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1424,7 +1424,7 @@ describe('Instance', () => {
         {pageSize: optionsPageSize, pageToken: optionsPageToken},
       );
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1436,8 +1436,8 @@ describe('Instance', () => {
       instance.getBackups(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      instance.request = config => {
+    it('should not require options', (done) => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: instance.formattedName_,
         });
@@ -1457,7 +1457,7 @@ describe('Instance', () => {
         };
       });
 
-      it('should execute callback with original arguments', done => {
+      it('should execute callback with original arguments', (done) => {
         instance.getBackups(OPTIONS, (...args) => {
           assert.deepStrictEqual(args, REQUEST_RESPONSE_ARGS);
           done();
@@ -1483,10 +1483,10 @@ describe('Instance', () => {
         };
       });
 
-      it('should create and return Backup objects', done => {
+      it('should create and return Backup objects', (done) => {
         const fakeBackupInstance = {};
 
-        instance.backup = backupId => {
+        instance.backup = (backupId) => {
           assert.strictEqual(backupId, BACKUPS[0].name);
           return fakeBackupInstance as Backup;
         };
@@ -1503,7 +1503,7 @@ describe('Instance', () => {
         });
       });
 
-      it('should return a complete nextQuery object', done => {
+      it('should return a complete nextQuery object', (done) => {
         const pageSize = 1;
         const filter = 'filter';
         const NEXTPAGEREQUEST = {
@@ -1548,7 +1548,7 @@ describe('Instance', () => {
       });
       delete expectedReqOpts.gaxOptions;
 
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'listBackupsStream');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -1579,7 +1579,7 @@ describe('Instance', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1615,7 +1615,7 @@ describe('Instance', () => {
       );
       delete expectedReqOpts.gaxOptions;
 
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1629,7 +1629,7 @@ describe('Instance', () => {
     });
 
     it('should not require options', () => {
-      instance.requestStream = config => {
+      instance.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: instance.formattedName_,
         });
@@ -1667,7 +1667,7 @@ describe('Instance', () => {
     } as inst.GetBackupOperationsOptions;
     const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const gaxOpts = {
         timeout: 1000,
       };
@@ -1677,7 +1677,7 @@ describe('Instance', () => {
         parent: instance.formattedName_,
       });
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'listBackupOperations');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -1692,7 +1692,7 @@ describe('Instance', () => {
       instance.getBackupOperations(options, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1707,7 +1707,7 @@ describe('Instance', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1719,7 +1719,7 @@ describe('Instance', () => {
       instance.getBackupOperations(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1741,7 +1741,7 @@ describe('Instance', () => {
         {pageSize: optionsPageSize, pageToken: optionsPageToken},
       );
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1753,8 +1753,8 @@ describe('Instance', () => {
       instance.getBackupOperations(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      instance.request = config => {
+    it('should not require options', (done) => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: instance.formattedName_,
         });
@@ -1766,7 +1766,7 @@ describe('Instance', () => {
       instance.getBackupOperations(assert.ifError);
     });
 
-    it('should return a complete nextQuery object', done => {
+    it('should return a complete nextQuery object', (done) => {
       const pageSize = 1;
       const filter = 'filter';
       const NEXTPAGEREQUEST = {
@@ -1804,7 +1804,7 @@ describe('Instance', () => {
     } as inst.GetDatabaseOperationsOptions;
     const ORIGINAL_OPTIONS = extend({}, OPTIONS);
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const gaxOpts = {
         timeout: 1000,
       };
@@ -1814,7 +1814,7 @@ describe('Instance', () => {
         parent: instance.formattedName_,
       });
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'listDatabaseOperations');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -1830,7 +1830,7 @@ describe('Instance', () => {
       instance.getDatabaseOperations(options, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1845,7 +1845,7 @@ describe('Instance', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1857,7 +1857,7 @@ describe('Instance', () => {
       instance.getDatabaseOperations(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -1879,7 +1879,7 @@ describe('Instance', () => {
         {pageSize: optionsPageSize, pageToken: optionsPageToken},
       );
 
-      instance.request = config => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -1891,8 +1891,8 @@ describe('Instance', () => {
       instance.getDatabaseOperations(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      instance.request = config => {
+    it('should not require options', (done) => {
+      instance.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           parent: instance.formattedName_,
         });
@@ -1904,7 +1904,7 @@ describe('Instance', () => {
       instance.getDatabaseOperations(assert.ifError);
     });
 
-    it('should return a complete nextQuery object', done => {
+    it('should return a complete nextQuery object', (done) => {
       const pageSize = 1;
       const filter = 'filter';
       const NEXTPAGEREQUEST = {

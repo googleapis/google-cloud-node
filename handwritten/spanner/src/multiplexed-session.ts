@@ -97,7 +97,7 @@ export class MultiplexedSession
       })
       // Ignore errors here. If this fails, the next user request will
       // automatically trigger a retry via `_getSession`.
-      .catch(err => {});
+      .catch((err) => {});
   }
 
   /**
@@ -126,7 +126,7 @@ export class MultiplexedSession
       return startTrace(
         'MultiplexedSession.createSession',
         traceConfig,
-        async span => {
+        async (span) => {
           span.addEvent('Requesting a multiplexed session');
           try {
             const [createSessionResponse] = await this.database.createSession({
@@ -197,7 +197,7 @@ export class MultiplexedSession
    */
   getSession(callback: GetSessionCallback): void {
     this._getSession().then(
-      session =>
+      (session) =>
         callback(
           null,
           session,

@@ -58,7 +58,7 @@ describe('storage/iam', () => {
       assert(promisified);
     });
 
-    it('should localize the request function', done => {
+    it('should localize the request function', (done) => {
       Object.assign(BUCKET_INSTANCE, {
         request(callback: Function) {
           assert.strictEqual(this, BUCKET_INSTANCE);
@@ -76,7 +76,7 @@ describe('storage/iam', () => {
   });
 
   describe('getPolicy', () => {
-    it('should make the correct api request', done => {
+    it('should make the correct api request', (done) => {
       iam.request_ = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts, {
           uri: '/iam',
@@ -89,7 +89,7 @@ describe('storage/iam', () => {
       iam.getPolicy(done);
     });
 
-    it('should accept an options object', done => {
+    it('should accept an options object', (done) => {
       const options = {
         userProject: 'grape-spaceship-123',
       };
@@ -102,7 +102,7 @@ describe('storage/iam', () => {
       iam.getPolicy(options, assert.ifError);
     });
 
-    it('should map requestedPolicyVersion option to optionsRequestedPolicyVersion', done => {
+    it('should map requestedPolicyVersion option to optionsRequestedPolicyVersion', (done) => {
       const VERSION = 3;
       const options = {
         requestedPolicyVersion: VERSION,
@@ -126,7 +126,7 @@ describe('storage/iam', () => {
       });
     });
 
-    it('should make the correct API request', done => {
+    it('should make the correct API request', (done) => {
       const policy = {
         a: 'b',
       };
@@ -140,7 +140,7 @@ describe('storage/iam', () => {
             {
               resourceId: iam.resourceId_,
             },
-            policy
+            policy,
           ),
           qs: {},
         });
@@ -151,7 +151,7 @@ describe('storage/iam', () => {
       iam.setPolicy(policy, done);
     });
 
-    it('should accept an options object', done => {
+    it('should accept an options object', (done) => {
       const policy = {
         a: 'b',
       };
@@ -177,7 +177,7 @@ describe('storage/iam', () => {
       });
     });
 
-    it('should make the correct API request', done => {
+    it('should make the correct API request', (done) => {
       const permissions = 'storage.bucket.list';
 
       iam.request_ = (reqOpts: DecorateRequestOptions) => {
@@ -195,7 +195,7 @@ describe('storage/iam', () => {
       iam.testPermissions(permissions, assert.ifError);
     });
 
-    it('should send an error back if the request fails', done => {
+    it('should send an error back if the request fails', (done) => {
       const permissions = ['storage.bucket.list'];
       const error = new Error('Error.');
       const apiResponse = {};
@@ -211,11 +211,11 @@ describe('storage/iam', () => {
           assert.strictEqual(permissions, null);
           assert.strictEqual(apiResp, apiResponse);
           done();
-        }
+        },
       );
     });
 
-    it('should pass back a hash of permissions the user has', done => {
+    it('should pass back a hash of permissions the user has', (done) => {
       const permissions = ['storage.bucket.list', 'storage.bucket.consume'];
       const apiResponse = {
         permissions: ['storage.bucket.consume'],
@@ -236,11 +236,11 @@ describe('storage/iam', () => {
           assert.strictEqual(apiResp, apiResponse);
 
           done();
-        }
+        },
       );
     });
 
-    it('should return false for supplied permissions if user has no permissions', done => {
+    it('should return false for supplied permissions if user has no permissions', (done) => {
       const permissions = ['storage.bucket.list', 'storage.bucket.consume'];
       const apiResponse = {permissions: undefined};
 
@@ -258,11 +258,11 @@ describe('storage/iam', () => {
           assert.strictEqual(apiResp, apiResponse);
 
           done();
-        }
+        },
       );
     });
 
-    it('should accept an options object', done => {
+    it('should accept an options object', (done) => {
       const permissions = ['storage.bucket.list'];
       const options = {
         userProject: 'grape-spaceship-123',
@@ -272,7 +272,7 @@ describe('storage/iam', () => {
         {
           permissions,
         },
-        options
+        options,
       );
 
       iam.request_ = (reqOpts: DecorateRequestOptions) => {

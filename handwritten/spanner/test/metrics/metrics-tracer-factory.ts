@@ -107,7 +107,7 @@ describe('MetricsTracerFactory', () => {
       for (let j = 0; j < attempts; j++) {
         tracer!.recordAttemptStart();
         // Simulate processing time during attempt
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           setTimeout(resolve, 50);
         });
         tracer!.recordAttemptCompletion();

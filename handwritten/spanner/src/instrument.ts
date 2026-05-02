@@ -139,7 +139,7 @@ export function startTrace<T>(
   return getTracer(config.opts?.tracerProvider).startActiveSpan(
     SPAN_NAMESPACE_PREFIX + '.' + spanNameSuffix,
     {kind: SpanKind.CLIENT},
-    span => {
+    (span) => {
       span.setAttribute(ATTR_OTEL_SCOPE_NAME, TRACER_NAME);
       span.setAttribute(ATTR_OTEL_SCOPE_VERSION, TRACER_VERSION);
       span.setAttribute('gcp.client.service', 'spanner');

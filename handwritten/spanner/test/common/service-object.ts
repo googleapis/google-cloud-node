@@ -88,7 +88,7 @@ describe('GrpcServiceObject', () => {
   });
 
   describe('delete', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       grpcServiceObject.request = (protoOpts, reqOpts, callback) => {
         const deleteMethod = grpcServiceObject.methods.delete;
         assert.strictEqual(protoOpts, deleteMethod.protoOpts);
@@ -99,7 +99,7 @@ describe('GrpcServiceObject', () => {
       grpcServiceObject.delete(done);
     });
 
-    it('should not require a callback', done => {
+    it('should not require a callback', (done) => {
       grpcServiceObject.request = (protoOpts, reqOpts, callback) => {
         assert.doesNotThrow(callback);
         done();
@@ -110,7 +110,7 @@ describe('GrpcServiceObject', () => {
   });
 
   describe('getMetadata', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       grpcServiceObject.request = (protoOpts, reqOpts, callback) => {
         const getMetadataMethod = grpcServiceObject.methods.getMetadata;
         assert.strictEqual(protoOpts, getMetadataMethod.protoOpts);
@@ -131,7 +131,7 @@ describe('GrpcServiceObject', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         grpcServiceObject.getMetadata((err, metadata, apiResponse_) => {
           assert.strictEqual(err, error);
           assert.strictEqual(metadata, null);
@@ -150,7 +150,7 @@ describe('GrpcServiceObject', () => {
         };
       });
 
-      it('should exec callback with metadata & API response', done => {
+      it('should exec callback with metadata & API response', (done) => {
         grpcServiceObject.getMetadata((err, metadata, apiResponse_) => {
           assert.ifError(err);
           assert.strictEqual(metadata, apiResponse);
@@ -159,8 +159,8 @@ describe('GrpcServiceObject', () => {
         });
       });
 
-      it('should update the metadata on the instance', done => {
-        grpcServiceObject.getMetadata(err => {
+      it('should update the metadata on the instance', (done) => {
+        grpcServiceObject.getMetadata((err) => {
           assert.ifError(err);
           assert.strictEqual(grpcServiceObject.metadata, apiResponse);
           done();
@@ -173,7 +173,7 @@ describe('GrpcServiceObject', () => {
     const DEFAULT_REQ_OPTS = {a: 'b'};
     const METADATA = {a: 'c'};
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const setMetadataMethod = grpcServiceObject.methods.setMetadata;
       const expectedReqOpts = extend(true, {}, DEFAULT_REQ_OPTS, METADATA);
 
@@ -188,7 +188,7 @@ describe('GrpcServiceObject', () => {
       grpcServiceObject.setMetadata(METADATA, done);
     });
 
-    it('should not require a callback', done => {
+    it('should not require a callback', (done) => {
       grpcServiceObject.request = (protoOpts, reqOpts, callback) => {
         assert.doesNotThrow(callback);
         done();

@@ -65,7 +65,7 @@ describe('storage/acl', () => {
   });
 
   describe('add', () => {
-    it('should make the correct api request', done => {
+    it('should make the correct api request', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '');
@@ -76,7 +76,7 @@ describe('storage/acl', () => {
       acl.add({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
-    it('should set the generation', done => {
+    it('should set the generation', (done) => {
       const options = {
         entity: ENTITY,
         role: ROLE,
@@ -91,7 +91,7 @@ describe('storage/acl', () => {
       acl.add(options, assert.ifError);
     });
 
-    it('should set the userProject', done => {
+    it('should set the userProject', (done) => {
       const options = {
         entity: ENTITY,
         role: ROLE,
@@ -106,7 +106,7 @@ describe('storage/acl', () => {
       acl.add(options, assert.ifError);
     });
 
-    it('should execute the callback with an ACL object', done => {
+    it('should execute the callback with an ACL object', (done) => {
       const apiResponse = {entity: ENTITY, role: ROLE};
       const expectedAclObject = {entity: ENTITY, role: ROLE};
 
@@ -126,7 +126,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with an error', done => {
+    it('should execute the callback with an error', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
@@ -137,7 +137,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', (done) => {
       const resp = {success: true};
 
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
@@ -149,13 +149,13 @@ describe('storage/acl', () => {
         (err: Error, acls: {}, apiResponse: unknown) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
   });
 
   describe('delete', () => {
-    it('should make the correct api request', done => {
+    it('should make the correct api request', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
@@ -166,7 +166,7 @@ describe('storage/acl', () => {
       acl.delete({entity: ENTITY}, assert.ifError);
     });
 
-    it('should set the generation', done => {
+    it('should set the generation', (done) => {
       const options = {
         entity: ENTITY,
         generation: 8,
@@ -180,7 +180,7 @@ describe('storage/acl', () => {
       acl.delete(options, assert.ifError);
     });
 
-    it('should set the userProject', done => {
+    it('should set the userProject', (done) => {
       const options = {
         entity: ENTITY,
         role: ROLE,
@@ -195,7 +195,7 @@ describe('storage/acl', () => {
       acl.delete(options, assert.ifError);
     });
 
-    it('should execute the callback with an error', done => {
+    it('should execute the callback with an error', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
@@ -206,7 +206,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', (done) => {
       const resp = {success: true};
 
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
@@ -222,7 +222,7 @@ describe('storage/acl', () => {
 
   describe('get', () => {
     describe('all ACL objects', () => {
-      it('should make the correct API request', done => {
+      it('should make the correct API request', (done) => {
         acl.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.uri, '');
 
@@ -232,7 +232,7 @@ describe('storage/acl', () => {
         acl.get(assert.ifError);
       });
 
-      it('should accept a configuration object', done => {
+      it('should accept a configuration object', (done) => {
         const generation = 1;
 
         acl.request = (reqOpts: DecorateRequestOptions) => {
@@ -244,7 +244,7 @@ describe('storage/acl', () => {
         acl.get({generation}, assert.ifError);
       });
 
-      it('should pass an array of acl objects to the callback', done => {
+      it('should pass an array of acl objects to the callback', (done) => {
         const apiResponse = {
           items: [
             {entity: ENTITY, role: ROLE},
@@ -276,7 +276,7 @@ describe('storage/acl', () => {
     });
 
     describe('ACL object for an entity', () => {
-      it('should get a specific ACL object', done => {
+      it('should get a specific ACL object', (done) => {
         acl.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
@@ -286,7 +286,7 @@ describe('storage/acl', () => {
         acl.get({entity: ENTITY}, assert.ifError);
       });
 
-      it('should accept a configuration object', done => {
+      it('should accept a configuration object', (done) => {
         const generation = 1;
 
         acl.request = (reqOpts: DecorateRequestOptions) => {
@@ -298,7 +298,7 @@ describe('storage/acl', () => {
         acl.get({entity: ENTITY, generation}, assert.ifError);
       });
 
-      it('should set the userProject', done => {
+      it('should set the userProject', (done) => {
         const options = {
           entity: ENTITY,
           userProject: 'grape-spaceship-123',
@@ -312,7 +312,7 @@ describe('storage/acl', () => {
         acl.get(options, assert.ifError);
       });
 
-      it('should pass an acl object to the callback', done => {
+      it('should pass an acl object to the callback', (done) => {
         const apiResponse = {entity: ENTITY, role: ROLE};
         const expectedAclObject = {entity: ENTITY, role: ROLE};
 
@@ -332,7 +332,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with an error', done => {
+    it('should execute the callback with an error', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
@@ -343,7 +343,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', (done) => {
       const resp = {success: true};
 
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
@@ -358,7 +358,7 @@ describe('storage/acl', () => {
   });
 
   describe('update', () => {
-    it('should make the correct API request', done => {
+    it('should make the correct API request', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
@@ -370,7 +370,7 @@ describe('storage/acl', () => {
       acl.update({entity: ENTITY, role: ROLE}, assert.ifError);
     });
 
-    it('should set the generation', done => {
+    it('should set the generation', (done) => {
       const options = {
         entity: ENTITY,
         role: ROLE,
@@ -385,7 +385,7 @@ describe('storage/acl', () => {
       acl.update(options, assert.ifError);
     });
 
-    it('should set the userProject', done => {
+    it('should set the userProject', (done) => {
       const options = {
         entity: ENTITY,
         role: ROLE,
@@ -400,7 +400,7 @@ describe('storage/acl', () => {
       acl.update(options, assert.ifError);
     });
 
-    it('should pass an acl object to the callback', done => {
+    it('should pass an acl object to the callback', (done) => {
       const apiResponse = {entity: ENTITY, role: ROLE};
       const expectedAclObject = {entity: ENTITY, role: ROLE};
 
@@ -419,7 +419,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with an error', done => {
+    it('should execute the callback with an error', (done) => {
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
@@ -430,7 +430,7 @@ describe('storage/acl', () => {
       });
     });
 
-    it('should execute the callback with apiResponse', done => {
+    it('should execute the callback with apiResponse', (done) => {
       const resp = {success: true};
 
       acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
@@ -443,7 +443,7 @@ describe('storage/acl', () => {
         (err: Error, acls: Array<{}>, apiResponse: unknown) => {
           assert.deepStrictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
   });
@@ -472,7 +472,7 @@ describe('storage/acl', () => {
   });
 
   describe('request', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const uri = '/uri';
 
       const reqOpts = {
@@ -572,7 +572,7 @@ describe('storage/AclRoleAccessorMethods', () => {
       assert.strictEqual(value, fakeReturn);
     });
 
-    it('should not pass in the callback if undefined', done => {
+    it('should not pass in the callback if undefined', (done) => {
       aclEntity.add = (...args: Array<{}>) => {
         assert.strictEqual(args.length, 1);
         done();
@@ -582,7 +582,7 @@ describe('storage/AclRoleAccessorMethods', () => {
       aclEntity.fakeroles.addUser('email@example.com', undefined);
     });
 
-    it('should optionally accept options', done => {
+    it('should optionally accept options', (done) => {
       const fakeRole = 'fakerole';
       const fakeUser = 'email@example.com';
       const fakeOptions = {
@@ -594,7 +594,7 @@ describe('storage/AclRoleAccessorMethods', () => {
           entity: 'user-' + fakeUser,
           role: fakeRole,
         },
-        fakeOptions
+        fakeOptions,
       );
 
       aclEntity.add = (options: {}) => {

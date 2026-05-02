@@ -611,7 +611,7 @@ export class Snapshot extends EventEmitter {
         transactionTag: this.requestOptions?.transactionTag,
         ...this._traceConfig,
       },
-      span => {
+      (span) => {
         span.addEvent('Begin Transaction');
 
         this.request(
@@ -889,7 +889,7 @@ export class Snapshot extends EventEmitter {
       requestTag: requestOptions?.requestTag,
     };
 
-    return startTrace('Snapshot.createReadStream', traceConfig, span => {
+    return startTrace('Snapshot.createReadStream', traceConfig, (span) => {
       let attempt = 0;
       const database = this.session.parent as Database;
       const nthRequest = nextNthRequest(database);
@@ -938,13 +938,13 @@ export class Snapshot extends EventEmitter {
           gaxOptions,
         },
       )
-        ?.on('response', response => {
+        ?.on('response', (response) => {
           this._updatePrecommitToken(response);
           if (response.metadata && response.metadata!.transaction && !this.id) {
             this._update(response.metadata!.transaction, span);
           }
         })
-        .on('error', err => {
+        .on('error', (err) => {
           setSpanError(span, err);
           const wasAborted = isErrorAborted(err);
           if (!this.id && this._useInRunner && !wasAborted) {
@@ -959,7 +959,7 @@ export class Snapshot extends EventEmitter {
           }
           span.end();
         })
-        .on('end', err => {
+        .on('end', (err) => {
           if (err) {
             setSpanError(span, err);
           }
@@ -967,7 +967,7 @@ export class Snapshot extends EventEmitter {
         });
 
       if (resultStream instanceof Stream) {
-        finished(resultStream, err => {
+        finished(resultStream, (err) => {
           if (err) {
             setSpanError(span, err);
           }
@@ -1177,15 +1177,15 @@ export class Snapshot extends EventEmitter {
         tableName: table,
         ...this._traceConfig,
       },
-      span => {
+      (span) => {
         this.createReadStream(table, request)
-          .on('error', err => {
+          .on('error', (err) => {
             const e = err as grpc.ServiceError;
             setSpanError(span, e);
             span.end();
             callback!(e, null);
           })
-          .on('data', row => rows.push(row))
+          .on('data', (row) => rows.push(row))
           .on('end', () => {
             span.end();
             callback!(null, rows);
@@ -1287,9 +1287,9 @@ export class Snapshot extends EventEmitter {
         ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
       },
-      span => {
+      (span) => {
         return this.runStream(query)
-          .on('error', err => {
+          .on('error', (err) => {
             setSpanError(span, err);
             span.end();
             if (!('code' in err)) {
@@ -1301,7 +1301,7 @@ export class Snapshot extends EventEmitter {
             }
             callback!(err as ServiceError, rows, stats, metadata);
           })
-          .on('response', response => {
+          .on('response', (response) => {
             if (response.metadata) {
               metadata = response.metadata;
               if (metadata.transaction && !this.id) {
@@ -1309,8 +1309,8 @@ export class Snapshot extends EventEmitter {
               }
             }
           })
-          .on('data', row => rows.push(row))
-          .on('stats', _stats => (stats = _stats))
+          .on('data', (row) => rows.push(row))
+          .on('stats', (_stats) => (stats = _stats))
           .on('end', () => {
             span.end();
             callback!(null, rows, stats, metadata);
@@ -1501,7 +1501,7 @@ export class Snapshot extends EventEmitter {
       ...query,
       ...this._traceConfig,
     };
-    return startTrace('Snapshot.runStream', traceConfig, span => {
+    return startTrace('Snapshot.runStream', traceConfig, (span) => {
       let attempt = 0;
       const database = this.session.parent as Database;
       const nthRequest = nextNthRequest(database);
@@ -1557,13 +1557,13 @@ export class Snapshot extends EventEmitter {
           gaxOptions,
         },
       )
-        .on('response', response => {
+        .on('response', (response) => {
           this._updatePrecommitToken(response);
           if (response.metadata && response.metadata!.transaction && !this.id) {
             this._update(response.metadata!.transaction, span);
           }
         })
-        .on('error', err => {
+        .on('error', (err) => {
           setSpanError(span, err as Error);
           const wasAborted = isErrorAborted(err);
           if (!this.id && this._useInRunner && !wasAborted) {
@@ -1579,7 +1579,7 @@ export class Snapshot extends EventEmitter {
           }
           span.end();
         })
-        .on('end', err => {
+        .on('end', (err) => {
           if (err) {
             setSpanError(span, err as Error);
           }
@@ -1587,7 +1587,7 @@ export class Snapshot extends EventEmitter {
         });
 
       if (resultStream instanceof Stream) {
-        finished(resultStream, err => {
+        finished(resultStream, (err) => {
           if (err) {
             setSpanError(span, err);
           }
@@ -1634,10 +1634,10 @@ export class Snapshot extends EventEmitter {
     }
 
     if (request.ranges) {
-      keySet.ranges = toArray(request.ranges).map(range => {
+      keySet.ranges = toArray(request.ranges).map((range) => {
         const encodedRange: spannerClient.spanner.v1.IKeyRange = {};
 
-        Object.keys(range).forEach(bound => {
+        Object.keys(range).forEach((bound) => {
           encodedRange[bound] = codec.convertToListValue(range[bound]);
         });
 
@@ -1720,7 +1720,7 @@ export class Snapshot extends EventEmitter {
     if (request.params && !request.params.fields) {
       const fields = {};
 
-      Object.keys(request.params).forEach(param => {
+      Object.keys(request.params).forEach((param) => {
         const value = request.params![param];
 
         if (!typeMap[param]) {
@@ -1733,7 +1733,7 @@ export class Snapshot extends EventEmitter {
     }
 
     if (!isEmpty(typeMap)) {
-      Object.keys(typeMap).forEach(param => {
+      Object.keys(typeMap).forEach((param) => {
         const type = typeMap[param];
         if (process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] === 'true') {
           const typeObject = codec.createTypeObject(type);
@@ -1827,8 +1827,8 @@ export class Snapshot extends EventEmitter {
 
       this._waitingRequests.push(() => {
         makeRequest(resumeToken)
-          .on('data', chunk => streamProxy.emit('data', chunk))
-          .on('error', err => streamProxy.emit('error', err))
+          .on('data', (chunk) => streamProxy.emit('data', chunk))
+          .on('error', (err) => streamProxy.emit('error', err))
           .on('end', () => streamProxy.emit('end'));
       });
 
@@ -1917,7 +1917,7 @@ export class Dml extends Snapshot {
         transactionTag: this.requestOptions?.transactionTag,
         requestTag: query.requestOptions?.requestTag,
       },
-      span => {
+      (span) => {
         this.run(
           query,
           (
@@ -2165,7 +2165,7 @@ export class Transaction extends Dml {
     }
 
     const statements: spannerClient.spanner.v1.ExecuteBatchDmlRequest.IStatement[] =
-      queries.map(query => {
+      queries.map((query) => {
         if (typeof query === 'string') {
           return {sql: query};
         }
@@ -2218,7 +2218,7 @@ export class Transaction extends Dml {
       transactionTag: requestOptionsWithTag?.transactionTag,
       requestTag: (options as BatchUpdateOptions)?.requestOptions?.requestTag,
     };
-    return startTrace('Transaction.batchUpdate', traceConfig, span => {
+    return startTrace('Transaction.batchUpdate', traceConfig, (span) => {
       this.request(
         {
           client: 'SpannerClient',
@@ -2401,7 +2401,7 @@ export class Transaction extends Dml {
         transactionTag: this.requestOptions?.transactionTag,
         ...this._traceConfig,
       },
-      span => {
+      (span) => {
         if (this.id) {
           reqOpts.transactionId = this.id as Uint8Array;
         } else if (!this._useInRunner) {
@@ -2420,7 +2420,7 @@ export class Transaction extends Dml {
                 callback(err, resp);
               });
             },
-            err => {
+            (err) => {
               setSpanError(span, err);
               span.end();
               callback(err, null);
@@ -2799,7 +2799,7 @@ export class Transaction extends Dml {
     const callback =
       typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
 
-    return startTrace('Transaction.rollback', this._traceConfig, span => {
+    return startTrace('Transaction.rollback', this._traceConfig, (span) => {
       if (!this.id) {
         span.addEvent('Transaction ID is unknown, nothing to rollback.');
         span.end();
@@ -2944,7 +2944,7 @@ export class Transaction extends Dml {
    */
   static getUniqueKeys(rows: object[]): string[] {
     const allKeys: string[] = [];
-    rows.forEach(row => allKeys.push(...Object.keys(row)));
+    rows.forEach((row) => allKeys.push(...Object.keys(row)));
     const unique = new Set(allKeys);
     return Array.from(unique).sort();
   }
@@ -3036,7 +3036,7 @@ function buildMutation(
 
   const values = rows.map((row, index) => {
     const keys = Object.keys(row);
-    const missingColumns = columns.filter(column => !keys.includes(column));
+    const missingColumns = columns.filter((column) => !keys.includes(column));
 
     if (missingColumns.length > 0) {
       throw new GoogleError(
@@ -3047,7 +3047,7 @@ function buildMutation(
       );
     }
 
-    const values = columns.map(column => row[column]);
+    const values = columns.map((column) => row[column]);
     return codec.convertToListValue(values);
   });
 
@@ -3319,7 +3319,7 @@ export class PartitionedDml extends Dml {
         ...(query as ExecuteSqlRequest),
         ...this._traceConfig,
       },
-      span => {
+      (span) => {
         super.runUpdate(query, (err, count) => {
           if (err) {
             setSpanError(span, err);

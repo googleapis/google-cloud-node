@@ -91,7 +91,7 @@ describe('MultiplexedSession', () => {
       assert.strictEqual(_createSessionStub.callCount, 1);
     });
 
-    it('should start housekeeping', done => {
+    it('should start housekeeping', (done) => {
       multiplexedSession.createSession();
       setImmediate(() => {
         try {
@@ -167,7 +167,7 @@ describe('MultiplexedSession', () => {
   });
 
   describe('getSession', () => {
-    it('should acquire a session', done => {
+    it('should acquire a session', (done) => {
       sandbox.stub(multiplexedSession, '_getSession').resolves(fakeMuxSession);
       multiplexedSession.getSession((err, session) => {
         assert.ifError(err);
@@ -176,16 +176,16 @@ describe('MultiplexedSession', () => {
       });
     });
 
-    it('should pass any errors to the callback', done => {
+    it('should pass any errors to the callback', (done) => {
       const error = new Error('err');
       sandbox.stub(multiplexedSession, '_getSession').rejects(error);
-      multiplexedSession.getSession(err => {
+      multiplexedSession.getSession((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should pass back the session and txn', done => {
+    it('should pass back the session and txn', (done) => {
       const fakeTxn = new FakeTransaction() as unknown as Transaction;
       sandbox.stub(multiplexedSession, '_getSession').resolves(fakeMuxSession);
       multiplexedSession.getSession((err, session, txn) => {
@@ -216,7 +216,7 @@ describe('MultiplexedSession', () => {
 
       // create a manual lock to simulate another request currently running
       let resolveLock!: () => void;
-      const pendingLock = new Promise<void>(resolve => {
+      const pendingLock = new Promise<void>((resolve) => {
         resolveLock = resolve;
       });
 

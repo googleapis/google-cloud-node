@@ -9,23 +9,8 @@
             "100",
             1.1,
             "YWJj",
-            [
-              "abc",
-              "def",
-              null,
-              "ghi"
-            ],
-            [
-              [
-                "abc"
-              ],
-              [
-                "def"
-              ],
-              [
-                "ghi"
-              ]
-            ]
+            ["abc", "def", null, "ghi"],
+            [["abc"], ["def"], ["ghi"]]
           ]
         ]
       },
@@ -36,11 +21,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            "abcdefghi"
-          ]
-        ]
+        "value": [["abcdefghi"]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"STRING\"\n        }\n      }]\n    }\n  },\n  \"values\": [\"abc\"],\n  \"chunkedValue\": true\n}",
@@ -51,16 +32,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              "abc",
-              "def",
-              "ghi",
-              "jkl"
-            ]
-          ]
-        ]
+        "value": [[["abc", "def", "ghi", "jkl"]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRING\"\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[\"abc\", \"d\"]],\n  \"chunkedValue\": true\n}",
@@ -71,18 +43,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              "abc",
-              "def",
-              null,
-              "ghi",
-              null,
-              "jkl"
-            ]
-          ]
-        ]
+        "value": [[["abc", "def", null, "ghi", null, "jkl"]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRING\"\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[\"abc\", \"def\"]],\n  \"chunkedValue\": true\n}",
@@ -93,16 +54,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              "abc",
-              "def",
-              "ghi",
-              "jkl"
-            ]
-          ]
-        ]
+        "value": [[["abc", "def", "ghi", "jkl"]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRING\"\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[\"abc\", \"def\"]],\n  \"chunkedValue\": true\n}",
@@ -113,13 +65,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              "abcdefghi"
-            ]
-          ]
-        ]
+        "value": [[["abcdefghi"]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRING\"\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[\"abc\"]],\n  \"chunkedValue\": true\n}",
@@ -130,17 +76,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              "1",
-              "23",
-              "4",
-              null,
-              "5"
-            ]
-          ]
-        ]
+        "value": [[["1", "23", "4", null, "5"]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"INT64\"\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[\"1\", \"2\"]],\n  \"chunkedValue\": true\n}",
@@ -151,19 +87,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              1,
-              2,
-              "Infinity",
-              "-Infinity",
-              "NaN",
-              null,
-              3
-            ]
-          ]
-        ]
+        "value": [[[1, 2, "Infinity", "-Infinity", "NaN", null, 3]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"FLOAT64\"\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[1.0, 2.0]],\n  \"chunkedValue\": true\n}",
@@ -177,14 +101,8 @@
         "value": [
           [
             [
-              [
-                "abc",
-                "defghi"
-              ],
-              [
-                "123",
-                "456"
-              ]
+              ["abc", "defghi"],
+              ["123", "456"]
             ]
           ]
         ]
@@ -198,19 +116,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              [
-                [
-                  [
-                    "abc"
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
+        "value": [[[[[["abc"]]]]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRUCT\",\n            \"structType\": {\n              \"fields\": [{\n                \"name\": \"f11\",\n                \"type\": {\n                  \"code\": \"ARRAY\",\n                  \"arrayElementType\": {\n                    \"code\": \"STRUCT\",\n                    \"structType\": {\n                      \"fields\": [{\n                        \"name\": \"f12\",\n                        \"type\": {\n                          \"code\": \"STRING\"\n                        }\n                      }]\n                    }\n                  }\n                }\n              }]\n            }\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[[[[\"abc\"]]]]]\n}"
@@ -219,22 +125,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              [
-                [
-                  [
-                    "abc"
-                  ],
-                  [
-                    "def"
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
+        "value": [[[[[["abc"], ["def"]]]]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRUCT\",\n            \"structType\": {\n              \"fields\": [{\n                \"name\": \"f11\",\n                \"type\": {\n                  \"code\": \"ARRAY\",\n                  \"arrayElementType\": {\n                    \"code\": \"STRUCT\",\n                    \"structType\": {\n                      \"fields\": [{\n                        \"name\": \"f12\",\n                        \"type\": {\n                          \"code\": \"STRING\"\n                        }\n                      }]\n                    }\n                  }\n                }\n              }]\n            }\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[[[[\"ab\"]]]]],\n  \"chunkedValue\": true\n}",
@@ -245,22 +136,8 @@
     {
       "result": {
         "value": [
-          [
-            "1",
-            [
-              [
-                "ab"
-              ]
-            ]
-          ],
-          [
-            "2",
-            [
-              [
-                "c"
-              ]
-            ]
-          ]
+          ["1", [["ab"]]],
+          ["2", [["c"]]]
         ]
       },
       "chunks": [
@@ -273,14 +150,8 @@
     {
       "result": {
         "value": [
-          [
-            "abc",
-            "1"
-          ],
-          [
-            "def",
-            "2"
-          ]
+          ["abc", "1"],
+          ["def", "2"]
         ]
       },
       "chunks": [
@@ -291,14 +162,8 @@
     {
       "result": {
         "value": [
-          [
-            "abc",
-            "1"
-          ],
-          [
-            "def",
-            "2"
-          ]
+          ["abc", "1"],
+          ["def", "2"]
         ]
       },
       "chunks": [
@@ -310,20 +175,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            "ab"
-          ],
-          [
-            "c"
-          ],
-          [
-            "d"
-          ],
-          [
-            "ef"
-          ]
-        ]
+        "value": [["ab"], ["c"], ["d"], ["ef"]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"STRING\"\n        }\n      }]\n    }\n  },\n  \"values\": [\"a\"],\n  \"chunkedValue\": true\n}",
@@ -335,23 +187,7 @@
     },
     {
       "result": {
-        "value": [
-          [
-            [
-              [
-                [
-                  [
-                    "abc"
-                  ],
-                  null,
-                  [
-                    "def"
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
+        "value": [[[[[["abc"], null, ["def"]]]]]]
       },
       "chunks": [
         "{\n  \"metadata\": {\n    \"rowType\": {\n      \"fields\": [{\n        \"name\": \"f1\",\n        \"type\": {\n          \"code\": \"ARRAY\",\n          \"arrayElementType\": {\n            \"code\": \"STRUCT\",\n            \"structType\": {\n              \"fields\": [{\n                \"name\": \"f11\",\n                \"type\": {\n                  \"code\": \"ARRAY\",\n                  \"arrayElementType\": {\n                    \"code\": \"STRUCT\",\n                    \"structType\": {\n                      \"fields\": [{\n                        \"name\": \"f12\",\n                        \"type\": {\n                          \"code\": \"STRING\"\n                        }\n                      }]\n                    }\n                  }\n                }\n              }]\n            }\n          }\n        }\n      }]\n    }\n  },\n  \"values\": [[[[[\"abc\"], null]]]],\n  \"chunkedValue\": true\n}",

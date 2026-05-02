@@ -517,7 +517,7 @@ export class MockSpanner {
   }
 
   static sleep(ms): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   private async simulateExecutionTime(functionName: string): Promise<void> {
@@ -580,7 +580,7 @@ export class MockSpanner {
           protobuf.BatchCreateSessionsResponse.create({session: sessions}),
         );
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -600,7 +600,7 @@ export class MockSpanner {
           ),
         );
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -619,7 +619,7 @@ export class MockSpanner {
           callback(MockSpanner.createSessionNotFoundError(call.request!.name));
         }
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -637,13 +637,13 @@ export class MockSpanner {
         callback(
           null,
           protobuf.ListSessionsResponse.create({
-            sessions: Array.from(this.sessions.values()).filter(session => {
+            sessions: Array.from(this.sessions.values()).filter((session) => {
               return session.name.startsWith(call.request!.database);
             }),
           }),
         );
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -804,7 +804,7 @@ export class MockSpanner {
         }
         call.end();
       })
-      .catch(err => {
+      .catch((err) => {
         call.sendMetadata(new Metadata());
         call.emit('error', err);
         call.end();
@@ -999,7 +999,7 @@ export class MockSpanner {
           }),
         );
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -1130,7 +1130,7 @@ export class MockSpanner {
         }
         call.end();
       })
-      .catch(err => {
+      .catch((err) => {
         call.sendMetadata(new Metadata());
         call.emit('error', err);
         call.end();
@@ -1158,7 +1158,7 @@ export class MockSpanner {
           callback(null, res);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -1219,7 +1219,7 @@ export class MockSpanner {
           );
         }
       })
-      .catch(err => {
+      .catch((err) => {
         callback(err);
       });
   }
@@ -1263,7 +1263,7 @@ export class MockSpanner {
         });
         callback(null, response);
       })
-      .catch(err => callback(err));
+      .catch((err) => callback(err));
   }
 
   partitionRead(
@@ -1278,7 +1278,7 @@ export class MockSpanner {
         });
         callback(null, response);
       })
-      .catch(err => callback(err));
+      .catch((err) => callback(err));
   }
 
   batchWrite(
@@ -1296,7 +1296,7 @@ export class MockSpanner {
         call.write(response);
         call.end();
       })
-      .catch(err => call.destroy(err));
+      .catch((err) => call.destroy(err));
   }
 
   private _updateTransaction(

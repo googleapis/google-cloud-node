@@ -287,13 +287,13 @@ describe('TransactionRunner', () => {
         assert.strictEqual(returnVal, fakeReturnValue);
       });
 
-      it('should reject for non-retryable errors', done => {
+      it('should reject for non-retryable errors', (done) => {
         const fakeError = new Error('err') as grpc.ServiceError;
         fakeError.code = grpc.status.UNKNOWN;
 
         runFn.rejects(fakeError);
 
-        runner.run().catch(err => {
+        runner.run().catch((err) => {
           assert.strictEqual(err, fakeError);
           done();
         });
@@ -319,7 +319,7 @@ describe('TransactionRunner', () => {
         assert.strictEqual(delayStub.callCount, 1);
       });
 
-      it('should throw a DeadlineError if the timeout is exceeded', done => {
+      it('should throw a DeadlineError if the timeout is exceeded', (done) => {
         const fakeError = new Error('err') as grpc.ServiceError;
         fakeError.code = grpc.status.ABORTED;
 
@@ -332,7 +332,7 @@ describe('TransactionRunner', () => {
           .then(() => {
             done(new Error('missing expected DEADLINE_EXCEEDED error'));
           })
-          .catch(err => {
+          .catch((err) => {
             assert.strictEqual(err.code, grpc.status.DEADLINE_EXCEEDED);
             assert.deepStrictEqual(err.errors, [fakeError]);
             done();
@@ -529,19 +529,19 @@ describe('TransactionRunner', () => {
       describe('transaction streams', () => {
         const CONFIG = {};
 
-        it('should pipe the data through', done => {
+        it('should pipe the data through', (done) => {
           const fakeStream = through.obj();
           fakeTransaction.requestStream.withArgs(CONFIG).returns(fakeStream);
 
           const fakeData = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
-          fakeData.forEach(data => fakeStream.push(data));
+          fakeData.forEach((data) => fakeStream.push(data));
           fakeStream.push(null);
 
           runFn.callsFake((err, transaction) => {
             assert.ifError(err);
 
             transaction.requestStream(CONFIG).pipe(
-              concat(data => {
+              concat((data) => {
                 assert.deepStrictEqual(data, fakeData);
                 done();
               }),
@@ -551,7 +551,7 @@ describe('TransactionRunner', () => {
           runner.run().catch(done);
         });
 
-        it('should destroy on non-retryable streaming errors', done => {
+        it('should destroy on non-retryable streaming errors', (done) => {
           const fakeStream = through.obj();
           fakeTransaction.requestStream.withArgs(CONFIG).returns(fakeStream);
 
@@ -561,7 +561,7 @@ describe('TransactionRunner', () => {
           runFn.callsFake((err, transaction) => {
             assert.ifError(err);
 
-            transaction.requestStream(CONFIG).on('error', err => {
+            transaction.requestStream(CONFIG).on('error', (err) => {
               assert.strictEqual(err, fakeError);
               done();
             });
@@ -571,7 +571,7 @@ describe('TransactionRunner', () => {
           setImmediate(() => fakeStream.destroy(fakeError));
         });
 
-        it('should intercept ABORTED streaming errors', done => {
+        it('should intercept ABORTED streaming errors', (done) => {
           const badStream = through.obj();
           const goodStream = through.obj();
 
@@ -579,7 +579,7 @@ describe('TransactionRunner', () => {
           fakeError.code = grpc.status.ABORTED;
 
           const fakeData = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
-          fakeData.forEach(data => goodStream.push(data));
+          fakeData.forEach((data) => goodStream.push(data));
           goodStream.push(null);
 
           fakeTransaction.requestStream.onCall(0).returns(badStream);
@@ -592,7 +592,7 @@ describe('TransactionRunner', () => {
               .requestStream(CONFIG)
               .on('error', done)
               .pipe(
-                concat(data => {
+                concat((data) => {
                   assert.deepStrictEqual(data, fakeData);
                   assert.strictEqual(runFn.callCount, 2);
                   done();

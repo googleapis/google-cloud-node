@@ -246,7 +246,7 @@ class FakeAbortError {
   }
 }
 
-const fakeRetry = fn => {
+const fakeRetry = (fn) => {
   return fn();
 };
 
@@ -365,12 +365,12 @@ describe('Database', () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
-      it('should re-emit SessionPool errors', done => {
+      it('should re-emit SessionPool errors', (done) => {
         const error = new Error('err');
 
         const sessionFactory = new SessionFactory(database, NAME);
 
-        database.on('error', err => {
+        database.on('error', (err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -379,7 +379,7 @@ describe('Database', () => {
       });
     });
 
-    it('should inherit from ServiceObject', done => {
+    it('should inherit from ServiceObject', (done) => {
       const options = {};
 
       const instanceInstance = extend({}, INSTANCE, {
@@ -542,7 +542,7 @@ describe('Database', () => {
       assert.strictEqual(gaxOpts, gaxOptions);
     });
 
-    it('should return any request errors', done => {
+    it('should return any request errors', (done) => {
       const error = new Error('err');
       const response = {};
 
@@ -559,7 +559,7 @@ describe('Database', () => {
       });
     });
 
-    it('should create session objects from the response', done => {
+    it('should create session objects from the response', (done) => {
       const stub = sandbox.stub(database, 'session');
       const fakeSessions = [{}, {}, {}];
       const response = {
@@ -621,9 +621,9 @@ describe('Database', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -664,7 +664,7 @@ describe('Database', () => {
         timestamp: READ_TIMESTAMP,
       };
 
-      database.session = id => {
+      database.session = (id) => {
         assert.strictEqual(id, SESSION.id);
         return SESSION;
       };
@@ -712,27 +712,27 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => callback(null, fakeSession));
+      ).callsFake((callback) => callback(null, fakeSession));
 
       requestStreamStub = sandbox
         .stub(database, 'requestStream')
         .returns(fakeDataStream);
     });
 
-    it('should get a session via `getSessionForReadWrite`', done => {
+    it('should get a session via `getSessionForReadWrite`', (done) => {
       getSessionStub.callsFake(() => {});
       database.batchWriteAtLeastOnce(mutationGroups, options);
       assert.strictEqual(getSessionStub.callCount, 1);
       done();
     });
 
-    it('should destroy the stream if `getSessionForReadWrite` errors', done => {
+    it('should destroy the stream if `getSessionForReadWrite` errors', (done) => {
       const fakeError = new Error('err');
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err, fakeError);
           done();
         });
@@ -744,7 +744,7 @@ describe('Database', () => {
         {} as google.spanner.v1.BatchWriteRequest,
         {
           session: fakeSession!.formattedName_!,
-          mutationGroups: mutationGroups.map(mg => mg.proto()),
+          mutationGroups: mutationGroups.map((mg) => mg.proto()),
           requestOptions: options?.requestOptions,
           excludeTxnFromChangeStream: options?.excludeTxnFromChangeStreams,
         },
@@ -761,26 +761,26 @@ describe('Database', () => {
       assert.deepStrictEqual(args.headers, database.commonHeaders_);
     });
 
-    it('should return error when passing an empty list of mutationGroups', done => {
+    it('should return error when passing an empty list of mutationGroups', (done) => {
       const fakeError = new Error('err');
-      database.batchWriteAtLeastOnce([], options).on('error', error => {
+      database.batchWriteAtLeastOnce([], options).on('error', (error) => {
         assert.strictEqual(error, fakeError);
         done();
       });
       fakeDataStream.emit('error', fakeError);
     });
 
-    it('should return data when passing a valid list of mutationGroups', done => {
+    it('should return data when passing a valid list of mutationGroups', (done) => {
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
-        .on('data', data => {
+        .on('data', (data) => {
           assert.strictEqual(data, 'test');
           done();
         });
       fakeDataStream.emit('data', 'test');
     });
 
-    it('should emit correct event based on valid/invalid list of mutationGroups', done => {
+    it('should emit correct event based on valid/invalid list of mutationGroups', (done) => {
       const fakeError = new Error('err');
       const FakeMutationGroup1 = new MutationGroup();
       FakeMutationGroup1.insert('Singers', {
@@ -819,10 +819,10 @@ describe('Database', () => {
           [FakeMutationGroup1, FakeMutationGroup2],
           options,
         )
-        .on('data', data => {
+        .on('data', (data) => {
           assert.strictEqual(data, 'testData');
         })
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err, fakeError);
         });
       fakeDataStream.emit('data', 'testData');
@@ -830,7 +830,7 @@ describe('Database', () => {
       done();
     });
 
-    it('should retry on "Session not found" error', done => {
+    it('should retry on "Session not found" error', (done) => {
       const sessionNotFoundError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -840,7 +840,7 @@ describe('Database', () => {
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
         .on('data', () => {})
-        .on('error', err => {
+        .on('error', (err) => {
           assert.fail(err);
         })
         .on('end', () => {
@@ -885,26 +885,26 @@ describe('Database', () => {
       sandbox.restore();
       sessionFactory = database.sessionFactory_;
       (sandbox.stub(sessionFactory, 'getSession') as sinon.SinonStub).callsFake(
-        callback => {
+        (callback) => {
           callback(null, SESSION, TRANSACTION);
         },
       );
     });
 
-    it('should return any errors getting a session', done => {
+    it('should return any errors getting a session', (done) => {
       const fakeErr = new Error('err');
 
-      (sessionFactory.getSession as sinon.SinonStub).callsFake(callback =>
+      (sessionFactory.getSession as sinon.SinonStub).callsFake((callback) =>
         callback(fakeErr, null, null),
       );
 
-      database.writeAtLeastOnce(mutations, err => {
+      database.writeAtLeastOnce(mutations, (err) => {
         assert.deepStrictEqual(err, fakeErr);
         done();
       });
     });
 
-    it('should return successful CommitResponse when passing an empty mutation', done => {
+    it('should return successful CommitResponse when passing an empty mutation', (done) => {
       const fakeMutations = new MutationSet();
       try {
         database.writeAtLeastOnce(fakeMutations, (err, response) => {
@@ -920,7 +920,7 @@ describe('Database', () => {
       }
     });
 
-    it('should return an error when passing null mutation', done => {
+    it('should return an error when passing null mutation', (done) => {
       try {
         database.writeAtLeastOnce(null, () => {});
       } catch (err) {
@@ -935,7 +935,7 @@ describe('Database', () => {
       }
     });
 
-    it('should return CommitResponse on successful write using Callback', done => {
+    it('should return CommitResponse on successful write using Callback', (done) => {
       database.writeAtLeastOnce(mutations, (err, res) => {
         assert.deepStrictEqual(err, null);
         assert.deepStrictEqual(res, RESPONSE);
@@ -970,18 +970,18 @@ describe('Database', () => {
         };
       });
 
-      it('should close the database', done => {
+      it('should close the database', (done) => {
         database.close(done);
       });
 
-      it('should remove the database cache', done => {
+      it('should remove the database cache', (done) => {
         const cache = INSTANCE.databases_;
         const cacheId = FAKE_ID.split('/').pop()!;
 
         cache.set(cacheId, database);
         assert(cache.has(cacheId));
 
-        database.close(err => {
+        database.close((err) => {
           assert.ifError(err);
           assert.strictEqual(cache.has(cacheId), false);
           done();
@@ -990,7 +990,7 @@ describe('Database', () => {
     });
 
     describe('error', () => {
-      it('should return the closing error', done => {
+      it('should return the closing error', (done) => {
         const error = new Error('err.');
 
         database.pool_ = {
@@ -999,7 +999,7 @@ describe('Database', () => {
           },
         };
 
-        database.close(err => {
+        database.close((err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -1019,7 +1019,7 @@ describe('Database', () => {
       };
     });
 
-    it('should return any get session errors', done => {
+    it('should return any get session errors', (done) => {
       const error = new Error('err');
 
       database.sessionFactory_ = {
@@ -1036,7 +1036,7 @@ describe('Database', () => {
       });
     });
 
-    it('should create a transaction', done => {
+    it('should create a transaction', (done) => {
       const opts = {a: 'b'};
 
       const fakeTransaction = {
@@ -1061,7 +1061,7 @@ describe('Database', () => {
       });
     });
 
-    it('should return any transaction errors', done => {
+    it('should return any transaction errors', (done) => {
       const error = new Error('err');
 
       const fakeTransaction = {
@@ -1089,8 +1089,8 @@ describe('Database', () => {
     const TABLE_NAME = 'table-name';
     const SCHEMA = 'CREATE TABLE `' + TABLE_NAME + '`';
 
-    it('should call updateSchema', done => {
-      database.updateSchema = schema => {
+    it('should call updateSchema', (done) => {
+      database.updateSchema = (schema) => {
         assert.strictEqual(schema, SCHEMA);
         done();
       };
@@ -1098,7 +1098,7 @@ describe('Database', () => {
       database.createTable(SCHEMA, assert.ifError);
     });
 
-    it('should accept and pass gaxOptions to updateSchema', done => {
+    it('should accept and pass gaxOptions to updateSchema', (done) => {
       const gaxOptions = {};
       database.updateSchema = (schema, options) => {
         assert.strictEqual(options, gaxOptions);
@@ -1117,7 +1117,7 @@ describe('Database', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         database.createTable(SCHEMA, (err, table, op, apiResponse) => {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(table, null);
@@ -1139,8 +1139,8 @@ describe('Database', () => {
       });
 
       describe('table name parsing', () => {
-        it('should recognize an escaped name', done => {
-          database.table = name => {
+        it('should recognize an escaped name', (done) => {
+          database.table = (name) => {
             assert.strictEqual(name, TABLE_NAME);
             done();
           };
@@ -1148,8 +1148,8 @@ describe('Database', () => {
           database.createTable(SCHEMA, assert.ifError);
         });
 
-        it('should recognize a non-escaped name', done => {
-          database.table = name => {
+        it('should recognize a non-escaped name', (done) => {
+          database.table = (name) => {
             assert.strictEqual(name, TABLE_NAME);
             done();
           };
@@ -1158,10 +1158,10 @@ describe('Database', () => {
         });
       });
 
-      it('should exec callback with Table, op & API response', done => {
+      it('should exec callback with Table, op & API response', (done) => {
         const tableInstance = {};
 
-        database.table = name => {
+        database.table = (name) => {
           assert.strictEqual(name, TABLE_NAME);
           return tableInstance;
         };
@@ -1179,12 +1179,12 @@ describe('Database', () => {
 
   describe('delete', () => {
     beforeEach(() => {
-      database.close = callback => {
+      database.close = (callback) => {
         callback();
       };
     });
 
-    it('should close the database', done => {
+    it('should close the database', (done) => {
       database.close = () => {
         done();
       };
@@ -1207,10 +1207,10 @@ describe('Database', () => {
       database.delete(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
 
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -1220,7 +1220,7 @@ describe('Database', () => {
   });
 
   describe('exists', () => {
-    it('should return any non-404 like errors', done => {
+    it('should return any non-404 like errors', (done) => {
       const error = {code: 3};
 
       database.getMetadata = (options, callback) => {
@@ -1234,7 +1234,7 @@ describe('Database', () => {
       });
     });
 
-    it('should return true if error is absent', done => {
+    it('should return true if error is absent', (done) => {
       database.getMetadata = (options, callback) => {
         callback(null);
       };
@@ -1246,7 +1246,7 @@ describe('Database', () => {
       });
     });
 
-    it('should return false if not found error if present', done => {
+    it('should return false if not found error if present', (done) => {
       const error = {code: 5};
 
       database.getMetadata = (options, callback) => {
@@ -1260,10 +1260,10 @@ describe('Database', () => {
       });
     });
 
-    it('should accept and pass gaxOptions to getMetadata', done => {
+    it('should accept and pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
 
-      database.getMetadata = options => {
+      database.getMetadata = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
@@ -1272,7 +1272,7 @@ describe('Database', () => {
   });
 
   describe('get', () => {
-    it('should call getMetadata', done => {
+    it('should call getMetadata', (done) => {
       const options = {};
 
       database.getMetadata = () => {
@@ -1282,9 +1282,9 @@ describe('Database', () => {
       database.get(options, assert.ifError);
     });
 
-    it('should accept and pass gaxOptions to getMetadata', done => {
+    it('should accept and pass gaxOptions to getMetadata', (done) => {
       const gaxOptions = {};
-      database.getMetadata = options => {
+      database.getMetadata = (options) => {
         assert.strictEqual(options, gaxOptions);
         done();
       };
@@ -1292,7 +1292,7 @@ describe('Database', () => {
       database.get({gaxOptions});
     });
 
-    it('should not require an options object', done => {
+    it('should not require an options object', (done) => {
       database.getMetadata = () => {
         done();
       };
@@ -1328,8 +1328,8 @@ describe('Database', () => {
         };
       });
 
-      it('should call create', done => {
-        database.create = options => {
+      it('should call create', (done) => {
+        database.create = (options) => {
           assert.strictEqual(options, OPTIONS);
           done();
         };
@@ -1337,10 +1337,10 @@ describe('Database', () => {
         database.get(OPTIONS, assert.ifError);
       });
 
-      it('should pass gaxOptions to create', done => {
+      it('should pass gaxOptions to create', (done) => {
         const gaxOptions = {};
         const options = Object.assign({}, OPTIONS, {gaxOptions});
-        database.create = opts => {
+        database.create = (opts) => {
           assert.strictEqual(opts.gaxOptions, options.gaxOptions);
           done();
         };
@@ -1348,33 +1348,33 @@ describe('Database', () => {
         database.get(options, assert.ifError);
       });
 
-      it('should return error if create failed', done => {
+      it('should return error if create failed', (done) => {
         const error = new Error('Error.');
 
         database.create = (options, callback) => {
           callback(error);
         };
 
-        database.get(OPTIONS, err => {
+        database.get(OPTIONS, (err) => {
           assert.strictEqual(err, error);
           done();
         });
       });
 
-      it('should return operation error', done => {
+      it('should return operation error', (done) => {
         const error = new Error('Error.');
 
         setImmediate(() => {
           OPERATION.listeners['error'](error);
         });
 
-        database.get(OPTIONS, err => {
+        database.get(OPTIONS, (err) => {
           assert.strictEqual(err, error);
           done();
         });
       });
 
-      it('should execute callback if opereation succeeded', done => {
+      it('should execute callback if opereation succeeded', (done) => {
         const metadata = {};
 
         setImmediate(() => {
@@ -1391,7 +1391,7 @@ describe('Database', () => {
       });
     });
 
-    it('should not auto create without error code 5', done => {
+    it('should not auto create without error code 5', (done) => {
       const error = new Error('Error.');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (error as any).code = 'NOT-5';
@@ -1408,13 +1408,13 @@ describe('Database', () => {
         throw new Error('Should not create.');
       };
 
-      database.get(options, err => {
+      database.get(options, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should not auto create unless requested', done => {
+    it('should not auto create unless requested', (done) => {
       const error = new ApiError('Error.');
       error.code = 5;
 
@@ -1426,26 +1426,26 @@ describe('Database', () => {
         throw new Error('Should not create.');
       };
 
-      database.get(err => {
+      database.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return an error from getMetadata', done => {
+    it('should return an error from getMetadata', (done) => {
       const error = new Error('Error.');
 
       database.getMetadata = (options, callback) => {
         callback(error);
       };
 
-      database.get(err => {
+      database.get((err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return self and API response', done => {
+    it('should return self and API response', (done) => {
       const apiResponse = {};
 
       database.getMetadata = (options, callback) => {
@@ -1465,7 +1465,7 @@ describe('Database', () => {
     it('should call and return the request', () => {
       const requestReturnValue = {};
 
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'getDatabase');
         assert.deepStrictEqual(config.reqOpts, {
@@ -1480,9 +1480,9 @@ describe('Database', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -1491,8 +1491,8 @@ describe('Database', () => {
   });
 
   describe('getSchema', () => {
-    it('should make the correct request', done => {
-      database.request = config => {
+    it('should make the correct request', (done) => {
+      database.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'getDatabaseDdl');
         assert.deepStrictEqual(config.reqOpts, {
@@ -1506,9 +1506,9 @@ describe('Database', () => {
       database.getSchema(assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -1529,7 +1529,7 @@ describe('Database', () => {
         };
       });
 
-      it('should return the arguments from the request', done => {
+      it('should return the arguments from the request', (done) => {
         database.getSchema((arg1, arg2, arg3, arg4, arg5) => {
           assert.strictEqual(arg1, ARG_1);
           assert.strictEqual(arg2, STATEMENTS_ARG);
@@ -1557,7 +1557,7 @@ describe('Database', () => {
         };
       });
 
-      it('should return just the statements property', done => {
+      it('should return just the statements property', (done) => {
         database.getSchema((arg1, statements, arg3, arg4, arg5) => {
           assert.strictEqual(arg1, ARG_1);
           assert.strictEqual(statements, STATEMENTS_ARG.statements);
@@ -1568,7 +1568,7 @@ describe('Database', () => {
         });
       });
 
-      it('should update metadata', done => {
+      it('should update metadata', (done) => {
         const metadata = {};
         database.request = (config: {}, callback: Function) => {
           callback(null, metadata);
@@ -1579,12 +1579,12 @@ describe('Database', () => {
         });
       });
 
-      it('should call callback with error', done => {
+      it('should call callback with error', (done) => {
         const error = new Error('Error');
         database.request = (config: {}, callback: Function) => {
           callback(error);
         };
-        database.getMetadata(err => {
+        database.getMetadata((err) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -1609,14 +1609,14 @@ describe('Database', () => {
 
       database.sessionFactory_ = SESSIONFACTORY;
 
-      SESSIONFACTORY.getSessionForReadWrite = callback => {
+      SESSIONFACTORY.getSessionForReadWrite = (callback) => {
         callback(null, SESSION);
       };
 
       SESSIONFACTORY.release = util.noop;
     });
 
-    it('should get a session', done => {
+    it('should get a session', (done) => {
       SESSIONFACTORY.getSessionForReadWrite = () => {
         done();
       };
@@ -1624,25 +1624,25 @@ describe('Database', () => {
       database.makePooledRequest_(CONFIG, assert.ifError);
     });
 
-    it('should return error if it cannot get a session', done => {
+    it('should return error if it cannot get a session', (done) => {
       const error = new Error('Error.');
 
-      SESSIONFACTORY.getSessionForReadWrite = callback => {
+      SESSIONFACTORY.getSessionForReadWrite = (callback) => {
         callback(error);
       };
 
-      database.makePooledRequest_(CONFIG, err => {
+      database.makePooledRequest_(CONFIG, (err) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should call the method with the session', done => {
+    it('should call the method with the session', (done) => {
       CONFIG.reqOpts = {
         a: 'b',
       };
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(
           config.reqOpts,
           extend({}, CONFIG.reqOpts, {
@@ -1655,8 +1655,8 @@ describe('Database', () => {
       database.makePooledRequest_(CONFIG, assert.ifError);
     });
 
-    it('should release the session after calling the method', done => {
-      SESSIONFACTORY.release = session => {
+    it('should release the session after calling the method', (done) => {
+      SESSIONFACTORY.release = (session) => {
         assert.deepStrictEqual(session, SESSION);
         done();
       };
@@ -1668,7 +1668,7 @@ describe('Database', () => {
       database.makePooledRequest_(CONFIG, assert.ifError);
     });
 
-    it('should execute the callback with original arguments', done => {
+    it('should execute the callback with original arguments', (done) => {
       const originalArgs = ['a', 'b', 'c'];
 
       database.request = (config, callback) => {
@@ -1705,14 +1705,14 @@ describe('Database', () => {
         return REQUEST_STREAM;
       };
 
-      SESSIONFACTORY.getSession = callback => {
+      SESSIONFACTORY.getSession = (callback) => {
         callback(null, SESSION);
       };
 
       SESSIONFACTORY.release = util.noop;
     });
 
-    it('should get a session when stream opens', done => {
+    it('should get a session when stream opens', (done) => {
       SESSIONFACTORY.getSession = () => {
         done();
       };
@@ -1724,15 +1724,15 @@ describe('Database', () => {
       const ERROR = new Error('Error.');
 
       beforeEach(() => {
-        SESSIONFACTORY.getSession = callback => {
+        SESSIONFACTORY.getSession = (callback) => {
           callback(ERROR);
         };
       });
 
-      it('should destroy the stream', done => {
+      it('should destroy the stream', (done) => {
         database
           .makePooledStreamingRequest_(CONFIG)
-          .on('error', err => {
+          .on('error', (err) => {
             assert.strictEqual(err, ERROR);
             done();
           })
@@ -1742,13 +1742,13 @@ describe('Database', () => {
 
     describe('session retrieved successfully', () => {
       beforeEach(() => {
-        SESSIONFACTORY.getSession = callback => {
+        SESSIONFACTORY.getSession = (callback) => {
           callback(null, SESSION);
         };
       });
 
-      it('should assign session to request options', done => {
-        database.requestStream = config => {
+      it('should assign session to request options', (done) => {
+        database.requestStream = (config) => {
           assert.strictEqual(config.reqOpts.session, SESSION.formattedName_);
           setImmediate(done);
           return through.obj();
@@ -1757,10 +1757,10 @@ describe('Database', () => {
         database.makePooledStreamingRequest_(CONFIG).emit('reading');
       });
 
-      it('should make request and pipe to the stream', done => {
+      it('should make request and pipe to the stream', (done) => {
         const responseData = Buffer.from('response-data');
 
-        database.makePooledStreamingRequest_(CONFIG).on('data', data => {
+        database.makePooledStreamingRequest_(CONFIG).on('data', (data) => {
           assert.deepStrictEqual(data, responseData);
           done();
         });
@@ -1768,8 +1768,8 @@ describe('Database', () => {
         REQUEST_STREAM.end(responseData);
       });
 
-      it('should release session when request stream ends', done => {
-        SESSIONFACTORY.release = session => {
+      it('should release session when request stream ends', (done) => {
+        SESSIONFACTORY.release = (session) => {
           assert.strictEqual(session, SESSION);
           done();
         };
@@ -1779,8 +1779,8 @@ describe('Database', () => {
         REQUEST_STREAM.end();
       });
 
-      it('should release session when request stream errors', done => {
-        SESSIONFACTORY.release = session => {
+      it('should release session when request stream errors', (done) => {
+        SESSIONFACTORY.release = (session) => {
           assert.strictEqual(session, SESSION);
           done();
         };
@@ -1792,12 +1792,12 @@ describe('Database', () => {
         });
       });
 
-      it('should error user stream when request stream errors', done => {
+      it('should error user stream when request stream errors', (done) => {
         const error = new Error('Error.');
 
         database
           .makePooledStreamingRequest_(CONFIG)
-          .on('error', err => {
+          .on('error', (err) => {
             assert.strictEqual(err, error);
             done();
           })
@@ -1819,13 +1819,13 @@ describe('Database', () => {
           cancel: util.noop,
         };
 
-        SESSIONFACTORY.getSession = callback => {
+        SESSIONFACTORY.getSession = (callback) => {
           callback(null, SESSION);
         };
       });
 
-      it('should release the session', done => {
-        SESSIONFACTORY.release = session => {
+      it('should release the session', (done) => {
+        SESSIONFACTORY.release = (session) => {
           assert.strictEqual(session, SESSION);
           done();
         };
@@ -1839,10 +1839,10 @@ describe('Database', () => {
         });
       });
 
-      it('should not release the session more than once', done => {
+      it('should not release the session more than once', (done) => {
         let numTimesReleased = 0;
 
-        SESSIONFACTORY.release = session => {
+        SESSIONFACTORY.release = (session) => {
           numTimesReleased++;
           assert.strictEqual(session, SESSION);
         };
@@ -1862,7 +1862,7 @@ describe('Database', () => {
         });
       });
 
-      it('should cancel the request stream', done => {
+      it('should cancel the request stream', (done) => {
         REQUEST_STREAM.cancel = done;
         const requestStream = database.makePooledStreamingRequest_(CONFIG);
         requestStream.emit('reading');
@@ -1893,7 +1893,7 @@ describe('Database', () => {
       };
     });
 
-    it('should correctly call runStream', done => {
+    it('should correctly call runStream', (done) => {
       database.runStream = (query, options) => {
         assert.strictEqual(query, QUERY);
         assert.deepStrictEqual(options, {});
@@ -1904,7 +1904,7 @@ describe('Database', () => {
       database.run(QUERY, assert.ifError);
     });
 
-    it('should optionally accept options', done => {
+    it('should optionally accept options', (done) => {
       const OPTIONS = {};
 
       database.runStream = (query, options) => {
@@ -1916,7 +1916,7 @@ describe('Database', () => {
       database.run(QUERY, OPTIONS, assert.ifError);
     });
 
-    it('should return rows from the stream to the callback', done => {
+    it('should return rows from the stream to the callback', (done) => {
       QUERY_STREAM.end();
 
       database.run(QUERY, (err, rows) => {
@@ -1926,12 +1926,12 @@ describe('Database', () => {
       });
     });
 
-    it('should execute callback with error from stream', done => {
+    it('should execute callback with error from stream', (done) => {
       const error = new Error('Error.');
 
       QUERY_STREAM.destroy(error);
 
-      database.run(QUERY, err => {
+      database.run(QUERY, (err) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1974,9 +1974,9 @@ describe('Database', () => {
         sandbox.stub(fakeSessionFactory, 'getSession') as sinon.SinonStub
       )
         .onFirstCall()
-        .callsFake(callback => callback(null, fakeSession))
+        .callsFake((callback) => callback(null, fakeSession))
         .onSecondCall()
-        .callsFake(callback => callback(null, fakeSession2));
+        .callsFake((callback) => callback(null, fakeSession2));
 
       snapshotStub = sandbox
         .stub(fakeSession, 'snapshot')
@@ -2000,12 +2000,12 @@ describe('Database', () => {
       assert.strictEqual(getSessionStub.callCount, 1);
     });
 
-    it('should destroy the stream if `getSession` errors', done => {
+    it('should destroy the stream if `getSession` errors', (done) => {
       const fakeError = new Error('err');
 
-      getSessionStub.onFirstCall().callsFake(callback => callback(fakeError));
+      getSessionStub.onFirstCall().callsFake((callback) => callback(fakeError));
 
-      database.runStream(QUERY).on('error', err => {
+      database.runStream(QUERY).on('error', (err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
@@ -2030,7 +2030,7 @@ describe('Database', () => {
       assert.strictEqual(stream, proxyStream);
     });
 
-    it('should end the snapshot on stream end', done => {
+    it('should end the snapshot on stream end', (done) => {
       const endStub = sandbox.stub(fakeSnapshot, 'end');
 
       database
@@ -2044,11 +2044,11 @@ describe('Database', () => {
       fakeStream.push(null);
     });
 
-    it('should clean up the stream/transaction on error', done => {
+    it('should clean up the stream/transaction on error', (done) => {
       const fakeError = new Error('err');
       const endStub = sandbox.stub(fakeSnapshot, 'end');
 
-      database.runStream(QUERY).on('error', err => {
+      database.runStream(QUERY).on('error', (err) => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(endStub.callCount, 1);
         done();
@@ -2057,7 +2057,7 @@ describe('Database', () => {
       fakeStream.destroy(fakeError);
     });
 
-    it('should not retry on "Session not found" error', done => {
+    it('should not retry on "Session not found" error', (done) => {
       const sessionNotFoundError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -2066,7 +2066,7 @@ describe('Database', () => {
       const endStub2 = sandbox.stub(fakeSnapshot2, 'end');
       const rows = 0;
 
-      database.runStream(QUERY).on('error', err => {
+      database.runStream(QUERY).on('error', (err) => {
         assert.strictEqual(err, sessionNotFoundError);
         assert.strictEqual(endStub.callCount, 1);
         // make sure it is not retrying the stream
@@ -2095,7 +2095,7 @@ describe('Database', () => {
     });
 
     // since mux is default enabled, session pool is not getting created
-    it.skip('should retry "Session not found" error', done => {
+    it.skip('should retry "Session not found" error', (done) => {
       const sessionNotFoundError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -2107,7 +2107,7 @@ describe('Database', () => {
       database
         .runStream(QUERY)
         .on('data', () => rows++)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.fail(err);
         })
         .on('end', () => {
@@ -2164,8 +2164,8 @@ describe('Database', () => {
       assert.strictEqual(returnValue, requestReturnValue);
     });
 
-    it('should arrify a string statement', done => {
-      database.request = config => {
+    it('should arrify a string statement', (done) => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts.statements, [STATEMENTS[0]]);
         done();
       };
@@ -2173,7 +2173,7 @@ describe('Database', () => {
       database.updateSchema(STATEMENTS[0], assert.ifError);
     });
 
-    it('should accept an object', done => {
+    it('should accept an object', (done) => {
       const config = {
         statements: STATEMENTS,
         otherConfiguration: {},
@@ -2183,7 +2183,7 @@ describe('Database', () => {
         database: database.formattedName_,
       });
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         done();
       };
@@ -2191,9 +2191,9 @@ describe('Database', () => {
       database.updateSchema(config, assert.ifError);
     });
 
-    it('should accept gaxOptions', done => {
+    it('should accept gaxOptions', (done) => {
       const gaxOptions = {};
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -2205,8 +2205,8 @@ describe('Database', () => {
     const gaxOptions = {};
     const OPTIONS = {gaxOptions};
 
-    it('should make the correct request', done => {
-      database.request = config => {
+    it('should make the correct request', (done) => {
+      database.request = (config) => {
         assert.strictEqual(config.client, 'SpannerClient');
         assert.strictEqual(config.method, 'createSession');
         assert.deepStrictEqual(config.reqOpts, {
@@ -2234,8 +2234,8 @@ describe('Database', () => {
       database.createSession(OPTIONS, assert.ifError);
     });
 
-    it('should not require options', done => {
-      database.request = config => {
+    it('should not require options', (done) => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           database: database.formattedName_,
           session: {
@@ -2251,12 +2251,12 @@ describe('Database', () => {
       database.createSession(assert.ifError);
     });
 
-    it('should send labels correctly', done => {
+    it('should send labels correctly', (done) => {
       const labels = {a: 'b'};
       const options = {a: 'b', labels};
       const originalOptions = extend(true, {}, options);
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts.session.labels, labels);
         assert.deepStrictEqual(options, originalOptions);
         done();
@@ -2265,12 +2265,12 @@ describe('Database', () => {
       database.createSession({labels}, assert.ifError);
     });
 
-    it('should send databaseRole correctly', done => {
+    it('should send databaseRole correctly', (done) => {
       const databaseRole = {databaseRole: 'child_role'};
       const options = {a: 'b', databaseRole: databaseRole};
       const originalOptions = extend(true, {}, options);
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(
           config.reqOpts.session.creatorRole,
           databaseRole.databaseRole,
@@ -2282,12 +2282,12 @@ describe('Database', () => {
       database.createSession(databaseRole, assert.ifError);
     });
 
-    it('should send default databaseRole correctly', done => {
+    it('should send default databaseRole correctly', (done) => {
       const databaseRole = {databaseRole: 'parent_role'};
       const options = {a: 'b'};
       const originalOptions = extend(true, {}, options);
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(
           config.reqOpts.session.creatorRole,
           databaseRole.databaseRole,
@@ -2299,12 +2299,12 @@ describe('Database', () => {
       database.createSession(databaseRole, assert.ifError);
     });
 
-    it('should send multiplexed correctly', done => {
+    it('should send multiplexed correctly', (done) => {
       const multiplexed = {multiplexed: true};
       const options = {a: 'b', multiplexed};
       const originalOptions = extend(true, {}, options);
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(
           config.reqOpts.session.multiplexed,
           multiplexed.multiplexed,
@@ -2326,7 +2326,7 @@ describe('Database', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         database.createSession((err, session, apiResponse) => {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(session, null);
@@ -2347,10 +2347,10 @@ describe('Database', () => {
         };
       });
 
-      it('should execute callback with session & API response', done => {
+      it('should execute callback with session & API response', (done) => {
         const sessionInstance = {};
 
-        database.session = name => {
+        database.session = (name) => {
           assert.strictEqual(name, API_RESPONSE.name);
           return sessionInstance;
         };
@@ -2388,11 +2388,11 @@ describe('Database', () => {
 
       beginSnapshotStub = (
         sandbox.stub(fakeSnapshot, 'begin') as sinon.SinonStub
-      ).callsFake(callback => callback(null));
+      ).callsFake((callback) => callback(null));
 
       getSessionStub = (
         sandbox.stub(fakeSessionFactory, 'getSession') as sinon.SinonStub
-      ).callsFake(callback => callback(null, fakeSession));
+      ).callsFake((callback) => callback(null, fakeSession));
 
       snapshotStub = (
         sandbox.stub(fakeSession, 'snapshot') as sinon.SinonStub
@@ -2406,12 +2406,12 @@ describe('Database', () => {
       ).returns(true);
     });
 
-    it('should return any multiplexed session errors', done => {
+    it('should return any multiplexed session errors', (done) => {
       const fakeError = new Error('err');
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
 
-      database.getSnapshot(err => {
+      database.getSnapshot((err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
@@ -2429,7 +2429,7 @@ describe('Database', () => {
     it('should throw error if maxStaleness is passed in the timestamp bounds to the snapshot', () => {
       const fakeTimestampBounds = {maxStaleness: 10};
 
-      database.getSnapshot(fakeTimestampBounds, err => {
+      database.getSnapshot(fakeTimestampBounds, (err) => {
         assert.strictEqual(err.code, 3);
         assert.strictEqual(
           err.message,
@@ -2441,7 +2441,7 @@ describe('Database', () => {
     it('should throw error if minReadTimestamp is passed in the timestamp bounds to the snapshot', () => {
       const fakeTimestampBounds = {minReadTimestamp: 10};
 
-      database.getSnapshot(fakeTimestampBounds, err => {
+      database.getSnapshot(fakeTimestampBounds, (err) => {
         assert.strictEqual(err.code, 3);
         assert.strictEqual(
           err.message,
@@ -2459,7 +2459,7 @@ describe('Database', () => {
       assert.strictEqual(bounds, fakeTimestampBounds);
     });
 
-    it('should return the `snapshot`', done => {
+    it('should return the `snapshot`', (done) => {
       database.getSnapshot((err, snapshot) => {
         assert.ifError(err);
         assert.strictEqual(snapshot, fakeSnapshot);
@@ -2467,13 +2467,13 @@ describe('Database', () => {
       });
     });
 
-    it('should throw an error if `begin` errors with `Session not found`', done => {
+    it('should throw an error if `begin` errors with `Session not found`', (done) => {
       const fakeError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
       } as MockError;
 
-      beginSnapshotStub.callsFake(callback => callback(fakeError));
+      beginSnapshotStub.callsFake((callback) => callback(fakeError));
 
       database.getSnapshot((err, snapshot) => {
         assert.strictEqual(err, fakeError);
@@ -2482,16 +2482,16 @@ describe('Database', () => {
       });
     });
 
-    it('should release the session if `begin` errors', done => {
+    it('should release the session if `begin` errors', (done) => {
       const fakeError = new Error('err');
 
-      beginSnapshotStub.callsFake(callback => callback(fakeError));
+      beginSnapshotStub.callsFake((callback) => callback(fakeError));
 
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
       ).withArgs(fakeSession);
 
-      database.getSnapshot(err => {
+      database.getSnapshot((err) => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(releaseStub.callCount, 1);
         done();
@@ -2499,7 +2499,7 @@ describe('Database', () => {
     });
 
     // since mux is default enabled, session pool is not getting created
-    it.skip('should retry if `begin` errors with `Session not found`', done => {
+    it.skip('should retry if `begin` errors with `Session not found`', (done) => {
       const fakeError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -2510,17 +2510,17 @@ describe('Database', () => {
         {} as google.spanner.v1.TransactionOptions.ReadOnly,
       );
       (sandbox.stub(fakeSnapshot2, 'begin') as sinon.SinonStub).callsFake(
-        callback => callback(null),
+        (callback) => callback(null),
       );
       sandbox.stub(fakeSession2, 'snapshot').returns(fakeSnapshot2);
 
       getSessionStub
         .onFirstCall()
-        .callsFake(callback => callback(null, fakeSession))
+        .callsFake((callback) => callback(null, fakeSession))
         .onSecondCall()
-        .callsFake(callback => callback(null, fakeSession2));
+        .callsFake((callback) => callback(null, fakeSession2));
 
-      beginSnapshotStub.callsFake(callback => callback(fakeError));
+      beginSnapshotStub.callsFake((callback) => callback(fakeError));
 
       // The first session that was not found should be released back into the
       // pool, so that the pool can remove it from its inventory.
@@ -2540,12 +2540,12 @@ describe('Database', () => {
       });
     });
 
-    it('should release the snapshot on `end`', done => {
+    it('should release the snapshot on `end`', (done) => {
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
       ).withArgs(fakeSession);
 
-      database.getSnapshot(err => {
+      database.getSnapshot((err) => {
         assert.ifError(err);
         fakeSnapshot.emit('end');
         assert.strictEqual(releaseStub.callCount, 1);
@@ -2573,7 +2573,7 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, fakeSession, fakeTransaction);
       });
     });
@@ -2586,18 +2586,18 @@ describe('Database', () => {
       assert.strictEqual(getSessionStub.callCount, 1);
     });
 
-    it('should return any multiplexed session errors', done => {
+    it('should return any multiplexed session errors', (done) => {
       const fakeError = new Error('err');
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
 
-      database.getTransaction(err => {
+      database.getTransaction((err) => {
         assert.strictEqual(err, fakeError);
         done();
       });
     });
 
-    it('should return the read/write transaction', done => {
+    it('should return the read/write transaction', (done) => {
       database.getTransaction((err, transaction) => {
         assert.ifError(err);
         assert.strictEqual(transaction, fakeTransaction);
@@ -2605,7 +2605,7 @@ describe('Database', () => {
       });
     });
 
-    it('should optionally accept runner `options`', done => {
+    it('should optionally accept runner `options`', (done) => {
       const fakeOptions = {excludeTxnFromChangeStreams: true};
 
       database.getTransaction(fakeOptions, (_err, transaction) => {
@@ -2615,13 +2615,13 @@ describe('Database', () => {
       });
     });
 
-    it('should propagate an error', done => {
+    it('should propagate an error', (done) => {
       const error = new Error('resource');
       (sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub)
         .withArgs(fakeSession)
         .throws(error);
 
-      database.on('error', err => {
+      database.on('error', (err) => {
         assert.deepStrictEqual(err, error);
         done();
       });
@@ -2632,7 +2632,7 @@ describe('Database', () => {
       });
     });
 
-    it('should release the session on transaction end', done => {
+    it('should release the session on transaction end', (done) => {
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
       ).withArgs(fakeSession);
@@ -2647,7 +2647,7 @@ describe('Database', () => {
   });
 
   describe('getSessions', () => {
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const gaxOpts = {};
       const options: {
         a: string;
@@ -2660,7 +2660,7 @@ describe('Database', () => {
 
       delete expectedReqOpts.gaxOptions;
 
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.client, 'SpannerClient');
         assert.strictEqual(config.method, 'listSessions');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -2675,7 +2675,7 @@ describe('Database', () => {
       database.getSessions(options, assert.ifError);
     });
 
-    it('should pass pageSize and pageToken from gaxOptions into reqOpts', done => {
+    it('should pass pageSize and pageToken from gaxOptions into reqOpts', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -2694,7 +2694,7 @@ describe('Database', () => {
       );
       delete expectedReqOpts.gaxOptions;
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -2706,7 +2706,7 @@ describe('Database', () => {
       database.getSessions(options, assert.ifError);
     });
 
-    it('pageSize and pageToken in options should take precedence over gaxOptions', done => {
+    it('pageSize and pageToken in options should take precedence over gaxOptions', (done) => {
       const pageSize = 3;
       const pageToken = 'token';
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
@@ -2734,7 +2734,7 @@ describe('Database', () => {
       );
       delete expectedReqOpts.gaxOptions;
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -2746,8 +2746,8 @@ describe('Database', () => {
       database.getSessions(options, assert.ifError);
     });
 
-    it('should not require options', done => {
-      database.request = config => {
+    it('should not require options', (done) => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           database: database.formattedName_,
         });
@@ -2757,7 +2757,7 @@ describe('Database', () => {
       database.getSessions(assert.ifError);
     });
 
-    it('should return all arguments on error', done => {
+    it('should return all arguments on error', (done) => {
       const ARGS = [new Error('err'), null, {}];
       database.request = (config, callback) => {
         callback(...ARGS);
@@ -2768,7 +2768,7 @@ describe('Database', () => {
       });
     });
 
-    it('should create and return Session objects', done => {
+    it('should create and return Session objects', (done) => {
       const ERR = null;
       const SESSIONS = [{name: 'abc'}];
       const NEXTPAGEREQUEST = null;
@@ -2780,7 +2780,7 @@ describe('Database', () => {
         callback(...RESPONSE);
       };
 
-      database.session = name => {
+      database.session = (name) => {
         assert.strictEqual(name, SESSIONS[0].name);
         return SESSION_INSTANCE;
       };
@@ -2793,7 +2793,7 @@ describe('Database', () => {
       });
     });
 
-    it('should return a complete nexQuery object', done => {
+    it('should return a complete nexQuery object', (done) => {
       const pageSize = 1;
       const filter = 'filter';
       const NEXTPAGEREQUEST = {
@@ -2833,7 +2833,7 @@ describe('Database', () => {
       });
       delete expectedReqOpts.gaxOptions;
 
-      database.requestStream = config => {
+      database.requestStream = (config) => {
         assert.strictEqual(config.client, 'SpannerClient');
         assert.strictEqual(config.method, 'listSessionsStream');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -2863,7 +2863,7 @@ describe('Database', () => {
         {pageSize: gaxOptions.pageSize, pageToken: gaxOptions.pageToken},
       );
 
-      database.requestStream = config => {
+      database.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -2897,7 +2897,7 @@ describe('Database', () => {
         {pageSize: optionsPageSize, pageToken: optionsPageToken},
       );
 
-      database.requestStream = config => {
+      database.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         assert.notStrictEqual(config.gaxOpts, gaxOptions);
         assert.notDeepStrictEqual(config.gaxOpts, gaxOptions);
@@ -2911,7 +2911,7 @@ describe('Database', () => {
     });
 
     it('should not require options', () => {
-      database.requestStream = config => {
+      database.requestStream = (config) => {
         assert.deepStrictEqual(config.reqOpts, {
           database: database.formattedName_,
         });
@@ -2966,7 +2966,7 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForPartitionedOps',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, fakeSession);
       });
 
@@ -2974,7 +2974,7 @@ describe('Database', () => {
 
       beginStub = (
         sandbox.stub(fakePartitionedDml, 'begin') as sinon.SinonStub
-      ).callsFake(callback => callback(null));
+      ).callsFake((callback) => callback(null));
 
       runUpdateStub = (
         sandbox.stub(fakePartitionedDml, 'runUpdate') as sinon.SinonStub
@@ -2991,7 +2991,7 @@ describe('Database', () => {
 
     it('should get a session from the session factory', () => {
       const fakeCallback = sandbox.spy();
-      getSessionStub.callsFake(callback => callback(fakeSession));
+      getSessionStub.callsFake((callback) => callback(fakeSession));
       database.runPartitionedUpdate(QUERY, fakeCallback);
       const [resp] = fakeCallback.lastCall.args;
       assert.strictEqual(resp, fakeSession);
@@ -3001,7 +3001,7 @@ describe('Database', () => {
       const fakeError = new Error('err');
       const fakeCallback = sandbox.spy();
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
       database.runPartitionedUpdate(QUERY, fakeCallback);
 
       const [err, rowCount] = fakeCallback.lastCall.args;
@@ -3012,7 +3012,7 @@ describe('Database', () => {
 
     it('should get a partitioned dml transaction from the session factory', () => {
       const fakeCallback = sandbox.spy();
-      getSessionStub.callsFake(callback => callback(fakePartitionedDml));
+      getSessionStub.callsFake((callback) => callback(fakePartitionedDml));
       database.runPartitionedUpdate(QUERY, fakeCallback);
       const [resp] = fakeCallback.lastCall.args;
       assert.strictEqual(resp, fakePartitionedDml);
@@ -3025,10 +3025,10 @@ describe('Database', () => {
       assert.strictEqual(beginStub.callCount, 1);
     });
 
-    it('should return any begin errors', done => {
+    it('should return any begin errors', (done) => {
       const fakeError = new Error('err');
 
-      beginStub.callsFake(callback => callback(fakeError));
+      beginStub.callsFake((callback) => callback(fakeError));
 
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
@@ -3154,19 +3154,19 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, SESSION, TRANSACTION);
       });
     });
 
-    it('should return any errors getting a session', done => {
+    it('should return any errors getting a session', (done) => {
       const fakeErr = new Error('err');
 
       (fakeSessionFactory.getSessionForReadWrite as sinon.SinonStub).callsFake(
-        callback => callback(fakeErr),
+        (callback) => callback(fakeErr),
       );
 
-      database.runTransaction(err => {
+      database.runTransaction((err) => {
         assert.strictEqual(err, fakeErr);
         done();
       });
@@ -3217,7 +3217,7 @@ describe('Database', () => {
       assert.strictEqual(options, fakeOptions);
     });
 
-    it('should release the session when finished', done => {
+    it('should release the session when finished', (done) => {
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
       ).withArgs(SESSION);
@@ -3232,7 +3232,7 @@ describe('Database', () => {
       });
     });
 
-    it('should catch any run errors and return them', done => {
+    it('should catch any run errors and return them', (done) => {
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
       ).withArgs(SESSION);
@@ -3240,7 +3240,7 @@ describe('Database', () => {
 
       sandbox.stub(FakeTransactionRunner.prototype, 'run').rejects(fakeError);
 
-      database.runTransaction(err => {
+      database.runTransaction((err) => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(releaseStub.callCount, 1);
         done();
@@ -3263,7 +3263,7 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, SESSION, TRANSACTION);
       });
     });
@@ -3355,14 +3355,14 @@ describe('Database', () => {
 
     it('should accept and pass gaxOptions to getMetadata', async () => {
       const options = {};
-      database.getMetadata = async gaxOptions => {
+      database.getMetadata = async (gaxOptions) => {
         assert.strictEqual(gaxOptions, options);
         return [{}];
       };
       await database.getState(options);
     });
 
-    it('should accept callback and return state', done => {
+    it('should accept callback and return state', (done) => {
       const state = 'READY';
       database.getMetadata = async () => [{state}];
       database.getState((err, result) => {
@@ -3384,14 +3384,14 @@ describe('Database', () => {
 
     it('should accept and pass gaxOptions to getMetadata', async () => {
       const options = {};
-      database.getMetadata = async gaxOptions => {
+      database.getMetadata = async (gaxOptions) => {
         assert.strictEqual(gaxOptions, options);
         return [{}];
       };
       await database.getDatabaseDialect(options);
     });
 
-    it('should accept callback and return database dialect', done => {
+    it('should accept callback and return database dialect', (done) => {
       const databaseDialect = 'GOOGLE_STANDARD_SQL';
       database.getMetadata = async () => [{databaseDialect}];
       database.getDatabaseDialect((err, result) => {
@@ -3412,14 +3412,14 @@ describe('Database', () => {
 
     it('should accept and pass gaxOptions to getMetadata', async () => {
       const options = {};
-      database.getMetadata = async gaxOptions => {
+      database.getMetadata = async (gaxOptions) => {
         assert.strictEqual(gaxOptions, options);
         return [{}];
       };
       await database.getRestoreInfo(options);
     });
 
-    it('should accept callback and return info', done => {
+    it('should accept callback and return info', (done) => {
       const restoreInfo = {sourceType: 'BACKUP'};
       database.getMetadata = async () => [{restoreInfo}];
       database.getRestoreInfo((err, result) => {
@@ -3434,7 +3434,7 @@ describe('Database', () => {
     it('should create filter for querying the database', async () => {
       const operations: IOperation[] = [{name: 'my-operation'}];
 
-      database.instance.getDatabaseOperations = async options => {
+      database.instance.getDatabaseOperations = async (options) => {
         assert.strictEqual(options.filter, `name:${DATABASE_FORMATTED_NAME}`);
         return [operations, {}];
       };
@@ -3446,7 +3446,7 @@ describe('Database', () => {
     it('should create filter for querying the database in combination with user supplied filter', async () => {
       const operations: IOperation[] = [{name: 'my-operation'}];
 
-      database.instance.getDatabaseOperations = async options => {
+      database.instance.getDatabaseOperations = async (options) => {
         assert.strictEqual(
           options.filter,
           `(name:${DATABASE_FORMATTED_NAME}) AND (someOtherAttribute: aValue)`,
@@ -3466,7 +3466,7 @@ describe('Database', () => {
         timeout: 1000,
       };
 
-      database.instance.getDatabaseOperations = async options => {
+      database.instance.getDatabaseOperations = async (options) => {
         assert.strictEqual(options.gaxOptions, gaxOpts);
         return [operations, {}];
       };
@@ -3478,7 +3478,7 @@ describe('Database', () => {
       assert.deepStrictEqual(results, operations);
     });
 
-    it('should accept callback', done => {
+    it('should accept callback', (done) => {
       const operations: IOperation[] = [{name: 'my-operation'}];
 
       database.instance.getDatabaseOperations = async () => [operations, {}];
@@ -3496,7 +3496,7 @@ describe('Database', () => {
     const BACKUP_FORMATTED_NAME =
       INSTANCE.formattedName_ + '/backups/' + BACKUP_NAME;
 
-    it('should make the correct request', done => {
+    it('should make the correct request', (done) => {
       const QUERY = {};
       const ORIGINAL_QUERY = extend({}, QUERY);
       const expectedReqOpts = extend({}, QUERY, {
@@ -3506,7 +3506,7 @@ describe('Database', () => {
       });
 
       database.id = NAME;
-      database.request = config => {
+      database.request = (config) => {
         assert.strictEqual(config.client, 'DatabaseAdminClient');
         assert.strictEqual(config.method, 'restoreDatabase');
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
@@ -3521,7 +3521,7 @@ describe('Database', () => {
       database.restore(BACKUP_FORMATTED_NAME, assert.ifError);
     });
 
-    it('should accept a backup name', done => {
+    it('should accept a backup name', (done) => {
       const QUERY = {};
       const expectedReqOpts = extend({}, QUERY, {
         databaseId: NAME,
@@ -3530,7 +3530,7 @@ describe('Database', () => {
       });
 
       database.id = NAME;
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.reqOpts, expectedReqOpts);
         done();
       };
@@ -3538,14 +3538,14 @@ describe('Database', () => {
       database.restore(BACKUP_NAME, assert.ifError);
     });
 
-    it('should accept restore options', done => {
+    it('should accept restore options', (done) => {
       const encryptionConfig = {
         encryptionType: EncryptionType.CUSTOMER_MANAGED_ENCRYPTION,
         kmsKeyName: 'some/key/path',
       };
       const options = {encryptionConfig};
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(
           config.reqOpts.encryptionConfig,
           encryptionConfig,
@@ -3556,10 +3556,10 @@ describe('Database', () => {
       database.restore(BACKUP_NAME, options, assert.ifError);
     });
 
-    it('should accept gaxOpts as CallOptions', done => {
+    it('should accept gaxOpts as CallOptions', (done) => {
       const gaxOptions = {timeout: 1000};
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -3567,7 +3567,7 @@ describe('Database', () => {
       database.restore(BACKUP_NAME, gaxOptions, assert.ifError);
     });
 
-    it('should accept restore and gax options', done => {
+    it('should accept restore and gax options', (done) => {
       const encryptionConfig = {
         encryptionType: EncryptionType.CUSTOMER_MANAGED_ENCRYPTION,
         kmsKeyName: 'some/key/path',
@@ -3575,7 +3575,7 @@ describe('Database', () => {
       const gaxOptions = {timeout: 1000};
       const options = {gaxOptions, encryptionConfig};
 
-      database.request = config => {
+      database.request = (config) => {
         assert.deepStrictEqual(
           config.reqOpts.encryptionConfig,
           encryptionConfig,
@@ -3597,7 +3597,7 @@ describe('Database', () => {
         };
       });
 
-      it('should execute callback with error & API response', done => {
+      it('should execute callback with error & API response', (done) => {
         database.restore(BACKUP_FORMATTED_NAME, (err, db, op, resp) => {
           assert.strictEqual(err, ERROR);
           assert.strictEqual(db, null);
@@ -3618,7 +3618,7 @@ describe('Database', () => {
         };
       });
 
-      it('should execute callback with a Database and Operation', done => {
+      it('should execute callback with a Database and Operation', (done) => {
         database.restore(BACKUP_FORMATTED_NAME, (err, db, op, resp) => {
           assert.ifError(err);
           assert.strictEqual(db, database);

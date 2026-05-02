@@ -279,12 +279,12 @@ describe('v1.DatabaseAdminClient', () => {
       assert(client.databaseAdminStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.databaseAdminStub);
@@ -293,12 +293,12 @@ describe('v1.DatabaseAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new databaseadminModule.v1.DatabaseAdminClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -309,7 +309,7 @@ describe('v1.DatabaseAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -474,7 +474,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getDatabase(request), expectedError);
@@ -606,7 +606,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.dropDatabase(request), expectedError);
@@ -738,7 +738,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getDatabaseDdl(request), expectedError);
@@ -870,7 +870,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1002,7 +1002,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1135,7 +1135,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1264,7 +1264,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -1400,7 +1400,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.backup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateBackup(request), expectedError);
@@ -1532,7 +1532,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteBackup(request), expectedError);
@@ -1664,7 +1664,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.database = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.addSplitPoints(request), expectedError);
@@ -1797,7 +1797,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createBackupSchedule(request), expectedError);
@@ -1929,7 +1929,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getBackupSchedule(request), expectedError);
@@ -2066,7 +2066,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.backupSchedule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateBackupSchedule(request), expectedError);
@@ -2199,7 +2199,7 @@ describe('v1.DatabaseAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteBackupSchedule(request), expectedError);
@@ -2288,7 +2288,7 @@ describe('v1.DatabaseAdminClient', () => {
         new protos.google.spanner.admin.database.v1.InternalUpdateGraphOperationRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -5448,7 +5448,7 @@ describe('v1.DatabaseAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -5532,7 +5532,7 @@ describe('v1.DatabaseAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });
@@ -5616,7 +5616,7 @@ describe('v1.DatabaseAdminClient', () => {
               }
             },
           )
-          .catch(err => {
+          .catch((err) => {
             throw err;
           });
       });

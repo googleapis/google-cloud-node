@@ -204,7 +204,7 @@ export class URLSigner {
       );
     }
 
-    return promise.then(query => {
+    return promise.then((query) => {
       query = Object.assign(query, cfg.queryParams);
 
       const signedUrl = new url.URL(
@@ -308,7 +308,7 @@ export class URLSigner {
     }
 
     const signedHeaders = Object.keys(extensionHeaders)
-      .map(header => header.toLowerCase())
+      .map((header) => header.toLowerCase())
       .sort()
       .join(';');
 

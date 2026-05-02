@@ -57,7 +57,7 @@ export function disableContextAndManager(manager: ContextManager) {
 
 export function generateWithAllSpansHaveDBName(dbName: String): Function {
   return function (spans: (typeof ReadableSpan)[]) {
-    spans.forEach(span => {
+    spans.forEach((span) => {
       assert.deepStrictEqual(
         span.attributes[SEMATTRS_DB_NAME],
         dbName,
@@ -76,9 +76,9 @@ export async function verifySpansAndEvents(
   const spans = traceExporter.getFinishedSpans();
   const actualEventNames: string[] = [];
   const actualSpanNames: string[] = [];
-  spans.forEach(span => {
+  spans.forEach((span) => {
     actualSpanNames.push(span.name);
-    span.events.forEach(event => {
+    span.events.forEach((event) => {
       actualEventNames.push(event.name);
     });
   });

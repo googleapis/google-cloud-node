@@ -194,7 +194,7 @@ class FakeAbortError {
   }
 }
 
-const fakeRetry = fn => {
+const fakeRetry = (fn) => {
   return fn();
 };
 
@@ -289,7 +289,7 @@ describe('Database', () => {
     traceExporter.reset();
   });
 
-  it('getSessions without error', done => {
+  it('getSessions without error', (done) => {
     const ARGS = [null, [], {}];
     database.request = (config, callback) => {
       callback(...ARGS);
@@ -306,9 +306,9 @@ describe('Database', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -340,7 +340,7 @@ describe('Database', () => {
     });
   });
 
-  it('getSessions with error', done => {
+  it('getSessions with error', (done) => {
     const ARGS = [new Error('our error'), null, {}];
     database.request = (config, callback) => {
       callback(...ARGS);
@@ -356,9 +356,9 @@ describe('Database', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -396,7 +396,7 @@ describe('Database', () => {
   });
 
   describe('batchCreateSessions', () => {
-    it('without error', done => {
+    it('without error', (done) => {
       const ARGS = [null, [{}]];
       database.request = (config, callback) => {
         callback(...ARGS);
@@ -411,9 +411,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -450,7 +450,7 @@ describe('Database', () => {
       });
     });
 
-    it('with error', done => {
+    it('with error', (done) => {
       const ARGS = [new Error('batchCreateSessions.error'), null];
       database.request = (config, callback) => {
         callback(...ARGS);
@@ -464,9 +464,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -521,23 +521,23 @@ describe('Database', () => {
 
       beginSnapshotStub = (
         sandbox.stub(fakeSnapshot, 'begin') as sinon.SinonStub
-      ).callsFake(callback => callback(null));
+      ).callsFake((callback) => callback(null));
 
       getSessionStub = (
         sandbox.stub(fakeSessionFactory, 'getSession') as sinon.SinonStub
-      ).callsFake(callback => callback(null, fakeSession));
+      ).callsFake((callback) => callback(null, fakeSession));
 
       sandbox.stub(fakeSession, 'snapshot').returns(fakeSnapshot);
 
       sandbox.stub(fakeSessionFactory, 'isMultiplexedEnabled').returns(false);
     });
 
-    it('with error', done => {
+    it('with error', (done) => {
       const fakeError = new Error('our snapshot error');
 
-      getSessionStub.callsFake(callback => callback(fakeError, null));
+      getSessionStub.callsFake((callback) => callback(fakeError, null));
 
-      database.getSnapshot(err => {
+      database.getSnapshot((err) => {
         assert.strictEqual(err, fakeError);
         traceExporter.forceFlush();
         const spans = traceExporter.getFinishedSpans();
@@ -546,9 +546,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -585,7 +585,7 @@ describe('Database', () => {
       });
     });
 
-    it('with retries on `begin` errors with `Session not found`', done => {
+    it('with retries on `begin` errors with `Session not found`', (done) => {
       const fakeError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -596,16 +596,16 @@ describe('Database', () => {
         {} as google.spanner.v1.TransactionOptions.ReadOnly,
       );
       (sandbox.stub(fakeSnapshot2, 'begin') as sinon.SinonStub).callsFake(
-        callback => callback(null),
+        (callback) => callback(null),
       );
       sandbox.stub(fakeSession2, 'snapshot').returns(fakeSnapshot2);
 
       getSessionStub
         .onFirstCall()
-        .callsFake(callback => callback(null, fakeSession))
+        .callsFake((callback) => callback(null, fakeSession))
         .onSecondCall()
-        .callsFake(callback => callback(null, fakeSession2));
-      beginSnapshotStub.callsFake(callback => callback(fakeError));
+        .callsFake((callback) => callback(null, fakeSession2));
+      beginSnapshotStub.callsFake((callback) => callback(fakeError));
 
       // The first session that was not found should be released back into the
       // pool, so that the pool can remove it from its inventory.
@@ -629,9 +629,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -712,7 +712,7 @@ describe('Database', () => {
       };
     });
 
-    it('with session error', done => {
+    it('with session error', (done) => {
       const error = new Error('with session error');
 
       database.sessionFactory_ = {
@@ -732,9 +732,9 @@ describe('Database', () => {
 
         const actualEventNames: string[] = [];
         const actualSpanNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -773,7 +773,7 @@ describe('Database', () => {
       });
     });
 
-    it('with no error', done => {
+    it('with no error', (done) => {
       const opts = {a: 'b'};
 
       const fakeTransaction = {
@@ -804,9 +804,9 @@ describe('Database', () => {
 
         const actualEventNames: string[] = [];
         const actualSpanNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -844,7 +844,7 @@ describe('Database', () => {
       });
     });
 
-    it('with begin transaction error', done => {
+    it('with begin transaction error', (done) => {
       const error = new Error('our createBatchTransaction error');
 
       const fakeTransaction = {
@@ -870,9 +870,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -931,19 +931,19 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, fakeSession, fakeTransaction);
       });
     });
 
-    it('with pool errors', done => {
+    it('with pool errors', (done) => {
       const fakeError = new Error('pool error');
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
 
       database.getTransaction(
         {requestOptions: {transactionTag: 'transaction-tag'}},
-        async err => {
+        async (err) => {
           assert.strictEqual(err, fakeError);
 
           await provider.forceFlush();
@@ -954,9 +954,9 @@ describe('Database', () => {
 
           const actualEventNames: string[] = [];
           const actualSpanNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -996,7 +996,7 @@ describe('Database', () => {
       );
     });
 
-    it('with no errors', done => {
+    it('with no errors', (done) => {
       database.getTransaction((err, transaction) => {
         assert.ifError(err);
         assert.strictEqual(transaction, fakeTransaction);
@@ -1008,9 +1008,9 @@ describe('Database', () => {
         assert.strictEqual(spans.length, 1, 'Exactly 1 span expected');
         const actualEventNames: string[] = [];
         const actualSpanNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -1066,21 +1066,21 @@ describe('Database', () => {
     beforeEach(() => {
       sessionFactory = database.sessionFactory_;
       (sandbox.stub(sessionFactory, 'getSession') as sinon.SinonStub).callsFake(
-        callback => {
+        (callback) => {
           callback(null, SESSION, TRANSACTION);
         },
       );
       sandbox.stub(sessionFactory, 'isMultiplexedEnabled').returns(false);
     });
 
-    it('should return any errors getting a session', done => {
+    it('should return any errors getting a session', (done) => {
       const fakeErr = new Error('getting session error');
 
-      (sessionFactory.getSession as sinon.SinonStub).callsFake(callback =>
+      (sessionFactory.getSession as sinon.SinonStub).callsFake((callback) =>
         callback(fakeErr, null, null),
       );
 
-      database.writeAtLeastOnce(mutations, err => {
+      database.writeAtLeastOnce(mutations, (err) => {
         assert.deepStrictEqual(err, fakeErr);
 
         const spans = traceExporter.getFinishedSpans();
@@ -1089,9 +1089,9 @@ describe('Database', () => {
 
         const actualEventNames: string[] = [];
         const actualSpanNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -1128,7 +1128,7 @@ describe('Database', () => {
       });
     });
 
-    it('with empty mutation should return successful CommitResponse', done => {
+    it('with empty mutation should return successful CommitResponse', (done) => {
       const fakeMutations = new MutationSet();
       try {
         database.writeAtLeastOnce(fakeMutations, (err, response) => {
@@ -1144,9 +1144,9 @@ describe('Database', () => {
 
           const actualEventNames: string[] = [];
           const actualSpanNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -1185,7 +1185,7 @@ describe('Database', () => {
       }
     });
 
-    it('with error on null mutation should catch thrown error', done => {
+    it('with error on null mutation should catch thrown error', (done) => {
       try {
         database.writeAtLeastOnce(null, () => {});
       } catch (err) {
@@ -1202,9 +1202,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -1281,12 +1281,12 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => callback(null, fakeSession));
+      ).callsFake((callback) => callback(null, fakeSession));
 
       sandbox.stub(database, 'requestStream').returns(fakeDataStream);
     });
 
-    it('on retry with "Session not found" error', done => {
+    it('on retry with "Session not found" error', (done) => {
       const sessionNotFoundError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -1296,7 +1296,7 @@ describe('Database', () => {
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
         .on('data', () => {})
-        .on('error', err => {
+        .on('error', (err) => {
           assert.fail(err);
         })
         .on('end', () => {
@@ -1307,9 +1307,9 @@ describe('Database', () => {
 
           const actualSpanNames: string[] = [];
           const actualEventNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -1364,13 +1364,13 @@ describe('Database', () => {
       retryCount++;
     });
 
-    it('on getSession errors', done => {
+    it('on getSession errors', (done) => {
       const fakeError = new Error('err');
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.strictEqual(err, fakeError);
 
           const spans = traceExporter.getFinishedSpans();
@@ -1378,9 +1378,9 @@ describe('Database', () => {
 
           const actualSpanNames: string[] = [];
           const actualEventNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -1411,8 +1411,8 @@ describe('Database', () => {
         });
     });
 
-    it('with no errors', done => {
-      getSessionStub.callsFake(callback => callback(null, {}));
+    it('with no errors', (done) => {
+      getSessionStub.callsFake((callback) => callback(null, {}));
       database
         .batchWriteAtLeastOnce(mutationGroups, options)
         .on('data', () => {})
@@ -1423,9 +1423,9 @@ describe('Database', () => {
 
           const actualSpanNames: string[] = [];
           const actualEventNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -1480,21 +1480,21 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, SESSION, TRANSACTION);
       });
     });
 
-    it('with error getting session', done => {
+    it('with error getting session', (done) => {
       const fakeErr = new Error('getting a session');
 
       (fakeSessionFactory.getSessionForReadWrite as sinon.SinonStub).callsFake(
-        callback => callback(fakeErr),
+        (callback) => callback(fakeErr),
       );
 
       database.runTransaction(
         {requestOptions: {transactionTag: 'transaction-tag'}},
-        err => {
+        (err) => {
           assert.strictEqual(err, fakeErr);
 
           const spans = traceExporter.getFinishedSpans();
@@ -1503,9 +1503,9 @@ describe('Database', () => {
 
           const actualSpanNames: string[] = [];
           const actualEventNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -1547,12 +1547,12 @@ describe('Database', () => {
       );
     });
 
-    it('with other errors when running the transaction', done => {
+    it('with other errors when running the transaction', (done) => {
       const fakeError = new Error('internal rejects err');
 
       sandbox.stub(FakeTransactionRunner.prototype, 'run').rejects(fakeError);
 
-      database.runTransaction(err => {
+      database.runTransaction((err) => {
         assert.strictEqual(err, fakeError);
 
         const spans = traceExporter.getFinishedSpans();
@@ -1561,9 +1561,9 @@ describe('Database', () => {
 
         const actualSpanNames: string[] = [];
         const actualEventNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -1616,7 +1616,7 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForReadWrite',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, SESSION, TRANSACTION);
       });
     });
@@ -1630,7 +1630,7 @@ describe('Database', () => {
 
       const value = await database.runTransactionAsync(
         {requestOptions: {transactionTag: 'transaction-tag'}},
-        async txn => {
+        async (txn) => {
           const result = await txn.run('SELECT 1');
           await txn.commit();
           return result;
@@ -1646,9 +1646,9 @@ describe('Database', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -1692,7 +1692,7 @@ describe('Database', () => {
         .throws(ourException);
 
       await assert.rejects(async () => {
-        await database.runTransactionAsync(async txn => {
+        await database.runTransactionAsync(async (txn) => {
           const result = await txn.run('SELECT 1');
           await txn.commit();
           return result;
@@ -1706,9 +1706,9 @@ describe('Database', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -1776,9 +1776,9 @@ describe('Database', () => {
         sandbox.stub(fakeSessionFactory, 'getSession') as sinon.SinonStub
       )
         .onFirstCall()
-        .callsFake(callback => callback(null, fakeSession))
+        .callsFake((callback) => callback(null, fakeSession))
         .onSecondCall()
-        .callsFake(callback => callback(null, fakeSession2));
+        .callsFake((callback) => callback(null, fakeSession2));
 
       sandbox.stub(fakeSession, 'snapshot').returns(fakeSnapshot);
 
@@ -1791,12 +1791,12 @@ describe('Database', () => {
       sandbox.stub(fakeSessionFactory, 'isMultiplexedEnabled').returns(false);
     });
 
-    it('with error on `getSession`', done => {
+    it('with error on `getSession`', (done) => {
       const fakeError = new Error('getSession error');
 
-      getSessionStub.onFirstCall().callsFake(callback => callback(fakeError));
+      getSessionStub.onFirstCall().callsFake((callback) => callback(fakeError));
 
-      database.runStream(QUERY).on('error', err => {
+      database.runStream(QUERY).on('error', (err) => {
         assert.strictEqual(err, fakeError);
 
         const spans = traceExporter.getFinishedSpans();
@@ -1805,9 +1805,9 @@ describe('Database', () => {
 
         const actualEventNames: string[] = [];
         const actualSpanNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -1845,11 +1845,11 @@ describe('Database', () => {
       });
     });
 
-    it('propagation on stream/transaction errors', done => {
+    it('propagation on stream/transaction errors', (done) => {
       const fakeError = new Error('propagation err');
       const endStub = sandbox.stub(fakeSnapshot, 'end');
 
-      database.runStream(QUERY).on('error', err => {
+      database.runStream(QUERY).on('error', (err) => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(endStub.callCount, 1);
 
@@ -1859,9 +1859,9 @@ describe('Database', () => {
 
         const actualEventNames: string[] = [];
         const actualSpanNames: string[] = [];
-        spans.forEach(span => {
+        spans.forEach((span) => {
           actualSpanNames.push(span.name);
-          span.events.forEach(event => {
+          span.events.forEach((event) => {
             actualEventNames.push(event.name);
           });
         });
@@ -1899,7 +1899,7 @@ describe('Database', () => {
       fakeStream.destroy(fakeError);
     });
 
-    it('retries with "Session not found" error', done => {
+    it('retries with "Session not found" error', (done) => {
       const sessionNotFoundError = {
         code: grpc.status.NOT_FOUND,
         message: 'Session not found',
@@ -1911,7 +1911,7 @@ describe('Database', () => {
       database
         .runStream(QUERY)
         .on('data', () => rows++)
-        .on('error', err => {
+        .on('error', (err) => {
           assert.fail(err);
         })
         .on('end', async () => {
@@ -1928,9 +1928,9 @@ describe('Database', () => {
 
           const actualSpanNames: string[] = [];
           const actualEventNames: string[] = [];
-          spans.forEach(span => {
+          spans.forEach((span) => {
             actualSpanNames.push(span.name);
-            span.events.forEach(event => {
+            span.events.forEach((event) => {
               actualEventNames.push(event.name);
             });
           });
@@ -2022,7 +2022,7 @@ describe('Database', () => {
           fakeSessionFactory,
           'getSessionForPartitionedOps',
         ) as sinon.SinonStub
-      ).callsFake(callback => {
+      ).callsFake((callback) => {
         callback(null, fakeSession);
       });
 
@@ -2030,7 +2030,7 @@ describe('Database', () => {
 
       beginStub = (
         sandbox.stub(fakePartitionedDml, 'begin') as sinon.SinonStub
-      ).callsFake(callback => callback(null));
+      ).callsFake((callback) => callback(null));
 
       (
         sandbox.stub(fakePartitionedDml, 'runUpdate') as sinon.SinonStub
@@ -2051,9 +2051,9 @@ describe('Database', () => {
 
       const actualSpanNames: string[] = [];
       const actualEventNames: string[] = [];
-      spans.forEach(span => {
+      spans.forEach((span) => {
         actualSpanNames.push(span.name);
-        span.events.forEach(event => {
+        span.events.forEach((event) => {
           actualEventNames.push(event.name);
         });
       });
@@ -2065,10 +2065,10 @@ describe('Database', () => {
       });
     }
 
-    it('with pool errors', done => {
+    it('with pool errors', (done) => {
       const fakeError = new Error('err');
 
-      getSessionStub.callsFake(callback => callback(fakeError));
+      getSessionStub.callsFake((callback) => callback(fakeError));
       database.runPartitionedUpdate(QUERY, async (err, rowCount) => {
         assert.strictEqual(err, fakeError);
         assert.strictEqual(rowCount, 0);
@@ -2112,10 +2112,10 @@ describe('Database', () => {
       });
     });
 
-    it('with begin errors', done => {
+    it('with begin errors', (done) => {
       const fakeError = new Error('err');
 
-      beginStub.callsFake(callback => callback(fakeError));
+      beginStub.callsFake((callback) => callback(fakeError));
 
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
@@ -2163,7 +2163,7 @@ describe('Database', () => {
       });
     });
 
-    it('session released on transaction end', done => {
+    it('session released on transaction end', (done) => {
       const releaseStub = (
         sandbox.stub(fakeSessionFactory, 'release') as sinon.SinonStub
       ).withArgs(fakeSession);

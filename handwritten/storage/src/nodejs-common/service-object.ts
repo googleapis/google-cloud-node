@@ -200,7 +200,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       // the configured methods. We make a couple of exceptions for core-
       // functionality ("request()" and "getRequestInterceptors()")
       Object.getOwnPropertyNames(ServiceObject.prototype)
-        .filter(methodName => {
+        .filter((methodName) => {
           return (
             // All ServiceObjects need `request` and `getRequestInterceptors`.
             // clang-format off
@@ -216,7 +216,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
             !config.methods![methodName]
           );
         })
-        .forEach(methodName => {
+        .forEach((methodName) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this as any)[methodName] = undefined;
         });
@@ -340,7 +340,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       ExistsCallback
     >(optionsOrCallback, cb);
 
-    this.get(options, err => {
+    this.get(options, (err) => {
       if (err) {
         if (err.code === 404) {
           callback!(null, false);
@@ -469,8 +469,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   getRequestInterceptors(): Function[] {
     // Interceptors should be returned in the order they were assigned.
     const localInterceptors = this.interceptors
-      .filter(interceptor => typeof interceptor.request === 'function')
-      .map(interceptor => interceptor.request);
+      .filter((interceptor) => typeof interceptor.request === 'function')
+      .map((interceptor) => interceptor.request);
     return this.parent.getRequestInterceptors().concat(localInterceptors);
   }
 
@@ -565,8 +565,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     }
 
     reqOpts.uri = uriComponents
-      .filter(x => x!.trim()) // Limit to non-empty strings.
-      .map(uriComponent => {
+      .filter((x) => x!.trim()) // Limit to non-empty strings.
+      .map((uriComponent) => {
         const trimSlashesRegex = /^\/*|\/*$/g;
         return uriComponent!.replace(trimSlashesRegex, '');
       })

@@ -29,7 +29,7 @@ import {
 
 describe('RequestId', () => {
   describe('AtomicCounter', () => {
-    it('Constructor with initialValue', done => {
+    it('Constructor with initialValue', (done) => {
       const ac0 = newAtomicCounter();
       assert.deepStrictEqual(ac0.value(), 0);
       assert.deepStrictEqual(
@@ -58,7 +58,7 @@ describe('RequestId', () => {
       done();
     });
 
-    it('reset', done => {
+    it('reset', (done) => {
       const ac0 = newAtomicCounter(1);
       ac0.increment();
       assert.strictEqual(ac0.value(), 2);
@@ -67,7 +67,7 @@ describe('RequestId', () => {
       done();
     });
 
-    it('toString', done => {
+    it('toString', (done) => {
       const ac0 = newAtomicCounter(1);
       ac0.increment();
       assert.strictEqual(ac0.value(), 2);
@@ -78,7 +78,7 @@ describe('RequestId', () => {
   });
 
   describe('craftRequestId', () => {
-    it('has a 32-bit hex-formatted process-id', done => {
+    it('has a 32-bit hex-formatted process-id', (done) => {
       assert.match(
         randIdForProcess,
         /^[0-9A-Fa-f]{8}$/,
@@ -87,7 +87,7 @@ describe('RequestId', () => {
       done();
     });
 
-    it('with attempts', done => {
+    it('with attempts', (done) => {
       assert.strictEqual(
         craftRequestId(1, 2, 3, 4),
         `1.${randIdForProcess}.1.2.3.4`,
@@ -97,7 +97,7 @@ describe('RequestId', () => {
   });
 
   describe('injectRequestIDIntoError', () => {
-    it('with non-null error', done => {
+    it('with non-null error', (done) => {
       const err: Error = new Error('this one');
       const config = {headers: {}};
       config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER] = '1.2.3.4.5.6';
@@ -108,13 +108,13 @@ describe('RequestId', () => {
   });
 
   describe('injectRequestIDIntoHeaders', () => {
-    it('with null session', done => {
+    it('with null session', (done) => {
       const hdrs = {};
       injectRequestIDIntoHeaders(hdrs, null, 2, 1);
       done();
     });
 
-    it('with nthRequest explicitly passed in', done => {
+    it('with nthRequest explicitly passed in', (done) => {
       const session = {
         parent: {
           _nextNthRequest: () => {
@@ -130,7 +130,7 @@ describe('RequestId', () => {
       done();
     });
 
-    it('infer nthRequest from session', done => {
+    it('infer nthRequest from session', (done) => {
       const session = {
         parent: {
           _nextNthRequest: () => {

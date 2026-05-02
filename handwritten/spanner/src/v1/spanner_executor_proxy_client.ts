@@ -285,7 +285,7 @@ export class SpannerExecutorProxyClient {
     const spannerExecutorProxyStubMethods = ['executeActionAsync'];
     for (const methodName of spannerExecutorProxyStubMethods) {
       const callPromise = this.spannerExecutorProxyStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
@@ -432,7 +432,7 @@ export class SpannerExecutorProxyClient {
    * region_tag:spanner-cloud-executor_v1_generated_SpannerExecutorProxy_ExecuteActionAsync_async
    */
   executeActionAsync(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('executeActionAsync stream %j', options);
@@ -899,7 +899,7 @@ export class SpannerExecutorProxyClient {
    */
   close(): Promise<void> {
     if (this.spannerExecutorProxyStub && !this._terminated) {
-      return this.spannerExecutorProxyStub.then(stub => {
+      return this.spannerExecutorProxyStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

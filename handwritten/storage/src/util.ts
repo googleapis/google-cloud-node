@@ -44,7 +44,7 @@ export function normalize<T = {}, U = Function>(
  * @internal
  */
 export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
-  return Object.keys(obj).map(key => [key, obj[key]] as [string, T]);
+  return Object.keys(obj).map((key) => [key, obj[key]] as [string, T]);
 }
 
 /**
@@ -59,7 +59,7 @@ export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
 export function fixedEncodeURIComponent(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g,
-    c => '%' + c.charCodeAt(0).toString(16).toUpperCase(),
+    (c) => '%' + c.charCodeAt(0).toString(16).toUpperCase(),
   );
 }
 
@@ -274,7 +274,6 @@ export class PassThroughShim extends PassThrough {
   }
 }
 
-
 /**
  * Validates Object Contexts for forbidden characters.
  * Double quotes (") are forbidden in context keys and values as they
@@ -289,12 +288,12 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
   for (const [key, context] of Object.entries(custom)) {
     if (key.includes('"')) {
       throw new Error(
-        `Invalid context key "${key}": Forbidden character (") detected.`
+        `Invalid context key "${key}": Forbidden character (") detected.`,
       );
     }
     if (context?.value && context.value.includes('"')) {
       throw new Error(
-        `Invalid context value for key "${key}": Forbidden character (") detected.`
+        `Invalid context value for key "${key}": Forbidden character (") detected.`,
       );
     }
   }
@@ -307,7 +306,7 @@ export function validateContexts(contexts?: FileMetadata['contexts']): void {
  */
 export function handleContextValidation(
   contexts?: FileMetadata['contexts'],
-  callback?: Function
+  callback?: Function,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> | void {
   try {

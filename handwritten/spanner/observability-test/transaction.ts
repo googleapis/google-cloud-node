@@ -136,9 +136,9 @@ describe('Transaction', () => {
 
     const spanNames: string[] = [];
     const eventNames: string[] = [];
-    spans.forEach(span => {
+    spans.forEach((span) => {
       spanNames.push(span.name);
-      span.events.forEach(event => {
+      span.events.forEach((event) => {
         eventNames.push(event.name);
       });
     });
@@ -156,7 +156,7 @@ describe('Transaction', () => {
         id: Buffer.from('transaction-id-123'),
       };
 
-      it('without error', done => {
+      it('without error', (done) => {
         REQUEST.callsFake((_, callback) => callback(null, BEGIN_RESPONSE));
 
         snapshot.begin((err, resp) => {
@@ -188,12 +188,12 @@ describe('Transaction', () => {
         });
       });
 
-      it('with error', done => {
+      it('with error', (done) => {
         const fakeError = new Error('begin.error');
 
         REQUEST.callsFake((_, callback) => callback(fakeError));
 
-        snapshot.begin(err => {
+        snapshot.begin((err) => {
           assert.strictEqual(err, fakeError);
 
           const exportResults = extractExportedSpans();
@@ -243,10 +243,10 @@ describe('Transaction', () => {
         sandbox.stub(snapshot, 'createReadStream').returns(fakeStream);
       });
 
-      it('with error', done => {
+      it('with error', (done) => {
         const fakeError = new Error('read.error');
 
-        snapshot.read(TABLE, {}, err => {
+        snapshot.read(TABLE, {}, (err) => {
           assert.strictEqual(err, fakeError);
 
           const exportResults = extractExportedSpans();
@@ -287,7 +287,7 @@ describe('Transaction', () => {
         fakeStream.emit('error', fakeError);
       });
 
-      it('without error', done => {
+      it('without error', (done) => {
         const fakeRows = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
 
         snapshot.read(TABLE, {}, (err, rows) => {
@@ -329,7 +329,7 @@ describe('Transaction', () => {
           done();
         });
 
-        fakeRows.forEach(row => fakeStream.emit('data', row));
+        fakeRows.forEach((row) => fakeStream.emit('data', row));
         fakeStream.emit('end');
       });
     });
@@ -344,7 +344,7 @@ describe('Transaction', () => {
         sandbox.stub(snapshot, 'runStream').returns(fakeStream);
       });
 
-      it('without error', done => {
+      it('without error', (done) => {
         const fakeRows = [{a: 'b'}, {c: 'd'}, {e: 'f'}];
 
         snapshot.run(QUERY, (err, rows) => {
@@ -385,14 +385,14 @@ describe('Transaction', () => {
           done();
         });
 
-        fakeRows.forEach(row => fakeStream.emit('data', row));
+        fakeRows.forEach((row) => fakeStream.emit('data', row));
         fakeStream.emit('end');
       });
 
-      it('with errors', done => {
+      it('with errors', (done) => {
         const fakeError = new Error('run.error');
 
-        snapshot.run(QUERY, err => {
+        snapshot.run(QUERY, (err) => {
           assert.strictEqual(err, fakeError);
 
           const exportResults = extractExportedSpans();
@@ -440,10 +440,10 @@ describe('Transaction', () => {
       };
 
       beforeEach(() => {
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) => makeRequest());
       });
 
-      it('with error', done => {
+      it('with error', (done) => {
         REQUEST_STREAM.resetHistory();
 
         const fakeQuery: ExecuteSqlRequest = Object.assign({}, QUERY, {
@@ -453,7 +453,7 @@ describe('Transaction', () => {
 
         snapshot.requestOptions = {transactionTag: 'transaction-tag'};
         const stream = snapshot.runStream(fakeQuery);
-        stream.on('error', error => {
+        stream.on('error', (error) => {
           assert.strictEqual(
             error.message,
             'Value of type undefined not recognized.',
@@ -505,10 +505,10 @@ describe('Transaction', () => {
       const TABLE = 'my-table-123';
 
       beforeEach(() => {
-        PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest) => makeRequest());
       });
 
-      it('without error', done => {
+      it('without error', (done) => {
         const fakeStream = new EventEmitter();
         REQUEST_STREAM.returns(fakeStream);
         const request: ReadRequest = {
@@ -546,13 +546,13 @@ describe('Transaction', () => {
       transaction.id = ID;
     });
 
-    it('no error with unset `id`', done => {
+    it('no error with unset `id`', (done) => {
       const expectedError = new Error(
         'Transaction ID is unknown, nothing to rollback.',
       );
       delete transaction.id;
 
-      transaction.rollback(err => {
+      transaction.rollback((err) => {
         assert.deepStrictEqual(err, null);
 
         const exportResults = extractExportedSpans();
@@ -593,13 +593,13 @@ describe('Transaction', () => {
       });
     });
 
-    it('with request error', done => {
+    it('with request error', (done) => {
       const fakeError = new Error('our request error');
       transaction.request = (config, callback) => {
         callback(fakeError);
       };
 
-      transaction.rollback(err => {
+      transaction.rollback((err) => {
         assert.deepStrictEqual(err, fakeError);
 
         const exportResults = extractExportedSpans();
@@ -638,12 +638,12 @@ describe('Transaction', () => {
       });
     });
 
-    it('with no error', done => {
+    it('with no error', (done) => {
       transaction.request = (config, callback) => {
         callback(null);
       };
 
-      transaction.rollback(err => {
+      transaction.rollback((err) => {
         assert.ifError(err);
 
         const exportResults = extractExportedSpans();
@@ -684,7 +684,7 @@ describe('Transaction', () => {
   });
 
   describe('commit', () => {
-    it('without error', done => {
+    it('without error', (done) => {
       const id = 'transaction-id-123';
       const transactionTag = 'bar';
       transaction.id = id;
@@ -694,7 +694,7 @@ describe('Transaction', () => {
         callback(null, {});
       };
 
-      transaction.commit(err => {
+      transaction.commit((err) => {
         assert.ifError(err);
 
         const exportResults = extractExportedSpans();
@@ -739,7 +739,7 @@ describe('Transaction', () => {
         callback(fakeError, {});
       };
 
-      transaction.commit(err => {
+      transaction.commit((err) => {
         assert.strictEqual(err, fakeError);
 
         const exportResults = extractExportedSpans();
