@@ -2747,7 +2747,7 @@ declare namespace FirebaseFirestore {
      */
     static increment(n: number): FieldValue;
     /**
-     * Returns a special value that can be used with set(), create() or update()
+     * Returns a special value that can be used with `set()`, `create()` or `update()`
      * that tells the server to set the field to the numeric minimum of the
      * field's current and the given value.
      *
@@ -2759,11 +2759,11 @@ declare namespace FirebaseFirestore {
      * operand is `NaN` then the result is always `NaN`.
      *
      * @param {number} n The value to compare to the exiting field value.
-     * @return {FieldValue} The FieldValue for use in a call to set(), create() or
-     * update().
+     * @return {FieldValue} The `FieldValue` for use in a call to `set()`, `create()` or
+     * `update()`.
      *
      * @example
-     * ```
+     * ```typescript
      * let documentRef = firestore.doc('col/doc');
      *
      * documentRef.update(
@@ -2778,7 +2778,7 @@ declare namespace FirebaseFirestore {
     static minimum(n: number): FieldValue;
 
     /**
-     * Returns a special value that can be used with set(), create() or update()
+     * Returns a special value that can be used with `set()`, `create()` or `update()`
      * that tells the server to set the field to the numeric maximum of the
      * field's current and the given value.
      *
@@ -2790,11 +2790,11 @@ declare namespace FirebaseFirestore {
      * operand is `NaN` then the result is always `NaN`.
      *
      * @param {number} n The value to compare to the exiting field value.
-     * @return {FieldValue} The FieldValue for use in a call to set(), create() or
-     * update().
+     * @return {FieldValue} The `FieldValue` for use in a call to `set()`, `create()` or
+     * `update()`.
      *
      * @example
-     * ```
+     * ```typescript
      * let documentRef = firestore.doc('col/doc');
      *
      * documentRef.update(
