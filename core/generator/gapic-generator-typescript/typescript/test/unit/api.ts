@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Basic comment.
+
 import {API} from '../../src/schema/api.js';
 import type * as protos from '../../../protos/index.js';
 import assert from 'assert';
