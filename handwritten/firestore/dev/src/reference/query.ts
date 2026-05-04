@@ -1608,7 +1608,7 @@ export class Query<
     structuredQuery.startAt = this.toCursor(this._queryOptions.startAt);
     structuredQuery.endAt = this.toCursor(this._queryOptions.endAt);
 
-    if (this._queryOptions.limit) {
+    if (this._queryOptions.limit !== undefined) {
       structuredQuery.limit = {value: this._queryOptions.limit};
     }
 
