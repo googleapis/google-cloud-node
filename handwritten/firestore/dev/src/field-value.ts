@@ -199,8 +199,8 @@ export class FieldValue implements firestore.FieldValue {
    * operand is `NaN` then the result is always `NaN`.
    *
    * @param {number} n The value to compare to the exiting field value.
-   * @return {FieldValue} The FieldValue for use in a call to set(), create() or
-   * update().
+   * @return {FieldValue} The FieldValue for use in a call to `set()`, `create()` or
+   * `update()`.
    *
    * @example
    * ```typescript
