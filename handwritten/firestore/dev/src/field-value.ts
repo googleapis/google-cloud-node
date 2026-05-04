@@ -238,7 +238,7 @@ export class FieldValue implements firestore.FieldValue {
    * `update()`.
    *
    * @example
-   * ```
+   * ```typescript
    * let documentRef = firestore.doc('col/doc');
    *
    * documentRef.update(
