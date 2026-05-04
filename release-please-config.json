@@ -3,7 +3,6 @@
   "initial-version": "0.1.0",
   "separate-pull-requests": false,
   "commit-batch-size": 10,
-  "commit-search-depth": 50000,
   "packages": {
     "packages/gapic-node-processing": {},
     "packages/google-ads-admanager": {},

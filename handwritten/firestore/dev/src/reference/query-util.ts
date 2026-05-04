@@ -344,7 +344,7 @@ export class QueryUtil<
                   // call to `requestStream()` will backoff should the restart
                   // fail before delivering any results.
                   let newQuery: Query<AppModelType, DbModelType>;
-                  if (!this._queryOptions.limit) {
+                  if (this._queryOptions.limit === undefined) {
                     newQuery = query;
                   } else {
                     const newLimit =

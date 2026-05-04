@@ -14,7 +14,7 @@
     "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/vmmigration": "^4.3.1"
+    "@google-cloud/vmmigration": "^4.3.2"
   },
   "devDependencies": {
     "c8": "^10.0.0",

@@ -1110,13 +1110,13 @@ export class {{ service.name }}Client {
 {%- endif %}
 {%- endfor %}
 {%- if service.IAMPolicyMixin > 0 %}
-{{ iam.iamServiceMethods()}}
+{{ iam.iamServiceMethods(service)}}
 {% endif -%}
 {%- if service.LocationMixin > 0 %}
-{{ location.locationServiceMethods()}}
+{{ location.locationServiceMethods(service)}}
 {% endif -%}
 {%- if service.LongRunningOperationsMixin > 0 %}
-{{ operations.operationsServiceMethods()}}
+{{ operations.operationsServiceMethods(service)}}
 {% endif -%}
 {%- if service.pathTemplates.length > 0 %}
   // --------------------
