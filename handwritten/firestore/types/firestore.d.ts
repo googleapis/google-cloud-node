@@ -2747,6 +2747,68 @@ declare namespace FirebaseFirestore {
      */
     static increment(n: number): FieldValue;
     /**
+     * Returns a special value that can be used with `set()`, `create()` or `update()`
+     * that tells the server to set the field to the numeric minimum of the
+     * field's current and the given value.
+     *
+     * If the current field value is not of type 'number', or if the field does
+     * not yet exist, the transformation will set the field to the given value.
+     *
+     * If the existing value and the operand are equivalent, then the field does
+     * not change. For example, `0`, `0.0`, and `-0.0` are all equivalent. If the
+     * operand is `NaN` then the result is always `NaN`.
+     *
+     * @param {number} n The value to compare to the exiting field value.
+     * @return {FieldValue} The `FieldValue` for use in a call to `set()`, `create()` or
+     * `update()`.
+     *
+     * @example
+     * ```typescript
+     * let documentRef = firestore.doc('col/doc');
+     *
+     * documentRef.update(
+     *   'counter', Firestore.FieldValue.minimum(1)
+     * ).then(() => {
+     *   return documentRef.get();
+     * }).then(doc => {
+     *   // doc.get('counter') is the minimum of either the existing value or 1
+     * });
+     * ```
+     */
+    static minimum(n: number): FieldValue;
+
+    /**
+     * Returns a special value that can be used with `set()`, `create()` or `update()`
+     * that tells the server to set the field to the numeric maximum of the
+     * field's current and the given value.
+     *
+     * If the current field value is not of type 'number', or if the field does
+     * not yet exist, the transformation will set the field to the given value.
+     *
+     * If the existing value and the operand are equivalent, then the field does
+     * not change. For example, `0`, `0.0`, and `-0.0` are all equivalent. If the
+     * operand is `NaN` then the result is always `NaN`.
+     *
+     * @param {number} n The value to compare to the exiting field value.
+     * @return {FieldValue} The `FieldValue` for use in a call to `set()`, `create()` or
+     * `update()`.
+     *
+     * @example
+     * ```typescript
+     * let documentRef = firestore.doc('col/doc');
+     *
+     * documentRef.update(
+     *   'counter', Firestore.FieldValue.maximum(1)
+     * ).then(() => {
+     *   return documentRef.get();
+     * }).then(doc => {
+     *   // doc.get('counter') is the maximum of either the existing value or 1
+     * });
+     * ```
+     */
+    static maximum(n: number): FieldValue;
+
+    /**
      * Returns a special value that can be used with set(), create() or update()
      * that tells the server to union the given elements with any array value
      * that already exists on the server. Each specified element that doesn't
