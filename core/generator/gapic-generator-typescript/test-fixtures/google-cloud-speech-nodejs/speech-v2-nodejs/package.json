@@ -31,7 +31,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha build/system-test",
+    "system-test": "echo 'no system test'",
     "test": "c8 mocha build/test"
   },
   "dependencies": {
@@ -48,7 +48,6 @@
     "jsdoc-fresh": "^5.0.2",
     "jsdoc-region-tag": "^4.0.1",
     "mocha": "^11.7.4",
-    "pack-n-play": "^4.2.1",
     "typescript": "5.8.3",
     "sinon": "^21.0.0"
   },
