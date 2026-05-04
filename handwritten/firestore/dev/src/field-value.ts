@@ -187,7 +187,7 @@ export class FieldValue implements firestore.FieldValue {
   }
 
   /**
-   * Returns a special value that can be used with set(), create() or update()
+   * Returns a special value that can be used with `set()`, `create()` or `update()`
    * that tells the server to set the field to the numeric minimum of the
    * field's current and the given value.
    *
