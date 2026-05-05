@@ -339,7 +339,8 @@ describe('Spanner', () => {
 
     it('should optionally accept disableBuiltInMetrics', () => {
       const spanner = new Spanner({disableBuiltInMetrics: true});
-      assert.strictEqual(asAny(spanner)._metricsEnabled, false);
+      assert.strictEqual(MetricsTracerFactory.enabled, false);
+      MetricsTracerFactory.enabled = true; // Reset for other tests.
     });
 
     it('should optionally accept directedReadOptions', () => {

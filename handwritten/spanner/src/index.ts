@@ -325,7 +325,6 @@ class Spanner extends GrpcService {
   sessionLabels: {[key: string]: string} | null;
   private _universeDomain: string;
   private _isInSecureCredentials: boolean;
-  private _metricsEnabled = false;
   private static _isAFEServerTimingEnabled: boolean | undefined;
   readonly _nthClientId: number;
 
@@ -1627,12 +1626,11 @@ class Spanner extends GrpcService {
   configureMetrics_(disableBuiltInMetrics?: boolean) {
     // Only enable metrics if not explicitly disabled and we are not using
     // insecure credentials.
-    const metricsExplicitlyDisabled =
-      process.env.SPANNER_DISABLE_BUILTIN_METRICS === 'true' ||
-      !!disableBuiltInMetrics;
-    this._metricsEnabled =
-      !metricsExplicitlyDisabled && !this._isInSecureCredentials;
-    if (this._metricsEnabled) {
+    const metricsEnabled =
+      process.env.SPANNER_DISABLE_BUILTIN_METRICS !== 'true' &&
+      !disableBuiltInMetrics &&
+      !this._isInSecureCredentials;
+    if (metricsEnabled) {
       try {
         this.auth.getProjectId((err, projectId) => {
           if (err || !projectId) {
@@ -1644,7 +1642,7 @@ class Spanner extends GrpcService {
             return;
           }
 
-          MetricsTracerFactory.enabled = this._metricsEnabled;
+          MetricsTracerFactory.enabled = metricsEnabled;
           this.projectId_ = projectId;
           const factory = MetricsTracerFactory.getInstance(projectId);
           const periodicReader = new PeriodicExportingMetricReader({
@@ -1730,7 +1728,7 @@ class Spanner extends GrpcService {
       // Attach the x-goog-spanner-request-id to the currently active span.
       attributeXGoogSpannerRequestIdToActiveSpan(config);
       const interceptors: any[] = [];
-      if (this._metricsEnabled) {
+      if (MetricsTracerFactory.enabled) {
         interceptors.push(MetricInterceptor);
       }
       const requestFn = gaxClient[config.method].bind(
@@ -1813,11 +1811,7 @@ class Spanner extends GrpcService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request(config: any, callback?: any): any {
     let metricsTracer: MetricsTracer | null = null;
-    if (
-      this._metricsEnabled &&
-      config.client === 'SpannerClient' &&
-      this.projectId_
-    ) {
+    if (config.client === 'SpannerClient' && this.projectId_) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
           config.method,
@@ -1881,11 +1875,7 @@ class Spanner extends GrpcService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   requestStream(config): any {
     let metricsTracer: MetricsTracer | null = null;
-    if (
-      this._metricsEnabled &&
-      config.client === 'SpannerClient' &&
-      this.projectId_
-    ) {
+    if (config.client === 'SpannerClient' && this.projectId_) {
       metricsTracer =
         MetricsTracerFactory?.getInstance(this.projectId_)?.createMetricsTracer(
           config.method,
