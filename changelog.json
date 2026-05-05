@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "778adb0d5f368448f99bf68dcbcf37c3a7394f5d",
+          "message": "Upgrade the protobufjs dependency for bigquery storage",
+          "issues": [
+            "8136"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "7471b59c-1ee2-477e-bb6f-4f7fe950bc11",
+      "createTime": "2026-05-05T21:43:20.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
           "issues": [
@@ -77670,5 +77687,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T21:43:20.738Z"
 }

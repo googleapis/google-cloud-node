@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.0...bigquery-storage-v5.1.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* Upgrade the protobufjs dependency for bigquery storage ([#8136](https://github.com/googleapis/google-cloud-node/issues/8136)) ([778adb0](https://github.com/googleapis/google-cloud-node/commit/778adb0d5f368448f99bf68dcbcf37c3a7394f5d))
+
 ## [5.1.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v5.0.0...v5.1.0) (2025-06-06)
 
 
