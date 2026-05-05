@@ -1630,6 +1630,7 @@ class Spanner extends GrpcService {
       process.env.SPANNER_DISABLE_BUILTIN_METRICS !== 'true' &&
       !disableBuiltInMetrics &&
       !this._isInSecureCredentials;
+    MetricsTracerFactory.enabled = metricsEnabled;
     if (metricsEnabled) {
       try {
         this.auth.getProjectId((err, projectId) => {
