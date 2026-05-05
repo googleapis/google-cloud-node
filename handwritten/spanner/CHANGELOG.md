@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.7.0...spanner-v8.7.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* **spanner:** Disable metrics tracer when built-in metrics are disabled ([#8170](https://github.com/googleapis/google-cloud-node/issues/8170)) ([0dd9a53](https://github.com/googleapis/google-cloud-node/commit/0dd9a53aa825d08c106928f88d72ff931f839b1c))
+* **spanner:** GetTransaction type with options, cb ([#8045](https://github.com/googleapis/google-cloud-node/issues/8045)) ([8e31dd7](https://github.com/googleapis/google-cloud-node/commit/8e31dd7b8afb0a2fb6e1d6809fee7d9cd21370c8))
+* **spanner:** Record fractional latency metrics ([#8168](https://github.com/googleapis/google-cloud-node/issues/8168)) ([9e91cc8](https://github.com/googleapis/google-cloud-node/commit/9e91cc8b68973b546f1fb94b1c39951c395f5a2b))
+
 ## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.6.0...spanner-v8.7.0) (2026-04-14)
 
 
