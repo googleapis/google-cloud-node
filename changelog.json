@@ -5,6 +5,50 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "1a44778856255471fa96e7df26e232ffb543d87c",
+          "message": "Resolve flakiness in Service retry system tests",
+          "issues": [
+            "7945"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d60757e2c61077ee3dfd881be45ef7ca554bd038",
+          "message": "Implement Object Contexts with advanced filtering and validation",
+          "issues": [
+            "7548"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "1a693aa3ade3ffb2ac25ff54677602d199b5e3da",
+          "message": "Set CRC32C as the default checksum option",
+          "issues": [
+            "7547"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "113d05c3bf068487bd81a7d4dbb4510f89142618",
+          "message": "Implement robust path validation and structured skip reporting",
+          "issues": [
+            "7546"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "7.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "7808d37a-bf7e-449f-b6dd-61c11ba91fcf",
+      "createTime": "2026-05-05T21:43:20.799Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
           "issues": [
@@ -77670,5 +77714,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T21:43:20.799Z"
 }
