@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [10.1.1](https://github.com/googleapis/google-cloud-node/compare/datastore-v10.1.0...datastore-v10.1.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* Upgrade protobufjs and fix legacy key decoding in Datastore ([#8088](https://github.com/googleapis/google-cloud-node/issues/8088)) ([939d18d](https://github.com/googleapis/google-cloud-node/commit/939d18dfd14295405a06d2023651d006d4992310))
+
 ## [10.1.0](https://github.com/googleapis/nodejs-datastore/compare/v10.0.1...v10.1.0) (2025-11-20)
 
 

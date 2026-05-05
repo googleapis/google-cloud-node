@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "939d18dfd14295405a06d2023651d006d4992310",
+          "message": "Upgrade protobufjs and fix legacy key decoding in Datastore",
+          "issues": [
+            "8088"
+          ]
+        }
+      ],
+      "version": "10.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore",
+      "id": "1994e17a-66a2-4c2c-bc0a-f7f31dc6a50d",
+      "createTime": "2026-05-05T21:43:20.707Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
           "issues": [
@@ -77670,5 +77687,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T21:43:20.707Z"
 }
