@@ -1632,6 +1632,7 @@ class Spanner extends GrpcService {
       !!disableBuiltInMetrics;
     this._metricsEnabled =
       !metricsExplicitlyDisabled && !this._isInSecureCredentials;
+    MetricsTracerFactory.enabled = this._metricsEnabled;
     if (this._metricsEnabled) {
       try {
         this.auth.getProjectId((err, projectId) => {
@@ -1644,7 +1645,6 @@ class Spanner extends GrpcService {
             return;
           }
 
-          MetricsTracerFactory.enabled = this._metricsEnabled;
           this.projectId_ = projectId;
           const factory = MetricsTracerFactory.getInstance(projectId);
           const periodicReader = new PeriodicExportingMetricReader({
