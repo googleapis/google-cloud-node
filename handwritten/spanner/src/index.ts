@@ -408,14 +408,11 @@ class Spanner extends GrpcService {
   }
 
   constructor(options?: SpannerOptions) {
-    const hasCustomerGcpApiConfig =
-      options && options['grpc.gcpApiConfig'] !== undefined;
     const requestedNumChannels =
       options?.numChannels && options.numChannels > 0
         ? Math.floor(options.numChannels)
         : 0;
-    const numChannels =
-      requestedNumChannels || (hasCustomerGcpApiConfig ? 0 : 4);
+    const numChannels = requestedNumChannels;
     const scopes: Array<{}> = [];
     const clientClasses = [
       v1.DatabaseAdminClient,

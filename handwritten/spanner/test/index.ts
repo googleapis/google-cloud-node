@@ -229,7 +229,12 @@ describe('Spanner', () => {
       scopes: [],
       grpc,
       'grpc.keepalive_time_ms': 120000,
-      'grpc.use_local_subchannel_pool': 1,
+      'grpc.callInvocationTransformer':
+        fakeGrpcGcp().gcpCallInvocationTransformer,
+      'grpc.channelFactoryOverride': fakeGrpcGcp().gcpChannelFactoryOverride,
+      'grpc.gcpApiConfig': {
+        calledWith_: apiConfig,
+      },
     });
 
     it('should localize a cached gapic client map', () => {
@@ -250,6 +255,26 @@ describe('Spanner', () => {
       assert.deepStrictEqual(
         getFake(spanner.auth).calledWith_[0],
         EXPECTED_OPTIONS,
+      );
+    });
+
+    it('should use numChannels instead of grpc-gcp when explicitly provided', () => {
+      const options = extend({}, OPTIONS, {
+        numChannels: 4,
+      });
+      const spanner = new Spanner(options);
+      const expectedOptions = extend({}, OPTIONS, {
+        libName: 'gccl',
+        libVersion: require('../../package.json').version,
+        scopes: [],
+        grpc,
+        'grpc.keepalive_time_ms': 120000,
+        'grpc.use_local_subchannel_pool': 1,
+      });
+
+      assert.deepStrictEqual(
+        getFake(spanner.auth).calledWith_[0],
+        expectedOptions,
       );
     });
 
@@ -2112,7 +2137,6 @@ describe('Spanner', () => {
         [CLOUD_RESOURCE_HEADER]: 'header',
       },
     };
-    const CLIENT_KEY = `${CONFIG.client}:0`;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const FAKE_GAPIC_CLIENT: any = {
@@ -2176,7 +2200,7 @@ describe('Spanner', () => {
           assert.strictEqual(options, spanner.options);
 
           setImmediate(() => {
-            const cachedClient = spanner.clients_.get(CLIENT_KEY);
+            const cachedClient = spanner.clients_.get(CONFIG.client);
             assert.strictEqual(cachedClient, FAKE_GAPIC_CLIENT);
             done();
           });
@@ -2191,7 +2215,7 @@ describe('Spanner', () => {
       fakeV1[CONFIG.client] = () => {
         throw new Error('Should not have re-created client!');
       };
-      spanner.clients_.set(CLIENT_KEY, FAKE_GAPIC_CLIENT);
+      spanner.clients_.set(CONFIG.client, FAKE_GAPIC_CLIENT);
       spanner.prepareGapicRequest_(CONFIG, assert.ifError);
     });
 
