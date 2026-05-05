@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -256,6 +256,10 @@ message Batch {
 
     // Optional. SparkSql batch config.
     SparkSqlBatch spark_sql_batch = 7 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. PySpark notebook batch config.
+    PySparkNotebookBatch pyspark_notebook_batch = 19
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Output only. Runtime information about batch execution.
@@ -405,4 +409,28 @@ message SparkSqlBatch {
 
   // Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
   repeated string jar_file_uris = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// A configuration for running a PySpark Notebook batch workload.
+message PySparkNotebookBatch {
+  // Required. The HCFS URI of the notebook file to execute.
+  string notebook_file_uri = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The parameters to pass to the notebook.
+  map<string, string> params = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. HCFS URIs of Python files to pass to the PySpark framework.
+  repeated string python_file_uris = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
+  repeated string jar_file_uris = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. HCFS URIs of files to be placed in the working directory of
+  // each executor
+  repeated string file_uris = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. HCFS URIs of archives to be extracted into the working directory
+  // of each executor. Supported file types:
+  // `.jar`, `.tar`, `.tar.gz`, `.tgz`, and `.zip`.
+  repeated string archive_uris = 6 [(google.api.field_behavior) = OPTIONAL];
 }

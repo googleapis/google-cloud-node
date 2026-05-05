@@ -4348,6 +4348,7 @@
                          * @property {google.cloud.dataproc.v1.ISparkBatch|null} [sparkBatch] Batch sparkBatch
                          * @property {google.cloud.dataproc.v1.ISparkRBatch|null} [sparkRBatch] Batch sparkRBatch
                          * @property {google.cloud.dataproc.v1.ISparkSqlBatch|null} [sparkSqlBatch] Batch sparkSqlBatch
+                         * @property {google.cloud.dataproc.v1.IPySparkNotebookBatch|null} [pysparkNotebookBatch] Batch pysparkNotebookBatch
                          * @property {google.cloud.dataproc.v1.IRuntimeInfo|null} [runtimeInfo] Batch runtimeInfo
                          * @property {google.cloud.dataproc.v1.Batch.State|null} [state] Batch state
                          * @property {string|null} [stateMessage] Batch stateMessage
@@ -4434,6 +4435,14 @@
                         Batch.prototype.sparkSqlBatch = null;
     
                         /**
+                         * Batch pysparkNotebookBatch.
+                         * @member {google.cloud.dataproc.v1.IPySparkNotebookBatch|null|undefined} pysparkNotebookBatch
+                         * @memberof google.cloud.dataproc.v1.Batch
+                         * @instance
+                         */
+                        Batch.prototype.pysparkNotebookBatch = null;
+    
+                        /**
                          * Batch runtimeInfo.
                          * @member {google.cloud.dataproc.v1.IRuntimeInfo|null|undefined} runtimeInfo
                          * @memberof google.cloud.dataproc.v1.Batch
@@ -4518,12 +4527,12 @@
     
                         /**
                          * Batch batchConfig.
-                         * @member {"pysparkBatch"|"sparkBatch"|"sparkRBatch"|"sparkSqlBatch"|undefined} batchConfig
+                         * @member {"pysparkBatch"|"sparkBatch"|"sparkRBatch"|"sparkSqlBatch"|"pysparkNotebookBatch"|undefined} batchConfig
                          * @memberof google.cloud.dataproc.v1.Batch
                          * @instance
                          */
                         Object.defineProperty(Batch.prototype, "batchConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["pysparkBatch", "sparkBatch", "sparkRBatch", "sparkSqlBatch"]),
+                            get: $util.oneOfGetter($oneOfFields = ["pysparkBatch", "sparkBatch", "sparkRBatch", "sparkSqlBatch", "pysparkNotebookBatch"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4587,6 +4596,8 @@
                             if (message.stateHistory != null && message.stateHistory.length)
                                 for (var i = 0; i < message.stateHistory.length; ++i)
                                     $root.google.cloud.dataproc.v1.Batch.StateHistory.encode(message.stateHistory[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.pysparkNotebookBatch != null && Object.hasOwnProperty.call(message, "pysparkNotebookBatch"))
+                                $root.google.cloud.dataproc.v1.PySparkNotebookBatch.encode(message.pysparkNotebookBatch, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -4649,6 +4660,10 @@
                                     }
                                 case 7: {
                                         message.sparkSqlBatch = $root.google.cloud.dataproc.v1.SparkSqlBatch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.pysparkNotebookBatch = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -4797,6 +4812,16 @@
                                         return "sparkSqlBatch." + error;
                                 }
                             }
+                            if (message.pysparkNotebookBatch != null && message.hasOwnProperty("pysparkNotebookBatch")) {
+                                if (properties.batchConfig === 1)
+                                    return "batchConfig: multiple values";
+                                properties.batchConfig = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.verify(message.pysparkNotebookBatch);
+                                    if (error)
+                                        return "pysparkNotebookBatch." + error;
+                                }
+                            }
                             if (message.runtimeInfo != null && message.hasOwnProperty("runtimeInfo")) {
                                 var error = $root.google.cloud.dataproc.v1.RuntimeInfo.verify(message.runtimeInfo);
                                 if (error)
@@ -4899,6 +4924,11 @@
                                 if (typeof object.sparkSqlBatch !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.Batch.sparkSqlBatch: object expected");
                                 message.sparkSqlBatch = $root.google.cloud.dataproc.v1.SparkSqlBatch.fromObject(object.sparkSqlBatch);
+                            }
+                            if (object.pysparkNotebookBatch != null) {
+                                if (typeof object.pysparkNotebookBatch !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.Batch.pysparkNotebookBatch: object expected");
+                                message.pysparkNotebookBatch = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.fromObject(object.pysparkNotebookBatch);
                             }
                             if (object.runtimeInfo != null) {
                                 if (typeof object.runtimeInfo !== "object")
@@ -5064,6 +5094,11 @@
                                 object.stateHistory = [];
                                 for (var j = 0; j < message.stateHistory.length; ++j)
                                     object.stateHistory[j] = $root.google.cloud.dataproc.v1.Batch.StateHistory.toObject(message.stateHistory[j], options);
+                            }
+                            if (message.pysparkNotebookBatch != null && message.hasOwnProperty("pysparkNotebookBatch")) {
+                                object.pysparkNotebookBatch = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.toObject(message.pysparkNotebookBatch, options);
+                                if (options.oneofs)
+                                    object.batchConfig = "pysparkNotebookBatch";
                             }
                             return object;
                         };
@@ -6860,6 +6895,428 @@
                         };
     
                         return SparkSqlBatch;
+                    })();
+    
+                    v1.PySparkNotebookBatch = (function() {
+    
+                        /**
+                         * Properties of a PySparkNotebookBatch.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IPySparkNotebookBatch
+                         * @property {string|null} [notebookFileUri] PySparkNotebookBatch notebookFileUri
+                         * @property {Object.<string,string>|null} [params] PySparkNotebookBatch params
+                         * @property {Array.<string>|null} [pythonFileUris] PySparkNotebookBatch pythonFileUris
+                         * @property {Array.<string>|null} [jarFileUris] PySparkNotebookBatch jarFileUris
+                         * @property {Array.<string>|null} [fileUris] PySparkNotebookBatch fileUris
+                         * @property {Array.<string>|null} [archiveUris] PySparkNotebookBatch archiveUris
+                         */
+    
+                        /**
+                         * Constructs a new PySparkNotebookBatch.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a PySparkNotebookBatch.
+                         * @implements IPySparkNotebookBatch
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch=} [properties] Properties to set
+                         */
+                        function PySparkNotebookBatch(properties) {
+                            this.params = {};
+                            this.pythonFileUris = [];
+                            this.jarFileUris = [];
+                            this.fileUris = [];
+                            this.archiveUris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PySparkNotebookBatch notebookFileUri.
+                         * @member {string} notebookFileUri
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.notebookFileUri = "";
+    
+                        /**
+                         * PySparkNotebookBatch params.
+                         * @member {Object.<string,string>} params
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.params = $util.emptyObject;
+    
+                        /**
+                         * PySparkNotebookBatch pythonFileUris.
+                         * @member {Array.<string>} pythonFileUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.pythonFileUris = $util.emptyArray;
+    
+                        /**
+                         * PySparkNotebookBatch jarFileUris.
+                         * @member {Array.<string>} jarFileUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.jarFileUris = $util.emptyArray;
+    
+                        /**
+                         * PySparkNotebookBatch fileUris.
+                         * @member {Array.<string>} fileUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.fileUris = $util.emptyArray;
+    
+                        /**
+                         * PySparkNotebookBatch archiveUris.
+                         * @member {Array.<string>} archiveUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.archiveUris = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PySparkNotebookBatch instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch instance
+                         */
+                        PySparkNotebookBatch.create = function create(properties) {
+                            return new PySparkNotebookBatch(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PySparkNotebookBatch message. Does not implicitly {@link google.cloud.dataproc.v1.PySparkNotebookBatch.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch} message PySparkNotebookBatch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PySparkNotebookBatch.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.notebookFileUri != null && Object.hasOwnProperty.call(message, "notebookFileUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.notebookFileUri);
+                            if (message.params != null && Object.hasOwnProperty.call(message, "params"))
+                                for (var keys = Object.keys(message.params), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.params[keys[i]]).ldelim();
+                            if (message.pythonFileUris != null && message.pythonFileUris.length)
+                                for (var i = 0; i < message.pythonFileUris.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pythonFileUris[i]);
+                            if (message.jarFileUris != null && message.jarFileUris.length)
+                                for (var i = 0; i < message.jarFileUris.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.jarFileUris[i]);
+                            if (message.fileUris != null && message.fileUris.length)
+                                for (var i = 0; i < message.fileUris.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.fileUris[i]);
+                            if (message.archiveUris != null && message.archiveUris.length)
+                                for (var i = 0; i < message.archiveUris.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.archiveUris[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PySparkNotebookBatch message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.PySparkNotebookBatch.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch} message PySparkNotebookBatch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PySparkNotebookBatch.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PySparkNotebookBatch message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PySparkNotebookBatch.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PySparkNotebookBatch(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.notebookFileUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.params === $util.emptyObject)
+                                            message.params = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.params[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.pythonFileUris && message.pythonFileUris.length))
+                                            message.pythonFileUris = [];
+                                        message.pythonFileUris.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.jarFileUris && message.jarFileUris.length))
+                                            message.jarFileUris = [];
+                                        message.jarFileUris.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.fileUris && message.fileUris.length))
+                                            message.fileUris = [];
+                                        message.fileUris.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.archiveUris && message.archiveUris.length))
+                                            message.archiveUris = [];
+                                        message.archiveUris.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PySparkNotebookBatch message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PySparkNotebookBatch.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PySparkNotebookBatch message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PySparkNotebookBatch.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.notebookFileUri != null && message.hasOwnProperty("notebookFileUri"))
+                                if (!$util.isString(message.notebookFileUri))
+                                    return "notebookFileUri: string expected";
+                            if (message.params != null && message.hasOwnProperty("params")) {
+                                if (!$util.isObject(message.params))
+                                    return "params: object expected";
+                                var key = Object.keys(message.params);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.params[key[i]]))
+                                        return "params: string{k:string} expected";
+                            }
+                            if (message.pythonFileUris != null && message.hasOwnProperty("pythonFileUris")) {
+                                if (!Array.isArray(message.pythonFileUris))
+                                    return "pythonFileUris: array expected";
+                                for (var i = 0; i < message.pythonFileUris.length; ++i)
+                                    if (!$util.isString(message.pythonFileUris[i]))
+                                        return "pythonFileUris: string[] expected";
+                            }
+                            if (message.jarFileUris != null && message.hasOwnProperty("jarFileUris")) {
+                                if (!Array.isArray(message.jarFileUris))
+                                    return "jarFileUris: array expected";
+                                for (var i = 0; i < message.jarFileUris.length; ++i)
+                                    if (!$util.isString(message.jarFileUris[i]))
+                                        return "jarFileUris: string[] expected";
+                            }
+                            if (message.fileUris != null && message.hasOwnProperty("fileUris")) {
+                                if (!Array.isArray(message.fileUris))
+                                    return "fileUris: array expected";
+                                for (var i = 0; i < message.fileUris.length; ++i)
+                                    if (!$util.isString(message.fileUris[i]))
+                                        return "fileUris: string[] expected";
+                            }
+                            if (message.archiveUris != null && message.hasOwnProperty("archiveUris")) {
+                                if (!Array.isArray(message.archiveUris))
+                                    return "archiveUris: array expected";
+                                for (var i = 0; i < message.archiveUris.length; ++i)
+                                    if (!$util.isString(message.archiveUris[i]))
+                                        return "archiveUris: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PySparkNotebookBatch message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch
+                         */
+                        PySparkNotebookBatch.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.PySparkNotebookBatch)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.PySparkNotebookBatch();
+                            if (object.notebookFileUri != null)
+                                message.notebookFileUri = String(object.notebookFileUri);
+                            if (object.params) {
+                                if (typeof object.params !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.params: object expected");
+                                message.params = {};
+                                for (var keys = Object.keys(object.params), i = 0; i < keys.length; ++i)
+                                    message.params[keys[i]] = String(object.params[keys[i]]);
+                            }
+                            if (object.pythonFileUris) {
+                                if (!Array.isArray(object.pythonFileUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.pythonFileUris: array expected");
+                                message.pythonFileUris = [];
+                                for (var i = 0; i < object.pythonFileUris.length; ++i)
+                                    message.pythonFileUris[i] = String(object.pythonFileUris[i]);
+                            }
+                            if (object.jarFileUris) {
+                                if (!Array.isArray(object.jarFileUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.jarFileUris: array expected");
+                                message.jarFileUris = [];
+                                for (var i = 0; i < object.jarFileUris.length; ++i)
+                                    message.jarFileUris[i] = String(object.jarFileUris[i]);
+                            }
+                            if (object.fileUris) {
+                                if (!Array.isArray(object.fileUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.fileUris: array expected");
+                                message.fileUris = [];
+                                for (var i = 0; i < object.fileUris.length; ++i)
+                                    message.fileUris[i] = String(object.fileUris[i]);
+                            }
+                            if (object.archiveUris) {
+                                if (!Array.isArray(object.archiveUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.archiveUris: array expected");
+                                message.archiveUris = [];
+                                for (var i = 0; i < object.archiveUris.length; ++i)
+                                    message.archiveUris[i] = String(object.archiveUris[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PySparkNotebookBatch message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.PySparkNotebookBatch} message PySparkNotebookBatch
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PySparkNotebookBatch.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pythonFileUris = [];
+                                object.jarFileUris = [];
+                                object.fileUris = [];
+                                object.archiveUris = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.params = {};
+                            if (options.defaults)
+                                object.notebookFileUri = "";
+                            if (message.notebookFileUri != null && message.hasOwnProperty("notebookFileUri"))
+                                object.notebookFileUri = message.notebookFileUri;
+                            var keys2;
+                            if (message.params && (keys2 = Object.keys(message.params)).length) {
+                                object.params = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.params[keys2[j]] = message.params[keys2[j]];
+                            }
+                            if (message.pythonFileUris && message.pythonFileUris.length) {
+                                object.pythonFileUris = [];
+                                for (var j = 0; j < message.pythonFileUris.length; ++j)
+                                    object.pythonFileUris[j] = message.pythonFileUris[j];
+                            }
+                            if (message.jarFileUris && message.jarFileUris.length) {
+                                object.jarFileUris = [];
+                                for (var j = 0; j < message.jarFileUris.length; ++j)
+                                    object.jarFileUris[j] = message.jarFileUris[j];
+                            }
+                            if (message.fileUris && message.fileUris.length) {
+                                object.fileUris = [];
+                                for (var j = 0; j < message.fileUris.length; ++j)
+                                    object.fileUris[j] = message.fileUris[j];
+                            }
+                            if (message.archiveUris && message.archiveUris.length) {
+                                object.archiveUris = [];
+                                for (var j = 0; j < message.archiveUris.length; ++j)
+                                    object.archiveUris[j] = message.archiveUris[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PySparkNotebookBatch to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PySparkNotebookBatch.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PySparkNotebookBatch
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PySparkNotebookBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.PySparkNotebookBatch";
+                        };
+    
+                        return PySparkNotebookBatch;
                     })();
     
                     v1.RuntimeConfig = (function() {

@@ -620,7 +620,8 @@
                             "pysparkBatch",
                             "sparkBatch",
                             "sparkRBatch",
-                            "sparkSqlBatch"
+                            "sparkSqlBatch",
+                            "pysparkNotebookBatch"
                           ]
                         }
                       },
@@ -670,6 +671,13 @@
                         "sparkSqlBatch": {
                           "type": "SparkSqlBatch",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pysparkNotebookBatch": {
+                          "type": "PySparkNotebookBatch",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -951,6 +959,57 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PySparkNotebookBatch": {
+                      "fields": {
+                        "notebookFileUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pythonFileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "jarFileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "archiveUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
