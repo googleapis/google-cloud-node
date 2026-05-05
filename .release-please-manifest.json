@@ -258,5 +258,11 @@
   "packages/typeless-sample-bot": "3.1.2",
   "packages/google-cloud-datacatalog-lineage-configmanagement": "0.1.1",
   "packages/google-cloud-auditmanager": "0.1.1",
-  "packages/google-maps-geocode": "0.1.1"
+  "packages/google-maps-geocode": "0.1.1",
+  "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech": "0.1.0",
+  "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v1-nodejs": "0.1.0",
+  "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v1p1beta1-nodejs": "0.1.0",
+  "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-speech-nodejs/speech-v2-nodejs": "0.1.0",
+  "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2-nodejs": "0.1.0",
+  "core/generator/gapic-generator-typescript/test-fixtures/google-cloud-tasks-nodejs/tasks-v2beta2-nodejs": "0.1.0"
 }

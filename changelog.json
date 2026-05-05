@@ -10,6 +10,108 @@
           "issues": [
             "8109"
           ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "a72079ff-12f8-46cb-b89f-73498ad553b2",
+      "createTime": "2026-05-05T00:07:22.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "d2f36613-c92b-4156-a49f-41567d4963ef",
+      "createTime": "2026-05-05T00:07:22.053Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "b36c4b3f-2719-4549-85c2-886e8be6f3f1",
+      "createTime": "2026-05-05T00:07:22.023Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "322b89fd-71a1-460c-b62b-21e73b120bfc",
+      "createTime": "2026-05-05T00:07:21.996Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "aa7bc36f-6c4e-4f9e-90e9-d2125e784f7f",
+      "createTime": "2026-05-05T00:07:21.967Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "a54eed72-45bf-4880-a59c-a87fe1dabd95",
+      "createTime": "2026-05-05T00:07:21.940Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
         },
         {
           "type": "fix",
@@ -77670,5 +77772,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T00:07:22.080Z"
 }
