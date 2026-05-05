@@ -5,6 +5,32 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "374167bd4c1b45c38112938df55e821fdeb82c97",
+          "message": "Pin @sinonjs/fake-timers to unblock build in bigquery",
+          "issues": [
+            "8121"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0948b354bab60bbae906b7e9f8996b5b35754361",
+          "message": "Run npm run types in correct directory in owlbot",
+          "issues": [
+            "8061"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "8.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "8b9b7027-4b87-4b9c-aacc-529edc2eca57",
+      "createTime": "2026-05-05T21:43:20.692Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
           "issues": [
@@ -77670,5 +77696,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T21:43:20.692Z"
 }
