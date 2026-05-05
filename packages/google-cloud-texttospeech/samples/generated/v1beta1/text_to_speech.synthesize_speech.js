@@ -45,7 +45,7 @@ function main(input, voice, audioConfig) {
    */
   // const enableTimePointing = [1,2,3,4]
   /**
-   *  Advanced voice options.
+   *  Optional. Advanced voice options.
    */
   // const advancedVoiceOptions = {}
 

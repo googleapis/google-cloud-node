@@ -128,6 +128,7 @@ export type Query = JobRequest<bigquery.IJobConfigurationQuery> & {
   pageToken?: string;
   wrapIntegers?: boolean | IntegerTypeCastOptions;
   parseJSON?: boolean;
+  skipParsing?: boolean;
   // Overrides default job creation mode set on the client.
   jobCreationMode?: JobCreationMode;
 };
@@ -1100,10 +1101,12 @@ export class BigQuery extends Service {
         }),
       };
     } else if ((providedType as string).toUpperCase() === 'TIMESTAMP(12)') {
-      return {
-        type: 'TIMESTAMP',
-        timestampPrecision: '12',
-      };
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+        return {
+          type: 'TIMESTAMP',
+          timestampPrecision: '12',
+        };
+      }
     }
 
     providedType = (providedType as string).toUpperCase();
@@ -2217,6 +2220,7 @@ export class BigQuery extends Service {
         ? {
             wrapIntegers: query.wrapIntegers,
             parseJSON: query.parseJSON,
+            skipParsing: query.skipParsing,
           }
         : {};
     const callback =
@@ -2261,19 +2265,22 @@ export class BigQuery extends Service {
             the callback. Instead, pass the error to the callback the user provides
             so that the user can see the error.
              */
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const listParams = {
               'formatOptions.timestampOutputFormat':
                 queryReq.formatOptions?.timestampOutputFormat,
               'formatOptions.useInt64Timestamp':
                 queryReq.formatOptions?.useInt64Timestamp,
             };
-            rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
-              wrapIntegers: options.wrapIntegers || false,
-              parseJSON: options.parseJSON,
-              listParams,
-            });
-            delete res.rows;
+            if (options.skipParsing) {
+              rows = res.rows;
+            } else {
+              rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
+                wrapIntegers: options.wrapIntegers || false,
+                parseJSON: options.parseJSON,
+                listParams,
+              });
+              delete res.rows;
+            }
           } catch (e) {
             (callback as SimpleQueryRowsCallback)(e as Error, null, job);
             return;
@@ -2361,11 +2368,18 @@ export class BigQuery extends Service {
     const hasAnyFormatOpts =
       options['formatOptions.timestampOutputFormat'] !== undefined ||
       options['formatOptions.useInt64Timestamp'] !== undefined;
-    const defaultOpts = hasAnyFormatOpts
+    let defaultOpts: bigquery.IDataFormatOptions = hasAnyFormatOpts
       ? {}
       : {
-          timestampOutputFormat: 'ISO8601_STRING',
+          useInt64Timestamp: true,
         };
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+      defaultOpts = hasAnyFormatOpts
+        ? {}
+        : {
+            timestampOutputFormat: 'ISO8601_STRING',
+          };
+    }
     const formatOptions = extend(defaultOpts, {
       timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
       useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
@@ -2579,12 +2593,9 @@ function convertSchemaFieldValue(
       2023-01-01T12:00:00.123456789123Z
        */
       const listParams = options.listParams;
-      const timestampOutputFormat = listParams
-        ? listParams['formatOptions.timestampOutputFormat']
-        : undefined;
-      const useInt64Timestamp = listParams
-        ? listParams['formatOptions.useInt64Timestamp']
-        : undefined;
+      const timestampOutputFormat =
+        listParams?.['formatOptions.timestampOutputFormat'];
+      const useInt64Timestamp = listParams?.['formatOptions.useInt64Timestamp'];
       if (timestampOutputFormat === 'ISO8601_STRING') {
         // value is ISO string, create BigQueryTimestamp wrapping the string
         value = BigQuery.timestamp(value);

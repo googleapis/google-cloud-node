@@ -50,7 +50,7 @@
     "mocha": "^11.7.2",
     "pack-n-play": "^3.0.0",
     "typescript": "5.8.3",
-    "sinon": "^21.0.0"
+    "sinon": "21.0.3"
   },
   "engines": {
     "node": ">=v18"

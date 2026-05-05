@@ -577,6 +577,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_commitments.insert.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_commitments.list.js) |
 | update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_commitments.update.js) |
+| aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.aggregated_list.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.get.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.list.js) |
+| patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.patch.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_composite_health_checks.test_iam_permissions.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disk_types.get.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disk_types.list.js) |
 | add resource policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_disks.add_resource_policies.js) |
@@ -603,6 +610,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_aggregation_policies.list.js) |
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_aggregation_policies.patch.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_aggregation_policies.test_iam_permissions.js) |
+| aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_check_services.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_check_services.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_check_services.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_check_services.insert.js) |
@@ -616,6 +624,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_checks.patch.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_checks.test_iam_permissions.js) |
 | update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_checks.update.js) |
+| aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.aggregated_list.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.get.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.list.js) |
+| patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.patch.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_health_sources.test_iam_permissions.js) |
 | abandon instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.abandon_instances.js) |
 | apply updates to instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.apply_updates_to_instances.js) |
 | create instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_instance_group_managers.create_instances.js) |
@@ -681,6 +696,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | remove rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_firewall_policies.remove_rule.js) |
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_firewall_policies.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_network_firewall_policies.test_iam_permissions.js) |
+| aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_notification_endpoints.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_notification_endpoints.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_notification_endpoints.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_notification_endpoints.insert.js) |
@@ -743,10 +759,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_blocks.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_blocks.test_iam_permissions.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_slots.get.js) |
+| get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_slots.get_version.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_slots.list.js) |
 | update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_slots.update.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get_iam_policy.js) |
+| get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get_version.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.list.js) |
 | perform maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.perform_maintenance.js) |
 | report faulty | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.report_faulty.js) |
@@ -1557,6 +1575,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_aggregation_policies.list.js) |
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_aggregation_policies.patch.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_aggregation_policies.test_iam_permissions.js) |
+| aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_check_services.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_check_services.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_check_services.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_health_check_services.insert.js) |
@@ -1679,6 +1698,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | patch traffic classification rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_network_policies.patch_traffic_classification_rule.js) |
 | remove association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_network_policies.remove_association.js) |
 | remove traffic classification rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_network_policies.remove_traffic_classification_rule.js) |
+| aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_notification_endpoints.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_notification_endpoints.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_notification_endpoints.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/region_notification_endpoints.insert.js) |
@@ -1758,10 +1778,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_blocks.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_blocks.test_iam_permissions.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.get.js) |
+| get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.get_version.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.list.js) |
 | update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_slots.update.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get_iam_policy.js) |
+| get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.get_version.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.list.js) |
 | perform maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.perform_maintenance.js) |
 | report faulty | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.report_faulty.js) |

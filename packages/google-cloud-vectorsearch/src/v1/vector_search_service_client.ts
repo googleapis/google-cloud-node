@@ -244,6 +244,10 @@ export class VectorSearchServiceClient {
       '.google.cloud.vectorsearch.v1.Index') as gax.protobuf.Type;
     const createIndexMetadata = protoFilesRoot.lookup(
       '.google.cloud.vectorsearch.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateIndexResponse = protoFilesRoot.lookup(
+      '.google.cloud.vectorsearch.v1.Index') as gax.protobuf.Type;
+    const updateIndexMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vectorsearch.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteIndexResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteIndexMetadata = protoFilesRoot.lookup(
@@ -252,6 +256,10 @@ export class VectorSearchServiceClient {
       '.google.cloud.vectorsearch.v1.ImportDataObjectsResponse') as gax.protobuf.Type;
     const importDataObjectsMetadata = protoFilesRoot.lookup(
       '.google.cloud.vectorsearch.v1.ImportDataObjectsMetadata') as gax.protobuf.Type;
+    const exportDataObjectsResponse = protoFilesRoot.lookup(
+      '.google.cloud.vectorsearch.v1.ExportDataObjectsResponse') as gax.protobuf.Type;
+    const exportDataObjectsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vectorsearch.v1.ExportDataObjectsMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCollection: new this._gaxModule.LongrunningDescriptor(
@@ -270,6 +278,10 @@ export class VectorSearchServiceClient {
         this.operationsClient,
         createIndexResponse.decode.bind(createIndexResponse),
         createIndexMetadata.decode.bind(createIndexMetadata)),
+      updateIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateIndexResponse.decode.bind(updateIndexResponse),
+        updateIndexMetadata.decode.bind(updateIndexMetadata)),
       deleteIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteIndexResponse.decode.bind(deleteIndexResponse),
@@ -277,7 +289,11 @@ export class VectorSearchServiceClient {
       importDataObjects: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataObjectsResponse.decode.bind(importDataObjectsResponse),
-        importDataObjectsMetadata.decode.bind(importDataObjectsMetadata))
+        importDataObjectsMetadata.decode.bind(importDataObjectsMetadata)),
+      exportDataObjects: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportDataObjectsResponse.decode.bind(exportDataObjectsResponse),
+        exportDataObjectsMetadata.decode.bind(exportDataObjectsMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -323,7 +339,7 @@ export class VectorSearchServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const vectorSearchServiceStubMethods =
-        ['listCollections', 'getCollection', 'createCollection', 'updateCollection', 'deleteCollection', 'listIndexes', 'getIndex', 'createIndex', 'deleteIndex', 'importDataObjects'];
+        ['listCollections', 'getCollection', 'createCollection', 'updateCollection', 'deleteCollection', 'listIndexes', 'getIndex', 'createIndex', 'updateIndex', 'deleteIndex', 'importDataObjects', 'exportDataObjects'];
     for (const methodName of vectorSearchServiceStubMethods) {
       const callPromise = this.vectorSearchServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1137,6 +1153,143 @@ export class VectorSearchServiceClient {
     return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1.Index, protos.google.cloud.vectorsearch.v1.OperationMetadata>;
   }
 /**
+ * Updates the parameters of a single Index.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.vectorsearch.v1.Index} request.index
+ *   Required. The resource being updated.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Specifies the fields to be overwritten in the Index resource by
+ *   the update. The fields specified in the update_mask are relative to the
+ *   resource, not the full request. A field will be overwritten if it is in the
+ *   mask. If the user does not provide a mask then all fields present in the
+ *   request with non-empty values will be overwritten.
+ *
+ *   The following fields support update:
+ *     * `display_name`
+ *     * `description`
+ *     * `labels`
+ *     * `dedicated_infrastructure.autoscaling_spec.min_replica_count`
+ *     * `dedicated_infrastructure.autoscaling_spec.max_replica_count`
+ *
+ *   If `*` is provided in the `update_mask`, full replacement of mutable fields
+ *   will be performed.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vector_search_service.update_index.js</caption>
+ * region_tag:vectorsearch_v1_generated_VectorSearchService_UpdateIndex_async
+ */
+  updateIndex(
+      request?: protos.google.cloud.vectorsearch.v1.IUpdateIndexRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateIndex(
+      request: protos.google.cloud.vectorsearch.v1.IUpdateIndexRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateIndex(
+      request: protos.google.cloud.vectorsearch.v1.IUpdateIndexRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateIndex(
+      request?: protos.google.cloud.vectorsearch.v1.IUpdateIndexRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'index.name': request.index!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateIndex request %j', request);
+    return this.innerApiCalls.updateIndex(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.vectorsearch.v1.IIndex, protos.google.cloud.vectorsearch.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateIndex response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateIndex()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vector_search_service.update_index.js</caption>
+ * region_tag:vectorsearch_v1_generated_VectorSearchService_UpdateIndex_async
+ */
+  async checkUpdateIndexProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1.Index, protos.google.cloud.vectorsearch.v1.OperationMetadata>>{
+    this._log.info('updateIndex long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateIndex, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1.Index, protos.google.cloud.vectorsearch.v1.OperationMetadata>;
+  }
+/**
  * Deletes a single Index.
  *
  * @param {Object} request
@@ -1368,6 +1521,117 @@ export class VectorSearchServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importDataObjects, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1.ImportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.ImportDataObjectsMetadata>;
+  }
+/**
+ * Initiates a Long-Running Operation to export DataObjects from a Collection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination} request.gcsDestination
+ *   The Cloud Storage location where user wants to export Data Objects.
+ * @param {string} request.name
+ *   Required. The resource name of the Collection from which we want to export
+ *   Data Objects. Format:
+ *   `projects/{project}/locations/{location}/collections/{collection}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vector_search_service.export_data_objects.js</caption>
+ * region_tag:vectorsearch_v1_generated_VectorSearchService_ExportDataObjects_async
+ */
+  exportDataObjects(
+      request?: protos.google.cloud.vectorsearch.v1.IExportDataObjectsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  exportDataObjects(
+      request: protos.google.cloud.vectorsearch.v1.IExportDataObjectsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  exportDataObjects(
+      request: protos.google.cloud.vectorsearch.v1.IExportDataObjectsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  exportDataObjects(
+      request?: protos.google.cloud.vectorsearch.v1.IExportDataObjectsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportDataObjects response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportDataObjects request %j', request);
+    return this.innerApiCalls.exportDataObjects(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.vectorsearch.v1.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.IExportDataObjectsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportDataObjects response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `exportDataObjects()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vector_search_service.export_data_objects.js</caption>
+ * region_tag:vectorsearch_v1_generated_VectorSearchService_ExportDataObjects_async
+ */
+  async checkExportDataObjectsProgress(name: string): Promise<LROperation<protos.google.cloud.vectorsearch.v1.ExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.ExportDataObjectsMetadata>>{
+    this._log.info('exportDataObjects long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportDataObjects, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.vectorsearch.v1.ExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1.ExportDataObjectsMetadata>;
   }
  /**
  * Lists Collections in a given project and location.

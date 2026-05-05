@@ -1985,7 +1985,11 @@ export namespace google {
                     CC_CATEGORY_LEGAL_AND_DISCLOSURES = 12,
                     CC_CATEGORY_VULNERABILITY_MANAGEMENT = 13,
                     CC_CATEGORY_PRIVACY = 14,
-                    CC_CATEGORY_BCDR = 15
+                    CC_CATEGORY_BCDR = 15,
+                    CC_CATEGORY_ADMIN_ACCESS = 16,
+                    CC_CATEGORY_DATA_RESIDENCY = 17,
+                    CC_CATEGORY_RESOURCE_USAGE_RESTRICTION = 18,
+                    CC_CATEGORY_SERVICE_SPECIFIC = 19
                 }
 
                 /** CloudProvider enum. */
@@ -4126,6 +4130,201 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Control. */
+                interface IControl {
+
+                    /** Control name */
+                    name?: (string|null);
+
+                    /** Control displayName */
+                    displayName?: (string|null);
+
+                    /** Control description */
+                    description?: (string|null);
+
+                    /** Control family */
+                    family?: (google.cloud.cloudsecuritycompliance.v1.Control.Family|keyof typeof google.cloud.cloudsecuritycompliance.v1.Control.Family|null);
+
+                    /** Control controlFamily */
+                    controlFamily?: (google.cloud.cloudsecuritycompliance.v1.IControlFamily|null);
+
+                    /** Control responsibilityType */
+                    responsibilityType?: (google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|keyof typeof google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|null);
+
+                    /** Control googleResponsibilityDescription */
+                    googleResponsibilityDescription?: (string|null);
+
+                    /** Control googleResponsibilityImplementation */
+                    googleResponsibilityImplementation?: (string|null);
+
+                    /** Control customerResponsibilityDescription */
+                    customerResponsibilityDescription?: (string|null);
+
+                    /** Control customerResponsibilityImplementation */
+                    customerResponsibilityImplementation?: (string|null);
+
+                    /** Control sharedResponsibilityDescription */
+                    sharedResponsibilityDescription?: (string|null);
+
+                    /** Control additionalContentUri */
+                    additionalContentUri?: (string|null);
+
+                    /** Control relatedFrameworks */
+                    relatedFrameworks?: (string[]|null);
+                }
+
+                /** Represents a Control. */
+                class Control implements IControl {
+
+                    /**
+                     * Constructs a new Control.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IControl);
+
+                    /** Control name. */
+                    public name: string;
+
+                    /** Control displayName. */
+                    public displayName: string;
+
+                    /** Control description. */
+                    public description: string;
+
+                    /** Control family. */
+                    public family: (google.cloud.cloudsecuritycompliance.v1.Control.Family|keyof typeof google.cloud.cloudsecuritycompliance.v1.Control.Family);
+
+                    /** Control controlFamily. */
+                    public controlFamily?: (google.cloud.cloudsecuritycompliance.v1.IControlFamily|null);
+
+                    /** Control responsibilityType. */
+                    public responsibilityType: (google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|keyof typeof google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType);
+
+                    /** Control googleResponsibilityDescription. */
+                    public googleResponsibilityDescription: string;
+
+                    /** Control googleResponsibilityImplementation. */
+                    public googleResponsibilityImplementation: string;
+
+                    /** Control customerResponsibilityDescription. */
+                    public customerResponsibilityDescription: string;
+
+                    /** Control customerResponsibilityImplementation. */
+                    public customerResponsibilityImplementation: string;
+
+                    /** Control sharedResponsibilityDescription. */
+                    public sharedResponsibilityDescription: string;
+
+                    /** Control additionalContentUri. */
+                    public additionalContentUri: string;
+
+                    /** Control relatedFrameworks. */
+                    public relatedFrameworks: string[];
+
+                    /**
+                     * Creates a new Control instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Control instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IControl): google.cloud.cloudsecuritycompliance.v1.Control;
+
+                    /**
+                     * Encodes the specified Control message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
+                     * @param message Control message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
+                     * @param message Control message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Control message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Control
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.Control;
+
+                    /**
+                     * Decodes a Control message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Control
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.Control;
+
+                    /**
+                     * Verifies a Control message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Control message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Control
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.Control;
+
+                    /**
+                     * Creates a plain object from a Control message. Also converts values to other types if specified.
+                     * @param message Control
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Control to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Control
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Control {
+
+                    /** Family enum. */
+                    enum Family {
+                        FAMILY_UNSPECIFIED = 0,
+                        AC = 1,
+                        AT = 2,
+                        AU = 3,
+                        CA = 4,
+                        CM = 5,
+                        CP = 6,
+                        IA = 7,
+                        IR = 8,
+                        MA = 9,
+                        MP = 10,
+                        PE = 11,
+                        PL = 12,
+                        PS = 13,
+                        RA = 14,
+                        SA = 15,
+                        SC = 16,
+                        SI = 17,
+                        SR = 18
+                    }
                 }
 
                 /** Properties of a ControlFamily. */
@@ -6547,6 +6746,7 @@ export namespace google {
                     DEPLOYMENT_STATE_VALIDATING = 1,
                     DEPLOYMENT_STATE_CREATING = 2,
                     DEPLOYMENT_STATE_DELETING = 3,
+                    DEPLOYMENT_STATE_UPDATING = 8,
                     DEPLOYMENT_STATE_FAILED = 4,
                     DEPLOYMENT_STATE_READY = 5,
                     DEPLOYMENT_STATE_PARTIALLY_DEPLOYED = 6,
@@ -8617,6 +8817,13 @@ export namespace google {
                     CHOKEPOINT = 9
                 }
 
+                /** FrameworkComplianceSummaryView enum. */
+                enum FrameworkComplianceSummaryView {
+                    FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED = 0,
+                    FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC = 1,
+                    FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL = 2
+                }
+
                 /** Properties of a ListFrameworkComplianceSummariesRequest. */
                 interface IListFrameworkComplianceSummariesRequest {
 
@@ -8631,6 +8838,9 @@ export namespace google {
 
                     /** ListFrameworkComplianceSummariesRequest filter */
                     filter?: (string|null);
+
+                    /** ListFrameworkComplianceSummariesRequest view */
+                    view?: (google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView|keyof typeof google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView|null);
                 }
 
                 /** Represents a ListFrameworkComplianceSummariesRequest. */
@@ -8653,6 +8863,9 @@ export namespace google {
 
                     /** ListFrameworkComplianceSummariesRequest filter. */
                     public filter: string;
+
+                    /** ListFrameworkComplianceSummariesRequest view. */
+                    public view: (google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView|keyof typeof google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView);
 
                     /**
                      * Creates a new ListFrameworkComplianceSummariesRequest instance using the specified properties.
@@ -9006,6 +9219,9 @@ export namespace google {
 
                     /** FetchFrameworkComplianceReportRequest endTime */
                     endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FetchFrameworkComplianceReportRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a FetchFrameworkComplianceReportRequest. */
@@ -9022,6 +9238,9 @@ export namespace google {
 
                     /** FetchFrameworkComplianceReportRequest endTime. */
                     public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FetchFrameworkComplianceReportRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new FetchFrameworkComplianceReportRequest instance using the specified properties.
@@ -9902,6 +10121,12 @@ export namespace google {
 
                     /** FrameworkComplianceSummary targetResourceDetails */
                     targetResourceDetails?: (google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails[]|null);
+
+                    /** FrameworkComplianceSummary findingCount */
+                    findingCount?: (number|Long|string|null);
+
+                    /** FrameworkComplianceSummary controlsPassingTrend */
+                    controlsPassingTrend?: (google.cloud.cloudsecuritycompliance.v1.ITrend|null);
                 }
 
                 /** Represents a FrameworkComplianceSummary. */
@@ -9942,6 +10167,12 @@ export namespace google {
 
                     /** FrameworkComplianceSummary targetResourceDetails. */
                     public targetResourceDetails: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails[];
+
+                    /** FrameworkComplianceSummary findingCount. */
+                    public findingCount: (number|Long|string);
+
+                    /** FrameworkComplianceSummary controlsPassingTrend. */
+                    public controlsPassingTrend?: (google.cloud.cloudsecuritycompliance.v1.ITrend|null);
 
                     /**
                      * Creates a new FrameworkComplianceSummary instance using the specified properties.
@@ -11034,6 +11265,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TargetResourceDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Trend. */
+                interface ITrend {
+
+                    /** Trend duration */
+                    duration?: (google.protobuf.IDuration|null);
+
+                    /** Trend valuePercent */
+                    valuePercent?: (number|null);
+                }
+
+                /** Represents a Trend. */
+                class Trend implements ITrend {
+
+                    /**
+                     * Constructs a new Trend.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ITrend);
+
+                    /** Trend duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /** Trend valuePercent. */
+                    public valuePercent: number;
+
+                    /**
+                     * Creates a new Trend instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Trend instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ITrend): google.cloud.cloudsecuritycompliance.v1.Trend;
+
+                    /**
+                     * Encodes the specified Trend message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Trend.verify|verify} messages.
+                     * @param message Trend message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ITrend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Trend message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Trend.verify|verify} messages.
+                     * @param message Trend message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ITrend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Trend message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Trend
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.Trend;
+
+                    /**
+                     * Decodes a Trend message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Trend
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.Trend;
+
+                    /**
+                     * Verifies a Trend message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Trend message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Trend
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.Trend;
+
+                    /**
+                     * Creates a plain object from a Trend message. Also converts values to other types if specified.
+                     * @param message Trend
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.Trend, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Trend to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Trend
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

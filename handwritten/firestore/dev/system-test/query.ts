@@ -2291,5 +2291,55 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       expectDocs(await compareQueryAndPipeline(query), 'doc2', 'doc3', 'doc4');
       expectDocs(await queryWithCursor.get(), 'doc2', 'doc3', 'doc4');
     });
+
+    it('alwaysUseImplicitOrderBy returns same results', async () => {
+      const collection = getTestRoot();
+      const docs = {
+        doc01: {sort: 1},
+        doc02: {sort: 2},
+        doc03: {sort: 3},
+        doc04: {sort: 4},
+        doc05: {sort: 5},
+        doc06: {sort: 6},
+        doc07: {sort: 7},
+        doc08: {sort: 8},
+        doc09: {sort: 9},
+        doc10: {sort: 10},
+      };
+
+      for (const [id, data] of Object.entries(docs)) {
+        await collection.doc(id).set(data);
+      }
+
+      const expectedOrder = [
+        'doc02',
+        'doc03',
+        'doc04',
+        'doc05',
+        'doc06',
+        'doc07',
+        'doc08',
+        'doc09',
+        'doc10',
+      ];
+
+      // TODO: This test should run against both standard and enterprise
+      // and verify the results respectively
+      // const originalQuery = collection.where('sort', '>', 1);
+      // const originalSnapshot = await originalQuery.get();
+      // const originalResult = originalSnapshot.docs.map(d => d.id);
+
+      const modifiedFirestore = new Firestore({
+        ...firestore.settings,
+        alwaysUseImplicitOrderBy: true,
+      });
+      const modifiedCollection = modifiedFirestore.collection(collection.id);
+      const query = modifiedCollection.where('sort', '>', 1);
+      const snapshot = await query.get();
+      const result = snapshot.docs.map(d => d.id);
+
+      // since alwaysUseImplicitOrderBy is true, we expect strict ordering.
+      expect(result).to.deep.equal(expectedOrder);
+    });
   });
 });

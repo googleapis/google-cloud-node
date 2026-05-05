@@ -67026,7 +67026,8 @@ export namespace google {
                         enum Condition {
                             CONDITION_UNSPECIFIED = 0,
                             DISABLED = 1,
-                            ENABLED = 2
+                            ENABLED = 2,
+                            AUTO = 3
                         }
                     }
 
@@ -110782,6 +110783,9 @@ export namespace google {
 
                         /** DataStoreSpec filter */
                         filter?: (string|null);
+
+                        /** DataStoreSpec boostSpec */
+                        boostSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null);
                     }
 
                     /** Represents a DataStoreSpec. */
@@ -110798,6 +110802,9 @@ export namespace google {
 
                         /** DataStoreSpec filter. */
                         public filter: string;
+
+                        /** DataStoreSpec boostSpec. */
+                        public boostSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null);
 
                         /**
                          * Creates a new DataStoreSpec instance using the specified properties.
@@ -113025,7 +113032,8 @@ export namespace google {
                         enum Condition {
                             CONDITION_UNSPECIFIED = 0,
                             DISABLED = 1,
-                            ENABLED = 2
+                            ENABLED = 2,
+                            AUTO = 3
                         }
                     }
 

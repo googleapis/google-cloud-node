@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.secretmanager.v1beta2",
-  "libraryPackage": "@google-cloud/secretmanager",
+  "libraryPackage": "@google-cloud/secret-manager",
   "services": {
     "SecretManagerService": {
       "clients": {

@@ -82,6 +82,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete volume | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_volume.js) |
 | encrypt volumes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.encrypt_volumes.js) |
 | establish peering | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.establish_peering.js) |
+| establish volume peering | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.establish_volume_peering.js) |
+| execute ontap delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.execute_ontap_delete.js) |
+| execute ontap get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.execute_ontap_get.js) |
+| execute ontap patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.execute_ontap_patch.js) |
+| execute ontap post | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.execute_ontap_post.js) |
 | get active directory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_active_directory.js) |
 | get backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js) |
 | get backup policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js) |

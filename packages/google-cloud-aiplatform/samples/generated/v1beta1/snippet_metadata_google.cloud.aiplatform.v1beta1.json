@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-aiplatform",
-    "version": "0.1.0",
+    "version": "6.6.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -1834,7 +1834,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 193,
+          "end": 209,
           "type": "FULL"
         }
       ],
@@ -1976,6 +1976,18 @@
             "type": "TYPE_STRING"
           },
           {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metric_sources",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.aiplatform.v1beta1.EvaluationInstance"
+          },
+          {
             "name": "autorater_config",
             "type": ".google.cloud.aiplatform.v1beta1.AutoraterConfig"
           }
@@ -2044,6 +2056,62 @@
         "method": {
           "shortName": "EvaluateDataset",
           "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateDataset",
+          "service": {
+            "shortName": "EvaluationService",
+            "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_EvaluationService_GenerateInstanceRubrics_async",
+      "title": "DatasetService generateInstanceRubrics Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates rubrics for a given prompt. A rubric represents a single testable criterion for evaluation. One input prompt could have multiple rubrics This RPC allows users to get suggested rubrics based on provided prompt, which can then be reviewed and used for subsequent evaluations.",
+      "canonical": true,
+      "file": "evaluation_service.generate_instance_rubrics.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateInstanceRubrics",
+        "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.GenerateInstanceRubrics",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "contents",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "predefined_rubric_generation_spec",
+            "type": ".google.cloud.aiplatform.v1beta1.PredefinedMetricSpec"
+          },
+          {
+            "name": "rubric_generation_spec",
+            "type": ".google.cloud.aiplatform.v1beta1.RubricGenerationSpec"
+          },
+          {
+            "name": "agent_config",
+            "type": ".google.cloud.aiplatform.v1beta1.EvaluationInstance.DeprecatedAgentConfig"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.GenerateInstanceRubricsResponse",
+        "client": {
+          "shortName": "EvaluationServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.EvaluationServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateInstanceRubrics",
+          "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.GenerateInstanceRubrics",
           "service": {
             "shortName": "EvaluationService",
             "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService"
@@ -8610,7 +8678,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -8626,6 +8694,10 @@
           {
             "name": "memory",
             "type": ".google.cloud.aiplatform.v1beta1.Memory"
+          },
+          {
+            "name": "memory_id",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -11966,7 +12038,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -11994,6 +12066,10 @@
           {
             "name": "encryption_spec",
             "type": ".google.cloud.aiplatform.v1beta1.EncryptionSpec"
+          },
+          {
+            "name": "custom_service_account",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -13119,6 +13195,310 @@
           "service": {
             "shortName": "NotebookService",
             "fullName": "google.cloud.aiplatform.v1beta1.NotebookService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_CreateOnlineEvaluator_async",
+      "title": "DatasetService createOnlineEvaluator Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an OnlineEvaluator in the given project and location.",
+      "canonical": true,
+      "file": "online_evaluator_service.create_online_evaluator.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateOnlineEvaluator",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.CreateOnlineEvaluator",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "online_evaluator",
+            "type": ".google.cloud.aiplatform.v1beta1.OnlineEvaluator"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "CreateOnlineEvaluator",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.CreateOnlineEvaluator",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_GetOnlineEvaluator_async",
+      "title": "DatasetService getOnlineEvaluator Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of an OnlineEvaluator.",
+      "canonical": true,
+      "file": "online_evaluator_service.get_online_evaluator.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetOnlineEvaluator",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.GetOnlineEvaluator",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.OnlineEvaluator",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "GetOnlineEvaluator",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.GetOnlineEvaluator",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_UpdateOnlineEvaluator_async",
+      "title": "DatasetService updateOnlineEvaluator Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the fields of an OnlineEvaluator.",
+      "canonical": true,
+      "file": "online_evaluator_service.update_online_evaluator.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateOnlineEvaluator",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.UpdateOnlineEvaluator",
+        "async": true,
+        "parameters": [
+          {
+            "name": "online_evaluator",
+            "type": ".google.cloud.aiplatform.v1beta1.OnlineEvaluator"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateOnlineEvaluator",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.UpdateOnlineEvaluator",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_DeleteOnlineEvaluator_async",
+      "title": "DatasetService deleteOnlineEvaluator Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an OnlineEvaluator.",
+      "canonical": true,
+      "file": "online_evaluator_service.delete_online_evaluator.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteOnlineEvaluator",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.DeleteOnlineEvaluator",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteOnlineEvaluator",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.DeleteOnlineEvaluator",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_ListOnlineEvaluators_async",
+      "title": "DatasetService listOnlineEvaluators Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the OnlineEvaluators for the given project and location.",
+      "canonical": true,
+      "file": "online_evaluator_service.list_online_evaluators.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOnlineEvaluators",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.ListOnlineEvaluators",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.ListOnlineEvaluatorsResponse",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "ListOnlineEvaluators",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.ListOnlineEvaluators",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_ActivateOnlineEvaluator_async",
+      "title": "DatasetService activateOnlineEvaluator Sample",
+      "origin": "API_DEFINITION",
+      "description": " Activates an OnlineEvaluator.",
+      "canonical": true,
+      "file": "online_evaluator_service.activate_online_evaluator.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ActivateOnlineEvaluator",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.ActivateOnlineEvaluator",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "ActivateOnlineEvaluator",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.ActivateOnlineEvaluator",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_OnlineEvaluatorService_SuspendOnlineEvaluator_async",
+      "title": "DatasetService suspendOnlineEvaluator Sample",
+      "origin": "API_DEFINITION",
+      "description": " Suspends an OnlineEvaluator. When an OnlineEvaluator is suspended, it won't run any evaluations until it is activated again.",
+      "canonical": true,
+      "file": "online_evaluator_service.suspend_online_evaluator.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SuspendOnlineEvaluator",
+        "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.SuspendOnlineEvaluator",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OnlineEvaluatorServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorServiceClient"
+        },
+        "method": {
+          "shortName": "SuspendOnlineEvaluator",
+          "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService.SuspendOnlineEvaluator",
+          "service": {
+            "shortName": "OnlineEvaluatorService",
+            "fullName": "google.cloud.aiplatform.v1beta1.OnlineEvaluatorService"
           }
         }
       }
@@ -14726,7 +15106,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 76,
+          "end": 62,
           "type": "FULL"
         }
       ],
@@ -14758,6 +15138,10 @@
           {
             "name": "auto_truncate",
             "type": "TYPE_BOOL"
+          },
+          {
+            "name": "embed_content_config",
+            "type": ".google.cloud.aiplatform.v1beta1.EmbedContentRequest.EmbedContentConfig"
           }
         ],
         "resultType": ".google.cloud.aiplatform.v1beta1.EmbedContentResponse",
@@ -14864,6 +15248,54 @@
         "method": {
           "shortName": "StreamQueryReasoningEngine",
           "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.StreamQueryReasoningEngine",
+          "service": {
+            "shortName": "ReasoningEngineExecutionService",
+            "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineExecutionService_AsyncQueryReasoningEngine_async",
+      "title": "DatasetService asyncQueryReasoningEngine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Async query using a reasoning engine.",
+      "canonical": true,
+      "file": "reasoning_engine_execution_service.async_query_reasoning_engine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsyncQueryReasoningEngine",
+        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.AsyncQueryReasoningEngine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_gcs_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "output_gcs_uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ReasoningEngineExecutionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionServiceClient"
+        },
+        "method": {
+          "shortName": "AsyncQueryReasoningEngine",
+          "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.AsyncQueryReasoningEngine",
           "service": {
             "shortName": "ReasoningEngineExecutionService",
             "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService"
@@ -15414,7 +15846,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -15430,6 +15862,10 @@
           {
             "name": "session",
             "type": ".google.cloud.aiplatform.v1beta1.Session"
+          },
+          {
+            "name": "session_id",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.longrunning.Operation",
@@ -15498,7 +15934,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 87,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -17848,6 +18284,574 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_CreateRagDataSchema_async",
+      "title": "DatasetService createRagDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a RagDataSchema.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.create_rag_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRagDataSchema",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rag_data_schema",
+            "type": ".google.cloud.aiplatform.v1beta1.RagDataSchema"
+          },
+          {
+            "name": "rag_data_schema_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagDataSchema",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "CreateRagDataSchema",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagDataSchema",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_BatchCreateRagDataSchemas_async",
+      "title": "DatasetService batchCreateRagDataSchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch Create one or more RagDataSchemas",
+      "canonical": true,
+      "file": "vertex_rag_data_service.batch_create_rag_data_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateRagDataSchemas",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchCreateRagDataSchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "BatchCreateRagDataSchemas",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchCreateRagDataSchemas",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagDataSchema_async",
+      "title": "DatasetService getRagDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a RagDataSchema.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.get_rag_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRagDataSchema",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagDataSchema",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "GetRagDataSchema",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagDataSchema",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ListRagDataSchemas_async",
+      "title": "DatasetService listRagDataSchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RagDataSchemas in a Location.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.list_rag_data_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRagDataSchemas",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagDataSchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.ListRagDataSchemasResponse",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "ListRagDataSchemas",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagDataSchemas",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagDataSchema_async",
+      "title": "DatasetService deleteRagDataSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a RagDataSchema.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.delete_rag_data_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRagDataSchema",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagDataSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteRagDataSchema",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagDataSchema",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_BatchDeleteRagDataSchemas_async",
+      "title": "DatasetService batchDeleteRagDataSchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch Deletes one or more RagDataSchemas",
+      "canonical": true,
+      "file": "vertex_rag_data_service.batch_delete_rag_data_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteRagDataSchemas",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchDeleteRagDataSchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteRagDataSchemas",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchDeleteRagDataSchemas",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_CreateRagMetadata_async",
+      "title": "DatasetService createRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a RagMetadata.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.create_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rag_metadata",
+            "type": ".google.cloud.aiplatform.v1beta1.RagMetadata"
+          },
+          {
+            "name": "rag_metadata_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagMetadata",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "CreateRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.CreateRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_BatchCreateRagMetadata_async",
+      "title": "DatasetService batchCreateRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch Create one or more RagMetadatas",
+      "canonical": true,
+      "file": "vertex_rag_data_service.batch_create_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchCreateRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "BatchCreateRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchCreateRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagMetadata_async",
+      "title": "DatasetService updateRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a RagMetadata.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.update_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UpdateRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "rag_metadata",
+            "type": ".google.cloud.aiplatform.v1beta1.RagMetadata"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagMetadata",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UpdateRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagMetadata_async",
+      "title": "DatasetService getRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a RagMetadata.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.get_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.RagMetadata",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "GetRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.GetRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_ListRagMetadata_async",
+      "title": "DatasetService listRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists RagMetadata in a RagFile.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.list_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.ListRagMetadataResponse",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "ListRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagMetadata_async",
+      "title": "DatasetService deleteRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a RagMetadata.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.delete_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.DeleteRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_BatchDeleteRagMetadata_async",
+      "title": "DatasetService batchDeleteRagMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch Deletes one or more RagMetadata.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.batch_delete_rag_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteRagMetadata",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchDeleteRagMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteRagMetadata",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.BatchDeleteRagMetadata",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_VertexRagService_RetrieveContexts_async",
       "title": "DatasetService retrieveContexts Sample",
       "origin": "API_DEFINITION",
@@ -17992,6 +18996,102 @@
         "method": {
           "shortName": "CorroborateContent",
           "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.CorroborateContent",
+          "service": {
+            "shortName": "VertexRagService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagService_AskContexts_async",
+      "title": "DatasetService askContexts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Agentic Retrieval Ask API for RAG.",
+      "canonical": true,
+      "file": "vertex_rag_service.ask_contexts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AskContexts",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.AskContexts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": ".google.cloud.aiplatform.v1beta1.RagQuery"
+          },
+          {
+            "name": "tools",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.AskContextsResponse",
+        "client": {
+          "shortName": "VertexRagServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagServiceClient"
+        },
+        "method": {
+          "shortName": "AskContexts",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.AskContexts",
+          "service": {
+            "shortName": "VertexRagService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagService_AsyncRetrieveContexts_async",
+      "title": "DatasetService asyncRetrieveContexts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Asynchronous API to retrieves relevant contexts for a query.",
+      "canonical": true,
+      "file": "vertex_rag_service.async_retrieve_contexts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsyncRetrieveContexts",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.AsyncRetrieveContexts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": ".google.cloud.aiplatform.v1beta1.RagQuery"
+          },
+          {
+            "name": "tools",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagServiceClient"
+        },
+        "method": {
+          "shortName": "AsyncRetrieveContexts",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService.AsyncRetrieveContexts",
           "service": {
             "shortName": "VertexRagService",
             "fullName": "google.cloud.aiplatform.v1beta1.VertexRagService"

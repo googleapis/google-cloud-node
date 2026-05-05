@@ -609,6 +609,48 @@ describe('query interface', () => {
     expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
   });
 
+  it('supports alwaysUseImplicitOrderBy with limitToLast', async () => {
+    const overrides: ApiOverride = {
+      runQuery: request => {
+        queryEquals(
+          request,
+          where(fieldFilters('foo', 'GREATER_THAN_OR_EQUAL', 'bar')),
+          {
+            orderBy: [
+              {
+                field: {fieldPath: 'foo'},
+                direction: 'DESCENDING',
+              },
+              {
+                field: {fieldPath: '__name__'},
+                direction: 'DESCENDING',
+              },
+            ],
+            limit: {value: 1},
+          },
+        );
+        return stream({readTime: {seconds: 5, nanos: 6}});
+      },
+    };
+
+    firestore = await createInstance(overrides, {
+      alwaysUseImplicitOrderBy: true,
+    });
+    const query = firestore
+      .collection('collectionId')
+      .where('foo', '>=', 'bar')
+      .limitToLast(1);
+    await query.get();
+  });
+
+  it('throws for limitToLast without orderBy', async () => {
+    firestore = await createInstance();
+    const query = firestore.collection('collectionId').limitToLast(1);
+    expect(() => query.toProto()).to.throw(
+      'limitToLast() queries require specifying at least one orderBy() clause.',
+    );
+  });
+
   it('retries on stream failure', async () => {
     let attempts = 0;
     const overrides: ApiOverride = {
@@ -1913,6 +1955,20 @@ describe('limit() interface', () => {
     firestore = await createInstance(overrides);
     let query: Query = firestore.collection('collectionId');
     query = query.limit(1).limit(2).limit(3);
+    await query.get();
+  });
+
+  it('handles limit(0) correctly', async () => {
+    const overrides: ApiOverride = {
+      runQuery: request => {
+        queryEquals(request, limit(0));
+        return emptyQueryStream();
+      },
+    };
+
+    firestore = await createInstance(overrides);
+    let query: Query = firestore.collection('collectionId');
+    query = query.limit(0);
     await query.get();
   });
 });

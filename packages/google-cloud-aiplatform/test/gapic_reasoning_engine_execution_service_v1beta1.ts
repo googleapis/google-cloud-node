@@ -25,7 +25,7 @@ import * as reasoningengineexecutionserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, IamProtos, LocationProtos} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -64,6 +64,22 @@ function stubServerStreamingCall<ResponseType>(response?: ResponseType, error?: 
     setImmediate(() => { mockStream.write({}); });
     setImmediate(() => { mockStream.end(); });
     return sinon.stub().returns(mockStream);
+}
+
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -351,6 +367,160 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.queryReasoningEngine(request), expectedError);
+        });
+    });
+
+    describe('asyncQueryReasoningEngine', () => {
+        it('invokes asyncQueryReasoningEngine without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.asyncQueryReasoningEngine = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.asyncQueryReasoningEngine(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes asyncQueryReasoningEngine without error using callback', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.asyncQueryReasoningEngine = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.asyncQueryReasoningEngine(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.aiplatform.v1beta1.IAsyncQueryReasoningEngineResponse, protos.google.cloud.aiplatform.v1beta1.IAsyncQueryReasoningEngineOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.aiplatform.v1beta1.IAsyncQueryReasoningEngineResponse, protos.google.cloud.aiplatform.v1beta1.IAsyncQueryReasoningEngineOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes asyncQueryReasoningEngine with call error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.asyncQueryReasoningEngine = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.asyncQueryReasoningEngine(request), expectedError);
+            const actualRequest = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes asyncQueryReasoningEngine with LRO error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.asyncQueryReasoningEngine = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.asyncQueryReasoningEngine(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.asyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkAsyncQueryReasoningEngineProgress without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkAsyncQueryReasoningEngineProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkAsyncQueryReasoningEngineProgress with error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkAsyncQueryReasoningEngineProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
         });
     });
 
@@ -933,6 +1103,261 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
                         expectedHeaderRequestParams
                     )
             );
+        });
+    });
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
         });
     });
 
@@ -2946,6 +3371,52 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             });
         });
 
+        describe('onlineEvaluator', async () => {
+            const fakePath = "/rendered/path/onlineEvaluator";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                online_evaluator: "onlineEvaluatorValue",
+            };
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.onlineEvaluatorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.onlineEvaluatorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('onlineEvaluatorPath', () => {
+                const result = client.onlineEvaluatorPath("projectValue", "locationValue", "onlineEvaluatorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromOnlineEvaluatorName', () => {
+                const result = client.matchProjectFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOnlineEvaluatorName', () => {
+                const result = client.matchLocationFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOnlineEvaluatorFromOnlineEvaluatorName', () => {
+                const result = client.matchOnlineEvaluatorFromOnlineEvaluatorName(fakePath);
+                assert.strictEqual(result, "onlineEvaluatorValue");
+                assert((client.pathTemplates.onlineEvaluatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('persistentResource', async () => {
             const fakePath = "/rendered/path/persistentResource";
             const expectedParameters = {
@@ -3338,6 +3809,60 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             });
         });
 
+        describe('ragDataSchema', async () => {
+            const fakePath = "/rendered/path/ragDataSchema";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rag_corpus: "ragCorpusValue",
+                rag_data_schema: "ragDataSchemaValue",
+            };
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragDataSchemaPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragDataSchemaPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragDataSchemaPath', () => {
+                const result = client.ragDataSchemaPath("projectValue", "locationValue", "ragCorpusValue", "ragDataSchemaValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragDataSchemaPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagDataSchemaName', () => {
+                const result = client.matchProjectFromRagDataSchemaName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragDataSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagDataSchemaName', () => {
+                const result = client.matchLocationFromRagDataSchemaName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragDataSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagCorpusFromRagDataSchemaName', () => {
+                const result = client.matchRagCorpusFromRagDataSchemaName(fakePath);
+                assert.strictEqual(result, "ragCorpusValue");
+                assert((client.pathTemplates.ragDataSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagDataSchemaFromRagDataSchemaName', () => {
+                const result = client.matchRagDataSchemaFromRagDataSchemaName(fakePath);
+                assert.strictEqual(result, "ragDataSchemaValue");
+                assert((client.pathTemplates.ragDataSchemaPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('ragEngineConfig', async () => {
             const fakePath = "/rendered/path/ragEngineConfig";
             const expectedParameters = {
@@ -3426,6 +3951,68 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
                 const result = client.matchRagFileFromRagFileName(fakePath);
                 assert.strictEqual(result, "ragFileValue");
                 assert((client.pathTemplates.ragFilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragMetadata', async () => {
+            const fakePath = "/rendered/path/ragMetadata";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                rag_corpus: "ragCorpusValue",
+                rag_file: "ragFileValue",
+                rag_metadata: "ragMetadataValue",
+            };
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragMetadataPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragMetadataPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragMetadataPath', () => {
+                const result = client.ragMetadataPath("projectValue", "locationValue", "ragCorpusValue", "ragFileValue", "ragMetadataValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragMetadataPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagMetadataName', () => {
+                const result = client.matchProjectFromRagMetadataName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragMetadataPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagMetadataName', () => {
+                const result = client.matchLocationFromRagMetadataName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragMetadataPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagCorpusFromRagMetadataName', () => {
+                const result = client.matchRagCorpusFromRagMetadataName(fakePath);
+                assert.strictEqual(result, "ragCorpusValue");
+                assert((client.pathTemplates.ragMetadataPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagFileFromRagMetadataName', () => {
+                const result = client.matchRagFileFromRagMetadataName(fakePath);
+                assert.strictEqual(result, "ragFileValue");
+                assert((client.pathTemplates.ragMetadataPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRagMetadataFromRagMetadataName', () => {
+                const result = client.matchRagMetadataFromRagMetadataName(fakePath);
+                assert.strictEqual(result, "ragMetadataValue");
+                assert((client.pathTemplates.ragMetadataPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -473,6 +473,11 @@
                 "evaluateInstances"
               ]
             },
+            "GenerateInstanceRubrics": {
+              "methods": [
+                "generateInstanceRubrics"
+              ]
+            },
             "EvaluateDataset": {
               "methods": [
                 "evaluateDataset"
@@ -486,6 +491,11 @@
             "EvaluateInstances": {
               "methods": [
                 "evaluateInstances"
+              ]
+            },
+            "GenerateInstanceRubrics": {
+              "methods": [
+                "generateInstanceRubrics"
               ]
             },
             "EvaluateDataset": {
@@ -3334,6 +3344,94 @@
         }
       }
     },
+    "OnlineEvaluatorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OnlineEvaluatorServiceClient",
+          "rpcs": {
+            "GetOnlineEvaluator": {
+              "methods": [
+                "getOnlineEvaluator"
+              ]
+            },
+            "CreateOnlineEvaluator": {
+              "methods": [
+                "createOnlineEvaluator"
+              ]
+            },
+            "UpdateOnlineEvaluator": {
+              "methods": [
+                "updateOnlineEvaluator"
+              ]
+            },
+            "DeleteOnlineEvaluator": {
+              "methods": [
+                "deleteOnlineEvaluator"
+              ]
+            },
+            "ActivateOnlineEvaluator": {
+              "methods": [
+                "activateOnlineEvaluator"
+              ]
+            },
+            "SuspendOnlineEvaluator": {
+              "methods": [
+                "suspendOnlineEvaluator"
+              ]
+            },
+            "ListOnlineEvaluators": {
+              "methods": [
+                "listOnlineEvaluators",
+                "listOnlineEvaluatorsStream",
+                "listOnlineEvaluatorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OnlineEvaluatorServiceClient",
+          "rpcs": {
+            "GetOnlineEvaluator": {
+              "methods": [
+                "getOnlineEvaluator"
+              ]
+            },
+            "CreateOnlineEvaluator": {
+              "methods": [
+                "createOnlineEvaluator"
+              ]
+            },
+            "UpdateOnlineEvaluator": {
+              "methods": [
+                "updateOnlineEvaluator"
+              ]
+            },
+            "DeleteOnlineEvaluator": {
+              "methods": [
+                "deleteOnlineEvaluator"
+              ]
+            },
+            "ActivateOnlineEvaluator": {
+              "methods": [
+                "activateOnlineEvaluator"
+              ]
+            },
+            "SuspendOnlineEvaluator": {
+              "methods": [
+                "suspendOnlineEvaluator"
+              ]
+            },
+            "ListOnlineEvaluators": {
+              "methods": [
+                "listOnlineEvaluators",
+                "listOnlineEvaluatorsStream",
+                "listOnlineEvaluatorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PersistentResourceService": {
       "clients": {
         "grpc": {
@@ -3702,6 +3800,11 @@
               "methods": [
                 "streamQueryReasoningEngine"
               ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
+              ]
             }
           }
         },
@@ -3711,6 +3814,11 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
               ]
             }
           }
@@ -4387,6 +4495,41 @@
                 "getRagEngineConfig"
               ]
             },
+            "CreateRagDataSchema": {
+              "methods": [
+                "createRagDataSchema"
+              ]
+            },
+            "GetRagDataSchema": {
+              "methods": [
+                "getRagDataSchema"
+              ]
+            },
+            "DeleteRagDataSchema": {
+              "methods": [
+                "deleteRagDataSchema"
+              ]
+            },
+            "CreateRagMetadata": {
+              "methods": [
+                "createRagMetadata"
+              ]
+            },
+            "UpdateRagMetadata": {
+              "methods": [
+                "updateRagMetadata"
+              ]
+            },
+            "GetRagMetadata": {
+              "methods": [
+                "getRagMetadata"
+              ]
+            },
+            "DeleteRagMetadata": {
+              "methods": [
+                "deleteRagMetadata"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -4417,6 +4560,26 @@
                 "updateRagEngineConfig"
               ]
             },
+            "BatchCreateRagDataSchemas": {
+              "methods": [
+                "batchCreateRagDataSchemas"
+              ]
+            },
+            "BatchDeleteRagDataSchemas": {
+              "methods": [
+                "batchDeleteRagDataSchemas"
+              ]
+            },
+            "BatchCreateRagMetadata": {
+              "methods": [
+                "batchCreateRagMetadata"
+              ]
+            },
+            "BatchDeleteRagMetadata": {
+              "methods": [
+                "batchDeleteRagMetadata"
+              ]
+            },
             "ListRagCorpora": {
               "methods": [
                 "listRagCorpora",
@@ -4429,6 +4592,20 @@
                 "listRagFiles",
                 "listRagFilesStream",
                 "listRagFilesAsync"
+              ]
+            },
+            "ListRagDataSchemas": {
+              "methods": [
+                "listRagDataSchemas",
+                "listRagDataSchemasStream",
+                "listRagDataSchemasAsync"
+              ]
+            },
+            "ListRagMetadata": {
+              "methods": [
+                "listRagMetadata",
+                "listRagMetadataStream",
+                "listRagMetadataAsync"
               ]
             }
           }
@@ -4456,6 +4633,41 @@
                 "getRagEngineConfig"
               ]
             },
+            "CreateRagDataSchema": {
+              "methods": [
+                "createRagDataSchema"
+              ]
+            },
+            "GetRagDataSchema": {
+              "methods": [
+                "getRagDataSchema"
+              ]
+            },
+            "DeleteRagDataSchema": {
+              "methods": [
+                "deleteRagDataSchema"
+              ]
+            },
+            "CreateRagMetadata": {
+              "methods": [
+                "createRagMetadata"
+              ]
+            },
+            "UpdateRagMetadata": {
+              "methods": [
+                "updateRagMetadata"
+              ]
+            },
+            "GetRagMetadata": {
+              "methods": [
+                "getRagMetadata"
+              ]
+            },
+            "DeleteRagMetadata": {
+              "methods": [
+                "deleteRagMetadata"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -4486,6 +4698,26 @@
                 "updateRagEngineConfig"
               ]
             },
+            "BatchCreateRagDataSchemas": {
+              "methods": [
+                "batchCreateRagDataSchemas"
+              ]
+            },
+            "BatchDeleteRagDataSchemas": {
+              "methods": [
+                "batchDeleteRagDataSchemas"
+              ]
+            },
+            "BatchCreateRagMetadata": {
+              "methods": [
+                "batchCreateRagMetadata"
+              ]
+            },
+            "BatchDeleteRagMetadata": {
+              "methods": [
+                "batchDeleteRagMetadata"
+              ]
+            },
             "ListRagCorpora": {
               "methods": [
                 "listRagCorpora",
@@ -4498,6 +4730,20 @@
                 "listRagFiles",
                 "listRagFilesStream",
                 "listRagFilesAsync"
+              ]
+            },
+            "ListRagDataSchemas": {
+              "methods": [
+                "listRagDataSchemas",
+                "listRagDataSchemasStream",
+                "listRagDataSchemasAsync"
+              ]
+            },
+            "ListRagMetadata": {
+              "methods": [
+                "listRagMetadata",
+                "listRagMetadataStream",
+                "listRagMetadataAsync"
               ]
             }
           }
@@ -4523,6 +4769,16 @@
               "methods": [
                 "corroborateContent"
               ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
+              ]
             }
           }
         },
@@ -4542,6 +4798,16 @@
             "CorroborateContent": {
               "methods": [
                 "corroborateContent"
+              ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
               ]
             }
           }

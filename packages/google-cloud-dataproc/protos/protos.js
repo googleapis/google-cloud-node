@@ -13529,6 +13529,7 @@
                          * @interface IClusterConfig
                          * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterType|null} [clusterType] ClusterConfig clusterType
                          * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null} [clusterTier] ClusterConfig clusterTier
+                         * @property {google.cloud.dataproc.v1.ClusterConfig.Engine|null} [engine] ClusterConfig engine
                          * @property {string|null} [configBucket] ClusterConfig configBucket
                          * @property {string|null} [tempBucket] ClusterConfig tempBucket
                          * @property {google.cloud.dataproc.v1.IGceClusterConfig|null} [gceClusterConfig] ClusterConfig gceClusterConfig
@@ -13579,6 +13580,14 @@
                          * @instance
                          */
                         ClusterConfig.prototype.clusterTier = 0;
+    
+                        /**
+                         * ClusterConfig engine.
+                         * @member {google.cloud.dataproc.v1.ClusterConfig.Engine} engine
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.engine = 0;
     
                         /**
                          * ClusterConfig configBucket.
@@ -13770,6 +13779,8 @@
                                 writer.uint32(/* id 27, wireType 0 =*/216).int32(message.clusterType);
                             if (message.clusterTier != null && Object.hasOwnProperty.call(message, "clusterTier"))
                                 writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clusterTier);
+                            if (message.engine != null && Object.hasOwnProperty.call(message, "engine"))
+                                writer.uint32(/* id 30, wireType 0 =*/240).int32(message.engine);
                             return writer;
                         };
     
@@ -13812,6 +13823,10 @@
                                     }
                                 case 29: {
                                         message.clusterTier = reader.int32();
+                                        break;
+                                    }
+                                case 30: {
+                                        message.engine = reader.int32();
                                         break;
                                     }
                                 case 1: {
@@ -13931,6 +13946,15 @@
                                 switch (message.clusterTier) {
                                 default:
                                     return "clusterTier: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                switch (message.engine) {
+                                default:
+                                    return "engine: enum value expected";
                                 case 0:
                                 case 1:
                                 case 2:
@@ -14079,6 +14103,26 @@
                                 message.clusterTier = 2;
                                 break;
                             }
+                            switch (object.engine) {
+                            default:
+                                if (typeof object.engine === "number") {
+                                    message.engine = object.engine;
+                                    break;
+                                }
+                                break;
+                            case "ENGINE_UNSPECIFIED":
+                            case 0:
+                                message.engine = 0;
+                                break;
+                            case "DEFAULT":
+                            case 1:
+                                message.engine = 1;
+                                break;
+                            case "LIGHTNING":
+                            case 2:
+                                message.engine = 2;
+                                break;
+                            }
                             if (object.configBucket != null)
                                 message.configBucket = String(object.configBucket);
                             if (object.tempBucket != null)
@@ -14200,6 +14244,7 @@
                                 object.dataprocMetricConfig = null;
                                 object.clusterType = options.enums === String ? "CLUSTER_TYPE_UNSPECIFIED" : 0;
                                 object.clusterTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
+                                object.engine = options.enums === String ? "ENGINE_UNSPECIFIED" : 0;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -14243,6 +14288,8 @@
                                 object.clusterType = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterType[message.clusterType] === undefined ? message.clusterType : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterType[message.clusterType] : message.clusterType;
                             if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
                                 object.clusterTier = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] === undefined ? message.clusterTier : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] : message.clusterTier;
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                object.engine = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.Engine[message.engine] === undefined ? message.engine : $root.google.cloud.dataproc.v1.ClusterConfig.Engine[message.engine] : message.engine;
                             return object;
                         };
     
@@ -14303,6 +14350,22 @@
                             values[valuesById[0] = "CLUSTER_TIER_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "CLUSTER_TIER_STANDARD"] = 1;
                             values[valuesById[2] = "CLUSTER_TIER_PREMIUM"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Engine enum.
+                         * @name google.cloud.dataproc.v1.ClusterConfig.Engine
+                         * @enum {number}
+                         * @property {number} ENGINE_UNSPECIFIED=0 ENGINE_UNSPECIFIED value
+                         * @property {number} DEFAULT=1 DEFAULT value
+                         * @property {number} LIGHTNING=2 LIGHTNING value
+                         */
+                        ClusterConfig.Engine = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENGINE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEFAULT"] = 1;
+                            values[valuesById[2] = "LIGHTNING"] = 2;
                             return values;
                         })();
     
@@ -22563,6 +22626,9 @@
                          * @property {google.protobuf.IDuration|null} [idleDeleteTtl] LifecycleConfig idleDeleteTtl
                          * @property {google.protobuf.ITimestamp|null} [autoDeleteTime] LifecycleConfig autoDeleteTime
                          * @property {google.protobuf.IDuration|null} [autoDeleteTtl] LifecycleConfig autoDeleteTtl
+                         * @property {google.protobuf.IDuration|null} [idleStopTtl] LifecycleConfig idleStopTtl
+                         * @property {google.protobuf.ITimestamp|null} [autoStopTime] LifecycleConfig autoStopTime
+                         * @property {google.protobuf.IDuration|null} [autoStopTtl] LifecycleConfig autoStopTtl
                          * @property {google.protobuf.ITimestamp|null} [idleStartTime] LifecycleConfig idleStartTime
                          */
     
@@ -22606,6 +22672,30 @@
                         LifecycleConfig.prototype.autoDeleteTtl = null;
     
                         /**
+                         * LifecycleConfig idleStopTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} idleStopTtl
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.idleStopTtl = null;
+    
+                        /**
+                         * LifecycleConfig autoStopTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} autoStopTime
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.autoStopTime = null;
+    
+                        /**
+                         * LifecycleConfig autoStopTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} autoStopTtl
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.autoStopTtl = null;
+    
+                        /**
                          * LifecycleConfig idleStartTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} idleStartTime
                          * @memberof google.cloud.dataproc.v1.LifecycleConfig
@@ -22624,6 +22714,17 @@
                          */
                         Object.defineProperty(LifecycleConfig.prototype, "ttl", {
                             get: $util.oneOfGetter($oneOfFields = ["autoDeleteTime", "autoDeleteTtl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * LifecycleConfig stopTtl.
+                         * @member {"autoStopTime"|"autoStopTtl"|undefined} stopTtl
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        Object.defineProperty(LifecycleConfig.prototype, "stopTtl", {
+                            get: $util.oneOfGetter($oneOfFields = ["autoStopTime", "autoStopTtl"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -22659,6 +22760,12 @@
                                 $root.google.protobuf.Duration.encode(message.autoDeleteTtl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.idleStartTime != null && Object.hasOwnProperty.call(message, "idleStartTime"))
                                 $root.google.protobuf.Timestamp.encode(message.idleStartTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.idleStopTtl != null && Object.hasOwnProperty.call(message, "idleStopTtl"))
+                                $root.google.protobuf.Duration.encode(message.idleStopTtl, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.autoStopTime != null && Object.hasOwnProperty.call(message, "autoStopTime"))
+                                $root.google.protobuf.Timestamp.encode(message.autoStopTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.autoStopTtl != null && Object.hasOwnProperty.call(message, "autoStopTtl"))
+                                $root.google.protobuf.Duration.encode(message.autoStopTtl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -22705,6 +22812,18 @@
                                     }
                                 case 3: {
                                         message.autoDeleteTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.idleStopTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.autoStopTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.autoStopTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -22770,6 +22889,29 @@
                                         return "autoDeleteTtl." + error;
                                 }
                             }
+                            if (message.idleStopTtl != null && message.hasOwnProperty("idleStopTtl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.idleStopTtl);
+                                if (error)
+                                    return "idleStopTtl." + error;
+                            }
+                            if (message.autoStopTime != null && message.hasOwnProperty("autoStopTime")) {
+                                properties.stopTtl = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.autoStopTime);
+                                    if (error)
+                                        return "autoStopTime." + error;
+                                }
+                            }
+                            if (message.autoStopTtl != null && message.hasOwnProperty("autoStopTtl")) {
+                                if (properties.stopTtl === 1)
+                                    return "stopTtl: multiple values";
+                                properties.stopTtl = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.autoStopTtl);
+                                    if (error)
+                                        return "autoStopTtl." + error;
+                                }
+                            }
                             if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.idleStartTime);
                                 if (error)
@@ -22805,6 +22947,21 @@
                                     throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.autoDeleteTtl: object expected");
                                 message.autoDeleteTtl = $root.google.protobuf.Duration.fromObject(object.autoDeleteTtl);
                             }
+                            if (object.idleStopTtl != null) {
+                                if (typeof object.idleStopTtl !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.idleStopTtl: object expected");
+                                message.idleStopTtl = $root.google.protobuf.Duration.fromObject(object.idleStopTtl);
+                            }
+                            if (object.autoStopTime != null) {
+                                if (typeof object.autoStopTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.autoStopTime: object expected");
+                                message.autoStopTime = $root.google.protobuf.Timestamp.fromObject(object.autoStopTime);
+                            }
+                            if (object.autoStopTtl != null) {
+                                if (typeof object.autoStopTtl !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.autoStopTtl: object expected");
+                                message.autoStopTtl = $root.google.protobuf.Duration.fromObject(object.autoStopTtl);
+                            }
                             if (object.idleStartTime != null) {
                                 if (typeof object.idleStartTime !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.idleStartTime: object expected");
@@ -22829,6 +22986,7 @@
                             if (options.defaults) {
                                 object.idleDeleteTtl = null;
                                 object.idleStartTime = null;
+                                object.idleStopTtl = null;
                             }
                             if (message.idleDeleteTtl != null && message.hasOwnProperty("idleDeleteTtl"))
                                 object.idleDeleteTtl = $root.google.protobuf.Duration.toObject(message.idleDeleteTtl, options);
@@ -22844,6 +23002,18 @@
                             }
                             if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime"))
                                 object.idleStartTime = $root.google.protobuf.Timestamp.toObject(message.idleStartTime, options);
+                            if (message.idleStopTtl != null && message.hasOwnProperty("idleStopTtl"))
+                                object.idleStopTtl = $root.google.protobuf.Duration.toObject(message.idleStopTtl, options);
+                            if (message.autoStopTime != null && message.hasOwnProperty("autoStopTime")) {
+                                object.autoStopTime = $root.google.protobuf.Timestamp.toObject(message.autoStopTime, options);
+                                if (options.oneofs)
+                                    object.stopTtl = "autoStopTime";
+                            }
+                            if (message.autoStopTtl != null && message.hasOwnProperty("autoStopTtl")) {
+                                object.autoStopTtl = $root.google.protobuf.Duration.toObject(message.autoStopTtl, options);
+                                if (options.oneofs)
+                                    object.stopTtl = "autoStopTtl";
+                            }
                             return object;
                         };
     

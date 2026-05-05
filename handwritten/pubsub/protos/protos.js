@@ -7583,6 +7583,493 @@
                     return JavaScriptUDF;
                 })();
     
+                v1.AIInference = (function() {
+    
+                    /**
+                     * Properties of a AIInference.
+                     * @memberof google.pubsub.v1
+                     * @interface IAIInference
+                     * @property {string|null} [endpoint] AIInference endpoint
+                     * @property {google.pubsub.v1.AIInference.IUnstructuredInference|null} [unstructuredInference] AIInference unstructuredInference
+                     * @property {string|null} [serviceAccountEmail] AIInference serviceAccountEmail
+                     */
+    
+                    /**
+                     * Constructs a new AIInference.
+                     * @memberof google.pubsub.v1
+                     * @classdesc Represents a AIInference.
+                     * @implements IAIInference
+                     * @constructor
+                     * @param {google.pubsub.v1.IAIInference=} [properties] Properties to set
+                     */
+                    function AIInference(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AIInference endpoint.
+                     * @member {string} endpoint
+                     * @memberof google.pubsub.v1.AIInference
+                     * @instance
+                     */
+                    AIInference.prototype.endpoint = "";
+    
+                    /**
+                     * AIInference unstructuredInference.
+                     * @member {google.pubsub.v1.AIInference.IUnstructuredInference|null|undefined} unstructuredInference
+                     * @memberof google.pubsub.v1.AIInference
+                     * @instance
+                     */
+                    AIInference.prototype.unstructuredInference = null;
+    
+                    /**
+                     * AIInference serviceAccountEmail.
+                     * @member {string} serviceAccountEmail
+                     * @memberof google.pubsub.v1.AIInference
+                     * @instance
+                     */
+                    AIInference.prototype.serviceAccountEmail = "";
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AIInference inferenceMode.
+                     * @member {"unstructuredInference"|undefined} inferenceMode
+                     * @memberof google.pubsub.v1.AIInference
+                     * @instance
+                     */
+                    Object.defineProperty(AIInference.prototype, "inferenceMode", {
+                        get: $util.oneOfGetter($oneOfFields = ["unstructuredInference"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AIInference instance using the specified properties.
+                     * @function create
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {google.pubsub.v1.IAIInference=} [properties] Properties to set
+                     * @returns {google.pubsub.v1.AIInference} AIInference instance
+                     */
+                    AIInference.create = function create(properties) {
+                        return new AIInference(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AIInference message. Does not implicitly {@link google.pubsub.v1.AIInference.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {google.pubsub.v1.IAIInference} message AIInference message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AIInference.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.endpoint);
+                        if (message.unstructuredInference != null && Object.hasOwnProperty.call(message, "unstructuredInference"))
+                            $root.google.pubsub.v1.AIInference.UnstructuredInference.encode(message.unstructuredInference, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceAccountEmail);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AIInference message, length delimited. Does not implicitly {@link google.pubsub.v1.AIInference.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {google.pubsub.v1.IAIInference} message AIInference message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AIInference.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a AIInference message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.pubsub.v1.AIInference} AIInference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AIInference.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.pubsub.v1.AIInference();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.endpoint = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.unstructuredInference = $root.google.pubsub.v1.AIInference.UnstructuredInference.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a AIInference message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.pubsub.v1.AIInference} AIInference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AIInference.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a AIInference message.
+                     * @function verify
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AIInference.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                            if (!$util.isString(message.endpoint))
+                                return "endpoint: string expected";
+                        if (message.unstructuredInference != null && message.hasOwnProperty("unstructuredInference")) {
+                            properties.inferenceMode = 1;
+                            {
+                                var error = $root.google.pubsub.v1.AIInference.UnstructuredInference.verify(message.unstructuredInference);
+                                if (error)
+                                    return "unstructuredInference." + error;
+                            }
+                        }
+                        if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                            if (!$util.isString(message.serviceAccountEmail))
+                                return "serviceAccountEmail: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a AIInference message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.pubsub.v1.AIInference} AIInference
+                     */
+                    AIInference.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.pubsub.v1.AIInference)
+                            return object;
+                        var message = new $root.google.pubsub.v1.AIInference();
+                        if (object.endpoint != null)
+                            message.endpoint = String(object.endpoint);
+                        if (object.unstructuredInference != null) {
+                            if (typeof object.unstructuredInference !== "object")
+                                throw TypeError(".google.pubsub.v1.AIInference.unstructuredInference: object expected");
+                            message.unstructuredInference = $root.google.pubsub.v1.AIInference.UnstructuredInference.fromObject(object.unstructuredInference);
+                        }
+                        if (object.serviceAccountEmail != null)
+                            message.serviceAccountEmail = String(object.serviceAccountEmail);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a AIInference message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {google.pubsub.v1.AIInference} message AIInference
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AIInference.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.endpoint = "";
+                            object.serviceAccountEmail = "";
+                        }
+                        if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                            object.endpoint = message.endpoint;
+                        if (message.unstructuredInference != null && message.hasOwnProperty("unstructuredInference")) {
+                            object.unstructuredInference = $root.google.pubsub.v1.AIInference.UnstructuredInference.toObject(message.unstructuredInference, options);
+                            if (options.oneofs)
+                                object.inferenceMode = "unstructuredInference";
+                        }
+                        if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                            object.serviceAccountEmail = message.serviceAccountEmail;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AIInference to JSON.
+                     * @function toJSON
+                     * @memberof google.pubsub.v1.AIInference
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AIInference.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AIInference
+                     * @function getTypeUrl
+                     * @memberof google.pubsub.v1.AIInference
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AIInference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.pubsub.v1.AIInference";
+                    };
+    
+                    AIInference.UnstructuredInference = (function() {
+    
+                        /**
+                         * Properties of an UnstructuredInference.
+                         * @memberof google.pubsub.v1.AIInference
+                         * @interface IUnstructuredInference
+                         * @property {google.protobuf.IStruct|null} [parameters] UnstructuredInference parameters
+                         */
+    
+                        /**
+                         * Constructs a new UnstructuredInference.
+                         * @memberof google.pubsub.v1.AIInference
+                         * @classdesc Represents an UnstructuredInference.
+                         * @implements IUnstructuredInference
+                         * @constructor
+                         * @param {google.pubsub.v1.AIInference.IUnstructuredInference=} [properties] Properties to set
+                         */
+                        function UnstructuredInference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UnstructuredInference parameters.
+                         * @member {google.protobuf.IStruct|null|undefined} parameters
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @instance
+                         */
+                        UnstructuredInference.prototype.parameters = null;
+    
+                        /**
+                         * Creates a new UnstructuredInference instance using the specified properties.
+                         * @function create
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {google.pubsub.v1.AIInference.IUnstructuredInference=} [properties] Properties to set
+                         * @returns {google.pubsub.v1.AIInference.UnstructuredInference} UnstructuredInference instance
+                         */
+                        UnstructuredInference.create = function create(properties) {
+                            return new UnstructuredInference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UnstructuredInference message. Does not implicitly {@link google.pubsub.v1.AIInference.UnstructuredInference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {google.pubsub.v1.AIInference.IUnstructuredInference} message UnstructuredInference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnstructuredInference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parameters != null && Object.hasOwnProperty.call(message, "parameters"))
+                                $root.google.protobuf.Struct.encode(message.parameters, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UnstructuredInference message, length delimited. Does not implicitly {@link google.pubsub.v1.AIInference.UnstructuredInference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {google.pubsub.v1.AIInference.IUnstructuredInference} message UnstructuredInference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnstructuredInference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UnstructuredInference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.pubsub.v1.AIInference.UnstructuredInference} UnstructuredInference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnstructuredInference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.pubsub.v1.AIInference.UnstructuredInference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UnstructuredInference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.pubsub.v1.AIInference.UnstructuredInference} UnstructuredInference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnstructuredInference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UnstructuredInference message.
+                         * @function verify
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UnstructuredInference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parameters != null && message.hasOwnProperty("parameters")) {
+                                var error = $root.google.protobuf.Struct.verify(message.parameters);
+                                if (error)
+                                    return "parameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UnstructuredInference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.pubsub.v1.AIInference.UnstructuredInference} UnstructuredInference
+                         */
+                        UnstructuredInference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.pubsub.v1.AIInference.UnstructuredInference)
+                                return object;
+                            var message = new $root.google.pubsub.v1.AIInference.UnstructuredInference();
+                            if (object.parameters != null) {
+                                if (typeof object.parameters !== "object")
+                                    throw TypeError(".google.pubsub.v1.AIInference.UnstructuredInference.parameters: object expected");
+                                message.parameters = $root.google.protobuf.Struct.fromObject(object.parameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UnstructuredInference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {google.pubsub.v1.AIInference.UnstructuredInference} message UnstructuredInference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UnstructuredInference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.parameters = null;
+                            if (message.parameters != null && message.hasOwnProperty("parameters"))
+                                object.parameters = $root.google.protobuf.Struct.toObject(message.parameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UnstructuredInference to JSON.
+                         * @function toJSON
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UnstructuredInference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UnstructuredInference
+                         * @function getTypeUrl
+                         * @memberof google.pubsub.v1.AIInference.UnstructuredInference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UnstructuredInference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.pubsub.v1.AIInference.UnstructuredInference";
+                        };
+    
+                        return UnstructuredInference;
+                    })();
+    
+                    return AIInference;
+                })();
+    
                 v1.MessageTransform = (function() {
     
                     /**
@@ -7590,6 +8077,7 @@
                      * @memberof google.pubsub.v1
                      * @interface IMessageTransform
                      * @property {google.pubsub.v1.IJavaScriptUDF|null} [javascriptUdf] MessageTransform javascriptUdf
+                     * @property {google.pubsub.v1.IAIInference|null} [aiInference] MessageTransform aiInference
                      * @property {boolean|null} [enabled] MessageTransform enabled
                      * @property {boolean|null} [disabled] MessageTransform disabled
                      */
@@ -7618,6 +8106,14 @@
                     MessageTransform.prototype.javascriptUdf = null;
     
                     /**
+                     * MessageTransform aiInference.
+                     * @member {google.pubsub.v1.IAIInference|null|undefined} aiInference
+                     * @memberof google.pubsub.v1.MessageTransform
+                     * @instance
+                     */
+                    MessageTransform.prototype.aiInference = null;
+    
+                    /**
                      * MessageTransform enabled.
                      * @member {boolean} enabled
                      * @memberof google.pubsub.v1.MessageTransform
@@ -7638,12 +8134,12 @@
     
                     /**
                      * MessageTransform transform.
-                     * @member {"javascriptUdf"|undefined} transform
+                     * @member {"javascriptUdf"|"aiInference"|undefined} transform
                      * @memberof google.pubsub.v1.MessageTransform
                      * @instance
                      */
                     Object.defineProperty(MessageTransform.prototype, "transform", {
-                        get: $util.oneOfGetter($oneOfFields = ["javascriptUdf"]),
+                        get: $util.oneOfGetter($oneOfFields = ["javascriptUdf", "aiInference"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -7677,6 +8173,8 @@
                             writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enabled);
                         if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
                             writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disabled);
+                        if (message.aiInference != null && Object.hasOwnProperty.call(message, "aiInference"))
+                            $root.google.pubsub.v1.AIInference.encode(message.aiInference, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -7715,6 +8213,10 @@
                             switch (tag >>> 3) {
                             case 2: {
                                     message.javascriptUdf = $root.google.pubsub.v1.JavaScriptUDF.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.aiInference = $root.google.pubsub.v1.AIInference.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 3: {
@@ -7769,6 +8271,16 @@
                                     return "javascriptUdf." + error;
                             }
                         }
+                        if (message.aiInference != null && message.hasOwnProperty("aiInference")) {
+                            if (properties.transform === 1)
+                                return "transform: multiple values";
+                            properties.transform = 1;
+                            {
+                                var error = $root.google.pubsub.v1.AIInference.verify(message.aiInference);
+                                if (error)
+                                    return "aiInference." + error;
+                            }
+                        }
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             if (typeof message.enabled !== "boolean")
                                 return "enabled: boolean expected";
@@ -7794,6 +8306,11 @@
                             if (typeof object.javascriptUdf !== "object")
                                 throw TypeError(".google.pubsub.v1.MessageTransform.javascriptUdf: object expected");
                             message.javascriptUdf = $root.google.pubsub.v1.JavaScriptUDF.fromObject(object.javascriptUdf);
+                        }
+                        if (object.aiInference != null) {
+                            if (typeof object.aiInference !== "object")
+                                throw TypeError(".google.pubsub.v1.MessageTransform.aiInference: object expected");
+                            message.aiInference = $root.google.pubsub.v1.AIInference.fromObject(object.aiInference);
                         }
                         if (object.enabled != null)
                             message.enabled = Boolean(object.enabled);
@@ -7828,6 +8345,11 @@
                             object.enabled = message.enabled;
                         if (message.disabled != null && message.hasOwnProperty("disabled"))
                             object.disabled = message.disabled;
+                        if (message.aiInference != null && message.hasOwnProperty("aiInference")) {
+                            object.aiInference = $root.google.pubsub.v1.AIInference.toObject(message.aiInference, options);
+                            if (options.oneofs)
+                                object.transform = "aiInference";
+                        }
                         return object;
                     };
     
@@ -12369,6 +12891,7 @@
                      * @property {google.pubsub.v1.IPushConfig|null} [pushConfig] Subscription pushConfig
                      * @property {google.pubsub.v1.IBigQueryConfig|null} [bigqueryConfig] Subscription bigqueryConfig
                      * @property {google.pubsub.v1.ICloudStorageConfig|null} [cloudStorageConfig] Subscription cloudStorageConfig
+                     * @property {google.pubsub.v1.IBigtableConfig|null} [bigtableConfig] Subscription bigtableConfig
                      * @property {number|null} [ackDeadlineSeconds] Subscription ackDeadlineSeconds
                      * @property {boolean|null} [retainAckedMessages] Subscription retainAckedMessages
                      * @property {google.protobuf.IDuration|null} [messageRetentionDuration] Subscription messageRetentionDuration
@@ -12444,6 +12967,14 @@
                      * @instance
                      */
                     Subscription.prototype.cloudStorageConfig = null;
+    
+                    /**
+                     * Subscription bigtableConfig.
+                     * @member {google.pubsub.v1.IBigtableConfig|null|undefined} bigtableConfig
+                     * @memberof google.pubsub.v1.Subscription
+                     * @instance
+                     */
+                    Subscription.prototype.bigtableConfig = null;
     
                     /**
                      * Subscription ackDeadlineSeconds.
@@ -12642,6 +13173,8 @@
                         if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
                             for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 26, wireType 2 =*/210).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
+                        if (message.bigtableConfig != null && Object.hasOwnProperty.call(message, "bigtableConfig"))
+                            $root.google.pubsub.v1.BigtableConfig.encode(message.bigtableConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                         return writer;
                     };
     
@@ -12696,6 +13229,10 @@
                                 }
                             case 22: {
                                     message.cloudStorageConfig = $root.google.pubsub.v1.CloudStorageConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 27: {
+                                    message.bigtableConfig = $root.google.pubsub.v1.BigtableConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 5: {
@@ -12858,6 +13395,11 @@
                             if (error)
                                 return "cloudStorageConfig." + error;
                         }
+                        if (message.bigtableConfig != null && message.hasOwnProperty("bigtableConfig")) {
+                            var error = $root.google.pubsub.v1.BigtableConfig.verify(message.bigtableConfig);
+                            if (error)
+                                return "bigtableConfig." + error;
+                        }
                         if (message.ackDeadlineSeconds != null && message.hasOwnProperty("ackDeadlineSeconds"))
                             if (!$util.isInteger(message.ackDeadlineSeconds))
                                 return "ackDeadlineSeconds: integer expected";
@@ -12973,6 +13515,11 @@
                             if (typeof object.cloudStorageConfig !== "object")
                                 throw TypeError(".google.pubsub.v1.Subscription.cloudStorageConfig: object expected");
                             message.cloudStorageConfig = $root.google.pubsub.v1.CloudStorageConfig.fromObject(object.cloudStorageConfig);
+                        }
+                        if (object.bigtableConfig != null) {
+                            if (typeof object.bigtableConfig !== "object")
+                                throw TypeError(".google.pubsub.v1.Subscription.bigtableConfig: object expected");
+                            message.bigtableConfig = $root.google.pubsub.v1.BigtableConfig.fromObject(object.bigtableConfig);
                         }
                         if (object.ackDeadlineSeconds != null)
                             message.ackDeadlineSeconds = object.ackDeadlineSeconds | 0;
@@ -13101,6 +13648,7 @@
                             object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             object.cloudStorageConfig = null;
                             object.analyticsHubSubscriptionInfo = null;
+                            object.bigtableConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -13154,6 +13702,8 @@
                             for (var j = 0; j < keys2.length; ++j)
                                 object.tags[keys2[j]] = message.tags[keys2[j]];
                         }
+                        if (message.bigtableConfig != null && message.hasOwnProperty("bigtableConfig"))
+                            object.bigtableConfig = $root.google.pubsub.v1.BigtableConfig.toObject(message.bigtableConfig, options);
                         return object;
                     };
     
@@ -15356,6 +15906,7 @@
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
                                 break;
                             }
                         if (message.useTableSchema != null && message.hasOwnProperty("useTableSchema"))
@@ -15417,6 +15968,10 @@
                         case "IN_TRANSIT_LOCATION_RESTRICTION":
                         case 5:
                             message.state = 5;
+                            break;
+                        case "VERTEX_AI_LOCATION_RESTRICTION":
+                        case 6:
+                            message.state = 6;
                             break;
                         }
                         if (object.useTableSchema != null)
@@ -15501,6 +16056,7 @@
                      * @property {number} NOT_FOUND=3 NOT_FOUND value
                      * @property {number} SCHEMA_MISMATCH=4 SCHEMA_MISMATCH value
                      * @property {number} IN_TRANSIT_LOCATION_RESTRICTION=5 IN_TRANSIT_LOCATION_RESTRICTION value
+                     * @property {number} VERTEX_AI_LOCATION_RESTRICTION=6 VERTEX_AI_LOCATION_RESTRICTION value
                      */
                     BigQueryConfig.State = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -15510,10 +16066,384 @@
                         values[valuesById[3] = "NOT_FOUND"] = 3;
                         values[valuesById[4] = "SCHEMA_MISMATCH"] = 4;
                         values[valuesById[5] = "IN_TRANSIT_LOCATION_RESTRICTION"] = 5;
+                        values[valuesById[6] = "VERTEX_AI_LOCATION_RESTRICTION"] = 6;
                         return values;
                     })();
     
                     return BigQueryConfig;
+                })();
+    
+                v1.BigtableConfig = (function() {
+    
+                    /**
+                     * Properties of a BigtableConfig.
+                     * @memberof google.pubsub.v1
+                     * @interface IBigtableConfig
+                     * @property {string|null} [table] BigtableConfig table
+                     * @property {string|null} [appProfileId] BigtableConfig appProfileId
+                     * @property {string|null} [serviceAccountEmail] BigtableConfig serviceAccountEmail
+                     * @property {boolean|null} [writeMetadata] BigtableConfig writeMetadata
+                     * @property {google.pubsub.v1.BigtableConfig.State|null} [state] BigtableConfig state
+                     */
+    
+                    /**
+                     * Constructs a new BigtableConfig.
+                     * @memberof google.pubsub.v1
+                     * @classdesc Represents a BigtableConfig.
+                     * @implements IBigtableConfig
+                     * @constructor
+                     * @param {google.pubsub.v1.IBigtableConfig=} [properties] Properties to set
+                     */
+                    function BigtableConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * BigtableConfig table.
+                     * @member {string} table
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @instance
+                     */
+                    BigtableConfig.prototype.table = "";
+    
+                    /**
+                     * BigtableConfig appProfileId.
+                     * @member {string} appProfileId
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @instance
+                     */
+                    BigtableConfig.prototype.appProfileId = "";
+    
+                    /**
+                     * BigtableConfig serviceAccountEmail.
+                     * @member {string} serviceAccountEmail
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @instance
+                     */
+                    BigtableConfig.prototype.serviceAccountEmail = "";
+    
+                    /**
+                     * BigtableConfig writeMetadata.
+                     * @member {boolean} writeMetadata
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @instance
+                     */
+                    BigtableConfig.prototype.writeMetadata = false;
+    
+                    /**
+                     * BigtableConfig state.
+                     * @member {google.pubsub.v1.BigtableConfig.State} state
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @instance
+                     */
+                    BigtableConfig.prototype.state = 0;
+    
+                    /**
+                     * Creates a new BigtableConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {google.pubsub.v1.IBigtableConfig=} [properties] Properties to set
+                     * @returns {google.pubsub.v1.BigtableConfig} BigtableConfig instance
+                     */
+                    BigtableConfig.create = function create(properties) {
+                        return new BigtableConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified BigtableConfig message. Does not implicitly {@link google.pubsub.v1.BigtableConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {google.pubsub.v1.IBigtableConfig} message BigtableConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BigtableConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.table != null && Object.hasOwnProperty.call(message, "table"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.table);
+                        if (message.appProfileId != null && Object.hasOwnProperty.call(message, "appProfileId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.appProfileId);
+                        if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceAccountEmail);
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                        if (message.writeMetadata != null && Object.hasOwnProperty.call(message, "writeMetadata"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.writeMetadata);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified BigtableConfig message, length delimited. Does not implicitly {@link google.pubsub.v1.BigtableConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {google.pubsub.v1.IBigtableConfig} message BigtableConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BigtableConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a BigtableConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.pubsub.v1.BigtableConfig} BigtableConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BigtableConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.pubsub.v1.BigtableConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.table = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.appProfileId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.writeMetadata = reader.bool();
+                                    break;
+                                }
+                            case 4: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a BigtableConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.pubsub.v1.BigtableConfig} BigtableConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BigtableConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a BigtableConfig message.
+                     * @function verify
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BigtableConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.table != null && message.hasOwnProperty("table"))
+                            if (!$util.isString(message.table))
+                                return "table: string expected";
+                        if (message.appProfileId != null && message.hasOwnProperty("appProfileId"))
+                            if (!$util.isString(message.appProfileId))
+                                return "appProfileId: string expected";
+                        if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                            if (!$util.isString(message.serviceAccountEmail))
+                                return "serviceAccountEmail: string expected";
+                        if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                            if (typeof message.writeMetadata !== "boolean")
+                                return "writeMetadata: boolean expected";
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a BigtableConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.pubsub.v1.BigtableConfig} BigtableConfig
+                     */
+                    BigtableConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.pubsub.v1.BigtableConfig)
+                            return object;
+                        var message = new $root.google.pubsub.v1.BigtableConfig();
+                        if (object.table != null)
+                            message.table = String(object.table);
+                        if (object.appProfileId != null)
+                            message.appProfileId = String(object.appProfileId);
+                        if (object.serviceAccountEmail != null)
+                            message.serviceAccountEmail = String(object.serviceAccountEmail);
+                        if (object.writeMetadata != null)
+                            message.writeMetadata = Boolean(object.writeMetadata);
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "ACTIVE":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "NOT_FOUND":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "APP_PROFILE_MISCONFIGURED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "PERMISSION_DENIED":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        case "SCHEMA_MISMATCH":
+                        case 5:
+                            message.state = 5;
+                            break;
+                        case "IN_TRANSIT_LOCATION_RESTRICTION":
+                        case 6:
+                            message.state = 6;
+                            break;
+                        case "VERTEX_AI_LOCATION_RESTRICTION":
+                        case 7:
+                            message.state = 7;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a BigtableConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {google.pubsub.v1.BigtableConfig} message BigtableConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BigtableConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.table = "";
+                            object.appProfileId = "";
+                            object.serviceAccountEmail = "";
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            object.writeMetadata = false;
+                        }
+                        if (message.table != null && message.hasOwnProperty("table"))
+                            object.table = message.table;
+                        if (message.appProfileId != null && message.hasOwnProperty("appProfileId"))
+                            object.appProfileId = message.appProfileId;
+                        if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                            object.serviceAccountEmail = message.serviceAccountEmail;
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.google.pubsub.v1.BigtableConfig.State[message.state] === undefined ? message.state : $root.google.pubsub.v1.BigtableConfig.State[message.state] : message.state;
+                        if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                            object.writeMetadata = message.writeMetadata;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this BigtableConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BigtableConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for BigtableConfig
+                     * @function getTypeUrl
+                     * @memberof google.pubsub.v1.BigtableConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BigtableConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.pubsub.v1.BigtableConfig";
+                    };
+    
+                    /**
+                     * State enum.
+                     * @name google.pubsub.v1.BigtableConfig.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} ACTIVE=1 ACTIVE value
+                     * @property {number} NOT_FOUND=2 NOT_FOUND value
+                     * @property {number} APP_PROFILE_MISCONFIGURED=3 APP_PROFILE_MISCONFIGURED value
+                     * @property {number} PERMISSION_DENIED=4 PERMISSION_DENIED value
+                     * @property {number} SCHEMA_MISMATCH=5 SCHEMA_MISMATCH value
+                     * @property {number} IN_TRANSIT_LOCATION_RESTRICTION=6 IN_TRANSIT_LOCATION_RESTRICTION value
+                     * @property {number} VERTEX_AI_LOCATION_RESTRICTION=7 VERTEX_AI_LOCATION_RESTRICTION value
+                     */
+                    BigtableConfig.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ACTIVE"] = 1;
+                        values[valuesById[2] = "NOT_FOUND"] = 2;
+                        values[valuesById[3] = "APP_PROFILE_MISCONFIGURED"] = 3;
+                        values[valuesById[4] = "PERMISSION_DENIED"] = 4;
+                        values[valuesById[5] = "SCHEMA_MISMATCH"] = 5;
+                        values[valuesById[6] = "IN_TRANSIT_LOCATION_RESTRICTION"] = 6;
+                        values[valuesById[7] = "VERTEX_AI_LOCATION_RESTRICTION"] = 7;
+                        return values;
+                    })();
+    
+                    return BigtableConfig;
                 })();
     
                 v1.CloudStorageConfig = (function() {
@@ -15865,6 +16795,7 @@
                             case 3:
                             case 4:
                             case 5:
+                            case 6:
                                 break;
                             }
                         if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
@@ -15956,6 +16887,10 @@
                         case "SCHEMA_MISMATCH":
                         case 5:
                             message.state = 5;
+                            break;
+                        case "VERTEX_AI_LOCATION_RESTRICTION":
+                        case 6:
+                            message.state = 6;
                             break;
                         }
                         if (object.serviceAccountEmail != null)
@@ -16474,6 +17409,7 @@
                      * @property {number} NOT_FOUND=3 NOT_FOUND value
                      * @property {number} IN_TRANSIT_LOCATION_RESTRICTION=4 IN_TRANSIT_LOCATION_RESTRICTION value
                      * @property {number} SCHEMA_MISMATCH=5 SCHEMA_MISMATCH value
+                     * @property {number} VERTEX_AI_LOCATION_RESTRICTION=6 VERTEX_AI_LOCATION_RESTRICTION value
                      */
                     CloudStorageConfig.State = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -16483,6 +17419,7 @@
                         values[valuesById[3] = "NOT_FOUND"] = 3;
                         values[valuesById[4] = "IN_TRANSIT_LOCATION_RESTRICTION"] = 4;
                         values[valuesById[5] = "SCHEMA_MISMATCH"] = 5;
+                        values[valuesById[6] = "VERTEX_AI_LOCATION_RESTRICTION"] = 6;
                         return values;
                     })();
     
@@ -47334,6 +48271,885 @@
                 };
     
                 return FieldMask;
+            })();
+    
+            protobuf.Struct = (function() {
+    
+                /**
+                 * Properties of a Struct.
+                 * @memberof google.protobuf
+                 * @interface IStruct
+                 * @property {Object.<string,google.protobuf.IValue>|null} [fields] Struct fields
+                 */
+    
+                /**
+                 * Constructs a new Struct.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Struct.
+                 * @implements IStruct
+                 * @constructor
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 */
+                function Struct(properties) {
+                    this.fields = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Struct fields.
+                 * @member {Object.<string,google.protobuf.IValue>} fields
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 */
+                Struct.prototype.fields = $util.emptyObject;
+    
+                /**
+                 * Creates a new Struct instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct=} [properties] Properties to set
+                 * @returns {google.protobuf.Struct} Struct instance
+                 */
+                Struct.create = function create(properties) {
+                    return new Struct(properties);
+                };
+    
+                /**
+                 * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fields != null && Object.hasOwnProperty.call(message, "fields"))
+                        for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                            $root.google.protobuf.Value.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                        }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.IStruct} message Struct message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Struct.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (message.fields === $util.emptyObject)
+                                    message.fields = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = null;
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.fields[key] = value;
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Struct message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Struct} Struct
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Struct.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Struct message.
+                 * @function verify
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Struct.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fields != null && message.hasOwnProperty("fields")) {
+                        if (!$util.isObject(message.fields))
+                            return "fields: object expected";
+                        var key = Object.keys(message.fields);
+                        for (var i = 0; i < key.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.fields[key[i]]);
+                            if (error)
+                                return "fields." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Struct} Struct
+                 */
+                Struct.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Struct)
+                        return object;
+                    var message = new $root.google.protobuf.Struct();
+                    if (object.fields) {
+                        if (typeof object.fields !== "object")
+                            throw TypeError(".google.protobuf.Struct.fields: object expected");
+                        message.fields = {};
+                        for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                            if (typeof object.fields[keys[i]] !== "object")
+                                throw TypeError(".google.protobuf.Struct.fields: object expected");
+                            message.fields[keys[i]] = $root.google.protobuf.Value.fromObject(object.fields[keys[i]]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Struct message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {google.protobuf.Struct} message Struct
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Struct.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.fields = {};
+                    var keys2;
+                    if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                        object.fields = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.fields[keys2[j]] = $root.google.protobuf.Value.toObject(message.fields[keys2[j]], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Struct to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Struct
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Struct.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Struct
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Struct
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Struct.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Struct";
+                };
+    
+                return Struct;
+            })();
+    
+            protobuf.Value = (function() {
+    
+                /**
+                 * Properties of a Value.
+                 * @memberof google.protobuf
+                 * @interface IValue
+                 * @property {google.protobuf.NullValue|null} [nullValue] Value nullValue
+                 * @property {number|null} [numberValue] Value numberValue
+                 * @property {string|null} [stringValue] Value stringValue
+                 * @property {boolean|null} [boolValue] Value boolValue
+                 * @property {google.protobuf.IStruct|null} [structValue] Value structValue
+                 * @property {google.protobuf.IListValue|null} [listValue] Value listValue
+                 */
+    
+                /**
+                 * Constructs a new Value.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Value.
+                 * @implements IValue
+                 * @constructor
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 */
+                function Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Value nullValue.
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.nullValue = null;
+    
+                /**
+                 * Value numberValue.
+                 * @member {number|null|undefined} numberValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.numberValue = null;
+    
+                /**
+                 * Value stringValue.
+                 * @member {string|null|undefined} stringValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.stringValue = null;
+    
+                /**
+                 * Value boolValue.
+                 * @member {boolean|null|undefined} boolValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.boolValue = null;
+    
+                /**
+                 * Value structValue.
+                 * @member {google.protobuf.IStruct|null|undefined} structValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.structValue = null;
+    
+                /**
+                 * Value listValue.
+                 * @member {google.protobuf.IListValue|null|undefined} listValue
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Value.prototype.listValue = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Value kind.
+                 * @member {"nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue"|undefined} kind
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 */
+                Object.defineProperty(Value.prototype, "kind", {
+                    get: $util.oneOfGetter($oneOfFields = ["nullValue", "numberValue", "stringValue", "boolValue", "structValue", "listValue"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Value instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue=} [properties] Properties to set
+                 * @returns {google.protobuf.Value} Value instance
+                 */
+                Value.create = function create(properties) {
+                    return new Value(properties);
+                };
+    
+                /**
+                 * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.nullValue != null && Object.hasOwnProperty.call(message, "nullValue"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nullValue);
+                    if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.numberValue);
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                    if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
+                    if (message.structValue != null && Object.hasOwnProperty.call(message, "structValue"))
+                        $root.google.protobuf.Struct.encode(message.structValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.listValue != null && Object.hasOwnProperty.call(message, "listValue"))
+                        $root.google.protobuf.ListValue.encode(message.listValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.nullValue = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.numberValue = reader.double();
+                                break;
+                            }
+                        case 3: {
+                                message.stringValue = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.boolValue = reader.bool();
+                                break;
+                            }
+                        case 5: {
+                                message.structValue = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.listValue = $root.google.protobuf.ListValue.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Value message.
+                 * @function verify
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        properties.kind = 1;
+                        switch (message.nullValue) {
+                        default:
+                            return "nullValue: enum value expected";
+                        case 0:
+                            break;
+                        }
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.numberValue !== "number")
+                            return "numberValue: number expected";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (!$util.isString(message.stringValue))
+                            return "stringValue: string expected";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        if (typeof message.boolValue !== "boolean")
+                            return "boolValue: boolean expected";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.Struct.verify(message.structValue);
+                            if (error)
+                                return "structValue." + error;
+                        }
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        if (properties.kind === 1)
+                            return "kind: multiple values";
+                        properties.kind = 1;
+                        {
+                            var error = $root.google.protobuf.ListValue.verify(message.listValue);
+                            if (error)
+                                return "listValue." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Value} Value
+                 */
+                Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Value)
+                        return object;
+                    var message = new $root.google.protobuf.Value();
+                    switch (object.nullValue) {
+                    default:
+                        if (typeof object.nullValue === "number") {
+                            message.nullValue = object.nullValue;
+                            break;
+                        }
+                        break;
+                    case "NULL_VALUE":
+                    case 0:
+                        message.nullValue = 0;
+                        break;
+                    }
+                    if (object.numberValue != null)
+                        message.numberValue = Number(object.numberValue);
+                    if (object.stringValue != null)
+                        message.stringValue = String(object.stringValue);
+                    if (object.boolValue != null)
+                        message.boolValue = Boolean(object.boolValue);
+                    if (object.structValue != null) {
+                        if (typeof object.structValue !== "object")
+                            throw TypeError(".google.protobuf.Value.structValue: object expected");
+                        message.structValue = $root.google.protobuf.Struct.fromObject(object.structValue);
+                    }
+                    if (object.listValue != null) {
+                        if (typeof object.listValue !== "object")
+                            throw TypeError(".google.protobuf.Value.listValue: object expected");
+                        message.listValue = $root.google.protobuf.ListValue.fromObject(object.listValue);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {google.protobuf.Value} message Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.nullValue != null && message.hasOwnProperty("nullValue")) {
+                        object.nullValue = options.enums === String ? $root.google.protobuf.NullValue[message.nullValue] === undefined ? message.nullValue : $root.google.protobuf.NullValue[message.nullValue] : message.nullValue;
+                        if (options.oneofs)
+                            object.kind = "nullValue";
+                    }
+                    if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                        object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
+                        if (options.oneofs)
+                            object.kind = "numberValue";
+                    }
+                    if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                        object.stringValue = message.stringValue;
+                        if (options.oneofs)
+                            object.kind = "stringValue";
+                    }
+                    if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                        object.boolValue = message.boolValue;
+                        if (options.oneofs)
+                            object.kind = "boolValue";
+                    }
+                    if (message.structValue != null && message.hasOwnProperty("structValue")) {
+                        object.structValue = $root.google.protobuf.Struct.toObject(message.structValue, options);
+                        if (options.oneofs)
+                            object.kind = "structValue";
+                    }
+                    if (message.listValue != null && message.hasOwnProperty("listValue")) {
+                        object.listValue = $root.google.protobuf.ListValue.toObject(message.listValue, options);
+                        if (options.oneofs)
+                            object.kind = "listValue";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Value to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Value
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Value
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Value.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Value";
+                };
+    
+                return Value;
+            })();
+    
+            /**
+             * NullValue enum.
+             * @name google.protobuf.NullValue
+             * @enum {number}
+             * @property {number} NULL_VALUE=0 NULL_VALUE value
+             */
+            protobuf.NullValue = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "NULL_VALUE"] = 0;
+                return values;
+            })();
+    
+            protobuf.ListValue = (function() {
+    
+                /**
+                 * Properties of a ListValue.
+                 * @memberof google.protobuf
+                 * @interface IListValue
+                 * @property {Array.<google.protobuf.IValue>|null} [values] ListValue values
+                 */
+    
+                /**
+                 * Constructs a new ListValue.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a ListValue.
+                 * @implements IListValue
+                 * @constructor
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 */
+                function ListValue(properties) {
+                    this.values = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListValue values.
+                 * @member {Array.<google.protobuf.IValue>} values
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 */
+                ListValue.prototype.values = $util.emptyArray;
+    
+                /**
+                 * Creates a new ListValue instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue=} [properties] Properties to set
+                 * @returns {google.protobuf.ListValue} ListValue instance
+                 */
+                ListValue.create = function create(properties) {
+                    return new ListValue(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.values != null && message.values.length)
+                        for (var i = 0; i < message.values.length; ++i)
+                            $root.google.protobuf.Value.encode(message.values[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.IListValue} message ListValue message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListValue.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.values && message.values.length))
+                                    message.values = [];
+                                message.values.push($root.google.protobuf.Value.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListValue message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.ListValue} ListValue
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListValue.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListValue message.
+                 * @function verify
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListValue.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.values != null && message.hasOwnProperty("values")) {
+                        if (!Array.isArray(message.values))
+                            return "values: array expected";
+                        for (var i = 0; i < message.values.length; ++i) {
+                            var error = $root.google.protobuf.Value.verify(message.values[i]);
+                            if (error)
+                                return "values." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.ListValue} ListValue
+                 */
+                ListValue.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.ListValue)
+                        return object;
+                    var message = new $root.google.protobuf.ListValue();
+                    if (object.values) {
+                        if (!Array.isArray(object.values))
+                            throw TypeError(".google.protobuf.ListValue.values: array expected");
+                        message.values = [];
+                        for (var i = 0; i < object.values.length; ++i) {
+                            if (typeof object.values[i] !== "object")
+                                throw TypeError(".google.protobuf.ListValue.values: object expected");
+                            message.values[i] = $root.google.protobuf.Value.fromObject(object.values[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {google.protobuf.ListValue} message ListValue
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListValue.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.values = [];
+                    if (message.values && message.values.length) {
+                        object.values = [];
+                        for (var j = 0; j < message.values.length; ++j)
+                            object.values[j] = $root.google.protobuf.Value.toObject(message.values[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListValue to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.ListValue
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListValue.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListValue
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.ListValue
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.ListValue";
+                };
+    
+                return ListValue;
             })();
     
             protobuf.Timestamp = (function() {

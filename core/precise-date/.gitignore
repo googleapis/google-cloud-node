@@ -1,0 +1,8 @@
+node_modules
+build
+.coverage
+.nyc_output
+package-lock.json
+.vscode
+__pycache__
+docs

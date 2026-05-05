@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-cloudsecuritycompliance",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -294,7 +294,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 69,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -342,7 +342,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 63,
           "type": "FULL"
         }
       ],
@@ -386,7 +386,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -482,7 +482,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 55,
+          "end": 57,
           "type": "FULL"
         }
       ],
@@ -522,7 +522,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 73,
+          "end": 74,
           "type": "FULL"
         }
       ],
@@ -570,7 +570,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 63,
           "type": "FULL"
         }
       ],
@@ -614,7 +614,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 68,
           "type": "FULL"
         }
       ],
@@ -706,7 +706,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 55,
+          "end": 58,
           "type": "FULL"
         }
       ],
@@ -746,7 +746,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 69,
           "type": "FULL"
         }
       ],
@@ -794,7 +794,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 66,
+          "end": 68,
           "type": "FULL"
         }
       ],
@@ -838,7 +838,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 55,
+          "end": 57,
           "type": "FULL"
         }
       ],
@@ -878,7 +878,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 81,
+          "end": 83,
           "type": "FULL"
         }
       ],
@@ -934,7 +934,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 55,
+          "end": 57,
           "type": "FULL"
         }
       ],
@@ -974,7 +974,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 81,
+          "end": 82,
           "type": "FULL"
         }
       ],
@@ -1030,7 +1030,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 69,
+          "end": 73,
           "type": "FULL"
         }
       ],
@@ -1054,6 +1054,10 @@
           {
             "name": "filter",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView"
           }
         ],
         "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse",
@@ -1138,7 +1142,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 57,
+          "end": 61,
           "type": "FULL"
         }
       ],
@@ -1154,6 +1158,10 @@
           {
             "name": "end_time",
             "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport",

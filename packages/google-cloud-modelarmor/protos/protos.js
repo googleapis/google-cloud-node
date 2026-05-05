@@ -14964,6 +14964,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|streamSanitizeUserPrompt}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef StreamSanitizeUserPromptCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse} [response] SanitizeUserPromptResponse
+                         */
+    
+                        /**
+                         * Calls StreamSanitizeUserPrompt.
+                         * @function streamSanitizeUserPrompt
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest} request SanitizeUserPromptRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeUserPromptCallback} callback Node-style callback called with the error, if any, and SanitizeUserPromptResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.streamSanitizeUserPrompt = function streamSanitizeUserPrompt(request, callback) {
+                            return this.rpcCall(streamSanitizeUserPrompt, $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest, $root.google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse, request, callback);
+                        }, "name", { value: "StreamSanitizeUserPrompt" });
+    
+                        /**
+                         * Calls StreamSanitizeUserPrompt.
+                         * @function streamSanitizeUserPrompt
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest} request SanitizeUserPromptRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|streamSanitizeModelResponse}.
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @typedef StreamSanitizeModelResponseCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse} [response] SanitizeModelResponseResponse
+                         */
+    
+                        /**
+                         * Calls StreamSanitizeModelResponse.
+                         * @function streamSanitizeModelResponse
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest} request SanitizeModelResponseRequest message or plain object
+                         * @param {google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeModelResponseCallback} callback Node-style callback called with the error, if any, and SanitizeModelResponseResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ModelArmor.prototype.streamSanitizeModelResponse = function streamSanitizeModelResponse(request, callback) {
+                            return this.rpcCall(streamSanitizeModelResponse, $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest, $root.google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse, request, callback);
+                        }, "name", { value: "StreamSanitizeModelResponse" });
+    
+                        /**
+                         * Calls StreamSanitizeModelResponse.
+                         * @function streamSanitizeModelResponse
+                         * @memberof google.cloud.modelarmor.v1beta.ModelArmor
+                         * @instance
+                         * @param {google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest} request SanitizeModelResponseRequest message or plain object
+                         * @returns {Promise<google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return ModelArmor;
                     })();
     
@@ -15074,6 +15140,22 @@
                         values[valuesById[1] = "SUCCESS"] = 1;
                         values[valuesById[2] = "PARTIAL"] = 2;
                         values[valuesById[3] = "FAILURE"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * StreamingMode enum.
+                     * @name google.cloud.modelarmor.v1beta.StreamingMode
+                     * @enum {number}
+                     * @property {number} STREAMING_MODE_UNSPECIFIED=0 STREAMING_MODE_UNSPECIFIED value
+                     * @property {number} STREAMING_MODE_BUFFERED=1 STREAMING_MODE_BUFFERED value
+                     * @property {number} STREAMING_MODE_REALTIME=2 STREAMING_MODE_REALTIME value
+                     */
+                    v1beta.StreamingMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STREAMING_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "STREAMING_MODE_BUFFERED"] = 1;
+                        values[valuesById[2] = "STREAMING_MODE_REALTIME"] = 2;
                         return values;
                     })();
     
@@ -16108,6 +16190,7 @@
                          * @property {Array.<google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService>|null} [integratedServices] FloorSetting integratedServices
                          * @property {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null} [aiPlatformFloorSetting] FloorSetting aiPlatformFloorSetting
                          * @property {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null} [floorSettingMetadata] FloorSetting floorSettingMetadata
+                         * @property {google.cloud.modelarmor.v1beta.IMcpServerFloorSetting|null} [googleMcpServerFloorSetting] FloorSetting googleMcpServerFloorSetting
                          */
     
                         /**
@@ -16190,6 +16273,14 @@
                          */
                         FloorSetting.prototype.floorSettingMetadata = null;
     
+                        /**
+                         * FloorSetting googleMcpServerFloorSetting.
+                         * @member {google.cloud.modelarmor.v1beta.IMcpServerFloorSetting|null|undefined} googleMcpServerFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.googleMcpServerFloorSetting = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -16202,6 +16293,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FloorSetting.prototype, "_aiPlatformFloorSetting", {
                             get: $util.oneOfGetter($oneOfFields = ["aiPlatformFloorSetting"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FloorSetting.prototype, "_googleMcpServerFloorSetting", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleMcpServerFloorSetting"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -16249,6 +16346,8 @@
                                 $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.encode(message.aiPlatformFloorSetting, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.floorSettingMetadata != null && Object.hasOwnProperty.call(message, "floorSettingMetadata"))
                                 $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.encode(message.floorSettingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.googleMcpServerFloorSetting != null && Object.hasOwnProperty.call(message, "googleMcpServerFloorSetting"))
+                                $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting.encode(message.googleMcpServerFloorSetting, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -16324,6 +16423,10 @@
                                         message.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 9: {
+                                        message.googleMcpServerFloorSetting = $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16392,6 +16495,7 @@
                                         return "integratedServices: enum value[] expected";
                                     case 0:
                                     case 1:
+                                    case 2:
                                         break;
                                     }
                             }
@@ -16407,6 +16511,14 @@
                                 var error = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify(message.floorSettingMetadata);
                                 if (error)
                                     return "floorSettingMetadata." + error;
+                            }
+                            if (message.googleMcpServerFloorSetting != null && message.hasOwnProperty("googleMcpServerFloorSetting")) {
+                                properties._googleMcpServerFloorSetting = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting.verify(message.googleMcpServerFloorSetting);
+                                    if (error)
+                                        return "googleMcpServerFloorSetting." + error;
+                                }
                             }
                             return null;
                         };
@@ -16461,6 +16573,10 @@
                                     case 1:
                                         message.integratedServices[i] = 1;
                                         break;
+                                    case "GOOGLE_MCP_SERVER":
+                                    case 2:
+                                        message.integratedServices[i] = 2;
+                                        break;
                                     }
                             }
                             if (object.aiPlatformFloorSetting != null) {
@@ -16472,6 +16588,11 @@
                                 if (typeof object.floorSettingMetadata !== "object")
                                     throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.floorSettingMetadata: object expected");
                                 message.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.fromObject(object.floorSettingMetadata);
+                            }
+                            if (object.googleMcpServerFloorSetting != null) {
+                                if (typeof object.googleMcpServerFloorSetting !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.googleMcpServerFloorSetting: object expected");
+                                message.googleMcpServerFloorSetting = $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting.fromObject(object.googleMcpServerFloorSetting);
                             }
                             return message;
                         };
@@ -16523,6 +16644,11 @@
                             }
                             if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata"))
                                 object.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.toObject(message.floorSettingMetadata, options);
+                            if (message.googleMcpServerFloorSetting != null && message.hasOwnProperty("googleMcpServerFloorSetting")) {
+                                object.googleMcpServerFloorSetting = $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting.toObject(message.googleMcpServerFloorSetting, options);
+                                if (options.oneofs)
+                                    object._googleMcpServerFloorSetting = "googleMcpServerFloorSetting";
+                            }
                             return object;
                         };
     
@@ -16973,15 +17099,333 @@
                          * @enum {number}
                          * @property {number} INTEGRATED_SERVICE_UNSPECIFIED=0 INTEGRATED_SERVICE_UNSPECIFIED value
                          * @property {number} AI_PLATFORM=1 AI_PLATFORM value
+                         * @property {number} GOOGLE_MCP_SERVER=2 GOOGLE_MCP_SERVER value
                          */
                         FloorSetting.IntegratedService = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "INTEGRATED_SERVICE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "AI_PLATFORM"] = 1;
+                            values[valuesById[2] = "GOOGLE_MCP_SERVER"] = 2;
                             return values;
                         })();
     
                         return FloorSetting;
+                    })();
+    
+                    v1beta.McpServerFloorSetting = (function() {
+    
+                        /**
+                         * Properties of a McpServerFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IMcpServerFloorSetting
+                         * @property {boolean|null} [inspectOnly] McpServerFloorSetting inspectOnly
+                         * @property {boolean|null} [inspectAndBlock] McpServerFloorSetting inspectAndBlock
+                         * @property {boolean|null} [enableCloudLogging] McpServerFloorSetting enableCloudLogging
+                         * @property {Array.<string>|null} [apis] McpServerFloorSetting apis
+                         */
+    
+                        /**
+                         * Constructs a new McpServerFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents a McpServerFloorSetting.
+                         * @implements IMcpServerFloorSetting
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IMcpServerFloorSetting=} [properties] Properties to set
+                         */
+                        function McpServerFloorSetting(properties) {
+                            this.apis = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * McpServerFloorSetting inspectOnly.
+                         * @member {boolean|null|undefined} inspectOnly
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @instance
+                         */
+                        McpServerFloorSetting.prototype.inspectOnly = null;
+    
+                        /**
+                         * McpServerFloorSetting inspectAndBlock.
+                         * @member {boolean|null|undefined} inspectAndBlock
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @instance
+                         */
+                        McpServerFloorSetting.prototype.inspectAndBlock = null;
+    
+                        /**
+                         * McpServerFloorSetting enableCloudLogging.
+                         * @member {boolean} enableCloudLogging
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @instance
+                         */
+                        McpServerFloorSetting.prototype.enableCloudLogging = false;
+    
+                        /**
+                         * McpServerFloorSetting apis.
+                         * @member {Array.<string>} apis
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @instance
+                         */
+                        McpServerFloorSetting.prototype.apis = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * McpServerFloorSetting enforcementType.
+                         * @member {"inspectOnly"|"inspectAndBlock"|undefined} enforcementType
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @instance
+                         */
+                        Object.defineProperty(McpServerFloorSetting.prototype, "enforcementType", {
+                            get: $util.oneOfGetter($oneOfFields = ["inspectOnly", "inspectAndBlock"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new McpServerFloorSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMcpServerFloorSetting=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.McpServerFloorSetting} McpServerFloorSetting instance
+                         */
+                        McpServerFloorSetting.create = function create(properties) {
+                            return new McpServerFloorSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified McpServerFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.McpServerFloorSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMcpServerFloorSetting} message McpServerFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpServerFloorSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectOnly != null && Object.hasOwnProperty.call(message, "inspectOnly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.inspectOnly);
+                            if (message.inspectAndBlock != null && Object.hasOwnProperty.call(message, "inspectAndBlock"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.inspectAndBlock);
+                            if (message.enableCloudLogging != null && Object.hasOwnProperty.call(message, "enableCloudLogging"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableCloudLogging);
+                            if (message.apis != null && message.apis.length)
+                                for (var i = 0; i < message.apis.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.apis[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified McpServerFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.McpServerFloorSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IMcpServerFloorSetting} message McpServerFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpServerFloorSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a McpServerFloorSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.McpServerFloorSetting} McpServerFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpServerFloorSetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectOnly = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inspectAndBlock = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enableCloudLogging = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.apis && message.apis.length))
+                                            message.apis = [];
+                                        message.apis.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a McpServerFloorSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.McpServerFloorSetting} McpServerFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpServerFloorSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a McpServerFloorSetting message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        McpServerFloorSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectOnly !== "boolean")
+                                    return "inspectOnly: boolean expected";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                if (properties.enforcementType === 1)
+                                    return "enforcementType: multiple values";
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectAndBlock !== "boolean")
+                                    return "inspectAndBlock: boolean expected";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                if (typeof message.enableCloudLogging !== "boolean")
+                                    return "enableCloudLogging: boolean expected";
+                            if (message.apis != null && message.hasOwnProperty("apis")) {
+                                if (!Array.isArray(message.apis))
+                                    return "apis: array expected";
+                                for (var i = 0; i < message.apis.length; ++i)
+                                    if (!$util.isString(message.apis[i]))
+                                        return "apis: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a McpServerFloorSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.McpServerFloorSetting} McpServerFloorSetting
+                         */
+                        McpServerFloorSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.McpServerFloorSetting();
+                            if (object.inspectOnly != null)
+                                message.inspectOnly = Boolean(object.inspectOnly);
+                            if (object.inspectAndBlock != null)
+                                message.inspectAndBlock = Boolean(object.inspectAndBlock);
+                            if (object.enableCloudLogging != null)
+                                message.enableCloudLogging = Boolean(object.enableCloudLogging);
+                            if (object.apis) {
+                                if (!Array.isArray(object.apis))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.McpServerFloorSetting.apis: array expected");
+                                message.apis = [];
+                                for (var i = 0; i < object.apis.length; ++i)
+                                    message.apis[i] = String(object.apis[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a McpServerFloorSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.McpServerFloorSetting} message McpServerFloorSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        McpServerFloorSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.apis = [];
+                            if (options.defaults)
+                                object.enableCloudLogging = false;
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                object.inspectOnly = message.inspectOnly;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectOnly";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                object.inspectAndBlock = message.inspectAndBlock;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectAndBlock";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                object.enableCloudLogging = message.enableCloudLogging;
+                            if (message.apis && message.apis.length) {
+                                object.apis = [];
+                                for (var j = 0; j < message.apis.length; ++j)
+                                    object.apis[j] = message.apis[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this McpServerFloorSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        McpServerFloorSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for McpServerFloorSetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.McpServerFloorSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        McpServerFloorSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.McpServerFloorSetting";
+                        };
+    
+                        return McpServerFloorSetting;
                     })();
     
                     v1beta.AiPlatformFloorSetting = (function() {
@@ -21371,6 +21815,7 @@
                          * @property {string|null} [name] SanitizeUserPromptRequest name
                          * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
                          * @property {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeUserPromptRequest multiLanguageDetectionMetadata
+                         * @property {google.cloud.modelarmor.v1beta.StreamingMode|null} [streamingMode] SanitizeUserPromptRequest streamingMode
                          */
     
                         /**
@@ -21413,6 +21858,23 @@
                         SanitizeUserPromptRequest.prototype.multiLanguageDetectionMetadata = null;
     
                         /**
+                         * SanitizeUserPromptRequest streamingMode.
+                         * @member {google.cloud.modelarmor.v1beta.StreamingMode|null|undefined} streamingMode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.streamingMode = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SanitizeUserPromptRequest.prototype, "_streamingMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["streamingMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new SanitizeUserPromptRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
@@ -21442,6 +21904,8 @@
                                 $root.google.cloud.modelarmor.v1beta.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
                                 $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.streamingMode);
                             return writer;
                         };
     
@@ -21490,6 +21954,10 @@
                                         message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 7: {
+                                        message.streamingMode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21525,6 +21993,7 @@
                         SanitizeUserPromptRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -21537,6 +22006,17 @@
                                 var error = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
                                 if (error)
                                     return "multiLanguageDetectionMetadata." + error;
+                            }
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                properties._streamingMode = 1;
+                                switch (message.streamingMode) {
+                                default:
+                                    return "streamingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             }
                             return null;
                         };
@@ -21565,6 +22045,26 @@
                                     throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.multiLanguageDetectionMetadata: object expected");
                                 message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
                             }
+                            switch (object.streamingMode) {
+                            default:
+                                if (typeof object.streamingMode === "number") {
+                                    message.streamingMode = object.streamingMode;
+                                    break;
+                                }
+                                break;
+                            case "STREAMING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.streamingMode = 0;
+                                break;
+                            case "STREAMING_MODE_BUFFERED":
+                            case 1:
+                                message.streamingMode = 1;
+                                break;
+                            case "STREAMING_MODE_REALTIME":
+                            case 2:
+                                message.streamingMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -21592,6 +22092,11 @@
                                 object.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.toObject(message.userPromptData, options);
                             if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
                                 object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                object.streamingMode = options.enums === String ? $root.google.cloud.modelarmor.v1beta.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.cloud.modelarmor.v1beta.StreamingMode[message.streamingMode] : message.streamingMode;
+                                if (options.oneofs)
+                                    object._streamingMode = "streamingMode";
+                            }
                             return object;
                         };
     
@@ -21634,6 +22139,7 @@
                          * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [modelResponseData] SanitizeModelResponseRequest modelResponseData
                          * @property {string|null} [userPrompt] SanitizeModelResponseRequest userPrompt
                          * @property {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeModelResponseRequest multiLanguageDetectionMetadata
+                         * @property {google.cloud.modelarmor.v1beta.StreamingMode|null} [streamingMode] SanitizeModelResponseRequest streamingMode
                          */
     
                         /**
@@ -21684,6 +22190,23 @@
                         SanitizeModelResponseRequest.prototype.multiLanguageDetectionMetadata = null;
     
                         /**
+                         * SanitizeModelResponseRequest streamingMode.
+                         * @member {google.cloud.modelarmor.v1beta.StreamingMode|null|undefined} streamingMode
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.streamingMode = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SanitizeModelResponseRequest.prototype, "_streamingMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["streamingMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new SanitizeModelResponseRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest
@@ -21715,6 +22238,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.userPrompt);
                             if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
                                 $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.streamingMode);
                             return writer;
                         };
     
@@ -21767,6 +22292,10 @@
                                         message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        message.streamingMode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21802,6 +22331,7 @@
                         SanitizeModelResponseRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -21817,6 +22347,17 @@
                                 var error = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
                                 if (error)
                                     return "multiLanguageDetectionMetadata." + error;
+                            }
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                properties._streamingMode = 1;
+                                switch (message.streamingMode) {
+                                default:
+                                    return "streamingMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             }
                             return null;
                         };
@@ -21846,6 +22387,26 @@
                                 if (typeof object.multiLanguageDetectionMetadata !== "object")
                                     throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeModelResponseRequest.multiLanguageDetectionMetadata: object expected");
                                 message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
+                            switch (object.streamingMode) {
+                            default:
+                                if (typeof object.streamingMode === "number") {
+                                    message.streamingMode = object.streamingMode;
+                                    break;
+                                }
+                                break;
+                            case "STREAMING_MODE_UNSPECIFIED":
+                            case 0:
+                                message.streamingMode = 0;
+                                break;
+                            case "STREAMING_MODE_BUFFERED":
+                            case 1:
+                                message.streamingMode = 1;
+                                break;
+                            case "STREAMING_MODE_REALTIME":
+                            case 2:
+                                message.streamingMode = 2;
+                                break;
                             }
                             return message;
                         };
@@ -21877,6 +22438,11 @@
                                 object.userPrompt = message.userPrompt;
                             if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
                                 object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
+                            if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                                object.streamingMode = options.enums === String ? $root.google.cloud.modelarmor.v1beta.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.cloud.modelarmor.v1beta.StreamingMode[message.streamingMode] : message.streamingMode;
+                                if (options.oneofs)
+                                    object._streamingMode = "streamingMode";
+                            }
                             return object;
                         };
     
@@ -25251,6 +25817,7 @@
                          * @interface IByteDataItem
                          * @property {google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType|null} [byteDataType] ByteDataItem byteDataType
                          * @property {Uint8Array|null} [byteData] ByteDataItem byteData
+                         * @property {string|null} [fileLabel] ByteDataItem fileLabel
                          */
     
                         /**
@@ -25285,6 +25852,14 @@
                         ByteDataItem.prototype.byteData = $util.newBuffer([]);
     
                         /**
+                         * ByteDataItem fileLabel.
+                         * @member {string} fileLabel
+                         * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
+                         * @instance
+                         */
+                        ByteDataItem.prototype.fileLabel = "";
+    
+                        /**
                          * Creates a new ByteDataItem instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1beta.ByteDataItem
@@ -25312,6 +25887,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.byteDataType);
                             if (message.byteData != null && Object.hasOwnProperty.call(message, "byteData"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.byteData);
+                            if (message.fileLabel != null && Object.hasOwnProperty.call(message, "fileLabel"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.fileLabel);
                             return writer;
                         };
     
@@ -25354,6 +25931,10 @@
                                     }
                                 case 2: {
                                         message.byteData = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fileLabel = reader.string();
                                         break;
                                     }
                                 default:
@@ -25403,11 +25984,15 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 9:
                                     break;
                                 }
                             if (message.byteData != null && message.hasOwnProperty("byteData"))
                                 if (!(message.byteData && typeof message.byteData.length === "number" || $util.isString(message.byteData)))
                                     return "byteData: buffer expected";
+                            if (message.fileLabel != null && message.hasOwnProperty("fileLabel"))
+                                if (!$util.isString(message.fileLabel))
+                                    return "fileLabel: string expected";
                             return null;
                         };
     
@@ -25462,12 +26047,18 @@
                             case 7:
                                 message.byteDataType = 7;
                                 break;
+                            case "ZIP":
+                            case 9:
+                                message.byteDataType = 9;
+                                break;
                             }
                             if (object.byteData != null)
                                 if (typeof object.byteData === "string")
                                     $util.base64.decode(object.byteData, message.byteData = $util.newBuffer($util.base64.length(object.byteData)), 0);
                                 else if (object.byteData.length >= 0)
                                     message.byteData = object.byteData;
+                            if (object.fileLabel != null)
+                                message.fileLabel = String(object.fileLabel);
                             return message;
                         };
     
@@ -25493,11 +26084,14 @@
                                     if (options.bytes !== Array)
                                         object.byteData = $util.newBuffer(object.byteData);
                                 }
+                                object.fileLabel = "";
                             }
                             if (message.byteDataType != null && message.hasOwnProperty("byteDataType"))
                                 object.byteDataType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType[message.byteDataType] === undefined ? message.byteDataType : $root.google.cloud.modelarmor.v1beta.ByteDataItem.ByteItemType[message.byteDataType] : message.byteDataType;
                             if (message.byteData != null && message.hasOwnProperty("byteData"))
                                 object.byteData = options.bytes === String ? $util.base64.encode(message.byteData, 0, message.byteData.length) : options.bytes === Array ? Array.prototype.slice.call(message.byteData) : message.byteData;
+                            if (message.fileLabel != null && message.hasOwnProperty("fileLabel"))
+                                object.fileLabel = message.fileLabel;
                             return object;
                         };
     
@@ -25539,6 +26133,7 @@
                          * @property {number} POWERPOINT_DOCUMENT=5 POWERPOINT_DOCUMENT value
                          * @property {number} TXT=6 TXT value
                          * @property {number} CSV=7 CSV value
+                         * @property {number} ZIP=9 ZIP value
                          */
                         ByteDataItem.ByteItemType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -25550,6 +26145,7 @@
                             values[valuesById[5] = "POWERPOINT_DOCUMENT"] = 5;
                             values[valuesById[6] = "TXT"] = 6;
                             values[valuesById[7] = "CSV"] = 7;
+                            values[valuesById[9] = "ZIP"] = 9;
                             return values;
                         })();
     

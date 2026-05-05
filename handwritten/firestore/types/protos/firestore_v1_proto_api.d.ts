@@ -519,6 +519,9 @@ export namespace google {
                 /** Value fieldReferenceValue */
                 fieldReferenceValue?: (string|null);
 
+                /** Value variableReferenceValue */
+                variableReferenceValue?: (string|null);
+
                 /** Value functionValue */
                 functionValue?: (google.firestore.v1.IFunction|null);
 
@@ -571,6 +574,9 @@ export namespace google {
                 /** Value fieldReferenceValue. */
                 public fieldReferenceValue?: (string|null);
 
+                /** Value variableReferenceValue. */
+                public variableReferenceValue?: (string|null);
+
                 /** Value functionValue. */
                 public functionValue?: (google.firestore.v1.IFunction|null);
 
@@ -578,7 +584,7 @@ export namespace google {
                 public pipelineValue?: (google.firestore.v1.IPipeline|null);
 
                 /** Value valueType. */
-                public valueType?: ("nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"stringValue"|"bytesValue"|"referenceValue"|"geoPointValue"|"arrayValue"|"mapValue"|"fieldReferenceValue"|"functionValue"|"pipelineValue");
+                public valueType?: ("nullValue"|"booleanValue"|"integerValue"|"doubleValue"|"timestampValue"|"stringValue"|"bytesValue"|"referenceValue"|"geoPointValue"|"arrayValue"|"mapValue"|"fieldReferenceValue"|"variableReferenceValue"|"functionValue"|"pipelineValue");
 
                 /**
                  * Creates a Value message from a plain object. Also converts values to their respective internal types.

@@ -62,6 +62,7 @@
                         "arrayValue",
                         "mapValue",
                         "fieldReferenceValue",
+                        "variableReferenceValue",
                         "functionValue",
                         "pipelineValue"
                       ]
@@ -115,6 +116,10 @@
                     "fieldReferenceValue": {
                       "type": "string",
                       "id": 19
+                    },
+                    "variableReferenceValue": {
+                      "type": "string",
+                      "id": 22
                     },
                     "functionValue": {
                       "type": "Function",

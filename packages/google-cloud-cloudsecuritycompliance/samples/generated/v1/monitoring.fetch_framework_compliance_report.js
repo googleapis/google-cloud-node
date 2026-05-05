@@ -36,6 +36,10 @@ function main(name) {
    *  Optional. The end time of the report.
    */
   // const endTime = {}
+  /**
+   *  Optional. The filtering results.
+   */
+  // const filter = 'abc123'
 
   // Imports the Cloudsecuritycompliance library
   const {MonitoringClient} = require('@google-cloud/cloudsecuritycompliance').v1;

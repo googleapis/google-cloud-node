@@ -1,0 +1,25 @@
+{
+  "name": "fixture",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An app we're using to test the library.",
+  "scripts": {
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "start": "node build/src/index.js"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/common": "file:./google-cloud-common.tgz"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "gts": "^5.2.0",
+    "typescript": "^5.1.6"
+  }
+}

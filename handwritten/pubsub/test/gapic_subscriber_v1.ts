@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3055,6 +3055,82 @@ describe('v1.SubscriberClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('cryptoKey', async () => {
+      const fakePath = '/rendered/path/cryptoKey';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+      };
+      const client = new subscriberModule.v1.SubscriberClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyPath', () => {
+        const result = client.cryptoKeyPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCryptoKeyName', () => {
+        const result = client.matchProjectFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCryptoKeyName', () => {
+        const result = client.matchLocationFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyName', () => {
+        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -3093,8 +3169,8 @@ describe('v1.SubscriberClient', () => {
       });
     });
 
-    describe('projectTopic', async () => {
-      const fakePath = '/rendered/path/projectTopic';
+    describe('projectTopics', async () => {
+      const fakePath = '/rendered/path/projectTopics';
       const expectedParameters = {
         project: 'projectValue',
         topic: 'topicValue',
@@ -3104,38 +3180,38 @@ describe('v1.SubscriberClient', () => {
         projectId: 'bogus',
       });
       await client.initialize();
-      client.pathTemplates.projectTopicPathTemplate.render = sinon
+      client.pathTemplates.projectTopicsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.projectTopicPathTemplate.match = sinon
+      client.pathTemplates.projectTopicsPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('projectTopicPath', () => {
-        const result = client.projectTopicPath('projectValue', 'topicValue');
+      it('projectTopicsPath', () => {
+        const result = client.projectTopicsPath('projectValue', 'topicValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTopicPathTemplate.render as SinonStub)
+          (client.pathTemplates.projectTopicsPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters),
         );
       });
 
-      it('matchProjectFromProjectTopicName', () => {
-        const result = client.matchProjectFromProjectTopicName(fakePath);
+      it('matchProjectFromProjectTopicsName', () => {
+        const result = client.matchProjectFromProjectTopicsName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTopicPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectTopicsPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
       });
 
-      it('matchTopicFromProjectTopicName', () => {
-        const result = client.matchTopicFromProjectTopicName(fakePath);
+      it('matchTopicFromProjectTopicsName', () => {
+        const result = client.matchTopicFromProjectTopicsName(fakePath);
         assert.strictEqual(result, 'topicValue');
         assert(
-          (client.pathTemplates.projectTopicPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectTopicsPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

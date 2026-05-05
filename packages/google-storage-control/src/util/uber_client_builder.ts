@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ export const FILES = [
   '../v2/storage_client.ts',
 ];
 export const LICENSE = `
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -137,9 +137,9 @@ function buildOptionTypes(clients: string[]) {
 function buildClientConstructor(clients: string[]) {
   let variableDecl = '';
   const comment = `\t/**
-  \* @param {object} [StorageControlClientOptions] - Enables user to instantiate clients separately and use those as the subclients.
-  \* To have sub-clients with different options, instantiate each client separately.
-  \*/`;
+  * @param {object} [StorageControlClientOptions] - Enables user to instantiate clients separately and use those as the subclients.
+  * To have sub-clients with different options, instantiate each client separately.
+  */`;
   let constructorInitializers = `\tconstructor(options?: StorageControlClientOptions){
     options = options || {};\n`;
   let clientCounter = 0;

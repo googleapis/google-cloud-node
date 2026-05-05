@@ -193,11 +193,17 @@ export class CmekServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+      ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
+      dataProductPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}'
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
@@ -246,6 +252,9 @@ export class CmekServiceClient {
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
       ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
@@ -1666,6 +1675,68 @@ export class CmekServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAsset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @param {string} data_asset
+   * @returns {string} Resource name string.
+   */
+  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+    return this.pathTemplates.dataAssetPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+      data_asset: dataAsset,
+    });
+  }
+
+  /**
+   * Parse the project from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+  }
+
+  /**
+   * Parse the location from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+  }
+
+  /**
+   * Parse the data_product from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+  }
+
+  /**
+   * Parse the data_asset from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_asset.
+   */
+  matchDataAssetFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+  }
+
+  /**
    * Return a fully-qualified dataAttribute resource name string.
    *
    * @param {string} project
@@ -1774,6 +1845,55 @@ export class CmekServiceClient {
    */
   matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  }
+
+  /**
+   * Return a fully-qualified dataProduct resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @returns {string} Resource name string.
+   */
+  dataProductPath(project:string,location:string,dataProduct:string) {
+    return this.pathTemplates.dataProductPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+    });
+  }
+
+  /**
+   * Parse the project from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+  }
+
+  /**
+   * Parse the location from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+  }
+
+  /**
+   * Parse the data_product from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
   }
 
   /**
@@ -2675,6 +2795,55 @@ export class CmekServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataFeed resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_feed
+   * @returns {string} Resource name string.
+   */
+  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+    return this.pathTemplates.metadataFeedPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_feed: metadataFeed,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+  }
+
+  /**
+   * Parse the location from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+  }
+
+  /**
+   * Parse the metadata_feed from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the metadata_feed.
+   */
+  matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
   }
 
   /**

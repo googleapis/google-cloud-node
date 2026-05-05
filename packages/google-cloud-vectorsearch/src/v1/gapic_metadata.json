@@ -186,6 +186,11 @@
                 "createIndex"
               ]
             },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
             "DeleteIndex": {
               "methods": [
                 "deleteIndex"
@@ -194,6 +199,11 @@
             "ImportDataObjects": {
               "methods": [
                 "importDataObjects"
+              ]
+            },
+            "ExportDataObjects": {
+              "methods": [
+                "exportDataObjects"
               ]
             },
             "ListCollections": {
@@ -245,6 +255,11 @@
                 "createIndex"
               ]
             },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
             "DeleteIndex": {
               "methods": [
                 "deleteIndex"
@@ -253,6 +268,11 @@
             "ImportDataObjects": {
               "methods": [
                 "importDataObjects"
+              ]
+            },
+            "ExportDataObjects": {
+              "methods": [
+                "exportDataObjects"
               ]
             },
             "ListCollections": {

@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/firestore",
   "description": "Firestore Client Library for Node.js",
-  "version": "8.3.0",
+  "version": "8.5.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -40,15 +40,16 @@
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test:rest": "FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
-    "system-test:named-db:rest": "FIRESTORE_NAMED_DATABASE=test-db FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:rest": "FIRESTORE_DATABASE_ID=test-db FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:grpc": "mocha build/system-test --timeout 1200000",
-    "system-test:named-db:grpc": "FIRESTORE_NAMED_DATABASE=test-db mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:grpc": "FIRESTORE_DATABASE_ID=test-db mocha build/system-test --timeout 1200000",
     "system-test:emulator:rest": "FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
-    "system-test:named-db:emulator:rest": "FIRESTORE_NAMED_DATABASE=test-db FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:emulator:rest": "FIRESTORE_DATABASE_ID=test-db FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:emulator:grpc": "FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
-    "system-test:named-db:emulator:grpc": "FIRESTORE_NAMED_DATABASE=test-db FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
-    "system-test": "npm run system-test:grpc && npm run system-test:rest && npm run system-test:named-db:grpc && npm run system-test:named-db:rest",
-    "system-test:emulator": "npm run system-test:emulator:grpc && npm run system-test:emulator:rest && npm run system-test:named-db:emulator:grpc && npm run system-test:named-db:emulator:rest",
+    "system-test:enterprise:emulator:grpc": "FIRESTORE_DATABASE_ID=test-db FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
+    "system-test": "concurrently -p \"[{name}]\" -n \"grpc,rest,enterprise-grpc,enterprise-rest\" -c \"cyan,magenta,blue,yellow\" \"npm:system-test:grpc\" \"npm:system-test:rest\" \"npm:system-test:enterprise:grpc\" \"npm:system-test:enterprise:rest\"",
+    "system-test:nightly": "FIRESTORE_TARGET_BACKEND=nightly FIRESTORE_DATABASE_ID=enterprise RUN_ENTERPRISE_TESTS=yes GCLOUD_PROJECT=firestore-sdk-nightly mocha build/system-test --timeout 1200000",
+    "system-test:emulator": "concurrently -p \"[{name}]\" -n \"grpc,rest,enterprise-grpc,enterprise-rest\" -c \"cyan,magenta,blue,yellow\" \"npm:system-test:emulator:grpc\" \"npm:system-test:emulator:rest\" \"npm:system-test:enterprise:emulator:grpc\" \"npm:system-test:enterprise:emulator:rest\"",
     "presystem-test": "npm run compile",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "conformance": "mocha build/conformance",
@@ -89,12 +90,13 @@
     "@types/extend": "^3.0.4",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.1.0",
-    "@types/sinon": "^17.0.4",
+    "@types/sinon": "^21.0.0",
     "@types/through2": "^2.0.41",
     "c8": "^10.1.3",
     "chai": "^4.5.0",
     "chai-as-promised": "^7.1.2",
     "codecov": "^3.8.3",
+    "concurrently": "^9.1.2",
     "duplexify": "^4.1.3",
     "eslint-plugin-node": "^11.1.0",
     "execa": "^9.6.0",
@@ -114,10 +116,17 @@
     "path-to-regexp": "^8.2.0",
     "protobufjs-cli": "^1.1.3",
     "proxyquire": "^2.1.3",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "through2": "^4.0.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
+  },
+  "//_comment": "TODO: Remove @sinonjs/fake-timers overrides/resolutions when version > 15.3.0 fixes the duplicate identifier 'withGlobal' issue.",
+  "overrides": {
+    "@sinonjs/fake-timers": "15.1.1"
+  },
+  "resolutions": {
+    "@sinonjs/fake-timers": "15.1.1"
   },
   "exports": {
     ".": {

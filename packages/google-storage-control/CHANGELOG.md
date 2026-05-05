@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.2...storage-control-v0.9.0) (2026-05-01)
+
+
+### Features
+
+* [control] populate the `persisted_data_checksums` field with object checksums on write object / query write status responses ([f373cc5](https://github.com/googleapis/google-cloud-node/commit/f373cc54c43afbebc6815a702ad4d854071185d4))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [0.8.2](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.1...storage-control-v0.8.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* **storage-control:** Update jsdocs headers in v2 clients to include … ([#7851](https://github.com/googleapis/google-cloud-node/issues/7851)) ([1dd5860](https://github.com/googleapis/google-cloud-node/commit/1dd586015cbc85409f4737c995c750bc694c14c3))
+
+## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.8.0...storage-control-v0.8.1) (2026-03-18)
+
+
+### Bug Fixes
+
+* **storage-control:** Add utility to use correct client and update al… ([#7600](https://github.com/googleapis/google-cloud-node/issues/7600)) ([08e9bae](https://github.com/googleapis/google-cloud-node/commit/08e9bae6b1f756e2aa457b5f31e2d5096658912f))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.7.0...storage-control-v0.8.0) (2026-01-31)
 
 

@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.6.0...discoveryengine-v2.7.0) (2026-05-01)
+
+
+### Features
+
+* [discoveryengine] add AUTO condition to SearchAsYouTypeSpec in v1alpha and v1beta ([#8032](https://github.com/googleapis/google-cloud-node/issues/8032)) ([35ba856](https://github.com/googleapis/google-cloud-node/commit/35ba85651226491b08d3f62369fdcf1fe64d1e4b))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.3...discoveryengine-v2.6.0) (2026-03-25)
+
+
+### Features
+
+* [discoveryengine] Update DataStoreSpec and add BoostSpec to SearchService ([#7837](https://github.com/googleapis/google-cloud-node/issues/7837)) ([6943587](https://github.com/googleapis/google-cloud-node/commit/694358739b082ad17f42800b42e5dbbf4c2c975b))
+
 ## [2.5.3](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.2...discoveryengine-v2.5.3) (2026-03-02)
 
 
