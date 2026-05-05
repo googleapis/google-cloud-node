@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [3.0.4](https://github.com/googleapis/google-cloud-node-core/compare/proto3-json-serializer-v3.0.3...proto3-json-serializer-v3.0.4) (2025-10-29)
 
 
