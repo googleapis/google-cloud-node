@@ -5,6 +5,32 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "b90800518eb02799a812e6c2d21f57216564da30",
+          "message": "Add logic to check for IAM RPC methods within the service before adding mixin to avoid generating duplicate methods",
+          "issues": [
+            "7929"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "5b4ab3bd8487ad5ba4816157e0deb33d418ed836",
+          "message": "Add .boolean() to diregapic and handwritten_layer",
+          "issues": [
+            "8100"
+          ],
+          "scope": "gapic-generator-typescript"
+        }
+      ],
+      "version": "4.11.14",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "b245faa2-6b6d-4456-b53b-482fae16e2d4",
+      "createTime": "2026-05-05T21:43:20.625Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
           "issues": [
@@ -77670,5 +77696,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T21:43:20.625Z"
 }
