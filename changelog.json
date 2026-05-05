@@ -4,6 +4,52 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "41671b08ba94df02ab6fd42ea216dbcfe51d18ad",
+          "message": "Added FieldValue.minimum() and FieldValue.maximum()",
+          "issues": [
+            "8151"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "4acb07593b5c6a1387a1dfb97bf7ab4cd399f329",
+          "message": "Added search stage support for languageCode, offset, limit, and retrievalDepth",
+          "issues": [
+            "8161"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "86310088f5dea61b4dfe3580e273b34aad79eac0",
+          "message": "Ensure limit(0) is properly serialized in query requests",
+          "issues": [
+            "8076",
+            "7382"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "a9f6c3f3f721ba4920d925de6afa24ba9e81c7ad",
+          "message": "Respect `ignoreUndefinedProperties` in subpipelines",
+          "issues": [
+            "8089"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "8.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "dba533a3-fbc5-4fb1-8d8b-f54850ecc2e1",
+      "createTime": "2026-05-05T21:43:20.675Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
@@ -77670,5 +77716,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-05T21:43:20.675Z"
 }

@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [8.6.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.5.0...firestore-v8.6.0) (2026-05-05)
+
+
+### Features
+
+* **firestore:** Added FieldValue.minimum() and FieldValue.maximum() ([#8151](https://github.com/googleapis/google-cloud-node/issues/8151)) ([41671b0](https://github.com/googleapis/google-cloud-node/commit/41671b08ba94df02ab6fd42ea216dbcfe51d18ad))
+* **firestore:** Added search stage support for languageCode, offset, limit, and retrievalDepth ([#8161](https://github.com/googleapis/google-cloud-node/issues/8161)) ([4acb075](https://github.com/googleapis/google-cloud-node/commit/4acb07593b5c6a1387a1dfb97bf7ab4cd399f329))
+
+
+### Bug Fixes
+
+* **firestore:** Ensure limit(0) is properly serialized in query requests ([#8076](https://github.com/googleapis/google-cloud-node/issues/8076)) ([8631008](https://github.com/googleapis/google-cloud-node/commit/86310088f5dea61b4dfe3580e273b34aad79eac0)), closes [#7382](https://github.com/googleapis/google-cloud-node/issues/7382)
+* **firestore:** Respect `ignoreUndefinedProperties` in subpipelines ([#8089](https://github.com/googleapis/google-cloud-node/issues/8089)) ([a9f6c3f](https://github.com/googleapis/google-cloud-node/commit/a9f6c3f3f721ba4920d925de6afa24ba9e81c7ad))
+
 ## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.4.0...firestore-v8.5.0) (2026-04-13)
 
 
