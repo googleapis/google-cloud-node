@@ -3825,6 +3825,54 @@
         }
       }
     },
+    "ReasoningEngineRuntimeRevisionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReasoningEngineRuntimeRevisionServiceClient",
+          "rpcs": {
+            "GetReasoningEngineRuntimeRevision": {
+              "methods": [
+                "getReasoningEngineRuntimeRevision"
+              ]
+            },
+            "DeleteReasoningEngineRuntimeRevision": {
+              "methods": [
+                "deleteReasoningEngineRuntimeRevision"
+              ]
+            },
+            "ListReasoningEngineRuntimeRevisions": {
+              "methods": [
+                "listReasoningEngineRuntimeRevisions",
+                "listReasoningEngineRuntimeRevisionsStream",
+                "listReasoningEngineRuntimeRevisionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReasoningEngineRuntimeRevisionServiceClient",
+          "rpcs": {
+            "GetReasoningEngineRuntimeRevision": {
+              "methods": [
+                "getReasoningEngineRuntimeRevision"
+              ]
+            },
+            "DeleteReasoningEngineRuntimeRevision": {
+              "methods": [
+                "deleteReasoningEngineRuntimeRevision"
+              ]
+            },
+            "ListReasoningEngineRuntimeRevisions": {
+              "methods": [
+                "listReasoningEngineRuntimeRevisions",
+                "listReasoningEngineRuntimeRevisionsStream",
+                "listReasoningEngineRuntimeRevisionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ReasoningEngineService": {
       "clients": {
         "grpc": {

@@ -46,6 +46,10 @@ service ReasoningEngineExecutionService {
       post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:query"
       body: "*"
       additional_bindings {
+        post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}:query"
+        body: "*"
+      }
+      additional_bindings {
         post: "/v1beta1/{name=reasoningEngines/*}:query"
         body: "*"
       }
@@ -58,6 +62,10 @@ service ReasoningEngineExecutionService {
     option (google.api.http) = {
       post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:streamQuery"
       body: "*"
+      additional_bindings {
+        post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}:streamQuery"
+        body: "*"
+      }
       additional_bindings {
         post: "/v1beta1/{name=reasoningEngines/*}:streamQuery"
         body: "*"
