@@ -23,6 +23,8 @@ import {
   document,
   incrementTransform,
   InvalidApiUsage,
+  minimumTransform,
+  maximumTransform,
   requestEquals,
   response,
   serverTimestamp,
@@ -158,8 +160,11 @@ describe('FieldValue.increment()', () => {
     const arrayUnionA = FieldValue.increment(13.37);
     const arrayUnionB = FieldValue.increment(13.37);
     const arrayUnionC = FieldValue.increment(42);
+    const arrayUnionD = FieldValue.maximum(NaN);
+    const arrayUnionE = FieldValue.maximum(NaN);
     expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
     expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
+    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
   });
 
   it('can be used with set()', () => {
@@ -187,6 +192,120 @@ describe('FieldValue.increment()', () => {
   });
 
   genericFieldValueTests('FieldValue.increment', FieldValue.increment(42));
+});
+
+describe('FieldValue.minimum()', () => {
+  it('requires one argument', () => {
+    expect(() => (FieldValue as InvalidApiUsage).minimum()).to.throw(
+      'Function "FieldValue.minimum()" requires at least 1 argument.',
+    );
+  });
+
+  it('validates that operand is number', () => {
+    return createInstance().then(firestore => {
+      expect(() => {
+        return firestore.doc('collectionId/documentId').set({
+          foo: FieldValue.minimum('foo' as InvalidApiUsage),
+        });
+      }).to.throw(
+        'Value for argument "FieldValue.minimum()" is not a valid number',
+      );
+    });
+  });
+
+  it('supports isEqual()', () => {
+    const arrayUnionA = FieldValue.minimum(13.37);
+    const arrayUnionB = FieldValue.minimum(13.37);
+    const arrayUnionC = FieldValue.minimum(42);
+    const arrayUnionD = FieldValue.maximum(NaN);
+    const arrayUnionE = FieldValue.maximum(NaN);
+    expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
+    expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
+    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
+  });
+
+  it('can be used with set()', () => {
+    const overrides: ApiOverride = {
+      commit: request => {
+        const expectedRequest = set({
+          document: document('documentId', 'foo', 'bar'),
+          transforms: [
+            minimumTransform('field', 42),
+            minimumTransform('map.field', 13.37),
+          ],
+        });
+        requestEquals(request, expectedRequest);
+        return response(writeResult(1));
+      },
+    };
+
+    return createInstance(overrides).then(firestore => {
+      return firestore.doc('collectionId/documentId').set({
+        foo: 'bar',
+        field: FieldValue.minimum(42),
+        map: {field: FieldValue.minimum(13.37)},
+      });
+    });
+  });
+
+  genericFieldValueTests('FieldValue.minimum', FieldValue.minimum(42));
+});
+
+describe('FieldValue.maximum()', () => {
+  it('requires one argument', () => {
+    expect(() => (FieldValue as InvalidApiUsage).maximum()).to.throw(
+      'Function "FieldValue.maximum()" requires at least 1 argument.',
+    );
+  });
+
+  it('validates that operand is number', () => {
+    return createInstance().then(firestore => {
+      expect(() => {
+        return firestore.doc('collectionId/documentId').set({
+          foo: FieldValue.maximum('foo' as InvalidApiUsage),
+        });
+      }).to.throw(
+        'Value for argument "FieldValue.maximum()" is not a valid number',
+      );
+    });
+  });
+
+  it('supports isEqual()', () => {
+    const arrayUnionA = FieldValue.maximum(13.37);
+    const arrayUnionB = FieldValue.maximum(13.37);
+    const arrayUnionC = FieldValue.maximum(42);
+    const arrayUnionD = FieldValue.maximum(NaN);
+    const arrayUnionE = FieldValue.maximum(NaN);
+    expect(arrayUnionA.isEqual(arrayUnionB)).to.be.true;
+    expect(arrayUnionC.isEqual(arrayUnionB)).to.be.false;
+    expect(arrayUnionD.isEqual(arrayUnionE)).to.be.true;
+  });
+
+  it('can be used with set()', () => {
+    const overrides: ApiOverride = {
+      commit: request => {
+        const expectedRequest = set({
+          document: document('documentId', 'foo', 'bar'),
+          transforms: [
+            maximumTransform('field', 42),
+            maximumTransform('map.field', 13.37),
+          ],
+        });
+        requestEquals(request, expectedRequest);
+        return response(writeResult(1));
+      },
+    };
+
+    return createInstance(overrides).then(firestore => {
+      return firestore.doc('collectionId/documentId').set({
+        foo: 'bar',
+        field: FieldValue.maximum(42),
+        map: {field: FieldValue.maximum(13.37)},
+      });
+    });
+  });
+
+  genericFieldValueTests('FieldValue.maximum', FieldValue.maximum(42));
 });
 
 describe('FieldValue.arrayRemove()', () => {
