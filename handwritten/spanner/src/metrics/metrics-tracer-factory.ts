@@ -56,7 +56,7 @@ export class MetricsTracerFactory {
   private _currentOperationTracers = new Map();
   private _currentOperationLastUpdatedMs = new Map();
   private _intervalTracerCleanup: NodeJS.Timeout;
-  public static enabled = false;
+  public static enabled = true;
 
   /**
    * Private constructor to enforce singleton pattern.
