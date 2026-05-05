@@ -1,2 +1,4 @@
-paths:
-  - '.github'
+paths-ignore:
+  - 'packages'
+  - 'core'
+  - 'handwritten'
