@@ -55,7 +55,7 @@
     "google-gax": "^5.0.0",
     "pumpify": "^2.0.1",
     "stream-events": "^1.0.5",
-    "uuid": "^11.1.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

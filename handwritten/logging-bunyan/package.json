@@ -81,7 +81,7 @@
     "post-install-check": "0.0.1",
     "proxyquire": "^2.0.1",
     "typescript": "^5.1.6",
-    "uuid": "^10.0.0"
+    "uuid": "^14.0.0"
   },
   "peerDependencies": {
     "bunyan": "*"

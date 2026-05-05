@@ -66,7 +66,7 @@
     "on-finished": "^2.3.0",
     "pumpify": "^2.0.1",
     "stream-events": "^1.0.5",
-    "uuid": "^9.0.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^7.0.0",

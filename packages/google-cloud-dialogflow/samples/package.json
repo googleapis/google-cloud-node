@@ -17,7 +17,7 @@
   "dependencies": {
     "@google-cloud/dialogflow": "^7.6.1",
     "pb-util": "^1.0.0",
-    "uuid": "^9.0.0",
+    "uuid": "^14.0.0",
     "yargs": "^17.0.0"
   },
   "devDependencies": {
