@@ -5,7 +5,7 @@ ARG SPANNER_VERSION=8.6.0
 RUN npm init -y \
  && npm install --omit=dev "@google-cloud/spanner@${SPANNER_VERSION}" @grpc/grpc-js \
  && npm cache clean --force
-COPY issue/node/benchmark.js ./benchmark.js
-COPY issue/node/cluster-runner.js ./cluster-runner.js
+COPY --chown=node:node --chmod=0444 issue/node/benchmark.js ./benchmark.js
+COPY --chown=node:node --chmod=0444 issue/node/cluster-runner.js ./cluster-runner.js
 USER node
 ENTRYPOINT ["node", "/app/cluster-runner.js"]

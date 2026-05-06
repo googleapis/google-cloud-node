@@ -22,7 +22,7 @@ COPY --from=local-lib /tmp/google-cloud-spanner.tgz /tmp/google-cloud-spanner.tg
 RUN npm install --omit=dev /tmp/google-cloud-spanner.tgz \
  && npm cache clean --force \
  && node -e "console.log(require('@google-cloud/spanner/package.json').version)"
-COPY issue/node/benchmark.js ./benchmark.js
-COPY issue/node/cluster-runner.js ./cluster-runner.js
+COPY --chown=node:node --chmod=0444 issue/node/benchmark.js ./benchmark.js
+COPY --chown=node:node --chmod=0444 issue/node/cluster-runner.js ./cluster-runner.js
 USER node
 ENTRYPOINT ["node", "/app/cluster-runner.js"]
