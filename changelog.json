@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8e",
+          "message": "Test changelog change",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "3.0.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/error-reporting",
+      "id": "3fd62a46-a8cd-4020-952f-e58c7771b035",
+      "createTime": "2026-05-06T19:07:28.494Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
           "message": "Bump all node submodules",
           "issues": [
