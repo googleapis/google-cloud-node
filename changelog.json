@@ -10,6 +10,31 @@
           "issues": [
             "8178"
           ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "6.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "e9c0afc1-e825-4e6c-8108-4acae6e81ea6",
+      "createTime": "2026-05-06T21:35:08.423Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
         }
       ],
       "version": "3.0.6",
@@ -77687,5 +77712,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-06T18:07:28.494Z"
+  "updateTime": "2026-05-06T21:35:08.423Z"
 }
