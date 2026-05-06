@@ -14,7 +14,7 @@
   "core/packages/proto3-json-serializer-nodejs": "3.0.4",
   "core/packages/retry-request": "8.0.2",
   "core/packages/teeny-request": "10.1.2",
-  "core/packages/tools": "1.0.5",
+  "core/packages/tools": "1.0.6",
   "core/paginator": "6.0.0",
   "core/precise-date": "5.0.0",
   "core/projectify": "5.0.0",
