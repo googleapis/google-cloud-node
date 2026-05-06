@@ -16,8 +16,6 @@ import assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch from 'node-fetch';
-import FormData from 'form-data';
 import pLimit from 'p-limit';
 import * as path from 'path';
 import * as tmp from 'tmp';
@@ -434,9 +432,9 @@ describe('storage', function () {
           resumable: false,
         });
         const [metadata] = await file.getMetadata();
-        const encyrptionAlgorithm =
+        const encryptionAlgorithm =
           metadata.customerEncryption?.encryptionAlgorithm;
-        assert.strictEqual(encyrptionAlgorithm, 'AES256');
+        assert.strictEqual(encryptionAlgorithm, 'AES256');
       });
 
       it('should set custom encryption in a resumable upload', async () => {
@@ -446,9 +444,9 @@ describe('storage', function () {
           resumable: true,
         });
         const [metadata] = await file.getMetadata();
-        const encyrptionAlgorithm =
+        const encryptionAlgorithm =
           metadata.customerEncryption?.encryptionAlgorithm;
-        assert.strictEqual(encyrptionAlgorithm, 'AES256');
+        assert.strictEqual(encryptionAlgorithm, 'AES256');
       });
 
       it('should make a file public during the upload', async () => {
