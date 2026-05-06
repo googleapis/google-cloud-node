@@ -7053,6 +7053,7 @@
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] SingleTenantHsmInstance deleteTime
                          * @property {google.protobuf.IDuration|null} [unrefreshedDurationUntilDisable] SingleTenantHsmInstance unrefreshedDurationUntilDisable
                          * @property {google.protobuf.ITimestamp|null} [disableTime] SingleTenantHsmInstance disableTime
+                         * @property {boolean|null} [keyPortabilityEnabled] SingleTenantHsmInstance keyPortabilityEnabled
                          */
     
                         /**
@@ -7127,6 +7128,14 @@
                         SingleTenantHsmInstance.prototype.disableTime = null;
     
                         /**
+                         * SingleTenantHsmInstance keyPortabilityEnabled.
+                         * @member {boolean} keyPortabilityEnabled
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.keyPortabilityEnabled = false;
+    
+                        /**
                          * Creates a new SingleTenantHsmInstance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
@@ -7164,6 +7173,8 @@
                                 $root.google.protobuf.Duration.encode(message.unrefreshedDurationUntilDisable, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.disableTime != null && Object.hasOwnProperty.call(message, "disableTime"))
                                 $root.google.protobuf.Timestamp.encode(message.disableTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.keyPortabilityEnabled != null && Object.hasOwnProperty.call(message, "keyPortabilityEnabled"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.keyPortabilityEnabled);
                             return writer;
                         };
     
@@ -7226,6 +7237,10 @@
                                     }
                                 case 7: {
                                         message.disableTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.keyPortabilityEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7306,6 +7321,9 @@
                                 if (error)
                                     return "disableTime." + error;
                             }
+                            if (message.keyPortabilityEnabled != null && message.hasOwnProperty("keyPortabilityEnabled"))
+                                if (typeof message.keyPortabilityEnabled !== "boolean")
+                                    return "keyPortabilityEnabled: boolean expected";
                             return null;
                         };
     
@@ -7392,6 +7410,8 @@
                                     throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.disableTime: object expected");
                                 message.disableTime = $root.google.protobuf.Timestamp.fromObject(object.disableTime);
                             }
+                            if (object.keyPortabilityEnabled != null)
+                                message.keyPortabilityEnabled = Boolean(object.keyPortabilityEnabled);
                             return message;
                         };
     
@@ -7416,6 +7436,7 @@
                                 object.deleteTime = null;
                                 object.unrefreshedDurationUntilDisable = null;
                                 object.disableTime = null;
+                                object.keyPortabilityEnabled = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7431,6 +7452,8 @@
                                 object.unrefreshedDurationUntilDisable = $root.google.protobuf.Duration.toObject(message.unrefreshedDurationUntilDisable, options);
                             if (message.disableTime != null && message.hasOwnProperty("disableTime"))
                                 object.disableTime = $root.google.protobuf.Timestamp.toObject(message.disableTime, options);
+                            if (message.keyPortabilityEnabled != null && message.hasOwnProperty("keyPortabilityEnabled"))
+                                object.keyPortabilityEnabled = message.keyPortabilityEnabled;
                             return object;
                         };
     
@@ -36169,6 +36192,7 @@
                          * @property {Uint8Array|null} [sha256] Digest sha256
                          * @property {Uint8Array|null} [sha384] Digest sha384
                          * @property {Uint8Array|null} [sha512] Digest sha512
+                         * @property {Uint8Array|null} [externalMu] Digest externalMu
                          */
     
                         /**
@@ -36210,17 +36234,25 @@
                          */
                         Digest.prototype.sha512 = null;
     
+                        /**
+                         * Digest externalMu.
+                         * @member {Uint8Array|null|undefined} externalMu
+                         * @memberof google.cloud.kms.v1.Digest
+                         * @instance
+                         */
+                        Digest.prototype.externalMu = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Digest digest.
-                         * @member {"sha256"|"sha384"|"sha512"|undefined} digest
+                         * @member {"sha256"|"sha384"|"sha512"|"externalMu"|undefined} digest
                          * @memberof google.cloud.kms.v1.Digest
                          * @instance
                          */
                         Object.defineProperty(Digest.prototype, "digest", {
-                            get: $util.oneOfGetter($oneOfFields = ["sha256", "sha384", "sha512"]),
+                            get: $util.oneOfGetter($oneOfFields = ["sha256", "sha384", "sha512", "externalMu"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -36254,6 +36286,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sha384);
                             if (message.sha512 != null && Object.hasOwnProperty.call(message, "sha512"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.sha512);
+                            if (message.externalMu != null && Object.hasOwnProperty.call(message, "externalMu"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.externalMu);
                             return writer;
                         };
     
@@ -36300,6 +36334,10 @@
                                     }
                                 case 3: {
                                         message.sha512 = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.externalMu = reader.bytes();
                                         break;
                                     }
                                 default:
@@ -36357,6 +36395,13 @@
                                 if (!(message.sha512 && typeof message.sha512.length === "number" || $util.isString(message.sha512)))
                                     return "sha512: buffer expected";
                             }
+                            if (message.externalMu != null && message.hasOwnProperty("externalMu")) {
+                                if (properties.digest === 1)
+                                    return "digest: multiple values";
+                                properties.digest = 1;
+                                if (!(message.externalMu && typeof message.externalMu.length === "number" || $util.isString(message.externalMu)))
+                                    return "externalMu: buffer expected";
+                            }
                             return null;
                         };
     
@@ -36387,6 +36432,11 @@
                                     $util.base64.decode(object.sha512, message.sha512 = $util.newBuffer($util.base64.length(object.sha512)), 0);
                                 else if (object.sha512.length >= 0)
                                     message.sha512 = object.sha512;
+                            if (object.externalMu != null)
+                                if (typeof object.externalMu === "string")
+                                    $util.base64.decode(object.externalMu, message.externalMu = $util.newBuffer($util.base64.length(object.externalMu)), 0);
+                                else if (object.externalMu.length >= 0)
+                                    message.externalMu = object.externalMu;
                             return message;
                         };
     
@@ -36417,6 +36467,11 @@
                                 object.sha512 = options.bytes === String ? $util.base64.encode(message.sha512, 0, message.sha512.length) : options.bytes === Array ? Array.prototype.slice.call(message.sha512) : message.sha512;
                                 if (options.oneofs)
                                     object.digest = "sha512";
+                            }
+                            if (message.externalMu != null && message.hasOwnProperty("externalMu")) {
+                                object.externalMu = options.bytes === String ? $util.base64.encode(message.externalMu, 0, message.externalMu.length) : options.bytes === Array ? Array.prototype.slice.call(message.externalMu) : message.externalMu;
+                                if (options.oneofs)
+                                    object.digest = "externalMu";
                             }
                             return object;
                         };

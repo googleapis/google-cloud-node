@@ -35,6 +35,7 @@ import {
   RETRYABLE_ERR_FN_DEFAULT,
   Storage,
 } from '../src/storage.js';
+import {CRC32C} from '../src/crc32c.js';
 
 const bucketName = process.env.BUCKET_NAME || 'gcs-resumable-upload-test';
 
@@ -304,5 +305,67 @@ describe('resumable-upload', () => {
       'crc32c should be generated on each upload',
     );
     assert.equal(results.size, FILE_SIZE);
+  });
+
+  const KNOWN_CRC32C_OF_ZEROS = 'rthIWA==';
+  describe('Validation of Client Checksums Against Server Response', () => {
+    let crc32c: string;
+
+    before(async () => {
+      crc32c = (await CRC32C.fromFile(filePath)).toString();
+    });
+    it('should upload successfully when crc32c calculation is enabled', done => {
+      let uploadSucceeded = false;
+
+      fs.createReadStream(filePath)
+        .on('error', done)
+        .pipe(
+          upload({
+            bucket: bucketName,
+            file: filePath,
+            crc32c: true,
+            clientCrc32c: crc32c,
+            retryOptions: retryOptions,
+          }),
+        )
+        .on('error', err => {
+          console.log(err);
+          done(
+            new Error(
+              `Upload failed unexpectedly on success path: ${err.message}`,
+            ),
+          );
+        })
+        .on('response', resp => {
+          uploadSucceeded = resp.status === 200;
+        })
+        .on('finish', () => {
+          assert.strictEqual(uploadSucceeded, true);
+          done();
+        });
+    });
+
+    it('should destroy the stream on a checksum mismatch (client-provided hash mismatch)', done => {
+      const EXPECTED_ERROR_MESSAGE_PART = `Provided CRC32C "${KNOWN_CRC32C_OF_ZEROS}" doesn't match calculated CRC32C`;
+
+      fs.createReadStream(filePath)
+        .on('error', done)
+        .pipe(
+          upload({
+            bucket: bucketName,
+            file: filePath,
+            clientCrc32c: KNOWN_CRC32C_OF_ZEROS,
+            crc32c: true,
+            retryOptions: retryOptions,
+          }),
+        )
+        .on('error', (err: Error) => {
+          assert.ok(
+            err.message.includes(EXPECTED_ERROR_MESSAGE_PART),
+            `Expected error message part "${EXPECTED_ERROR_MESSAGE_PART}" not found in: ${err.message}`,
+          );
+          done();
+        });
+    });
   });
 });

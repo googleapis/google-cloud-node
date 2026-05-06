@@ -490,6 +490,15 @@
                         }
                       }
                     },
+                    "Chokepoint": {
+                      "fields": {
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "CloudArmor": {
                       "fields": {
                         "securityPolicy": {
@@ -590,6 +599,11 @@
                         "parentType": {
                           "type": "ParentType",
                           "id": 2
+                        },
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -598,6 +612,41 @@
                             "PARENT_TYPE_UNSPECIFIED": 0,
                             "ORGANIZATION": 1,
                             "PROJECT": 2
+                          }
+                        }
+                      }
+                    },
+                    "InfoType": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sensitivityScore": {
+                          "type": "SensitivityScore",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SensitivityScore": {
+                      "fields": {
+                        "score": {
+                          "type": "SensitivityScoreLevel",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SensitivityScoreLevel": {
+                          "values": {
+                            "SENSITIVITY_SCORE_LEVEL_UNSPECIFIED": 0,
+                            "SENSITIVITY_LOW": 10,
+                            "SENSITIVITY_UNKNOWN": 12,
+                            "SENSITIVITY_MODERATE": 20,
+                            "SENSITIVITY_HIGH": 30
                           }
                         }
                       }
@@ -1093,6 +1142,64 @@
                         }
                       }
                     },
+                    "ExternalExposure": {
+                      "fields": {
+                        "privateIpAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "privatePort": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "exposedService": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "publicIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "publicPort": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "exposedEndpoint": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "loadBalancerFirewallPolicy": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceFirewallPolicy": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "forwardingRule": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "backendService": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "instanceGroup": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "networkEndpointGroup": {
+                          "type": "string",
+                          "id": 12
+                        }
+                      }
+                    },
                     "ExternalSystem": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
@@ -1462,6 +1569,14 @@
                           "rule": "repeated",
                           "type": "GroupMembership",
                           "id": 65
+                        },
+                        "chokepoint": {
+                          "type": "Chokepoint",
+                          "id": 77
+                        },
+                        "externalExposure": {
+                          "type": "ExternalExposure",
+                          "id": 84
                         }
                       },
                       "nested": {
@@ -1498,7 +1613,10 @@
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
                             "POSTURE_VIOLATION": 6,
-                            "TOXIC_COMBINATION": 7
+                            "TOXIC_COMBINATION": 7,
+                            "SENSITIVE_DATA_RISK": 8,
+                            "CHOKEPOINT": 9,
+                            "EXTERNAL_EXPOSURE": 10
                           }
                         },
                         "MuteInfo": {
@@ -1557,7 +1675,8 @@
                         "GroupType": {
                           "values": {
                             "GROUP_TYPE_UNSPECIFIED": 0,
-                            "GROUP_TYPE_TOXIC_COMBINATION": 1
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1,
+                            "GROUP_TYPE_CHOKEPOINT": 3
                           }
                         }
                       }
@@ -15005,6 +15124,30 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             },
             "http": {

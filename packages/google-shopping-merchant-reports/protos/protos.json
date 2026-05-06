@@ -148,6 +148,11 @@
                                 "customerCountryCode"
                               ]
                             },
+                            "_storeType": {
+                              "oneof": [
+                                "storeType"
+                              ]
+                            },
                             "_offerId": {
                               "oneof": [
                                 "offerId"
@@ -283,6 +288,13 @@
                             "customerCountryCode": {
                               "type": "string",
                               "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "storeType": {
+                              "type": "StoreType.StoreTypeEnum",
+                              "id": 32,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -571,6 +583,11 @@
                                 "aggregatedReportingContextStatus"
                               ]
                             },
+                            "_reportingContext": {
+                              "oneof": [
+                                "reportingContext"
+                              ]
+                            },
                             "_clickPotentialRank": {
                               "oneof": [
                                 "clickPotentialRank"
@@ -756,6 +773,18 @@
                                 "proto3_optional": true
                               }
                             },
+                            "statusPerReportingContext": {
+                              "rule": "repeated",
+                              "type": "StatusPerReportingContext",
+                              "id": 32
+                            },
+                            "reportingContext": {
+                              "type": "google.shopping.type.ReportingContext.ReportingContextEnum",
+                              "id": 33,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
                             "itemIssues": {
                               "rule": "repeated",
                               "type": "ItemIssue",
@@ -897,6 +926,39 @@
                                     "MERCHANT_ACTION": 1,
                                     "PENDING_PROCESSING": 2
                                   }
+                                }
+                              }
+                            },
+                            "StatusPerReportingContext": {
+                              "oneofs": {
+                                "_reportingContext": {
+                                  "oneof": [
+                                    "reportingContext"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "reportingContext": {
+                                  "type": "google.shopping.type.ReportingContext.ReportingContextEnum",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "approvedCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "disapprovedCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "pendingCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4
                                 }
                               }
                             },
@@ -2068,6 +2130,18 @@
                                 "MARKETING_METHOD_ENUM_UNSPECIFIED": 0,
                                 "ORGANIC": 1,
                                 "ADS": 2
+                              }
+                            }
+                          }
+                        },
+                        "StoreType": {
+                          "fields": {},
+                          "nested": {
+                            "StoreTypeEnum": {
+                              "values": {
+                                "STORE_TYPE_ENUM_UNSPECIFIED": 0,
+                                "ONLINE_STORE": 1,
+                                "LOCAL_STORES": 2
                               }
                             }
                           }
@@ -6889,7 +6963,13 @@
                         "LOCAL_INVENTORY_ADS": 3,
                         "FREE_LISTINGS": 4,
                         "FREE_LOCAL_LISTINGS": 5,
-                        "YOUTUBE_SHOPPING": 6
+                        "YOUTUBE_SHOPPING": 6,
+                        "YOUTUBE_SHOPPING_CHECKOUT": 7,
+                        "YOUTUBE_AFFILIATE": 8,
+                        "FREE_VEHICLE_LISTINGS": 9,
+                        "VEHICLE_ADS": 10,
+                        "CLOUD_RETAIL": 11,
+                        "LOCAL_CLOUD_RETAIL": 12
                       }
                     }
                   }
@@ -6914,11 +6994,16 @@
                         "LOCAL_INVENTORY_ADS": 5,
                         "VEHICLE_INVENTORY_ADS": 6,
                         "FREE_LISTINGS": 7,
+                        "FREE_LISTINGS_UCP_CHECKOUT": 19,
                         "FREE_LOCAL_LISTINGS": 8,
                         "FREE_LOCAL_VEHICLE_LISTINGS": 9,
+                        "YOUTUBE_AFFILIATE": 18,
                         "YOUTUBE_SHOPPING": 10,
                         "CLOUD_RETAIL": 11,
-                        "LOCAL_CLOUD_RETAIL": 12
+                        "LOCAL_CLOUD_RETAIL": 12,
+                        "PRODUCT_REVIEWS": 15,
+                        "MERCHANT_REVIEWS": 16,
+                        "YOUTUBE_CHECKOUT": 17
                       }
                     }
                   }

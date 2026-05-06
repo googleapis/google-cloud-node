@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-vectorsearch",
-    "version": "0.1.0",
+    "version": "0.6.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -920,6 +920,54 @@
       }
     },
     {
+      "regionTag": "vectorsearch_v1_generated_VectorSearchService_UpdateIndex_async",
+      "title": "DataObjectSearchService updateIndex Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Index.",
+      "canonical": true,
+      "file": "vector_search_service.update_index.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIndex",
+        "fullName": "google.cloud.vectorsearch.v1.VectorSearchService.UpdateIndex",
+        "async": true,
+        "parameters": [
+          {
+            "name": "index",
+            "type": ".google.cloud.vectorsearch.v1.Index"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VectorSearchServiceClient",
+          "fullName": "google.cloud.vectorsearch.v1.VectorSearchServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateIndex",
+          "fullName": "google.cloud.vectorsearch.v1.VectorSearchService.UpdateIndex",
+          "service": {
+            "shortName": "VectorSearchService",
+            "fullName": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "vectorsearch_v1_generated_VectorSearchService_DeleteIndex_async",
       "title": "DataObjectSearchService deleteIndex Sample",
       "origin": "API_DEFINITION",
@@ -1000,6 +1048,50 @@
         "method": {
           "shortName": "ImportDataObjects",
           "fullName": "google.cloud.vectorsearch.v1.VectorSearchService.ImportDataObjects",
+          "service": {
+            "shortName": "VectorSearchService",
+            "fullName": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vectorsearch_v1_generated_VectorSearchService_ExportDataObjects_async",
+      "title": "DataObjectSearchService exportDataObjects Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates a Long-Running Operation to export DataObjects from a Collection.",
+      "canonical": true,
+      "file": "vector_search_service.export_data_objects.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportDataObjects",
+        "fullName": "google.cloud.vectorsearch.v1.VectorSearchService.ExportDataObjects",
+        "async": true,
+        "parameters": [
+          {
+            "name": "gcs_destination",
+            "type": ".google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VectorSearchServiceClient",
+          "fullName": "google.cloud.vectorsearch.v1.VectorSearchServiceClient"
+        },
+        "method": {
+          "shortName": "ExportDataObjects",
+          "fullName": "google.cloud.vectorsearch.v1.VectorSearchService.ExportDataObjects",
           "service": {
             "shortName": "VectorSearchService",
             "fullName": "google.cloud.vectorsearch.v1.VectorSearchService"

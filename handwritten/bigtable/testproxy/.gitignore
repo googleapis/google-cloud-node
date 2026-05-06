@@ -1,0 +1,2 @@
+# Exclude temp log files to make sure they don't get committed.
+*.txt

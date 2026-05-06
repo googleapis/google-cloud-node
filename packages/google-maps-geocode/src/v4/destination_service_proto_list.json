@@ -1,0 +1,5 @@
+[
+  "../../protos/google/geo/type/viewport.proto",
+  "../../protos/google/maps/geocode/v4/destination_service.proto",
+  "../../protos/google/maps/geocode/v4/geocode_service.proto"
+]

@@ -1,0 +1,16 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "lib": [
+      "es2018",
+      "esnext.bigint"
+    ]
+  },
+  "include": [
+    "src/*.ts",
+    "test/*.ts",
+    "system-test/*.ts"
+  ]
+}

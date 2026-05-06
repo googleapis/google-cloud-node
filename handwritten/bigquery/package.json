@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/bigquery",
   "description": "Google BigQuery Client Library for Node.js",
-  "version": "8.2.0",
+  "version": "8.3.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -64,6 +64,7 @@
     "stream-events": "^1.0.5"
   },
   "overrides": {
+    "@sinonjs/fake-timers": "15.1.1",
     "@google-cloud/common": {
       "google-auth-library": "10.3.0"
     }
@@ -93,7 +94,7 @@
     "path-to-regexp": "^8.2.0",
     "prettier": "^3.5.3",
     "proxyquire": "^2.1.3",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery"

@@ -354,6 +354,27 @@ describe('BigQuery', () => {
     assert.strictEqual(res.totalRows, '100');
   });
 
+  it('should query with skipParsing', async () => {
+    const [rows] = await bigquery.query({
+      query,
+      skipParsing: true,
+    });
+    assert.strictEqual(rows.length, 100);
+    // Raw rows have an 'f' property containing the fields
+    assert.ok(rows[0].f);
+    assert.strictEqual(typeof rows[0].f[0].v, 'string');
+  });
+
+  it('should query with skipParsing via Dataset.query', async () => {
+    const [rows] = await dataset.query({
+      query,
+      skipParsing: true,
+    });
+    assert.strictEqual(rows.length, 100);
+    assert.ok(rows[0].f);
+    assert.strictEqual(typeof rows[0].f[0].v, 'string');
+  });
+
   it('should query without jobs.query and return all PagedResponse as positional parameters', async () => {
     // force jobs.getQueryResult instead of fast query path
     const jobId = generateName('job');
@@ -575,8 +596,9 @@ describe('BigQuery', () => {
       const QUERY = `SELECT * FROM \`${table.id}\``;
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const SCHEMA = require('../../system-test/data/schema.json');
-      const TEST_DATA_FILE =
-        require.resolve('../../system-test/data/location-test-data.json');
+      const TEST_DATA_FILE = require.resolve(
+        '../../system-test/data/location-test-data.json',
+      );
 
       before(async () => {
         // create a dataset in a certain location will cascade the location
@@ -879,8 +901,9 @@ describe('BigQuery', () => {
   });
 
   describe('BigQuery/Table', () => {
-    const TEST_DATA_JSON_PATH =
-      require.resolve('../../system-test/data/kitten-test-data.json');
+    const TEST_DATA_JSON_PATH = require.resolve(
+      '../../system-test/data/kitten-test-data.json',
+    );
 
     it('should have created the correct schema', () => {
       assert.deepStrictEqual(table.metadata.schema.fields, SCHEMA);
@@ -1019,25 +1042,27 @@ describe('BigQuery', () => {
     });
 
     it('should create a table with timestampPrecision', async () => {
-      const table = dataset.table(generateName('timestamp-precision-table'));
-      const schema = {
-        fields: [
-          {
-            name: 'ts_field',
-            type: 'TIMESTAMP',
-            timestampPrecision: 12,
-          },
-        ],
-      };
-      try {
-        await table.create({schema});
-        const [metadata] = await table.getMetadata();
-        assert.deepStrictEqual(
-          metadata.schema.fields[0].timestampPrecision,
-          '12',
-        );
-      } catch (e) {
-        assert.ifError(e);
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+        const table = dataset.table(generateName('timestamp-precision-table'));
+        const schema = {
+          fields: [
+            {
+              name: 'ts_field',
+              type: 'TIMESTAMP',
+              timestampPrecision: 12,
+            },
+          ],
+        };
+        try {
+          await table.create({schema});
+          const [metadata] = await table.getMetadata();
+          assert.deepStrictEqual(
+            metadata.schema.fields[0].timestampPrecision,
+            '12',
+          );
+        } catch (e) {
+          assert.ifError(e);
+        }
       }
     });
 
@@ -1539,6 +1564,11 @@ describe('BigQuery', () => {
 
             testCases.forEach(testCase => {
               it(`should handle ${testCase.name}`, async () => {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                  // These tests are only important when the high precision
+                  // timestamp support is turned on.
+                  return;
+                }
                 /*
                 The users use the new TIMESTAMP(12) type to indicate they want to
                 opt in to using timestampPrecision=12. The reason is that some queries
@@ -1591,6 +1621,11 @@ describe('BigQuery', () => {
                 }
               });
               it(`should handle nested ${testCase.name}`, async () => {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                  // These tests are only important when the high precision
+                  // timestamp support is turned on.
+                  return;
+                }
                 /*
                 The users use the new TIMESTAMP(12) type to indicate they want to
                 opt in to using timestampPrecision=12. The reason is that some queries
@@ -1986,6 +2021,11 @@ describe('BigQuery', () => {
 
             testCases.forEach(testCase => {
               it(`should handle ${testCase.name}`, async () => {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                  // These tests are only important when the high precision
+                  // timestamp support is turned on.
+                  return;
+                }
                 /*
                 The users use the new TIMESTAMP(12) type to indicate they want to
                 opt in to using timestampPrecision=12. The reason is that some queries
@@ -2040,6 +2080,11 @@ describe('BigQuery', () => {
                 }
               });
               it(`should handle nested ${testCase.name}`, async () => {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                  // These tests are only important when the high precision
+                  // timestamp support is turned on.
+                  return;
+                }
                 /*
                 The users use the new TIMESTAMP(12) type to indicate they want to
                 opt in to using timestampPrecision=12. The reason is that some queries

@@ -30,6 +30,7 @@ import {StorageTransport} from '../src/storage-transport.js';
 import {
   AvailableServiceObjectMethods,
   BucketExceptionMessages,
+  BucketMetadata,
   EnableLoggingOptions,
   GetBucketSignedUrlConfig,
   LifecycleRule,
@@ -1067,132 +1068,61 @@ describe('Bucket', () => {
     });
   });
 
-  /* describe('deleteFiles', () => {
-    let readCount: number;
-
-    beforeEach(() => {
-      readCount = 0;
-    });
-
+  describe('deleteFiles', () => {
     it('should accept only a callback', done => {
-      const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = () => {
-          return Promise.resolve();
-        };
-        return file;
-      });
+      const file = new File(bucket, '1');
+      sandbox.stub(file, 'delete').resolves();
 
-      const readable = new stream.Readable({
-        objectMode: true,
-        read() {
-          if (readCount < 1) {
-            this.push(files[readCount]);
-            readCount++;
-          } else {
-            this.push(null);
-          }
-        },
-      });
+      const readable = stream.Readable.from([file]);
 
       bucket.getFilesStream = (query: {}) => {
         assert.deepStrictEqual(query, {});
-        return readable;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return readable as any;
       };
 
       bucket.deleteFiles(done);
     });
 
     it('should get files from the bucket', done => {
-      const query = {a: 'b', c: 'd'};
+      const query = {
+        prefix: 'my-folder/',
+        force: true,
+      };
+      const file = new File(bucket, '1');
+      sandbox.stub(file, 'delete').resolves();
 
-      const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = () => {
-          return Promise.resolve();
-        };
-        return file;
-      });
-
-      const readable = new stream.Readable({
-        objectMode: true,
-        read() {
-          if (readCount < 1) {
-            this.push(files[readCount]);
-            readCount++;
-          } else {
-            this.push(null);
-          }
-        },
-      });
+      const readable = stream.Readable.from([file]);
 
       bucket.getFilesStream = (query_: {}) => {
         assert.deepStrictEqual(query_, query);
-        return readable;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return readable as any;
       };
 
       bucket.deleteFiles(query, done);
     });
 
-    it('should process 10 files at a time', done => {
-      pLimitOverride = (limit: number) => {
-        assert.strictEqual(limit, 10);
-        setImmediate(done);
-        return () => {};
-      };
-
-      const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = () => {
-          return Promise.resolve();
-        };
-        return file;
-      });
-
-      const readable = new stream.Readable({
-        objectMode: true,
-        read() {
-          if (readCount < 1) {
-            this.push(files[readCount]);
-            readCount++;
-          } else {
-            this.push(null);
-          }
-        },
-      });
-
-      bucket.getFilesStream = () => readable;
-      bucket.deleteFiles({}, assert.ifError);
-    });
-
     it('should delete the files', done => {
-      const query = {};
+      const query = {force: true};
       let timesCalled = 0;
 
-      const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = (query_: {}) => {
+      const files = [new File(bucket, '1'), new File(bucket, '2')];
+      files.forEach(file => {
+        sandbox.stub(file, 'delete').callsFake(query_ => {
           timesCalled++;
           assert.strictEqual(query_, query);
           return Promise.resolve();
-        };
-        return file;
-      });
-
-      const readable = new stream.Readable({
-        objectMode: true,
-        read() {
-          if (readCount < files.length) {
-            this.push(files[readCount]);
-            readCount++;
-          } else {
-            this.push(null);
-          }
-        },
+        });
       });
 
       bucket.getFilesStream = (query_: {}) => {
         assert.strictEqual(query_, query);
-        return readable;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return stream.Readable.from(files) as any;
       };
 
-      bucket.deleteFiles(query, (err: Error) => {
+      bucket.deleteFiles(query, err => {
         assert.ifError(err);
         assert.strictEqual(timesCalled, files.length);
         done();
@@ -1202,17 +1132,15 @@ describe('Bucket', () => {
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
       const readable = new stream.Readable({
-        objectMode: true,
         read() {
           this.destroy(error);
         },
       });
 
-      bucket.getFilesStream = () => {
-        return readable;
-      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      bucket.getFilesStream = () => readable as any;
 
-      bucket.deleteFiles({}, (err: Error) => {
+      bucket.deleteFiles({}, err => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1220,29 +1148,13 @@ describe('Bucket', () => {
 
     it('should execute callback with error from deleting file', done => {
       const error = new Error('Error.');
+      const file = new File(bucket, '1');
+      sandbox.stub(file, 'delete').rejects(error);
 
-      const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = () => Promise.reject(error);
-        return file;
-      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      bucket.getFilesStream = () => stream.Readable.from([file]) as any;
 
-      const readable = new stream.Readable({
-        objectMode: true,
-        read() {
-          if (readCount < files.length) {
-            this.push(files[readCount]);
-            readCount++;
-          } else {
-            this.push(null);
-          }
-        },
-      });
-
-      bucket.getFilesStream = () => {
-        return readable;
-      };
-
-      bucket.deleteFiles({}, (err: Error) => {
+      bucket.deleteFiles({}, err => {
         assert.strictEqual(err, error);
         done();
       });
@@ -1250,35 +1162,21 @@ describe('Bucket', () => {
 
     it('should execute callback with queued errors', done => {
       const error = new Error('Error.');
+      const files = [new File(bucket, '1'), new File(bucket, '2')];
 
-      const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = () => Promise.reject(error);
-        return file;
-      });
+      files.forEach(f => sandbox.stub(f, 'delete').rejects(error));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      bucket.getFilesStream = () => stream.Readable.from(files) as any;
 
-      const readable = new stream.Readable({
-        objectMode: true,
-        read() {
-          if (readCount < files.length) {
-            this.push(files[readCount]);
-            readCount++;
-          } else {
-            this.push(null);
-          }
-        },
-      });
-
-      bucket.getFilesStream = () => {
-        return readable;
-      };
-
-      bucket.deleteFiles({force: true}, (errs: Array<{}>) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      void bucket.deleteFiles({force: true}, (errs: any) => {
+        assert.ok(Array.isArray(errs));
         assert.strictEqual(errs[0], error);
         assert.strictEqual(errs[1], error);
         done();
       });
     });
-  }); */
+  });
 
   describe('deleteLabels', () => {
     describe('all labels', () => {
@@ -1752,28 +1650,30 @@ describe('Bucket', () => {
       });
     });
 
-    /* it('should add nextPageToken to fields for autoPaginate', done => {
-      bucket.request = (
-        reqOpts: DecorateRequestOptions,
-        callback: Function,
-      ) => {
-        assert.strictEqual(reqOpts.qs.fields, 'items(name),nextPageToken');
-        callback(null, {
-          items: [{name: 'fake-file-name'}],
-          nextPageToken: 'fake-page-token',
+    it('should add nextPageToken to fields for autoPaginate', async () => {
+      bucket.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(
+            reqOpts.queryParameters.fields,
+            'items(name),nextPageToken',
+          );
+          return Promise.resolve({
+            items: [{name: 'fake-file-name'}],
+            nextPageToken: 'fake-page-token',
+          });
         });
-      };
 
       bucket.getFiles(
         {fields: 'items(name)', autoPaginate: true},
-        (err: Error, files: FakeFile[], nextQuery: {pageToken: string}) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (err: Error | null, files?: File[], nextQuery?: any) => {
           assert.ifError(err);
-          assert.strictEqual(files[0].name, 'fake-file-name');
+          assert.strictEqual(files![0].name, 'fake-file-name');
           assert.strictEqual(nextQuery.pageToken, 'fake-page-token');
-          done();
         },
       );
-    }); */
+    });
 
     it('should return soft-deleted Files if queried for softDeleted', () => {
       const softDeletedTime = new Date('1/1/2024').toISOString();
@@ -1839,8 +1739,95 @@ describe('Bucket', () => {
         .resolves({items: [fileMetadata]});
       bucket.getFiles((err, files) => {
         assert.ifError(err);
-        assert(files instanceof File);
-        assert.deepStrictEqual(files[0].metadata, fileMetadata);
+        assert(files![0] instanceof File);
+        assert.deepStrictEqual(files![0].metadata, fileMetadata);
+      });
+    });
+
+    it('should filter by presence of key/value pair', done => {
+      const filter = 'contexts."status"="active"';
+      bucket.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters.filter, filter);
+          done();
+          return Promise.resolve({items: []});
+        });
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by absence of key/value pair (NOT)', done => {
+      const filter = '-contexts."status"="active"';
+      bucket.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters.filter, filter);
+          done();
+          return Promise.resolve({items: []});
+        });
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by presence of key regardless of value (Existence)', done => {
+      const filter = 'contexts."status":*';
+      bucket.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters.filter, filter);
+          done();
+          return Promise.resolve({items: []});
+        });
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by absence of key regardless of value (Non-existence)', done => {
+      const filter = '-contexts."status":*';
+      bucket.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake(reqOpts => {
+          assert.strictEqual(reqOpts.queryParameters.filter, filter);
+          done();
+          return Promise.resolve({items: []});
+        });
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should include contexts in the returned File metadata', done => {
+      const fileMetadata = {
+        name: 'filename',
+        contexts: {
+          custom: {
+            dept: {value: 'eng', createTime: '...'},
+          },
+        },
+      };
+
+      bucket.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((reqOpts, callback) => {
+          const response = {items: [fileMetadata]};
+
+          const promise = Promise.resolve(response);
+          if (typeof callback === 'function') {
+            promise.then(
+              res => callback(null, res),
+              err => callback(err),
+            );
+          }
+          return promise;
+        });
+
+      bucket.getFiles((err, files) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(
+          files![0].metadata.contexts,
+          fileMetadata.contexts,
+        );
+        done();
       });
     });
   });
@@ -2312,78 +2299,6 @@ describe('Bucket', () => {
     });
   });
 
-  /* describe('request', () => {
-    const USER_PROJECT = 'grape-spaceship-123';
-
-    beforeEach(() => {
-      bucket.userProject = USER_PROJECT;
-    });
-
-    it('should set the userProject if qs is undefined', done => {
-      FakeServiceObject.prototype.request = ((
-        reqOpts: DecorateRequestOptions,
-      ) => {
-        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-        done();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }) as any;
-
-      bucket.request({}, assert.ifError);
-    });
-
-    it('should set the userProject if field is undefined', done => {
-      const options = {
-        qs: {
-          foo: 'bar',
-        },
-      };
-
-      FakeServiceObject.prototype.request = ((
-        reqOpts: DecorateRequestOptions,
-      ) => {
-        assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-        assert.strictEqual(reqOpts.qs, options.qs);
-        done();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }) as any;
-
-      bucket.request(options, assert.ifError);
-    });
-
-    it('should not overwrite the userProject', done => {
-      const fakeUserProject = 'not-grape-spaceship-123';
-      const options = {
-        qs: {
-          userProject: fakeUserProject,
-        },
-      };
-
-      FakeServiceObject.prototype.request = ((
-        reqOpts: DecorateRequestOptions,
-      ) => {
-        assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
-        done();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }) as any;
-
-      bucket.request(options, assert.ifError);
-    });
-
-    it('should call ServiceObject#request correctly', done => {
-      const options = {};
-
-      Object.assign(FakeServiceObject.prototype, {
-        request(reqOpts: DecorateRequestOptions, callback: Function) {
-          assert.strictEqual(this, bucket);
-          assert.strictEqual(reqOpts, options);
-          callback(); // done fn
-        },
-      });
-
-      bucket.request(options, done);
-    });
-  }); */
-
   describe('setLabels', () => {
     it('should correctly call setMetadata', done => {
       const labels = {};
@@ -2472,7 +2387,7 @@ describe('Bucket', () => {
       bucket.setStorageClass('hyphenated-class', OPTIONS, CALLBACK);
     });
 
-    it('should call setMetdata correctly', () => {
+    it('should call setMetadata correctly', () => {
       bucket.setMetadata = sandbox
         .stub()
         .callsFake((metadata, options, callback) => {
@@ -3058,6 +2973,144 @@ describe('Bucket', () => {
       );
       assert.strictEqual(bucket.storage.retryOptions.autoRetry, true);
       done();
+    });
+  });
+
+  describe('setMetadata', () => {
+    describe('encryption enforcement', () => {
+      const effectiveTime = '2026-02-02T12:00:00Z';
+      it('should correctly format restrictionMode for all enforcement types', async () => {
+        const encryptionMetadata: BucketMetadata = {
+          encryption: {
+            defaultKmsKeyName: 'kms-key-name',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+              effectiveTime: effectiveTime,
+            },
+            customerManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'NotRestricted',
+              effectiveTime: effectiveTime,
+            },
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+              effectiveTime: effectiveTime,
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([encryptionMetadata, {}]);
+
+        await bucket.setMetadata(encryptionMetadata);
+
+        // Verify the stub was called with the correct object
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+
+        assert.strictEqual(
+          calledMetadata.encryption?.defaultKmsKeyName,
+          encryptionMetadata.encryption?.defaultKmsKeyName,
+        );
+        assert.deepStrictEqual(
+          calledMetadata.encryption?.googleManagedEncryptionEnforcementConfig,
+          {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime},
+        );
+      });
+
+      it('should preserve existing encryption fields during a partial update', async () => {
+        // In a real scenario, the library might merge this.
+        // Here we verify what is passed TO the method.
+        const patch: BucketMetadata = {
+          encryption: {
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        await bucket.setMetadata(patch);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.strictEqual(
+          calledMetadata.encryption?.customerSuppliedEncryptionEnforcementConfig
+            ?.restrictionMode,
+          'FullyRestricted',
+        );
+      });
+
+      it('should reject or handle invalid restrictionMode values', async () => {
+        const invalidMetadata = {
+          encryption: {
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'fully_restricted',
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await bucket.setMetadata(invalidMetadata as any);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.strictEqual(
+          calledMetadata.encryption?.googleManagedEncryptionEnforcementConfig
+            ?.restrictionMode,
+          'fully_restricted',
+        );
+      });
+
+      it('should not include enforcement configs that are not provided', async () => {
+        const partialMetadata: BucketMetadata = {
+          encryption: {
+            defaultKmsKeyName: 'test-key',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        await bucket.setMetadata(partialMetadata);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.ok(
+          calledMetadata.encryption?.googleManagedEncryptionEnforcementConfig,
+        );
+        assert.strictEqual(
+          calledMetadata.encryption?.customerManagedEncryptionEnforcementConfig,
+          undefined,
+        );
+        assert.strictEqual(
+          calledMetadata.encryption
+            ?.customerSuppliedEncryptionEnforcementConfig,
+          undefined,
+        );
+      });
+
+      it('should allow nullifying encryption enforcement', async () => {
+        const clearMetadata = {
+          encryption: null,
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        await bucket.setMetadata(clearMetadata);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.strictEqual(calledMetadata.encryption, null);
+      });
     });
   });
 });

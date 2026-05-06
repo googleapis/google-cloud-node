@@ -1,0 +1,27 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "lib": [
+      "es2023",
+      "dom"
+    ]
+  },
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts",
+    "system-test/*.ts",
+    "testproxy/*.ts",
+    "testproxy/**/*.ts",
+    "src/v2/bigtable_client_config.json",
+    "src/admin/v2/bigtable_table_admin_client_config.json",
+    "src/admin/v2/bigtable_instance_admin_client_config.json",
+    "test-common/*.ts",
+    "test-common/**/*.ts",
+    "protos/protos.json"
+  ]
+}

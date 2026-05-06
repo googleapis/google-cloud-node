@@ -58,7 +58,7 @@
     "nock": "^14.0.5",
     "null-loader": "^4.0.1",
     "puppeteer": "^24.0.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "ts-loader": "^9.5.2",
     "typescript": "5.8.3",
     "webpack": "^5.97.1",

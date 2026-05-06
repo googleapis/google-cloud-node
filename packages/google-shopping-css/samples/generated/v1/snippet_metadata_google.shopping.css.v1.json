@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-css",
-    "version": "0.1.0",
+    "version": "0.11.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -478,7 +478,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 53,
+          "end": 54,
           "type": "FULL"
         }
       ],

@@ -3132,6 +3132,14 @@
                           "type": "ChunkedDocument",
                           "id": 18
                         },
+                        "blobAssets": {
+                          "rule": "repeated",
+                          "type": "BlobAsset",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "entityValidationOutput": {
                           "type": "EntityValidationOutput",
                           "id": 21
@@ -4154,6 +4162,14 @@
                             }
                           }
                         },
+                        "Annotations": {
+                          "fields": {
+                            "description": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "DocumentLayout": {
                           "fields": {
                             "blocks": {
@@ -4169,7 +4185,8 @@
                                   "oneof": [
                                     "textBlock",
                                     "tableBlock",
-                                    "listBlock"
+                                    "listBlock",
+                                    "imageBlock"
                                   ]
                                 }
                               },
@@ -4185,6 +4202,10 @@
                                 "listBlock": {
                                   "type": "LayoutListBlock",
                                   "id": 4
+                                },
+                                "imageBlock": {
+                                  "type": "LayoutImageBlock",
+                                  "id": 7
                                 },
                                 "blockId": {
                                   "type": "string",
@@ -4226,6 +4247,10 @@
                                       "rule": "repeated",
                                       "type": "DocumentLayoutBlock",
                                       "id": 3
+                                    },
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 4
                                     }
                                   }
                                 },
@@ -4244,6 +4269,10 @@
                                     "caption": {
                                       "type": "string",
                                       "id": 3
+                                    },
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 4
                                     }
                                   }
                                 },
@@ -4294,6 +4323,52 @@
                                       "id": 1
                                     }
                                   }
+                                },
+                                "LayoutImageBlock": {
+                                  "oneofs": {
+                                    "imageSource": {
+                                      "oneof": [
+                                        "blobAssetId",
+                                        "gcsUri",
+                                        "dataUri"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "blobAssetId": {
+                                      "type": "string",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "gcsUri": {
+                                      "type": "string",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "dataUri": {
+                                      "type": "string",
+                                      "id": 6,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "imageText": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 3
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -4336,6 +4411,11 @@
                                   "rule": "repeated",
                                   "type": "ChunkPageFooter",
                                   "id": 6
+                                },
+                                "chunkFields": {
+                                  "rule": "repeated",
+                                  "type": "ChunkField",
+                                  "id": 7
                                 }
                               },
                               "nested": {
@@ -4374,8 +4454,96 @@
                                       "id": 2
                                     }
                                   }
+                                },
+                                "ImageChunkField": {
+                                  "oneofs": {
+                                    "imageSource": {
+                                      "oneof": [
+                                        "blobAssetId",
+                                        "gcsUri",
+                                        "dataUri"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "blobAssetId": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "gcsUri": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "dataUri": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "TableChunkField": {
+                                  "fields": {
+                                    "annotations": {
+                                      "type": "Annotations",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "ChunkField": {
+                                  "oneofs": {
+                                    "fieldType": {
+                                      "oneof": [
+                                        "imageChunkField",
+                                        "tableChunkField"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "imageChunkField": {
+                                      "type": "ImageChunkField",
+                                      "id": 1
+                                    },
+                                    "tableChunkField": {
+                                      "type": "TableChunkField",
+                                      "id": 2
+                                    }
+                                  }
                                 }
                               }
+                            }
+                          }
+                        },
+                        "BlobAsset": {
+                          "fields": {
+                            "assetId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "content": {
+                              "type": "bytes",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "mimeType": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },

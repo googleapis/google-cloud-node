@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-memorystore",
-    "version": "0.1.0",
+    "version": "0.5.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -284,6 +284,46 @@
         "method": {
           "shortName": "GetCertificateAuthority",
           "fullName": "google.cloud.memorystore.v1beta.Memorystore.GetCertificateAuthority",
+          "service": {
+            "shortName": "Memorystore",
+            "fullName": "google.cloud.memorystore.v1beta.Memorystore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "memorystore_v1beta_generated_Memorystore_GetSharedRegionalCertificateAuthority_async",
+      "title": "Memorystore getSharedRegionalCertificateAuthority Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of shared regional certificate authority information for Memorystore instance.",
+      "canonical": true,
+      "file": "memorystore.get_shared_regional_certificate_authority.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSharedRegionalCertificateAuthority",
+        "fullName": "google.cloud.memorystore.v1beta.Memorystore.GetSharedRegionalCertificateAuthority",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.memorystore.v1beta.SharedRegionalCertificateAuthority",
+        "client": {
+          "shortName": "MemorystoreClient",
+          "fullName": "google.cloud.memorystore.v1beta.MemorystoreClient"
+        },
+        "method": {
+          "shortName": "GetSharedRegionalCertificateAuthority",
+          "fullName": "google.cloud.memorystore.v1beta.Memorystore.GetSharedRegionalCertificateAuthority",
           "service": {
             "shortName": "Memorystore",
             "fullName": "google.cloud.memorystore.v1beta.Memorystore"

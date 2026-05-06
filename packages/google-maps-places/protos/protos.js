@@ -7937,6 +7937,7 @@
                          * @property {Array.<google.maps.places.v1.IPhoto>|null} [photos] Place photos
                          * @property {string|null} [adrFormatAddress] Place adrFormatAddress
                          * @property {google.maps.places.v1.Place.BusinessStatus|null} [businessStatus] Place businessStatus
+                         * @property {google.type.IDate|null} [openingDate] Place openingDate
                          * @property {google.maps.places.v1.PriceLevel|null} [priceLevel] Place priceLevel
                          * @property {Array.<google.maps.places.v1.Place.IAttribution>|null} [attributions] Place attributions
                          * @property {number|null} [userRatingCount] Place userRatingCount
@@ -8220,6 +8221,14 @@
                          * @instance
                          */
                         Place.prototype.businessStatus = 0;
+    
+                        /**
+                         * Place openingDate.
+                         * @member {google.type.IDate|null|undefined} openingDate
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.openingDate = null;
     
                         /**
                          * Place priceLevel.
@@ -8969,6 +8978,8 @@
                                 writer.uint32(/* id 93, wireType 2 =*/746).string(message.movedPlace);
                             if (message.movedPlaceId != null && Object.hasOwnProperty.call(message, "movedPlaceId"))
                                 writer.uint32(/* id 94, wireType 2 =*/754).string(message.movedPlaceId);
+                            if (message.openingDate != null && Object.hasOwnProperty.call(message, "openingDate"))
+                                $root.google.type.Date.encode(message.openingDate, writer.uint32(/* id 95, wireType 2 =*/762).fork()).ldelim();
                             if (message.googleMapsTypeLabel != null && Object.hasOwnProperty.call(message, "googleMapsTypeLabel"))
                                 $root.google.type.LocalizedText.encode(message.googleMapsTypeLabel, writer.uint32(/* id 96, wireType 2 =*/770).fork()).ldelim();
                             return writer;
@@ -9117,6 +9128,10 @@
                                     }
                                 case 25: {
                                         message.businessStatus = reader.int32();
+                                        break;
+                                    }
+                                case 95: {
+                                        message.openingDate = $root.google.type.Date.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 26: {
@@ -9490,8 +9505,14 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
+                            if (message.openingDate != null && message.hasOwnProperty("openingDate")) {
+                                var error = $root.google.type.Date.verify(message.openingDate);
+                                if (error)
+                                    return "openingDate." + error;
+                            }
                             if (message.priceLevel != null && message.hasOwnProperty("priceLevel"))
                                 switch (message.priceLevel) {
                                 default:
@@ -9908,6 +9929,15 @@
                             case 3:
                                 message.businessStatus = 3;
                                 break;
+                            case "FUTURE_OPENING":
+                            case 4:
+                                message.businessStatus = 4;
+                                break;
+                            }
+                            if (object.openingDate != null) {
+                                if (typeof object.openingDate !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.openingDate: object expected");
+                                message.openingDate = $root.google.type.Date.fromObject(object.openingDate);
                             }
                             switch (object.priceLevel) {
                             default:
@@ -10191,6 +10221,7 @@
                                 object.consumerAlert = null;
                                 object.movedPlace = "";
                                 object.movedPlaceId = "";
+                                object.openingDate = null;
                                 object.googleMapsTypeLabel = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -10451,6 +10482,8 @@
                                 object.movedPlace = message.movedPlace;
                             if (message.movedPlaceId != null && message.hasOwnProperty("movedPlaceId"))
                                 object.movedPlaceId = message.movedPlaceId;
+                            if (message.openingDate != null && message.hasOwnProperty("openingDate"))
+                                object.openingDate = $root.google.type.Date.toObject(message.openingDate, options);
                             if (message.googleMapsTypeLabel != null && message.hasOwnProperty("googleMapsTypeLabel"))
                                 object.googleMapsTypeLabel = $root.google.type.LocalizedText.toObject(message.googleMapsTypeLabel, options);
                             return object;
@@ -12342,6 +12375,7 @@
                          * @property {number} OPERATIONAL=1 OPERATIONAL value
                          * @property {number} CLOSED_TEMPORARILY=2 CLOSED_TEMPORARILY value
                          * @property {number} CLOSED_PERMANENTLY=3 CLOSED_PERMANENTLY value
+                         * @property {number} FUTURE_OPENING=4 FUTURE_OPENING value
                          */
                         Place.BusinessStatus = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12349,6 +12383,7 @@
                             values[valuesById[1] = "OPERATIONAL"] = 1;
                             values[valuesById[2] = "CLOSED_TEMPORARILY"] = 2;
                             values[valuesById[3] = "CLOSED_PERMANENTLY"] = 3;
+                            values[valuesById[4] = "FUTURE_OPENING"] = 4;
                             return values;
                         })();
     
@@ -17141,6 +17176,7 @@
                          * @property {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction|null} [locationRestriction] SearchNearbyRequest locationRestriction
                          * @property {google.maps.places.v1.SearchNearbyRequest.RankPreference|null} [rankPreference] SearchNearbyRequest rankPreference
                          * @property {google.maps.places.v1.IRoutingParameters|null} [routingParameters] SearchNearbyRequest routingParameters
+                         * @property {boolean|null} [includeFutureOpeningBusinesses] SearchNearbyRequest includeFutureOpeningBusinesses
                          */
     
                         /**
@@ -17243,6 +17279,14 @@
                         SearchNearbyRequest.prototype.routingParameters = null;
     
                         /**
+                         * SearchNearbyRequest includeFutureOpeningBusinesses.
+                         * @member {boolean} includeFutureOpeningBusinesses
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.includeFutureOpeningBusinesses = false;
+    
+                        /**
                          * Creates a new SearchNearbyRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.SearchNearbyRequest
@@ -17290,6 +17334,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.rankPreference);
                             if (message.routingParameters != null && Object.hasOwnProperty.call(message, "routingParameters"))
                                 $root.google.maps.places.v1.RoutingParameters.encode(message.routingParameters, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.includeFutureOpeningBusinesses != null && Object.hasOwnProperty.call(message, "includeFutureOpeningBusinesses"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.includeFutureOpeningBusinesses);
                             return writer;
                         };
     
@@ -17372,6 +17418,10 @@
                                     }
                                 case 10: {
                                         message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.includeFutureOpeningBusinesses = reader.bool();
                                         break;
                                     }
                                 default:
@@ -17465,6 +17515,9 @@
                                 if (error)
                                     return "routingParameters." + error;
                             }
+                            if (message.includeFutureOpeningBusinesses != null && message.hasOwnProperty("includeFutureOpeningBusinesses"))
+                                if (typeof message.includeFutureOpeningBusinesses !== "boolean")
+                                    return "includeFutureOpeningBusinesses: boolean expected";
                             return null;
                         };
     
@@ -17544,6 +17597,8 @@
                                     throw TypeError(".google.maps.places.v1.SearchNearbyRequest.routingParameters: object expected");
                                 message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters);
                             }
+                            if (object.includeFutureOpeningBusinesses != null)
+                                message.includeFutureOpeningBusinesses = Boolean(object.includeFutureOpeningBusinesses);
                             return message;
                         };
     
@@ -17573,6 +17628,7 @@
                                 object.locationRestriction = null;
                                 object.rankPreference = options.enums === String ? "RANK_PREFERENCE_UNSPECIFIED" : 0;
                                 object.routingParameters = null;
+                                object.includeFutureOpeningBusinesses = false;
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -17606,6 +17662,8 @@
                                 object.rankPreference = options.enums === String ? $root.google.maps.places.v1.SearchNearbyRequest.RankPreference[message.rankPreference] === undefined ? message.rankPreference : $root.google.maps.places.v1.SearchNearbyRequest.RankPreference[message.rankPreference] : message.rankPreference;
                             if (message.routingParameters != null && message.hasOwnProperty("routingParameters"))
                                 object.routingParameters = $root.google.maps.places.v1.RoutingParameters.toObject(message.routingParameters, options);
+                            if (message.includeFutureOpeningBusinesses != null && message.hasOwnProperty("includeFutureOpeningBusinesses"))
+                                object.includeFutureOpeningBusinesses = message.includeFutureOpeningBusinesses;
                             return object;
                         };
     
@@ -18176,6 +18234,7 @@
                          * @property {google.maps.places.v1.IRoutingParameters|null} [routingParameters] SearchTextRequest routingParameters
                          * @property {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters|null} [searchAlongRouteParameters] SearchTextRequest searchAlongRouteParameters
                          * @property {boolean|null} [includePureServiceAreaBusinesses] SearchTextRequest includePureServiceAreaBusinesses
+                         * @property {boolean|null} [includeFutureOpeningBusinesses] SearchTextRequest includeFutureOpeningBusinesses
                          */
     
                         /**
@@ -18323,6 +18382,14 @@
                         SearchTextRequest.prototype.includePureServiceAreaBusinesses = false;
     
                         /**
+                         * SearchTextRequest includeFutureOpeningBusinesses.
+                         * @member {boolean} includeFutureOpeningBusinesses
+                         * @memberof google.maps.places.v1.SearchTextRequest
+                         * @instance
+                         */
+                        SearchTextRequest.prototype.includeFutureOpeningBusinesses = false;
+    
+                        /**
                          * Creates a new SearchTextRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.SearchTextRequest
@@ -18382,6 +18449,8 @@
                                 $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.encode(message.searchAlongRouteParameters, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.includePureServiceAreaBusinesses != null && Object.hasOwnProperty.call(message, "includePureServiceAreaBusinesses"))
                                 writer.uint32(/* id 20, wireType 0 =*/160).bool(message.includePureServiceAreaBusinesses);
+                            if (message.includeFutureOpeningBusinesses != null && Object.hasOwnProperty.call(message, "includeFutureOpeningBusinesses"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).bool(message.includeFutureOpeningBusinesses);
                             return writer;
                         };
     
@@ -18487,6 +18556,10 @@
                                     }
                                 case 20: {
                                         message.includePureServiceAreaBusinesses = reader.bool();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.includeFutureOpeningBusinesses = reader.bool();
                                         break;
                                     }
                                 default:
@@ -18601,6 +18674,9 @@
                             if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
                                 if (typeof message.includePureServiceAreaBusinesses !== "boolean")
                                     return "includePureServiceAreaBusinesses: boolean expected";
+                            if (message.includeFutureOpeningBusinesses != null && message.hasOwnProperty("includeFutureOpeningBusinesses"))
+                                if (typeof message.includeFutureOpeningBusinesses !== "boolean")
+                                    return "includeFutureOpeningBusinesses: boolean expected";
                             return null;
                         };
     
@@ -18716,6 +18792,8 @@
                             }
                             if (object.includePureServiceAreaBusinesses != null)
                                 message.includePureServiceAreaBusinesses = Boolean(object.includePureServiceAreaBusinesses);
+                            if (object.includeFutureOpeningBusinesses != null)
+                                message.includeFutureOpeningBusinesses = Boolean(object.includeFutureOpeningBusinesses);
                             return message;
                         };
     
@@ -18750,6 +18828,7 @@
                                 object.routingParameters = null;
                                 object.searchAlongRouteParameters = null;
                                 object.includePureServiceAreaBusinesses = false;
+                                object.includeFutureOpeningBusinesses = false;
                             }
                             if (message.textQuery != null && message.hasOwnProperty("textQuery"))
                                 object.textQuery = message.textQuery;
@@ -18786,6 +18865,8 @@
                                 object.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.toObject(message.searchAlongRouteParameters, options);
                             if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
                                 object.includePureServiceAreaBusinesses = message.includePureServiceAreaBusinesses;
+                            if (message.includeFutureOpeningBusinesses != null && message.hasOwnProperty("includeFutureOpeningBusinesses"))
+                                object.includeFutureOpeningBusinesses = message.includeFutureOpeningBusinesses;
                             return object;
                         };
     
@@ -20966,6 +21047,7 @@
                          * @property {boolean|null} [includeQueryPredictions] AutocompletePlacesRequest includeQueryPredictions
                          * @property {string|null} [sessionToken] AutocompletePlacesRequest sessionToken
                          * @property {boolean|null} [includePureServiceAreaBusinesses] AutocompletePlacesRequest includePureServiceAreaBusinesses
+                         * @property {boolean|null} [includeFutureOpeningBusinesses] AutocompletePlacesRequest includeFutureOpeningBusinesses
                          */
     
                         /**
@@ -21082,6 +21164,14 @@
                         AutocompletePlacesRequest.prototype.includePureServiceAreaBusinesses = false;
     
                         /**
+                         * AutocompletePlacesRequest includeFutureOpeningBusinesses.
+                         * @member {boolean} includeFutureOpeningBusinesses
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.includeFutureOpeningBusinesses = false;
+    
+                        /**
                          * Creates a new AutocompletePlacesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.AutocompletePlacesRequest
@@ -21131,6 +21221,8 @@
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.sessionToken);
                             if (message.includePureServiceAreaBusinesses != null && Object.hasOwnProperty.call(message, "includePureServiceAreaBusinesses"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.includePureServiceAreaBusinesses);
+                            if (message.includeFutureOpeningBusinesses != null && Object.hasOwnProperty.call(message, "includeFutureOpeningBusinesses"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.includeFutureOpeningBusinesses);
                             return writer;
                         };
     
@@ -21219,6 +21311,10 @@
                                         message.includePureServiceAreaBusinesses = reader.bool();
                                         break;
                                     }
+                                case 13: {
+                                        message.includeFutureOpeningBusinesses = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21304,6 +21400,9 @@
                             if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
                                 if (typeof message.includePureServiceAreaBusinesses !== "boolean")
                                     return "includePureServiceAreaBusinesses: boolean expected";
+                            if (message.includeFutureOpeningBusinesses != null && message.hasOwnProperty("includeFutureOpeningBusinesses"))
+                                if (typeof message.includeFutureOpeningBusinesses !== "boolean")
+                                    return "includeFutureOpeningBusinesses: boolean expected";
                             return null;
                         };
     
@@ -21362,6 +21461,8 @@
                                 message.sessionToken = String(object.sessionToken);
                             if (object.includePureServiceAreaBusinesses != null)
                                 message.includePureServiceAreaBusinesses = Boolean(object.includePureServiceAreaBusinesses);
+                            if (object.includeFutureOpeningBusinesses != null)
+                                message.includeFutureOpeningBusinesses = Boolean(object.includeFutureOpeningBusinesses);
                             return message;
                         };
     
@@ -21393,6 +21494,7 @@
                                 object.includeQueryPredictions = false;
                                 object.sessionToken = "";
                                 object.includePureServiceAreaBusinesses = false;
+                                object.includeFutureOpeningBusinesses = false;
                             }
                             if (message.input != null && message.hasOwnProperty("input"))
                                 object.input = message.input;
@@ -21424,6 +21526,8 @@
                                 object.sessionToken = message.sessionToken;
                             if (message.includePureServiceAreaBusinesses != null && message.hasOwnProperty("includePureServiceAreaBusinesses"))
                                 object.includePureServiceAreaBusinesses = message.includePureServiceAreaBusinesses;
+                            if (message.includeFutureOpeningBusinesses != null && message.hasOwnProperty("includeFutureOpeningBusinesses"))
+                                object.includeFutureOpeningBusinesses = message.includeFutureOpeningBusinesses;
                             return object;
                         };
     

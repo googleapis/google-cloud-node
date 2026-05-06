@@ -1,0 +1,66 @@
+// Copyright 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.duplicate_methods_test.v1;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/iam/v1/iam_policy.proto";
+import "google/iam/v1/policy.proto";
+import "google/cloud/location/locations.proto";
+
+option csharp_namespace = "Google.DuplicateMethodsTest.V1";
+option go_package = "google.golang.org/genproto/googleapis/duplicate_methods_test/v1;duplicate_methods_test";
+option java_multiple_files = true;
+option java_outer_classname = "DuplicateMethodsTestProto";
+option java_package = "com.google.duplicate_methods_test.v1";
+option php_namespace = "Google\\DuplicateMethodsTest\\V1";
+option ruby_package = "Google::DuplicateMethodsTest::V1";
+
+service DuplicateMethodsTestService {
+  option (google.api.default_host) = "duplicatemethodstest.googleapis.com";
+  option (google.api.oauth_scopes) = "https://www.googleapis.com/auth/cloud-platform";
+
+  // Native GetIamPolicy method that conflicts with the IAMPolicy mixin.
+  rpc GetIamPolicy(google.iam.v1.GetIamPolicyRequest) returns (google.iam.v1.Policy) {
+    option (google.api.http) = {
+      get: "/v1/{resource=projects/*}:getIamPolicy"
+    };
+  }
+
+  // Native ListLocations method that conflicts with the Locations mixin.
+  rpc ListLocations(google.cloud.location.ListLocationsRequest) returns (google.cloud.location.ListLocationsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{name=projects/*}/locations"
+    };
+  }
+
+  // Another native method to ensure the service is valid and has other methods.
+  rpc Echo(EchoRequest) returns (EchoResponse) {
+    option (google.api.http) = {
+      post: "/v1/echo"
+      body: "*"
+    };
+  }
+}
+
+message EchoRequest {
+  string content = 1;
+}
+
+message EchoResponse {
+  string content = 1;
+}

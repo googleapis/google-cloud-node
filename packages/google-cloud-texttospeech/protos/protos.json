@@ -139,6 +139,11 @@
                           "oneof": [
                             "lowLatencyJourneySynthesis"
                           ]
+                        },
+                        "_enableTextnorm": {
+                          "oneof": [
+                            "enableTextnorm"
+                          ]
                         }
                       },
                       "fields": {
@@ -153,7 +158,65 @@
                           "type": "bool",
                           "id": 8,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "safetySettings": {
+                          "type": "SafetySettings",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableTextnorm": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SafetySetting": {
+                          "fields": {
+                            "category": {
+                              "type": "HarmCategory",
+                              "id": 1
+                            },
+                            "threshold": {
+                              "type": "HarmBlockThreshold",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SafetySettings": {
+                          "fields": {
+                            "settings": {
+                              "rule": "repeated",
+                              "type": "SafetySetting",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "HarmCategory": {
+                          "values": {
+                            "HARM_CATEGORY_UNSPECIFIED": 0,
+                            "HARM_CATEGORY_HATE_SPEECH": 1,
+                            "HARM_CATEGORY_DANGEROUS_CONTENT": 2,
+                            "HARM_CATEGORY_HARASSMENT": 3,
+                            "HARM_CATEGORY_SEXUALLY_EXPLICIT": 4
+                          }
+                        },
+                        "HarmBlockThreshold": {
+                          "values": {
+                            "HARM_BLOCK_THRESHOLD_UNSPECIFIED": 0,
+                            "BLOCK_LOW_AND_ABOVE": 1,
+                            "BLOCK_MEDIUM_AND_ABOVE": 2,
+                            "BLOCK_ONLY_HIGH": 3,
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         }
                       }
@@ -192,6 +255,7 @@
                           "type": "AdvancedVoiceOptions",
                           "id": 8,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -535,6 +599,13 @@
                       }
                     },
                     "StreamingSynthesizeConfig": {
+                      "oneofs": {
+                        "_advancedVoiceOptions": {
+                          "oneof": [
+                            "advancedVoiceOptions"
+                          ]
+                        }
+                      },
                       "fields": {
                         "voice": {
                           "type": "VoiceSelectionParams",
@@ -555,6 +626,14 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "advancedVoiceOptions": {
+                          "type": "AdvancedVoiceOptions",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -850,6 +929,11 @@
                           "oneof": [
                             "lowLatencyJourneySynthesis"
                           ]
+                        },
+                        "_enableTextnorm": {
+                          "oneof": [
+                            "enableTextnorm"
+                          ]
                         }
                       },
                       "fields": {
@@ -864,7 +948,65 @@
                           "type": "bool",
                           "id": 8,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "safetySettings": {
+                          "type": "SafetySettings",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableTextnorm": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SafetySetting": {
+                          "fields": {
+                            "category": {
+                              "type": "HarmCategory",
+                              "id": 1
+                            },
+                            "threshold": {
+                              "type": "HarmBlockThreshold",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SafetySettings": {
+                          "fields": {
+                            "settings": {
+                              "rule": "repeated",
+                              "type": "SafetySetting",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "HarmCategory": {
+                          "values": {
+                            "HARM_CATEGORY_UNSPECIFIED": 0,
+                            "HARM_CATEGORY_HATE_SPEECH": 1,
+                            "HARM_CATEGORY_DANGEROUS_CONTENT": 2,
+                            "HARM_CATEGORY_HARASSMENT": 3,
+                            "HARM_CATEGORY_SEXUALLY_EXPLICIT": 4
+                          }
+                        },
+                        "HarmBlockThreshold": {
+                          "values": {
+                            "HARM_BLOCK_THRESHOLD_UNSPECIFIED": 0,
+                            "BLOCK_LOW_AND_ABOVE": 1,
+                            "BLOCK_MEDIUM_AND_ABOVE": 2,
+                            "BLOCK_ONLY_HIGH": 3,
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         }
                       }
@@ -908,6 +1050,7 @@
                           "type": "AdvancedVoiceOptions",
                           "id": 8,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
@@ -1280,6 +1423,13 @@
                       }
                     },
                     "StreamingSynthesizeConfig": {
+                      "oneofs": {
+                        "_advancedVoiceOptions": {
+                          "oneof": [
+                            "advancedVoiceOptions"
+                          ]
+                        }
+                      },
                       "fields": {
                         "voice": {
                           "type": "VoiceSelectionParams",
@@ -1300,6 +1450,14 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "advancedVoiceOptions": {
+                          "type": "AdvancedVoiceOptions",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

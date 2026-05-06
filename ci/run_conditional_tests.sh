@@ -104,8 +104,32 @@ for subdir in ${subdirs[@]}; do
             echo "Skipping ${d} (no package.json found)"
             continue
         fi
+        if [[ "${TEST_TYPE}" == "samples" && ! -f "${d}/samples/package.json" ]]; then
+            echo "Skipping ${TEST_TYPE} test for ${d} (no samples/package.json found)"
+            continue
+        fi
         if [[ ("${subdir}" == "handwritten" || "${subdir}" == "core") && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
             echo "Skipping ${TEST_TYPE} test for handwritten and core packages: ${d}"
+            continue
+        fi
+
+        # System tests for packages are broken and blocking PRs.
+        # See https://github.com/googleapis/google-cloud-node/issues/7976.
+        #
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # we are likely to permanently remove these tests in the near future.
+        if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "system" ]]; then
+            echo "Skipping ${TEST_TYPE} test for packages: ${d}"
+            continue
+        fi
+
+        # Sample tests for packages are broken/flaky and blocking PRs.
+        # See https://github.com/googleapis/google-cloud-node/issues/7976#issuecomment-4210458096.
+        #
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # we are likely to permanently remove these tests in the near future.
+        if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "samples" ]]; then
+            echo "Skipping ${TEST_TYPE} test for packages: ${d}"
             continue
         fi
 

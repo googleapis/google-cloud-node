@@ -122,8 +122,14 @@ export namespace google {
                         /** ProductInput name */
                         name?: (string|null);
 
+                        /** ProductInput base64EncodedName */
+                        base64EncodedName?: (string|null);
+
                         /** ProductInput product */
                         product?: (string|null);
+
+                        /** ProductInput base64EncodedProduct */
+                        base64EncodedProduct?: (string|null);
 
                         /** ProductInput legacyLocal */
                         legacyLocal?: (boolean|null);
@@ -159,8 +165,14 @@ export namespace google {
                         /** ProductInput name. */
                         public name: string;
 
+                        /** ProductInput base64EncodedName. */
+                        public base64EncodedName: string;
+
                         /** ProductInput product. */
                         public product: string;
+
+                        /** ProductInput base64EncodedProduct. */
+                        public base64EncodedProduct: string;
 
                         /** ProductInput legacyLocal. */
                         public legacyLocal: boolean;
@@ -934,6 +946,9 @@ export namespace google {
                         /** ProductAttributes shippingLabel */
                         shippingLabel?: (string|null);
 
+                        /** ProductAttributes returnPolicyLabel */
+                        returnPolicyLabel?: (string|null);
+
                         /** ProductAttributes transitTimeLabel */
                         transitTimeLabel?: (string|null);
 
@@ -1065,6 +1080,9 @@ export namespace google {
 
                         /** ProductAttributes sustainabilityIncentives */
                         sustainabilityIncentives?: (google.shopping.merchant.products.v1.IProductSustainabilityIncentive[]|null);
+
+                        /** ProductAttributes videoLinks */
+                        videoLinks?: (string[]|null);
                     }
 
                     /** Represents a ProductAttributes. */
@@ -1232,6 +1250,9 @@ export namespace google {
                         /** ProductAttributes shippingLabel. */
                         public shippingLabel?: (string|null);
 
+                        /** ProductAttributes returnPolicyLabel. */
+                        public returnPolicyLabel?: (string|null);
+
                         /** ProductAttributes transitTimeLabel. */
                         public transitTimeLabel?: (string|null);
 
@@ -1363,6 +1384,9 @@ export namespace google {
 
                         /** ProductAttributes sustainabilityIncentives. */
                         public sustainabilityIncentives: google.shopping.merchant.products.v1.IProductSustainabilityIncentive[];
+
+                        /** ProductAttributes videoLinks. */
+                        public videoLinks: string[];
 
                         /**
                          * Creates a new ProductAttributes instance using the specified properties.
@@ -2318,6 +2342,9 @@ export namespace google {
 
                         /** ProductInstallment creditType */
                         creditType?: (google.shopping.merchant.products.v1.CreditType|keyof typeof google.shopping.merchant.products.v1.CreditType|null);
+
+                        /** ProductInstallment annualPercentageRate */
+                        annualPercentageRate?: (number|null);
                     }
 
                     /** Represents a ProductInstallment. */
@@ -2340,6 +2367,9 @@ export namespace google {
 
                         /** ProductInstallment creditType. */
                         public creditType?: (google.shopping.merchant.products.v1.CreditType|keyof typeof google.shopping.merchant.products.v1.CreditType|null);
+
+                        /** ProductInstallment annualPercentageRate. */
+                        public annualPercentageRate?: (number|null);
 
                         /**
                          * Creates a new ProductInstallment instance using the specified properties.
@@ -4521,6 +4551,9 @@ export namespace google {
                         /** Product name */
                         name?: (string|null);
 
+                        /** Product base64EncodedName */
+                        base64EncodedName?: (string|null);
+
                         /** Product legacyLocal */
                         legacyLocal?: (boolean|null);
 
@@ -4563,6 +4596,9 @@ export namespace google {
 
                         /** Product name. */
                         public name: string;
+
+                        /** Product base64EncodedName. */
+                        public base64EncodedName: string;
 
                         /** Product legacyLocal. */
                         public legacyLocal: boolean;

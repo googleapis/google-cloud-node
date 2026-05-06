@@ -53,7 +53,7 @@ export class SecretManagerServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('secretmanager');
+  private _log = logging.log('secret-manager');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

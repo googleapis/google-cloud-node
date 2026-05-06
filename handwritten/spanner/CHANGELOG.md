@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.6.0...spanner-v8.7.0) (2026-04-14)
+
+
+### Features
+
+* add SI, adapt, split point related proto ([#2527](https://github.com/googleapis/google-cloud-node/issues/2527)) ([f1650a8](https://github.com/googleapis/google-cloud-node/commit/f1650a8095cbe6023a9b23aa3264f7f19edaba19))
+* **spanner:** include cache updates into the ResultSet response ([#2519](https://github.com/googleapis/google-cloud-node/issues/2519)) ([184684f](https://github.com/googleapis/google-cloud-node/commit/184684f669f97835af88ac9d4101320732d65683))
+
+
+### Bug Fixes
+
+* **spanner:** enable afe_connectivity_error_count metric ([#7964](https://github.com/googleapis/google-cloud-node/issues/7964)) ([4d59769](https://github.com/googleapis/google-cloud-node/commit/4d597690ad90f9cf7c3c2aa9611029beaa599703))
+* **spanner:** override gcp-metadata to resolve punycode deprecation](https://github.com/googleapis/google-cloud-node/pull/7815#top) ([16971e7](https://github.com/googleapis/google-cloud-node/commit/16971e7ab08a54cfc1b57b17ee75800aa1dcedee))
+* **spanner:** override gcp-metadata to resolve punycode deprecation](https://github.com/googleapis/google-cloud-node/pull/7815#top) ([01d1d9e](https://github.com/googleapis/google-cloud-node/commit/01d1d9e8f89d6ad79da8b1c790e13eab176e932f))
+* **spanner:** override gcp-metadata to resolve punycode deprecation](https://github.com/googleapis/google-cloud-node/pull/7815#top) ([c717550](https://github.com/googleapis/google-cloud-node/commit/c717550789a731c629003908acd713c44f170c23))
+* **spanner:** resolve type conflicts between @types/sinon and @sinonjs/fake-timers ([6d513f9](https://github.com/googleapis/google-cloud-node/commit/6d513f93d0126198b4eb3867c4f5809422e467fe))
+* **spanner:** trigger release ([4c82399](https://github.com/googleapis/google-cloud-node/commit/4c8239955def8cf8f8915ff4254eae70b2abed31))
+* **spanner:** type conflict between @sinonjs/fake-timers and @types/sinonjs__fake-timers ([2280f7a](https://github.com/googleapis/google-cloud-node/commit/2280f7aeab96b9911efc3673dd084e3d9f831d9b))
+
 ## [8.6.0](https://github.com/googleapis/nodejs-spanner/compare/v8.5.0...v8.6.0) (2026-01-28)
 
 

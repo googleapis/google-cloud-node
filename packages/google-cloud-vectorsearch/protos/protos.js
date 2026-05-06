@@ -9734,6 +9734,211 @@
                         return BatchDeleteDataObjectsRequest;
                     })();
     
+                    v1.EncryptionSpec = (function() {
+    
+                        /**
+                         * Properties of an EncryptionSpec.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @interface IEncryptionSpec
+                         * @property {string|null} [cryptoKeyName] EncryptionSpec cryptoKeyName
+                         */
+    
+                        /**
+                         * Constructs a new EncryptionSpec.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @classdesc Represents an EncryptionSpec.
+                         * @implements IEncryptionSpec
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1.IEncryptionSpec=} [properties] Properties to set
+                         */
+                        function EncryptionSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EncryptionSpec cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @instance
+                         */
+                        EncryptionSpec.prototype.cryptoKeyName = "";
+    
+                        /**
+                         * Creates a new EncryptionSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IEncryptionSpec=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1.EncryptionSpec} EncryptionSpec instance
+                         */
+                        EncryptionSpec.create = function create(properties) {
+                            return new EncryptionSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1.EncryptionSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.cryptoKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.EncryptionSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1.EncryptionSpec} EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionSpec.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.EncryptionSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1.EncryptionSpec} EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EncryptionSpec message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EncryptionSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1.EncryptionSpec} EncryptionSpec
+                         */
+                        EncryptionSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1.EncryptionSpec)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1.EncryptionSpec();
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.EncryptionSpec} message EncryptionSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EncryptionSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.cryptoKeyName = "";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EncryptionSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EncryptionSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptionSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1.EncryptionSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptionSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1.EncryptionSpec";
+                        };
+    
+                        return EncryptionSpec;
+                    })();
+    
                     v1.VectorSearchService = (function() {
     
                         /**
@@ -10031,6 +10236,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|updateIndex}.
+                         * @memberof google.cloud.vectorsearch.v1.VectorSearchService
+                         * @typedef UpdateIndexCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateIndex.
+                         * @function updateIndex
+                         * @memberof google.cloud.vectorsearch.v1.VectorSearchService
+                         * @instance
+                         * @param {google.cloud.vectorsearch.v1.IUpdateIndexRequest} request UpdateIndexRequest message or plain object
+                         * @param {google.cloud.vectorsearch.v1.VectorSearchService.UpdateIndexCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VectorSearchService.prototype.updateIndex = function updateIndex(request, callback) {
+                            return this.rpcCall(updateIndex, $root.google.cloud.vectorsearch.v1.UpdateIndexRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateIndex" });
+    
+                        /**
+                         * Calls UpdateIndex.
+                         * @function updateIndex
+                         * @memberof google.cloud.vectorsearch.v1.VectorSearchService
+                         * @instance
+                         * @param {google.cloud.vectorsearch.v1.IUpdateIndexRequest} request UpdateIndexRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|deleteIndex}.
                          * @memberof google.cloud.vectorsearch.v1.VectorSearchService
                          * @typedef DeleteIndexCallback
@@ -10096,6 +10334,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.vectorsearch.v1.VectorSearchService|exportDataObjects}.
+                         * @memberof google.cloud.vectorsearch.v1.VectorSearchService
+                         * @typedef ExportDataObjectsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportDataObjects.
+                         * @function exportDataObjects
+                         * @memberof google.cloud.vectorsearch.v1.VectorSearchService
+                         * @instance
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsRequest} request ExportDataObjectsRequest message or plain object
+                         * @param {google.cloud.vectorsearch.v1.VectorSearchService.ExportDataObjectsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VectorSearchService.prototype.exportDataObjects = function exportDataObjects(request, callback) {
+                            return this.rpcCall(exportDataObjects, $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportDataObjects" });
+    
+                        /**
+                         * Calls ExportDataObjects.
+                         * @function exportDataObjects
+                         * @memberof google.cloud.vectorsearch.v1.VectorSearchService
+                         * @instance
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsRequest} request ExportDataObjectsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return VectorSearchService;
                     })();
     
@@ -10113,6 +10384,7 @@
                          * @property {Object.<string,string>|null} [labels] Collection labels
                          * @property {Object.<string,google.cloud.vectorsearch.v1.IVectorField>|null} [vectorSchema] Collection vectorSchema
                          * @property {google.protobuf.IStruct|null} [dataSchema] Collection dataSchema
+                         * @property {google.cloud.vectorsearch.v1.IEncryptionSpec|null} [encryptionSpec] Collection encryptionSpec
                          */
     
                         /**
@@ -10197,6 +10469,14 @@
                         Collection.prototype.dataSchema = null;
     
                         /**
+                         * Collection encryptionSpec.
+                         * @member {google.cloud.vectorsearch.v1.IEncryptionSpec|null|undefined} encryptionSpec
+                         * @memberof google.cloud.vectorsearch.v1.Collection
+                         * @instance
+                         */
+                        Collection.prototype.encryptionSpec = null;
+    
+                        /**
                          * Creates a new Collection instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vectorsearch.v1.Collection
@@ -10240,6 +10520,8 @@
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.description);
                             if (message.dataSchema != null && Object.hasOwnProperty.call(message, "dataSchema"))
                                 $root.google.protobuf.Struct.encode(message.dataSchema, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.encryptionSpec != null && Object.hasOwnProperty.call(message, "encryptionSpec"))
+                                $root.google.cloud.vectorsearch.v1.EncryptionSpec.encode(message.encryptionSpec, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -10346,6 +10628,10 @@
                                         message.dataSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        message.encryptionSpec = $root.google.cloud.vectorsearch.v1.EncryptionSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10423,6 +10709,11 @@
                                 if (error)
                                     return "dataSchema." + error;
                             }
+                            if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec")) {
+                                var error = $root.google.cloud.vectorsearch.v1.EncryptionSpec.verify(message.encryptionSpec);
+                                if (error)
+                                    return "encryptionSpec." + error;
+                            }
                             return null;
                         };
     
@@ -10476,6 +10767,11 @@
                                     throw TypeError(".google.cloud.vectorsearch.v1.Collection.dataSchema: object expected");
                                 message.dataSchema = $root.google.protobuf.Struct.fromObject(object.dataSchema);
                             }
+                            if (object.encryptionSpec != null) {
+                                if (typeof object.encryptionSpec !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.Collection.encryptionSpec: object expected");
+                                message.encryptionSpec = $root.google.cloud.vectorsearch.v1.EncryptionSpec.fromObject(object.encryptionSpec);
+                            }
                             return message;
                         };
     
@@ -10503,6 +10799,7 @@
                                 object.displayName = "";
                                 object.description = "";
                                 object.dataSchema = null;
+                                object.encryptionSpec = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10527,6 +10824,8 @@
                                 object.description = message.description;
                             if (message.dataSchema != null && message.hasOwnProperty("dataSchema"))
                                 object.dataSchema = $root.google.protobuf.Struct.toObject(message.dataSchema, options);
+                            if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec"))
+                                object.encryptionSpec = $root.google.cloud.vectorsearch.v1.EncryptionSpec.toObject(message.encryptionSpec, options);
                             return object;
                         };
     
@@ -13687,6 +13986,268 @@
                         return CreateIndexRequest;
                     })();
     
+                    v1.UpdateIndexRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateIndexRequest.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @interface IUpdateIndexRequest
+                         * @property {google.cloud.vectorsearch.v1.IIndex|null} [index] UpdateIndexRequest index
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateIndexRequest updateMask
+                         * @property {string|null} [requestId] UpdateIndexRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateIndexRequest.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @classdesc Represents an UpdateIndexRequest.
+                         * @implements IUpdateIndexRequest
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1.IUpdateIndexRequest=} [properties] Properties to set
+                         */
+                        function UpdateIndexRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateIndexRequest index.
+                         * @member {google.cloud.vectorsearch.v1.IIndex|null|undefined} index
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @instance
+                         */
+                        UpdateIndexRequest.prototype.index = null;
+    
+                        /**
+                         * UpdateIndexRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @instance
+                         */
+                        UpdateIndexRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateIndexRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @instance
+                         */
+                        UpdateIndexRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateIndexRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IUpdateIndexRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1.UpdateIndexRequest} UpdateIndexRequest instance
+                         */
+                        UpdateIndexRequest.create = function create(properties) {
+                            return new UpdateIndexRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateIndexRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IUpdateIndexRequest} message UpdateIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIndexRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                                $root.google.cloud.vectorsearch.v1.Index.encode(message.index, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.UpdateIndexRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IUpdateIndexRequest} message UpdateIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIndexRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateIndexRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1.UpdateIndexRequest} UpdateIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIndexRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.UpdateIndexRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.index = $root.google.cloud.vectorsearch.v1.Index.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateIndexRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1.UpdateIndexRequest} UpdateIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIndexRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateIndexRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateIndexRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.index != null && message.hasOwnProperty("index")) {
+                                var error = $root.google.cloud.vectorsearch.v1.Index.verify(message.index);
+                                if (error)
+                                    return "index." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1.UpdateIndexRequest} UpdateIndexRequest
+                         */
+                        UpdateIndexRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1.UpdateIndexRequest)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1.UpdateIndexRequest();
+                            if (object.index != null) {
+                                if (typeof object.index !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.UpdateIndexRequest.index: object expected");
+                                message.index = $root.google.cloud.vectorsearch.v1.Index.fromObject(object.index);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.UpdateIndexRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateIndexRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.UpdateIndexRequest} message UpdateIndexRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateIndexRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.index = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.index != null && message.hasOwnProperty("index"))
+                                object.index = $root.google.cloud.vectorsearch.v1.Index.toObject(message.index, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateIndexRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateIndexRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateIndexRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1.UpdateIndexRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateIndexRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1.UpdateIndexRequest";
+                        };
+    
+                        return UpdateIndexRequest;
+                    })();
+    
                     v1.DeleteIndexRequest = (function() {
     
                         /**
@@ -16049,6 +16610,937 @@
                         };
     
                         return ImportDataObjectsResponse;
+                    })();
+    
+                    v1.ExportDataObjectsRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportDataObjectsRequest.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @interface IExportDataObjectsRequest
+                         * @property {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination|null} [gcsDestination] ExportDataObjectsRequest gcsDestination
+                         * @property {string|null} [name] ExportDataObjectsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ExportDataObjectsRequest.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @classdesc Represents an ExportDataObjectsRequest.
+                         * @implements IExportDataObjectsRequest
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsRequest=} [properties] Properties to set
+                         */
+                        function ExportDataObjectsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportDataObjectsRequest gcsDestination.
+                         * @member {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination|null|undefined} gcsDestination
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @instance
+                         */
+                        ExportDataObjectsRequest.prototype.gcsDestination = null;
+    
+                        /**
+                         * ExportDataObjectsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @instance
+                         */
+                        ExportDataObjectsRequest.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExportDataObjectsRequest destination.
+                         * @member {"gcsDestination"|undefined} destination
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ExportDataObjectsRequest.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExportDataObjectsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest} ExportDataObjectsRequest instance
+                         */
+                        ExportDataObjectsRequest.create = function create(properties) {
+                            return new ExportDataObjectsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsRequest} message ExportDataObjectsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataObjectsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
+                                $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.encode(message.gcsDestination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsRequest} message ExportDataObjectsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataObjectsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportDataObjectsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest} ExportDataObjectsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataObjectsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.gcsDestination = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportDataObjectsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest} ExportDataObjectsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataObjectsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportDataObjectsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportDataObjectsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.verify(message.gcsDestination);
+                                    if (error)
+                                        return "gcsDestination." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest} ExportDataObjectsRequest
+                         */
+                        ExportDataObjectsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest();
+                            if (object.gcsDestination != null) {
+                                if (typeof object.gcsDestination !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsRequest.gcsDestination: object expected");
+                                message.gcsDestination = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.fromObject(object.gcsDestination);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportDataObjectsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest} message ExportDataObjectsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportDataObjectsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                object.gcsDestination = $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.toObject(message.gcsDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "gcsDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportDataObjectsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportDataObjectsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportDataObjectsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportDataObjectsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1.ExportDataObjectsRequest";
+                        };
+    
+                        ExportDataObjectsRequest.GcsExportDestination = (function() {
+    
+                            /**
+                             * Properties of a GcsExportDestination.
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                             * @interface IGcsExportDestination
+                             * @property {string|null} [exportUri] GcsExportDestination exportUri
+                             * @property {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.Format|null} [format] GcsExportDestination format
+                             */
+    
+                            /**
+                             * Constructs a new GcsExportDestination.
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest
+                             * @classdesc Represents a GcsExportDestination.
+                             * @implements IGcsExportDestination
+                             * @constructor
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination=} [properties] Properties to set
+                             */
+                            function GcsExportDestination(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GcsExportDestination exportUri.
+                             * @member {string} exportUri
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @instance
+                             */
+                            GcsExportDestination.prototype.exportUri = "";
+    
+                            /**
+                             * GcsExportDestination format.
+                             * @member {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.Format} format
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @instance
+                             */
+                            GcsExportDestination.prototype.format = 0;
+    
+                            /**
+                             * Creates a new GcsExportDestination instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination=} [properties] Properties to set
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination} GcsExportDestination instance
+                             */
+                            GcsExportDestination.create = function create(properties) {
+                                return new GcsExportDestination(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GcsExportDestination message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination} message GcsExportDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsExportDestination.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.exportUri != null && Object.hasOwnProperty.call(message, "exportUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.exportUri);
+                                if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.format);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GcsExportDestination message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IGcsExportDestination} message GcsExportDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsExportDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GcsExportDestination message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination} GcsExportDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsExportDestination.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.exportUri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.format = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GcsExportDestination message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination} GcsExportDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsExportDestination.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GcsExportDestination message.
+                             * @function verify
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GcsExportDestination.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.exportUri != null && message.hasOwnProperty("exportUri"))
+                                    if (!$util.isString(message.exportUri))
+                                        return "exportUri: string expected";
+                                if (message.format != null && message.hasOwnProperty("format"))
+                                    switch (message.format) {
+                                    default:
+                                        return "format: enum value expected";
+                                    case 0:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GcsExportDestination message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination} GcsExportDestination
+                             */
+                            GcsExportDestination.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination)
+                                    return object;
+                                var message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination();
+                                if (object.exportUri != null)
+                                    message.exportUri = String(object.exportUri);
+                                switch (object.format) {
+                                default:
+                                    if (typeof object.format === "number") {
+                                        message.format = object.format;
+                                        break;
+                                    }
+                                    break;
+                                case "FORMAT_UNSPECIFIED":
+                                case 0:
+                                    message.format = 0;
+                                    break;
+                                case "JSONL":
+                                case 2:
+                                    message.format = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GcsExportDestination message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination} message GcsExportDestination
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GcsExportDestination.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.exportUri = "";
+                                    object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                                }
+                                if (message.exportUri != null && message.hasOwnProperty("exportUri"))
+                                    object.exportUri = message.exportUri;
+                                if (message.format != null && message.hasOwnProperty("format"))
+                                    object.format = options.enums === String ? $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.Format[message.format] === undefined ? message.format : $root.google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.Format[message.format] : message.format;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GcsExportDestination to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GcsExportDestination.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GcsExportDestination
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GcsExportDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination";
+                            };
+    
+                            /**
+                             * Format enum.
+                             * @name google.cloud.vectorsearch.v1.ExportDataObjectsRequest.GcsExportDestination.Format
+                             * @enum {number}
+                             * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                             * @property {number} JSONL=2 JSONL value
+                             */
+                            GcsExportDestination.Format = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                                values[valuesById[2] = "JSONL"] = 2;
+                                return values;
+                            })();
+    
+                            return GcsExportDestination;
+                        })();
+    
+                        return ExportDataObjectsRequest;
+                    })();
+    
+                    v1.ExportDataObjectsMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportDataObjectsMetadata.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @interface IExportDataObjectsMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ExportDataObjectsMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [finishTime] ExportDataObjectsMetadata finishTime
+                         */
+    
+                        /**
+                         * Constructs a new ExportDataObjectsMetadata.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @classdesc Represents an ExportDataObjectsMetadata.
+                         * @implements IExportDataObjectsMetadata
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsMetadata=} [properties] Properties to set
+                         */
+                        function ExportDataObjectsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportDataObjectsMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @instance
+                         */
+                        ExportDataObjectsMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ExportDataObjectsMetadata finishTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} finishTime
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @instance
+                         */
+                        ExportDataObjectsMetadata.prototype.finishTime = null;
+    
+                        /**
+                         * Creates a new ExportDataObjectsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsMetadata} ExportDataObjectsMetadata instance
+                         */
+                        ExportDataObjectsMetadata.create = function create(properties) {
+                            return new ExportDataObjectsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataObjectsMetadata message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsMetadata} message ExportDataObjectsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataObjectsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.finishTime != null && Object.hasOwnProperty.call(message, "finishTime"))
+                                $root.google.protobuf.Timestamp.encode(message.finishTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataObjectsMetadata message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsMetadata} message ExportDataObjectsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataObjectsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportDataObjectsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsMetadata} ExportDataObjectsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataObjectsMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.finishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportDataObjectsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsMetadata} ExportDataObjectsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataObjectsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportDataObjectsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportDataObjectsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.finishTime != null && message.hasOwnProperty("finishTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.finishTime);
+                                if (error)
+                                    return "finishTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportDataObjectsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsMetadata} ExportDataObjectsMetadata
+                         */
+                        ExportDataObjectsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1.ExportDataObjectsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.finishTime != null) {
+                                if (typeof object.finishTime !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1.ExportDataObjectsMetadata.finishTime: object expected");
+                                message.finishTime = $root.google.protobuf.Timestamp.fromObject(object.finishTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportDataObjectsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.ExportDataObjectsMetadata} message ExportDataObjectsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportDataObjectsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.finishTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.finishTime != null && message.hasOwnProperty("finishTime"))
+                                object.finishTime = $root.google.protobuf.Timestamp.toObject(message.finishTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportDataObjectsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportDataObjectsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportDataObjectsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportDataObjectsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1.ExportDataObjectsMetadata";
+                        };
+    
+                        return ExportDataObjectsMetadata;
+                    })();
+    
+                    v1.ExportDataObjectsResponse = (function() {
+    
+                        /**
+                         * Properties of an ExportDataObjectsResponse.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @interface IExportDataObjectsResponse
+                         */
+    
+                        /**
+                         * Constructs a new ExportDataObjectsResponse.
+                         * @memberof google.cloud.vectorsearch.v1
+                         * @classdesc Represents an ExportDataObjectsResponse.
+                         * @implements IExportDataObjectsResponse
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsResponse=} [properties] Properties to set
+                         */
+                        function ExportDataObjectsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExportDataObjectsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsResponse} ExportDataObjectsResponse instance
+                         */
+                        ExportDataObjectsResponse.create = function create(properties) {
+                            return new ExportDataObjectsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsResponse} message ExportDataObjectsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataObjectsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.IExportDataObjectsResponse} message ExportDataObjectsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataObjectsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportDataObjectsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsResponse} ExportDataObjectsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataObjectsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1.ExportDataObjectsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportDataObjectsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsResponse} ExportDataObjectsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataObjectsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportDataObjectsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportDataObjectsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1.ExportDataObjectsResponse} ExportDataObjectsResponse
+                         */
+                        ExportDataObjectsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1.ExportDataObjectsResponse)
+                                return object;
+                            return new $root.google.cloud.vectorsearch.v1.ExportDataObjectsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportDataObjectsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1.ExportDataObjectsResponse} message ExportDataObjectsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportDataObjectsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExportDataObjectsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportDataObjectsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportDataObjectsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1.ExportDataObjectsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportDataObjectsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1.ExportDataObjectsResponse";
+                        };
+    
+                        return ExportDataObjectsResponse;
                     })();
     
                     v1.DedicatedInfrastructure = (function() {
@@ -27373,6 +28865,211 @@
                         return BatchDeleteDataObjectsRequest;
                     })();
     
+                    v1beta.EncryptionSpec = (function() {
+    
+                        /**
+                         * Properties of an EncryptionSpec.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @interface IEncryptionSpec
+                         * @property {string|null} [cryptoKeyName] EncryptionSpec cryptoKeyName
+                         */
+    
+                        /**
+                         * Constructs a new EncryptionSpec.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @classdesc Represents an EncryptionSpec.
+                         * @implements IEncryptionSpec
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1beta.IEncryptionSpec=} [properties] Properties to set
+                         */
+                        function EncryptionSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EncryptionSpec cryptoKeyName.
+                         * @member {string} cryptoKeyName
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @instance
+                         */
+                        EncryptionSpec.prototype.cryptoKeyName = "";
+    
+                        /**
+                         * Creates a new EncryptionSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IEncryptionSpec=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1beta.EncryptionSpec} EncryptionSpec instance
+                         */
+                        EncryptionSpec.create = function create(properties) {
+                            return new EncryptionSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.EncryptionSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cryptoKeyName != null && Object.hasOwnProperty.call(message, "cryptoKeyName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.cryptoKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.EncryptionSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1beta.EncryptionSpec} EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionSpec.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.EncryptionSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.cryptoKeyName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1beta.EncryptionSpec} EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EncryptionSpec message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EncryptionSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                if (!$util.isString(message.cryptoKeyName))
+                                    return "cryptoKeyName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1beta.EncryptionSpec} EncryptionSpec
+                         */
+                        EncryptionSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1beta.EncryptionSpec)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1beta.EncryptionSpec();
+                            if (object.cryptoKeyName != null)
+                                message.cryptoKeyName = String(object.cryptoKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.EncryptionSpec} message EncryptionSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EncryptionSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.cryptoKeyName = "";
+                            if (message.cryptoKeyName != null && message.hasOwnProperty("cryptoKeyName"))
+                                object.cryptoKeyName = message.cryptoKeyName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EncryptionSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EncryptionSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptionSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1beta.EncryptionSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptionSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.EncryptionSpec";
+                        };
+    
+                        return EncryptionSpec;
+                    })();
+    
                     v1beta.VectorSearchService = (function() {
     
                         /**
@@ -27670,6 +29367,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|updateIndex}.
+                         * @memberof google.cloud.vectorsearch.v1beta.VectorSearchService
+                         * @typedef UpdateIndexCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateIndex.
+                         * @function updateIndex
+                         * @memberof google.cloud.vectorsearch.v1beta.VectorSearchService
+                         * @instance
+                         * @param {google.cloud.vectorsearch.v1beta.IUpdateIndexRequest} request UpdateIndexRequest message or plain object
+                         * @param {google.cloud.vectorsearch.v1beta.VectorSearchService.UpdateIndexCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VectorSearchService.prototype.updateIndex = function updateIndex(request, callback) {
+                            return this.rpcCall(updateIndex, $root.google.cloud.vectorsearch.v1beta.UpdateIndexRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateIndex" });
+    
+                        /**
+                         * Calls UpdateIndex.
+                         * @function updateIndex
+                         * @memberof google.cloud.vectorsearch.v1beta.VectorSearchService
+                         * @instance
+                         * @param {google.cloud.vectorsearch.v1beta.IUpdateIndexRequest} request UpdateIndexRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|deleteIndex}.
                          * @memberof google.cloud.vectorsearch.v1beta.VectorSearchService
                          * @typedef DeleteIndexCallback
@@ -27786,6 +29516,7 @@
                          * @property {google.protobuf.IStruct|null} [schema] Collection schema
                          * @property {Object.<string,google.cloud.vectorsearch.v1beta.IVectorField>|null} [vectorSchema] Collection vectorSchema
                          * @property {google.protobuf.IStruct|null} [dataSchema] Collection dataSchema
+                         * @property {google.cloud.vectorsearch.v1beta.IEncryptionSpec|null} [encryptionSpec] Collection encryptionSpec
                          */
     
                         /**
@@ -27878,6 +29609,14 @@
                         Collection.prototype.dataSchema = null;
     
                         /**
+                         * Collection encryptionSpec.
+                         * @member {google.cloud.vectorsearch.v1beta.IEncryptionSpec|null|undefined} encryptionSpec
+                         * @memberof google.cloud.vectorsearch.v1beta.Collection
+                         * @instance
+                         */
+                        Collection.prototype.encryptionSpec = null;
+    
+                        /**
                          * Creates a new Collection instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.vectorsearch.v1beta.Collection
@@ -27923,6 +29662,8 @@
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.description);
                             if (message.dataSchema != null && Object.hasOwnProperty.call(message, "dataSchema"))
                                 $root.google.protobuf.Struct.encode(message.dataSchema, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.encryptionSpec != null && Object.hasOwnProperty.call(message, "encryptionSpec"))
+                                $root.google.cloud.vectorsearch.v1beta.EncryptionSpec.encode(message.encryptionSpec, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -28033,6 +29774,10 @@
                                         message.dataSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        message.encryptionSpec = $root.google.cloud.vectorsearch.v1beta.EncryptionSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28115,6 +29860,11 @@
                                 if (error)
                                     return "dataSchema." + error;
                             }
+                            if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec")) {
+                                var error = $root.google.cloud.vectorsearch.v1beta.EncryptionSpec.verify(message.encryptionSpec);
+                                if (error)
+                                    return "encryptionSpec." + error;
+                            }
                             return null;
                         };
     
@@ -28173,6 +29923,11 @@
                                     throw TypeError(".google.cloud.vectorsearch.v1beta.Collection.dataSchema: object expected");
                                 message.dataSchema = $root.google.protobuf.Struct.fromObject(object.dataSchema);
                             }
+                            if (object.encryptionSpec != null) {
+                                if (typeof object.encryptionSpec !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.Collection.encryptionSpec: object expected");
+                                message.encryptionSpec = $root.google.cloud.vectorsearch.v1beta.EncryptionSpec.fromObject(object.encryptionSpec);
+                            }
                             return message;
                         };
     
@@ -28201,6 +29956,7 @@
                                 object.displayName = "";
                                 object.description = "";
                                 object.dataSchema = null;
+                                object.encryptionSpec = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -28227,6 +29983,8 @@
                                 object.description = message.description;
                             if (message.dataSchema != null && message.hasOwnProperty("dataSchema"))
                                 object.dataSchema = $root.google.protobuf.Struct.toObject(message.dataSchema, options);
+                            if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec"))
+                                object.encryptionSpec = $root.google.cloud.vectorsearch.v1beta.EncryptionSpec.toObject(message.encryptionSpec, options);
                             return object;
                         };
     
@@ -31387,6 +33145,268 @@
                         return CreateIndexRequest;
                     })();
     
+                    v1beta.UpdateIndexRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateIndexRequest.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @interface IUpdateIndexRequest
+                         * @property {google.cloud.vectorsearch.v1beta.IIndex|null} [index] UpdateIndexRequest index
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateIndexRequest updateMask
+                         * @property {string|null} [requestId] UpdateIndexRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateIndexRequest.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @classdesc Represents an UpdateIndexRequest.
+                         * @implements IUpdateIndexRequest
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1beta.IUpdateIndexRequest=} [properties] Properties to set
+                         */
+                        function UpdateIndexRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateIndexRequest index.
+                         * @member {google.cloud.vectorsearch.v1beta.IIndex|null|undefined} index
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @instance
+                         */
+                        UpdateIndexRequest.prototype.index = null;
+    
+                        /**
+                         * UpdateIndexRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @instance
+                         */
+                        UpdateIndexRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateIndexRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @instance
+                         */
+                        UpdateIndexRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateIndexRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IUpdateIndexRequest=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1beta.UpdateIndexRequest} UpdateIndexRequest instance
+                         */
+                        UpdateIndexRequest.create = function create(properties) {
+                            return new UpdateIndexRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIndexRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UpdateIndexRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IUpdateIndexRequest} message UpdateIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIndexRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                                $root.google.cloud.vectorsearch.v1beta.Index.encode(message.index, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIndexRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.UpdateIndexRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IUpdateIndexRequest} message UpdateIndexRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIndexRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateIndexRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1beta.UpdateIndexRequest} UpdateIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIndexRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.UpdateIndexRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.index = $root.google.cloud.vectorsearch.v1beta.Index.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateIndexRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1beta.UpdateIndexRequest} UpdateIndexRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIndexRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateIndexRequest message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateIndexRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.index != null && message.hasOwnProperty("index")) {
+                                var error = $root.google.cloud.vectorsearch.v1beta.Index.verify(message.index);
+                                if (error)
+                                    return "index." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateIndexRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1beta.UpdateIndexRequest} UpdateIndexRequest
+                         */
+                        UpdateIndexRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1beta.UpdateIndexRequest)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1beta.UpdateIndexRequest();
+                            if (object.index != null) {
+                                if (typeof object.index !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.UpdateIndexRequest.index: object expected");
+                                message.index = $root.google.cloud.vectorsearch.v1beta.Index.fromObject(object.index);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.UpdateIndexRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateIndexRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.UpdateIndexRequest} message UpdateIndexRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateIndexRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.index = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.index != null && message.hasOwnProperty("index"))
+                                object.index = $root.google.cloud.vectorsearch.v1beta.Index.toObject(message.index, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateIndexRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateIndexRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateIndexRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1beta.UpdateIndexRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateIndexRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.UpdateIndexRequest";
+                        };
+    
+                        return UpdateIndexRequest;
+                    })();
+    
                     v1beta.DeleteIndexRequest = (function() {
     
                         /**
@@ -34158,6 +36178,7 @@
                                         return "format: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 2:
                                         break;
                                     }
                                 return null;
@@ -34191,6 +36212,10 @@
                                 case "JSON":
                                 case 1:
                                     message.format = 1;
+                                    break;
+                                case "JSONL":
+                                case 2:
+                                    message.format = 2;
                                     break;
                                 }
                                 return message;
@@ -34252,11 +36277,13 @@
                              * @enum {number}
                              * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
                              * @property {number} JSON=1 JSON value
+                             * @property {number} JSONL=2 JSONL value
                              */
                             GcsExportDestination.Format = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "JSON"] = 1;
+                                values[valuesById[2] = "JSONL"] = 2;
                                 return values;
                             })();
     

@@ -56,6 +56,7 @@ import {
   unicodeJSONStringify,
   formatAsUTCISO,
   PassThroughShim,
+  handleContextValidation,
 } from './util.js';
 import {CRC32C, CRC32CValidatorGenerator} from './crc32c.js';
 import {HashStreamValidator} from './hash-stream-validator.js';
@@ -388,6 +389,11 @@ export interface CopyOptions {
   metadata?: {
     [key: string]: string | boolean | number | null;
   };
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue;
+    } | null;
+  };
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
@@ -402,6 +408,22 @@ export interface CopyCallback {
 
 export type DownloadResponse = [Buffer];
 
+export type DownloadResponseWithStatus = [Buffer] & {
+  skipped?: boolean;
+  reason?: SkipReason;
+  fileName?: string;
+  localPath?: string;
+  message?: string;
+  error?: Error;
+};
+
+export enum SkipReason {
+  PATH_TRAVERSAL = 'PATH_TRAVERSAL',
+  ILLEGAL_CHARACTER = 'ILLEGAL_CHARACTER',
+  ALREADY_EXISTS = 'ALREADY_EXISTS',
+  DOWNLOAD_ERROR = 'DOWNLOAD_ERROR',
+}
+
 export type DownloadCallback = (
   err: RequestError | null,
   contents: Buffer,
@@ -409,6 +431,7 @@ export type DownloadCallback = (
 
 export interface DownloadOptions extends CreateReadStreamOptions {
   destination?: string;
+  encryptionKey?: string | Buffer;
 }
 
 interface CopyQuery {
@@ -474,6 +497,12 @@ export interface RestoreOptions extends PreconditionOptions {
   projection?: 'full' | 'noAcl';
 }
 
+export interface ContextValue {
+  value: string | null;
+  readonly createTime?: string;
+  readonly updateTime?: string;
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -487,6 +516,11 @@ export interface FileMetadata extends BaseMetadata {
   customerEncryption?: {
     encryptionAlgorithm?: string;
     keySha256?: string;
+  };
+  contexts?: {
+    custom: {
+      [key: string]: ContextValue | null;
+    } | null;
   };
   customTime?: string;
   eventBasedHold?: boolean | null;
@@ -1302,6 +1336,14 @@ class File extends ServiceObject<File, FileMetadata> {
       callback = optionsOrCallback;
     } else if (optionsOrCallback) {
       options = {...optionsOrCallback};
+    }
+
+    if (options.contexts) {
+      const validationError = handleContextValidation(
+        options.contexts,
+        callback,
+      );
+      if (validationError) return validationError;
     }
 
     callback = callback || util.noop;
@@ -2181,6 +2223,16 @@ class File extends ServiceObject<File, FileMetadata> {
             return pipelineCallback(e);
           }
 
+          // If this is a partial upload, we don't expect final metadata yet.
+          if (options.isPartialUpload) {
+            // Emit CRC32c for this completed chunk if hash validation is active.
+            if (hashCalculatingStream?.crc32c) {
+              writeStream.emit('crc32c', hashCalculatingStream.crc32c);
+            }
+            // Resolve the pipeline for this *partial chunk*.
+            return pipelineCallback();
+          }
+
           // We want to make sure we've received the metadata from the server in order
           // to properly validate the object's integrity. Depending on the type of upload,
           // the stream could close before the response is returned.
@@ -2343,6 +2395,11 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const destination = options.destination;
     delete options.destination;
+
+    if (options.encryptionKey) {
+      this.setEncryptionKey(options.encryptionKey);
+      delete options.encryptionKey;
+    }
 
     const fileStream = this.createReadStream(options);
     let receivedData = false;
@@ -3522,7 +3579,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * @property {number} [preconditionOpts.ifGenerationMatch] Makes the operation conditional on whether the object's current generation matches the given value.
    */
   /**
-   * Move this file within the same HNS-enabled bucket.
+   * Move this file within the same bucket.
    * The source object must exist and be a live object.
    * The source and destination object IDs must be different.
    * Overwriting the destination object is allowed by default, but can be prevented
@@ -3544,9 +3601,9 @@ class File extends ServiceObject<File, FileMetadata> {
    * const storage = new Storage();
    *
    * //-
-   * // Assume 'my-hns-bucket' is an HNS-enabled bucket.
+   * // Assume 'my-bucket' is a bucket.
    * //-
-   * const bucket = storage.bucket('my-hns-bucket');
+   * const bucket = storage.bucket('my-bucket');
    * const file = bucket.file('my-image.png');
    *
    * //-
@@ -3554,7 +3611,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * // current bucket, under the new name provided.
    * //-
    * file.moveFileAtomic('moved-image.png', function(err, movedFile, apiResponse) {
-   *   // `my-hns-bucket` now contains:
+   *   // `my-bucket` now contains:
    *   // - "moved-image.png"
    *
    *   // `movedFile` is an instance of a File object that refers to your new
@@ -3565,7 +3622,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * // Move the file to a subdirectory, creating parent folders if necessary.
    * //-
    * file.moveFileAtomic('new-folder/subfolder/moved-image.png', function(err, movedFile, apiResponse) {
-   * // `my-hns-bucket` now contains:
+   * // `my-bucket` now contains:
    * // - "new-folder/subfolder/moved-image.png"
    * });
    *
@@ -3594,7 +3651,7 @@ class File extends ServiceObject<File, FileMetadata> {
    *
    * ```
    * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_move_file_hns
+   * region_tag:storage_move_file
    * Another example:
    */
   moveFileAtomic(
@@ -4125,11 +4182,16 @@ class File extends ServiceObject<File, FileMetadata> {
     optionsOrCallback?: SaveOptions | SaveCallback,
     callback?: SaveCallback,
   ): Promise<void> | void {
-    // tslint:enable:no-any
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+
+    const validationError = handleContextValidation(
+      options.metadata?.contexts,
+      callback,
+    );
+    if (validationError) return validationError;
 
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
@@ -4233,6 +4295,9 @@ class File extends ServiceObject<File, FileMetadata> {
       typeof optionsOrCallback === 'function'
         ? (optionsOrCallback as MetadataCallback<FileMetadata>)
         : cb;
+
+    const validationError = handleContextValidation(metadata.contexts, cb);
+    if (validationError) return validationError;
 
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,

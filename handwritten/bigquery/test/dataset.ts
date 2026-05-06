@@ -1010,6 +1010,20 @@ describe('BigQuery/Dataset', () => {
       ds.query(query);
     });
 
+    it('should pass along skipParsing', done => {
+      const query = {
+        query: 'SELECT * FROM allthedata',
+        skipParsing: true,
+      };
+
+      ds.bigQuery.query = (opts: _root.Query) => {
+        assert.strictEqual(opts.skipParsing, true);
+        done();
+      };
+
+      ds.query(query);
+    });
+
     it('should pass along options', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ds.bigQuery.query = (opts: any) => {

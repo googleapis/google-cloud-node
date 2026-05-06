@@ -316,6 +316,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stream raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js) |
 | streaming predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_predict.js) |
 | streaming raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.streaming_raw_predict.js) |
+| async query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.async_query_reasoning_engine.js) |
 | query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js) |
 | stream query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js) |
 | create reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js) |
@@ -330,6 +331,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | pause schedule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js) |
 | resume schedule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js) |
 | update schedule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js) |
+| append event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.append_event.js) |
+| create session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.create_session.js) |
+| delete session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.delete_session.js) |
+| get session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.get_session.js) |
+| list events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.list_events.js) |
+| list sessions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.list_sessions.js) |
+| update session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/session_service.update_session.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/snippet_metadata_google.cloud.aiplatform.v1.json) |
 | create specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.create_specialist_pool.js) |
 | delete specialist pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.delete_specialist_pool.js) |
@@ -378,6 +386,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update rag corpus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js) |
 | update rag engine config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_engine_config.js) |
 | upload rag file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js) |
+| ask contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.ask_contexts.js) |
+| async retrieve contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.async_retrieve_contexts.js) |
 | augment prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js) |
 | corroborate content | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js) |
 | retrieve contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js) |
@@ -436,6 +446,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update endpoint long running | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.update_endpoint_long_running.js) |
 | evaluate dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js) |
 | evaluate instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js) |
+| generate instance rubrics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.generate_instance_rubrics.js) |
 | create example store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/example_store_service.create_example_store.js) |
 | delete example store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/example_store_service.delete_example_store.js) |
 | fetch examples | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/example_store_service.fetch_examples.js) |
@@ -672,6 +683,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stop notebook runtime | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.stop_notebook_runtime.js) |
 | update notebook runtime template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js) |
 | upgrade notebook runtime | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.upgrade_notebook_runtime.js) |
+| activate online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.activate_online_evaluator.js) |
+| create online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.create_online_evaluator.js) |
+| delete online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.delete_online_evaluator.js) |
+| get online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.get_online_evaluator.js) |
+| list online evaluators | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.list_online_evaluators.js) |
+| suspend online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.suspend_online_evaluator.js) |
+| update online evaluator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/online_evaluator_service.update_online_evaluator.js) |
 | create persistent resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.create_persistent_resource.js) |
 | delete persistent resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.delete_persistent_resource.js) |
 | get persistent resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.get_persistent_resource.js) |
@@ -706,6 +724,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stream raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js) |
 | streaming predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_predict.js) |
 | streaming raw predict | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_raw_predict.js) |
+| async query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.async_query_reasoning_engine.js) |
 | query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js) |
 | stream query reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js) |
 | create reasoning engine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js) |
@@ -763,18 +782,33 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update tensorboard time series | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.update_tensorboard_time_series.js) |
 | write tensorboard experiment data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_experiment_data.js) |
 | write tensorboard run data | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/tensorboard_service.write_tensorboard_run_data.js) |
+| batch create rag data schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.batch_create_rag_data_schemas.js) |
+| batch create rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.batch_create_rag_metadata.js) |
+| batch delete rag data schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.batch_delete_rag_data_schemas.js) |
+| batch delete rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.batch_delete_rag_metadata.js) |
 | create rag corpus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js) |
+| create rag data schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.create_rag_data_schema.js) |
+| create rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.create_rag_metadata.js) |
 | delete rag corpus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js) |
+| delete rag data schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_data_schema.js) |
 | delete rag file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js) |
+| delete rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.delete_rag_metadata.js) |
 | get rag corpus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_corpus.js) |
+| get rag data schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_data_schema.js) |
 | get rag engine config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_engine_config.js) |
 | get rag file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_file.js) |
+| get rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.get_rag_metadata.js) |
 | import rag files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js) |
 | list rag corpora | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_corpora.js) |
+| list rag data schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_data_schemas.js) |
 | list rag files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_files.js) |
+| list rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.list_rag_metadata.js) |
 | update rag corpus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js) |
 | update rag engine config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.update_rag_engine_config.js) |
+| update rag metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.update_rag_metadata.js) |
 | upload rag file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js) |
+| ask contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.ask_contexts.js) |
+| async retrieve contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.async_retrieve_contexts.js) |
 | augment prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js) |
 | corroborate content | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js) |
 | retrieve contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.retrieve_contexts.js) |

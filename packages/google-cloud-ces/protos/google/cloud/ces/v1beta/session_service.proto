@@ -22,6 +22,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/ces/v1beta/common.proto";
 import "google/cloud/ces/v1beta/example.proto";
+import "google/cloud/ces/v1beta/mocks.proto";
 import "google/cloud/ces/v1beta/search_suggestions.proto";
 import "google/protobuf/struct.proto";
 
@@ -41,11 +42,26 @@ service SessionService {
       "https://www.googleapis.com/auth/ces,"
       "https://www.googleapis.com/auth/cloud-platform";
 
-  // Initiates a single turn interaction with the CES agent within a
-  // session.
+  // Initiates a single-turn interaction with the CES agent within a session.
   rpc RunSession(RunSessionRequest) returns (RunSessionResponse) {
     option (google.api.http) = {
       post: "/v1beta/{config.session=projects/*/locations/*/apps/*/sessions/*}:runSession"
+      body: "*"
+    };
+  }
+
+  // Initiates a single-turn interaction with the CES agent. Uses server-side
+  // streaming to deliver incremental results and partial responses as they are
+  // generated.
+  //
+  // By default, complete responses (e.g., messages from callbacks or full LLM
+  // responses) are sent to the client as soon as they are available. To enable
+  // streaming individual text chunks directly from the model, set
+  // [enable_text_streaming][google.cloud.ces.v1beta.SessionConfig.enable_text_streaming]
+  // to true.
+  rpc StreamRunSession(RunSessionRequest) returns (stream RunSessionResponse) {
+    option (google.api.http) = {
+      post: "/v1beta/{config.session=projects/*/locations/*/apps/*/sessions/*}:streamRunSession"
       body: "*"
     };
   }
@@ -131,6 +147,31 @@ enum AudioEncoding {
 
   // 8-bit samples that compand 14-bit audio samples using G.711 PCMU/A-law.
   ALAW = 3;
+}
+
+// Mock tool calls configuration for the session.
+message MockConfig {
+  // What to do when a tool call doesn't match any mocked tool calls.
+  enum UnmatchedToolCallBehavior {
+    // Default value. This value is unused.
+    UNMATCHED_TOOL_CALL_BEHAVIOR_UNSPECIFIED = 0;
+
+    // Throw an error for any tool calls that don't match a mock expected input
+    // pattern.
+    FAIL = 1;
+
+    // For unmatched tool calls, pass the tool call through to real tool.
+    PASS_THROUGH = 2;
+  }
+
+  // Optional. All tool calls to mock for the duration of the session.
+  repeated MockedToolCall mocked_tool_calls = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. Beavhior for tool calls that don't match any args patterns in
+  // mocked_tool_calls.
+  UnmatchedToolCallBehavior unmatched_tool_call_behavior = 2
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 // InputAudioConfig configures how the CES agent should interpret the incoming
@@ -237,6 +278,14 @@ message SessionConfig {
   // agent when the session control is transferred to the remote agent.
   RemoteDialogflowQueryParameters remote_dialogflow_query_parameters = 15
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Whether to enable streaming text outputs from the model.
+  // By default, text outputs from the model are collected before sending to the
+  // client.
+  // NOTE: This is only supported for text (non-voice) sessions via
+  // [StreamRunSession][google.cloud.ces.v1beta.SessionService.StreamRunSession]
+  // or [BidiRunSession][google.cloud.ces.v1beta.SessionService.BidiRunSession].
+  bool enable_text_streaming = 18 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request for the client to execute the tools and return the execution results

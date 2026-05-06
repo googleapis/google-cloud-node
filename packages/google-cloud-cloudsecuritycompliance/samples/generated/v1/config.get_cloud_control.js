@@ -29,8 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the cloud control to retrieve, in the format
-   *  `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
+   *  Required. The name of the cloud control to retrieve, in one of the
+   *  following formats:
+   *  `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+   *  or
+   *  `projects/{project}/locations/{location}/cloudControls/{cloud_control}`.
    *  The only supported location is `global`.
    */
   // const name = 'abc123'

@@ -107,6 +107,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update toolset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/agent_service.update_toolset.js) |
 | bidi run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/session_service.bidi_run_session.js) |
 | run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/session_service.run_session.js) |
+| stream run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/session_service.stream_run_session.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/snippet_metadata_google.cloud.ces.v1.json) |
 | execute tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/tool_service.execute_tool.js) |
 | retrieve tool schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1/tool_service.retrieve_tool_schema.js) |
@@ -131,6 +132,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.delete_tool.js) |
 | delete toolset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.delete_toolset.js) |
 | export app | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.export_app.js) |
+| generate app resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.generate_app_resource.js) |
 | get agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_agent.js) |
 | get app | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_app.js) |
 | get app version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/agent_service.get_app_version.js) |
@@ -172,6 +174,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete evaluation result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_result.js) |
 | delete evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_evaluation_run.js) |
 | delete scheduled evaluation run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.delete_scheduled_evaluation_run.js) |
+| export evaluations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.export_evaluations.js) |
 | generate evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.generate_evaluation.js) |
 | get evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation.js) |
 | get evaluation dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.get_evaluation_dataset.js) |
@@ -195,6 +198,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | upload evaluation audio | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/evaluation_service.upload_evaluation_audio.js) |
 | bidi run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/session_service.bidi_run_session.js) |
 | run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/session_service.run_session.js) |
+| stream run session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/session_service.stream_run_session.js) |
 | cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/snippet_metadata_google.cloud.ces.v1beta.json) |
 | execute tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/tool_service.execute_tool.js) |
 | retrieve tool schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-ces/samples/generated/v1beta/tool_service.retrieve_tool_schema.js) |

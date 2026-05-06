@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/routing-v2.2.0...routing-v2.2.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/routing-v2.1.1...routing-v2.2.0) (2026-03-19)
+
+
+### Features
+
+* [routing] add a new Waypoint source to accept a token that identifies a Navigation Point obtained from the `SearchDestinations` method of the Geocoding API ([#7531](https://github.com/googleapis/google-cloud-node/issues/7531)) ([b906b3a](https://github.com/googleapis/google-cloud-node/commit/b906b3ac62ee0513392d62defc7d168966c989f3))
+
 ## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/routing-v2.1.0...routing-v2.1.1) (2025-10-13)
 
 

@@ -954,6 +954,10 @@
                           "type": "BusinessStatus",
                           "id": 25
                         },
+                        "openingDate": {
+                          "type": "google.type.Date",
+                          "id": 95
+                        },
                         "priceLevel": {
                           "type": "PriceLevel",
                           "id": 26
@@ -1417,7 +1421,8 @@
                             "BUSINESS_STATUS_UNSPECIFIED": 0,
                             "OPERATIONAL": 1,
                             "CLOSED_TEMPORARILY": 2,
-                            "CLOSED_PERMANENTLY": 3
+                            "CLOSED_PERMANENTLY": 3,
+                            "FUTURE_OPENING": 4
                           }
                         },
                         "Attribution": {
@@ -2015,6 +2020,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "includeFutureOpeningBusinesses": {
+                          "type": "bool",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2134,6 +2146,13 @@
                         "includePureServiceAreaBusinesses": {
                           "type": "bool",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeFutureOpeningBusinesses": {
+                          "type": "bool",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2401,6 +2420,13 @@
                         "includePureServiceAreaBusinesses": {
                           "type": "bool",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeFutureOpeningBusinesses": {
+                          "type": "bool",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

@@ -210,6 +210,11 @@
                 "restoreAppVersion"
               ]
             },
+            "GenerateAppResource": {
+              "methods": [
+                "generateAppResource"
+              ]
+            },
             "ListApps": {
               "methods": [
                 "listApps",
@@ -485,6 +490,11 @@
                 "restoreAppVersion"
               ]
             },
+            "GenerateAppResource": {
+              "methods": [
+                "generateAppResource"
+              ]
+            },
             "ListApps": {
               "methods": [
                 "listApps",
@@ -689,6 +699,11 @@
                 "deleteEvaluationRun"
               ]
             },
+            "ExportEvaluations": {
+              "methods": [
+                "exportEvaluations"
+              ]
+            },
             "ListEvaluations": {
               "methods": [
                 "listEvaluations",
@@ -861,6 +876,11 @@
                 "deleteEvaluationRun"
               ]
             },
+            "ExportEvaluations": {
+              "methods": [
+                "exportEvaluations"
+              ]
+            },
             "ListEvaluations": {
               "methods": [
                 "listEvaluations",
@@ -915,6 +935,11 @@
             "RunSession": {
               "methods": [
                 "runSession"
+              ]
+            },
+            "StreamRunSession": {
+              "methods": [
+                "streamRunSession"
               ]
             },
             "BidiRunSession": {

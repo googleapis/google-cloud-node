@@ -1,5 +1,28 @@
 # Changelog
 
+## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.5.0...dataplex-v5.5.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.4.0...dataplex-v5.5.0) (2026-04-14)
+
+
+### Features
+
+* [dataplex] Allow Data Documentation DataScans to support BigQuery Dataset resources in addition to BigQuery table resources ([#8012](https://github.com/googleapis/google-cloud-node/issues/8012)) ([c75e5b6](https://github.com/googleapis/google-cloud-node/commit/c75e5b6c00aff1eda45f1ea0ca0e71bd72748452))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.3.0...dataplex-v5.4.0) (2026-03-18)
+
+
+### Features
+
+* **dataplex:** [dataplex] add DataProductService to manage data products and underlying data assets ([#7612](https://github.com/googleapis/google-cloud-node/issues/7612)) ([cb2345a](https://github.com/googleapis/google-cloud-node/commit/cb2345ab8636cb2fae3b1a3842a93c56f132bfbe))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.2.0...dataplex-v5.3.0) (2025-11-11)
 
 

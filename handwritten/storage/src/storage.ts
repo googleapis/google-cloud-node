@@ -204,6 +204,7 @@ export interface GetBucketsRequest {
   userProject?: string;
   softDeleted?: boolean;
   generation?: number;
+  returnPartialSuccess?: boolean;
 }
 
 export interface HmacKeyResourceResponse {
@@ -218,6 +219,7 @@ export interface CreateHmacKeyOptions {
   projectId?: string;
   userProject?: string;
 }
+
 export interface CreateHmacKeyCallback {
   (
     err: Error | null,
@@ -237,6 +239,7 @@ export interface GetHmacKeysOptions {
   pageToken?: string;
   userProject?: string;
 }
+
 export interface GetHmacKeysCallback {
   (
     err: Error | null,
@@ -1441,6 +1444,7 @@ export class Storage {
         kind: string;
         nextPageToken?: string;
         items: BucketMetadata[];
+        unreachable?: [];
       }>(
         {
           url: '/storage/v1/b',
@@ -1453,13 +1457,25 @@ export class Storage {
             callback(err, null, null, resp);
             return;
           }
-          const items = data?.items ? data.items : [];
-          const buckets = items.map((bucket: BucketMetadata) => {
+          const itemsArray = data?.items ? data?.items : [];
+          const unreachableArray = data?.unreachable ? data.unreachable : [];
+
+          const buckets = itemsArray.map((bucket: BucketMetadata) => {
             const bucketInstance = this.bucket(bucket.id!);
             bucketInstance.metadata = bucket;
             return bucketInstance;
           });
-
+          if (unreachableArray.length > 0) {
+            unreachableArray.forEach((fullPath: string) => {
+              const name = fullPath.split('/').pop();
+              if (name) {
+                const placeholder = this.bucket(name);
+                placeholder.unreachable = true;
+                placeholder.metadata = {};
+                buckets.push(placeholder);
+              }
+            });
+          }
           const nextQuery = data?.nextPageToken
             ? Object.assign({}, options, {pageToken: data.nextPageToken})
             : null;

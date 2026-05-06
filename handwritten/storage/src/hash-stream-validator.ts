@@ -81,10 +81,19 @@ class HashStreamValidator extends Transform {
     return this.#crc32cHash?.toString();
   }
 
-  _flush(callback: (error?: Error | null | undefined) => void) {
-    if (this.#md5Hash) {
+  /**
+   * Return the calculated MD5 value, if available.
+   */
+  get md5Digest(): string | undefined {
+    if (this.#md5Hash && !this.#md5Digest) {
       this.#md5Digest = this.#md5Hash.digest('base64');
     }
+    return this.#md5Digest;
+  }
+
+  _flush(callback: (error?: Error | null | undefined) => void) {
+    // Triggers the getter logic to finalize and cache the MD5 digest
+    this.md5Digest;
 
     if (this.updateHashesOnly) {
       callback();

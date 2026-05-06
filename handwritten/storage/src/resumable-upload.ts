@@ -35,10 +35,11 @@ import {
   getUserAgentString,
 } from './util.js';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
-import {FileMetadata} from './file.js';
+import {FileExceptionMessages, FileMetadata, RequestError} from './file.js';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
+import {HashStreamValidator} from './hash-stream-validator.js';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
@@ -147,6 +148,19 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    * @see {@link checkUploadStatus} for checking the status of an existing upload.
    */
   isPartialUpload?: boolean;
+
+  clientCrc32c?: string;
+  clientMd5Hash?: string;
+  /**
+   * Enables CRC32C calculation on the client side.
+   * The calculated hash will be sent in the final PUT request if `clientCrc32c` is not provided.
+   */
+  crc32c?: boolean;
+  /**
+   * Enables MD5 calculation on the client side.
+   * The calculated hash will be sent in the final PUT request if `clientMd5Hash` is not provided.
+   */
+  md5?: boolean;
 
   /**
    * A customer-supplied encryption key. See
@@ -328,6 +342,11 @@ export class Upload extends Writable {
    */
   private writeBuffers: Buffer[] = [];
   private numChunksReadInRequest = 0;
+
+  #hashValidator?: HashStreamValidator;
+  #clientCrc32c?: string;
+  #clientMd5Hash?: string;
+
   /**
    * An array of buffers used for caching the most recent upload chunk.
    * We should not assume that the server received all bytes sent in the request.
@@ -419,6 +438,20 @@ export class Upload extends Writable {
     this.retryOptions = cfg.retryOptions;
     this.isPartialUpload = cfg.isPartialUpload ?? false;
 
+    this.#clientCrc32c = cfg.clientCrc32c;
+    this.#clientMd5Hash = cfg.clientMd5Hash;
+
+    const calculateCrc32c = !cfg.clientCrc32c && cfg.crc32c;
+    const calculateMd5 = !cfg.clientMd5Hash && cfg.md5;
+
+    if (calculateCrc32c || calculateMd5) {
+      this.#hashValidator = new HashStreamValidator({
+        crc32c: calculateCrc32c,
+        md5: calculateMd5,
+        updateHashesOnly: true,
+      });
+    }
+
     if (cfg.key) {
       if (typeof cfg.key === 'string') {
         const base64Key = Buffer.from(cfg.key).toString('base64');
@@ -509,9 +542,19 @@ export class Upload extends Writable {
     // Backwards-compatible event
     this.emit('writing');
 
-    this.writeBuffers.push(
-      typeof chunk === 'string' ? Buffer.from(chunk, encoding) : chunk,
-    );
+    const bufferChunk =
+      typeof chunk === 'string' ? Buffer.from(chunk, encoding) : chunk;
+
+    if (this.#hashValidator) {
+      try {
+        this.#hashValidator.write(bufferChunk);
+      } catch (e) {
+        this.destroy(e as Error);
+        return;
+      }
+    }
+
+    this.writeBuffers.push(bufferChunk);
 
     this.once('readFromChunkBuffer', readCallback);
 
@@ -526,6 +569,69 @@ export class Upload extends Writable {
   #addLocalBufferCache(buf: Buffer) {
     this.localWriteCache.push(buf);
     this.localWriteCacheByteLength += buf.byteLength;
+  }
+
+  /**
+   * Compares the client's calculated or provided hash against the server's
+   * returned hash for a specific checksum type. Destroys the stream on mismatch.
+   * @param clientHash The client's calculated or provided hash (Base64).
+   * @param serverHash The hash returned by the server (Base64).
+   * @param hashType The type of hash ('CRC32C' or 'MD5').
+   */
+  #validateChecksum(
+    clientHash: string | undefined,
+    serverHash: string | undefined,
+    hashType: 'CRC32C' | 'MD5',
+  ): boolean {
+    // Only validate if both client and server hashes are present.
+    if (clientHash && serverHash) {
+      if (clientHash !== serverHash) {
+        const detailMessage = `${hashType} checksum mismatch. Client calculated: ${clientHash}, Server returned: ${serverHash}`;
+        const detailError = new Error(detailMessage);
+        const error = new RequestError(FileExceptionMessages.UPLOAD_MISMATCH);
+        error.code = 'FILE_NO_UPLOAD';
+        error.errors = [detailError];
+
+        this.destroy(error);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Builds and applies the X-Goog-Hash header to the request options
+   * using either calculated hashes from #hashValidator or pre-calculated
+   * client-side hashes. This should only be called on the final request.
+   *
+   * @param headers The headers object to modify.
+   */
+  #applyChecksumHeaders(headers: GaxiosOptions['headers']) {
+    const checksums: string[] = [];
+
+    if (this.#hashValidator?.crc32cEnabled) {
+      checksums.push(`crc32c=${this.#hashValidator.crc32c!}`);
+    } else if (this.#clientCrc32c) {
+      checksums.push(`crc32c=${this.#clientCrc32c}`);
+    }
+
+    if (this.#hashValidator?.md5Enabled) {
+      checksums.push(`md5=${this.#hashValidator.md5Digest!}`);
+    } else if (this.#clientMd5Hash) {
+      checksums.push(`md5=${this.#clientMd5Hash}`);
+    }
+
+    if (checksums.length > 0 && headers) {
+      const value = checksums.join(',');
+
+      if (headers instanceof Headers) {
+        headers.set('X-Goog-Hash', value);
+      } else if (Array.isArray(headers)) {
+        headers.push(['X-Goog-Hash', value]);
+      } else {
+        (headers as Record<string, string>)['X-Goog-Hash'] = value;
+      }
+    }
   }
 
   /**
@@ -913,6 +1019,10 @@ export class Upload extends Writable {
       // unshifting data back into the queue. This way we will know if this is the last request or not.
       const isLastChunkOfUpload = !(await this.waitForNextChunk());
 
+      if (isLastChunkOfUpload && this.#hashValidator) {
+        this.#hashValidator.end();
+      }
+
       // Important: put the data back in the queue for the actual upload
       this.prependLocalBufferToUpstream();
 
@@ -935,8 +1045,18 @@ export class Upload extends Writable {
       headers['Content-Length'] = bytesToUpload.toString();
       headers['Content-Range'] =
         `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
+
+      // Apply X-Goog-Hash header ONLY on the final chunk (WriteObject call)
+      if (isLastChunkOfUpload) {
+        this.#applyChecksumHeaders(headers);
+      }
     } else {
       headers['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
+
+      if (this.#hashValidator) {
+        this.#hashValidator.end();
+      }
+      this.#applyChecksumHeaders(headers);
     }
 
     const reqOpts: GaxiosOptions = {
@@ -1029,7 +1149,29 @@ export class Upload extends Writable {
       }
 
       this.destroy(err);
-    } else {
+    } else if (this.isSuccessfulResponse(resp.status)) {
+      const serverCrc32c = resp.data.crc32c;
+      const serverMd5 = resp.data.md5Hash;
+
+      if (this.#hashValidator) {
+        this.#hashValidator.end();
+      }
+
+      const clientCrc32cToValidate =
+        this.#hashValidator?.crc32c || this.#clientCrc32c;
+      const clientMd5HashToValidate =
+        this.#hashValidator?.md5Digest || this.#clientMd5Hash;
+      if (
+        this.#validateChecksum(
+          clientCrc32cToValidate,
+          serverCrc32c,
+          'CRC32C',
+        ) ||
+        this.#validateChecksum(clientMd5HashToValidate, serverMd5, 'MD5')
+      ) {
+        return;
+      }
+
       // no need to keep the cache
       this.#resetLocalBuffersCache();
 
@@ -1040,6 +1182,11 @@ export class Upload extends Writable {
 
       // Allow the object (Upload) to continue naturally so the user's
       // "finish" event fires.
+      this.emit('uploadFinished');
+    } else {
+      // Handles the case where shouldContinueUploadInAnotherRequest is true
+      // and the response is not successful (e.g., 308 for a partial upload).
+      // This is the expected behavior for partial uploads that have finished their chunk.
       this.emit('uploadFinished');
     }
   }

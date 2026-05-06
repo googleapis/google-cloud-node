@@ -28600,6 +28600,7 @@
                              * @property {google.cloud.gkehub.configmanagement.v1beta.IPolicyControllerState|null} [policyControllerState] MembershipState policyControllerState
                              * @property {google.cloud.gkehub.configmanagement.v1beta.IBinauthzState|null} [binauthzState] MembershipState binauthzState
                              * @property {google.cloud.gkehub.configmanagement.v1beta.IHierarchyControllerState|null} [hierarchyControllerState] MembershipState hierarchyControllerState
+                             * @property {string|null} [kubernetesApiServerVersion] MembershipState kubernetesApiServerVersion
                              */
     
                             /**
@@ -28674,6 +28675,14 @@
                             MembershipState.prototype.hierarchyControllerState = null;
     
                             /**
+                             * MembershipState kubernetesApiServerVersion.
+                             * @member {string} kubernetesApiServerVersion
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.MembershipState
+                             * @instance
+                             */
+                            MembershipState.prototype.kubernetesApiServerVersion = "";
+    
+                            /**
                              * Creates a new MembershipState instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.gkehub.configmanagement.v1beta.MembershipState
@@ -28711,6 +28720,8 @@
                                     $root.google.cloud.gkehub.configmanagement.v1beta.BinauthzState.encode(message.binauthzState, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 if (message.hierarchyControllerState != null && Object.hasOwnProperty.call(message, "hierarchyControllerState"))
                                     $root.google.cloud.gkehub.configmanagement.v1beta.HierarchyControllerState.encode(message.hierarchyControllerState, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.kubernetesApiServerVersion != null && Object.hasOwnProperty.call(message, "kubernetesApiServerVersion"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.kubernetesApiServerVersion);
                                 return writer;
                             };
     
@@ -28773,6 +28784,10 @@
                                         }
                                     case 7: {
                                             message.hierarchyControllerState = $root.google.cloud.gkehub.configmanagement.v1beta.HierarchyControllerState.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.kubernetesApiServerVersion = reader.string();
                                             break;
                                         }
                                     default:
@@ -28843,6 +28858,9 @@
                                     if (error)
                                         return "hierarchyControllerState." + error;
                                 }
+                                if (message.kubernetesApiServerVersion != null && message.hasOwnProperty("kubernetesApiServerVersion"))
+                                    if (!$util.isString(message.kubernetesApiServerVersion))
+                                        return "kubernetesApiServerVersion: string expected";
                                 return null;
                             };
     
@@ -28890,6 +28908,8 @@
                                         throw TypeError(".google.cloud.gkehub.configmanagement.v1beta.MembershipState.hierarchyControllerState: object expected");
                                     message.hierarchyControllerState = $root.google.cloud.gkehub.configmanagement.v1beta.HierarchyControllerState.fromObject(object.hierarchyControllerState);
                                 }
+                                if (object.kubernetesApiServerVersion != null)
+                                    message.kubernetesApiServerVersion = String(object.kubernetesApiServerVersion);
                                 return message;
                             };
     
@@ -28914,6 +28934,7 @@
                                     object.policyControllerState = null;
                                     object.binauthzState = null;
                                     object.hierarchyControllerState = null;
+                                    object.kubernetesApiServerVersion = "";
                                 }
                                 if (message.clusterName != null && message.hasOwnProperty("clusterName"))
                                     object.clusterName = message.clusterName;
@@ -28929,6 +28950,8 @@
                                     object.binauthzState = $root.google.cloud.gkehub.configmanagement.v1beta.BinauthzState.toObject(message.binauthzState, options);
                                 if (message.hierarchyControllerState != null && message.hasOwnProperty("hierarchyControllerState"))
                                     object.hierarchyControllerState = $root.google.cloud.gkehub.configmanagement.v1beta.HierarchyControllerState.toObject(message.hierarchyControllerState, options);
+                                if (message.kubernetesApiServerVersion != null && message.hasOwnProperty("kubernetesApiServerVersion"))
+                                    object.kubernetesApiServerVersion = message.kubernetesApiServerVersion;
                                 return object;
                             };
     
@@ -29377,6 +29400,7 @@
                              * @property {boolean|null} [preventDrift] ConfigSync preventDrift
                              * @property {google.cloud.gkehub.configmanagement.v1beta.IOciConfig|null} [oci] ConfigSync oci
                              * @property {boolean|null} [stopSyncing] ConfigSync stopSyncing
+                             * @property {Array.<google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride>|null} [deploymentOverrides] ConfigSync deploymentOverrides
                              */
     
                             /**
@@ -29388,6 +29412,7 @@
                              * @param {google.cloud.gkehub.configmanagement.v1beta.IConfigSync=} [properties] Properties to set
                              */
                             function ConfigSync(properties) {
+                                this.deploymentOverrides = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -29442,6 +29467,14 @@
                              */
                             ConfigSync.prototype.stopSyncing = false;
     
+                            /**
+                             * ConfigSync deploymentOverrides.
+                             * @member {Array.<google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride>} deploymentOverrides
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ConfigSync
+                             * @instance
+                             */
+                            ConfigSync.prototype.deploymentOverrides = $util.emptyArray;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -29487,6 +29520,9 @@
                                     $root.google.cloud.gkehub.configmanagement.v1beta.OciConfig.encode(message.oci, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                                 if (message.stopSyncing != null && Object.hasOwnProperty.call(message, "stopSyncing"))
                                     writer.uint32(/* id 16, wireType 0 =*/128).bool(message.stopSyncing);
+                                if (message.deploymentOverrides != null && message.deploymentOverrides.length)
+                                    for (var i = 0; i < message.deploymentOverrides.length; ++i)
+                                        $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.encode(message.deploymentOverrides[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 return writer;
                             };
     
@@ -29545,6 +29581,12 @@
                                         }
                                     case 16: {
                                             message.stopSyncing = reader.bool();
+                                            break;
+                                        }
+                                    case 17: {
+                                            if (!(message.deploymentOverrides && message.deploymentOverrides.length))
+                                                message.deploymentOverrides = [];
+                                            message.deploymentOverrides.push($root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -29607,6 +29649,15 @@
                                 if (message.stopSyncing != null && message.hasOwnProperty("stopSyncing"))
                                     if (typeof message.stopSyncing !== "boolean")
                                         return "stopSyncing: boolean expected";
+                                if (message.deploymentOverrides != null && message.hasOwnProperty("deploymentOverrides")) {
+                                    if (!Array.isArray(message.deploymentOverrides))
+                                        return "deploymentOverrides: array expected";
+                                    for (var i = 0; i < message.deploymentOverrides.length; ++i) {
+                                        var error = $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify(message.deploymentOverrides[i]);
+                                        if (error)
+                                            return "deploymentOverrides." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -29640,6 +29691,16 @@
                                 }
                                 if (object.stopSyncing != null)
                                     message.stopSyncing = Boolean(object.stopSyncing);
+                                if (object.deploymentOverrides) {
+                                    if (!Array.isArray(object.deploymentOverrides))
+                                        throw TypeError(".google.cloud.gkehub.configmanagement.v1beta.ConfigSync.deploymentOverrides: array expected");
+                                    message.deploymentOverrides = [];
+                                    for (var i = 0; i < object.deploymentOverrides.length; ++i) {
+                                        if (typeof object.deploymentOverrides[i] !== "object")
+                                            throw TypeError(".google.cloud.gkehub.configmanagement.v1beta.ConfigSync.deploymentOverrides: object expected");
+                                        message.deploymentOverrides[i] = $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.fromObject(object.deploymentOverrides[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -29656,6 +29717,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.deploymentOverrides = [];
                                 if (options.defaults) {
                                     object.git = null;
                                     object.sourceFormat = "";
@@ -29678,6 +29741,11 @@
                                     object.oci = $root.google.cloud.gkehub.configmanagement.v1beta.OciConfig.toObject(message.oci, options);
                                 if (message.stopSyncing != null && message.hasOwnProperty("stopSyncing"))
                                     object.stopSyncing = message.stopSyncing;
+                                if (message.deploymentOverrides && message.deploymentOverrides.length) {
+                                    object.deploymentOverrides = [];
+                                    for (var j = 0; j < message.deploymentOverrides.length; ++j)
+                                        object.deploymentOverrides[j] = $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.toObject(message.deploymentOverrides[j], options);
+                                }
                                 return object;
                             };
     
@@ -29708,6 +29776,578 @@
                             };
     
                             return ConfigSync;
+                        })();
+    
+                        v1beta.DeploymentOverride = (function() {
+    
+                            /**
+                             * Properties of a DeploymentOverride.
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta
+                             * @interface IDeploymentOverride
+                             * @property {string|null} [deploymentName] DeploymentOverride deploymentName
+                             * @property {string|null} [deploymentNamespace] DeploymentOverride deploymentNamespace
+                             * @property {Array.<google.cloud.gkehub.configmanagement.v1beta.IContainerOverride>|null} [containers] DeploymentOverride containers
+                             */
+    
+                            /**
+                             * Constructs a new DeploymentOverride.
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta
+                             * @classdesc Represents a DeploymentOverride.
+                             * @implements IDeploymentOverride
+                             * @constructor
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride=} [properties] Properties to set
+                             */
+                            function DeploymentOverride(properties) {
+                                this.containers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeploymentOverride deploymentName.
+                             * @member {string} deploymentName
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @instance
+                             */
+                            DeploymentOverride.prototype.deploymentName = "";
+    
+                            /**
+                             * DeploymentOverride deploymentNamespace.
+                             * @member {string} deploymentNamespace
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @instance
+                             */
+                            DeploymentOverride.prototype.deploymentNamespace = "";
+    
+                            /**
+                             * DeploymentOverride containers.
+                             * @member {Array.<google.cloud.gkehub.configmanagement.v1beta.IContainerOverride>} containers
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @instance
+                             */
+                            DeploymentOverride.prototype.containers = $util.emptyArray;
+    
+                            /**
+                             * Creates a new DeploymentOverride instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride=} [properties] Properties to set
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride} DeploymentOverride instance
+                             */
+                            DeploymentOverride.create = function create(properties) {
+                                return new DeploymentOverride(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeploymentOverride message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride} message DeploymentOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeploymentOverride.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.deploymentName != null && Object.hasOwnProperty.call(message, "deploymentName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.deploymentName);
+                                if (message.deploymentNamespace != null && Object.hasOwnProperty.call(message, "deploymentNamespace"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.deploymentNamespace);
+                                if (message.containers != null && message.containers.length)
+                                    for (var i = 0; i < message.containers.length; ++i)
+                                        $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.encode(message.containers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeploymentOverride message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride} message DeploymentOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeploymentOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeploymentOverride message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride} DeploymentOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeploymentOverride.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.deploymentName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.deploymentNamespace = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.containers && message.containers.length))
+                                                message.containers = [];
+                                            message.containers.push($root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeploymentOverride message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride} DeploymentOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeploymentOverride.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeploymentOverride message.
+                             * @function verify
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeploymentOverride.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.deploymentName != null && message.hasOwnProperty("deploymentName"))
+                                    if (!$util.isString(message.deploymentName))
+                                        return "deploymentName: string expected";
+                                if (message.deploymentNamespace != null && message.hasOwnProperty("deploymentNamespace"))
+                                    if (!$util.isString(message.deploymentNamespace))
+                                        return "deploymentNamespace: string expected";
+                                if (message.containers != null && message.hasOwnProperty("containers")) {
+                                    if (!Array.isArray(message.containers))
+                                        return "containers: array expected";
+                                    for (var i = 0; i < message.containers.length; ++i) {
+                                        var error = $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify(message.containers[i]);
+                                        if (error)
+                                            return "containers." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeploymentOverride message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride} DeploymentOverride
+                             */
+                            DeploymentOverride.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride)
+                                    return object;
+                                var message = new $root.google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride();
+                                if (object.deploymentName != null)
+                                    message.deploymentName = String(object.deploymentName);
+                                if (object.deploymentNamespace != null)
+                                    message.deploymentNamespace = String(object.deploymentNamespace);
+                                if (object.containers) {
+                                    if (!Array.isArray(object.containers))
+                                        throw TypeError(".google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.containers: array expected");
+                                    message.containers = [];
+                                    for (var i = 0; i < object.containers.length; ++i) {
+                                        if (typeof object.containers[i] !== "object")
+                                            throw TypeError(".google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.containers: object expected");
+                                        message.containers[i] = $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.fromObject(object.containers[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeploymentOverride message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride} message DeploymentOverride
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeploymentOverride.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.containers = [];
+                                if (options.defaults) {
+                                    object.deploymentName = "";
+                                    object.deploymentNamespace = "";
+                                }
+                                if (message.deploymentName != null && message.hasOwnProperty("deploymentName"))
+                                    object.deploymentName = message.deploymentName;
+                                if (message.deploymentNamespace != null && message.hasOwnProperty("deploymentNamespace"))
+                                    object.deploymentNamespace = message.deploymentNamespace;
+                                if (message.containers && message.containers.length) {
+                                    object.containers = [];
+                                    for (var j = 0; j < message.containers.length; ++j)
+                                        object.containers[j] = $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.toObject(message.containers[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeploymentOverride to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeploymentOverride.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeploymentOverride
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeploymentOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride";
+                            };
+    
+                            return DeploymentOverride;
+                        })();
+    
+                        v1beta.ContainerOverride = (function() {
+    
+                            /**
+                             * Properties of a ContainerOverride.
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta
+                             * @interface IContainerOverride
+                             * @property {string|null} [containerName] ContainerOverride containerName
+                             * @property {string|null} [cpuRequest] ContainerOverride cpuRequest
+                             * @property {string|null} [cpuLimit] ContainerOverride cpuLimit
+                             * @property {string|null} [memoryRequest] ContainerOverride memoryRequest
+                             * @property {string|null} [memoryLimit] ContainerOverride memoryLimit
+                             */
+    
+                            /**
+                             * Constructs a new ContainerOverride.
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta
+                             * @classdesc Represents a ContainerOverride.
+                             * @implements IContainerOverride
+                             * @constructor
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IContainerOverride=} [properties] Properties to set
+                             */
+                            function ContainerOverride(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ContainerOverride containerName.
+                             * @member {string} containerName
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @instance
+                             */
+                            ContainerOverride.prototype.containerName = "";
+    
+                            /**
+                             * ContainerOverride cpuRequest.
+                             * @member {string} cpuRequest
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @instance
+                             */
+                            ContainerOverride.prototype.cpuRequest = "";
+    
+                            /**
+                             * ContainerOverride cpuLimit.
+                             * @member {string} cpuLimit
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @instance
+                             */
+                            ContainerOverride.prototype.cpuLimit = "";
+    
+                            /**
+                             * ContainerOverride memoryRequest.
+                             * @member {string} memoryRequest
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @instance
+                             */
+                            ContainerOverride.prototype.memoryRequest = "";
+    
+                            /**
+                             * ContainerOverride memoryLimit.
+                             * @member {string} memoryLimit
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @instance
+                             */
+                            ContainerOverride.prototype.memoryLimit = "";
+    
+                            /**
+                             * Creates a new ContainerOverride instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IContainerOverride=} [properties] Properties to set
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.ContainerOverride} ContainerOverride instance
+                             */
+                            ContainerOverride.create = function create(properties) {
+                                return new ContainerOverride(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ContainerOverride message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IContainerOverride} message ContainerOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContainerOverride.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.containerName != null && Object.hasOwnProperty.call(message, "containerName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.containerName);
+                                if (message.cpuRequest != null && Object.hasOwnProperty.call(message, "cpuRequest"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.cpuRequest);
+                                if (message.cpuLimit != null && Object.hasOwnProperty.call(message, "cpuLimit"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.cpuLimit);
+                                if (message.memoryRequest != null && Object.hasOwnProperty.call(message, "memoryRequest"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.memoryRequest);
+                                if (message.memoryLimit != null && Object.hasOwnProperty.call(message, "memoryLimit"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.memoryLimit);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ContainerOverride message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.IContainerOverride} message ContainerOverride message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ContainerOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ContainerOverride message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.ContainerOverride} ContainerOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContainerOverride.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.containerName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.cpuRequest = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.cpuLimit = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.memoryRequest = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.memoryLimit = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ContainerOverride message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.ContainerOverride} ContainerOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ContainerOverride.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ContainerOverride message.
+                             * @function verify
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ContainerOverride.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                    if (!$util.isString(message.containerName))
+                                        return "containerName: string expected";
+                                if (message.cpuRequest != null && message.hasOwnProperty("cpuRequest"))
+                                    if (!$util.isString(message.cpuRequest))
+                                        return "cpuRequest: string expected";
+                                if (message.cpuLimit != null && message.hasOwnProperty("cpuLimit"))
+                                    if (!$util.isString(message.cpuLimit))
+                                        return "cpuLimit: string expected";
+                                if (message.memoryRequest != null && message.hasOwnProperty("memoryRequest"))
+                                    if (!$util.isString(message.memoryRequest))
+                                        return "memoryRequest: string expected";
+                                if (message.memoryLimit != null && message.hasOwnProperty("memoryLimit"))
+                                    if (!$util.isString(message.memoryLimit))
+                                        return "memoryLimit: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ContainerOverride message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkehub.configmanagement.v1beta.ContainerOverride} ContainerOverride
+                             */
+                            ContainerOverride.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride)
+                                    return object;
+                                var message = new $root.google.cloud.gkehub.configmanagement.v1beta.ContainerOverride();
+                                if (object.containerName != null)
+                                    message.containerName = String(object.containerName);
+                                if (object.cpuRequest != null)
+                                    message.cpuRequest = String(object.cpuRequest);
+                                if (object.cpuLimit != null)
+                                    message.cpuLimit = String(object.cpuLimit);
+                                if (object.memoryRequest != null)
+                                    message.memoryRequest = String(object.memoryRequest);
+                                if (object.memoryLimit != null)
+                                    message.memoryLimit = String(object.memoryLimit);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ContainerOverride message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {google.cloud.gkehub.configmanagement.v1beta.ContainerOverride} message ContainerOverride
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ContainerOverride.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.containerName = "";
+                                    object.cpuRequest = "";
+                                    object.cpuLimit = "";
+                                    object.memoryRequest = "";
+                                    object.memoryLimit = "";
+                                }
+                                if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                    object.containerName = message.containerName;
+                                if (message.cpuRequest != null && message.hasOwnProperty("cpuRequest"))
+                                    object.cpuRequest = message.cpuRequest;
+                                if (message.cpuLimit != null && message.hasOwnProperty("cpuLimit"))
+                                    object.cpuLimit = message.cpuLimit;
+                                if (message.memoryRequest != null && message.hasOwnProperty("memoryRequest"))
+                                    object.memoryRequest = message.memoryRequest;
+                                if (message.memoryLimit != null && message.hasOwnProperty("memoryLimit"))
+                                    object.memoryLimit = message.memoryLimit;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ContainerOverride to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ContainerOverride.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ContainerOverride
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkehub.configmanagement.v1beta.ContainerOverride
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ContainerOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkehub.configmanagement.v1beta.ContainerOverride";
+                            };
+    
+                            return ContainerOverride;
                         })();
     
                         v1beta.GitConfig = (function() {
