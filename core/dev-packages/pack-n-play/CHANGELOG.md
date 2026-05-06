@@ -1,13 +1,5 @@
 # Changelog
 
-## [4.2.2](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.2.1...pack-n-play-v4.2.2) (2025-12-17)
-
-
-### Bug Fixes
-
-* **pack-n-play:** Replace rimraf with native Node.js fs.promises.rm ([a10146b](https://github.com/googleapis/google-cloud-node-core/commit/a10146b6e1fe66c5b3b0de7d86639dd81b232236))
-* **pack-n-play:** Replace rimraf with native Node.js fs.promises.rm ([e686c20](https://github.com/googleapis/google-cloud-node-core/commit/e686c20a0b71436e961d2696ccdfd3e7382426fb))
-
 ## [4.2.1](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.2.0...pack-n-play-v4.2.1) (2025-10-07)
 
 

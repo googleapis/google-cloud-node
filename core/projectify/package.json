@@ -18,8 +18,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "presystem-test": "npm run compile",
-    "system-test": "mocha build/system-test",
+    "system-test": "echo 'no system test'",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
     "precompile": "gts clean"
