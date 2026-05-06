@@ -2285,6 +2285,7 @@ describe('File', () => {
 
   describe('download', () => {
     let fileReadStream: Readable;
+    let originalSetEncryptionKey: typeof file.setEncryptionKey;
 
     beforeEach(() => {
       fileReadStream = new Readable();
@@ -2297,6 +2298,13 @@ describe('File', () => {
       file.createReadStream = () => {
         return fileReadStream;
       };
+
+      originalSetEncryptionKey = file.setEncryptionKey;
+      file.setEncryptionKey = sinon.stub();
+    });
+
+    afterEach(() => {
+      file.setEncryptionKey = originalSetEncryptionKey;
     });
 
     it('should accept just a callback', () => {
@@ -2317,6 +2325,31 @@ describe('File', () => {
       });
 
       file.download(readOptions, assert.ifError);
+    });
+
+    it('should call setEncryptionKey with the provided key and not pass it to createReadStream', done => {
+      const encryptionKey = Buffer.from('encryption-key');
+      const downloadOptions = {
+        encryptionKey: encryptionKey,
+        userProject: 'user-project-id',
+      };
+
+      file.createReadStream = (options: {}) => {
+        assert.deepStrictEqual(options, {userProject: 'user-project-id'});
+        return fileReadStream;
+      };
+
+      file.download(downloadOptions, err => {
+        assert.ifError(err);
+        // Verify that setEncryptionKey was called with the correct key
+        assert.ok(
+          (file.setEncryptionKey as sinon.SinonStub).calledWith(encryptionKey),
+        );
+        done();
+      });
+
+      fileReadStream.push('some data');
+      fileReadStream.push(null);
     });
 
     it('should only execute callback once', done => {

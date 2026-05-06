@@ -314,6 +314,10 @@ export interface RestoreOptions {
   generation: string;
   projection?: 'full' | 'noAcl';
 }
+export interface EncryptionEnforcementConfig {
+  restrictionMode?: 'NotRestricted' | 'FullyRestricted';
+  readonly effectiveTime?: string;
+}
 export interface BucketMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   autoclass?: {
@@ -333,6 +337,9 @@ export interface BucketMetadata extends BaseMetadata {
   defaultObjectAcl?: AclMetadata[];
   encryption?: {
     defaultKmsKeyName?: string;
+    googleManagedEncryptionEnforcementConfig?: EncryptionEnforcementConfig;
+    customerManagedEncryptionEnforcementConfig?: EncryptionEnforcementConfig;
+    customerSuppliedEncryptionEnforcementConfig?: EncryptionEnforcementConfig;
   } | null;
   hierarchicalNamespace?: {
     enabled?: boolean;
@@ -859,6 +866,13 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
   private instanceRetryValue?: boolean;
   instancePreconditionOpts?: PreconditionOptions;
 
+  /**
+   * Indicates whether this Bucket object is a placeholder for an item
+   * that the API failed to retrieve (unreachable) due to partial failure.
+   * Consumers must check this flag before accessing other properties.
+   */
+  unreachable = false;
+
   constructor(storage: Storage, name: string, options?: BucketOptions) {
     options = options || {};
 
@@ -1203,6 +1217,25 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
        * bucket.setMetadata({
        *   encryption: {
        *     defaultKmsKeyName: 'projects/grape-spaceship-123/...'
+       *   }
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // Enforce CMEK-only encryption for new objects.
+       * // This blocks Google-Managed and Customer-Supplied keys.
+       * //-
+       * bucket.setMetadata({
+       *   encryption: {
+       *     defaultKmsKeyName: 'projects/grape-spaceship-123/...',
+       *     googleManagedEncryptionEnforcementConfig: {
+       *       restrictionMode: 'FullyRestricted'
+       *     },
+       *     customerSuppliedEncryptionEnforcementConfig: {
+       *       restrictionMode: 'FullyRestricted'
+       *     },
+       *     customerManagedEncryptionEnforcementConfig: {
+       *       restrictionMode: 'NotRestricted'
+       *     }
        *   }
        * }, function(err, apiResponse) {});
        *

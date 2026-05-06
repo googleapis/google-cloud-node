@@ -33,6 +33,7 @@ import {
   ApiError,
   CreateUriCallback,
   PROTOCOL_REGEX,
+  UploadConfig,
 } from '../src/resumable-upload.js';
 import {
   GaxiosOptions,
@@ -42,6 +43,7 @@ import {
 } from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {getDirName} from '../src/util.js';
+import {FileExceptionMessages} from '../src/file.js';
 
 nock.disableNetConnect();
 
@@ -52,6 +54,10 @@ const queryPath = '/?userProject=user-project-id';
 const X_GOOG_API_HEADER_REGEX =
   /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd\/(?<gcclGcsCmd>[^W]+)$/;
 const USER_AGENT_REGEX = /^gcloud-node-storage\/(?<libVersion>[^W]+)$/;
+const CORRECT_CLIENT_CRC32C = 'Q2hlY2tzdW0h';
+const INCORRECT_SERVER_CRC32C = 'Q2hlY2tzdVUa';
+const CORRECT_CLIENT_MD5 = 'CorrectMD5Hash';
+const INCORRECT_SERVER_MD5 = 'IncorrectMD5Hash';
 
 function mockAuthorizeRequest(
   code = 200,
@@ -111,6 +117,8 @@ describe('resumable-upload', () => {
       apiEndpoint: API_ENDPOINT,
       retryOptions: {...RETRY_OPTIONS},
       [GCCL_GCS_CMD_KEY]: 'sample.command',
+      clientCrc32c: CORRECT_CLIENT_CRC32C,
+      clientMd5Hash: CORRECT_CLIENT_MD5,
     });
   });
 
@@ -1319,6 +1327,278 @@ describe('resumable-upload', () => {
         });
       });
     });
+
+    describe('X-Goog-Hash header injection', () => {
+      const CALCULATED_CRC32C = 'bzKmHw==';
+      const CALCULATED_MD5 = 'VpBzljOcorCZvRIkX5Nt3A==';
+      const DUMMY_CONTENT = Buffer.alloc(512, 'a');
+      const CHUNK_SIZE = 256;
+
+      let requestCount: number;
+
+      /**
+       * Creates a mocked HashValidator object with forced getters to return
+       * predefined hash values, bypassing internal stream calculation logic.
+       */
+      function createMockHashValidator(
+        crc32cEnabled: boolean,
+        md5Enabled: boolean,
+      ) {
+        const mockValidator = {
+          crc32cEnabled: crc32cEnabled,
+          md5Enabled: md5Enabled,
+          end: () => {}, // Mock the end method
+          write: () => {},
+        };
+
+        Object.defineProperty(mockValidator, 'crc32c', {
+          get: () => CALCULATED_CRC32C,
+          configurable: true,
+        });
+        Object.defineProperty(mockValidator, 'md5Digest', {
+          get: () => CALCULATED_MD5,
+          configurable: true,
+        });
+        return mockValidator;
+      }
+
+      const MOCK_AUTH_CLIENT = {
+        // Mock the request method to return a dummy response
+        request: async (opts: GaxiosOptions) => {
+          return {
+            status: 200,
+            data: {},
+            headers: {},
+            config: opts,
+            statusText: 'OK',
+          } as GaxiosResponse;
+        },
+        getRequestHeaders: async () => ({}),
+        getRequestMetadata: async () => ({}),
+        getRequestMetadataAsync: async () => ({}),
+        getClient: async () => MOCK_AUTH_CLIENT,
+      };
+
+      /**
+       * Sets up the `up` instance for hash injection tests.
+       * @param configOptions Partial UploadConfig to apply.
+       */
+      function setupHashUploadInstance(
+        configOptions: Partial<UploadConfig> & {
+          crc32c?: boolean;
+          md5?: boolean;
+        },
+      ) {
+        up = upload({
+          bucket: BUCKET,
+          file: FILE,
+          authClient: MOCK_AUTH_CLIENT,
+          retryOptions: {...RETRY_OPTIONS, maxRetries: 0},
+          metadata: {
+            contentLength: DUMMY_CONTENT.byteLength,
+            contentType: 'text/plain',
+          },
+          ...configOptions,
+        });
+
+        // Manually inject the mock HashStreamValidator if needed
+        const calculateCrc32c =
+          !configOptions.clientCrc32c && configOptions.crc32c;
+        const calculateMd5 = !configOptions.clientMd5Hash && configOptions.md5;
+
+        if (calculateCrc32c || calculateMd5) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (up as any)['#hashValidator'] = createMockHashValidator(
+            !!calculateCrc32c,
+            !!calculateMd5,
+          );
+        }
+      }
+
+      async function performUpload(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        uploadInstance: any,
+        data: Buffer,
+        isMultiChunk: boolean,
+        expectedCrc32c?: string,
+        expectedMd5?: string,
+      ): Promise<GaxiosOptions[]> {
+        const capturedReqOpts: GaxiosOptions[] = [];
+        requestCount = 0;
+
+        uploadInstance.makeRequestStream = async (
+          requestOptions: GaxiosOptions,
+        ) => {
+          requestCount++;
+          capturedReqOpts.push(requestOptions);
+
+          await new Promise<void>(resolve => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const body = requestOptions.body as any;
+            if (body?.on) {
+              body.on('data', () => {});
+              body.on('end', resolve);
+            } else {
+              resolve();
+            }
+          });
+
+          const serverCrc32c = expectedCrc32c || CALCULATED_CRC32C;
+          const serverMd5 = expectedMd5 || CALCULATED_MD5;
+          if (
+            isMultiChunk &&
+            requestCount < Math.ceil(DUMMY_CONTENT.byteLength / CHUNK_SIZE)
+          ) {
+            const lastByteReceived = requestCount * CHUNK_SIZE - 1;
+            return {
+              data: '',
+              status: RESUMABLE_INCOMPLETE_STATUS_CODE,
+              headers: {range: `bytes=0-${lastByteReceived}`},
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any;
+          } else {
+            return {
+              status: 200,
+              data: {
+                crc32c: serverCrc32c,
+                md5Hash: serverMd5,
+                name: FILE,
+                bucket: BUCKET,
+                size: DUMMY_CONTENT.byteLength.toString(),
+              },
+              headers: {},
+              config: {},
+              statusText: 'OK',
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any;
+          }
+        };
+
+        return new Promise((resolve, reject) => {
+          uploadInstance.on('error', reject);
+          uploadInstance.on('uploadFinished', () => {
+            resolve(capturedReqOpts);
+          });
+
+          const upstreamBuffer = new Readable({
+            read() {
+              this.push(data);
+              this.push(null);
+            },
+          });
+          upstreamBuffer.pipe(uploadInstance);
+        });
+      }
+
+      describe('single chunk', () => {
+        it('should include X-Goog-Hash header with crc32c when crc32c is enabled (via validator)', async () => {
+          setupHashUploadInstance({crc32c: true});
+          const reqOpts = await performUpload(up, DUMMY_CONTENT, false);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 1);
+          assert.equal(headers['X-Goog-Hash'], `crc32c=${CALCULATED_CRC32C}`);
+        });
+
+        it('should include X-Goog-Hash header with md5 when md5 is enabled (via validator)', async () => {
+          setupHashUploadInstance({md5: true});
+          const reqOpts = await performUpload(up, DUMMY_CONTENT, false);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 1);
+          assert.equal(headers['X-Goog-Hash'], `md5=${CALCULATED_MD5}`);
+        });
+
+        it('should include both crc32c and md5 in X-Goog-Hash when both are enabled (via validator)', async () => {
+          setupHashUploadInstance({crc32c: true, md5: true});
+          const reqOpts = await performUpload(up, DUMMY_CONTENT, false);
+          assert.strictEqual(reqOpts.length, 1);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          const xGoogHash = headers['X-Goog-Hash'];
+          assert.ok(xGoogHash);
+          const expectedHashes = [
+            `crc32c=${CALCULATED_CRC32C}`,
+            `md5=${CALCULATED_MD5}`,
+          ];
+          const actualHashes = xGoogHash
+            .split(',')
+            .map((s: string) => s.trim());
+          assert.deepStrictEqual(actualHashes.sort(), expectedHashes.sort());
+        });
+
+        it('should use clientCrc32c if provided (pre-calculated hash)', async () => {
+          const customCrc32c = 'CUSTOMCRC';
+          setupHashUploadInstance({crc32c: true, clientCrc32c: customCrc32c});
+          const reqOpts = await performUpload(
+            up,
+            DUMMY_CONTENT,
+            false,
+            customCrc32c,
+          );
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 1);
+          assert.strictEqual(headers['X-Goog-Hash'], `crc32c=${customCrc32c}`);
+        });
+
+        it('should use clientMd5Hash if provided (pre-calculated hash)', async () => {
+          const customMd5 = 'CUSTOMMD5';
+          setupHashUploadInstance({md5: true, clientMd5Hash: customMd5});
+          const reqOpts = await performUpload(
+            up,
+            DUMMY_CONTENT,
+            false,
+            undefined,
+            customMd5,
+          );
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 1);
+          assert.strictEqual(headers['X-Goog-Hash'], `md5=${customMd5}`);
+        });
+
+        it('should not include X-Goog-Hash if neither crc32c nor md5 are enabled', async () => {
+          setupHashUploadInstance({});
+          const reqOpts = await performUpload(up, DUMMY_CONTENT, false);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 1);
+          assert.strictEqual(headers['X-Goog-Hash'], undefined);
+        });
+      });
+
+      describe('multiple chunk', () => {
+        beforeEach(() => {
+          setupHashUploadInstance({
+            crc32c: true,
+            md5: true,
+            chunkSize: CHUNK_SIZE,
+          });
+        });
+
+        it('should NOT include X-Goog-Hash header on intermediate multi-chunk requests', async () => {
+          const reqOpts = await performUpload(up, DUMMY_CONTENT, true);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 2);
+
+          assert.strictEqual(headers['Content-Length'], CHUNK_SIZE);
+          assert.strictEqual(headers['X-Goog-Hash'], undefined);
+        });
+
+        it('should include X-Goog-Hash header ONLY on the final multi-chunk request', async () => {
+          const expectedHashHeader = `crc32c=${CALCULATED_CRC32C},md5=${CALCULATED_MD5}`;
+          const reqOpts = await performUpload(up, DUMMY_CONTENT, true);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const headers = reqOpts[0].headers as Record<string, any>;
+          assert.strictEqual(reqOpts.length, 2);
+
+          assert.strictEqual(headers['Content-Length'], CHUNK_SIZE);
+          assert.equal(headers['X-Goog-Hash'], expectedHashHeader);
+        });
+      });
+    });
   });
 
   describe('#responseHandler', () => {
@@ -1370,6 +1650,63 @@ describe('resumable-upload', () => {
         done();
       };
       up.upstreamEnded = true;
+      up.responseHandler(RESP);
+    });
+
+    it('should destroy the stream on CRC32C checksum mismatch', done => {
+      const CLIENT_CRC = 'client_hash';
+      const SERVER_CRC = 'server_hash';
+      const RESP = {
+        data: {
+          crc32c: SERVER_CRC,
+          md5Hash: 'md5_match',
+          size: '100',
+        },
+        status: 200,
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (up as any)['#hashValidator'] = {
+        crc32cEnabled: true,
+        md5Enabled: true,
+        crc32c: CLIENT_CRC,
+        md5Digest: 'md5_match',
+      };
+      up.upstreamEnded = true;
+
+      up.destroy = (err: Error) => {
+        assert.strictEqual(err.message, FileExceptionMessages.UPLOAD_MISMATCH);
+        done();
+      };
+
+      up.responseHandler(RESP);
+    });
+
+    it('should destroy the stream on MD5 checksum mismatch', done => {
+      const CLIENT_MD5 = 'client_md5';
+      const SERVER_MD5 = 'server_md5';
+      const RESP = {
+        data: {
+          crc32c: 'crc32c_match',
+          md5Hash: SERVER_MD5,
+          size: '100',
+        },
+        status: 200,
+      };
+
+      up.md5 = true;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (up as any)['#hashValidator'] = {
+        crc32c: 'crc32c_match',
+        md5Digest: CLIENT_MD5,
+      };
+      up.upstreamEnded = true;
+
+      up.destroy = (err: Error) => {
+        assert.strictEqual(err.message, FileExceptionMessages.UPLOAD_MISMATCH);
+        done();
+      };
+
       up.responseHandler(RESP);
     });
 
@@ -2715,6 +3052,125 @@ describe('resumable-upload', () => {
         });
 
         // init the request
+        upstreamBuffer.pipe(up);
+      });
+    });
+  });
+
+  describe('Validation of Client Checksums Against Server Response', () => {
+    const DUMMY_CONTENT = Buffer.alloc(CHUNK_SIZE_MULTIPLE * 2);
+    let URI = '';
+    beforeEach(() => {
+      up.contentLength = DUMMY_CONTENT.byteLength;
+      URI = 'uri';
+      up.createURI = (callback: (error: Error | null, uri: string) => void) => {
+        up.uri = URI;
+        up.offset = 0;
+        callback(null, URI);
+      };
+    });
+    const checksumScenarios = [
+      {
+        type: 'CRC32C',
+        match: true,
+        desc: 'successfully finish the upload if server-reported CRC32C matches client CRC32C',
+        serverCrc: CORRECT_CLIENT_CRC32C,
+        serverMd5: CORRECT_CLIENT_MD5,
+      },
+      {
+        type: 'CRC32C',
+        match: false,
+        desc: 'fail and destroy the stream if server-reported CRC32C mismatches client CRC32C',
+        serverCrc: INCORRECT_SERVER_CRC32C,
+        serverMd5: CORRECT_CLIENT_MD5,
+        errorPart: 'CRC32C checksum mismatch.',
+      },
+      {
+        type: 'MD5',
+        match: true,
+        desc: 'successfully finish the upload if server-reported MD5 matches client MD5',
+        serverCrc: CORRECT_CLIENT_CRC32C,
+        serverMd5: CORRECT_CLIENT_MD5,
+      },
+      {
+        type: 'MD5',
+        match: false,
+        desc: 'fail and destroy the stream if server-reported MD5 mismatches client MD5',
+        serverCrc: CORRECT_CLIENT_CRC32C,
+        serverMd5: INCORRECT_SERVER_MD5,
+        errorPart: 'MD5 checksum mismatch.',
+      },
+    ];
+
+    checksumScenarios.forEach(scenario => {
+      it(`should ${scenario.desc}`, done => {
+        up.makeRequestStream = async (opts: GaxiosOptions) => {
+          await new Promise<void>(resolve => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const body = opts.body as any;
+
+            if (body?.on) {
+              body.on('data', () => {});
+              body.on('end', resolve);
+            } else {
+              resolve();
+            }
+          });
+
+          return {
+            status: 200,
+            data: {
+              crc32c: scenario.serverCrc,
+              md5Hash: scenario.serverMd5,
+              name: up.file,
+              bucket: up.bucket,
+              size: DUMMY_CONTENT.byteLength.toString(),
+            },
+            headers: {},
+            config: opts,
+            statusText: 'OK',
+          };
+        };
+
+        if (scenario.match) {
+          up.on('error', (err: Error) => {
+            done(new Error(`Upload failed unexpectedly: ${err.message}`));
+          });
+          up.on('finish', () => {
+            done();
+          });
+        } else {
+          up.on('error', (err: Error) => {
+            assert.strictEqual(
+              err.message,
+              FileExceptionMessages.UPLOAD_MISMATCH,
+            );
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const detailError = (err as any).errors && (err as any).errors[0];
+            assert.ok(
+              detailError && detailError.message.includes(scenario.errorPart!),
+              `Error message should contain: ${scenario.errorPart}`,
+            );
+            assert.strictEqual(up.uri, URI);
+            done();
+          });
+
+          up.on('finish', () => {
+            done(
+              new Error(
+                `Upload should have failed due to ${scenario.type} mismatch, but emitted finish.`,
+              ),
+            );
+          });
+        }
+
+        const upstreamBuffer = new Readable({
+          read() {
+            this.push(DUMMY_CONTENT);
+            this.push(null);
+          },
+        });
         upstreamBuffer.pipe(up);
       });
     });

@@ -30,6 +30,7 @@ import {StorageTransport} from '../src/storage-transport.js';
 import {
   AvailableServiceObjectMethods,
   BucketExceptionMessages,
+  BucketMetadata,
   EnableLoggingOptions,
   GetBucketSignedUrlConfig,
   LifecycleRule,
@@ -2963,6 +2964,144 @@ describe('Bucket', () => {
       );
       assert.strictEqual(bucket.storage.retryOptions.autoRetry, true);
       done();
+    });
+  });
+
+  describe('setMetadata', () => {
+    describe('encryption enforcement', () => {
+      const effectiveTime = '2026-02-02T12:00:00Z';
+      it('should correctly format restrictionMode for all enforcement types', async () => {
+        const encryptionMetadata: BucketMetadata = {
+          encryption: {
+            defaultKmsKeyName: 'kms-key-name',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+              effectiveTime: effectiveTime,
+            },
+            customerManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'NotRestricted',
+              effectiveTime: effectiveTime,
+            },
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+              effectiveTime: effectiveTime,
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([encryptionMetadata, {}]);
+
+        await bucket.setMetadata(encryptionMetadata);
+
+        // Verify the stub was called with the correct object
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+
+        assert.strictEqual(
+          calledMetadata.encryption?.defaultKmsKeyName,
+          encryptionMetadata.encryption?.defaultKmsKeyName,
+        );
+        assert.deepStrictEqual(
+          calledMetadata.encryption?.googleManagedEncryptionEnforcementConfig,
+          {restrictionMode: 'FullyRestricted', effectiveTime: effectiveTime},
+        );
+      });
+
+      it('should preserve existing encryption fields during a partial update', async () => {
+        // In a real scenario, the library might merge this.
+        // Here we verify what is passed TO the method.
+        const patch: BucketMetadata = {
+          encryption: {
+            customerSuppliedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        await bucket.setMetadata(patch);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.strictEqual(
+          calledMetadata.encryption?.customerSuppliedEncryptionEnforcementConfig
+            ?.restrictionMode,
+          'FullyRestricted',
+        );
+      });
+
+      it('should reject or handle invalid restrictionMode values', async () => {
+        const invalidMetadata = {
+          encryption: {
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'fully_restricted',
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await bucket.setMetadata(invalidMetadata as any);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.strictEqual(
+          calledMetadata.encryption?.googleManagedEncryptionEnforcementConfig
+            ?.restrictionMode,
+          'fully_restricted',
+        );
+      });
+
+      it('should not include enforcement configs that are not provided', async () => {
+        const partialMetadata: BucketMetadata = {
+          encryption: {
+            defaultKmsKeyName: 'test-key',
+            googleManagedEncryptionEnforcementConfig: {
+              restrictionMode: 'FullyRestricted',
+            },
+          },
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        await bucket.setMetadata(partialMetadata);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.ok(
+          calledMetadata.encryption?.googleManagedEncryptionEnforcementConfig,
+        );
+        assert.strictEqual(
+          calledMetadata.encryption?.customerManagedEncryptionEnforcementConfig,
+          undefined,
+        );
+        assert.strictEqual(
+          calledMetadata.encryption
+            ?.customerSuppliedEncryptionEnforcementConfig,
+          undefined,
+        );
+      });
+
+      it('should allow nullifying encryption enforcement', async () => {
+        const clearMetadata = {
+          encryption: null,
+        };
+
+        const setMetadataStub = sandbox
+          .stub(bucket, 'setMetadata')
+          .resolves([{}, {}]);
+
+        await bucket.setMetadata(clearMetadata);
+
+        const calledMetadata = setMetadataStub.getCall(0).args[0];
+        assert.strictEqual(calledMetadata.encryption, null);
+      });
     });
   });
 });

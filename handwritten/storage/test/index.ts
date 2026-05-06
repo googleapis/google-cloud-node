@@ -360,7 +360,7 @@ describe('Storage', () => {
         );
       });
 
-      it('should be overriden by apiEndpoint', () => {
+      it('should be overridden by apiEndpoint', () => {
         const storage = new Storage({
           projectId: PROJECT_ID,
           apiEndpoint: 'https://some.api.com',
@@ -1040,6 +1040,75 @@ describe('Storage', () => {
       storage.getBuckets((err, buckets) => {
         assert.ifError(err);
         assert.deepStrictEqual(buckets[0].metadata, bucketMetadata);
+      });
+    });
+
+    describe('returnPartialSuccess', () => {
+      it('should return unreachable when returnPartialSuccess is true', async () => {
+        const unreachableList = ['projects/_/buckets/fail-bucket'];
+        const itemsList = [{id: 'fake-bucket-name'}];
+        const resp = {items: itemsList, unreachable: unreachableList};
+
+        storage.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((config, callback) => {
+            callback(null, resp, {status: 200});
+            return Promise.resolve();
+          });
+
+        const [buckets] = await storage.getBuckets({
+          returnPartialSuccess: true,
+        });
+
+        assert.strictEqual(buckets.length, 2);
+
+        const reachableBucket = buckets.find(
+          b => b.name === 'fake-bucket-name',
+        );
+        assert.ok(reachableBucket);
+        assert.strictEqual(reachableBucket.unreachable, false);
+
+        const unreachableBucket = buckets.find(b => b.name === 'fail-bucket');
+        assert.ok(unreachableBucket);
+        assert.strictEqual(unreachableBucket.unreachable, true);
+      });
+
+      it('should handle partial failure with zero reachable buckets', async () => {
+        const unreachableList = ['projects/_/buckets/fail-bucket'];
+        const resp = {items: [], unreachable: unreachableList};
+
+        storage.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((config, callback) => {
+            callback(null, resp, {status: 200});
+            return Promise.resolve();
+          });
+
+        const [buckets] = await storage.getBuckets({
+          returnPartialSuccess: true,
+        });
+
+        assert.strictEqual(buckets.length, 1);
+        assert.strictEqual(buckets[0].name, 'fail-bucket');
+        assert.strictEqual(buckets[0].unreachable, true);
+        assert.deepStrictEqual(buckets[0].metadata, {});
+      });
+
+      it('should handle API success where zero items and zero unreachable items are returned', async () => {
+        const resp = {items: [], unreachable: []};
+
+        storage.storageTransport.makeRequest = sandbox
+          .stub()
+          .callsFake((config, callback) => {
+            callback(null, resp, {status: 200});
+            return Promise.resolve();
+          });
+
+        const [buckets] = await storage.getBuckets({
+          returnPartialSuccess: true,
+        });
+
+        assert.strictEqual(buckets.length, 0);
       });
     });
   });

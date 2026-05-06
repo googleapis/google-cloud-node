@@ -1695,52 +1695,6 @@ describe('storage', function () {
       assert(metadata.hierarchicalNamespace);
       assert.strictEqual(metadata.hierarchicalNamespace.enabled, true);
     });
-
-    describe('file#moveFileAtomic', async () => {
-      let hnsBucket: Bucket;
-
-      afterEach(async () => {
-        try {
-          await hnsBucket.delete();
-        } catch {
-          //Ignore errors
-        }
-      });
-
-      it('Should move a file to a new name within the same HNS-enabled bucket.', async () => {
-        hnsBucket = storage.bucket(generateName());
-        await storage.createBucket(hnsBucket.name, {
-          hierarchicalNamespace: {enabled: true},
-          iamConfiguration: {
-            uniformBucketLevelAccess: {
-              enabled: true,
-            },
-          },
-        });
-        // Create a source file in the bucket and save some content.
-        const f1 = hnsBucket.file('move-src-obj');
-        await f1.save('move-src-obj');
-        assert(f1);
-        const [f1_metadata] = await f1.getMetadata();
-
-        // Move the source file to a new destination name within the same bucket.
-        await f1.moveFileAtomic('move-dst-obj');
-        const f2 = hnsBucket.file('move-dst-obj');
-        assert(f2);
-        const [f2_metadata] = await f2.getMetadata();
-
-        // Assert that the generation of the destination file is different from the source file,
-        // indicating a new file was created.
-        assert.notStrictEqual(f1_metadata.generation, f2_metadata.generation);
-
-        const [f1_exists] = await f1.exists();
-        const [f2_exists] = await f2.exists();
-        // Assert that the source file no longer exists after the move.
-        assert.strictEqual(f1_exists, false);
-        // Assert that the destination file exists after the move.
-        assert.strictEqual(f2_exists, true);
-      });
-    });
   });
 
   describe('bucket retention policies', () => {
@@ -2353,7 +2307,12 @@ describe('storage', function () {
           });
         });
 
-        it('iam#setPolicy', async () => {
+        /**
+         * TODO: Re-enable once the test environment allows public IAM roles.
+         * Currently disabled to avoid 403 errors when adding 'allUsers' or
+         * 'allAuthenticatedUsers' permissions.
+         */
+        it.skip('iam#setPolicy', async () => {
           await requesterPaysDoubleTest(async options => {
             const [policy] = await bucket.iam.getPolicy();
 
@@ -2780,7 +2739,7 @@ describe('storage', function () {
         });
       });
 
-      it('should download from the encrytped file', async () => {
+      it('should download from the encrypted file', async () => {
         const [contents] = await file.download();
         assert.strictEqual(contents.toString(), 'secret data');
       });
@@ -3002,6 +2961,89 @@ describe('storage', function () {
             `${metadata!.encryption!.defaultKmsKeyName}/cryptoKeyVersions/1`,
           );
         });
+
+        describe('encryption enforcement', () => {
+          it('should enforce FullyRestricted CSEK policy', async () => {
+            await bucket.setMetadata({
+              encryption: {
+                defaultKmsKeyName: kmsKeyName,
+                customerSuppliedEncryptionEnforcementConfig: {
+                  restrictionMode: 'FullyRestricted',
+                },
+              },
+            });
+
+            await new Promise(res =>
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
+            );
+
+            const encryptionKey = crypto.randomBytes(32);
+            const file = bucket.file('csek-attempt', {encryptionKey});
+
+            await assert.rejects(
+              file.save(FILE_CONTENTS, {resumable: false}),
+              (err: GaxiosError) => {
+                const failureMessage =
+                  "Requested encryption type for object is not compliant with the bucket's encryption enforcement configuration.";
+                assert.strictEqual(err.code, 412);
+                assert.ok(err.message.includes(failureMessage));
+                return true;
+              },
+            );
+          });
+
+          it('should allow uploads that comply with enforcement', async () => {
+            await bucket.setMetadata({
+              encryption: {
+                googleManagedEncryptionEnforcementConfig: {
+                  restrictionMode: 'NotRestricted',
+                },
+              },
+            });
+
+            const file = bucket.file('compliant-file');
+            await file.save(FILE_CONTENTS);
+
+            const [metadata] = await file.getMetadata();
+            assert.ok(metadata.customerEncryption);
+          });
+
+          it('should retain defaultKmsKeyName when updating enforcement settings independently', async () => {
+            await bucket.setMetadata({
+              encryption: {
+                defaultKmsKeyName: kmsKeyName,
+              },
+            });
+
+            await new Promise(res =>
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
+            );
+
+            await bucket.setMetadata({
+              encryption: {
+                googleManagedEncryptionEnforcementConfig: {
+                  restrictionMode: 'FullyRestricted',
+                },
+              },
+            });
+
+            await new Promise(res =>
+              setTimeout(res, BUCKET_METADATA_UPDATE_WAIT_TIME),
+            );
+
+            const [metadata] = await bucket.getMetadata();
+            assert.strictEqual(
+              metadata.encryption?.defaultKmsKeyName,
+              kmsKeyName,
+            );
+
+            assert.strictEqual(
+              metadata.encryption?.googleManagedEncryptionEnforcementConfig
+                ?.restrictionMode,
+              'FullyRestricted',
+            );
+          });
+        });
       });
     });
 
@@ -3219,6 +3261,33 @@ describe('storage', function () {
         assert.strictEqual((err as GaxiosError).code, 404);
         assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
       });
+    });
+  });
+
+  describe('file#moveFileAtomic', async () => {
+    it('Should move a file to a new name within the bucket.', async () => {
+      // Create a source file in the bucket and save some content.
+      const f1 = bucket.file('move-src-obj');
+      await f1.save('move-src-obj');
+      assert(f1);
+      const [f1_metadata] = await f1.getMetadata();
+
+      // Move the source file to a new destination name within the same bucket.
+      await f1.moveFileAtomic('move-dst-obj');
+      const f2 = bucket.file('move-dst-obj');
+      assert(f2);
+      const [f2_metadata] = await f2.getMetadata();
+
+      // Assert that the generation of the destination file is different from the source file,
+      // indicating a new file was created.
+      assert.notStrictEqual(f1_metadata.generation, f2_metadata.generation);
+
+      const [f1_exists] = await f1.exists();
+      const [f2_exists] = await f2.exists();
+      // Assert that the source file no longer exists after the move.
+      assert.strictEqual(f1_exists, false);
+      // Assert that the destination file exists after the move.
+      assert.strictEqual(f2_exists, true);
     });
   });
 
@@ -3538,7 +3607,7 @@ describe('storage', function () {
       assert.ok(metadata.contexts?.custom);
       assert.strictEqual(
         metadata.contexts.custom['team-owner']?.value,
-        'storage-team'
+        'storage-team',
       );
       assert.ok(metadata.contexts.custom['team-owner'].createTime);
 
@@ -3663,7 +3732,7 @@ describe('storage', function () {
         const [metadata] = await combined.getMetadata();
         assert.strictEqual(
           metadata.contexts?.custom?.status?.value,
-          'composed'
+          'composed',
         );
       });
     });
