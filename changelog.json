@@ -10,6 +10,68 @@
           "issues": [
             "8178"
           ]
+        },
+        {
+          "type": "feat",
+          "sha": "41671b08ba94df02ab6fd42ea216dbcfe51d18ad",
+          "message": "Added FieldValue.minimum() and FieldValue.maximum()",
+          "issues": [
+            "8151"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "4acb07593b5c6a1387a1dfb97bf7ab4cd399f329",
+          "message": "Added search stage support for languageCode, offset, limit, and retrievalDepth",
+          "issues": [
+            "8161"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "86310088f5dea61b4dfe3580e273b34aad79eac0",
+          "message": "Ensure limit(0) is properly serialized in query requests",
+          "issues": [
+            "8076",
+            "7382"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a9f6c3f3f721ba4920d925de6afa24ba9e81c7ad",
+          "message": "Respect `ignoreUndefinedProperties` in subpipelines",
+          "issues": [
+            "8089"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "8.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "576d9d4e-2cee-496f-a7e9-61b28dfb4518",
+      "createTime": "2026-05-06T21:35:10.670Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
         }
       ],
       "version": "3.0.6",
@@ -77687,5 +77749,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-06T18:07:28.494Z"
+  "updateTime": "2026-05-06T21:35:10.670Z"
 }
