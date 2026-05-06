@@ -230,7 +230,8 @@
     "packages/google-maps-navconnect": {},
     "packages/google-cloud-auditmanager": {},
     "packages/google-maps-geocode": {},
-    "packages/google-cloud-datacatalog-lineage-configmanagement": {}
+    "packages/google-cloud-datacatalog-lineage-configmanagement": {},
+    "packages/google-devicesandservices-health": {}
   },
   "plugins": [
     {
