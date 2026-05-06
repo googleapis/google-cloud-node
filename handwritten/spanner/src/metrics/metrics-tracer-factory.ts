@@ -305,7 +305,8 @@ export class MetricsTracerFactory {
    * @param requestId The request id of the gRPC call set under 'x-goog-spanner-request-id'.
    */
   public clearCurrentTracer(requestId: string) {
-    const operationRequest = this._extractOperationRequest(requestId);
+    const operationRequest =
+      this._extractOperationRequest(requestId) || requestId;
     if (!this._currentOperationTracers.has(operationRequest)) {
       return;
     }
