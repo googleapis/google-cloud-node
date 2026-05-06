@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [10.1.2](https://github.com/googleapis/google-cloud-node-core/compare/teeny-request-v10.1.1...teeny-request-v10.1.2) (2026-03-13)
 
 
