@@ -4659,7 +4659,7 @@ describe('File', () => {
 
         assert.strictEqual(
           contexts!.custom!['🚀-launcher'].value,
-          '✨-sparkle'
+          '✨-sparkle',
         );
       });
 
@@ -4698,12 +4698,12 @@ describe('File', () => {
         assert.ok(sentMetadata.contexts);
         assert.ok(sentMetadata.contexts!.custom);
         assert.strictEqual(
-          sentMetadata.contexts!.custom!['only-key'].value,
-          'only-val'
+          sentMetadata.contexts!.custom!['only-key']!.value,
+          'only-val',
         );
         assert.strictEqual(
           sentMetadata.contexts!.custom!['new-key'],
-          undefined
+          undefined,
         );
       });
 
@@ -4720,13 +4720,13 @@ describe('File', () => {
         const stub = sinon.stub(file, 'setMetadata').resolves();
         await file.setMetadata(patchMetadata);
 
-        const sentMetadata = stub.getCall(0).args[0]!;
+        const sentMetadata = stub.getCall(0).args[0];
 
         assert.ok(sentMetadata.contexts);
         assert.ok(sentMetadata.contexts!.custom);
         assert.strictEqual(
-          sentMetadata.contexts!.custom!['new-key'].value,
-          'added'
+          sentMetadata.contexts!.custom!['new-key']!.value,
+          'added',
         );
       });
 
@@ -4777,7 +4777,7 @@ describe('File', () => {
 
         assert.strictEqual(stub.calledOnce, true);
         const options = stub.getCall(0).args[1];
-        assert.deepStrictEqual(options.metadata.contexts, metadata.contexts);
+        assert.deepStrictEqual(options.metadata?.contexts, metadata.contexts);
       });
     });
 
@@ -4796,10 +4796,11 @@ describe('File', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await BUCKET.combine(sources, combinedFile, {metadata} as any);
 
-        const callOptions = stub.getCall(0).args[2];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const callOptions = stub.getCall(0).args[2] as any;
         assert.deepStrictEqual(
           callOptions.metadata.contexts,
-          metadata.contexts
+          metadata.contexts,
         );
       });
     });
@@ -4815,10 +4816,12 @@ describe('File', () => {
       await file.save('data', {metadata});
 
       const sentMetadata = stub.getCall(0).args[1].metadata;
-      assert.strictEqual(sentMetadata.contexts.custom['empty-key'].value, '');
+      assert.strictEqual(
+        sentMetadata!.contexts!.custom!['empty-key'].value,
+        '',
+      );
     });
   });
-
 
   describe('setStorageClass', () => {
     const STORAGE_CLASS = 'new_storage_class';
