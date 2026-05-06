@@ -4,22 +4,6 @@
 
 [1]: https://www.npmjs.com/package/google-proto-files?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node-core/compare/google-proto-files-v5.0.1...google-proto-files-v6.0.0) (2025-12-17)
-
-
-### ⚠ BREAKING CHANGES
-
-* update library to Node 18 ([#508](https://github.com/googleapis/google-cloud-node-core/issues/508))
-
-### Bug Fixes
-
-* **deps:** Update dependency protobufjs to v7.5.4 ([#524](https://github.com/googleapis/google-cloud-node-core/issues/524)) ([80c71bc](https://github.com/googleapis/google-cloud-node-core/commit/80c71bcca642b8b85349454671955a6529a2e28d))
-
-
-### Miscellaneous Chores
-
-* Update library to Node 18 ([#508](https://github.com/googleapis/google-cloud-node-core/issues/508)) ([5a0d43f](https://github.com/googleapis/google-cloud-node-core/commit/5a0d43f4525577855b0b8beed28d3f043e478eaa))
-
 ## [5.0.1](https://github.com/googleapis/nodejs-proto-files/compare/v5.0.0...v5.0.1) (2025-08-21)
 
 

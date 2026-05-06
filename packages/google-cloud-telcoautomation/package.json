@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/telcoautomation",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Telco Automation API client for Node.js",
   "repository": {
     "type": "git",
