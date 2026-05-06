@@ -6,6 +6,14 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [5.0.7](https://github.com/googleapis/google-cloud-node/compare/google-gax-v5.0.6...google-gax-v5.0.7) (2026-05-06)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
 ## [5.0.6](https://github.com/googleapis/google-cloud-node-core/compare/google-gax-v5.0.5...google-gax-v5.0.6) (2025-11-11)
 
 
