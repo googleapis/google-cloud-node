@@ -15,7 +15,7 @@
   "core/packages/retry-request": "8.0.2",
   "core/packages/teeny-request": "10.1.2",
   "core/packages/tools": "1.0.5",
-  "core/paginator": "6.0.0",
+  "core/paginator": "6.0.1",
   "core/precise-date": "5.0.0",
   "core/projectify": "5.0.0",
   "core/promisify": "5.0.0",
