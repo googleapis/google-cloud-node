@@ -28,7 +28,7 @@
   "handwritten/firestore": "8.5.0",
   "handwritten/logging": "11.2.1",
   "handwritten/logging-bunyan": "5.1.1",
-  "handwritten/logging-winston": "6.0.1",
+  "handwritten/logging-winston": "6.0.2",
   "handwritten/pubsub": "5.3.0",
   "handwritten/spanner": "8.7.0",
   "handwritten/storage": "7.19.0",
