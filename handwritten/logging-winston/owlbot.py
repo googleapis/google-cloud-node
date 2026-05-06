@@ -43,7 +43,7 @@ s.move(
     "handwritten/logging-winston/.kokoro/common.cfg",
     merge=lambda src, dst, _, : f"{dst}\n{src}",
 )
-for path, subdirs, files in os.walk(f".kokoro/continuous"):
+for path, subdirs, files in os.walk(f"handwritten/logging-winston/.kokoro/continuous"):
     for name in files:
         if name == "common.cfg":
             file_path = os.path.join(path, name)
