@@ -70,8 +70,7 @@ function mockAuthorizeRequest(
     .reply(code, data);
 }
 
-/* TODO: UnSkip once the circular dependency is fixed. */
-describe.skip('resumable-upload', () => {
+describe('resumable-upload', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let upload: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,7 +99,7 @@ describe.skip('resumable-upload', () => {
   const keyFile = path.join(getDirName(), '../../../test/fixtures/keys.json');
 
   before(() => {
-    mockery.enable({useCleanCache: true, warnOnUnregistered: false});
+    mockery.enable({useCleanCache: false, warnOnUnregistered: false});
     upload = require('../src/resumable-upload').upload;
   });
 
@@ -1371,7 +1370,7 @@ describe.skip('resumable-upload', () => {
           return {
             status: 200,
             data: {},
-            headers: {},
+            headers: new Headers(),
             config: opts,
             statusText: 'OK',
           } as GaxiosResponse;
@@ -1429,6 +1428,10 @@ describe.skip('resumable-upload', () => {
         const capturedReqOpts: GaxiosOptions[] = [];
         requestCount = 0;
 
+        const totalChunks = isMultiChunk
+          ? Math.ceil(data.byteLength / CHUNK_SIZE)
+          : 1;
+
         uploadInstance.makeRequestStream = async (
           requestOptions: GaxiosOptions,
         ) => {
@@ -1448,33 +1451,33 @@ describe.skip('resumable-upload', () => {
 
           const serverCrc32c = expectedCrc32c || CALCULATED_CRC32C;
           const serverMd5 = expectedMd5 || CALCULATED_MD5;
-          if (
-            isMultiChunk &&
-            requestCount < Math.ceil(DUMMY_CONTENT.byteLength / CHUNK_SIZE)
-          ) {
+          if (isMultiChunk && requestCount < totalChunks) {
             const lastByteReceived = requestCount * CHUNK_SIZE - 1;
             return {
               data: '',
               status: RESUMABLE_INCOMPLETE_STATUS_CODE,
-              headers: {range: `bytes=0-${lastByteReceived}`},
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any;
-          } else {
-            return {
-              status: 200,
-              data: {
-                crc32c: serverCrc32c,
-                md5Hash: serverMd5,
-                name: FILE,
-                bucket: BUCKET,
-                size: DUMMY_CONTENT.byteLength.toString(),
+              headers: {
+                range: `bytes=0-${lastByteReceived}`,
+                'Content-Length': '0',
               },
-              headers: {},
-              config: {},
-              statusText: 'OK',
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } as any;
           }
+
+          return {
+            status: 200,
+            data: {
+              crc32c: serverCrc32c,
+              md5Hash: serverMd5,
+              name: FILE,
+              bucket: BUCKET,
+              size: DUMMY_CONTENT.byteLength.toString(),
+            },
+            headers: new Headers(),
+            config: {},
+            statusText: 'OK',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any;
         };
 
         return new Promise((resolve, reject) => {
@@ -1586,7 +1589,7 @@ describe.skip('resumable-upload', () => {
           const headers = reqOpts[0].headers as Record<string, any>;
           assert.strictEqual(reqOpts.length, 2);
 
-          assert.strictEqual(headers['Content-Length'], CHUNK_SIZE);
+          assert.strictEqual(headers['Content-Length'], CHUNK_SIZE.toString());
           assert.strictEqual(headers['X-Goog-Hash'], undefined);
         });
 
@@ -1594,11 +1597,15 @@ describe.skip('resumable-upload', () => {
           const expectedHashHeader = `crc32c=${CALCULATED_CRC32C},md5=${CALCULATED_MD5}`;
           const reqOpts = await performUpload(up, DUMMY_CONTENT, true);
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const headers = reqOpts[0].headers as Record<string, any>;
+          const headers = reqOpts[1].headers as any;
           assert.strictEqual(reqOpts.length, 2);
 
-          assert.strictEqual(headers['Content-Length'], CHUNK_SIZE);
-          assert.equal(headers['X-Goog-Hash'], expectedHashHeader);
+          const xGoogHash =
+            typeof headers.get === 'function'
+              ? headers.get('x-goog-hash')
+              : headers['X-Goog-Hash'];
+          assert.strictEqual(headers['Content-Length'], CHUNK_SIZE.toString());
+          assert.equal(xGoogHash, expectedHashHeader);
         });
       });
     });
