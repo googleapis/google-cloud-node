@@ -8,12 +8,19 @@ PUSH="${PUSH:-true}"
 PLATFORM="${PLATFORM:-linux/amd64}"
 BUILD_CURRENT="${BUILD_CURRENT:-true}"
 
-docker build --platform "$PLATFORM" -f "$ROOT/issue/Dockerfile.go" -t "$IMAGE_REPO/issue-insert-go:latest" "$ROOT"
+docker build --platform "$PLATFORM" -f "$ROOT/issue/Dockerfile.go" \
+  -t "$IMAGE_REPO/issue-insert-go:latest" \
+  "$ROOT"
 
 docker build --platform "$PLATFORM" -f "$ROOT/issue/Dockerfile.node" \
   --build-arg "SPANNER_VERSION=$SPANNER_VERSION" \
   -t "$IMAGE_REPO/issue-insert-node:release-${SPANNER_VERSION}" \
   -t "$IMAGE_REPO/issue-insert-node:latest" \
+  "$ROOT"
+
+docker build --platform "$PLATFORM" -f "$ROOT/issue/Dockerfile.node-cluster" \
+  --build-arg "SPANNER_VERSION=$SPANNER_VERSION" \
+  -t "$IMAGE_REPO/issue-insert-node-cluster:release-${SPANNER_VERSION}" \
   "$ROOT"
 
 if [[ "$BUILD_CURRENT" == "true" ]]; then
@@ -25,23 +32,20 @@ if [[ "$BUILD_CURRENT" == "true" ]]; then
     -t "$IMAGE_REPO/issue-insert-node-cluster:latest" \
     "$ROOT"
 else
-  docker build --platform "$PLATFORM" -f "$ROOT/issue/Dockerfile.node-cluster" \
-    --build-arg "SPANNER_VERSION=$SPANNER_VERSION" \
-    -t "$IMAGE_REPO/issue-insert-node-cluster:release-${SPANNER_VERSION}" \
-    -t "$IMAGE_REPO/issue-insert-node-cluster:latest" \
-    "$ROOT"
+  docker tag "$IMAGE_REPO/issue-insert-node-cluster:release-${SPANNER_VERSION}" \
+    "$IMAGE_REPO/issue-insert-node-cluster:latest"
 fi
 
 if [[ "$PUSH" == "true" ]]; then
   docker push "$IMAGE_REPO/issue-insert-go:latest"
   docker push "$IMAGE_REPO/issue-insert-node:release-${SPANNER_VERSION}"
   docker push "$IMAGE_REPO/issue-insert-node:latest"
+  docker push "$IMAGE_REPO/issue-insert-node-cluster:release-${SPANNER_VERSION}"
   if [[ "$BUILD_CURRENT" == "true" ]]; then
     docker push "$IMAGE_REPO/issue-insert-node:current"
     docker push "$IMAGE_REPO/issue-insert-node-cluster:current"
     docker push "$IMAGE_REPO/issue-insert-node-cluster:latest"
   else
-    docker push "$IMAGE_REPO/issue-insert-node-cluster:release-${SPANNER_VERSION}"
     docker push "$IMAGE_REPO/issue-insert-node-cluster:latest"
   fi
 fi
