@@ -39,7 +39,9 @@
     "gaxios": "^7.0.0-rc",
     "parse-link-header": "^2.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gts": "^6.0.2"
+  },
   "engines": {
     "node": ">=18"
   }

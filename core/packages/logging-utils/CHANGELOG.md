@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [1.1.3](https://github.com/googleapis/google-cloud-node-core/compare/google-logging-utils-v1.1.2...google-logging-utils-v1.1.3) (2025-11-11)
 
 

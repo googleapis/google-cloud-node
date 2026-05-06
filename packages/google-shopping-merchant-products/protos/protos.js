@@ -1965,6 +1965,7 @@
                              * @property {google.shopping.merchant.products.v1.IStructuredDescription|null} [structuredDescription] ProductAttributes structuredDescription
                              * @property {google.shopping.type.IPrice|null} [autoPricingMinPrice] ProductAttributes autoPricingMinPrice
                              * @property {Array.<google.shopping.merchant.products.v1.IProductSustainabilityIncentive>|null} [sustainabilityIncentives] ProductAttributes sustainabilityIncentives
+                             * @property {Array.<string>|null} [videoLinks] ProductAttributes videoLinks
                              */
     
                             /**
@@ -1999,6 +2000,7 @@
                                 this.cloudExportAdditionalProperties = [];
                                 this.certifications = [];
                                 this.sustainabilityIncentives = [];
+                                this.videoLinks = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -2781,6 +2783,14 @@
                              */
                             ProductAttributes.prototype.sustainabilityIncentives = $util.emptyArray;
     
+                            /**
+                             * ProductAttributes videoLinks.
+                             * @member {Array.<string>} videoLinks
+                             * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                             * @instance
+                             */
+                            ProductAttributes.prototype.videoLinks = $util.emptyArray;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -3344,6 +3354,9 @@
                                 if (message.shippingTransitBusinessDays != null && message.shippingTransitBusinessDays.length)
                                     for (var i = 0; i < message.shippingTransitBusinessDays.length; ++i)
                                         $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.encode(message.shippingTransitBusinessDays[i], writer.uint32(/* id 144, wireType 2 =*/1154).fork()).ldelim();
+                                if (message.videoLinks != null && message.videoLinks.length)
+                                    for (var i = 0; i < message.videoLinks.length; ++i)
+                                        writer.uint32(/* id 169, wireType 2 =*/1354).string(message.videoLinks[i]);
                                 if (message.returnPolicyLabel != null && Object.hasOwnProperty.call(message, "returnPolicyLabel"))
                                     writer.uint32(/* id 170, wireType 2 =*/1362).string(message.returnPolicyLabel);
                                 return writer;
@@ -3829,6 +3842,12 @@
                                             if (!(message.sustainabilityIncentives && message.sustainabilityIncentives.length))
                                                 message.sustainabilityIncentives = [];
                                             message.sustainabilityIncentives.push($root.google.shopping.merchant.products.v1.ProductSustainabilityIncentive.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 169: {
+                                            if (!(message.videoLinks && message.videoLinks.length))
+                                                message.videoLinks = [];
+                                            message.videoLinks.push(reader.string());
                                             break;
                                         }
                                     default:
@@ -4582,6 +4601,13 @@
                                         if (error)
                                             return "sustainabilityIncentives." + error;
                                     }
+                                }
+                                if (message.videoLinks != null && message.hasOwnProperty("videoLinks")) {
+                                    if (!Array.isArray(message.videoLinks))
+                                        return "videoLinks: array expected";
+                                    for (var i = 0; i < message.videoLinks.length; ++i)
+                                        if (!$util.isString(message.videoLinks[i]))
+                                            return "videoLinks: string[] expected";
                                 }
                                 return null;
                             };
@@ -5584,6 +5610,13 @@
                                         message.sustainabilityIncentives[i] = $root.google.shopping.merchant.products.v1.ProductSustainabilityIncentive.fromObject(object.sustainabilityIncentives[i]);
                                     }
                                 }
+                                if (object.videoLinks) {
+                                    if (!Array.isArray(object.videoLinks))
+                                        throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.videoLinks: array expected");
+                                    message.videoLinks = [];
+                                    for (var i = 0; i < object.videoLinks.length; ++i)
+                                        message.videoLinks[i] = String(object.videoLinks[i]);
+                                }
                                 return message;
                             };
     
@@ -5624,6 +5657,7 @@
                                     object.carrierShipping = [];
                                     object.shippingHandlingBusinessDays = [];
                                     object.shippingTransitBusinessDays = [];
+                                    object.videoLinks = [];
                                 }
                                 if (options.defaults) {
                                     object.expirationDate = null;
@@ -6074,6 +6108,11 @@
                                     object.shippingTransitBusinessDays = [];
                                     for (var j = 0; j < message.shippingTransitBusinessDays.length; ++j)
                                         object.shippingTransitBusinessDays[j] = $root.google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.toObject(message.shippingTransitBusinessDays[j], options);
+                                }
+                                if (message.videoLinks && message.videoLinks.length) {
+                                    object.videoLinks = [];
+                                    for (var j = 0; j < message.videoLinks.length; ++j)
+                                        object.videoLinks[j] = message.videoLinks[j];
                                 }
                                 if (message.returnPolicyLabel != null && message.hasOwnProperty("returnPolicyLabel")) {
                                     object.returnPolicyLabel = message.returnPolicyLabel;
@@ -8931,6 +8970,7 @@
                              * @property {google.shopping.type.IPrice|null} [amount] ProductInstallment amount
                              * @property {google.shopping.type.IPrice|null} [downpayment] ProductInstallment downpayment
                              * @property {google.shopping.merchant.products.v1.CreditType|null} [creditType] ProductInstallment creditType
+                             * @property {number|null} [annualPercentageRate] ProductInstallment annualPercentageRate
                              */
     
                             /**
@@ -8980,6 +9020,14 @@
                              */
                             ProductInstallment.prototype.creditType = null;
     
+                            /**
+                             * ProductInstallment annualPercentageRate.
+                             * @member {number|null|undefined} annualPercentageRate
+                             * @memberof google.shopping.merchant.products.v1.ProductInstallment
+                             * @instance
+                             */
+                            ProductInstallment.prototype.annualPercentageRate = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -8992,6 +9040,12 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductInstallment.prototype, "_creditType", {
                                 get: $util.oneOfGetter($oneOfFields = ["creditType"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductInstallment.prototype, "_annualPercentageRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["annualPercentageRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -9027,6 +9081,8 @@
                                     $root.google.shopping.type.Price.encode(message.downpayment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.creditType != null && Object.hasOwnProperty.call(message, "creditType"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.creditType);
+                                if (message.annualPercentageRate != null && Object.hasOwnProperty.call(message, "annualPercentageRate"))
+                                    writer.uint32(/* id 5, wireType 1 =*/41).double(message.annualPercentageRate);
                                 return writer;
                             };
     
@@ -9077,6 +9133,10 @@
                                         }
                                     case 4: {
                                             message.creditType = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.annualPercentageRate = reader.double();
                                             break;
                                         }
                                     default:
@@ -9142,6 +9202,11 @@
                                         break;
                                     }
                                 }
+                                if (message.annualPercentageRate != null && message.hasOwnProperty("annualPercentageRate")) {
+                                    properties._annualPercentageRate = 1;
+                                    if (typeof message.annualPercentageRate !== "number")
+                                        return "annualPercentageRate: number expected";
+                                }
                                 return null;
                             };
     
@@ -9196,6 +9261,8 @@
                                     message.creditType = 2;
                                     break;
                                 }
+                                if (object.annualPercentageRate != null)
+                                    message.annualPercentageRate = Number(object.annualPercentageRate);
                                 return message;
                             };
     
@@ -9236,6 +9303,11 @@
                                     object.creditType = options.enums === String ? $root.google.shopping.merchant.products.v1.CreditType[message.creditType] === undefined ? message.creditType : $root.google.shopping.merchant.products.v1.CreditType[message.creditType] : message.creditType;
                                     if (options.oneofs)
                                         object._creditType = "creditType";
+                                }
+                                if (message.annualPercentageRate != null && message.hasOwnProperty("annualPercentageRate")) {
+                                    object.annualPercentageRate = options.json && !isFinite(message.annualPercentageRate) ? String(message.annualPercentageRate) : message.annualPercentageRate;
+                                    if (options.oneofs)
+                                        object._annualPercentageRate = "annualPercentageRate";
                                 }
                                 return object;
                             };

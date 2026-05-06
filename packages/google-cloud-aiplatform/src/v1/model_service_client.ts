@@ -2029,6 +2029,17 @@ export class ModelServiceClient {
  * @param {google.cloud.aiplatform.v1.EncryptionSpec} request.encryptionSpec
  *   Customer-managed encryption key options. If this is set,
  *   then the Model copy will be encrypted with the provided encryption key.
+ * @param {string} [request.customServiceAccount]
+ *   Optional. The user-provided custom service account to use to do the copy
+ *   model. If empty, [Vertex AI Service
+ *   Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+ *   will be used to access resources needed to upload the model. This account
+ *   must belong to the destination project where the model is copied to,
+ *   i.e., the project specified in the `parent` field of this request and
+ *   have the Vertex AI Service Agent role in the source project.
+ *
+ *   Requires the user copying the Model to have the
+ *   `iam.serviceAccounts.actAs` permission on this service account.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

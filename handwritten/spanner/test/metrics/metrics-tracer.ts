@@ -113,6 +113,21 @@ describe('MetricsTracer', () => {
       );
     });
 
+    it('should record fractional latency with sub-millisecond precision', () => {
+      const nowStub = sandbox.stub(performance, 'now');
+      nowStub.onCall(0).returns(100.0); // op start
+      nowStub.onCall(1).returns(200.5); // attempt start
+      nowStub.onCall(2).returns(202.75); // attempt end
+
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.OK);
+
+      assert.strictEqual(fakeAttemptLatency.record.calledOnce, true);
+      const [[latency]] = fakeAttemptLatency.record.args;
+      assert.strictEqual(latency, 2.25); // 202.75 - 200.5
+    });
+
     it('should do nothing if disabled', () => {
       tracer.enabled = false;
       tracer.recordAttemptStart();
@@ -140,6 +155,27 @@ describe('MetricsTracer', () => {
 
       const [[_, opAttrs]] = fakeOperationLatency.record.args;
       assert.strictEqual(opAttrs[Constants.METRIC_LABEL_KEY_STATUS], 'OK');
+    });
+
+    it('should record fractional operation latency with sub-millisecond precision', () => {
+      const nowStub = sandbox.stub(performance, 'now');
+      nowStub.onCall(0).returns(100.5); // op start
+      nowStub.onCall(1).returns(105.0); // attempt start
+      nowStub.onCall(2).returns(108.0); // attempt end
+      nowStub.onCall(3).returns(110.25); // op end
+
+      sandbox.stub(MetricsTracerFactory, 'getInstance').returns({
+        clearCurrentTracer: sinon.spy(),
+      } as any);
+
+      tracer.recordOperationStart();
+      tracer.recordAttemptStart();
+      tracer.recordAttemptCompletion(Status.OK);
+      tracer.recordOperationCompletion();
+
+      assert.strictEqual(fakeOperationLatency.record.calledOnce, true);
+      const [[latency]] = fakeOperationLatency.record.args;
+      assert.strictEqual(latency, 9.75); // 110.25 - 100.5
     });
 
     it('should do nothing if disabled', () => {

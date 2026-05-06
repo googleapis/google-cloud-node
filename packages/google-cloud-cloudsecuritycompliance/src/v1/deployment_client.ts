@@ -185,12 +185,6 @@ export class DeploymentClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      cloudControlPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cloudControls/{cloud_control}'
-      ),
-      cloudControlDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
-      ),
       folderLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/findingSummaries/{finding_summary}'
       ),
@@ -203,20 +197,23 @@ export class DeploymentClient {
       folderLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
       ),
-      frameworkPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworks/{framework}'
-      ),
-      frameworkDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}'
-      ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
+      organizationLocationCloudControlDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
+      ),
+      organizationLocationCloudControlsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/cloudControls/{cloud_control}'
+      ),
       organizationLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/cmEnrollment'
+      ),
+      organizationLocationControlsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/controls/{control}'
       ),
       organizationLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/findingSummaries/{finding_summary}'
@@ -236,8 +233,23 @@ export class DeploymentClient {
       organizationLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
       ),
+      organizationLocationFrameworkDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}'
+      ),
+      organizationLocationFrameworksPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworks/{framework}'
+      ),
+      projectLocationCloudControlDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
+      ),
+      projectLocationCloudControlsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cloudControls/{cloud_control}'
+      ),
       projectLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/cmEnrollment'
+      ),
+      projectLocationControlsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/controls/{control}'
       ),
       projectLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/findingSummaries/{finding_summary}'
@@ -256,6 +268,12 @@ export class DeploymentClient {
       ),
       projectLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
+      ),
+      projectLocationFrameworkDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}'
+      ),
+      projectLocationFrameworksPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworks/{framework}'
       ),
     };
 
@@ -279,7 +297,13 @@ export class DeploymentClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=organizations/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=organizations/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=organizations/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=organizations/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=organizations/*/locations/*}/operations',}];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=organizations/*/locations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*}',}],
+      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=organizations/*}/locations',additional_bindings: [{get: '/v1/{name=projects/*}/locations',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=organizations/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=organizations/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=organizations/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=projects/*/locations/*}/operations',}],
+      }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createFrameworkDeploymentResponse = protoFilesRoot.lookup(
@@ -456,7 +480,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name of the framework deployment, in the format
- *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+ *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+ *   or
+ *   `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
  *   The only supported location is `global`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -552,7 +578,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name for the cloud control deployment, in the format
- *   `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+ *   `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`
+ *   or
+ *   `projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}`.
  *   The only supported location is `global`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -652,7 +680,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource of the framework deployment in the format
- *   `organizations/{organization}/locations/{location}`.
+ *   `organizations/{organization}/locations/{location}`
+ *   or
+ *   `projects/{project}/locations/{location}`.
  *   Only the global location is supported.
  * @param {string} [request.frameworkDeploymentId]
  *   Optional. An identifier for the framework deployment that's unique in scope
@@ -768,7 +798,9 @@ export class DeploymentClient {
  * @param {string} request.name
  *   Required. The name of the framework deployment that you want to delete,
  *   in the format
- *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+ *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}`
+ *   or
+ *   `projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}`.
  *   The only supported location is `global`.
  * @param {string} [request.etag]
  *   Optional. An opaque identifier for the current version of the resource.
@@ -886,7 +918,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource of the framework deployment, in the format
- *   `organizations/{organization}/locations/{location}`.
+ *   `organizations/{organization}/locations/{location}`
+ *   or
+ *   `projects/{project}/locations/{location}`.
  *   The only supported location is `global`.
  * @param {number} [request.pageSize]
  *   Optional. The requested page size. The server might return fewer items than
@@ -1000,7 +1034,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource of the framework deployment, in the format
- *   `organizations/{organization}/locations/{location}`.
+ *   `organizations/{organization}/locations/{location}`
+ *   or
+ *   `projects/{project}/locations/{location}`.
  *   The only supported location is `global`.
  * @param {number} [request.pageSize]
  *   Optional. The requested page size. The server might return fewer items than
@@ -1063,7 +1099,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource of the framework deployment, in the format
- *   `organizations/{organization}/locations/{location}`.
+ *   `organizations/{organization}/locations/{location}`
+ *   or
+ *   `projects/{project}/locations/{location}`.
  *   The only supported location is `global`.
  * @param {number} [request.pageSize]
  *   Optional. The requested page size. The server might return fewer items than
@@ -1125,8 +1163,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource for the cloud control deployment, in the
- *   format `organizations/{organization}/locations/{location}`. The only
- *   supported location is `global`.
+ *   format `organizations/{organization}/locations/{location}` or
+ *   `projects/{project}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
  *   Optional. The requested page size. The server might return fewer items than
  *   you requested.
@@ -1239,8 +1278,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource for the cloud control deployment, in the
- *   format `organizations/{organization}/locations/{location}`. The only
- *   supported location is `global`.
+ *   format `organizations/{organization}/locations/{location}` or
+ *   `projects/{project}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
  *   Optional. The requested page size. The server might return fewer items than
  *   you requested.
@@ -1302,8 +1342,9 @@ export class DeploymentClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The parent resource for the cloud control deployment, in the
- *   format `organizations/{organization}/locations/{location}`. The only
- *   supported location is `global`.
+ *   format `organizations/{organization}/locations/{location}` or
+ *   `projects/{project}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
  *   Optional. The requested page size. The server might return fewer items than
  *   you requested.
@@ -1664,104 +1705,6 @@ export class DeploymentClient {
   // --------------------
 
   /**
-   * Return a fully-qualified cloudControl resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} cloud_control
-   * @returns {string} Resource name string.
-   */
-  cloudControlPath(organization:string,location:string,cloudControl:string) {
-    return this.pathTemplates.cloudControlPathTemplate.render({
-      organization: organization,
-      location: location,
-      cloud_control: cloudControl,
-    });
-  }
-
-  /**
-   * Parse the organization from CloudControl resource.
-   *
-   * @param {string} cloudControlName
-   *   A fully-qualified path representing CloudControl resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromCloudControlName(cloudControlName: string) {
-    return this.pathTemplates.cloudControlPathTemplate.match(cloudControlName).organization;
-  }
-
-  /**
-   * Parse the location from CloudControl resource.
-   *
-   * @param {string} cloudControlName
-   *   A fully-qualified path representing CloudControl resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCloudControlName(cloudControlName: string) {
-    return this.pathTemplates.cloudControlPathTemplate.match(cloudControlName).location;
-  }
-
-  /**
-   * Parse the cloud_control from CloudControl resource.
-   *
-   * @param {string} cloudControlName
-   *   A fully-qualified path representing CloudControl resource.
-   * @returns {string} A string representing the cloud_control.
-   */
-  matchCloudControlFromCloudControlName(cloudControlName: string) {
-    return this.pathTemplates.cloudControlPathTemplate.match(cloudControlName).cloud_control;
-  }
-
-  /**
-   * Return a fully-qualified cloudControlDeployment resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} cloud_control_deployment
-   * @returns {string} Resource name string.
-   */
-  cloudControlDeploymentPath(organization:string,location:string,cloudControlDeployment:string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.render({
-      organization: organization,
-      location: location,
-      cloud_control_deployment: cloudControlDeployment,
-    });
-  }
-
-  /**
-   * Parse the organization from CloudControlDeployment resource.
-   *
-   * @param {string} cloudControlDeploymentName
-   *   A fully-qualified path representing CloudControlDeployment resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromCloudControlDeploymentName(cloudControlDeploymentName: string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.match(cloudControlDeploymentName).organization;
-  }
-
-  /**
-   * Parse the location from CloudControlDeployment resource.
-   *
-   * @param {string} cloudControlDeploymentName
-   *   A fully-qualified path representing CloudControlDeployment resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCloudControlDeploymentName(cloudControlDeploymentName: string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.match(cloudControlDeploymentName).location;
-  }
-
-  /**
-   * Parse the cloud_control_deployment from CloudControlDeployment resource.
-   *
-   * @param {string} cloudControlDeploymentName
-   *   A fully-qualified path representing CloudControlDeployment resource.
-   * @returns {string} A string representing the cloud_control_deployment.
-   */
-  matchCloudControlDeploymentFromCloudControlDeploymentName(cloudControlDeploymentName: string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.match(cloudControlDeploymentName).cloud_control_deployment;
-  }
-
-  /**
    * Return a fully-qualified folderLocationFindingSummaries resource name string.
    *
    * @param {string} folder
@@ -1971,104 +1914,6 @@ export class DeploymentClient {
   }
 
   /**
-   * Return a fully-qualified framework resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} framework
-   * @returns {string} Resource name string.
-   */
-  frameworkPath(organization:string,location:string,framework:string) {
-    return this.pathTemplates.frameworkPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework: framework,
-    });
-  }
-
-  /**
-   * Parse the organization from Framework resource.
-   *
-   * @param {string} frameworkName
-   *   A fully-qualified path representing Framework resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromFrameworkName(frameworkName: string) {
-    return this.pathTemplates.frameworkPathTemplate.match(frameworkName).organization;
-  }
-
-  /**
-   * Parse the location from Framework resource.
-   *
-   * @param {string} frameworkName
-   *   A fully-qualified path representing Framework resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFrameworkName(frameworkName: string) {
-    return this.pathTemplates.frameworkPathTemplate.match(frameworkName).location;
-  }
-
-  /**
-   * Parse the framework from Framework resource.
-   *
-   * @param {string} frameworkName
-   *   A fully-qualified path representing Framework resource.
-   * @returns {string} A string representing the framework.
-   */
-  matchFrameworkFromFrameworkName(frameworkName: string) {
-    return this.pathTemplates.frameworkPathTemplate.match(frameworkName).framework;
-  }
-
-  /**
-   * Return a fully-qualified frameworkDeployment resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} framework_deployment
-   * @returns {string} Resource name string.
-   */
-  frameworkDeploymentPath(organization:string,location:string,frameworkDeployment:string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_deployment: frameworkDeployment,
-    });
-  }
-
-  /**
-   * Parse the organization from FrameworkDeployment resource.
-   *
-   * @param {string} frameworkDeploymentName
-   *   A fully-qualified path representing FrameworkDeployment resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromFrameworkDeploymentName(frameworkDeploymentName: string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.match(frameworkDeploymentName).organization;
-  }
-
-  /**
-   * Parse the location from FrameworkDeployment resource.
-   *
-   * @param {string} frameworkDeploymentName
-   *   A fully-qualified path representing FrameworkDeployment resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFrameworkDeploymentName(frameworkDeploymentName: string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.match(frameworkDeploymentName).location;
-  }
-
-  /**
-   * Parse the framework_deployment from FrameworkDeployment resource.
-   *
-   * @param {string} frameworkDeploymentName
-   *   A fully-qualified path representing FrameworkDeployment resource.
-   * @returns {string} A string representing the framework_deployment.
-   */
-  matchFrameworkDeploymentFromFrameworkDeploymentName(frameworkDeploymentName: string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.match(frameworkDeploymentName).framework_deployment;
-  }
-
-  /**
    * Return a fully-qualified organization resource name string.
    *
    * @param {string} organization
@@ -2128,6 +1973,104 @@ export class DeploymentClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationCloudControlDeployments resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} cloud_control_deployment
+   * @returns {string} Resource name string.
+   */
+  organizationLocationCloudControlDeploymentsPath(organization:string,location:string,cloudControlDeployment:string) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.render({
+      organization: organization,
+      location: location,
+      cloud_control_deployment: cloudControlDeployment,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationCloudControlDeployments resource.
+   *
+   * @param {string} organizationLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationCloudControlDeploymentsName(organizationLocationCloudControlDeploymentsName: string) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(organizationLocationCloudControlDeploymentsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationCloudControlDeployments resource.
+   *
+   * @param {string} organizationLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationCloudControlDeploymentsName(organizationLocationCloudControlDeploymentsName: string) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(organizationLocationCloudControlDeploymentsName).location;
+  }
+
+  /**
+   * Parse the cloud_control_deployment from OrganizationLocationCloudControlDeployments resource.
+   *
+   * @param {string} organizationLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the cloud_control_deployment.
+   */
+  matchCloudControlDeploymentFromOrganizationLocationCloudControlDeploymentsName(organizationLocationCloudControlDeploymentsName: string) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(organizationLocationCloudControlDeploymentsName).cloud_control_deployment;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationCloudControls resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} cloud_control
+   * @returns {string} Resource name string.
+   */
+  organizationLocationCloudControlsPath(organization:string,location:string,cloudControl:string) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.render({
+      organization: organization,
+      location: location,
+      cloud_control: cloudControl,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationCloudControls resource.
+   *
+   * @param {string} organizationLocationCloudControlsName
+   *   A fully-qualified path representing organization_location_cloudControls resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationCloudControlsName(organizationLocationCloudControlsName: string) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(organizationLocationCloudControlsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationCloudControls resource.
+   *
+   * @param {string} organizationLocationCloudControlsName
+   *   A fully-qualified path representing organization_location_cloudControls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationCloudControlsName(organizationLocationCloudControlsName: string) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(organizationLocationCloudControlsName).location;
+  }
+
+  /**
+   * Parse the cloud_control from OrganizationLocationCloudControls resource.
+   *
+   * @param {string} organizationLocationCloudControlsName
+   *   A fully-qualified path representing organization_location_cloudControls resource.
+   * @returns {string} A string representing the cloud_control.
+   */
+  matchCloudControlFromOrganizationLocationCloudControlsName(organizationLocationCloudControlsName: string) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(organizationLocationCloudControlsName).cloud_control;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationCmEnrollment resource name string.
    *
    * @param {string} organization
@@ -2161,6 +2104,55 @@ export class DeploymentClient {
    */
   matchLocationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
     return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationControls resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  organizationLocationControlsPath(organization:string,location:string,control:string) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.render({
+      organization: organization,
+      location: location,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationControls resource.
+   *
+   * @param {string} organizationLocationControlsName
+   *   A fully-qualified path representing organization_location_controls resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationControlsName(organizationLocationControlsName: string) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(organizationLocationControlsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationControls resource.
+   *
+   * @param {string} organizationLocationControlsName
+   *   A fully-qualified path representing organization_location_controls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationControlsName(organizationLocationControlsName: string) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(organizationLocationControlsName).location;
+  }
+
+  /**
+   * Parse the control from OrganizationLocationControls resource.
+   *
+   * @param {string} organizationLocationControlsName
+   *   A fully-qualified path representing organization_location_controls resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromOrganizationLocationControlsName(organizationLocationControlsName: string) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(organizationLocationControlsName).control;
   }
 
   /**
@@ -2471,6 +2463,202 @@ export class DeploymentClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationFrameworkDeployments resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_deployment
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkDeploymentsPath(organization:string,location:string,frameworkDeployment:string) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework_deployment: frameworkDeployment,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkDeployments resource.
+   *
+   * @param {string} organizationLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing organization_location_frameworkDeployments resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkDeploymentsName(organizationLocationFrameworkDeploymentsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(organizationLocationFrameworkDeploymentsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkDeployments resource.
+   *
+   * @param {string} organizationLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing organization_location_frameworkDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkDeploymentsName(organizationLocationFrameworkDeploymentsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(organizationLocationFrameworkDeploymentsName).location;
+  }
+
+  /**
+   * Parse the framework_deployment from OrganizationLocationFrameworkDeployments resource.
+   *
+   * @param {string} organizationLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing organization_location_frameworkDeployments resource.
+   * @returns {string} A string representing the framework_deployment.
+   */
+  matchFrameworkDeploymentFromOrganizationLocationFrameworkDeploymentsName(organizationLocationFrameworkDeploymentsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(organizationLocationFrameworkDeploymentsName).framework_deployment;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworks resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworksPath(organization:string,location:string,framework:string) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework: framework,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworks resource.
+   *
+   * @param {string} organizationLocationFrameworksName
+   *   A fully-qualified path representing organization_location_frameworks resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworksName(organizationLocationFrameworksName: string) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(organizationLocationFrameworksName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworks resource.
+   *
+   * @param {string} organizationLocationFrameworksName
+   *   A fully-qualified path representing organization_location_frameworks resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworksName(organizationLocationFrameworksName: string) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(organizationLocationFrameworksName).location;
+  }
+
+  /**
+   * Parse the framework from OrganizationLocationFrameworks resource.
+   *
+   * @param {string} organizationLocationFrameworksName
+   *   A fully-qualified path representing organization_location_frameworks resource.
+   * @returns {string} A string representing the framework.
+   */
+  matchFrameworkFromOrganizationLocationFrameworksName(organizationLocationFrameworksName: string) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(organizationLocationFrameworksName).framework;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCloudControlDeployments resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cloud_control_deployment
+   * @returns {string} Resource name string.
+   */
+  projectLocationCloudControlDeploymentsPath(project:string,location:string,cloudControlDeployment:string) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.render({
+      project: project,
+      location: location,
+      cloud_control_deployment: cloudControlDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCloudControlDeployments resource.
+   *
+   * @param {string} projectLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing project_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCloudControlDeploymentsName(projectLocationCloudControlDeploymentsName: string) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(projectLocationCloudControlDeploymentsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCloudControlDeployments resource.
+   *
+   * @param {string} projectLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing project_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCloudControlDeploymentsName(projectLocationCloudControlDeploymentsName: string) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(projectLocationCloudControlDeploymentsName).location;
+  }
+
+  /**
+   * Parse the cloud_control_deployment from ProjectLocationCloudControlDeployments resource.
+   *
+   * @param {string} projectLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing project_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the cloud_control_deployment.
+   */
+  matchCloudControlDeploymentFromProjectLocationCloudControlDeploymentsName(projectLocationCloudControlDeploymentsName: string) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(projectLocationCloudControlDeploymentsName).cloud_control_deployment;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCloudControls resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cloud_control
+   * @returns {string} Resource name string.
+   */
+  projectLocationCloudControlsPath(project:string,location:string,cloudControl:string) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.render({
+      project: project,
+      location: location,
+      cloud_control: cloudControl,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCloudControls resource.
+   *
+   * @param {string} projectLocationCloudControlsName
+   *   A fully-qualified path representing project_location_cloudControls resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCloudControlsName(projectLocationCloudControlsName: string) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(projectLocationCloudControlsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCloudControls resource.
+   *
+   * @param {string} projectLocationCloudControlsName
+   *   A fully-qualified path representing project_location_cloudControls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCloudControlsName(projectLocationCloudControlsName: string) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(projectLocationCloudControlsName).location;
+  }
+
+  /**
+   * Parse the cloud_control from ProjectLocationCloudControls resource.
+   *
+   * @param {string} projectLocationCloudControlsName
+   *   A fully-qualified path representing project_location_cloudControls resource.
+   * @returns {string} A string representing the cloud_control.
+   */
+  matchCloudControlFromProjectLocationCloudControlsName(projectLocationCloudControlsName: string) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(projectLocationCloudControlsName).cloud_control;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCmEnrollment resource name string.
    *
    * @param {string} project
@@ -2504,6 +2692,55 @@ export class DeploymentClient {
    */
   matchLocationFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
     return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationControls resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  projectLocationControlsPath(project:string,location:string,control:string) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.render({
+      project: project,
+      location: location,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationControls resource.
+   *
+   * @param {string} projectLocationControlsName
+   *   A fully-qualified path representing project_location_controls resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationControlsName(projectLocationControlsName: string) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(projectLocationControlsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationControls resource.
+   *
+   * @param {string} projectLocationControlsName
+   *   A fully-qualified path representing project_location_controls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationControlsName(projectLocationControlsName: string) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(projectLocationControlsName).location;
+  }
+
+  /**
+   * Parse the control from ProjectLocationControls resource.
+   *
+   * @param {string} projectLocationControlsName
+   *   A fully-qualified path representing project_location_controls resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromProjectLocationControlsName(projectLocationControlsName: string) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(projectLocationControlsName).control;
   }
 
   /**
@@ -2811,6 +3048,104 @@ export class DeploymentClient {
    */
   matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
     return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkDeployments resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_deployment
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkDeploymentsPath(project:string,location:string,frameworkDeployment:string) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.render({
+      project: project,
+      location: location,
+      framework_deployment: frameworkDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkDeployments resource.
+   *
+   * @param {string} projectLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing project_location_frameworkDeployments resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkDeploymentsName(projectLocationFrameworkDeploymentsName: string) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(projectLocationFrameworkDeploymentsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkDeployments resource.
+   *
+   * @param {string} projectLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing project_location_frameworkDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkDeploymentsName(projectLocationFrameworkDeploymentsName: string) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(projectLocationFrameworkDeploymentsName).location;
+  }
+
+  /**
+   * Parse the framework_deployment from ProjectLocationFrameworkDeployments resource.
+   *
+   * @param {string} projectLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing project_location_frameworkDeployments resource.
+   * @returns {string} A string representing the framework_deployment.
+   */
+  matchFrameworkDeploymentFromProjectLocationFrameworkDeploymentsName(projectLocationFrameworkDeploymentsName: string) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(projectLocationFrameworkDeploymentsName).framework_deployment;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworks resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworksPath(project:string,location:string,framework:string) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.render({
+      project: project,
+      location: location,
+      framework: framework,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworks resource.
+   *
+   * @param {string} projectLocationFrameworksName
+   *   A fully-qualified path representing project_location_frameworks resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworksName(projectLocationFrameworksName: string) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(projectLocationFrameworksName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworks resource.
+   *
+   * @param {string} projectLocationFrameworksName
+   *   A fully-qualified path representing project_location_frameworks resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworksName(projectLocationFrameworksName: string) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(projectLocationFrameworksName).location;
+  }
+
+  /**
+   * Parse the framework from ProjectLocationFrameworks resource.
+   *
+   * @param {string} projectLocationFrameworksName
+   *   A fully-qualified path representing project_location_frameworks resource.
+   * @returns {string} A string representing the framework.
+   */
+  matchFrameworkFromProjectLocationFrameworksName(projectLocationFrameworksName: string) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(projectLocationFrameworksName).framework;
   }
 
   /**

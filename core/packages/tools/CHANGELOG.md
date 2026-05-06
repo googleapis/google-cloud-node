@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [1.0.5](https://github.com/googleapis/google-cloud-node-core/compare/gapic-tools-v1.0.4...gapic-tools-v1.0.5) (2025-11-11)
 
 

@@ -3,12 +3,12 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "sourceMap": false,
     "lib": ["esnext",  "DOM"],
-    "target": "esnext"
+    "target": "esnext",
   },
   "include": [
     "typescript/**/*.ts",

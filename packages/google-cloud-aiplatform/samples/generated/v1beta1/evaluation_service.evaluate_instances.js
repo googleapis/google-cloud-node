@@ -169,6 +169,22 @@ function main(location) {
    */
   // const location = 'abc123'
   /**
+   *  The metrics used for evaluation.
+   *  Currently, we only support evaluating a single metric. If multiple metrics
+   *  are provided, only the first one will be evaluated.
+   */
+  // const metrics = [1,2,3,4]
+  /**
+   *  Optional. The metrics (either inline or registered) used for evaluation.
+   *  Currently, we only support evaluating a single metric. If multiple metrics
+   *  are provided, only the first one will be evaluated.
+   */
+  // const metricSources = [1,2,3,4]
+  /**
+   *  The instance to be evaluated.
+   */
+  // const instance = {}
+  /**
    *  Optional. Autorater config used for evaluation.
    */
   // const autoraterConfig = {}

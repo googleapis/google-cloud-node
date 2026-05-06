@@ -17952,6 +17952,3608 @@
                  */
                 var v3beta = {};
     
+                v3beta.AccessPolicies = (function() {
+    
+                    /**
+                     * Constructs a new AccessPolicies service.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents an AccessPolicies
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function AccessPolicies(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (AccessPolicies.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AccessPolicies;
+    
+                    /**
+                     * Creates new AccessPolicies service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {AccessPolicies} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    AccessPolicies.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3beta.AccessPolicies|createAccessPolicy}.
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @typedef CreateAccessPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls CreateAccessPolicy.
+                     * @function createAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.ICreateAccessPolicyRequest} request CreateAccessPolicyRequest message or plain object
+                     * @param {google.iam.v3beta.AccessPolicies.CreateAccessPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AccessPolicies.prototype.createAccessPolicy = function createAccessPolicy(request, callback) {
+                        return this.rpcCall(createAccessPolicy, $root.google.iam.v3beta.CreateAccessPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "CreateAccessPolicy" });
+    
+                    /**
+                     * Calls CreateAccessPolicy.
+                     * @function createAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.ICreateAccessPolicyRequest} request CreateAccessPolicyRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3beta.AccessPolicies|getAccessPolicy}.
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @typedef GetAccessPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3beta.AccessPolicy} [response] AccessPolicy
+                     */
+    
+                    /**
+                     * Calls GetAccessPolicy.
+                     * @function getAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IGetAccessPolicyRequest} request GetAccessPolicyRequest message or plain object
+                     * @param {google.iam.v3beta.AccessPolicies.GetAccessPolicyCallback} callback Node-style callback called with the error, if any, and AccessPolicy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AccessPolicies.prototype.getAccessPolicy = function getAccessPolicy(request, callback) {
+                        return this.rpcCall(getAccessPolicy, $root.google.iam.v3beta.GetAccessPolicyRequest, $root.google.iam.v3beta.AccessPolicy, request, callback);
+                    }, "name", { value: "GetAccessPolicy" });
+    
+                    /**
+                     * Calls GetAccessPolicy.
+                     * @function getAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IGetAccessPolicyRequest} request GetAccessPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v3beta.AccessPolicy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3beta.AccessPolicies|updateAccessPolicy}.
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @typedef UpdateAccessPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls UpdateAccessPolicy.
+                     * @function updateAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IUpdateAccessPolicyRequest} request UpdateAccessPolicyRequest message or plain object
+                     * @param {google.iam.v3beta.AccessPolicies.UpdateAccessPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AccessPolicies.prototype.updateAccessPolicy = function updateAccessPolicy(request, callback) {
+                        return this.rpcCall(updateAccessPolicy, $root.google.iam.v3beta.UpdateAccessPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "UpdateAccessPolicy" });
+    
+                    /**
+                     * Calls UpdateAccessPolicy.
+                     * @function updateAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IUpdateAccessPolicyRequest} request UpdateAccessPolicyRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3beta.AccessPolicies|deleteAccessPolicy}.
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @typedef DeleteAccessPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+    
+                    /**
+                     * Calls DeleteAccessPolicy.
+                     * @function deleteAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IDeleteAccessPolicyRequest} request DeleteAccessPolicyRequest message or plain object
+                     * @param {google.iam.v3beta.AccessPolicies.DeleteAccessPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AccessPolicies.prototype.deleteAccessPolicy = function deleteAccessPolicy(request, callback) {
+                        return this.rpcCall(deleteAccessPolicy, $root.google.iam.v3beta.DeleteAccessPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "DeleteAccessPolicy" });
+    
+                    /**
+                     * Calls DeleteAccessPolicy.
+                     * @function deleteAccessPolicy
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IDeleteAccessPolicyRequest} request DeleteAccessPolicyRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3beta.AccessPolicies|listAccessPolicies}.
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @typedef ListAccessPoliciesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3beta.ListAccessPoliciesResponse} [response] ListAccessPoliciesResponse
+                     */
+    
+                    /**
+                     * Calls ListAccessPolicies.
+                     * @function listAccessPolicies
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IListAccessPoliciesRequest} request ListAccessPoliciesRequest message or plain object
+                     * @param {google.iam.v3beta.AccessPolicies.ListAccessPoliciesCallback} callback Node-style callback called with the error, if any, and ListAccessPoliciesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AccessPolicies.prototype.listAccessPolicies = function listAccessPolicies(request, callback) {
+                        return this.rpcCall(listAccessPolicies, $root.google.iam.v3beta.ListAccessPoliciesRequest, $root.google.iam.v3beta.ListAccessPoliciesResponse, request, callback);
+                    }, "name", { value: "ListAccessPolicies" });
+    
+                    /**
+                     * Calls ListAccessPolicies.
+                     * @function listAccessPolicies
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.IListAccessPoliciesRequest} request ListAccessPoliciesRequest message or plain object
+                     * @returns {Promise<google.iam.v3beta.ListAccessPoliciesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v3beta.AccessPolicies|searchAccessPolicyBindings}.
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @typedef SearchAccessPolicyBindingsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v3beta.SearchAccessPolicyBindingsResponse} [response] SearchAccessPolicyBindingsResponse
+                     */
+    
+                    /**
+                     * Calls SearchAccessPolicyBindings.
+                     * @function searchAccessPolicyBindings
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsRequest} request SearchAccessPolicyBindingsRequest message or plain object
+                     * @param {google.iam.v3beta.AccessPolicies.SearchAccessPolicyBindingsCallback} callback Node-style callback called with the error, if any, and SearchAccessPolicyBindingsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(AccessPolicies.prototype.searchAccessPolicyBindings = function searchAccessPolicyBindings(request, callback) {
+                        return this.rpcCall(searchAccessPolicyBindings, $root.google.iam.v3beta.SearchAccessPolicyBindingsRequest, $root.google.iam.v3beta.SearchAccessPolicyBindingsResponse, request, callback);
+                    }, "name", { value: "SearchAccessPolicyBindings" });
+    
+                    /**
+                     * Calls SearchAccessPolicyBindings.
+                     * @function searchAccessPolicyBindings
+                     * @memberof google.iam.v3beta.AccessPolicies
+                     * @instance
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsRequest} request SearchAccessPolicyBindingsRequest message or plain object
+                     * @returns {Promise<google.iam.v3beta.SearchAccessPolicyBindingsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return AccessPolicies;
+                })();
+    
+                v3beta.CreateAccessPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @interface ICreateAccessPolicyRequest
+                     * @property {string|null} [parent] CreateAccessPolicyRequest parent
+                     * @property {string|null} [accessPolicyId] CreateAccessPolicyRequest accessPolicyId
+                     * @property {google.iam.v3beta.IAccessPolicy|null} [accessPolicy] CreateAccessPolicyRequest accessPolicy
+                     * @property {boolean|null} [validateOnly] CreateAccessPolicyRequest validateOnly
+                     */
+    
+                    /**
+                     * Constructs a new CreateAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a CreateAccessPolicyRequest.
+                     * @implements ICreateAccessPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3beta.ICreateAccessPolicyRequest=} [properties] Properties to set
+                     */
+                    function CreateAccessPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateAccessPolicyRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @instance
+                     */
+                    CreateAccessPolicyRequest.prototype.parent = "";
+    
+                    /**
+                     * CreateAccessPolicyRequest accessPolicyId.
+                     * @member {string} accessPolicyId
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @instance
+                     */
+                    CreateAccessPolicyRequest.prototype.accessPolicyId = "";
+    
+                    /**
+                     * CreateAccessPolicyRequest accessPolicy.
+                     * @member {google.iam.v3beta.IAccessPolicy|null|undefined} accessPolicy
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @instance
+                     */
+                    CreateAccessPolicyRequest.prototype.accessPolicy = null;
+    
+                    /**
+                     * CreateAccessPolicyRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @instance
+                     */
+                    CreateAccessPolicyRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * Creates a new CreateAccessPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.ICreateAccessPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.CreateAccessPolicyRequest} CreateAccessPolicyRequest instance
+                     */
+                    CreateAccessPolicyRequest.create = function create(properties) {
+                        return new CreateAccessPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateAccessPolicyRequest message. Does not implicitly {@link google.iam.v3beta.CreateAccessPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.ICreateAccessPolicyRequest} message CreateAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateAccessPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.accessPolicyId != null && Object.hasOwnProperty.call(message, "accessPolicyId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.accessPolicyId);
+                        if (message.accessPolicy != null && Object.hasOwnProperty.call(message, "accessPolicy"))
+                            $root.google.iam.v3beta.AccessPolicy.encode(message.accessPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3beta.CreateAccessPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.ICreateAccessPolicyRequest} message CreateAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateAccessPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateAccessPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.CreateAccessPolicyRequest} CreateAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateAccessPolicyRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.CreateAccessPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.accessPolicyId = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.accessPolicy = $root.google.iam.v3beta.AccessPolicy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.CreateAccessPolicyRequest} CreateAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateAccessPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateAccessPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateAccessPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.accessPolicyId != null && message.hasOwnProperty("accessPolicyId"))
+                            if (!$util.isString(message.accessPolicyId))
+                                return "accessPolicyId: string expected";
+                        if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy")) {
+                            var error = $root.google.iam.v3beta.AccessPolicy.verify(message.accessPolicy);
+                            if (error)
+                                return "accessPolicy." + error;
+                        }
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.CreateAccessPolicyRequest} CreateAccessPolicyRequest
+                     */
+                    CreateAccessPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.CreateAccessPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3beta.CreateAccessPolicyRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.accessPolicyId != null)
+                            message.accessPolicyId = String(object.accessPolicyId);
+                        if (object.accessPolicy != null) {
+                            if (typeof object.accessPolicy !== "object")
+                                throw TypeError(".google.iam.v3beta.CreateAccessPolicyRequest.accessPolicy: object expected");
+                            message.accessPolicy = $root.google.iam.v3beta.AccessPolicy.fromObject(object.accessPolicy);
+                        }
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateAccessPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.CreateAccessPolicyRequest} message CreateAccessPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateAccessPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.accessPolicyId = "";
+                            object.accessPolicy = null;
+                            object.validateOnly = false;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.accessPolicyId != null && message.hasOwnProperty("accessPolicyId"))
+                            object.accessPolicyId = message.accessPolicyId;
+                        if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy"))
+                            object.accessPolicy = $root.google.iam.v3beta.AccessPolicy.toObject(message.accessPolicy, options);
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateAccessPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateAccessPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateAccessPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.CreateAccessPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateAccessPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.CreateAccessPolicyRequest";
+                    };
+    
+                    return CreateAccessPolicyRequest;
+                })();
+    
+                v3beta.GetAccessPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a GetAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @interface IGetAccessPolicyRequest
+                     * @property {string|null} [name] GetAccessPolicyRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a GetAccessPolicyRequest.
+                     * @implements IGetAccessPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3beta.IGetAccessPolicyRequest=} [properties] Properties to set
+                     */
+                    function GetAccessPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetAccessPolicyRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @instance
+                     */
+                    GetAccessPolicyRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetAccessPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IGetAccessPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.GetAccessPolicyRequest} GetAccessPolicyRequest instance
+                     */
+                    GetAccessPolicyRequest.create = function create(properties) {
+                        return new GetAccessPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetAccessPolicyRequest message. Does not implicitly {@link google.iam.v3beta.GetAccessPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IGetAccessPolicyRequest} message GetAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetAccessPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3beta.GetAccessPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IGetAccessPolicyRequest} message GetAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetAccessPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetAccessPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.GetAccessPolicyRequest} GetAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetAccessPolicyRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.GetAccessPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.GetAccessPolicyRequest} GetAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetAccessPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetAccessPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetAccessPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.GetAccessPolicyRequest} GetAccessPolicyRequest
+                     */
+                    GetAccessPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.GetAccessPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3beta.GetAccessPolicyRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetAccessPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.GetAccessPolicyRequest} message GetAccessPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetAccessPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetAccessPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetAccessPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetAccessPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.GetAccessPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetAccessPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.GetAccessPolicyRequest";
+                    };
+    
+                    return GetAccessPolicyRequest;
+                })();
+    
+                v3beta.UpdateAccessPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @interface IUpdateAccessPolicyRequest
+                     * @property {google.iam.v3beta.IAccessPolicy|null} [accessPolicy] UpdateAccessPolicyRequest accessPolicy
+                     * @property {boolean|null} [validateOnly] UpdateAccessPolicyRequest validateOnly
+                     */
+    
+                    /**
+                     * Constructs a new UpdateAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents an UpdateAccessPolicyRequest.
+                     * @implements IUpdateAccessPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3beta.IUpdateAccessPolicyRequest=} [properties] Properties to set
+                     */
+                    function UpdateAccessPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateAccessPolicyRequest accessPolicy.
+                     * @member {google.iam.v3beta.IAccessPolicy|null|undefined} accessPolicy
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @instance
+                     */
+                    UpdateAccessPolicyRequest.prototype.accessPolicy = null;
+    
+                    /**
+                     * UpdateAccessPolicyRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @instance
+                     */
+                    UpdateAccessPolicyRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * Creates a new UpdateAccessPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IUpdateAccessPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.UpdateAccessPolicyRequest} UpdateAccessPolicyRequest instance
+                     */
+                    UpdateAccessPolicyRequest.create = function create(properties) {
+                        return new UpdateAccessPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateAccessPolicyRequest message. Does not implicitly {@link google.iam.v3beta.UpdateAccessPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IUpdateAccessPolicyRequest} message UpdateAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateAccessPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.accessPolicy != null && Object.hasOwnProperty.call(message, "accessPolicy"))
+                            $root.google.iam.v3beta.AccessPolicy.encode(message.accessPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.validateOnly);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3beta.UpdateAccessPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IUpdateAccessPolicyRequest} message UpdateAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateAccessPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateAccessPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.UpdateAccessPolicyRequest} UpdateAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateAccessPolicyRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.UpdateAccessPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.accessPolicy = $root.google.iam.v3beta.AccessPolicy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.UpdateAccessPolicyRequest} UpdateAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateAccessPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateAccessPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateAccessPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy")) {
+                            var error = $root.google.iam.v3beta.AccessPolicy.verify(message.accessPolicy);
+                            if (error)
+                                return "accessPolicy." + error;
+                        }
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.UpdateAccessPolicyRequest} UpdateAccessPolicyRequest
+                     */
+                    UpdateAccessPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.UpdateAccessPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3beta.UpdateAccessPolicyRequest();
+                        if (object.accessPolicy != null) {
+                            if (typeof object.accessPolicy !== "object")
+                                throw TypeError(".google.iam.v3beta.UpdateAccessPolicyRequest.accessPolicy: object expected");
+                            message.accessPolicy = $root.google.iam.v3beta.AccessPolicy.fromObject(object.accessPolicy);
+                        }
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateAccessPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.UpdateAccessPolicyRequest} message UpdateAccessPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateAccessPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.accessPolicy = null;
+                            object.validateOnly = false;
+                        }
+                        if (message.accessPolicy != null && message.hasOwnProperty("accessPolicy"))
+                            object.accessPolicy = $root.google.iam.v3beta.AccessPolicy.toObject(message.accessPolicy, options);
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateAccessPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateAccessPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateAccessPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.UpdateAccessPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateAccessPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.UpdateAccessPolicyRequest";
+                    };
+    
+                    return UpdateAccessPolicyRequest;
+                })();
+    
+                v3beta.DeleteAccessPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @interface IDeleteAccessPolicyRequest
+                     * @property {string|null} [name] DeleteAccessPolicyRequest name
+                     * @property {string|null} [etag] DeleteAccessPolicyRequest etag
+                     * @property {boolean|null} [validateOnly] DeleteAccessPolicyRequest validateOnly
+                     * @property {boolean|null} [force] DeleteAccessPolicyRequest force
+                     */
+    
+                    /**
+                     * Constructs a new DeleteAccessPolicyRequest.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a DeleteAccessPolicyRequest.
+                     * @implements IDeleteAccessPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v3beta.IDeleteAccessPolicyRequest=} [properties] Properties to set
+                     */
+                    function DeleteAccessPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteAccessPolicyRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @instance
+                     */
+                    DeleteAccessPolicyRequest.prototype.name = "";
+    
+                    /**
+                     * DeleteAccessPolicyRequest etag.
+                     * @member {string} etag
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @instance
+                     */
+                    DeleteAccessPolicyRequest.prototype.etag = "";
+    
+                    /**
+                     * DeleteAccessPolicyRequest validateOnly.
+                     * @member {boolean} validateOnly
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @instance
+                     */
+                    DeleteAccessPolicyRequest.prototype.validateOnly = false;
+    
+                    /**
+                     * DeleteAccessPolicyRequest force.
+                     * @member {boolean} force
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @instance
+                     */
+                    DeleteAccessPolicyRequest.prototype.force = false;
+    
+                    /**
+                     * Creates a new DeleteAccessPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IDeleteAccessPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.DeleteAccessPolicyRequest} DeleteAccessPolicyRequest instance
+                     */
+                    DeleteAccessPolicyRequest.create = function create(properties) {
+                        return new DeleteAccessPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteAccessPolicyRequest message. Does not implicitly {@link google.iam.v3beta.DeleteAccessPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IDeleteAccessPolicyRequest} message DeleteAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteAccessPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                        if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                        if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.force);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteAccessPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v3beta.DeleteAccessPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.IDeleteAccessPolicyRequest} message DeleteAccessPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteAccessPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteAccessPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.DeleteAccessPolicyRequest} DeleteAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteAccessPolicyRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.DeleteAccessPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.etag = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                }
+                            case 4: {
+                                    message.force = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteAccessPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.DeleteAccessPolicyRequest} DeleteAccessPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteAccessPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteAccessPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteAccessPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!$util.isString(message.etag))
+                                return "etag: string expected";
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            if (typeof message.validateOnly !== "boolean")
+                                return "validateOnly: boolean expected";
+                        if (message.force != null && message.hasOwnProperty("force"))
+                            if (typeof message.force !== "boolean")
+                                return "force: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteAccessPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.DeleteAccessPolicyRequest} DeleteAccessPolicyRequest
+                     */
+                    DeleteAccessPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.DeleteAccessPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v3beta.DeleteAccessPolicyRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.etag != null)
+                            message.etag = String(object.etag);
+                        if (object.validateOnly != null)
+                            message.validateOnly = Boolean(object.validateOnly);
+                        if (object.force != null)
+                            message.force = Boolean(object.force);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteAccessPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {google.iam.v3beta.DeleteAccessPolicyRequest} message DeleteAccessPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteAccessPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.etag = "";
+                            object.validateOnly = false;
+                            object.force = false;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = message.etag;
+                        if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                            object.validateOnly = message.validateOnly;
+                        if (message.force != null && message.hasOwnProperty("force"))
+                            object.force = message.force;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteAccessPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteAccessPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteAccessPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.DeleteAccessPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteAccessPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.DeleteAccessPolicyRequest";
+                    };
+    
+                    return DeleteAccessPolicyRequest;
+                })();
+    
+                v3beta.ListAccessPoliciesRequest = (function() {
+    
+                    /**
+                     * Properties of a ListAccessPoliciesRequest.
+                     * @memberof google.iam.v3beta
+                     * @interface IListAccessPoliciesRequest
+                     * @property {string|null} [parent] ListAccessPoliciesRequest parent
+                     * @property {number|null} [pageSize] ListAccessPoliciesRequest pageSize
+                     * @property {string|null} [pageToken] ListAccessPoliciesRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListAccessPoliciesRequest.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a ListAccessPoliciesRequest.
+                     * @implements IListAccessPoliciesRequest
+                     * @constructor
+                     * @param {google.iam.v3beta.IListAccessPoliciesRequest=} [properties] Properties to set
+                     */
+                    function ListAccessPoliciesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListAccessPoliciesRequest parent.
+                     * @member {string} parent
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @instance
+                     */
+                    ListAccessPoliciesRequest.prototype.parent = "";
+    
+                    /**
+                     * ListAccessPoliciesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @instance
+                     */
+                    ListAccessPoliciesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListAccessPoliciesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @instance
+                     */
+                    ListAccessPoliciesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new ListAccessPoliciesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3beta.IListAccessPoliciesRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.ListAccessPoliciesRequest} ListAccessPoliciesRequest instance
+                     */
+                    ListAccessPoliciesRequest.create = function create(properties) {
+                        return new ListAccessPoliciesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListAccessPoliciesRequest message. Does not implicitly {@link google.iam.v3beta.ListAccessPoliciesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3beta.IListAccessPoliciesRequest} message ListAccessPoliciesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAccessPoliciesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListAccessPoliciesRequest message, length delimited. Does not implicitly {@link google.iam.v3beta.ListAccessPoliciesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3beta.IListAccessPoliciesRequest} message ListAccessPoliciesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAccessPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListAccessPoliciesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.ListAccessPoliciesRequest} ListAccessPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAccessPoliciesRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.ListAccessPoliciesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListAccessPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.ListAccessPoliciesRequest} ListAccessPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAccessPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListAccessPoliciesRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListAccessPoliciesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListAccessPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.ListAccessPoliciesRequest} ListAccessPoliciesRequest
+                     */
+                    ListAccessPoliciesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.ListAccessPoliciesRequest)
+                            return object;
+                        var message = new $root.google.iam.v3beta.ListAccessPoliciesRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListAccessPoliciesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {google.iam.v3beta.ListAccessPoliciesRequest} message ListAccessPoliciesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListAccessPoliciesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListAccessPoliciesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListAccessPoliciesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListAccessPoliciesRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.ListAccessPoliciesRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListAccessPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.ListAccessPoliciesRequest";
+                    };
+    
+                    return ListAccessPoliciesRequest;
+                })();
+    
+                v3beta.ListAccessPoliciesResponse = (function() {
+    
+                    /**
+                     * Properties of a ListAccessPoliciesResponse.
+                     * @memberof google.iam.v3beta
+                     * @interface IListAccessPoliciesResponse
+                     * @property {Array.<google.iam.v3beta.IAccessPolicy>|null} [accessPolicies] ListAccessPoliciesResponse accessPolicies
+                     * @property {string|null} [nextPageToken] ListAccessPoliciesResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListAccessPoliciesResponse.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a ListAccessPoliciesResponse.
+                     * @implements IListAccessPoliciesResponse
+                     * @constructor
+                     * @param {google.iam.v3beta.IListAccessPoliciesResponse=} [properties] Properties to set
+                     */
+                    function ListAccessPoliciesResponse(properties) {
+                        this.accessPolicies = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListAccessPoliciesResponse accessPolicies.
+                     * @member {Array.<google.iam.v3beta.IAccessPolicy>} accessPolicies
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @instance
+                     */
+                    ListAccessPoliciesResponse.prototype.accessPolicies = $util.emptyArray;
+    
+                    /**
+                     * ListAccessPoliciesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @instance
+                     */
+                    ListAccessPoliciesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListAccessPoliciesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3beta.IListAccessPoliciesResponse=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.ListAccessPoliciesResponse} ListAccessPoliciesResponse instance
+                     */
+                    ListAccessPoliciesResponse.create = function create(properties) {
+                        return new ListAccessPoliciesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListAccessPoliciesResponse message. Does not implicitly {@link google.iam.v3beta.ListAccessPoliciesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3beta.IListAccessPoliciesResponse} message ListAccessPoliciesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAccessPoliciesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.accessPolicies != null && message.accessPolicies.length)
+                            for (var i = 0; i < message.accessPolicies.length; ++i)
+                                $root.google.iam.v3beta.AccessPolicy.encode(message.accessPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListAccessPoliciesResponse message, length delimited. Does not implicitly {@link google.iam.v3beta.ListAccessPoliciesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3beta.IListAccessPoliciesResponse} message ListAccessPoliciesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListAccessPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListAccessPoliciesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.ListAccessPoliciesResponse} ListAccessPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAccessPoliciesResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.ListAccessPoliciesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.accessPolicies && message.accessPolicies.length))
+                                        message.accessPolicies = [];
+                                    message.accessPolicies.push($root.google.iam.v3beta.AccessPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListAccessPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.ListAccessPoliciesResponse} ListAccessPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListAccessPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListAccessPoliciesResponse message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListAccessPoliciesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.accessPolicies != null && message.hasOwnProperty("accessPolicies")) {
+                            if (!Array.isArray(message.accessPolicies))
+                                return "accessPolicies: array expected";
+                            for (var i = 0; i < message.accessPolicies.length; ++i) {
+                                var error = $root.google.iam.v3beta.AccessPolicy.verify(message.accessPolicies[i]);
+                                if (error)
+                                    return "accessPolicies." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListAccessPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.ListAccessPoliciesResponse} ListAccessPoliciesResponse
+                     */
+                    ListAccessPoliciesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.ListAccessPoliciesResponse)
+                            return object;
+                        var message = new $root.google.iam.v3beta.ListAccessPoliciesResponse();
+                        if (object.accessPolicies) {
+                            if (!Array.isArray(object.accessPolicies))
+                                throw TypeError(".google.iam.v3beta.ListAccessPoliciesResponse.accessPolicies: array expected");
+                            message.accessPolicies = [];
+                            for (var i = 0; i < object.accessPolicies.length; ++i) {
+                                if (typeof object.accessPolicies[i] !== "object")
+                                    throw TypeError(".google.iam.v3beta.ListAccessPoliciesResponse.accessPolicies: object expected");
+                                message.accessPolicies[i] = $root.google.iam.v3beta.AccessPolicy.fromObject(object.accessPolicies[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListAccessPoliciesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {google.iam.v3beta.ListAccessPoliciesResponse} message ListAccessPoliciesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListAccessPoliciesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.accessPolicies = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.accessPolicies && message.accessPolicies.length) {
+                            object.accessPolicies = [];
+                            for (var j = 0; j < message.accessPolicies.length; ++j)
+                                object.accessPolicies[j] = $root.google.iam.v3beta.AccessPolicy.toObject(message.accessPolicies[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListAccessPoliciesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListAccessPoliciesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListAccessPoliciesResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.ListAccessPoliciesResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListAccessPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.ListAccessPoliciesResponse";
+                    };
+    
+                    return ListAccessPoliciesResponse;
+                })();
+    
+                v3beta.SearchAccessPolicyBindingsRequest = (function() {
+    
+                    /**
+                     * Properties of a SearchAccessPolicyBindingsRequest.
+                     * @memberof google.iam.v3beta
+                     * @interface ISearchAccessPolicyBindingsRequest
+                     * @property {string|null} [name] SearchAccessPolicyBindingsRequest name
+                     * @property {number|null} [pageSize] SearchAccessPolicyBindingsRequest pageSize
+                     * @property {string|null} [pageToken] SearchAccessPolicyBindingsRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new SearchAccessPolicyBindingsRequest.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a SearchAccessPolicyBindingsRequest.
+                     * @implements ISearchAccessPolicyBindingsRequest
+                     * @constructor
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsRequest=} [properties] Properties to set
+                     */
+                    function SearchAccessPolicyBindingsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchAccessPolicyBindingsRequest name.
+                     * @member {string} name
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchAccessPolicyBindingsRequest.prototype.name = "";
+    
+                    /**
+                     * SearchAccessPolicyBindingsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchAccessPolicyBindingsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * SearchAccessPolicyBindingsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchAccessPolicyBindingsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new SearchAccessPolicyBindingsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsRequest} SearchAccessPolicyBindingsRequest instance
+                     */
+                    SearchAccessPolicyBindingsRequest.create = function create(properties) {
+                        return new SearchAccessPolicyBindingsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchAccessPolicyBindingsRequest message. Does not implicitly {@link google.iam.v3beta.SearchAccessPolicyBindingsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsRequest} message SearchAccessPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchAccessPolicyBindingsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchAccessPolicyBindingsRequest message, length delimited. Does not implicitly {@link google.iam.v3beta.SearchAccessPolicyBindingsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsRequest} message SearchAccessPolicyBindingsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchAccessPolicyBindingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchAccessPolicyBindingsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsRequest} SearchAccessPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchAccessPolicyBindingsRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.SearchAccessPolicyBindingsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchAccessPolicyBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsRequest} SearchAccessPolicyBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchAccessPolicyBindingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchAccessPolicyBindingsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchAccessPolicyBindingsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchAccessPolicyBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsRequest} SearchAccessPolicyBindingsRequest
+                     */
+                    SearchAccessPolicyBindingsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.SearchAccessPolicyBindingsRequest)
+                            return object;
+                        var message = new $root.google.iam.v3beta.SearchAccessPolicyBindingsRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchAccessPolicyBindingsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {google.iam.v3beta.SearchAccessPolicyBindingsRequest} message SearchAccessPolicyBindingsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchAccessPolicyBindingsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchAccessPolicyBindingsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchAccessPolicyBindingsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchAccessPolicyBindingsRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchAccessPolicyBindingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.SearchAccessPolicyBindingsRequest";
+                    };
+    
+                    return SearchAccessPolicyBindingsRequest;
+                })();
+    
+                v3beta.SearchAccessPolicyBindingsResponse = (function() {
+    
+                    /**
+                     * Properties of a SearchAccessPolicyBindingsResponse.
+                     * @memberof google.iam.v3beta
+                     * @interface ISearchAccessPolicyBindingsResponse
+                     * @property {Array.<google.iam.v3beta.IPolicyBinding>|null} [policyBindings] SearchAccessPolicyBindingsResponse policyBindings
+                     * @property {string|null} [nextPageToken] SearchAccessPolicyBindingsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new SearchAccessPolicyBindingsResponse.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents a SearchAccessPolicyBindingsResponse.
+                     * @implements ISearchAccessPolicyBindingsResponse
+                     * @constructor
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsResponse=} [properties] Properties to set
+                     */
+                    function SearchAccessPolicyBindingsResponse(properties) {
+                        this.policyBindings = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchAccessPolicyBindingsResponse policyBindings.
+                     * @member {Array.<google.iam.v3beta.IPolicyBinding>} policyBindings
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @instance
+                     */
+                    SearchAccessPolicyBindingsResponse.prototype.policyBindings = $util.emptyArray;
+    
+                    /**
+                     * SearchAccessPolicyBindingsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @instance
+                     */
+                    SearchAccessPolicyBindingsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new SearchAccessPolicyBindingsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsResponse} SearchAccessPolicyBindingsResponse instance
+                     */
+                    SearchAccessPolicyBindingsResponse.create = function create(properties) {
+                        return new SearchAccessPolicyBindingsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchAccessPolicyBindingsResponse message. Does not implicitly {@link google.iam.v3beta.SearchAccessPolicyBindingsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsResponse} message SearchAccessPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchAccessPolicyBindingsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policyBindings != null && message.policyBindings.length)
+                            for (var i = 0; i < message.policyBindings.length; ++i)
+                                $root.google.iam.v3beta.PolicyBinding.encode(message.policyBindings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchAccessPolicyBindingsResponse message, length delimited. Does not implicitly {@link google.iam.v3beta.SearchAccessPolicyBindingsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3beta.ISearchAccessPolicyBindingsResponse} message SearchAccessPolicyBindingsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchAccessPolicyBindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchAccessPolicyBindingsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsResponse} SearchAccessPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchAccessPolicyBindingsResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.SearchAccessPolicyBindingsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.policyBindings && message.policyBindings.length))
+                                        message.policyBindings = [];
+                                    message.policyBindings.push($root.google.iam.v3beta.PolicyBinding.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchAccessPolicyBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsResponse} SearchAccessPolicyBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchAccessPolicyBindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchAccessPolicyBindingsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchAccessPolicyBindingsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policyBindings != null && message.hasOwnProperty("policyBindings")) {
+                            if (!Array.isArray(message.policyBindings))
+                                return "policyBindings: array expected";
+                            for (var i = 0; i < message.policyBindings.length; ++i) {
+                                var error = $root.google.iam.v3beta.PolicyBinding.verify(message.policyBindings[i]);
+                                if (error)
+                                    return "policyBindings." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchAccessPolicyBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.SearchAccessPolicyBindingsResponse} SearchAccessPolicyBindingsResponse
+                     */
+                    SearchAccessPolicyBindingsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.SearchAccessPolicyBindingsResponse)
+                            return object;
+                        var message = new $root.google.iam.v3beta.SearchAccessPolicyBindingsResponse();
+                        if (object.policyBindings) {
+                            if (!Array.isArray(object.policyBindings))
+                                throw TypeError(".google.iam.v3beta.SearchAccessPolicyBindingsResponse.policyBindings: array expected");
+                            message.policyBindings = [];
+                            for (var i = 0; i < object.policyBindings.length; ++i) {
+                                if (typeof object.policyBindings[i] !== "object")
+                                    throw TypeError(".google.iam.v3beta.SearchAccessPolicyBindingsResponse.policyBindings: object expected");
+                                message.policyBindings[i] = $root.google.iam.v3beta.PolicyBinding.fromObject(object.policyBindings[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchAccessPolicyBindingsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {google.iam.v3beta.SearchAccessPolicyBindingsResponse} message SearchAccessPolicyBindingsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchAccessPolicyBindingsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.policyBindings = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.policyBindings && message.policyBindings.length) {
+                            object.policyBindings = [];
+                            for (var j = 0; j < message.policyBindings.length; ++j)
+                                object.policyBindings[j] = $root.google.iam.v3beta.PolicyBinding.toObject(message.policyBindings[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchAccessPolicyBindingsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchAccessPolicyBindingsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchAccessPolicyBindingsResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.SearchAccessPolicyBindingsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchAccessPolicyBindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.SearchAccessPolicyBindingsResponse";
+                    };
+    
+                    return SearchAccessPolicyBindingsResponse;
+                })();
+    
+                v3beta.AccessPolicy = (function() {
+    
+                    /**
+                     * Properties of an AccessPolicy.
+                     * @memberof google.iam.v3beta
+                     * @interface IAccessPolicy
+                     * @property {string|null} [name] AccessPolicy name
+                     * @property {string|null} [uid] AccessPolicy uid
+                     * @property {string|null} [etag] AccessPolicy etag
+                     * @property {string|null} [displayName] AccessPolicy displayName
+                     * @property {Object.<string,string>|null} [annotations] AccessPolicy annotations
+                     * @property {google.protobuf.ITimestamp|null} [createTime] AccessPolicy createTime
+                     * @property {google.protobuf.ITimestamp|null} [updateTime] AccessPolicy updateTime
+                     * @property {google.iam.v3beta.IAccessPolicyDetails|null} [details] AccessPolicy details
+                     */
+    
+                    /**
+                     * Constructs a new AccessPolicy.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents an AccessPolicy.
+                     * @implements IAccessPolicy
+                     * @constructor
+                     * @param {google.iam.v3beta.IAccessPolicy=} [properties] Properties to set
+                     */
+                    function AccessPolicy(properties) {
+                        this.annotations = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AccessPolicy name.
+                     * @member {string} name
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.name = "";
+    
+                    /**
+                     * AccessPolicy uid.
+                     * @member {string} uid
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.uid = "";
+    
+                    /**
+                     * AccessPolicy etag.
+                     * @member {string} etag
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.etag = "";
+    
+                    /**
+                     * AccessPolicy displayName.
+                     * @member {string} displayName
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.displayName = "";
+    
+                    /**
+                     * AccessPolicy annotations.
+                     * @member {Object.<string,string>} annotations
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.annotations = $util.emptyObject;
+    
+                    /**
+                     * AccessPolicy createTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.createTime = null;
+    
+                    /**
+                     * AccessPolicy updateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.updateTime = null;
+    
+                    /**
+                     * AccessPolicy details.
+                     * @member {google.iam.v3beta.IAccessPolicyDetails|null|undefined} details
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     */
+                    AccessPolicy.prototype.details = null;
+    
+                    /**
+                     * Creates a new AccessPolicy instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicy=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.AccessPolicy} AccessPolicy instance
+                     */
+                    AccessPolicy.create = function create(properties) {
+                        return new AccessPolicy(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AccessPolicy message. Does not implicitly {@link google.iam.v3beta.AccessPolicy.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicy} message AccessPolicy message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessPolicy.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.displayName);
+                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                            for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                            $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                            $root.google.iam.v3beta.AccessPolicyDetails.encode(message.details, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AccessPolicy message, length delimited. Does not implicitly {@link google.iam.v3beta.AccessPolicy.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicy} message AccessPolicy message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AccessPolicy message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.AccessPolicy} AccessPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessPolicy.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.AccessPolicy(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.uid = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.etag = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.displayName = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                }
+                            case 6: {
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 7: {
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 8: {
+                                    message.details = $root.google.iam.v3beta.AccessPolicyDetails.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AccessPolicy message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.AccessPolicy} AccessPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessPolicy.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AccessPolicy message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AccessPolicy.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            if (!$util.isString(message.uid))
+                                return "uid: string expected";
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!$util.isString(message.etag))
+                                return "etag: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                            if (!$util.isObject(message.annotations))
+                                return "annotations: object expected";
+                            var key = Object.keys(message.annotations);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.annotations[key[i]]))
+                                    return "annotations: string{k:string} expected";
+                        }
+                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            if (error)
+                                return "createTime." + error;
+                        }
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            if (error)
+                                return "updateTime." + error;
+                        }
+                        if (message.details != null && message.hasOwnProperty("details")) {
+                            var error = $root.google.iam.v3beta.AccessPolicyDetails.verify(message.details);
+                            if (error)
+                                return "details." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AccessPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.AccessPolicy} AccessPolicy
+                     */
+                    AccessPolicy.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.AccessPolicy)
+                            return object;
+                        var message = new $root.google.iam.v3beta.AccessPolicy();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.uid != null)
+                            message.uid = String(object.uid);
+                        if (object.etag != null)
+                            message.etag = String(object.etag);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.annotations) {
+                            if (typeof object.annotations !== "object")
+                                throw TypeError(".google.iam.v3beta.AccessPolicy.annotations: object expected");
+                            message.annotations = {};
+                            for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                        }
+                        if (object.createTime != null) {
+                            if (typeof object.createTime !== "object")
+                                throw TypeError(".google.iam.v3beta.AccessPolicy.createTime: object expected");
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                        }
+                        if (object.updateTime != null) {
+                            if (typeof object.updateTime !== "object")
+                                throw TypeError(".google.iam.v3beta.AccessPolicy.updateTime: object expected");
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                        }
+                        if (object.details != null) {
+                            if (typeof object.details !== "object")
+                                throw TypeError(".google.iam.v3beta.AccessPolicy.details: object expected");
+                            message.details = $root.google.iam.v3beta.AccessPolicyDetails.fromObject(object.details);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AccessPolicy message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {google.iam.v3beta.AccessPolicy} message AccessPolicy
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AccessPolicy.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.annotations = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.uid = "";
+                            object.etag = "";
+                            object.displayName = "";
+                            object.createTime = null;
+                            object.updateTime = null;
+                            object.details = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.uid != null && message.hasOwnProperty("uid"))
+                            object.uid = message.uid;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = message.etag;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        var keys2;
+                        if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                            object.annotations = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                        }
+                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                        if (message.details != null && message.hasOwnProperty("details"))
+                            object.details = $root.google.iam.v3beta.AccessPolicyDetails.toObject(message.details, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AccessPolicy to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AccessPolicy.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AccessPolicy
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.AccessPolicy
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AccessPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.AccessPolicy";
+                    };
+    
+                    return AccessPolicy;
+                })();
+    
+                v3beta.AccessPolicyDetails = (function() {
+    
+                    /**
+                     * Properties of an AccessPolicyDetails.
+                     * @memberof google.iam.v3beta
+                     * @interface IAccessPolicyDetails
+                     * @property {Array.<google.iam.v3beta.IAccessPolicyRule>|null} [rules] AccessPolicyDetails rules
+                     */
+    
+                    /**
+                     * Constructs a new AccessPolicyDetails.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents an AccessPolicyDetails.
+                     * @implements IAccessPolicyDetails
+                     * @constructor
+                     * @param {google.iam.v3beta.IAccessPolicyDetails=} [properties] Properties to set
+                     */
+                    function AccessPolicyDetails(properties) {
+                        this.rules = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AccessPolicyDetails rules.
+                     * @member {Array.<google.iam.v3beta.IAccessPolicyRule>} rules
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @instance
+                     */
+                    AccessPolicyDetails.prototype.rules = $util.emptyArray;
+    
+                    /**
+                     * Creates a new AccessPolicyDetails instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicyDetails=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.AccessPolicyDetails} AccessPolicyDetails instance
+                     */
+                    AccessPolicyDetails.create = function create(properties) {
+                        return new AccessPolicyDetails(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AccessPolicyDetails message. Does not implicitly {@link google.iam.v3beta.AccessPolicyDetails.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicyDetails} message AccessPolicyDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessPolicyDetails.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.rules != null && message.rules.length)
+                            for (var i = 0; i < message.rules.length; ++i)
+                                $root.google.iam.v3beta.AccessPolicyRule.encode(message.rules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AccessPolicyDetails message, length delimited. Does not implicitly {@link google.iam.v3beta.AccessPolicyDetails.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicyDetails} message AccessPolicyDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessPolicyDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AccessPolicyDetails message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.AccessPolicyDetails} AccessPolicyDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessPolicyDetails.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.AccessPolicyDetails();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.rules && message.rules.length))
+                                        message.rules = [];
+                                    message.rules.push($root.google.iam.v3beta.AccessPolicyRule.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AccessPolicyDetails message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.AccessPolicyDetails} AccessPolicyDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessPolicyDetails.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AccessPolicyDetails message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AccessPolicyDetails.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.rules != null && message.hasOwnProperty("rules")) {
+                            if (!Array.isArray(message.rules))
+                                return "rules: array expected";
+                            for (var i = 0; i < message.rules.length; ++i) {
+                                var error = $root.google.iam.v3beta.AccessPolicyRule.verify(message.rules[i]);
+                                if (error)
+                                    return "rules." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AccessPolicyDetails message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.AccessPolicyDetails} AccessPolicyDetails
+                     */
+                    AccessPolicyDetails.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.AccessPolicyDetails)
+                            return object;
+                        var message = new $root.google.iam.v3beta.AccessPolicyDetails();
+                        if (object.rules) {
+                            if (!Array.isArray(object.rules))
+                                throw TypeError(".google.iam.v3beta.AccessPolicyDetails.rules: array expected");
+                            message.rules = [];
+                            for (var i = 0; i < object.rules.length; ++i) {
+                                if (typeof object.rules[i] !== "object")
+                                    throw TypeError(".google.iam.v3beta.AccessPolicyDetails.rules: object expected");
+                                message.rules[i] = $root.google.iam.v3beta.AccessPolicyRule.fromObject(object.rules[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AccessPolicyDetails message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {google.iam.v3beta.AccessPolicyDetails} message AccessPolicyDetails
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AccessPolicyDetails.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.rules = [];
+                        if (message.rules && message.rules.length) {
+                            object.rules = [];
+                            for (var j = 0; j < message.rules.length; ++j)
+                                object.rules[j] = $root.google.iam.v3beta.AccessPolicyRule.toObject(message.rules[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AccessPolicyDetails to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AccessPolicyDetails.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AccessPolicyDetails
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.AccessPolicyDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AccessPolicyDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.AccessPolicyDetails";
+                    };
+    
+                    return AccessPolicyDetails;
+                })();
+    
+                v3beta.AccessPolicyRule = (function() {
+    
+                    /**
+                     * Properties of an AccessPolicyRule.
+                     * @memberof google.iam.v3beta
+                     * @interface IAccessPolicyRule
+                     * @property {string|null} [description] AccessPolicyRule description
+                     * @property {google.iam.v3beta.AccessPolicyRule.Effect|null} [effect] AccessPolicyRule effect
+                     * @property {Array.<string>|null} [principals] AccessPolicyRule principals
+                     * @property {Array.<string>|null} [excludedPrincipals] AccessPolicyRule excludedPrincipals
+                     * @property {google.iam.v3beta.AccessPolicyRule.IOperation|null} [operation] AccessPolicyRule operation
+                     * @property {Object.<string,google.type.IExpr>|null} [conditions] AccessPolicyRule conditions
+                     */
+    
+                    /**
+                     * Constructs a new AccessPolicyRule.
+                     * @memberof google.iam.v3beta
+                     * @classdesc Represents an AccessPolicyRule.
+                     * @implements IAccessPolicyRule
+                     * @constructor
+                     * @param {google.iam.v3beta.IAccessPolicyRule=} [properties] Properties to set
+                     */
+                    function AccessPolicyRule(properties) {
+                        this.principals = [];
+                        this.excludedPrincipals = [];
+                        this.conditions = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AccessPolicyRule description.
+                     * @member {string|null|undefined} description
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     */
+                    AccessPolicyRule.prototype.description = null;
+    
+                    /**
+                     * AccessPolicyRule effect.
+                     * @member {google.iam.v3beta.AccessPolicyRule.Effect|null|undefined} effect
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     */
+                    AccessPolicyRule.prototype.effect = null;
+    
+                    /**
+                     * AccessPolicyRule principals.
+                     * @member {Array.<string>} principals
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     */
+                    AccessPolicyRule.prototype.principals = $util.emptyArray;
+    
+                    /**
+                     * AccessPolicyRule excludedPrincipals.
+                     * @member {Array.<string>} excludedPrincipals
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     */
+                    AccessPolicyRule.prototype.excludedPrincipals = $util.emptyArray;
+    
+                    /**
+                     * AccessPolicyRule operation.
+                     * @member {google.iam.v3beta.AccessPolicyRule.IOperation|null|undefined} operation
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     */
+                    AccessPolicyRule.prototype.operation = null;
+    
+                    /**
+                     * AccessPolicyRule conditions.
+                     * @member {Object.<string,google.type.IExpr>} conditions
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     */
+                    AccessPolicyRule.prototype.conditions = $util.emptyObject;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(AccessPolicyRule.prototype, "_description", {
+                        get: $util.oneOfGetter($oneOfFields = ["description"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(AccessPolicyRule.prototype, "_effect", {
+                        get: $util.oneOfGetter($oneOfFields = ["effect"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AccessPolicyRule instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicyRule=} [properties] Properties to set
+                     * @returns {google.iam.v3beta.AccessPolicyRule} AccessPolicyRule instance
+                     */
+                    AccessPolicyRule.create = function create(properties) {
+                        return new AccessPolicyRule(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AccessPolicyRule message. Does not implicitly {@link google.iam.v3beta.AccessPolicyRule.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicyRule} message AccessPolicyRule message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessPolicyRule.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                        if (message.effect != null && Object.hasOwnProperty.call(message, "effect"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.effect);
+                        if (message.principals != null && message.principals.length)
+                            for (var i = 0; i < message.principals.length; ++i)
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.principals[i]);
+                        if (message.excludedPrincipals != null && message.excludedPrincipals.length)
+                            for (var i = 0; i < message.excludedPrincipals.length; ++i)
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.excludedPrincipals[i]);
+                        if (message.conditions != null && Object.hasOwnProperty.call(message, "conditions"))
+                            for (var keys = Object.keys(message.conditions), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                $root.google.type.Expr.encode(message.conditions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                            $root.google.iam.v3beta.AccessPolicyRule.Operation.encode(message.operation, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AccessPolicyRule message, length delimited. Does not implicitly {@link google.iam.v3beta.AccessPolicyRule.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {google.iam.v3beta.IAccessPolicyRule} message AccessPolicyRule message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessPolicyRule.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AccessPolicyRule message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v3beta.AccessPolicyRule} AccessPolicyRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessPolicyRule.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.AccessPolicyRule(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.description = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.effect = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.principals && message.principals.length))
+                                        message.principals = [];
+                                    message.principals.push(reader.string());
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.excludedPrincipals && message.excludedPrincipals.length))
+                                        message.excludedPrincipals = [];
+                                    message.excludedPrincipals.push(reader.string());
+                                    break;
+                                }
+                            case 10: {
+                                    message.operation = $root.google.iam.v3beta.AccessPolicyRule.Operation.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    if (message.conditions === $util.emptyObject)
+                                        message.conditions = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.type.Expr.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.conditions[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AccessPolicyRule message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v3beta.AccessPolicyRule} AccessPolicyRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessPolicyRule.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AccessPolicyRule message.
+                     * @function verify
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AccessPolicyRule.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.description != null && message.hasOwnProperty("description")) {
+                            properties._description = 1;
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        }
+                        if (message.effect != null && message.hasOwnProperty("effect")) {
+                            properties._effect = 1;
+                            switch (message.effect) {
+                            default:
+                                return "effect: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        if (message.principals != null && message.hasOwnProperty("principals")) {
+                            if (!Array.isArray(message.principals))
+                                return "principals: array expected";
+                            for (var i = 0; i < message.principals.length; ++i)
+                                if (!$util.isString(message.principals[i]))
+                                    return "principals: string[] expected";
+                        }
+                        if (message.excludedPrincipals != null && message.hasOwnProperty("excludedPrincipals")) {
+                            if (!Array.isArray(message.excludedPrincipals))
+                                return "excludedPrincipals: array expected";
+                            for (var i = 0; i < message.excludedPrincipals.length; ++i)
+                                if (!$util.isString(message.excludedPrincipals[i]))
+                                    return "excludedPrincipals: string[] expected";
+                        }
+                        if (message.operation != null && message.hasOwnProperty("operation")) {
+                            var error = $root.google.iam.v3beta.AccessPolicyRule.Operation.verify(message.operation);
+                            if (error)
+                                return "operation." + error;
+                        }
+                        if (message.conditions != null && message.hasOwnProperty("conditions")) {
+                            if (!$util.isObject(message.conditions))
+                                return "conditions: object expected";
+                            var key = Object.keys(message.conditions);
+                            for (var i = 0; i < key.length; ++i) {
+                                var error = $root.google.type.Expr.verify(message.conditions[key[i]]);
+                                if (error)
+                                    return "conditions." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AccessPolicyRule message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v3beta.AccessPolicyRule} AccessPolicyRule
+                     */
+                    AccessPolicyRule.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v3beta.AccessPolicyRule)
+                            return object;
+                        var message = new $root.google.iam.v3beta.AccessPolicyRule();
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        switch (object.effect) {
+                        default:
+                            if (typeof object.effect === "number") {
+                                message.effect = object.effect;
+                                break;
+                            }
+                            break;
+                        case "EFFECT_UNSPECIFIED":
+                        case 0:
+                            message.effect = 0;
+                            break;
+                        case "DENY":
+                        case 1:
+                            message.effect = 1;
+                            break;
+                        case "ALLOW":
+                        case 2:
+                            message.effect = 2;
+                            break;
+                        }
+                        if (object.principals) {
+                            if (!Array.isArray(object.principals))
+                                throw TypeError(".google.iam.v3beta.AccessPolicyRule.principals: array expected");
+                            message.principals = [];
+                            for (var i = 0; i < object.principals.length; ++i)
+                                message.principals[i] = String(object.principals[i]);
+                        }
+                        if (object.excludedPrincipals) {
+                            if (!Array.isArray(object.excludedPrincipals))
+                                throw TypeError(".google.iam.v3beta.AccessPolicyRule.excludedPrincipals: array expected");
+                            message.excludedPrincipals = [];
+                            for (var i = 0; i < object.excludedPrincipals.length; ++i)
+                                message.excludedPrincipals[i] = String(object.excludedPrincipals[i]);
+                        }
+                        if (object.operation != null) {
+                            if (typeof object.operation !== "object")
+                                throw TypeError(".google.iam.v3beta.AccessPolicyRule.operation: object expected");
+                            message.operation = $root.google.iam.v3beta.AccessPolicyRule.Operation.fromObject(object.operation);
+                        }
+                        if (object.conditions) {
+                            if (typeof object.conditions !== "object")
+                                throw TypeError(".google.iam.v3beta.AccessPolicyRule.conditions: object expected");
+                            message.conditions = {};
+                            for (var keys = Object.keys(object.conditions), i = 0; i < keys.length; ++i) {
+                                if (typeof object.conditions[keys[i]] !== "object")
+                                    throw TypeError(".google.iam.v3beta.AccessPolicyRule.conditions: object expected");
+                                message.conditions[keys[i]] = $root.google.type.Expr.fromObject(object.conditions[keys[i]]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AccessPolicyRule message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {google.iam.v3beta.AccessPolicyRule} message AccessPolicyRule
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AccessPolicyRule.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.principals = [];
+                            object.excludedPrincipals = [];
+                        }
+                        if (options.objects || options.defaults)
+                            object.conditions = {};
+                        if (options.defaults)
+                            object.operation = null;
+                        if (message.description != null && message.hasOwnProperty("description")) {
+                            object.description = message.description;
+                            if (options.oneofs)
+                                object._description = "description";
+                        }
+                        if (message.effect != null && message.hasOwnProperty("effect")) {
+                            object.effect = options.enums === String ? $root.google.iam.v3beta.AccessPolicyRule.Effect[message.effect] === undefined ? message.effect : $root.google.iam.v3beta.AccessPolicyRule.Effect[message.effect] : message.effect;
+                            if (options.oneofs)
+                                object._effect = "effect";
+                        }
+                        if (message.principals && message.principals.length) {
+                            object.principals = [];
+                            for (var j = 0; j < message.principals.length; ++j)
+                                object.principals[j] = message.principals[j];
+                        }
+                        if (message.excludedPrincipals && message.excludedPrincipals.length) {
+                            object.excludedPrincipals = [];
+                            for (var j = 0; j < message.excludedPrincipals.length; ++j)
+                                object.excludedPrincipals[j] = message.excludedPrincipals[j];
+                        }
+                        var keys2;
+                        if (message.conditions && (keys2 = Object.keys(message.conditions)).length) {
+                            object.conditions = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.conditions[keys2[j]] = $root.google.type.Expr.toObject(message.conditions[keys2[j]], options);
+                        }
+                        if (message.operation != null && message.hasOwnProperty("operation"))
+                            object.operation = $root.google.iam.v3beta.AccessPolicyRule.Operation.toObject(message.operation, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AccessPolicyRule to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AccessPolicyRule.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AccessPolicyRule
+                     * @function getTypeUrl
+                     * @memberof google.iam.v3beta.AccessPolicyRule
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AccessPolicyRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v3beta.AccessPolicyRule";
+                    };
+    
+                    AccessPolicyRule.Operation = (function() {
+    
+                        /**
+                         * Properties of an Operation.
+                         * @memberof google.iam.v3beta.AccessPolicyRule
+                         * @interface IOperation
+                         * @property {Array.<string>|null} [permissions] Operation permissions
+                         * @property {Array.<string>|null} [excludedPermissions] Operation excludedPermissions
+                         */
+    
+                        /**
+                         * Constructs a new Operation.
+                         * @memberof google.iam.v3beta.AccessPolicyRule
+                         * @classdesc Represents an Operation.
+                         * @implements IOperation
+                         * @constructor
+                         * @param {google.iam.v3beta.AccessPolicyRule.IOperation=} [properties] Properties to set
+                         */
+                        function Operation(properties) {
+                            this.permissions = [];
+                            this.excludedPermissions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Operation permissions.
+                         * @member {Array.<string>} permissions
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @instance
+                         */
+                        Operation.prototype.permissions = $util.emptyArray;
+    
+                        /**
+                         * Operation excludedPermissions.
+                         * @member {Array.<string>} excludedPermissions
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @instance
+                         */
+                        Operation.prototype.excludedPermissions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Operation instance using the specified properties.
+                         * @function create
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {google.iam.v3beta.AccessPolicyRule.IOperation=} [properties] Properties to set
+                         * @returns {google.iam.v3beta.AccessPolicyRule.Operation} Operation instance
+                         */
+                        Operation.create = function create(properties) {
+                            return new Operation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Operation message. Does not implicitly {@link google.iam.v3beta.AccessPolicyRule.Operation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {google.iam.v3beta.AccessPolicyRule.IOperation} message Operation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Operation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.permissions != null && message.permissions.length)
+                                for (var i = 0; i < message.permissions.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
+                            if (message.excludedPermissions != null && message.excludedPermissions.length)
+                                for (var i = 0; i < message.excludedPermissions.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.excludedPermissions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.iam.v3beta.AccessPolicyRule.Operation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {google.iam.v3beta.AccessPolicyRule.IOperation} message Operation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Operation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Operation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.iam.v3beta.AccessPolicyRule.Operation} Operation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Operation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v3beta.AccessPolicyRule.Operation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.permissions && message.permissions.length))
+                                            message.permissions = [];
+                                        message.permissions.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.excludedPermissions && message.excludedPermissions.length))
+                                            message.excludedPermissions = [];
+                                        message.excludedPermissions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Operation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.iam.v3beta.AccessPolicyRule.Operation} Operation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Operation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Operation message.
+                         * @function verify
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Operation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                                if (!Array.isArray(message.permissions))
+                                    return "permissions: array expected";
+                                for (var i = 0; i < message.permissions.length; ++i)
+                                    if (!$util.isString(message.permissions[i]))
+                                        return "permissions: string[] expected";
+                            }
+                            if (message.excludedPermissions != null && message.hasOwnProperty("excludedPermissions")) {
+                                if (!Array.isArray(message.excludedPermissions))
+                                    return "excludedPermissions: array expected";
+                                for (var i = 0; i < message.excludedPermissions.length; ++i)
+                                    if (!$util.isString(message.excludedPermissions[i]))
+                                        return "excludedPermissions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.iam.v3beta.AccessPolicyRule.Operation} Operation
+                         */
+                        Operation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.iam.v3beta.AccessPolicyRule.Operation)
+                                return object;
+                            var message = new $root.google.iam.v3beta.AccessPolicyRule.Operation();
+                            if (object.permissions) {
+                                if (!Array.isArray(object.permissions))
+                                    throw TypeError(".google.iam.v3beta.AccessPolicyRule.Operation.permissions: array expected");
+                                message.permissions = [];
+                                for (var i = 0; i < object.permissions.length; ++i)
+                                    message.permissions[i] = String(object.permissions[i]);
+                            }
+                            if (object.excludedPermissions) {
+                                if (!Array.isArray(object.excludedPermissions))
+                                    throw TypeError(".google.iam.v3beta.AccessPolicyRule.Operation.excludedPermissions: array expected");
+                                message.excludedPermissions = [];
+                                for (var i = 0; i < object.excludedPermissions.length; ++i)
+                                    message.excludedPermissions[i] = String(object.excludedPermissions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Operation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {google.iam.v3beta.AccessPolicyRule.Operation} message Operation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Operation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.permissions = [];
+                                object.excludedPermissions = [];
+                            }
+                            if (message.permissions && message.permissions.length) {
+                                object.permissions = [];
+                                for (var j = 0; j < message.permissions.length; ++j)
+                                    object.permissions[j] = message.permissions[j];
+                            }
+                            if (message.excludedPermissions && message.excludedPermissions.length) {
+                                object.excludedPermissions = [];
+                                for (var j = 0; j < message.excludedPermissions.length; ++j)
+                                    object.excludedPermissions[j] = message.excludedPermissions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Operation to JSON.
+                         * @function toJSON
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Operation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Operation
+                         * @function getTypeUrl
+                         * @memberof google.iam.v3beta.AccessPolicyRule.Operation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.iam.v3beta.AccessPolicyRule.Operation";
+                        };
+    
+                        return Operation;
+                    })();
+    
+                    /**
+                     * Effect enum.
+                     * @name google.iam.v3beta.AccessPolicyRule.Effect
+                     * @enum {number}
+                     * @property {number} EFFECT_UNSPECIFIED=0 EFFECT_UNSPECIFIED value
+                     * @property {number} DENY=1 DENY value
+                     * @property {number} ALLOW=2 ALLOW value
+                     */
+                    AccessPolicyRule.Effect = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EFFECT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DENY"] = 1;
+                        values[valuesById[2] = "ALLOW"] = 2;
+                        return values;
+                    })();
+    
+                    return AccessPolicyRule;
+                })();
+    
                 v3beta.OperationMetadata = (function() {
     
                     /**
@@ -18656,6 +22258,7 @@
                                 return "policyKind: enum value expected";
                             case 0:
                             case 1:
+                            case 2:
                                 break;
                             }
                         if (message.policy != null && message.hasOwnProperty("policy"))
@@ -18728,6 +22331,10 @@
                         case "PRINCIPAL_ACCESS_BOUNDARY":
                         case 1:
                             message.policyKind = 1;
+                            break;
+                        case "ACCESS":
+                        case 2:
+                            message.policyKind = 2;
                             break;
                         }
                         if (object.policy != null)
@@ -18844,6 +22451,7 @@
                          * @memberof google.iam.v3beta.PolicyBinding
                          * @interface ITarget
                          * @property {string|null} [principalSet] Target principalSet
+                         * @property {string|null} [resource] Target resource
                          */
     
                         /**
@@ -18869,17 +22477,25 @@
                          */
                         Target.prototype.principalSet = null;
     
+                        /**
+                         * Target resource.
+                         * @member {string|null|undefined} resource
+                         * @memberof google.iam.v3beta.PolicyBinding.Target
+                         * @instance
+                         */
+                        Target.prototype.resource = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Target target.
-                         * @member {"principalSet"|undefined} target
+                         * @member {"principalSet"|"resource"|undefined} target
                          * @memberof google.iam.v3beta.PolicyBinding.Target
                          * @instance
                          */
                         Object.defineProperty(Target.prototype, "target", {
-                            get: $util.oneOfGetter($oneOfFields = ["principalSet"]),
+                            get: $util.oneOfGetter($oneOfFields = ["principalSet", "resource"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -18909,6 +22525,8 @@
                                 writer = $Writer.create();
                             if (message.principalSet != null && Object.hasOwnProperty.call(message, "principalSet"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.principalSet);
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resource);
                             return writer;
                         };
     
@@ -18947,6 +22565,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.principalSet = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resource = reader.string();
                                         break;
                                     }
                                 default:
@@ -18990,6 +22612,13 @@
                                 if (!$util.isString(message.principalSet))
                                     return "principalSet: string expected";
                             }
+                            if (message.resource != null && message.hasOwnProperty("resource")) {
+                                if (properties.target === 1)
+                                    return "target: multiple values";
+                                properties.target = 1;
+                                if (!$util.isString(message.resource))
+                                    return "resource: string expected";
+                            }
                             return null;
                         };
     
@@ -19007,6 +22636,8 @@
                             var message = new $root.google.iam.v3beta.PolicyBinding.Target();
                             if (object.principalSet != null)
                                 message.principalSet = String(object.principalSet);
+                            if (object.resource != null)
+                                message.resource = String(object.resource);
                             return message;
                         };
     
@@ -19027,6 +22658,11 @@
                                 object.principalSet = message.principalSet;
                                 if (options.oneofs)
                                     object.target = "principalSet";
+                            }
+                            if (message.resource != null && message.hasOwnProperty("resource")) {
+                                object.resource = message.resource;
+                                if (options.oneofs)
+                                    object.target = "resource";
                             }
                             return object;
                         };
@@ -19066,11 +22702,13 @@
                      * @enum {number}
                      * @property {number} POLICY_KIND_UNSPECIFIED=0 POLICY_KIND_UNSPECIFIED value
                      * @property {number} PRINCIPAL_ACCESS_BOUNDARY=1 PRINCIPAL_ACCESS_BOUNDARY value
+                     * @property {number} ACCESS=2 ACCESS value
                      */
                     PolicyBinding.PolicyKind = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "POLICY_KIND_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "PRINCIPAL_ACCESS_BOUNDARY"] = 1;
+                        values[valuesById[2] = "ACCESS"] = 2;
                         return values;
                     })();
     
@@ -20844,6 +24482,7 @@
                      * @property {number|null} [pageSize] SearchTargetPolicyBindingsRequest pageSize
                      * @property {string|null} [pageToken] SearchTargetPolicyBindingsRequest pageToken
                      * @property {string|null} [parent] SearchTargetPolicyBindingsRequest parent
+                     * @property {string|null} [filter] SearchTargetPolicyBindingsRequest filter
                      */
     
                     /**
@@ -20894,6 +24533,14 @@
                     SearchTargetPolicyBindingsRequest.prototype.parent = "";
     
                     /**
+                     * SearchTargetPolicyBindingsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.iam.v3beta.SearchTargetPolicyBindingsRequest
+                     * @instance
+                     */
+                    SearchTargetPolicyBindingsRequest.prototype.filter = "";
+    
+                    /**
                      * Creates a new SearchTargetPolicyBindingsRequest instance using the specified properties.
                      * @function create
                      * @memberof google.iam.v3beta.SearchTargetPolicyBindingsRequest
@@ -20925,6 +24572,8 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                         if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.parent);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.filter);
                         return writer;
                     };
     
@@ -20977,6 +24626,10 @@
                                     message.parent = reader.string();
                                     break;
                                 }
+                            case 6: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -21024,6 +24677,9 @@
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
                         return null;
                     };
     
@@ -21047,6 +24703,8 @@
                             message.pageToken = String(object.pageToken);
                         if (object.parent != null)
                             message.parent = String(object.parent);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
                         return message;
                     };
     
@@ -21068,6 +24726,7 @@
                             object.pageSize = 0;
                             object.pageToken = "";
                             object.parent = "";
+                            object.filter = "";
                         }
                         if (message.target != null && message.hasOwnProperty("target"))
                             object.target = message.target;
@@ -21077,6 +24736,8 @@
                             object.pageToken = message.pageToken;
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
                         return object;
                     };
     

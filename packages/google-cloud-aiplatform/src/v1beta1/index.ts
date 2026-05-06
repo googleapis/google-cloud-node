@@ -42,6 +42,7 @@ export {ModelGardenServiceClient} from './model_garden_service_client';
 export {ModelMonitoringServiceClient} from './model_monitoring_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {NotebookServiceClient} from './notebook_service_client';
+export {OnlineEvaluatorServiceClient} from './online_evaluator_service_client';
 export {PersistentResourceServiceClient} from './persistent_resource_service_client';
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';

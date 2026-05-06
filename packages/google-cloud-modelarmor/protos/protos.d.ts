@@ -5804,6 +5804,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public sanitizeModelResponse(request: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest): Promise<google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse>;
+
+                    /**
+                     * Calls StreamSanitizeUserPrompt.
+                     * @param request SanitizeUserPromptRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SanitizeUserPromptResponse
+                     */
+                    public streamSanitizeUserPrompt(request: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeUserPromptCallback): void;
+
+                    /**
+                     * Calls StreamSanitizeUserPrompt.
+                     * @param request SanitizeUserPromptRequest message or plain object
+                     * @returns Promise
+                     */
+                    public streamSanitizeUserPrompt(request: google.cloud.modelarmor.v1beta.ISanitizeUserPromptRequest): Promise<google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse>;
+
+                    /**
+                     * Calls StreamSanitizeModelResponse.
+                     * @param request SanitizeModelResponseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SanitizeModelResponseResponse
+                     */
+                    public streamSanitizeModelResponse(request: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest, callback: google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeModelResponseCallback): void;
+
+                    /**
+                     * Calls StreamSanitizeModelResponse.
+                     * @param request SanitizeModelResponseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public streamSanitizeModelResponse(request: google.cloud.modelarmor.v1beta.ISanitizeModelResponseRequest): Promise<google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse>;
                 }
 
                 namespace ModelArmor {
@@ -5870,6 +5898,20 @@ export namespace google {
                      * @param [response] SanitizeModelResponseResponse
                      */
                     type SanitizeModelResponseCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|streamSanitizeUserPrompt}.
+                     * @param error Error, if any
+                     * @param [response] SanitizeUserPromptResponse
+                     */
+                    type StreamSanitizeUserPromptCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1beta.ModelArmor|streamSanitizeModelResponse}.
+                     * @param error Error, if any
+                     * @param [response] SanitizeModelResponseResponse
+                     */
+                    type StreamSanitizeModelResponseCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse) => void;
                 }
 
                 /** FilterMatchState enum. */
@@ -5919,6 +5961,13 @@ export namespace google {
                     SUCCESS = 1,
                     PARTIAL = 2,
                     FAILURE = 3
+                }
+
+                /** StreamingMode enum. */
+                enum StreamingMode {
+                    STREAMING_MODE_UNSPECIFIED = 0,
+                    STREAMING_MODE_BUFFERED = 1,
+                    STREAMING_MODE_REALTIME = 2
                 }
 
                 /** Properties of a Template. */
@@ -6329,6 +6378,9 @@ export namespace google {
 
                     /** FloorSetting floorSettingMetadata */
                     floorSettingMetadata?: (google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null);
+
+                    /** FloorSetting googleMcpServerFloorSetting */
+                    googleMcpServerFloorSetting?: (google.cloud.modelarmor.v1beta.IMcpServerFloorSetting|null);
                 }
 
                 /** Represents a FloorSetting. */
@@ -6363,6 +6415,9 @@ export namespace google {
 
                     /** FloorSetting floorSettingMetadata. */
                     public floorSettingMetadata?: (google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null);
+
+                    /** FloorSetting googleMcpServerFloorSetting. */
+                    public googleMcpServerFloorSetting?: (google.cloud.modelarmor.v1beta.IMcpServerFloorSetting|null);
 
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
@@ -6644,8 +6699,127 @@ export namespace google {
                     /** IntegratedService enum. */
                     enum IntegratedService {
                         INTEGRATED_SERVICE_UNSPECIFIED = 0,
-                        AI_PLATFORM = 1
+                        AI_PLATFORM = 1,
+                        GOOGLE_MCP_SERVER = 2
                     }
+                }
+
+                /** Properties of a McpServerFloorSetting. */
+                interface IMcpServerFloorSetting {
+
+                    /** McpServerFloorSetting inspectOnly */
+                    inspectOnly?: (boolean|null);
+
+                    /** McpServerFloorSetting inspectAndBlock */
+                    inspectAndBlock?: (boolean|null);
+
+                    /** McpServerFloorSetting enableCloudLogging */
+                    enableCloudLogging?: (boolean|null);
+
+                    /** McpServerFloorSetting apis */
+                    apis?: (string[]|null);
+                }
+
+                /** Represents a McpServerFloorSetting. */
+                class McpServerFloorSetting implements IMcpServerFloorSetting {
+
+                    /**
+                     * Constructs a new McpServerFloorSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IMcpServerFloorSetting);
+
+                    /** McpServerFloorSetting inspectOnly. */
+                    public inspectOnly?: (boolean|null);
+
+                    /** McpServerFloorSetting inspectAndBlock. */
+                    public inspectAndBlock?: (boolean|null);
+
+                    /** McpServerFloorSetting enableCloudLogging. */
+                    public enableCloudLogging: boolean;
+
+                    /** McpServerFloorSetting apis. */
+                    public apis: string[];
+
+                    /** McpServerFloorSetting enforcementType. */
+                    public enforcementType?: ("inspectOnly"|"inspectAndBlock");
+
+                    /**
+                     * Creates a new McpServerFloorSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McpServerFloorSetting instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IMcpServerFloorSetting): google.cloud.modelarmor.v1beta.McpServerFloorSetting;
+
+                    /**
+                     * Encodes the specified McpServerFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.McpServerFloorSetting.verify|verify} messages.
+                     * @param message McpServerFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IMcpServerFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McpServerFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.McpServerFloorSetting.verify|verify} messages.
+                     * @param message McpServerFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IMcpServerFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McpServerFloorSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McpServerFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.McpServerFloorSetting;
+
+                    /**
+                     * Decodes a McpServerFloorSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McpServerFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.McpServerFloorSetting;
+
+                    /**
+                     * Verifies a McpServerFloorSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McpServerFloorSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McpServerFloorSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.McpServerFloorSetting;
+
+                    /**
+                     * Creates a plain object from a McpServerFloorSetting message. Also converts values to other types if specified.
+                     * @param message McpServerFloorSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.McpServerFloorSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McpServerFloorSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McpServerFloorSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AiPlatformFloorSetting. */
@@ -8479,6 +8653,9 @@ export namespace google {
 
                     /** SanitizeUserPromptRequest multiLanguageDetectionMetadata */
                     multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeUserPromptRequest streamingMode */
+                    streamingMode?: (google.cloud.modelarmor.v1beta.StreamingMode|keyof typeof google.cloud.modelarmor.v1beta.StreamingMode|null);
                 }
 
                 /** Represents a SanitizeUserPromptRequest. */
@@ -8498,6 +8675,9 @@ export namespace google {
 
                     /** SanitizeUserPromptRequest multiLanguageDetectionMetadata. */
                     public multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeUserPromptRequest streamingMode. */
+                    public streamingMode?: (google.cloud.modelarmor.v1beta.StreamingMode|keyof typeof google.cloud.modelarmor.v1beta.StreamingMode|null);
 
                     /**
                      * Creates a new SanitizeUserPromptRequest instance using the specified properties.
@@ -8591,6 +8771,9 @@ export namespace google {
 
                     /** SanitizeModelResponseRequest multiLanguageDetectionMetadata */
                     multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeModelResponseRequest streamingMode */
+                    streamingMode?: (google.cloud.modelarmor.v1beta.StreamingMode|keyof typeof google.cloud.modelarmor.v1beta.StreamingMode|null);
                 }
 
                 /** Represents a SanitizeModelResponseRequest. */
@@ -8613,6 +8796,9 @@ export namespace google {
 
                     /** SanitizeModelResponseRequest multiLanguageDetectionMetadata. */
                     public multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeModelResponseRequest streamingMode. */
+                    public streamingMode?: (google.cloud.modelarmor.v1beta.StreamingMode|keyof typeof google.cloud.modelarmor.v1beta.StreamingMode|null);
 
                     /**
                      * Creates a new SanitizeModelResponseRequest instance using the specified properties.
@@ -9914,6 +10100,9 @@ export namespace google {
 
                     /** ByteDataItem byteData */
                     byteData?: (Uint8Array|Buffer|string|null);
+
+                    /** ByteDataItem fileLabel */
+                    fileLabel?: (string|null);
                 }
 
                 /** Represents a ByteDataItem. */
@@ -9930,6 +10119,9 @@ export namespace google {
 
                     /** ByteDataItem byteData. */
                     public byteData: (Uint8Array|Buffer|string);
+
+                    /** ByteDataItem fileLabel. */
+                    public fileLabel: string;
 
                     /**
                      * Creates a new ByteDataItem instance using the specified properties.
@@ -10020,7 +10212,8 @@ export namespace google {
                         EXCEL_DOCUMENT = 4,
                         POWERPOINT_DOCUMENT = 5,
                         TXT = 6,
-                        CSV = 7
+                        CSV = 7,
+                        ZIP = 9
                     }
                 }
 
