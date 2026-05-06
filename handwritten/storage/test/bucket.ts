@@ -2736,6 +2736,53 @@ describe('Bucket', () => {
           done();
         });
       });
+
+      it('should use the same invocationId across retries in a multipart upload', done => {
+        const fakeFile = new File(bucket, 'file-name');
+        const options = {
+          destination: fakeFile,
+          resumable: false,
+          preconditionOpts: {ifGenerationMatch: 123},
+        };
+        let retryCount = 0;
+        let firstInvocationId: string | undefined;
+
+        bucket.storage.retryOptions.autoRetry = true;
+        bucket.storage.retryOptions.maxRetries = 2;
+        bucket.storage.retryOptions.idempotencyStrategy = 1;
+
+        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+          retryCount++;
+          const currentId = options_.invocationId;
+
+          if (retryCount === 1) {
+            firstInvocationId = currentId;
+          } else {
+            assert.strictEqual(currentId, firstInvocationId);
+          }
+
+          const ws = new stream.PassThrough();
+
+          setImmediate(() => {
+            if (retryCount === 1) {
+              const error = new Error('Retryable failure') as GaxiosError;
+              error.code = 500;
+              error.status = 500;
+              ws.emit('error', error);
+            } else {
+              ws.emit('metadata', {});
+              ws.end();
+            }
+          });
+          return ws;
+        };
+
+        bucket.upload(filepath, options, err => {
+          assert.ifError(err);
+          assert.strictEqual(retryCount, 2);
+          done();
+        });
+      });
     });
 
     it('should allow overriding content type', done => {

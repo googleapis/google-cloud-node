@@ -4550,26 +4550,29 @@ describe('File', () => {
       });
     });
 
-    it('should accept an options object', done => {
-      const options = {};
+    it('should accept an options object', async () => {
+      const options = {resumable: false};
 
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        assert.strictEqual(options_, options);
-        setImmediate(done);
-        return new PassThrough();
+        assert.strictEqual(options_?.resumable, options.resumable);
+        assert.ok(options_?.invocationId);
+        const ws = new PassThrough();
+        setImmediate(() => ws.emit('finish'));
+        return ws;
       });
 
-      file.save(DATA, options, assert.ifError);
+      await file.save(DATA, options, assert.ifError);
     });
 
-    it('should not require options', done => {
+    it('should not require options', async () => {
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        assert.deepStrictEqual(options_, {});
-        setImmediate(done);
-        return new PassThrough();
+        assert.ok(options_?.invocationId);
+        const ws = new PassThrough();
+        setImmediate(() => ws.emit('finish'));
+        return ws;
       });
 
-      file.save(DATA, assert.ifError);
+      await file.save(DATA, assert.ifError);
     });
 
     it('should register the error listener', done => {
@@ -4621,6 +4624,22 @@ describe('File', () => {
       });
 
       file.save(DATA, assert.ifError);
+    });
+
+    it('should generate a single invocationId and pass it to createWriteStream', async () => {
+      const options = {resumable: false};
+      const createWriteStreamStub = sandbox
+        .stub(file, 'createWriteStream')
+        .callsFake(() => {
+          return new DelayedStreamNoError();
+        });
+
+      await file.save(DATA, options);
+
+      // Verify createWriteStream was called with an invocationId
+      const calledOptions = createWriteStreamStub.firstCall.args[0];
+      assert.ok(calledOptions?.invocationId);
+      assert.strictEqual(typeof calledOptions?.invocationId, 'string');
     });
   });
 
@@ -5186,6 +5205,22 @@ describe('File', () => {
         });
         assert.strictEqual(file.storage.retryOptions.autoRetry, true);
       });
+
+      it('should pass the invocationId to the resumable upload configuration', done => {
+        const options = {
+          invocationId: 'resumable-persistent-id',
+        };
+
+        const resumableUpload = require('../src/resumable-upload');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        sandbox.stub(resumableUpload, 'upload').callsFake((cfg: any) => {
+          assert.strictEqual(cfg.invocationId, options.invocationId);
+          setImmediate(done);
+          return new PassThrough();
+        });
+
+        file.startResumableUpload_(duplexify(), options);
+      });
     });
   });
 
@@ -5296,6 +5331,25 @@ describe('File', () => {
             options_.queryParameters?.userProject,
             options.userProject,
           );
+        })
+        .resolves({});
+
+      await file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should pass the invocationId to the storageTransport', async () => {
+      const options = {
+        invocationId: 'test-uuid-1234',
+        userProject: 'user-project-id',
+      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.strictEqual(
+            options_.queryParameters?.userProject,
+            options.userProject,
+          );
+          assert.strictEqual(options_.invocationId, options.invocationId);
         })
         .resolves({});
 

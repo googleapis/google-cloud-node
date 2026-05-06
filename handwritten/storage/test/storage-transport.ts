@@ -21,7 +21,7 @@ import {GoogleAuth} from 'google-auth-library';
 import sinon from 'sinon';
 import assert from 'assert';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
-import {Gaxios} from 'gaxios';
+import {Gaxios, GaxiosResponse} from 'gaxios';
 
 describe('Storage Transport', () => {
   let sandbox: sinon.SinonSandbox;
@@ -64,20 +64,25 @@ describe('Storage Transport', () => {
 
     const reqOpts: StorageRequestOptions = {
       url: '/bucket/object',
-      queryParameters: {alt: 'json', userProject: 'user-project'},
+      queryParameters: {
+        alt: 'json',
+        userProject: 'user-project',
+      },
       headers: {'content-encoding': 'gzip'},
     };
     const _response = await transport.makeRequest(reqOpts);
 
     assert.strictEqual(requestStub.calledOnce, true);
     const calledWith = requestStub.getCall(0).args[0];
-    assert.strictEqual(
-      calledWith.url.href,
-      `${baseUrl}/bucket/object?alt=json&userProject=user-project`,
-    );
-    assert.strictEqual(calledWith.headers.get('content-encoding'), 'gzip');
+    assert.strictEqual(calledWith.url, `${baseUrl}/bucket/object`);
+    assert.deepStrictEqual(calledWith.params, {
+      alt: 'json',
+      project: 'project-id',
+      userProject: 'user-project',
+    });
+    assert.strictEqual(calledWith.headers['content-encoding'], 'gzip');
     assert.ok(
-      calledWith.headers.get('User-Agent').includes('gcloud-node-storage/'),
+      calledWith.headers['user-agent'].includes('gcloud-node-storage/'),
     );
     assert.deepStrictEqual(_response, response.data);
   });
@@ -113,14 +118,11 @@ describe('Storage Transport', () => {
       .args[0];
 
     assert.ok(
-      calledWith.headers
-        .get('x-goog-api-client')
-        .includes('gccl-gcs-cmd/test-key'),
+      calledWith.headers['x-goog-api-client'].includes('gccl-gcs-cmd/test-key'),
     );
   });
 
-  // TODO: Undo this skip once the gaxios interceptor issue is resolved.
-  it.skip('should clear and add interceptors if provided', async () => {
+  it('should clear and add interceptors if provided', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const interceptorStub: any = sandbox.stub();
     const reqOpts: StorageRequestOptions = {
@@ -135,7 +137,18 @@ describe('Storage Transport', () => {
     transportInstance.interceptors.request.clear = clearStub;
     transportInstance.interceptors.request.add = addStub;
 
-    await transport.makeRequest(reqOpts);
+    const transportWithMock = new StorageTransport({
+      apiEndpoint: baseUrl,
+      baseUrl,
+      authClient: authClientStub,
+      projectId: 'project-id',
+      retryOptions: transport['retryOptions'],
+      scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+      packageJson: {name: 'test-package', version: '1.0.0'},
+      gaxiosInstance: transportInstance,
+    });
+
+    await transportWithMock.makeRequest(reqOpts);
 
     assert.strictEqual(clearStub.calledOnce, true);
     assert.strictEqual(addStub.calledOnce, true);
@@ -166,5 +179,52 @@ describe('Storage Transport', () => {
 
     const transport = new StorageTransport(options);
     assert.ok(transport.authClient instanceof GoogleAuth);
+  });
+
+  it('should use the provided invocationId in x-goog-api-client header', async () => {
+    const invocationId = 'manual-id-5678';
+    const mockResponse = {
+      config: {},
+      data: {},
+      headers: {},
+      status: 200,
+      statusText: 'OK',
+      request: {},
+    } as unknown as GaxiosResponse;
+
+    const requestStub = transport.authClient.request as sinon.SinonStub;
+    requestStub.resolves(mockResponse);
+
+    await transport.makeRequest({
+      url: 'http://test',
+      invocationId: invocationId,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const headers = requestStub.firstCall.args[0].headers as any;
+    const apiClientHeader = headers['x-goog-api-client'];
+
+    assert.ok(apiClientHeader.includes(`gccl-invocation-id/${invocationId}`));
+  });
+
+  it('should generate a new random ID if none is provided', async () => {
+    const mockResponse = {
+      config: {},
+      data: {},
+      headers: {},
+      status: 200,
+      statusText: 'OK',
+    } as GaxiosResponse;
+    const requestStub = transport.authClient.request as sinon.SinonStub;
+    requestStub.resolves(mockResponse);
+
+    await transport.makeRequest({url: 'http://test'});
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const headers = requestStub.firstCall.args[0].headers as any;
+    const apiClientHeader = headers['x-goog-api-client'];
+
+    assert.ok(apiClientHeader.includes('gccl-invocation-id/'));
+    const id = apiClientHeader.split('gccl-invocation-id/')[1];
+    assert.strictEqual(id.length, 36);
   });
 });
