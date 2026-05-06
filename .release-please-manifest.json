@@ -17,7 +17,7 @@
   "core/packages/tools": "1.0.5",
   "core/paginator": "6.0.0",
   "core/precise-date": "5.0.0",
-  "core/projectify": "5.0.0",
+  "core/projectify": "5.0.1",
   "core/promisify": "5.0.0",
   "handwritten/bigquery": "8.3.0",
   "handwritten/bigquery-storage": "5.1.0",

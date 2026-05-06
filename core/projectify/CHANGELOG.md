@@ -4,6 +4,14 @@
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/@google-cloud/projectify?activeTab=versions
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/projectify-v5.0.0...projectify-v5.0.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-projectify/compare/v4.0.0...v5.0.0) (2025-03-07)
 
 
