@@ -5,6 +5,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [8.3.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.0...bigquery-v8.3.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* **bigquery:** Run npm run types in correct directory in owlbot ([#8061](https://github.com/googleapis/google-cloud-node/issues/8061)) ([0948b35](https://github.com/googleapis/google-cloud-node/commit/0948b354bab60bbae906b7e9f8996b5b35754361))
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Pin @sinonjs/fake-timers to unblock build in bigquery ([#8121](https://github.com/googleapis/google-cloud-node/issues/8121)) ([374167b](https://github.com/googleapis/google-cloud-node/commit/374167bd4c1b45c38112938df55e821fdeb82c97))
+
 ## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.2.0...bigquery-v8.3.0) (2026-04-09)
 
 
