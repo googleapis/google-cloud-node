@@ -2,11 +2,10 @@
 
 **Table of contents**
 
-- [How to become a contributor and submit your own code](#how-to-become-a-contributor-and-submit-your-own-code)
-  - [Contributor License Agreements](#contributor-license-agreements)
-  - [Contributing A Patch](#contributing-a-patch)
-    - [Before you begin](#before-you-begin)
-  - [Running the tests](#running-the-tests)
+* [Contributor License Agreements](#contributor-license-agreements)
+* [Contributing a patch](#contributing-a-patch)
+* [Running the tests](#running-the-tests)
+* [Releasing the library](#releasing-the-library)
 
 ## Contributor License Agreements
 
@@ -40,9 +39,7 @@ accept your pull requests.
 
 ### Before you begin
 
-1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable billing for your project][billing]. 
-1.  [Enable the Google Cloud Storage API][enable_api]. 
+1.  [Select or create a Cloud Platform project][projects]. 
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -73,5 +70,5 @@ accept your pull requests.
 [setup]: https://cloud.google.com/nodejs/docs/setup
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=storage-api.googleapis.com
+
 [auth]: https://cloud.google.com/docs/authentication/getting-started

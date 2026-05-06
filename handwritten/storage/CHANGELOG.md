@@ -4,6 +4,61 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.19.0](https://github.com/googleapis/nodejs-storage/compare/v7.18.0...v7.19.0) (2026-02-05)
+
+
+### Features
+
+* Enable full object checksum validation on JSON path ([#2687](https://github.com/googleapis/nodejs-storage/issues/2687)) ([08a8962](https://github.com/googleapis/nodejs-storage/commit/08a896240e2ee110c13a5803ce5a2fbf38fbedc4))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency fast-xml-parser to v5 [security] ([#2713](https://github.com/googleapis/nodejs-storage/issues/2713)) ([420935a](https://github.com/googleapis/nodejs-storage/commit/420935a0334b0723ec052bb4d6b8527dd2acffea))
+
+## [7.18.0](https://github.com/googleapis/nodejs-storage/compare/v7.17.3...v7.18.0) (2025-11-28)
+
+
+### Features
+
+* **listBuckets:** Add support for returning partial success ([#2678](https://github.com/googleapis/nodejs-storage/issues/2678)) ([c7004da](https://github.com/googleapis/nodejs-storage/commit/c7004daae0b506eeefc5f4f241d9e3df3589b0e8))
+
+## [7.17.3](https://github.com/googleapis/nodejs-storage/compare/v7.17.2...v7.17.3) (2025-11-03)
+
+
+### Bug Fixes
+
+* :bug: fix the issue 2667, do not mutate object given to options … ([#2668](https://github.com/googleapis/nodejs-storage/issues/2668)) ([8a9f259](https://github.com/googleapis/nodejs-storage/commit/8a9f25968a08dc5cdaeb056054104db738fe651b))
+* Revert implement path containment to prevent traversal attacks ([254b6b2](https://github.com/googleapis/nodejs-storage/commit/254b6b2f9e79ce2e572f87694998538c9b1371c1))
+
+## [7.17.2](https://github.com/googleapis/nodejs-storage/compare/v7.17.1...v7.17.2) (2025-10-06)
+
+
+### Bug Fixes
+
+* Common Service: should retry a request failed ([#2652](https://github.com/googleapis/nodejs-storage/issues/2652)) ([b38b5d2](https://github.com/googleapis/nodejs-storage/commit/b38b5d221f2cb72658c1eb4a726315ab395a542c))
+* Implement path containment to prevent traversal attacks ([#2654](https://github.com/googleapis/nodejs-storage/issues/2654)) ([08d7abf](https://github.com/googleapis/nodejs-storage/commit/08d7abf32dd365b24ce34c66174be06c30bfce8f))
+
+## [7.17.1](https://github.com/googleapis/nodejs-storage/compare/v7.17.0...v7.17.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* Respect useAuthWithCustomEndpoint flag for resumable uploads ([#2637](https://github.com/googleapis/nodejs-storage/issues/2637)) ([707b4f2](https://github.com/googleapis/nodejs-storage/commit/707b4f2fe1d67878bcd8f1434e4cbb57c951994e))
+
+## [7.17.0](https://github.com/googleapis/nodejs-storage/compare/v7.16.0...v7.17.0) (2025-08-18)
+
+
+### Features
+
+* Add CSEK to download ([#2604](https://github.com/googleapis/nodejs-storage/issues/2604)) ([cacc0be](https://github.com/googleapis/nodejs-storage/commit/cacc0be49a4fe81c384180bdfd77820b6b3f3001))
+
+
+### Bug Fixes
+
+* Propagate errors when using pipelines ([#2560](https://github.com/googleapis/nodejs-storage/issues/2560)) ([#2624](https://github.com/googleapis/nodejs-storage/issues/2624)) ([a43b490](https://github.com/googleapis/nodejs-storage/commit/a43b4904ecf2ebacde22bc6efbdcf97ac886e28d))
+* Typo correction ([#2610](https://github.com/googleapis/nodejs-storage/issues/2610)) ([9cae69c](https://github.com/googleapis/nodejs-storage/commit/9cae69cc280227737b5a1a1476eae1b2612b162b))
+
 ## [7.16.0](https://github.com/googleapis/nodejs-storage/compare/v7.15.2...v7.16.0) (2025-03-31)
 
 
