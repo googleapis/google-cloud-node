@@ -45,3 +45,40 @@ Node cluster job uses `CLUSTER_WORKERS=3`. It splits total work across workers:
 - each worker has a separate Node event loop and Spanner client
 
 Use `VERBOSE_BATCH_LOGS=false` to remove per-batch logging overhead.
+
+## Reference table setup for Go benchmark
+
+`issue/go/main.go` samples IDs from these tables before inserting into `DeviceRecentActivityLog`:
+
+- `tracking.Devices(deviceRecordId)`
+- `tracking.DeviceDetails(deviceDetailsId)`
+- `tracking.HttpRequestDetails(httpRequestDetailsId)`
+- `tracking.HttpRequestLocations(httpRequestLocationId)`
+
+The insert target table does not require these rows unless you add foreign keys. They are only needed by the Go benchmark script. Minimum to run: 1 row in the first 3 tables; locations can be empty. Recommended for default `SAMPLE_SIZE=10000`: seed 10000 rows in each table.
+
+DDL:
+
+```sh
+gcloud spanner databases ddl update db \
+  --instance=irahul-load-test \
+  --project=span-cloud-testing \
+  --ddl-file=issue/create-reference.sql
+```
+
+Seed 10000 rows per reference table:
+
+```sh
+node issue/seed-reference-data.js
+```
+
+Use env overrides if needed:
+
+```sh
+DB_PROJECT_ID=span-cloud-testing \
+DB_INSTANCE=irahul-load-test \
+DB_DATABASE=db \
+DB_SCHEMA=tracking \
+SAMPLE_SIZE=10000 \
+node issue/seed-reference-data.js
+```
