@@ -1,6 +1,6 @@
 {
   "core/common": "6.0.0",
-  "core/dev-packages/jsdoc-fresh": "5.0.2",
+  "core/dev-packages/jsdoc-fresh": "5.0.3",
   "core/dev-packages/jsdoc-region-tag": "4.0.1",
   "core/dev-packages/pack-n-play": "4.2.1",
   "core/generator/gapic-generator-typescript": "4.11.13",
