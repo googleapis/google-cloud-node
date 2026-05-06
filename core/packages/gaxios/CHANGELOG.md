@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [7.1.4](https://github.com/googleapis/google-cloud-node-core/compare/gaxios-v7.1.3...gaxios-v7.1.4) (2025-12-17)
 
 
