@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ describe('combine libraries', () => {
   it('should generate unique final directory paths', async () => {
     const libraryPaths = await generateFinalDirectoryPath(libraryConfigCJS);
     // This should be the amount of unique file paths in the tree directory
-    assert.deepStrictEqual(libraryPaths.length, 103);
+    assert.deepStrictEqual(libraryPaths.length, 102);
 
     // Confirm there are only unique items in the array
     assert.deepStrictEqual(

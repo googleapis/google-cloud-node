@@ -1671,6 +1671,12 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
@@ -2005,6 +2011,30 @@
                             case "STANDARD_SMALL":
                             case 4:
                                 message.nodeType = 4;
+                                break;
+                            case "CUSTOM_MICRO":
+                            case 5:
+                                message.nodeType = 5;
+                                break;
+                            case "CUSTOM_MINI":
+                            case 6:
+                                message.nodeType = 6;
+                                break;
+                            case "HIGHCPU_MEDIUM":
+                            case 7:
+                                message.nodeType = 7;
+                                break;
+                            case "STANDARD_LARGE":
+                            case 8:
+                                message.nodeType = 8;
+                                break;
+                            case "HIGHMEM_2XLARGE":
+                            case 9:
+                                message.nodeType = 9;
+                                break;
+                            case "CUSTOM_PICO":
+                            case 10:
+                                message.nodeType = 10;
                                 break;
                             }
                             if (object.persistenceConfig != null) {
@@ -2873,6 +2903,12 @@
                                         case 2:
                                         case 3:
                                         case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
                                             break;
                                         }
                                     }
@@ -2923,6 +2959,30 @@
                                     case "STANDARD_SMALL":
                                     case 4:
                                         message.targetNodeType = 4;
+                                        break;
+                                    case "CUSTOM_MICRO":
+                                    case 5:
+                                        message.targetNodeType = 5;
+                                        break;
+                                    case "CUSTOM_MINI":
+                                    case 6:
+                                        message.targetNodeType = 6;
+                                        break;
+                                    case "HIGHCPU_MEDIUM":
+                                    case 7:
+                                        message.targetNodeType = 7;
+                                        break;
+                                    case "STANDARD_LARGE":
+                                    case 8:
+                                        message.targetNodeType = 8;
+                                        break;
+                                    case "HIGHMEM_2XLARGE":
+                                    case 9:
+                                        message.targetNodeType = 9;
+                                        break;
+                                    case "CUSTOM_PICO":
+                                    case 10:
+                                        message.targetNodeType = 10;
                                         break;
                                     }
                                     return message;
@@ -3973,6 +4033,12 @@
                          * @property {number} HIGHMEM_MEDIUM=2 HIGHMEM_MEDIUM value
                          * @property {number} HIGHMEM_XLARGE=3 HIGHMEM_XLARGE value
                          * @property {number} STANDARD_SMALL=4 STANDARD_SMALL value
+                         * @property {number} CUSTOM_MICRO=5 CUSTOM_MICRO value
+                         * @property {number} CUSTOM_MINI=6 CUSTOM_MINI value
+                         * @property {number} HIGHCPU_MEDIUM=7 HIGHCPU_MEDIUM value
+                         * @property {number} STANDARD_LARGE=8 STANDARD_LARGE value
+                         * @property {number} HIGHMEM_2XLARGE=9 HIGHMEM_2XLARGE value
+                         * @property {number} CUSTOM_PICO=10 CUSTOM_PICO value
                          */
                         Instance.NodeType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3981,6 +4047,12 @@
                             values[valuesById[2] = "HIGHMEM_MEDIUM"] = 2;
                             values[valuesById[3] = "HIGHMEM_XLARGE"] = 3;
                             values[valuesById[4] = "STANDARD_SMALL"] = 4;
+                            values[valuesById[5] = "CUSTOM_MICRO"] = 5;
+                            values[valuesById[6] = "CUSTOM_MINI"] = 6;
+                            values[valuesById[7] = "HIGHCPU_MEDIUM"] = 7;
+                            values[valuesById[8] = "STANDARD_LARGE"] = 8;
+                            values[valuesById[9] = "HIGHMEM_2XLARGE"] = 9;
+                            values[valuesById[10] = "CUSTOM_PICO"] = 10;
                             return values;
                         })();
     
@@ -5379,6 +5451,12 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
@@ -5493,6 +5571,30 @@
                             case "STANDARD_SMALL":
                             case 4:
                                 message.nodeType = 4;
+                                break;
+                            case "CUSTOM_MICRO":
+                            case 5:
+                                message.nodeType = 5;
+                                break;
+                            case "CUSTOM_MINI":
+                            case 6:
+                                message.nodeType = 6;
+                                break;
+                            case "HIGHCPU_MEDIUM":
+                            case 7:
+                                message.nodeType = 7;
+                                break;
+                            case "STANDARD_LARGE":
+                            case 8:
+                                message.nodeType = 8;
+                                break;
+                            case "HIGHMEM_2XLARGE":
+                            case 9:
+                                message.nodeType = 9;
+                                break;
+                            case "CUSTOM_PICO":
+                            case 10:
+                                message.nodeType = 10;
                                 break;
                             }
                             if (object.replicaCount != null)
@@ -18058,6 +18160,12 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
@@ -18293,6 +18401,30 @@
                             case "STANDARD_SMALL":
                             case 4:
                                 message.nodeType = 4;
+                                break;
+                            case "CUSTOM_MICRO":
+                            case 5:
+                                message.nodeType = 5;
+                                break;
+                            case "CUSTOM_MINI":
+                            case 6:
+                                message.nodeType = 6;
+                                break;
+                            case "HIGHCPU_MEDIUM":
+                            case 7:
+                                message.nodeType = 7;
+                                break;
+                            case "STANDARD_LARGE":
+                            case 8:
+                                message.nodeType = 8;
+                                break;
+                            case "HIGHMEM_2XLARGE":
+                            case 9:
+                                message.nodeType = 9;
+                                break;
+                            case "CUSTOM_PICO":
+                            case 10:
+                                message.nodeType = 10;
                                 break;
                             }
                             if (object.persistenceConfig != null) {
@@ -19588,6 +19720,12 @@
                          * @property {number} HIGHMEM_MEDIUM=2 HIGHMEM_MEDIUM value
                          * @property {number} HIGHMEM_XLARGE=3 HIGHMEM_XLARGE value
                          * @property {number} STANDARD_SMALL=4 STANDARD_SMALL value
+                         * @property {number} CUSTOM_MICRO=5 CUSTOM_MICRO value
+                         * @property {number} CUSTOM_MINI=6 CUSTOM_MINI value
+                         * @property {number} HIGHCPU_MEDIUM=7 HIGHCPU_MEDIUM value
+                         * @property {number} STANDARD_LARGE=8 STANDARD_LARGE value
+                         * @property {number} HIGHMEM_2XLARGE=9 HIGHMEM_2XLARGE value
+                         * @property {number} CUSTOM_PICO=10 CUSTOM_PICO value
                          */
                         Instance.NodeType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -19596,6 +19734,12 @@
                             values[valuesById[2] = "HIGHMEM_MEDIUM"] = 2;
                             values[valuesById[3] = "HIGHMEM_XLARGE"] = 3;
                             values[valuesById[4] = "STANDARD_SMALL"] = 4;
+                            values[valuesById[5] = "CUSTOM_MICRO"] = 5;
+                            values[valuesById[6] = "CUSTOM_MINI"] = 6;
+                            values[valuesById[7] = "HIGHCPU_MEDIUM"] = 7;
+                            values[valuesById[8] = "STANDARD_LARGE"] = 8;
+                            values[valuesById[9] = "HIGHMEM_2XLARGE"] = 9;
+                            values[valuesById[10] = "CUSTOM_PICO"] = 10;
                             return values;
                         })();
     

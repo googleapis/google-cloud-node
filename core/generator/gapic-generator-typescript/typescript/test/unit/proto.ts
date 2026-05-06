@@ -420,6 +420,59 @@ describe('src/schema/proto.ts', () => {
       assert.strictEqual(proto.services[fd.service[0].name].protoFile, fd.name);
     });
 
+    it('should calculate mixin flags accurately for duplicate methods', () => {
+      const fd = {} as protos.google.protobuf.FileDescriptorProto;
+      fd.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
+      fd.service[0].name = 'TestService';
+      fd.service[0].method = [
+        {name: 'GetIamPolicy'},
+        {name: 'ListLocations'},
+        {name: 'GetOperation'},
+      ] as protos.google.protobuf.MethodDescriptorProto[];
+
+      // Simulating mixins being enabled (non-zero value)
+      (fd.service[0] as any).IAMPolicyMixin = 1;
+      (fd.service[0] as any).LocationMixin = 1;
+      (fd.service[0] as any).LongRunningOperationsMixin = 1;
+
+      const options: Options = {
+        grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+      };
+
+      const augmentedService = augmentService({
+        allMessages: {},
+        localMessages: {},
+        packageName: 'google.showcase.v1beta1',
+        service: fd.service[0],
+        commentsMap: new CommentsMap([fd]),
+        allResourceDatabase: new ResourceDatabase(),
+        resourceDatabase: new ResourceDatabase(),
+        options,
+        protoFile: 'fd',
+      });
+
+      assert.strictEqual(
+        augmentedService.iamPolicyMixinFlags?.getIamPolicy,
+        false
+      ); // Native GetIamPolicy exists
+      assert.strictEqual(augmentedService.iamPolicyMixinFlags?.setIamPolicy, true);
+      assert.strictEqual(
+        augmentedService.iamPolicyMixinFlags?.testIamPermissions,
+        true
+      );
+
+      assert.strictEqual(augmentedService.locationMixinFlags?.getLocation, true);
+      assert.strictEqual(
+        augmentedService.locationMixinFlags?.listLocations,
+        false
+      ); // Native ListLocations exists
+
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.getOperation, false); // Native GetOperation exists
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.cancelOperation, true);
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.deleteOperation, true);
+      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.listOperations, true);
+    });
+
     it('should return api version if it exists', () => {
       const fd = {} as protos.google.protobuf.FileDescriptorProto;
       fd.name = 'google/cloud/showcase/v1beta1/test.proto';

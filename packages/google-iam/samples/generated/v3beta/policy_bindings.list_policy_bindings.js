@@ -41,8 +41,7 @@ function main(parent) {
   /**
    *  Optional. The maximum number of policy bindings to return. The service may
    *  return fewer than this value.
-   *  If unspecified, at most 50 policy bindings will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  The default value is 50. The maximum value is 1000.
    */
   // const pageSize = 1234
   /**
@@ -54,7 +53,8 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  Optional. An expression for filtering the results of the request. Filter
-   *  rules are case insensitive. Some eligible fields for filtering are:
+   *  rules are case insensitive. Some eligible fields for filtering are the
+   *  following:
    *  + `target`
    *  + `policy`
    *  Some examples of filter queries:

@@ -1,5 +1,20 @@
 # Changelog
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.6.0...aiplatform-v6.7.0) (2026-05-01)
+
+
+### Features
+
+* Add OnlineEvaluator API and update Evaluation API ([#8044](https://github.com/googleapis/google-cloud-node/issues/8044)) ([7c62c7d](https://github.com/googleapis/google-cloud-node/commit/7c62c7d69f706b65c7e73c50e81909c4d6f6ce0d))
+* New field CopyModelRequest.custome_service_account for Model Registry CopyModel BYOSA ([7c62c7d](https://github.com/googleapis/google-cloud-node/commit/7c62c7d69f706b65c7e73c50e81909c4d6f6ce0d))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.5.0...aiplatform-v6.6.0) (2026-04-14)
 
 

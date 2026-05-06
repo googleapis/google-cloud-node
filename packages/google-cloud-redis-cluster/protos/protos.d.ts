@@ -388,7 +388,10 @@ export namespace google {
                         REDIS_SHARED_CORE_NANO = 1,
                         REDIS_HIGHMEM_MEDIUM = 2,
                         REDIS_HIGHMEM_XLARGE = 3,
-                        REDIS_STANDARD_SMALL = 4
+                        REDIS_STANDARD_SMALL = 4,
+                        REDIS_HIGHCPU_MEDIUM = 7,
+                        REDIS_STANDARD_LARGE = 8,
+                        REDIS_HIGHMEM_2XLARGE = 9
                     }
 
                     /** TransitEncryptionMode enum. */
@@ -6815,7 +6818,10 @@ export namespace google {
                         REDIS_SHARED_CORE_NANO = 1,
                         REDIS_HIGHMEM_MEDIUM = 2,
                         REDIS_HIGHMEM_XLARGE = 3,
-                        REDIS_STANDARD_SMALL = 4
+                        REDIS_STANDARD_SMALL = 4,
+                        REDIS_HIGHCPU_MEDIUM = 7,
+                        REDIS_STANDARD_LARGE = 8,
+                        REDIS_HIGHMEM_2XLARGE = 9
                     }
 
                     /** TransitEncryptionMode enum. */

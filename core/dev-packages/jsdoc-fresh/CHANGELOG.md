@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [5.0.2](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v5.0.1...jsdoc-fresh-v5.0.2) (2025-10-07)
 
 

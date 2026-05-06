@@ -1272,6 +1272,14 @@
                               "rule": "repeated",
                               "type": "ProductSustainabilityIncentive",
                               "id": 138
+                            },
+                            "videoLinks": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 169,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -1610,6 +1618,11 @@
                               "oneof": [
                                 "creditType"
                               ]
+                            },
+                            "_annualPercentageRate": {
+                              "oneof": [
+                                "annualPercentageRate"
+                              ]
                             }
                           },
                           "fields": {
@@ -1632,6 +1645,14 @@
                               "type": "CreditType",
                               "id": 4,
                               "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "annualPercentageRate": {
+                              "type": "double",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             }

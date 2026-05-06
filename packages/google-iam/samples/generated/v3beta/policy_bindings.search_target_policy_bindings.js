@@ -42,8 +42,7 @@ function main(target, parent) {
   /**
    *  Optional. The maximum number of policy bindings to return. The service may
    *  return fewer than this value.
-   *  If unspecified, at most 50 policy bindings will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  The default value is 50. The maximum value is 1000.
    */
   // const pageSize = 1234
   /**
@@ -66,6 +65,16 @@ function main(target, parent) {
    *  * `organizations/{organization_id}/locations/{location}`
    */
   // const parent = 'abc123'
+  /**
+   *  Optional. Filtering currently only supports the kind of policies to return,
+   *  and must be in the format "policy_kind={policy_kind}".
+   *  If String is empty, bindings bound to all kinds of policies would be
+   *  returned.
+   *  The only supported values are the following:
+   *  * "policy_kind=PRINCIPAL_ACCESS_BOUNDARY",
+   *  * "policy_kind=ACCESS"
+   */
+  // const filter = 'abc123'
 
   // Imports the Iam library
   const {PolicyBindingsClient} = require('@google-cloud/iam').v3beta;

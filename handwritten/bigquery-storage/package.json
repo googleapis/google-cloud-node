@@ -41,14 +41,14 @@
     "long": "^5.2.0"
   },
   "peerDependencies": {
-    "protobufjs": "7.2.4 - 7.5.0"
+    "protobufjs": "^7.5.5"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^8.0.0",
     "@types/extend": "^3.0.4",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.14",
-    "@types/sinon": "^17.0.4",
+    "@types/sinon": "^21.0.0",
     "@types/uuid": "^10.0.0",
     "avsc": "^5.7.9",
     "c8": "^10.1.3",
