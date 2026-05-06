@@ -164,7 +164,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadManyFiles(paths, {prefix: 'hello/world'});
     });
 
-    it('replaces OS specfic separator with posix separator when calling bucket.upload', async () => {
+    it('replaces OS specific separator with posix separator when calling bucket.upload', async () => {
       const filePath = ['a', 'b', 'c'].join(path.sep);
       const expected = ['a', 'b', 'c'].join(path.posix.sep);
 
@@ -345,7 +345,7 @@ describe('Transfer Manager', () => {
       });
       assert.strictEqual(
         mkdirSpy.calledWith(expectedDir, {recursive: true}),
-        true
+        true,
       );
     });
 
@@ -364,7 +364,7 @@ describe('Transfer Manager', () => {
 
       const result = (await transferManager.downloadManyFiles(
         [maliciousFile, validFile],
-        {passthroughOptions: {destination: destination}}
+        {passthroughOptions: {destination: destination}},
       )) as DownloadResponseWithStatus[];
 
       assert.strictEqual(maliciousDownloadStub.called, false);
@@ -412,7 +412,7 @@ describe('Transfer Manager', () => {
       const file = new File(bucket, filename);
       const expectedDestination = path.resolve(
         destination,
-        filename.replace(/^\/+/, '')
+        filename.replace(/^\/+/, ''),
       );
 
       const downloadStub = sandbox
@@ -436,7 +436,7 @@ describe('Transfer Manager', () => {
       const filename = '/etc/passwd';
       const expectedDestination = path.resolve(
         destination,
-        filename.replace(/^\/+/, '')
+        filename.replace(/^\/+/, ''),
       );
 
       const file = new File(bucket, filename);
@@ -466,7 +466,7 @@ describe('Transfer Manager', () => {
 
       const result = (await transferManager.downloadManyFiles(
         [file],
-        options
+        options,
       )) as DownloadResponseWithStatus[];
 
       assert.strictEqual(downloadStub.called, false);
@@ -525,7 +525,7 @@ describe('Transfer Manager', () => {
       assert.strictEqual(
         result.length,
         fileNames.length,
-        `Parity Failure: Processed ${result.length} files but input had ${fileNames.length}`
+        `Parity Failure: Processed ${result.length} files but input had ${fileNames.length}`,
       );
 
       const downloads = result.filter(r => !r.skipped);
@@ -538,22 +538,22 @@ describe('Transfer Manager', () => {
       assert.strictEqual(
         downloads.length,
         expectedDownloads,
-        `Expected ${expectedDownloads} downloads but got ${downloads.length}`
+        `Expected ${expectedDownloads} downloads but got ${downloads.length}`,
       );
 
       assert.strictEqual(
         skips.length,
         expectedSkips,
-        `Expected ${expectedSkips} skips but got ${skips.length}`
+        `Expected ${expectedSkips} skips but got ${skips.length}`,
       );
 
       const traversalSkips = skips.filter(
-        f => f.reason === SkipReason.PATH_TRAVERSAL
+        f => f.reason === SkipReason.PATH_TRAVERSAL,
       );
       assert.strictEqual(traversalSkips.length, expectedTraversalSkips);
 
       const illegalCharSkips = skips.filter(
-        f => f.reason === SkipReason.ILLEGAL_CHARACTER
+        f => f.reason === SkipReason.ILLEGAL_CHARACTER,
       );
       assert.strictEqual(illegalCharSkips.length, 2);
     });
@@ -963,7 +963,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadFileInChunks(
         filePath,
         {validation: 'crc32c'},
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
@@ -994,7 +994,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadFileInChunks(
         filePath,
         {},
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
