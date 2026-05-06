@@ -11,7 +11,7 @@ steps:
     npm install -g npm@latest
     npm config set prefix /usr/local
     npm install
-  dir: '.' # Changed to '.' as the cloudbuild.yaml is in this directory
+  dir: 'handwritten/bigtable' # Changed to '.' as the cloudbuild.yaml is in this directory
   id: 'install-dependencies'
 
 # 2. (Optional) Run pre-system-test.sh if it exists
@@ -27,7 +27,7 @@ steps:
     else
       echo "No .kokoro/pre-system-test.sh found, skipping."
     fi
-  dir: '.'
+  dir: 'handwritten/bigtable'
   id: 'run-pre-test-hook'
 
 # 3. Configure environment variables for the tests and run system tests
@@ -42,7 +42,7 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   entrypoint: 'npm'
   args: ['run', 'system-test']
-  dir: '.' # Changed to '.'
+  dir: 'handwritten/bigtable'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
   # If you need specific credentials from Secret Manager, uncomment these:
@@ -73,7 +73,7 @@ steps:
     #   b) Replicate its functionality directly in this step.
     #   c) Store it in a GCS bucket and fetch it.
     echo "Codecov reporting (if desired) would be integrated here."
-  dir: '.' # Changed to '.'
+  dir: 'handwritten/bigtable' # Changed to '.'
   id: 'coverage-report'
 
 # If you use Secret Manager for credentials, uncomment and configure:
