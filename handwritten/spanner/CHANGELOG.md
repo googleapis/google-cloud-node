@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.7.0...spanner-v8.7.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* **spanner:** Clear metrics tracers after operation completion ([#8172](https://github.com/googleapis/google-cloud-node/issues/8172)) ([4c33205](https://github.com/googleapis/google-cloud-node/commit/4c33205869fc81a0ebd60604c3f91fe90b87ecea))
+* **spanner:** Disable metrics tracer when built-in metrics are disabled ([#8170](https://github.com/googleapis/google-cloud-node/issues/8170)) ([0dd9a53](https://github.com/googleapis/google-cloud-node/commit/0dd9a53aa825d08c106928f88d72ff931f839b1c))
+* **spanner:** GetTransaction type with options, cb ([#8045](https://github.com/googleapis/google-cloud-node/issues/8045)) ([8e31dd7](https://github.com/googleapis/google-cloud-node/commit/8e31dd7b8afb0a2fb6e1d6809fee7d9cd21370c8))
+* **spanner:** Record fractional latency metrics ([#8168](https://github.com/googleapis/google-cloud-node/issues/8168)) ([9e91cc8](https://github.com/googleapis/google-cloud-node/commit/9e91cc8b68973b546f1fb94b1c39951c395f5a2b))
+
 ## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.6.0...spanner-v8.7.0) (2026-04-14)
 
 
