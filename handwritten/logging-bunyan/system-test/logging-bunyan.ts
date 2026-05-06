@@ -75,7 +75,7 @@ describe('LoggingBunyan', function () {
       LOG_NAME,
       start,
       2,
-      WRITE_CONSISTENCY_DELAY_MS
+      WRITE_CONSISTENCY_DELAY_MS,
     );
     assert.strictEqual(entries.length, 2);
     let isDiagnosticPresent = false;
@@ -84,7 +84,7 @@ describe('LoggingBunyan', function () {
       if (
         Object.prototype.hasOwnProperty.call(
           entry.data,
-          instrumentation.DIAGNOSTIC_INFO_KEY
+          instrumentation.DIAGNOSTIC_INFO_KEY,
         )
       ) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -121,11 +121,11 @@ describe('LoggingBunyan', function () {
         verify: (entry: types.StackdriverEntry) => {
           assert.strictEqual(
             (entry.data as types.StackdriverData).message,
-            'first'
+            'first',
           );
           assert.strictEqual(
             (entry.data as types.StackdriverData).pid,
-            process.pid
+            process.pid,
           );
         },
       },
@@ -136,12 +136,12 @@ describe('LoggingBunyan', function () {
         verify: (entry: types.StackdriverEntry) => {
           assert(
             ((entry.data as types.StackdriverData).message as string).includes(
-              'Error: second'
-            )
+              'Error: second',
+            ),
           );
           assert.strictEqual(
             (entry.data as types.StackdriverData).pid,
-            process.pid
+            process.pid,
           );
         },
       },
@@ -157,11 +157,11 @@ describe('LoggingBunyan', function () {
         verify: (entry: types.StackdriverEntry) => {
           assert.strictEqual(
             (entry.data as types.StackdriverData).message,
-            'third'
+            'third',
           );
           assert.strictEqual(
             (entry.data as types.StackdriverData).pid,
-            process.pid
+            process.pid,
           );
           assert.deepStrictEqual((entry.data as types.StackdriverData).test, {
             circular: '[Circular]',
@@ -181,17 +181,17 @@ describe('LoggingBunyan', function () {
       verify: (entry: types.StackdriverEntry) => {
         assert.strictEqual(
           (entry.data as types.StackdriverData).message,
-          'earliest'
+          'earliest',
         );
         assert.strictEqual(
           (entry.data as types.StackdriverData).pid,
-          process.pid
+          process.pid,
         );
         assert.strictEqual(
           (
             (entry.metadata as types.StackdriverEntryMetadata).timestamp as Date
           ).toString(),
-          timestamp.toString()
+          timestamp.toString(),
         );
       },
     };
@@ -218,7 +218,7 @@ describe('LoggingBunyan', function () {
       LOG_NAME,
       start,
       testData.length,
-      WRITE_CONSISTENCY_DELAY_MS
+      WRITE_CONSISTENCY_DELAY_MS,
     );
     assert.strictEqual(entries.length, testData.length);
     entries.reverse().forEach((entry, index) => {
@@ -241,13 +241,13 @@ describe('LoggingBunyan', function () {
       const errors = await errorsTransport.pollForNewEvents(
         SERVICE,
         start,
-        ERROR_REPORTING_POLL_TIMEOUT
+        ERROR_REPORTING_POLL_TIMEOUT,
       );
 
       assert.strictEqual(
         errors.length,
         1,
-        `expected 1 error but got ${require('util').inspect(errors)}`
+        `expected 1 error but got ${require('util').inspect(errors)}`,
       );
       const errEvent = errors[0];
 
@@ -262,7 +262,7 @@ function pollLogs(
   logName: string,
   logTime: number,
   size: number,
-  timeout: number
+  timeout: number,
 ) {
   const p = new Promise<types.StackdriverEntry[]>((resolve, reject) => {
     const end = Date.now() + timeout;
@@ -291,7 +291,7 @@ function pollLogs(
               return reject(new Error('timeout'));
             }
             loop();
-          }
+          },
         );
       }, 500);
     }
