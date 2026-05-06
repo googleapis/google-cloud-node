@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [5.1.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v5.0.0...v5.1.0) (2025-06-06)
 
 

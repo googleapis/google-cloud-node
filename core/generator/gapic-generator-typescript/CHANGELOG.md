@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## [4.11.13](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.12...gapic-generator-v4.11.13) (2026-04-06)
 
 
