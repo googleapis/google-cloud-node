@@ -41,7 +41,7 @@ node.fix_hermetic(relative_dir="handwritten/logging-winston")
 s.move(
     "handwritten/logging-winston/.kokoro/common_env_vars.cfg",
     "handwritten/logging-winston/.kokoro/common.cfg",
-    merge=lambda src, dst, _, : f"{dst}\n{src}",
+    merge=lambda src, dst, _: dst if src.strip() in dst else f"{dst.rstrip()}\n{src.strip()}\n",
 )
 for path, subdirs, files in os.walk(f"handwritten/logging-winston/.kokoro/continuous"):
     for name in files:
@@ -50,5 +50,5 @@ for path, subdirs, files in os.walk(f"handwritten/logging-winston/.kokoro/contin
             s.move(
                 "handwritten/logging-winston/.kokoro/common_env_vars.cfg",
                 file_path,
-                merge=lambda src, dst, _, : f"{dst}\n{src}",
+                merge=lambda src, dst, _: dst if src.strip() in dst else f"{dst.rstrip()}\n{src.strip()}\n",
             )
