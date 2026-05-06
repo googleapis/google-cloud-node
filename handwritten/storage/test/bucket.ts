@@ -1834,6 +1834,72 @@ describe('Bucket', () => {
         assert.deepStrictEqual(files[0].metadata, fileMetadata);
       });
     });
+
+    it('should filter by presence of key/value pair', done => {
+      const filter = 'contexts."status"="active"';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by absence of key/value pair (NOT)', done => {
+      const filter = '-contexts."status"="active"';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by presence of key regardless of value (Existence)', done => {
+      const filter = 'contexts."status":*';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should filter by absence of key regardless of value (Non-existence)', done => {
+      const filter = '-contexts."status":*';
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(reqOpts.qs.filter, filter);
+        done();
+      };
+
+      bucket.getFiles({filter}, util.noop);
+    });
+
+    it('should include contexts in the returned File metadata', done => {
+      const fileMetadata = {
+        name: 'filename',
+        contexts: {
+          custom: {
+            dept: {value: 'eng', createTime: '...'},
+          },
+        },
+      };
+      bucket.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, {items: [fileMetadata]});
+      };
+
+      bucket.getFiles((err: Error, files: FakeFile[]) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(
+          files[0].metadata.contexts,
+          fileMetadata.contexts
+        );
+        done();
+      });
+    });
   });
 
   describe('getLabels', () => {

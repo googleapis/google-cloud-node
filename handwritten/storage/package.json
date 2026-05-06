@@ -73,7 +73,7 @@
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "system-test:esm": "mocha build/esm/system-test --timeout 600000 --exit",
     "system-test": "mocha build/cjs/system-test --timeout 600000 --exit",
-    "test": "c8 mocha build/cjs/test"
+    "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha build/cjs/test"
   },
   "dependencies": {
     "@google-cloud/paginator": "^6.0.0",
