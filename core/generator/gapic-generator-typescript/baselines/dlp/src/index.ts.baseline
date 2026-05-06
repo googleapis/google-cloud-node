@@ -19,7 +19,7 @@
 import * as v2 from './v2';
 const DlpServiceClient = v2.DlpServiceClient;
 type DlpServiceClient = v2.DlpServiceClient;
-export {v2, DlpServiceClient};
-export default {v2, DlpServiceClient};
+export { v2, DlpServiceClient };
+export default { v2, DlpServiceClient };
 import * as protos from '../protos/protos';
-export {protos}
+export { protos };

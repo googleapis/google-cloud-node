@@ -17,7 +17,15 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, JobServiceClient, ModelServiceClient, ProjectServiceClient, RoutineServiceClient, RowAccessPolicyServiceClient, TableServiceClient} from 'bigquery';
+import {
+  DatasetServiceClient,
+  JobServiceClient,
+  ModelServiceClient,
+  ProjectServiceClient,
+  RoutineServiceClient,
+  RowAccessPolicyServiceClient,
+  TableServiceClient,
+} from 'bigquery';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
@@ -35,7 +43,9 @@ function doStuffWithProjectServiceClient(client: ProjectServiceClient) {
 function doStuffWithRoutineServiceClient(client: RoutineServiceClient) {
   client.close();
 }
-function doStuffWithRowAccessPolicyServiceClient(client: RowAccessPolicyServiceClient) {
+function doStuffWithRowAccessPolicyServiceClient(
+  client: RowAccessPolicyServiceClient,
+) {
   client.close();
 }
 function doStuffWithTableServiceClient(client: TableServiceClient) {
