@@ -35,7 +35,6 @@ import {
   RETRYABLE_ERR_FN_DEFAULT,
   Storage,
 } from '../src/storage.js';
-import {CRC32C} from '../src/crc32c.js';
 
 const bucketName = process.env.BUCKET_NAME || 'gcs-resumable-upload-test';
 
@@ -55,7 +54,10 @@ describe('resumable-upload', () => {
     retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
   };
 
-  const bucket = new Storage({retryOptions}).bucket(bucketName);
+  const bucket = new Storage({
+    projectId: process.env.PROJECT_ID,
+    retryOptions: retryOptions,
+  }).bucket(bucketName);
   let filePath: string;
 
   before(async () => {
@@ -97,7 +99,7 @@ describe('resumable-upload', () => {
     // see: https://cloud.google.com/storage/docs/exponential-backoff:
     const ms = Math.pow(2, retries) * 1000 + Math.random() * 2000;
     console.info(`retrying "${title}" in ${ms}ms`);
-    setTimeout(done(), ms);
+    setTimeout(() => done(), ms);
   }
 
   it('should work', done => {
