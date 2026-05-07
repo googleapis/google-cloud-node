@@ -16,35 +16,25 @@
 export {GoogleAuthOptions} from 'google-auth-library';
 
 export {
-  Service,
-  ServiceConfig,
-  ServiceOptions,
-  StreamRequestOptions,
-} from './service.js';
-
-export {
   BaseMetadata,
   DeleteCallback,
+  DeleteOptions,
   ExistsCallback,
   GetConfig,
   InstanceResponseCallback,
-  Interceptor,
   MetadataCallback,
   MetadataResponse,
   Methods,
   ResponseCallback,
   ServiceObject,
   ServiceObjectConfig,
-  ServiceObjectParent,
   SetMetadataResponse,
 } from './service-object.js';
 
 export {
   Abortable,
   AbortableDuplex,
-  ApiError,
   BodyResponseCallback,
-  DecorateRequestOptions,
   ResponseBody,
   util,
 } from './util.js';
