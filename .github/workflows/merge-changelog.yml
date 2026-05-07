@@ -1,0 +1,30 @@
+name: Merge changelog.json
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - changelog.json
+  push:
+    branches:
+      - main
+    paths:
+      - changelog.json
+  workflow_dispatch:
+
+jobs:
+  merge-changelog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Run Merge Changelog Script
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const script = require('./.github/scripts/merge-changelog.cjs');
+            await script({ github, context });
