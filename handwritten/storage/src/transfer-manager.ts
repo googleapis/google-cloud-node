@@ -31,8 +31,7 @@ import {CRC32C} from './crc32c.js';
 import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
-import {ApiError} from './nodejs-common/index.js';
-import {GaxiosResponse, Headers} from 'gaxios';
+import {GaxiosError, GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {getRuntimeTrackingString, getUserAgentString} from './util.js';
@@ -133,6 +132,10 @@ export interface UploadFileInChunksOptions {
   headers?: {[key: string]: string};
 }
 
+interface MultiPartUploadErrorResponse {
+  error?: object;
+}
+
 export interface MultiPartUploadHelper {
   bucket: Bucket;
   fileName: string;
@@ -202,7 +205,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     uploadId?: string,
     partsMap?: Map<number, string>,
   ) {
-    this.authClient = bucket.storage.authClient || new GoogleAuth();
+    this.authClient =
+      bucket.storage.storageTransport.authClient || new GoogleAuth();
     this.uploadId = uploadId || '';
     this.bucket = bucket;
     this.fileName = fileName;
@@ -220,7 +224,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     };
   }
 
-  #setGoogApiClientHeaders(headers: Headers = {}): Headers {
+  #setGoogApiClientHeaders(headers = new Headers()): Headers {
     let headerFound = false;
     let userAgentFound = false;
 
@@ -230,8 +234,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
         // Prepend command feature to value, if not already there
         if (!value.includes(GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED)) {
-          headers[key] =
-            `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+          headers.set(
+            key,
+            `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`,
+          );
         }
       } else if (key.toLocaleLowerCase().trim() === 'user-agent') {
         userAgentFound = true;
@@ -240,14 +246,17 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
     // If the header isn't present, add it
     if (!headerFound) {
-      headers['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
-        packageJson.version
-      } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+      headers.set(
+        'x-goog-api-client',
+        `${getRuntimeTrackingString()} gccl/${
+          packageJson.version
+        } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`,
+      );
     }
 
     // If the User-Agent isn't present, add it
     if (!userAgentFound) {
-      headers['User-Agent'] = getUserAgentString();
+      headers.set('User-Agent', getUserAgentString());
     }
 
     return headers;
@@ -258,21 +267,26 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
    *
    * @returns {Promise<void>}
    */
-  async initiateUpload(headers: Headers = {}): Promise<void> {
+  async initiateUpload(headers?: {[key: string]: string}): Promise<void> {
+    const headersObject = new Headers(headers);
     const url = `${this.baseUrl}?uploads`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          headers: this.#setGoogApiClientHeaders(headers),
+        const res = await this.authClient.request<
+          string | MultiPartUploadErrorResponse
+        >({
+          headers: this.#setGoogApiClientHeaders(headersObject),
           method: 'POST',
           url,
         });
 
-        if (res.data && res.data.error) {
-          throw res.data.error;
+        if ((res?.data as MultiPartUploadErrorResponse)?.error) {
+          throw (res.data as MultiPartUploadErrorResponse).error;
         }
-        const parsedXML = this.xmlParser.parse(res.data);
-        this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
+        if (typeof res.data === 'string') {
+          const parsedXML = this.xmlParser.parse(res.data);
+          this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
+        }
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }
@@ -294,31 +308,32 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
-    let headers: Headers = this.#setGoogApiClientHeaders();
+    const headers: Headers = this.#setGoogApiClientHeaders();
 
     if (validation === 'md5') {
       const hash = createHash('md5').update(chunk).digest('base64');
-      headers = {
-        'Content-MD5': hash,
-      };
+      headers.set('Content-MD5', hash);
     } else if (validation === 'crc32c') {
       const crc = new CRC32C();
       crc.update(chunk);
-      headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
+      headers.set('x-goog-hash', `crc32c=${crc.toString()}`);
     }
 
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          url,
-          method: 'PUT',
-          body: chunk,
-          headers,
-        });
+        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
+          {
+            url,
+            method: 'PUT',
+            body: chunk,
+            headers,
+          },
+        );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        this.partsMap.set(partNumber, res.headers['etag']);
+        const resHeaders = new Headers(res.headers);
+        this.partsMap.set(partNumber, resHeaders.get('etag')!);
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }
@@ -344,12 +359,14 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     )}</CompleteMultipartUpload>`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          headers: this.#setGoogApiClientHeaders(),
-          url,
-          method: 'POST',
-          body,
-        });
+        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
+          {
+            headers: this.#setGoogApiClientHeaders(),
+            url,
+            method: 'POST',
+            body,
+          },
+        );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
@@ -371,15 +388,17 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     return AsyncRetry(async bail => {
       try {
-        const res = await this.authClient.request({
-          url,
-          method: 'DELETE',
-        });
+        const res = await this.authClient.request<MultiPartUploadErrorResponse>(
+          {
+            url,
+            method: 'DELETE',
+          },
+        );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
       } catch (e) {
-        this.#handleErrorResponse(e as Error, bail);
+        this.#handleErrorResponse(e as GaxiosError, bail);
         return;
       }
     }, this.retryOptions);
@@ -394,7 +413,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   #handleErrorResponse(err: Error, bail: Function) {
     if (
       this.bucket.storage.retryOptions.autoRetry &&
-      this.bucket.storage.retryOptions.retryableErrorFn!(err as ApiError)
+      this.bucket.storage.retryOptions.retryableErrorFn!(err as GaxiosError)
     ) {
       throw err;
     } else {
@@ -422,7 +441,7 @@ export class TransferManager {
    * @typedef {object} UploadManyFilesOptions
    * @property {number} [concurrencyLimit] The number of concurrently executing promises
    * to use when uploading the files.
-   * @property {Function} [customDestinationBuilder] A function that will take the current path of a local file
+   * @property {Function} [customDestinationBuilder] A fuction that will take the current path of a local file
    * and return a string representing a custom path to be used to upload the file to GCS.
    * @property {boolean} [skipIfExists] Do not upload the file if it already exists in
    * the bucket. This will set the precondition ifGenerationMatch = 0.
@@ -860,7 +879,7 @@ export class TransferManager {
    * @property {number} [concurrencyLimit] The number of concurrently executing promises
    * to use when uploading the file.
    * @property {number} [chunkSizeBytes] The size in bytes of each chunk to be uploaded.
-   * @property {string} [uploadName] Name of the file when saving to GCS. If omitted the name is taken from the file path.
+   * @property {string} [uploadName] Name of the file when saving to GCS. If ommitted the name is taken from the file path.
    * @property {number} [maxQueueSize] The number of chunks to be uploaded to hold in memory concurrently. If not specified
    * defaults to the specified concurrency limit.
    * @property {string} [uploadId] If specified attempts to resume a previous upload.
@@ -873,14 +892,14 @@ export class TransferManager {
    *
    */
   /**
-   * Upload a large file in chunks utilizing parallel upload operations. If the upload fails, an uploadId and
+   * Upload a large file in chunks utilizing parallel upload opertions. If the upload fails, an uploadId and
    * map containing all the successfully uploaded parts will be returned to the caller. These arguments can be used to
    * resume the upload.
    *
    * @param {string} [filePath] The path of the file to be uploaded
    * @param {UploadFileInChunksOptions} [options] Configuration options.
    * @param {MultiPartHelperGenerator} [generator] A function that will return a type that implements the MPU interface. Most users will not need to use this.
-   * @returns {Promise<void>} If successful a promise resolving to void, otherwise a error containing the message, uploadId, and parts map.
+   * @returns {Promise<void>} If successful a promise resolving to void, otherwise a error containing the message, uploadid, and parts map.
    *
    * @example
    * ```
