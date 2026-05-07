@@ -1,0 +1,253 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.spanner.admin.instance.v1",
+  "libraryPackage": "@google-cloud/spanner",
+  "services": {
+    "InstanceAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstanceAdminClient",
+          "rpcs": {
+            "GetInstanceConfig": {
+              "methods": [
+                "getInstanceConfig"
+              ]
+            },
+            "DeleteInstanceConfig": {
+              "methods": [
+                "deleteInstanceConfig"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetInstancePartition": {
+              "methods": [
+                "getInstancePartition"
+              ]
+            },
+            "DeleteInstancePartition": {
+              "methods": [
+                "deleteInstancePartition"
+              ]
+            },
+            "CreateInstanceConfig": {
+              "methods": [
+                "createInstanceConfig"
+              ]
+            },
+            "UpdateInstanceConfig": {
+              "methods": [
+                "updateInstanceConfig"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "CreateInstancePartition": {
+              "methods": [
+                "createInstancePartition"
+              ]
+            },
+            "UpdateInstancePartition": {
+              "methods": [
+                "updateInstancePartition"
+              ]
+            },
+            "MoveInstance": {
+              "methods": [
+                "moveInstance"
+              ]
+            },
+            "ListInstanceConfigs": {
+              "methods": [
+                "listInstanceConfigs",
+                "listInstanceConfigsStream",
+                "listInstanceConfigsAsync"
+              ]
+            },
+            "ListInstanceConfigOperations": {
+              "methods": [
+                "listInstanceConfigOperations",
+                "listInstanceConfigOperationsStream",
+                "listInstanceConfigOperationsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListInstancePartitions": {
+              "methods": [
+                "listInstancePartitions",
+                "listInstancePartitionsStream",
+                "listInstancePartitionsAsync"
+              ]
+            },
+            "ListInstancePartitionOperations": {
+              "methods": [
+                "listInstancePartitionOperations",
+                "listInstancePartitionOperationsStream",
+                "listInstancePartitionOperationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstanceAdminClient",
+          "rpcs": {
+            "GetInstanceConfig": {
+              "methods": [
+                "getInstanceConfig"
+              ]
+            },
+            "DeleteInstanceConfig": {
+              "methods": [
+                "deleteInstanceConfig"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetInstancePartition": {
+              "methods": [
+                "getInstancePartition"
+              ]
+            },
+            "DeleteInstancePartition": {
+              "methods": [
+                "deleteInstancePartition"
+              ]
+            },
+            "CreateInstanceConfig": {
+              "methods": [
+                "createInstanceConfig"
+              ]
+            },
+            "UpdateInstanceConfig": {
+              "methods": [
+                "updateInstanceConfig"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "CreateInstancePartition": {
+              "methods": [
+                "createInstancePartition"
+              ]
+            },
+            "UpdateInstancePartition": {
+              "methods": [
+                "updateInstancePartition"
+              ]
+            },
+            "MoveInstance": {
+              "methods": [
+                "moveInstance"
+              ]
+            },
+            "ListInstanceConfigs": {
+              "methods": [
+                "listInstanceConfigs",
+                "listInstanceConfigsStream",
+                "listInstanceConfigsAsync"
+              ]
+            },
+            "ListInstanceConfigOperations": {
+              "methods": [
+                "listInstanceConfigOperations",
+                "listInstanceConfigOperationsStream",
+                "listInstanceConfigOperationsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListInstancePartitions": {
+              "methods": [
+                "listInstancePartitions",
+                "listInstancePartitionsStream",
+                "listInstancePartitionsAsync"
+              ]
+            },
+            "ListInstancePartitionOperations": {
+              "methods": [
+                "listInstancePartitionOperations",
+                "listInstancePartitionOperationsStream",
+                "listInstancePartitionOperationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

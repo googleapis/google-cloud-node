@@ -1,0 +1,317 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.spanner.admin.database.v1",
+  "libraryPackage": "@google-cloud/spanner",
+  "services": {
+    "DatabaseAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DatabaseAdminClient",
+          "rpcs": {
+            "GetDatabase": {
+              "methods": [
+                "getDatabase"
+              ]
+            },
+            "DropDatabase": {
+              "methods": [
+                "dropDatabase"
+              ]
+            },
+            "GetDatabaseDdl": {
+              "methods": [
+                "getDatabaseDdl"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "AddSplitPoints": {
+              "methods": [
+                "addSplitPoints"
+              ]
+            },
+            "CreateBackupSchedule": {
+              "methods": [
+                "createBackupSchedule"
+              ]
+            },
+            "GetBackupSchedule": {
+              "methods": [
+                "getBackupSchedule"
+              ]
+            },
+            "UpdateBackupSchedule": {
+              "methods": [
+                "updateBackupSchedule"
+              ]
+            },
+            "DeleteBackupSchedule": {
+              "methods": [
+                "deleteBackupSchedule"
+              ]
+            },
+            "InternalUpdateGraphOperation": {
+              "methods": [
+                "internalUpdateGraphOperation"
+              ]
+            },
+            "CreateDatabase": {
+              "methods": [
+                "createDatabase"
+              ]
+            },
+            "UpdateDatabase": {
+              "methods": [
+                "updateDatabase"
+              ]
+            },
+            "UpdateDatabaseDdl": {
+              "methods": [
+                "updateDatabaseDdl"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "CopyBackup": {
+              "methods": [
+                "copyBackup"
+              ]
+            },
+            "RestoreDatabase": {
+              "methods": [
+                "restoreDatabase"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases",
+                "listDatabasesStream",
+                "listDatabasesAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListDatabaseOperations": {
+              "methods": [
+                "listDatabaseOperations",
+                "listDatabaseOperationsStream",
+                "listDatabaseOperationsAsync"
+              ]
+            },
+            "ListBackupOperations": {
+              "methods": [
+                "listBackupOperations",
+                "listBackupOperationsStream",
+                "listBackupOperationsAsync"
+              ]
+            },
+            "ListDatabaseRoles": {
+              "methods": [
+                "listDatabaseRoles",
+                "listDatabaseRolesStream",
+                "listDatabaseRolesAsync"
+              ]
+            },
+            "ListBackupSchedules": {
+              "methods": [
+                "listBackupSchedules",
+                "listBackupSchedulesStream",
+                "listBackupSchedulesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DatabaseAdminClient",
+          "rpcs": {
+            "GetDatabase": {
+              "methods": [
+                "getDatabase"
+              ]
+            },
+            "DropDatabase": {
+              "methods": [
+                "dropDatabase"
+              ]
+            },
+            "GetDatabaseDdl": {
+              "methods": [
+                "getDatabaseDdl"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "AddSplitPoints": {
+              "methods": [
+                "addSplitPoints"
+              ]
+            },
+            "CreateBackupSchedule": {
+              "methods": [
+                "createBackupSchedule"
+              ]
+            },
+            "GetBackupSchedule": {
+              "methods": [
+                "getBackupSchedule"
+              ]
+            },
+            "UpdateBackupSchedule": {
+              "methods": [
+                "updateBackupSchedule"
+              ]
+            },
+            "DeleteBackupSchedule": {
+              "methods": [
+                "deleteBackupSchedule"
+              ]
+            },
+            "InternalUpdateGraphOperation": {
+              "methods": [
+                "internalUpdateGraphOperation"
+              ]
+            },
+            "CreateDatabase": {
+              "methods": [
+                "createDatabase"
+              ]
+            },
+            "UpdateDatabase": {
+              "methods": [
+                "updateDatabase"
+              ]
+            },
+            "UpdateDatabaseDdl": {
+              "methods": [
+                "updateDatabaseDdl"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "CopyBackup": {
+              "methods": [
+                "copyBackup"
+              ]
+            },
+            "RestoreDatabase": {
+              "methods": [
+                "restoreDatabase"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases",
+                "listDatabasesStream",
+                "listDatabasesAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListDatabaseOperations": {
+              "methods": [
+                "listDatabaseOperations",
+                "listDatabaseOperationsStream",
+                "listDatabaseOperationsAsync"
+              ]
+            },
+            "ListBackupOperations": {
+              "methods": [
+                "listBackupOperations",
+                "listBackupOperationsStream",
+                "listBackupOperationsAsync"
+              ]
+            },
+            "ListDatabaseRoles": {
+              "methods": [
+                "listDatabaseRoles",
+                "listDatabaseRolesStream",
+                "listDatabaseRolesAsync"
+              ]
+            },
+            "ListBackupSchedules": {
+              "methods": [
+                "listBackupSchedules",
+                "listBackupSchedulesStream",
+                "listBackupSchedulesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
