@@ -128,47 +128,47 @@ export interface StackdriverLog {
   critical: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   debug: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   emergency: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   error: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   info: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   notice: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   warning: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   write: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   alert: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   entry: (metadata: {}, data: {} | string) => StackdriverEntry;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -195,47 +195,47 @@ export interface StackdriverLog {
   critical: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   debug: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   emergency: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   error: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   info: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   notice: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   warning: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   write: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   alert: (
     entry: StackdriverEntry | StackdriverEntry[],
     options?: {},
-    callback?: (err: Error, apiResponse: {}) => void
+    callback?: (err: Error, apiResponse: {}) => void,
   ) => Promise<LogWriteResponse>;
   entry: (metadata: {}, data: {} | string) => StackdriverEntry;
 }
@@ -246,7 +246,7 @@ export interface StackdriverLogging {
   Logging?: StackdriverLogging;
   entry?: (
     resource?: MonitoredResource,
-    data?: {message: string} | string
+    data?: {message: string} | string,
   ) => StackdriverEntry;
   // define additional properties and methods.
 }
@@ -254,7 +254,7 @@ export interface StackdriverLogging {
 export interface StackdriverEntry {
   constructor: (
     metadata?: StackdriverEntryMetadata,
-    data?: {message: string} | string
+    data?: {message: string} | string,
   ) => StackdriverEntry;
   data?: StackdriverData | string;
   metadata?: StackdriverEntryMetadata;
