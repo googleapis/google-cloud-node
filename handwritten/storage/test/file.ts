@@ -583,18 +583,41 @@ describe('File', () => {
 
     it('should set encryption key on the new File instance', done => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let file: any;
-      // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
-      file = new (File as any)(BUCKET, FILE_NAME);
+      const file = new (File as any)(BUCKET, FILE_NAME);
+      Object.assign(file, {
+        encryptionKey: 'source-key',
+        encryptionKeyBase64: 'base64',
+        encryptionKeyHash: 'hash',
+      });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newFile = new (File as any)(BUCKET, 'new-file');
-      newFile.encryptionKey = 'encryptionKey';
-
-      file.setEncryptionKey = sandbox.stub().callsFake(encryptionKey => {
-        assert.strictEqual(encryptionKey, newFile.encryptionKey);
-        done();
+      Object.assign(newFile, {
+        encryptionKey: 'dest-key',
+        encryptionKeyBase64: 'base64-dest',
+        encryptionKeyHash: 'hash-dest',
       });
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      storageTransport.makeRequest = async (reqOpts: any, callback: any) => {
+        const actualHeaders = Object.fromEntries(reqOpts.headers.entries());
+
+        try {
+          assert.deepStrictEqual(actualHeaders, {
+            'content-type': 'application/json',
+            'x-goog-copy-source-encryption-algorithm': 'AES256',
+            'x-goog-copy-source-encryption-key': 'base64',
+            'x-goog-copy-source-encryption-key-sha256': 'hash',
+            'x-goog-encryption-algorithm': 'AES256',
+            'x-goog-encryption-key': 'base64-dest',
+            'x-goog-encryption-key-sha256': 'hash-dest',
+          });
+          callback?.(null, {done: true}, {});
+          done();
+        } catch (e) {
+          done(e);
+        }
+      };
 
       file.copy(newFile, assert.ifError);
     });
@@ -985,6 +1008,7 @@ describe('File', () => {
               'Accept-Encoding': 'gzip',
               'Cache-Control': 'no-store',
             },
+            decompress: true,
             responseType: 'stream',
             queryParameters: {
               alt: 'media',

@@ -1405,7 +1405,17 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     if (newFile.encryptionKey !== undefined) {
-      this.setEncryptionKey(newFile.encryptionKey!);
+      headers.set('x-goog-encryption-algorithm', 'AES256');
+      headers.set(
+        'x-goog-encryption-key',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (newFile as any).encryptionKeyBase64 || '',
+      );
+      headers.set(
+        'x-goog-encryption-key-sha256',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (newFile as any).encryptionKeyHash || '',
+      );
     } else if (options.destinationKmsKeyName !== undefined) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
@@ -1639,6 +1649,8 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       const headers = response.headers;
+      const isStoredCompressed =
+        headers.get('x-goog-stored-content-encoding') === 'gzip';
       const isCompressed = headers.get('content-encoding') === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
 
@@ -1652,7 +1664,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       const transformStreams: Transform[] = [];
 
-      if (shouldRunValidation) {
+      if (shouldRunValidation && !isStoredCompressed) {
         // The x-goog-hash header should be set with a crc32c and md5 hash.
         // ex: headers.set('x-goog-hash', 'crc32c=xxxx,md5=xxxx')
         if (typeof headers.get('x-goog-hash') === 'string') {
@@ -1721,6 +1733,7 @@ class File extends ServiceObject<File, FileMetadata> {
       const headers = {
         'Accept-Encoding': 'gzip',
         'Cache-Control': 'no-store',
+        ...(this.encryptionKeyHeaders || {}),
       } as Headers;
 
       if (rangeRequest) {
@@ -1735,7 +1748,9 @@ class File extends ServiceObject<File, FileMetadata> {
         headers,
         queryParameters: query as unknown as StorageQueryParameters,
         responseType: 'stream',
-      };
+        decompress: options.decompress,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
 
       if (options[GCCL_GCS_CMD_KEY]) {
         reqOpts[GCCL_GCS_CMD_KEY] = options[GCCL_GCS_CMD_KEY];
@@ -2424,6 +2439,18 @@ class File extends ServiceObject<File, FileMetadata> {
         .then(contents => callback?.(null, contents))
         .catch(callback as (err: RequestError) => void);
     }
+  }
+
+  get encryptionKeyHeaders(): Record<string, string> | undefined {
+    if (!this.encryptionKey) {
+      return undefined;
+    }
+
+    return {
+      'x-goog-encryption-algorithm': 'AES256',
+      'x-goog-encryption-key': this.encryptionKey.toString('base64'),
+      'x-goog-encryption-key-sha256': this.encryptionKeyHash!,
+    };
   }
 
   /**
@@ -4561,6 +4588,14 @@ class File extends ServiceObject<File, FileMetadata> {
         content: writeStream,
       },
     ];
+
+    const headers: Record<string, string> = {};
+    if (this.encryptionKey) {
+      headers['x-goog-encryption-algorithm'] = 'AES256';
+      headers['x-goog-encryption-key'] = this.encryptionKeyBase64!;
+      headers['x-goog-encryption-key-sha256'] = this.encryptionKeyHash!;
+    }
+    reqOpts.headers = headers;
 
     this.storageTransport
       .makeRequest(reqOpts as StorageRequestOptions, (err, body, resp) => {

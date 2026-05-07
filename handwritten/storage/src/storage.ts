@@ -317,38 +317,111 @@ const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
  * @return {boolean} True if the API request should be retried, false otherwise.
  */
 export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
-  const isConnectionProblem = (reason: string) => {
-    return (
-      reason.includes('eai_again') || // DNS lookup error
-      reason === 'econnreset' ||
-      reason === 'unexpected connection closure' ||
-      reason === 'epipe' ||
-      reason === 'socket connection timeout'
-    );
-  };
+  if (!err || !err.config) return false;
 
-  if (err) {
-    if ([408, 429, 500, 502, 503, 504].indexOf(err.status!) !== -1) {
-      return true;
-    }
+  const config = err.config;
+  const method = (config.method || 'GET').toUpperCase();
+  const url = config.url ? config.url.toString() : '';
+  const params = config.params || {};
+  const data = config.data;
 
-    if (typeof err.code === 'string') {
-      if (['408', '429', '500', '502', '503', '504'].indexOf(err.code) !== -1) {
-        return true;
-      }
-      const reason = (err.code as string).toLowerCase();
-      if (isConnectionProblem(reason)) {
-        return true;
-      }
-    }
+  // Immediate exit for non-retryable status codes
+  const status = err.response?.status;
+  if (status && [401, 405, 412].includes(status)) return false;
 
-    if (err) {
-      const reason = err?.code?.toString().toLowerCase();
-      if (reason && isConnectionProblem(reason)) {
-        return true;
-      }
+  // Optimized Precondition Check
+  let bodyEtag = false;
+  try {
+    const parsedBody = typeof data === 'string' ? JSON.parse(data) : data;
+    if (parsedBody && parsedBody.etag) {
+      bodyEtag = true;
     }
+  } catch (e) {
+    // If parsing fails, we treat it as no etag and move on
+    bodyEtag = false;
   }
+
+  const hasPrecondition = !!(
+    params.ifGenerationMatch !== undefined ||
+    params.ifMetagenerationMatch !== undefined ||
+    params.ifSourceGenerationMatch !== undefined ||
+    bodyEtag
+  );
+
+  // Granular Idempotency Logic
+  let isIdempotent = false;
+  if (['GET', 'HEAD'].includes(method) || hasPrecondition) {
+    isIdempotent = true;
+  } else if (method === 'PUT') {
+    // Resumable uploads (upload_id) are idempotent.
+    // IAM/HMAC are only idempotent if they have an etag (handled in hasPrecondition).
+    const isResumable = url.includes('upload_id=');
+    const isSpecialMutation =
+      /\/iam($|\?)/.test(url) || /\/hmacKeys\//.test(url);
+    isIdempotent = isResumable || !isSpecialMutation;
+  } else if (method === 'DELETE') {
+    // Deleting a specific object is only idempotent with a precondition.
+    // Deleting a bucket/HMAC is generally safe to retry.
+    if (!url.includes('/o/')) {
+      isIdempotent = true;
+    }
+  } else if (method === 'POST') {
+    // Bucket creation is safe to retry.
+    // Object mutations (rewrite/copy) must have a precondition (handled above).
+    isIdempotent =
+      url.includes('/v1/b') &&
+      !url.includes('/o') &&
+      !url.includes('/notificationConfigs');
+  }
+  if (!isIdempotent) return false;
+
+  const gcsErrors = err.response?.data?.error?.errors || [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const hasRateLimitReason = gcsErrors.some((e: any) =>
+    ['rateLimitExceeded', 'userRateLimitExceeded'].includes(e.reason),
+  );
+
+  if (hasRateLimitReason) return true;
+
+  // Unified Error Detection
+  const retryableCodes = [408, 429, 500, 502, 503, 504];
+  const errCode = err.code?.toString().toUpperCase() || '';
+  const message = err.message?.toLowerCase() || '';
+
+  // Check HTTP Status
+  if (status && retryableCodes.includes(status)) return true;
+
+  // Check Gaxios/Node Error Codes
+  if (retryableCodes.includes(Number(errCode))) return true;
+
+  const connectionErrors = [
+    'ECONNRESET',
+    'EPIPE',
+    'ETIMEDOUT',
+    'EADDRINUSE',
+    'ECONNREFUSED',
+    'ENOTFOUND',
+    'ENETUNREACH',
+    'EAI_AGAIN',
+  ];
+
+  if (
+    connectionErrors.includes(errCode) ||
+    message.includes('socket hang up')
+  ) {
+    return true;
+  }
+
+  // Handle malformed responses or stream interruptions
+  if (
+    message.includes('unexpected end of json input') ||
+    message.includes('unexpected token') ||
+    message.includes('operation was aborted') ||
+    message.includes('unexpected connection closure')
+  ) {
+    return true;
+  }
+
   return false;
 };
 
