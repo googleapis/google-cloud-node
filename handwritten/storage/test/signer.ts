@@ -723,8 +723,9 @@ describe('signer', () => {
           };
 
           assert.throws(() => {
-            void signer['getSignedUrlV4'](CONFIG);
-          }, new RegExp(SignerExceptionMessages.X_GOOG_CONTENT_SHA256));
+            void (signer['getSignedUrlV4'](CONFIG),
+            SignerExceptionMessages.X_GOOG_CONTENT_SHA256);
+          });
         });
       });
 
