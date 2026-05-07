@@ -14,6 +14,8 @@
     "system-test/*.ts",
     "conformance-test/*.ts",
     "conformance-test/scenarios/*.ts",
-    "internal-tooling/*.ts"
+    "internal-tooling/*.ts",
+    "src/nodejs-common/*.ts",
+    "conformance-test/test-data/*.json"
   ]
 }
