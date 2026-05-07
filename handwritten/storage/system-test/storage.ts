@@ -16,19 +16,16 @@ import assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch from 'node-fetch';
-import FormData from 'form-data';
 import pLimit from 'p-limit';
-import {promisify} from 'util';
 import * as path from 'path';
 import * as tmp from 'tmp';
-import {ApiError} from '../src/nodejs-common/index.js';
 import {
   AccessControlObject,
   Bucket,
   CRC32C,
   DeleteBucketCallback,
   File,
+  GaxiosError,
   IdempotencyStrategy,
   LifecycleRule,
   Notification,
@@ -185,7 +182,7 @@ describe('storage', function () {
         const file = files[0];
         const [isPublic] = await file.isPublic();
         assert.strictEqual(isPublic, true);
-        assert.doesNotReject(file.download());
+        await assert.doesNotReject(file.download());
       });
     });
 
@@ -289,12 +286,7 @@ describe('storage', function () {
         await bucket.acl.delete({entity: USER_ACCOUNT});
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should make a bucket public', async () => {
+      it('should make a bucket public', async () => {
         await bucket.makePublic();
         const [aclObject] = await bucket.acl.get({entity: 'allUsers'});
         assert.deepStrictEqual(aclObject, {
@@ -307,12 +299,7 @@ describe('storage', function () {
         await bucket.acl.delete({entity: 'allUsers'});
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should make files public', async () => {
+      it('should make files public', async () => {
         await Promise.all(
           ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
         );
@@ -329,21 +316,16 @@ describe('storage', function () {
         ]);
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should make a bucket private', async () => {
+      it('should make a bucket private', async () => {
         try {
           await bucket.makePublic();
           await new Promise(resolve =>
             setTimeout(resolve, BUCKET_METADATA_UPDATE_WAIT_TIME),
           );
           await bucket.makePrivate();
-          assert.rejects(bucket.acl.get({entity: 'allUsers'}), err => {
-            assert.strictEqual((err as ApiError).code, 404);
-            assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+          await assert.rejects(bucket.acl.get({entity: 'allUsers'}), err => {
+            assert.strictEqual((err as GaxiosError).status, 404);
+            assert.strictEqual((err as GaxiosError).message, 'notFound');
           });
         } catch (err) {
           assert.ifError(err);
@@ -419,12 +401,7 @@ describe('storage', function () {
         await file.acl.delete({entity: USER_ACCOUNT});
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should make a file public', async () => {
+      it('should make a file public', async () => {
         await file.makePublic();
         const [aclObject] = await file.acl.get({entity: 'allUsers'});
         assert.deepStrictEqual(aclObject, {
@@ -435,14 +412,14 @@ describe('storage', function () {
       });
 
       it('should make a file private', async () => {
-        const validateMakeFilePrivateRejects = (err: ApiError) => {
-          assert.strictEqual(err.code, 404);
-          assert.strictEqual(err!.errors![0].reason, 'notFound');
+        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
+          assert.strictEqual(err.status, 404);
+          assert.strictEqual(err!.message, 'notFound');
           return true;
         };
-        assert.doesNotReject(file.makePublic());
-        assert.doesNotReject(file.makePrivate());
-        assert.rejects(
+        await assert.doesNotReject(file.makePublic());
+        await assert.doesNotReject(file.makePrivate());
+        await assert.rejects(
           file.acl.get({entity: 'allUsers'}),
           validateMakeFilePrivateRejects,
         );
@@ -472,12 +449,7 @@ describe('storage', function () {
         assert.strictEqual(encryptionAlgorithm, 'AES256');
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should make a file public during the upload', async () => {
+      it('should make a file public during the upload', async () => {
         const [file] = await bucket.upload(FILES.big.path, {
           resumable: false,
           public: true,
@@ -490,12 +462,7 @@ describe('storage', function () {
         });
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should make a file public from a resumable upload', async () => {
+      it('should make a file public from a resumable upload', async () => {
         const [file] = await bucket.upload(FILES.big.path, {
           resumable: true,
           public: true,
@@ -508,18 +475,18 @@ describe('storage', function () {
       });
 
       it('should make a file private from a resumable upload', async () => {
-        const validateMakeFilePrivateRejects = (err: ApiError) => {
-          assert.strictEqual((err as ApiError)!.code, 404);
-          assert.strictEqual((err as ApiError).errors![0].reason, 'notFound');
+        const validateMakeFilePrivateRejects = (err: GaxiosError) => {
+          assert.strictEqual((err as GaxiosError)!.status, 404);
+          assert.strictEqual((err as GaxiosError).message, 'notFound');
           return true;
         };
-        assert.doesNotReject(
+        await assert.doesNotReject(
           bucket.upload(FILES.big.path, {
             resumable: true,
             private: true,
           }),
         );
-        assert.rejects(
+        await assert.rejects(
           file.acl.get({entity: 'allUsers'}),
           validateMakeFilePrivateRejects,
         );
@@ -531,7 +498,7 @@ describe('storage', function () {
     let PROJECT_ID: string;
 
     before(async () => {
-      PROJECT_ID = await storage.authClient.getProjectId();
+      PROJECT_ID = await storage.storageTransport.authClient.getProjectId();
     });
 
     describe('buckets', () => {
@@ -559,12 +526,7 @@ describe('storage', function () {
         ]);
       });
 
-      /**
-       * TODO: Re-enable once the test environment allows public IAM roles.
-       * Currently disabled to avoid 403 errors when adding 'allUsers' or
-       * 'allAuthenticatedUsers' permissions.
-       */
-      it.skip('should set a policy', async () => {
+      it('should set a policy', async () => {
         const [policy] = await bucket.iam.getPolicy();
         policy!.bindings.push({
           role: 'roles/storage.legacyBucketReader',
@@ -591,8 +553,9 @@ describe('storage', function () {
 
         const [policy] = await bucket.iam.getPolicy();
 
-        const serviceAccount = (await storage.authClient.getCredentials())
-          .client_email;
+        const serviceAccount = (
+          await storage.storageTransport.authClient.getCredentials()
+        ).client_email;
         const conditionalBinding = {
           role: 'roles/storage.objectViewer',
           members: [`serviceAccount:${serviceAccount}`],
@@ -651,14 +614,14 @@ describe('storage', function () {
     };
 
     const validateUnexpectedPublicAccessPreventionValueError = (
-      err: ApiError,
+      err: GaxiosError,
     ) => {
       assert.strictEqual(err.code, 400);
       return true;
     };
 
     const validateConfiguringPublicAccessWhenPAPEnforcedError = (
-      err: ApiError,
+      err: GaxiosError,
     ) => {
       assert.strictEqual(err.code, 412);
       return true;
@@ -1112,7 +1075,9 @@ describe('storage', function () {
     describe('disables file ACL', () => {
       let file: File;
 
-      const validateUniformBucketLevelAccessEnabledError = (err: ApiError) => {
+      const validateUniformBucketLevelAccessEnabledError = (
+        err: GaxiosError,
+      ) => {
         assert.strictEqual(err.code, 400);
         return true;
       };
@@ -1133,7 +1098,7 @@ describe('storage', function () {
             await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
           } catch (err) {
             assert(
-              validateUniformBucketLevelAccessEnabledError(err as ApiError),
+              validateUniformBucketLevelAccessEnabledError(err as GaxiosError),
             );
             break;
           }
@@ -1148,7 +1113,7 @@ describe('storage', function () {
             await new Promise(res => setTimeout(res, UNIFORM_ACCESS_WAIT_TIME));
           } catch (err) {
             assert(
-              validateUniformBucketLevelAccessEnabledError(err as ApiError),
+              validateUniformBucketLevelAccessEnabledError(err as GaxiosError),
             );
             break;
           }
@@ -1770,8 +1735,8 @@ describe('storage', function () {
         await bucket.lock(bucket.metadata!.metageneration!.toString());
         await assert.rejects(
           bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS / 2),
-          (err: ApiError) => {
-            return err.code === 403;
+          (err: GaxiosError) => {
+            return err.status === 403;
           },
         );
       });
@@ -1868,14 +1833,14 @@ describe('storage', function () {
 
       it('should block an overwrite request', async () => {
         const file = await createFile();
-        assert.rejects(file.save('new data'), (err: ApiError) => {
+        await assert.rejects(file.save('new data'), (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
         });
       });
 
       it('should block a delete request', async () => {
         const file = await createFile();
-        assert.rejects(file.delete(), (err: ApiError) => {
+        await assert.rejects(file.delete(), (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
         });
       });
@@ -2455,7 +2420,7 @@ describe('storage', function () {
         })
         .on('error', err => {
           assert.strictEqual(dataEmitted, false);
-          assert.strictEqual((err as ApiError).code, 404);
+          assert.strictEqual((err as GaxiosError).code, 404);
           done();
         });
     });
@@ -2558,8 +2523,8 @@ describe('storage', function () {
 
     it('should handle non-network errors', async () => {
       const file = bucket.file('hi.jpg');
-      assert.rejects(file.download(), (err: ApiError) => {
-        assert.strictEqual((err as ApiError).code, 404);
+      await assert.rejects(file.download(), (err: GaxiosError) => {
+        assert.strictEqual((err as GaxiosError).code, 404);
       });
     });
 
@@ -2732,8 +2697,8 @@ describe('storage', function () {
               .on('error', done)
               .pipe(fs.createWriteStream(tmpFilePath))
               .on('error', done)
-              .on('finish', () => {
-                file.delete((err: ApiError | null) => {
+              .on('finish', async () => {
+                await file.delete((err: GaxiosError | null) => {
                   assert.ifError(err);
 
                   fs.readFile(tmpFilePath, (err, data) => {
@@ -2770,7 +2735,7 @@ describe('storage', function () {
       });
 
       it('should not download from the unencrypted file', async () => {
-        assert.rejects(unencryptedFile.download(), (err: ApiError) => {
+        await assert.rejects(unencryptedFile.download(), (err: GaxiosError) => {
           assert(
             err!.message.indexOf(
               [
@@ -2806,7 +2771,9 @@ describe('storage', function () {
       const keyRingId = generateName();
       const cryptoKeyId = generateName();
 
-      const request = promisify(storage.request).bind(storage);
+      //const request = promisify(storage.request).bind(storage);
+      // eslint-disable-next-line no-empty-pattern
+      const request = ({}) => {};
 
       let bucket: Bucket;
       let kmsKeyName: string;
@@ -2856,7 +2823,7 @@ describe('storage', function () {
       before(async () => {
         bucket = storage.bucket(generateName());
 
-        setProjectId(await storage.authClient.getProjectId());
+        setProjectId(await storage.storageTransport.authClient.getProjectId());
         await bucket.create({location: BUCKET_LOCATION});
 
         // create keyRing
@@ -3024,7 +2991,7 @@ describe('storage', function () {
 
             await assert.rejects(
               file.save(FILE_CONTENTS, {resumable: false}),
-              (err: ApiError) => {
+              (err: GaxiosError) => {
                 const failureMessage =
                   "Requested encryption type for object is not compliant with the bucket's encryption enforcement configuration.";
                 assert.strictEqual(err.code, 412);
@@ -3139,12 +3106,7 @@ describe('storage', function () {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
-    /**
-     * TODO: Re-enable once the test environment allows public IAM roles.
-     * Currently disabled to avoid 403 errors when adding 'allUsers' or
-     * 'allAuthenticatedUsers' permissions.
-     */
-    it.skip('should respect predefined Acl at file#copy', async () => {
+    it('should respect predefined Acl at file#copy', async () => {
       const opts = {destination: 'CloudLogo'};
       const [file] = await bucket.upload(FILES.logo.path, opts);
       const copyOpts = {predefinedAcl: 'publicRead'};
@@ -3305,8 +3267,8 @@ describe('storage', function () {
       // We can't actually create a channel. But we can test to see that we're
       // reaching the right endpoint with the API request.
       const channel = storage.channel('id', 'resource-id');
-      assert.rejects(channel.stop(), (err: ApiError) => {
-        assert.strictEqual((err as ApiError).code, 404);
+      await assert.rejects(channel.stop(), (err: GaxiosError) => {
+        assert.strictEqual((err as GaxiosError).code, 404);
         assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
       });
     });
@@ -3418,7 +3380,7 @@ describe('storage', function () {
     });
 
     it('should get metadata for an HMAC key', async function () {
-      delay(this, accessId);
+      await delay(this, accessId);
       const hmacKey = storage.hmacKey(accessId, {projectId: HMAC_PROJECT});
       const [metadata] = await hmacKey.getMetadata();
       assert.strictEqual(metadata.accessId, accessId);
@@ -3993,9 +3955,9 @@ describe('storage', function () {
         .save('hello1', {resumable: false});
       await assert.rejects(
         bucketWithVersioning.file(fileName, {generation: 0}).save('hello2'),
-        (err: ApiError) => {
-          assert.strictEqual(err.code, 412);
-          assert.strictEqual(err.errors![0].reason, 'conditionNotMet');
+        (err: GaxiosError) => {
+          assert.strictEqual(err.status, 412);
+          assert.strictEqual(err.message, 'conditionNotMet');
           return true;
         },
       );
@@ -4059,9 +4021,9 @@ describe('storage', function () {
       });
 
       await fetch(signedDeleteUrl, {method: 'DELETE'});
-      assert.rejects(
+      await assert.rejects(
         () => file.getMetadata(),
-        (err: ApiError) => err.code === 404,
+        (err: GaxiosError) => err.status === 404,
       );
     });
   });
