@@ -56,7 +56,6 @@
  * region_tag:storage_quickstart
  * Full quickstart example:
  */
-export {ApiError} from './nodejs-common/index.js';
 export {
   BucketCallback,
   BucketOptions,
@@ -273,3 +272,4 @@ export {
 } from './notification.js';
 export {GetSignedUrlCallback, GetSignedUrlResponse} from './signer.js';
 export * from './transfer-manager.js';
+export * from 'gaxios';
