@@ -154,6 +154,7 @@ export class StorageTransport {
 
     try {
       const requestPromise = this.authClient.request<T>({
+        adapter: this.gaxiosInstance.request.bind(this.gaxiosInstance),
         retryConfig: {
           retry: this.retryOptions.maxRetries,
           noResponseRetries: this.retryOptions.maxRetries,

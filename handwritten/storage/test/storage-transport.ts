@@ -125,8 +125,7 @@ describe('Storage Transport', () => {
     );
   });
 
-  // TODO: Undo this skip once the gaxios interceptor issue is resolved.
-  it.skip('should clear and add interceptors if provided', async () => {
+  it('should clear and add interceptors if provided', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const interceptorStub: any = sandbox.stub();
     const reqOpts: StorageRequestOptions = {
@@ -136,12 +135,31 @@ describe('Storage Transport', () => {
 
     const clearStub = sandbox.stub();
     const addStub = sandbox.stub();
-    (authClientStub.request as sinon.SinonStub).resolves({data: {}});
+
     const transportInstance = new Gaxios();
     transportInstance.interceptors.request.clear = clearStub;
     transportInstance.interceptors.request.add = addStub;
 
-    await transport.makeRequest(reqOpts);
+    const testTransport = new StorageTransport({
+      apiEndpoint: baseUrl,
+      baseUrl,
+      authClient: authClientStub,
+      projectId: 'project-id',
+      retryOptions: {
+        maxRetries: 3,
+        retryDelayMultiplier: 2,
+        maxRetryDelay: 100,
+        totalTimeout: 1000,
+        retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+      },
+      scopes: ['https://www.googleapis.com/auth/could-platform'],
+      packageJson: {name: 'test-package', version: '1.0.0'},
+      gaxiosInstance: transportInstance,
+    });
+
+    (authClientStub.request as sinon.SinonStub).resolves({data: {}});
+
+    await testTransport.makeRequest(reqOpts);
 
     assert.strictEqual(clearStub.calledOnce, true);
     assert.strictEqual(addStub.calledOnce, true);
