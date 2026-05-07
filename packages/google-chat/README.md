@@ -71,6 +71,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete section | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_section.js) |
 | delete space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_space.js) |
 | find direct message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.find_direct_message.js) |
+| find group chats | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.find_group_chats.js) |
 | get attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_attachment.js) |
 | get custom emoji | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_custom_emoji.js) |
 | get membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_membership.js) |
