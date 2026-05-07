@@ -14,5 +14,4 @@
 
 import synthtool.languages.node_mono_repo as node
 
-node.owlbot_main(relative_dir="handwritten/cloud-profiler",templates_excludes=[".github/sync-repo-settings.yaml",
-                                     ".github/workflows/ci.yaml"])
+node.owlbot_main(relative_dir="handwritten/cloud-profiler")
