@@ -26,6 +26,9 @@ import {MethodDescriptorProto, ServiceDescriptorProto} from './schema/proto.js';
 interface Namer {
   register: (name: string, serviceName?: string) => string;
   get: (name: string, serviceName?: string) => string;
+
+  // For modern ESM import(), we have to check `default` instead.
+  default?: Namer;
 }
 
 const commonParameters: {[name: string]: string} = {
@@ -327,7 +330,7 @@ async function loadNamerPlugin(basePath: string) {
   };
   if (fs.existsSync(namerLocation)) {
     const namer: Namer = (await import(namerLocation)) as Namer;
-    const {register, get} = namer;
+    const {register, get} = namer.default || namer;
     id.register = register;
     id.get = get;
   }
