@@ -1,0 +1,152 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.cloud.aiplatform.v1beta1;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/cloud/aiplatform/v1beta1/operation.proto";
+import "google/cloud/aiplatform/v1beta1/reasoning_engine_runtime_revision.proto";
+import "google/longrunning/operations.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Google.Cloud.AIPlatform.V1Beta1";
+option go_package = "cloud.google.com/go/aiplatform/apiv1beta1/aiplatformpb;aiplatformpb";
+option java_multiple_files = true;
+option java_outer_classname = "ReasoningEngineRuntimeRevisionServiceProto";
+option java_package = "com.google.cloud.aiplatform.v1beta1";
+option php_namespace = "Google\\Cloud\\AIPlatform\\V1beta1";
+option ruby_package = "Google::Cloud::AIPlatform::V1beta1";
+
+// Manages Vertex AI's Reasoning Engine Revisions.
+service ReasoningEngineRuntimeRevisionService {
+  option (google.api.default_host) = "aiplatform.googleapis.com";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/cloud-platform";
+
+  // Gets a reasoning engine runtime revision.
+  rpc GetReasoningEngineRuntimeRevision(
+      GetReasoningEngineRuntimeRevisionRequest)
+      returns (ReasoningEngineRuntimeRevision) {
+    option (google.api.http) = {
+      get: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Lists runtime revisions in a reasoning engine.
+  rpc ListReasoningEngineRuntimeRevisions(
+      ListReasoningEngineRuntimeRevisionsRequest)
+      returns (ListReasoningEngineRuntimeRevisionsResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/runtimeRevisions"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Deletes a reasoning engine revision.
+  rpc DeleteReasoningEngineRuntimeRevision(
+      DeleteReasoningEngineRuntimeRevisionRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      delete: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}"
+    };
+    option (google.api.method_signature) = "name";
+    option (google.longrunning.operation_info) = {
+      response_type: "google.protobuf.Empty"
+      metadata_type: "DeleteReasoningEngineRuntimeRevisionOperationMetadata"
+    };
+  }
+}
+
+// Metadata associated with DeleteReasoningEngineRuntimeRevision operation.
+message DeleteReasoningEngineRuntimeRevisionOperationMetadata {
+  // The common part of the operation metadata.
+  GenericOperationMetadata generic_metadata = 1;
+}
+
+// Request message for
+// [ReasoningEngineRuntimeRevisionService.GetReasoningEngineRuntimeRevision][google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.GetReasoningEngineRuntimeRevision].
+message GetReasoningEngineRuntimeRevisionRequest {
+  // Required. The name of the ReasoningEngineRuntimeRevision resource.
+  // Format:
+  // `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/runtimeRevisions/{runtimeRevision}`
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision"
+    }
+  ];
+}
+
+// Request message for
+// [ReasoningEngineRuntimeRevisionService.ListReasoningEngineRuntimeRevisions][google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.ListReasoningEngineRuntimeRevisions].
+message ListReasoningEngineRuntimeRevisionsRequest {
+  // Required. The resource name of the ReasoningEngine to list the
+  // ReasoningEngineRuntimeRevisions from. Format:
+  // `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/ReasoningEngine"
+    }
+  ];
+
+  // Optional. The standard list filter.
+  // More detail in [AIP-160](https://google.aip.dev/160).
+  string filter = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The maximum number of ReasoningEngineRuntimeRevisions to return.
+  // The service may return fewer than this value.
+  //
+  // If unspecified, at most 50 revisions will be returned.
+  //
+  // The maximum value is 100; values above 100 will be coerced to 100.
+  int32 page_size = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The standard list page token.
+  string page_token = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response message for
+// [ReasoningEngineRuntimeRevisionService.ListReasoningEngineRuntimeRevisions][google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.ListReasoningEngineRuntimeRevisions]
+message ListReasoningEngineRuntimeRevisionsResponse {
+  // List of ReasoningEngineRuntimeRevisions in the requested page.
+  repeated ReasoningEngineRuntimeRevision reasoning_engine_runtime_revisions =
+      1;
+
+  // A token to retrieve the next page of results.
+  // Pass to
+  // [ListReasoningEngineRuntimeRevisionsRequest.page_token][google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest.page_token]
+  // to obtain that page.
+  string next_page_token = 2;
+}
+
+// Request message for
+// [ReasoningEngineRuntimeRevisionService.DeleteReasoningEngineRuntimeRevision][google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.DeleteReasoningEngineRuntimeRevision].
+message DeleteReasoningEngineRuntimeRevisionRequest {
+  // Required. The name of the ReasoningEngineRuntimeRevision resource to be
+  // deleted. Format:
+  // `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/runtimeRevisions/{runtime_revision}`
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision"
+    }
+  ];
+}
