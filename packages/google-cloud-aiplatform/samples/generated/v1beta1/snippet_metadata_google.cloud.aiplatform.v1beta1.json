@@ -15304,6 +15304,50 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineExecutionService_CancelAsyncQueryReasoningEngine_async",
+      "title": "DatasetService cancelAsyncQueryReasoningEngine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels an AsyncQueryReasoningEngine operation.",
+      "canonical": true,
+      "file": "reasoning_engine_execution_service.cancel_async_query_reasoning_engine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelAsyncQueryReasoningEngine",
+        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operation_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse",
+        "client": {
+          "shortName": "ReasoningEngineExecutionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionServiceClient"
+        },
+        "method": {
+          "shortName": "CancelAsyncQueryReasoningEngine",
+          "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine",
+          "service": {
+            "shortName": "ReasoningEngineExecutionService",
+            "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineRuntimeRevisionService_GetReasoningEngineRuntimeRevision_async",
       "title": "DatasetService getReasoningEngineRuntimeRevision Sample",
       "origin": "API_DEFINITION",

@@ -85045,6 +85045,28 @@
                               }
                             }
                           ]
+                        },
+                        "CancelAsyncQueryReasoningEngine": {
+                          "requestType": "CancelAsyncQueryReasoningEngineRequest",
+                          "responseType": "CancelAsyncQueryReasoningEngineResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{name=reasoningEngines/*}:cancelAsyncQuery",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{name=reasoningEngines/*}:cancelAsyncQuery",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -85149,6 +85171,28 @@
                           "id": 1
                         }
                       }
+                    },
+                    "CancelAsyncQueryReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "operationName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CancelAsyncQueryReasoningEngineResponse": {
+                      "fields": {}
                     },
                     "ReasoningEngineRuntimeRevision": {
                       "options": {
