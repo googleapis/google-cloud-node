@@ -1406,15 +1406,10 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (newFile.encryptionKey !== undefined) {
       headers.set('x-goog-encryption-algorithm', 'AES256');
-      headers.set(
-        'x-goog-encryption-key',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (newFile as any).encryptionKeyBase64 || '',
-      );
+      headers.set('x-goog-encryption-key', newFile.encryptionKeyBase64 || '');
       headers.set(
         'x-goog-encryption-key-sha256',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (newFile as any).encryptionKeyHash || '',
+        newFile.encryptionKeyHash || '',
       );
     } else if (options.destinationKmsKeyName !== undefined) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;

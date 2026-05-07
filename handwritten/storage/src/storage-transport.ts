@@ -233,7 +233,7 @@ export class StorageTransport {
 
   /**
    * Serializes query parameters into a string.
-   * Specifically handles arrays by appending each value individually 
+   * Specifically handles arrays by appending each value individually
    * to satisfy GCS "repeated key" requirements (e.g., for IAM permissions).
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
