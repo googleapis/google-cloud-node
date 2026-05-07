@@ -15,20 +15,20 @@ steps:
   id: 'install-dependencies'
 
 # 2. (Optional) Run pre-system-test.sh if it exists
-- name: 'ubuntu'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    if [ -f .kokoro/pre-system-test.sh ]; then
-      echo "Running pre-system-test.sh..."
-      # Make sure to source it correctly relative to the current dir
-      . ./.kokoro/pre-system-test.sh
-    else
-      echo "No .kokoro/pre-system-test.sh found, skipping."
-    fi
+- name: 'gcr.io/cloud-builders/npm/pre-system-test'
+  entrypoint: 'npm'
+  args: ['run', 'presystem-test']
   dir: 'handwritten/bigtable'
-  id: 'run-pre-test-hook'
+  env:
+  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  # If you need specific credentials from Secret Manager, uncomment these:
+  # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
+  id: 'run-system-tests'
+  # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
+  # secretEnv: ['SA_KEY']
+  # volumes:
+  #   - name: 'sa-keys'
+  #     path: '/secrets'
 
 # 3. Configure environment variables for the tests and run system tests
 #    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
