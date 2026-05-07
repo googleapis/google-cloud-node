@@ -686,6 +686,14 @@
               " For Google-internal migration only. Do not use."
             ]
           },
+          "FileDescriptorProto:option_dependency": {
+            "paramName": "option_dependency",
+            "paramType": "TYPE_STRING[]",
+            "comments": [
+              " Names of files imported by this file purely for the purpose of providing",
+              " option extensions. These are excluded from the dependency list above."
+            ]
+          },
           "FileDescriptorProto:message_type": {
             "paramName": "message_type",
             "paramType": "TYPE_MESSAGE[]",
@@ -730,14 +738,20 @@
               " The syntax of the proto file.",
               " The supported values are \"proto2\", \"proto3\", and \"editions\".",
               "",
-              " If `edition` is present, this value must be \"editions\"."
+              " If `edition` is present, this value must be \"editions\".",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "FileDescriptorProto:edition": {
             "paramName": "edition",
             "paramType": ".google.protobuf.Edition",
             "comments": [
-              " The edition of the proto file."
+              " The edition of the proto file.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "DescriptorProto:name": {
@@ -791,6 +805,13 @@
             "comments": [
               " Reserved field names, which may not be used by fields in the same message.",
               " A given name may only be reserved once."
+            ]
+          },
+          "DescriptorProto:visibility": {
+            "paramName": "visibility",
+            "paramType": ".google.protobuf.SymbolVisibility",
+            "comments": [
+              " Support for `export` and `local` keywords on enums."
             ]
           },
           "ExtensionRangeOptions:uninterpreted_option": {
@@ -967,6 +988,13 @@
             "comments": [
               " Reserved enum value names, which may not be reused. A given name may only",
               " be reserved once."
+            ]
+          },
+          "EnumDescriptorProto:visibility": {
+            "paramName": "visibility",
+            "paramType": ".google.protobuf.SymbolVisibility",
+            "comments": [
+              " Support for `export` and `local` keywords on enums."
             ]
           },
           "EnumValueDescriptorProto:name": {
@@ -1216,7 +1244,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "FileOptions:uninterpreted_option": {
@@ -1317,7 +1348,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "MessageOptions:uninterpreted_option": {
@@ -1331,12 +1365,13 @@
             "paramName": "ctype",
             "paramType": ".google.protobuf.FieldOptions.CType",
             "comments": [
+              " NOTE: ctype is deprecated. Use `features.(pb.cpp).string_type` instead.",
               " The ctype option instructs the C++ code generator to use a different",
               " representation of the field than it normally would.  See the specific",
               " options below.  This option is only implemented to support use of",
               " [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of",
-              " type \"bytes\" in the open source release -- sorry, we'll try to include",
-              " other types in a future version!"
+              " type \"bytes\" in the open source release.",
+              " TODO: make ctype actually deprecated."
             ]
           },
           "FieldOptions:packed": {
@@ -1420,6 +1455,7 @@
             "paramName": "weak",
             "paramType": "TYPE_BOOL",
             "comments": [
+              " DEPRECATED. DO NOT USE!",
               " For Google-internal migration only. Do not use."
             ]
           },
@@ -1450,8 +1486,16 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
+          },
+          "FieldOptions:feature_support": {
+            "paramName": "feature_support",
+            "paramType": ".google.protobuf.FieldOptions.FeatureSupport",
+            "comments": []
           },
           "FieldOptions:uninterpreted_option": {
             "paramName": "uninterpreted_option",
@@ -1464,7 +1508,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "OneofOptions:uninterpreted_option": {
@@ -1508,7 +1555,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "EnumOptions:uninterpreted_option": {
@@ -1532,7 +1582,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "EnumValueOptions:debug_redact": {
@@ -1542,6 +1595,13 @@
               " Indicate that fields annotated with this enum value should not be printed",
               " out when using debug formats, e.g. when the field contains sensitive",
               " credentials."
+            ]
+          },
+          "EnumValueOptions:feature_support": {
+            "paramName": "feature_support",
+            "paramType": ".google.protobuf.FieldOptions.FeatureSupport",
+            "comments": [
+              " Information about the support window of a feature value."
             ]
           },
           "EnumValueOptions:uninterpreted_option": {
@@ -1555,7 +1615,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "ServiceOptions:deprecated": {
@@ -1594,7 +1657,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "MethodOptions:uninterpreted_option": {
@@ -1670,6 +1736,16 @@
           "FeatureSet:json_format": {
             "paramName": "json_format",
             "paramType": ".google.protobuf.FeatureSet.JsonFormat",
+            "comments": []
+          },
+          "FeatureSet:enforce_naming_style": {
+            "paramName": "enforce_naming_style",
+            "paramType": ".google.protobuf.FeatureSet.EnforceNamingStyle",
+            "comments": []
+          },
+          "FeatureSet:default_symbol_visibility": {
+            "paramName": "default_symbol_visibility",
+            "paramType": ".google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility",
             "comments": []
           },
           "FeatureSetDefaults:defaults": {
@@ -1784,6 +1860,13 @@
             "paramType": "TYPE_ENUM[]",
             "comments": [
               " The destination where API teams want this client library to be published."
+            ]
+          },
+          "CommonLanguageSettings:selective_gapic_generation": {
+            "paramName": "selective_gapic_generation",
+            "paramType": ".google.api.SelectiveGapicGeneration",
+            "comments": [
+              " Configuration for which RPCs should be generated in the GAPIC client."
             ]
           },
           "ClientLibrarySettings:version": {
@@ -2019,6 +2102,13 @@
               " Some settings."
             ]
           },
+          "PythonSettings:experimental_features": {
+            "paramName": "experimental_features",
+            "paramType": ".google.api.PythonSettings.ExperimentalFeatures",
+            "comments": [
+              " Experimental features to be included during client library generation."
+            ]
+          },
           "NodeSettings:common": {
             "paramName": "common",
             "paramType": ".google.api.CommonLanguageSettings",
@@ -2097,12 +2187,33 @@
               " Some settings."
             ]
           },
+          "GoSettings:renamed_services": {
+            "paramName": "renamed_services",
+            "paramType": "TYPE_MESSAGE[]",
+            "comments": [
+              " Map of service names to renamed services. Keys are the package relative",
+              " service names and values are the name to be used for the service client",
+              " and call options.",
+              "",
+              " publishing:",
+              "   go_settings:",
+              "     renamed_services:",
+              "       Publisher: TopicAdmin"
+            ]
+          },
           "MethodSettings:selector": {
             "paramName": "selector",
             "paramType": "TYPE_STRING",
             "comments": [
               " The fully qualified name of the method, for which the options below apply.",
-              " This is used to find the method to apply the options."
+              " This is used to find the method to apply the options.",
+              "",
+              " Example:",
+              "",
+              "    publishing:",
+              "      method_settings:",
+              "      - selector: google.storage.control.v2.StorageControl.CreateFolder",
+              "        # method settings for CreateFolder..."
             ]
           },
           "MethodSettings:long_running": {
@@ -2115,17 +2226,14 @@
               "",
               " Example of a YAML configuration::",
               "",
-              "  publishing:",
-              "    method_settings:",
+              "    publishing:",
+              "      method_settings:",
               "      - selector: google.cloud.speech.v2.Speech.BatchRecognize",
               "        long_running:",
-              "          initial_poll_delay:",
-              "            seconds: 60 # 1 minute",
+              "          initial_poll_delay: 60s # 1 minute",
               "          poll_delay_multiplier: 1.5",
-              "          max_poll_delay:",
-              "            seconds: 360 # 6 minutes",
-              "          total_poll_timeout:",
-              "             seconds: 54000 # 90 minutes"
+              "          max_poll_delay: 360s # 6 minutes",
+              "          total_poll_timeout: 54000s # 90 minutes"
             ]
           },
           "MethodSettings:auto_populated_fields": {
@@ -2138,11 +2246,31 @@
               "",
               " Example of a YAML configuration:",
               "",
-              "  publishing:",
-              "    method_settings:",
+              "    publishing:",
+              "      method_settings:",
               "      - selector: google.example.v1.ExampleService.CreateExample",
               "        auto_populated_fields:",
               "        - request_id"
+            ]
+          },
+          "SelectiveGapicGeneration:methods": {
+            "paramName": "methods",
+            "paramType": "TYPE_STRING[]",
+            "comments": [
+              " An allowlist of the fully qualified names of RPCs that should be included",
+              " on public client surfaces."
+            ]
+          },
+          "SelectiveGapicGeneration:generate_omitted_as_internal": {
+            "paramName": "generate_omitted_as_internal",
+            "paramType": "TYPE_BOOL",
+            "comments": [
+              " Setting this to true indicates to the client generators that methods",
+              " that would be excluded from the generation should instead be generated",
+              " in a way that indicates these methods should not be consumed by",
+              " end users. How this is expressed is up to individual language",
+              " implementations to decide. Some examples may be: added annotations,",
+              " obfuscated identifiers, or other language idiomatic patterns."
             ]
           },
           "ResourceDescriptor:type": {
@@ -2221,8 +2349,13 @@
             "comments": [
               " The plural name used in the resource name and permission names, such as",
               " 'projects' for the resource name of 'projects/{project}' and the permission",
-              " name of 'cloudresourcemanager.googleapis.com/projects.get'. It is the same",
-              " concept of the `plural` field in k8s CRD spec",
+              " name of 'cloudresourcemanager.googleapis.com/projects.get'. One exception",
+              " to this is for Nested Collections that have stuttering names, as defined",
+              " in [AIP-122](https://google.aip.dev/122#nested-collections), where the",
+              " collection ID in the resource name pattern does not necessarily directly",
+              " match the `plural` value.",
+              "",
+              " It is the same concept of the `plural` field in k8s CRD spec",
               " https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/",
               "",
               " Note: The plural form is required even for singleton resources. See",
@@ -5596,6 +5729,14 @@
               " For Google-internal migration only. Do not use."
             ]
           },
+          "FileDescriptorProto:option_dependency": {
+            "paramName": "option_dependency",
+            "paramType": "TYPE_STRING[]",
+            "comments": [
+              " Names of files imported by this file purely for the purpose of providing",
+              " option extensions. These are excluded from the dependency list above."
+            ]
+          },
           "FileDescriptorProto:message_type": {
             "paramName": "message_type",
             "paramType": "TYPE_MESSAGE[]",
@@ -5640,14 +5781,20 @@
               " The syntax of the proto file.",
               " The supported values are \"proto2\", \"proto3\", and \"editions\".",
               "",
-              " If `edition` is present, this value must be \"editions\"."
+              " If `edition` is present, this value must be \"editions\".",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "FileDescriptorProto:edition": {
             "paramName": "edition",
             "paramType": ".google.protobuf.Edition",
             "comments": [
-              " The edition of the proto file."
+              " The edition of the proto file.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "DescriptorProto:name": {
@@ -5701,6 +5848,13 @@
             "comments": [
               " Reserved field names, which may not be used by fields in the same message.",
               " A given name may only be reserved once."
+            ]
+          },
+          "DescriptorProto:visibility": {
+            "paramName": "visibility",
+            "paramType": ".google.protobuf.SymbolVisibility",
+            "comments": [
+              " Support for `export` and `local` keywords on enums."
             ]
           },
           "ExtensionRangeOptions:uninterpreted_option": {
@@ -5877,6 +6031,13 @@
             "comments": [
               " Reserved enum value names, which may not be reused. A given name may only",
               " be reserved once."
+            ]
+          },
+          "EnumDescriptorProto:visibility": {
+            "paramName": "visibility",
+            "paramType": ".google.protobuf.SymbolVisibility",
+            "comments": [
+              " Support for `export` and `local` keywords on enums."
             ]
           },
           "EnumValueDescriptorProto:name": {
@@ -6126,7 +6287,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "FileOptions:uninterpreted_option": {
@@ -6227,7 +6391,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "MessageOptions:uninterpreted_option": {
@@ -6241,12 +6408,13 @@
             "paramName": "ctype",
             "paramType": ".google.protobuf.FieldOptions.CType",
             "comments": [
+              " NOTE: ctype is deprecated. Use `features.(pb.cpp).string_type` instead.",
               " The ctype option instructs the C++ code generator to use a different",
               " representation of the field than it normally would.  See the specific",
               " options below.  This option is only implemented to support use of",
               " [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of",
-              " type \"bytes\" in the open source release -- sorry, we'll try to include",
-              " other types in a future version!"
+              " type \"bytes\" in the open source release.",
+              " TODO: make ctype actually deprecated."
             ]
           },
           "FieldOptions:packed": {
@@ -6330,6 +6498,7 @@
             "paramName": "weak",
             "paramType": "TYPE_BOOL",
             "comments": [
+              " DEPRECATED. DO NOT USE!",
               " For Google-internal migration only. Do not use."
             ]
           },
@@ -6360,8 +6529,16 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
+          },
+          "FieldOptions:feature_support": {
+            "paramName": "feature_support",
+            "paramType": ".google.protobuf.FieldOptions.FeatureSupport",
+            "comments": []
           },
           "FieldOptions:uninterpreted_option": {
             "paramName": "uninterpreted_option",
@@ -6374,7 +6551,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "OneofOptions:uninterpreted_option": {
@@ -6418,7 +6598,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "EnumOptions:uninterpreted_option": {
@@ -6442,7 +6625,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "EnumValueOptions:debug_redact": {
@@ -6452,6 +6638,13 @@
               " Indicate that fields annotated with this enum value should not be printed",
               " out when using debug formats, e.g. when the field contains sensitive",
               " credentials."
+            ]
+          },
+          "EnumValueOptions:feature_support": {
+            "paramName": "feature_support",
+            "paramType": ".google.protobuf.FieldOptions.FeatureSupport",
+            "comments": [
+              " Information about the support window of a feature value."
             ]
           },
           "EnumValueOptions:uninterpreted_option": {
@@ -6465,7 +6658,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "ServiceOptions:deprecated": {
@@ -6504,7 +6700,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "MethodOptions:uninterpreted_option": {
@@ -6580,6 +6779,16 @@
           "FeatureSet:json_format": {
             "paramName": "json_format",
             "paramType": ".google.protobuf.FeatureSet.JsonFormat",
+            "comments": []
+          },
+          "FeatureSet:enforce_naming_style": {
+            "paramName": "enforce_naming_style",
+            "paramType": ".google.protobuf.FeatureSet.EnforceNamingStyle",
+            "comments": []
+          },
+          "FeatureSet:default_symbol_visibility": {
+            "paramName": "default_symbol_visibility",
+            "paramType": ".google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility",
             "comments": []
           },
           "FeatureSetDefaults:defaults": {
@@ -6694,6 +6903,13 @@
             "paramType": "TYPE_ENUM[]",
             "comments": [
               " The destination where API teams want this client library to be published."
+            ]
+          },
+          "CommonLanguageSettings:selective_gapic_generation": {
+            "paramName": "selective_gapic_generation",
+            "paramType": ".google.api.SelectiveGapicGeneration",
+            "comments": [
+              " Configuration for which RPCs should be generated in the GAPIC client."
             ]
           },
           "ClientLibrarySettings:version": {
@@ -6929,6 +7145,13 @@
               " Some settings."
             ]
           },
+          "PythonSettings:experimental_features": {
+            "paramName": "experimental_features",
+            "paramType": ".google.api.PythonSettings.ExperimentalFeatures",
+            "comments": [
+              " Experimental features to be included during client library generation."
+            ]
+          },
           "NodeSettings:common": {
             "paramName": "common",
             "paramType": ".google.api.CommonLanguageSettings",
@@ -7007,12 +7230,33 @@
               " Some settings."
             ]
           },
+          "GoSettings:renamed_services": {
+            "paramName": "renamed_services",
+            "paramType": "TYPE_MESSAGE[]",
+            "comments": [
+              " Map of service names to renamed services. Keys are the package relative",
+              " service names and values are the name to be used for the service client",
+              " and call options.",
+              "",
+              " publishing:",
+              "   go_settings:",
+              "     renamed_services:",
+              "       Publisher: TopicAdmin"
+            ]
+          },
           "MethodSettings:selector": {
             "paramName": "selector",
             "paramType": "TYPE_STRING",
             "comments": [
               " The fully qualified name of the method, for which the options below apply.",
-              " This is used to find the method to apply the options."
+              " This is used to find the method to apply the options.",
+              "",
+              " Example:",
+              "",
+              "    publishing:",
+              "      method_settings:",
+              "      - selector: google.storage.control.v2.StorageControl.CreateFolder",
+              "        # method settings for CreateFolder..."
             ]
           },
           "MethodSettings:long_running": {
@@ -7025,17 +7269,14 @@
               "",
               " Example of a YAML configuration::",
               "",
-              "  publishing:",
-              "    method_settings:",
+              "    publishing:",
+              "      method_settings:",
               "      - selector: google.cloud.speech.v2.Speech.BatchRecognize",
               "        long_running:",
-              "          initial_poll_delay:",
-              "            seconds: 60 # 1 minute",
+              "          initial_poll_delay: 60s # 1 minute",
               "          poll_delay_multiplier: 1.5",
-              "          max_poll_delay:",
-              "            seconds: 360 # 6 minutes",
-              "          total_poll_timeout:",
-              "             seconds: 54000 # 90 minutes"
+              "          max_poll_delay: 360s # 6 minutes",
+              "          total_poll_timeout: 54000s # 90 minutes"
             ]
           },
           "MethodSettings:auto_populated_fields": {
@@ -7048,11 +7289,31 @@
               "",
               " Example of a YAML configuration:",
               "",
-              "  publishing:",
-              "    method_settings:",
+              "    publishing:",
+              "      method_settings:",
               "      - selector: google.example.v1.ExampleService.CreateExample",
               "        auto_populated_fields:",
               "        - request_id"
+            ]
+          },
+          "SelectiveGapicGeneration:methods": {
+            "paramName": "methods",
+            "paramType": "TYPE_STRING[]",
+            "comments": [
+              " An allowlist of the fully qualified names of RPCs that should be included",
+              " on public client surfaces."
+            ]
+          },
+          "SelectiveGapicGeneration:generate_omitted_as_internal": {
+            "paramName": "generate_omitted_as_internal",
+            "paramType": "TYPE_BOOL",
+            "comments": [
+              " Setting this to true indicates to the client generators that methods",
+              " that would be excluded from the generation should instead be generated",
+              " in a way that indicates these methods should not be consumed by",
+              " end users. How this is expressed is up to individual language",
+              " implementations to decide. Some examples may be: added annotations,",
+              " obfuscated identifiers, or other language idiomatic patterns."
             ]
           },
           "ResourceDescriptor:type": {
@@ -7131,8 +7392,13 @@
             "comments": [
               " The plural name used in the resource name and permission names, such as",
               " 'projects' for the resource name of 'projects/{project}' and the permission",
-              " name of 'cloudresourcemanager.googleapis.com/projects.get'. It is the same",
-              " concept of the `plural` field in k8s CRD spec",
+              " name of 'cloudresourcemanager.googleapis.com/projects.get'. One exception",
+              " to this is for Nested Collections that have stuttering names, as defined",
+              " in [AIP-122](https://google.aip.dev/122#nested-collections), where the",
+              " collection ID in the resource name pattern does not necessarily directly",
+              " match the `plural` value.",
+              "",
+              " It is the same concept of the `plural` field in k8s CRD spec",
               " https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/",
               "",
               " Note: The plural form is required even for singleton resources. See",
@@ -11150,6 +11416,14 @@
               " For Google-internal migration only. Do not use."
             ]
           },
+          "FileDescriptorProto:option_dependency": {
+            "paramName": "option_dependency",
+            "paramType": "TYPE_STRING[]",
+            "comments": [
+              " Names of files imported by this file purely for the purpose of providing",
+              " option extensions. These are excluded from the dependency list above."
+            ]
+          },
           "FileDescriptorProto:message_type": {
             "paramName": "message_type",
             "paramType": "TYPE_MESSAGE[]",
@@ -11194,14 +11468,20 @@
               " The syntax of the proto file.",
               " The supported values are \"proto2\", \"proto3\", and \"editions\".",
               "",
-              " If `edition` is present, this value must be \"editions\"."
+              " If `edition` is present, this value must be \"editions\".",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "FileDescriptorProto:edition": {
             "paramName": "edition",
             "paramType": ".google.protobuf.Edition",
             "comments": [
-              " The edition of the proto file."
+              " The edition of the proto file.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "DescriptorProto:name": {
@@ -11255,6 +11535,13 @@
             "comments": [
               " Reserved field names, which may not be used by fields in the same message.",
               " A given name may only be reserved once."
+            ]
+          },
+          "DescriptorProto:visibility": {
+            "paramName": "visibility",
+            "paramType": ".google.protobuf.SymbolVisibility",
+            "comments": [
+              " Support for `export` and `local` keywords on enums."
             ]
           },
           "ExtensionRangeOptions:uninterpreted_option": {
@@ -11431,6 +11718,13 @@
             "comments": [
               " Reserved enum value names, which may not be reused. A given name may only",
               " be reserved once."
+            ]
+          },
+          "EnumDescriptorProto:visibility": {
+            "paramName": "visibility",
+            "paramType": ".google.protobuf.SymbolVisibility",
+            "comments": [
+              " Support for `export` and `local` keywords on enums."
             ]
           },
           "EnumValueDescriptorProto:name": {
@@ -11680,7 +11974,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "FileOptions:uninterpreted_option": {
@@ -11781,7 +12078,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "MessageOptions:uninterpreted_option": {
@@ -11795,12 +12095,13 @@
             "paramName": "ctype",
             "paramType": ".google.protobuf.FieldOptions.CType",
             "comments": [
+              " NOTE: ctype is deprecated. Use `features.(pb.cpp).string_type` instead.",
               " The ctype option instructs the C++ code generator to use a different",
               " representation of the field than it normally would.  See the specific",
               " options below.  This option is only implemented to support use of",
               " [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of",
-              " type \"bytes\" in the open source release -- sorry, we'll try to include",
-              " other types in a future version!"
+              " type \"bytes\" in the open source release.",
+              " TODO: make ctype actually deprecated."
             ]
           },
           "FieldOptions:packed": {
@@ -11884,6 +12185,7 @@
             "paramName": "weak",
             "paramType": "TYPE_BOOL",
             "comments": [
+              " DEPRECATED. DO NOT USE!",
               " For Google-internal migration only. Do not use."
             ]
           },
@@ -11914,8 +12216,16 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
+          },
+          "FieldOptions:feature_support": {
+            "paramName": "feature_support",
+            "paramType": ".google.protobuf.FieldOptions.FeatureSupport",
+            "comments": []
           },
           "FieldOptions:uninterpreted_option": {
             "paramName": "uninterpreted_option",
@@ -11928,7 +12238,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "OneofOptions:uninterpreted_option": {
@@ -11972,7 +12285,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "EnumOptions:uninterpreted_option": {
@@ -11996,7 +12312,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "EnumValueOptions:debug_redact": {
@@ -12006,6 +12325,13 @@
               " Indicate that fields annotated with this enum value should not be printed",
               " out when using debug formats, e.g. when the field contains sensitive",
               " credentials."
+            ]
+          },
+          "EnumValueOptions:feature_support": {
+            "paramName": "feature_support",
+            "paramType": ".google.protobuf.FieldOptions.FeatureSupport",
+            "comments": [
+              " Information about the support window of a feature value."
             ]
           },
           "EnumValueOptions:uninterpreted_option": {
@@ -12019,7 +12345,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "ServiceOptions:deprecated": {
@@ -12058,7 +12387,10 @@
             "paramName": "features",
             "paramType": ".google.protobuf.FeatureSet",
             "comments": [
-              " Any features defined in the specific edition."
+              " Any features defined in the specific edition.",
+              " WARNING: This field should only be used by protobuf plugins or special",
+              " cases like the proto compiler. Other uses are discouraged and",
+              " developers should rely on the protoreflect APIs for their client language."
             ]
           },
           "MethodOptions:uninterpreted_option": {
@@ -12134,6 +12466,16 @@
           "FeatureSet:json_format": {
             "paramName": "json_format",
             "paramType": ".google.protobuf.FeatureSet.JsonFormat",
+            "comments": []
+          },
+          "FeatureSet:enforce_naming_style": {
+            "paramName": "enforce_naming_style",
+            "paramType": ".google.protobuf.FeatureSet.EnforceNamingStyle",
+            "comments": []
+          },
+          "FeatureSet:default_symbol_visibility": {
+            "paramName": "default_symbol_visibility",
+            "paramType": ".google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility",
             "comments": []
           },
           "FeatureSetDefaults:defaults": {
@@ -12248,6 +12590,13 @@
             "paramType": "TYPE_ENUM[]",
             "comments": [
               " The destination where API teams want this client library to be published."
+            ]
+          },
+          "CommonLanguageSettings:selective_gapic_generation": {
+            "paramName": "selective_gapic_generation",
+            "paramType": ".google.api.SelectiveGapicGeneration",
+            "comments": [
+              " Configuration for which RPCs should be generated in the GAPIC client."
             ]
           },
           "ClientLibrarySettings:version": {
@@ -12483,6 +12832,13 @@
               " Some settings."
             ]
           },
+          "PythonSettings:experimental_features": {
+            "paramName": "experimental_features",
+            "paramType": ".google.api.PythonSettings.ExperimentalFeatures",
+            "comments": [
+              " Experimental features to be included during client library generation."
+            ]
+          },
           "NodeSettings:common": {
             "paramName": "common",
             "paramType": ".google.api.CommonLanguageSettings",
@@ -12561,12 +12917,33 @@
               " Some settings."
             ]
           },
+          "GoSettings:renamed_services": {
+            "paramName": "renamed_services",
+            "paramType": "TYPE_MESSAGE[]",
+            "comments": [
+              " Map of service names to renamed services. Keys are the package relative",
+              " service names and values are the name to be used for the service client",
+              " and call options.",
+              "",
+              " publishing:",
+              "   go_settings:",
+              "     renamed_services:",
+              "       Publisher: TopicAdmin"
+            ]
+          },
           "MethodSettings:selector": {
             "paramName": "selector",
             "paramType": "TYPE_STRING",
             "comments": [
               " The fully qualified name of the method, for which the options below apply.",
-              " This is used to find the method to apply the options."
+              " This is used to find the method to apply the options.",
+              "",
+              " Example:",
+              "",
+              "    publishing:",
+              "      method_settings:",
+              "      - selector: google.storage.control.v2.StorageControl.CreateFolder",
+              "        # method settings for CreateFolder..."
             ]
           },
           "MethodSettings:long_running": {
@@ -12579,17 +12956,14 @@
               "",
               " Example of a YAML configuration::",
               "",
-              "  publishing:",
-              "    method_settings:",
+              "    publishing:",
+              "      method_settings:",
               "      - selector: google.cloud.speech.v2.Speech.BatchRecognize",
               "        long_running:",
-              "          initial_poll_delay:",
-              "            seconds: 60 # 1 minute",
+              "          initial_poll_delay: 60s # 1 minute",
               "          poll_delay_multiplier: 1.5",
-              "          max_poll_delay:",
-              "            seconds: 360 # 6 minutes",
-              "          total_poll_timeout:",
-              "             seconds: 54000 # 90 minutes"
+              "          max_poll_delay: 360s # 6 minutes",
+              "          total_poll_timeout: 54000s # 90 minutes"
             ]
           },
           "MethodSettings:auto_populated_fields": {
@@ -12602,11 +12976,31 @@
               "",
               " Example of a YAML configuration:",
               "",
-              "  publishing:",
-              "    method_settings:",
+              "    publishing:",
+              "      method_settings:",
               "      - selector: google.example.v1.ExampleService.CreateExample",
               "        auto_populated_fields:",
               "        - request_id"
+            ]
+          },
+          "SelectiveGapicGeneration:methods": {
+            "paramName": "methods",
+            "paramType": "TYPE_STRING[]",
+            "comments": [
+              " An allowlist of the fully qualified names of RPCs that should be included",
+              " on public client surfaces."
+            ]
+          },
+          "SelectiveGapicGeneration:generate_omitted_as_internal": {
+            "paramName": "generate_omitted_as_internal",
+            "paramType": "TYPE_BOOL",
+            "comments": [
+              " Setting this to true indicates to the client generators that methods",
+              " that would be excluded from the generation should instead be generated",
+              " in a way that indicates these methods should not be consumed by",
+              " end users. How this is expressed is up to individual language",
+              " implementations to decide. Some examples may be: added annotations,",
+              " obfuscated identifiers, or other language idiomatic patterns."
             ]
           },
           "ResourceDescriptor:type": {
@@ -12685,8 +13079,13 @@
             "comments": [
               " The plural name used in the resource name and permission names, such as",
               " 'projects' for the resource name of 'projects/{project}' and the permission",
-              " name of 'cloudresourcemanager.googleapis.com/projects.get'. It is the same",
-              " concept of the `plural` field in k8s CRD spec",
+              " name of 'cloudresourcemanager.googleapis.com/projects.get'. One exception",
+              " to this is for Nested Collections that have stuttering names, as defined",
+              " in [AIP-122](https://google.aip.dev/122#nested-collections), where the",
+              " collection ID in the resource name pattern does not necessarily directly",
+              " match the `plural` value.",
+              "",
+              " It is the same concept of the `plural` field in k8s CRD spec",
               " https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/",
               "",
               " Note: The plural form is required even for singleton resources. See",
