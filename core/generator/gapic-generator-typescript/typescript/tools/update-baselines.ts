@@ -76,9 +76,9 @@ async function main() {
   const oldFolders = (await readdir(root)).filter(file =>
     file.match(resultPrefix),
   );
-  for (const oldFolder of oldFolders) {
-    await fsp.rm(oldFolder, { recursive: true });
-  }
+  await Promise.all(
+    oldFolders.map(oldFolder => fsp.rm(oldFolder, {recursive: true}))
+  );
 
   // generate test output
   try {
