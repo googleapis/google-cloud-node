@@ -11,24 +11,9 @@ steps:
     npm install -g npm@latest
     npm config set prefix /usr/local
     npm install
+    npm run presystem-test
   dir: 'handwritten/bigtable' # Changed to '.' as the cloudbuild.yaml is in this directory
   id: 'install-dependencies'
-
-# 2. (Optional) Run pre-system-test.sh if it exists
-- name: 'gcr.io/cloud-builders/npm/pre-system-test'
-  entrypoint: 'npm'
-  args: ['run', 'presystem-test']
-  dir: 'handwritten/bigtable'
-  env:
-  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
-  # If you need specific credentials from Secret Manager, uncomment these:
-  # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
-  id: 'pre-run-system-tests'
-  # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
-  # secretEnv: ['SA_KEY']
-  # volumes:
-  #   - name: 'sa-keys'
-  #     path: '/secrets'
 
 # 3. Configure environment variables for the tests and run system tests
 #    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
