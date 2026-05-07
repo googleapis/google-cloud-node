@@ -287,5 +287,33 @@ describe('merge-changelog script', () => {
       sinon.assert.calledTwice(reposStub.getContent);
       sinon.assert.calledOnce(reposStub.createOrUpdateFileContents);
     });
+
+    it('throws an Error if processing files fails', async () => {
+      const context = {
+        eventName: 'pull_request',
+        repo: {owner: 'testOrg', repo: 'testRepo'},
+        payload: {
+          pull_request: {
+            number: 42,
+            head: {
+              ref: 'feature-branch',
+              repo: {
+                owner: {login: 'testOrg'},
+                name: 'testRepo',
+              }
+            }
+          }
+        }
+      };
+
+      pullsStub.listFiles.rejects(new Error('GitHub API down'));
+
+      await assert.rejects(
+        async () => {
+          await mergeChangelog({github: githubStub, context});
+        },
+        /Changelog merge workflow encountered failures/
+      );
+    });
   });
 });

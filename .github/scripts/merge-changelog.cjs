@@ -73,13 +73,13 @@ async function processPullRequest(github, owner, repo, pr) {
     files = response.data;
   } catch (err) {
     console.error(`Error listing files for PR #${prNumber}:`, err.message);
-    return;
+    return false;
   }
 
   const modifiesChangelog = files.some(file => file.filename === 'changelog.json');
   if (!modifiesChangelog) {
     console.log(`PR #${prNumber} does not modify changelog.json. Skipping.`);
-    return;
+    return true;
   }
 
   console.log(`PR #${prNumber} modifies changelog.json. Fetching contents...`);
@@ -96,7 +96,7 @@ async function processPullRequest(github, owner, repo, pr) {
     prFileData = res.data;
   } catch (err) {
     console.error(`Error fetching changelog.json from PR #${prNumber}:`, err.message);
-    return;
+    return false;
   }
 
   const prContent = Buffer.from(prFileData.content, 'base64').toString('utf8');
@@ -105,7 +105,8 @@ async function processPullRequest(github, owner, repo, pr) {
     prChangelog = JSON.parse(prContent);
   } catch (err) {
     console.error(`Error parsing PR #${prNumber}'s changelog.json:`, err.message);
-    return;
+    console.error('PR changelog content:', prContent);
+    return false;
   }
   const prSha = prFileData.sha;
 
@@ -121,7 +122,7 @@ async function processPullRequest(github, owner, repo, pr) {
     mainFileData = res.data;
   } catch (err) {
     console.error(`Error fetching changelog.json from main branch:`, err.message);
-    return;
+    return false;
   }
 
   const mainContent = Buffer.from(mainFileData.content, 'base64').toString('utf8');
@@ -130,7 +131,7 @@ async function processPullRequest(github, owner, repo, pr) {
     mainChangelog = JSON.parse(mainContent);
   } catch (err) {
     console.error(`Error parsing main branch's changelog.json:`, err.message);
-    return;
+    return false;
   }
 
   // Merge the changelogs
@@ -139,7 +140,7 @@ async function processPullRequest(github, owner, repo, pr) {
 
   if (newContent === prContent) {
     console.log(`PR #${prNumber}'s changelog.json is already up to date.`);
-    return;
+    return true;
   }
 
   console.log(`PR #${prNumber}'s changelog.json is out of date. Committing updates to ${branch}...`);
@@ -156,8 +157,10 @@ async function processPullRequest(github, owner, repo, pr) {
       branch: branch,
     });
     console.log(`Successfully updated changelog.json for PR #${prNumber}.`);
+    return true;
   } catch (commitErr) {
     console.error(`Could not commit update to PR #${prNumber} (might be a fork PR without write permissions):`, commitErr.message);
+    return false;
   }
 }
 
@@ -165,9 +168,10 @@ module.exports = async ({github, context}) => {
   const owner = context.repo.owner;
   const repo = context.repo.repo;
 
+  let success = true;
   if (context.eventName === 'pull_request') {
     const pr = context.payload.pull_request;
-    await processPullRequest(github, owner, repo, pr);
+    success = await processPullRequest(github, owner, repo, pr);
   } else if (context.eventName === 'push' || context.eventName === 'workflow_dispatch') {
     console.log(`Triggered by ${context.eventName}. Finding all open pull requests...`);
     let pulls = [];
@@ -180,18 +184,30 @@ module.exports = async ({github, context}) => {
       pulls = response.data;
     } catch (err) {
       console.error(`Error listing open pull requests:`, err.message);
-      return;
+      success = false;
     }
 
-    console.log(`Found ${pulls.length} open pull requests. Processing...`);
-    for (const pr of pulls) {
-      try {
-        await processPullRequest(github, owner, repo, pr);
-      } catch (err) {
-        console.error(`Error processing PR #${pr.number}:`, err);
+    if (success) {
+      console.log(`Found ${pulls.length} open pull requests. Processing...`);
+      for (const pr of pulls) {
+        try {
+          const prResult = await processPullRequest(github, owner, repo, pr);
+          if (!prResult) {
+            success = false;
+          }
+        } catch (err) {
+          console.error(`Error processing PR #${pr.number}:`, err);
+          success = false;
+        }
       }
     }
   }
+
+  if (!success) {
+    throw new Error('Changelog merge workflow encountered failures. Failing the action.');
+  }
+
+  return true;
 };
 
 module.exports.mergeChangelogs = mergeChangelogs;
