@@ -52,6 +52,38 @@ function mergeChangelogs(mainChangelog, prChangelog) {
 }
 
 /**
+ * Fetch the file content safely, fallback to Git Blobs API if the file size is larger than 1MB limit.
+ */
+async function fetchFileContent(github, owner, repo, path, ref) {
+  const res = await github.rest.repos.getContent({
+    owner,
+    repo,
+    path,
+    ref,
+  });
+
+  const fileData = res.data;
+  // For files > 1MB, getContent might return metadata without standard base64 content field
+  if (fileData.content) {
+    return {
+      content: Buffer.from(fileData.content, 'base64').toString('utf8'),
+      sha: fileData.sha,
+    };
+  }
+
+  const blobRes = await github.rest.git.getBlob({
+    owner,
+    repo,
+    file_sha: fileData.sha,
+  });
+
+  return {
+    content: Buffer.from(blobRes.data.content, 'base64').toString('utf8'),
+    sha: fileData.sha,
+  };
+}
+
+/**
  * Process an individual pull request, checking if it modifies changelog.json and updating it if needed.
  */
 async function processPullRequest(github, owner, repo, pr) {
@@ -85,21 +117,16 @@ async function processPullRequest(github, owner, repo, pr) {
   console.log(`PR #${prNumber} modifies changelog.json. Fetching contents...`);
 
   // Fetch PR version of changelog.json
-  let prFileData;
+  let prContent, prSha;
   try {
-    const res = await github.rest.repos.getContent({
-      owner: prRepoOwner,
-      repo: prRepoName,
-      path: 'changelog.json',
-      ref: branch,
-    });
-    prFileData = res.data;
+    const fileData = await fetchFileContent(github, prRepoOwner, prRepoName, 'changelog.json', branch);
+    prContent = fileData.content;
+    prSha = fileData.sha;
   } catch (err) {
     console.error(`Error fetching changelog.json from PR #${prNumber}:`, err.message);
     return false;
   }
 
-  const prContent = Buffer.from(prFileData.content, 'base64').toString('utf8');
   let prChangelog;
   try {
     prChangelog = JSON.parse(prContent);
@@ -108,24 +135,17 @@ async function processPullRequest(github, owner, repo, pr) {
     console.error('PR changelog content:', prContent);
     return false;
   }
-  const prSha = prFileData.sha;
 
   // Fetch main version of changelog.json
-  let mainFileData;
+  let mainContent;
   try {
-    const res = await github.rest.repos.getContent({
-      owner,
-      repo,
-      path: 'changelog.json',
-      ref: 'main',
-    });
-    mainFileData = res.data;
+    const fileData = await fetchFileContent(github, owner, repo, 'changelog.json', 'main');
+    mainContent = fileData.content;
   } catch (err) {
     console.error(`Error fetching changelog.json from main branch:`, err.message);
     return false;
   }
 
-  const mainContent = Buffer.from(mainFileData.content, 'base64').toString('utf8');
   let mainChangelog;
   try {
     mainChangelog = JSON.parse(mainContent);

@@ -101,6 +101,7 @@ describe('merge-changelog script', () => {
     let githubStub;
     let pullsStub;
     let reposStub;
+    let gitStub;
 
     beforeEach(() => {
       pullsStub = {
@@ -111,16 +112,97 @@ describe('merge-changelog script', () => {
         getContent: sinon.stub(),
         createOrUpdateFileContents: sinon.stub(),
       };
+      gitStub = {
+        getBlob: sinon.stub(),
+      };
       githubStub = {
         rest: {
           pulls: pullsStub,
           repos: reposStub,
+          git: gitStub,
         },
       };
     });
 
     afterEach(() => {
       sinon.restore();
+    });
+
+    it('handles large changelog files (>1MB) using git.getBlob API', async () => {
+      const context = {
+        eventName: 'pull_request',
+        repo: {owner: 'testOrg', repo: 'testRepo'},
+        payload: {
+          pull_request: {
+            number: 42,
+            head: {
+              ref: 'feature-branch',
+              repo: {
+                owner: {login: 'testOrg'},
+                name: 'testRepo',
+              }
+            }
+          }
+        }
+      };
+
+      pullsStub.listFiles.resolves({
+        data: [
+          {filename: 'changelog.json'},
+        ]
+      });
+
+      // Mock getContent to return metadata with NO content (indicates >1MB file)
+      reposStub.getContent.withArgs(sinon.match({ref: 'feature-branch'})).resolves({
+        data: {
+          sha: 'large-pr-file-sha',
+        },
+      });
+
+      reposStub.getContent.withArgs(sinon.match({ref: 'main'})).resolves({
+        data: {
+          sha: 'large-main-file-sha',
+        },
+      });
+
+      const prChangelogContent = JSON.stringify({
+        repository: 'test',
+        entries: [{id: 'new-pr-entry'}, {id: 'main-entry-1'}],
+      });
+      gitStub.getBlob.withArgs(sinon.match({file_sha: 'large-pr-file-sha'})).resolves({
+        data: {
+          content: Buffer.from(prChangelogContent).toString('base64'),
+        }
+      });
+
+      const mainChangelogContent = JSON.stringify({
+        repository: 'test',
+        entries: [{id: 'main-entry-2'}, {id: 'main-entry-1'}],
+      });
+      gitStub.getBlob.withArgs(sinon.match({file_sha: 'large-main-file-sha'})).resolves({
+        data: {
+          content: Buffer.from(mainChangelogContent).toString('base64'),
+        }
+      });
+
+      reposStub.createOrUpdateFileContents.resolves({});
+
+      await mergeChangelog({github: githubStub, context});
+
+      sinon.assert.calledTwice(reposStub.getContent);
+      sinon.assert.calledTwice(gitStub.getBlob);
+      sinon.assert.calledOnce(reposStub.createOrUpdateFileContents);
+
+      const commitCallArgs = reposStub.createOrUpdateFileContents.firstCall.args[0];
+      assert.strictEqual(commitCallArgs.branch, 'feature-branch');
+      assert.strictEqual(commitCallArgs.sha, 'large-pr-file-sha');
+
+      const committedContent = JSON.parse(Buffer.from(commitCallArgs.content, 'base64').toString('utf8'));
+      assert.deepStrictEqual(committedContent.entries, [
+        {id: 'new-pr-entry'},
+        {id: 'main-entry-2'},
+        {id: 'main-entry-1'},
+      ]);
     });
 
     it('does not do anything if the PR does not modify changelog.json', async () => {
