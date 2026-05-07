@@ -5,6 +5,84 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "4c33205869fc81a0ebd60604c3f91fe90b87ecea",
+          "message": "Clear metrics tracers after operation completion",
+          "issues": [
+            "8172"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "0dd9a53aa825d08c106928f88d72ff931f839b1c",
+          "message": "Disable metrics tracer when built-in metrics are disabled",
+          "issues": [
+            "8170"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "9e91cc8b68973b546f1fb94b1c39951c395f5a2b",
+          "message": "Record fractional latency metrics",
+          "issues": [
+            "8168"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "8e31dd7b8afb0a2fb6e1d6809fee7d9cd21370c8",
+          "message": "GetTransaction type with options, cb",
+          "issues": [
+            "8045"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "a5e4c00a-94e9-42fb-96e8-8b7c29c58d82",
+      "createTime": "2026-05-06T21:35:08.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "3.0.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/error-reporting",
+      "id": "3fd62a46-a8cd-4020-952f-e58c7771b035",
+      "createTime": "2026-05-06T18:07:28.494Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
           "issues": [
@@ -77670,5 +77748,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-01T17:22:33.483Z"
+  "updateTime": "2026-05-06T21:35:08.503Z"
 }
