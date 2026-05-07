@@ -2444,7 +2444,7 @@ class File extends ServiceObject<File, FileMetadata> {
     return {
       'x-goog-encryption-algorithm': 'AES256',
       'x-goog-encryption-key': this.encryptionKey.toString('base64'),
-      'x-goog-encryption-key-sha256': this.encryptionKeyHash!,
+      'x-goog-encryption-key-sha256': this.encryptionKeyHash || '',
     };
   }
 
