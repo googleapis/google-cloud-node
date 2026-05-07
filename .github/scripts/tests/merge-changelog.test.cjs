@@ -95,6 +95,40 @@ describe('merge-changelog script', () => {
         {id: 'old-entry-1', version: '1.0.0'},
       ]);
     });
+
+    it('keeps the latest updateTime value', () => {
+      const mainChangelog = {
+        repository: 'googleapis/google-cloud-node',
+        entries: [],
+        updateTime: '2026-05-06T18:00:00.000Z'
+      };
+
+      const prChangelog = {
+        repository: 'googleapis/google-cloud-node',
+        entries: [],
+        updateTime: '2026-05-06T19:00:00.000Z'
+      };
+
+      const merged = mergeChangelog.mergeChangelogs(mainChangelog, prChangelog);
+      assert.strictEqual(merged.updateTime, '2026-05-06T19:00:00.000Z');
+    });
+
+    it('does not overwrite updateTime if main has a newer value', () => {
+      const mainChangelog = {
+        repository: 'googleapis/google-cloud-node',
+        entries: [],
+        updateTime: '2026-05-06T20:00:00.000Z'
+      };
+
+      const prChangelog = {
+        repository: 'googleapis/google-cloud-node',
+        entries: [],
+        updateTime: '2026-05-06T19:00:00.000Z'
+      };
+
+      const merged = mergeChangelog.mergeChangelogs(mainChangelog, prChangelog);
+      assert.strictEqual(merged.updateTime, '2026-05-06T20:00:00.000Z');
+    });
   });
 
   describe('integration with github', () => {

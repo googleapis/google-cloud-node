@@ -45,10 +45,27 @@ function mergeChangelogs(mainChangelog, prChangelog) {
   const newPrEntries = prEntries.filter(entry => !mainEntryKeys.has(getEntryKey(entry)));
 
   const mergedEntries = [...newPrEntries, ...mainEntries];
-  return {
+
+  const mainTime = mainChangelog && mainChangelog.updateTime;
+  const prTime = prChangelog && prChangelog.updateTime;
+  let mergedUpdateTime = mainTime;
+
+  if (prTime) {
+    if (!mainTime || new Date(prTime) > new Date(mainTime)) {
+      mergedUpdateTime = prTime;
+    }
+  }
+
+  const result = {
     ...mainChangelog,
     entries: mergedEntries,
   };
+
+  if (mergedUpdateTime) {
+    result.updateTime = mergedUpdateTime;
+  }
+
+  return result;
 }
 
 /**
