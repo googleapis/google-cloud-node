@@ -12,7 +12,7 @@ steps:
     npm config set prefix /usr/local
     npm install
     npm run presystem-test
-  dir: 'handwritten/bigtable' # Changed to '.' as the cloudbuild.yaml is in this directory
+  dir: 'handwritten/bigtable'
   id: 'install-dependencies'
 
 # 3. Configure environment variables for the tests and run system tests
@@ -58,7 +58,7 @@ steps:
     #   b) Replicate its functionality directly in this step.
     #   c) Store it in a GCS bucket and fetch it.
     echo "Codecov reporting (if desired) would be integrated here."
-  dir: 'handwritten/bigtable' # Changed to '.'
+  dir: 'handwritten/bigtable'
   id: 'coverage-report'
 
 # If you use Secret Manager for credentials, uncomment and configure:
