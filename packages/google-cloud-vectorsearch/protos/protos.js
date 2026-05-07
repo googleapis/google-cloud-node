@@ -23163,6 +23163,7 @@
                          * @interface ISearchResponseMetadata
                          * @property {google.cloud.vectorsearch.v1beta.SearchResponseMetadata.IIndexInfo|null} [usedIndex] SearchResponseMetadata usedIndex
                          * @property {boolean|null} [usedKnn] SearchResponseMetadata usedKnn
+                         * @property {Array.<google.rpc.IStatus>|null} [warnings] SearchResponseMetadata warnings
                          */
     
                         /**
@@ -23174,6 +23175,7 @@
                          * @param {google.cloud.vectorsearch.v1beta.ISearchResponseMetadata=} [properties] Properties to set
                          */
                         function SearchResponseMetadata(properties) {
+                            this.warnings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -23195,6 +23197,14 @@
                          * @instance
                          */
                         SearchResponseMetadata.prototype.usedKnn = null;
+    
+                        /**
+                         * SearchResponseMetadata warnings.
+                         * @member {Array.<google.rpc.IStatus>} warnings
+                         * @memberof google.cloud.vectorsearch.v1beta.SearchResponseMetadata
+                         * @instance
+                         */
+                        SearchResponseMetadata.prototype.warnings = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -23238,6 +23248,9 @@
                                 $root.google.cloud.vectorsearch.v1beta.SearchResponseMetadata.IndexInfo.encode(message.usedIndex, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.usedKnn != null && Object.hasOwnProperty.call(message, "usedKnn"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.usedKnn);
+                            if (message.warnings != null && message.warnings.length)
+                                for (var i = 0; i < message.warnings.length; ++i)
+                                    $root.google.rpc.Status.encode(message.warnings[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -23280,6 +23293,12 @@
                                     }
                                 case 2: {
                                         message.usedKnn = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.warnings && message.warnings.length))
+                                            message.warnings = [];
+                                        message.warnings.push($root.google.rpc.Status.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -23333,6 +23352,15 @@
                                 if (typeof message.usedKnn !== "boolean")
                                     return "usedKnn: boolean expected";
                             }
+                            if (message.warnings != null && message.hasOwnProperty("warnings")) {
+                                if (!Array.isArray(message.warnings))
+                                    return "warnings: array expected";
+                                for (var i = 0; i < message.warnings.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.warnings[i]);
+                                    if (error)
+                                        return "warnings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -23355,6 +23383,16 @@
                             }
                             if (object.usedKnn != null)
                                 message.usedKnn = Boolean(object.usedKnn);
+                            if (object.warnings) {
+                                if (!Array.isArray(object.warnings))
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.SearchResponseMetadata.warnings: array expected");
+                                message.warnings = [];
+                                for (var i = 0; i < object.warnings.length; ++i) {
+                                    if (typeof object.warnings[i] !== "object")
+                                        throw TypeError(".google.cloud.vectorsearch.v1beta.SearchResponseMetadata.warnings: object expected");
+                                    message.warnings[i] = $root.google.rpc.Status.fromObject(object.warnings[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -23371,6 +23409,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.warnings = [];
                             if (message.usedIndex != null && message.hasOwnProperty("usedIndex")) {
                                 object.usedIndex = $root.google.cloud.vectorsearch.v1beta.SearchResponseMetadata.IndexInfo.toObject(message.usedIndex, options);
                                 if (options.oneofs)
@@ -23380,6 +23420,11 @@
                                 object.usedKnn = message.usedKnn;
                                 if (options.oneofs)
                                     object.indexType = "usedKnn";
+                            }
+                            if (message.warnings && message.warnings.length) {
+                                object.warnings = [];
+                                for (var j = 0; j < message.warnings.length; ++j)
+                                    object.warnings[j] = $root.google.rpc.Status.toObject(message.warnings[j], options);
                             }
                             return object;
                         };
@@ -25505,6 +25550,7 @@
                          * @memberof google.cloud.vectorsearch.v1beta
                          * @interface IRanker
                          * @property {google.cloud.vectorsearch.v1beta.IReciprocalRankFusion|null} [rrf] Ranker rrf
+                         * @property {google.cloud.vectorsearch.v1beta.IVertexRanker|null} [vertexRanker] Ranker vertexRanker
                          */
     
                         /**
@@ -25530,6 +25576,14 @@
                          */
                         Ranker.prototype.rrf = null;
     
+                        /**
+                         * Ranker vertexRanker.
+                         * @member {google.cloud.vectorsearch.v1beta.IVertexRanker|null|undefined} vertexRanker
+                         * @memberof google.cloud.vectorsearch.v1beta.Ranker
+                         * @instance
+                         */
+                        Ranker.prototype.vertexRanker = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -25541,6 +25595,17 @@
                          */
                         Object.defineProperty(Ranker.prototype, "ranker", {
                             get: $util.oneOfGetter($oneOfFields = ["rrf"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Ranker reranker.
+                         * @member {"vertexRanker"|undefined} reranker
+                         * @memberof google.cloud.vectorsearch.v1beta.Ranker
+                         * @instance
+                         */
+                        Object.defineProperty(Ranker.prototype, "reranker", {
+                            get: $util.oneOfGetter($oneOfFields = ["vertexRanker"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -25570,6 +25635,8 @@
                                 writer = $Writer.create();
                             if (message.rrf != null && Object.hasOwnProperty.call(message, "rrf"))
                                 $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.encode(message.rrf, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.vertexRanker != null && Object.hasOwnProperty.call(message, "vertexRanker"))
+                                $root.google.cloud.vectorsearch.v1beta.VertexRanker.encode(message.vertexRanker, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -25608,6 +25675,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rrf = $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vertexRanker = $root.google.cloud.vectorsearch.v1beta.VertexRanker.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -25654,6 +25725,14 @@
                                         return "rrf." + error;
                                 }
                             }
+                            if (message.vertexRanker != null && message.hasOwnProperty("vertexRanker")) {
+                                properties.reranker = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1beta.VertexRanker.verify(message.vertexRanker);
+                                    if (error)
+                                        return "vertexRanker." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -25673,6 +25752,11 @@
                                 if (typeof object.rrf !== "object")
                                     throw TypeError(".google.cloud.vectorsearch.v1beta.Ranker.rrf: object expected");
                                 message.rrf = $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.fromObject(object.rrf);
+                            }
+                            if (object.vertexRanker != null) {
+                                if (typeof object.vertexRanker !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.Ranker.vertexRanker: object expected");
+                                message.vertexRanker = $root.google.cloud.vectorsearch.v1beta.VertexRanker.fromObject(object.vertexRanker);
                             }
                             return message;
                         };
@@ -25694,6 +25778,11 @@
                                 object.rrf = $root.google.cloud.vectorsearch.v1beta.ReciprocalRankFusion.toObject(message.rrf, options);
                                 if (options.oneofs)
                                     object.ranker = "rrf";
+                            }
+                            if (message.vertexRanker != null && message.hasOwnProperty("vertexRanker")) {
+                                object.vertexRanker = $root.google.cloud.vectorsearch.v1beta.VertexRanker.toObject(message.vertexRanker, options);
+                                if (options.oneofs)
+                                    object.reranker = "vertexRanker";
                             }
                             return object;
                         };
@@ -25954,6 +26043,535 @@
                         };
     
                         return ReciprocalRankFusion;
+                    })();
+    
+                    v1beta.VertexRanker = (function() {
+    
+                        /**
+                         * Properties of a VertexRanker.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @interface IVertexRanker
+                         * @property {google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec|null} [textRecordSpec] VertexRanker textRecordSpec
+                         * @property {string|null} [model] VertexRanker model
+                         * @property {number|null} [topN] VertexRanker topN
+                         */
+    
+                        /**
+                         * Constructs a new VertexRanker.
+                         * @memberof google.cloud.vectorsearch.v1beta
+                         * @classdesc Represents a VertexRanker.
+                         * @implements IVertexRanker
+                         * @constructor
+                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker=} [properties] Properties to set
+                         */
+                        function VertexRanker(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VertexRanker textRecordSpec.
+                         * @member {google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec|null|undefined} textRecordSpec
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @instance
+                         */
+                        VertexRanker.prototype.textRecordSpec = null;
+    
+                        /**
+                         * VertexRanker model.
+                         * @member {string} model
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @instance
+                         */
+                        VertexRanker.prototype.model = "";
+    
+                        /**
+                         * VertexRanker topN.
+                         * @member {number} topN
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @instance
+                         */
+                        VertexRanker.prototype.topN = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * VertexRanker recordSpec.
+                         * @member {"textRecordSpec"|undefined} recordSpec
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @instance
+                         */
+                        Object.defineProperty(VertexRanker.prototype, "recordSpec", {
+                            get: $util.oneOfGetter($oneOfFields = ["textRecordSpec"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new VertexRanker instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker=} [properties] Properties to set
+                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker instance
+                         */
+                        VertexRanker.create = function create(properties) {
+                            return new VertexRanker(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VertexRanker message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker} message VertexRanker message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VertexRanker.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.model);
+                            if (message.topN != null && Object.hasOwnProperty.call(message, "topN"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.topN);
+                            if (message.textRecordSpec != null && Object.hasOwnProperty.call(message, "textRecordSpec"))
+                                $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.encode(message.textRecordSpec, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VertexRanker message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.IVertexRanker} message VertexRanker message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VertexRanker.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VertexRanker message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VertexRanker.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.VertexRanker();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 6: {
+                                        message.textRecordSpec = $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.model = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.topN = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VertexRanker message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VertexRanker.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VertexRanker message.
+                         * @function verify
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VertexRanker.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.textRecordSpec != null && message.hasOwnProperty("textRecordSpec")) {
+                                properties.recordSpec = 1;
+                                {
+                                    var error = $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.verify(message.textRecordSpec);
+                                    if (error)
+                                        return "textRecordSpec." + error;
+                                }
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.topN != null && message.hasOwnProperty("topN"))
+                                if (!$util.isInteger(message.topN))
+                                    return "topN: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VertexRanker message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.vectorsearch.v1beta.VertexRanker} VertexRanker
+                         */
+                        VertexRanker.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.vectorsearch.v1beta.VertexRanker)
+                                return object;
+                            var message = new $root.google.cloud.vectorsearch.v1beta.VertexRanker();
+                            if (object.textRecordSpec != null) {
+                                if (typeof object.textRecordSpec !== "object")
+                                    throw TypeError(".google.cloud.vectorsearch.v1beta.VertexRanker.textRecordSpec: object expected");
+                                message.textRecordSpec = $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.fromObject(object.textRecordSpec);
+                            }
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.topN != null)
+                                message.topN = object.topN | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VertexRanker message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {google.cloud.vectorsearch.v1beta.VertexRanker} message VertexRanker
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VertexRanker.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.model = "";
+                                object.topN = 0;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.topN != null && message.hasOwnProperty("topN"))
+                                object.topN = message.topN;
+                            if (message.textRecordSpec != null && message.hasOwnProperty("textRecordSpec")) {
+                                object.textRecordSpec = $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.toObject(message.textRecordSpec, options);
+                                if (options.oneofs)
+                                    object.recordSpec = "textRecordSpec";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VertexRanker to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VertexRanker.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VertexRanker
+                         * @function getTypeUrl
+                         * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VertexRanker.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.VertexRanker";
+                        };
+    
+                        VertexRanker.TextRecordSpec = (function() {
+    
+                            /**
+                             * Properties of a TextRecordSpec.
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                             * @interface ITextRecordSpec
+                             * @property {string|null} [query] TextRecordSpec query
+                             * @property {string|null} [titleTemplate] TextRecordSpec titleTemplate
+                             * @property {string|null} [contentTemplate] TextRecordSpec contentTemplate
+                             */
+    
+                            /**
+                             * Constructs a new TextRecordSpec.
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker
+                             * @classdesc Represents a TextRecordSpec.
+                             * @implements ITextRecordSpec
+                             * @constructor
+                             * @param {google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec=} [properties] Properties to set
+                             */
+                            function TextRecordSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TextRecordSpec query.
+                             * @member {string} query
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @instance
+                             */
+                            TextRecordSpec.prototype.query = "";
+    
+                            /**
+                             * TextRecordSpec titleTemplate.
+                             * @member {string} titleTemplate
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @instance
+                             */
+                            TextRecordSpec.prototype.titleTemplate = "";
+    
+                            /**
+                             * TextRecordSpec contentTemplate.
+                             * @member {string} contentTemplate
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @instance
+                             */
+                            TextRecordSpec.prototype.contentTemplate = "";
+    
+                            /**
+                             * Creates a new TextRecordSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec=} [properties] Properties to set
+                             * @returns {google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec} TextRecordSpec instance
+                             */
+                            TextRecordSpec.create = function create(properties) {
+                                return new TextRecordSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TextRecordSpec message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec} message TextRecordSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextRecordSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                if (message.titleTemplate != null && Object.hasOwnProperty.call(message, "titleTemplate"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.titleTemplate);
+                                if (message.contentTemplate != null && Object.hasOwnProperty.call(message, "contentTemplate"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.contentTemplate);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TextRecordSpec message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.VertexRanker.ITextRecordSpec} message TextRecordSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextRecordSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TextRecordSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec} TextRecordSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextRecordSpec.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.titleTemplate = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.contentTemplate = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TextRecordSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec} TextRecordSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextRecordSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TextRecordSpec message.
+                             * @function verify
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TextRecordSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.titleTemplate != null && message.hasOwnProperty("titleTemplate"))
+                                    if (!$util.isString(message.titleTemplate))
+                                        return "titleTemplate: string expected";
+                                if (message.contentTemplate != null && message.hasOwnProperty("contentTemplate"))
+                                    if (!$util.isString(message.contentTemplate))
+                                        return "contentTemplate: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TextRecordSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec} TextRecordSpec
+                             */
+                            TextRecordSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec)
+                                    return object;
+                                var message = new $root.google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.titleTemplate != null)
+                                    message.titleTemplate = String(object.titleTemplate);
+                                if (object.contentTemplate != null)
+                                    message.contentTemplate = String(object.contentTemplate);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TextRecordSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec} message TextRecordSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TextRecordSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.query = "";
+                                    object.titleTemplate = "";
+                                    object.contentTemplate = "";
+                                }
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.titleTemplate != null && message.hasOwnProperty("titleTemplate"))
+                                    object.titleTemplate = message.titleTemplate;
+                                if (message.contentTemplate != null && message.hasOwnProperty("contentTemplate"))
+                                    object.contentTemplate = message.contentTemplate;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TextRecordSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TextRecordSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TextRecordSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TextRecordSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.vectorsearch.v1beta.VertexRanker.TextRecordSpec";
+                            };
+    
+                            return TextRecordSpec;
+                        })();
+    
+                        return VertexRanker;
                     })();
     
                     v1beta.BatchSearchDataObjectsResponse = (function() {
