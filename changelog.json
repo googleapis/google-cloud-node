@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "ddb0db637cff6477e8be1f60c9c5ba19c4a4e4a3",
+          "message": "[chronicle] Adding Client Libraries for BigQueryExportService",
+          "issues": [
+            "8139"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "2c98f567-013a-4b4b-bbec-22d7c5c5db95",
+      "createTime": "2026-05-07T00:03:46.700Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
           "message": "Bump all node submodules",
@@ -77687,5 +77704,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-06T18:07:28.494Z"
+  "updateTime": "2026-05-07T00:03:46.700Z"
 }
