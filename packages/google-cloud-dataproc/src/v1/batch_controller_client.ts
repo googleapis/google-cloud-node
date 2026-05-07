@@ -378,7 +378,9 @@ export class BatchControllerClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dataproc',
+      'https://www.googleapis.com/auth/dataproc.read-only'
     ];
   }
 
@@ -497,8 +499,10 @@ export class BatchControllerClient {
       });
   }
 /**
- * Deletes the batch workload resource. If the batch is not in terminal state,
- * the delete fails and the response returns `FAILED_PRECONDITION`.
+ * Deletes the batch workload resource. If the batch is not in a
+ * `CANCELLED`, `SUCCEEDED` or `FAILED`
+ * {@link protos.google.cloud.dataproc.v1.Batch.State|`State`}, the delete operation fails
+ * and the response returns `FAILED_PRECONDITION`.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -611,10 +615,9 @@ export class BatchControllerClient {
  * @param {string} [request.requestId]
  *   Optional. A unique ID used to identify the request. If the service
  *   receives two
- *   [CreateBatchRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateBatchRequest)s
- *   with the same request_id, the second request is ignored and the
- *   Operation that corresponds to the first Batch created and stored
- *   in the backend is returned.
+ *   `CreateBatchRequests` with the same `request_id`, the second request is
+ *   ignored and the operation that corresponds to the first Batch created and
+ *   stored in the backend is returned.
  *
  *   Recommendation: Set this value to a
  *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -741,10 +744,13 @@ export class BatchControllerClient {
  *   A filter is a logical expression constraining the values of various fields
  *   in each batch resource. Filters are case sensitive, and may contain
  *   multiple clauses combined with logical operators (AND/OR).
- *   Supported fields are `batch_id`, `batch_uuid`, `state`, and `create_time`.
+ *   Supported fields are `batch_id`, `batch_uuid`, `state`, `create_time`, and
+ *   `labels`.
  *
  *   e.g. `state = RUNNING and create_time < "2023-01-01T00:00:00Z"`
- *   filters for batches in state RUNNING that were created before 2023-01-01
+ *   filters for batches in state RUNNING that were created before 2023-01-01.
+ *   `state = RUNNING and labels.environment=production` filters for batches in
+ *   state in a RUNNING state that have a production environment label.
  *
  *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
  *   description of the filter syntax and a list of supported comparisons.
@@ -862,10 +868,13 @@ export class BatchControllerClient {
  *   A filter is a logical expression constraining the values of various fields
  *   in each batch resource. Filters are case sensitive, and may contain
  *   multiple clauses combined with logical operators (AND/OR).
- *   Supported fields are `batch_id`, `batch_uuid`, `state`, and `create_time`.
+ *   Supported fields are `batch_id`, `batch_uuid`, `state`, `create_time`, and
+ *   `labels`.
  *
  *   e.g. `state = RUNNING and create_time < "2023-01-01T00:00:00Z"`
- *   filters for batches in state RUNNING that were created before 2023-01-01
+ *   filters for batches in state RUNNING that were created before 2023-01-01.
+ *   `state = RUNNING and labels.environment=production` filters for batches in
+ *   state in a RUNNING state that have a production environment label.
  *
  *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
  *   description of the filter syntax and a list of supported comparisons.
@@ -932,10 +941,13 @@ export class BatchControllerClient {
  *   A filter is a logical expression constraining the values of various fields
  *   in each batch resource. Filters are case sensitive, and may contain
  *   multiple clauses combined with logical operators (AND/OR).
- *   Supported fields are `batch_id`, `batch_uuid`, `state`, and `create_time`.
+ *   Supported fields are `batch_id`, `batch_uuid`, `state`, `create_time`, and
+ *   `labels`.
  *
  *   e.g. `state = RUNNING and create_time < "2023-01-01T00:00:00Z"`
- *   filters for batches in state RUNNING that were created before 2023-01-01
+ *   filters for batches in state RUNNING that were created before 2023-01-01.
+ *   `state = RUNNING and labels.environment=production` filters for batches in
+ *   state in a RUNNING state that have a production environment label.
  *
  *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
  *   description of the filter syntax and a list of supported comparisons.
