@@ -13,6 +13,31 @@
         },
         {
           "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-proto-files",
+      "id": "b7efbd07-0050-4063-b6cf-2a44b6efd020",
+      "createTime": "2026-05-06T21:35:09.556Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
           "sha": "4c33205869fc81a0ebd60604c3f91fe90b87ecea",
           "message": "Clear metrics tracers after operation completion",
           "issues": [
