@@ -15,7 +15,6 @@
  */
 
 import {
-  ApiError,
   Bucket,
   File,
   CRC32C,
@@ -34,7 +33,7 @@ import {
 import assert from 'assert';
 import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
 import * as path from 'path';
-import {GaxiosOptions, GaxiosResponse} from 'gaxios';
+import {GaxiosError, GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util.js';
 import {AuthClient, GoogleAuth} from 'google-auth-library';
 import {tmpdir} from 'os';
@@ -53,12 +52,12 @@ describe('Transfer Manager', () => {
         retryDelayMultiplier: 2,
         totalTimeout: 600,
         maxRetryDelay: 60,
-        retryableErrorFn: (err: ApiError) => {
-          return err.code === 500;
+        retryableErrorFn: (err: GaxiosError) => {
+          return err.status === 500;
         },
         idempotencyStrategy: IdempotencyStrategy.RetryConditional,
       },
-    })
+    }),
   );
   let sandbox: sinon.SinonSandbox;
   let transferManager: TransferManager;
@@ -109,7 +108,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(bucket, 'upload').callsFake((path, options) => {
         assert.strictEqual(
           (options as UploadOptions).preconditionOpts?.ifGenerationMatch,
-          0
+          0,
         );
       });
 
@@ -129,7 +128,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(bucket, 'upload').callsFake((path, options) => {
         assert.strictEqual(
           (options as UploadOptions).destination,
-          expectedDestination
+          expectedDestination,
         );
       });
 
@@ -148,7 +147,7 @@ describe('Transfer Manager', () => {
       const result = await transferManager.uploadManyFiles(paths);
       assert.strictEqual(
         result[0][0].name,
-        paths[0].split(path.sep).join(path.posix.sep)
+        paths[0].split(path.sep).join(path.posix.sep),
       );
     });
 
@@ -158,7 +157,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(bucket, 'upload').callsFake(async (_path, options) => {
         assert.strictEqual(
           (options as UploadOptions)[GCCL_GCS_CMD_KEY],
-          'tm.upload_many'
+          'tm.upload_many',
         );
       });
 
@@ -225,7 +224,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(file, 'download').callsFake(options => {
         assert.strictEqual(
           (options as DownloadOptions).destination,
-          expectedDestination
+          expectedDestination,
         );
       });
       await transferManager.downloadManyFiles([file], {prefix});
@@ -240,7 +239,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(file, 'download').callsFake(options => {
         assert.strictEqual(
           (options as DownloadOptions).destination,
-          expectedDestination
+          expectedDestination,
         );
       });
       await transferManager.downloadManyFiles([file], {stripPrefix});
@@ -252,7 +251,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(file, 'download').callsFake(async options => {
         assert.strictEqual(
           (options as DownloadOptions)[GCCL_GCS_CMD_KEY],
-          'tm.download_many'
+          'tm.download_many',
         );
       });
 
@@ -265,7 +264,7 @@ describe('Transfer Manager', () => {
       };
       const filename = 'first.txt';
       const expectedDestination = path.normalize(
-        `${passthroughOptions.destination}/${filename}`
+        `${passthroughOptions.destination}/${filename}`,
       );
       const download = (optionsOrCb?: DownloadOptions | DownloadCallback) => {
         if (typeof optionsOrCb === 'function') {
@@ -286,14 +285,14 @@ describe('Transfer Manager', () => {
       sandbox.stub(firstFile, 'download').callsFake(options => {
         assert.strictEqual(
           (options as DownloadManyFilesOptions).skipIfExists,
-          0
+          0,
         );
       });
       const secondFile = new File(bucket, 'second.txt');
       sandbox.stub(secondFile, 'download').callsFake(options => {
         assert.strictEqual(
           (options as DownloadManyFilesOptions).skipIfExists,
-          0
+          0,
         );
       });
 
@@ -346,7 +345,7 @@ describe('Transfer Manager', () => {
       });
       assert.strictEqual(
         mkdirSpy.calledWith(expectedDir, {recursive: true}),
-        true
+        true,
       );
     });
 
@@ -365,7 +364,7 @@ describe('Transfer Manager', () => {
 
       const result = (await transferManager.downloadManyFiles(
         [maliciousFile, validFile],
-        {passthroughOptions: {destination: destination}}
+        {passthroughOptions: {destination: destination}},
       )) as DownloadResponseWithStatus[];
 
       assert.strictEqual(maliciousDownloadStub.called, false);
@@ -413,7 +412,7 @@ describe('Transfer Manager', () => {
       const file = new File(bucket, filename);
       const expectedDestination = path.resolve(
         destination,
-        filename.replace(/^\/+/, '')
+        filename.replace(/^\/+/, ''),
       );
 
       const downloadStub = sandbox
@@ -437,7 +436,7 @@ describe('Transfer Manager', () => {
       const filename = '/etc/passwd';
       const expectedDestination = path.resolve(
         destination,
-        filename.replace(/^\/+/, '')
+        filename.replace(/^\/+/, ''),
       );
 
       const file = new File(bucket, filename);
@@ -467,7 +466,7 @@ describe('Transfer Manager', () => {
 
       const result = (await transferManager.downloadManyFiles(
         [file],
-        options
+        options,
       )) as DownloadResponseWithStatus[];
 
       assert.strictEqual(downloadStub.called, false);
@@ -526,7 +525,7 @@ describe('Transfer Manager', () => {
       assert.strictEqual(
         result.length,
         fileNames.length,
-        `Parity Failure: Processed ${result.length} files but input had ${fileNames.length}`
+        `Parity Failure: Processed ${result.length} files but input had ${fileNames.length}`,
       );
 
       const downloads = result.filter(r => !r.skipped);
@@ -539,22 +538,22 @@ describe('Transfer Manager', () => {
       assert.strictEqual(
         downloads.length,
         expectedDownloads,
-        `Expected ${expectedDownloads} downloads but got ${downloads.length}`
+        `Expected ${expectedDownloads} downloads but got ${downloads.length}`,
       );
 
       assert.strictEqual(
         skips.length,
         expectedSkips,
-        `Expected ${expectedSkips} skips but got ${skips.length}`
+        `Expected ${expectedSkips} skips but got ${skips.length}`,
       );
 
       const traversalSkips = skips.filter(
-        f => f.reason === SkipReason.PATH_TRAVERSAL
+        f => f.reason === SkipReason.PATH_TRAVERSAL,
       );
       assert.strictEqual(traversalSkips.length, expectedTraversalSkips);
 
       const illegalCharSkips = skips.filter(
-        f => f.reason === SkipReason.ILLEGAL_CHARACTER
+        f => f.reason === SkipReason.ILLEGAL_CHARACTER,
       );
       assert.strictEqual(illegalCharSkips.length, 2);
     });
@@ -655,7 +654,7 @@ describe('Transfer Manager', () => {
         transferManager.downloadFileInChunks(file, {validation: 'crc32c'}),
         {
           code: 'CONTENT_DOWNLOAD_MISMATCH',
-        }
+        },
       );
     });
 
@@ -663,7 +662,7 @@ describe('Transfer Manager', () => {
       sandbox.stub(file, 'download').callsFake(async options => {
         assert.strictEqual(
           (options as DownloadOptions)[GCCL_GCS_CMD_KEY],
-          'tm.download_sharded'
+          'tm.download_sharded',
         );
         return [Buffer.alloc(100)];
       });
@@ -704,7 +703,7 @@ describe('Transfer Manager', () => {
 
     before(async () => {
       directory = await fsp.mkdtemp(
-        path.join(tmpdir(), 'tm-uploadFileInChunks-')
+        path.join(tmpdir(), 'tm-uploadFileInChunks-'),
       );
 
       filePath = path.join(directory, 't.txt');
@@ -734,7 +733,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadFileInChunks(
         filePath,
         {},
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
       assert.strictEqual(fakeHelper.initiateUpload.calledOnce, true);
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
@@ -749,7 +748,7 @@ describe('Transfer Manager', () => {
         {
           chunkSizeBytes: 32 * 1024 * 1024,
         },
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(readStreamSpy.calledOnceWith(filePath, options), true);
@@ -771,7 +770,7 @@ describe('Transfer Manager', () => {
           ]),
           chunkSizeBytes: 32 * 1024 * 1024,
         },
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(readStreamSpy.calledOnceWith(filePath, options), true);
@@ -787,7 +786,7 @@ describe('Transfer Manager', () => {
             [2, '321'],
           ]),
         },
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(fakeHelper.uploadId, '123');
@@ -798,7 +797,7 @@ describe('Transfer Manager', () => {
       const expectedErr = new MultiPartUploadError(
         'Hello World',
         '',
-        new Map<number, string>()
+        new Map<number, string>(),
       );
       mockGeneratorFunction = (bucket, fileName, uploadId, partsMap) => {
         fakeHelper = sandbox.createStubInstance(FakeXMLHelper);
@@ -810,13 +809,13 @@ describe('Transfer Manager', () => {
         fakeHelper.abortUpload.resolves();
         return fakeHelper;
       };
-      assert.rejects(
+      await assert.rejects(
         transferManager.uploadFileInChunks(
           filePath,
           {autoAbortFailure: false},
-          mockGeneratorFunction
+          mockGeneratorFunction,
         ),
-        expectedErr
+        expectedErr,
       );
     });
 
@@ -844,7 +843,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadFileInChunks(
         filePath,
         {headers: headersToAdd},
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
     });
 
@@ -852,7 +851,7 @@ describe('Transfer Manager', () => {
       const expectedErr = new MultiPartUploadError(
         'Hello World',
         '',
-        new Map<number, string>()
+        new Map<number, string>(),
       );
       const fakeId = '123';
 
@@ -874,7 +873,7 @@ describe('Transfer Manager', () => {
       };
 
       assert.doesNotThrow(() =>
-        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction)
+        transferManager.uploadFileInChunks(filePath, {}, mockGeneratorFunction),
       );
     });
 
@@ -885,34 +884,37 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
-          return {};
+        async getRequestHeaders(): Promise<Headers> {
+          return new Headers({});
         }
 
         async request(opts: GaxiosOptions) {
           called = true;
-
-          assert(opts.headers);
-          assert('x-goog-api-client' in opts.headers);
+          const headers = Object.fromEntries(
+            (opts.headers as Headers).entries(),
+          );
+          assert(headers);
+          assert('x-goog-api-client' in headers);
           assert.match(
-            opts.headers['x-goog-api-client'],
-            /gccl-gcs-cmd\/tm.upload_sharded/
+            headers['x-goog-api-client'],
+            /gccl-gcs-cmd\/tm.upload_sharded/,
           );
 
           return {
             data: Buffer.from(
               `<InitiateMultipartUploadResult>
                 <UploadId>1</UploadId>
-              </InitiateMultipartUploadResult>`
+              </InitiateMultipartUploadResult>`,
             ),
             headers: {},
           } as GaxiosResponse;
         }
       }
 
-      transferManager.bucket.storage.authClient = new GoogleAuth({
-        authClient: new TestAuthClient(),
-      });
+      transferManager.bucket.storage.storageTransport.authClient =
+        new GoogleAuth({
+          authClient: new TestAuthClient(),
+        });
 
       await transferManager.uploadFileInChunks(filePath);
 
@@ -926,31 +928,34 @@ describe('Transfer Manager', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders() {
-          return {};
+        async getRequestHeaders(): Promise<Headers> {
+          return new Headers({});
         }
 
         async request(opts: GaxiosOptions) {
           called = true;
-
-          assert(opts.headers);
-          assert('User-Agent' in opts.headers);
-          assert.match(opts.headers['User-Agent'], /gcloud-node/);
+          const headers = Object.fromEntries(
+            (opts.headers as Headers).entries(),
+          );
+          assert(headers);
+          assert('user-agent' in headers);
+          assert.match(headers['user-agent'], /gcloud-node/);
 
           return {
             data: Buffer.from(
               `<InitiateMultipartUploadResult>
                 <UploadId>1</UploadId>
-              </InitiateMultipartUploadResult>`
+              </InitiateMultipartUploadResult>`,
             ),
             headers: {},
           } as GaxiosResponse;
         }
       }
 
-      transferManager.bucket.storage.authClient = new GoogleAuth({
-        authClient: new TestAuthClient(),
-      });
+      transferManager.bucket.storage.storageTransport.authClient =
+        new GoogleAuth({
+          authClient: new TestAuthClient(),
+        });
 
       await transferManager.uploadFileInChunks(filePath);
 
@@ -976,7 +981,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadFileInChunks(
         filePath,
         {validation: 'crc32c'},
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
@@ -1007,7 +1012,7 @@ describe('Transfer Manager', () => {
       await transferManager.uploadFileInChunks(
         filePath,
         {},
-        mockGeneratorFunction
+        mockGeneratorFunction,
       );
 
       assert.strictEqual(fakeHelper.uploadPart.calledOnce, true);
