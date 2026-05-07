@@ -29,7 +29,7 @@ export async function mochaGlobalSetup(this: any) {
   await getTestBenchDockerImage();
   await runTestBenchDockerImage();
   await new Promise(resolve =>
-    setTimeout(resolve, TIME_TO_WAIT_FOR_CONTAINER_READY)
+    setTimeout(resolve, TIME_TO_WAIT_FOR_CONTAINER_READY),
   );
 }
 
