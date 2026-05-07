@@ -47,6 +47,7 @@ export {PersistentResourceServiceClient} from './persistent_resource_service_cli
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
 export {ReasoningEngineExecutionServiceClient} from './reasoning_engine_execution_service_client';
+export {ReasoningEngineRuntimeRevisionServiceClient} from './reasoning_engine_runtime_revision_service_client';
 export {ReasoningEngineServiceClient} from './reasoning_engine_service_client';
 export {ScheduleServiceClient} from './schedule_service_client';
 export {SessionServiceClient} from './session_service_client';

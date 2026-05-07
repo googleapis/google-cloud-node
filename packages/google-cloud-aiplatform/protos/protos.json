@@ -4726,6 +4726,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parallelAiSearch": {
+                          "type": "ParallelAiSearch",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -4793,6 +4800,24 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ParallelAiSearch": {
+                          "fields": {
+                            "apiKey": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customConfigs": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -34181,6 +34206,28 @@
                               }
                             }
                           ]
+                        },
+                        "CancelAsyncQueryReasoningEngine": {
+                          "requestType": "CancelAsyncQueryReasoningEngineRequest",
+                          "responseType": "CancelAsyncQueryReasoningEngineResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=reasoningEngines/*}:cancelAsyncQuery",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=reasoningEngines/*}:cancelAsyncQuery",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -34285,6 +34332,28 @@
                           "id": 1
                         }
                       }
+                    },
+                    "CancelAsyncQueryReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "operationName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CancelAsyncQueryReasoningEngineResponse": {
+                      "fields": {}
                     },
                     "ReasoningEngineService": {
                       "options": {
@@ -45973,6 +46042,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "parallelAiSearch": {
+                          "type": "ParallelAiSearch",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -46040,6 +46116,24 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ParallelAiSearch": {
+                          "fields": {
+                            "apiKey": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customConfigs": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -84669,6 +84763,76 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 17
+                        },
+                        "trafficConfig": {
+                          "type": "TrafficConfig",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TrafficConfig": {
+                          "oneofs": {
+                            "trafficSplit": {
+                              "oneof": [
+                                "trafficSplitManual",
+                                "trafficSplitAlwaysLatest"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "trafficSplitManual": {
+                              "type": "TrafficSplitManual",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "trafficSplitAlwaysLatest": {
+                              "type": "TrafficSplitAlwaysLatest",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "TrafficSplitManual": {
+                              "fields": {
+                                "targets": {
+                                  "rule": "repeated",
+                                  "type": "Target",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "Target": {
+                                  "fields": {
+                                    "runtimeRevisionName": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED",
+                                        "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision"
+                                      }
+                                    },
+                                    "percent": {
+                                      "type": "int32",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "TrafficSplitAlwaysLatest": {
+                              "fields": {}
+                            }
+                          }
                         }
                       }
                     },
@@ -84809,10 +84973,16 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:query",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{name=reasoningEngines/*}:query",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}:query",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=reasoningEngines/*}:query",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -84832,10 +85002,16 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:streamQuery",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{name=reasoningEngines/*}:streamQuery",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}:streamQuery",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{name=reasoningEngines/*}:streamQuery",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -84866,6 +85042,28 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "AsyncQueryReasoningEngineResponse",
                                 "metadata_type": "AsyncQueryReasoningEngineOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelAsyncQueryReasoningEngine": {
+                          "requestType": "CancelAsyncQueryReasoningEngineRequest",
+                          "responseType": "CancelAsyncQueryReasoningEngineResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{name=reasoningEngines/*}:cancelAsyncQuery",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{name=reasoningEngines/*}:cancelAsyncQuery",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -84971,6 +85169,223 @@
                         "outputGcsUri": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "CancelAsyncQueryReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "operationName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CancelAsyncQueryReasoningEngineResponse": {
+                      "fields": {}
+                    },
+                    "ReasoningEngineRuntimeRevision": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/runtimeRevisions/{runtime_revision}",
+                        "(google.api.resource).plural": "reasoningEngineRuntimeRevisions",
+                        "(google.api.resource).singular": "reasoningEngineRuntimeRevision"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "spec": {
+                          "type": "ReasoningEngineSpec",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "DEPRECATED": 2
+                          }
+                        }
+                      }
+                    },
+                    "ReasoningEngineRuntimeRevisionService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetReasoningEngineRuntimeRevision": {
+                          "requestType": "GetReasoningEngineRuntimeRevisionRequest",
+                          "responseType": "ReasoningEngineRuntimeRevision",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListReasoningEngineRuntimeRevisions": {
+                          "requestType": "ListReasoningEngineRuntimeRevisionsRequest",
+                          "responseType": "ListReasoningEngineRuntimeRevisionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/runtimeRevisions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/runtimeRevisions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteReasoningEngineRuntimeRevision": {
+                          "requestType": "DeleteReasoningEngineRuntimeRevisionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteReasoningEngineRuntimeRevisionOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteReasoningEngineRuntimeRevisionOperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "DeleteReasoningEngineRuntimeRevisionOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetReasoningEngineRuntimeRevisionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision"
+                          }
+                        }
+                      }
+                    },
+                    "ListReasoningEngineRuntimeRevisionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReasoningEngineRuntimeRevisionsResponse": {
+                      "fields": {
+                        "reasoningEngineRuntimeRevisions": {
+                          "rule": "repeated",
+                          "type": "ReasoningEngineRuntimeRevision",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteReasoningEngineRuntimeRevisionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision"
+                          }
                         }
                       }
                     },

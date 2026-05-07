@@ -20,11 +20,6 @@
                 "queryAudienceList"
               ]
             },
-            "SheetExportAudienceList": {
-              "methods": [
-                "sheetExportAudienceList"
-              ]
-            },
             "GetAudienceList": {
               "methods": [
                 "getAudienceList"
@@ -53,6 +48,16 @@
             "GetReportTask": {
               "methods": [
                 "getReportTask"
+              ]
+            },
+            "RunReport": {
+              "methods": [
+                "runReport"
+              ]
+            },
+            "GetMetadata": {
+              "methods": [
+                "getMetadata"
               ]
             },
             "CreateAudienceList": {
@@ -101,11 +106,6 @@
                 "queryAudienceList"
               ]
             },
-            "SheetExportAudienceList": {
-              "methods": [
-                "sheetExportAudienceList"
-              ]
-            },
             "GetAudienceList": {
               "methods": [
                 "getAudienceList"
@@ -134,6 +134,16 @@
             "GetReportTask": {
               "methods": [
                 "getReportTask"
+              ]
+            },
+            "RunReport": {
+              "methods": [
+                "runReport"
+              ]
+            },
+            "GetMetadata": {
+              "methods": [
+                "getMetadata"
               ]
             },
             "CreateAudienceList": {
