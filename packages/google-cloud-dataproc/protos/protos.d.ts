@@ -3082,6 +3082,9 @@ export namespace google {
 
                     /** ExecutionConfig authenticationConfig */
                     authenticationConfig?: (google.cloud.dataproc.v1.IAuthenticationConfig|null);
+
+                    /** ExecutionConfig resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an ExecutionConfig. */
@@ -3119,6 +3122,9 @@ export namespace google {
 
                     /** ExecutionConfig authenticationConfig. */
                     public authenticationConfig?: (google.cloud.dataproc.v1.IAuthenticationConfig|null);
+
+                    /** ExecutionConfig resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
 
                     /** ExecutionConfig network. */
                     public network?: ("networkUri"|"subnetworkUri");
@@ -3536,6 +3542,9 @@ export namespace google {
 
                     /** UsageMetrics acceleratorType */
                     acceleratorType?: (string|null);
+
+                    /** UsageMetrics updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a UsageMetrics. */
@@ -3558,6 +3567,9 @@ export namespace google {
 
                     /** UsageMetrics acceleratorType. */
                     public acceleratorType: string;
+
+                    /** UsageMetrics updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new UsageMetrics instance using the specified properties.
@@ -5090,14 +5102,14 @@ export namespace google {
                     HUDI = 18,
                     ICEBERG = 19,
                     JUPYTER = 1,
-                    JUPYTER_KERNEL_GATEWAY = 22,
                     PIG = 21,
                     PRESTO = 6,
                     TRINO = 17,
                     RANGER = 12,
                     SOLR = 10,
                     ZEPPELIN = 4,
-                    ZOOKEEPER = 8
+                    ZOOKEEPER = 8,
+                    JUPYTER_KERNEL_GATEWAY = 22
                 }
 
                 /** FailureAction enum. */

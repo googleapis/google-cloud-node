@@ -7940,6 +7940,7 @@
                          * @property {google.protobuf.IDuration|null} [ttl] ExecutionConfig ttl
                          * @property {string|null} [stagingBucket] ExecutionConfig stagingBucket
                          * @property {google.cloud.dataproc.v1.IAuthenticationConfig|null} [authenticationConfig] ExecutionConfig authenticationConfig
+                         * @property {Object.<string,string>|null} [resourceManagerTags] ExecutionConfig resourceManagerTags
                          */
     
                         /**
@@ -7952,6 +7953,7 @@
                          */
                         function ExecutionConfig(properties) {
                             this.networkTags = [];
+                            this.resourceManagerTags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -8030,6 +8032,14 @@
                          */
                         ExecutionConfig.prototype.authenticationConfig = null;
     
+                        /**
+                         * ExecutionConfig resourceManagerTags.
+                         * @member {Object.<string,string>} resourceManagerTags
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.resourceManagerTags = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -8087,6 +8097,9 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.stagingBucket);
                             if (message.authenticationConfig != null && Object.hasOwnProperty.call(message, "authenticationConfig"))
                                 $root.google.cloud.dataproc.v1.AuthenticationConfig.encode(message.authenticationConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.resourceManagerTags != null && Object.hasOwnProperty.call(message, "resourceManagerTags"))
+                                for (var keys = Object.keys(message.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.resourceManagerTags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -8117,7 +8130,7 @@
                         ExecutionConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ExecutionConfig();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ExecutionConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -8159,6 +8172,29 @@
                                     }
                                 case 11: {
                                         message.authenticationConfig = $root.google.cloud.dataproc.v1.AuthenticationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (message.resourceManagerTags === $util.emptyObject)
+                                            message.resourceManagerTags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.resourceManagerTags[key] = value;
                                         break;
                                     }
                                 default:
@@ -8240,6 +8276,14 @@
                                 if (error)
                                     return "authenticationConfig." + error;
                             }
+                            if (message.resourceManagerTags != null && message.hasOwnProperty("resourceManagerTags")) {
+                                if (!$util.isObject(message.resourceManagerTags))
+                                    return "resourceManagerTags: object expected";
+                                var key = Object.keys(message.resourceManagerTags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.resourceManagerTags[key[i]]))
+                                        return "resourceManagerTags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -8287,6 +8331,13 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ExecutionConfig.authenticationConfig: object expected");
                                 message.authenticationConfig = $root.google.cloud.dataproc.v1.AuthenticationConfig.fromObject(object.authenticationConfig);
                             }
+                            if (object.resourceManagerTags) {
+                                if (typeof object.resourceManagerTags !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ExecutionConfig.resourceManagerTags: object expected");
+                                message.resourceManagerTags = {};
+                                for (var keys = Object.keys(object.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    message.resourceManagerTags[keys[i]] = String(object.resourceManagerTags[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -8305,6 +8356,8 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.networkTags = [];
+                            if (options.objects || options.defaults)
+                                object.resourceManagerTags = {};
                             if (options.defaults) {
                                 object.serviceAccount = "";
                                 object.kmsKey = "";
@@ -8340,6 +8393,12 @@
                                 object.stagingBucket = message.stagingBucket;
                             if (message.authenticationConfig != null && message.hasOwnProperty("authenticationConfig"))
                                 object.authenticationConfig = $root.google.cloud.dataproc.v1.AuthenticationConfig.toObject(message.authenticationConfig, options);
+                            var keys2;
+                            if (message.resourceManagerTags && (keys2 = Object.keys(message.resourceManagerTags)).length) {
+                                object.resourceManagerTags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.resourceManagerTags[keys2[j]] = message.resourceManagerTags[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -9165,6 +9224,7 @@
                          * @property {number|Long|null} [shuffleStorageGbSeconds] UsageMetrics shuffleStorageGbSeconds
                          * @property {number|Long|null} [milliAcceleratorSeconds] UsageMetrics milliAcceleratorSeconds
                          * @property {string|null} [acceleratorType] UsageMetrics acceleratorType
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] UsageMetrics updateTime
                          */
     
                         /**
@@ -9215,6 +9275,14 @@
                         UsageMetrics.prototype.acceleratorType = "";
     
                         /**
+                         * UsageMetrics updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.dataproc.v1.UsageMetrics
+                         * @instance
+                         */
+                        UsageMetrics.prototype.updateTime = null;
+    
+                        /**
                          * Creates a new UsageMetrics instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.UsageMetrics
@@ -9246,6 +9314,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.milliAcceleratorSeconds);
                             if (message.acceleratorType != null && Object.hasOwnProperty.call(message, "acceleratorType"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.acceleratorType);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -9298,6 +9368,10 @@
                                         message.acceleratorType = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -9345,6 +9419,11 @@
                             if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                                 if (!$util.isString(message.acceleratorType))
                                     return "acceleratorType: string expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
                             return null;
                         };
     
@@ -9389,6 +9468,11 @@
                                     message.milliAcceleratorSeconds = new $util.LongBits(object.milliAcceleratorSeconds.low >>> 0, object.milliAcceleratorSeconds.high >>> 0).toNumber();
                             if (object.acceleratorType != null)
                                 message.acceleratorType = String(object.acceleratorType);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.UsageMetrics.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
                             return message;
                         };
     
@@ -9422,6 +9506,7 @@
                                 } else
                                     object.milliAcceleratorSeconds = options.longs === String ? "0" : 0;
                                 object.acceleratorType = "";
+                                object.updateTime = null;
                             }
                             if (message.milliDcuSeconds != null && message.hasOwnProperty("milliDcuSeconds"))
                                 if (typeof message.milliDcuSeconds === "number")
@@ -9440,6 +9525,8 @@
                                     object.milliAcceleratorSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.milliAcceleratorSeconds) : options.longs === Number ? new $util.LongBits(message.milliAcceleratorSeconds.low >>> 0, message.milliAcceleratorSeconds.high >>> 0).toNumber() : message.milliAcceleratorSeconds;
                             if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                                 object.acceleratorType = message.acceleratorType;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
                         };
     
@@ -13162,7 +13249,6 @@
                      * @property {number} HUDI=18 HUDI value
                      * @property {number} ICEBERG=19 ICEBERG value
                      * @property {number} JUPYTER=1 JUPYTER value
-                     * @property {number} JUPYTER_KERNEL_GATEWAY=22 JUPYTER_KERNEL_GATEWAY value
                      * @property {number} PIG=21 PIG value
                      * @property {number} PRESTO=6 PRESTO value
                      * @property {number} TRINO=17 TRINO value
@@ -13170,6 +13256,7 @@
                      * @property {number} SOLR=10 SOLR value
                      * @property {number} ZEPPELIN=4 ZEPPELIN value
                      * @property {number} ZOOKEEPER=8 ZOOKEEPER value
+                     * @property {number} JUPYTER_KERNEL_GATEWAY=22 JUPYTER_KERNEL_GATEWAY value
                      */
                     v1.Component = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -13184,7 +13271,6 @@
                         values[valuesById[18] = "HUDI"] = 18;
                         values[valuesById[19] = "ICEBERG"] = 19;
                         values[valuesById[1] = "JUPYTER"] = 1;
-                        values[valuesById[22] = "JUPYTER_KERNEL_GATEWAY"] = 22;
                         values[valuesById[21] = "PIG"] = 21;
                         values[valuesById[6] = "PRESTO"] = 6;
                         values[valuesById[17] = "TRINO"] = 17;
@@ -13192,6 +13278,7 @@
                         values[valuesById[10] = "SOLR"] = 10;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
                         values[valuesById[8] = "ZOOKEEPER"] = 8;
+                        values[valuesById[22] = "JUPYTER_KERNEL_GATEWAY"] = 22;
                         return values;
                     })();
     
@@ -22883,7 +22970,6 @@
                                     case 18:
                                     case 19:
                                     case 1:
-                                    case 22:
                                     case 21:
                                     case 6:
                                     case 17:
@@ -22891,6 +22977,7 @@
                                     case 10:
                                     case 4:
                                     case 8:
+                                    case 22:
                                         break;
                                     }
                             }
@@ -22973,10 +23060,6 @@
                                     case 1:
                                         message.optionalComponents[i] = 1;
                                         break;
-                                    case "JUPYTER_KERNEL_GATEWAY":
-                                    case 22:
-                                        message.optionalComponents[i] = 22;
-                                        break;
                                     case "PIG":
                                     case 21:
                                         message.optionalComponents[i] = 21;
@@ -23004,6 +23087,10 @@
                                     case "ZOOKEEPER":
                                     case 8:
                                         message.optionalComponents[i] = 8;
+                                        break;
+                                    case "JUPYTER_KERNEL_GATEWAY":
+                                    case 22:
+                                        message.optionalComponents[i] = 22;
                                         break;
                                     }
                             }
