@@ -123630,6 +123630,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public asyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CancelAsyncQueryReasoningEngine.
+                     * @param request CancelAsyncQueryReasoningEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CancelAsyncQueryReasoningEngineResponse
+                     */
+                    public cancelAsyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest, callback: google.cloud.aiplatform.v1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngineCallback): void;
+
+                    /**
+                     * Calls CancelAsyncQueryReasoningEngine.
+                     * @param request CancelAsyncQueryReasoningEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelAsyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest): Promise<google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse>;
                 }
 
                 namespace ReasoningEngineExecutionService {
@@ -123654,6 +123668,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type AsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.ReasoningEngineExecutionService|cancelAsyncQueryReasoningEngine}.
+                     * @param error Error, if any
+                     * @param [response] CancelAsyncQueryReasoningEngineResponse
+                     */
+                    type CancelAsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse) => void;
                 }
 
                 /** Properties of a QueryReasoningEngineRequest. */
@@ -124268,6 +124289,200 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AsyncQueryReasoningEngineResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelAsyncQueryReasoningEngineRequest. */
+                interface ICancelAsyncQueryReasoningEngineRequest {
+
+                    /** CancelAsyncQueryReasoningEngineRequest name */
+                    name?: (string|null);
+
+                    /** CancelAsyncQueryReasoningEngineRequest operationName */
+                    operationName?: (string|null);
+                }
+
+                /** Represents a CancelAsyncQueryReasoningEngineRequest. */
+                class CancelAsyncQueryReasoningEngineRequest implements ICancelAsyncQueryReasoningEngineRequest {
+
+                    /**
+                     * Constructs a new CancelAsyncQueryReasoningEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest);
+
+                    /** CancelAsyncQueryReasoningEngineRequest name. */
+                    public name: string;
+
+                    /** CancelAsyncQueryReasoningEngineRequest operationName. */
+                    public operationName: string;
+
+                    /**
+                     * Creates a new CancelAsyncQueryReasoningEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelAsyncQueryReasoningEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Verifies a CancelAsyncQueryReasoningEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelAsyncQueryReasoningEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Creates a plain object from a CancelAsyncQueryReasoningEngineRequest message. Also converts values to other types if specified.
+                     * @param message CancelAsyncQueryReasoningEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelAsyncQueryReasoningEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelAsyncQueryReasoningEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelAsyncQueryReasoningEngineResponse. */
+                interface ICancelAsyncQueryReasoningEngineResponse {
+                }
+
+                /** Represents a CancelAsyncQueryReasoningEngineResponse. */
+                class CancelAsyncQueryReasoningEngineResponse implements ICancelAsyncQueryReasoningEngineResponse {
+
+                    /**
+                     * Constructs a new CancelAsyncQueryReasoningEngineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse);
+
+                    /**
+                     * Creates a new CancelAsyncQueryReasoningEngineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelAsyncQueryReasoningEngineResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Verifies a CancelAsyncQueryReasoningEngineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelAsyncQueryReasoningEngineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Creates a plain object from a CancelAsyncQueryReasoningEngineResponse message. Also converts values to other types if specified.
+                     * @param message CancelAsyncQueryReasoningEngineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelAsyncQueryReasoningEngineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelAsyncQueryReasoningEngineResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
