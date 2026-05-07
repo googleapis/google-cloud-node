@@ -378,6 +378,222 @@ describe('v1.CmsMetadataKeyServiceClient', () => {
         });
     });
 
+    describe('batchActivateCmsMetadataKeys', () => {
+        it('invokes batchActivateCmsMetadataKeys without error', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCmsMetadataKeysResponse()
+            );
+            client.innerApiCalls.batchActivateCmsMetadataKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchActivateCmsMetadataKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCmsMetadataKeys without error using callback', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCmsMetadataKeysResponse()
+            );
+            client.innerApiCalls.batchActivateCmsMetadataKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchActivateCmsMetadataKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchActivateCmsMetadataKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCmsMetadataKeys with error', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchActivateCmsMetadataKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchActivateCmsMetadataKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchActivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCmsMetadataKeys with closed client', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchActivateCmsMetadataKeys(request), expectedError);
+        });
+    });
+
+    describe('batchDeactivateCmsMetadataKeys', () => {
+        it('invokes batchDeactivateCmsMetadataKeys without error', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysResponse()
+            );
+            client.innerApiCalls.batchDeactivateCmsMetadataKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeactivateCmsMetadataKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCmsMetadataKeys without error using callback', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysResponse()
+            );
+            client.innerApiCalls.batchDeactivateCmsMetadataKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeactivateCmsMetadataKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchDeactivateCmsMetadataKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCmsMetadataKeys with error', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeactivateCmsMetadataKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeactivateCmsMetadataKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCmsMetadataKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCmsMetadataKeys with closed client', async () => {
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeactivateCmsMetadataKeys(request), expectedError);
+        });
+    });
+
     describe('listCmsMetadataKeys', () => {
         it('invokes listCmsMetadataKeys without error', async () => {
             const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
@@ -941,6 +1157,44 @@ describe('v1.CmsMetadataKeyServiceClient', () => {
                 const result = client.matchBrowserLanguageFromBrowserLanguageName(fakePath);
                 assert.strictEqual(result, "browserLanguageValue");
                 assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('childPublisher', async () => {
+            const fakePath = "/rendered/path/childPublisher";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                child_publisher: "childPublisherValue",
+            };
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.childPublisherPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.childPublisherPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('childPublisherPath', () => {
+                const result = client.childPublisherPath("networkCodeValue", "childPublisherValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.childPublisherPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromChildPublisherName', () => {
+                const result = client.matchNetworkCodeFromChildPublisherName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.childPublisherPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChildPublisherFromChildPublisherName', () => {
+                const result = client.matchChildPublisherFromChildPublisherName(fakePath);
+                assert.strictEqual(result, "childPublisherValue");
+                assert((client.pathTemplates.childPublisherPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1629,6 +1883,44 @@ describe('v1.CmsMetadataKeyServiceClient', () => {
             });
         });
 
+        describe('linkedDevice', async () => {
+            const fakePath = "/rendered/path/linkedDevice";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                linked_device: "linkedDeviceValue",
+            };
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.linkedDevicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.linkedDevicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('linkedDevicePath', () => {
+                const result = client.linkedDevicePath("networkCodeValue", "linkedDeviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.linkedDevicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLinkedDeviceName', () => {
+                const result = client.matchNetworkCodeFromLinkedDeviceName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLinkedDeviceFromLinkedDeviceName', () => {
+                const result = client.matchLinkedDeviceFromLinkedDeviceName(fakePath);
+                assert.strictEqual(result, "linkedDeviceValue");
+                assert((client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('liveStreamEvent', async () => {
             const fakePath = "/rendered/path/liveStreamEvent";
             const expectedParameters = {
@@ -2111,6 +2403,44 @@ describe('v1.CmsMetadataKeyServiceClient', () => {
                 const result = client.matchReportFromReportName(fakePath);
                 assert.strictEqual(result, "reportValue");
                 assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('richMediaAdsCompany', async () => {
+            const fakePath = "/rendered/path/richMediaAdsCompany";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                rich_media_ads_company: "richMediaAdsCompanyValue",
+            };
+            const client = new cmsmetadatakeyserviceModule.v1.CmsMetadataKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.richMediaAdsCompanyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.richMediaAdsCompanyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('richMediaAdsCompanyPath', () => {
+                const result = client.richMediaAdsCompanyPath("networkCodeValue", "richMediaAdsCompanyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromRichMediaAdsCompanyName', () => {
+                const result = client.matchNetworkCodeFromRichMediaAdsCompanyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRichMediaAdsCompanyFromRichMediaAdsCompanyName', () => {
+                const result = client.matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(fakePath);
+                assert.strictEqual(result, "richMediaAdsCompanyValue");
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

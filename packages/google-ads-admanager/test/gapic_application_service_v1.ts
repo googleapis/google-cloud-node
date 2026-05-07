@@ -378,6 +378,658 @@ describe('v1.ApplicationServiceClient', () => {
         });
     });
 
+    describe('createApplication', () => {
+        it('invokes createApplication without error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateApplicationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateApplicationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Application()
+            );
+            client.innerApiCalls.createApplication = stubSimpleCall(expectedResponse);
+            const [response] = await client.createApplication(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createApplication as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createApplication as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createApplication without error using callback', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateApplicationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateApplicationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Application()
+            );
+            client.innerApiCalls.createApplication = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createApplication(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IApplication|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createApplication as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createApplication as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createApplication with error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateApplicationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateApplicationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createApplication = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createApplication(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createApplication as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createApplication as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createApplication with closed client', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateApplicationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateApplicationRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createApplication(request), expectedError);
+        });
+    });
+
+    describe('batchCreateApplications', () => {
+        it('invokes batchCreateApplications without error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateApplicationsResponse()
+            );
+            client.innerApiCalls.batchCreateApplications = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateApplications(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateApplications without error using callback', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateApplicationsResponse()
+            );
+            client.innerApiCalls.batchCreateApplications = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateApplications(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateApplications with error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateApplications = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateApplications(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateApplications with closed client', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateApplications(request), expectedError);
+        });
+    });
+
+    describe('updateApplication', () => {
+        it('invokes updateApplication without error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateApplicationRequest()
+            );
+            request.application ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateApplicationRequest', ['application', 'name']);
+            request.application.name = defaultValue1;
+            const expectedHeaderRequestParams = `application.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Application()
+            );
+            client.innerApiCalls.updateApplication = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateApplication(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateApplication as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateApplication as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateApplication without error using callback', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateApplicationRequest()
+            );
+            request.application ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateApplicationRequest', ['application', 'name']);
+            request.application.name = defaultValue1;
+            const expectedHeaderRequestParams = `application.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.Application()
+            );
+            client.innerApiCalls.updateApplication = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateApplication(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IApplication|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateApplication as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateApplication as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateApplication with error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateApplicationRequest()
+            );
+            request.application ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateApplicationRequest', ['application', 'name']);
+            request.application.name = defaultValue1;
+            const expectedHeaderRequestParams = `application.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateApplication = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateApplication(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateApplication as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateApplication as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateApplication with closed client', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateApplicationRequest()
+            );
+            request.application ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateApplicationRequest', ['application', 'name']);
+            request.application.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateApplication(request), expectedError);
+        });
+    });
+
+    describe('batchUpdateApplications', () => {
+        it('invokes batchUpdateApplications without error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateApplicationsResponse()
+            );
+            client.innerApiCalls.batchUpdateApplications = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateApplications(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateApplications without error using callback', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateApplicationsResponse()
+            );
+            client.innerApiCalls.batchUpdateApplications = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateApplications(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateApplications with error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateApplications = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateApplications(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateApplications with closed client', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateApplications(request), expectedError);
+        });
+    });
+
+    describe('batchArchiveApplications', () => {
+        it('invokes batchArchiveApplications without error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveApplicationsResponse()
+            );
+            client.innerApiCalls.batchArchiveApplications = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchArchiveApplications(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchArchiveApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchiveApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchiveApplications without error using callback', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveApplicationsResponse()
+            );
+            client.innerApiCalls.batchArchiveApplications = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchArchiveApplications(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchArchiveApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchiveApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchiveApplications with error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchArchiveApplications = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchArchiveApplications(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchArchiveApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchArchiveApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchArchiveApplications with closed client', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchArchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchArchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchArchiveApplications(request), expectedError);
+        });
+    });
+
+    describe('batchUnarchiveApplications', () => {
+        it('invokes batchUnarchiveApplications without error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUnarchiveApplicationsResponse()
+            );
+            client.innerApiCalls.batchUnarchiveApplications = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUnarchiveApplications(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUnarchiveApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUnarchiveApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUnarchiveApplications without error using callback', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUnarchiveApplicationsResponse()
+            );
+            client.innerApiCalls.batchUnarchiveApplications = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUnarchiveApplications(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUnarchiveApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUnarchiveApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUnarchiveApplications with error', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUnarchiveApplications = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUnarchiveApplications(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUnarchiveApplications as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUnarchiveApplications as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUnarchiveApplications with closed client', async () => {
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUnarchiveApplicationsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUnarchiveApplications(request), expectedError);
+        });
+    });
+
     describe('listApplications', () => {
         it('invokes listApplications without error', async () => {
             const client = new applicationserviceModule.v1.ApplicationServiceClient({
@@ -941,6 +1593,44 @@ describe('v1.ApplicationServiceClient', () => {
                 const result = client.matchBrowserLanguageFromBrowserLanguageName(fakePath);
                 assert.strictEqual(result, "browserLanguageValue");
                 assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('childPublisher', async () => {
+            const fakePath = "/rendered/path/childPublisher";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                child_publisher: "childPublisherValue",
+            };
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.childPublisherPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.childPublisherPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('childPublisherPath', () => {
+                const result = client.childPublisherPath("networkCodeValue", "childPublisherValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.childPublisherPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromChildPublisherName', () => {
+                const result = client.matchNetworkCodeFromChildPublisherName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.childPublisherPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChildPublisherFromChildPublisherName', () => {
+                const result = client.matchChildPublisherFromChildPublisherName(fakePath);
+                assert.strictEqual(result, "childPublisherValue");
+                assert((client.pathTemplates.childPublisherPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1629,6 +2319,44 @@ describe('v1.ApplicationServiceClient', () => {
             });
         });
 
+        describe('linkedDevice', async () => {
+            const fakePath = "/rendered/path/linkedDevice";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                linked_device: "linkedDeviceValue",
+            };
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.linkedDevicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.linkedDevicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('linkedDevicePath', () => {
+                const result = client.linkedDevicePath("networkCodeValue", "linkedDeviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.linkedDevicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLinkedDeviceName', () => {
+                const result = client.matchNetworkCodeFromLinkedDeviceName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLinkedDeviceFromLinkedDeviceName', () => {
+                const result = client.matchLinkedDeviceFromLinkedDeviceName(fakePath);
+                assert.strictEqual(result, "linkedDeviceValue");
+                assert((client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('liveStreamEvent', async () => {
             const fakePath = "/rendered/path/liveStreamEvent";
             const expectedParameters = {
@@ -2111,6 +2839,44 @@ describe('v1.ApplicationServiceClient', () => {
                 const result = client.matchReportFromReportName(fakePath);
                 assert.strictEqual(result, "reportValue");
                 assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('richMediaAdsCompany', async () => {
+            const fakePath = "/rendered/path/richMediaAdsCompany";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                rich_media_ads_company: "richMediaAdsCompanyValue",
+            };
+            const client = new applicationserviceModule.v1.ApplicationServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.richMediaAdsCompanyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.richMediaAdsCompanyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('richMediaAdsCompanyPath', () => {
+                const result = client.richMediaAdsCompanyPath("networkCodeValue", "richMediaAdsCompanyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromRichMediaAdsCompanyName', () => {
+                const result = client.matchNetworkCodeFromRichMediaAdsCompanyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRichMediaAdsCompanyFromRichMediaAdsCompanyName', () => {
+                const result = client.matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(fakePath);
+                assert.strictEqual(result, "richMediaAdsCompanyValue");
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

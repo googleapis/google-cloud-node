@@ -207,6 +207,9 @@ export class ApplicationServiceClient {
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}'
       ),
+      childPublisherPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/childPublishers/{child_publisher}'
+      ),
       cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
       ),
@@ -261,6 +264,9 @@ export class ApplicationServiceClient {
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}'
       ),
+      linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/linkedDevices/{linked_device}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -299,6 +305,9 @@ export class ApplicationServiceClient {
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}'
+      ),
+      richMediaAdsCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/richMediaAdsCompanies/{rich_media_ads_company}'
       ),
       rolePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/roles/{role}'
@@ -371,7 +380,7 @@ export class ApplicationServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const applicationServiceStubMethods =
-        ['getApplication', 'listApplications'];
+        ['getApplication', 'listApplications', 'createApplication', 'batchCreateApplications', 'updateApplication', 'batchUpdateApplications', 'batchArchiveApplications', 'batchUnarchiveApplications'];
     for (const methodName of applicationServiceStubMethods) {
       const callPromise = this.applicationServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -452,7 +461,8 @@ export class ApplicationServiceClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/admanager'
+      'https://www.googleapis.com/auth/admanager',
+      'https://www.googleapis.com/auth/admanager.readonly'
     ];
   }
 
@@ -569,6 +579,593 @@ export class ApplicationServiceClient {
         throw error;
       });
   }
+/**
+ * API to create a `Application` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this `Application` will be created.
+ *   Format: `networks/{network_code}`
+ * @param {google.ads.admanager.v1.Application} request.application
+ *   Required. The `Application` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Application|Application}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/application_service.create_application.js</caption>
+ * region_tag:admanager_v1_generated_ApplicationService_CreateApplication_async
+ */
+  createApplication(
+      request?: protos.google.ads.admanager.v1.ICreateApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.ICreateApplicationRequest|undefined, {}|undefined
+      ]>;
+  createApplication(
+      request: protos.google.ads.admanager.v1.ICreateApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.ICreateApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createApplication(
+      request: protos.google.ads.admanager.v1.ICreateApplicationRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.ICreateApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  createApplication(
+      request?: protos.google.ads.admanager.v1.ICreateApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.ICreateApplicationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.ICreateApplicationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.ICreateApplicationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createApplication request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.ICreateApplicationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApplication response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createApplication(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.ICreateApplicationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createApplication response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch create `Application` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where `Applications` will be created.
+ *   Format: `networks/{network_code}`
+ *   The parent field in the CreateApplicationRequest must match this
+ *   field.
+ * @param {number[]} request.requests
+ *   Required. The `Application` objects to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateApplicationsResponse|BatchCreateApplicationsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/application_service.batch_create_applications.js</caption>
+ * region_tag:admanager_v1_generated_ApplicationService_BatchCreateApplications_async
+ */
+  batchCreateApplications(
+      request?: protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|undefined, {}|undefined
+      ]>;
+  batchCreateApplications(
+      request: protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateApplications(
+      request: protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateApplications(
+      request?: protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchCreateApplications request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateApplications response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchCreateApplications(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchCreateApplicationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateApplications response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to update a `Application` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ads.admanager.v1.Application} request.application
+ *   Required. The `Application` to update.
+ *
+ *   The `Application`'s `name` is used to identify the `Application` to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Application|Application}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/application_service.update_application.js</caption>
+ * region_tag:admanager_v1_generated_ApplicationService_UpdateApplication_async
+ */
+  updateApplication(
+      request?: protos.google.ads.admanager.v1.IUpdateApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.IUpdateApplicationRequest|undefined, {}|undefined
+      ]>;
+  updateApplication(
+      request: protos.google.ads.admanager.v1.IUpdateApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.IUpdateApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateApplication(
+      request: protos.google.ads.admanager.v1.IUpdateApplicationRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.IUpdateApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateApplication(
+      request?: protos.google.ads.admanager.v1.IUpdateApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.IUpdateApplicationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IApplication,
+          protos.google.ads.admanager.v1.IUpdateApplicationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.IUpdateApplicationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'application.name': request.application!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateApplication request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.IUpdateApplicationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApplication response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateApplication(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IApplication,
+        protos.google.ads.admanager.v1.IUpdateApplicationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateApplication response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * API to batch update `Application` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where `Applications` will be updated.
+ *   Format: `networks/{network_code}`
+ *   The parent field in the UpdateApplicationRequest must match this
+ *   field.
+ * @param {number[]} request.requests
+ *   Required. The `Application` objects to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateApplicationsResponse|BatchUpdateApplicationsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/application_service.batch_update_applications.js</caption>
+ * region_tag:admanager_v1_generated_ApplicationService_BatchUpdateApplications_async
+ */
+  batchUpdateApplications(
+      request?: protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|undefined, {}|undefined
+      ]>;
+  batchUpdateApplications(
+      request: protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateApplications(
+      request: protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateApplications(
+      request?: protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchUpdateApplications request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateApplications response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchUpdateApplications(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUpdateApplicationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateApplications response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * / API to batch archive `Application` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource shared by all `Applications` to archive.
+ *   Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The `Application` objects to archive.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchArchiveApplicationsResponse|BatchArchiveApplicationsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/application_service.batch_archive_applications.js</caption>
+ * region_tag:admanager_v1_generated_ApplicationService_BatchArchiveApplications_async
+ */
+  batchArchiveApplications(
+      request?: protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|undefined, {}|undefined
+      ]>;
+  batchArchiveApplications(
+      request: protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchArchiveApplications(
+      request: protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchArchiveApplications(
+      request?: protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchArchiveApplications request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchArchiveApplications response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchArchiveApplications(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchArchiveApplicationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchArchiveApplications response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * / API to batch unarchive `Application` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource shared by all `Applications` to Unarchive.
+ *   Format: `networks/{network_code}`
+ * @param {string[]} request.names
+ *   Required. The `Application` objects to unarchive.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUnarchiveApplicationsResponse|BatchUnarchiveApplicationsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/application_service.batch_unarchive_applications.js</caption>
+ * region_tag:admanager_v1_generated_ApplicationService_BatchUnarchiveApplications_async
+ */
+  batchUnarchiveApplications(
+      request?: protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|undefined, {}|undefined
+      ]>;
+  batchUnarchiveApplications(
+      request: protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUnarchiveApplications(
+      request: protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUnarchiveApplications(
+      request?: protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+          protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchUnarchiveApplications request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUnarchiveApplications response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchUnarchiveApplications(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsResponse,
+        protos.google.ads.admanager.v1.IBatchUnarchiveApplicationsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUnarchiveApplications response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
  /**
  * API to retrieve a list of `Application` objects.
@@ -591,8 +1188,21 @@ export class ApplicationServiceClient {
  *   match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
+ *    See syntax details at
+ *    https://developers.google.com/ad-manager/api/beta/filters
+ *
+ *   <b>Filterable fields:</b>
+ *   <ul style="list-style-type:none">
+ *     <li><code>appStoreId</code></li>
+ *     <li><code>appStores</code></li>
+ *     <li><code>applicationCode</code></li>
+ *     <li><code>approvalStatus</code></li>
+ *     <li><code>archived</code></li>
+ *     <li><code>displayName</code></li>
+ *     <li><code>name</code></li>
+ *     <li><code>platform</code></li>
+ *     <li><code>webviewClaimingStatus</code></li>
+ *   </ul>
  * @param {string} [request.orderBy]
  *   Optional. Expression to specify sorting order.
  *   See syntax details at
@@ -707,8 +1317,21 @@ export class ApplicationServiceClient {
  *   match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
+ *    See syntax details at
+ *    https://developers.google.com/ad-manager/api/beta/filters
+ *
+ *   <b>Filterable fields:</b>
+ *   <ul style="list-style-type:none">
+ *     <li><code>appStoreId</code></li>
+ *     <li><code>appStores</code></li>
+ *     <li><code>applicationCode</code></li>
+ *     <li><code>approvalStatus</code></li>
+ *     <li><code>archived</code></li>
+ *     <li><code>displayName</code></li>
+ *     <li><code>name</code></li>
+ *     <li><code>platform</code></li>
+ *     <li><code>webviewClaimingStatus</code></li>
+ *   </ul>
  * @param {string} [request.orderBy]
  *   Optional. Expression to specify sorting order.
  *   See syntax details at
@@ -772,8 +1395,21 @@ export class ApplicationServiceClient {
  *   match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
+ *    See syntax details at
+ *    https://developers.google.com/ad-manager/api/beta/filters
+ *
+ *   <b>Filterable fields:</b>
+ *   <ul style="list-style-type:none">
+ *     <li><code>appStoreId</code></li>
+ *     <li><code>appStores</code></li>
+ *     <li><code>applicationCode</code></li>
+ *     <li><code>approvalStatus</code></li>
+ *     <li><code>archived</code></li>
+ *     <li><code>displayName</code></li>
+ *     <li><code>name</code></li>
+ *     <li><code>platform</code></li>
+ *     <li><code>webviewClaimingStatus</code></li>
+ *   </ul>
  * @param {string} [request.orderBy]
  *   Optional. Expression to specify sorting order.
  *   See syntax details at
@@ -1131,6 +1767,42 @@ export class ApplicationServiceClient {
    */
   matchBrowserLanguageFromBrowserLanguageName(browserLanguageName: string) {
     return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified childPublisher resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} child_publisher
+   * @returns {string} Resource name string.
+   */
+  childPublisherPath(networkCode:string,childPublisher:string) {
+    return this.pathTemplates.childPublisherPathTemplate.render({
+      network_code: networkCode,
+      child_publisher: childPublisher,
+    });
+  }
+
+  /**
+   * Parse the network_code from ChildPublisher resource.
+   *
+   * @param {string} childPublisherName
+   *   A fully-qualified path representing ChildPublisher resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromChildPublisherName(childPublisherName: string) {
+    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).network_code;
+  }
+
+  /**
+   * Parse the child_publisher from ChildPublisher resource.
+   *
+   * @param {string} childPublisherName
+   *   A fully-qualified path representing ChildPublisher resource.
+   * @returns {string} A string representing the child_publisher.
+   */
+  matchChildPublisherFromChildPublisherName(childPublisherName: string) {
+    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).child_publisher;
   }
 
   /**
@@ -1782,6 +2454,42 @@ export class ApplicationServiceClient {
   }
 
   /**
+   * Return a fully-qualified linkedDevice resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} linked_device
+   * @returns {string} Resource name string.
+   */
+  linkedDevicePath(networkCode:string,linkedDevice:string) {
+    return this.pathTemplates.linkedDevicePathTemplate.render({
+      network_code: networkCode,
+      linked_device: linkedDevice,
+    });
+  }
+
+  /**
+   * Parse the network_code from LinkedDevice resource.
+   *
+   * @param {string} linkedDeviceName
+   *   A fully-qualified path representing LinkedDevice resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLinkedDeviceName(linkedDeviceName: string) {
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).network_code;
+  }
+
+  /**
+   * Parse the linked_device from LinkedDevice resource.
+   *
+   * @param {string} linkedDeviceName
+   *   A fully-qualified path representing LinkedDevice resource.
+   * @returns {string} A string representing the linked_device.
+   */
+  matchLinkedDeviceFromLinkedDeviceName(linkedDeviceName: string) {
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).linked_device;
+  }
+
+  /**
    * Return a fully-qualified liveStreamEvent resource name string.
    *
    * @param {string} network_code
@@ -2234,6 +2942,42 @@ export class ApplicationServiceClient {
    */
   matchReportFromReportName(reportName: string) {
     return this.pathTemplates.reportPathTemplate.match(reportName).report;
+  }
+
+  /**
+   * Return a fully-qualified richMediaAdsCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} rich_media_ads_company
+   * @returns {string} Resource name string.
+   */
+  richMediaAdsCompanyPath(networkCode:string,richMediaAdsCompany:string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.render({
+      network_code: networkCode,
+      rich_media_ads_company: richMediaAdsCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from RichMediaAdsCompany resource.
+   *
+   * @param {string} richMediaAdsCompanyName
+   *   A fully-qualified path representing RichMediaAdsCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).network_code;
+  }
+
+  /**
+   * Parse the rich_media_ads_company from RichMediaAdsCompany resource.
+   *
+   * @param {string} richMediaAdsCompanyName
+   *   A fully-qualified path representing RichMediaAdsCompany resource.
+   * @returns {string} A string representing the rich_media_ads_company.
+   */
+  matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).rich_media_ads_company;
   }
 
   /**

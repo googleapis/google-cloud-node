@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, LineItemServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient} from '@google-ads/admanager';
+import {AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, LabelServiceClient, LineItemServiceClient, LinkedDeviceServiceClient, McmEarningsServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RichMediaAdsCompanyServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient} from '@google-ads/admanager';
 
 // check that the client class type name can be used
 function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
@@ -91,7 +91,16 @@ function doStuffWithEntitySignalsMappingServiceClient(client: EntitySignalsMappi
 function doStuffWithGeoTargetServiceClient(client: GeoTargetServiceClient) {
   client.close();
 }
+function doStuffWithLabelServiceClient(client: LabelServiceClient) {
+  client.close();
+}
 function doStuffWithLineItemServiceClient(client: LineItemServiceClient) {
+  client.close();
+}
+function doStuffWithLinkedDeviceServiceClient(client: LinkedDeviceServiceClient) {
+  client.close();
+}
+function doStuffWithMcmEarningsServiceClient(client: McmEarningsServiceClient) {
   client.close();
 }
 function doStuffWithMobileCarrierServiceClient(client: MobileCarrierServiceClient) {
@@ -128,6 +137,9 @@ function doStuffWithProgrammaticBuyerServiceClient(client: ProgrammaticBuyerServ
   client.close();
 }
 function doStuffWithReportServiceClient(client: ReportServiceClient) {
+  client.close();
+}
+function doStuffWithRichMediaAdsCompanyServiceClient(client: RichMediaAdsCompanyServiceClient) {
   client.close();
 }
 function doStuffWithRoleServiceClient(client: RoleServiceClient) {
@@ -220,8 +232,17 @@ function main() {
   const geoTargetServiceClient = new GeoTargetServiceClient();
   doStuffWithGeoTargetServiceClient(geoTargetServiceClient);
   // check that the client instance can be created
+  const labelServiceClient = new LabelServiceClient();
+  doStuffWithLabelServiceClient(labelServiceClient);
+  // check that the client instance can be created
   const lineItemServiceClient = new LineItemServiceClient();
   doStuffWithLineItemServiceClient(lineItemServiceClient);
+  // check that the client instance can be created
+  const linkedDeviceServiceClient = new LinkedDeviceServiceClient();
+  doStuffWithLinkedDeviceServiceClient(linkedDeviceServiceClient);
+  // check that the client instance can be created
+  const mcmEarningsServiceClient = new McmEarningsServiceClient();
+  doStuffWithMcmEarningsServiceClient(mcmEarningsServiceClient);
   // check that the client instance can be created
   const mobileCarrierServiceClient = new MobileCarrierServiceClient();
   doStuffWithMobileCarrierServiceClient(mobileCarrierServiceClient);
@@ -258,6 +279,9 @@ function main() {
   // check that the client instance can be created
   const reportServiceClient = new ReportServiceClient();
   doStuffWithReportServiceClient(reportServiceClient);
+  // check that the client instance can be created
+  const richMediaAdsCompanyServiceClient = new RichMediaAdsCompanyServiceClient();
+  doStuffWithRichMediaAdsCompanyServiceClient(richMediaAdsCompanyServiceClient);
   // check that the client instance can be created
   const roleServiceClient = new RoleServiceClient();
   doStuffWithRoleServiceClient(roleServiceClient);

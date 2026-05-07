@@ -208,6 +208,9 @@ export class ReportServiceClient {
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}'
       ),
+      childPublisherPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/childPublishers/{child_publisher}'
+      ),
       cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
       ),
@@ -262,6 +265,9 @@ export class ReportServiceClient {
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}'
       ),
+      linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/linkedDevices/{linked_device}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -300,6 +306,9 @@ export class ReportServiceClient {
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}'
+      ),
+      richMediaAdsCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/richMediaAdsCompanies/{rich_media_ads_company}'
       ),
       rolePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/roles/{role}'
@@ -341,7 +350,7 @@ export class ReportServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=networks/*/operations/reports/runs/*}',}];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=networks/*/operations/reports/runs/*}:cancel',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=networks/*/operations/reports/runs/*}',}];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const runReportResponse = protoFilesRoot.lookup(
@@ -481,7 +490,8 @@ export class ReportServiceClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/admanager'
+      'https://www.googleapis.com/auth/admanager',
+      'https://www.googleapis.com/auth/admanager.readonly'
     ];
   }
 
@@ -702,8 +712,8 @@ export class ReportServiceClient {
  *   The request object that will be sent.
  * @param {google.ads.admanager.v1.Report} request.report
  *   Required. The `Report` to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The list of fields to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1907,6 +1917,42 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified childPublisher resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} child_publisher
+   * @returns {string} Resource name string.
+   */
+  childPublisherPath(networkCode:string,childPublisher:string) {
+    return this.pathTemplates.childPublisherPathTemplate.render({
+      network_code: networkCode,
+      child_publisher: childPublisher,
+    });
+  }
+
+  /**
+   * Parse the network_code from ChildPublisher resource.
+   *
+   * @param {string} childPublisherName
+   *   A fully-qualified path representing ChildPublisher resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromChildPublisherName(childPublisherName: string) {
+    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).network_code;
+  }
+
+  /**
+   * Parse the child_publisher from ChildPublisher resource.
+   *
+   * @param {string} childPublisherName
+   *   A fully-qualified path representing ChildPublisher resource.
+   * @returns {string} A string representing the child_publisher.
+   */
+  matchChildPublisherFromChildPublisherName(childPublisherName: string) {
+    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).child_publisher;
+  }
+
+  /**
    * Return a fully-qualified cmsMetadataKey resource name string.
    *
    * @param {string} network_code
@@ -2555,6 +2601,42 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified linkedDevice resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} linked_device
+   * @returns {string} Resource name string.
+   */
+  linkedDevicePath(networkCode:string,linkedDevice:string) {
+    return this.pathTemplates.linkedDevicePathTemplate.render({
+      network_code: networkCode,
+      linked_device: linkedDevice,
+    });
+  }
+
+  /**
+   * Parse the network_code from LinkedDevice resource.
+   *
+   * @param {string} linkedDeviceName
+   *   A fully-qualified path representing LinkedDevice resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLinkedDeviceName(linkedDeviceName: string) {
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).network_code;
+  }
+
+  /**
+   * Parse the linked_device from LinkedDevice resource.
+   *
+   * @param {string} linkedDeviceName
+   *   A fully-qualified path representing LinkedDevice resource.
+   * @returns {string} A string representing the linked_device.
+   */
+  matchLinkedDeviceFromLinkedDeviceName(linkedDeviceName: string) {
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).linked_device;
+  }
+
+  /**
    * Return a fully-qualified liveStreamEvent resource name string.
    *
    * @param {string} network_code
@@ -3007,6 +3089,42 @@ export class ReportServiceClient {
    */
   matchReportFromReportName(reportName: string) {
     return this.pathTemplates.reportPathTemplate.match(reportName).report;
+  }
+
+  /**
+   * Return a fully-qualified richMediaAdsCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} rich_media_ads_company
+   * @returns {string} Resource name string.
+   */
+  richMediaAdsCompanyPath(networkCode:string,richMediaAdsCompany:string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.render({
+      network_code: networkCode,
+      rich_media_ads_company: richMediaAdsCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from RichMediaAdsCompany resource.
+   *
+   * @param {string} richMediaAdsCompanyName
+   *   A fully-qualified path representing RichMediaAdsCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).network_code;
+  }
+
+  /**
+   * Parse the rich_media_ads_company from RichMediaAdsCompany resource.
+   *
+   * @param {string} richMediaAdsCompanyName
+   *   A fully-qualified path representing RichMediaAdsCompany resource.
+   * @returns {string} A string representing the rich_media_ads_company.
+   */
+  matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).rich_media_ads_company;
   }
 
   /**

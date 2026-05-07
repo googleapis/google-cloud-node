@@ -40,7 +40,10 @@ export {DeviceCategoryServiceClient} from './device_category_service_client';
 export {DeviceManufacturerServiceClient} from './device_manufacturer_service_client';
 export {EntitySignalsMappingServiceClient} from './entity_signals_mapping_service_client';
 export {GeoTargetServiceClient} from './geo_target_service_client';
+export {LabelServiceClient} from './label_service_client';
 export {LineItemServiceClient} from './line_item_service_client';
+export {LinkedDeviceServiceClient} from './linked_device_service_client';
+export {McmEarningsServiceClient} from './mcm_earnings_service_client';
 export {MobileCarrierServiceClient} from './mobile_carrier_service_client';
 export {MobileDeviceServiceClient} from './mobile_device_service_client';
 export {MobileDeviceSubmodelServiceClient} from './mobile_device_submodel_service_client';
@@ -53,6 +56,7 @@ export {PrivateAuctionDealServiceClient} from './private_auction_deal_service_cl
 export {PrivateAuctionServiceClient} from './private_auction_service_client';
 export {ProgrammaticBuyerServiceClient} from './programmatic_buyer_service_client';
 export {ReportServiceClient} from './report_service_client';
+export {RichMediaAdsCompanyServiceClient} from './rich_media_ads_company_service_client';
 export {RoleServiceClient} from './role_service_client';
 export {SiteServiceClient} from './site_service_client';
 export {TaxonomyCategoryServiceClient} from './taxonomy_category_service_client';

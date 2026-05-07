@@ -1381,6 +1381,44 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
             });
         });
 
+        describe('childPublisher', async () => {
+            const fakePath = "/rendered/path/childPublisher";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                child_publisher: "childPublisherValue",
+            };
+            const client = new entitysignalsmappingserviceModule.v1.EntitySignalsMappingServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.childPublisherPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.childPublisherPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('childPublisherPath', () => {
+                const result = client.childPublisherPath("networkCodeValue", "childPublisherValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.childPublisherPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromChildPublisherName', () => {
+                const result = client.matchNetworkCodeFromChildPublisherName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.childPublisherPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChildPublisherFromChildPublisherName', () => {
+                const result = client.matchChildPublisherFromChildPublisherName(fakePath);
+                assert.strictEqual(result, "childPublisherValue");
+                assert((client.pathTemplates.childPublisherPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('cmsMetadataKey', async () => {
             const fakePath = "/rendered/path/cmsMetadataKey";
             const expectedParameters = {
@@ -2065,6 +2103,44 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
             });
         });
 
+        describe('linkedDevice', async () => {
+            const fakePath = "/rendered/path/linkedDevice";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                linked_device: "linkedDeviceValue",
+            };
+            const client = new entitysignalsmappingserviceModule.v1.EntitySignalsMappingServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.linkedDevicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.linkedDevicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('linkedDevicePath', () => {
+                const result = client.linkedDevicePath("networkCodeValue", "linkedDeviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.linkedDevicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLinkedDeviceName', () => {
+                const result = client.matchNetworkCodeFromLinkedDeviceName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLinkedDeviceFromLinkedDeviceName', () => {
+                const result = client.matchLinkedDeviceFromLinkedDeviceName(fakePath);
+                assert.strictEqual(result, "linkedDeviceValue");
+                assert((client.pathTemplates.linkedDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('liveStreamEvent', async () => {
             const fakePath = "/rendered/path/liveStreamEvent";
             const expectedParameters = {
@@ -2547,6 +2623,44 @@ describe('v1.EntitySignalsMappingServiceClient', () => {
                 const result = client.matchReportFromReportName(fakePath);
                 assert.strictEqual(result, "reportValue");
                 assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('richMediaAdsCompany', async () => {
+            const fakePath = "/rendered/path/richMediaAdsCompany";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                rich_media_ads_company: "richMediaAdsCompanyValue",
+            };
+            const client = new entitysignalsmappingserviceModule.v1.EntitySignalsMappingServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.richMediaAdsCompanyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.richMediaAdsCompanyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('richMediaAdsCompanyPath', () => {
+                const result = client.richMediaAdsCompanyPath("networkCodeValue", "richMediaAdsCompanyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromRichMediaAdsCompanyName', () => {
+                const result = client.matchNetworkCodeFromRichMediaAdsCompanyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRichMediaAdsCompanyFromRichMediaAdsCompanyName', () => {
+                const result = client.matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(fakePath);
+                assert.strictEqual(result, "richMediaAdsCompanyValue");
+                assert((client.pathTemplates.richMediaAdsCompanyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

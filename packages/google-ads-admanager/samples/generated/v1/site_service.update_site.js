@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(site, updateMask) {
+function main(site) {
   // [START admanager_v1_generated_SiteService_UpdateSite_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -34,7 +34,7 @@ function main(site, updateMask) {
    */
   // const site = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -48,7 +48,6 @@ function main(site, updateMask) {
     // Construct request
     const request = {
       site,
-      updateMask,
     };
 
     // Run request

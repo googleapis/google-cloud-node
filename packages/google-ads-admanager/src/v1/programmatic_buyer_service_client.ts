@@ -207,6 +207,9 @@ export class ProgrammaticBuyerServiceClient {
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}'
       ),
+      childPublisherPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/childPublishers/{child_publisher}'
+      ),
       cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
       ),
@@ -261,6 +264,9 @@ export class ProgrammaticBuyerServiceClient {
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}'
       ),
+      linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/linkedDevices/{linked_device}'
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}'
       ),
@@ -299,6 +305,9 @@ export class ProgrammaticBuyerServiceClient {
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}'
+      ),
+      richMediaAdsCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/richMediaAdsCompanies/{rich_media_ads_company}'
       ),
       rolePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/roles/{role}'
@@ -452,7 +461,8 @@ export class ProgrammaticBuyerServiceClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/admanager'
+      'https://www.googleapis.com/auth/admanager',
+      'https://www.googleapis.com/auth/admanager.readonly'
     ];
   }
 
@@ -592,8 +602,20 @@ export class ProgrammaticBuyerServiceClient {
  *   must match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
+ *    See syntax details at
+ *    https://developers.google.com/ad-manager/api/beta/filters
+ *
+ *   <b>Filterable fields:</b>
+ *   <ul style="list-style-type:none">
+ *     <li><code>agency</code></li>
+ *     <li><code>buyerAccountId</code></li>
+ *     <li><code>displayName</code></li>
+ *     <li><code>name</code></li>
+ *     <li><code>parentAccountId</code></li>
+ *     <li><code>partnerClientId</code></li>
+ *     <li><code>preferredDealsEnabled</code></li>
+ *     <li><code>programmaticGuaranteedEnabled</code></li>
+ *   </ul>
  * @param {string} [request.orderBy]
  *   Optional. Expression to specify sorting order.
  *   See syntax details at
@@ -708,8 +730,20 @@ export class ProgrammaticBuyerServiceClient {
  *   must match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
+ *    See syntax details at
+ *    https://developers.google.com/ad-manager/api/beta/filters
+ *
+ *   <b>Filterable fields:</b>
+ *   <ul style="list-style-type:none">
+ *     <li><code>agency</code></li>
+ *     <li><code>buyerAccountId</code></li>
+ *     <li><code>displayName</code></li>
+ *     <li><code>name</code></li>
+ *     <li><code>parentAccountId</code></li>
+ *     <li><code>partnerClientId</code></li>
+ *     <li><code>preferredDealsEnabled</code></li>
+ *     <li><code>programmaticGuaranteedEnabled</code></li>
+ *   </ul>
  * @param {string} [request.orderBy]
  *   Optional. Expression to specify sorting order.
  *   See syntax details at
@@ -773,8 +807,20 @@ export class ProgrammaticBuyerServiceClient {
  *   must match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. Expression to filter the response.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters
+ *    See syntax details at
+ *    https://developers.google.com/ad-manager/api/beta/filters
+ *
+ *   <b>Filterable fields:</b>
+ *   <ul style="list-style-type:none">
+ *     <li><code>agency</code></li>
+ *     <li><code>buyerAccountId</code></li>
+ *     <li><code>displayName</code></li>
+ *     <li><code>name</code></li>
+ *     <li><code>parentAccountId</code></li>
+ *     <li><code>partnerClientId</code></li>
+ *     <li><code>preferredDealsEnabled</code></li>
+ *     <li><code>programmaticGuaranteedEnabled</code></li>
+ *   </ul>
  * @param {string} [request.orderBy]
  *   Optional. Expression to specify sorting order.
  *   See syntax details at
@@ -1132,6 +1178,42 @@ export class ProgrammaticBuyerServiceClient {
    */
   matchBrowserLanguageFromBrowserLanguageName(browserLanguageName: string) {
     return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified childPublisher resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} child_publisher
+   * @returns {string} Resource name string.
+   */
+  childPublisherPath(networkCode:string,childPublisher:string) {
+    return this.pathTemplates.childPublisherPathTemplate.render({
+      network_code: networkCode,
+      child_publisher: childPublisher,
+    });
+  }
+
+  /**
+   * Parse the network_code from ChildPublisher resource.
+   *
+   * @param {string} childPublisherName
+   *   A fully-qualified path representing ChildPublisher resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromChildPublisherName(childPublisherName: string) {
+    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).network_code;
+  }
+
+  /**
+   * Parse the child_publisher from ChildPublisher resource.
+   *
+   * @param {string} childPublisherName
+   *   A fully-qualified path representing ChildPublisher resource.
+   * @returns {string} A string representing the child_publisher.
+   */
+  matchChildPublisherFromChildPublisherName(childPublisherName: string) {
+    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).child_publisher;
   }
 
   /**
@@ -1783,6 +1865,42 @@ export class ProgrammaticBuyerServiceClient {
   }
 
   /**
+   * Return a fully-qualified linkedDevice resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} linked_device
+   * @returns {string} Resource name string.
+   */
+  linkedDevicePath(networkCode:string,linkedDevice:string) {
+    return this.pathTemplates.linkedDevicePathTemplate.render({
+      network_code: networkCode,
+      linked_device: linkedDevice,
+    });
+  }
+
+  /**
+   * Parse the network_code from LinkedDevice resource.
+   *
+   * @param {string} linkedDeviceName
+   *   A fully-qualified path representing LinkedDevice resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLinkedDeviceName(linkedDeviceName: string) {
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).network_code;
+  }
+
+  /**
+   * Parse the linked_device from LinkedDevice resource.
+   *
+   * @param {string} linkedDeviceName
+   *   A fully-qualified path representing LinkedDevice resource.
+   * @returns {string} A string representing the linked_device.
+   */
+  matchLinkedDeviceFromLinkedDeviceName(linkedDeviceName: string) {
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).linked_device;
+  }
+
+  /**
    * Return a fully-qualified liveStreamEvent resource name string.
    *
    * @param {string} network_code
@@ -2235,6 +2353,42 @@ export class ProgrammaticBuyerServiceClient {
    */
   matchReportFromReportName(reportName: string) {
     return this.pathTemplates.reportPathTemplate.match(reportName).report;
+  }
+
+  /**
+   * Return a fully-qualified richMediaAdsCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} rich_media_ads_company
+   * @returns {string} Resource name string.
+   */
+  richMediaAdsCompanyPath(networkCode:string,richMediaAdsCompany:string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.render({
+      network_code: networkCode,
+      rich_media_ads_company: richMediaAdsCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from RichMediaAdsCompany resource.
+   *
+   * @param {string} richMediaAdsCompanyName
+   *   A fully-qualified path representing RichMediaAdsCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).network_code;
+  }
+
+  /**
+   * Parse the rich_media_ads_company from RichMediaAdsCompany resource.
+   *
+   * @param {string} richMediaAdsCompanyName
+   *   A fully-qualified path representing RichMediaAdsCompany resource.
+   * @returns {string} A string representing the rich_media_ads_company.
+   */
+  matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).rich_media_ads_company;
   }
 
   /**
