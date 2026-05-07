@@ -13,14 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
 import * as libraryMethods from './libraryMethods';
-import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
+import {
+  Bucket,
+  File,
+  GaxiosOptions,
+  GaxiosOptionsPrepared,
+  HmacKey,
+  Notification,
+  Storage,
+} from '../src';
 import * as crypto from 'crypto';
 import * as assert from 'assert';
-import {DecorateRequestOptions} from '../src/nodejs-common';
-import fetch from 'node-fetch';
-
+import {
+  StorageRequestOptions,
+  StorageTransport,
+} from '../src/storage-transport';
 interface RetryCase {
   instructions: String[];
 }
@@ -50,7 +60,7 @@ interface ConformanceTestResult {
 
 type LibraryMethodsModuleType = typeof import('./libraryMethods');
 const methodMap: Map<String, String[]> = new Map(
-  Object.entries(jsonToNodeApiMapping)
+  Object.entries({}), // TODO: replace with Object.entries(jsonToNodeApiMapping)
 );
 
 const DURATION_SECONDS = 600; // 10 mins.
@@ -82,9 +92,31 @@ export function executeScenario(testCase: RetryTestCase) {
         let creationResult: {id: string};
         let storage: Storage;
         let hmacKey: HmacKey;
+        let storageTransport: StorageTransport;
 
         describe(`${storageMethodString}`, async () => {
           beforeEach(async () => {
+            storageTransport = new StorageTransport({
+              apiEndpoint: TESTBENCH_HOST,
+              authClient: undefined,
+              baseUrl: TESTBENCH_HOST,
+              packageJson: {name: 'test-package', version: '1.0.0'},
+              retryOptions: {
+                retryDelayMultiplier: RETRY_MULTIPLIER_FOR_CONFORMANCE_TESTS,
+                maxRetries: 3,
+                maxRetryDelay: 32,
+                totalTimeout: TIMEOUT_FOR_INDIVIDUAL_TEST,
+              },
+              scopes: [
+                'http://www.googleapis.com/auth/devstorage.full_control',
+              ],
+              projectId: CONF_TEST_PROJECT_ID,
+              userAgent: 'retry-test',
+              useAuthWithCustomEndpoint: true,
+              customEndpoint: true,
+              timeout: DURATION_SECONDS,
+            });
+
             storage = new Storage({
               apiEndpoint: TESTBENCH_HOST,
               projectId: CONF_TEST_PROJECT_ID,
@@ -92,69 +124,83 @@ export function executeScenario(testCase: RetryTestCase) {
                 retryDelayMultiplier: RETRY_MULTIPLIER_FOR_CONFORMANCE_TESTS,
               },
             });
+
             creationResult = await createTestBenchRetryTest(
               instructionSet.instructions,
-              jsonMethod?.name.toString()
+              jsonMethod?.name.toString(),
+              storageTransport,
             );
             if (storageMethodString.includes('InstancePrecondition')) {
               bucket = await createBucketForTest(
                 storage,
                 testCase.preconditionProvided,
-                storageMethodString
+                storageMethodString,
               );
               file = await createFileForTest(
                 testCase.preconditionProvided,
                 storageMethodString,
-                bucket
+                bucket,
               );
             } else {
               bucket = await createBucketForTest(
                 storage,
                 false,
-                storageMethodString
+                storageMethodString,
               );
               file = await createFileForTest(
                 false,
                 storageMethodString,
-                bucket
+                bucket,
               );
             }
-            notification = bucket.notification(`${TESTS_PREFIX}`);
+            notification = bucket.notification(TESTS_PREFIX);
             await notification.create();
 
             [hmacKey] = await storage.createHmacKey(
-              `${TESTS_PREFIX}@email.com`
+              `${TESTS_PREFIX}@email.com`,
             );
 
             storage.interceptors.push({
-              request: requestConfig => {
-                requestConfig.headers = requestConfig.headers || {};
-                Object.assign(requestConfig.headers, {
+              resolved: (
+                requestConfig: GaxiosOptionsPrepared,
+              ): Promise<GaxiosOptionsPrepared> => {
+                const config = requestConfig as GaxiosOptions;
+                config.headers = config.headers || {};
+                Object.assign(config.headers, {
                   'x-retry-test-id': creationResult.id,
                 });
-                return requestConfig as DecorateRequestOptions;
+                return Promise.resolve(config as GaxiosOptionsPrepared);
+              },
+              rejected: error => {
+                return Promise.reject(error);
               },
             });
           });
 
           it(`${instructionNumber}`, async () => {
             const methodParameters: libraryMethods.ConformanceTestOptions = {
+              storage: storage,
               bucket: bucket,
               file: file,
+              storageTransport: storageTransport,
               notification: notification,
-              storage: storage,
               hmacKey: hmacKey,
             };
             if (testCase.preconditionProvided) {
               methodParameters.preconditionRequired = true;
             }
+
             if (testCase.expectSuccess) {
               assert.ifError(await storageMethodObject(methodParameters));
             } else {
-              await assert.rejects(storageMethodObject(methodParameters));
+              await assert.rejects(async () => {
+                await storageMethodObject(methodParameters);
+              }, undefined);
             }
+
             const testBenchResult = await getTestBenchRetryTest(
-              creationResult.id
+              creationResult.id,
+              storageTransport,
             );
             assert.strictEqual(testBenchResult.completed, true);
           }).timeout(TIMEOUT_FOR_INDIVIDUAL_TEST);
@@ -167,7 +213,7 @@ export function executeScenario(testCase: RetryTestCase) {
 async function createBucketForTest(
   storage: Storage,
   preconditionShouldBeOnInstance: boolean,
-  storageMethodString: String
+  storageMethodString: String,
 ) {
   const name = generateName(storageMethodString, 'bucket');
   const bucket = storage.bucket(name);
@@ -187,7 +233,7 @@ async function createBucketForTest(
 async function createFileForTest(
   preconditionShouldBeOnInstance: boolean,
   storageMethodString: String,
-  bucket: Bucket
+  bucket: Bucket,
 ) {
   const name = generateName(storageMethodString, 'file');
   const file = bucket.file(name);
@@ -209,25 +255,35 @@ function generateName(storageMethodString: String, bucketOrFile: string) {
 
 async function createTestBenchRetryTest(
   instructions: String[],
-  methodName: string
+  methodName: string,
+  storageTransport: StorageTransport,
 ): Promise<ConformanceTestCreationResult> {
   const requestBody = {instructions: {[methodName]: instructions}};
-  const response = await fetch(`${TESTBENCH_HOST}retry_test`, {
+
+  const requestOptions: StorageRequestOptions = {
     method: 'POST',
+    url: 'retry_test',
     body: JSON.stringify(requestBody),
     headers: {'Content-Type': 'application/json'},
-  });
-  return response.json() as Promise<ConformanceTestCreationResult>;
+  };
+
+  const response = await storageTransport.makeRequest(requestOptions);
+  return response as unknown as ConformanceTestCreationResult;
 }
 
 async function getTestBenchRetryTest(
-  testId: string
+  testId: string,
+  storageTransport: StorageTransport,
 ): Promise<ConformanceTestResult> {
-  const response = await fetch(`${TESTBENCH_HOST}retry_test/${testId}`, {
+  const response = await storageTransport.makeRequest({
+    url: `retry_test/${testId}`,
     method: 'GET',
+    retry: true,
+    headers: {
+      'x-retry-test-id': testId,
+    },
   });
-
-  return response.json() as Promise<ConformanceTestResult>;
+  return response as unknown as ConformanceTestResult;
 }
 
 function shortUUID() {
