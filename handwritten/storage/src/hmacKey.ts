@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {GaxiosError} from 'gaxios';
 import {
   ServiceObject,
   Methods,
@@ -84,6 +85,7 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
    */
   storage: Storage;
   private instanceRetryValue?: boolean;
+  secret?: string;
 
   /**
    * @typedef {object} HmacKeyOptions
@@ -350,9 +352,10 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
     const projectId = (options && options.projectId) || storage.projectId;
 
     super({
+      storageTransport: storage.storageTransport,
       parent: storage,
       id: accessId,
-      baseUrl: `/projects/${projectId}/hmacKeys`,
+      baseUrl: `/storage/v1/projects/${projectId}/hmacKeys`,
       methods,
     });
 
@@ -406,7 +409,7 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
       try {
         resp = await super.setMetadata(metadata, options);
       } catch (err) {
-        cb!(err as Error);
+        cb!(err as GaxiosError);
         return;
       } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
