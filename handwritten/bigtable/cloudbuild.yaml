@@ -68,3 +68,5 @@ steps:
 # Replace 'long-door-651' with the actual GCP Project ID your system tests should run against.
 substitutions:
   _GCP_PROJECT_ID: 'long-door-651'
+
+timeout: '10800s'
