@@ -24,6 +24,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AggregatedList": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Delete": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -45,6 +49,10 @@
           "retry_params_name": "default"
         },
         "List": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListUsable": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
