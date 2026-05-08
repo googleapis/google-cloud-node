@@ -46,7 +46,7 @@ describe('📦 pack-n-play test', () => {
           '/// <reference types="node" />\n' +
           readFileSync('./system-test/fixtures/sample/src/index.js').toString(),
         // Still needed so the package actually gets installed in the temp environment
-        dependencies: ['@types/node'],
+        dependencies: ['@types/node'], // This dependency solves a packnplay error so that require can be recognized.
       },
     };
     await packNTest(options);
