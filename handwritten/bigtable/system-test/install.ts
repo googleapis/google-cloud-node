@@ -42,9 +42,9 @@ describe('📦 pack-n-play test', () => {
       sample: {
         description: 'JavaScript user can use the library',
         // Inject the reference directive at the top of the code
-        ts: `/// <reference types="node" />\n` + readFileSync(
-            './system-test/fixtures/sample/src/index.js',
-        ).toString(),
+        ts:
+          '/// <reference types="node" />\n' +
+          readFileSync('./system-test/fixtures/sample/src/index.js').toString(),
         // Still needed so the package actually gets installed in the temp environment
         dependencies: ['@types/node'],
       },
