@@ -16,4 +16,4 @@ deep-copy-regex:
     - source: /google/developers/knowledge/google-developers-knowledge-nodejs
       dest: /owl-bot-staging/google-developers-knowledge
 
-api-name: developerknowledge
+api-name: knowledge
