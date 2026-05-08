@@ -41,13 +41,11 @@ describe('📦 pack-n-play test', () => {
       packageDir: process.cwd(),
       sample: {
         description: 'JavaScript user can use the library',
-        ts: readFileSync(
-          './system-test/fixtures/sample/src/index.js',
+        // Inject the reference directive at the top of the code
+        ts: `/// <reference types="node" />\n` + readFileSync(
+            './system-test/fixtures/sample/src/index.js',
         ).toString(),
-        // This tells pack-n-play to run `npm install @types/node`
-        // inside the isolated testing environment before running tsc.
-        // This is so that the tests don't produce the error that says
-        // `Cannot find name 'require'.`
+        // Still needed so the package actually gets installed in the temp environment
         dependencies: ['@types/node'],
       },
     };
