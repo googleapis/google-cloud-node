@@ -234,6 +234,8 @@ export class ChatServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'spaces'),
       searchSpaces:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'spaces'),
+      findGroupChats:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'spaces'),
       listReactions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reactions'),
       listCustomEmojis:
@@ -289,7 +291,7 @@ export class ChatServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const chatServiceStubMethods =
-        ['createMessage', 'listMessages', 'listMemberships', 'getMembership', 'getMessage', 'updateMessage', 'deleteMessage', 'getAttachment', 'uploadAttachment', 'listSpaces', 'searchSpaces', 'getSpace', 'createSpace', 'setUpSpace', 'updateSpace', 'deleteSpace', 'completeImportSpace', 'findDirectMessage', 'createMembership', 'updateMembership', 'deleteMembership', 'createReaction', 'listReactions', 'deleteReaction', 'createCustomEmoji', 'getCustomEmoji', 'listCustomEmojis', 'deleteCustomEmoji', 'getSpaceReadState', 'updateSpaceReadState', 'getThreadReadState', 'getSpaceEvent', 'listSpaceEvents', 'getSpaceNotificationSetting', 'updateSpaceNotificationSetting', 'createSection', 'deleteSection', 'updateSection', 'listSections', 'positionSection', 'listSectionItems', 'moveSectionItem'];
+        ['createMessage', 'listMessages', 'listMemberships', 'getMembership', 'getMessage', 'updateMessage', 'deleteMessage', 'getAttachment', 'uploadAttachment', 'listSpaces', 'searchSpaces', 'getSpace', 'createSpace', 'setUpSpace', 'updateSpace', 'deleteSpace', 'completeImportSpace', 'findDirectMessage', 'findGroupChats', 'createMembership', 'updateMembership', 'deleteMembership', 'createReaction', 'listReactions', 'deleteReaction', 'createCustomEmoji', 'getCustomEmoji', 'listCustomEmojis', 'deleteCustomEmoji', 'getSpaceReadState', 'updateSpaceReadState', 'getThreadReadState', 'getSpaceEvent', 'listSpaceEvents', 'getSpaceNotificationSetting', 'updateSpaceNotificationSetting', 'createSection', 'deleteSection', 'updateSection', 'listSections', 'positionSection', 'listSectionItems', 'moveSectionItem'];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -6453,6 +6455,306 @@ export class ChatServiceClient {
     this._log.info('searchSpaces iterate %j', request);
     return this.descriptors.page.searchSpaces.asyncIterate(
       this.innerApiCalls['searchSpaces'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.chat.v1.ISpace>;
+  }
+ /**
+ * Returns all spaces with `spaceType == GROUP_CHAT`, whose
+ * human memberships contain exactly the calling user, and the users specified
+ * in `FindGroupChatsRequest.users`. Only members that have joined the
+ * conversation are supported. For an example, see [Find group
+ * chats](https://developers.google.com/workspace/chat/find-group-chats).
+ *
+ * If the calling user blocks, or is blocked by, some users, and no spaces
+ * with the entire specified set of users are found, this method returns
+ * spaces that don't include the blocked or blocking users.
+ *
+ * The specified set of users must contain only human (non-app) memberships.
+ * A request that contains non-human users doesn't return any spaces.
+ *
+ * Requires [user
+ * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+ * with one of the following [authorization
+ * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+ *
+ *   - `https://www.googleapis.com/auth/chat.memberships.readonly`
+ *   - `https://www.googleapis.com/auth/chat.memberships`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} [request.users]
+ *   Optional. Resource names of all human users in group chat with the calling
+ *   user. Chat apps can't be included in the request.
+ *
+ *   The maximum number of users that can be specified in a single request is
+ *   `49`.
+ *
+ *   Format: `users/{user}`, where `{user}` is either the `id` for the
+ *   [person](https://developers.google.com/people/api/rest/v1/people) from the
+ *   People API, or the `id` for the
+ *   [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users)
+ *   in the Directory API. For example, to find all group chats with the calling
+ *   user and two other users, with People API profile IDs `123456789` and
+ *   `987654321`, you can use `users/123456789` and `users/987654321`.
+ *   You can also use the email as an alias for `{user}`. For example,
+ *   `users/example@gmail.com` where `example@gmail.com` is the email of the
+ *   Google Chat user.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of spaces to return. The service might return
+ *   fewer than this value.
+ *
+ *   If unspecified, at most 10 spaces are returned.
+ *
+ *   The maximum value is 30. If you use a value more than 30, it's
+ *   automatically changed to 30.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous call to find group chats.
+ *   Provide this parameter to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the token. Passing different values may lead to unexpected
+ *   results.
+ * @param {google.chat.v1.SpaceView} request.spaceView
+ *   Requested space view type. If unset, defaults to
+ *   `SPACE_VIEW_RESOURCE_NAME_ONLY`. Requests that specify
+ *   `SPACE_VIEW_EXPANDED` must include scopes that allow reading space data,
+ *   for example,
+ *   https://www.googleapis.com/auth/chat.spaces or
+ *   https://www.googleapis.com/auth/chat.spaces.readonly.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.chat.v1.Space|Space}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `findGroupChatsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  findGroupChats(
+      request?: protos.google.chat.v1.IFindGroupChatsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.chat.v1.ISpace[],
+        protos.google.chat.v1.IFindGroupChatsRequest|null,
+        protos.google.chat.v1.IFindGroupChatsResponse
+      ]>;
+  findGroupChats(
+      request: protos.google.chat.v1.IFindGroupChatsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.chat.v1.IFindGroupChatsRequest,
+          protos.google.chat.v1.IFindGroupChatsResponse|null|undefined,
+          protos.google.chat.v1.ISpace>): void;
+  findGroupChats(
+      request: protos.google.chat.v1.IFindGroupChatsRequest,
+      callback: PaginationCallback<
+          protos.google.chat.v1.IFindGroupChatsRequest,
+          protos.google.chat.v1.IFindGroupChatsResponse|null|undefined,
+          protos.google.chat.v1.ISpace>): void;
+  findGroupChats(
+      request?: protos.google.chat.v1.IFindGroupChatsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.chat.v1.IFindGroupChatsRequest,
+          protos.google.chat.v1.IFindGroupChatsResponse|null|undefined,
+          protos.google.chat.v1.ISpace>,
+      callback?: PaginationCallback<
+          protos.google.chat.v1.IFindGroupChatsRequest,
+          protos.google.chat.v1.IFindGroupChatsResponse|null|undefined,
+          protos.google.chat.v1.ISpace>):
+      Promise<[
+        protos.google.chat.v1.ISpace[],
+        protos.google.chat.v1.IFindGroupChatsRequest|null,
+        protos.google.chat.v1.IFindGroupChatsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.chat.v1.IFindGroupChatsRequest,
+      protos.google.chat.v1.IFindGroupChatsResponse|null|undefined,
+      protos.google.chat.v1.ISpace>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('findGroupChats values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('findGroupChats request %j', request);
+    return this.innerApiCalls
+      .findGroupChats(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.chat.v1.ISpace[],
+        protos.google.chat.v1.IFindGroupChatsRequest|null,
+        protos.google.chat.v1.IFindGroupChatsResponse
+      ]) => {
+        this._log.info('findGroupChats values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `findGroupChats`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} [request.users]
+ *   Optional. Resource names of all human users in group chat with the calling
+ *   user. Chat apps can't be included in the request.
+ *
+ *   The maximum number of users that can be specified in a single request is
+ *   `49`.
+ *
+ *   Format: `users/{user}`, where `{user}` is either the `id` for the
+ *   [person](https://developers.google.com/people/api/rest/v1/people) from the
+ *   People API, or the `id` for the
+ *   [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users)
+ *   in the Directory API. For example, to find all group chats with the calling
+ *   user and two other users, with People API profile IDs `123456789` and
+ *   `987654321`, you can use `users/123456789` and `users/987654321`.
+ *   You can also use the email as an alias for `{user}`. For example,
+ *   `users/example@gmail.com` where `example@gmail.com` is the email of the
+ *   Google Chat user.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of spaces to return. The service might return
+ *   fewer than this value.
+ *
+ *   If unspecified, at most 10 spaces are returned.
+ *
+ *   The maximum value is 30. If you use a value more than 30, it's
+ *   automatically changed to 30.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous call to find group chats.
+ *   Provide this parameter to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the token. Passing different values may lead to unexpected
+ *   results.
+ * @param {google.chat.v1.SpaceView} request.spaceView
+ *   Requested space view type. If unset, defaults to
+ *   `SPACE_VIEW_RESOURCE_NAME_ONLY`. Requests that specify
+ *   `SPACE_VIEW_EXPANDED` must include scopes that allow reading space data,
+ *   for example,
+ *   https://www.googleapis.com/auth/chat.spaces or
+ *   https://www.googleapis.com/auth/chat.spaces.readonly.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.chat.v1.Space|Space} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `findGroupChatsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  findGroupChatsStream(
+      request?: protos.google.chat.v1.IFindGroupChatsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['findGroupChats'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('findGroupChats stream %j', request);
+    return this.descriptors.page.findGroupChats.createStream(
+      this.innerApiCalls.findGroupChats as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `findGroupChats`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} [request.users]
+ *   Optional. Resource names of all human users in group chat with the calling
+ *   user. Chat apps can't be included in the request.
+ *
+ *   The maximum number of users that can be specified in a single request is
+ *   `49`.
+ *
+ *   Format: `users/{user}`, where `{user}` is either the `id` for the
+ *   [person](https://developers.google.com/people/api/rest/v1/people) from the
+ *   People API, or the `id` for the
+ *   [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users)
+ *   in the Directory API. For example, to find all group chats with the calling
+ *   user and two other users, with People API profile IDs `123456789` and
+ *   `987654321`, you can use `users/123456789` and `users/987654321`.
+ *   You can also use the email as an alias for `{user}`. For example,
+ *   `users/example@gmail.com` where `example@gmail.com` is the email of the
+ *   Google Chat user.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of spaces to return. The service might return
+ *   fewer than this value.
+ *
+ *   If unspecified, at most 10 spaces are returned.
+ *
+ *   The maximum value is 30. If you use a value more than 30, it's
+ *   automatically changed to 30.
+ *
+ *   Negative values return an `INVALID_ARGUMENT` error.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous call to find group chats.
+ *   Provide this parameter to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided should match the call that
+ *   provided the token. Passing different values may lead to unexpected
+ *   results.
+ * @param {google.chat.v1.SpaceView} request.spaceView
+ *   Requested space view type. If unset, defaults to
+ *   `SPACE_VIEW_RESOURCE_NAME_ONLY`. Requests that specify
+ *   `SPACE_VIEW_EXPANDED` must include scopes that allow reading space data,
+ *   for example,
+ *   https://www.googleapis.com/auth/chat.spaces or
+ *   https://www.googleapis.com/auth/chat.spaces.readonly.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.chat.v1.Space|Space}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/chat_service.find_group_chats.js</caption>
+ * region_tag:chat_v1_generated_ChatService_FindGroupChats_async
+ */
+  findGroupChatsAsync(
+      request?: protos.google.chat.v1.IFindGroupChatsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.chat.v1.ISpace>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['findGroupChats'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('findGroupChats iterate %j', request);
+    return this.descriptors.page.findGroupChats.asyncIterate(
+      this.innerApiCalls['findGroupChats'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.chat.v1.ISpace>;

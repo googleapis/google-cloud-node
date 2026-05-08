@@ -1098,6 +1098,126 @@ describe('v1.SnapshotsClient', () => {
         });
     });
 
+    describe('updateKmsKey', () => {
+        it('invokes updateKmsKey without error', async () => {
+            const client = new snapshotsModule.v1.SnapshotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['snapshot']);
+            request.snapshot = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&snapshot=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.updateKmsKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateKmsKey(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateKmsKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateKmsKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateKmsKey without error using callback', async () => {
+            const client = new snapshotsModule.v1.SnapshotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['snapshot']);
+            request.snapshot = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&snapshot=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.updateKmsKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateKmsKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateKmsKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateKmsKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateKmsKey with error', async () => {
+            const client = new snapshotsModule.v1.SnapshotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['snapshot']);
+            request.snapshot = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&snapshot=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateKmsKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateKmsKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateKmsKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateKmsKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateKmsKey with closed client', async () => {
+            const client = new snapshotsModule.v1.SnapshotsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.UpdateKmsKeySnapshotRequest', ['snapshot']);
+            request.snapshot = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateKmsKey(request), expectedError);
+        });
+    });
+
     describe('list', () => {
         it('invokes list without error', async () => {
             const client = new snapshotsModule.v1.SnapshotsClient({

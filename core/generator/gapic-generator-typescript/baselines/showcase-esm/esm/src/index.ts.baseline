@@ -29,8 +29,24 @@ const SequenceServiceClient = v1beta1.SequenceServiceClient;
 type SequenceServiceClient = v1beta1.SequenceServiceClient;
 const TestingClient = v1beta1.TestingClient;
 type TestingClient = v1beta1.TestingClient;
-export {v1beta1, ComplianceClient, EchoClient, IdentityClient, MessagingClient, SequenceServiceClient, TestingClient};
-export default {v1beta1, ComplianceClient, EchoClient, IdentityClient, MessagingClient, SequenceServiceClient, TestingClient};
+export {
+  v1beta1,
+  ComplianceClient,
+  EchoClient,
+  IdentityClient,
+  MessagingClient,
+  SequenceServiceClient,
+  TestingClient,
+};
+export default {
+  v1beta1,
+  ComplianceClient,
+  EchoClient,
+  IdentityClient,
+  MessagingClient,
+  SequenceServiceClient,
+  TestingClient,
+};
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export {protos}
+export { protos };

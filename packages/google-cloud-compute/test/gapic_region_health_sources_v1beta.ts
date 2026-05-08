@@ -534,6 +534,138 @@ describe('v1beta.RegionHealthSourcesClient', () => {
         });
     });
 
+    describe('getHealth', () => {
+        it('invokes getHealth without error', async () => {
+            const client = new regionhealthsourcesModule.v1beta.RegionHealthSourcesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['healthSource']);
+            request.healthSource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&health_source=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.HealthSourceHealth()
+            );
+            client.innerApiCalls.getHealth = stubSimpleCall(expectedResponse);
+            const [response] = await client.getHealth(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHealth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHealth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHealth without error using callback', async () => {
+            const client = new regionhealthsourcesModule.v1beta.RegionHealthSourcesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['healthSource']);
+            request.healthSource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&health_source=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.HealthSourceHealth()
+            );
+            client.innerApiCalls.getHealth = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getHealth(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IHealthSourceHealth|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHealth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHealth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHealth with error', async () => {
+            const client = new regionhealthsourcesModule.v1beta.RegionHealthSourcesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['healthSource']);
+            request.healthSource = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&health_source=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getHealth = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getHealth(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getHealth as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHealth as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHealth with closed client', async () => {
+            const client = new regionhealthsourcesModule.v1beta.RegionHealthSourcesClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.GetHealthRegionHealthSourceRequest', ['healthSource']);
+            request.healthSource = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getHealth(request), expectedError);
+        });
+    });
+
     describe('insert', () => {
         it('invokes insert without error', async () => {
             const client = new regionhealthsourcesModule.v1beta.RegionHealthSourcesClient({
