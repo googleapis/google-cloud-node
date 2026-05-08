@@ -44,6 +44,11 @@ describe('📦 pack-n-play test', () => {
         ts: readFileSync(
           './system-test/fixtures/sample/src/index.js',
         ).toString(),
+        // This tells pack-n-play to run `npm install @types/node`
+        // inside the isolated testing environment before running tsc.
+        // This is so that the tests don't produce the error that says
+        // `Cannot find name 'require'.`
+        dependencies: ['@types/node'],
       },
     };
     await packNTest(options);
