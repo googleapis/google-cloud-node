@@ -14502,6 +14502,20 @@ export namespace google {
                 public findDirectMessage(request: google.chat.v1.IFindDirectMessageRequest): Promise<google.chat.v1.Space>;
 
                 /**
+                 * Calls FindGroupChats.
+                 * @param request FindGroupChatsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and FindGroupChatsResponse
+                 */
+                public findGroupChats(request: google.chat.v1.IFindGroupChatsRequest, callback: google.chat.v1.ChatService.FindGroupChatsCallback): void;
+
+                /**
+                 * Calls FindGroupChats.
+                 * @param request FindGroupChatsRequest message or plain object
+                 * @returns Promise
+                 */
+                public findGroupChats(request: google.chat.v1.IFindGroupChatsRequest): Promise<google.chat.v1.FindGroupChatsResponse>;
+
+                /**
                  * Calls CreateMembership.
                  * @param request CreateMembershipRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Membership
@@ -14965,6 +14979,13 @@ export namespace google {
                  * @param [response] Space
                  */
                 type FindDirectMessageCallback = (error: (Error|null), response?: google.chat.v1.Space) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|findGroupChats}.
+                 * @param error Error, if any
+                 * @param [response] FindGroupChatsResponse
+                 */
+                type FindGroupChatsCallback = (error: (Error|null), response?: google.chat.v1.FindGroupChatsResponse) => void;
 
                 /**
                  * Callback as used by {@link google.chat.v1.ChatService|createMembership}.
@@ -21692,6 +21713,224 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a FindGroupChatsRequest. */
+            interface IFindGroupChatsRequest {
+
+                /** FindGroupChatsRequest users */
+                users?: (string[]|null);
+
+                /** FindGroupChatsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** FindGroupChatsRequest pageToken */
+                pageToken?: (string|null);
+
+                /** FindGroupChatsRequest spaceView */
+                spaceView?: (google.chat.v1.SpaceView|keyof typeof google.chat.v1.SpaceView|null);
+            }
+
+            /** Represents a FindGroupChatsRequest. */
+            class FindGroupChatsRequest implements IFindGroupChatsRequest {
+
+                /**
+                 * Constructs a new FindGroupChatsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IFindGroupChatsRequest);
+
+                /** FindGroupChatsRequest users. */
+                public users: string[];
+
+                /** FindGroupChatsRequest pageSize. */
+                public pageSize: number;
+
+                /** FindGroupChatsRequest pageToken. */
+                public pageToken: string;
+
+                /** FindGroupChatsRequest spaceView. */
+                public spaceView: (google.chat.v1.SpaceView|keyof typeof google.chat.v1.SpaceView);
+
+                /**
+                 * Creates a new FindGroupChatsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FindGroupChatsRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IFindGroupChatsRequest): google.chat.v1.FindGroupChatsRequest;
+
+                /**
+                 * Encodes the specified FindGroupChatsRequest message. Does not implicitly {@link google.chat.v1.FindGroupChatsRequest.verify|verify} messages.
+                 * @param message FindGroupChatsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IFindGroupChatsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FindGroupChatsRequest message, length delimited. Does not implicitly {@link google.chat.v1.FindGroupChatsRequest.verify|verify} messages.
+                 * @param message FindGroupChatsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IFindGroupChatsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FindGroupChatsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FindGroupChatsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.FindGroupChatsRequest;
+
+                /**
+                 * Decodes a FindGroupChatsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FindGroupChatsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.FindGroupChatsRequest;
+
+                /**
+                 * Verifies a FindGroupChatsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FindGroupChatsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FindGroupChatsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.FindGroupChatsRequest;
+
+                /**
+                 * Creates a plain object from a FindGroupChatsRequest message. Also converts values to other types if specified.
+                 * @param message FindGroupChatsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.FindGroupChatsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FindGroupChatsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FindGroupChatsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FindGroupChatsResponse. */
+            interface IFindGroupChatsResponse {
+
+                /** FindGroupChatsResponse spaces */
+                spaces?: (google.chat.v1.ISpace[]|null);
+
+                /** FindGroupChatsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a FindGroupChatsResponse. */
+            class FindGroupChatsResponse implements IFindGroupChatsResponse {
+
+                /**
+                 * Constructs a new FindGroupChatsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IFindGroupChatsResponse);
+
+                /** FindGroupChatsResponse spaces. */
+                public spaces: google.chat.v1.ISpace[];
+
+                /** FindGroupChatsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new FindGroupChatsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FindGroupChatsResponse instance
+                 */
+                public static create(properties?: google.chat.v1.IFindGroupChatsResponse): google.chat.v1.FindGroupChatsResponse;
+
+                /**
+                 * Encodes the specified FindGroupChatsResponse message. Does not implicitly {@link google.chat.v1.FindGroupChatsResponse.verify|verify} messages.
+                 * @param message FindGroupChatsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IFindGroupChatsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FindGroupChatsResponse message, length delimited. Does not implicitly {@link google.chat.v1.FindGroupChatsResponse.verify|verify} messages.
+                 * @param message FindGroupChatsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IFindGroupChatsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FindGroupChatsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FindGroupChatsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.FindGroupChatsResponse;
+
+                /**
+                 * Decodes a FindGroupChatsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FindGroupChatsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.FindGroupChatsResponse;
+
+                /**
+                 * Verifies a FindGroupChatsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FindGroupChatsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FindGroupChatsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.FindGroupChatsResponse;
+
+                /**
+                 * Creates a plain object from a FindGroupChatsResponse message. Also converts values to other types if specified.
+                 * @param message FindGroupChatsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.FindGroupChatsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FindGroupChatsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FindGroupChatsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of an UpdateSpaceRequest. */
             interface IUpdateSpaceRequest {
 
@@ -22326,6 +22565,13 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** SpaceView enum. */
+            enum SpaceView {
+                SPACE_VIEW_UNSPECIFIED = 0,
+                SPACE_VIEW_RESOURCE_NAME_ONLY = 3,
+                SPACE_VIEW_EXPANDED = 4
             }
 
             /** HistoryState enum. */
