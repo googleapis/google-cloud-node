@@ -70,7 +70,6 @@ describe('startTrace', () => {
   after(async () => {
     globalExporter.forceFlush();
     await globalProvider.shutdown();
-    disableContextAndManager(contextManager);
   });
 
   it('with TracerProvider in global configuration', () => {
@@ -377,7 +376,6 @@ describe('setError', () => {
   after(async () => {
     exporter.forceFlush();
     await provider.shutdown();
-    disableContextAndManager(contextManager);
   });
 
   it('passing in null error or null span should have no effect', () => {
@@ -432,7 +430,6 @@ describe('setErrorAndException', () => {
 
   after(async () => {
     await provider.shutdown();
-    disableContextAndManager(contextManager);
   });
 
   it('passing in null error or null span should have no effect', () => {

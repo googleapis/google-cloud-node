@@ -32,6 +32,43 @@ const {
 const {SimpleSpanProcessor} = require('@opentelemetry/sdk-trace-base');
 import {Session, Spanner} from '../src';
 import * as bt from '../src/batch-transaction';
+import {ROOT_CONTEXT, Context, ContextManager} from '@opentelemetry/api';
+
+/**
+ * Custom inline context manager to guarantee trace linkage across
+ * Sinon stubs and Proxyquire boundaries inside isolated unit tests.
+ */
+class SimpleTestContextManager implements ContextManager {
+  private _activeContext: Context | null = null;
+  active(): Context {
+    return this._activeContext || ROOT_CONTEXT;
+  }
+  with<A extends unknown[], F extends (...args: A) => ReturnType<F>>(
+    context: Context,
+    fn: F,
+    thisArg?: any,
+    ...args: A
+  ): ReturnType<F> {
+    const previousContext = this._activeContext;
+    this._activeContext = context;
+    try {
+      return fn.apply(thisArg, args);
+    } finally {
+      this._activeContext = previousContext;
+    }
+  }
+  bind<T>(context: Context, target: T): T {
+    return target;
+  }
+  enable(): this {
+    return this;
+  }
+  disable(): this {
+    return this;
+  }
+}
+
+const {setGlobalContextManager, disableContextAndManager} = require('./helper');
 
 const fakePfy = extend({}, pfy, {
   promisifyAll(klass, options) {
@@ -101,13 +138,19 @@ describe('BatchTransaction', () => {
   let BatchTransaction: typeof bt.BatchTransaction;
   let batchTransaction: bt.BatchTransaction;
 
+  const testContextManager = new SimpleTestContextManager();
   before(() => {
+    setGlobalContextManager(testContextManager);
     BatchTransaction = proxyquire('../src/batch-transaction.js', {
       '@google-cloud/precise-date': {PreciseDate: FakeTimestamp},
       '@google-cloud/promisify': fakePfy,
       './codec.js': {codec: fakeCodec},
       './transaction.js': {Snapshot: FakeTransaction},
     }).BatchTransaction;
+  });
+
+  after(() => {
+    disableContextAndManager(testContextManager);
   });
 
   const traceExporter = new InMemorySpanExporter();

@@ -86,10 +86,7 @@ import {
 import grpcGcpModule = require('grpc-gcp');
 const grpcGcp = grpcGcpModule(grpc);
 import * as v1 from './v1';
-import {
-  ObservabilityOptions,
-  ensureInitialContextManagerSet,
-} from './instrument';
+import {ObservabilityOptions} from './instrument';
 import {
   attributeXGoogSpannerRequestIdToActiveSpan,
   injectRequestIDIntoError,
@@ -501,7 +498,6 @@ class Spanner extends GrpcService {
       this.projectFormattedName_,
       this._observabilityOptions?.enableEndToEndTracing,
     );
-    ensureInitialContextManagerSet();
     this._nthClientId = nextSpannerClientId();
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;

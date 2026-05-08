@@ -29,6 +29,7 @@ import {
   SpanAttributes,
   TimeInput,
   TracerProvider,
+  Tracer,
   Link,
   Exception,
   SpanContext,
@@ -66,6 +67,43 @@ const TRACER_VERSION = require('../../package.json').version;
 
 export {TRACER_NAME, TRACER_VERSION}; // Only exported for testing.
 
+let cachedGlobalTracingActive: boolean | null = null;
+let cachedGlobalTracer: Tracer | undefined = undefined;
+
+function isGlobalTracingActive(): boolean {
+  if (cachedGlobalTracingActive) {
+    return cachedGlobalTracingActive;
+  }
+
+  // Inspect tracer behavior via public API
+  const globalTracer = trace.getTracer(TRACER_NAME, TRACER_VERSION);
+  const span = globalTracer.startSpan('__probe');
+  const ctx = span.spanContext();
+  span.end();
+
+  // A true NoOpSpan will not record and yields exclusively invalid contexts.
+  const isNoOp =
+    !span.isRecording() &&
+    ctx.traceId === INVALID_SPAN_CONTEXT.traceId &&
+    ctx.spanId === INVALID_SPAN_CONTEXT.spanId;
+
+  const isActive = !isNoOp;
+
+  // Sticky Cache: Once enabled, cache globally to bypass future probes.
+  if (isActive) {
+    cachedGlobalTracingActive = true;
+  }
+  return isActive;
+}
+
+function getGlobalTracer(): Tracer | undefined {
+  if (isGlobalTracingActive()) {
+    cachedGlobalTracer =
+      cachedGlobalTracer ?? trace.getTracer(TRACER_NAME, TRACER_VERSION);
+  }
+  return cachedGlobalTracer;
+}
+
 /**
  * getTracer fetches the tracer from the provided tracerProvider.
  * @param {TracerProvider} [tracerProvider] optional custom tracer provider
@@ -73,12 +111,12 @@ export {TRACER_NAME, TRACER_VERSION}; // Only exported for testing.
  *
  * @returns {Tracer} The tracer instance associated with the provided or global provider.
  */
-export function getTracer(tracerProvider?: TracerProvider) {
+export function getTracer(tracerProvider?: TracerProvider): Tracer | undefined {
   if (tracerProvider) {
     return tracerProvider.getTracer(TRACER_NAME, TRACER_VERSION);
   }
   // Otherwise use the global tracer.
-  return trace.getTracer(TRACER_NAME, TRACER_VERSION);
+  return getGlobalTracer();
 }
 
 interface traceConfig {
@@ -92,32 +130,6 @@ interface traceConfig {
 
 const SPAN_NAMESPACE_PREFIX = 'CloudSpanner'; // TODO: discuss & standardize this prefix.
 export {SPAN_NAMESPACE_PREFIX, traceConfig};
-
-const {
-  AsyncHooksContextManager,
-} = require('@opentelemetry/context-async-hooks');
-
-/*
- * This function ensures that async/await works correctly by
- * checking if context.active() returns an invalid/unset context
- * and if so, sets a global AsyncHooksContextManager otherwise
- * spans resulting from async/await invocations won't be correctly
- * associated in their respective hierarchies.
- */
-function ensureInitialContextManagerSet() {
-  if (!context['_contextManager'] || context.active() === ROOT_CONTEXT) {
-    // If no context manager is currently set, or if the active context is the ROOT_CONTEXT,
-    // trace context propagation cannot
-    // function correctly with async/await for OpenTelemetry
-    // See {@link https://opentelemetry.io/docs/languages/js/context/#active-context}
-    context.disable(); // Disable any prior contextManager.
-    const contextManager = new AsyncHooksContextManager();
-    contextManager.enable();
-    context.setGlobalContextManager(contextManager);
-  }
-}
-
-export {ensureInitialContextManagerSet};
 
 /**
  * startTrace begins an active span in the current active context
@@ -135,58 +147,60 @@ export function startTrace<T>(
   if (!config) {
     config = {} as traceConfig;
   }
+  const tracer: Tracer | undefined = getTracer(config.opts?.tracerProvider);
+  if (!tracer) return cb(new noopSpan());
+  else
+    return tracer.startActiveSpan(
+      SPAN_NAMESPACE_PREFIX + '.' + spanNameSuffix,
+      {kind: SpanKind.CLIENT},
+      span => {
+        span.setAttribute(ATTR_OTEL_SCOPE_NAME, TRACER_NAME);
+        span.setAttribute(ATTR_OTEL_SCOPE_VERSION, TRACER_VERSION);
+        span.setAttribute('gcp.client.service', 'spanner');
+        span.setAttribute('gcp.client.version', TRACER_VERSION);
+        span.setAttribute('gcp.client.repo', 'googleapis/nodejs-spanner');
 
-  return getTracer(config.opts?.tracerProvider).startActiveSpan(
-    SPAN_NAMESPACE_PREFIX + '.' + spanNameSuffix,
-    {kind: SpanKind.CLIENT},
-    span => {
-      span.setAttribute(ATTR_OTEL_SCOPE_NAME, TRACER_NAME);
-      span.setAttribute(ATTR_OTEL_SCOPE_VERSION, TRACER_VERSION);
-      span.setAttribute('gcp.client.service', 'spanner');
-      span.setAttribute('gcp.client.version', TRACER_VERSION);
-      span.setAttribute('gcp.client.repo', 'googleapis/nodejs-spanner');
-
-      if (config.tableName) {
-        span.setAttribute('db.sql.table', config.tableName);
-      }
-      if (config.dbName) {
-        span.setAttribute(
-          'gcp.resource.name',
-          `//spanner.googleapis.com/${config.dbName}`,
-        );
-        span.setAttribute('db.name', config.dbName);
-      }
-      if (config.requestTag) {
-        span.setAttribute('request.tag', config.requestTag);
-      }
-      if (config.transactionTag) {
-        span.setAttribute('transaction.tag', config.transactionTag);
-      }
-
-      const allowExtendedTracing =
-        optedInPII || config.opts?.enableExtendedTracing;
-      if (config.sql && allowExtendedTracing) {
-        const sql = config.sql;
-        if (typeof sql === 'string') {
-          span.setAttribute('db.statement', sql as string);
-        } else {
-          const stmt = sql as SQLStatement;
-          span.setAttribute('db.statement', stmt.sql);
+        if (config.tableName) {
+          span.setAttribute('db.sql.table', config.tableName);
         }
-      }
+        if (config.dbName) {
+          span.setAttribute(
+            'gcp.resource.name',
+            `//spanner.googleapis.com/${config.dbName}`,
+          );
+          span.setAttribute('db.name', config.dbName);
+        }
+        if (config.requestTag) {
+          span.setAttribute('request.tag', config.requestTag);
+        }
+        if (config.transactionTag) {
+          span.setAttribute('transaction.tag', config.transactionTag);
+        }
 
-      // If at all the invoked function throws an exception,
-      // record the exception and then end this span.
-      try {
-        return cb(span);
-      } catch (e) {
-        setSpanErrorAndException(span, e as Error);
-        span.end();
-        // Finally re-throw the exception.
-        throw e;
-      }
-    },
-  );
+        const allowExtendedTracing =
+          optedInPII || config.opts?.enableExtendedTracing;
+        if (config.sql && allowExtendedTracing) {
+          const sql = config.sql;
+          if (typeof sql === 'string') {
+            span.setAttribute('db.statement', sql as string);
+          } else {
+            const stmt = sql as SQLStatement;
+            span.setAttribute('db.statement', stmt.sql);
+          }
+        }
+
+        // If at all the invoked function throws an exception,
+        // record the exception and then end this span.
+        try {
+          return cb(span);
+        } catch (e) {
+          setSpanErrorAndException(span, e as Error);
+          span.end();
+          // Finally re-throw the exception.
+          throw e;
+        }
+      },
+    );
 }
 
 /**

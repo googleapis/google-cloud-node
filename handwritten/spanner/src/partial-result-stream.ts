@@ -121,6 +121,10 @@ export interface Row extends Array<Field> {
   toJSON(options?: JSONOptions): Json;
 }
 
+function rowToJSON(this: Row, options?: JSONOptions): Json {
+  return codec.convertFieldsToJson(this, options);
+}
+
 /**
  * @callback PartialResultStream~rowCallback
  * @param {Row|object} row The row data.
@@ -379,26 +383,27 @@ export class PartialResultStream extends Transform implements ResultEvents {
    * @returns {Row}
    */
   private _createRow(values: Value[]): Row {
-    const fields = values.map((value, index) => {
-      const {name, type} = this._fields[index];
+    const len = values.length;
+    const row = new Array(len) as Row;
+
+    for (let i = 0; i < len; i++) {
+      const {name, type} = this._fields[i];
       const columnMetadata = this._options.columnsMetadata?.[name];
-      return {
+      row[i] = {
         name,
         value: codec.decode(
-          value,
+          values[i],
           type as google.spanner.v1.Type,
           columnMetadata,
         ),
       };
+    }
+
+    Object.defineProperty(row, 'toJSON', {
+      value: rowToJSON,
     });
 
-    Object.defineProperty(fields, 'toJSON', {
-      value: (options?: JSONOptions): Json => {
-        return codec.convertFieldsToJson(fields, options);
-      },
-    });
-
-    return fields as Row;
+    return row;
   }
   /**
    * Attempts to merge chunked values together.
