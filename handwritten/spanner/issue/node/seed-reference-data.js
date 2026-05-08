@@ -1,17 +1,17 @@
 'use strict';
 
 const crypto = require('crypto');
-const {Spanner} = require('@google-cloud/spanner');
+const { Spanner } = require('@google-cloud/spanner');
 
 const SAMPLE_SIZE = envInt('SAMPLE_SIZE', 10000);
 const DB_PROJECT_ID = process.env.DB_PROJECT_ID || 'span-cloud-testing';
-const DB_INSTANCE = process.env.DB_INSTANCE || 'irahul-load-test';
-const DB_DATABASE = process.env.DB_DATABASE || 'db';
+const DB_INSTANCE = process.env.DB_INSTANCE || 'gargsurbhi-testing1';
+const DB_DATABASE = process.env.DB_DATABASE || 'jack_henry_db';
 const DB_SCHEMA = process.env.DB_SCHEMA || 'tracking';
 const BATCH_SIZE = envInt('SEED_BATCH_SIZE', 500);
 
 async function main() {
-  const spanner = new Spanner({projectId: DB_PROJECT_ID, disableBuiltInMetrics: true});
+  const spanner = new Spanner({ projectId: DB_PROJECT_ID, disableBuiltInMetrics: true });
   const database = spanner.instance(DB_INSTANCE).database(DB_DATABASE);
   try {
     await seedTable(database, `${DB_SCHEMA}.Devices`, 'deviceRecordId', 'device');

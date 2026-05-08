@@ -13,7 +13,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: benchmark
-          image: us-central1-docker.pkg.dev/span-cloud-testing/irahul-images/issue-insert-node-cluster:current
+          image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-insert-node-cluster:current
           imagePullPolicy: Always
           resources:
             requests:
@@ -40,8 +40,8 @@ spec:
             - name: DB_PROJECT_ID
               value: "span-cloud-testing"
             - name: DB_INSTANCE
-              value: "irahul-load-test"
+              value: "gargsurbhi-testing1"
             - name: DB_DATABASE
-              value: "db"
+              value: "jack_henry_db"
             - name: DB_SCHEMA
               value: "tracking"

@@ -3,13 +3,18 @@
 Build and push all three images:
 
 ```sh
-IMAGE_REPO=us-central1-docker.pkg.dev/span-cloud-testing/irahul-images \
-SPANNER_VERSION=8.6.0 \
+IMAGE_REPO=us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images \
+SPANNER_VERSION=8.7.1 \
 BUILD_CURRENT=true \
 ./issue/build-images.sh
 ```
 
 Run jobs:
+
+Connect to Kubernetes cluster
+```sh
+gcloud container clusters get-credentials cluster-1 --region us-central1 --project span-cloud-testing
+```
 
 Release baseline uses `issue-insert-node:latest` from npm `SPANNER_VERSION`. Current branch uses `issue-insert-node:current`. Release cluster uses `issue-insert-node-cluster:release-8.6.0`; current cluster uses `issue-insert-node-cluster:current`.
 
@@ -60,8 +65,8 @@ The insert target table does not require these rows unless you add foreign keys.
 DDL:
 
 ```sh
-gcloud spanner databases ddl update db \
-  --instance=irahul-load-test \
+gcloud spanner databases ddl update jack_henry_db \
+  --instance=gargsurbhi-testing1 \
   --project=span-cloud-testing \
   --ddl-file=issue/create-reference.sql
 ```
@@ -76,8 +81,8 @@ Use env overrides if needed:
 
 ```sh
 DB_PROJECT_ID=span-cloud-testing \
-DB_INSTANCE=irahul-load-test \
-DB_DATABASE=db \
+DB_INSTANCE=gargsurbhi-testing1 \
+DB_DATABASE=jack_henry_db \
 DB_SCHEMA=tracking \
 SAMPLE_SIZE=10000 \
 node issue/seed-reference-data.js

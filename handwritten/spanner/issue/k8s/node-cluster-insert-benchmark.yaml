@@ -13,18 +13,18 @@ spec:
       restartPolicy: Never
       containers:
         - name: benchmark
-          image: us-central1-docker.pkg.dev/span-cloud-testing/irahul-images/issue-insert-node-cluster:release-8.6.0
+          image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-insert-node-cluster:release-8.7.1
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: "3"
+              cpu: "1"
               memory: "3Gi"
             limits:
-              cpu: "3"
+              cpu: "1"
               memory: "3Gi"
           env:
             - name: CLUSTER_WORKERS
-              value: "3"
+              value: "1"
             - name: SAMPLE_SIZE
               value: "10000"
             - name: INSERT_COUNT
@@ -40,8 +40,8 @@ spec:
             - name: DB_PROJECT_ID
               value: "span-cloud-testing"
             - name: DB_INSTANCE
-              value: "irahul-load-test"
+              value: "gargsurbhi-testing1"
             - name: DB_DATABASE
-              value: "db"
+              value: "jack_henry_db"
             - name: DB_SCHEMA
               value: "tracking"

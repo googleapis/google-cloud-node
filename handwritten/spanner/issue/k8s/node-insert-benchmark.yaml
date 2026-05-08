@@ -13,14 +13,14 @@ spec:
       restartPolicy: Never
       containers:
         - name: benchmark
-          image: us-central1-docker.pkg.dev/span-cloud-testing/irahul-images/issue-insert-node:release-8.6.0
+          image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-insert-node:release-8.7.1
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: "3"
+              cpu: "1"
               memory: "2Gi"
             limits:
-              cpu: "3"
+              cpu: "1"
               memory: "2Gi"
           env:
             - name: SAMPLE_SIZE
@@ -38,8 +38,10 @@ spec:
             - name: DB_PROJECT_ID
               value: "span-cloud-testing"
             - name: DB_INSTANCE
-              value: "irahul-load-test"
+              value: "gargsurbhi-testing1"
             - name: DB_DATABASE
-              value: "db"
+              value: "jack_henry_db"
             - name: DB_SCHEMA
               value: "tracking"
+            - name: SPANNER_DISABLE_BUILT_IN_METRICS
+              value: "true"

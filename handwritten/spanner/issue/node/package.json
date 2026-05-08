@@ -1,0 +1,10 @@
+{
+  "name": "raw-grpc-benchmark",
+  "version": "1.0.0",
+  "description": "Raw gRPC benchmark for Spanner",
+  "main": "raw_grpc_benchmark.js",
+  "dependencies": {
+    "@google-cloud/spanner": "8.7.1",
+    "@grpc/grpc-js": "^1.10.0"
+  }
+}

@@ -17,6 +17,7 @@ import (
 
 	"cloud.google.com/go/spanner"
 	"google.golang.org/api/iterator"
+	"google.golang.org/api/option"
 	"google.golang.org/grpc/codes"
 )
 
@@ -79,7 +80,7 @@ func runBenchmark(ctx context.Context, projectID, instance, database, schema str
 	fmt.Printf("Configuration: SAMPLE_SIZE=%d, INSERT_COUNT=%d, INSERT_CONCURRENCY=%d, BATCH_COUNT=%d, DUPLICATE_INSERT=%t\n", sampleSize, insertCount, insertConcurrency, batchCount, duplicateInsert)
 
 	dbPath := fmt.Sprintf("projects/%s/instances/%s/databases/%s", projectID, instance, database)
-	client, err := spanner.NewClient(ctx, dbPath)
+	client, err := spanner.NewClient(ctx, dbPath, option.WithGRPCConnectionPool(1))
 	if err != nil {
 		return fmt.Errorf("failed to create client: %w", err)
 	}

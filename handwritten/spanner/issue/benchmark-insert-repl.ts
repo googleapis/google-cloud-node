@@ -16,7 +16,7 @@
 /* eslint-disable no-await-in-loop */
 
 // Disable multiplexed sessions to use traditional session pool
-// This avoids "ReleaseError: Unable to release unknown resource" with SDK v8.6.0
+// This avoids "ReleaseError: Unable to release unknown resource" with SDK v8.7.1
 // process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false'
 
 // Benchmark configuration - can be overridden via environment variables

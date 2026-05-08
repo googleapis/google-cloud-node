@@ -104,6 +104,10 @@ const {
  * spans resulting from async/await invocations won't be correctly
  * associated in their respective hierarchies.
  */
+/**
+ * Safely ensures that the OpenTelemetry context manager is initialized
+ * only if no specialized manager is currently active globally.
+ */
 function ensureInitialContextManagerSet() {
   if (!context['_contextManager'] || context.active() === ROOT_CONTEXT) {
     // If no context manager is currently set, or if the active context is the ROOT_CONTEXT,
