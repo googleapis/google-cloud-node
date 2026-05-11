@@ -74,8 +74,15 @@ interface ImpersonatedCredentialRequest {
 }
 
 describe('impersonated', () => {
+  beforeEach(() => {
+    sinon
+      .stub(Impersonated.prototype, 'getRegionalAccessBoundaryUrl')
+      .resolves(undefined);
+  });
+
   afterEach(() => {
     nock.cleanAll();
+    sinon.restore();
   });
 
   it('should request impersonated credentials on first request', async () => {
@@ -596,7 +603,6 @@ describe('impersonated', () => {
   });
 
   describe('regional access boundaries', () => {
-    let sandbox: sinon.SinonSandbox;
     const TARGET_PRINCIPAL_EMAIL = 'target@project.iam.gserviceaccount.com';
     const MOCK_ACCESS_TOKEN = 'abc123';
     const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
@@ -621,13 +627,12 @@ describe('impersonated', () => {
     }
 
     beforeEach(() => {
-      sandbox = sinon.createSandbox();
-      process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'] = 'true';
+      (
+        Impersonated.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub
+      ).restore();
     });
 
     afterEach(() => {
-      delete process.env['GOOGLE_AUTH_TRUST_BOUNDARY_ENABLE_EXPERIMENT'];
-      sandbox.restore();
       nock.cleanAll();
     });
 

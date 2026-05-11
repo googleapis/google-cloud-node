@@ -21,7 +21,6 @@ import {log as makeLog} from 'google-logging-utils';
 
 import {PRODUCT_NAME, USER_AGENT} from '../shared.cjs';
 import {
-  isRegionalAccessBoundaryEnabled,
   RegionalAccessBoundaryData,
   RegionalAccessBoundaryManager,
 } from './regionalaccessboundary';
@@ -237,7 +236,6 @@ export abstract class AuthClient
   eagerRefreshThresholdMillis = DEFAULT_EAGER_REFRESH_THRESHOLD_MILLIS;
   forceRefreshOnFailure = false;
   universeDomain = DEFAULT_UNIVERSE;
-  regionalAccessBoundaryEnabled: boolean;
   protected regionalAccessBoundaryManager: RegionalAccessBoundaryManager;
 
   /**
@@ -261,7 +259,6 @@ export abstract class AuthClient
     this.quotaProjectId = options.get('quota_project_id');
     this.credentials = options.get('credentials') ?? {};
     this.universeDomain = options.get('universe_domain') ?? DEFAULT_UNIVERSE;
-    this.regionalAccessBoundaryEnabled = isRegionalAccessBoundaryEnabled();
 
     // Shared client options
     this.transporter = opts.transporter ?? new Gaxios(opts.transporterOptions);
