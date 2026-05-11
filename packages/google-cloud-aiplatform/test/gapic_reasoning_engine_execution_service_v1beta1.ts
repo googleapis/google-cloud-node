@@ -370,6 +370,114 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
         });
     });
 
+    describe('cancelAsyncQueryReasoningEngine', () => {
+        it('invokes cancelAsyncQueryReasoningEngine without error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse()
+            );
+            client.innerApiCalls.cancelAsyncQueryReasoningEngine = stubSimpleCall(expectedResponse);
+            const [response] = await client.cancelAsyncQueryReasoningEngine(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelAsyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelAsyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelAsyncQueryReasoningEngine without error using callback', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse()
+            );
+            client.innerApiCalls.cancelAsyncQueryReasoningEngine = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.cancelAsyncQueryReasoningEngine(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.cancelAsyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelAsyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelAsyncQueryReasoningEngine with error', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.cancelAsyncQueryReasoningEngine = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.cancelAsyncQueryReasoningEngine(request), expectedError);
+            const actualRequest = (client.innerApiCalls.cancelAsyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.cancelAsyncQueryReasoningEngine as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes cancelAsyncQueryReasoningEngine with closed client', async () => {
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.cancelAsyncQueryReasoningEngine(request), expectedError);
+        });
+    });
+
     describe('asyncQueryReasoningEngine', () => {
         it('invokes asyncQueryReasoningEngine without error', async () => {
             const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
@@ -4059,6 +4167,60 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
                 const result = client.matchReasoningEngineFromReasoningEngineName(fakePath);
                 assert.strictEqual(result, "reasoningEngineValue");
                 assert((client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('reasoningEngineRuntimeRevision', async () => {
+            const fakePath = "/rendered/path/reasoningEngineRuntimeRevision";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                runtime_revision: "runtimeRevisionValue",
+            };
+            const client = new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reasoningEngineRuntimeRevisionPath', () => {
+                const result = client.reasoningEngineRuntimeRevisionPath("projectValue", "locationValue", "reasoningEngineValue", "runtimeRevisionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchProjectFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchLocationFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchReasoningEngineFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "runtimeRevisionValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

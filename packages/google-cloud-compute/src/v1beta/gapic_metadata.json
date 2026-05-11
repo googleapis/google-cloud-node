@@ -805,6 +805,11 @@
                 "update"
               ]
             },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -907,6 +912,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
               ]
             },
             "AggregatedList": {
@@ -6854,6 +6864,11 @@
                 "get"
               ]
             },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -6896,6 +6911,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
               ]
             },
             "Insert": {
@@ -7016,6 +7036,11 @@
                 "update"
               ]
             },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -7106,6 +7131,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
               ]
             },
             "List": {
@@ -7478,6 +7508,11 @@
                 "get"
               ]
             },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -7520,6 +7555,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
               ]
             },
             "Insert": {
@@ -9147,6 +9187,11 @@
                 "testIamPermissions"
               ]
             },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -9192,6 +9237,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
               ]
             },
             "List": {
@@ -11097,6 +11147,11 @@
                 "testIamPermissions"
               ]
             },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -11149,6 +11204,11 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "UpdateKmsKey": {
+              "methods": [
+                "updateKmsKey"
               ]
             },
             "AggregatedList": {

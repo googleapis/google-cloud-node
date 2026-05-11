@@ -1,0 +1,189 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.devicesandservices.health.v4",
+  "libraryPackage": "@google-cloud/health",
+  "services": {
+    "DataPointsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataPointsServiceClient",
+          "rpcs": {
+            "GetDataPoint": {
+              "methods": [
+                "getDataPoint"
+              ]
+            },
+            "DailyRollUpDataPoints": {
+              "methods": [
+                "dailyRollUpDataPoints"
+              ]
+            },
+            "ExportExerciseTcx": {
+              "methods": [
+                "exportExerciseTcx"
+              ]
+            },
+            "CreateDataPoint": {
+              "methods": [
+                "createDataPoint"
+              ]
+            },
+            "UpdateDataPoint": {
+              "methods": [
+                "updateDataPoint"
+              ]
+            },
+            "BatchDeleteDataPoints": {
+              "methods": [
+                "batchDeleteDataPoints"
+              ]
+            },
+            "ListDataPoints": {
+              "methods": [
+                "listDataPoints",
+                "listDataPointsStream",
+                "listDataPointsAsync"
+              ]
+            },
+            "ReconcileDataPoints": {
+              "methods": [
+                "reconcileDataPoints",
+                "reconcileDataPointsStream",
+                "reconcileDataPointsAsync"
+              ]
+            },
+            "RollUpDataPoints": {
+              "methods": [
+                "rollUpDataPoints",
+                "rollUpDataPointsStream",
+                "rollUpDataPointsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataPointsServiceClient",
+          "rpcs": {
+            "GetDataPoint": {
+              "methods": [
+                "getDataPoint"
+              ]
+            },
+            "DailyRollUpDataPoints": {
+              "methods": [
+                "dailyRollUpDataPoints"
+              ]
+            },
+            "ExportExerciseTcx": {
+              "methods": [
+                "exportExerciseTcx"
+              ]
+            },
+            "CreateDataPoint": {
+              "methods": [
+                "createDataPoint"
+              ]
+            },
+            "UpdateDataPoint": {
+              "methods": [
+                "updateDataPoint"
+              ]
+            },
+            "BatchDeleteDataPoints": {
+              "methods": [
+                "batchDeleteDataPoints"
+              ]
+            },
+            "ListDataPoints": {
+              "methods": [
+                "listDataPoints",
+                "listDataPointsStream",
+                "listDataPointsAsync"
+              ]
+            },
+            "ReconcileDataPoints": {
+              "methods": [
+                "reconcileDataPoints",
+                "reconcileDataPointsStream",
+                "reconcileDataPointsAsync"
+              ]
+            },
+            "RollUpDataPoints": {
+              "methods": [
+                "rollUpDataPoints",
+                "rollUpDataPointsStream",
+                "rollUpDataPointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HealthProfileService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HealthProfileServiceClient",
+          "rpcs": {
+            "GetProfile": {
+              "methods": [
+                "getProfile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "updateProfile"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "getSettings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "updateSettings"
+              ]
+            },
+            "GetIdentity": {
+              "methods": [
+                "getIdentity"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HealthProfileServiceClient",
+          "rpcs": {
+            "GetProfile": {
+              "methods": [
+                "getProfile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "updateProfile"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "getSettings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "updateSettings"
+              ]
+            },
+            "GetIdentity": {
+              "methods": [
+                "getIdentity"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
