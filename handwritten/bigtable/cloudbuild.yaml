@@ -7,12 +7,8 @@ steps:
   - '-c'
   - |
     git fetch origin main --quiet
-    # If on a branch, compare with origin/main. If on main, compare with previous commit.
-    DIFF_RANGE="origin/main..."
-    if [ "$(git rev-parse HEAD)" == "$(git rev-parse origin/main)" ]; then
-      DIFF_RANGE="HEAD~1..HEAD"
-    fi
-    if git diff --quiet "$DIFF_RANGE" -- . ; then
+    # Compare with origin/main to detect changes.
+    if git diff --quiet origin/main... -- . ; then
       echo "No changes in handwritten/bigtable. Skipping tests."
       echo "skip" > /workspace/skip_tests
     else
