@@ -17,14 +17,12 @@ steps:
   dir: 'handwritten/bigtable'
 
 # 1. Set up Node.js environment
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'node:18'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
     if [ -f /workspace/skip_tests ]; then exit 0; fi
-    npm install -g npm@latest
-    npm config set prefix /usr/local
     npm install
     npm run presystem-test
   dir: 'handwritten/bigtable'
@@ -40,7 +38,7 @@ steps:
 #      in Secret Manager and mount it here. For simplicity, we'll rely on
 #      the GCB service account's inherent permissions.
 #    - GCLOUD_PROJECT: Can be passed as a build variable.
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'node:18'
   entrypoint: 'bash'
   args:
   - '-c'
@@ -61,7 +59,7 @@ steps:
   #     path: '/secrets'
 
 # 3. (Optional) Code Coverage Reporting
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'node:18'
   entrypoint: 'bash'
   args:
   - '-c'
