@@ -307,6 +307,9 @@ export class MatchServiceClient {
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
+      onlineEvaluatorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/onlineEvaluators/{online_evaluator}'
+      ),
       persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
       ),
@@ -331,14 +334,23 @@ export class MatchServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragDataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}'
+      ),
       ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragEngineConfig'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
       ),
+      ragMetadataPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}'
+      ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
+      ),
+      reasoningEngineRuntimeRevisionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/runtimeRevisions/{runtime_revision}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -3192,6 +3204,55 @@ export class MatchServiceClient {
   }
 
   /**
+   * Return a fully-qualified onlineEvaluator resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} online_evaluator
+   * @returns {string} Resource name string.
+   */
+  onlineEvaluatorPath(project:string,location:string,onlineEvaluator:string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.render({
+      project: project,
+      location: location,
+      online_evaluator: onlineEvaluator,
+    });
+  }
+
+  /**
+   * Parse the project from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).project;
+  }
+
+  /**
+   * Parse the location from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).location;
+  }
+
+  /**
+   * Parse the online_evaluator from OnlineEvaluator resource.
+   *
+   * @param {string} onlineEvaluatorName
+   *   A fully-qualified path representing OnlineEvaluator resource.
+   * @returns {string} A string representing the online_evaluator.
+   */
+  matchOnlineEvaluatorFromOnlineEvaluatorName(onlineEvaluatorName: string) {
+    return this.pathTemplates.onlineEvaluatorPathTemplate.match(onlineEvaluatorName).online_evaluator;
+  }
+
+  /**
    * Return a fully-qualified persistentResource resource name string.
    *
    * @param {string} project
@@ -3623,6 +3684,68 @@ export class MatchServiceClient {
   }
 
   /**
+   * Return a fully-qualified ragDataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_data_schema
+   * @returns {string} Resource name string.
+   */
+  ragDataSchemaPath(project:string,location:string,ragCorpus:string,ragDataSchema:string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_data_schema: ragDataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).project;
+  }
+
+  /**
+   * Parse the location from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_data_schema from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_data_schema.
+   */
+  matchRagDataSchemaFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_data_schema;
+  }
+
+  /**
    * Return a fully-qualified ragEngineConfig resource name string.
    *
    * @param {string} project
@@ -3721,6 +3844,81 @@ export class MatchServiceClient {
   }
 
   /**
+   * Return a fully-qualified ragMetadata resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @param {string} rag_metadata
+   * @returns {string} Resource name string.
+   */
+  ragMetadataPath(project:string,location:string,ragCorpus:string,ragFile:string,ragMetadata:string) {
+    return this.pathTemplates.ragMetadataPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+      rag_metadata: ragMetadata,
+    });
+  }
+
+  /**
+   * Parse the project from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).project;
+  }
+
+  /**
+   * Parse the location from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_file;
+  }
+
+  /**
+   * Parse the rag_metadata from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_metadata.
+   */
+  matchRagMetadataFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_metadata;
+  }
+
+  /**
    * Return a fully-qualified reasoningEngine resource name string.
    *
    * @param {string} project
@@ -3767,6 +3965,68 @@ export class MatchServiceClient {
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
     return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).reasoning_engine;
+  }
+
+  /**
+   * Return a fully-qualified reasoningEngineRuntimeRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} runtime_revision
+   * @returns {string} Resource name string.
+   */
+  reasoningEngineRuntimeRevisionPath(project:string,location:string,reasoningEngine:string,runtimeRevision:string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      runtime_revision: runtimeRevision,
+    });
+  }
+
+  /**
+   * Parse the project from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).project;
+  }
+
+  /**
+   * Parse the location from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the runtime_revision from ReasoningEngineRuntimeRevision resource.
+   *
+   * @param {string} reasoningEngineRuntimeRevisionName
+   *   A fully-qualified path representing ReasoningEngineRuntimeRevision resource.
+   * @returns {string} A string representing the runtime_revision.
+   */
+  matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName(reasoningEngineRuntimeRevisionName: string) {
+    return this.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match(reasoningEngineRuntimeRevisionName).runtime_revision;
   }
 
   /**

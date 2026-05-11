@@ -1,0 +1,26 @@
+type: google.api.Service
+config_version: 3
+name: duplicatemethodstest.googleapis.com
+title: Duplicate Methods Test Service API
+
+apis:
+- name: google.duplicate_methods_test.v1.DuplicateMethodsTestService
+- name: google.iam.v1.IAMPolicy
+- name: google.cloud.location.Locations
+
+# We don't need to define HTTP rules for the native methods here if they are in the proto,
+# but we can define standard ones if we want to ensure full coverage.
+http:
+  rules:
+  - selector: google.iam.v1.IAMPolicy.SetIamPolicy
+    post: '/v1/{resource=projects/*}:setIamPolicy'
+    body: '*'
+  - selector: google.iam.v1.IAMPolicy.GetIamPolicy
+    get: '/v1/{resource=projects/*}:getIamPolicy'
+  - selector: google.iam.v1.IAMPolicy.TestIamPermissions
+    post: '/v1/{resource=projects/*}:testIamPermissions'
+    body: '*'
+  - selector: google.cloud.location.Locations.GetLocation
+    get: '/v1/{name=projects/*}/locations'
+  - selector: google.cloud.location.Locations.ListLocations
+    get: '/v1/{name=projects/*}/locations'

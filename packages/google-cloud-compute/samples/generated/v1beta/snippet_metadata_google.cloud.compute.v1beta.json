@@ -4068,6 +4068,62 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Disks_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified persistent disk.",
+      "canonical": true,
+      "file": "disks.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.Disks.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "disk",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "disk_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.DiskUpdateKmsKeyRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "DisksClient",
+          "fullName": "google.cloud.compute.v1beta.DisksClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.Disks.UpdateKmsKey",
+          "service": {
+            "shortName": "Disks",
+            "fullName": "google.cloud.compute.v1beta.Disks"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_DiskSettingsService_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
@@ -29908,6 +29964,54 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionCompositeHealthChecks_GetHealth_async",
+      "title": "AcceleratorTypes getHealth Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the most recent health check results for this regional CompositeHealthCheck.",
+      "canonical": true,
+      "file": "region_composite_health_checks.get_health.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHealth",
+        "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecks.GetHealth",
+        "async": true,
+        "parameters": [
+          {
+            "name": "composite_health_check",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.CompositeHealthCheckHealth",
+        "client": {
+          "shortName": "RegionCompositeHealthChecksClient",
+          "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecksClient"
+        },
+        "method": {
+          "shortName": "GetHealth",
+          "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecks.GetHealth",
+          "service": {
+            "shortName": "RegionCompositeHealthChecks",
+            "fullName": "google.cloud.compute.v1beta.RegionCompositeHealthChecks"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionCompositeHealthChecks_Insert_async",
       "title": "AcceleratorTypes insert Sample",
       "origin": "API_DEFINITION",
@@ -31056,6 +31160,62 @@
         "method": {
           "shortName": "Update",
           "fullName": "google.cloud.compute.v1beta.RegionDisks.Update",
+          "service": {
+            "shortName": "RegionDisks",
+            "fullName": "google.cloud.compute.v1beta.RegionDisks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionDisks_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified persistent disk.",
+      "canonical": true,
+      "file": "region_disks.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.RegionDisks.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "disk",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_disk_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.RegionDiskUpdateKmsKeyRequest"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionDisksClient",
+          "fullName": "google.cloud.compute.v1beta.RegionDisksClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.RegionDisks.UpdateKmsKey",
           "service": {
             "shortName": "RegionDisks",
             "fullName": "google.cloud.compute.v1beta.RegionDisks"
@@ -32600,6 +32760,54 @@
         "method": {
           "shortName": "Get",
           "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Get",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_GetHealth_async",
+      "title": "AcceleratorTypes getHealth Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the most recent health check results for this regional HealthSource.",
+      "canonical": true,
+      "file": "region_health_sources.get_health.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHealth",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.GetHealth",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_source",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.HealthSourceHealth",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "GetHealth",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.GetHealth",
           "service": {
             "shortName": "RegionHealthSources",
             "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
@@ -40156,6 +40364,62 @@
         "method": {
           "shortName": "TestIamPermissions",
           "fullName": "google.cloud.compute.v1beta.RegionSnapshots.TestIamPermissions",
+          "service": {
+            "shortName": "RegionSnapshots",
+            "fullName": "google.cloud.compute.v1beta.RegionSnapshots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionSnapshots_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified snapshot.",
+      "canonical": true,
+      "file": "region_snapshots.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.RegionSnapshots.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_snapshot_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.RegionSnapshotUpdateKmsKeyRequest"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionSnapshotsClient",
+          "fullName": "google.cloud.compute.v1beta.RegionSnapshotsClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.RegionSnapshots.UpdateKmsKey",
           "service": {
             "shortName": "RegionSnapshots",
             "fullName": "google.cloud.compute.v1beta.RegionSnapshots"
@@ -48652,6 +48916,58 @@
         "method": {
           "shortName": "TestIamPermissions",
           "fullName": "google.cloud.compute.v1beta.Snapshots.TestIamPermissions",
+          "service": {
+            "shortName": "Snapshots",
+            "fullName": "google.cloud.compute.v1beta.Snapshots"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Snapshots_UpdateKmsKey_async",
+      "title": "AcceleratorTypes updateKmsKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rotates the customer-managed encryption key to the latest version for the specified snapshot.",
+      "canonical": true,
+      "file": "snapshots.update_kms_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsKey",
+        "fullName": "google.cloud.compute.v1beta.Snapshots.UpdateKmsKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_update_kms_key_request_resource",
+            "type": ".google.cloud.compute.v1beta.SnapshotUpdateKmsKeyRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "SnapshotsClient",
+          "fullName": "google.cloud.compute.v1beta.SnapshotsClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsKey",
+          "fullName": "google.cloud.compute.v1beta.Snapshots.UpdateKmsKey",
           "service": {
             "shortName": "Snapshots",
             "fullName": "google.cloud.compute.v1beta.Snapshots"

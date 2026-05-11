@@ -180,54 +180,6 @@
       }
     },
     {
-      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_SheetExportAudienceList_async",
-      "title": "AlphaAnalyticsData sheetExportAudienceList Sample",
-      "origin": "API_DEFINITION",
-      "description": " Exports an audience list of users to a Google Sheet. After creating an audience, the users are not immediately available for listing. First, a request to `CreateAudienceList` is necessary to create an audience list of users, and then second, this method is used to export those users in the audience list to a Google Sheet. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-      "canonical": true,
-      "file": "alpha_analytics_data.sheet_export_audience_list.js",
-      "language": "JAVASCRIPT",
-      "segments": [
-        {
-          "start": 25,
-          "end": 75,
-          "type": "FULL"
-        }
-      ],
-      "clientMethod": {
-        "shortName": "SheetExportAudienceList",
-        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceList",
-        "async": true,
-        "parameters": [
-          {
-            "name": "name",
-            "type": "TYPE_STRING"
-          },
-          {
-            "name": "offset",
-            "type": "TYPE_INT64"
-          },
-          {
-            "name": "limit",
-            "type": "TYPE_INT64"
-          }
-        ],
-        "resultType": ".google.analytics.data.v1alpha.SheetExportAudienceListResponse",
-        "client": {
-          "shortName": "AlphaAnalyticsDataClient",
-          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-        },
-        "method": {
-          "shortName": "SheetExportAudienceList",
-          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceList",
-          "service": {
-            "shortName": "AlphaAnalyticsData",
-            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-          }
-        }
-      }
-    },
-    {
       "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetAudienceList_async",
       "title": "AlphaAnalyticsData getAudienceList Sample",
       "origin": "API_DEFINITION",
@@ -660,6 +612,146 @@
         "method": {
           "shortName": "ListReportTasks",
           "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListReportTasks",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunReport_async",
+      "title": "AlphaAnalyticsData runReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a customized report of your Google Analytics event data. Reports contain statistics derived from data collected by the Google Analytics tracking code. The data returned from the API is as a table with columns for the requested dimensions and metrics. Metrics are individual measurements of user activity on your property, such as active users or event count. Dimensions break down metrics across some common criteria, such as country or event name.",
+      "canonical": true,
+      "file": "alpha_analytics_data.run_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 164,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunReport",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dimensions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "date_ranges",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.data.v1alpha.FilterExpression"
+          },
+          {
+            "name": "metric_filter",
+            "type": ".google.analytics.data.v1alpha.FilterExpression"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "metric_aggregations",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "order_bys",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "currency_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cohort_spec",
+            "type": ".google.analytics.data.v1alpha.CohortSpec"
+          },
+          {
+            "name": "keep_empty_rows",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "return_property_quota",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "comparisons",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "conversion_spec",
+            "type": ".google.analytics.data.v1alpha.ConversionSpec"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.RunReportResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "RunReport",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunReport",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetMetadata_async",
+      "title": "AlphaAnalyticsData getMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics property identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.",
+      "canonical": true,
+      "file": "alpha_analytics_data.get_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMetadata",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.Metadata",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "GetMetadata",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetMetadata",
           "service": {
             "shortName": "AlphaAnalyticsData",
             "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"

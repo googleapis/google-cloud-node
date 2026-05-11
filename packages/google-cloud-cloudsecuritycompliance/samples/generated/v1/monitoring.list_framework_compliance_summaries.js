@@ -46,6 +46,10 @@ function main(parent) {
    *  Optional. The filtering results.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. Specifies the level of detail to return in the response.
+   */
+  // const view = {}
 
   // Imports the Cloudsecuritycompliance library
   const {MonitoringClient} = require('@google-cloud/cloudsecuritycompliance').v1;

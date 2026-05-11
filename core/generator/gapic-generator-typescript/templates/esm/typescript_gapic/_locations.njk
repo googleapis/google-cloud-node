@@ -1,4 +1,4 @@
-{%- macro locationServiceMethods() -%}
+{%- macro locationServiceMethods(service) -%}
 {#-
   This part will be added into src/version/client.ts.
   If the --service-yaml contains "google.cloud.location.Locations", it means the client requires Locations methods [getLocation, listLocations].
@@ -6,6 +6,7 @@
   [getLocation, listLocations] methods are created which is calling the corresponding methods from LocationsClient in google-gax. Note that since the listLocations method is a paginated
   method, we default to using listLocationsAsync for ease of use.
 -#}
+{%- if service.locationMixinFlags.getLocation %}
  /**
    * Gets information about a location.
    *
@@ -45,7 +46,9 @@
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
+{%- endif %}
 
+{%- if service.locationMixinFlags.listLocations %}
 /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
@@ -83,4 +86,5 @@
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
+{%- endif %}
 {%- endmacro -%}

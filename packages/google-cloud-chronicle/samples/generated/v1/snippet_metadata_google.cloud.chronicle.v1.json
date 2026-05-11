@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-chronicle",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -12,8 +12,312 @@
   },
   "snippets": [
     {
+      "regionTag": "chronicle_v1_generated_BigQueryExportService_GetBigQueryExport_async",
+      "title": "BigQueryExportService getBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the BigQuery export configuration for a Chronicle instance.",
+      "canonical": true,
+      "file": "big_query_export_service.get_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBigQueryExport",
+        "fullName": "google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BigQueryExport",
+        "client": {
+          "shortName": "BigQueryExportServiceClient",
+          "fullName": "google.cloud.chronicle.v1.BigQueryExportServiceClient"
+        },
+        "method": {
+          "shortName": "GetBigQueryExport",
+          "fullName": "google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExport",
+          "service": {
+            "shortName": "BigQueryExportService",
+            "fullName": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_BigQueryExportService_UpdateBigQueryExport_async",
+      "title": "BigQueryExportService updateBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update the BigQuery export configuration for a Chronicle instance.",
+      "canonical": true,
+      "file": "big_query_export_service.update_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBigQueryExport",
+        "fullName": "google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "big_query_export",
+            "type": ".google.cloud.chronicle.v1.BigQueryExport"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BigQueryExport",
+        "client": {
+          "shortName": "BigQueryExportServiceClient",
+          "fullName": "google.cloud.chronicle.v1.BigQueryExportServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateBigQueryExport",
+          "fullName": "google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExport",
+          "service": {
+            "shortName": "BigQueryExportService",
+            "fullName": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_BigQueryExportService_ProvisionBigQueryExport_async",
+      "title": "BigQueryExportService provisionBigQueryExport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Provision the BigQuery export for a Chronicle instance. This will create {{gcp_name}} resources like {{storage_name}} buckets, BigQuery datasets and set default export settings for each data source.",
+      "canonical": true,
+      "file": "big_query_export_service.provision_big_query_export.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProvisionBigQueryExport",
+        "fullName": "google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BigQueryExport",
+        "client": {
+          "shortName": "BigQueryExportServiceClient",
+          "fullName": "google.cloud.chronicle.v1.BigQueryExportServiceClient"
+        },
+        "method": {
+          "shortName": "ProvisionBigQueryExport",
+          "fullName": "google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExport",
+          "service": {
+            "shortName": "BigQueryExportService",
+            "fullName": "google.cloud.chronicle.v1.BigQueryExportService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DashboardChartService_GetDashboardChart_async",
+      "title": "BigQueryExportService getDashboardChart Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a dashboard chart.",
+      "canonical": true,
+      "file": "dashboard_chart_service.get_dashboard_chart.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDashboardChart",
+        "fullName": "google.cloud.chronicle.v1.DashboardChartService.GetDashboardChart",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DashboardChart",
+        "client": {
+          "shortName": "DashboardChartServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DashboardChartServiceClient"
+        },
+        "method": {
+          "shortName": "GetDashboardChart",
+          "fullName": "google.cloud.chronicle.v1.DashboardChartService.GetDashboardChart",
+          "service": {
+            "shortName": "DashboardChartService",
+            "fullName": "google.cloud.chronicle.v1.DashboardChartService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DashboardChartService_BatchGetDashboardCharts_async",
+      "title": "BigQueryExportService batchGetDashboardCharts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get dashboard charts in batches.",
+      "canonical": true,
+      "file": "dashboard_chart_service.batch_get_dashboard_charts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchGetDashboardCharts",
+        "fullName": "google.cloud.chronicle.v1.DashboardChartService.BatchGetDashboardCharts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BatchGetDashboardChartsResponse",
+        "client": {
+          "shortName": "DashboardChartServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DashboardChartServiceClient"
+        },
+        "method": {
+          "shortName": "BatchGetDashboardCharts",
+          "fullName": "google.cloud.chronicle.v1.DashboardChartService.BatchGetDashboardCharts",
+          "service": {
+            "shortName": "DashboardChartService",
+            "fullName": "google.cloud.chronicle.v1.DashboardChartService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DashboardQueryService_GetDashboardQuery_async",
+      "title": "BigQueryExportService getDashboardQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a dashboard query.",
+      "canonical": true,
+      "file": "dashboard_query_service.get_dashboard_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDashboardQuery",
+        "fullName": "google.cloud.chronicle.v1.DashboardQueryService.GetDashboardQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DashboardQuery",
+        "client": {
+          "shortName": "DashboardQueryServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DashboardQueryServiceClient"
+        },
+        "method": {
+          "shortName": "GetDashboardQuery",
+          "fullName": "google.cloud.chronicle.v1.DashboardQueryService.GetDashboardQuery",
+          "service": {
+            "shortName": "DashboardQueryService",
+            "fullName": "google.cloud.chronicle.v1.DashboardQueryService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DashboardQueryService_ExecuteDashboardQuery_async",
+      "title": "BigQueryExportService executeDashboardQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Execute a query and return the data.",
+      "canonical": true,
+      "file": "dashboard_query_service.execute_dashboard_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteDashboardQuery",
+        "fullName": "google.cloud.chronicle.v1.DashboardQueryService.ExecuteDashboardQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query",
+            "type": ".google.cloud.chronicle.v1.DashboardQuery"
+          },
+          {
+            "name": "filters",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "clear_cache",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "use_previous_time_range",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ExecuteDashboardQueryResponse",
+        "client": {
+          "shortName": "DashboardQueryServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DashboardQueryServiceClient"
+        },
+        "method": {
+          "shortName": "ExecuteDashboardQuery",
+          "fullName": "google.cloud.chronicle.v1.DashboardQueryService.ExecuteDashboardQuery",
+          "service": {
+            "shortName": "DashboardQueryService",
+            "fullName": "google.cloud.chronicle.v1.DashboardQueryService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_CreateDataAccessLabel_async",
-      "title": "DataAccessControlService createDataAccessLabel Sample",
+      "title": "BigQueryExportService createDataAccessLabel Sample",
       "origin": "API_DEFINITION",
       "description": " Creates a data access label. Data access labels are applied to incoming event data and selected in data access scopes (another resource), and only users with scopes containing the label can see data with that label. Currently, the data access label resource only includes custom labels, which are labels that correspond to UDM queries over event data.",
       "canonical": true,
@@ -61,7 +365,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_GetDataAccessLabel_async",
-      "title": "DataAccessControlService getDataAccessLabel Sample",
+      "title": "BigQueryExportService getDataAccessLabel Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a data access label.",
       "canonical": true,
@@ -101,7 +405,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_ListDataAccessLabels_async",
-      "title": "DataAccessControlService listDataAccessLabels Sample",
+      "title": "BigQueryExportService listDataAccessLabels Sample",
       "origin": "API_DEFINITION",
       "description": " Lists all data access labels for the customer.",
       "canonical": true,
@@ -153,7 +457,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_UpdateDataAccessLabel_async",
-      "title": "DataAccessControlService updateDataAccessLabel Sample",
+      "title": "BigQueryExportService updateDataAccessLabel Sample",
       "origin": "API_DEFINITION",
       "description": " Updates a data access label.",
       "canonical": true,
@@ -197,7 +501,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_DeleteDataAccessLabel_async",
-      "title": "DataAccessControlService deleteDataAccessLabel Sample",
+      "title": "BigQueryExportService deleteDataAccessLabel Sample",
       "origin": "API_DEFINITION",
       "description": " Deletes a data access label. When a label is deleted, new data that enters in the system will not receive the label, but the label will not be removed from old data that still refers to it.",
       "canonical": true,
@@ -237,7 +541,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_CreateDataAccessScope_async",
-      "title": "DataAccessControlService createDataAccessScope Sample",
+      "title": "BigQueryExportService createDataAccessScope Sample",
       "origin": "API_DEFINITION",
       "description": " Creates a data access scope. Data access scope is a combination of allowed and denied labels attached to a permission group. If a scope has allowed labels A and B and denied labels C and D, then the group of people attached to the scope will have permissions to see all events labeled with A or B (or both) and not labeled with either C or D.",
       "canonical": true,
@@ -285,7 +589,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_GetDataAccessScope_async",
-      "title": "DataAccessControlService getDataAccessScope Sample",
+      "title": "BigQueryExportService getDataAccessScope Sample",
       "origin": "API_DEFINITION",
       "description": " Retrieves an existing data access scope.",
       "canonical": true,
@@ -325,7 +629,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_ListDataAccessScopes_async",
-      "title": "DataAccessControlService listDataAccessScopes Sample",
+      "title": "BigQueryExportService listDataAccessScopes Sample",
       "origin": "API_DEFINITION",
       "description": " Lists all existing data access scopes for the customer.",
       "canonical": true,
@@ -377,7 +681,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_UpdateDataAccessScope_async",
-      "title": "DataAccessControlService updateDataAccessScope Sample",
+      "title": "BigQueryExportService updateDataAccessScope Sample",
       "origin": "API_DEFINITION",
       "description": " Updates a data access scope.",
       "canonical": true,
@@ -421,7 +725,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_DataAccessControlService_DeleteDataAccessScope_async",
-      "title": "DataAccessControlService deleteDataAccessScope Sample",
+      "title": "BigQueryExportService deleteDataAccessScope Sample",
       "origin": "API_DEFINITION",
       "description": " Deletes a data access scope.",
       "canonical": true,
@@ -460,8 +764,676 @@
       }
     },
     {
+      "regionTag": "chronicle_v1_generated_DataTableService_CreateDataTable_async",
+      "title": "BigQueryExportService createDataTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new data table.",
+      "canonical": true,
+      "file": "data_table_service.create_data_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataTable",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.CreateDataTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_table",
+            "type": ".google.cloud.chronicle.v1.DataTable"
+          },
+          {
+            "name": "data_table_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTable",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDataTable",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.CreateDataTable",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_ListDataTables_async",
+      "title": "BigQueryExportService listDataTables Sample",
+      "origin": "API_DEFINITION",
+      "description": " List data tables.",
+      "canonical": true,
+      "file": "data_table_service.list_data_tables.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataTables",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.ListDataTables",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ListDataTablesResponse",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "ListDataTables",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.ListDataTables",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_GetDataTable_async",
+      "title": "BigQueryExportService getDataTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get data table info.",
+      "canonical": true,
+      "file": "data_table_service.get_data_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataTable",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.GetDataTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTable",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataTable",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.GetDataTable",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_UpdateDataTable_async",
+      "title": "BigQueryExportService updateDataTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update data table.",
+      "canonical": true,
+      "file": "data_table_service.update_data_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataTable",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.UpdateDataTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "data_table",
+            "type": ".google.cloud.chronicle.v1.DataTable"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTable",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataTable",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.UpdateDataTable",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_DeleteDataTable_async",
+      "title": "BigQueryExportService deleteDataTable Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete data table.",
+      "canonical": true,
+      "file": "data_table_service.delete_data_table.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataTable",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.DeleteDataTable",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataTable",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.DeleteDataTable",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_CreateDataTableRow_async",
+      "title": "BigQueryExportService createDataTableRow Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new data table row.",
+      "canonical": true,
+      "file": "data_table_service.create_data_table_row.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataTableRow",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.CreateDataTableRow",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_table_row",
+            "type": ".google.cloud.chronicle.v1.DataTableRow"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTableRow",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDataTableRow",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.CreateDataTableRow",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_UpdateDataTableRow_async",
+      "title": "BigQueryExportService updateDataTableRow Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update data table row",
+      "canonical": true,
+      "file": "data_table_service.update_data_table_row.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataTableRow",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.UpdateDataTableRow",
+        "async": true,
+        "parameters": [
+          {
+            "name": "data_table_row",
+            "type": ".google.cloud.chronicle.v1.DataTableRow"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTableRow",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataTableRow",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.UpdateDataTableRow",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_ListDataTableRows_async",
+      "title": "BigQueryExportService listDataTableRows Sample",
+      "origin": "API_DEFINITION",
+      "description": " List data table rows.",
+      "canonical": true,
+      "file": "data_table_service.list_data_table_rows.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataTableRows",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.ListDataTableRows",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ListDataTableRowsResponse",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "ListDataTableRows",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.ListDataTableRows",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_GetDataTableRow_async",
+      "title": "BigQueryExportService getDataTableRow Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get data table row",
+      "canonical": true,
+      "file": "data_table_service.get_data_table_row.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataTableRow",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.GetDataTableRow",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTableRow",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataTableRow",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.GetDataTableRow",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_DeleteDataTableRow_async",
+      "title": "BigQueryExportService deleteDataTableRow Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete data table row.",
+      "canonical": true,
+      "file": "data_table_service.delete_data_table_row.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataTableRow",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.DeleteDataTableRow",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataTableRow",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.DeleteDataTableRow",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_BulkCreateDataTableRows_async",
+      "title": "BigQueryExportService bulkCreateDataTableRows Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create data table rows in bulk.",
+      "canonical": true,
+      "file": "data_table_service.bulk_create_data_table_rows.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BulkCreateDataTableRows",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.BulkCreateDataTableRows",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "BulkCreateDataTableRows",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.BulkCreateDataTableRows",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_BulkGetDataTableRows_async",
+      "title": "BigQueryExportService bulkGetDataTableRows Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get data table rows in bulk.",
+      "canonical": true,
+      "file": "data_table_service.bulk_get_data_table_rows.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BulkGetDataTableRows",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.BulkGetDataTableRows",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BulkGetDataTableRowsResponse",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "BulkGetDataTableRows",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.BulkGetDataTableRows",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_BulkReplaceDataTableRows_async",
+      "title": "BigQueryExportService bulkReplaceDataTableRows Sample",
+      "origin": "API_DEFINITION",
+      "description": " Replace all existing data table rows with new data table rows.",
+      "canonical": true,
+      "file": "data_table_service.bulk_replace_data_table_rows.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BulkReplaceDataTableRows",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.BulkReplaceDataTableRows",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "BulkReplaceDataTableRows",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.BulkReplaceDataTableRows",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_BulkUpdateDataTableRows_async",
+      "title": "BigQueryExportService bulkUpdateDataTableRows Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update data table rows in bulk.",
+      "canonical": true,
+      "file": "data_table_service.bulk_update_data_table_rows.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BulkUpdateDataTableRows",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.BulkUpdateDataTableRows",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "BulkUpdateDataTableRows",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.BulkUpdateDataTableRows",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_DataTableService_GetDataTableOperationErrors_async",
+      "title": "BigQueryExportService getDataTableOperationErrors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the error for a data table operation.",
+      "canonical": true,
+      "file": "data_table_service.get_data_table_operation_errors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataTableOperationErrors",
+        "fullName": "google.cloud.chronicle.v1.DataTableService.GetDataTableOperationErrors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DataTableOperationErrors",
+        "client": {
+          "shortName": "DataTableServiceClient",
+          "fullName": "google.cloud.chronicle.v1.DataTableServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataTableOperationErrors",
+          "fullName": "google.cloud.chronicle.v1.DataTableService.GetDataTableOperationErrors",
+          "service": {
+            "shortName": "DataTableService",
+            "fullName": "google.cloud.chronicle.v1.DataTableService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "chronicle_v1_generated_EntityService_GetWatchlist_async",
-      "title": "DataAccessControlService getWatchlist Sample",
+      "title": "BigQueryExportService getWatchlist Sample",
       "origin": "API_DEFINITION",
       "description": " Gets watchlist details for the given watchlist ID.",
       "canonical": true,
@@ -501,7 +1473,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_EntityService_ListWatchlists_async",
-      "title": "DataAccessControlService listWatchlists Sample",
+      "title": "BigQueryExportService listWatchlists Sample",
       "origin": "API_DEFINITION",
       "description": " Lists all watchlists for the given instance.",
       "canonical": true,
@@ -553,7 +1525,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_EntityService_CreateWatchlist_async",
-      "title": "DataAccessControlService createWatchlist Sample",
+      "title": "BigQueryExportService createWatchlist Sample",
       "origin": "API_DEFINITION",
       "description": " Creates a watchlist for the given instance. Note that there can be at most 200 watchlists per instance.",
       "canonical": true,
@@ -601,7 +1573,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_EntityService_UpdateWatchlist_async",
-      "title": "DataAccessControlService updateWatchlist Sample",
+      "title": "BigQueryExportService updateWatchlist Sample",
       "origin": "API_DEFINITION",
       "description": " Updates the watchlist for the given instance.",
       "canonical": true,
@@ -645,7 +1617,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_EntityService_DeleteWatchlist_async",
-      "title": "DataAccessControlService deleteWatchlist Sample",
+      "title": "BigQueryExportService deleteWatchlist Sample",
       "origin": "API_DEFINITION",
       "description": " Deletes the watchlist for the given instance.",
       "canonical": true,
@@ -688,8 +1660,144 @@
       }
     },
     {
+      "regionTag": "chronicle_v1_generated_FeaturedContentNativeDashboardService_GetFeaturedContentNativeDashboard_async",
+      "title": "BigQueryExportService getFeaturedContentNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a native dashboard featured content.",
+      "canonical": true,
+      "file": "featured_content_native_dashboard_service.get_featured_content_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFeaturedContentNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.GetFeaturedContentNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.FeaturedContentNativeDashboard",
+        "client": {
+          "shortName": "FeaturedContentNativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "GetFeaturedContentNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.GetFeaturedContentNativeDashboard",
+          "service": {
+            "shortName": "FeaturedContentNativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_FeaturedContentNativeDashboardService_ListFeaturedContentNativeDashboards_async",
+      "title": "BigQueryExportService listFeaturedContentNativeDashboards Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all native dashboards featured content.",
+      "canonical": true,
+      "file": "featured_content_native_dashboard_service.list_featured_content_native_dashboards.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFeaturedContentNativeDashboards",
+        "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.ListFeaturedContentNativeDashboards",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse",
+        "client": {
+          "shortName": "FeaturedContentNativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "ListFeaturedContentNativeDashboards",
+          "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.ListFeaturedContentNativeDashboards",
+          "service": {
+            "shortName": "FeaturedContentNativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_FeaturedContentNativeDashboardService_InstallFeaturedContentNativeDashboard_async",
+      "title": "BigQueryExportService installFeaturedContentNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Install a native dashboard featured content.",
+      "canonical": true,
+      "file": "featured_content_native_dashboard_service.install_featured_content_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InstallFeaturedContentNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.InstallFeaturedContentNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "featured_content_native_dashboard",
+            "type": ".google.cloud.chronicle.v1.FeaturedContentNativeDashboard"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse",
+        "client": {
+          "shortName": "FeaturedContentNativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "InstallFeaturedContentNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.InstallFeaturedContentNativeDashboard",
+          "service": {
+            "shortName": "FeaturedContentNativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.FeaturedContentNativeDashboardService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "chronicle_v1_generated_InstanceService_GetInstance_async",
-      "title": "DataAccessControlService getInstance Sample",
+      "title": "BigQueryExportService getInstance Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a Instance.",
       "canonical": true,
@@ -728,8 +1836,560 @@
       }
     },
     {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_CreateNativeDashboard_async",
+      "title": "BigQueryExportService createNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.create_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.CreateNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "native_dashboard",
+            "type": ".google.cloud.chronicle.v1.NativeDashboard"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.NativeDashboard",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "CreateNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.CreateNativeDashboard",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_GetNativeDashboard_async",
+      "title": "BigQueryExportService getNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.get_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.GetNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.chronicle.v1.NativeDashboardView"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.NativeDashboard",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "GetNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.GetNativeDashboard",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_ListNativeDashboards_async",
+      "title": "BigQueryExportService listNativeDashboards Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all dashboards.",
+      "canonical": true,
+      "file": "native_dashboard_service.list_native_dashboards.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNativeDashboards",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.ListNativeDashboards",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.chronicle.v1.NativeDashboardView"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ListNativeDashboardsResponse",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "ListNativeDashboards",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.ListNativeDashboards",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_UpdateNativeDashboard_async",
+      "title": "BigQueryExportService updateNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.update_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.UpdateNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "native_dashboard",
+            "type": ".google.cloud.chronicle.v1.NativeDashboard"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.NativeDashboard",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.UpdateNativeDashboard",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_DuplicateNativeDashboard_async",
+      "title": "BigQueryExportService duplicateNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Duplicate a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.duplicate_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DuplicateNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.DuplicateNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "native_dashboard",
+            "type": ".google.cloud.chronicle.v1.NativeDashboard"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.NativeDashboard",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "DuplicateNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.DuplicateNativeDashboard",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_DeleteNativeDashboard_async",
+      "title": "BigQueryExportService deleteNativeDashboard Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.delete_native_dashboard.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteNativeDashboard",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.DeleteNativeDashboard",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteNativeDashboard",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.DeleteNativeDashboard",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_AddChart_async",
+      "title": "BigQueryExportService addChart Sample",
+      "origin": "API_DEFINITION",
+      "description": " Add chart in a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.add_chart.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddChart",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.AddChart",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dashboard_query",
+            "type": ".google.cloud.chronicle.v1.DashboardQuery"
+          },
+          {
+            "name": "dashboard_chart",
+            "type": ".google.cloud.chronicle.v1.DashboardChart"
+          },
+          {
+            "name": "chart_layout",
+            "type": ".google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.AddChartResponse",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "AddChart",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.AddChart",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_RemoveChart_async",
+      "title": "BigQueryExportService removeChart Sample",
+      "origin": "API_DEFINITION",
+      "description": " Remove chart from a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.remove_chart.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveChart",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.RemoveChart",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dashboard_chart",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.NativeDashboard",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "RemoveChart",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.RemoveChart",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_EditChart_async",
+      "title": "BigQueryExportService editChart Sample",
+      "origin": "API_DEFINITION",
+      "description": " Edit chart in a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.edit_chart.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EditChart",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.EditChart",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dashboard_query",
+            "type": ".google.cloud.chronicle.v1.DashboardQuery"
+          },
+          {
+            "name": "dashboard_chart",
+            "type": ".google.cloud.chronicle.v1.DashboardChart"
+          },
+          {
+            "name": "edit_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "language_features",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.EditChartResponse",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "EditChart",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.EditChart",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_DuplicateChart_async",
+      "title": "BigQueryExportService duplicateChart Sample",
+      "origin": "API_DEFINITION",
+      "description": " Duplicate chart in a dashboard.",
+      "canonical": true,
+      "file": "native_dashboard_service.duplicate_chart.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DuplicateChart",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.DuplicateChart",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dashboard_chart",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.DuplicateChartResponse",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "DuplicateChart",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.DuplicateChart",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_ExportNativeDashboards_async",
+      "title": "BigQueryExportService exportNativeDashboards Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports the dashboards.",
+      "canonical": true,
+      "file": "native_dashboard_service.export_native_dashboards.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportNativeDashboards",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.ExportNativeDashboards",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ExportNativeDashboardsResponse",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "ExportNativeDashboards",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.ExportNativeDashboards",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "chronicle_v1_generated_NativeDashboardService_ImportNativeDashboards_async",
+      "title": "BigQueryExportService importNativeDashboards Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports the dashboards.",
+      "canonical": true,
+      "file": "native_dashboard_service.import_native_dashboards.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportNativeDashboards",
+        "fullName": "google.cloud.chronicle.v1.NativeDashboardService.ImportNativeDashboards",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource"
+          }
+        ],
+        "resultType": ".google.cloud.chronicle.v1.ImportNativeDashboardsResponse",
+        "client": {
+          "shortName": "NativeDashboardServiceClient",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardServiceClient"
+        },
+        "method": {
+          "shortName": "ImportNativeDashboards",
+          "fullName": "google.cloud.chronicle.v1.NativeDashboardService.ImportNativeDashboards",
+          "service": {
+            "shortName": "NativeDashboardService",
+            "fullName": "google.cloud.chronicle.v1.NativeDashboardService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "chronicle_v1_generated_ReferenceListService_GetReferenceList_async",
-      "title": "DataAccessControlService getReferenceList Sample",
+      "title": "BigQueryExportService getReferenceList Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a single reference list.",
       "canonical": true,
@@ -773,7 +2433,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_ReferenceListService_ListReferenceLists_async",
-      "title": "DataAccessControlService listReferenceLists Sample",
+      "title": "BigQueryExportService listReferenceLists Sample",
       "origin": "API_DEFINITION",
       "description": " Lists a collection of reference lists.",
       "canonical": true,
@@ -825,7 +2485,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_ReferenceListService_CreateReferenceList_async",
-      "title": "DataAccessControlService createReferenceList Sample",
+      "title": "BigQueryExportService createReferenceList Sample",
       "origin": "API_DEFINITION",
       "description": " Creates a new reference list.",
       "canonical": true,
@@ -873,7 +2533,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_ReferenceListService_UpdateReferenceList_async",
-      "title": "DataAccessControlService updateReferenceList Sample",
+      "title": "BigQueryExportService updateReferenceList Sample",
       "origin": "API_DEFINITION",
       "description": " Updates an existing reference list.",
       "canonical": true,
@@ -917,7 +2577,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_CreateRule_async",
-      "title": "DataAccessControlService createRule Sample",
+      "title": "BigQueryExportService createRule Sample",
       "origin": "API_DEFINITION",
       "description": " Creates a new Rule.",
       "canonical": true,
@@ -961,7 +2621,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_GetRule_async",
-      "title": "DataAccessControlService getRule Sample",
+      "title": "BigQueryExportService getRule Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a Rule.",
       "canonical": true,
@@ -1005,7 +2665,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_ListRules_async",
-      "title": "DataAccessControlService listRules Sample",
+      "title": "BigQueryExportService listRules Sample",
       "origin": "API_DEFINITION",
       "description": " Lists Rules.",
       "canonical": true,
@@ -1061,7 +2721,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_UpdateRule_async",
-      "title": "DataAccessControlService updateRule Sample",
+      "title": "BigQueryExportService updateRule Sample",
       "origin": "API_DEFINITION",
       "description": " Updates a Rule.",
       "canonical": true,
@@ -1105,7 +2765,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_DeleteRule_async",
-      "title": "DataAccessControlService deleteRule Sample",
+      "title": "BigQueryExportService deleteRule Sample",
       "origin": "API_DEFINITION",
       "description": " Deletes a Rule.",
       "canonical": true,
@@ -1149,7 +2809,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_ListRuleRevisions_async",
-      "title": "DataAccessControlService listRuleRevisions Sample",
+      "title": "BigQueryExportService listRuleRevisions Sample",
       "origin": "API_DEFINITION",
       "description": " Lists all revisions of the rule.",
       "canonical": true,
@@ -1201,7 +2861,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_CreateRetrohunt_async",
-      "title": "DataAccessControlService createRetrohunt Sample",
+      "title": "BigQueryExportService createRetrohunt Sample",
       "origin": "API_DEFINITION",
       "description": " Create a Retrohunt.",
       "canonical": true,
@@ -1245,7 +2905,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_GetRetrohunt_async",
-      "title": "DataAccessControlService getRetrohunt Sample",
+      "title": "BigQueryExportService getRetrohunt Sample",
       "origin": "API_DEFINITION",
       "description": " Get a Retrohunt.",
       "canonical": true,
@@ -1285,7 +2945,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_ListRetrohunts_async",
-      "title": "DataAccessControlService listRetrohunts Sample",
+      "title": "BigQueryExportService listRetrohunts Sample",
       "origin": "API_DEFINITION",
       "description": " List Retrohunts.",
       "canonical": true,
@@ -1337,7 +2997,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_GetRuleDeployment_async",
-      "title": "DataAccessControlService getRuleDeployment Sample",
+      "title": "BigQueryExportService getRuleDeployment Sample",
       "origin": "API_DEFINITION",
       "description": " Gets a RuleDeployment.",
       "canonical": true,
@@ -1377,7 +3037,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_ListRuleDeployments_async",
-      "title": "DataAccessControlService listRuleDeployments Sample",
+      "title": "BigQueryExportService listRuleDeployments Sample",
       "origin": "API_DEFINITION",
       "description": " Lists RuleDeployments across all Rules.",
       "canonical": true,
@@ -1429,7 +3089,7 @@
     },
     {
       "regionTag": "chronicle_v1_generated_RuleService_UpdateRuleDeployment_async",
-      "title": "DataAccessControlService updateRuleDeployment Sample",
+      "title": "BigQueryExportService updateRuleDeployment Sample",
       "origin": "API_DEFINITION",
       "description": " Updates a RuleDeployment. Failures are not necessarily atomic. If there is a request to update multiple fields, and any update to a single field fails, an error will be returned, but other fields may remain successfully updated.",
       "canonical": true,

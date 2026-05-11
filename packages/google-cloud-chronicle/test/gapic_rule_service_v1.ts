@@ -2430,6 +2430,160 @@ describe('v1.RuleServiceClient', () => {
 
     describe('Path templates', () => {
 
+        describe('bigQueryExport', async () => {
+            const fakePath = "/rendered/path/bigQueryExport";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.bigQueryExportPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.bigQueryExportPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('bigQueryExportPath', () => {
+                const result = client.bigQueryExportPath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBigQueryExportName', () => {
+                const result = client.matchProjectFromBigQueryExportName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBigQueryExportName', () => {
+                const result = client.matchLocationFromBigQueryExportName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromBigQueryExportName', () => {
+                const result = client.matchInstanceFromBigQueryExportName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dashboardChart', async () => {
+            const fakePath = "/rendered/path/dashboardChart";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                chart: "chartValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dashboardChartPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dashboardChartPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dashboardChartPath', () => {
+                const result = client.dashboardChartPath("projectValue", "locationValue", "instanceValue", "chartValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDashboardChartName', () => {
+                const result = client.matchProjectFromDashboardChartName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDashboardChartName', () => {
+                const result = client.matchLocationFromDashboardChartName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromDashboardChartName', () => {
+                const result = client.matchInstanceFromDashboardChartName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchChartFromDashboardChartName', () => {
+                const result = client.matchChartFromDashboardChartName(fakePath);
+                assert.strictEqual(result, "chartValue");
+                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dashboardQuery', async () => {
+            const fakePath = "/rendered/path/dashboardQuery";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                query: "queryValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dashboardQueryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dashboardQueryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dashboardQueryPath', () => {
+                const result = client.dashboardQueryPath("projectValue", "locationValue", "instanceValue", "queryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDashboardQueryName', () => {
+                const result = client.matchProjectFromDashboardQueryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDashboardQueryName', () => {
+                const result = client.matchLocationFromDashboardQueryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromDashboardQueryName', () => {
+                const result = client.matchInstanceFromDashboardQueryName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQueryFromDashboardQueryName', () => {
+                const result = client.matchQueryFromDashboardQueryName(fakePath);
+                assert.strictEqual(result, "queryValue");
+                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('dataAccessLabel', async () => {
             const fakePath = "/rendered/path/dataAccessLabel";
             const expectedParameters = {
@@ -2538,6 +2692,230 @@ describe('v1.RuleServiceClient', () => {
             });
         });
 
+        describe('dataTable', async () => {
+            const fakePath = "/rendered/path/dataTable";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                data_table: "dataTableValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataTablePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataTablePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataTablePath', () => {
+                const result = client.dataTablePath("projectValue", "locationValue", "instanceValue", "dataTableValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataTablePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataTableName', () => {
+                const result = client.matchProjectFromDataTableName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataTableName', () => {
+                const result = client.matchLocationFromDataTableName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromDataTableName', () => {
+                const result = client.matchInstanceFromDataTableName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataTableFromDataTableName', () => {
+                const result = client.matchDataTableFromDataTableName(fakePath);
+                assert.strictEqual(result, "dataTableValue");
+                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataTableOperationErrors', async () => {
+            const fakePath = "/rendered/path/dataTableOperationErrors";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                data_table_operation_errors: "dataTableOperationErrorsValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataTableOperationErrorsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataTableOperationErrorsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataTableOperationErrorsPath', () => {
+                const result = client.dataTableOperationErrorsPath("projectValue", "locationValue", "instanceValue", "dataTableOperationErrorsValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataTableOperationErrorsName', () => {
+                const result = client.matchProjectFromDataTableOperationErrorsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataTableOperationErrorsName', () => {
+                const result = client.matchLocationFromDataTableOperationErrorsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromDataTableOperationErrorsName', () => {
+                const result = client.matchInstanceFromDataTableOperationErrorsName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
+                const result = client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(fakePath);
+                assert.strictEqual(result, "dataTableOperationErrorsValue");
+                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dataTableRow', async () => {
+            const fakePath = "/rendered/path/dataTableRow";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                data_table: "dataTableValue",
+                data_table_row: "dataTableRowValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dataTableRowPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dataTableRowPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dataTableRowPath', () => {
+                const result = client.dataTableRowPath("projectValue", "locationValue", "instanceValue", "dataTableValue", "dataTableRowValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDataTableRowName', () => {
+                const result = client.matchProjectFromDataTableRowName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDataTableRowName', () => {
+                const result = client.matchLocationFromDataTableRowName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromDataTableRowName', () => {
+                const result = client.matchInstanceFromDataTableRowName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataTableFromDataTableRowName', () => {
+                const result = client.matchDataTableFromDataTableRowName(fakePath);
+                assert.strictEqual(result, "dataTableValue");
+                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataTableRowFromDataTableRowName', () => {
+                const result = client.matchDataTableRowFromDataTableRowName(fakePath);
+                assert.strictEqual(result, "dataTableRowValue");
+                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('featuredContentNativeDashboard', async () => {
+            const fakePath = "/rendered/path/featuredContentNativeDashboard";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                featured_content_native_dashboard: "featuredContentNativeDashboardValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('featuredContentNativeDashboardPath', () => {
+                const result = client.featuredContentNativeDashboardPath("projectValue", "locationValue", "instanceValue", "featuredContentNativeDashboardValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromFeaturedContentNativeDashboardName', () => {
+                const result = client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromFeaturedContentNativeDashboardName', () => {
+                const result = client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
+                const result = client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
+                const result = client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(fakePath);
+                assert.strictEqual(result, "featuredContentNativeDashboardValue");
+                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('instance', async () => {
             const fakePath = "/rendered/path/instance";
             const expectedParameters = {
@@ -2618,6 +2996,60 @@ describe('v1.RuleServiceClient', () => {
                 const result = client.matchLocationFromLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('nativeDashboard', async () => {
+            const fakePath = "/rendered/path/nativeDashboard";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                dashboard: "dashboardValue",
+            };
+            const client = new ruleserviceModule.v1.RuleServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.nativeDashboardPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.nativeDashboardPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('nativeDashboardPath', () => {
+                const result = client.nativeDashboardPath("projectValue", "locationValue", "instanceValue", "dashboardValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNativeDashboardName', () => {
+                const result = client.matchProjectFromNativeDashboardName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNativeDashboardName', () => {
+                const result = client.matchLocationFromNativeDashboardName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromNativeDashboardName', () => {
+                const result = client.matchInstanceFromNativeDashboardName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDashboardFromNativeDashboardName', () => {
+                const result = client.matchDashboardFromNativeDashboardName(fakePath);
+                assert.strictEqual(result, "dashboardValue");
+                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

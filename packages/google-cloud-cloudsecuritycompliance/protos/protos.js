@@ -5082,6 +5082,10 @@
                      * @property {number} CC_CATEGORY_VULNERABILITY_MANAGEMENT=13 CC_CATEGORY_VULNERABILITY_MANAGEMENT value
                      * @property {number} CC_CATEGORY_PRIVACY=14 CC_CATEGORY_PRIVACY value
                      * @property {number} CC_CATEGORY_BCDR=15 CC_CATEGORY_BCDR value
+                     * @property {number} CC_CATEGORY_ADMIN_ACCESS=16 CC_CATEGORY_ADMIN_ACCESS value
+                     * @property {number} CC_CATEGORY_DATA_RESIDENCY=17 CC_CATEGORY_DATA_RESIDENCY value
+                     * @property {number} CC_CATEGORY_RESOURCE_USAGE_RESTRICTION=18 CC_CATEGORY_RESOURCE_USAGE_RESTRICTION value
+                     * @property {number} CC_CATEGORY_SERVICE_SPECIFIC=19 CC_CATEGORY_SERVICE_SPECIFIC value
                      */
                     v1.CloudControlCategory = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -5101,6 +5105,10 @@
                         values[valuesById[13] = "CC_CATEGORY_VULNERABILITY_MANAGEMENT"] = 13;
                         values[valuesById[14] = "CC_CATEGORY_PRIVACY"] = 14;
                         values[valuesById[15] = "CC_CATEGORY_BCDR"] = 15;
+                        values[valuesById[16] = "CC_CATEGORY_ADMIN_ACCESS"] = 16;
+                        values[valuesById[17] = "CC_CATEGORY_DATA_RESIDENCY"] = 17;
+                        values[valuesById[18] = "CC_CATEGORY_RESOURCE_USAGE_RESTRICTION"] = 18;
+                        values[valuesById[19] = "CC_CATEGORY_SERVICE_SPECIFIC"] = 19;
                         return values;
                     })();
     
@@ -7179,6 +7187,10 @@
                                     case 13:
                                     case 14:
                                     case 15:
+                                    case 16:
+                                    case 17:
+                                    case 18:
+                                    case 19:
                                         break;
                                     }
                             }
@@ -7423,6 +7435,22 @@
                                     case "CC_CATEGORY_BCDR":
                                     case 15:
                                         message.categories[i] = 15;
+                                        break;
+                                    case "CC_CATEGORY_ADMIN_ACCESS":
+                                    case 16:
+                                        message.categories[i] = 16;
+                                        break;
+                                    case "CC_CATEGORY_DATA_RESIDENCY":
+                                    case 17:
+                                        message.categories[i] = 17;
+                                        break;
+                                    case "CC_CATEGORY_RESOURCE_USAGE_RESTRICTION":
+                                    case 18:
+                                        message.categories[i] = 18;
+                                        break;
+                                    case "CC_CATEGORY_SERVICE_SPECIFIC":
+                                    case 19:
+                                        message.categories[i] = 19;
                                         break;
                                     }
                             }
@@ -11278,6 +11306,691 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v1.Control = (function() {
+    
+                        /**
+                         * Properties of a Control.
+                         * @memberof google.cloud.cloudsecuritycompliance.v1
+                         * @interface IControl
+                         * @property {string|null} [name] Control name
+                         * @property {string|null} [displayName] Control displayName
+                         * @property {string|null} [description] Control description
+                         * @property {google.cloud.cloudsecuritycompliance.v1.Control.Family|null} [family] Control family
+                         * @property {google.cloud.cloudsecuritycompliance.v1.IControlFamily|null} [controlFamily] Control controlFamily
+                         * @property {google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|null} [responsibilityType] Control responsibilityType
+                         * @property {string|null} [googleResponsibilityDescription] Control googleResponsibilityDescription
+                         * @property {string|null} [googleResponsibilityImplementation] Control googleResponsibilityImplementation
+                         * @property {string|null} [customerResponsibilityDescription] Control customerResponsibilityDescription
+                         * @property {string|null} [customerResponsibilityImplementation] Control customerResponsibilityImplementation
+                         * @property {string|null} [sharedResponsibilityDescription] Control sharedResponsibilityDescription
+                         * @property {string|null} [additionalContentUri] Control additionalContentUri
+                         * @property {Array.<string>|null} [relatedFrameworks] Control relatedFrameworks
+                         */
+    
+                        /**
+                         * Constructs a new Control.
+                         * @memberof google.cloud.cloudsecuritycompliance.v1
+                         * @classdesc Represents a Control.
+                         * @implements IControl
+                         * @constructor
+                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl=} [properties] Properties to set
+                         */
+                        function Control(properties) {
+                            this.relatedFrameworks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Control name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.name = "";
+    
+                        /**
+                         * Control displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.displayName = "";
+    
+                        /**
+                         * Control description.
+                         * @member {string} description
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.description = "";
+    
+                        /**
+                         * Control family.
+                         * @member {google.cloud.cloudsecuritycompliance.v1.Control.Family} family
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.family = 0;
+    
+                        /**
+                         * Control controlFamily.
+                         * @member {google.cloud.cloudsecuritycompliance.v1.IControlFamily|null|undefined} controlFamily
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.controlFamily = null;
+    
+                        /**
+                         * Control responsibilityType.
+                         * @member {google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType} responsibilityType
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.responsibilityType = 0;
+    
+                        /**
+                         * Control googleResponsibilityDescription.
+                         * @member {string} googleResponsibilityDescription
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.googleResponsibilityDescription = "";
+    
+                        /**
+                         * Control googleResponsibilityImplementation.
+                         * @member {string} googleResponsibilityImplementation
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.googleResponsibilityImplementation = "";
+    
+                        /**
+                         * Control customerResponsibilityDescription.
+                         * @member {string} customerResponsibilityDescription
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.customerResponsibilityDescription = "";
+    
+                        /**
+                         * Control customerResponsibilityImplementation.
+                         * @member {string} customerResponsibilityImplementation
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.customerResponsibilityImplementation = "";
+    
+                        /**
+                         * Control sharedResponsibilityDescription.
+                         * @member {string} sharedResponsibilityDescription
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.sharedResponsibilityDescription = "";
+    
+                        /**
+                         * Control additionalContentUri.
+                         * @member {string} additionalContentUri
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.additionalContentUri = "";
+    
+                        /**
+                         * Control relatedFrameworks.
+                         * @member {Array.<string>} relatedFrameworks
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         */
+                        Control.prototype.relatedFrameworks = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Control instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl=} [properties] Properties to set
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control instance
+                         */
+                        Control.create = function create(properties) {
+                            return new Control(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Control message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl} message Control message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Control.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.family != null && Object.hasOwnProperty.call(message, "family"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.family);
+                            if (message.controlFamily != null && Object.hasOwnProperty.call(message, "controlFamily"))
+                                $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.encode(message.controlFamily, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.responsibilityType != null && Object.hasOwnProperty.call(message, "responsibilityType"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.responsibilityType);
+                            if (message.googleResponsibilityDescription != null && Object.hasOwnProperty.call(message, "googleResponsibilityDescription"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.googleResponsibilityDescription);
+                            if (message.googleResponsibilityImplementation != null && Object.hasOwnProperty.call(message, "googleResponsibilityImplementation"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.googleResponsibilityImplementation);
+                            if (message.customerResponsibilityDescription != null && Object.hasOwnProperty.call(message, "customerResponsibilityDescription"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.customerResponsibilityDescription);
+                            if (message.customerResponsibilityImplementation != null && Object.hasOwnProperty.call(message, "customerResponsibilityImplementation"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.customerResponsibilityImplementation);
+                            if (message.sharedResponsibilityDescription != null && Object.hasOwnProperty.call(message, "sharedResponsibilityDescription"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.sharedResponsibilityDescription);
+                            if (message.additionalContentUri != null && Object.hasOwnProperty.call(message, "additionalContentUri"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.additionalContentUri);
+                            if (message.relatedFrameworks != null && message.relatedFrameworks.length)
+                                for (var i = 0; i < message.relatedFrameworks.length; ++i)
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.relatedFrameworks[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl} message Control message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Control.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Control message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Control.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.Control();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.family = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.controlFamily = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.responsibilityType = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.googleResponsibilityDescription = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.googleResponsibilityImplementation = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.customerResponsibilityDescription = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.customerResponsibilityImplementation = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.sharedResponsibilityDescription = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.additionalContentUri = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.relatedFrameworks && message.relatedFrameworks.length))
+                                            message.relatedFrameworks = [];
+                                        message.relatedFrameworks.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Control message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Control.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Control message.
+                         * @function verify
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Control.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.family != null && message.hasOwnProperty("family"))
+                                switch (message.family) {
+                                default:
+                                    return "family: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 18:
+                                    break;
+                                }
+                            if (message.controlFamily != null && message.hasOwnProperty("controlFamily")) {
+                                var error = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify(message.controlFamily);
+                                if (error)
+                                    return "controlFamily." + error;
+                            }
+                            if (message.responsibilityType != null && message.hasOwnProperty("responsibilityType"))
+                                switch (message.responsibilityType) {
+                                default:
+                                    return "responsibilityType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.googleResponsibilityDescription != null && message.hasOwnProperty("googleResponsibilityDescription"))
+                                if (!$util.isString(message.googleResponsibilityDescription))
+                                    return "googleResponsibilityDescription: string expected";
+                            if (message.googleResponsibilityImplementation != null && message.hasOwnProperty("googleResponsibilityImplementation"))
+                                if (!$util.isString(message.googleResponsibilityImplementation))
+                                    return "googleResponsibilityImplementation: string expected";
+                            if (message.customerResponsibilityDescription != null && message.hasOwnProperty("customerResponsibilityDescription"))
+                                if (!$util.isString(message.customerResponsibilityDescription))
+                                    return "customerResponsibilityDescription: string expected";
+                            if (message.customerResponsibilityImplementation != null && message.hasOwnProperty("customerResponsibilityImplementation"))
+                                if (!$util.isString(message.customerResponsibilityImplementation))
+                                    return "customerResponsibilityImplementation: string expected";
+                            if (message.sharedResponsibilityDescription != null && message.hasOwnProperty("sharedResponsibilityDescription"))
+                                if (!$util.isString(message.sharedResponsibilityDescription))
+                                    return "sharedResponsibilityDescription: string expected";
+                            if (message.additionalContentUri != null && message.hasOwnProperty("additionalContentUri"))
+                                if (!$util.isString(message.additionalContentUri))
+                                    return "additionalContentUri: string expected";
+                            if (message.relatedFrameworks != null && message.hasOwnProperty("relatedFrameworks")) {
+                                if (!Array.isArray(message.relatedFrameworks))
+                                    return "relatedFrameworks: array expected";
+                                for (var i = 0; i < message.relatedFrameworks.length; ++i)
+                                    if (!$util.isString(message.relatedFrameworks[i]))
+                                        return "relatedFrameworks: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Control message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control
+                         */
+                        Control.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.Control)
+                                return object;
+                            var message = new $root.google.cloud.cloudsecuritycompliance.v1.Control();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.family) {
+                            default:
+                                if (typeof object.family === "number") {
+                                    message.family = object.family;
+                                    break;
+                                }
+                                break;
+                            case "FAMILY_UNSPECIFIED":
+                            case 0:
+                                message.family = 0;
+                                break;
+                            case "AC":
+                            case 1:
+                                message.family = 1;
+                                break;
+                            case "AT":
+                            case 2:
+                                message.family = 2;
+                                break;
+                            case "AU":
+                            case 3:
+                                message.family = 3;
+                                break;
+                            case "CA":
+                            case 4:
+                                message.family = 4;
+                                break;
+                            case "CM":
+                            case 5:
+                                message.family = 5;
+                                break;
+                            case "CP":
+                            case 6:
+                                message.family = 6;
+                                break;
+                            case "IA":
+                            case 7:
+                                message.family = 7;
+                                break;
+                            case "IR":
+                            case 8:
+                                message.family = 8;
+                                break;
+                            case "MA":
+                            case 9:
+                                message.family = 9;
+                                break;
+                            case "MP":
+                            case 10:
+                                message.family = 10;
+                                break;
+                            case "PE":
+                            case 11:
+                                message.family = 11;
+                                break;
+                            case "PL":
+                            case 12:
+                                message.family = 12;
+                                break;
+                            case "PS":
+                            case 13:
+                                message.family = 13;
+                                break;
+                            case "RA":
+                            case 14:
+                                message.family = 14;
+                                break;
+                            case "SA":
+                            case 15:
+                                message.family = 15;
+                                break;
+                            case "SC":
+                            case 16:
+                                message.family = 16;
+                                break;
+                            case "SI":
+                            case 17:
+                                message.family = 17;
+                                break;
+                            case "SR":
+                            case 18:
+                                message.family = 18;
+                                break;
+                            }
+                            if (object.controlFamily != null) {
+                                if (typeof object.controlFamily !== "object")
+                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Control.controlFamily: object expected");
+                                message.controlFamily = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.fromObject(object.controlFamily);
+                            }
+                            switch (object.responsibilityType) {
+                            default:
+                                if (typeof object.responsibilityType === "number") {
+                                    message.responsibilityType = object.responsibilityType;
+                                    break;
+                                }
+                                break;
+                            case "REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.responsibilityType = 0;
+                                break;
+                            case "GOOGLE":
+                            case 1:
+                                message.responsibilityType = 1;
+                                break;
+                            case "CUSTOMER":
+                            case 2:
+                                message.responsibilityType = 2;
+                                break;
+                            case "SHARED":
+                            case 3:
+                                message.responsibilityType = 3;
+                                break;
+                            }
+                            if (object.googleResponsibilityDescription != null)
+                                message.googleResponsibilityDescription = String(object.googleResponsibilityDescription);
+                            if (object.googleResponsibilityImplementation != null)
+                                message.googleResponsibilityImplementation = String(object.googleResponsibilityImplementation);
+                            if (object.customerResponsibilityDescription != null)
+                                message.customerResponsibilityDescription = String(object.customerResponsibilityDescription);
+                            if (object.customerResponsibilityImplementation != null)
+                                message.customerResponsibilityImplementation = String(object.customerResponsibilityImplementation);
+                            if (object.sharedResponsibilityDescription != null)
+                                message.sharedResponsibilityDescription = String(object.sharedResponsibilityDescription);
+                            if (object.additionalContentUri != null)
+                                message.additionalContentUri = String(object.additionalContentUri);
+                            if (object.relatedFrameworks) {
+                                if (!Array.isArray(object.relatedFrameworks))
+                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Control.relatedFrameworks: array expected");
+                                message.relatedFrameworks = [];
+                                for (var i = 0; i < object.relatedFrameworks.length; ++i)
+                                    message.relatedFrameworks[i] = String(object.relatedFrameworks[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Control message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.Control} message Control
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Control.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedFrameworks = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.family = options.enums === String ? "FAMILY_UNSPECIFIED" : 0;
+                                object.controlFamily = null;
+                                object.responsibilityType = options.enums === String ? "REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED" : 0;
+                                object.googleResponsibilityDescription = "";
+                                object.googleResponsibilityImplementation = "";
+                                object.customerResponsibilityDescription = "";
+                                object.customerResponsibilityImplementation = "";
+                                object.sharedResponsibilityDescription = "";
+                                object.additionalContentUri = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.family != null && message.hasOwnProperty("family"))
+                                object.family = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.Control.Family[message.family] === undefined ? message.family : $root.google.cloud.cloudsecuritycompliance.v1.Control.Family[message.family] : message.family;
+                            if (message.controlFamily != null && message.hasOwnProperty("controlFamily"))
+                                object.controlFamily = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.toObject(message.controlFamily, options);
+                            if (message.responsibilityType != null && message.hasOwnProperty("responsibilityType"))
+                                object.responsibilityType = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType[message.responsibilityType] === undefined ? message.responsibilityType : $root.google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType[message.responsibilityType] : message.responsibilityType;
+                            if (message.googleResponsibilityDescription != null && message.hasOwnProperty("googleResponsibilityDescription"))
+                                object.googleResponsibilityDescription = message.googleResponsibilityDescription;
+                            if (message.googleResponsibilityImplementation != null && message.hasOwnProperty("googleResponsibilityImplementation"))
+                                object.googleResponsibilityImplementation = message.googleResponsibilityImplementation;
+                            if (message.customerResponsibilityDescription != null && message.hasOwnProperty("customerResponsibilityDescription"))
+                                object.customerResponsibilityDescription = message.customerResponsibilityDescription;
+                            if (message.customerResponsibilityImplementation != null && message.hasOwnProperty("customerResponsibilityImplementation"))
+                                object.customerResponsibilityImplementation = message.customerResponsibilityImplementation;
+                            if (message.sharedResponsibilityDescription != null && message.hasOwnProperty("sharedResponsibilityDescription"))
+                                object.sharedResponsibilityDescription = message.sharedResponsibilityDescription;
+                            if (message.additionalContentUri != null && message.hasOwnProperty("additionalContentUri"))
+                                object.additionalContentUri = message.additionalContentUri;
+                            if (message.relatedFrameworks && message.relatedFrameworks.length) {
+                                object.relatedFrameworks = [];
+                                for (var j = 0; j < message.relatedFrameworks.length; ++j)
+                                    object.relatedFrameworks[j] = message.relatedFrameworks[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Control to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Control.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Control
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Control.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.Control";
+                        };
+    
+                        /**
+                         * Family enum.
+                         * @name google.cloud.cloudsecuritycompliance.v1.Control.Family
+                         * @enum {number}
+                         * @property {number} FAMILY_UNSPECIFIED=0 FAMILY_UNSPECIFIED value
+                         * @property {number} AC=1 AC value
+                         * @property {number} AT=2 AT value
+                         * @property {number} AU=3 AU value
+                         * @property {number} CA=4 CA value
+                         * @property {number} CM=5 CM value
+                         * @property {number} CP=6 CP value
+                         * @property {number} IA=7 IA value
+                         * @property {number} IR=8 IR value
+                         * @property {number} MA=9 MA value
+                         * @property {number} MP=10 MP value
+                         * @property {number} PE=11 PE value
+                         * @property {number} PL=12 PL value
+                         * @property {number} PS=13 PS value
+                         * @property {number} RA=14 RA value
+                         * @property {number} SA=15 SA value
+                         * @property {number} SC=16 SC value
+                         * @property {number} SI=17 SI value
+                         * @property {number} SR=18 SR value
+                         */
+                        Control.Family = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FAMILY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AC"] = 1;
+                            values[valuesById[2] = "AT"] = 2;
+                            values[valuesById[3] = "AU"] = 3;
+                            values[valuesById[4] = "CA"] = 4;
+                            values[valuesById[5] = "CM"] = 5;
+                            values[valuesById[6] = "CP"] = 6;
+                            values[valuesById[7] = "IA"] = 7;
+                            values[valuesById[8] = "IR"] = 8;
+                            values[valuesById[9] = "MA"] = 9;
+                            values[valuesById[10] = "MP"] = 10;
+                            values[valuesById[11] = "PE"] = 11;
+                            values[valuesById[12] = "PL"] = 12;
+                            values[valuesById[13] = "PS"] = 13;
+                            values[valuesById[14] = "RA"] = 14;
+                            values[valuesById[15] = "SA"] = 15;
+                            values[valuesById[16] = "SC"] = 16;
+                            values[valuesById[17] = "SI"] = 17;
+                            values[valuesById[18] = "SR"] = 18;
+                            return values;
+                        })();
+    
+                        return Control;
                     })();
     
                     v1.ControlFamily = (function() {
@@ -16505,6 +17218,7 @@
                      * @property {number} DEPLOYMENT_STATE_VALIDATING=1 DEPLOYMENT_STATE_VALIDATING value
                      * @property {number} DEPLOYMENT_STATE_CREATING=2 DEPLOYMENT_STATE_CREATING value
                      * @property {number} DEPLOYMENT_STATE_DELETING=3 DEPLOYMENT_STATE_DELETING value
+                     * @property {number} DEPLOYMENT_STATE_UPDATING=8 DEPLOYMENT_STATE_UPDATING value
                      * @property {number} DEPLOYMENT_STATE_FAILED=4 DEPLOYMENT_STATE_FAILED value
                      * @property {number} DEPLOYMENT_STATE_READY=5 DEPLOYMENT_STATE_READY value
                      * @property {number} DEPLOYMENT_STATE_PARTIALLY_DEPLOYED=6 DEPLOYMENT_STATE_PARTIALLY_DEPLOYED value
@@ -16516,6 +17230,7 @@
                         values[valuesById[1] = "DEPLOYMENT_STATE_VALIDATING"] = 1;
                         values[valuesById[2] = "DEPLOYMENT_STATE_CREATING"] = 2;
                         values[valuesById[3] = "DEPLOYMENT_STATE_DELETING"] = 3;
+                        values[valuesById[8] = "DEPLOYMENT_STATE_UPDATING"] = 8;
                         values[valuesById[4] = "DEPLOYMENT_STATE_FAILED"] = 4;
                         values[valuesById[5] = "DEPLOYMENT_STATE_READY"] = 5;
                         values[valuesById[6] = "DEPLOYMENT_STATE_PARTIALLY_DEPLOYED"] = 6;
@@ -16865,6 +17580,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 8:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -16959,6 +17675,10 @@
                             case "DEPLOYMENT_STATE_DELETING":
                             case 3:
                                 message.deploymentState = 3;
+                                break;
+                            case "DEPLOYMENT_STATE_UPDATING":
+                            case 8:
+                                message.deploymentState = 8;
                                 break;
                             case "DEPLOYMENT_STATE_FAILED":
                             case 4:
@@ -17424,6 +18144,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 8:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -17513,6 +18234,10 @@
                             case "DEPLOYMENT_STATE_DELETING":
                             case 3:
                                 message.deploymentState = 3;
+                                break;
+                            case "DEPLOYMENT_STATE_UPDATING":
+                            case 8:
+                                message.deploymentState = 8;
                                 break;
                             case "DEPLOYMENT_STATE_FAILED":
                             case 4:
@@ -21618,6 +22343,22 @@
                         return values;
                     })();
     
+                    /**
+                     * FrameworkComplianceSummaryView enum.
+                     * @name google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView
+                     * @enum {number}
+                     * @property {number} FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED=0 FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED value
+                     * @property {number} FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC=1 FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC value
+                     * @property {number} FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL=2 FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL value
+                     */
+                    v1.FrameworkComplianceSummaryView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC"] = 1;
+                        values[valuesById[2] = "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL"] = 2;
+                        return values;
+                    })();
+    
                     v1.ListFrameworkComplianceSummariesRequest = (function() {
     
                         /**
@@ -21628,6 +22369,7 @@
                          * @property {number|null} [pageSize] ListFrameworkComplianceSummariesRequest pageSize
                          * @property {string|null} [pageToken] ListFrameworkComplianceSummariesRequest pageToken
                          * @property {string|null} [filter] ListFrameworkComplianceSummariesRequest filter
+                         * @property {google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView|null} [view] ListFrameworkComplianceSummariesRequest view
                          */
     
                         /**
@@ -21678,6 +22420,14 @@
                         ListFrameworkComplianceSummariesRequest.prototype.filter = "";
     
                         /**
+                         * ListFrameworkComplianceSummariesRequest view.
+                         * @member {google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView} view
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest
+                         * @instance
+                         */
+                        ListFrameworkComplianceSummariesRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new ListFrameworkComplianceSummariesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest
@@ -21709,6 +22459,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.view);
                             return writer;
                         };
     
@@ -21761,6 +22513,10 @@
                                         message.filter = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.view = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -21808,6 +22564,15 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -21831,6 +22596,26 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -21852,6 +22637,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.filter = "";
+                                object.view = options.enums === String ? "FRAMEWORK_COMPLIANCE_SUMMARY_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -21861,6 +22647,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView[message.view] === undefined ? message.view : $root.google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummaryView[message.view] : message.view;
                             return object;
                         };
     
@@ -22811,6 +23599,7 @@
                          * @interface IFetchFrameworkComplianceReportRequest
                          * @property {string|null} [name] FetchFrameworkComplianceReportRequest name
                          * @property {google.protobuf.ITimestamp|null} [endTime] FetchFrameworkComplianceReportRequest endTime
+                         * @property {string|null} [filter] FetchFrameworkComplianceReportRequest filter
                          */
     
                         /**
@@ -22845,6 +23634,14 @@
                         FetchFrameworkComplianceReportRequest.prototype.endTime = null;
     
                         /**
+                         * FetchFrameworkComplianceReportRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest
+                         * @instance
+                         */
+                        FetchFrameworkComplianceReportRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new FetchFrameworkComplianceReportRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest
@@ -22872,6 +23669,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                 $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
                             return writer;
                         };
     
@@ -22914,6 +23713,10 @@
                                     }
                                 case 2: {
                                         message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.filter = reader.string();
                                         break;
                                     }
                                 default:
@@ -22959,6 +23762,9 @@
                                 if (error)
                                     return "endTime." + error;
                             }
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -22981,6 +23787,8 @@
                                     throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest.endTime: object expected");
                                 message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                             }
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -23000,11 +23808,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.endTime = null;
+                                object.filter = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.endTime != null && message.hasOwnProperty("endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -24917,6 +25728,8 @@
                          * @property {number|Long|null} [majorRevisionId] FrameworkComplianceSummary majorRevisionId
                          * @property {number|Long|null} [minorRevisionId] FrameworkComplianceSummary minorRevisionId
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails>|null} [targetResourceDetails] FrameworkComplianceSummary targetResourceDetails
+                         * @property {number|Long|null} [findingCount] FrameworkComplianceSummary findingCount
+                         * @property {google.cloud.cloudsecuritycompliance.v1.ITrend|null} [controlsPassingTrend] FrameworkComplianceSummary controlsPassingTrend
                          */
     
                         /**
@@ -25018,6 +25831,22 @@
                         FrameworkComplianceSummary.prototype.targetResourceDetails = $util.emptyArray;
     
                         /**
+                         * FrameworkComplianceSummary findingCount.
+                         * @member {number|Long} findingCount
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary
+                         * @instance
+                         */
+                        FrameworkComplianceSummary.prototype.findingCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * FrameworkComplianceSummary controlsPassingTrend.
+                         * @member {google.cloud.cloudsecuritycompliance.v1.ITrend|null|undefined} controlsPassingTrend
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary
+                         * @instance
+                         */
+                        FrameworkComplianceSummary.prototype.controlsPassingTrend = null;
+    
+                        /**
                          * Creates a new FrameworkComplianceSummary instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary
@@ -25070,6 +25899,10 @@
                             if (message.targetResourceDetails != null && message.targetResourceDetails.length)
                                 for (var i = 0; i < message.targetResourceDetails.length; ++i)
                                     $root.google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails.encode(message.targetResourceDetails[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.findingCount != null && Object.hasOwnProperty.call(message, "findingCount"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int64(message.findingCount);
+                            if (message.controlsPassingTrend != null && Object.hasOwnProperty.call(message, "controlsPassingTrend"))
+                                $root.google.cloud.cloudsecuritycompliance.v1.Trend.encode(message.controlsPassingTrend, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -25160,6 +25993,14 @@
                                         if (!(message.targetResourceDetails && message.targetResourceDetails.length))
                                             message.targetResourceDetails = [];
                                         message.targetResourceDetails.push($root.google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        message.findingCount = reader.int64();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.controlsPassingTrend = $root.google.cloud.cloudsecuritycompliance.v1.Trend.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -25264,6 +26105,14 @@
                                     if (error)
                                         return "targetResourceDetails." + error;
                                 }
+                            }
+                            if (message.findingCount != null && message.hasOwnProperty("findingCount"))
+                                if (!$util.isInteger(message.findingCount) && !(message.findingCount && $util.isInteger(message.findingCount.low) && $util.isInteger(message.findingCount.high)))
+                                    return "findingCount: integer|Long expected";
+                            if (message.controlsPassingTrend != null && message.hasOwnProperty("controlsPassingTrend")) {
+                                var error = $root.google.cloud.cloudsecuritycompliance.v1.Trend.verify(message.controlsPassingTrend);
+                                if (error)
+                                    return "controlsPassingTrend." + error;
                             }
                             return null;
                         };
@@ -25405,6 +26254,20 @@
                                     message.targetResourceDetails[i] = $root.google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails.fromObject(object.targetResourceDetails[i]);
                                 }
                             }
+                            if (object.findingCount != null)
+                                if ($util.Long)
+                                    (message.findingCount = $util.Long.fromValue(object.findingCount)).unsigned = false;
+                                else if (typeof object.findingCount === "string")
+                                    message.findingCount = parseInt(object.findingCount, 10);
+                                else if (typeof object.findingCount === "number")
+                                    message.findingCount = object.findingCount;
+                                else if (typeof object.findingCount === "object")
+                                    message.findingCount = new $util.LongBits(object.findingCount.low >>> 0, object.findingCount.high >>> 0).toNumber();
+                            if (object.controlsPassingTrend != null) {
+                                if (typeof object.controlsPassingTrend !== "object")
+                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary.controlsPassingTrend: object expected");
+                                message.controlsPassingTrend = $root.google.cloud.cloudsecuritycompliance.v1.Trend.fromObject(object.controlsPassingTrend);
+                            }
                             return message;
                         };
     
@@ -25442,6 +26305,12 @@
                                     object.minorRevisionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.minorRevisionId = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.findingCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.findingCount = options.longs === String ? "0" : 0;
+                                object.controlsPassingTrend = null;
                             }
                             if (message.framework != null && message.hasOwnProperty("framework"))
                                 object.framework = message.framework;
@@ -25478,6 +26347,13 @@
                                 for (var j = 0; j < message.targetResourceDetails.length; ++j)
                                     object.targetResourceDetails[j] = $root.google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails.toObject(message.targetResourceDetails[j], options);
                             }
+                            if (message.findingCount != null && message.hasOwnProperty("findingCount"))
+                                if (typeof message.findingCount === "number")
+                                    object.findingCount = options.longs === String ? String(message.findingCount) : message.findingCount;
+                                else
+                                    object.findingCount = options.longs === String ? $util.Long.prototype.toString.call(message.findingCount) : options.longs === Number ? new $util.LongBits(message.findingCount.low >>> 0, message.findingCount.high >>> 0).toNumber() : message.findingCount;
+                            if (message.controlsPassingTrend != null && message.hasOwnProperty("controlsPassingTrend"))
+                                object.controlsPassingTrend = $root.google.cloud.cloudsecuritycompliance.v1.Trend.toObject(message.controlsPassingTrend, options);
                             return object;
                         };
     
@@ -28661,6 +29537,240 @@
                         };
     
                         return TargetResourceDetails;
+                    })();
+    
+                    v1.Trend = (function() {
+    
+                        /**
+                         * Properties of a Trend.
+                         * @memberof google.cloud.cloudsecuritycompliance.v1
+                         * @interface ITrend
+                         * @property {google.protobuf.IDuration|null} [duration] Trend duration
+                         * @property {number|null} [valuePercent] Trend valuePercent
+                         */
+    
+                        /**
+                         * Constructs a new Trend.
+                         * @memberof google.cloud.cloudsecuritycompliance.v1
+                         * @classdesc Represents a Trend.
+                         * @implements ITrend
+                         * @constructor
+                         * @param {google.cloud.cloudsecuritycompliance.v1.ITrend=} [properties] Properties to set
+                         */
+                        function Trend(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Trend duration.
+                         * @member {google.protobuf.IDuration|null|undefined} duration
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @instance
+                         */
+                        Trend.prototype.duration = null;
+    
+                        /**
+                         * Trend valuePercent.
+                         * @member {number} valuePercent
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @instance
+                         */
+                        Trend.prototype.valuePercent = 0;
+    
+                        /**
+                         * Creates a new Trend instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.ITrend=} [properties] Properties to set
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Trend} Trend instance
+                         */
+                        Trend.create = function create(properties) {
+                            return new Trend(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Trend message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Trend.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.ITrend} message Trend message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Trend.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.valuePercent != null && Object.hasOwnProperty.call(message, "valuePercent"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.valuePercent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Trend message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Trend.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.ITrend} message Trend message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Trend.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Trend message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Trend} Trend
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Trend.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.Trend();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.valuePercent = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Trend message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Trend} Trend
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Trend.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Trend message.
+                         * @function verify
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Trend.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.duration != null && message.hasOwnProperty("duration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.duration);
+                                if (error)
+                                    return "duration." + error;
+                            }
+                            if (message.valuePercent != null && message.hasOwnProperty("valuePercent"))
+                                if (typeof message.valuePercent !== "number")
+                                    return "valuePercent: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Trend message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudsecuritycompliance.v1.Trend} Trend
+                         */
+                        Trend.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.Trend)
+                                return object;
+                            var message = new $root.google.cloud.cloudsecuritycompliance.v1.Trend();
+                            if (object.duration != null) {
+                                if (typeof object.duration !== "object")
+                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Trend.duration: object expected");
+                                message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                            }
+                            if (object.valuePercent != null)
+                                message.valuePercent = Number(object.valuePercent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Trend message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {google.cloud.cloudsecuritycompliance.v1.Trend} message Trend
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Trend.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.duration = null;
+                                object.valuePercent = 0;
+                            }
+                            if (message.duration != null && message.hasOwnProperty("duration"))
+                                object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                            if (message.valuePercent != null && message.hasOwnProperty("valuePercent"))
+                                object.valuePercent = options.json && !isFinite(message.valuePercent) ? String(message.valuePercent) : message.valuePercent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Trend to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Trend.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Trend
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Trend
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Trend.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.Trend";
+                        };
+    
+                        return Trend;
                     })();
     
                     return v1;

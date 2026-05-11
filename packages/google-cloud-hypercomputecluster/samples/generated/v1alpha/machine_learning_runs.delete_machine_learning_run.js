@@ -34,10 +34,12 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. Etag for the run. Etag gets updated with every update/create
-   *  operation. If provided, it must match the server's etag.
+   *  Optional. If force=false and if a user tries to delete an ml run resource
+   *  that still has child resources (e.g., ProfilerTarget), the request should
+   *  fail with a FAILED_PRECONDITION error. If force=true, the delete request
+   *  should delete both parent and child resources that exist.
    */
-  // const etag = 'abc123'
+  // const force = true
 
   // Imports the Hypercomputecluster library
   const {MachineLearningRunsClient} = require('@google-cloud/hypercomputecluster').v1alpha;

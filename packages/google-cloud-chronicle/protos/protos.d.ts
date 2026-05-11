@@ -26,6 +26,8354 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Represents a BigQueryExportService */
+                class BigQueryExportService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new BigQueryExportService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new BigQueryExportService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): BigQueryExportService;
+
+                    /**
+                     * Calls GetBigQueryExport.
+                     * @param request GetBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public getBigQueryExport(request: google.cloud.chronicle.v1.IGetBigQueryExportRequest, callback: google.cloud.chronicle.v1.BigQueryExportService.GetBigQueryExportCallback): void;
+
+                    /**
+                     * Calls GetBigQueryExport.
+                     * @param request GetBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBigQueryExport(request: google.cloud.chronicle.v1.IGetBigQueryExportRequest): Promise<google.cloud.chronicle.v1.BigQueryExport>;
+
+                    /**
+                     * Calls UpdateBigQueryExport.
+                     * @param request UpdateBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public updateBigQueryExport(request: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest, callback: google.cloud.chronicle.v1.BigQueryExportService.UpdateBigQueryExportCallback): void;
+
+                    /**
+                     * Calls UpdateBigQueryExport.
+                     * @param request UpdateBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBigQueryExport(request: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest): Promise<google.cloud.chronicle.v1.BigQueryExport>;
+
+                    /**
+                     * Calls ProvisionBigQueryExport.
+                     * @param request ProvisionBigQueryExportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BigQueryExport
+                     */
+                    public provisionBigQueryExport(request: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest, callback: google.cloud.chronicle.v1.BigQueryExportService.ProvisionBigQueryExportCallback): void;
+
+                    /**
+                     * Calls ProvisionBigQueryExport.
+                     * @param request ProvisionBigQueryExportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public provisionBigQueryExport(request: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest): Promise<google.cloud.chronicle.v1.BigQueryExport>;
+                }
+
+                namespace BigQueryExportService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|getBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type GetBigQueryExportCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BigQueryExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|updateBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type UpdateBigQueryExportCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BigQueryExport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.BigQueryExportService|provisionBigQueryExport}.
+                     * @param error Error, if any
+                     * @param [response] BigQueryExport
+                     */
+                    type ProvisionBigQueryExportCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BigQueryExport) => void;
+                }
+
+                /** BigQueryExportPackage enum. */
+                enum BigQueryExportPackage {
+                    BIG_QUERY_EXPORT_PACKAGE_UNSPECIFIED = 0,
+                    BIG_QUERY_EXPORT_PACKAGE_BYOBQ = 1,
+                    BIG_QUERY_EXPORT_PACKAGE_ADVANCED = 2
+                }
+
+                /** LatestExportJobState enum. */
+                enum LatestExportJobState {
+                    LATEST_EXPORT_JOB_STATE_UNSPECIFIED = 0,
+                    LATEST_EXPORT_JOB_STATE_SUCCESS = 1,
+                    LATEST_EXPORT_JOB_STATE_FAILED = 2
+                }
+
+                /** Properties of a BigQueryExport. */
+                interface IBigQueryExport {
+
+                    /** BigQueryExport name */
+                    name?: (string|null);
+
+                    /** BigQueryExport provisioned */
+                    provisioned?: (boolean|null);
+
+                    /** BigQueryExport bigQueryExportPackage */
+                    bigQueryExportPackage?: (google.cloud.chronicle.v1.BigQueryExportPackage|keyof typeof google.cloud.chronicle.v1.BigQueryExportPackage|null);
+
+                    /** BigQueryExport entityGraphSettings */
+                    entityGraphSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport iocMatchesSettings */
+                    iocMatchesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport ruleDetectionsSettings */
+                    ruleDetectionsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsAggregatesSettings */
+                    udmEventsAggregatesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsSettings */
+                    udmEventsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+                }
+
+                /** Represents a BigQueryExport. */
+                class BigQueryExport implements IBigQueryExport {
+
+                    /**
+                     * Constructs a new BigQueryExport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBigQueryExport);
+
+                    /** BigQueryExport name. */
+                    public name: string;
+
+                    /** BigQueryExport provisioned. */
+                    public provisioned: boolean;
+
+                    /** BigQueryExport bigQueryExportPackage. */
+                    public bigQueryExportPackage: (google.cloud.chronicle.v1.BigQueryExportPackage|keyof typeof google.cloud.chronicle.v1.BigQueryExportPackage);
+
+                    /** BigQueryExport entityGraphSettings. */
+                    public entityGraphSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport iocMatchesSettings. */
+                    public iocMatchesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport ruleDetectionsSettings. */
+                    public ruleDetectionsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsAggregatesSettings. */
+                    public udmEventsAggregatesSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /** BigQueryExport udmEventsSettings. */
+                    public udmEventsSettings?: (google.cloud.chronicle.v1.IDataSourceExportSettings|null);
+
+                    /**
+                     * Creates a new BigQueryExport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryExport instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBigQueryExport): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Encodes the specified BigQueryExport message. Does not implicitly {@link google.cloud.chronicle.v1.BigQueryExport.verify|verify} messages.
+                     * @param message BigQueryExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBigQueryExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryExport message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BigQueryExport.verify|verify} messages.
+                     * @param message BigQueryExport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBigQueryExport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryExport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Decodes a BigQueryExport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryExport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Verifies a BigQueryExport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryExport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryExport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BigQueryExport;
+
+                    /**
+                     * Creates a plain object from a BigQueryExport message. Also converts values to other types if specified.
+                     * @param message BigQueryExport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BigQueryExport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryExport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryExport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataSourceExportSettings. */
+                interface IDataSourceExportSettings {
+
+                    /** DataSourceExportSettings enabled */
+                    enabled?: (boolean|null);
+
+                    /** DataSourceExportSettings retentionDays */
+                    retentionDays?: (number|null);
+
+                    /** DataSourceExportSettings latestExportJobState */
+                    latestExportJobState?: (google.cloud.chronicle.v1.LatestExportJobState|keyof typeof google.cloud.chronicle.v1.LatestExportJobState|null);
+
+                    /** DataSourceExportSettings dataFreshnessTime */
+                    dataFreshnessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataSourceExportSettings dataVolume */
+                    dataVolume?: (number|Long|string|null);
+                }
+
+                /** Represents a DataSourceExportSettings. */
+                class DataSourceExportSettings implements IDataSourceExportSettings {
+
+                    /**
+                     * Constructs a new DataSourceExportSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataSourceExportSettings);
+
+                    /** DataSourceExportSettings enabled. */
+                    public enabled: boolean;
+
+                    /** DataSourceExportSettings retentionDays. */
+                    public retentionDays: number;
+
+                    /** DataSourceExportSettings latestExportJobState. */
+                    public latestExportJobState: (google.cloud.chronicle.v1.LatestExportJobState|keyof typeof google.cloud.chronicle.v1.LatestExportJobState);
+
+                    /** DataSourceExportSettings dataFreshnessTime. */
+                    public dataFreshnessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataSourceExportSettings dataVolume. */
+                    public dataVolume: (number|Long|string);
+
+                    /**
+                     * Creates a new DataSourceExportSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataSourceExportSettings instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataSourceExportSettings): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Encodes the specified DataSourceExportSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DataSourceExportSettings.verify|verify} messages.
+                     * @param message DataSourceExportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataSourceExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataSourceExportSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataSourceExportSettings.verify|verify} messages.
+                     * @param message DataSourceExportSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataSourceExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataSourceExportSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataSourceExportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Decodes a DataSourceExportSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataSourceExportSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Verifies a DataSourceExportSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataSourceExportSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataSourceExportSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataSourceExportSettings;
+
+                    /**
+                     * Creates a plain object from a DataSourceExportSettings message. Also converts values to other types if specified.
+                     * @param message DataSourceExportSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataSourceExportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataSourceExportSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataSourceExportSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBigQueryExportRequest. */
+                interface IGetBigQueryExportRequest {
+
+                    /** GetBigQueryExportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBigQueryExportRequest. */
+                class GetBigQueryExportRequest implements IGetBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new GetBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetBigQueryExportRequest);
+
+                    /** GetBigQueryExportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetBigQueryExportRequest): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified GetBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetBigQueryExportRequest.verify|verify} messages.
+                     * @param message GetBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetBigQueryExportRequest.verify|verify} messages.
+                     * @param message GetBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Decodes a GetBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Verifies a GetBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a GetBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message GetBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBigQueryExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBigQueryExportRequest. */
+                interface IUpdateBigQueryExportRequest {
+
+                    /** UpdateBigQueryExportRequest bigQueryExport */
+                    bigQueryExport?: (google.cloud.chronicle.v1.IBigQueryExport|null);
+
+                    /** UpdateBigQueryExportRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateBigQueryExportRequest. */
+                class UpdateBigQueryExportRequest implements IUpdateBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new UpdateBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest);
+
+                    /** UpdateBigQueryExportRequest bigQueryExport. */
+                    public bigQueryExport?: (google.cloud.chronicle.v1.IBigQueryExport|null);
+
+                    /** UpdateBigQueryExportRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified UpdateBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                     * @param message UpdateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateBigQueryExportRequest.verify|verify} messages.
+                     * @param message UpdateBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Decodes an UpdateBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Verifies an UpdateBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBigQueryExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProvisionBigQueryExportRequest. */
+                interface IProvisionBigQueryExportRequest {
+
+                    /** ProvisionBigQueryExportRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ProvisionBigQueryExportRequest. */
+                class ProvisionBigQueryExportRequest implements IProvisionBigQueryExportRequest {
+
+                    /**
+                     * Constructs a new ProvisionBigQueryExportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest);
+
+                    /** ProvisionBigQueryExportRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ProvisionBigQueryExportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProvisionBigQueryExportRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Encodes the specified ProvisionBigQueryExportRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ProvisionBigQueryExportRequest.verify|verify} messages.
+                     * @param message ProvisionBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProvisionBigQueryExportRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ProvisionBigQueryExportRequest.verify|verify} messages.
+                     * @param message ProvisionBigQueryExportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IProvisionBigQueryExportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProvisionBigQueryExportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProvisionBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Decodes a ProvisionBigQueryExportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProvisionBigQueryExportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Verifies a ProvisionBigQueryExportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProvisionBigQueryExportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProvisionBigQueryExportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ProvisionBigQueryExportRequest;
+
+                    /**
+                     * Creates a plain object from a ProvisionBigQueryExportRequest message. Also converts values to other types if specified.
+                     * @param message ProvisionBigQueryExportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ProvisionBigQueryExportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProvisionBigQueryExportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProvisionBigQueryExportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DashboardChartService */
+                class DashboardChartService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DashboardChartService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DashboardChartService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DashboardChartService;
+
+                    /**
+                     * Calls GetDashboardChart.
+                     * @param request GetDashboardChartRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DashboardChart
+                     */
+                    public getDashboardChart(request: google.cloud.chronicle.v1.IGetDashboardChartRequest, callback: google.cloud.chronicle.v1.DashboardChartService.GetDashboardChartCallback): void;
+
+                    /**
+                     * Calls GetDashboardChart.
+                     * @param request GetDashboardChartRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDashboardChart(request: google.cloud.chronicle.v1.IGetDashboardChartRequest): Promise<google.cloud.chronicle.v1.DashboardChart>;
+
+                    /**
+                     * Calls BatchGetDashboardCharts.
+                     * @param request BatchGetDashboardChartsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BatchGetDashboardChartsResponse
+                     */
+                    public batchGetDashboardCharts(request: google.cloud.chronicle.v1.IBatchGetDashboardChartsRequest, callback: google.cloud.chronicle.v1.DashboardChartService.BatchGetDashboardChartsCallback): void;
+
+                    /**
+                     * Calls BatchGetDashboardCharts.
+                     * @param request BatchGetDashboardChartsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchGetDashboardCharts(request: google.cloud.chronicle.v1.IBatchGetDashboardChartsRequest): Promise<google.cloud.chronicle.v1.BatchGetDashboardChartsResponse>;
+                }
+
+                namespace DashboardChartService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DashboardChartService|getDashboardChart}.
+                     * @param error Error, if any
+                     * @param [response] DashboardChart
+                     */
+                    type GetDashboardChartCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DashboardChart) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DashboardChartService|batchGetDashboardCharts}.
+                     * @param error Error, if any
+                     * @param [response] BatchGetDashboardChartsResponse
+                     */
+                    type BatchGetDashboardChartsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BatchGetDashboardChartsResponse) => void;
+                }
+
+                /** TileType enum. */
+                enum TileType {
+                    TILE_TYPE_UNSPECIFIED = 0,
+                    TILE_TYPE_VISUALIZATION = 1,
+                    TILE_TYPE_BUTTON = 2,
+                    TILE_TYPE_MARKDOWN = 3
+                }
+
+                /** RenderType enum. */
+                enum RenderType {
+                    RENDER_TYPE_UNSPECIFIED = 0,
+                    RENDER_TYPE_TEXT = 1,
+                    RENDER_TYPE_ICON = 2,
+                    RENDER_TYPE_ICON_AND_TEXT = 3
+                }
+
+                /** AxisType enum. */
+                enum AxisType {
+                    AXIS_TYPE_UNSPECIFIED = 0,
+                    VALUE = 1,
+                    CATEGORY = 2,
+                    TIME = 3,
+                    LOG = 4
+                }
+
+                /** SeriesType enum. */
+                enum SeriesType {
+                    SERIES_TYPE_UNSPECIFIED = 0,
+                    LINE = 1,
+                    BAR = 2,
+                    PIE = 3,
+                    TEXT = 4,
+                    MAP = 5,
+                    GAUGE = 6,
+                    SCATTERPLOT = 7
+                }
+
+                /** SeriesStackStrategy enum. */
+                enum SeriesStackStrategy {
+                    SERIES_STACK_STRATEGY_UNSPECIFIED = 0,
+                    SAMESIGN = 1,
+                    ALL = 2,
+                    POSITIVE = 3,
+                    NEGATIVE = 4
+                }
+
+                /** ToolTipTrigger enum. */
+                enum ToolTipTrigger {
+                    TOOLTIP_TRIGGER_UNSPECIFIED = 0,
+                    TOOLTIP_TRIGGER_NONE = 1,
+                    TOOLTIP_TRIGGER_ITEM = 2,
+                    TOOLTIP_TRIGGER_AXIS = 3
+                }
+
+                /** LegendOrient enum. */
+                enum LegendOrient {
+                    LEGEND_ORIENT_UNSPECIFIED = 0,
+                    VERTICAL = 1,
+                    HORIZONTAL = 2
+                }
+
+                /** LegendAlign enum. */
+                enum LegendAlign {
+                    LEGEND_ALIGN_UNSPECIFIED = 0,
+                    AUTO = 1,
+                    LEFT = 2,
+                    RIGHT = 3
+                }
+
+                /** ButtonStyle enum. */
+                enum ButtonStyle {
+                    BUTTON_STYLE_UNSPECIFIED = 0,
+                    BUTTON_STYLE_FILLED = 1,
+                    BUTTON_STYLE_OUTLINED = 2,
+                    BUTTON_STYLE_TRANSPARENT = 3
+                }
+
+                /** PlotMode enum. */
+                enum PlotMode {
+                    PLOT_MODE_UNSPECIFIED = 0,
+                    PLOT_MODE_POINTS = 1,
+                    PLOT_MODE_HEATMAP = 2,
+                    PLOT_MODE_BOTH = 3
+                }
+
+                /** PointSizeType enum. */
+                enum PointSizeType {
+                    POINT_SIZE_TYPE_UNSPECIFIED = 0,
+                    POINT_SIZE_TYPE_FIXED = 1,
+                    POINT_SIZE_TYPE_PROPORTIONAL_TO_SIZE = 2
+                }
+
+                /** MetricFormat enum. */
+                enum MetricFormat {
+                    METRIC_FORMAT_UNSPECIFIED = 0,
+                    METRIC_FORMAT_NUMBER = 1,
+                    METRIC_FORMAT_PLAIN_TEXT = 2
+                }
+
+                /** MetricDisplayTrend enum. */
+                enum MetricDisplayTrend {
+                    METRIC_DISPLAY_TREND_UNSPECIFIED = 0,
+                    METRIC_DISPLAY_TREND_ABSOLUTE_VALUE = 2,
+                    METRIC_DISPLAY_TREND_PERCENTAGE = 3,
+                    METRIC_DISPLAY_TREND_ABSOLUTE_VALUE_AND_PERCENTAGE = 4
+                }
+
+                /** MetricTrendType enum. */
+                enum MetricTrendType {
+                    METRIC_TREND_TYPE_UNSPECIFIED = 0,
+                    METRIC_TREND_TYPE_REGULAR = 1,
+                    METRIC_TREND_TYPE_INVERSE = 2
+                }
+
+                /** VisualMapType enum. */
+                enum VisualMapType {
+                    VISUAL_MAP_TYPE_UNSPECIFIED = 0,
+                    CONTINUOUS = 1,
+                    PIECEWISE = 2
+                }
+
+                /** Properties of a DashboardChart. */
+                interface IDashboardChart {
+
+                    /** DashboardChart name */
+                    name?: (string|null);
+
+                    /** DashboardChart displayName */
+                    displayName?: (string|null);
+
+                    /** DashboardChart description */
+                    description?: (string|null);
+
+                    /** DashboardChart nativeDashboard */
+                    nativeDashboard?: (string|null);
+
+                    /** DashboardChart tileType */
+                    tileType?: (google.cloud.chronicle.v1.TileType|keyof typeof google.cloud.chronicle.v1.TileType|null);
+
+                    /** DashboardChart chartDatasource */
+                    chartDatasource?: (google.cloud.chronicle.v1.DashboardChart.IChartDatasource|null);
+
+                    /** DashboardChart visualization */
+                    visualization?: (google.cloud.chronicle.v1.DashboardChart.IVisualization|null);
+
+                    /** DashboardChart etag */
+                    etag?: (string|null);
+
+                    /** DashboardChart drillDownConfig */
+                    drillDownConfig?: (google.cloud.chronicle.v1.DashboardChart.IDrillDownConfig|null);
+
+                    /** DashboardChart tokens */
+                    tokens?: (string[]|null);
+                }
+
+                /** Represents a DashboardChart. */
+                class DashboardChart implements IDashboardChart {
+
+                    /**
+                     * Constructs a new DashboardChart.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDashboardChart);
+
+                    /** DashboardChart name. */
+                    public name: string;
+
+                    /** DashboardChart displayName. */
+                    public displayName: string;
+
+                    /** DashboardChart description. */
+                    public description: string;
+
+                    /** DashboardChart nativeDashboard. */
+                    public nativeDashboard: string;
+
+                    /** DashboardChart tileType. */
+                    public tileType: (google.cloud.chronicle.v1.TileType|keyof typeof google.cloud.chronicle.v1.TileType);
+
+                    /** DashboardChart chartDatasource. */
+                    public chartDatasource?: (google.cloud.chronicle.v1.DashboardChart.IChartDatasource|null);
+
+                    /** DashboardChart visualization. */
+                    public visualization?: (google.cloud.chronicle.v1.DashboardChart.IVisualization|null);
+
+                    /** DashboardChart etag. */
+                    public etag: string;
+
+                    /** DashboardChart drillDownConfig. */
+                    public drillDownConfig?: (google.cloud.chronicle.v1.DashboardChart.IDrillDownConfig|null);
+
+                    /** DashboardChart tokens. */
+                    public tokens: string[];
+
+                    /**
+                     * Creates a new DashboardChart instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DashboardChart instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDashboardChart): google.cloud.chronicle.v1.DashboardChart;
+
+                    /**
+                     * Encodes the specified DashboardChart message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.verify|verify} messages.
+                     * @param message DashboardChart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDashboardChart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DashboardChart message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.verify|verify} messages.
+                     * @param message DashboardChart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDashboardChart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DashboardChart message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DashboardChart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart;
+
+                    /**
+                     * Decodes a DashboardChart message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DashboardChart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart;
+
+                    /**
+                     * Verifies a DashboardChart message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DashboardChart message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DashboardChart
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart;
+
+                    /**
+                     * Creates a plain object from a DashboardChart message. Also converts values to other types if specified.
+                     * @param message DashboardChart
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DashboardChart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DashboardChart to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DashboardChart
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DashboardChart {
+
+                    /** Properties of a ChartDatasource. */
+                    interface IChartDatasource {
+
+                        /** ChartDatasource dashboardQuery */
+                        dashboardQuery?: (string|null);
+
+                        /** ChartDatasource dataSources */
+                        dataSources?: (google.cloud.chronicle.v1.DataSource[]|null);
+                    }
+
+                    /** Represents a ChartDatasource. */
+                    class ChartDatasource implements IChartDatasource {
+
+                        /**
+                         * Constructs a new ChartDatasource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DashboardChart.IChartDatasource);
+
+                        /** ChartDatasource dashboardQuery. */
+                        public dashboardQuery: string;
+
+                        /** ChartDatasource dataSources. */
+                        public dataSources: google.cloud.chronicle.v1.DataSource[];
+
+                        /**
+                         * Creates a new ChartDatasource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChartDatasource instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DashboardChart.IChartDatasource): google.cloud.chronicle.v1.DashboardChart.ChartDatasource;
+
+                        /**
+                         * Encodes the specified ChartDatasource message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.ChartDatasource.verify|verify} messages.
+                         * @param message ChartDatasource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DashboardChart.IChartDatasource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChartDatasource message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.ChartDatasource.verify|verify} messages.
+                         * @param message ChartDatasource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.IChartDatasource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChartDatasource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChartDatasource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.ChartDatasource;
+
+                        /**
+                         * Decodes a ChartDatasource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChartDatasource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.ChartDatasource;
+
+                        /**
+                         * Verifies a ChartDatasource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChartDatasource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChartDatasource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.ChartDatasource;
+
+                        /**
+                         * Creates a plain object from a ChartDatasource message. Also converts values to other types if specified.
+                         * @param message ChartDatasource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DashboardChart.ChartDatasource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChartDatasource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ChartDatasource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Visualization. */
+                    interface IVisualization {
+
+                        /** Visualization xAxes */
+                        xAxes?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis[]|null);
+
+                        /** Visualization yAxes */
+                        yAxes?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis[]|null);
+
+                        /** Visualization series */
+                        series?: (google.cloud.chronicle.v1.DashboardChart.Visualization.ISeries[]|null);
+
+                        /** Visualization tooltip */
+                        tooltip?: (google.cloud.chronicle.v1.DashboardChart.Visualization.ITooltip|null);
+
+                        /** Visualization legends */
+                        legends?: (google.cloud.chronicle.v1.DashboardChart.Visualization.ILegend[]|null);
+
+                        /** Visualization columnDefs */
+                        columnDefs?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnDef[]|null);
+
+                        /** Visualization tableConfig */
+                        tableConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.ITableConfig|null);
+
+                        /** Visualization button */
+                        button?: (google.cloud.chronicle.v1.IButton|null);
+
+                        /** Visualization markdown */
+                        markdown?: (google.cloud.chronicle.v1.IMarkdown|null);
+
+                        /** Visualization seriesColumn */
+                        seriesColumn?: (string[]|null);
+
+                        /** Visualization groupingType */
+                        groupingType?: (string|null);
+
+                        /** Visualization googleMapsConfig */
+                        googleMapsConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IGoogleMapsConfig|null);
+
+                        /** Visualization thresholdColoringEnabled */
+                        thresholdColoringEnabled?: (boolean|null);
+
+                        /** Visualization visualMaps */
+                        visualMaps?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IVisualMap[]|null);
+                    }
+
+                    /** Represents a Visualization. */
+                    class Visualization implements IVisualization {
+
+                        /**
+                         * Constructs a new Visualization.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DashboardChart.IVisualization);
+
+                        /** Visualization xAxes. */
+                        public xAxes: google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis[];
+
+                        /** Visualization yAxes. */
+                        public yAxes: google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis[];
+
+                        /** Visualization series. */
+                        public series: google.cloud.chronicle.v1.DashboardChart.Visualization.ISeries[];
+
+                        /** Visualization tooltip. */
+                        public tooltip?: (google.cloud.chronicle.v1.DashboardChart.Visualization.ITooltip|null);
+
+                        /** Visualization legends. */
+                        public legends: google.cloud.chronicle.v1.DashboardChart.Visualization.ILegend[];
+
+                        /** Visualization columnDefs. */
+                        public columnDefs: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnDef[];
+
+                        /** Visualization tableConfig. */
+                        public tableConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.ITableConfig|null);
+
+                        /** Visualization button. */
+                        public button?: (google.cloud.chronicle.v1.IButton|null);
+
+                        /** Visualization markdown. */
+                        public markdown?: (google.cloud.chronicle.v1.IMarkdown|null);
+
+                        /** Visualization seriesColumn. */
+                        public seriesColumn: string[];
+
+                        /** Visualization groupingType. */
+                        public groupingType: string;
+
+                        /** Visualization googleMapsConfig. */
+                        public googleMapsConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IGoogleMapsConfig|null);
+
+                        /** Visualization thresholdColoringEnabled. */
+                        public thresholdColoringEnabled: boolean;
+
+                        /** Visualization visualMaps. */
+                        public visualMaps: google.cloud.chronicle.v1.DashboardChart.Visualization.IVisualMap[];
+
+                        /**
+                         * Creates a new Visualization instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Visualization instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DashboardChart.IVisualization): google.cloud.chronicle.v1.DashboardChart.Visualization;
+
+                        /**
+                         * Encodes the specified Visualization message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.verify|verify} messages.
+                         * @param message Visualization message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DashboardChart.IVisualization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Visualization message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.verify|verify} messages.
+                         * @param message Visualization message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.IVisualization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Visualization message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Visualization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization;
+
+                        /**
+                         * Decodes a Visualization message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Visualization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization;
+
+                        /**
+                         * Verifies a Visualization message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Visualization message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Visualization
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization;
+
+                        /**
+                         * Creates a plain object from a Visualization message. Also converts values to other types if specified.
+                         * @param message Visualization
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Visualization to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Visualization
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Visualization {
+
+                        /** Properties of an Axis. */
+                        interface IAxis {
+
+                            /** Axis axisType */
+                            axisType?: (google.cloud.chronicle.v1.AxisType|keyof typeof google.cloud.chronicle.v1.AxisType|null);
+
+                            /** Axis displayName */
+                            displayName?: (string|null);
+
+                            /** Axis min */
+                            min?: (number|null);
+
+                            /** Axis max */
+                            max?: (number|null);
+                        }
+
+                        /** Represents an Axis. */
+                        class Axis implements IAxis {
+
+                            /**
+                             * Constructs a new Axis.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis);
+
+                            /** Axis axisType. */
+                            public axisType: (google.cloud.chronicle.v1.AxisType|keyof typeof google.cloud.chronicle.v1.AxisType);
+
+                            /** Axis displayName. */
+                            public displayName: string;
+
+                            /** Axis min. */
+                            public min?: (number|null);
+
+                            /** Axis max. */
+                            public max?: (number|null);
+
+                            /**
+                             * Creates a new Axis instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Axis instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis): google.cloud.chronicle.v1.DashboardChart.Visualization.Axis;
+
+                            /**
+                             * Encodes the specified Axis message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Axis.verify|verify} messages.
+                             * @param message Axis message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Axis message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Axis.verify|verify} messages.
+                             * @param message Axis message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IAxis, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Axis message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Axis
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Axis;
+
+                            /**
+                             * Decodes an Axis message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Axis
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Axis;
+
+                            /**
+                             * Verifies an Axis message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Axis message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Axis
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Axis;
+
+                            /**
+                             * Creates a plain object from an Axis message. Also converts values to other types if specified.
+                             * @param message Axis
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Axis, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Axis to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Axis
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Series. */
+                        interface ISeries {
+
+                            /** Series seriesType */
+                            seriesType?: (google.cloud.chronicle.v1.SeriesType|keyof typeof google.cloud.chronicle.v1.SeriesType|null);
+
+                            /** Series seriesName */
+                            seriesName?: (string|null);
+
+                            /** Series showSymbol */
+                            showSymbol?: (boolean|null);
+
+                            /** Series showBackground */
+                            showBackground?: (boolean|null);
+
+                            /** Series stack */
+                            stack?: (string|null);
+
+                            /** Series seriesStackStrategy */
+                            seriesStackStrategy?: (google.cloud.chronicle.v1.SeriesStackStrategy|keyof typeof google.cloud.chronicle.v1.SeriesStackStrategy|null);
+
+                            /** Series encode */
+                            encode?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IEncode|null);
+
+                            /** Series label */
+                            label?: (string|null);
+
+                            /** Series field */
+                            field?: (string|null);
+
+                            /** Series dataLabel */
+                            dataLabel?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IDataLabel|null);
+
+                            /** Series radius */
+                            radius?: (string[]|null);
+
+                            /** Series itemStyle */
+                            itemStyle?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemStyle|null);
+
+                            /** Series seriesUniqueValue */
+                            seriesUniqueValue?: (string|null);
+
+                            /** Series areaStyle */
+                            areaStyle?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IAreaStyle|null);
+
+                            /** Series itemColors */
+                            itemColors?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemColors|null);
+
+                            /** Series gaugeConfig */
+                            gaugeConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeConfig|null);
+
+                            /** Series metricTrendConfig */
+                            metricTrendConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IMetricTrendConfig|null);
+                        }
+
+                        /** Represents a Series. */
+                        class Series implements ISeries {
+
+                            /**
+                             * Constructs a new Series.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ISeries);
+
+                            /** Series seriesType. */
+                            public seriesType: (google.cloud.chronicle.v1.SeriesType|keyof typeof google.cloud.chronicle.v1.SeriesType);
+
+                            /** Series seriesName. */
+                            public seriesName: string;
+
+                            /** Series showSymbol. */
+                            public showSymbol: boolean;
+
+                            /** Series showBackground. */
+                            public showBackground: boolean;
+
+                            /** Series stack. */
+                            public stack: string;
+
+                            /** Series seriesStackStrategy. */
+                            public seriesStackStrategy: (google.cloud.chronicle.v1.SeriesStackStrategy|keyof typeof google.cloud.chronicle.v1.SeriesStackStrategy);
+
+                            /** Series encode. */
+                            public encode?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IEncode|null);
+
+                            /** Series label. */
+                            public label: string;
+
+                            /** Series field. */
+                            public field: string;
+
+                            /** Series dataLabel. */
+                            public dataLabel?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IDataLabel|null);
+
+                            /** Series radius. */
+                            public radius: string[];
+
+                            /** Series itemStyle. */
+                            public itemStyle?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemStyle|null);
+
+                            /** Series seriesUniqueValue. */
+                            public seriesUniqueValue: string;
+
+                            /** Series areaStyle. */
+                            public areaStyle?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IAreaStyle|null);
+
+                            /** Series itemColors. */
+                            public itemColors?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemColors|null);
+
+                            /** Series gaugeConfig. */
+                            public gaugeConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeConfig|null);
+
+                            /** Series metricTrendConfig. */
+                            public metricTrendConfig?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IMetricTrendConfig|null);
+
+                            /**
+                             * Creates a new Series instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Series instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ISeries): google.cloud.chronicle.v1.DashboardChart.Visualization.Series;
+
+                            /**
+                             * Encodes the specified Series message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.verify|verify} messages.
+                             * @param message Series message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ISeries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Series message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.verify|verify} messages.
+                             * @param message Series message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ISeries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Series message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Series
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series;
+
+                            /**
+                             * Decodes a Series message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Series
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series;
+
+                            /**
+                             * Verifies a Series message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Series message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Series
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series;
+
+                            /**
+                             * Creates a plain object from a Series message. Also converts values to other types if specified.
+                             * @param message Series
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Series to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Series
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Series {
+
+                            /** Properties of an Encode. */
+                            interface IEncode {
+
+                                /** Encode x */
+                                x?: (string|null);
+
+                                /** Encode y */
+                                y?: (string|null);
+
+                                /** Encode value */
+                                value?: (string|null);
+
+                                /** Encode itemName */
+                                itemName?: (string|null);
+                            }
+
+                            /** Represents an Encode. */
+                            class Encode implements IEncode {
+
+                                /**
+                                 * Constructs a new Encode.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IEncode);
+
+                                /** Encode x. */
+                                public x: string;
+
+                                /** Encode y. */
+                                public y: string;
+
+                                /** Encode value. */
+                                public value: string;
+
+                                /** Encode itemName. */
+                                public itemName: string;
+
+                                /**
+                                 * Creates a new Encode instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Encode instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IEncode): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode;
+
+                                /**
+                                 * Encodes the specified Encode message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode.verify|verify} messages.
+                                 * @param message Encode message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IEncode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Encode message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode.verify|verify} messages.
+                                 * @param message Encode message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IEncode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an Encode message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Encode
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode;
+
+                                /**
+                                 * Decodes an Encode message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Encode
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode;
+
+                                /**
+                                 * Verifies an Encode message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an Encode message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Encode
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode;
+
+                                /**
+                                 * Creates a plain object from an Encode message. Also converts values to other types if specified.
+                                 * @param message Encode
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.Encode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Encode to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Encode
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a DataLabel. */
+                            interface IDataLabel {
+
+                                /** DataLabel show */
+                                show?: (boolean|null);
+                            }
+
+                            /** Represents a DataLabel. */
+                            class DataLabel implements IDataLabel {
+
+                                /**
+                                 * Constructs a new DataLabel.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IDataLabel);
+
+                                /** DataLabel show. */
+                                public show: boolean;
+
+                                /**
+                                 * Creates a new DataLabel instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DataLabel instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IDataLabel): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel;
+
+                                /**
+                                 * Encodes the specified DataLabel message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel.verify|verify} messages.
+                                 * @param message DataLabel message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IDataLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DataLabel message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel.verify|verify} messages.
+                                 * @param message DataLabel message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IDataLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DataLabel message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DataLabel
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel;
+
+                                /**
+                                 * Decodes a DataLabel message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DataLabel
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel;
+
+                                /**
+                                 * Verifies a DataLabel message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DataLabel message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DataLabel
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel;
+
+                                /**
+                                 * Creates a plain object from a DataLabel message. Also converts values to other types if specified.
+                                 * @param message DataLabel
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.DataLabel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DataLabel to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DataLabel
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an ItemStyle. */
+                            interface IItemStyle {
+
+                                /** ItemStyle borderWidth */
+                                borderWidth?: (number|null);
+
+                                /** ItemStyle borderColor */
+                                borderColor?: (string|null);
+
+                                /** ItemStyle color */
+                                color?: (string|null);
+                            }
+
+                            /** Represents an ItemStyle. */
+                            class ItemStyle implements IItemStyle {
+
+                                /**
+                                 * Constructs a new ItemStyle.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemStyle);
+
+                                /** ItemStyle borderWidth. */
+                                public borderWidth: number;
+
+                                /** ItemStyle borderColor. */
+                                public borderColor: string;
+
+                                /** ItemStyle color. */
+                                public color: string;
+
+                                /**
+                                 * Creates a new ItemStyle instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ItemStyle instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemStyle): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle;
+
+                                /**
+                                 * Encodes the specified ItemStyle message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle.verify|verify} messages.
+                                 * @param message ItemStyle message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ItemStyle message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle.verify|verify} messages.
+                                 * @param message ItemStyle message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ItemStyle message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ItemStyle
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle;
+
+                                /**
+                                 * Decodes an ItemStyle message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ItemStyle
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle;
+
+                                /**
+                                 * Verifies an ItemStyle message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ItemStyle message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ItemStyle
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle;
+
+                                /**
+                                 * Creates a plain object from an ItemStyle message. Also converts values to other types if specified.
+                                 * @param message ItemStyle
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemStyle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ItemStyle to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ItemStyle
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an AreaStyle. */
+                            interface IAreaStyle {
+
+                                /** AreaStyle color */
+                                color?: (string|null);
+
+                                /** AreaStyle origin */
+                                origin?: (string|null);
+
+                                /** AreaStyle shadowBlur */
+                                shadowBlur?: (number|null);
+
+                                /** AreaStyle shadowColor */
+                                shadowColor?: (string|null);
+
+                                /** AreaStyle shadowOffsetX */
+                                shadowOffsetX?: (number|null);
+
+                                /** AreaStyle shadowOffsetY */
+                                shadowOffsetY?: (number|null);
+
+                                /** AreaStyle opacity */
+                                opacity?: (number|null);
+                            }
+
+                            /** Represents an AreaStyle. */
+                            class AreaStyle implements IAreaStyle {
+
+                                /**
+                                 * Constructs a new AreaStyle.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IAreaStyle);
+
+                                /** AreaStyle color. */
+                                public color: string;
+
+                                /** AreaStyle origin. */
+                                public origin: string;
+
+                                /** AreaStyle shadowBlur. */
+                                public shadowBlur: number;
+
+                                /** AreaStyle shadowColor. */
+                                public shadowColor: string;
+
+                                /** AreaStyle shadowOffsetX. */
+                                public shadowOffsetX: number;
+
+                                /** AreaStyle shadowOffsetY. */
+                                public shadowOffsetY: number;
+
+                                /** AreaStyle opacity. */
+                                public opacity: number;
+
+                                /**
+                                 * Creates a new AreaStyle instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AreaStyle instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IAreaStyle): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle;
+
+                                /**
+                                 * Encodes the specified AreaStyle message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle.verify|verify} messages.
+                                 * @param message AreaStyle message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IAreaStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AreaStyle message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle.verify|verify} messages.
+                                 * @param message AreaStyle message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IAreaStyle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AreaStyle message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AreaStyle
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle;
+
+                                /**
+                                 * Decodes an AreaStyle message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AreaStyle
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle;
+
+                                /**
+                                 * Verifies an AreaStyle message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AreaStyle message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AreaStyle
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle;
+
+                                /**
+                                 * Creates a plain object from an AreaStyle message. Also converts values to other types if specified.
+                                 * @param message AreaStyle
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.AreaStyle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AreaStyle to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for AreaStyle
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a UserSelectedValues. */
+                            interface IUserSelectedValues {
+
+                                /** UserSelectedValues color */
+                                color?: (string|null);
+
+                                /** UserSelectedValues label */
+                                label?: (string|null);
+                            }
+
+                            /** Represents a UserSelectedValues. */
+                            class UserSelectedValues implements IUserSelectedValues {
+
+                                /**
+                                 * Constructs a new UserSelectedValues.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IUserSelectedValues);
+
+                                /** UserSelectedValues color. */
+                                public color: string;
+
+                                /** UserSelectedValues label. */
+                                public label: string;
+
+                                /**
+                                 * Creates a new UserSelectedValues instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns UserSelectedValues instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IUserSelectedValues): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues;
+
+                                /**
+                                 * Encodes the specified UserSelectedValues message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues.verify|verify} messages.
+                                 * @param message UserSelectedValues message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IUserSelectedValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified UserSelectedValues message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues.verify|verify} messages.
+                                 * @param message UserSelectedValues message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IUserSelectedValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a UserSelectedValues message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns UserSelectedValues
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues;
+
+                                /**
+                                 * Decodes a UserSelectedValues message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns UserSelectedValues
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues;
+
+                                /**
+                                 * Verifies a UserSelectedValues message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a UserSelectedValues message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns UserSelectedValues
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues;
+
+                                /**
+                                 * Creates a plain object from a UserSelectedValues message. Also converts values to other types if specified.
+                                 * @param message UserSelectedValues
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.UserSelectedValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this UserSelectedValues to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for UserSelectedValues
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a ChartSliceColor. */
+                            interface IChartSliceColor {
+
+                                /** ChartSliceColor key */
+                                key?: (string|null);
+
+                                /** ChartSliceColor value */
+                                value?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IUserSelectedValues|null);
+                            }
+
+                            /** Represents a ChartSliceColor. */
+                            class ChartSliceColor implements IChartSliceColor {
+
+                                /**
+                                 * Constructs a new ChartSliceColor.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IChartSliceColor);
+
+                                /** ChartSliceColor key. */
+                                public key: string;
+
+                                /** ChartSliceColor value. */
+                                public value?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IUserSelectedValues|null);
+
+                                /**
+                                 * Creates a new ChartSliceColor instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ChartSliceColor instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IChartSliceColor): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor;
+
+                                /**
+                                 * Encodes the specified ChartSliceColor message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor.verify|verify} messages.
+                                 * @param message ChartSliceColor message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IChartSliceColor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ChartSliceColor message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor.verify|verify} messages.
+                                 * @param message ChartSliceColor message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IChartSliceColor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ChartSliceColor message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ChartSliceColor
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor;
+
+                                /**
+                                 * Decodes a ChartSliceColor message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ChartSliceColor
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor;
+
+                                /**
+                                 * Verifies a ChartSliceColor message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ChartSliceColor message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ChartSliceColor
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor;
+
+                                /**
+                                 * Creates a plain object from a ChartSliceColor message. Also converts values to other types if specified.
+                                 * @param message ChartSliceColor
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ChartSliceColor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ChartSliceColor to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ChartSliceColor
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an ItemColors. */
+                            interface IItemColors {
+
+                                /** ItemColors colors */
+                                colors?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IChartSliceColor[]|null);
+                            }
+
+                            /** Represents an ItemColors. */
+                            class ItemColors implements IItemColors {
+
+                                /**
+                                 * Constructs a new ItemColors.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemColors);
+
+                                /** ItemColors colors. */
+                                public colors: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IChartSliceColor[];
+
+                                /**
+                                 * Creates a new ItemColors instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ItemColors instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemColors): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors;
+
+                                /**
+                                 * Encodes the specified ItemColors message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors.verify|verify} messages.
+                                 * @param message ItemColors message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemColors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ItemColors message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors.verify|verify} messages.
+                                 * @param message ItemColors message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IItemColors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ItemColors message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ItemColors
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors;
+
+                                /**
+                                 * Decodes an ItemColors message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ItemColors
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors;
+
+                                /**
+                                 * Verifies an ItemColors message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ItemColors message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ItemColors
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors;
+
+                                /**
+                                 * Creates a plain object from an ItemColors message. Also converts values to other types if specified.
+                                 * @param message ItemColors
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.ItemColors, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ItemColors to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ItemColors
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a GaugeValue. */
+                            interface IGaugeValue {
+
+                                /** GaugeValue value */
+                                value?: (number|null);
+
+                                /** GaugeValue color */
+                                color?: (string|null);
+                            }
+
+                            /** Represents a GaugeValue. */
+                            class GaugeValue implements IGaugeValue {
+
+                                /**
+                                 * Constructs a new GaugeValue.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue);
+
+                                /** GaugeValue value. */
+                                public value: number;
+
+                                /** GaugeValue color. */
+                                public color: string;
+
+                                /**
+                                 * Creates a new GaugeValue instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GaugeValue instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue;
+
+                                /**
+                                 * Encodes the specified GaugeValue message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue.verify|verify} messages.
+                                 * @param message GaugeValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GaugeValue message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue.verify|verify} messages.
+                                 * @param message GaugeValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GaugeValue message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GaugeValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue;
+
+                                /**
+                                 * Decodes a GaugeValue message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GaugeValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue;
+
+                                /**
+                                 * Verifies a GaugeValue message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GaugeValue message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GaugeValue
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue;
+
+                                /**
+                                 * Creates a plain object from a GaugeValue message. Also converts values to other types if specified.
+                                 * @param message GaugeValue
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GaugeValue to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GaugeValue
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a GaugeConfig. */
+                            interface IGaugeConfig {
+
+                                /** GaugeConfig baseValue */
+                                baseValue?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue|null);
+
+                                /** GaugeConfig limitValue */
+                                limitValue?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue|null);
+
+                                /** GaugeConfig thresholdValues */
+                                thresholdValues?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue[]|null);
+                            }
+
+                            /** Represents a GaugeConfig. */
+                            class GaugeConfig implements IGaugeConfig {
+
+                                /**
+                                 * Constructs a new GaugeConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeConfig);
+
+                                /** GaugeConfig baseValue. */
+                                public baseValue?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue|null);
+
+                                /** GaugeConfig limitValue. */
+                                public limitValue?: (google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue|null);
+
+                                /** GaugeConfig thresholdValues. */
+                                public thresholdValues: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeValue[];
+
+                                /**
+                                 * Creates a new GaugeConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GaugeConfig instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeConfig): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig;
+
+                                /**
+                                 * Encodes the specified GaugeConfig message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig.verify|verify} messages.
+                                 * @param message GaugeConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GaugeConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig.verify|verify} messages.
+                                 * @param message GaugeConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IGaugeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GaugeConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GaugeConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig;
+
+                                /**
+                                 * Decodes a GaugeConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GaugeConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig;
+
+                                /**
+                                 * Verifies a GaugeConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GaugeConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GaugeConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig;
+
+                                /**
+                                 * Creates a plain object from a GaugeConfig message. Also converts values to other types if specified.
+                                 * @param message GaugeConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.GaugeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GaugeConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GaugeConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a MetricTrendConfig. */
+                            interface IMetricTrendConfig {
+
+                                /** MetricTrendConfig metricFormat */
+                                metricFormat?: (google.cloud.chronicle.v1.MetricFormat|keyof typeof google.cloud.chronicle.v1.MetricFormat|null);
+
+                                /** MetricTrendConfig showMetricTrend */
+                                showMetricTrend?: (boolean|null);
+
+                                /** MetricTrendConfig metricDisplayTrend */
+                                metricDisplayTrend?: (google.cloud.chronicle.v1.MetricDisplayTrend|keyof typeof google.cloud.chronicle.v1.MetricDisplayTrend|null);
+
+                                /** MetricTrendConfig metricTrendType */
+                                metricTrendType?: (google.cloud.chronicle.v1.MetricTrendType|keyof typeof google.cloud.chronicle.v1.MetricTrendType|null);
+                            }
+
+                            /** Represents a MetricTrendConfig. */
+                            class MetricTrendConfig implements IMetricTrendConfig {
+
+                                /**
+                                 * Constructs a new MetricTrendConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IMetricTrendConfig);
+
+                                /** MetricTrendConfig metricFormat. */
+                                public metricFormat: (google.cloud.chronicle.v1.MetricFormat|keyof typeof google.cloud.chronicle.v1.MetricFormat);
+
+                                /** MetricTrendConfig showMetricTrend. */
+                                public showMetricTrend: boolean;
+
+                                /** MetricTrendConfig metricDisplayTrend. */
+                                public metricDisplayTrend: (google.cloud.chronicle.v1.MetricDisplayTrend|keyof typeof google.cloud.chronicle.v1.MetricDisplayTrend);
+
+                                /** MetricTrendConfig metricTrendType. */
+                                public metricTrendType: (google.cloud.chronicle.v1.MetricTrendType|keyof typeof google.cloud.chronicle.v1.MetricTrendType);
+
+                                /**
+                                 * Creates a new MetricTrendConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns MetricTrendConfig instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IMetricTrendConfig): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig;
+
+                                /**
+                                 * Encodes the specified MetricTrendConfig message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig.verify|verify} messages.
+                                 * @param message MetricTrendConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IMetricTrendConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified MetricTrendConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig.verify|verify} messages.
+                                 * @param message MetricTrendConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.IMetricTrendConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a MetricTrendConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns MetricTrendConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig;
+
+                                /**
+                                 * Decodes a MetricTrendConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns MetricTrendConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig;
+
+                                /**
+                                 * Verifies a MetricTrendConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a MetricTrendConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns MetricTrendConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig;
+
+                                /**
+                                 * Creates a plain object from a MetricTrendConfig message. Also converts values to other types if specified.
+                                 * @param message MetricTrendConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Series.MetricTrendConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this MetricTrendConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for MetricTrendConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a Tooltip. */
+                        interface ITooltip {
+
+                            /** Tooltip show */
+                            show?: (boolean|null);
+
+                            /** Tooltip tooltipTrigger */
+                            tooltipTrigger?: (google.cloud.chronicle.v1.ToolTipTrigger|keyof typeof google.cloud.chronicle.v1.ToolTipTrigger|null);
+                        }
+
+                        /** Represents a Tooltip. */
+                        class Tooltip implements ITooltip {
+
+                            /**
+                             * Constructs a new Tooltip.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ITooltip);
+
+                            /** Tooltip show. */
+                            public show: boolean;
+
+                            /** Tooltip tooltipTrigger. */
+                            public tooltipTrigger: (google.cloud.chronicle.v1.ToolTipTrigger|keyof typeof google.cloud.chronicle.v1.ToolTipTrigger);
+
+                            /**
+                             * Creates a new Tooltip instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Tooltip instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ITooltip): google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip;
+
+                            /**
+                             * Encodes the specified Tooltip message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip.verify|verify} messages.
+                             * @param message Tooltip message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ITooltip, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Tooltip message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip.verify|verify} messages.
+                             * @param message Tooltip message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ITooltip, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Tooltip message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Tooltip
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip;
+
+                            /**
+                             * Decodes a Tooltip message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Tooltip
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip;
+
+                            /**
+                             * Verifies a Tooltip message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Tooltip message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Tooltip
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip;
+
+                            /**
+                             * Creates a plain object from a Tooltip message. Also converts values to other types if specified.
+                             * @param message Tooltip
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Tooltip, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Tooltip to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Tooltip
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Legend. */
+                        interface ILegend {
+
+                            /** Legend id */
+                            id?: (string|null);
+
+                            /** Legend show */
+                            show?: (boolean|null);
+
+                            /** Legend zLevel */
+                            zLevel?: (number|null);
+
+                            /** Legend z */
+                            z?: (number|null);
+
+                            /** Legend left */
+                            left?: (number|null);
+
+                            /** Legend top */
+                            top?: (number|null);
+
+                            /** Legend right */
+                            right?: (number|null);
+
+                            /** Legend bottom */
+                            bottom?: (number|null);
+
+                            /** Legend legendOrient */
+                            legendOrient?: (google.cloud.chronicle.v1.LegendOrient|keyof typeof google.cloud.chronicle.v1.LegendOrient|null);
+
+                            /** Legend legendAlign */
+                            legendAlign?: (google.cloud.chronicle.v1.LegendAlign|keyof typeof google.cloud.chronicle.v1.LegendAlign|null);
+
+                            /** Legend padding */
+                            padding?: (number[]|null);
+                        }
+
+                        /** Represents a Legend. */
+                        class Legend implements ILegend {
+
+                            /**
+                             * Constructs a new Legend.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ILegend);
+
+                            /** Legend id. */
+                            public id: string;
+
+                            /** Legend show. */
+                            public show: boolean;
+
+                            /** Legend zLevel. */
+                            public zLevel: number;
+
+                            /** Legend z. */
+                            public z: number;
+
+                            /** Legend left. */
+                            public left: number;
+
+                            /** Legend top. */
+                            public top: number;
+
+                            /** Legend right. */
+                            public right: number;
+
+                            /** Legend bottom. */
+                            public bottom: number;
+
+                            /** Legend legendOrient. */
+                            public legendOrient: (google.cloud.chronicle.v1.LegendOrient|keyof typeof google.cloud.chronicle.v1.LegendOrient);
+
+                            /** Legend legendAlign. */
+                            public legendAlign: (google.cloud.chronicle.v1.LegendAlign|keyof typeof google.cloud.chronicle.v1.LegendAlign);
+
+                            /** Legend padding. */
+                            public padding: number[];
+
+                            /**
+                             * Creates a new Legend instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Legend instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ILegend): google.cloud.chronicle.v1.DashboardChart.Visualization.Legend;
+
+                            /**
+                             * Encodes the specified Legend message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Legend.verify|verify} messages.
+                             * @param message Legend message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ILegend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Legend message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.Legend.verify|verify} messages.
+                             * @param message Legend message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ILegend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Legend message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Legend
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.Legend;
+
+                            /**
+                             * Decodes a Legend message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Legend
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.Legend;
+
+                            /**
+                             * Verifies a Legend message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Legend message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Legend
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.Legend;
+
+                            /**
+                             * Creates a plain object from a Legend message. Also converts values to other types if specified.
+                             * @param message Legend
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.Legend, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Legend to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Legend
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ColumnDef. */
+                        interface IColumnDef {
+
+                            /** ColumnDef field */
+                            field?: (string|null);
+
+                            /** ColumnDef header */
+                            header?: (string|null);
+                        }
+
+                        /** Represents a ColumnDef. */
+                        class ColumnDef implements IColumnDef {
+
+                            /**
+                             * Constructs a new ColumnDef.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnDef);
+
+                            /** ColumnDef field. */
+                            public field: string;
+
+                            /** ColumnDef header. */
+                            public header: string;
+
+                            /**
+                             * Creates a new ColumnDef instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ColumnDef instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnDef): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef;
+
+                            /**
+                             * Encodes the specified ColumnDef message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef.verify|verify} messages.
+                             * @param message ColumnDef message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnDef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ColumnDef message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef.verify|verify} messages.
+                             * @param message ColumnDef message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnDef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ColumnDef message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ColumnDef
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef;
+
+                            /**
+                             * Decodes a ColumnDef message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ColumnDef
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef;
+
+                            /**
+                             * Verifies a ColumnDef message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ColumnDef message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ColumnDef
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef;
+
+                            /**
+                             * Creates a plain object from a ColumnDef message. Also converts values to other types if specified.
+                             * @param message ColumnDef
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnDef, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ColumnDef to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ColumnDef
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ColumnRenderTypeSettings. */
+                        interface IColumnRenderTypeSettings {
+
+                            /** ColumnRenderTypeSettings field */
+                            field?: (string|null);
+
+                            /** ColumnRenderTypeSettings columnRenderType */
+                            columnRenderType?: (google.cloud.chronicle.v1.RenderType|keyof typeof google.cloud.chronicle.v1.RenderType|null);
+                        }
+
+                        /** Represents a ColumnRenderTypeSettings. */
+                        class ColumnRenderTypeSettings implements IColumnRenderTypeSettings {
+
+                            /**
+                             * Constructs a new ColumnRenderTypeSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnRenderTypeSettings);
+
+                            /** ColumnRenderTypeSettings field. */
+                            public field: string;
+
+                            /** ColumnRenderTypeSettings columnRenderType. */
+                            public columnRenderType: (google.cloud.chronicle.v1.RenderType|keyof typeof google.cloud.chronicle.v1.RenderType);
+
+                            /**
+                             * Creates a new ColumnRenderTypeSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ColumnRenderTypeSettings instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnRenderTypeSettings): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings;
+
+                            /**
+                             * Encodes the specified ColumnRenderTypeSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings.verify|verify} messages.
+                             * @param message ColumnRenderTypeSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnRenderTypeSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ColumnRenderTypeSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings.verify|verify} messages.
+                             * @param message ColumnRenderTypeSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnRenderTypeSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ColumnRenderTypeSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ColumnRenderTypeSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings;
+
+                            /**
+                             * Decodes a ColumnRenderTypeSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ColumnRenderTypeSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings;
+
+                            /**
+                             * Verifies a ColumnRenderTypeSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ColumnRenderTypeSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ColumnRenderTypeSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings;
+
+                            /**
+                             * Creates a plain object from a ColumnRenderTypeSettings message. Also converts values to other types if specified.
+                             * @param message ColumnRenderTypeSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnRenderTypeSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ColumnRenderTypeSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ColumnRenderTypeSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ColumnTooltipSettings. */
+                        interface IColumnTooltipSettings {
+
+                            /** ColumnTooltipSettings field */
+                            field?: (string|null);
+
+                            /** ColumnTooltipSettings headerTooltipText */
+                            headerTooltipText?: (string|null);
+
+                            /** ColumnTooltipSettings cellTooltipText */
+                            cellTooltipText?: (string|null);
+                        }
+
+                        /** Represents a ColumnTooltipSettings. */
+                        class ColumnTooltipSettings implements IColumnTooltipSettings {
+
+                            /**
+                             * Constructs a new ColumnTooltipSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnTooltipSettings);
+
+                            /** ColumnTooltipSettings field. */
+                            public field: string;
+
+                            /** ColumnTooltipSettings headerTooltipText. */
+                            public headerTooltipText: string;
+
+                            /** ColumnTooltipSettings cellTooltipText. */
+                            public cellTooltipText: string;
+
+                            /**
+                             * Creates a new ColumnTooltipSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ColumnTooltipSettings instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnTooltipSettings): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings;
+
+                            /**
+                             * Encodes the specified ColumnTooltipSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings.verify|verify} messages.
+                             * @param message ColumnTooltipSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnTooltipSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ColumnTooltipSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings.verify|verify} messages.
+                             * @param message ColumnTooltipSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnTooltipSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ColumnTooltipSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ColumnTooltipSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings;
+
+                            /**
+                             * Decodes a ColumnTooltipSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ColumnTooltipSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings;
+
+                            /**
+                             * Verifies a ColumnTooltipSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ColumnTooltipSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ColumnTooltipSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings;
+
+                            /**
+                             * Creates a plain object from a ColumnTooltipSettings message. Also converts values to other types if specified.
+                             * @param message ColumnTooltipSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ColumnTooltipSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ColumnTooltipSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ColumnTooltipSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TableConfig. */
+                        interface ITableConfig {
+
+                            /** TableConfig enableTextWrap */
+                            enableTextWrap?: (boolean|null);
+
+                            /** TableConfig columnRenderTypeSettings */
+                            columnRenderTypeSettings?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnRenderTypeSettings[]|null);
+
+                            /** TableConfig columnTooltipSettings */
+                            columnTooltipSettings?: (google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnTooltipSettings[]|null);
+                        }
+
+                        /** Represents a TableConfig. */
+                        class TableConfig implements ITableConfig {
+
+                            /**
+                             * Constructs a new TableConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ITableConfig);
+
+                            /** TableConfig enableTextWrap. */
+                            public enableTextWrap: boolean;
+
+                            /** TableConfig columnRenderTypeSettings. */
+                            public columnRenderTypeSettings: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnRenderTypeSettings[];
+
+                            /** TableConfig columnTooltipSettings. */
+                            public columnTooltipSettings: google.cloud.chronicle.v1.DashboardChart.Visualization.IColumnTooltipSettings[];
+
+                            /**
+                             * Creates a new TableConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TableConfig instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.ITableConfig): google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig;
+
+                            /**
+                             * Encodes the specified TableConfig message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig.verify|verify} messages.
+                             * @param message TableConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ITableConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TableConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig.verify|verify} messages.
+                             * @param message TableConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.ITableConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TableConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TableConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig;
+
+                            /**
+                             * Decodes a TableConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TableConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig;
+
+                            /**
+                             * Verifies a TableConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TableConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TableConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig;
+
+                            /**
+                             * Creates a plain object from a TableConfig message. Also converts values to other types if specified.
+                             * @param message TableConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.TableConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TableConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TableConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a GoogleMapsConfig. */
+                        interface IGoogleMapsConfig {
+
+                            /** GoogleMapsConfig dataSettings */
+                            dataSettings?: (google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IDataSettings|null);
+
+                            /** GoogleMapsConfig plotMode */
+                            plotMode?: (google.cloud.chronicle.v1.PlotMode|keyof typeof google.cloud.chronicle.v1.PlotMode|null);
+
+                            /** GoogleMapsConfig mapPosition */
+                            mapPosition?: (google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IMapPosition|null);
+
+                            /** GoogleMapsConfig pointSettings */
+                            pointSettings?: (google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IPointSettings|null);
+                        }
+
+                        /** Represents a GoogleMapsConfig. */
+                        class GoogleMapsConfig implements IGoogleMapsConfig {
+
+                            /**
+                             * Constructs a new GoogleMapsConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IGoogleMapsConfig);
+
+                            /** GoogleMapsConfig dataSettings. */
+                            public dataSettings?: (google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IDataSettings|null);
+
+                            /** GoogleMapsConfig plotMode. */
+                            public plotMode: (google.cloud.chronicle.v1.PlotMode|keyof typeof google.cloud.chronicle.v1.PlotMode);
+
+                            /** GoogleMapsConfig mapPosition. */
+                            public mapPosition?: (google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IMapPosition|null);
+
+                            /** GoogleMapsConfig pointSettings. */
+                            public pointSettings?: (google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IPointSettings|null);
+
+                            /**
+                             * Creates a new GoogleMapsConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GoogleMapsConfig instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IGoogleMapsConfig): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig;
+
+                            /**
+                             * Encodes the specified GoogleMapsConfig message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.verify|verify} messages.
+                             * @param message GoogleMapsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IGoogleMapsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GoogleMapsConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.verify|verify} messages.
+                             * @param message GoogleMapsConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IGoogleMapsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GoogleMapsConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GoogleMapsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig;
+
+                            /**
+                             * Decodes a GoogleMapsConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GoogleMapsConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig;
+
+                            /**
+                             * Verifies a GoogleMapsConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GoogleMapsConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GoogleMapsConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig;
+
+                            /**
+                             * Creates a plain object from a GoogleMapsConfig message. Also converts values to other types if specified.
+                             * @param message GoogleMapsConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GoogleMapsConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GoogleMapsConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace GoogleMapsConfig {
+
+                            /** Properties of a DataSettings. */
+                            interface IDataSettings {
+
+                                /** DataSettings latitudeColumn */
+                                latitudeColumn?: (string|null);
+
+                                /** DataSettings longitudeColumn */
+                                longitudeColumn?: (string|null);
+
+                                /** DataSettings countColumn */
+                                countColumn?: (string|null);
+                            }
+
+                            /** Represents a DataSettings. */
+                            class DataSettings implements IDataSettings {
+
+                                /**
+                                 * Constructs a new DataSettings.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IDataSettings);
+
+                                /** DataSettings latitudeColumn. */
+                                public latitudeColumn: string;
+
+                                /** DataSettings longitudeColumn. */
+                                public longitudeColumn: string;
+
+                                /** DataSettings countColumn. */
+                                public countColumn: string;
+
+                                /**
+                                 * Creates a new DataSettings instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DataSettings instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IDataSettings): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings;
+
+                                /**
+                                 * Encodes the specified DataSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings.verify|verify} messages.
+                                 * @param message DataSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IDataSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DataSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings.verify|verify} messages.
+                                 * @param message DataSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IDataSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DataSettings message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DataSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings;
+
+                                /**
+                                 * Decodes a DataSettings message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DataSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings;
+
+                                /**
+                                 * Verifies a DataSettings message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DataSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DataSettings
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings;
+
+                                /**
+                                 * Creates a plain object from a DataSettings message. Also converts values to other types if specified.
+                                 * @param message DataSettings
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.DataSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DataSettings to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DataSettings
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a MapPosition. */
+                            interface IMapPosition {
+
+                                /** MapPosition fitData */
+                                fitData?: (boolean|null);
+
+                                /** MapPosition latitudeValue */
+                                latitudeValue?: (number|null);
+
+                                /** MapPosition longitudeValue */
+                                longitudeValue?: (number|null);
+
+                                /** MapPosition zoomScaleValue */
+                                zoomScaleValue?: (number|null);
+                            }
+
+                            /** Represents a MapPosition. */
+                            class MapPosition implements IMapPosition {
+
+                                /**
+                                 * Constructs a new MapPosition.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IMapPosition);
+
+                                /** MapPosition fitData. */
+                                public fitData: boolean;
+
+                                /** MapPosition latitudeValue. */
+                                public latitudeValue: number;
+
+                                /** MapPosition longitudeValue. */
+                                public longitudeValue: number;
+
+                                /** MapPosition zoomScaleValue. */
+                                public zoomScaleValue: number;
+
+                                /**
+                                 * Creates a new MapPosition instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns MapPosition instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IMapPosition): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition;
+
+                                /**
+                                 * Encodes the specified MapPosition message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition.verify|verify} messages.
+                                 * @param message MapPosition message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IMapPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified MapPosition message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition.verify|verify} messages.
+                                 * @param message MapPosition message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IMapPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a MapPosition message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns MapPosition
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition;
+
+                                /**
+                                 * Decodes a MapPosition message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns MapPosition
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition;
+
+                                /**
+                                 * Verifies a MapPosition message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a MapPosition message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns MapPosition
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition;
+
+                                /**
+                                 * Creates a plain object from a MapPosition message. Also converts values to other types if specified.
+                                 * @param message MapPosition
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.MapPosition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this MapPosition to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for MapPosition
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a PointSettings. */
+                            interface IPointSettings {
+
+                                /** PointSettings pointSizeType */
+                                pointSizeType?: (google.cloud.chronicle.v1.PointSizeType|keyof typeof google.cloud.chronicle.v1.PointSizeType|null);
+
+                                /** PointSettings color */
+                                color?: (string|null);
+                            }
+
+                            /** Represents a PointSettings. */
+                            class PointSettings implements IPointSettings {
+
+                                /**
+                                 * Constructs a new PointSettings.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IPointSettings);
+
+                                /** PointSettings pointSizeType. */
+                                public pointSizeType: (google.cloud.chronicle.v1.PointSizeType|keyof typeof google.cloud.chronicle.v1.PointSizeType);
+
+                                /** PointSettings color. */
+                                public color: string;
+
+                                /**
+                                 * Creates a new PointSettings instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns PointSettings instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IPointSettings): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings;
+
+                                /**
+                                 * Encodes the specified PointSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings.verify|verify} messages.
+                                 * @param message PointSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IPointSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified PointSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings.verify|verify} messages.
+                                 * @param message PointSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.IPointSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a PointSettings message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns PointSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings;
+
+                                /**
+                                 * Decodes a PointSettings message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns PointSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings;
+
+                                /**
+                                 * Verifies a PointSettings message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a PointSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns PointSettings
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings;
+
+                                /**
+                                 * Creates a plain object from a PointSettings message. Also converts values to other types if specified.
+                                 * @param message PointSettings
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.GoogleMapsConfig.PointSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this PointSettings to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for PointSettings
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a VisualMap. */
+                        interface IVisualMap {
+
+                            /** VisualMap visualMapType */
+                            visualMapType?: (google.cloud.chronicle.v1.VisualMapType|keyof typeof google.cloud.chronicle.v1.VisualMapType|null);
+
+                            /** VisualMap pieces */
+                            pieces?: (google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.IVisualMapPiece[]|null);
+                        }
+
+                        /** Represents a VisualMap. */
+                        class VisualMap implements IVisualMap {
+
+                            /**
+                             * Constructs a new VisualMap.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IVisualMap);
+
+                            /** VisualMap visualMapType. */
+                            public visualMapType: (google.cloud.chronicle.v1.VisualMapType|keyof typeof google.cloud.chronicle.v1.VisualMapType);
+
+                            /** VisualMap pieces. */
+                            public pieces: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.IVisualMapPiece[];
+
+                            /**
+                             * Creates a new VisualMap instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns VisualMap instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.IVisualMap): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap;
+
+                            /**
+                             * Encodes the specified VisualMap message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.verify|verify} messages.
+                             * @param message VisualMap message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IVisualMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified VisualMap message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.verify|verify} messages.
+                             * @param message VisualMap message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.IVisualMap, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a VisualMap message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns VisualMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap;
+
+                            /**
+                             * Decodes a VisualMap message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns VisualMap
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap;
+
+                            /**
+                             * Verifies a VisualMap message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a VisualMap message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns VisualMap
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap;
+
+                            /**
+                             * Creates a plain object from a VisualMap message. Also converts values to other types if specified.
+                             * @param message VisualMap
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this VisualMap to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for VisualMap
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace VisualMap {
+
+                            /** Properties of a VisualMapPiece. */
+                            interface IVisualMapPiece {
+
+                                /** VisualMapPiece min */
+                                min?: (number|Long|string|null);
+
+                                /** VisualMapPiece max */
+                                max?: (number|Long|string|null);
+
+                                /** VisualMapPiece color */
+                                color?: (string|null);
+
+                                /** VisualMapPiece label */
+                                label?: (string|null);
+                            }
+
+                            /** Represents a VisualMapPiece. */
+                            class VisualMapPiece implements IVisualMapPiece {
+
+                                /**
+                                 * Constructs a new VisualMapPiece.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.IVisualMapPiece);
+
+                                /** VisualMapPiece min. */
+                                public min?: (number|Long|string|null);
+
+                                /** VisualMapPiece max. */
+                                public max?: (number|Long|string|null);
+
+                                /** VisualMapPiece color. */
+                                public color: string;
+
+                                /** VisualMapPiece label. */
+                                public label: string;
+
+                                /**
+                                 * Creates a new VisualMapPiece instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns VisualMapPiece instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.IVisualMapPiece): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece;
+
+                                /**
+                                 * Encodes the specified VisualMapPiece message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece.verify|verify} messages.
+                                 * @param message VisualMapPiece message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.IVisualMapPiece, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified VisualMapPiece message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece.verify|verify} messages.
+                                 * @param message VisualMapPiece message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.IVisualMapPiece, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a VisualMapPiece message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns VisualMapPiece
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece;
+
+                                /**
+                                 * Decodes a VisualMapPiece message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns VisualMapPiece
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece;
+
+                                /**
+                                 * Verifies a VisualMapPiece message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a VisualMapPiece message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns VisualMapPiece
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece;
+
+                                /**
+                                 * Creates a plain object from a VisualMapPiece message. Also converts values to other types if specified.
+                                 * @param message VisualMapPiece
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.Visualization.VisualMap.VisualMapPiece, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this VisualMapPiece to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for VisualMapPiece
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of a DrillDownConfig. */
+                    interface IDrillDownConfig {
+
+                        /** DrillDownConfig leftDrillDowns */
+                        leftDrillDowns?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown[]|null);
+
+                        /** DrillDownConfig rightDrillDowns */
+                        rightDrillDowns?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown[]|null);
+                    }
+
+                    /** Represents a DrillDownConfig. */
+                    class DrillDownConfig implements IDrillDownConfig {
+
+                        /**
+                         * Constructs a new DrillDownConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DashboardChart.IDrillDownConfig);
+
+                        /** DrillDownConfig leftDrillDowns. */
+                        public leftDrillDowns: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown[];
+
+                        /** DrillDownConfig rightDrillDowns. */
+                        public rightDrillDowns: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown[];
+
+                        /**
+                         * Creates a new DrillDownConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DrillDownConfig instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DashboardChart.IDrillDownConfig): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig;
+
+                        /**
+                         * Encodes the specified DrillDownConfig message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.verify|verify} messages.
+                         * @param message DrillDownConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DashboardChart.IDrillDownConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DrillDownConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.verify|verify} messages.
+                         * @param message DrillDownConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.IDrillDownConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DrillDownConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DrillDownConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig;
+
+                        /**
+                         * Decodes a DrillDownConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DrillDownConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig;
+
+                        /**
+                         * Verifies a DrillDownConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DrillDownConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DrillDownConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig;
+
+                        /**
+                         * Creates a plain object from a DrillDownConfig message. Also converts values to other types if specified.
+                         * @param message DrillDownConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DrillDownConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DrillDownConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DrillDownConfig {
+
+                        /** Properties of a DrillDown. */
+                        interface IDrillDown {
+
+                            /** DrillDown defaultSettings */
+                            defaultSettings?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.IDefaultDrillDownSettings|null);
+
+                            /** DrillDown customSettings */
+                            customSettings?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.ICustomDrillDownSettings|null);
+
+                            /** DrillDown id */
+                            id?: (string|null);
+
+                            /** DrillDown displayName */
+                            displayName?: (string|null);
+                        }
+
+                        /** Represents a DrillDown. */
+                        class DrillDown implements IDrillDown {
+
+                            /**
+                             * Constructs a new DrillDown.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown);
+
+                            /** DrillDown defaultSettings. */
+                            public defaultSettings?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.IDefaultDrillDownSettings|null);
+
+                            /** DrillDown customSettings. */
+                            public customSettings?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.ICustomDrillDownSettings|null);
+
+                            /** DrillDown id. */
+                            public id: string;
+
+                            /** DrillDown displayName. */
+                            public displayName: string;
+
+                            /** DrillDown settings. */
+                            public settings?: ("defaultSettings"|"customSettings");
+
+                            /**
+                             * Creates a new DrillDown instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DrillDown instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown;
+
+                            /**
+                             * Encodes the specified DrillDown message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.verify|verify} messages.
+                             * @param message DrillDown message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DrillDown message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.verify|verify} messages.
+                             * @param message DrillDown message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.IDrillDown, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DrillDown message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DrillDown
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown;
+
+                            /**
+                             * Decodes a DrillDown message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DrillDown
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown;
+
+                            /**
+                             * Verifies a DrillDown message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DrillDown message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DrillDown
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown;
+
+                            /**
+                             * Creates a plain object from a DrillDown message. Also converts values to other types if specified.
+                             * @param message DrillDown
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DrillDown to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DrillDown
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace DrillDown {
+
+                            /** Properties of a DefaultDrillDownSettings. */
+                            interface IDefaultDrillDownSettings {
+
+                                /** DefaultDrillDownSettings enabled */
+                                enabled?: (boolean|null);
+                            }
+
+                            /** Represents a DefaultDrillDownSettings. */
+                            class DefaultDrillDownSettings implements IDefaultDrillDownSettings {
+
+                                /**
+                                 * Constructs a new DefaultDrillDownSettings.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.IDefaultDrillDownSettings);
+
+                                /** DefaultDrillDownSettings enabled. */
+                                public enabled: boolean;
+
+                                /**
+                                 * Creates a new DefaultDrillDownSettings instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DefaultDrillDownSettings instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.IDefaultDrillDownSettings): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings;
+
+                                /**
+                                 * Encodes the specified DefaultDrillDownSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings.verify|verify} messages.
+                                 * @param message DefaultDrillDownSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.IDefaultDrillDownSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DefaultDrillDownSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings.verify|verify} messages.
+                                 * @param message DefaultDrillDownSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.IDefaultDrillDownSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DefaultDrillDownSettings message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DefaultDrillDownSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings;
+
+                                /**
+                                 * Decodes a DefaultDrillDownSettings message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DefaultDrillDownSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings;
+
+                                /**
+                                 * Verifies a DefaultDrillDownSettings message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DefaultDrillDownSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DefaultDrillDownSettings
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings;
+
+                                /**
+                                 * Creates a plain object from a DefaultDrillDownSettings message. Also converts values to other types if specified.
+                                 * @param message DefaultDrillDownSettings
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.DefaultDrillDownSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DefaultDrillDownSettings to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for DefaultDrillDownSettings
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a CustomDrillDownSettings. */
+                            interface ICustomDrillDownSettings {
+
+                                /** CustomDrillDownSettings query */
+                                query?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownQuery|null);
+
+                                /** CustomDrillDownSettings filter */
+                                filter?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownFilter|null);
+
+                                /** CustomDrillDownSettings externalLink */
+                                externalLink?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownExternalLink|null);
+
+                                /** CustomDrillDownSettings newTab */
+                                newTab?: (boolean|null);
+
+                                /** CustomDrillDownSettings leftClickColumn */
+                                leftClickColumn?: (string|null);
+                            }
+
+                            /** Represents a CustomDrillDownSettings. */
+                            class CustomDrillDownSettings implements ICustomDrillDownSettings {
+
+                                /**
+                                 * Constructs a new CustomDrillDownSettings.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.ICustomDrillDownSettings);
+
+                                /** CustomDrillDownSettings query. */
+                                public query?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownQuery|null);
+
+                                /** CustomDrillDownSettings filter. */
+                                public filter?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownFilter|null);
+
+                                /** CustomDrillDownSettings externalLink. */
+                                public externalLink?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownExternalLink|null);
+
+                                /** CustomDrillDownSettings newTab. */
+                                public newTab: boolean;
+
+                                /** CustomDrillDownSettings leftClickColumn. */
+                                public leftClickColumn: string;
+
+                                /** CustomDrillDownSettings action. */
+                                public action?: ("query"|"filter"|"externalLink");
+
+                                /**
+                                 * Creates a new CustomDrillDownSettings instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CustomDrillDownSettings instance
+                                 */
+                                public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.ICustomDrillDownSettings): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings;
+
+                                /**
+                                 * Encodes the specified CustomDrillDownSettings message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.verify|verify} messages.
+                                 * @param message CustomDrillDownSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.ICustomDrillDownSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CustomDrillDownSettings message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.verify|verify} messages.
+                                 * @param message CustomDrillDownSettings message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.ICustomDrillDownSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CustomDrillDownSettings message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CustomDrillDownSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings;
+
+                                /**
+                                 * Decodes a CustomDrillDownSettings message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CustomDrillDownSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings;
+
+                                /**
+                                 * Verifies a CustomDrillDownSettings message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CustomDrillDownSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CustomDrillDownSettings
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings;
+
+                                /**
+                                 * Creates a plain object from a CustomDrillDownSettings message. Also converts values to other types if specified.
+                                 * @param message CustomDrillDownSettings
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CustomDrillDownSettings to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CustomDrillDownSettings
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace CustomDrillDownSettings {
+
+                                /** Properties of a DrillDownQuery. */
+                                interface IDrillDownQuery {
+
+                                    /** DrillDownQuery query */
+                                    query?: (string|null);
+                                }
+
+                                /** Represents a DrillDownQuery. */
+                                class DrillDownQuery implements IDrillDownQuery {
+
+                                    /**
+                                     * Constructs a new DrillDownQuery.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownQuery);
+
+                                    /** DrillDownQuery query. */
+                                    public query: string;
+
+                                    /**
+                                     * Creates a new DrillDownQuery instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns DrillDownQuery instance
+                                     */
+                                    public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownQuery): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery;
+
+                                    /**
+                                     * Encodes the specified DrillDownQuery message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery.verify|verify} messages.
+                                     * @param message DrillDownQuery message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified DrillDownQuery message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery.verify|verify} messages.
+                                     * @param message DrillDownQuery message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a DrillDownQuery message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns DrillDownQuery
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery;
+
+                                    /**
+                                     * Decodes a DrillDownQuery message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns DrillDownQuery
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery;
+
+                                    /**
+                                     * Verifies a DrillDownQuery message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a DrillDownQuery message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns DrillDownQuery
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery;
+
+                                    /**
+                                     * Creates a plain object from a DrillDownQuery message. Also converts values to other types if specified.
+                                     * @param message DrillDownQuery
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this DrillDownQuery to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for DrillDownQuery
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+
+                                /** Properties of a DrillDownFilter. */
+                                interface IDrillDownFilter {
+
+                                    /** DrillDownFilter dashboardFilters */
+                                    dashboardFilters?: (google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.IDrillDownDashboardFilter[]|null);
+                                }
+
+                                /** Represents a DrillDownFilter. */
+                                class DrillDownFilter implements IDrillDownFilter {
+
+                                    /**
+                                     * Constructs a new DrillDownFilter.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownFilter);
+
+                                    /** DrillDownFilter dashboardFilters. */
+                                    public dashboardFilters: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.IDrillDownDashboardFilter[];
+
+                                    /**
+                                     * Creates a new DrillDownFilter instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns DrillDownFilter instance
+                                     */
+                                    public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownFilter): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter;
+
+                                    /**
+                                     * Encodes the specified DrillDownFilter message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.verify|verify} messages.
+                                     * @param message DrillDownFilter message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified DrillDownFilter message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.verify|verify} messages.
+                                     * @param message DrillDownFilter message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a DrillDownFilter message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns DrillDownFilter
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter;
+
+                                    /**
+                                     * Decodes a DrillDownFilter message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns DrillDownFilter
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter;
+
+                                    /**
+                                     * Verifies a DrillDownFilter message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a DrillDownFilter message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns DrillDownFilter
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter;
+
+                                    /**
+                                     * Creates a plain object from a DrillDownFilter message. Also converts values to other types if specified.
+                                     * @param message DrillDownFilter
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this DrillDownFilter to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for DrillDownFilter
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+
+                                namespace DrillDownFilter {
+
+                                    /** Properties of a DrillDownDashboardFilter. */
+                                    interface IDrillDownDashboardFilter {
+
+                                        /** DrillDownDashboardFilter dashboardFilterId */
+                                        dashboardFilterId?: (string|null);
+
+                                        /** DrillDownDashboardFilter filterOperatorAndValues */
+                                        filterOperatorAndValues?: (google.cloud.chronicle.v1.IFilterOperatorAndValues[]|null);
+                                    }
+
+                                    /** Represents a DrillDownDashboardFilter. */
+                                    class DrillDownDashboardFilter implements IDrillDownDashboardFilter {
+
+                                        /**
+                                         * Constructs a new DrillDownDashboardFilter.
+                                         * @param [properties] Properties to set
+                                         */
+                                        constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.IDrillDownDashboardFilter);
+
+                                        /** DrillDownDashboardFilter dashboardFilterId. */
+                                        public dashboardFilterId: string;
+
+                                        /** DrillDownDashboardFilter filterOperatorAndValues. */
+                                        public filterOperatorAndValues: google.cloud.chronicle.v1.IFilterOperatorAndValues[];
+
+                                        /**
+                                         * Creates a new DrillDownDashboardFilter instance using the specified properties.
+                                         * @param [properties] Properties to set
+                                         * @returns DrillDownDashboardFilter instance
+                                         */
+                                        public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.IDrillDownDashboardFilter): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter;
+
+                                        /**
+                                         * Encodes the specified DrillDownDashboardFilter message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter.verify|verify} messages.
+                                         * @param message DrillDownDashboardFilter message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.IDrillDownDashboardFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Encodes the specified DrillDownDashboardFilter message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter.verify|verify} messages.
+                                         * @param message DrillDownDashboardFilter message or plain object to encode
+                                         * @param [writer] Writer to encode to
+                                         * @returns Writer
+                                         */
+                                        public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.IDrillDownDashboardFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                        /**
+                                         * Decodes a DrillDownDashboardFilter message from the specified reader or buffer.
+                                         * @param reader Reader or buffer to decode from
+                                         * @param [length] Message length if known beforehand
+                                         * @returns DrillDownDashboardFilter
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter;
+
+                                        /**
+                                         * Decodes a DrillDownDashboardFilter message from the specified reader or buffer, length delimited.
+                                         * @param reader Reader or buffer to decode from
+                                         * @returns DrillDownDashboardFilter
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter;
+
+                                        /**
+                                         * Verifies a DrillDownDashboardFilter message.
+                                         * @param message Plain object to verify
+                                         * @returns `null` if valid, otherwise the reason why it is not
+                                         */
+                                        public static verify(message: { [k: string]: any }): (string|null);
+
+                                        /**
+                                         * Creates a DrillDownDashboardFilter message from a plain object. Also converts values to their respective internal types.
+                                         * @param object Plain object
+                                         * @returns DrillDownDashboardFilter
+                                         */
+                                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter;
+
+                                        /**
+                                         * Creates a plain object from a DrillDownDashboardFilter message. Also converts values to other types if specified.
+                                         * @param message DrillDownDashboardFilter
+                                         * @param [options] Conversion options
+                                         * @returns Plain object
+                                         */
+                                        public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownFilter.DrillDownDashboardFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                        /**
+                                         * Converts this DrillDownDashboardFilter to JSON.
+                                         * @returns JSON object
+                                         */
+                                        public toJSON(): { [k: string]: any };
+
+                                        /**
+                                         * Gets the default type url for DrillDownDashboardFilter
+                                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns The default type url
+                                         */
+                                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                                    }
+                                }
+
+                                /** Properties of a DrillDownExternalLink. */
+                                interface IDrillDownExternalLink {
+
+                                    /** DrillDownExternalLink link */
+                                    link?: (string|null);
+
+                                    /** DrillDownExternalLink description */
+                                    description?: (string|null);
+                                }
+
+                                /** Represents a DrillDownExternalLink. */
+                                class DrillDownExternalLink implements IDrillDownExternalLink {
+
+                                    /**
+                                     * Constructs a new DrillDownExternalLink.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownExternalLink);
+
+                                    /** DrillDownExternalLink link. */
+                                    public link: string;
+
+                                    /** DrillDownExternalLink description. */
+                                    public description: string;
+
+                                    /**
+                                     * Creates a new DrillDownExternalLink instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns DrillDownExternalLink instance
+                                     */
+                                    public static create(properties?: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownExternalLink): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink;
+
+                                    /**
+                                     * Encodes the specified DrillDownExternalLink message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink.verify|verify} messages.
+                                     * @param message DrillDownExternalLink message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownExternalLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified DrillDownExternalLink message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink.verify|verify} messages.
+                                     * @param message DrillDownExternalLink message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.IDrillDownExternalLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a DrillDownExternalLink message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns DrillDownExternalLink
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink;
+
+                                    /**
+                                     * Decodes a DrillDownExternalLink message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns DrillDownExternalLink
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink;
+
+                                    /**
+                                     * Verifies a DrillDownExternalLink message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a DrillDownExternalLink message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns DrillDownExternalLink
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink;
+
+                                    /**
+                                     * Creates a plain object from a DrillDownExternalLink message. Also converts values to other types if specified.
+                                     * @param message DrillDownExternalLink
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.chronicle.v1.DashboardChart.DrillDownConfig.DrillDown.CustomDrillDownSettings.DrillDownExternalLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this DrillDownExternalLink to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for DrillDownExternalLink
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /** Properties of a Button. */
+                interface IButton {
+
+                    /** Button label */
+                    label?: (string|null);
+
+                    /** Button hyperlink */
+                    hyperlink?: (string|null);
+
+                    /** Button description */
+                    description?: (string|null);
+
+                    /** Button newTab */
+                    newTab?: (boolean|null);
+
+                    /** Button properties */
+                    properties?: (google.cloud.chronicle.v1.Button.IProperties|null);
+                }
+
+                /** Represents a Button. */
+                class Button implements IButton {
+
+                    /**
+                     * Constructs a new Button.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IButton);
+
+                    /** Button label. */
+                    public label: string;
+
+                    /** Button hyperlink. */
+                    public hyperlink: string;
+
+                    /** Button description. */
+                    public description: string;
+
+                    /** Button newTab. */
+                    public newTab: boolean;
+
+                    /** Button properties. */
+                    public properties?: (google.cloud.chronicle.v1.Button.IProperties|null);
+
+                    /**
+                     * Creates a new Button instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Button instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IButton): google.cloud.chronicle.v1.Button;
+
+                    /**
+                     * Encodes the specified Button message. Does not implicitly {@link google.cloud.chronicle.v1.Button.verify|verify} messages.
+                     * @param message Button message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IButton, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Button message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.Button.verify|verify} messages.
+                     * @param message Button message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IButton, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Button message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Button
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.Button;
+
+                    /**
+                     * Decodes a Button message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Button
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.Button;
+
+                    /**
+                     * Verifies a Button message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Button message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Button
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.Button;
+
+                    /**
+                     * Creates a plain object from a Button message. Also converts values to other types if specified.
+                     * @param message Button
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.Button, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Button to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Button
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Button {
+
+                    /** Properties of a Properties. */
+                    interface IProperties {
+
+                        /** Properties color */
+                        color?: (string|null);
+
+                        /** Properties buttonStyle */
+                        buttonStyle?: (google.cloud.chronicle.v1.ButtonStyle|keyof typeof google.cloud.chronicle.v1.ButtonStyle|null);
+                    }
+
+                    /** Represents a Properties. */
+                    class Properties implements IProperties {
+
+                        /**
+                         * Constructs a new Properties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.Button.IProperties);
+
+                        /** Properties color. */
+                        public color: string;
+
+                        /** Properties buttonStyle. */
+                        public buttonStyle: (google.cloud.chronicle.v1.ButtonStyle|keyof typeof google.cloud.chronicle.v1.ButtonStyle);
+
+                        /**
+                         * Creates a new Properties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Properties instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.Button.IProperties): google.cloud.chronicle.v1.Button.Properties;
+
+                        /**
+                         * Encodes the specified Properties message. Does not implicitly {@link google.cloud.chronicle.v1.Button.Properties.verify|verify} messages.
+                         * @param message Properties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.Button.IProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Properties message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.Button.Properties.verify|verify} messages.
+                         * @param message Properties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.Button.IProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Properties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Properties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.Button.Properties;
+
+                        /**
+                         * Decodes a Properties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Properties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.Button.Properties;
+
+                        /**
+                         * Verifies a Properties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Properties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Properties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.Button.Properties;
+
+                        /**
+                         * Creates a plain object from a Properties message. Also converts values to other types if specified.
+                         * @param message Properties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.Button.Properties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Properties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Properties
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Markdown. */
+                interface IMarkdown {
+
+                    /** Markdown content */
+                    content?: (string|null);
+
+                    /** Markdown properties */
+                    properties?: (google.cloud.chronicle.v1.Markdown.IMarkdownProperties|null);
+                }
+
+                /** Represents a Markdown. */
+                class Markdown implements IMarkdown {
+
+                    /**
+                     * Constructs a new Markdown.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IMarkdown);
+
+                    /** Markdown content. */
+                    public content: string;
+
+                    /** Markdown properties. */
+                    public properties?: (google.cloud.chronicle.v1.Markdown.IMarkdownProperties|null);
+
+                    /**
+                     * Creates a new Markdown instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Markdown instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IMarkdown): google.cloud.chronicle.v1.Markdown;
+
+                    /**
+                     * Encodes the specified Markdown message. Does not implicitly {@link google.cloud.chronicle.v1.Markdown.verify|verify} messages.
+                     * @param message Markdown message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IMarkdown, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Markdown message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.Markdown.verify|verify} messages.
+                     * @param message Markdown message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IMarkdown, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Markdown message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Markdown
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.Markdown;
+
+                    /**
+                     * Decodes a Markdown message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Markdown
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.Markdown;
+
+                    /**
+                     * Verifies a Markdown message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Markdown message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Markdown
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.Markdown;
+
+                    /**
+                     * Creates a plain object from a Markdown message. Also converts values to other types if specified.
+                     * @param message Markdown
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.Markdown, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Markdown to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Markdown
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Markdown {
+
+                    /** Properties of a MarkdownProperties. */
+                    interface IMarkdownProperties {
+
+                        /** MarkdownProperties backgroundColor */
+                        backgroundColor?: (string|null);
+                    }
+
+                    /** Represents a MarkdownProperties. */
+                    class MarkdownProperties implements IMarkdownProperties {
+
+                        /**
+                         * Constructs a new MarkdownProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.Markdown.IMarkdownProperties);
+
+                        /** MarkdownProperties backgroundColor. */
+                        public backgroundColor: string;
+
+                        /**
+                         * Creates a new MarkdownProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MarkdownProperties instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.Markdown.IMarkdownProperties): google.cloud.chronicle.v1.Markdown.MarkdownProperties;
+
+                        /**
+                         * Encodes the specified MarkdownProperties message. Does not implicitly {@link google.cloud.chronicle.v1.Markdown.MarkdownProperties.verify|verify} messages.
+                         * @param message MarkdownProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.Markdown.IMarkdownProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MarkdownProperties message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.Markdown.MarkdownProperties.verify|verify} messages.
+                         * @param message MarkdownProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.Markdown.IMarkdownProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MarkdownProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MarkdownProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.Markdown.MarkdownProperties;
+
+                        /**
+                         * Decodes a MarkdownProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MarkdownProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.Markdown.MarkdownProperties;
+
+                        /**
+                         * Verifies a MarkdownProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MarkdownProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MarkdownProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.Markdown.MarkdownProperties;
+
+                        /**
+                         * Creates a plain object from a MarkdownProperties message. Also converts values to other types if specified.
+                         * @param message MarkdownProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.Markdown.MarkdownProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MarkdownProperties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MarkdownProperties
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GetDashboardChartRequest. */
+                interface IGetDashboardChartRequest {
+
+                    /** GetDashboardChartRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDashboardChartRequest. */
+                class GetDashboardChartRequest implements IGetDashboardChartRequest {
+
+                    /**
+                     * Constructs a new GetDashboardChartRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDashboardChartRequest);
+
+                    /** GetDashboardChartRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDashboardChartRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDashboardChartRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDashboardChartRequest): google.cloud.chronicle.v1.GetDashboardChartRequest;
+
+                    /**
+                     * Encodes the specified GetDashboardChartRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDashboardChartRequest.verify|verify} messages.
+                     * @param message GetDashboardChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDashboardChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDashboardChartRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDashboardChartRequest.verify|verify} messages.
+                     * @param message GetDashboardChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDashboardChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDashboardChartRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDashboardChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDashboardChartRequest;
+
+                    /**
+                     * Decodes a GetDashboardChartRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDashboardChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDashboardChartRequest;
+
+                    /**
+                     * Verifies a GetDashboardChartRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDashboardChartRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDashboardChartRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDashboardChartRequest;
+
+                    /**
+                     * Creates a plain object from a GetDashboardChartRequest message. Also converts values to other types if specified.
+                     * @param message GetDashboardChartRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDashboardChartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDashboardChartRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDashboardChartRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchGetDashboardChartsRequest. */
+                interface IBatchGetDashboardChartsRequest {
+
+                    /** BatchGetDashboardChartsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchGetDashboardChartsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a BatchGetDashboardChartsRequest. */
+                class BatchGetDashboardChartsRequest implements IBatchGetDashboardChartsRequest {
+
+                    /**
+                     * Constructs a new BatchGetDashboardChartsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBatchGetDashboardChartsRequest);
+
+                    /** BatchGetDashboardChartsRequest parent. */
+                    public parent: string;
+
+                    /** BatchGetDashboardChartsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new BatchGetDashboardChartsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchGetDashboardChartsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBatchGetDashboardChartsRequest): google.cloud.chronicle.v1.BatchGetDashboardChartsRequest;
+
+                    /**
+                     * Encodes the specified BatchGetDashboardChartsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BatchGetDashboardChartsRequest.verify|verify} messages.
+                     * @param message BatchGetDashboardChartsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBatchGetDashboardChartsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchGetDashboardChartsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BatchGetDashboardChartsRequest.verify|verify} messages.
+                     * @param message BatchGetDashboardChartsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBatchGetDashboardChartsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchGetDashboardChartsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchGetDashboardChartsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BatchGetDashboardChartsRequest;
+
+                    /**
+                     * Decodes a BatchGetDashboardChartsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchGetDashboardChartsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BatchGetDashboardChartsRequest;
+
+                    /**
+                     * Verifies a BatchGetDashboardChartsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchGetDashboardChartsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchGetDashboardChartsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BatchGetDashboardChartsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchGetDashboardChartsRequest message. Also converts values to other types if specified.
+                     * @param message BatchGetDashboardChartsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BatchGetDashboardChartsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchGetDashboardChartsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetDashboardChartsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchGetDashboardChartsResponse. */
+                interface IBatchGetDashboardChartsResponse {
+
+                    /** BatchGetDashboardChartsResponse dashboardCharts */
+                    dashboardCharts?: (google.cloud.chronicle.v1.IDashboardChart[]|null);
+                }
+
+                /** Represents a BatchGetDashboardChartsResponse. */
+                class BatchGetDashboardChartsResponse implements IBatchGetDashboardChartsResponse {
+
+                    /**
+                     * Constructs a new BatchGetDashboardChartsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBatchGetDashboardChartsResponse);
+
+                    /** BatchGetDashboardChartsResponse dashboardCharts. */
+                    public dashboardCharts: google.cloud.chronicle.v1.IDashboardChart[];
+
+                    /**
+                     * Creates a new BatchGetDashboardChartsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchGetDashboardChartsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBatchGetDashboardChartsResponse): google.cloud.chronicle.v1.BatchGetDashboardChartsResponse;
+
+                    /**
+                     * Encodes the specified BatchGetDashboardChartsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BatchGetDashboardChartsResponse.verify|verify} messages.
+                     * @param message BatchGetDashboardChartsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBatchGetDashboardChartsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchGetDashboardChartsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BatchGetDashboardChartsResponse.verify|verify} messages.
+                     * @param message BatchGetDashboardChartsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBatchGetDashboardChartsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchGetDashboardChartsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchGetDashboardChartsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BatchGetDashboardChartsResponse;
+
+                    /**
+                     * Decodes a BatchGetDashboardChartsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchGetDashboardChartsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BatchGetDashboardChartsResponse;
+
+                    /**
+                     * Verifies a BatchGetDashboardChartsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchGetDashboardChartsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchGetDashboardChartsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BatchGetDashboardChartsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchGetDashboardChartsResponse message. Also converts values to other types if specified.
+                     * @param message BatchGetDashboardChartsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BatchGetDashboardChartsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchGetDashboardChartsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetDashboardChartsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a DashboardQueryService */
+                class DashboardQueryService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DashboardQueryService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DashboardQueryService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DashboardQueryService;
+
+                    /**
+                     * Calls GetDashboardQuery.
+                     * @param request GetDashboardQueryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DashboardQuery
+                     */
+                    public getDashboardQuery(request: google.cloud.chronicle.v1.IGetDashboardQueryRequest, callback: google.cloud.chronicle.v1.DashboardQueryService.GetDashboardQueryCallback): void;
+
+                    /**
+                     * Calls GetDashboardQuery.
+                     * @param request GetDashboardQueryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDashboardQuery(request: google.cloud.chronicle.v1.IGetDashboardQueryRequest): Promise<google.cloud.chronicle.v1.DashboardQuery>;
+
+                    /**
+                     * Calls ExecuteDashboardQuery.
+                     * @param request ExecuteDashboardQueryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExecuteDashboardQueryResponse
+                     */
+                    public executeDashboardQuery(request: google.cloud.chronicle.v1.IExecuteDashboardQueryRequest, callback: google.cloud.chronicle.v1.DashboardQueryService.ExecuteDashboardQueryCallback): void;
+
+                    /**
+                     * Calls ExecuteDashboardQuery.
+                     * @param request ExecuteDashboardQueryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public executeDashboardQuery(request: google.cloud.chronicle.v1.IExecuteDashboardQueryRequest): Promise<google.cloud.chronicle.v1.ExecuteDashboardQueryResponse>;
+                }
+
+                namespace DashboardQueryService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DashboardQueryService|getDashboardQuery}.
+                     * @param error Error, if any
+                     * @param [response] DashboardQuery
+                     */
+                    type GetDashboardQueryCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DashboardQuery) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DashboardQueryService|executeDashboardQuery}.
+                     * @param error Error, if any
+                     * @param [response] ExecuteDashboardQueryResponse
+                     */
+                    type ExecuteDashboardQueryCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse) => void;
+                }
+
+                /** LanguageFeature enum. */
+                enum LanguageFeature {
+                    LANGUAGE_FEATURE_UNSPECIFIED = 0,
+                    JOINS = 1,
+                    STAGES = 2,
+                    DATA_TABLES = 3
+                }
+
+                /** FilterOperator enum. */
+                enum FilterOperator {
+                    FILTER_OPERATOR_UNSPECIFIED = 0,
+                    EQUAL = 1,
+                    NOT_EQUAL = 2,
+                    IN = 3,
+                    GREATER_THAN = 4,
+                    GREATER_THAN_OR_EQUAL_TO = 5,
+                    LESS_THAN = 6,
+                    LESS_THAN_OR_EQUAL_TO = 7,
+                    BETWEEN = 8,
+                    PAST = 9,
+                    IS_NULL = 10,
+                    IS_NOT_NULL = 11,
+                    STARTS_WITH = 12,
+                    ENDS_WITH = 13,
+                    DOES_NOT_STARTS_WITH = 14,
+                    DOES_NOT_ENDS_WITH = 15,
+                    NOT_IN = 16,
+                    CONTAINS = 17,
+                    DOES_NOT_CONTAIN = 18
+                }
+
+                /** DataSource enum. */
+                enum DataSource {
+                    DATA_SOURCE_UNSPECIFIED = 0,
+                    UDM = 1,
+                    ENTITY = 2,
+                    INGESTION_METRICS = 3,
+                    RULE_DETECTIONS = 4,
+                    RULESETS = 5,
+                    GLOBAL = 6,
+                    IOC_MATCHES = 7,
+                    RULES = 8,
+                    SOAR_CASES = 9,
+                    SOAR_PLAYBOOKS = 10,
+                    SOAR_CASE_HISTORY = 11,
+                    DATA_TABLE = 12,
+                    INVESTIGATION = 13,
+                    INVESTIGATION_FEEDBACK = 14
+                }
+
+                /** TimeUnit enum. */
+                enum TimeUnit {
+                    TIME_UNIT_UNSPECIFIED = 0,
+                    SECOND = 1,
+                    MINUTE = 2,
+                    HOUR = 3,
+                    DAY = 4,
+                    WEEK = 5,
+                    MONTH = 6,
+                    YEAR = 7
+                }
+
+                /** Properties of a DashboardQuery. */
+                interface IDashboardQuery {
+
+                    /** DashboardQuery name */
+                    name?: (string|null);
+
+                    /** DashboardQuery query */
+                    query?: (string|null);
+
+                    /** DashboardQuery input */
+                    input?: (google.cloud.chronicle.v1.DashboardQuery.IInput|null);
+
+                    /** DashboardQuery dashboardChart */
+                    dashboardChart?: (string|null);
+
+                    /** DashboardQuery etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DashboardQuery. */
+                class DashboardQuery implements IDashboardQuery {
+
+                    /**
+                     * Constructs a new DashboardQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDashboardQuery);
+
+                    /** DashboardQuery name. */
+                    public name: string;
+
+                    /** DashboardQuery query. */
+                    public query: string;
+
+                    /** DashboardQuery input. */
+                    public input?: (google.cloud.chronicle.v1.DashboardQuery.IInput|null);
+
+                    /** DashboardQuery dashboardChart. */
+                    public dashboardChart: string;
+
+                    /** DashboardQuery etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DashboardQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DashboardQuery instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDashboardQuery): google.cloud.chronicle.v1.DashboardQuery;
+
+                    /**
+                     * Encodes the specified DashboardQuery message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardQuery.verify|verify} messages.
+                     * @param message DashboardQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDashboardQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DashboardQuery message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardQuery.verify|verify} messages.
+                     * @param message DashboardQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDashboardQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DashboardQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DashboardQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardQuery;
+
+                    /**
+                     * Decodes a DashboardQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DashboardQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardQuery;
+
+                    /**
+                     * Verifies a DashboardQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DashboardQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DashboardQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardQuery;
+
+                    /**
+                     * Creates a plain object from a DashboardQuery message. Also converts values to other types if specified.
+                     * @param message DashboardQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DashboardQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DashboardQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DashboardQuery
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DashboardQuery {
+
+                    /** Properties of an Input. */
+                    interface IInput {
+
+                        /** Input timeWindow */
+                        timeWindow?: (google.type.IInterval|null);
+
+                        /** Input relativeTime */
+                        relativeTime?: (google.cloud.chronicle.v1.DashboardQuery.Input.IRelativeTime|null);
+                    }
+
+                    /** Represents an Input. */
+                    class Input implements IInput {
+
+                        /**
+                         * Constructs a new Input.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DashboardQuery.IInput);
+
+                        /** Input timeWindow. */
+                        public timeWindow?: (google.type.IInterval|null);
+
+                        /** Input relativeTime. */
+                        public relativeTime?: (google.cloud.chronicle.v1.DashboardQuery.Input.IRelativeTime|null);
+
+                        /** Input timeInput. */
+                        public timeInput?: ("timeWindow"|"relativeTime");
+
+                        /**
+                         * Creates a new Input instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Input instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DashboardQuery.IInput): google.cloud.chronicle.v1.DashboardQuery.Input;
+
+                        /**
+                         * Encodes the specified Input message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardQuery.Input.verify|verify} messages.
+                         * @param message Input message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DashboardQuery.IInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Input message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardQuery.Input.verify|verify} messages.
+                         * @param message Input message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardQuery.IInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Input message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Input
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardQuery.Input;
+
+                        /**
+                         * Decodes an Input message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Input
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardQuery.Input;
+
+                        /**
+                         * Verifies an Input message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Input message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Input
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardQuery.Input;
+
+                        /**
+                         * Creates a plain object from an Input message. Also converts values to other types if specified.
+                         * @param message Input
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DashboardQuery.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Input to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Input
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Input {
+
+                        /** Properties of a RelativeTime. */
+                        interface IRelativeTime {
+
+                            /** RelativeTime timeUnit */
+                            timeUnit?: (google.cloud.chronicle.v1.TimeUnit|keyof typeof google.cloud.chronicle.v1.TimeUnit|null);
+
+                            /** RelativeTime startTimeVal */
+                            startTimeVal?: (number|Long|string|null);
+                        }
+
+                        /** Represents a RelativeTime. */
+                        class RelativeTime implements IRelativeTime {
+
+                            /**
+                             * Constructs a new RelativeTime.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardQuery.Input.IRelativeTime);
+
+                            /** RelativeTime timeUnit. */
+                            public timeUnit: (google.cloud.chronicle.v1.TimeUnit|keyof typeof google.cloud.chronicle.v1.TimeUnit);
+
+                            /** RelativeTime startTimeVal. */
+                            public startTimeVal: (number|Long|string);
+
+                            /**
+                             * Creates a new RelativeTime instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RelativeTime instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardQuery.Input.IRelativeTime): google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime;
+
+                            /**
+                             * Encodes the specified RelativeTime message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime.verify|verify} messages.
+                             * @param message RelativeTime message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardQuery.Input.IRelativeTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RelativeTime message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime.verify|verify} messages.
+                             * @param message RelativeTime message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardQuery.Input.IRelativeTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RelativeTime message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RelativeTime
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime;
+
+                            /**
+                             * Decodes a RelativeTime message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RelativeTime
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime;
+
+                            /**
+                             * Verifies a RelativeTime message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RelativeTime message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RelativeTime
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime;
+
+                            /**
+                             * Creates a plain object from a RelativeTime message. Also converts values to other types if specified.
+                             * @param message RelativeTime
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardQuery.Input.RelativeTime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RelativeTime to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RelativeTime
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a GetDashboardQueryRequest. */
+                interface IGetDashboardQueryRequest {
+
+                    /** GetDashboardQueryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDashboardQueryRequest. */
+                class GetDashboardQueryRequest implements IGetDashboardQueryRequest {
+
+                    /**
+                     * Constructs a new GetDashboardQueryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDashboardQueryRequest);
+
+                    /** GetDashboardQueryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDashboardQueryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDashboardQueryRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDashboardQueryRequest): google.cloud.chronicle.v1.GetDashboardQueryRequest;
+
+                    /**
+                     * Encodes the specified GetDashboardQueryRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDashboardQueryRequest.verify|verify} messages.
+                     * @param message GetDashboardQueryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDashboardQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDashboardQueryRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDashboardQueryRequest.verify|verify} messages.
+                     * @param message GetDashboardQueryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDashboardQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDashboardQueryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDashboardQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDashboardQueryRequest;
+
+                    /**
+                     * Decodes a GetDashboardQueryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDashboardQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDashboardQueryRequest;
+
+                    /**
+                     * Verifies a GetDashboardQueryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDashboardQueryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDashboardQueryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDashboardQueryRequest;
+
+                    /**
+                     * Creates a plain object from a GetDashboardQueryRequest message. Also converts values to other types if specified.
+                     * @param message GetDashboardQueryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDashboardQueryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDashboardQueryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDashboardQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExecuteDashboardQueryRequest. */
+                interface IExecuteDashboardQueryRequest {
+
+                    /** ExecuteDashboardQueryRequest parent */
+                    parent?: (string|null);
+
+                    /** ExecuteDashboardQueryRequest query */
+                    query?: (google.cloud.chronicle.v1.IDashboardQuery|null);
+
+                    /** ExecuteDashboardQueryRequest filters */
+                    filters?: (google.cloud.chronicle.v1.IDashboardFilter[]|null);
+
+                    /** ExecuteDashboardQueryRequest clearCache */
+                    clearCache?: (boolean|null);
+
+                    /** ExecuteDashboardQueryRequest usePreviousTimeRange */
+                    usePreviousTimeRange?: (boolean|null);
+                }
+
+                /** Represents an ExecuteDashboardQueryRequest. */
+                class ExecuteDashboardQueryRequest implements IExecuteDashboardQueryRequest {
+
+                    /**
+                     * Constructs a new ExecuteDashboardQueryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IExecuteDashboardQueryRequest);
+
+                    /** ExecuteDashboardQueryRequest parent. */
+                    public parent: string;
+
+                    /** ExecuteDashboardQueryRequest query. */
+                    public query?: (google.cloud.chronicle.v1.IDashboardQuery|null);
+
+                    /** ExecuteDashboardQueryRequest filters. */
+                    public filters: google.cloud.chronicle.v1.IDashboardFilter[];
+
+                    /** ExecuteDashboardQueryRequest clearCache. */
+                    public clearCache: boolean;
+
+                    /** ExecuteDashboardQueryRequest usePreviousTimeRange. */
+                    public usePreviousTimeRange: boolean;
+
+                    /**
+                     * Creates a new ExecuteDashboardQueryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecuteDashboardQueryRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IExecuteDashboardQueryRequest): google.cloud.chronicle.v1.ExecuteDashboardQueryRequest;
+
+                    /**
+                     * Encodes the specified ExecuteDashboardQueryRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryRequest.verify|verify} messages.
+                     * @param message ExecuteDashboardQueryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IExecuteDashboardQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecuteDashboardQueryRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryRequest.verify|verify} messages.
+                     * @param message ExecuteDashboardQueryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IExecuteDashboardQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecuteDashboardQueryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecuteDashboardQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryRequest;
+
+                    /**
+                     * Decodes an ExecuteDashboardQueryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecuteDashboardQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryRequest;
+
+                    /**
+                     * Verifies an ExecuteDashboardQueryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecuteDashboardQueryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecuteDashboardQueryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryRequest;
+
+                    /**
+                     * Creates a plain object from an ExecuteDashboardQueryRequest message. Also converts values to other types if specified.
+                     * @param message ExecuteDashboardQueryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecuteDashboardQueryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecuteDashboardQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryRuntimeError. */
+                interface IQueryRuntimeError {
+
+                    /** QueryRuntimeError errorTitle */
+                    errorTitle?: (string|null);
+
+                    /** QueryRuntimeError errorDescription */
+                    errorDescription?: (string|null);
+
+                    /** QueryRuntimeError errorSeverity */
+                    errorSeverity?: (google.cloud.chronicle.v1.QueryRuntimeError.ErrorSeverity|keyof typeof google.cloud.chronicle.v1.QueryRuntimeError.ErrorSeverity|null);
+
+                    /** QueryRuntimeError metadata */
+                    metadata?: (google.cloud.chronicle.v1.QueryRuntimeError.IQueryRuntimeErrorMetadata[]|null);
+
+                    /** QueryRuntimeError warningReason */
+                    warningReason?: (google.cloud.chronicle.v1.QueryRuntimeError.WarningReason|keyof typeof google.cloud.chronicle.v1.QueryRuntimeError.WarningReason|null);
+                }
+
+                /** Represents a QueryRuntimeError. */
+                class QueryRuntimeError implements IQueryRuntimeError {
+
+                    /**
+                     * Constructs a new QueryRuntimeError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IQueryRuntimeError);
+
+                    /** QueryRuntimeError errorTitle. */
+                    public errorTitle: string;
+
+                    /** QueryRuntimeError errorDescription. */
+                    public errorDescription: string;
+
+                    /** QueryRuntimeError errorSeverity. */
+                    public errorSeverity: (google.cloud.chronicle.v1.QueryRuntimeError.ErrorSeverity|keyof typeof google.cloud.chronicle.v1.QueryRuntimeError.ErrorSeverity);
+
+                    /** QueryRuntimeError metadata. */
+                    public metadata: google.cloud.chronicle.v1.QueryRuntimeError.IQueryRuntimeErrorMetadata[];
+
+                    /** QueryRuntimeError warningReason. */
+                    public warningReason: (google.cloud.chronicle.v1.QueryRuntimeError.WarningReason|keyof typeof google.cloud.chronicle.v1.QueryRuntimeError.WarningReason);
+
+                    /**
+                     * Creates a new QueryRuntimeError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryRuntimeError instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IQueryRuntimeError): google.cloud.chronicle.v1.QueryRuntimeError;
+
+                    /**
+                     * Encodes the specified QueryRuntimeError message. Does not implicitly {@link google.cloud.chronicle.v1.QueryRuntimeError.verify|verify} messages.
+                     * @param message QueryRuntimeError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IQueryRuntimeError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryRuntimeError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.QueryRuntimeError.verify|verify} messages.
+                     * @param message QueryRuntimeError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IQueryRuntimeError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryRuntimeError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryRuntimeError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.QueryRuntimeError;
+
+                    /**
+                     * Decodes a QueryRuntimeError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryRuntimeError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.QueryRuntimeError;
+
+                    /**
+                     * Verifies a QueryRuntimeError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryRuntimeError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryRuntimeError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.QueryRuntimeError;
+
+                    /**
+                     * Creates a plain object from a QueryRuntimeError message. Also converts values to other types if specified.
+                     * @param message QueryRuntimeError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.QueryRuntimeError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryRuntimeError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryRuntimeError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QueryRuntimeError {
+
+                    /** Properties of a QueryRuntimeErrorMetadata. */
+                    interface IQueryRuntimeErrorMetadata {
+
+                        /** QueryRuntimeErrorMetadata key */
+                        key?: (google.cloud.chronicle.v1.QueryRuntimeError.MetadataKey|keyof typeof google.cloud.chronicle.v1.QueryRuntimeError.MetadataKey|null);
+
+                        /** QueryRuntimeErrorMetadata value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a QueryRuntimeErrorMetadata. */
+                    class QueryRuntimeErrorMetadata implements IQueryRuntimeErrorMetadata {
+
+                        /**
+                         * Constructs a new QueryRuntimeErrorMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.QueryRuntimeError.IQueryRuntimeErrorMetadata);
+
+                        /** QueryRuntimeErrorMetadata key. */
+                        public key: (google.cloud.chronicle.v1.QueryRuntimeError.MetadataKey|keyof typeof google.cloud.chronicle.v1.QueryRuntimeError.MetadataKey);
+
+                        /** QueryRuntimeErrorMetadata value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new QueryRuntimeErrorMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryRuntimeErrorMetadata instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.QueryRuntimeError.IQueryRuntimeErrorMetadata): google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata;
+
+                        /**
+                         * Encodes the specified QueryRuntimeErrorMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata.verify|verify} messages.
+                         * @param message QueryRuntimeErrorMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.QueryRuntimeError.IQueryRuntimeErrorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryRuntimeErrorMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata.verify|verify} messages.
+                         * @param message QueryRuntimeErrorMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.QueryRuntimeError.IQueryRuntimeErrorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryRuntimeErrorMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryRuntimeErrorMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata;
+
+                        /**
+                         * Decodes a QueryRuntimeErrorMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryRuntimeErrorMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata;
+
+                        /**
+                         * Verifies a QueryRuntimeErrorMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryRuntimeErrorMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryRuntimeErrorMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata;
+
+                        /**
+                         * Creates a plain object from a QueryRuntimeErrorMetadata message. Also converts values to other types if specified.
+                         * @param message QueryRuntimeErrorMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.QueryRuntimeError.QueryRuntimeErrorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryRuntimeErrorMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryRuntimeErrorMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ErrorSeverity enum. */
+                    enum ErrorSeverity {
+                        ERROR_SEVERITY_UNSPECIFIED = 0,
+                        WARNING = 1,
+                        SEVERE = 2
+                    }
+
+                    /** MetadataKey enum. */
+                    enum MetadataKey {
+                        METADATA_KEY_UNSPECIFIED = 0,
+                        ROW_LIMIT = 1
+                    }
+
+                    /** WarningReason enum. */
+                    enum WarningReason {
+                        WARNING_REASON_UNSPECIFIED = 0,
+                        ROW_LIMIT_EXCEEDED = 1,
+                        DEFAULT_ROW_LIMIT_EXCEEDED = 2,
+                        CURATED_QUERY_DEFAULT_ROW_LIMIT_EXCEEDED = 3
+                    }
+                }
+
+                /** Properties of an ExecuteDashboardQueryResponse. */
+                interface IExecuteDashboardQueryResponse {
+
+                    /** ExecuteDashboardQueryResponse results */
+                    results?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnData[]|null);
+
+                    /** ExecuteDashboardQueryResponse dataSources */
+                    dataSources?: (google.cloud.chronicle.v1.DataSource[]|null);
+
+                    /** ExecuteDashboardQueryResponse lastBackendCacheRefreshedTime */
+                    lastBackendCacheRefreshedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExecuteDashboardQueryResponse timeWindow */
+                    timeWindow?: (google.type.IInterval|null);
+
+                    /** ExecuteDashboardQueryResponse queryRuntimeErrors */
+                    queryRuntimeErrors?: (google.cloud.chronicle.v1.IQueryRuntimeError[]|null);
+
+                    /** ExecuteDashboardQueryResponse languageFeatures */
+                    languageFeatures?: (google.cloud.chronicle.v1.LanguageFeature[]|null);
+                }
+
+                /** Represents an ExecuteDashboardQueryResponse. */
+                class ExecuteDashboardQueryResponse implements IExecuteDashboardQueryResponse {
+
+                    /**
+                     * Constructs a new ExecuteDashboardQueryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IExecuteDashboardQueryResponse);
+
+                    /** ExecuteDashboardQueryResponse results. */
+                    public results: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnData[];
+
+                    /** ExecuteDashboardQueryResponse dataSources. */
+                    public dataSources: google.cloud.chronicle.v1.DataSource[];
+
+                    /** ExecuteDashboardQueryResponse lastBackendCacheRefreshedTime. */
+                    public lastBackendCacheRefreshedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExecuteDashboardQueryResponse timeWindow. */
+                    public timeWindow?: (google.type.IInterval|null);
+
+                    /** ExecuteDashboardQueryResponse queryRuntimeErrors. */
+                    public queryRuntimeErrors: google.cloud.chronicle.v1.IQueryRuntimeError[];
+
+                    /** ExecuteDashboardQueryResponse languageFeatures. */
+                    public languageFeatures: google.cloud.chronicle.v1.LanguageFeature[];
+
+                    /**
+                     * Creates a new ExecuteDashboardQueryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecuteDashboardQueryResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IExecuteDashboardQueryResponse): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse;
+
+                    /**
+                     * Encodes the specified ExecuteDashboardQueryResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.verify|verify} messages.
+                     * @param message ExecuteDashboardQueryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IExecuteDashboardQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecuteDashboardQueryResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.verify|verify} messages.
+                     * @param message ExecuteDashboardQueryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IExecuteDashboardQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecuteDashboardQueryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecuteDashboardQueryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse;
+
+                    /**
+                     * Decodes an ExecuteDashboardQueryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecuteDashboardQueryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse;
+
+                    /**
+                     * Verifies an ExecuteDashboardQueryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecuteDashboardQueryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecuteDashboardQueryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse;
+
+                    /**
+                     * Creates a plain object from an ExecuteDashboardQueryResponse message. Also converts values to other types if specified.
+                     * @param message ExecuteDashboardQueryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecuteDashboardQueryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecuteDashboardQueryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExecuteDashboardQueryResponse {
+
+                    /** Properties of a ColumnValue. */
+                    interface IColumnValue {
+
+                        /** ColumnValue nullVal */
+                        nullVal?: (boolean|null);
+
+                        /** ColumnValue boolVal */
+                        boolVal?: (boolean|null);
+
+                        /** ColumnValue bytesVal */
+                        bytesVal?: (Uint8Array|Buffer|string|null);
+
+                        /** ColumnValue doubleVal */
+                        doubleVal?: (number|null);
+
+                        /** ColumnValue int64Val */
+                        int64Val?: (number|Long|string|null);
+
+                        /** ColumnValue uint64Val */
+                        uint64Val?: (number|Long|string|null);
+
+                        /** ColumnValue stringVal */
+                        stringVal?: (string|null);
+
+                        /** ColumnValue timestampVal */
+                        timestampVal?: (google.protobuf.ITimestamp|null);
+
+                        /** ColumnValue dateVal */
+                        dateVal?: (google.type.IDate|null);
+
+                        /** ColumnValue protoVal */
+                        protoVal?: (google.protobuf.IAny|null);
+
+                        /** ColumnValue metadata */
+                        metadata?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.IValueMetadata|null);
+                    }
+
+                    /** Represents a ColumnValue. */
+                    class ColumnValue implements IColumnValue {
+
+                        /**
+                         * Constructs a new ColumnValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue);
+
+                        /** ColumnValue nullVal. */
+                        public nullVal?: (boolean|null);
+
+                        /** ColumnValue boolVal. */
+                        public boolVal?: (boolean|null);
+
+                        /** ColumnValue bytesVal. */
+                        public bytesVal?: (Uint8Array|Buffer|string|null);
+
+                        /** ColumnValue doubleVal. */
+                        public doubleVal?: (number|null);
+
+                        /** ColumnValue int64Val. */
+                        public int64Val?: (number|Long|string|null);
+
+                        /** ColumnValue uint64Val. */
+                        public uint64Val?: (number|Long|string|null);
+
+                        /** ColumnValue stringVal. */
+                        public stringVal?: (string|null);
+
+                        /** ColumnValue timestampVal. */
+                        public timestampVal?: (google.protobuf.ITimestamp|null);
+
+                        /** ColumnValue dateVal. */
+                        public dateVal?: (google.type.IDate|null);
+
+                        /** ColumnValue protoVal. */
+                        public protoVal?: (google.protobuf.IAny|null);
+
+                        /** ColumnValue metadata. */
+                        public metadata?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.IValueMetadata|null);
+
+                        /** ColumnValue value. */
+                        public value?: ("nullVal"|"boolVal"|"bytesVal"|"doubleVal"|"int64Val"|"uint64Val"|"stringVal"|"timestampVal"|"dateVal"|"protoVal");
+
+                        /**
+                         * Creates a new ColumnValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColumnValue instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue;
+
+                        /**
+                         * Encodes the specified ColumnValue message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.verify|verify} messages.
+                         * @param message ColumnValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColumnValue message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.verify|verify} messages.
+                         * @param message ColumnValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColumnValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColumnValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue;
+
+                        /**
+                         * Decodes a ColumnValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColumnValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue;
+
+                        /**
+                         * Verifies a ColumnValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColumnValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColumnValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue;
+
+                        /**
+                         * Creates a plain object from a ColumnValue message. Also converts values to other types if specified.
+                         * @param message ColumnValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColumnValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColumnValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ColumnValue {
+
+                        /** Properties of a ValueMetadata. */
+                        interface IValueMetadata {
+
+                            /** ValueMetadata links */
+                            links?: (google.cloud.chronicle.v1.IInAppLink[]|null);
+
+                            /** ValueMetadata fieldPaths */
+                            fieldPaths?: (string[]|null);
+
+                            /** ValueMetadata timestampVal */
+                            timestampVal?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a ValueMetadata. */
+                        class ValueMetadata implements IValueMetadata {
+
+                            /**
+                             * Constructs a new ValueMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.IValueMetadata);
+
+                            /** ValueMetadata links. */
+                            public links: google.cloud.chronicle.v1.IInAppLink[];
+
+                            /** ValueMetadata fieldPaths. */
+                            public fieldPaths: string[];
+
+                            /** ValueMetadata timestampVal. */
+                            public timestampVal?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new ValueMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ValueMetadata instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.IValueMetadata): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata;
+
+                            /**
+                             * Encodes the specified ValueMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata.verify|verify} messages.
+                             * @param message ValueMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.IValueMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ValueMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata.verify|verify} messages.
+                             * @param message ValueMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.IValueMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ValueMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ValueMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata;
+
+                            /**
+                             * Decodes a ValueMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ValueMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata;
+
+                            /**
+                             * Verifies a ValueMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ValueMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ValueMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata;
+
+                            /**
+                             * Creates a plain object from a ValueMetadata message. Also converts values to other types if specified.
+                             * @param message ValueMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ValueMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ValueMetadata
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ColumnType. */
+                    interface IColumnType {
+
+                        /** ColumnType value */
+                        value?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue|null);
+
+                        /** ColumnType list */
+                        list?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.IList|null);
+                    }
+
+                    /** Represents a ColumnType. */
+                    class ColumnType implements IColumnType {
+
+                        /**
+                         * Constructs a new ColumnType.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnType);
+
+                        /** ColumnType value. */
+                        public value?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue|null);
+
+                        /** ColumnType list. */
+                        public list?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.IList|null);
+
+                        /** ColumnType type. */
+                        public type?: ("value"|"list");
+
+                        /**
+                         * Creates a new ColumnType instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColumnType instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnType): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType;
+
+                        /**
+                         * Encodes the specified ColumnType message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.verify|verify} messages.
+                         * @param message ColumnType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColumnType message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.verify|verify} messages.
+                         * @param message ColumnType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColumnType message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColumnType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType;
+
+                        /**
+                         * Decodes a ColumnType message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColumnType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType;
+
+                        /**
+                         * Verifies a ColumnType message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColumnType message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColumnType
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType;
+
+                        /**
+                         * Creates a plain object from a ColumnType message. Also converts values to other types if specified.
+                         * @param message ColumnType
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColumnType to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColumnType
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ColumnType {
+
+                        /** Properties of a List. */
+                        interface IList {
+
+                            /** List values */
+                            values?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue[]|null);
+                        }
+
+                        /** Represents a List. */
+                        class List implements IList {
+
+                            /**
+                             * Constructs a new List.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.IList);
+
+                            /** List values. */
+                            public values: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnValue[];
+
+                            /**
+                             * Creates a new List instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns List instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.IList): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List;
+
+                            /**
+                             * Encodes the specified List message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List.verify|verify} messages.
+                             * @param message List message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.IList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified List message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List.verify|verify} messages.
+                             * @param message List message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.IList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a List message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns List
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List;
+
+                            /**
+                             * Decodes a List message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns List
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List;
+
+                            /**
+                             * Verifies a List message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a List message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns List
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List;
+
+                            /**
+                             * Creates a plain object from a List message. Also converts values to other types if specified.
+                             * @param message List
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this List to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for List
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ColumnData. */
+                    interface IColumnData {
+
+                        /** ColumnData column */
+                        column?: (string|null);
+
+                        /** ColumnData values */
+                        values?: (google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnType[]|null);
+
+                        /** ColumnData metadata */
+                        metadata?: (google.cloud.chronicle.v1.IColumnMetadata|null);
+                    }
+
+                    /** Represents a ColumnData. */
+                    class ColumnData implements IColumnData {
+
+                        /**
+                         * Constructs a new ColumnData.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnData);
+
+                        /** ColumnData column. */
+                        public column: string;
+
+                        /** ColumnData values. */
+                        public values: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnType[];
+
+                        /** ColumnData metadata. */
+                        public metadata?: (google.cloud.chronicle.v1.IColumnMetadata|null);
+
+                        /**
+                         * Creates a new ColumnData instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ColumnData instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnData): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData;
+
+                        /**
+                         * Encodes the specified ColumnData message. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData.verify|verify} messages.
+                         * @param message ColumnData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ColumnData message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData.verify|verify} messages.
+                         * @param message ColumnData message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.IColumnData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ColumnData message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ColumnData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData;
+
+                        /**
+                         * Decodes a ColumnData message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ColumnData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData;
+
+                        /**
+                         * Verifies a ColumnData message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ColumnData message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ColumnData
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData;
+
+                        /**
+                         * Creates a plain object from a ColumnData message. Also converts values to other types if specified.
+                         * @param message ColumnData
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ColumnData to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ColumnData
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a DashboardFilter. */
+                interface IDashboardFilter {
+
+                    /** DashboardFilter id */
+                    id?: (string|null);
+
+                    /** DashboardFilter dataSource */
+                    dataSource?: (google.cloud.chronicle.v1.DataSource|keyof typeof google.cloud.chronicle.v1.DataSource|null);
+
+                    /** DashboardFilter fieldPath */
+                    fieldPath?: (string|null);
+
+                    /** DashboardFilter filterOperatorAndFieldValues */
+                    filterOperatorAndFieldValues?: (google.cloud.chronicle.v1.IFilterOperatorAndValues[]|null);
+
+                    /** DashboardFilter displayName */
+                    displayName?: (string|null);
+
+                    /** DashboardFilter chartIds */
+                    chartIds?: (string[]|null);
+
+                    /** DashboardFilter isStandardTimeRangeFilter */
+                    isStandardTimeRangeFilter?: (boolean|null);
+
+                    /** DashboardFilter isMandatory */
+                    isMandatory?: (boolean|null);
+
+                    /** DashboardFilter isStandardTimeRangeFilterEnabled */
+                    isStandardTimeRangeFilterEnabled?: (boolean|null);
+
+                    /** DashboardFilter advancedFilterConfig */
+                    advancedFilterConfig?: (google.cloud.chronicle.v1.IAdvancedFilterConfig|null);
+                }
+
+                /** Represents a DashboardFilter. */
+                class DashboardFilter implements IDashboardFilter {
+
+                    /**
+                     * Constructs a new DashboardFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDashboardFilter);
+
+                    /** DashboardFilter id. */
+                    public id: string;
+
+                    /** DashboardFilter dataSource. */
+                    public dataSource: (google.cloud.chronicle.v1.DataSource|keyof typeof google.cloud.chronicle.v1.DataSource);
+
+                    /** DashboardFilter fieldPath. */
+                    public fieldPath: string;
+
+                    /** DashboardFilter filterOperatorAndFieldValues. */
+                    public filterOperatorAndFieldValues: google.cloud.chronicle.v1.IFilterOperatorAndValues[];
+
+                    /** DashboardFilter displayName. */
+                    public displayName: string;
+
+                    /** DashboardFilter chartIds. */
+                    public chartIds: string[];
+
+                    /** DashboardFilter isStandardTimeRangeFilter. */
+                    public isStandardTimeRangeFilter: boolean;
+
+                    /** DashboardFilter isMandatory. */
+                    public isMandatory: boolean;
+
+                    /** DashboardFilter isStandardTimeRangeFilterEnabled. */
+                    public isStandardTimeRangeFilterEnabled?: (boolean|null);
+
+                    /** DashboardFilter advancedFilterConfig. */
+                    public advancedFilterConfig?: (google.cloud.chronicle.v1.IAdvancedFilterConfig|null);
+
+                    /**
+                     * Creates a new DashboardFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DashboardFilter instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDashboardFilter): google.cloud.chronicle.v1.DashboardFilter;
+
+                    /**
+                     * Encodes the specified DashboardFilter message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardFilter.verify|verify} messages.
+                     * @param message DashboardFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDashboardFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DashboardFilter message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardFilter.verify|verify} messages.
+                     * @param message DashboardFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDashboardFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DashboardFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DashboardFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardFilter;
+
+                    /**
+                     * Decodes a DashboardFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DashboardFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardFilter;
+
+                    /**
+                     * Verifies a DashboardFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DashboardFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DashboardFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardFilter;
+
+                    /**
+                     * Creates a plain object from a DashboardFilter message. Also converts values to other types if specified.
+                     * @param message DashboardFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DashboardFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DashboardFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DashboardFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FilterOperatorAndValues. */
+                interface IFilterOperatorAndValues {
+
+                    /** FilterOperatorAndValues filterOperator */
+                    filterOperator?: (google.cloud.chronicle.v1.FilterOperator|keyof typeof google.cloud.chronicle.v1.FilterOperator|null);
+
+                    /** FilterOperatorAndValues fieldValues */
+                    fieldValues?: (string[]|null);
+                }
+
+                /** Represents a FilterOperatorAndValues. */
+                class FilterOperatorAndValues implements IFilterOperatorAndValues {
+
+                    /**
+                     * Constructs a new FilterOperatorAndValues.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IFilterOperatorAndValues);
+
+                    /** FilterOperatorAndValues filterOperator. */
+                    public filterOperator: (google.cloud.chronicle.v1.FilterOperator|keyof typeof google.cloud.chronicle.v1.FilterOperator);
+
+                    /** FilterOperatorAndValues fieldValues. */
+                    public fieldValues: string[];
+
+                    /**
+                     * Creates a new FilterOperatorAndValues instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterOperatorAndValues instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IFilterOperatorAndValues): google.cloud.chronicle.v1.FilterOperatorAndValues;
+
+                    /**
+                     * Encodes the specified FilterOperatorAndValues message. Does not implicitly {@link google.cloud.chronicle.v1.FilterOperatorAndValues.verify|verify} messages.
+                     * @param message FilterOperatorAndValues message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IFilterOperatorAndValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterOperatorAndValues message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FilterOperatorAndValues.verify|verify} messages.
+                     * @param message FilterOperatorAndValues message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IFilterOperatorAndValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterOperatorAndValues message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterOperatorAndValues
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.FilterOperatorAndValues;
+
+                    /**
+                     * Decodes a FilterOperatorAndValues message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterOperatorAndValues
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.FilterOperatorAndValues;
+
+                    /**
+                     * Verifies a FilterOperatorAndValues message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterOperatorAndValues message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterOperatorAndValues
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.FilterOperatorAndValues;
+
+                    /**
+                     * Creates a plain object from a FilterOperatorAndValues message. Also converts values to other types if specified.
+                     * @param message FilterOperatorAndValues
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.FilterOperatorAndValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterOperatorAndValues to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FilterOperatorAndValues
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AdvancedFilterConfig. */
+                interface IAdvancedFilterConfig {
+
+                    /** AdvancedFilterConfig token */
+                    token?: (string|null);
+
+                    /** AdvancedFilterConfig prefix */
+                    prefix?: (string|null);
+
+                    /** AdvancedFilterConfig suffix */
+                    suffix?: (string|null);
+
+                    /** AdvancedFilterConfig separator */
+                    separator?: (string|null);
+
+                    /** AdvancedFilterConfig multipleAllowed */
+                    multipleAllowed?: (boolean|null);
+
+                    /** AdvancedFilterConfig defaultValues */
+                    defaultValues?: (string[]|null);
+
+                    /** AdvancedFilterConfig skipDefaultAffixes */
+                    skipDefaultAffixes?: (boolean|null);
+
+                    /** AdvancedFilterConfig valueSource */
+                    valueSource?: (google.cloud.chronicle.v1.AdvancedFilterConfig.IValueSource|null);
+                }
+
+                /** Represents an AdvancedFilterConfig. */
+                class AdvancedFilterConfig implements IAdvancedFilterConfig {
+
+                    /**
+                     * Constructs a new AdvancedFilterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IAdvancedFilterConfig);
+
+                    /** AdvancedFilterConfig token. */
+                    public token: string;
+
+                    /** AdvancedFilterConfig prefix. */
+                    public prefix: string;
+
+                    /** AdvancedFilterConfig suffix. */
+                    public suffix: string;
+
+                    /** AdvancedFilterConfig separator. */
+                    public separator: string;
+
+                    /** AdvancedFilterConfig multipleAllowed. */
+                    public multipleAllowed: boolean;
+
+                    /** AdvancedFilterConfig defaultValues. */
+                    public defaultValues: string[];
+
+                    /** AdvancedFilterConfig skipDefaultAffixes. */
+                    public skipDefaultAffixes: boolean;
+
+                    /** AdvancedFilterConfig valueSource. */
+                    public valueSource?: (google.cloud.chronicle.v1.AdvancedFilterConfig.IValueSource|null);
+
+                    /**
+                     * Creates a new AdvancedFilterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdvancedFilterConfig instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IAdvancedFilterConfig): google.cloud.chronicle.v1.AdvancedFilterConfig;
+
+                    /**
+                     * Encodes the specified AdvancedFilterConfig message. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.verify|verify} messages.
+                     * @param message AdvancedFilterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IAdvancedFilterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdvancedFilterConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.verify|verify} messages.
+                     * @param message AdvancedFilterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IAdvancedFilterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdvancedFilterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdvancedFilterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.AdvancedFilterConfig;
+
+                    /**
+                     * Decodes an AdvancedFilterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdvancedFilterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.AdvancedFilterConfig;
+
+                    /**
+                     * Verifies an AdvancedFilterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdvancedFilterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdvancedFilterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.AdvancedFilterConfig;
+
+                    /**
+                     * Creates a plain object from an AdvancedFilterConfig message. Also converts values to other types if specified.
+                     * @param message AdvancedFilterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.AdvancedFilterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdvancedFilterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdvancedFilterConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AdvancedFilterConfig {
+
+                    /** Properties of a ValueSource. */
+                    interface IValueSource {
+
+                        /** ValueSource manualOptions */
+                        manualOptions?: (google.cloud.chronicle.v1.AdvancedFilterConfig.IManualOptions|null);
+
+                        /** ValueSource queryOptions */
+                        queryOptions?: (google.cloud.chronicle.v1.AdvancedFilterConfig.IQueryOptions|null);
+                    }
+
+                    /** Represents a ValueSource. */
+                    class ValueSource implements IValueSource {
+
+                        /**
+                         * Constructs a new ValueSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.AdvancedFilterConfig.IValueSource);
+
+                        /** ValueSource manualOptions. */
+                        public manualOptions?: (google.cloud.chronicle.v1.AdvancedFilterConfig.IManualOptions|null);
+
+                        /** ValueSource queryOptions. */
+                        public queryOptions?: (google.cloud.chronicle.v1.AdvancedFilterConfig.IQueryOptions|null);
+
+                        /** ValueSource source. */
+                        public source?: ("manualOptions"|"queryOptions");
+
+                        /**
+                         * Creates a new ValueSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ValueSource instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.AdvancedFilterConfig.IValueSource): google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource;
+
+                        /**
+                         * Encodes the specified ValueSource message. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource.verify|verify} messages.
+                         * @param message ValueSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.AdvancedFilterConfig.IValueSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ValueSource message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource.verify|verify} messages.
+                         * @param message ValueSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.AdvancedFilterConfig.IValueSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ValueSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ValueSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource;
+
+                        /**
+                         * Decodes a ValueSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ValueSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource;
+
+                        /**
+                         * Verifies a ValueSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ValueSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ValueSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource;
+
+                        /**
+                         * Creates a plain object from a ValueSource message. Also converts values to other types if specified.
+                         * @param message ValueSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.AdvancedFilterConfig.ValueSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ValueSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ValueSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ManualOptions. */
+                    interface IManualOptions {
+
+                        /** ManualOptions options */
+                        options?: (string[]|null);
+                    }
+
+                    /** Represents a ManualOptions. */
+                    class ManualOptions implements IManualOptions {
+
+                        /**
+                         * Constructs a new ManualOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.AdvancedFilterConfig.IManualOptions);
+
+                        /** ManualOptions options. */
+                        public options: string[];
+
+                        /**
+                         * Creates a new ManualOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ManualOptions instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.AdvancedFilterConfig.IManualOptions): google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions;
+
+                        /**
+                         * Encodes the specified ManualOptions message. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions.verify|verify} messages.
+                         * @param message ManualOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.AdvancedFilterConfig.IManualOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ManualOptions message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions.verify|verify} messages.
+                         * @param message ManualOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.AdvancedFilterConfig.IManualOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ManualOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ManualOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions;
+
+                        /**
+                         * Decodes a ManualOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ManualOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions;
+
+                        /**
+                         * Verifies a ManualOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ManualOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ManualOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions;
+
+                        /**
+                         * Creates a plain object from a ManualOptions message. Also converts values to other types if specified.
+                         * @param message ManualOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.AdvancedFilterConfig.ManualOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ManualOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ManualOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QueryOptions. */
+                    interface IQueryOptions {
+
+                        /** QueryOptions query */
+                        query?: (string|null);
+
+                        /** QueryOptions column */
+                        column?: (string|null);
+
+                        /** QueryOptions globalTimeFilterEnabled */
+                        globalTimeFilterEnabled?: (boolean|null);
+
+                        /** QueryOptions input */
+                        input?: (google.cloud.chronicle.v1.DashboardQuery.IInput|null);
+                    }
+
+                    /** Represents a QueryOptions. */
+                    class QueryOptions implements IQueryOptions {
+
+                        /**
+                         * Constructs a new QueryOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.AdvancedFilterConfig.IQueryOptions);
+
+                        /** QueryOptions query. */
+                        public query: string;
+
+                        /** QueryOptions column. */
+                        public column: string;
+
+                        /** QueryOptions globalTimeFilterEnabled. */
+                        public globalTimeFilterEnabled: boolean;
+
+                        /** QueryOptions input. */
+                        public input?: (google.cloud.chronicle.v1.DashboardQuery.IInput|null);
+
+                        /**
+                         * Creates a new QueryOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryOptions instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.AdvancedFilterConfig.IQueryOptions): google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions;
+
+                        /**
+                         * Encodes the specified QueryOptions message. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions.verify|verify} messages.
+                         * @param message QueryOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.AdvancedFilterConfig.IQueryOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryOptions message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions.verify|verify} messages.
+                         * @param message QueryOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.AdvancedFilterConfig.IQueryOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions;
+
+                        /**
+                         * Decodes a QueryOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions;
+
+                        /**
+                         * Verifies a QueryOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions;
+
+                        /**
+                         * Creates a plain object from a QueryOptions message. Also converts values to other types if specified.
+                         * @param message QueryOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.AdvancedFilterConfig.QueryOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an InAppLink. */
+                interface IInAppLink {
+
+                    /** InAppLink url */
+                    url?: (string|null);
+
+                    /** InAppLink label */
+                    label?: (string|null);
+
+                    /** InAppLink iconUrl */
+                    iconUrl?: (string|null);
+                }
+
+                /** Represents an InAppLink. */
+                class InAppLink implements IInAppLink {
+
+                    /**
+                     * Constructs a new InAppLink.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IInAppLink);
+
+                    /** InAppLink url. */
+                    public url: string;
+
+                    /** InAppLink label. */
+                    public label: string;
+
+                    /** InAppLink iconUrl. */
+                    public iconUrl: string;
+
+                    /**
+                     * Creates a new InAppLink instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InAppLink instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IInAppLink): google.cloud.chronicle.v1.InAppLink;
+
+                    /**
+                     * Encodes the specified InAppLink message. Does not implicitly {@link google.cloud.chronicle.v1.InAppLink.verify|verify} messages.
+                     * @param message InAppLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IInAppLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InAppLink message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.InAppLink.verify|verify} messages.
+                     * @param message InAppLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IInAppLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InAppLink message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InAppLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.InAppLink;
+
+                    /**
+                     * Decodes an InAppLink message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InAppLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.InAppLink;
+
+                    /**
+                     * Verifies an InAppLink message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InAppLink message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InAppLink
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.InAppLink;
+
+                    /**
+                     * Creates a plain object from an InAppLink message. Also converts values to other types if specified.
+                     * @param message InAppLink
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.InAppLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InAppLink to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InAppLink
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ColumnMetadata. */
+                interface IColumnMetadata {
+
+                    /** ColumnMetadata column */
+                    column?: (string|null);
+
+                    /** ColumnMetadata fieldPath */
+                    fieldPath?: (string|null);
+
+                    /** ColumnMetadata functionName */
+                    functionName?: (string|null);
+
+                    /** ColumnMetadata functionModule */
+                    functionModule?: (string|null);
+
+                    /** ColumnMetadata dataSource */
+                    dataSource?: (google.cloud.chronicle.v1.DataSource|keyof typeof google.cloud.chronicle.v1.DataSource|null);
+
+                    /** ColumnMetadata timestampMetadata */
+                    timestampMetadata?: (google.cloud.chronicle.v1.ITimestampMetadata|null);
+
+                    /** ColumnMetadata longitude */
+                    longitude?: (boolean|null);
+
+                    /** ColumnMetadata latitude */
+                    latitude?: (boolean|null);
+
+                    /** ColumnMetadata selected */
+                    selected?: (boolean|null);
+
+                    /** ColumnMetadata unselected */
+                    unselected?: (boolean|null);
+                }
+
+                /** Represents a ColumnMetadata. */
+                class ColumnMetadata implements IColumnMetadata {
+
+                    /**
+                     * Constructs a new ColumnMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IColumnMetadata);
+
+                    /** ColumnMetadata column. */
+                    public column: string;
+
+                    /** ColumnMetadata fieldPath. */
+                    public fieldPath: string;
+
+                    /** ColumnMetadata functionName. */
+                    public functionName: string;
+
+                    /** ColumnMetadata functionModule. */
+                    public functionModule: string;
+
+                    /** ColumnMetadata dataSource. */
+                    public dataSource: (google.cloud.chronicle.v1.DataSource|keyof typeof google.cloud.chronicle.v1.DataSource);
+
+                    /** ColumnMetadata timestampMetadata. */
+                    public timestampMetadata?: (google.cloud.chronicle.v1.ITimestampMetadata|null);
+
+                    /** ColumnMetadata longitude. */
+                    public longitude: boolean;
+
+                    /** ColumnMetadata latitude. */
+                    public latitude: boolean;
+
+                    /** ColumnMetadata selected. */
+                    public selected: boolean;
+
+                    /** ColumnMetadata unselected. */
+                    public unselected: boolean;
+
+                    /**
+                     * Creates a new ColumnMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IColumnMetadata): google.cloud.chronicle.v1.ColumnMetadata;
+
+                    /**
+                     * Encodes the specified ColumnMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.ColumnMetadata.verify|verify} messages.
+                     * @param message ColumnMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IColumnMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ColumnMetadata.verify|verify} messages.
+                     * @param message ColumnMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IColumnMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ColumnMetadata;
+
+                    /**
+                     * Decodes a ColumnMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ColumnMetadata;
+
+                    /**
+                     * Verifies a ColumnMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ColumnMetadata;
+
+                    /**
+                     * Creates a plain object from a ColumnMetadata message. Also converts values to other types if specified.
+                     * @param message ColumnMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ColumnMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColumnMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TimestampMetadata. */
+                interface ITimestampMetadata {
+
+                    /** TimestampMetadata timeFormat */
+                    timeFormat?: (string|null);
+
+                    /** TimestampMetadata timeZone */
+                    timeZone?: (string|null);
+
+                    /** TimestampMetadata timeGranularity */
+                    timeGranularity?: (string|null);
+
+                    /** TimestampMetadata isSortable */
+                    isSortable?: (boolean|null);
+
+                    /** TimestampMetadata isInterpolable */
+                    isInterpolable?: (boolean|null);
+                }
+
+                /** Represents a TimestampMetadata. */
+                class TimestampMetadata implements ITimestampMetadata {
+
+                    /**
+                     * Constructs a new TimestampMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ITimestampMetadata);
+
+                    /** TimestampMetadata timeFormat. */
+                    public timeFormat: string;
+
+                    /** TimestampMetadata timeZone. */
+                    public timeZone: string;
+
+                    /** TimestampMetadata timeGranularity. */
+                    public timeGranularity: string;
+
+                    /** TimestampMetadata isSortable. */
+                    public isSortable: boolean;
+
+                    /** TimestampMetadata isInterpolable. */
+                    public isInterpolable: boolean;
+
+                    /**
+                     * Creates a new TimestampMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimestampMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ITimestampMetadata): google.cloud.chronicle.v1.TimestampMetadata;
+
+                    /**
+                     * Encodes the specified TimestampMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.TimestampMetadata.verify|verify} messages.
+                     * @param message TimestampMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ITimestampMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimestampMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.TimestampMetadata.verify|verify} messages.
+                     * @param message TimestampMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ITimestampMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimestampMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimestampMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.TimestampMetadata;
+
+                    /**
+                     * Decodes a TimestampMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimestampMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.TimestampMetadata;
+
+                    /**
+                     * Verifies a TimestampMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimestampMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimestampMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.TimestampMetadata;
+
+                    /**
+                     * Creates a plain object from a TimestampMetadata message. Also converts values to other types if specified.
+                     * @param message TimestampMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.TimestampMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimestampMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimestampMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a DataAccessControlService */
                 class DataAccessControlService extends $protobuf.rpc.Service {
 
@@ -2034,6 +10382,3142 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a DataTableService */
+                class DataTableService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataTableService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataTableService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataTableService;
+
+                    /**
+                     * Calls CreateDataTable.
+                     * @param request CreateDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTable
+                     */
+                    public createDataTable(request: google.cloud.chronicle.v1.ICreateDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.CreateDataTableCallback): void;
+
+                    /**
+                     * Calls CreateDataTable.
+                     * @param request CreateDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataTable(request: google.cloud.chronicle.v1.ICreateDataTableRequest): Promise<google.cloud.chronicle.v1.DataTable>;
+
+                    /**
+                     * Calls ListDataTables.
+                     * @param request ListDataTablesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataTablesResponse
+                     */
+                    public listDataTables(request: google.cloud.chronicle.v1.IListDataTablesRequest, callback: google.cloud.chronicle.v1.DataTableService.ListDataTablesCallback): void;
+
+                    /**
+                     * Calls ListDataTables.
+                     * @param request ListDataTablesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataTables(request: google.cloud.chronicle.v1.IListDataTablesRequest): Promise<google.cloud.chronicle.v1.ListDataTablesResponse>;
+
+                    /**
+                     * Calls GetDataTable.
+                     * @param request GetDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTable
+                     */
+                    public getDataTable(request: google.cloud.chronicle.v1.IGetDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.GetDataTableCallback): void;
+
+                    /**
+                     * Calls GetDataTable.
+                     * @param request GetDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataTable(request: google.cloud.chronicle.v1.IGetDataTableRequest): Promise<google.cloud.chronicle.v1.DataTable>;
+
+                    /**
+                     * Calls UpdateDataTable.
+                     * @param request UpdateDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTable
+                     */
+                    public updateDataTable(request: google.cloud.chronicle.v1.IUpdateDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.UpdateDataTableCallback): void;
+
+                    /**
+                     * Calls UpdateDataTable.
+                     * @param request UpdateDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataTable(request: google.cloud.chronicle.v1.IUpdateDataTableRequest): Promise<google.cloud.chronicle.v1.DataTable>;
+
+                    /**
+                     * Calls DeleteDataTable.
+                     * @param request DeleteDataTableRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataTable(request: google.cloud.chronicle.v1.IDeleteDataTableRequest, callback: google.cloud.chronicle.v1.DataTableService.DeleteDataTableCallback): void;
+
+                    /**
+                     * Calls DeleteDataTable.
+                     * @param request DeleteDataTableRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataTable(request: google.cloud.chronicle.v1.IDeleteDataTableRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateDataTableRow.
+                     * @param request CreateDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableRow
+                     */
+                    public createDataTableRow(request: google.cloud.chronicle.v1.ICreateDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.CreateDataTableRowCallback): void;
+
+                    /**
+                     * Calls CreateDataTableRow.
+                     * @param request CreateDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataTableRow(request: google.cloud.chronicle.v1.ICreateDataTableRowRequest): Promise<google.cloud.chronicle.v1.DataTableRow>;
+
+                    /**
+                     * Calls UpdateDataTableRow.
+                     * @param request UpdateDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableRow
+                     */
+                    public updateDataTableRow(request: google.cloud.chronicle.v1.IUpdateDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.UpdateDataTableRowCallback): void;
+
+                    /**
+                     * Calls UpdateDataTableRow.
+                     * @param request UpdateDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataTableRow(request: google.cloud.chronicle.v1.IUpdateDataTableRowRequest): Promise<google.cloud.chronicle.v1.DataTableRow>;
+
+                    /**
+                     * Calls ListDataTableRows.
+                     * @param request ListDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataTableRowsResponse
+                     */
+                    public listDataTableRows(request: google.cloud.chronicle.v1.IListDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.ListDataTableRowsCallback): void;
+
+                    /**
+                     * Calls ListDataTableRows.
+                     * @param request ListDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataTableRows(request: google.cloud.chronicle.v1.IListDataTableRowsRequest): Promise<google.cloud.chronicle.v1.ListDataTableRowsResponse>;
+
+                    /**
+                     * Calls GetDataTableRow.
+                     * @param request GetDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableRow
+                     */
+                    public getDataTableRow(request: google.cloud.chronicle.v1.IGetDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.GetDataTableRowCallback): void;
+
+                    /**
+                     * Calls GetDataTableRow.
+                     * @param request GetDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataTableRow(request: google.cloud.chronicle.v1.IGetDataTableRowRequest): Promise<google.cloud.chronicle.v1.DataTableRow>;
+
+                    /**
+                     * Calls DeleteDataTableRow.
+                     * @param request DeleteDataTableRowRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDataTableRow(request: google.cloud.chronicle.v1.IDeleteDataTableRowRequest, callback: google.cloud.chronicle.v1.DataTableService.DeleteDataTableRowCallback): void;
+
+                    /**
+                     * Calls DeleteDataTableRow.
+                     * @param request DeleteDataTableRowRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataTableRow(request: google.cloud.chronicle.v1.IDeleteDataTableRowRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls BulkCreateDataTableRows.
+                     * @param request BulkCreateDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkCreateDataTableRowsResponse
+                     */
+                    public bulkCreateDataTableRows(request: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkCreateDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkCreateDataTableRows.
+                     * @param request BulkCreateDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkCreateDataTableRows(request: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse>;
+
+                    /**
+                     * Calls BulkGetDataTableRows.
+                     * @param request BulkGetDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkGetDataTableRowsResponse
+                     */
+                    public bulkGetDataTableRows(request: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkGetDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkGetDataTableRows.
+                     * @param request BulkGetDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkGetDataTableRows(request: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkGetDataTableRowsResponse>;
+
+                    /**
+                     * Calls BulkReplaceDataTableRows.
+                     * @param request BulkReplaceDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkReplaceDataTableRowsResponse
+                     */
+                    public bulkReplaceDataTableRows(request: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkReplaceDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkReplaceDataTableRows.
+                     * @param request BulkReplaceDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkReplaceDataTableRows(request: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse>;
+
+                    /**
+                     * Calls BulkUpdateDataTableRows.
+                     * @param request BulkUpdateDataTableRowsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BulkUpdateDataTableRowsResponse
+                     */
+                    public bulkUpdateDataTableRows(request: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest, callback: google.cloud.chronicle.v1.DataTableService.BulkUpdateDataTableRowsCallback): void;
+
+                    /**
+                     * Calls BulkUpdateDataTableRows.
+                     * @param request BulkUpdateDataTableRowsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkUpdateDataTableRows(request: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest): Promise<google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse>;
+
+                    /**
+                     * Calls GetDataTableOperationErrors.
+                     * @param request GetDataTableOperationErrorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataTableOperationErrors
+                     */
+                    public getDataTableOperationErrors(request: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest, callback: google.cloud.chronicle.v1.DataTableService.GetDataTableOperationErrorsCallback): void;
+
+                    /**
+                     * Calls GetDataTableOperationErrors.
+                     * @param request GetDataTableOperationErrorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataTableOperationErrors(request: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest): Promise<google.cloud.chronicle.v1.DataTableOperationErrors>;
+                }
+
+                namespace DataTableService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|createDataTable}.
+                     * @param error Error, if any
+                     * @param [response] DataTable
+                     */
+                    type CreateDataTableCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|listDataTables}.
+                     * @param error Error, if any
+                     * @param [response] ListDataTablesResponse
+                     */
+                    type ListDataTablesCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListDataTablesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTable}.
+                     * @param error Error, if any
+                     * @param [response] DataTable
+                     */
+                    type GetDataTableCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|updateDataTable}.
+                     * @param error Error, if any
+                     * @param [response] DataTable
+                     */
+                    type UpdateDataTableCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTable) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|deleteDataTable}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataTableCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|createDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] DataTableRow
+                     */
+                    type CreateDataTableRowCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableRow) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|updateDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] DataTableRow
+                     */
+                    type UpdateDataTableRowCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableRow) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|listDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] ListDataTableRowsResponse
+                     */
+                    type ListDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] DataTableRow
+                     */
+                    type GetDataTableRowCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableRow) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|deleteDataTableRow}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDataTableRowCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkCreateDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkCreateDataTableRowsResponse
+                     */
+                    type BulkCreateDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkGetDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkGetDataTableRowsResponse
+                     */
+                    type BulkGetDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkGetDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkReplaceDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkReplaceDataTableRowsResponse
+                     */
+                    type BulkReplaceDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|bulkUpdateDataTableRows}.
+                     * @param error Error, if any
+                     * @param [response] BulkUpdateDataTableRowsResponse
+                     */
+                    type BulkUpdateDataTableRowsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.DataTableService|getDataTableOperationErrors}.
+                     * @param error Error, if any
+                     * @param [response] DataTableOperationErrors
+                     */
+                    type GetDataTableOperationErrorsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DataTableOperationErrors) => void;
+                }
+
+                /** DataTableUpdateSource enum. */
+                enum DataTableUpdateSource {
+                    DATA_TABLE_UPDATE_SOURCE_UNSPECIFIED = 0,
+                    USER = 1,
+                    RULE = 2,
+                    SEARCH = 3
+                }
+
+                /** Properties of a CreateDataTableRequest. */
+                interface ICreateDataTableRequest {
+
+                    /** CreateDataTableRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataTableRequest dataTable */
+                    dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** CreateDataTableRequest dataTableId */
+                    dataTableId?: (string|null);
+                }
+
+                /** Represents a CreateDataTableRequest. */
+                class CreateDataTableRequest implements ICreateDataTableRequest {
+
+                    /**
+                     * Constructs a new CreateDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ICreateDataTableRequest);
+
+                    /** CreateDataTableRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataTableRequest dataTable. */
+                    public dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** CreateDataTableRequest dataTableId. */
+                    public dataTableId: string;
+
+                    /**
+                     * Creates a new CreateDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ICreateDataTableRequest): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Encodes the specified CreateDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRequest.verify|verify} messages.
+                     * @param message CreateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ICreateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRequest.verify|verify} messages.
+                     * @param message CreateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ICreateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Decodes a CreateDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Verifies a CreateDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.CreateDataTableRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataTableRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.CreateDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDataTableRequest. */
+                interface IGetDataTableRequest {
+
+                    /** GetDataTableRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataTableRequest. */
+                class GetDataTableRequest implements IGetDataTableRequest {
+
+                    /**
+                     * Constructs a new GetDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDataTableRequest);
+
+                    /** GetDataTableRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDataTableRequest): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Encodes the specified GetDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRequest.verify|verify} messages.
+                     * @param message GetDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRequest.verify|verify} messages.
+                     * @param message GetDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Decodes a GetDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Verifies a GetDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDataTableRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataTableRequest message. Also converts values to other types if specified.
+                     * @param message GetDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDataTableRequest. */
+                interface IUpdateDataTableRequest {
+
+                    /** UpdateDataTableRequest dataTable */
+                    dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** UpdateDataTableRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataTableRequest. */
+                class UpdateDataTableRequest implements IUpdateDataTableRequest {
+
+                    /**
+                     * Constructs a new UpdateDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateDataTableRequest);
+
+                    /** UpdateDataTableRequest dataTable. */
+                    public dataTable?: (google.cloud.chronicle.v1.IDataTable|null);
+
+                    /** UpdateDataTableRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateDataTableRequest): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Decodes an UpdateDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Verifies an UpdateDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateDataTableRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataTableRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTablesRequest. */
+                interface IListDataTablesRequest {
+
+                    /** ListDataTablesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataTablesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataTablesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDataTablesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDataTablesRequest. */
+                class ListDataTablesRequest implements IListDataTablesRequest {
+
+                    /**
+                     * Constructs a new ListDataTablesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTablesRequest);
+
+                    /** ListDataTablesRequest parent. */
+                    public parent: string;
+
+                    /** ListDataTablesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataTablesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDataTablesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDataTablesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTablesRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTablesRequest): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Encodes the specified ListDataTablesRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesRequest.verify|verify} messages.
+                     * @param message ListDataTablesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTablesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTablesRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesRequest.verify|verify} messages.
+                     * @param message ListDataTablesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTablesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTablesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTablesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Decodes a ListDataTablesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTablesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Verifies a ListDataTablesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTablesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTablesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTablesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataTablesRequest message. Also converts values to other types if specified.
+                     * @param message ListDataTablesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTablesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTablesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTablesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataTableRequest. */
+                interface IDeleteDataTableRequest {
+
+                    /** DeleteDataTableRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDataTableRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteDataTableRequest. */
+                class DeleteDataTableRequest implements IDeleteDataTableRequest {
+
+                    /**
+                     * Constructs a new DeleteDataTableRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDeleteDataTableRequest);
+
+                    /** DeleteDataTableRequest name. */
+                    public name: string;
+
+                    /** DeleteDataTableRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteDataTableRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataTableRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDeleteDataTableRequest): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDeleteDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDeleteDataTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataTableRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Decodes a DeleteDataTableRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataTableRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Verifies a DeleteDataTableRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataTableRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataTableRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DeleteDataTableRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataTableRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataTableRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DeleteDataTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataTableRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataTableRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTablesResponse. */
+                interface IListDataTablesResponse {
+
+                    /** ListDataTablesResponse dataTables */
+                    dataTables?: (google.cloud.chronicle.v1.IDataTable[]|null);
+
+                    /** ListDataTablesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDataTablesResponse. */
+                class ListDataTablesResponse implements IListDataTablesResponse {
+
+                    /**
+                     * Constructs a new ListDataTablesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTablesResponse);
+
+                    /** ListDataTablesResponse dataTables. */
+                    public dataTables: google.cloud.chronicle.v1.IDataTable[];
+
+                    /** ListDataTablesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDataTablesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTablesResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTablesResponse): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Encodes the specified ListDataTablesResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesResponse.verify|verify} messages.
+                     * @param message ListDataTablesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTablesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTablesResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTablesResponse.verify|verify} messages.
+                     * @param message ListDataTablesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTablesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTablesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTablesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Decodes a ListDataTablesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTablesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Verifies a ListDataTablesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTablesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTablesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTablesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataTablesResponse message. Also converts values to other types if specified.
+                     * @param message ListDataTablesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTablesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTablesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTablesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDataTableRowRequest. */
+                interface ICreateDataTableRowRequest {
+
+                    /** CreateDataTableRowRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDataTableRowRequest dataTableRow */
+                    dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+                }
+
+                /** Represents a CreateDataTableRowRequest. */
+                class CreateDataTableRowRequest implements ICreateDataTableRowRequest {
+
+                    /**
+                     * Constructs a new CreateDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ICreateDataTableRowRequest);
+
+                    /** CreateDataTableRowRequest parent. */
+                    public parent: string;
+
+                    /** CreateDataTableRowRequest dataTableRow. */
+                    public dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+
+                    /**
+                     * Creates a new CreateDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ICreateDataTableRowRequest): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified CreateDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRowRequest.verify|verify} messages.
+                     * @param message CreateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ICreateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateDataTableRowRequest.verify|verify} messages.
+                     * @param message CreateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ICreateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Decodes a CreateDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Verifies a CreateDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.CreateDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message CreateDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.CreateDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDataTableRowRequest. */
+                interface IUpdateDataTableRowRequest {
+
+                    /** UpdateDataTableRowRequest dataTableRow */
+                    dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+
+                    /** UpdateDataTableRowRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataTableRowRequest. */
+                class UpdateDataTableRowRequest implements IUpdateDataTableRowRequest {
+
+                    /**
+                     * Constructs a new UpdateDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateDataTableRowRequest);
+
+                    /** UpdateDataTableRowRequest dataTableRow. */
+                    public dataTableRow?: (google.cloud.chronicle.v1.IDataTableRow|null);
+
+                    /** UpdateDataTableRowRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateDataTableRowRequest): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateDataTableRowRequest.verify|verify} messages.
+                     * @param message UpdateDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Decodes an UpdateDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Verifies an UpdateDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTableRowsRequest. */
+                interface IListDataTableRowsRequest {
+
+                    /** ListDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataTableRowsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataTableRowsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDataTableRowsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListDataTableRowsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDataTableRowsRequest. */
+                class ListDataTableRowsRequest implements IListDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new ListDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTableRowsRequest);
+
+                    /** ListDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** ListDataTableRowsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataTableRowsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDataTableRowsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListDataTableRowsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTableRowsRequest): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsRequest.verify|verify} messages.
+                     * @param message ListDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsRequest.verify|verify} messages.
+                     * @param message ListDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Decodes a ListDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Verifies a ListDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message ListDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataTableRowsResponse. */
+                interface IListDataTableRowsResponse {
+
+                    /** ListDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+
+                    /** ListDataTableRowsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDataTableRowsResponse. */
+                class ListDataTableRowsResponse implements IListDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new ListDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListDataTableRowsResponse);
+
+                    /** ListDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /** ListDataTableRowsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListDataTableRowsResponse): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsResponse.verify|verify} messages.
+                     * @param message ListDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListDataTableRowsResponse.verify|verify} messages.
+                     * @param message ListDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Decodes a ListDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Verifies a ListDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message ListDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDataTableRowRequest. */
+                interface IGetDataTableRowRequest {
+
+                    /** GetDataTableRowRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataTableRowRequest. */
+                class GetDataTableRowRequest implements IGetDataTableRowRequest {
+
+                    /**
+                     * Constructs a new GetDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDataTableRowRequest);
+
+                    /** GetDataTableRowRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDataTableRowRequest): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified GetDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRowRequest.verify|verify} messages.
+                     * @param message GetDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableRowRequest.verify|verify} messages.
+                     * @param message GetDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Decodes a GetDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Verifies a GetDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message GetDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDataTableRowRequest. */
+                interface IDeleteDataTableRowRequest {
+
+                    /** DeleteDataTableRowRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDataTableRowRequest. */
+                class DeleteDataTableRowRequest implements IDeleteDataTableRowRequest {
+
+                    /**
+                     * Constructs a new DeleteDataTableRowRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDeleteDataTableRowRequest);
+
+                    /** DeleteDataTableRowRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDataTableRowRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDataTableRowRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDeleteDataTableRowRequest): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRowRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRowRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDeleteDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDataTableRowRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteDataTableRowRequest.verify|verify} messages.
+                     * @param message DeleteDataTableRowRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDeleteDataTableRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDataTableRowRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Decodes a DeleteDataTableRowRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDataTableRowRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Verifies a DeleteDataTableRowRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDataTableRowRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDataTableRowRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DeleteDataTableRowRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDataTableRowRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDataTableRowRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DeleteDataTableRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDataTableRowRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDataTableRowRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkCreateDataTableRowsRequest. */
+                interface IBulkCreateDataTableRowsRequest {
+
+                    /** BulkCreateDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkCreateDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.ICreateDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkCreateDataTableRowsRequest. */
+                class BulkCreateDataTableRowsRequest implements IBulkCreateDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkCreateDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest);
+
+                    /** BulkCreateDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkCreateDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.ICreateDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkCreateDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkCreateDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkCreateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkCreateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkCreateDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkCreateDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkCreateDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkCreateDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkCreateDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkCreateDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkCreateDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkCreateDataTableRowsResponse. */
+                interface IBulkCreateDataTableRowsResponse {
+
+                    /** BulkCreateDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkCreateDataTableRowsResponse. */
+                class BulkCreateDataTableRowsResponse implements IBulkCreateDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkCreateDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse);
+
+                    /** BulkCreateDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkCreateDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkCreateDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkCreateDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkCreateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkCreateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkCreateDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkCreateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkCreateDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkCreateDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkCreateDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkCreateDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkCreateDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkCreateDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkCreateDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkGetDataTableRowsRequest. */
+                interface IBulkGetDataTableRowsRequest {
+
+                    /** BulkGetDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkGetDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.IGetDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkGetDataTableRowsRequest. */
+                class BulkGetDataTableRowsRequest implements IBulkGetDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkGetDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest);
+
+                    /** BulkGetDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkGetDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.IGetDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkGetDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkGetDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkGetDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkGetDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkGetDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkGetDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkGetDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkGetDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkGetDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkGetDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkGetDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkGetDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkGetDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkGetDataTableRowsResponse. */
+                interface IBulkGetDataTableRowsResponse {
+
+                    /** BulkGetDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkGetDataTableRowsResponse. */
+                class BulkGetDataTableRowsResponse implements IBulkGetDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkGetDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse);
+
+                    /** BulkGetDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkGetDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkGetDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkGetDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkGetDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkGetDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkGetDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkGetDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkGetDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkGetDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkGetDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkGetDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkGetDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkGetDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkGetDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkGetDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkGetDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkGetDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkReplaceDataTableRowsRequest. */
+                interface IBulkReplaceDataTableRowsRequest {
+
+                    /** BulkReplaceDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkReplaceDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.ICreateDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkReplaceDataTableRowsRequest. */
+                class BulkReplaceDataTableRowsRequest implements IBulkReplaceDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkReplaceDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest);
+
+                    /** BulkReplaceDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkReplaceDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.ICreateDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkReplaceDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkReplaceDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkReplaceDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkReplaceDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkReplaceDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkReplaceDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkReplaceDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkReplaceDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkReplaceDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkReplaceDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkReplaceDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkReplaceDataTableRowsResponse. */
+                interface IBulkReplaceDataTableRowsResponse {
+
+                    /** BulkReplaceDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkReplaceDataTableRowsResponse. */
+                class BulkReplaceDataTableRowsResponse implements IBulkReplaceDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkReplaceDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse);
+
+                    /** BulkReplaceDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkReplaceDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkReplaceDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkReplaceDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkReplaceDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkReplaceDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkReplaceDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkReplaceDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkReplaceDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkReplaceDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkReplaceDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkReplaceDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkReplaceDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkReplaceDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkReplaceDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkUpdateDataTableRowsRequest. */
+                interface IBulkUpdateDataTableRowsRequest {
+
+                    /** BulkUpdateDataTableRowsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkUpdateDataTableRowsRequest requests */
+                    requests?: (google.cloud.chronicle.v1.IUpdateDataTableRowRequest[]|null);
+                }
+
+                /** Represents a BulkUpdateDataTableRowsRequest. */
+                class BulkUpdateDataTableRowsRequest implements IBulkUpdateDataTableRowsRequest {
+
+                    /**
+                     * Constructs a new BulkUpdateDataTableRowsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest);
+
+                    /** BulkUpdateDataTableRowsRequest parent. */
+                    public parent: string;
+
+                    /** BulkUpdateDataTableRowsRequest requests. */
+                    public requests: google.cloud.chronicle.v1.IUpdateDataTableRowRequest[];
+
+                    /**
+                     * Creates a new BulkUpdateDataTableRowsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUpdateDataTableRowsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUpdateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUpdateDataTableRowsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Verifies a BulkUpdateDataTableRowsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUpdateDataTableRowsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUpdateDataTableRowsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkUpdateDataTableRowsRequest message. Also converts values to other types if specified.
+                     * @param message BulkUpdateDataTableRowsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUpdateDataTableRowsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUpdateDataTableRowsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkUpdateDataTableRowsResponse. */
+                interface IBulkUpdateDataTableRowsResponse {
+
+                    /** BulkUpdateDataTableRowsResponse dataTableRows */
+                    dataTableRows?: (google.cloud.chronicle.v1.IDataTableRow[]|null);
+                }
+
+                /** Represents a BulkUpdateDataTableRowsResponse. */
+                class BulkUpdateDataTableRowsResponse implements IBulkUpdateDataTableRowsResponse {
+
+                    /**
+                     * Constructs a new BulkUpdateDataTableRowsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse);
+
+                    /** BulkUpdateDataTableRowsResponse dataTableRows. */
+                    public dataTableRows: google.cloud.chronicle.v1.IDataTableRow[];
+
+                    /**
+                     * Creates a new BulkUpdateDataTableRowsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUpdateDataTableRowsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUpdateDataTableRowsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse.verify|verify} messages.
+                     * @param message BulkUpdateDataTableRowsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUpdateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Decodes a BulkUpdateDataTableRowsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUpdateDataTableRowsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Verifies a BulkUpdateDataTableRowsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUpdateDataTableRowsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUpdateDataTableRowsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkUpdateDataTableRowsResponse message. Also converts values to other types if specified.
+                     * @param message BulkUpdateDataTableRowsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUpdateDataTableRowsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUpdateDataTableRowsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableScopeInfo. */
+                interface IDataTableScopeInfo {
+
+                    /** DataTableScopeInfo dataAccessScopes */
+                    dataAccessScopes?: (string[]|null);
+                }
+
+                /** Represents a DataTableScopeInfo. */
+                class DataTableScopeInfo implements IDataTableScopeInfo {
+
+                    /**
+                     * Constructs a new DataTableScopeInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableScopeInfo);
+
+                    /** DataTableScopeInfo dataAccessScopes. */
+                    public dataAccessScopes: string[];
+
+                    /**
+                     * Creates a new DataTableScopeInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableScopeInfo instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableScopeInfo): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Encodes the specified DataTableScopeInfo message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableScopeInfo.verify|verify} messages.
+                     * @param message DataTableScopeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableScopeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableScopeInfo message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableScopeInfo.verify|verify} messages.
+                     * @param message DataTableScopeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableScopeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableScopeInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableScopeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Decodes a DataTableScopeInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableScopeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Verifies a DataTableScopeInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableScopeInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableScopeInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableScopeInfo;
+
+                    /**
+                     * Creates a plain object from a DataTableScopeInfo message. Also converts values to other types if specified.
+                     * @param message DataTableScopeInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableScopeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableScopeInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableScopeInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTable. */
+                interface IDataTable {
+
+                    /** DataTable name */
+                    name?: (string|null);
+
+                    /** DataTable displayName */
+                    displayName?: (string|null);
+
+                    /** DataTable description */
+                    description?: (string|null);
+
+                    /** DataTable createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable columnInfo */
+                    columnInfo?: (google.cloud.chronicle.v1.IDataTableColumnInfo[]|null);
+
+                    /** DataTable dataTableUuid */
+                    dataTableUuid?: (string|null);
+
+                    /** DataTable rules */
+                    rules?: (string[]|null);
+
+                    /** DataTable ruleAssociationsCount */
+                    ruleAssociationsCount?: (number|null);
+
+                    /** DataTable rowTimeToLive */
+                    rowTimeToLive?: (string|null);
+
+                    /** DataTable approximateRowCount */
+                    approximateRowCount?: (number|Long|string|null);
+
+                    /** DataTable scopeInfo */
+                    scopeInfo?: (google.cloud.chronicle.v1.IDataTableScopeInfo|null);
+
+                    /** DataTable updateSource */
+                    updateSource?: (google.cloud.chronicle.v1.DataTableUpdateSource|keyof typeof google.cloud.chronicle.v1.DataTableUpdateSource|null);
+
+                    /** DataTable rowTimeToLiveUpdateTime */
+                    rowTimeToLiveUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DataTable. */
+                class DataTable implements IDataTable {
+
+                    /**
+                     * Constructs a new DataTable.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTable);
+
+                    /** DataTable name. */
+                    public name: string;
+
+                    /** DataTable displayName. */
+                    public displayName: string;
+
+                    /** DataTable description. */
+                    public description: string;
+
+                    /** DataTable createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTable columnInfo. */
+                    public columnInfo: google.cloud.chronicle.v1.IDataTableColumnInfo[];
+
+                    /** DataTable dataTableUuid. */
+                    public dataTableUuid: string;
+
+                    /** DataTable rules. */
+                    public rules: string[];
+
+                    /** DataTable ruleAssociationsCount. */
+                    public ruleAssociationsCount: number;
+
+                    /** DataTable rowTimeToLive. */
+                    public rowTimeToLive: string;
+
+                    /** DataTable approximateRowCount. */
+                    public approximateRowCount: (number|Long|string);
+
+                    /** DataTable scopeInfo. */
+                    public scopeInfo?: (google.cloud.chronicle.v1.IDataTableScopeInfo|null);
+
+                    /** DataTable updateSource. */
+                    public updateSource: (google.cloud.chronicle.v1.DataTableUpdateSource|keyof typeof google.cloud.chronicle.v1.DataTableUpdateSource);
+
+                    /** DataTable rowTimeToLiveUpdateTime. */
+                    public rowTimeToLiveUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DataTable instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTable instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTable): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Encodes the specified DataTable message. Does not implicitly {@link google.cloud.chronicle.v1.DataTable.verify|verify} messages.
+                     * @param message DataTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTable message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTable.verify|verify} messages.
+                     * @param message DataTable message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTable, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTable message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Decodes a DataTable message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTable
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Verifies a DataTable message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTable message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTable
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTable;
+
+                    /**
+                     * Creates a plain object from a DataTable message. Also converts values to other types if specified.
+                     * @param message DataTable
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTable to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTable
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableRow. */
+                interface IDataTableRow {
+
+                    /** DataTableRow name */
+                    name?: (string|null);
+
+                    /** DataTableRow values */
+                    values?: (string[]|null);
+
+                    /** DataTableRow createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow rowTimeToLive */
+                    rowTimeToLive?: (string|null);
+                }
+
+                /** Represents a DataTableRow. */
+                class DataTableRow implements IDataTableRow {
+
+                    /**
+                     * Constructs a new DataTableRow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableRow);
+
+                    /** DataTableRow name. */
+                    public name: string;
+
+                    /** DataTableRow values. */
+                    public values: string[];
+
+                    /** DataTableRow createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataTableRow rowTimeToLive. */
+                    public rowTimeToLive: string;
+
+                    /**
+                     * Creates a new DataTableRow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableRow instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableRow): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Encodes the specified DataTableRow message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRow.verify|verify} messages.
+                     * @param message DataTableRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableRow message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableRow.verify|verify} messages.
+                     * @param message DataTableRow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableRow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Decodes a DataTableRow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableRow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Verifies a DataTableRow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableRow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableRow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableRow;
+
+                    /**
+                     * Creates a plain object from a DataTableRow message. Also converts values to other types if specified.
+                     * @param message DataTableRow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableRow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableRow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableColumnInfo. */
+                interface IDataTableColumnInfo {
+
+                    /** DataTableColumnInfo mappedColumnPath */
+                    mappedColumnPath?: (string|null);
+
+                    /** DataTableColumnInfo columnType */
+                    columnType?: (google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|keyof typeof google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|null);
+
+                    /** DataTableColumnInfo columnIndex */
+                    columnIndex?: (number|null);
+
+                    /** DataTableColumnInfo originalColumn */
+                    originalColumn?: (string|null);
+
+                    /** DataTableColumnInfo keyColumn */
+                    keyColumn?: (boolean|null);
+
+                    /** DataTableColumnInfo repeatedValues */
+                    repeatedValues?: (boolean|null);
+                }
+
+                /** Represents a DataTableColumnInfo. */
+                class DataTableColumnInfo implements IDataTableColumnInfo {
+
+                    /**
+                     * Constructs a new DataTableColumnInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableColumnInfo);
+
+                    /** DataTableColumnInfo mappedColumnPath. */
+                    public mappedColumnPath?: (string|null);
+
+                    /** DataTableColumnInfo columnType. */
+                    public columnType?: (google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|keyof typeof google.cloud.chronicle.v1.DataTableColumnInfo.DataTableColumnType|null);
+
+                    /** DataTableColumnInfo columnIndex. */
+                    public columnIndex: number;
+
+                    /** DataTableColumnInfo originalColumn. */
+                    public originalColumn: string;
+
+                    /** DataTableColumnInfo keyColumn. */
+                    public keyColumn: boolean;
+
+                    /** DataTableColumnInfo repeatedValues. */
+                    public repeatedValues: boolean;
+
+                    /** DataTableColumnInfo pathOrType. */
+                    public pathOrType?: ("mappedColumnPath"|"columnType");
+
+                    /**
+                     * Creates a new DataTableColumnInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableColumnInfo instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableColumnInfo): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Encodes the specified DataTableColumnInfo message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableColumnInfo.verify|verify} messages.
+                     * @param message DataTableColumnInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableColumnInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableColumnInfo message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableColumnInfo.verify|verify} messages.
+                     * @param message DataTableColumnInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableColumnInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableColumnInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableColumnInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Decodes a DataTableColumnInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableColumnInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Verifies a DataTableColumnInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableColumnInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableColumnInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableColumnInfo;
+
+                    /**
+                     * Creates a plain object from a DataTableColumnInfo message. Also converts values to other types if specified.
+                     * @param message DataTableColumnInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableColumnInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableColumnInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableColumnInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataTableColumnInfo {
+
+                    /** DataTableColumnType enum. */
+                    enum DataTableColumnType {
+                        DATA_TABLE_COLUMN_TYPE_UNSPECIFIED = 0,
+                        STRING = 1,
+                        REGEX = 2,
+                        CIDR = 3,
+                        NUMBER = 4
+                    }
+                }
+
+                /** Properties of a GetDataTableOperationErrorsRequest. */
+                interface IGetDataTableOperationErrorsRequest {
+
+                    /** GetDataTableOperationErrorsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataTableOperationErrorsRequest. */
+                class GetDataTableOperationErrorsRequest implements IGetDataTableOperationErrorsRequest {
+
+                    /**
+                     * Constructs a new GetDataTableOperationErrorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest);
+
+                    /** GetDataTableOperationErrorsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataTableOperationErrorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataTableOperationErrorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Encodes the specified GetDataTableOperationErrorsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest.verify|verify} messages.
+                     * @param message GetDataTableOperationErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataTableOperationErrorsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest.verify|verify} messages.
+                     * @param message GetDataTableOperationErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetDataTableOperationErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataTableOperationErrorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataTableOperationErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Decodes a GetDataTableOperationErrorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataTableOperationErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Verifies a GetDataTableOperationErrorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataTableOperationErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataTableOperationErrorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataTableOperationErrorsRequest message. Also converts values to other types if specified.
+                     * @param message GetDataTableOperationErrorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataTableOperationErrorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDataTableOperationErrorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataTableOperationErrors. */
+                interface IDataTableOperationErrors {
+
+                    /** DataTableOperationErrors name */
+                    name?: (string|null);
+
+                    /** DataTableOperationErrors rpcErrors */
+                    rpcErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a DataTableOperationErrors. */
+                class DataTableOperationErrors implements IDataTableOperationErrors {
+
+                    /**
+                     * Constructs a new DataTableOperationErrors.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDataTableOperationErrors);
+
+                    /** DataTableOperationErrors name. */
+                    public name: string;
+
+                    /** DataTableOperationErrors rpcErrors. */
+                    public rpcErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new DataTableOperationErrors instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataTableOperationErrors instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDataTableOperationErrors): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Encodes the specified DataTableOperationErrors message. Does not implicitly {@link google.cloud.chronicle.v1.DataTableOperationErrors.verify|verify} messages.
+                     * @param message DataTableOperationErrors message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDataTableOperationErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataTableOperationErrors message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DataTableOperationErrors.verify|verify} messages.
+                     * @param message DataTableOperationErrors message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDataTableOperationErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataTableOperationErrors message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataTableOperationErrors
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Decodes a DataTableOperationErrors message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataTableOperationErrors
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Verifies a DataTableOperationErrors message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataTableOperationErrors message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataTableOperationErrors
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DataTableOperationErrors;
+
+                    /**
+                     * Creates a plain object from a DataTableOperationErrors message. Also converts values to other types if specified.
+                     * @param message DataTableOperationErrors
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DataTableOperationErrors, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataTableOperationErrors to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataTableOperationErrors
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an EntityService */
                 class EntityService extends $protobuf.rpc.Service {
 
@@ -3333,6 +14817,4077 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FeaturedContentMetadata. */
+                interface IFeaturedContentMetadata {
+
+                    /** FeaturedContentMetadata id */
+                    id?: (string|null);
+
+                    /** FeaturedContentMetadata displayName */
+                    displayName?: (string|null);
+
+                    /** FeaturedContentMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeaturedContentMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeaturedContentMetadata author */
+                    author?: (string|null);
+
+                    /** FeaturedContentMetadata certified */
+                    certified?: (boolean|null);
+
+                    /** FeaturedContentMetadata description */
+                    description?: (string|null);
+
+                    /** FeaturedContentMetadata categories */
+                    categories?: (string[]|null);
+
+                    /** FeaturedContentMetadata version */
+                    version?: (string|null);
+
+                    /** FeaturedContentMetadata verified */
+                    verified?: (boolean|null);
+
+                    /** FeaturedContentMetadata sourceType */
+                    sourceType?: (google.cloud.chronicle.v1.FeaturedContentMetadata.ContentSourceType|keyof typeof google.cloud.chronicle.v1.FeaturedContentMetadata.ContentSourceType|null);
+                }
+
+                /** Represents a FeaturedContentMetadata. */
+                class FeaturedContentMetadata implements IFeaturedContentMetadata {
+
+                    /**
+                     * Constructs a new FeaturedContentMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IFeaturedContentMetadata);
+
+                    /** FeaturedContentMetadata id. */
+                    public id: string;
+
+                    /** FeaturedContentMetadata displayName. */
+                    public displayName: string;
+
+                    /** FeaturedContentMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeaturedContentMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeaturedContentMetadata author. */
+                    public author: string;
+
+                    /** FeaturedContentMetadata certified. */
+                    public certified: boolean;
+
+                    /** FeaturedContentMetadata description. */
+                    public description: string;
+
+                    /** FeaturedContentMetadata categories. */
+                    public categories: string[];
+
+                    /** FeaturedContentMetadata version. */
+                    public version: string;
+
+                    /** FeaturedContentMetadata verified. */
+                    public verified?: (boolean|null);
+
+                    /** FeaturedContentMetadata sourceType. */
+                    public sourceType: (google.cloud.chronicle.v1.FeaturedContentMetadata.ContentSourceType|keyof typeof google.cloud.chronicle.v1.FeaturedContentMetadata.ContentSourceType);
+
+                    /**
+                     * Creates a new FeaturedContentMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeaturedContentMetadata instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IFeaturedContentMetadata): google.cloud.chronicle.v1.FeaturedContentMetadata;
+
+                    /**
+                     * Encodes the specified FeaturedContentMetadata message. Does not implicitly {@link google.cloud.chronicle.v1.FeaturedContentMetadata.verify|verify} messages.
+                     * @param message FeaturedContentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IFeaturedContentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeaturedContentMetadata message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FeaturedContentMetadata.verify|verify} messages.
+                     * @param message FeaturedContentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IFeaturedContentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeaturedContentMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeaturedContentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.FeaturedContentMetadata;
+
+                    /**
+                     * Decodes a FeaturedContentMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeaturedContentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.FeaturedContentMetadata;
+
+                    /**
+                     * Verifies a FeaturedContentMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeaturedContentMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeaturedContentMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.FeaturedContentMetadata;
+
+                    /**
+                     * Creates a plain object from a FeaturedContentMetadata message. Also converts values to other types if specified.
+                     * @param message FeaturedContentMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.FeaturedContentMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeaturedContentMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeaturedContentMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FeaturedContentMetadata {
+
+                    /** ContentSourceType enum. */
+                    enum ContentSourceType {
+                        CONTENT_SOURCE_TYPE_UNSPECIFIED = 0,
+                        GOOGLE = 1,
+                        COMMUNITY = 2,
+                        PARTNER = 3
+                    }
+                }
+
+                /** Represents a FeaturedContentNativeDashboardService */
+                class FeaturedContentNativeDashboardService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new FeaturedContentNativeDashboardService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new FeaturedContentNativeDashboardService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FeaturedContentNativeDashboardService;
+
+                    /**
+                     * Calls GetFeaturedContentNativeDashboard.
+                     * @param request GetFeaturedContentNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FeaturedContentNativeDashboard
+                     */
+                    public getFeaturedContentNativeDashboard(request: google.cloud.chronicle.v1.IGetFeaturedContentNativeDashboardRequest, callback: google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.GetFeaturedContentNativeDashboardCallback): void;
+
+                    /**
+                     * Calls GetFeaturedContentNativeDashboard.
+                     * @param request GetFeaturedContentNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFeaturedContentNativeDashboard(request: google.cloud.chronicle.v1.IGetFeaturedContentNativeDashboardRequest): Promise<google.cloud.chronicle.v1.FeaturedContentNativeDashboard>;
+
+                    /**
+                     * Calls ListFeaturedContentNativeDashboards.
+                     * @param request ListFeaturedContentNativeDashboardsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFeaturedContentNativeDashboardsResponse
+                     */
+                    public listFeaturedContentNativeDashboards(request: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest, callback: google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.ListFeaturedContentNativeDashboardsCallback): void;
+
+                    /**
+                     * Calls ListFeaturedContentNativeDashboards.
+                     * @param request ListFeaturedContentNativeDashboardsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFeaturedContentNativeDashboards(request: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest): Promise<google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse>;
+
+                    /**
+                     * Calls InstallFeaturedContentNativeDashboard.
+                     * @param request InstallFeaturedContentNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and InstallFeaturedContentNativeDashboardResponse
+                     */
+                    public installFeaturedContentNativeDashboard(request: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardRequest, callback: google.cloud.chronicle.v1.FeaturedContentNativeDashboardService.InstallFeaturedContentNativeDashboardCallback): void;
+
+                    /**
+                     * Calls InstallFeaturedContentNativeDashboard.
+                     * @param request InstallFeaturedContentNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public installFeaturedContentNativeDashboard(request: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardRequest): Promise<google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse>;
+                }
+
+                namespace FeaturedContentNativeDashboardService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FeaturedContentNativeDashboardService|getFeaturedContentNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] FeaturedContentNativeDashboard
+                     */
+                    type GetFeaturedContentNativeDashboardCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.FeaturedContentNativeDashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FeaturedContentNativeDashboardService|listFeaturedContentNativeDashboards}.
+                     * @param error Error, if any
+                     * @param [response] ListFeaturedContentNativeDashboardsResponse
+                     */
+                    type ListFeaturedContentNativeDashboardsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FeaturedContentNativeDashboardService|installFeaturedContentNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] InstallFeaturedContentNativeDashboardResponse
+                     */
+                    type InstallFeaturedContentNativeDashboardCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse) => void;
+                }
+
+                /** Properties of a FeaturedContentNativeDashboard. */
+                interface IFeaturedContentNativeDashboard {
+
+                    /** FeaturedContentNativeDashboard name */
+                    name?: (string|null);
+
+                    /** FeaturedContentNativeDashboard contentMetadata */
+                    contentMetadata?: (google.cloud.chronicle.v1.IFeaturedContentMetadata|null);
+
+                    /** FeaturedContentNativeDashboard dashboardContent */
+                    dashboardContent?: (google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries|null);
+                }
+
+                /** Represents a FeaturedContentNativeDashboard. */
+                class FeaturedContentNativeDashboard implements IFeaturedContentNativeDashboard {
+
+                    /**
+                     * Constructs a new FeaturedContentNativeDashboard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IFeaturedContentNativeDashboard);
+
+                    /** FeaturedContentNativeDashboard name. */
+                    public name: string;
+
+                    /** FeaturedContentNativeDashboard contentMetadata. */
+                    public contentMetadata?: (google.cloud.chronicle.v1.IFeaturedContentMetadata|null);
+
+                    /** FeaturedContentNativeDashboard dashboardContent. */
+                    public dashboardContent?: (google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries|null);
+
+                    /**
+                     * Creates a new FeaturedContentNativeDashboard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeaturedContentNativeDashboard instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IFeaturedContentNativeDashboard): google.cloud.chronicle.v1.FeaturedContentNativeDashboard;
+
+                    /**
+                     * Encodes the specified FeaturedContentNativeDashboard message. Does not implicitly {@link google.cloud.chronicle.v1.FeaturedContentNativeDashboard.verify|verify} messages.
+                     * @param message FeaturedContentNativeDashboard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IFeaturedContentNativeDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeaturedContentNativeDashboard message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FeaturedContentNativeDashboard.verify|verify} messages.
+                     * @param message FeaturedContentNativeDashboard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IFeaturedContentNativeDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeaturedContentNativeDashboard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeaturedContentNativeDashboard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.FeaturedContentNativeDashboard;
+
+                    /**
+                     * Decodes a FeaturedContentNativeDashboard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeaturedContentNativeDashboard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.FeaturedContentNativeDashboard;
+
+                    /**
+                     * Verifies a FeaturedContentNativeDashboard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeaturedContentNativeDashboard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeaturedContentNativeDashboard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.FeaturedContentNativeDashboard;
+
+                    /**
+                     * Creates a plain object from a FeaturedContentNativeDashboard message. Also converts values to other types if specified.
+                     * @param message FeaturedContentNativeDashboard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.FeaturedContentNativeDashboard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeaturedContentNativeDashboard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeaturedContentNativeDashboard
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFeaturedContentNativeDashboardRequest. */
+                interface IGetFeaturedContentNativeDashboardRequest {
+
+                    /** GetFeaturedContentNativeDashboardRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFeaturedContentNativeDashboardRequest. */
+                class GetFeaturedContentNativeDashboardRequest implements IGetFeaturedContentNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new GetFeaturedContentNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetFeaturedContentNativeDashboardRequest);
+
+                    /** GetFeaturedContentNativeDashboardRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFeaturedContentNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFeaturedContentNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetFeaturedContentNativeDashboardRequest): google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified GetFeaturedContentNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest.verify|verify} messages.
+                     * @param message GetFeaturedContentNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetFeaturedContentNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFeaturedContentNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest.verify|verify} messages.
+                     * @param message GetFeaturedContentNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetFeaturedContentNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFeaturedContentNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFeaturedContentNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Decodes a GetFeaturedContentNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFeaturedContentNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Verifies a GetFeaturedContentNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFeaturedContentNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFeaturedContentNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a GetFeaturedContentNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message GetFeaturedContentNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetFeaturedContentNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFeaturedContentNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFeaturedContentNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFeaturedContentNativeDashboardsRequest. */
+                interface IListFeaturedContentNativeDashboardsRequest {
+
+                    /** ListFeaturedContentNativeDashboardsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFeaturedContentNativeDashboardsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFeaturedContentNativeDashboardsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFeaturedContentNativeDashboardsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListFeaturedContentNativeDashboardsRequest. */
+                class ListFeaturedContentNativeDashboardsRequest implements IListFeaturedContentNativeDashboardsRequest {
+
+                    /**
+                     * Constructs a new ListFeaturedContentNativeDashboardsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest);
+
+                    /** ListFeaturedContentNativeDashboardsRequest parent. */
+                    public parent: string;
+
+                    /** ListFeaturedContentNativeDashboardsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFeaturedContentNativeDashboardsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFeaturedContentNativeDashboardsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListFeaturedContentNativeDashboardsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFeaturedContentNativeDashboardsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest;
+
+                    /**
+                     * Encodes the specified ListFeaturedContentNativeDashboardsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ListFeaturedContentNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFeaturedContentNativeDashboardsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ListFeaturedContentNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFeaturedContentNativeDashboardsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFeaturedContentNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest;
+
+                    /**
+                     * Decodes a ListFeaturedContentNativeDashboardsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFeaturedContentNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest;
+
+                    /**
+                     * Verifies a ListFeaturedContentNativeDashboardsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFeaturedContentNativeDashboardsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFeaturedContentNativeDashboardsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFeaturedContentNativeDashboardsRequest message. Also converts values to other types if specified.
+                     * @param message ListFeaturedContentNativeDashboardsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFeaturedContentNativeDashboardsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeaturedContentNativeDashboardsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFeaturedContentNativeDashboardsResponse. */
+                interface IListFeaturedContentNativeDashboardsResponse {
+
+                    /** ListFeaturedContentNativeDashboardsResponse featuredContentNativeDashboards */
+                    featuredContentNativeDashboards?: (google.cloud.chronicle.v1.IFeaturedContentNativeDashboard[]|null);
+
+                    /** ListFeaturedContentNativeDashboardsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFeaturedContentNativeDashboardsResponse. */
+                class ListFeaturedContentNativeDashboardsResponse implements IListFeaturedContentNativeDashboardsResponse {
+
+                    /**
+                     * Constructs a new ListFeaturedContentNativeDashboardsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsResponse);
+
+                    /** ListFeaturedContentNativeDashboardsResponse featuredContentNativeDashboards. */
+                    public featuredContentNativeDashboards: google.cloud.chronicle.v1.IFeaturedContentNativeDashboard[];
+
+                    /** ListFeaturedContentNativeDashboardsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFeaturedContentNativeDashboardsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFeaturedContentNativeDashboardsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsResponse): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse;
+
+                    /**
+                     * Encodes the specified ListFeaturedContentNativeDashboardsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ListFeaturedContentNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFeaturedContentNativeDashboardsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ListFeaturedContentNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListFeaturedContentNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFeaturedContentNativeDashboardsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFeaturedContentNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse;
+
+                    /**
+                     * Decodes a ListFeaturedContentNativeDashboardsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFeaturedContentNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse;
+
+                    /**
+                     * Verifies a ListFeaturedContentNativeDashboardsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFeaturedContentNativeDashboardsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFeaturedContentNativeDashboardsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFeaturedContentNativeDashboardsResponse message. Also converts values to other types if specified.
+                     * @param message ListFeaturedContentNativeDashboardsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListFeaturedContentNativeDashboardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFeaturedContentNativeDashboardsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeaturedContentNativeDashboardsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstallFeaturedContentNativeDashboardRequest. */
+                interface IInstallFeaturedContentNativeDashboardRequest {
+
+                    /** InstallFeaturedContentNativeDashboardRequest name */
+                    name?: (string|null);
+
+                    /** InstallFeaturedContentNativeDashboardRequest featuredContentNativeDashboard */
+                    featuredContentNativeDashboard?: (google.cloud.chronicle.v1.IFeaturedContentNativeDashboard|null);
+                }
+
+                /** Represents an InstallFeaturedContentNativeDashboardRequest. */
+                class InstallFeaturedContentNativeDashboardRequest implements IInstallFeaturedContentNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new InstallFeaturedContentNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardRequest);
+
+                    /** InstallFeaturedContentNativeDashboardRequest name. */
+                    public name: string;
+
+                    /** InstallFeaturedContentNativeDashboardRequest featuredContentNativeDashboard. */
+                    public featuredContentNativeDashboard?: (google.cloud.chronicle.v1.IFeaturedContentNativeDashboard|null);
+
+                    /**
+                     * Creates a new InstallFeaturedContentNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstallFeaturedContentNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardRequest): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified InstallFeaturedContentNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest.verify|verify} messages.
+                     * @param message InstallFeaturedContentNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstallFeaturedContentNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest.verify|verify} messages.
+                     * @param message InstallFeaturedContentNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstallFeaturedContentNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstallFeaturedContentNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Decodes an InstallFeaturedContentNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstallFeaturedContentNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Verifies an InstallFeaturedContentNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstallFeaturedContentNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstallFeaturedContentNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from an InstallFeaturedContentNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message InstallFeaturedContentNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstallFeaturedContentNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstallFeaturedContentNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstallFeaturedContentNativeDashboardResponse. */
+                interface IInstallFeaturedContentNativeDashboardResponse {
+
+                    /** InstallFeaturedContentNativeDashboardResponse nativeDashboard */
+                    nativeDashboard?: (string|null);
+                }
+
+                /** Represents an InstallFeaturedContentNativeDashboardResponse. */
+                class InstallFeaturedContentNativeDashboardResponse implements IInstallFeaturedContentNativeDashboardResponse {
+
+                    /**
+                     * Constructs a new InstallFeaturedContentNativeDashboardResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardResponse);
+
+                    /** InstallFeaturedContentNativeDashboardResponse nativeDashboard. */
+                    public nativeDashboard: string;
+
+                    /**
+                     * Creates a new InstallFeaturedContentNativeDashboardResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstallFeaturedContentNativeDashboardResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardResponse): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse;
+
+                    /**
+                     * Encodes the specified InstallFeaturedContentNativeDashboardResponse message. Does not implicitly {@link google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse.verify|verify} messages.
+                     * @param message InstallFeaturedContentNativeDashboardResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstallFeaturedContentNativeDashboardResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse.verify|verify} messages.
+                     * @param message InstallFeaturedContentNativeDashboardResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IInstallFeaturedContentNativeDashboardResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstallFeaturedContentNativeDashboardResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstallFeaturedContentNativeDashboardResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse;
+
+                    /**
+                     * Decodes an InstallFeaturedContentNativeDashboardResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstallFeaturedContentNativeDashboardResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse;
+
+                    /**
+                     * Verifies an InstallFeaturedContentNativeDashboardResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstallFeaturedContentNativeDashboardResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstallFeaturedContentNativeDashboardResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse;
+
+                    /**
+                     * Creates a plain object from an InstallFeaturedContentNativeDashboardResponse message. Also converts values to other types if specified.
+                     * @param message InstallFeaturedContentNativeDashboardResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.InstallFeaturedContentNativeDashboardResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstallFeaturedContentNativeDashboardResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstallFeaturedContentNativeDashboardResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a NativeDashboardService */
+                class NativeDashboardService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new NativeDashboardService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new NativeDashboardService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): NativeDashboardService;
+
+                    /**
+                     * Calls CreateNativeDashboard.
+                     * @param request CreateNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NativeDashboard
+                     */
+                    public createNativeDashboard(request: google.cloud.chronicle.v1.ICreateNativeDashboardRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.CreateNativeDashboardCallback): void;
+
+                    /**
+                     * Calls CreateNativeDashboard.
+                     * @param request CreateNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createNativeDashboard(request: google.cloud.chronicle.v1.ICreateNativeDashboardRequest): Promise<google.cloud.chronicle.v1.NativeDashboard>;
+
+                    /**
+                     * Calls GetNativeDashboard.
+                     * @param request GetNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NativeDashboard
+                     */
+                    public getNativeDashboard(request: google.cloud.chronicle.v1.IGetNativeDashboardRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.GetNativeDashboardCallback): void;
+
+                    /**
+                     * Calls GetNativeDashboard.
+                     * @param request GetNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getNativeDashboard(request: google.cloud.chronicle.v1.IGetNativeDashboardRequest): Promise<google.cloud.chronicle.v1.NativeDashboard>;
+
+                    /**
+                     * Calls ListNativeDashboards.
+                     * @param request ListNativeDashboardsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListNativeDashboardsResponse
+                     */
+                    public listNativeDashboards(request: google.cloud.chronicle.v1.IListNativeDashboardsRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.ListNativeDashboardsCallback): void;
+
+                    /**
+                     * Calls ListNativeDashboards.
+                     * @param request ListNativeDashboardsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listNativeDashboards(request: google.cloud.chronicle.v1.IListNativeDashboardsRequest): Promise<google.cloud.chronicle.v1.ListNativeDashboardsResponse>;
+
+                    /**
+                     * Calls UpdateNativeDashboard.
+                     * @param request UpdateNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NativeDashboard
+                     */
+                    public updateNativeDashboard(request: google.cloud.chronicle.v1.IUpdateNativeDashboardRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.UpdateNativeDashboardCallback): void;
+
+                    /**
+                     * Calls UpdateNativeDashboard.
+                     * @param request UpdateNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateNativeDashboard(request: google.cloud.chronicle.v1.IUpdateNativeDashboardRequest): Promise<google.cloud.chronicle.v1.NativeDashboard>;
+
+                    /**
+                     * Calls DuplicateNativeDashboard.
+                     * @param request DuplicateNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NativeDashboard
+                     */
+                    public duplicateNativeDashboard(request: google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.DuplicateNativeDashboardCallback): void;
+
+                    /**
+                     * Calls DuplicateNativeDashboard.
+                     * @param request DuplicateNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public duplicateNativeDashboard(request: google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest): Promise<google.cloud.chronicle.v1.NativeDashboard>;
+
+                    /**
+                     * Calls DeleteNativeDashboard.
+                     * @param request DeleteNativeDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteNativeDashboard(request: google.cloud.chronicle.v1.IDeleteNativeDashboardRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.DeleteNativeDashboardCallback): void;
+
+                    /**
+                     * Calls DeleteNativeDashboard.
+                     * @param request DeleteNativeDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteNativeDashboard(request: google.cloud.chronicle.v1.IDeleteNativeDashboardRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls AddChart.
+                     * @param request AddChartRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AddChartResponse
+                     */
+                    public addChart(request: google.cloud.chronicle.v1.IAddChartRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.AddChartCallback): void;
+
+                    /**
+                     * Calls AddChart.
+                     * @param request AddChartRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addChart(request: google.cloud.chronicle.v1.IAddChartRequest): Promise<google.cloud.chronicle.v1.AddChartResponse>;
+
+                    /**
+                     * Calls RemoveChart.
+                     * @param request RemoveChartRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and NativeDashboard
+                     */
+                    public removeChart(request: google.cloud.chronicle.v1.IRemoveChartRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.RemoveChartCallback): void;
+
+                    /**
+                     * Calls RemoveChart.
+                     * @param request RemoveChartRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeChart(request: google.cloud.chronicle.v1.IRemoveChartRequest): Promise<google.cloud.chronicle.v1.NativeDashboard>;
+
+                    /**
+                     * Calls EditChart.
+                     * @param request EditChartRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EditChartResponse
+                     */
+                    public editChart(request: google.cloud.chronicle.v1.IEditChartRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.EditChartCallback): void;
+
+                    /**
+                     * Calls EditChart.
+                     * @param request EditChartRequest message or plain object
+                     * @returns Promise
+                     */
+                    public editChart(request: google.cloud.chronicle.v1.IEditChartRequest): Promise<google.cloud.chronicle.v1.EditChartResponse>;
+
+                    /**
+                     * Calls DuplicateChart.
+                     * @param request DuplicateChartRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DuplicateChartResponse
+                     */
+                    public duplicateChart(request: google.cloud.chronicle.v1.IDuplicateChartRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.DuplicateChartCallback): void;
+
+                    /**
+                     * Calls DuplicateChart.
+                     * @param request DuplicateChartRequest message or plain object
+                     * @returns Promise
+                     */
+                    public duplicateChart(request: google.cloud.chronicle.v1.IDuplicateChartRequest): Promise<google.cloud.chronicle.v1.DuplicateChartResponse>;
+
+                    /**
+                     * Calls ExportNativeDashboards.
+                     * @param request ExportNativeDashboardsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExportNativeDashboardsResponse
+                     */
+                    public exportNativeDashboards(request: google.cloud.chronicle.v1.IExportNativeDashboardsRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.ExportNativeDashboardsCallback): void;
+
+                    /**
+                     * Calls ExportNativeDashboards.
+                     * @param request ExportNativeDashboardsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportNativeDashboards(request: google.cloud.chronicle.v1.IExportNativeDashboardsRequest): Promise<google.cloud.chronicle.v1.ExportNativeDashboardsResponse>;
+
+                    /**
+                     * Calls ImportNativeDashboards.
+                     * @param request ImportNativeDashboardsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImportNativeDashboardsResponse
+                     */
+                    public importNativeDashboards(request: google.cloud.chronicle.v1.IImportNativeDashboardsRequest, callback: google.cloud.chronicle.v1.NativeDashboardService.ImportNativeDashboardsCallback): void;
+
+                    /**
+                     * Calls ImportNativeDashboards.
+                     * @param request ImportNativeDashboardsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importNativeDashboards(request: google.cloud.chronicle.v1.IImportNativeDashboardsRequest): Promise<google.cloud.chronicle.v1.ImportNativeDashboardsResponse>;
+                }
+
+                namespace NativeDashboardService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|createNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] NativeDashboard
+                     */
+                    type CreateNativeDashboardCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.NativeDashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|getNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] NativeDashboard
+                     */
+                    type GetNativeDashboardCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.NativeDashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|listNativeDashboards}.
+                     * @param error Error, if any
+                     * @param [response] ListNativeDashboardsResponse
+                     */
+                    type ListNativeDashboardsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListNativeDashboardsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|updateNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] NativeDashboard
+                     */
+                    type UpdateNativeDashboardCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.NativeDashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|duplicateNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] NativeDashboard
+                     */
+                    type DuplicateNativeDashboardCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.NativeDashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|deleteNativeDashboard}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteNativeDashboardCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|addChart}.
+                     * @param error Error, if any
+                     * @param [response] AddChartResponse
+                     */
+                    type AddChartCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.AddChartResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|removeChart}.
+                     * @param error Error, if any
+                     * @param [response] NativeDashboard
+                     */
+                    type RemoveChartCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.NativeDashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|editChart}.
+                     * @param error Error, if any
+                     * @param [response] EditChartResponse
+                     */
+                    type EditChartCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.EditChartResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|duplicateChart}.
+                     * @param error Error, if any
+                     * @param [response] DuplicateChartResponse
+                     */
+                    type DuplicateChartCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.DuplicateChartResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|exportNativeDashboards}.
+                     * @param error Error, if any
+                     * @param [response] ExportNativeDashboardsResponse
+                     */
+                    type ExportNativeDashboardsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ExportNativeDashboardsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.NativeDashboardService|importNativeDashboards}.
+                     * @param error Error, if any
+                     * @param [response] ImportNativeDashboardsResponse
+                     */
+                    type ImportNativeDashboardsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ImportNativeDashboardsResponse) => void;
+                }
+
+                /** DashboardType enum. */
+                enum DashboardType {
+                    DASHBOARD_TYPE_UNSPECIFIED = 0,
+                    CURATED = 1,
+                    PRIVATE = 2,
+                    PUBLIC = 3,
+                    CUSTOM = 4,
+                    MARKETPLACE = 5
+                }
+
+                /** DashboardAccess enum. */
+                enum DashboardAccess {
+                    DASHBOARD_ACCESS_UNSPECIFIED = 0,
+                    DASHBOARD_PRIVATE = 1,
+                    DASHBOARD_PUBLIC = 2
+                }
+
+                /** NativeDashboardView enum. */
+                enum NativeDashboardView {
+                    NATIVE_DASHBOARD_VIEW_UNSPECIFIED = 0,
+                    NATIVE_DASHBOARD_VIEW_BASIC = 1,
+                    NATIVE_DASHBOARD_VIEW_FULL = 2
+                }
+
+                /** Properties of an ExportNativeDashboardsRequest. */
+                interface IExportNativeDashboardsRequest {
+
+                    /** ExportNativeDashboardsRequest parent */
+                    parent?: (string|null);
+
+                    /** ExportNativeDashboardsRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents an ExportNativeDashboardsRequest. */
+                class ExportNativeDashboardsRequest implements IExportNativeDashboardsRequest {
+
+                    /**
+                     * Constructs a new ExportNativeDashboardsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IExportNativeDashboardsRequest);
+
+                    /** ExportNativeDashboardsRequest parent. */
+                    public parent: string;
+
+                    /** ExportNativeDashboardsRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new ExportNativeDashboardsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportNativeDashboardsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IExportNativeDashboardsRequest): google.cloud.chronicle.v1.ExportNativeDashboardsRequest;
+
+                    /**
+                     * Encodes the specified ExportNativeDashboardsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ExportNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ExportNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IExportNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportNativeDashboardsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExportNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ExportNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IExportNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportNativeDashboardsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExportNativeDashboardsRequest;
+
+                    /**
+                     * Decodes an ExportNativeDashboardsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExportNativeDashboardsRequest;
+
+                    /**
+                     * Verifies an ExportNativeDashboardsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportNativeDashboardsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportNativeDashboardsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExportNativeDashboardsRequest;
+
+                    /**
+                     * Creates a plain object from an ExportNativeDashboardsRequest message. Also converts values to other types if specified.
+                     * @param message ExportNativeDashboardsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ExportNativeDashboardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportNativeDashboardsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportNativeDashboardsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportNativeDashboardsResponse. */
+                interface IExportNativeDashboardsResponse {
+
+                    /** ExportNativeDashboardsResponse inlineDestination */
+                    inlineDestination?: (google.cloud.chronicle.v1.IInlineDestination|null);
+                }
+
+                /** Represents an ExportNativeDashboardsResponse. */
+                class ExportNativeDashboardsResponse implements IExportNativeDashboardsResponse {
+
+                    /**
+                     * Constructs a new ExportNativeDashboardsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IExportNativeDashboardsResponse);
+
+                    /** ExportNativeDashboardsResponse inlineDestination. */
+                    public inlineDestination?: (google.cloud.chronicle.v1.IInlineDestination|null);
+
+                    /** ExportNativeDashboardsResponse destination. */
+                    public destination?: "inlineDestination";
+
+                    /**
+                     * Creates a new ExportNativeDashboardsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportNativeDashboardsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IExportNativeDashboardsResponse): google.cloud.chronicle.v1.ExportNativeDashboardsResponse;
+
+                    /**
+                     * Encodes the specified ExportNativeDashboardsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ExportNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ExportNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IExportNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportNativeDashboardsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ExportNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ExportNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IExportNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportNativeDashboardsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ExportNativeDashboardsResponse;
+
+                    /**
+                     * Decodes an ExportNativeDashboardsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ExportNativeDashboardsResponse;
+
+                    /**
+                     * Verifies an ExportNativeDashboardsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportNativeDashboardsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportNativeDashboardsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ExportNativeDashboardsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportNativeDashboardsResponse message. Also converts values to other types if specified.
+                     * @param message ExportNativeDashboardsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ExportNativeDashboardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportNativeDashboardsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportNativeDashboardsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InlineDestination. */
+                interface IInlineDestination {
+
+                    /** InlineDestination dashboards */
+                    dashboards?: (google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries[]|null);
+                }
+
+                /** Represents an InlineDestination. */
+                class InlineDestination implements IInlineDestination {
+
+                    /**
+                     * Constructs a new InlineDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IInlineDestination);
+
+                    /** InlineDestination dashboards. */
+                    public dashboards: google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries[];
+
+                    /**
+                     * Creates a new InlineDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InlineDestination instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IInlineDestination): google.cloud.chronicle.v1.InlineDestination;
+
+                    /**
+                     * Encodes the specified InlineDestination message. Does not implicitly {@link google.cloud.chronicle.v1.InlineDestination.verify|verify} messages.
+                     * @param message InlineDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IInlineDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InlineDestination message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.InlineDestination.verify|verify} messages.
+                     * @param message InlineDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IInlineDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InlineDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InlineDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.InlineDestination;
+
+                    /**
+                     * Decodes an InlineDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InlineDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.InlineDestination;
+
+                    /**
+                     * Verifies an InlineDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InlineDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InlineDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.InlineDestination;
+
+                    /**
+                     * Creates a plain object from an InlineDestination message. Also converts values to other types if specified.
+                     * @param message InlineDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.InlineDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InlineDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InlineDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NativeDashboardWithChartsAndQueries. */
+                interface INativeDashboardWithChartsAndQueries {
+
+                    /** NativeDashboardWithChartsAndQueries dashboard */
+                    dashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** NativeDashboardWithChartsAndQueries dashboardCharts */
+                    dashboardCharts?: (google.cloud.chronicle.v1.IDashboardChart[]|null);
+
+                    /** NativeDashboardWithChartsAndQueries dashboardQueries */
+                    dashboardQueries?: (google.cloud.chronicle.v1.IDashboardQuery[]|null);
+                }
+
+                /** Represents a NativeDashboardWithChartsAndQueries. */
+                class NativeDashboardWithChartsAndQueries implements INativeDashboardWithChartsAndQueries {
+
+                    /**
+                     * Constructs a new NativeDashboardWithChartsAndQueries.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries);
+
+                    /** NativeDashboardWithChartsAndQueries dashboard. */
+                    public dashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** NativeDashboardWithChartsAndQueries dashboardCharts. */
+                    public dashboardCharts: google.cloud.chronicle.v1.IDashboardChart[];
+
+                    /** NativeDashboardWithChartsAndQueries dashboardQueries. */
+                    public dashboardQueries: google.cloud.chronicle.v1.IDashboardQuery[];
+
+                    /**
+                     * Creates a new NativeDashboardWithChartsAndQueries instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NativeDashboardWithChartsAndQueries instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries): google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries;
+
+                    /**
+                     * Encodes the specified NativeDashboardWithChartsAndQueries message. Does not implicitly {@link google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries.verify|verify} messages.
+                     * @param message NativeDashboardWithChartsAndQueries message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NativeDashboardWithChartsAndQueries message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries.verify|verify} messages.
+                     * @param message NativeDashboardWithChartsAndQueries message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NativeDashboardWithChartsAndQueries message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NativeDashboardWithChartsAndQueries
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries;
+
+                    /**
+                     * Decodes a NativeDashboardWithChartsAndQueries message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NativeDashboardWithChartsAndQueries
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries;
+
+                    /**
+                     * Verifies a NativeDashboardWithChartsAndQueries message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NativeDashboardWithChartsAndQueries message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NativeDashboardWithChartsAndQueries
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries;
+
+                    /**
+                     * Creates a plain object from a NativeDashboardWithChartsAndQueries message. Also converts values to other types if specified.
+                     * @param message NativeDashboardWithChartsAndQueries
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.NativeDashboardWithChartsAndQueries, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NativeDashboardWithChartsAndQueries to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NativeDashboardWithChartsAndQueries
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportNativeDashboardsRequest. */
+                interface IImportNativeDashboardsRequest {
+
+                    /** ImportNativeDashboardsRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportNativeDashboardsRequest source */
+                    source?: (google.cloud.chronicle.v1.IImportNativeDashboardsInlineSource|null);
+                }
+
+                /** Represents an ImportNativeDashboardsRequest. */
+                class ImportNativeDashboardsRequest implements IImportNativeDashboardsRequest {
+
+                    /**
+                     * Constructs a new ImportNativeDashboardsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IImportNativeDashboardsRequest);
+
+                    /** ImportNativeDashboardsRequest parent. */
+                    public parent: string;
+
+                    /** ImportNativeDashboardsRequest source. */
+                    public source?: (google.cloud.chronicle.v1.IImportNativeDashboardsInlineSource|null);
+
+                    /**
+                     * Creates a new ImportNativeDashboardsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportNativeDashboardsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IImportNativeDashboardsRequest): google.cloud.chronicle.v1.ImportNativeDashboardsRequest;
+
+                    /**
+                     * Encodes the specified ImportNativeDashboardsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ImportNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ImportNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IImportNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportNativeDashboardsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ImportNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ImportNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IImportNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportNativeDashboardsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ImportNativeDashboardsRequest;
+
+                    /**
+                     * Decodes an ImportNativeDashboardsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ImportNativeDashboardsRequest;
+
+                    /**
+                     * Verifies an ImportNativeDashboardsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportNativeDashboardsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportNativeDashboardsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ImportNativeDashboardsRequest;
+
+                    /**
+                     * Creates a plain object from an ImportNativeDashboardsRequest message. Also converts values to other types if specified.
+                     * @param message ImportNativeDashboardsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ImportNativeDashboardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportNativeDashboardsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportNativeDashboardsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportNativeDashboardsInlineSource. */
+                interface IImportNativeDashboardsInlineSource {
+
+                    /** ImportNativeDashboardsInlineSource dashboards */
+                    dashboards?: (google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries[]|null);
+                }
+
+                /** Represents an ImportNativeDashboardsInlineSource. */
+                class ImportNativeDashboardsInlineSource implements IImportNativeDashboardsInlineSource {
+
+                    /**
+                     * Constructs a new ImportNativeDashboardsInlineSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IImportNativeDashboardsInlineSource);
+
+                    /** ImportNativeDashboardsInlineSource dashboards. */
+                    public dashboards: google.cloud.chronicle.v1.INativeDashboardWithChartsAndQueries[];
+
+                    /**
+                     * Creates a new ImportNativeDashboardsInlineSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportNativeDashboardsInlineSource instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IImportNativeDashboardsInlineSource): google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource;
+
+                    /**
+                     * Encodes the specified ImportNativeDashboardsInlineSource message. Does not implicitly {@link google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource.verify|verify} messages.
+                     * @param message ImportNativeDashboardsInlineSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IImportNativeDashboardsInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportNativeDashboardsInlineSource message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource.verify|verify} messages.
+                     * @param message ImportNativeDashboardsInlineSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IImportNativeDashboardsInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportNativeDashboardsInlineSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportNativeDashboardsInlineSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource;
+
+                    /**
+                     * Decodes an ImportNativeDashboardsInlineSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportNativeDashboardsInlineSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource;
+
+                    /**
+                     * Verifies an ImportNativeDashboardsInlineSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportNativeDashboardsInlineSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportNativeDashboardsInlineSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource;
+
+                    /**
+                     * Creates a plain object from an ImportNativeDashboardsInlineSource message. Also converts values to other types if specified.
+                     * @param message ImportNativeDashboardsInlineSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportNativeDashboardsInlineSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportNativeDashboardsInlineSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportNativeDashboardsResponse. */
+                interface IImportNativeDashboardsResponse {
+
+                    /** ImportNativeDashboardsResponse results */
+                    results?: (google.cloud.chronicle.v1.IImportExportStatus[]|null);
+                }
+
+                /** Represents an ImportNativeDashboardsResponse. */
+                class ImportNativeDashboardsResponse implements IImportNativeDashboardsResponse {
+
+                    /**
+                     * Constructs a new ImportNativeDashboardsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IImportNativeDashboardsResponse);
+
+                    /** ImportNativeDashboardsResponse results. */
+                    public results: google.cloud.chronicle.v1.IImportExportStatus[];
+
+                    /**
+                     * Creates a new ImportNativeDashboardsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportNativeDashboardsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IImportNativeDashboardsResponse): google.cloud.chronicle.v1.ImportNativeDashboardsResponse;
+
+                    /**
+                     * Encodes the specified ImportNativeDashboardsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ImportNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ImportNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IImportNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportNativeDashboardsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ImportNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ImportNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IImportNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportNativeDashboardsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ImportNativeDashboardsResponse;
+
+                    /**
+                     * Decodes an ImportNativeDashboardsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ImportNativeDashboardsResponse;
+
+                    /**
+                     * Verifies an ImportNativeDashboardsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportNativeDashboardsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportNativeDashboardsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ImportNativeDashboardsResponse;
+
+                    /**
+                     * Creates a plain object from an ImportNativeDashboardsResponse message. Also converts values to other types if specified.
+                     * @param message ImportNativeDashboardsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ImportNativeDashboardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportNativeDashboardsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportNativeDashboardsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportExportStatus. */
+                interface IImportExportStatus {
+
+                    /** ImportExportStatus dashboard */
+                    dashboard?: (string|null);
+
+                    /** ImportExportStatus status */
+                    status?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an ImportExportStatus. */
+                class ImportExportStatus implements IImportExportStatus {
+
+                    /**
+                     * Constructs a new ImportExportStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IImportExportStatus);
+
+                    /** ImportExportStatus dashboard. */
+                    public dashboard: string;
+
+                    /** ImportExportStatus status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new ImportExportStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportExportStatus instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IImportExportStatus): google.cloud.chronicle.v1.ImportExportStatus;
+
+                    /**
+                     * Encodes the specified ImportExportStatus message. Does not implicitly {@link google.cloud.chronicle.v1.ImportExportStatus.verify|verify} messages.
+                     * @param message ImportExportStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IImportExportStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportExportStatus message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ImportExportStatus.verify|verify} messages.
+                     * @param message ImportExportStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IImportExportStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportExportStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportExportStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ImportExportStatus;
+
+                    /**
+                     * Decodes an ImportExportStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportExportStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ImportExportStatus;
+
+                    /**
+                     * Verifies an ImportExportStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportExportStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportExportStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ImportExportStatus;
+
+                    /**
+                     * Creates a plain object from an ImportExportStatus message. Also converts values to other types if specified.
+                     * @param message ImportExportStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ImportExportStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportExportStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportExportStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NativeDashboard. */
+                interface INativeDashboard {
+
+                    /** NativeDashboard name */
+                    name?: (string|null);
+
+                    /** NativeDashboard displayName */
+                    displayName?: (string|null);
+
+                    /** NativeDashboard description */
+                    description?: (string|null);
+
+                    /** NativeDashboard definition */
+                    definition?: (google.cloud.chronicle.v1.IDashboardDefinition|null);
+
+                    /** NativeDashboard type */
+                    type?: (google.cloud.chronicle.v1.DashboardType|keyof typeof google.cloud.chronicle.v1.DashboardType|null);
+
+                    /** NativeDashboard createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NativeDashboard updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NativeDashboard createUserId */
+                    createUserId?: (string|null);
+
+                    /** NativeDashboard updateUserId */
+                    updateUserId?: (string|null);
+
+                    /** NativeDashboard dashboardUserData */
+                    dashboardUserData?: (google.cloud.chronicle.v1.IDashboardUserData|null);
+
+                    /** NativeDashboard etag */
+                    etag?: (string|null);
+
+                    /** NativeDashboard access */
+                    access?: (google.cloud.chronicle.v1.DashboardAccess|keyof typeof google.cloud.chronicle.v1.DashboardAccess|null);
+                }
+
+                /** Represents a NativeDashboard. */
+                class NativeDashboard implements INativeDashboard {
+
+                    /**
+                     * Constructs a new NativeDashboard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.INativeDashboard);
+
+                    /** NativeDashboard name. */
+                    public name: string;
+
+                    /** NativeDashboard displayName. */
+                    public displayName: string;
+
+                    /** NativeDashboard description. */
+                    public description: string;
+
+                    /** NativeDashboard definition. */
+                    public definition?: (google.cloud.chronicle.v1.IDashboardDefinition|null);
+
+                    /** NativeDashboard type. */
+                    public type: (google.cloud.chronicle.v1.DashboardType|keyof typeof google.cloud.chronicle.v1.DashboardType);
+
+                    /** NativeDashboard createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NativeDashboard updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NativeDashboard createUserId. */
+                    public createUserId: string;
+
+                    /** NativeDashboard updateUserId. */
+                    public updateUserId: string;
+
+                    /** NativeDashboard dashboardUserData. */
+                    public dashboardUserData?: (google.cloud.chronicle.v1.IDashboardUserData|null);
+
+                    /** NativeDashboard etag. */
+                    public etag: string;
+
+                    /** NativeDashboard access. */
+                    public access: (google.cloud.chronicle.v1.DashboardAccess|keyof typeof google.cloud.chronicle.v1.DashboardAccess);
+
+                    /**
+                     * Creates a new NativeDashboard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NativeDashboard instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.INativeDashboard): google.cloud.chronicle.v1.NativeDashboard;
+
+                    /**
+                     * Encodes the specified NativeDashboard message. Does not implicitly {@link google.cloud.chronicle.v1.NativeDashboard.verify|verify} messages.
+                     * @param message NativeDashboard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.INativeDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NativeDashboard message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.NativeDashboard.verify|verify} messages.
+                     * @param message NativeDashboard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.INativeDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NativeDashboard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NativeDashboard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.NativeDashboard;
+
+                    /**
+                     * Decodes a NativeDashboard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NativeDashboard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.NativeDashboard;
+
+                    /**
+                     * Verifies a NativeDashboard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NativeDashboard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NativeDashboard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.NativeDashboard;
+
+                    /**
+                     * Creates a plain object from a NativeDashboard message. Also converts values to other types if specified.
+                     * @param message NativeDashboard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.NativeDashboard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NativeDashboard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NativeDashboard
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateNativeDashboardRequest. */
+                interface ICreateNativeDashboardRequest {
+
+                    /** CreateNativeDashboardRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateNativeDashboardRequest nativeDashboard */
+                    nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+                }
+
+                /** Represents a CreateNativeDashboardRequest. */
+                class CreateNativeDashboardRequest implements ICreateNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new CreateNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ICreateNativeDashboardRequest);
+
+                    /** CreateNativeDashboardRequest parent. */
+                    public parent: string;
+
+                    /** CreateNativeDashboardRequest nativeDashboard. */
+                    public nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /**
+                     * Creates a new CreateNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ICreateNativeDashboardRequest): google.cloud.chronicle.v1.CreateNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified CreateNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateNativeDashboardRequest.verify|verify} messages.
+                     * @param message CreateNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ICreateNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateNativeDashboardRequest.verify|verify} messages.
+                     * @param message CreateNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ICreateNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.CreateNativeDashboardRequest;
+
+                    /**
+                     * Decodes a CreateNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.CreateNativeDashboardRequest;
+
+                    /**
+                     * Verifies a CreateNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.CreateNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a CreateNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message CreateNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.CreateNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetNativeDashboardRequest. */
+                interface IGetNativeDashboardRequest {
+
+                    /** GetNativeDashboardRequest name */
+                    name?: (string|null);
+
+                    /** GetNativeDashboardRequest view */
+                    view?: (google.cloud.chronicle.v1.NativeDashboardView|keyof typeof google.cloud.chronicle.v1.NativeDashboardView|null);
+                }
+
+                /** Represents a GetNativeDashboardRequest. */
+                class GetNativeDashboardRequest implements IGetNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new GetNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetNativeDashboardRequest);
+
+                    /** GetNativeDashboardRequest name. */
+                    public name: string;
+
+                    /** GetNativeDashboardRequest view. */
+                    public view: (google.cloud.chronicle.v1.NativeDashboardView|keyof typeof google.cloud.chronicle.v1.NativeDashboardView);
+
+                    /**
+                     * Creates a new GetNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetNativeDashboardRequest): google.cloud.chronicle.v1.GetNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified GetNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetNativeDashboardRequest.verify|verify} messages.
+                     * @param message GetNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetNativeDashboardRequest.verify|verify} messages.
+                     * @param message GetNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetNativeDashboardRequest;
+
+                    /**
+                     * Decodes a GetNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetNativeDashboardRequest;
+
+                    /**
+                     * Verifies a GetNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a GetNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message GetNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNativeDashboardsRequest. */
+                interface IListNativeDashboardsRequest {
+
+                    /** ListNativeDashboardsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListNativeDashboardsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListNativeDashboardsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListNativeDashboardsRequest view */
+                    view?: (google.cloud.chronicle.v1.NativeDashboardView|keyof typeof google.cloud.chronicle.v1.NativeDashboardView|null);
+                }
+
+                /** Represents a ListNativeDashboardsRequest. */
+                class ListNativeDashboardsRequest implements IListNativeDashboardsRequest {
+
+                    /**
+                     * Constructs a new ListNativeDashboardsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListNativeDashboardsRequest);
+
+                    /** ListNativeDashboardsRequest parent. */
+                    public parent: string;
+
+                    /** ListNativeDashboardsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListNativeDashboardsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListNativeDashboardsRequest view. */
+                    public view: (google.cloud.chronicle.v1.NativeDashboardView|keyof typeof google.cloud.chronicle.v1.NativeDashboardView);
+
+                    /**
+                     * Creates a new ListNativeDashboardsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNativeDashboardsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListNativeDashboardsRequest): google.cloud.chronicle.v1.ListNativeDashboardsRequest;
+
+                    /**
+                     * Encodes the specified ListNativeDashboardsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ListNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNativeDashboardsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListNativeDashboardsRequest.verify|verify} messages.
+                     * @param message ListNativeDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListNativeDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNativeDashboardsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListNativeDashboardsRequest;
+
+                    /**
+                     * Decodes a ListNativeDashboardsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNativeDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListNativeDashboardsRequest;
+
+                    /**
+                     * Verifies a ListNativeDashboardsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNativeDashboardsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNativeDashboardsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListNativeDashboardsRequest;
+
+                    /**
+                     * Creates a plain object from a ListNativeDashboardsRequest message. Also converts values to other types if specified.
+                     * @param message ListNativeDashboardsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListNativeDashboardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNativeDashboardsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNativeDashboardsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListNativeDashboardsResponse. */
+                interface IListNativeDashboardsResponse {
+
+                    /** ListNativeDashboardsResponse nativeDashboards */
+                    nativeDashboards?: (google.cloud.chronicle.v1.INativeDashboard[]|null);
+
+                    /** ListNativeDashboardsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListNativeDashboardsResponse. */
+                class ListNativeDashboardsResponse implements IListNativeDashboardsResponse {
+
+                    /**
+                     * Constructs a new ListNativeDashboardsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListNativeDashboardsResponse);
+
+                    /** ListNativeDashboardsResponse nativeDashboards. */
+                    public nativeDashboards: google.cloud.chronicle.v1.INativeDashboard[];
+
+                    /** ListNativeDashboardsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListNativeDashboardsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListNativeDashboardsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListNativeDashboardsResponse): google.cloud.chronicle.v1.ListNativeDashboardsResponse;
+
+                    /**
+                     * Encodes the specified ListNativeDashboardsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ListNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListNativeDashboardsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListNativeDashboardsResponse.verify|verify} messages.
+                     * @param message ListNativeDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListNativeDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListNativeDashboardsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListNativeDashboardsResponse;
+
+                    /**
+                     * Decodes a ListNativeDashboardsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListNativeDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListNativeDashboardsResponse;
+
+                    /**
+                     * Verifies a ListNativeDashboardsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListNativeDashboardsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListNativeDashboardsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListNativeDashboardsResponse;
+
+                    /**
+                     * Creates a plain object from a ListNativeDashboardsResponse message. Also converts values to other types if specified.
+                     * @param message ListNativeDashboardsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListNativeDashboardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListNativeDashboardsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListNativeDashboardsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateNativeDashboardRequest. */
+                interface IUpdateNativeDashboardRequest {
+
+                    /** UpdateNativeDashboardRequest nativeDashboard */
+                    nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** UpdateNativeDashboardRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateNativeDashboardRequest. */
+                class UpdateNativeDashboardRequest implements IUpdateNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new UpdateNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateNativeDashboardRequest);
+
+                    /** UpdateNativeDashboardRequest nativeDashboard. */
+                    public nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** UpdateNativeDashboardRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateNativeDashboardRequest): google.cloud.chronicle.v1.UpdateNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified UpdateNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateNativeDashboardRequest.verify|verify} messages.
+                     * @param message UpdateNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateNativeDashboardRequest.verify|verify} messages.
+                     * @param message UpdateNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateNativeDashboardRequest;
+
+                    /**
+                     * Decodes an UpdateNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateNativeDashboardRequest;
+
+                    /**
+                     * Verifies an UpdateNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message UpdateNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DuplicateNativeDashboardRequest. */
+                interface IDuplicateNativeDashboardRequest {
+
+                    /** DuplicateNativeDashboardRequest name */
+                    name?: (string|null);
+
+                    /** DuplicateNativeDashboardRequest nativeDashboard */
+                    nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+                }
+
+                /** Represents a DuplicateNativeDashboardRequest. */
+                class DuplicateNativeDashboardRequest implements IDuplicateNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new DuplicateNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest);
+
+                    /** DuplicateNativeDashboardRequest name. */
+                    public name: string;
+
+                    /** DuplicateNativeDashboardRequest nativeDashboard. */
+                    public nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /**
+                     * Creates a new DuplicateNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DuplicateNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest): google.cloud.chronicle.v1.DuplicateNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified DuplicateNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DuplicateNativeDashboardRequest.verify|verify} messages.
+                     * @param message DuplicateNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DuplicateNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DuplicateNativeDashboardRequest.verify|verify} messages.
+                     * @param message DuplicateNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DuplicateNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DuplicateNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DuplicateNativeDashboardRequest;
+
+                    /**
+                     * Decodes a DuplicateNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DuplicateNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DuplicateNativeDashboardRequest;
+
+                    /**
+                     * Verifies a DuplicateNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DuplicateNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DuplicateNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DuplicateNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a DuplicateNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message DuplicateNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DuplicateNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DuplicateNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DuplicateNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteNativeDashboardRequest. */
+                interface IDeleteNativeDashboardRequest {
+
+                    /** DeleteNativeDashboardRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteNativeDashboardRequest. */
+                class DeleteNativeDashboardRequest implements IDeleteNativeDashboardRequest {
+
+                    /**
+                     * Constructs a new DeleteNativeDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDeleteNativeDashboardRequest);
+
+                    /** DeleteNativeDashboardRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteNativeDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteNativeDashboardRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDeleteNativeDashboardRequest): google.cloud.chronicle.v1.DeleteNativeDashboardRequest;
+
+                    /**
+                     * Encodes the specified DeleteNativeDashboardRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DeleteNativeDashboardRequest.verify|verify} messages.
+                     * @param message DeleteNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDeleteNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteNativeDashboardRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DeleteNativeDashboardRequest.verify|verify} messages.
+                     * @param message DeleteNativeDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDeleteNativeDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteNativeDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DeleteNativeDashboardRequest;
+
+                    /**
+                     * Decodes a DeleteNativeDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteNativeDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DeleteNativeDashboardRequest;
+
+                    /**
+                     * Verifies a DeleteNativeDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteNativeDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteNativeDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DeleteNativeDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteNativeDashboardRequest message. Also converts values to other types if specified.
+                     * @param message DeleteNativeDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DeleteNativeDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteNativeDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteNativeDashboardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddChartRequest. */
+                interface IAddChartRequest {
+
+                    /** AddChartRequest name */
+                    name?: (string|null);
+
+                    /** AddChartRequest dashboardQuery */
+                    dashboardQuery?: (google.cloud.chronicle.v1.IDashboardQuery|null);
+
+                    /** AddChartRequest dashboardChart */
+                    dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /** AddChartRequest chartLayout */
+                    chartLayout?: (google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout|null);
+                }
+
+                /** Represents an AddChartRequest. */
+                class AddChartRequest implements IAddChartRequest {
+
+                    /**
+                     * Constructs a new AddChartRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IAddChartRequest);
+
+                    /** AddChartRequest name. */
+                    public name: string;
+
+                    /** AddChartRequest dashboardQuery. */
+                    public dashboardQuery?: (google.cloud.chronicle.v1.IDashboardQuery|null);
+
+                    /** AddChartRequest dashboardChart. */
+                    public dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /** AddChartRequest chartLayout. */
+                    public chartLayout?: (google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout|null);
+
+                    /**
+                     * Creates a new AddChartRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddChartRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IAddChartRequest): google.cloud.chronicle.v1.AddChartRequest;
+
+                    /**
+                     * Encodes the specified AddChartRequest message. Does not implicitly {@link google.cloud.chronicle.v1.AddChartRequest.verify|verify} messages.
+                     * @param message AddChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IAddChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddChartRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.AddChartRequest.verify|verify} messages.
+                     * @param message AddChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IAddChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddChartRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.AddChartRequest;
+
+                    /**
+                     * Decodes an AddChartRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.AddChartRequest;
+
+                    /**
+                     * Verifies an AddChartRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddChartRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddChartRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.AddChartRequest;
+
+                    /**
+                     * Creates a plain object from an AddChartRequest message. Also converts values to other types if specified.
+                     * @param message AddChartRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.AddChartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddChartRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddChartRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddChartResponse. */
+                interface IAddChartResponse {
+
+                    /** AddChartResponse nativeDashboard */
+                    nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** AddChartResponse dashboardChart */
+                    dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+                }
+
+                /** Represents an AddChartResponse. */
+                class AddChartResponse implements IAddChartResponse {
+
+                    /**
+                     * Constructs a new AddChartResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IAddChartResponse);
+
+                    /** AddChartResponse nativeDashboard. */
+                    public nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** AddChartResponse dashboardChart. */
+                    public dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /**
+                     * Creates a new AddChartResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddChartResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IAddChartResponse): google.cloud.chronicle.v1.AddChartResponse;
+
+                    /**
+                     * Encodes the specified AddChartResponse message. Does not implicitly {@link google.cloud.chronicle.v1.AddChartResponse.verify|verify} messages.
+                     * @param message AddChartResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IAddChartResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddChartResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.AddChartResponse.verify|verify} messages.
+                     * @param message AddChartResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IAddChartResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddChartResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddChartResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.AddChartResponse;
+
+                    /**
+                     * Decodes an AddChartResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddChartResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.AddChartResponse;
+
+                    /**
+                     * Verifies an AddChartResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddChartResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddChartResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.AddChartResponse;
+
+                    /**
+                     * Creates a plain object from an AddChartResponse message. Also converts values to other types if specified.
+                     * @param message AddChartResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.AddChartResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddChartResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddChartResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EditChartRequest. */
+                interface IEditChartRequest {
+
+                    /** EditChartRequest name */
+                    name?: (string|null);
+
+                    /** EditChartRequest dashboardQuery */
+                    dashboardQuery?: (google.cloud.chronicle.v1.IDashboardQuery|null);
+
+                    /** EditChartRequest dashboardChart */
+                    dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /** EditChartRequest editMask */
+                    editMask?: (google.protobuf.IFieldMask|null);
+
+                    /** EditChartRequest languageFeatures */
+                    languageFeatures?: (google.cloud.chronicle.v1.LanguageFeature[]|null);
+                }
+
+                /** Represents an EditChartRequest. */
+                class EditChartRequest implements IEditChartRequest {
+
+                    /**
+                     * Constructs a new EditChartRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IEditChartRequest);
+
+                    /** EditChartRequest name. */
+                    public name: string;
+
+                    /** EditChartRequest dashboardQuery. */
+                    public dashboardQuery?: (google.cloud.chronicle.v1.IDashboardQuery|null);
+
+                    /** EditChartRequest dashboardChart. */
+                    public dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /** EditChartRequest editMask. */
+                    public editMask?: (google.protobuf.IFieldMask|null);
+
+                    /** EditChartRequest languageFeatures. */
+                    public languageFeatures: google.cloud.chronicle.v1.LanguageFeature[];
+
+                    /**
+                     * Creates a new EditChartRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EditChartRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IEditChartRequest): google.cloud.chronicle.v1.EditChartRequest;
+
+                    /**
+                     * Encodes the specified EditChartRequest message. Does not implicitly {@link google.cloud.chronicle.v1.EditChartRequest.verify|verify} messages.
+                     * @param message EditChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IEditChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EditChartRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.EditChartRequest.verify|verify} messages.
+                     * @param message EditChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IEditChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EditChartRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EditChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.EditChartRequest;
+
+                    /**
+                     * Decodes an EditChartRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EditChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.EditChartRequest;
+
+                    /**
+                     * Verifies an EditChartRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EditChartRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EditChartRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.EditChartRequest;
+
+                    /**
+                     * Creates a plain object from an EditChartRequest message. Also converts values to other types if specified.
+                     * @param message EditChartRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.EditChartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EditChartRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EditChartRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EditChartResponse. */
+                interface IEditChartResponse {
+
+                    /** EditChartResponse nativeDashboard */
+                    nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** EditChartResponse dashboardChart */
+                    dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+                }
+
+                /** Represents an EditChartResponse. */
+                class EditChartResponse implements IEditChartResponse {
+
+                    /**
+                     * Constructs a new EditChartResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IEditChartResponse);
+
+                    /** EditChartResponse nativeDashboard. */
+                    public nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** EditChartResponse dashboardChart. */
+                    public dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /**
+                     * Creates a new EditChartResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EditChartResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IEditChartResponse): google.cloud.chronicle.v1.EditChartResponse;
+
+                    /**
+                     * Encodes the specified EditChartResponse message. Does not implicitly {@link google.cloud.chronicle.v1.EditChartResponse.verify|verify} messages.
+                     * @param message EditChartResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IEditChartResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EditChartResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.EditChartResponse.verify|verify} messages.
+                     * @param message EditChartResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IEditChartResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EditChartResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EditChartResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.EditChartResponse;
+
+                    /**
+                     * Decodes an EditChartResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EditChartResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.EditChartResponse;
+
+                    /**
+                     * Verifies an EditChartResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EditChartResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EditChartResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.EditChartResponse;
+
+                    /**
+                     * Creates a plain object from an EditChartResponse message. Also converts values to other types if specified.
+                     * @param message EditChartResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.EditChartResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EditChartResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EditChartResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveChartRequest. */
+                interface IRemoveChartRequest {
+
+                    /** RemoveChartRequest name */
+                    name?: (string|null);
+
+                    /** RemoveChartRequest dashboardChart */
+                    dashboardChart?: (string|null);
+                }
+
+                /** Represents a RemoveChartRequest. */
+                class RemoveChartRequest implements IRemoveChartRequest {
+
+                    /**
+                     * Constructs a new RemoveChartRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IRemoveChartRequest);
+
+                    /** RemoveChartRequest name. */
+                    public name: string;
+
+                    /** RemoveChartRequest dashboardChart. */
+                    public dashboardChart: string;
+
+                    /**
+                     * Creates a new RemoveChartRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveChartRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IRemoveChartRequest): google.cloud.chronicle.v1.RemoveChartRequest;
+
+                    /**
+                     * Encodes the specified RemoveChartRequest message. Does not implicitly {@link google.cloud.chronicle.v1.RemoveChartRequest.verify|verify} messages.
+                     * @param message RemoveChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IRemoveChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveChartRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.RemoveChartRequest.verify|verify} messages.
+                     * @param message RemoveChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IRemoveChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveChartRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.RemoveChartRequest;
+
+                    /**
+                     * Decodes a RemoveChartRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.RemoveChartRequest;
+
+                    /**
+                     * Verifies a RemoveChartRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveChartRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveChartRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.RemoveChartRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveChartRequest message. Also converts values to other types if specified.
+                     * @param message RemoveChartRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.RemoveChartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveChartRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveChartRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DuplicateChartRequest. */
+                interface IDuplicateChartRequest {
+
+                    /** DuplicateChartRequest name */
+                    name?: (string|null);
+
+                    /** DuplicateChartRequest dashboardChart */
+                    dashboardChart?: (string|null);
+                }
+
+                /** Represents a DuplicateChartRequest. */
+                class DuplicateChartRequest implements IDuplicateChartRequest {
+
+                    /**
+                     * Constructs a new DuplicateChartRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDuplicateChartRequest);
+
+                    /** DuplicateChartRequest name. */
+                    public name: string;
+
+                    /** DuplicateChartRequest dashboardChart. */
+                    public dashboardChart: string;
+
+                    /**
+                     * Creates a new DuplicateChartRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DuplicateChartRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDuplicateChartRequest): google.cloud.chronicle.v1.DuplicateChartRequest;
+
+                    /**
+                     * Encodes the specified DuplicateChartRequest message. Does not implicitly {@link google.cloud.chronicle.v1.DuplicateChartRequest.verify|verify} messages.
+                     * @param message DuplicateChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDuplicateChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DuplicateChartRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DuplicateChartRequest.verify|verify} messages.
+                     * @param message DuplicateChartRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDuplicateChartRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DuplicateChartRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DuplicateChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DuplicateChartRequest;
+
+                    /**
+                     * Decodes a DuplicateChartRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DuplicateChartRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DuplicateChartRequest;
+
+                    /**
+                     * Verifies a DuplicateChartRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DuplicateChartRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DuplicateChartRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DuplicateChartRequest;
+
+                    /**
+                     * Creates a plain object from a DuplicateChartRequest message. Also converts values to other types if specified.
+                     * @param message DuplicateChartRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DuplicateChartRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DuplicateChartRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DuplicateChartRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DuplicateChartResponse. */
+                interface IDuplicateChartResponse {
+
+                    /** DuplicateChartResponse nativeDashboard */
+                    nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** DuplicateChartResponse dashboardChart */
+                    dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+                }
+
+                /** Represents a DuplicateChartResponse. */
+                class DuplicateChartResponse implements IDuplicateChartResponse {
+
+                    /**
+                     * Constructs a new DuplicateChartResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDuplicateChartResponse);
+
+                    /** DuplicateChartResponse nativeDashboard. */
+                    public nativeDashboard?: (google.cloud.chronicle.v1.INativeDashboard|null);
+
+                    /** DuplicateChartResponse dashboardChart. */
+                    public dashboardChart?: (google.cloud.chronicle.v1.IDashboardChart|null);
+
+                    /**
+                     * Creates a new DuplicateChartResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DuplicateChartResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDuplicateChartResponse): google.cloud.chronicle.v1.DuplicateChartResponse;
+
+                    /**
+                     * Encodes the specified DuplicateChartResponse message. Does not implicitly {@link google.cloud.chronicle.v1.DuplicateChartResponse.verify|verify} messages.
+                     * @param message DuplicateChartResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDuplicateChartResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DuplicateChartResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DuplicateChartResponse.verify|verify} messages.
+                     * @param message DuplicateChartResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDuplicateChartResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DuplicateChartResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DuplicateChartResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DuplicateChartResponse;
+
+                    /**
+                     * Decodes a DuplicateChartResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DuplicateChartResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DuplicateChartResponse;
+
+                    /**
+                     * Verifies a DuplicateChartResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DuplicateChartResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DuplicateChartResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DuplicateChartResponse;
+
+                    /**
+                     * Creates a plain object from a DuplicateChartResponse message. Also converts values to other types if specified.
+                     * @param message DuplicateChartResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DuplicateChartResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DuplicateChartResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DuplicateChartResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DashboardUserData. */
+                interface IDashboardUserData {
+
+                    /** DashboardUserData lastViewedTime */
+                    lastViewedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DashboardUserData isPinned */
+                    isPinned?: (boolean|null);
+                }
+
+                /** Represents a DashboardUserData. */
+                class DashboardUserData implements IDashboardUserData {
+
+                    /**
+                     * Constructs a new DashboardUserData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDashboardUserData);
+
+                    /** DashboardUserData lastViewedTime. */
+                    public lastViewedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DashboardUserData isPinned. */
+                    public isPinned: boolean;
+
+                    /**
+                     * Creates a new DashboardUserData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DashboardUserData instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDashboardUserData): google.cloud.chronicle.v1.DashboardUserData;
+
+                    /**
+                     * Encodes the specified DashboardUserData message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardUserData.verify|verify} messages.
+                     * @param message DashboardUserData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDashboardUserData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DashboardUserData message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardUserData.verify|verify} messages.
+                     * @param message DashboardUserData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDashboardUserData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DashboardUserData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DashboardUserData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardUserData;
+
+                    /**
+                     * Decodes a DashboardUserData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DashboardUserData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardUserData;
+
+                    /**
+                     * Verifies a DashboardUserData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DashboardUserData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DashboardUserData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardUserData;
+
+                    /**
+                     * Creates a plain object from a DashboardUserData message. Also converts values to other types if specified.
+                     * @param message DashboardUserData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DashboardUserData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DashboardUserData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DashboardUserData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DashboardDefinition. */
+                interface IDashboardDefinition {
+
+                    /** DashboardDefinition filters */
+                    filters?: (google.cloud.chronicle.v1.IDashboardFilter[]|null);
+
+                    /** DashboardDefinition fingerprint */
+                    fingerprint?: (string|null);
+
+                    /** DashboardDefinition charts */
+                    charts?: (google.cloud.chronicle.v1.DashboardDefinition.IChartConfig[]|null);
+                }
+
+                /** Represents a DashboardDefinition. */
+                class DashboardDefinition implements IDashboardDefinition {
+
+                    /**
+                     * Constructs a new DashboardDefinition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDashboardDefinition);
+
+                    /** DashboardDefinition filters. */
+                    public filters: google.cloud.chronicle.v1.IDashboardFilter[];
+
+                    /** DashboardDefinition fingerprint. */
+                    public fingerprint: string;
+
+                    /** DashboardDefinition charts. */
+                    public charts: google.cloud.chronicle.v1.DashboardDefinition.IChartConfig[];
+
+                    /**
+                     * Creates a new DashboardDefinition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DashboardDefinition instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDashboardDefinition): google.cloud.chronicle.v1.DashboardDefinition;
+
+                    /**
+                     * Encodes the specified DashboardDefinition message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardDefinition.verify|verify} messages.
+                     * @param message DashboardDefinition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDashboardDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DashboardDefinition message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardDefinition.verify|verify} messages.
+                     * @param message DashboardDefinition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDashboardDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DashboardDefinition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DashboardDefinition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardDefinition;
+
+                    /**
+                     * Decodes a DashboardDefinition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DashboardDefinition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardDefinition;
+
+                    /**
+                     * Verifies a DashboardDefinition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DashboardDefinition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DashboardDefinition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardDefinition;
+
+                    /**
+                     * Creates a plain object from a DashboardDefinition message. Also converts values to other types if specified.
+                     * @param message DashboardDefinition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DashboardDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DashboardDefinition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DashboardDefinition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DashboardDefinition {
+
+                    /** Properties of a ChartConfig. */
+                    interface IChartConfig {
+
+                        /** ChartConfig dashboardChart */
+                        dashboardChart?: (string|null);
+
+                        /** ChartConfig chartLayout */
+                        chartLayout?: (google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout|null);
+
+                        /** ChartConfig filtersIds */
+                        filtersIds?: (string[]|null);
+                    }
+
+                    /** Represents a ChartConfig. */
+                    class ChartConfig implements IChartConfig {
+
+                        /**
+                         * Constructs a new ChartConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DashboardDefinition.IChartConfig);
+
+                        /** ChartConfig dashboardChart. */
+                        public dashboardChart: string;
+
+                        /** ChartConfig chartLayout. */
+                        public chartLayout?: (google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout|null);
+
+                        /** ChartConfig filtersIds. */
+                        public filtersIds: string[];
+
+                        /**
+                         * Creates a new ChartConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ChartConfig instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DashboardDefinition.IChartConfig): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig;
+
+                        /**
+                         * Encodes the specified ChartConfig message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.verify|verify} messages.
+                         * @param message ChartConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DashboardDefinition.IChartConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ChartConfig message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.verify|verify} messages.
+                         * @param message ChartConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardDefinition.IChartConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ChartConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ChartConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig;
+
+                        /**
+                         * Decodes a ChartConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ChartConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig;
+
+                        /**
+                         * Verifies a ChartConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ChartConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ChartConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig;
+
+                        /**
+                         * Creates a plain object from a ChartConfig message. Also converts values to other types if specified.
+                         * @param message ChartConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DashboardDefinition.ChartConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ChartConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ChartConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ChartConfig {
+
+                        /** Properties of a ChartLayout. */
+                        interface IChartLayout {
+
+                            /** ChartLayout startX */
+                            startX?: (number|null);
+
+                            /** ChartLayout spanX */
+                            spanX?: (number|null);
+
+                            /** ChartLayout startY */
+                            startY?: (number|null);
+
+                            /** ChartLayout spanY */
+                            spanY?: (number|null);
+                        }
+
+                        /** Represents a ChartLayout. */
+                        class ChartLayout implements IChartLayout {
+
+                            /**
+                             * Constructs a new ChartLayout.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout);
+
+                            /** ChartLayout startX. */
+                            public startX?: (number|null);
+
+                            /** ChartLayout spanX. */
+                            public spanX: number;
+
+                            /** ChartLayout startY. */
+                            public startY?: (number|null);
+
+                            /** ChartLayout spanY. */
+                            public spanY: number;
+
+                            /**
+                             * Creates a new ChartLayout instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ChartLayout instance
+                             */
+                            public static create(properties?: google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout;
+
+                            /**
+                             * Encodes the specified ChartLayout message. Does not implicitly {@link google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout.verify|verify} messages.
+                             * @param message ChartLayout message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ChartLayout message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout.verify|verify} messages.
+                             * @param message ChartLayout message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.IChartLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ChartLayout message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ChartLayout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout;
+
+                            /**
+                             * Decodes a ChartLayout message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ChartLayout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout;
+
+                            /**
+                             * Verifies a ChartLayout message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ChartLayout message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ChartLayout
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout;
+
+                            /**
+                             * Creates a plain object from a ChartLayout message. Also converts values to other types if specified.
+                             * @param message ChartLayout
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ChartLayout to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ChartLayout
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Represents an InstanceService */
@@ -14053,97 +29608,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -14441,6 +29905,426 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -15413,226 +31297,6 @@ export namespace google {
 
             /**
              * Gets the default type url for OperationInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Properties of a Status. */
-        interface IStatus {
-
-            /** Status code */
-            code?: (number|null);
-
-            /** Status message */
-            message?: (string|null);
-
-            /** Status details */
-            details?: (google.protobuf.IAny[]|null);
-        }
-
-        /** Represents a Status. */
-        class Status implements IStatus {
-
-            /**
-             * Constructs a new Status.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.rpc.IStatus);
-
-            /** Status code. */
-            public code: number;
-
-            /** Status message. */
-            public message: string;
-
-            /** Status details. */
-            public details: google.protobuf.IAny[];
-
-            /**
-             * Creates a new Status instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Status instance
-             */
-            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
-
-            /**
-             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
-
-            /**
-             * Verifies a Status message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Status message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Status
-             */
-            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
-
-            /**
-             * Creates a plain object from a Status message. Also converts values to other types if specified.
-             * @param message Status
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Status to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Status
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
-    /** Namespace type. */
-    namespace type {
-
-        /** Properties of an Interval. */
-        interface IInterval {
-
-            /** Interval startTime */
-            startTime?: (google.protobuf.ITimestamp|null);
-
-            /** Interval endTime */
-            endTime?: (google.protobuf.ITimestamp|null);
-        }
-
-        /** Represents an Interval. */
-        class Interval implements IInterval {
-
-            /**
-             * Constructs a new Interval.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.IInterval);
-
-            /** Interval startTime. */
-            public startTime?: (google.protobuf.ITimestamp|null);
-
-            /** Interval endTime. */
-            public endTime?: (google.protobuf.ITimestamp|null);
-
-            /**
-             * Creates a new Interval instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Interval instance
-             */
-            public static create(properties?: google.type.IInterval): google.type.Interval;
-
-            /**
-             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
-             * @param message Interval message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
-             * @param message Interval message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Interval message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Interval
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
-
-            /**
-             * Decodes an Interval message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Interval
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
-
-            /**
-             * Verifies an Interval message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Interval
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.Interval;
-
-            /**
-             * Creates a plain object from an Interval message. Also converts values to other types if specified.
-             * @param message Interval
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Interval to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

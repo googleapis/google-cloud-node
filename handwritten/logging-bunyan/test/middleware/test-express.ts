@@ -60,7 +60,7 @@ let passedEmitRequestLog: Function | undefined;
 function fakeMakeMiddleware(
   projectId: string,
   makeChildLogger: Function,
-  emitRequestLog: Function
+  emitRequestLog: Function,
 ): Function {
   passedProjectId = projectId;
   passedEmitRequestLog = emitRequestLog;
@@ -74,7 +74,7 @@ const {middleware, APP_LOG_SUFFIX} = proxyquire(
     '@google-cloud/logging': {
       middleware: {express: {makeMiddleware: fakeMakeMiddleware}},
     },
-  }
+  },
 );
 
 describe('middleware/express', () => {
@@ -97,8 +97,8 @@ describe('middleware/express', () => {
     assert.strictEqual(passedOptions.length, 2);
     assert.ok(
       passedOptions.some(
-        option => option!.logName === `bunyan_log_${APP_LOG_SUFFIX}`
-      )
+        option => option!.logName === `bunyan_log_${APP_LOG_SUFFIX}`,
+      ),
     );
     assert.ok(passedOptions.some(option => option!.logName === 'bunyan_log'));
     assert.ok(passedOptions.every(option => option!.level === 'info'));
@@ -113,8 +113,8 @@ describe('middleware/express', () => {
     assert.strictEqual(passedOptions.length, 2);
     assert.ok(
       passedOptions.some(
-        option => option!.logName === `${LOGNAME}_${APP_LOG_SUFFIX}`
-      )
+        option => option!.logName === `${LOGNAME}_${APP_LOG_SUFFIX}`,
+      ),
     );
     assert.ok(passedOptions.some(option => option!.logName === LOGNAME));
     assert.ok(passedOptions.every(option => option!.level === LEVEL));

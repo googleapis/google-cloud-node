@@ -150,6 +150,31 @@
                 "updateSpaceNotificationSetting"
               ]
             },
+            "CreateSection": {
+              "methods": [
+                "createSection"
+              ]
+            },
+            "DeleteSection": {
+              "methods": [
+                "deleteSection"
+              ]
+            },
+            "UpdateSection": {
+              "methods": [
+                "updateSection"
+              ]
+            },
+            "PositionSection": {
+              "methods": [
+                "positionSection"
+              ]
+            },
+            "MoveSectionItem": {
+              "methods": [
+                "moveSectionItem"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -178,6 +203,13 @@
                 "searchSpacesAsync"
               ]
             },
+            "FindGroupChats": {
+              "methods": [
+                "findGroupChats",
+                "findGroupChatsStream",
+                "findGroupChatsAsync"
+              ]
+            },
             "ListReactions": {
               "methods": [
                 "listReactions",
@@ -197,6 +229,20 @@
                 "listSpaceEvents",
                 "listSpaceEventsStream",
                 "listSpaceEventsAsync"
+              ]
+            },
+            "ListSections": {
+              "methods": [
+                "listSections",
+                "listSectionsStream",
+                "listSectionsAsync"
+              ]
+            },
+            "ListSectionItems": {
+              "methods": [
+                "listSectionItems",
+                "listSectionItemsStream",
+                "listSectionItemsAsync"
               ]
             }
           }
@@ -344,6 +390,31 @@
                 "updateSpaceNotificationSetting"
               ]
             },
+            "CreateSection": {
+              "methods": [
+                "createSection"
+              ]
+            },
+            "DeleteSection": {
+              "methods": [
+                "deleteSection"
+              ]
+            },
+            "UpdateSection": {
+              "methods": [
+                "updateSection"
+              ]
+            },
+            "PositionSection": {
+              "methods": [
+                "positionSection"
+              ]
+            },
+            "MoveSectionItem": {
+              "methods": [
+                "moveSectionItem"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -372,6 +443,13 @@
                 "searchSpacesAsync"
               ]
             },
+            "FindGroupChats": {
+              "methods": [
+                "findGroupChats",
+                "findGroupChatsStream",
+                "findGroupChatsAsync"
+              ]
+            },
             "ListReactions": {
               "methods": [
                 "listReactions",
@@ -391,6 +469,20 @@
                 "listSpaceEvents",
                 "listSpaceEventsStream",
                 "listSpaceEventsAsync"
+              ]
+            },
+            "ListSections": {
+              "methods": [
+                "listSections",
+                "listSectionsStream",
+                "listSectionsAsync"
+              ]
+            },
+            "ListSectionItems": {
+              "methods": [
+                "listSectionItems",
+                "listSectionItemsStream",
+                "listSectionItemsAsync"
               ]
             }
           }

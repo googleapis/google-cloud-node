@@ -3305,6 +3305,15 @@ export namespace google {
 
                     /** Counters totalBytesFound */
                     totalBytesFound?: (number|Long|string|null);
+
+                    /** Counters objectCustomContextsCreated */
+                    objectCustomContextsCreated?: (number|Long|string|null);
+
+                    /** Counters objectCustomContextsDeleted */
+                    objectCustomContextsDeleted?: (number|Long|string|null);
+
+                    /** Counters objectCustomContextsUpdated */
+                    objectCustomContextsUpdated?: (number|Long|string|null);
                 }
 
                 /** Represents a Counters. */
@@ -3327,6 +3336,15 @@ export namespace google {
 
                     /** Counters totalBytesFound. */
                     public totalBytesFound?: (number|Long|string|null);
+
+                    /** Counters objectCustomContextsCreated. */
+                    public objectCustomContextsCreated?: (number|Long|string|null);
+
+                    /** Counters objectCustomContextsDeleted. */
+                    public objectCustomContextsDeleted?: (number|Long|string|null);
+
+                    /** Counters objectCustomContextsUpdated. */
+                    public objectCustomContextsUpdated?: (number|Long|string|null);
 
                     /**
                      * Creates a new Counters instance using the specified properties.

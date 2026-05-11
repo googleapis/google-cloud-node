@@ -24,6 +24,7 @@
     "src/**/*.json",
     "system-test/*.ts",
     "protos/protos.json",
-    "samples/**/*.d.ts"
+    "samples/**/*.d.ts",
+    "google-cloud-spanner-executor/**/*.ts"
   ]
 }

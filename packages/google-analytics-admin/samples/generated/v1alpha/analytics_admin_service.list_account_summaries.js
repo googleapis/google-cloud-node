@@ -29,17 +29,17 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The maximum number of AccountSummary resources to return. The service may
-   *  return fewer than this value, even if there are additional pages.
-   *  If unspecified, at most 50 resources will be returned.
-   *  The maximum value is 200; (higher values will be coerced to the maximum)
+   *  Optional. The maximum number of AccountSummary resources to return. The
+   *  service may return fewer than this value, even if there are additional
+   *  pages. If unspecified, at most 50 resources will be returned. The maximum
+   *  value is 200; (higher values will be coerced to the maximum)
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListAccountSummaries` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListAccountSummaries`
-   *  must match the call that provided the page token.
+   *  Optional. A page token, received from a previous `ListAccountSummaries`
+   *  call. Provide this to retrieve the subsequent page. When paginating, all
+   *  other parameters provided to `ListAccountSummaries` must match the call
+   *  that provided the page token.
    */
   // const pageToken = 'abc123'
 

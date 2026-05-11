@@ -57,6 +57,18 @@ function main(parent, sourceModel) {
    *  then the Model copy will be encrypted with the provided encryption key.
    */
   // const encryptionSpec = {}
+  /**
+   *  Optional. The user-provided custom service account to use to do the copy
+   *  model. If empty, Vertex AI Service
+   *  Agent (https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+   *  will be used to access resources needed to upload the model. This account
+   *  must belong to the destination project where the model is copied to,
+   *  i.e., the project specified in the `parent` field of this request and
+   *  have the Vertex AI Service Agent role in the source project.
+   *  Requires the user copying the Model to have the
+   *  `iam.serviceAccounts.actAs` permission on this service account.
+   */
+  // const customServiceAccount = 'abc123'
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;

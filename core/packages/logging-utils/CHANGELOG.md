@@ -1,5 +1,13 @@
 # Changelog
 
+
+## [1.1.4](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v1.1.3...google-logging-utils-v1.1.4) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+
 ## [1.1.3](https://github.com/googleapis/google-cloud-node-core/compare/google-logging-utils-v1.1.2...google-logging-utils-v1.1.3) (2025-11-11)
 
 

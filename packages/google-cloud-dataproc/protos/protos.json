@@ -404,7 +404,7 @@
                     "BatchController": {
                       "options": {
                         "(google.api.default_host)": "dataproc.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dataproc,https://www.googleapis.com/auth/dataproc.read-only"
                       },
                       "methods": {
                         "CreateBatch": {
@@ -581,7 +581,10 @@
                         "batches": {
                           "rule": "repeated",
                           "type": "Batch",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "nextPageToken": {
                           "type": "string",
@@ -620,7 +623,8 @@
                             "pysparkBatch",
                             "sparkBatch",
                             "sparkRBatch",
-                            "sparkSqlBatch"
+                            "sparkSqlBatch",
+                            "pysparkNotebookBatch"
                           ]
                         }
                       },
@@ -670,6 +674,13 @@
                         "sparkSqlBatch": {
                           "type": "SparkSqlBatch",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pysparkNotebookBatch": {
+                          "type": "PySparkNotebookBatch",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -957,6 +968,57 @@
                         }
                       }
                     },
+                    "PySparkNotebookBatch": {
+                      "fields": {
+                        "notebookFileUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pythonFileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "jarFileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "archiveUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "RuntimeConfig": {
                       "fields": {
                         "version": {
@@ -1065,7 +1127,8 @@
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         },
                         "idleTtl": {
@@ -1092,6 +1155,14 @@
                         "authenticationConfig": {
                           "type": "AuthenticationConfig",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1194,6 +1265,13 @@
                         "acceleratorType": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1424,7 +1502,8 @@
                               "type": "string",
                               "id": 23,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                               }
                             },
                             "spot": {
@@ -1545,14 +1624,14 @@
                         "HUDI": 18,
                         "ICEBERG": 19,
                         "JUPYTER": 1,
-                        "JUPYTER_KERNEL_GATEWAY": 22,
                         "PIG": 21,
                         "PRESTO": 6,
                         "TRINO": 17,
                         "RANGER": 12,
                         "SOLR": 10,
                         "ZEPPELIN": 4,
-                        "ZOOKEEPER": 8
+                        "ZOOKEEPER": 8,
+                        "JUPYTER_KERNEL_GATEWAY": 22
                       }
                     },
                     "FailureAction": {
@@ -1852,6 +1931,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "engine": {
+                          "type": "Engine",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "configBucket": {
                           "type": "string",
                           "id": 1,
@@ -1981,6 +2067,13 @@
                             "CLUSTER_TIER_UNSPECIFIED": 0,
                             "CLUSTER_TIER_STANDARD": 1,
                             "CLUSTER_TIER_PREMIUM": 2
+                          }
+                        },
+                        "Engine": {
+                          "values": {
+                            "ENGINE_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "LIGHTNING": 2
                           }
                         }
                       }
@@ -2935,6 +3028,12 @@
                             "autoDeleteTime",
                             "autoDeleteTtl"
                           ]
+                        },
+                        "stopTtl": {
+                          "oneof": [
+                            "autoStopTime",
+                            "autoStopTtl"
+                          ]
                         }
                       },
                       "fields": {
@@ -2955,6 +3054,27 @@
                         "autoDeleteTtl": {
                           "type": "google.protobuf.Duration",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "idleStopTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoStopTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "autoStopTtl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5284,7 +5404,7 @@
                     "SessionTemplateController": {
                       "options": {
                         "(google.api.default_host)": "dataproc.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dataproc,https://www.googleapis.com/auth/dataproc.read-only"
                       },
                       "methods": {
                         "CreateSessionTemplate": {
@@ -5504,7 +5624,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "description": {
@@ -5583,7 +5703,7 @@
                     "SessionController": {
                       "options": {
                         "(google.api.default_host)": "dataproc.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dataproc,https://www.googleapis.com/auth/dataproc.read-only"
                       },
                       "methods": {
                         "CreateSession": {
@@ -5856,7 +5976,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "uuid": {

@@ -225,7 +225,7 @@ export class RegionCompositeHealthChecksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const regionCompositeHealthChecksStubMethods =
-        ['aggregatedList', 'delete', 'get', 'insert', 'list', 'patch', 'testIamPermissions'];
+        ['aggregatedList', 'delete', 'get', 'getHealth', 'insert', 'list', 'patch', 'testIamPermissions'];
     for (const methodName of regionCompositeHealthChecksStubMethods) {
       const callPromise = this.regionCompositeHealthChecksStub.then(
         stub => (...args: Array<{}>) => {
@@ -538,6 +538,107 @@ export class RegionCompositeHealthChecksClient {
         {}|undefined
       ]) => {
         this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets the most recent health check results for this
+ * regional CompositeHealthCheck.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.compositeHealthCheck
+ *   Name of the CompositeHealthCheck resource to get health for.
+ * @param {string} request.project
+ *   Name of the project scoping this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.CompositeHealthCheckHealth|CompositeHealthCheckHealth}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/region_composite_health_checks.get_health.js</caption>
+ * region_tag:compute_v1_generated_RegionCompositeHealthChecks_GetHealth_async
+ */
+  getHealth(
+      request?: protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+        protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|undefined, {}|undefined
+      ]>;
+  getHealth(
+      request: protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+          protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHealth(
+      request: protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+          protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHealth(
+      request?: protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+          protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+          protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+        protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'region': request.region ?? '',
+      'composite_health_check': request.compositeHealthCheck ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getHealth request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+        protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHealth response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getHealth(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ICompositeHealthCheckHealth,
+        protos.google.cloud.compute.v1.IGetHealthRegionCompositeHealthCheckRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getHealth response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

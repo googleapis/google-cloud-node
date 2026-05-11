@@ -1,5 +1,13 @@
 # Changelog
 
+
+## [7.1.5](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.4...gaxios-v7.1.5) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+
 ## [7.1.4](https://github.com/googleapis/google-cloud-node-core/compare/gaxios-v7.1.3...gaxios-v7.1.4) (2025-12-17)
 
 

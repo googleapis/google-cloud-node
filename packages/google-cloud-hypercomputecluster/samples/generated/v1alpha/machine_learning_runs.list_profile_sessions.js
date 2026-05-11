@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. Parent format:
-   *  projects/{project}/locations/{location}/machineLearningRuns/{machineLearningRun}
+   *  projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}
    */
   // const parent = 'abc123'
   /**

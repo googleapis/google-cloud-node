@@ -29,8 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the framework to retrieve, in the format
-   *  `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
+   *  Required. The name of the framework to retrieve, in one of the following
+   *  formats:
+   *  `organizations/{organization}/locations/{location}/frameworks/{framework}`
+   *  or
+   *  `projects/{project}/locations/{location}/frameworks/{framework}`.
    *  The only supported location is `global`.
    */
   // const name = 'abc123'

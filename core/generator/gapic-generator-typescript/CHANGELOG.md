@@ -1,5 +1,15 @@
 # Changelog
 
+
+## [4.11.14](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.13...gapic-generator-v4.11.14) (2026-05-11)
+
+
+### Bug Fixes
+
+* Add logic to check for IAM RPC methods within the service before adding mixin to avoid generating duplicate methods ([#7929](https://github.com/googleapis/google-cloud-node/issues/7929)) ([b908005](https://github.com/googleapis/google-cloud-node/commit/b90800518eb02799a812e6c2d21f57216564da30))
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* **gapic-generator-typescript:** Add .boolean() to diregapic and handwritten_layer ([#8100](https://github.com/googleapis/google-cloud-node/issues/8100)) ([5b4ab3b](https://github.com/googleapis/google-cloud-node/commit/5b4ab3bd8487ad5ba4816157e0deb33d418ed836))
+
 ## [4.11.13](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.12...gapic-generator-v4.11.13) (2026-04-06)
 
 

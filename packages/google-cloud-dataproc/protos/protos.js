@@ -4348,6 +4348,7 @@
                          * @property {google.cloud.dataproc.v1.ISparkBatch|null} [sparkBatch] Batch sparkBatch
                          * @property {google.cloud.dataproc.v1.ISparkRBatch|null} [sparkRBatch] Batch sparkRBatch
                          * @property {google.cloud.dataproc.v1.ISparkSqlBatch|null} [sparkSqlBatch] Batch sparkSqlBatch
+                         * @property {google.cloud.dataproc.v1.IPySparkNotebookBatch|null} [pysparkNotebookBatch] Batch pysparkNotebookBatch
                          * @property {google.cloud.dataproc.v1.IRuntimeInfo|null} [runtimeInfo] Batch runtimeInfo
                          * @property {google.cloud.dataproc.v1.Batch.State|null} [state] Batch state
                          * @property {string|null} [stateMessage] Batch stateMessage
@@ -4434,6 +4435,14 @@
                         Batch.prototype.sparkSqlBatch = null;
     
                         /**
+                         * Batch pysparkNotebookBatch.
+                         * @member {google.cloud.dataproc.v1.IPySparkNotebookBatch|null|undefined} pysparkNotebookBatch
+                         * @memberof google.cloud.dataproc.v1.Batch
+                         * @instance
+                         */
+                        Batch.prototype.pysparkNotebookBatch = null;
+    
+                        /**
                          * Batch runtimeInfo.
                          * @member {google.cloud.dataproc.v1.IRuntimeInfo|null|undefined} runtimeInfo
                          * @memberof google.cloud.dataproc.v1.Batch
@@ -4518,12 +4527,12 @@
     
                         /**
                          * Batch batchConfig.
-                         * @member {"pysparkBatch"|"sparkBatch"|"sparkRBatch"|"sparkSqlBatch"|undefined} batchConfig
+                         * @member {"pysparkBatch"|"sparkBatch"|"sparkRBatch"|"sparkSqlBatch"|"pysparkNotebookBatch"|undefined} batchConfig
                          * @memberof google.cloud.dataproc.v1.Batch
                          * @instance
                          */
                         Object.defineProperty(Batch.prototype, "batchConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["pysparkBatch", "sparkBatch", "sparkRBatch", "sparkSqlBatch"]),
+                            get: $util.oneOfGetter($oneOfFields = ["pysparkBatch", "sparkBatch", "sparkRBatch", "sparkSqlBatch", "pysparkNotebookBatch"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4587,6 +4596,8 @@
                             if (message.stateHistory != null && message.stateHistory.length)
                                 for (var i = 0; i < message.stateHistory.length; ++i)
                                     $root.google.cloud.dataproc.v1.Batch.StateHistory.encode(message.stateHistory[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.pysparkNotebookBatch != null && Object.hasOwnProperty.call(message, "pysparkNotebookBatch"))
+                                $root.google.cloud.dataproc.v1.PySparkNotebookBatch.encode(message.pysparkNotebookBatch, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -4649,6 +4660,10 @@
                                     }
                                 case 7: {
                                         message.sparkSqlBatch = $root.google.cloud.dataproc.v1.SparkSqlBatch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 19: {
+                                        message.pysparkNotebookBatch = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -4797,6 +4812,16 @@
                                         return "sparkSqlBatch." + error;
                                 }
                             }
+                            if (message.pysparkNotebookBatch != null && message.hasOwnProperty("pysparkNotebookBatch")) {
+                                if (properties.batchConfig === 1)
+                                    return "batchConfig: multiple values";
+                                properties.batchConfig = 1;
+                                {
+                                    var error = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.verify(message.pysparkNotebookBatch);
+                                    if (error)
+                                        return "pysparkNotebookBatch." + error;
+                                }
+                            }
                             if (message.runtimeInfo != null && message.hasOwnProperty("runtimeInfo")) {
                                 var error = $root.google.cloud.dataproc.v1.RuntimeInfo.verify(message.runtimeInfo);
                                 if (error)
@@ -4899,6 +4924,11 @@
                                 if (typeof object.sparkSqlBatch !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.Batch.sparkSqlBatch: object expected");
                                 message.sparkSqlBatch = $root.google.cloud.dataproc.v1.SparkSqlBatch.fromObject(object.sparkSqlBatch);
+                            }
+                            if (object.pysparkNotebookBatch != null) {
+                                if (typeof object.pysparkNotebookBatch !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.Batch.pysparkNotebookBatch: object expected");
+                                message.pysparkNotebookBatch = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.fromObject(object.pysparkNotebookBatch);
                             }
                             if (object.runtimeInfo != null) {
                                 if (typeof object.runtimeInfo !== "object")
@@ -5064,6 +5094,11 @@
                                 object.stateHistory = [];
                                 for (var j = 0; j < message.stateHistory.length; ++j)
                                     object.stateHistory[j] = $root.google.cloud.dataproc.v1.Batch.StateHistory.toObject(message.stateHistory[j], options);
+                            }
+                            if (message.pysparkNotebookBatch != null && message.hasOwnProperty("pysparkNotebookBatch")) {
+                                object.pysparkNotebookBatch = $root.google.cloud.dataproc.v1.PySparkNotebookBatch.toObject(message.pysparkNotebookBatch, options);
+                                if (options.oneofs)
+                                    object.batchConfig = "pysparkNotebookBatch";
                             }
                             return object;
                         };
@@ -6862,6 +6897,428 @@
                         return SparkSqlBatch;
                     })();
     
+                    v1.PySparkNotebookBatch = (function() {
+    
+                        /**
+                         * Properties of a PySparkNotebookBatch.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IPySparkNotebookBatch
+                         * @property {string|null} [notebookFileUri] PySparkNotebookBatch notebookFileUri
+                         * @property {Object.<string,string>|null} [params] PySparkNotebookBatch params
+                         * @property {Array.<string>|null} [pythonFileUris] PySparkNotebookBatch pythonFileUris
+                         * @property {Array.<string>|null} [jarFileUris] PySparkNotebookBatch jarFileUris
+                         * @property {Array.<string>|null} [fileUris] PySparkNotebookBatch fileUris
+                         * @property {Array.<string>|null} [archiveUris] PySparkNotebookBatch archiveUris
+                         */
+    
+                        /**
+                         * Constructs a new PySparkNotebookBatch.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a PySparkNotebookBatch.
+                         * @implements IPySparkNotebookBatch
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch=} [properties] Properties to set
+                         */
+                        function PySparkNotebookBatch(properties) {
+                            this.params = {};
+                            this.pythonFileUris = [];
+                            this.jarFileUris = [];
+                            this.fileUris = [];
+                            this.archiveUris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PySparkNotebookBatch notebookFileUri.
+                         * @member {string} notebookFileUri
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.notebookFileUri = "";
+    
+                        /**
+                         * PySparkNotebookBatch params.
+                         * @member {Object.<string,string>} params
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.params = $util.emptyObject;
+    
+                        /**
+                         * PySparkNotebookBatch pythonFileUris.
+                         * @member {Array.<string>} pythonFileUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.pythonFileUris = $util.emptyArray;
+    
+                        /**
+                         * PySparkNotebookBatch jarFileUris.
+                         * @member {Array.<string>} jarFileUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.jarFileUris = $util.emptyArray;
+    
+                        /**
+                         * PySparkNotebookBatch fileUris.
+                         * @member {Array.<string>} fileUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.fileUris = $util.emptyArray;
+    
+                        /**
+                         * PySparkNotebookBatch archiveUris.
+                         * @member {Array.<string>} archiveUris
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         */
+                        PySparkNotebookBatch.prototype.archiveUris = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PySparkNotebookBatch instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch instance
+                         */
+                        PySparkNotebookBatch.create = function create(properties) {
+                            return new PySparkNotebookBatch(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PySparkNotebookBatch message. Does not implicitly {@link google.cloud.dataproc.v1.PySparkNotebookBatch.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch} message PySparkNotebookBatch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PySparkNotebookBatch.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.notebookFileUri != null && Object.hasOwnProperty.call(message, "notebookFileUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.notebookFileUri);
+                            if (message.params != null && Object.hasOwnProperty.call(message, "params"))
+                                for (var keys = Object.keys(message.params), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.params[keys[i]]).ldelim();
+                            if (message.pythonFileUris != null && message.pythonFileUris.length)
+                                for (var i = 0; i < message.pythonFileUris.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pythonFileUris[i]);
+                            if (message.jarFileUris != null && message.jarFileUris.length)
+                                for (var i = 0; i < message.jarFileUris.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.jarFileUris[i]);
+                            if (message.fileUris != null && message.fileUris.length)
+                                for (var i = 0; i < message.fileUris.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.fileUris[i]);
+                            if (message.archiveUris != null && message.archiveUris.length)
+                                for (var i = 0; i < message.archiveUris.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.archiveUris[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PySparkNotebookBatch message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.PySparkNotebookBatch.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPySparkNotebookBatch} message PySparkNotebookBatch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PySparkNotebookBatch.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PySparkNotebookBatch message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PySparkNotebookBatch.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PySparkNotebookBatch(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.notebookFileUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.params === $util.emptyObject)
+                                            message.params = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.params[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.pythonFileUris && message.pythonFileUris.length))
+                                            message.pythonFileUris = [];
+                                        message.pythonFileUris.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.jarFileUris && message.jarFileUris.length))
+                                            message.jarFileUris = [];
+                                        message.jarFileUris.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.fileUris && message.fileUris.length))
+                                            message.fileUris = [];
+                                        message.fileUris.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.archiveUris && message.archiveUris.length))
+                                            message.archiveUris = [];
+                                        message.archiveUris.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PySparkNotebookBatch message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PySparkNotebookBatch.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PySparkNotebookBatch message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PySparkNotebookBatch.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.notebookFileUri != null && message.hasOwnProperty("notebookFileUri"))
+                                if (!$util.isString(message.notebookFileUri))
+                                    return "notebookFileUri: string expected";
+                            if (message.params != null && message.hasOwnProperty("params")) {
+                                if (!$util.isObject(message.params))
+                                    return "params: object expected";
+                                var key = Object.keys(message.params);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.params[key[i]]))
+                                        return "params: string{k:string} expected";
+                            }
+                            if (message.pythonFileUris != null && message.hasOwnProperty("pythonFileUris")) {
+                                if (!Array.isArray(message.pythonFileUris))
+                                    return "pythonFileUris: array expected";
+                                for (var i = 0; i < message.pythonFileUris.length; ++i)
+                                    if (!$util.isString(message.pythonFileUris[i]))
+                                        return "pythonFileUris: string[] expected";
+                            }
+                            if (message.jarFileUris != null && message.hasOwnProperty("jarFileUris")) {
+                                if (!Array.isArray(message.jarFileUris))
+                                    return "jarFileUris: array expected";
+                                for (var i = 0; i < message.jarFileUris.length; ++i)
+                                    if (!$util.isString(message.jarFileUris[i]))
+                                        return "jarFileUris: string[] expected";
+                            }
+                            if (message.fileUris != null && message.hasOwnProperty("fileUris")) {
+                                if (!Array.isArray(message.fileUris))
+                                    return "fileUris: array expected";
+                                for (var i = 0; i < message.fileUris.length; ++i)
+                                    if (!$util.isString(message.fileUris[i]))
+                                        return "fileUris: string[] expected";
+                            }
+                            if (message.archiveUris != null && message.hasOwnProperty("archiveUris")) {
+                                if (!Array.isArray(message.archiveUris))
+                                    return "archiveUris: array expected";
+                                for (var i = 0; i < message.archiveUris.length; ++i)
+                                    if (!$util.isString(message.archiveUris[i]))
+                                        return "archiveUris: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PySparkNotebookBatch message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.PySparkNotebookBatch} PySparkNotebookBatch
+                         */
+                        PySparkNotebookBatch.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.PySparkNotebookBatch)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.PySparkNotebookBatch();
+                            if (object.notebookFileUri != null)
+                                message.notebookFileUri = String(object.notebookFileUri);
+                            if (object.params) {
+                                if (typeof object.params !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.params: object expected");
+                                message.params = {};
+                                for (var keys = Object.keys(object.params), i = 0; i < keys.length; ++i)
+                                    message.params[keys[i]] = String(object.params[keys[i]]);
+                            }
+                            if (object.pythonFileUris) {
+                                if (!Array.isArray(object.pythonFileUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.pythonFileUris: array expected");
+                                message.pythonFileUris = [];
+                                for (var i = 0; i < object.pythonFileUris.length; ++i)
+                                    message.pythonFileUris[i] = String(object.pythonFileUris[i]);
+                            }
+                            if (object.jarFileUris) {
+                                if (!Array.isArray(object.jarFileUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.jarFileUris: array expected");
+                                message.jarFileUris = [];
+                                for (var i = 0; i < object.jarFileUris.length; ++i)
+                                    message.jarFileUris[i] = String(object.jarFileUris[i]);
+                            }
+                            if (object.fileUris) {
+                                if (!Array.isArray(object.fileUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.fileUris: array expected");
+                                message.fileUris = [];
+                                for (var i = 0; i < object.fileUris.length; ++i)
+                                    message.fileUris[i] = String(object.fileUris[i]);
+                            }
+                            if (object.archiveUris) {
+                                if (!Array.isArray(object.archiveUris))
+                                    throw TypeError(".google.cloud.dataproc.v1.PySparkNotebookBatch.archiveUris: array expected");
+                                message.archiveUris = [];
+                                for (var i = 0; i < object.archiveUris.length; ++i)
+                                    message.archiveUris[i] = String(object.archiveUris[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PySparkNotebookBatch message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {google.cloud.dataproc.v1.PySparkNotebookBatch} message PySparkNotebookBatch
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PySparkNotebookBatch.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.pythonFileUris = [];
+                                object.jarFileUris = [];
+                                object.fileUris = [];
+                                object.archiveUris = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.params = {};
+                            if (options.defaults)
+                                object.notebookFileUri = "";
+                            if (message.notebookFileUri != null && message.hasOwnProperty("notebookFileUri"))
+                                object.notebookFileUri = message.notebookFileUri;
+                            var keys2;
+                            if (message.params && (keys2 = Object.keys(message.params)).length) {
+                                object.params = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.params[keys2[j]] = message.params[keys2[j]];
+                            }
+                            if (message.pythonFileUris && message.pythonFileUris.length) {
+                                object.pythonFileUris = [];
+                                for (var j = 0; j < message.pythonFileUris.length; ++j)
+                                    object.pythonFileUris[j] = message.pythonFileUris[j];
+                            }
+                            if (message.jarFileUris && message.jarFileUris.length) {
+                                object.jarFileUris = [];
+                                for (var j = 0; j < message.jarFileUris.length; ++j)
+                                    object.jarFileUris[j] = message.jarFileUris[j];
+                            }
+                            if (message.fileUris && message.fileUris.length) {
+                                object.fileUris = [];
+                                for (var j = 0; j < message.fileUris.length; ++j)
+                                    object.fileUris[j] = message.fileUris[j];
+                            }
+                            if (message.archiveUris && message.archiveUris.length) {
+                                object.archiveUris = [];
+                                for (var j = 0; j < message.archiveUris.length; ++j)
+                                    object.archiveUris[j] = message.archiveUris[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PySparkNotebookBatch to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PySparkNotebookBatch.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PySparkNotebookBatch
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.PySparkNotebookBatch
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PySparkNotebookBatch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.PySparkNotebookBatch";
+                        };
+    
+                        return PySparkNotebookBatch;
+                    })();
+    
                     v1.RuntimeConfig = (function() {
     
                         /**
@@ -7483,6 +7940,7 @@
                          * @property {google.protobuf.IDuration|null} [ttl] ExecutionConfig ttl
                          * @property {string|null} [stagingBucket] ExecutionConfig stagingBucket
                          * @property {google.cloud.dataproc.v1.IAuthenticationConfig|null} [authenticationConfig] ExecutionConfig authenticationConfig
+                         * @property {Object.<string,string>|null} [resourceManagerTags] ExecutionConfig resourceManagerTags
                          */
     
                         /**
@@ -7495,6 +7953,7 @@
                          */
                         function ExecutionConfig(properties) {
                             this.networkTags = [];
+                            this.resourceManagerTags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7573,6 +8032,14 @@
                          */
                         ExecutionConfig.prototype.authenticationConfig = null;
     
+                        /**
+                         * ExecutionConfig resourceManagerTags.
+                         * @member {Object.<string,string>} resourceManagerTags
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.resourceManagerTags = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -7630,6 +8097,9 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.stagingBucket);
                             if (message.authenticationConfig != null && Object.hasOwnProperty.call(message, "authenticationConfig"))
                                 $root.google.cloud.dataproc.v1.AuthenticationConfig.encode(message.authenticationConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.resourceManagerTags != null && Object.hasOwnProperty.call(message, "resourceManagerTags"))
+                                for (var keys = Object.keys(message.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.resourceManagerTags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -7660,7 +8130,7 @@
                         ExecutionConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ExecutionConfig();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ExecutionConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -7702,6 +8172,29 @@
                                     }
                                 case 11: {
                                         message.authenticationConfig = $root.google.cloud.dataproc.v1.AuthenticationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (message.resourceManagerTags === $util.emptyObject)
+                                            message.resourceManagerTags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.resourceManagerTags[key] = value;
                                         break;
                                     }
                                 default:
@@ -7783,6 +8276,14 @@
                                 if (error)
                                     return "authenticationConfig." + error;
                             }
+                            if (message.resourceManagerTags != null && message.hasOwnProperty("resourceManagerTags")) {
+                                if (!$util.isObject(message.resourceManagerTags))
+                                    return "resourceManagerTags: object expected";
+                                var key = Object.keys(message.resourceManagerTags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.resourceManagerTags[key[i]]))
+                                        return "resourceManagerTags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -7830,6 +8331,13 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ExecutionConfig.authenticationConfig: object expected");
                                 message.authenticationConfig = $root.google.cloud.dataproc.v1.AuthenticationConfig.fromObject(object.authenticationConfig);
                             }
+                            if (object.resourceManagerTags) {
+                                if (typeof object.resourceManagerTags !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ExecutionConfig.resourceManagerTags: object expected");
+                                message.resourceManagerTags = {};
+                                for (var keys = Object.keys(object.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    message.resourceManagerTags[keys[i]] = String(object.resourceManagerTags[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -7848,6 +8356,8 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.networkTags = [];
+                            if (options.objects || options.defaults)
+                                object.resourceManagerTags = {};
                             if (options.defaults) {
                                 object.serviceAccount = "";
                                 object.kmsKey = "";
@@ -7883,6 +8393,12 @@
                                 object.stagingBucket = message.stagingBucket;
                             if (message.authenticationConfig != null && message.hasOwnProperty("authenticationConfig"))
                                 object.authenticationConfig = $root.google.cloud.dataproc.v1.AuthenticationConfig.toObject(message.authenticationConfig, options);
+                            var keys2;
+                            if (message.resourceManagerTags && (keys2 = Object.keys(message.resourceManagerTags)).length) {
+                                object.resourceManagerTags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.resourceManagerTags[keys2[j]] = message.resourceManagerTags[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -8708,6 +9224,7 @@
                          * @property {number|Long|null} [shuffleStorageGbSeconds] UsageMetrics shuffleStorageGbSeconds
                          * @property {number|Long|null} [milliAcceleratorSeconds] UsageMetrics milliAcceleratorSeconds
                          * @property {string|null} [acceleratorType] UsageMetrics acceleratorType
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] UsageMetrics updateTime
                          */
     
                         /**
@@ -8758,6 +9275,14 @@
                         UsageMetrics.prototype.acceleratorType = "";
     
                         /**
+                         * UsageMetrics updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.dataproc.v1.UsageMetrics
+                         * @instance
+                         */
+                        UsageMetrics.prototype.updateTime = null;
+    
+                        /**
                          * Creates a new UsageMetrics instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.UsageMetrics
@@ -8789,6 +9314,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.milliAcceleratorSeconds);
                             if (message.acceleratorType != null && Object.hasOwnProperty.call(message, "acceleratorType"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.acceleratorType);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -8841,6 +9368,10 @@
                                         message.acceleratorType = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8888,6 +9419,11 @@
                             if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                                 if (!$util.isString(message.acceleratorType))
                                     return "acceleratorType: string expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
                             return null;
                         };
     
@@ -8932,6 +9468,11 @@
                                     message.milliAcceleratorSeconds = new $util.LongBits(object.milliAcceleratorSeconds.low >>> 0, object.milliAcceleratorSeconds.high >>> 0).toNumber();
                             if (object.acceleratorType != null)
                                 message.acceleratorType = String(object.acceleratorType);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.UsageMetrics.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
                             return message;
                         };
     
@@ -8965,6 +9506,7 @@
                                 } else
                                     object.milliAcceleratorSeconds = options.longs === String ? "0" : 0;
                                 object.acceleratorType = "";
+                                object.updateTime = null;
                             }
                             if (message.milliDcuSeconds != null && message.hasOwnProperty("milliDcuSeconds"))
                                 if (typeof message.milliDcuSeconds === "number")
@@ -8983,6 +9525,8 @@
                                     object.milliAcceleratorSeconds = options.longs === String ? $util.Long.prototype.toString.call(message.milliAcceleratorSeconds) : options.longs === Number ? new $util.LongBits(message.milliAcceleratorSeconds.low >>> 0, message.milliAcceleratorSeconds.high >>> 0).toNumber() : message.milliAcceleratorSeconds;
                             if (message.acceleratorType != null && message.hasOwnProperty("acceleratorType"))
                                 object.acceleratorType = message.acceleratorType;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
                         };
     
@@ -12705,7 +13249,6 @@
                      * @property {number} HUDI=18 HUDI value
                      * @property {number} ICEBERG=19 ICEBERG value
                      * @property {number} JUPYTER=1 JUPYTER value
-                     * @property {number} JUPYTER_KERNEL_GATEWAY=22 JUPYTER_KERNEL_GATEWAY value
                      * @property {number} PIG=21 PIG value
                      * @property {number} PRESTO=6 PRESTO value
                      * @property {number} TRINO=17 TRINO value
@@ -12713,6 +13256,7 @@
                      * @property {number} SOLR=10 SOLR value
                      * @property {number} ZEPPELIN=4 ZEPPELIN value
                      * @property {number} ZOOKEEPER=8 ZOOKEEPER value
+                     * @property {number} JUPYTER_KERNEL_GATEWAY=22 JUPYTER_KERNEL_GATEWAY value
                      */
                     v1.Component = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -12727,7 +13271,6 @@
                         values[valuesById[18] = "HUDI"] = 18;
                         values[valuesById[19] = "ICEBERG"] = 19;
                         values[valuesById[1] = "JUPYTER"] = 1;
-                        values[valuesById[22] = "JUPYTER_KERNEL_GATEWAY"] = 22;
                         values[valuesById[21] = "PIG"] = 21;
                         values[valuesById[6] = "PRESTO"] = 6;
                         values[valuesById[17] = "TRINO"] = 17;
@@ -12735,6 +13278,7 @@
                         values[valuesById[10] = "SOLR"] = 10;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
                         values[valuesById[8] = "ZOOKEEPER"] = 8;
+                        values[valuesById[22] = "JUPYTER_KERNEL_GATEWAY"] = 22;
                         return values;
                     })();
     
@@ -13529,6 +14073,7 @@
                          * @interface IClusterConfig
                          * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterType|null} [clusterType] ClusterConfig clusterType
                          * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null} [clusterTier] ClusterConfig clusterTier
+                         * @property {google.cloud.dataproc.v1.ClusterConfig.Engine|null} [engine] ClusterConfig engine
                          * @property {string|null} [configBucket] ClusterConfig configBucket
                          * @property {string|null} [tempBucket] ClusterConfig tempBucket
                          * @property {google.cloud.dataproc.v1.IGceClusterConfig|null} [gceClusterConfig] ClusterConfig gceClusterConfig
@@ -13579,6 +14124,14 @@
                          * @instance
                          */
                         ClusterConfig.prototype.clusterTier = 0;
+    
+                        /**
+                         * ClusterConfig engine.
+                         * @member {google.cloud.dataproc.v1.ClusterConfig.Engine} engine
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.engine = 0;
     
                         /**
                          * ClusterConfig configBucket.
@@ -13770,6 +14323,8 @@
                                 writer.uint32(/* id 27, wireType 0 =*/216).int32(message.clusterType);
                             if (message.clusterTier != null && Object.hasOwnProperty.call(message, "clusterTier"))
                                 writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clusterTier);
+                            if (message.engine != null && Object.hasOwnProperty.call(message, "engine"))
+                                writer.uint32(/* id 30, wireType 0 =*/240).int32(message.engine);
                             return writer;
                         };
     
@@ -13812,6 +14367,10 @@
                                     }
                                 case 29: {
                                         message.clusterTier = reader.int32();
+                                        break;
+                                    }
+                                case 30: {
+                                        message.engine = reader.int32();
                                         break;
                                     }
                                 case 1: {
@@ -13931,6 +14490,15 @@
                                 switch (message.clusterTier) {
                                 default:
                                     return "clusterTier: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                switch (message.engine) {
+                                default:
+                                    return "engine: enum value expected";
                                 case 0:
                                 case 1:
                                 case 2:
@@ -14079,6 +14647,26 @@
                                 message.clusterTier = 2;
                                 break;
                             }
+                            switch (object.engine) {
+                            default:
+                                if (typeof object.engine === "number") {
+                                    message.engine = object.engine;
+                                    break;
+                                }
+                                break;
+                            case "ENGINE_UNSPECIFIED":
+                            case 0:
+                                message.engine = 0;
+                                break;
+                            case "DEFAULT":
+                            case 1:
+                                message.engine = 1;
+                                break;
+                            case "LIGHTNING":
+                            case 2:
+                                message.engine = 2;
+                                break;
+                            }
                             if (object.configBucket != null)
                                 message.configBucket = String(object.configBucket);
                             if (object.tempBucket != null)
@@ -14200,6 +14788,7 @@
                                 object.dataprocMetricConfig = null;
                                 object.clusterType = options.enums === String ? "CLUSTER_TYPE_UNSPECIFIED" : 0;
                                 object.clusterTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
+                                object.engine = options.enums === String ? "ENGINE_UNSPECIFIED" : 0;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -14243,6 +14832,8 @@
                                 object.clusterType = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterType[message.clusterType] === undefined ? message.clusterType : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterType[message.clusterType] : message.clusterType;
                             if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
                                 object.clusterTier = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] === undefined ? message.clusterTier : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] : message.clusterTier;
+                            if (message.engine != null && message.hasOwnProperty("engine"))
+                                object.engine = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.Engine[message.engine] === undefined ? message.engine : $root.google.cloud.dataproc.v1.ClusterConfig.Engine[message.engine] : message.engine;
                             return object;
                         };
     
@@ -14303,6 +14894,22 @@
                             values[valuesById[0] = "CLUSTER_TIER_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "CLUSTER_TIER_STANDARD"] = 1;
                             values[valuesById[2] = "CLUSTER_TIER_PREMIUM"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Engine enum.
+                         * @name google.cloud.dataproc.v1.ClusterConfig.Engine
+                         * @enum {number}
+                         * @property {number} ENGINE_UNSPECIFIED=0 ENGINE_UNSPECIFIED value
+                         * @property {number} DEFAULT=1 DEFAULT value
+                         * @property {number} LIGHTNING=2 LIGHTNING value
+                         */
+                        ClusterConfig.Engine = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENGINE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEFAULT"] = 1;
+                            values[valuesById[2] = "LIGHTNING"] = 2;
                             return values;
                         })();
     
@@ -22363,7 +22970,6 @@
                                     case 18:
                                     case 19:
                                     case 1:
-                                    case 22:
                                     case 21:
                                     case 6:
                                     case 17:
@@ -22371,6 +22977,7 @@
                                     case 10:
                                     case 4:
                                     case 8:
+                                    case 22:
                                         break;
                                     }
                             }
@@ -22453,10 +23060,6 @@
                                     case 1:
                                         message.optionalComponents[i] = 1;
                                         break;
-                                    case "JUPYTER_KERNEL_GATEWAY":
-                                    case 22:
-                                        message.optionalComponents[i] = 22;
-                                        break;
                                     case "PIG":
                                     case 21:
                                         message.optionalComponents[i] = 21;
@@ -22484,6 +23087,10 @@
                                     case "ZOOKEEPER":
                                     case 8:
                                         message.optionalComponents[i] = 8;
+                                        break;
+                                    case "JUPYTER_KERNEL_GATEWAY":
+                                    case 22:
+                                        message.optionalComponents[i] = 22;
                                         break;
                                     }
                             }
@@ -22563,6 +23170,9 @@
                          * @property {google.protobuf.IDuration|null} [idleDeleteTtl] LifecycleConfig idleDeleteTtl
                          * @property {google.protobuf.ITimestamp|null} [autoDeleteTime] LifecycleConfig autoDeleteTime
                          * @property {google.protobuf.IDuration|null} [autoDeleteTtl] LifecycleConfig autoDeleteTtl
+                         * @property {google.protobuf.IDuration|null} [idleStopTtl] LifecycleConfig idleStopTtl
+                         * @property {google.protobuf.ITimestamp|null} [autoStopTime] LifecycleConfig autoStopTime
+                         * @property {google.protobuf.IDuration|null} [autoStopTtl] LifecycleConfig autoStopTtl
                          * @property {google.protobuf.ITimestamp|null} [idleStartTime] LifecycleConfig idleStartTime
                          */
     
@@ -22606,6 +23216,30 @@
                         LifecycleConfig.prototype.autoDeleteTtl = null;
     
                         /**
+                         * LifecycleConfig idleStopTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} idleStopTtl
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.idleStopTtl = null;
+    
+                        /**
+                         * LifecycleConfig autoStopTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} autoStopTime
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.autoStopTime = null;
+    
+                        /**
+                         * LifecycleConfig autoStopTtl.
+                         * @member {google.protobuf.IDuration|null|undefined} autoStopTtl
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.autoStopTtl = null;
+    
+                        /**
                          * LifecycleConfig idleStartTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} idleStartTime
                          * @memberof google.cloud.dataproc.v1.LifecycleConfig
@@ -22624,6 +23258,17 @@
                          */
                         Object.defineProperty(LifecycleConfig.prototype, "ttl", {
                             get: $util.oneOfGetter($oneOfFields = ["autoDeleteTime", "autoDeleteTtl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * LifecycleConfig stopTtl.
+                         * @member {"autoStopTime"|"autoStopTtl"|undefined} stopTtl
+                         * @memberof google.cloud.dataproc.v1.LifecycleConfig
+                         * @instance
+                         */
+                        Object.defineProperty(LifecycleConfig.prototype, "stopTtl", {
+                            get: $util.oneOfGetter($oneOfFields = ["autoStopTime", "autoStopTtl"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -22659,6 +23304,12 @@
                                 $root.google.protobuf.Duration.encode(message.autoDeleteTtl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.idleStartTime != null && Object.hasOwnProperty.call(message, "idleStartTime"))
                                 $root.google.protobuf.Timestamp.encode(message.idleStartTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.idleStopTtl != null && Object.hasOwnProperty.call(message, "idleStopTtl"))
+                                $root.google.protobuf.Duration.encode(message.idleStopTtl, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.autoStopTime != null && Object.hasOwnProperty.call(message, "autoStopTime"))
+                                $root.google.protobuf.Timestamp.encode(message.autoStopTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.autoStopTtl != null && Object.hasOwnProperty.call(message, "autoStopTtl"))
+                                $root.google.protobuf.Duration.encode(message.autoStopTtl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -22705,6 +23356,18 @@
                                     }
                                 case 3: {
                                         message.autoDeleteTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.idleStopTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.autoStopTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.autoStopTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -22770,6 +23433,29 @@
                                         return "autoDeleteTtl." + error;
                                 }
                             }
+                            if (message.idleStopTtl != null && message.hasOwnProperty("idleStopTtl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.idleStopTtl);
+                                if (error)
+                                    return "idleStopTtl." + error;
+                            }
+                            if (message.autoStopTime != null && message.hasOwnProperty("autoStopTime")) {
+                                properties.stopTtl = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.autoStopTime);
+                                    if (error)
+                                        return "autoStopTime." + error;
+                                }
+                            }
+                            if (message.autoStopTtl != null && message.hasOwnProperty("autoStopTtl")) {
+                                if (properties.stopTtl === 1)
+                                    return "stopTtl: multiple values";
+                                properties.stopTtl = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.autoStopTtl);
+                                    if (error)
+                                        return "autoStopTtl." + error;
+                                }
+                            }
                             if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.idleStartTime);
                                 if (error)
@@ -22805,6 +23491,21 @@
                                     throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.autoDeleteTtl: object expected");
                                 message.autoDeleteTtl = $root.google.protobuf.Duration.fromObject(object.autoDeleteTtl);
                             }
+                            if (object.idleStopTtl != null) {
+                                if (typeof object.idleStopTtl !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.idleStopTtl: object expected");
+                                message.idleStopTtl = $root.google.protobuf.Duration.fromObject(object.idleStopTtl);
+                            }
+                            if (object.autoStopTime != null) {
+                                if (typeof object.autoStopTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.autoStopTime: object expected");
+                                message.autoStopTime = $root.google.protobuf.Timestamp.fromObject(object.autoStopTime);
+                            }
+                            if (object.autoStopTtl != null) {
+                                if (typeof object.autoStopTtl !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.autoStopTtl: object expected");
+                                message.autoStopTtl = $root.google.protobuf.Duration.fromObject(object.autoStopTtl);
+                            }
                             if (object.idleStartTime != null) {
                                 if (typeof object.idleStartTime !== "object")
                                     throw TypeError(".google.cloud.dataproc.v1.LifecycleConfig.idleStartTime: object expected");
@@ -22829,6 +23530,7 @@
                             if (options.defaults) {
                                 object.idleDeleteTtl = null;
                                 object.idleStartTime = null;
+                                object.idleStopTtl = null;
                             }
                             if (message.idleDeleteTtl != null && message.hasOwnProperty("idleDeleteTtl"))
                                 object.idleDeleteTtl = $root.google.protobuf.Duration.toObject(message.idleDeleteTtl, options);
@@ -22844,6 +23546,18 @@
                             }
                             if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime"))
                                 object.idleStartTime = $root.google.protobuf.Timestamp.toObject(message.idleStartTime, options);
+                            if (message.idleStopTtl != null && message.hasOwnProperty("idleStopTtl"))
+                                object.idleStopTtl = $root.google.protobuf.Duration.toObject(message.idleStopTtl, options);
+                            if (message.autoStopTime != null && message.hasOwnProperty("autoStopTime")) {
+                                object.autoStopTime = $root.google.protobuf.Timestamp.toObject(message.autoStopTime, options);
+                                if (options.oneofs)
+                                    object.stopTtl = "autoStopTime";
+                            }
+                            if (message.autoStopTtl != null && message.hasOwnProperty("autoStopTtl")) {
+                                object.autoStopTtl = $root.google.protobuf.Duration.toObject(message.autoStopTtl, options);
+                                if (options.oneofs)
+                                    object.stopTtl = "autoStopTtl";
+                            }
                             return object;
                         };
     

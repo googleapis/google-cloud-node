@@ -1914,6 +1914,9 @@ export namespace google {
                     /** Batch sparkSqlBatch */
                     sparkSqlBatch?: (google.cloud.dataproc.v1.ISparkSqlBatch|null);
 
+                    /** Batch pysparkNotebookBatch */
+                    pysparkNotebookBatch?: (google.cloud.dataproc.v1.IPySparkNotebookBatch|null);
+
                     /** Batch runtimeInfo */
                     runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
 
@@ -1975,6 +1978,9 @@ export namespace google {
                     /** Batch sparkSqlBatch. */
                     public sparkSqlBatch?: (google.cloud.dataproc.v1.ISparkSqlBatch|null);
 
+                    /** Batch pysparkNotebookBatch. */
+                    public pysparkNotebookBatch?: (google.cloud.dataproc.v1.IPySparkNotebookBatch|null);
+
                     /** Batch runtimeInfo. */
                     public runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
 
@@ -2006,7 +2012,7 @@ export namespace google {
                     public stateHistory: google.cloud.dataproc.v1.Batch.IStateHistory[];
 
                     /** Batch batchConfig. */
-                    public batchConfig?: ("pysparkBatch"|"sparkBatch"|"sparkRBatch"|"sparkSqlBatch");
+                    public batchConfig?: ("pysparkBatch"|"sparkBatch"|"sparkRBatch"|"sparkSqlBatch"|"pysparkNotebookBatch");
 
                     /**
                      * Creates a new Batch instance using the specified properties.
@@ -2690,6 +2696,133 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PySparkNotebookBatch. */
+                interface IPySparkNotebookBatch {
+
+                    /** PySparkNotebookBatch notebookFileUri */
+                    notebookFileUri?: (string|null);
+
+                    /** PySparkNotebookBatch params */
+                    params?: ({ [k: string]: string }|null);
+
+                    /** PySparkNotebookBatch pythonFileUris */
+                    pythonFileUris?: (string[]|null);
+
+                    /** PySparkNotebookBatch jarFileUris */
+                    jarFileUris?: (string[]|null);
+
+                    /** PySparkNotebookBatch fileUris */
+                    fileUris?: (string[]|null);
+
+                    /** PySparkNotebookBatch archiveUris */
+                    archiveUris?: (string[]|null);
+                }
+
+                /** Represents a PySparkNotebookBatch. */
+                class PySparkNotebookBatch implements IPySparkNotebookBatch {
+
+                    /**
+                     * Constructs a new PySparkNotebookBatch.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IPySparkNotebookBatch);
+
+                    /** PySparkNotebookBatch notebookFileUri. */
+                    public notebookFileUri: string;
+
+                    /** PySparkNotebookBatch params. */
+                    public params: { [k: string]: string };
+
+                    /** PySparkNotebookBatch pythonFileUris. */
+                    public pythonFileUris: string[];
+
+                    /** PySparkNotebookBatch jarFileUris. */
+                    public jarFileUris: string[];
+
+                    /** PySparkNotebookBatch fileUris. */
+                    public fileUris: string[];
+
+                    /** PySparkNotebookBatch archiveUris. */
+                    public archiveUris: string[];
+
+                    /**
+                     * Creates a new PySparkNotebookBatch instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PySparkNotebookBatch instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IPySparkNotebookBatch): google.cloud.dataproc.v1.PySparkNotebookBatch;
+
+                    /**
+                     * Encodes the specified PySparkNotebookBatch message. Does not implicitly {@link google.cloud.dataproc.v1.PySparkNotebookBatch.verify|verify} messages.
+                     * @param message PySparkNotebookBatch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IPySparkNotebookBatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PySparkNotebookBatch message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.PySparkNotebookBatch.verify|verify} messages.
+                     * @param message PySparkNotebookBatch message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IPySparkNotebookBatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PySparkNotebookBatch message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PySparkNotebookBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.PySparkNotebookBatch;
+
+                    /**
+                     * Decodes a PySparkNotebookBatch message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PySparkNotebookBatch
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.PySparkNotebookBatch;
+
+                    /**
+                     * Verifies a PySparkNotebookBatch message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PySparkNotebookBatch message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PySparkNotebookBatch
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.PySparkNotebookBatch;
+
+                    /**
+                     * Creates a plain object from a PySparkNotebookBatch message. Also converts values to other types if specified.
+                     * @param message PySparkNotebookBatch
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.PySparkNotebookBatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PySparkNotebookBatch to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PySparkNotebookBatch
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RuntimeConfig. */
                 interface IRuntimeConfig {
 
@@ -2949,6 +3082,9 @@ export namespace google {
 
                     /** ExecutionConfig authenticationConfig */
                     authenticationConfig?: (google.cloud.dataproc.v1.IAuthenticationConfig|null);
+
+                    /** ExecutionConfig resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an ExecutionConfig. */
@@ -2986,6 +3122,9 @@ export namespace google {
 
                     /** ExecutionConfig authenticationConfig. */
                     public authenticationConfig?: (google.cloud.dataproc.v1.IAuthenticationConfig|null);
+
+                    /** ExecutionConfig resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
 
                     /** ExecutionConfig network. */
                     public network?: ("networkUri"|"subnetworkUri");
@@ -3403,6 +3542,9 @@ export namespace google {
 
                     /** UsageMetrics acceleratorType */
                     acceleratorType?: (string|null);
+
+                    /** UsageMetrics updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a UsageMetrics. */
@@ -3425,6 +3567,9 @@ export namespace google {
 
                     /** UsageMetrics acceleratorType. */
                     public acceleratorType: string;
+
+                    /** UsageMetrics updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new UsageMetrics instance using the specified properties.
@@ -4957,14 +5102,14 @@ export namespace google {
                     HUDI = 18,
                     ICEBERG = 19,
                     JUPYTER = 1,
-                    JUPYTER_KERNEL_GATEWAY = 22,
                     PIG = 21,
                     PRESTO = 6,
                     TRINO = 17,
                     RANGER = 12,
                     SOLR = 10,
                     ZEPPELIN = 4,
-                    ZOOKEEPER = 8
+                    ZOOKEEPER = 8,
+                    JUPYTER_KERNEL_GATEWAY = 22
                 }
 
                 /** FailureAction enum. */
@@ -5320,6 +5465,9 @@ export namespace google {
                     /** ClusterConfig clusterTier */
                     clusterTier?: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null);
 
+                    /** ClusterConfig engine */
+                    engine?: (google.cloud.dataproc.v1.ClusterConfig.Engine|keyof typeof google.cloud.dataproc.v1.ClusterConfig.Engine|null);
+
                     /** ClusterConfig configBucket */
                     configBucket?: (string|null);
 
@@ -5383,6 +5531,9 @@ export namespace google {
 
                     /** ClusterConfig clusterTier. */
                     public clusterTier: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier);
+
+                    /** ClusterConfig engine. */
+                    public engine: (google.cloud.dataproc.v1.ClusterConfig.Engine|keyof typeof google.cloud.dataproc.v1.ClusterConfig.Engine);
 
                     /** ClusterConfig configBucket. */
                     public configBucket: string;
@@ -5525,6 +5676,13 @@ export namespace google {
                         CLUSTER_TIER_UNSPECIFIED = 0,
                         CLUSTER_TIER_STANDARD = 1,
                         CLUSTER_TIER_PREMIUM = 2
+                    }
+
+                    /** Engine enum. */
+                    enum Engine {
+                        ENGINE_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        LIGHTNING = 2
                     }
                 }
 
@@ -8659,6 +8817,15 @@ export namespace google {
                     /** LifecycleConfig autoDeleteTtl */
                     autoDeleteTtl?: (google.protobuf.IDuration|null);
 
+                    /** LifecycleConfig idleStopTtl */
+                    idleStopTtl?: (google.protobuf.IDuration|null);
+
+                    /** LifecycleConfig autoStopTime */
+                    autoStopTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LifecycleConfig autoStopTtl */
+                    autoStopTtl?: (google.protobuf.IDuration|null);
+
                     /** LifecycleConfig idleStartTime */
                     idleStartTime?: (google.protobuf.ITimestamp|null);
                 }
@@ -8681,11 +8848,23 @@ export namespace google {
                     /** LifecycleConfig autoDeleteTtl. */
                     public autoDeleteTtl?: (google.protobuf.IDuration|null);
 
+                    /** LifecycleConfig idleStopTtl. */
+                    public idleStopTtl?: (google.protobuf.IDuration|null);
+
+                    /** LifecycleConfig autoStopTime. */
+                    public autoStopTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LifecycleConfig autoStopTtl. */
+                    public autoStopTtl?: (google.protobuf.IDuration|null);
+
                     /** LifecycleConfig idleStartTime. */
                     public idleStartTime?: (google.protobuf.ITimestamp|null);
 
                     /** LifecycleConfig ttl. */
                     public ttl?: ("autoDeleteTime"|"autoDeleteTtl");
+
+                    /** LifecycleConfig stopTtl. */
+                    public stopTtl?: ("autoStopTime"|"autoStopTtl");
 
                     /**
                      * Creates a new LifecycleConfig instance using the specified properties.
