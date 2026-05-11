@@ -108,6 +108,6 @@
     }
   ],
   "release-type": "node",
-  "separate-pull-requests": true,
+  "separate-pull-requests": false,
   "tag-separator": "-"
 }
