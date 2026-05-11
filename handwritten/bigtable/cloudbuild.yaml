@@ -1,16 +1,39 @@
 steps:
+# 0. Check for changes in handwritten/bigtable
+- name: 'gcr.io/cloud-builders/git'
+  id: 'check-changes'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    git fetch origin main --quiet
+    # If on a branch, compare with origin/main. If on main, compare with previous commit.
+    DIFF_RANGE="origin/main..."
+    if [ "$(git rev-parse HEAD)" == "$(git rev-parse origin/main)" ]; then
+      DIFF_RANGE="HEAD~1..HEAD"
+    fi
+    if git diff --quiet "$DIFF_RANGE" -- . ; then
+      echo "No changes in handwritten/bigtable. Skipping tests."
+      echo "skip" > /workspace/skip_tests
+    else
+      echo "Changes detected in handwritten/bigtable. Proceeding with tests."
+    fi
+  dir: 'handwritten/bigtable'
+
 # 1. Set up Node.js environment
 - name: 'gcr.io/cloud-builders/npm'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
+    if [ -f /workspace/skip_tests ]; then exit 0; fi
     npm install -g npm@latest
     npm config set prefix /usr/local
     npm install
     npm run presystem-test
   dir: 'handwritten/bigtable'
   id: 'install-dependencies'
+  waitFor: ['check-changes']
 
 # 2. Configure environment variables for the tests and run system tests
 #    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
@@ -22,14 +45,19 @@ steps:
 #      the GCB service account's inherent permissions.
 #    - GCLOUD_PROJECT: Can be passed as a build variable.
 - name: 'gcr.io/cloud-builders/npm'
-  entrypoint: 'npm'
-  args: ['run', 'system-test']
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    if [ -f /workspace/skip_tests ]; then exit 0; fi
+    npm run system-test
   dir: 'handwritten/bigtable'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
   # If you need specific credentials from Secret Manager, uncomment these:
   # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
   id: 'run-system-tests'
+  waitFor: ['install-dependencies']
   # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
   # secretEnv: ['SA_KEY']
   # volumes:
@@ -42,6 +70,7 @@ steps:
   args:
   - '-c'
   - |
+    if [ -f /workspace/skip_tests ]; then exit 0; fi
     # Check if nyc is installed and run report
     if [ -f ./node_modules/nyc/bin/nyc.js ]; then
       ./node_modules/nyc/bin/nyc.js report || true # `|| true` prevents build failure if nyc report itself exits non-zero
@@ -57,6 +86,7 @@ steps:
     echo "Codecov reporting (if desired) would be integrated here."
   dir: 'handwritten/bigtable'
   id: 'coverage-report'
+  waitFor: ['run-system-tests']
 
 # If you use Secret Manager for credentials, uncomment and configure:
 # availableSecrets:
