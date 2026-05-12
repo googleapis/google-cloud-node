@@ -17,7 +17,7 @@ steps:
   dir: 'handwritten/bigtable'
 
 # 1. Set up Node.js environment
-- name: 'node:18'
+- name: 'node:24'
   entrypoint: 'bash'
   args:
   - '-c'
