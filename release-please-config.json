@@ -232,6 +232,8 @@
     "packages/google-maps-geocode": {},
     "packages/google-cloud-datacatalog-lineage-configmanagement": {},
     "packages/google-developers-knowledge": {}
+    "packages/google-devicesandservices-health": {},
+    "packages/google-cloud-databasecenter": {}
   },
   "plugins": [
     {

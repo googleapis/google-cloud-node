@@ -3796,6 +3796,11 @@
                 "queryReasoningEngine"
               ]
             },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
             "StreamQueryReasoningEngine": {
               "methods": [
                 "streamQueryReasoningEngine"
@@ -3816,9 +3821,62 @@
                 "queryReasoningEngine"
               ]
             },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
             "AsyncQueryReasoningEngine": {
               "methods": [
                 "asyncQueryReasoningEngine"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReasoningEngineRuntimeRevisionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReasoningEngineRuntimeRevisionServiceClient",
+          "rpcs": {
+            "GetReasoningEngineRuntimeRevision": {
+              "methods": [
+                "getReasoningEngineRuntimeRevision"
+              ]
+            },
+            "DeleteReasoningEngineRuntimeRevision": {
+              "methods": [
+                "deleteReasoningEngineRuntimeRevision"
+              ]
+            },
+            "ListReasoningEngineRuntimeRevisions": {
+              "methods": [
+                "listReasoningEngineRuntimeRevisions",
+                "listReasoningEngineRuntimeRevisionsStream",
+                "listReasoningEngineRuntimeRevisionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReasoningEngineRuntimeRevisionServiceClient",
+          "rpcs": {
+            "GetReasoningEngineRuntimeRevision": {
+              "methods": [
+                "getReasoningEngineRuntimeRevision"
+              ]
+            },
+            "DeleteReasoningEngineRuntimeRevision": {
+              "methods": [
+                "deleteReasoningEngineRuntimeRevision"
+              ]
+            },
+            "ListReasoningEngineRuntimeRevisions": {
+              "methods": [
+                "listReasoningEngineRuntimeRevisions",
+                "listReasoningEngineRuntimeRevisionsStream",
+                "listReasoningEngineRuntimeRevisionsAsync"
               ]
             }
           }

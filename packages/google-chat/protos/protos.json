@@ -3830,6 +3830,20 @@
                         }
                       ]
                     },
+                    "FindGroupChats": {
+                      "requestType": "FindGroupChatsRequest",
+                      "responseType": "FindGroupChatsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/spaces:findGroupChats"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/spaces:findGroupChats"
+                          }
+                        }
+                      ]
+                    },
                     "CreateMembership": {
                       "requestType": "CreateMembershipRequest",
                       "responseType": "Membership",
@@ -6052,6 +6066,49 @@
                     }
                   }
                 },
+                "FindGroupChatsRequest": {
+                  "fields": {
+                    "users": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "spaceView": {
+                      "type": "SpaceView",
+                      "id": 4
+                    }
+                  }
+                },
+                "FindGroupChatsResponse": {
+                  "fields": {
+                    "spaces": {
+                      "rule": "repeated",
+                      "type": "Space",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
                 "UpdateSpaceRequest": {
                   "fields": {
                     "space": {
@@ -6161,6 +6218,13 @@
                       "type": "Space",
                       "id": 1
                     }
+                  }
+                },
+                "SpaceView": {
+                  "values": {
+                    "SPACE_VIEW_UNSPECIFIED": 0,
+                    "SPACE_VIEW_RESOURCE_NAME_ONLY": 3,
+                    "SPACE_VIEW_EXPANDED": 4
                   }
                 },
                 "HistoryState": {

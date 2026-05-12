@@ -203,6 +203,13 @@
                 "searchSpacesAsync"
               ]
             },
+            "FindGroupChats": {
+              "methods": [
+                "findGroupChats",
+                "findGroupChatsStream",
+                "findGroupChatsAsync"
+              ]
+            },
             "ListReactions": {
               "methods": [
                 "listReactions",
@@ -434,6 +441,13 @@
                 "searchSpaces",
                 "searchSpacesStream",
                 "searchSpacesAsync"
+              ]
+            },
+            "FindGroupChats": {
+              "methods": [
+                "findGroupChats",
+                "findGroupChatsStream",
+                "findGroupChatsAsync"
               ]
             },
             "ListReactions": {

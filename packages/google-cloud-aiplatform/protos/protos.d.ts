@@ -16726,6 +16726,9 @@ export namespace google {
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1.IEnterpriseWebSearch|null);
 
+                    /** Tool parallelAiSearch */
+                    parallelAiSearch?: (google.cloud.aiplatform.v1.Tool.IParallelAiSearch|null);
+
                     /** Tool codeExecution */
                     codeExecution?: (google.cloud.aiplatform.v1.Tool.ICodeExecution|null);
 
@@ -16762,6 +16765,9 @@ export namespace google {
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1.IEnterpriseWebSearch|null);
+
+                    /** Tool parallelAiSearch. */
+                    public parallelAiSearch?: (google.cloud.aiplatform.v1.Tool.IParallelAiSearch|null);
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.cloud.aiplatform.v1.Tool.ICodeExecution|null);
@@ -16960,6 +16966,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GoogleSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ParallelAiSearch. */
+                    interface IParallelAiSearch {
+
+                        /** ParallelAiSearch apiKey */
+                        apiKey?: (string|null);
+
+                        /** ParallelAiSearch customConfigs */
+                        customConfigs?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a ParallelAiSearch. */
+                    class ParallelAiSearch implements IParallelAiSearch {
+
+                        /**
+                         * Constructs a new ParallelAiSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.Tool.IParallelAiSearch);
+
+                        /** ParallelAiSearch apiKey. */
+                        public apiKey: string;
+
+                        /** ParallelAiSearch customConfigs. */
+                        public customConfigs?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ParallelAiSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParallelAiSearch instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.Tool.IParallelAiSearch): google.cloud.aiplatform.v1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Encodes the specified ParallelAiSearch message. Does not implicitly {@link google.cloud.aiplatform.v1.Tool.ParallelAiSearch.verify|verify} messages.
+                         * @param message ParallelAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.Tool.IParallelAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParallelAiSearch message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.Tool.ParallelAiSearch.verify|verify} messages.
+                         * @param message ParallelAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.Tool.IParallelAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParallelAiSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParallelAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Decodes a ParallelAiSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParallelAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Verifies a ParallelAiSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParallelAiSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParallelAiSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Creates a plain object from a ParallelAiSearch message. Also converts values to other types if specified.
+                         * @param message ParallelAiSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.Tool.ParallelAiSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParallelAiSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParallelAiSearch
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -123521,6 +123630,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public asyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.IAsyncQueryReasoningEngineRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CancelAsyncQueryReasoningEngine.
+                     * @param request CancelAsyncQueryReasoningEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CancelAsyncQueryReasoningEngineResponse
+                     */
+                    public cancelAsyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest, callback: google.cloud.aiplatform.v1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngineCallback): void;
+
+                    /**
+                     * Calls CancelAsyncQueryReasoningEngine.
+                     * @param request CancelAsyncQueryReasoningEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelAsyncQueryReasoningEngine(request: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest): Promise<google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse>;
                 }
 
                 namespace ReasoningEngineExecutionService {
@@ -123545,6 +123668,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type AsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.ReasoningEngineExecutionService|cancelAsyncQueryReasoningEngine}.
+                     * @param error Error, if any
+                     * @param [response] CancelAsyncQueryReasoningEngineResponse
+                     */
+                    type CancelAsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse) => void;
                 }
 
                 /** Properties of a QueryReasoningEngineRequest. */
@@ -124159,6 +124289,200 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AsyncQueryReasoningEngineResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelAsyncQueryReasoningEngineRequest. */
+                interface ICancelAsyncQueryReasoningEngineRequest {
+
+                    /** CancelAsyncQueryReasoningEngineRequest name */
+                    name?: (string|null);
+
+                    /** CancelAsyncQueryReasoningEngineRequest operationName */
+                    operationName?: (string|null);
+                }
+
+                /** Represents a CancelAsyncQueryReasoningEngineRequest. */
+                class CancelAsyncQueryReasoningEngineRequest implements ICancelAsyncQueryReasoningEngineRequest {
+
+                    /**
+                     * Constructs a new CancelAsyncQueryReasoningEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest);
+
+                    /** CancelAsyncQueryReasoningEngineRequest name. */
+                    public name: string;
+
+                    /** CancelAsyncQueryReasoningEngineRequest operationName. */
+                    public operationName: string;
+
+                    /**
+                     * Creates a new CancelAsyncQueryReasoningEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelAsyncQueryReasoningEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Verifies a CancelAsyncQueryReasoningEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelAsyncQueryReasoningEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Creates a plain object from a CancelAsyncQueryReasoningEngineRequest message. Also converts values to other types if specified.
+                     * @param message CancelAsyncQueryReasoningEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelAsyncQueryReasoningEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelAsyncQueryReasoningEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelAsyncQueryReasoningEngineResponse. */
+                interface ICancelAsyncQueryReasoningEngineResponse {
+                }
+
+                /** Represents a CancelAsyncQueryReasoningEngineResponse. */
+                class CancelAsyncQueryReasoningEngineResponse implements ICancelAsyncQueryReasoningEngineResponse {
+
+                    /**
+                     * Constructs a new CancelAsyncQueryReasoningEngineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse);
+
+                    /**
+                     * Creates a new CancelAsyncQueryReasoningEngineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelAsyncQueryReasoningEngineResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Verifies a CancelAsyncQueryReasoningEngineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelAsyncQueryReasoningEngineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Creates a plain object from a CancelAsyncQueryReasoningEngineResponse message. Also converts values to other types if specified.
+                     * @param message CancelAsyncQueryReasoningEngineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelAsyncQueryReasoningEngineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelAsyncQueryReasoningEngineResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -169368,6 +169692,9 @@ export namespace google {
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
 
+                    /** Tool parallelAiSearch */
+                    parallelAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch|null);
+
                     /** Tool codeExecution */
                     codeExecution?: (google.cloud.aiplatform.v1beta1.Tool.ICodeExecution|null);
 
@@ -169404,6 +169731,9 @@ export namespace google {
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
+
+                    /** Tool parallelAiSearch. */
+                    public parallelAiSearch?: (google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch|null);
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.cloud.aiplatform.v1beta1.Tool.ICodeExecution|null);
@@ -169602,6 +169932,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GoogleSearch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ParallelAiSearch. */
+                    interface IParallelAiSearch {
+
+                        /** ParallelAiSearch apiKey */
+                        apiKey?: (string|null);
+
+                        /** ParallelAiSearch customConfigs */
+                        customConfigs?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a ParallelAiSearch. */
+                    class ParallelAiSearch implements IParallelAiSearch {
+
+                        /**
+                         * Constructs a new ParallelAiSearch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch);
+
+                        /** ParallelAiSearch apiKey. */
+                        public apiKey: string;
+
+                        /** ParallelAiSearch customConfigs. */
+                        public customConfigs?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ParallelAiSearch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParallelAiSearch instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Encodes the specified ParallelAiSearch message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch.verify|verify} messages.
+                         * @param message ParallelAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParallelAiSearch message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch.verify|verify} messages.
+                         * @param message ParallelAiSearch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.Tool.IParallelAiSearch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParallelAiSearch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParallelAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Decodes a ParallelAiSearch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParallelAiSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Verifies a ParallelAiSearch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParallelAiSearch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParallelAiSearch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch;
+
+                        /**
+                         * Creates a plain object from a ParallelAiSearch message. Also converts values to other types if specified.
+                         * @param message ParallelAiSearch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.Tool.ParallelAiSearch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParallelAiSearch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParallelAiSearch
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -312304,6 +312737,9 @@ export namespace google {
 
                     /** ReasoningEngine labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** ReasoningEngine trafficConfig */
+                    trafficConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.ITrafficConfig|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -312344,6 +312780,9 @@ export namespace google {
 
                     /** ReasoningEngine labels. */
                     public labels: { [k: string]: string };
+
+                    /** ReasoningEngine trafficConfig. */
+                    public trafficConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.ITrafficConfig|null);
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.
@@ -312421,6 +312860,412 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReasoningEngine {
+
+                    /** Properties of a TrafficConfig. */
+                    interface ITrafficConfig {
+
+                        /** TrafficConfig trafficSplitManual */
+                        trafficSplitManual?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitManual|null);
+
+                        /** TrafficConfig trafficSplitAlwaysLatest */
+                        trafficSplitAlwaysLatest?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitAlwaysLatest|null);
+                    }
+
+                    /** Represents a TrafficConfig. */
+                    class TrafficConfig implements ITrafficConfig {
+
+                        /**
+                         * Constructs a new TrafficConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.ITrafficConfig);
+
+                        /** TrafficConfig trafficSplitManual. */
+                        public trafficSplitManual?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitManual|null);
+
+                        /** TrafficConfig trafficSplitAlwaysLatest. */
+                        public trafficSplitAlwaysLatest?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitAlwaysLatest|null);
+
+                        /** TrafficConfig trafficSplit. */
+                        public trafficSplit?: ("trafficSplitManual"|"trafficSplitAlwaysLatest");
+
+                        /**
+                         * Creates a new TrafficConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrafficConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.ITrafficConfig): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig;
+
+                        /**
+                         * Encodes the specified TrafficConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.verify|verify} messages.
+                         * @param message TrafficConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.ITrafficConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrafficConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.verify|verify} messages.
+                         * @param message TrafficConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.ITrafficConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrafficConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrafficConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig;
+
+                        /**
+                         * Decodes a TrafficConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrafficConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig;
+
+                        /**
+                         * Verifies a TrafficConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrafficConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrafficConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig;
+
+                        /**
+                         * Creates a plain object from a TrafficConfig message. Also converts values to other types if specified.
+                         * @param message TrafficConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrafficConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrafficConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TrafficConfig {
+
+                        /** Properties of a TrafficSplitManual. */
+                        interface ITrafficSplitManual {
+
+                            /** TrafficSplitManual targets */
+                            targets?: (google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.ITarget[]|null);
+                        }
+
+                        /** Represents a TrafficSplitManual. */
+                        class TrafficSplitManual implements ITrafficSplitManual {
+
+                            /**
+                             * Constructs a new TrafficSplitManual.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitManual);
+
+                            /** TrafficSplitManual targets. */
+                            public targets: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.ITarget[];
+
+                            /**
+                             * Creates a new TrafficSplitManual instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TrafficSplitManual instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitManual): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual;
+
+                            /**
+                             * Encodes the specified TrafficSplitManual message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.verify|verify} messages.
+                             * @param message TrafficSplitManual message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitManual, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TrafficSplitManual message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.verify|verify} messages.
+                             * @param message TrafficSplitManual message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitManual, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TrafficSplitManual message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TrafficSplitManual
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual;
+
+                            /**
+                             * Decodes a TrafficSplitManual message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TrafficSplitManual
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual;
+
+                            /**
+                             * Verifies a TrafficSplitManual message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TrafficSplitManual message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TrafficSplitManual
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual;
+
+                            /**
+                             * Creates a plain object from a TrafficSplitManual message. Also converts values to other types if specified.
+                             * @param message TrafficSplitManual
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TrafficSplitManual to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TrafficSplitManual
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TrafficSplitManual {
+
+                            /** Properties of a Target. */
+                            interface ITarget {
+
+                                /** Target runtimeRevisionName */
+                                runtimeRevisionName?: (string|null);
+
+                                /** Target percent */
+                                percent?: (number|null);
+                            }
+
+                            /** Represents a Target. */
+                            class Target implements ITarget {
+
+                                /**
+                                 * Constructs a new Target.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.ITarget);
+
+                                /** Target runtimeRevisionName. */
+                                public runtimeRevisionName: string;
+
+                                /** Target percent. */
+                                public percent: number;
+
+                                /**
+                                 * Creates a new Target instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Target instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.ITarget): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target;
+
+                                /**
+                                 * Encodes the specified Target message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target.verify|verify} messages.
+                                 * @param message Target message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Target message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target.verify|verify} messages.
+                                 * @param message Target message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.ITarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Target message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Target
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target;
+
+                                /**
+                                 * Decodes a Target message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Target
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target;
+
+                                /**
+                                 * Verifies a Target message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Target message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Target
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target;
+
+                                /**
+                                 * Creates a plain object from a Target message. Also converts values to other types if specified.
+                                 * @param message Target
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitManual.Target, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Target to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Target
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a TrafficSplitAlwaysLatest. */
+                        interface ITrafficSplitAlwaysLatest {
+                        }
+
+                        /** Represents a TrafficSplitAlwaysLatest. */
+                        class TrafficSplitAlwaysLatest implements ITrafficSplitAlwaysLatest {
+
+                            /**
+                             * Constructs a new TrafficSplitAlwaysLatest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitAlwaysLatest);
+
+                            /**
+                             * Creates a new TrafficSplitAlwaysLatest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TrafficSplitAlwaysLatest instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitAlwaysLatest): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest;
+
+                            /**
+                             * Encodes the specified TrafficSplitAlwaysLatest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest.verify|verify} messages.
+                             * @param message TrafficSplitAlwaysLatest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitAlwaysLatest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TrafficSplitAlwaysLatest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest.verify|verify} messages.
+                             * @param message TrafficSplitAlwaysLatest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.ITrafficSplitAlwaysLatest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TrafficSplitAlwaysLatest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TrafficSplitAlwaysLatest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest;
+
+                            /**
+                             * Decodes a TrafficSplitAlwaysLatest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TrafficSplitAlwaysLatest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest;
+
+                            /**
+                             * Verifies a TrafficSplitAlwaysLatest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TrafficSplitAlwaysLatest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TrafficSplitAlwaysLatest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest;
+
+                            /**
+                             * Creates a plain object from a TrafficSplitAlwaysLatest message. Also converts values to other types if specified.
+                             * @param message TrafficSplitAlwaysLatest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngine.TrafficConfig.TrafficSplitAlwaysLatest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TrafficSplitAlwaysLatest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TrafficSplitAlwaysLatest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Properties of a ReasoningEngineContextSpec. */
@@ -313108,6 +313953,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public asyncQueryReasoningEngine(request: google.cloud.aiplatform.v1beta1.IAsyncQueryReasoningEngineRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CancelAsyncQueryReasoningEngine.
+                     * @param request CancelAsyncQueryReasoningEngineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CancelAsyncQueryReasoningEngineResponse
+                     */
+                    public cancelAsyncQueryReasoningEngine(request: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineRequest, callback: google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngineCallback): void;
+
+                    /**
+                     * Calls CancelAsyncQueryReasoningEngine.
+                     * @param request CancelAsyncQueryReasoningEngineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelAsyncQueryReasoningEngine(request: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineRequest): Promise<google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse>;
                 }
 
                 namespace ReasoningEngineExecutionService {
@@ -313132,6 +313991,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type AsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService|cancelAsyncQueryReasoningEngine}.
+                     * @param error Error, if any
+                     * @param [response] CancelAsyncQueryReasoningEngineResponse
+                     */
+                    type CancelAsyncQueryReasoningEngineCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse) => void;
                 }
 
                 /** Properties of a QueryReasoningEngineRequest. */
@@ -313746,6 +314612,921 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AsyncQueryReasoningEngineResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelAsyncQueryReasoningEngineRequest. */
+                interface ICancelAsyncQueryReasoningEngineRequest {
+
+                    /** CancelAsyncQueryReasoningEngineRequest name */
+                    name?: (string|null);
+
+                    /** CancelAsyncQueryReasoningEngineRequest operationName */
+                    operationName?: (string|null);
+                }
+
+                /** Represents a CancelAsyncQueryReasoningEngineRequest. */
+                class CancelAsyncQueryReasoningEngineRequest implements ICancelAsyncQueryReasoningEngineRequest {
+
+                    /**
+                     * Constructs a new CancelAsyncQueryReasoningEngineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineRequest);
+
+                    /** CancelAsyncQueryReasoningEngineRequest name. */
+                    public name: string;
+
+                    /** CancelAsyncQueryReasoningEngineRequest operationName. */
+                    public operationName: string;
+
+                    /**
+                     * Creates a new CancelAsyncQueryReasoningEngineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelAsyncQueryReasoningEngineRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineRequest): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Verifies a CancelAsyncQueryReasoningEngineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelAsyncQueryReasoningEngineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelAsyncQueryReasoningEngineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest;
+
+                    /**
+                     * Creates a plain object from a CancelAsyncQueryReasoningEngineRequest message. Also converts values to other types if specified.
+                     * @param message CancelAsyncQueryReasoningEngineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelAsyncQueryReasoningEngineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelAsyncQueryReasoningEngineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelAsyncQueryReasoningEngineResponse. */
+                interface ICancelAsyncQueryReasoningEngineResponse {
+                }
+
+                /** Represents a CancelAsyncQueryReasoningEngineResponse. */
+                class CancelAsyncQueryReasoningEngineResponse implements ICancelAsyncQueryReasoningEngineResponse {
+
+                    /**
+                     * Constructs a new CancelAsyncQueryReasoningEngineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineResponse);
+
+                    /**
+                     * Creates a new CancelAsyncQueryReasoningEngineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelAsyncQueryReasoningEngineResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineResponse): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelAsyncQueryReasoningEngineResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse.verify|verify} messages.
+                     * @param message CancelAsyncQueryReasoningEngineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ICancelAsyncQueryReasoningEngineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Decodes a CancelAsyncQueryReasoningEngineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Verifies a CancelAsyncQueryReasoningEngineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelAsyncQueryReasoningEngineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelAsyncQueryReasoningEngineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse;
+
+                    /**
+                     * Creates a plain object from a CancelAsyncQueryReasoningEngineResponse message. Also converts values to other types if specified.
+                     * @param message CancelAsyncQueryReasoningEngineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.CancelAsyncQueryReasoningEngineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelAsyncQueryReasoningEngineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelAsyncQueryReasoningEngineResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReasoningEngineRuntimeRevision. */
+                interface IReasoningEngineRuntimeRevision {
+
+                    /** ReasoningEngineRuntimeRevision name */
+                    name?: (string|null);
+
+                    /** ReasoningEngineRuntimeRevision spec */
+                    spec?: (google.cloud.aiplatform.v1beta1.IReasoningEngineSpec|null);
+
+                    /** ReasoningEngineRuntimeRevision createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ReasoningEngineRuntimeRevision state */
+                    state?: (google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision.State|keyof typeof google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision.State|null);
+                }
+
+                /** Represents a ReasoningEngineRuntimeRevision. */
+                class ReasoningEngineRuntimeRevision implements IReasoningEngineRuntimeRevision {
+
+                    /**
+                     * Constructs a new ReasoningEngineRuntimeRevision.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IReasoningEngineRuntimeRevision);
+
+                    /** ReasoningEngineRuntimeRevision name. */
+                    public name: string;
+
+                    /** ReasoningEngineRuntimeRevision spec. */
+                    public spec?: (google.cloud.aiplatform.v1beta1.IReasoningEngineSpec|null);
+
+                    /** ReasoningEngineRuntimeRevision createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ReasoningEngineRuntimeRevision state. */
+                    public state: (google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision.State|keyof typeof google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision.State);
+
+                    /**
+                     * Creates a new ReasoningEngineRuntimeRevision instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReasoningEngineRuntimeRevision instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IReasoningEngineRuntimeRevision): google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision;
+
+                    /**
+                     * Encodes the specified ReasoningEngineRuntimeRevision message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision.verify|verify} messages.
+                     * @param message ReasoningEngineRuntimeRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IReasoningEngineRuntimeRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReasoningEngineRuntimeRevision message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision.verify|verify} messages.
+                     * @param message ReasoningEngineRuntimeRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IReasoningEngineRuntimeRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReasoningEngineRuntimeRevision message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReasoningEngineRuntimeRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision;
+
+                    /**
+                     * Decodes a ReasoningEngineRuntimeRevision message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReasoningEngineRuntimeRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision;
+
+                    /**
+                     * Verifies a ReasoningEngineRuntimeRevision message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReasoningEngineRuntimeRevision message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReasoningEngineRuntimeRevision
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision;
+
+                    /**
+                     * Creates a plain object from a ReasoningEngineRuntimeRevision message. Also converts values to other types if specified.
+                     * @param message ReasoningEngineRuntimeRevision
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReasoningEngineRuntimeRevision to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReasoningEngineRuntimeRevision
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReasoningEngineRuntimeRevision {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        DEPRECATED = 2
+                    }
+                }
+
+                /** Represents a ReasoningEngineRuntimeRevisionService */
+                class ReasoningEngineRuntimeRevisionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ReasoningEngineRuntimeRevisionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ReasoningEngineRuntimeRevisionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ReasoningEngineRuntimeRevisionService;
+
+                    /**
+                     * Calls GetReasoningEngineRuntimeRevision.
+                     * @param request GetReasoningEngineRuntimeRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReasoningEngineRuntimeRevision
+                     */
+                    public getReasoningEngineRuntimeRevision(request: google.cloud.aiplatform.v1beta1.IGetReasoningEngineRuntimeRevisionRequest, callback: google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.GetReasoningEngineRuntimeRevisionCallback): void;
+
+                    /**
+                     * Calls GetReasoningEngineRuntimeRevision.
+                     * @param request GetReasoningEngineRuntimeRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getReasoningEngineRuntimeRevision(request: google.cloud.aiplatform.v1beta1.IGetReasoningEngineRuntimeRevisionRequest): Promise<google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision>;
+
+                    /**
+                     * Calls ListReasoningEngineRuntimeRevisions.
+                     * @param request ListReasoningEngineRuntimeRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListReasoningEngineRuntimeRevisionsResponse
+                     */
+                    public listReasoningEngineRuntimeRevisions(request: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsRequest, callback: google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.ListReasoningEngineRuntimeRevisionsCallback): void;
+
+                    /**
+                     * Calls ListReasoningEngineRuntimeRevisions.
+                     * @param request ListReasoningEngineRuntimeRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listReasoningEngineRuntimeRevisions(request: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsRequest): Promise<google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse>;
+
+                    /**
+                     * Calls DeleteReasoningEngineRuntimeRevision.
+                     * @param request DeleteReasoningEngineRuntimeRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteReasoningEngineRuntimeRevision(request: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionRequest, callback: google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService.DeleteReasoningEngineRuntimeRevisionCallback): void;
+
+                    /**
+                     * Calls DeleteReasoningEngineRuntimeRevision.
+                     * @param request DeleteReasoningEngineRuntimeRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteReasoningEngineRuntimeRevision(request: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace ReasoningEngineRuntimeRevisionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService|getReasoningEngineRuntimeRevision}.
+                     * @param error Error, if any
+                     * @param [response] ReasoningEngineRuntimeRevision
+                     */
+                    type GetReasoningEngineRuntimeRevisionCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService|listReasoningEngineRuntimeRevisions}.
+                     * @param error Error, if any
+                     * @param [response] ListReasoningEngineRuntimeRevisionsResponse
+                     */
+                    type ListReasoningEngineRuntimeRevisionsCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.ReasoningEngineRuntimeRevisionService|deleteReasoningEngineRuntimeRevision}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteReasoningEngineRuntimeRevisionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a DeleteReasoningEngineRuntimeRevisionOperationMetadata. */
+                interface IDeleteReasoningEngineRuntimeRevisionOperationMetadata {
+
+                    /** DeleteReasoningEngineRuntimeRevisionOperationMetadata genericMetadata */
+                    genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+                }
+
+                /** Represents a DeleteReasoningEngineRuntimeRevisionOperationMetadata. */
+                class DeleteReasoningEngineRuntimeRevisionOperationMetadata implements IDeleteReasoningEngineRuntimeRevisionOperationMetadata {
+
+                    /**
+                     * Constructs a new DeleteReasoningEngineRuntimeRevisionOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionOperationMetadata);
+
+                    /** DeleteReasoningEngineRuntimeRevisionOperationMetadata genericMetadata. */
+                    public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /**
+                     * Creates a new DeleteReasoningEngineRuntimeRevisionOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteReasoningEngineRuntimeRevisionOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionOperationMetadata): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata;
+
+                    /**
+                     * Encodes the specified DeleteReasoningEngineRuntimeRevisionOperationMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata.verify|verify} messages.
+                     * @param message DeleteReasoningEngineRuntimeRevisionOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteReasoningEngineRuntimeRevisionOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata.verify|verify} messages.
+                     * @param message DeleteReasoningEngineRuntimeRevisionOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteReasoningEngineRuntimeRevisionOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteReasoningEngineRuntimeRevisionOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata;
+
+                    /**
+                     * Decodes a DeleteReasoningEngineRuntimeRevisionOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteReasoningEngineRuntimeRevisionOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata;
+
+                    /**
+                     * Verifies a DeleteReasoningEngineRuntimeRevisionOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteReasoningEngineRuntimeRevisionOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteReasoningEngineRuntimeRevisionOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteReasoningEngineRuntimeRevisionOperationMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteReasoningEngineRuntimeRevisionOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteReasoningEngineRuntimeRevisionOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteReasoningEngineRuntimeRevisionOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetReasoningEngineRuntimeRevisionRequest. */
+                interface IGetReasoningEngineRuntimeRevisionRequest {
+
+                    /** GetReasoningEngineRuntimeRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetReasoningEngineRuntimeRevisionRequest. */
+                class GetReasoningEngineRuntimeRevisionRequest implements IGetReasoningEngineRuntimeRevisionRequest {
+
+                    /**
+                     * Constructs a new GetReasoningEngineRuntimeRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGetReasoningEngineRuntimeRevisionRequest);
+
+                    /** GetReasoningEngineRuntimeRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetReasoningEngineRuntimeRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetReasoningEngineRuntimeRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGetReasoningEngineRuntimeRevisionRequest): google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Encodes the specified GetReasoningEngineRuntimeRevisionRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest.verify|verify} messages.
+                     * @param message GetReasoningEngineRuntimeRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGetReasoningEngineRuntimeRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetReasoningEngineRuntimeRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest.verify|verify} messages.
+                     * @param message GetReasoningEngineRuntimeRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGetReasoningEngineRuntimeRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetReasoningEngineRuntimeRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetReasoningEngineRuntimeRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Decodes a GetReasoningEngineRuntimeRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetReasoningEngineRuntimeRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Verifies a GetReasoningEngineRuntimeRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetReasoningEngineRuntimeRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetReasoningEngineRuntimeRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a GetReasoningEngineRuntimeRevisionRequest message. Also converts values to other types if specified.
+                     * @param message GetReasoningEngineRuntimeRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GetReasoningEngineRuntimeRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetReasoningEngineRuntimeRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetReasoningEngineRuntimeRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReasoningEngineRuntimeRevisionsRequest. */
+                interface IListReasoningEngineRuntimeRevisionsRequest {
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListReasoningEngineRuntimeRevisionsRequest. */
+                class ListReasoningEngineRuntimeRevisionsRequest implements IListReasoningEngineRuntimeRevisionsRequest {
+
+                    /**
+                     * Constructs a new ListReasoningEngineRuntimeRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsRequest);
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest parent. */
+                    public parent: string;
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest filter. */
+                    public filter: string;
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListReasoningEngineRuntimeRevisionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListReasoningEngineRuntimeRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReasoningEngineRuntimeRevisionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsRequest): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest;
+
+                    /**
+                     * Encodes the specified ListReasoningEngineRuntimeRevisionsRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest.verify|verify} messages.
+                     * @param message ListReasoningEngineRuntimeRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReasoningEngineRuntimeRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest.verify|verify} messages.
+                     * @param message ListReasoningEngineRuntimeRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReasoningEngineRuntimeRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReasoningEngineRuntimeRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest;
+
+                    /**
+                     * Decodes a ListReasoningEngineRuntimeRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReasoningEngineRuntimeRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest;
+
+                    /**
+                     * Verifies a ListReasoningEngineRuntimeRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReasoningEngineRuntimeRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReasoningEngineRuntimeRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListReasoningEngineRuntimeRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message ListReasoningEngineRuntimeRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReasoningEngineRuntimeRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReasoningEngineRuntimeRevisionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListReasoningEngineRuntimeRevisionsResponse. */
+                interface IListReasoningEngineRuntimeRevisionsResponse {
+
+                    /** ListReasoningEngineRuntimeRevisionsResponse reasoningEngineRuntimeRevisions */
+                    reasoningEngineRuntimeRevisions?: (google.cloud.aiplatform.v1beta1.IReasoningEngineRuntimeRevision[]|null);
+
+                    /** ListReasoningEngineRuntimeRevisionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListReasoningEngineRuntimeRevisionsResponse. */
+                class ListReasoningEngineRuntimeRevisionsResponse implements IListReasoningEngineRuntimeRevisionsResponse {
+
+                    /**
+                     * Constructs a new ListReasoningEngineRuntimeRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsResponse);
+
+                    /** ListReasoningEngineRuntimeRevisionsResponse reasoningEngineRuntimeRevisions. */
+                    public reasoningEngineRuntimeRevisions: google.cloud.aiplatform.v1beta1.IReasoningEngineRuntimeRevision[];
+
+                    /** ListReasoningEngineRuntimeRevisionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListReasoningEngineRuntimeRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListReasoningEngineRuntimeRevisionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsResponse): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse;
+
+                    /**
+                     * Encodes the specified ListReasoningEngineRuntimeRevisionsResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse.verify|verify} messages.
+                     * @param message ListReasoningEngineRuntimeRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListReasoningEngineRuntimeRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse.verify|verify} messages.
+                     * @param message ListReasoningEngineRuntimeRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IListReasoningEngineRuntimeRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListReasoningEngineRuntimeRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListReasoningEngineRuntimeRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse;
+
+                    /**
+                     * Decodes a ListReasoningEngineRuntimeRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListReasoningEngineRuntimeRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse;
+
+                    /**
+                     * Verifies a ListReasoningEngineRuntimeRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListReasoningEngineRuntimeRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListReasoningEngineRuntimeRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListReasoningEngineRuntimeRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message ListReasoningEngineRuntimeRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ListReasoningEngineRuntimeRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListReasoningEngineRuntimeRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListReasoningEngineRuntimeRevisionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteReasoningEngineRuntimeRevisionRequest. */
+                interface IDeleteReasoningEngineRuntimeRevisionRequest {
+
+                    /** DeleteReasoningEngineRuntimeRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteReasoningEngineRuntimeRevisionRequest. */
+                class DeleteReasoningEngineRuntimeRevisionRequest implements IDeleteReasoningEngineRuntimeRevisionRequest {
+
+                    /**
+                     * Constructs a new DeleteReasoningEngineRuntimeRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionRequest);
+
+                    /** DeleteReasoningEngineRuntimeRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteReasoningEngineRuntimeRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteReasoningEngineRuntimeRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionRequest): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Encodes the specified DeleteReasoningEngineRuntimeRevisionRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest.verify|verify} messages.
+                     * @param message DeleteReasoningEngineRuntimeRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteReasoningEngineRuntimeRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest.verify|verify} messages.
+                     * @param message DeleteReasoningEngineRuntimeRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IDeleteReasoningEngineRuntimeRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteReasoningEngineRuntimeRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteReasoningEngineRuntimeRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Decodes a DeleteReasoningEngineRuntimeRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteReasoningEngineRuntimeRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Verifies a DeleteReasoningEngineRuntimeRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteReasoningEngineRuntimeRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteReasoningEngineRuntimeRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteReasoningEngineRuntimeRevisionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteReasoningEngineRuntimeRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.DeleteReasoningEngineRuntimeRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteReasoningEngineRuntimeRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteReasoningEngineRuntimeRevisionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

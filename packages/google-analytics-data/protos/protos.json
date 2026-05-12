@@ -1371,7 +1371,7 @@
                     "AlphaAnalyticsData": {
                       "options": {
                         "(google.api.default_host)": "analyticsdata.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/spreadsheets"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly"
                       },
                       "methods": {
                         "RunFunnelReport": {
@@ -1430,26 +1430,6 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1alpha/{name=properties/*/audienceLists/*}:query",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "SheetExportAudienceList": {
-                          "requestType": "SheetExportAudienceListRequest",
-                          "responseType": "SheetExportAudienceListResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{name=properties/*/audienceLists/*}:exportSheet",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{name=properties/*/audienceLists/*}:exportSheet",
                                 "body": "*"
                               }
                             },
@@ -1649,6 +1629,40 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "RunReport": {
+                          "requestType": "RunReportRequest",
+                          "responseType": "RunReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{property=properties/*}:runReport",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{property=properties/*}:runReport",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GetMetadata": {
+                          "requestType": "GetMetadataRequest",
+                          "responseType": "Metadata",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/metadata}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/metadata}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -2174,86 +2188,6 @@
                         }
                       }
                     },
-                    "SheetExportAudienceListRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/AudienceList"
-                          }
-                        },
-                        "offset": {
-                          "type": "int64",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "limit": {
-                          "type": "int64",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "SheetExportAudienceListResponse": {
-                      "oneofs": {
-                        "_spreadsheetUri": {
-                          "oneof": [
-                            "spreadsheetUri"
-                          ]
-                        },
-                        "_spreadsheetId": {
-                          "oneof": [
-                            "spreadsheetId"
-                          ]
-                        },
-                        "_rowCount": {
-                          "oneof": [
-                            "rowCount"
-                          ]
-                        },
-                        "_audienceList": {
-                          "oneof": [
-                            "audienceList"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "spreadsheetUri": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "spreadsheetId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "rowCount": {
-                          "type": "int32",
-                          "id": 3,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "audienceList": {
-                          "type": "AudienceList",
-                          "id": 4,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
                     "AudienceRow": {
                       "fields": {
                         "dimensionValues": {
@@ -2773,6 +2707,236 @@
                         }
                       }
                     },
+                    "RunReportRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "Dimension",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "Metric",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dateRanges": {
+                          "rule": "repeated",
+                          "type": "DateRange",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dimensionFilter": {
+                          "type": "FilterExpression",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metricFilter": {
+                          "type": "FilterExpression",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metricAggregations": {
+                          "rule": "repeated",
+                          "type": "MetricAggregation",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBys": {
+                          "rule": "repeated",
+                          "type": "OrderBy",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cohortSpec": {
+                          "type": "CohortSpec",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "keepEmptyRows": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "returnPropertyQuota": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "comparisons": {
+                          "rule": "repeated",
+                          "type": "Comparison",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversionSpec": {
+                          "type": "ConversionSpec",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RunReportResponse": {
+                      "oneofs": {
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dimensionHeaders": {
+                          "rule": "repeated",
+                          "type": "DimensionHeader",
+                          "id": 1
+                        },
+                        "metricHeaders": {
+                          "rule": "repeated",
+                          "type": "MetricHeader",
+                          "id": 2
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 3
+                        },
+                        "totals": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 4
+                        },
+                        "maximums": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 5
+                        },
+                        "minimums": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 6
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "metadata": {
+                          "type": "ResponseMetaData",
+                          "id": 8
+                        },
+                        "propertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 9
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "GetMetadataRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/Metadata"
+                          }
+                        }
+                      }
+                    },
+                    "Metadata": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsdata.googleapis.com/Metadata",
+                        "(google.api.resource).pattern": "properties/{property}/metadata"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "DimensionMetadata",
+                          "id": 1
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "MetricMetadata",
+                          "id": 2
+                        },
+                        "comparisons": {
+                          "rule": "repeated",
+                          "type": "ComparisonMetadata",
+                          "id": 4
+                        },
+                        "conversions": {
+                          "rule": "repeated",
+                          "type": "ConversionMetadata",
+                          "id": 5
+                        }
+                      }
+                    },
                     "DateRange": {
                       "fields": {
                         "startDate": {
@@ -2861,6 +3025,38 @@
                         },
                         "invisible": {
                           "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Comparison": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "oneComparison": {
+                          "oneof": [
+                            "dimensionFilter",
+                            "comparison"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "dimensionFilter": {
+                          "type": "FilterExpression",
+                          "id": 2
+                        },
+                        "comparison": {
+                          "type": "string",
                           "id": 3
                         }
                       }
@@ -3167,6 +3363,13 @@
                         }
                       }
                     },
+                    "Section": {
+                      "values": {
+                        "SECTION_UNSPECIFIED": 0,
+                        "SECTION_REPORT": 1,
+                        "SECTION_ADVERTISING": 2
+                      }
+                    },
                     "ResponseMetaData": {
                       "oneofs": {
                         "_schemaRestrictionResponse": {
@@ -3239,6 +3442,10 @@
                           "rule": "repeated",
                           "type": "SamplingMetadata",
                           "id": 9
+                        },
+                        "section": {
+                          "type": "Section",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -4221,6 +4428,146 @@
                         "LOW": 1,
                         "MEDIUM": 2,
                         "UNSAMPLED": 3
+                      }
+                    },
+                    "ConversionSpec": {
+                      "fields": {
+                        "conversionActions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "attributionModel": {
+                          "type": "AttributionModel",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AttributionModel": {
+                          "values": {
+                            "ATTRIBUTION_MODEL_UNSPECIFIED": 0,
+                            "DATA_DRIVEN": 1,
+                            "LAST_CLICK": 2
+                          }
+                        }
+                      }
+                    },
+                    "DimensionMetadata": {
+                      "fields": {
+                        "apiName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uiName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "deprecatedApiNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "customDefinition": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "sections": {
+                          "rule": "repeated",
+                          "type": "Section",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "MetricMetadata": {
+                      "fields": {
+                        "apiName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uiName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "deprecatedApiNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "type": {
+                          "type": "MetricType",
+                          "id": 5
+                        },
+                        "expression": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "customDefinition": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "blockedReasons": {
+                          "rule": "repeated",
+                          "type": "BlockedReason",
+                          "id": 8
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "sections": {
+                          "rule": "repeated",
+                          "type": "Section",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "BlockedReason": {
+                          "values": {
+                            "BLOCKED_REASON_UNSPECIFIED": 0,
+                            "NO_REVENUE_METRICS": 1,
+                            "NO_COST_METRICS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ComparisonMetadata": {
+                      "fields": {
+                        "apiName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uiName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ConversionMetadata": {
+                      "fields": {
+                        "conversionAction": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
                       }
                     }
                   }
