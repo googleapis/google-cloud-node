@@ -43,7 +43,7 @@ describe('📦 pack-n-play test', () => {
         description: 'JavaScript user can use the library',
         cjs: readFileSync(
           './system-test/fixtures/sample/src/index.js',
-        ).toString()
+        ).toString(),
       },
     };
     await packNTest(options);
