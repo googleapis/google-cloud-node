@@ -27,8 +27,8 @@ dependencies:
     specifier: ^7.5.5
     version: 7.5.5
   protobufjs-cli:
-    specifier: ^1.2.0
-    version: 1.2.0(protobufjs@7.5.5)
+    specifier: ^1.2.2
+    version: 1.2.2(protobufjs@7.5.5)
   yargs:
     specifier: ^17.7.2
     version: 17.7.2
@@ -105,7 +105,7 @@ packages:
       '@babel/helper-compilation-targets': 7.28.6
       '@babel/helper-module-transforms': 7.28.6(@babel/core@7.29.0)
       '@babel/helpers': 7.29.2
-      '@babel/parser': 7.29.2
+      '@babel/parser': 7.29.3
       '@babel/template': 7.28.6
       '@babel/traverse': 7.29.0
       '@babel/types': 7.29.0
@@ -123,7 +123,7 @@ packages:
     resolution: {integrity: sha512-qsaF+9Qcm2Qv8SRIMMscAvG4O3lJ0F1GuMo5HR/Bp02LopNgnZBC/EkbevHFeGs4ls/oPz9v+Bsmzbkbe+0dUw==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/parser': 7.29.2
+      '@babel/parser': 7.29.3
       '@babel/types': 7.29.0
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
@@ -191,8 +191,8 @@ packages:
       '@babel/types': 7.29.0
     dev: true
 
-  /@babel/parser@7.29.2:
-    resolution: {integrity: sha512-4GgRzy/+fsBa72/RZVJmGKPmZu9Byn8o4MoLpmNe1m8ZfYnz5emHLQz3U4gLud6Zwl0RZIcgiLD7Uq7ySFuDLA==}
+  /@babel/parser@7.29.3:
+    resolution: {integrity: sha512-b3ctpQwp+PROvU/cttc4OYl4MzfJUWy6FZg+PMXfzmt/+39iHVF0sDfqay8TQM3JA2EUOyKcFZt75jWriQijsA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
@@ -203,7 +203,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.29.0
-      '@babel/parser': 7.29.2
+      '@babel/parser': 7.29.3
       '@babel/types': 7.29.0
     dev: true
 
@@ -214,7 +214,7 @@ packages:
       '@babel/code-frame': 7.29.0
       '@babel/generator': 7.29.1
       '@babel/helper-globals': 7.28.0
-      '@babel/parser': 7.29.2
+      '@babel/parser': 7.29.3
       '@babel/template': 7.28.6
       '@babel/types': 7.29.0
       debug: 4.4.3(supports-color@8.1.1)
@@ -733,7 +733,7 @@ packages:
       graphemer: 1.4.0
       ignore: 5.3.2
       natural-compare-lite: 1.4.0
-      semver: 7.7.4
+      semver: 7.8.0
       tsutils: 3.21.0(typescript@5.6.2)
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -807,7 +807,7 @@ packages:
       debug: 4.4.3(supports-color@8.1.1)
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.7.4
+      semver: 7.8.0
       tsutils: 3.21.0(typescript@5.6.2)
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -828,7 +828,7 @@ packages:
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.6.2)
       eslint: 8.57.1
       eslint-scope: 5.1.1
-      semver: 7.7.4
+      semver: 7.8.0
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -1051,7 +1051,7 @@ packages:
   /builtins@5.1.0:
     resolution: {integrity: sha512-SW9lzGTLvWTP1AY8xeAMZimqDrIaSdLQUcVr9DMef51niJ022Ri87SwRRKYm4A6iHfkPaiVUu/Duw2Wc4J7kKg==}
     dependencies:
-      semver: 7.7.4
+      semver: 7.8.0
     dev: true
 
   /call-bind-apply-helpers@1.0.2:
@@ -1551,7 +1551,7 @@ packages:
       is-core-module: 2.16.1
       minimatch: 3.1.5
       resolve: 1.22.12
-      semver: 7.7.4
+      semver: 7.8.0
     dev: true
 
   /eslint-plugin-prettier@5.2.1(eslint-config-prettier@9.1.0)(eslint@8.57.1)(prettier@3.3.3):
@@ -2008,7 +2008,7 @@ packages:
       '@babel/traverse': 7.29.0
       google-gax: 5.0.6
       google-proto-files: 5.0.1
-      protobufjs-cli: 1.2.0(protobufjs@7.5.5)
+      protobufjs-cli: 1.2.2(protobufjs@7.5.5)
       rimraf: 5.0.10
       uglify-js: 3.19.3
       walk-up-path: 3.0.1
@@ -2588,7 +2588,7 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
-      '@babel/parser': 7.29.2
+      '@babel/parser': 7.29.3
       '@jsdoc/salty': 0.2.12
       '@types/markdown-it': 14.1.2
       bluebird: 3.7.2
@@ -3008,7 +3008,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.16.1
-      semver: 7.7.4
+      semver: 7.8.0
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -3218,12 +3218,12 @@ packages:
     dependencies:
       protobufjs: 7.5.5
 
-  /protobufjs-cli@1.2.0(protobufjs@7.5.5):
-    resolution: {integrity: sha512-+YvqJEmsmZHGzE5j0tvEzFeHm0sX7pzRFpyj7+GazhkS4Y0r+jgbioVvFxxSWIlPzUel/lxeOnLChBmV8NmyHA==}
+  /protobufjs-cli@1.2.2(protobufjs@7.5.5):
+    resolution: {integrity: sha512-gc27fy6Om+92g4UxqOs9ECTc3Xy7zXsnBSFR0dCSEvIRG8cn3eU8x+CcN8ouBB3EjIBVnEOeQb0iVKC4lnBoKA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     peerDependencies:
-      protobufjs: ^7.0.0
+      protobufjs: '>=7.5.6 <8'
     dependencies:
       chalk: 4.1.2
       escodegen: 1.14.3
@@ -3233,7 +3233,7 @@ packages:
       jsdoc: 4.0.5
       minimist: 1.2.8
       protobufjs: 7.5.5
-      semver: 7.7.4
+      semver: 7.8.0
       tmp: 0.2.5
       uglify-js: 3.19.3
 
@@ -3472,8 +3472,8 @@ packages:
     hasBin: true
     dev: true
 
-  /semver@7.7.4:
-    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
+  /semver@7.8.0:
+    resolution: {integrity: sha512-AcM7dV/5ul4EekoQ29Agm5vri8JNqRyj39o0qpX6vDF2GZrtutZl5RwgD1XnZjiTAfncsJhMI48QQH3sN87YNA==}
     engines: {node: '>=10'}
     hasBin: true
 
