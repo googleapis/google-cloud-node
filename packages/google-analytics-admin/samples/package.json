@@ -3,7 +3,11 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "repository": "googleapis/nodejs-analytics-admin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-analytics-admin/samples"
+  },
   "engines": {
     "node": ">=18"
   },

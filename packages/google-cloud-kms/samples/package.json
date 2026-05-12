@@ -6,7 +6,11 @@
     "*.js"
   ],
   "author": "Google LLC",
-  "repository": "googleapis/nodejs-kms",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-kms/samples"
+  },
   "engines": {
     "node": ">=18"
   },

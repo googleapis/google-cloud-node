@@ -5,7 +5,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/proto3-json-serializer-nodejs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/proto3-json-serializer-nodejs/samples"
+  },
   "private": true,
   "scripts": {
     "test": "c8 mocha system-test"

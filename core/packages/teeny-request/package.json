@@ -25,8 +25,8 @@
   ],
   "repository": {
     "type": "git",
-    "directory": "packages/teeny-request",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/teeny-request"
   },
   "keywords": [
     "request",

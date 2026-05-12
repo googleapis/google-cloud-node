@@ -9,7 +9,11 @@
   "files": [
     "*.js"
   ],
-  "repository": "googleapis/nodejs-asset",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-asset/samples"
+  },
   "private": true,
   "scripts": {
     "test": "mocha --timeout 600000"

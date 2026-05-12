@@ -5,7 +5,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-cloud-container",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-container/samples"
+  },
   "private": true,
   "files": [
     "*.js"

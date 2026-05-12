@@ -5,7 +5,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-language",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-language/samples"
+  },
   "private": true,
   "files": [
     "*.js",

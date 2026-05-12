@@ -8,7 +8,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-proto-files",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/nodejs-proto-files/samples"
+  },
   "private": true,
   "scripts": {
     "test": "mocha"

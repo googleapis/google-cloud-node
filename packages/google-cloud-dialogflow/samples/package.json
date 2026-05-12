@@ -3,7 +3,11 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "repository": "googleapis/nodejs-dialogflow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-dialogflow/samples"
+  },
   "files": [
     "*.js",
     "resources"

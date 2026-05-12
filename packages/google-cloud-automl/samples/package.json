@@ -6,7 +6,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-automl",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-automl/samples"
+  },
   "private": true,
   "scripts": {
     "test": "mocha --timeout 9000000"

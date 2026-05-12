@@ -10,8 +10,8 @@
   "types": "./build/src/index.d.ts",
   "repository": {
     "type": "git",
-    "directory": "packages/google-auth-library-nodejs",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/google-auth-library-nodejs"
   },
   "keywords": [
     "google",

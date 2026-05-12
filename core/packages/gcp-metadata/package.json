@@ -4,8 +4,8 @@
   "description": "Get the metadata from a Google Cloud Platform environment",
   "repository": {
     "type": "git",
-    "directory": "packages/gcp-metadata",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/gcp-metadata"
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",

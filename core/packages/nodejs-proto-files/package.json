@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/nodejs-proto-files",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/packages/nodejs-proto-files"
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",

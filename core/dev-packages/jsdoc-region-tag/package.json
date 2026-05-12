@@ -18,8 +18,8 @@
   ],
   "repository": {
     "type": "git",
-    "directory": "dev-packages/jsdoc-region-tag",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/dev-packages/jsdoc-region-tag"
   },
   "keywords": [
     "region",

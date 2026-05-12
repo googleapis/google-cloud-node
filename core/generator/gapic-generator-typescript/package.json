@@ -10,8 +10,8 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gapic-generator-typescript",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "core/generator/gapic-generator-typescript"
   },
   "license": "Apache-2.0",
   "author": "Google LLC",
