@@ -38,7 +38,7 @@ steps:
 #      in Secret Manager and mount it here. For simplicity, we'll rely on
 #      the GCB service account's inherent permissions.
 #    - GCLOUD_PROJECT: Can be passed as a build variable.
-- name: 'node:18'
+- name: 'node:24'
   entrypoint: 'bash'
   args:
   - '-c'
@@ -59,7 +59,7 @@ steps:
   #     path: '/secrets'
 
 # 3. (Optional) Code Coverage Reporting
-- name: 'node:18'
+- name: 'node:24'
   entrypoint: 'bash'
   args:
   - '-c'
