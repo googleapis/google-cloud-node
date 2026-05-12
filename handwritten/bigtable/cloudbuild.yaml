@@ -1,21 +1,4 @@
 steps:
-# 0. Check for changes in handwritten/bigtable
-- name: 'gcr.io/cloud-builders/git'
-  id: 'check-changes'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    git fetch origin main --quiet
-    # Compare with origin/main to detect changes.
-    if git diff --quiet origin/main... -- . ; then
-      echo "No changes in handwritten/bigtable. Skipping tests."
-      echo "skip" > /workspace/skip_tests
-    else
-      echo "Changes detected in handwritten/bigtable. Proceeding with tests."
-    fi
-  dir: 'handwritten/bigtable'
-
 # 1. Set up Node.js environment
 - name: 'node:24'
   entrypoint: 'bash'
@@ -27,7 +10,6 @@ steps:
     npm run presystem-test
   dir: 'handwritten/bigtable'
   id: 'install-dependencies'
-  waitFor: ['check-changes']
 
 # 2. Configure environment variables for the tests and run system tests
 #    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
