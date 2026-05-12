@@ -22,7 +22,7 @@ const PORT = new URL(HOST).port;
 const CONTAINER_NAME = 'storage-testbench';
 const DEFAULT_IMAGE_NAME =
   'gcr.io/cloud-devrel-public-resources/storage-testbench';
-const DEFAULT_IMAGE_TAG = 'v0.35.0';
+const DEFAULT_IMAGE_TAG = 'v0.60.0';
 const DOCKER_IMAGE = `${DEFAULT_IMAGE_NAME}:${DEFAULT_IMAGE_TAG}`;
 const PULL_CMD = `docker pull ${DOCKER_IMAGE}`;
 const RUN_CMD = `docker run --rm -d -p ${PORT}:${PORT} --name ${CONTAINER_NAME} ${DOCKER_IMAGE} && sleep 1`;
