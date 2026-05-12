@@ -89,5 +89,5 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/nodejs-googleapis-common"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/nodejs-googleapis-common"
 }

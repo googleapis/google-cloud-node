@@ -47,5 +47,5 @@
     "mocha": "^11.1.0",
     "typescript": "5.8.3"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/retry-request"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/retry-request"
 }

@@ -70,5 +70,5 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gcp-metadata"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gcp-metadata"
 }

@@ -61,7 +61,7 @@
   "bugs": {
     "url": "https://github.com/googleapis/google-cloud-node-core/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/tools",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/tools",
   "engines": {
     "node": ">=18"
   }

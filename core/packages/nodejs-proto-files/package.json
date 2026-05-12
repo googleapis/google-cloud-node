@@ -63,5 +63,5 @@
     "sinon": "21.0.3",
     "typescript": "5.8.3"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/nodejs-proto-files"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/nodejs-proto-files"
 }

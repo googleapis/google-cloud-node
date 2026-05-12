@@ -63,5 +63,6 @@
     "overrides": {
       "@sinonjs/fake-timers": "15.2.1"
     }
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/typeless-sample-bot"
 }
