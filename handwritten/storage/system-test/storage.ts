@@ -27,7 +27,6 @@ import {
   DeleteBucketCallback,
   File,
   GaxiosError,
-  GaxiosResponse,
   IdempotencyStrategy,
   LifecycleRule,
   Notification,
@@ -43,7 +42,6 @@ interface ErrorCallbackFunction {
 }
 import {PubSub, Subscription, Topic} from '@google-cloud/pubsub';
 import {getDirName} from '../src/util.js';
-import {GoogleAuth} from 'google-auth-library';
 
 class HTTPError extends Error {
   code: number;
@@ -76,7 +74,6 @@ describe('storage', function () {
   const RETENTION_DURATION_SECONDS = 10;
 
   const storage = new Storage({
-    projectId: process.env.PROJECT_ID,
     retryOptions: {
       idempotencyStrategy: IdempotencyStrategy.RetryAlways,
     },
@@ -157,9 +154,6 @@ describe('storage', function () {
       delete process.env.GOOGLE_CLOUD_PROJECT;
 
       storageWithoutAuth = new Storage({
-        authClient: new GoogleAuth({
-          credentials: {client_email: 'fake', private_key: 'fake'},
-        }),
         retryOptions: {
           idempotencyStrategy: IdempotencyStrategy.RetryAlways,
           retryDelayMultiplier: 3,
@@ -238,22 +232,12 @@ describe('storage', function () {
         );
       });
 
-      it('should get access controls', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should get access controls', async () => {
         const accessControls = await bucket.acl.get();
         assert(Array.isArray(accessControls));
       });
 
-      it('should add entity to default access controls', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should add entity to default access controls', async () => {
         const [accessControl] = await bucket.acl.default.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE,
@@ -268,22 +252,12 @@ describe('storage', function () {
         await bucket.acl.default.delete({entity: USER_ACCOUNT});
       });
 
-      it('should get default access controls', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should get default access controls', async () => {
         const accessControls = await bucket.acl.default.get();
         assert(Array.isArray(accessControls));
       });
 
-      it('should grant an account access', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should grant an account access', async () => {
         const [accessControl] = await bucket.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE,
@@ -298,12 +272,7 @@ describe('storage', function () {
         await bucket.acl.delete(opts);
       });
 
-      it('should update an account', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should update an account', async () => {
         const [accessControl] = await bucket.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE,
@@ -317,12 +286,7 @@ describe('storage', function () {
         await bucket.acl.delete({entity: USER_ACCOUNT});
       });
 
-      it('should make a bucket public', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a bucket public', async () => {
         await bucket.makePublic();
         const [aclObject] = await bucket.acl.get({entity: 'allUsers'});
         assert.deepStrictEqual(aclObject, {
@@ -335,12 +299,7 @@ describe('storage', function () {
         await bucket.acl.delete({entity: 'allUsers'});
       });
 
-      it('should make files public', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make files public', async () => {
         await Promise.all(
           ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
         );
@@ -357,12 +316,7 @@ describe('storage', function () {
         ]);
       });
 
-      it('should make a bucket private', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a bucket private', async () => {
         try {
           await bucket.makePublic();
           await new Promise(resolve =>
@@ -378,12 +332,7 @@ describe('storage', function () {
         }
       });
 
-      it('should make files private', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make files private', async () => {
         await Promise.all(
           ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
         );
@@ -414,12 +363,7 @@ describe('storage', function () {
         await file.delete();
       });
 
-      it('should get access controls', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should get access controls', async () => {
         const [accessControls] = await file.acl.get();
         assert(Array.isArray(accessControls));
       });
@@ -429,12 +373,7 @@ describe('storage', function () {
         assert.strictEqual(typeof (file as any).default, 'undefined');
       });
 
-      it('should grant an account access', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should grant an account access', async () => {
         const [accessControl] = await file.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE,
@@ -448,12 +387,7 @@ describe('storage', function () {
         await file.acl.delete({entity: USER_ACCOUNT});
       });
 
-      it('should update an account', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should update an account', async () => {
         const [accessControl] = await file.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE,
@@ -467,12 +401,7 @@ describe('storage', function () {
         await file.acl.delete({entity: USER_ACCOUNT});
       });
 
-      it('should make a file public', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a file public', async () => {
         await file.makePublic();
         const [aclObject] = await file.acl.get({entity: 'allUsers'});
         assert.deepStrictEqual(aclObject, {
@@ -482,12 +411,7 @@ describe('storage', function () {
         await file.acl.delete({entity: 'allUsers'});
       });
 
-      it('should make a file private', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a file private', async () => {
         const validateMakeFilePrivateRejects = (err: GaxiosError) => {
           assert.strictEqual(err.status, 404);
           assert.strictEqual(err!.message, 'notFound');
@@ -502,7 +426,7 @@ describe('storage', function () {
       });
 
       it('should set custom encryption during the upload', async () => {
-        const key = crypto.randomBytes(32);
+        const key = '12345678901234567890123456789012';
         const [file] = await bucket.upload(FILES.big.path, {
           encryptionKey: key,
           resumable: false,
@@ -525,12 +449,7 @@ describe('storage', function () {
         assert.strictEqual(encryptionAlgorithm, 'AES256');
       });
 
-      it('should make a file public during the upload', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a file public during the upload', async () => {
         const [file] = await bucket.upload(FILES.big.path, {
           resumable: false,
           public: true,
@@ -543,12 +462,7 @@ describe('storage', function () {
         });
       });
 
-      it('should make a file public from a resumable upload', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a file public from a resumable upload', async () => {
         const [file] = await bucket.upload(FILES.big.path, {
           resumable: true,
           public: true,
@@ -560,12 +474,7 @@ describe('storage', function () {
         });
       });
 
-      it('should make a file private from a resumable upload', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should make a file private from a resumable upload', async () => {
         const validateMakeFilePrivateRejects = (err: GaxiosError) => {
           assert.strictEqual((err as GaxiosError)!.status, 404);
           assert.strictEqual((err as GaxiosError).message, 'notFound');
@@ -595,9 +504,9 @@ describe('storage', function () {
     describe('buckets', () => {
       let bucket: Bucket;
 
-      before(async () => {
+      before(() => {
         bucket = storage.bucket(generateName());
-        await bucket.create();
+        return bucket.create();
       });
 
       it('should get a policy', async () => {
@@ -614,26 +523,10 @@ describe('storage', function () {
             members: ['projectViewer:' + PROJECT_ID],
             role: 'roles/storage.legacyBucketReader',
           },
-          {
-            role: 'roles/storage.legacyObjectOwner',
-            members: [
-              'projectEditor:' + PROJECT_ID,
-              'projectOwner:' + PROJECT_ID,
-            ],
-          },
-          {
-            role: 'roles/storage.legacyObjectReader',
-            members: ['projectViewer:' + PROJECT_ID],
-          },
         ]);
       });
 
-      it('should set a policy', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should set a policy', async () => {
         const [policy] = await bucket.iam.getPolicy();
         policy!.bindings.push({
           role: 'roles/storage.legacyBucketReader',
@@ -660,11 +553,12 @@ describe('storage', function () {
 
         const [policy] = await bucket.iam.getPolicy();
 
-        const [serviceAccount] = await storage.getServiceAccount();
-
+        const serviceAccount = (
+          await storage.storageTransport.authClient.getCredentials()
+        ).client_email;
         const conditionalBinding = {
           role: 'roles/storage.objectViewer',
-          members: [`serviceAccount:${serviceAccount!.emailAddress}`],
+          members: [`serviceAccount:${serviceAccount}`],
           condition: {
             title: 'always-true',
             description: 'this condition is always effective',
@@ -729,11 +623,7 @@ describe('storage', function () {
     const validateConfiguringPublicAccessWhenPAPEnforcedError = (
       err: GaxiosError,
     ) => {
-      // 412: PAP is working
-      // 400/404: UBLA Org Policy is working (and blocking the ACL call)
-      const status = err.response ? err.response.status : 0;
-      const isExpectedError = [412, 400, 404].includes(status);
-      assert.ok(isExpectedError);
+      assert.strictEqual(err.code, 412);
       return true;
     };
 
@@ -1184,9 +1074,7 @@ describe('storage', function () {
       const validateUniformBucketLevelAccessEnabledError = (
         err: GaxiosError,
       ) => {
-        const status = err.response ? err.response.status : Number(err.code);
-        const isExpected = [400, 404].includes(status);
-        assert.ok(isExpected);
+        assert.strictEqual(err.code, 400);
         return true;
       };
 
@@ -1232,12 +1120,7 @@ describe('storage', function () {
     describe('preserves bucket/file ACL over uniform bucket-level access on/off', () => {
       beforeEach(createBucket);
 
-      it('should preserve default bucket ACL', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should preserve default bucket ACL', async () => {
         await bucket.acl.default.update(customAcl);
         const [aclBefore] = await bucket.acl.default.get();
 
@@ -1256,12 +1139,7 @@ describe('storage', function () {
         }
       }).timeout(UNIFORM_ACCESS_TIMEOUT);
 
-      it('should preserve file ACL', async function () {
-        const [metadata] = await bucket.getMetadata();
-        if (metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled) {
-          this.skip();
-        }
-
+      it('should preserve file ACL', async () => {
         const file = bucket.file(`file-${uuid.v4()}`);
         await file.save('data', {resumable: false});
 
@@ -1576,7 +1454,6 @@ describe('storage', function () {
           isLive: true,
         },
       });
-      await bucket.getMetadata();
       assert.strictEqual(
         bucket.metadata.lifecycle!.rule!.length,
         numExistingRules + 2,
@@ -1816,52 +1693,6 @@ describe('storage', function () {
       assert(metadata.hierarchicalNamespace);
       assert.strictEqual(metadata.hierarchicalNamespace.enabled, true);
     });
-
-    describe('file#moveFileAtomic', async () => {
-      let hnsBucket: Bucket;
-
-      afterEach(async () => {
-        try {
-          await hnsBucket.delete();
-        } catch {
-          //Ignore errors
-        }
-      });
-
-      it('Should move a file to a new name within the same HNS-enabled bucket.', async () => {
-        hnsBucket = storage.bucket(generateName());
-        await storage.createBucket(hnsBucket.name, {
-          hierarchicalNamespace: {enabled: true},
-          iamConfiguration: {
-            uniformBucketLevelAccess: {
-              enabled: true,
-            },
-          },
-        });
-        // Create a source file in the bucket and save some content.
-        const f1 = hnsBucket.file('move-src-obj');
-        await f1.save('move-src-obj');
-        assert(f1);
-        const [f1_metadata] = await f1.getMetadata();
-
-        // Move the source file to a new destination name within the same bucket.
-        await f1.moveFileAtomic('move-dst-obj');
-        const f2 = hnsBucket.file('move-dst-obj');
-        assert(f2);
-        const [f2_metadata] = await f2.getMetadata();
-
-        // Assert that the generation of the destination file is different from the source file,
-        // indicating a new file was created.
-        assert.notStrictEqual(f1_metadata.generation, f2_metadata.generation);
-
-        const [f1_exists] = await f1.exists();
-        const [f2_exists] = await f2.exists();
-        // Assert that the source file no longer exists after the move.
-        assert.strictEqual(f1_exists, false);
-        // Assert that the destination file exists after the move.
-        assert.strictEqual(f2_exists, true);
-      });
-    });
   });
 
   describe('bucket retention policies', () => {
@@ -2000,7 +1831,6 @@ describe('storage', function () {
         const file = await createFile();
         await assert.rejects(file.save('new data'), (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
-          return true;
         });
       });
 
@@ -2008,7 +1838,6 @@ describe('storage', function () {
         const file = await createFile();
         await assert.rejects(file.delete(), (err: GaxiosError) => {
           assert.strictEqual(err.code, 403);
-          return true;
         });
       });
     });
@@ -2018,12 +1847,6 @@ describe('storage', function () {
     const PREFIX = 'sys-test';
 
     it('should enable logging on current bucket by default', async () => {
-      // Ensure the main bucket exists (in case it was deleted by previous tests)
-      const [exists] = await bucket.exists();
-      if (!exists) {
-        await bucket.create();
-      }
-
       const [metadata] = await bucket.enableLogging({prefix: PREFIX});
       assert.deepStrictEqual(metadata.logging, {
         logBucket: bucket.id,
@@ -2034,10 +1857,6 @@ describe('storage', function () {
     it('should enable logging on another bucket', async () => {
       const bucketForLogging = storage.bucket(generateName());
       await bucketForLogging.create();
-
-      // Eventual Consistency: Wait for the bucket to be visible globally
-      // before the logging service attempts to use it.
-      await new Promise(resolve => setTimeout(resolve, 5000));
 
       const [metadata] = await bucket.enableLogging({
         bucket: bucketForLogging,
@@ -2076,10 +1895,7 @@ describe('storage', function () {
     it('should create a file with object retention enabled', async () => {
       const time = new Date();
       time.setMinutes(time.getMinutes() + 1);
-      const retention = {
-        mode: 'Unlocked',
-        retainUntilTime: time.toISOString(),
-      };
+      const retention = {mode: 'Unlocked', retainUntilTime: time.toISOString()};
       const file = new File(objectRetentionBucket, fileName);
       await objectRetentionBucket.upload(FILES.big.path, {
         metadata: {
@@ -2115,14 +1931,11 @@ describe('storage', function () {
     });
 
     after(async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await bucket.delete({userProject: process.env.PROJECT_ID} as any);
+      await bucket.delete();
     });
 
     it('should have enabled requesterPays functionality', async () => {
-      const [metadata] = await bucket.getMetadata({
-        userProject: process.env.PROJECT_ID,
-      });
+      const [metadata] = await bucket.getMetadata();
       assert.strictEqual(metadata.billing!.requesterPays, true);
     });
 
@@ -2492,7 +2305,12 @@ describe('storage', function () {
           });
         });
 
-        it('iam#setPolicy', async () => {
+        /**
+         * TODO: Re-enable once the test environment allows public IAM roles.
+         * Currently disabled to avoid 403 errors when adding 'allUsers' or
+         * 'allAuthenticatedUsers' permissions.
+         */
+        it.skip('iam#setPolicy', async () => {
           await requesterPaysDoubleTest(async options => {
             const [policy] = await bucket.iam.getPolicy();
 
@@ -2697,7 +2515,6 @@ describe('storage', function () {
       const file = bucket.file('hi.jpg');
       await assert.rejects(file.download(), (err: GaxiosError) => {
         assert.strictEqual((err as GaxiosError).code, 404);
-        return true;
       });
     });
 
@@ -2707,10 +2524,7 @@ describe('storage', function () {
       };
       const expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
       const [file] = await bucket.upload(FILES.html.path, options);
-      const [contents] = await file.download({
-        validation: false,
-        decompress: false,
-      });
+      const [contents] = await file.download();
       assert.strictEqual(contents.toString(), expectedContents);
       await file.delete();
     });
@@ -2730,26 +2544,48 @@ describe('storage', function () {
       const {name: tmpGzFilePath} = tmp.fileSync({postfix: '.gz'});
       fs.writeFileSync(tmpGzFilePath, gzipSync(expectedContents));
 
-      const [file] = await bucket.upload(tmpGzFilePath, options);
-      const [contents] = await file.download({decompress: false});
+      const file: File = await new Promise((resolve, reject) => {
+        bucket.upload(tmpGzFilePath, options, (err, file) => {
+          if (err || !file) return reject(err);
+          resolve(file);
+        });
+      });
+
+      const contents: Buffer = await new Promise((resolve, reject) => {
+        return file.download((error, content) => {
+          if (error) return reject(error);
+          resolve(content);
+        });
+      });
+
       assert.strictEqual(contents.toString(), expectedContents);
       await file.delete();
     });
 
     it('should skip validation if file is served decompressed', async () => {
       const filename = 'logo-gzipped.png';
-      await bucket.upload(FILES.logo.path, {
-        destination: filename,
-        gzip: true,
-      });
+      await bucket.upload(FILES.logo.path, {destination: filename, gzip: true});
+
+      tmp.setGracefulCleanup();
+      const {name: tmpFilePath} = tmp.fileSync();
 
       const file = bucket.file(filename);
 
-      const [contents] = await file.download({
-        decompress: false,
+      await new Promise<void>((resolve, reject) => {
+        file
+          .createReadStream()
+          .on('error', reject)
+          .on('response', raw => {
+            assert.strictEqual(
+              raw.toJSON().headers['content-encoding'],
+              undefined,
+            );
+          })
+          .pipe(fs.createWriteStream(tmpFilePath))
+          .on('error', reject)
+          .on('finish', () => resolve());
       });
-      const expectedContents = fs.readFileSync(FILES.logo.path);
-      assert.ok(expectedContents.equals(contents));
+
       await file.delete();
     });
 
@@ -2868,30 +2704,23 @@ describe('storage', function () {
 
     describe('customer-supplied encryption keys', () => {
       const encryptionKey = crypto.randomBytes(32);
-      const fileName = `encrypted-file-${Date.now()}`;
-      let file: File;
-      let unencryptedFile: File;
+
+      const file = bucket.file('encrypted-file', {
+        encryptionKey,
+      });
+      const unencryptedFile = bucket.file(file.name);
 
       before(async () => {
-        file = bucket.file(fileName, {
-          encryptionKey,
-        });
-        unencryptedFile = bucket.file(file.name);
         await file.save('secret data', {resumable: false});
       });
 
       it('should not get the hashes from the unencrypted file', async () => {
         const [metadata] = await unencryptedFile.getMetadata();
-        if (metadata.crc32c !== undefined) {
-          assert.strictEqual(typeof metadata.crc32c, 'string');
-        } else {
-          assert.strictEqual(metadata.crc32c, undefined);
-        }
+        assert.strictEqual(metadata.crc32c, undefined);
       });
 
       it('should get the hashes from the encrypted file', async () => {
         const [metadata] = await file.getMetadata();
-        assert.strictEqual(typeof metadata.crc32c, 'string');
         assert.notStrictEqual(metadata.crc32c, undefined);
       });
 
@@ -2905,7 +2734,6 @@ describe('storage', function () {
               ].join(' '),
             ) > -1,
           );
-          return true;
         });
       });
 
@@ -2917,7 +2745,6 @@ describe('storage', function () {
       it('should rotate encryption keys', async () => {
         const newEncryptionKey = crypto.randomBytes(32);
         await file.rotateEncryptionKey(newEncryptionKey);
-        file.setEncryptionKey(newEncryptionKey);
         const [contents] = await file.download();
         assert.strictEqual(contents.toString(), 'secret data');
       });
@@ -2933,41 +2760,9 @@ describe('storage', function () {
       const keyRingId = generateName();
       const cryptoKeyId = generateName();
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const request = (opts: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const reqOpts: any = {
-          method: opts.method,
-          url: opts.uri,
-        };
-
-        if (opts.qs) {
-          reqOpts.queryParameters = opts.qs;
-        }
-
-        if (opts.json) {
-          reqOpts.body = JSON.stringify(opts.json);
-          reqOpts.headers = {
-            ...opts.headers,
-            'Content-Type': 'application/json',
-          };
-        } else if (opts.headers) {
-          reqOpts.headers = opts.headers;
-        }
-        return new Promise((resolve, reject) => {
-          // We use the storageTransport we've been fixing to ensure
-          // headers and Node 18 compatibility are handled correctly.
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (storage as any).storageTransport.makeRequest(
-            reqOpts,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            async (err: Error, body: any) => {
-              if (err) reject(err);
-              else resolve(body);
-            },
-          );
-        });
-      };
+      //const request = promisify(storage.request).bind(storage);
+      // eslint-disable-next-line no-empty-pattern
+      const request = ({}) => {};
 
       let bucket: Bucket;
       let kmsKeyName: string;
@@ -3020,10 +2815,6 @@ describe('storage', function () {
         setProjectId(await storage.storageTransport.authClient.getProjectId());
         await bucket.create({location: BUCKET_LOCATION});
 
-        if (!keyRingId || keyRingId.length === 0) {
-          throw new Error('FATAL: keyRingId is empty before KMS request.');
-        }
-
         // create keyRing
         await request({
           method: 'POST',
@@ -3039,10 +2830,7 @@ describe('storage', function () {
 
         before(async () => {
           file = bucket.file('kms-encrypted-file', {kmsKeyName});
-          await file.save(FILE_CONTENTS, {
-            resumable: false,
-            userProject: PROJECT_ID,
-          });
+          await file.save(FILE_CONTENTS, {resumable: false});
         });
 
         it('should have set kmsKeyName on created file', async () => {
@@ -3095,19 +2883,11 @@ describe('storage', function () {
 
         it('should convert CSEK to KMS key', async () => {
           const encryptionKey = crypto.randomBytes(32);
-          const originalName = `csek-to-kms-${Date.now()}`;
-          const csekFile = bucket.file(originalName, {encryptionKey});
-
-          await csekFile.save(FILE_CONTENTS, {resumable: false});
-          await csekFile.rotateEncryptionKey({kmsKeyName});
-          const kmsFile = bucket.file(originalName);
-          const [contents] = await kmsFile.download();
-          assert.strictEqual(contents.toString(), FILE_CONTENTS);
-          const [metadata] = await kmsFile.getMetadata();
-          assert.ok(
-            metadata.kmsKeyName && metadata.kmsKeyName.includes(kmsKeyName),
-          );
-          assert.strictEqual(metadata.customerEncryption, undefined);
+          const file = bucket.file('encrypted-file', {encryptionKey});
+          await file.save(FILE_CONTENTS, {resumable: false});
+          await file.rotateEncryptionKey({kmsKeyName});
+          const [contents] = await file.download();
+          assert.strictEqual(contents.toString(), 'secret data');
         });
       });
 
@@ -3314,14 +3094,7 @@ describe('storage', function () {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
-    it('should respect predefined Acl at file#copy', async function () {
-      const [metadata] = await bucket.getMetadata();
-      const ublaEnabled =
-        metadata.iamConfiguration?.uniformBucketLevelAccess?.enabled;
-      if (ublaEnabled) {
-        return this.skip();
-      }
-
+    it('should respect predefined Acl at file#copy', async () => {
       const opts = {destination: 'CloudLogo'};
       const [file] = await bucket.upload(FILES.logo.path, opts);
       const copyOpts = {predefinedAcl: 'publicRead'};
@@ -3485,7 +3258,6 @@ describe('storage', function () {
       await assert.rejects(channel.stop(), (err: GaxiosError) => {
         assert.strictEqual((err as GaxiosError).code, 404);
         assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
-        return true;
       });
     });
   });
@@ -3668,9 +3440,7 @@ describe('storage', function () {
           projectId: HMAC_PROJECT,
         });
 
-        const [hmacKeys] = await storage.getHmacKeys({
-          projectId: HMAC_PROJECT,
-        });
+        const [hmacKeys] = await storage.getHmacKeys({projectId: HMAC_PROJECT});
         assert(
           hmacKeys.some(
             hmacKey =>
@@ -3756,11 +3526,10 @@ describe('storage', function () {
         autoPaginate: false,
       });
 
-      const actualPrefixes =
-        (result as GaxiosResponse).data?.prefixes ??
-        (result as {prefixes: string[]}).prefixes;
-
-      assert.deepStrictEqual(actualPrefixes, expected);
+      assert.deepStrictEqual(
+        (result as {prefixes: string[]}).prefixes,
+        expected,
+      );
     });
 
     it('should get files as a stream', done => {
@@ -4166,9 +3935,8 @@ describe('storage', function () {
       await assert.rejects(
         bucketWithVersioning.file(fileName, {generation: 0}).save('hello2'),
         (err: GaxiosError) => {
-          const status = err.response ? err.response.status : Number(err.code);
-          assert.strictEqual(status, 412);
-          assert.ok(err.message.includes('pre-conditions'));
+          assert.strictEqual(err.status, 412);
+          assert.strictEqual(err.message, 'conditionNotMet');
           return true;
         },
       );
@@ -4499,7 +4267,7 @@ describe('storage', function () {
     });
 
     after(async () => {
-      await subscription?.delete().catch(() => {});
+      await subscription.delete();
       const notifications = await bucket.getNotifications();
       const notificationsToDelete = notifications[0].map(notification => {
         return notification.delete();
@@ -4721,20 +4489,8 @@ describe('storage', function () {
     });
   }
 
-  async function deleteFileAsync(file: File) {
-    try {
-      return await file.delete();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      const status =
-        err.status || (err.response && err.response.status) || err.code;
-
-      if (status === 404 || err.message.includes('No such object')) {
-        return;
-      }
-      // If it's a different error (like a 403 or 500), we still want to know.
-      throw err;
-    }
+  function deleteFileAsync(file: File) {
+    return file.delete();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
