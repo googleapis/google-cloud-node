@@ -5,9 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    if [ -f /workspace/skip_tests ]; then exit 0; fi
     npm install
-    npm run presystem-test
   dir: 'handwritten/bigtable'
   id: 'install-dependencies'
 
@@ -25,7 +23,6 @@ steps:
   args:
   - '-c'
   - |
-    if [ -f /workspace/skip_tests ]; then exit 0; fi
     npm run system-test
   dir: 'handwritten/bigtable'
   env:
@@ -46,7 +43,6 @@ steps:
   args:
   - '-c'
   - |
-    if [ -f /workspace/skip_tests ]; then exit 0; fi
     # Check if nyc is installed and run report
     if [ -f ./node_modules/nyc/bin/nyc.js ]; then
       ./node_modules/nyc/bin/nyc.js report || true # `|| true` prevents build failure if nyc report itself exits non-zero
