@@ -41,19 +41,9 @@ describe('📦 pack-n-play test', () => {
       packageDir: process.cwd(),
       sample: {
         description: 'JavaScript user can use the library',
-        // Inject the reference directive at the top of the code
-        // The reference header is needed so packnplay tests recognize require
-      packageDir: process.cwd(),
-      sample: {
-        description: 'JavaScript user can use the library',
         cjs: readFileSync(
           './system-test/fixtures/sample/src/index.js',
-        ).toString(),
-      },
-          '/// <reference types="node" />\n' +
-          readFileSync('./system-test/fixtures/sample/src/index.js').toString(),
-        // Still needed so the package actually gets installed in the temp environment
-        dependencies: ['@types/node'], // This dependency solves a packnplay error so that require can be recognized.
+        ).toString()
       },
     };
     await packNTest(options);
