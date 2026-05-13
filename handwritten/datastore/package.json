@@ -57,6 +57,7 @@
     "stream-events": "^1.0.5"
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@google-cloud/storage": "^7.16.0",
     "@types/extend": "^3.0.4",
     "@types/is": "^0.0.25",

@@ -98,6 +98,7 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@grpc/reflection": "^1.0.4",
     "@opentelemetry/sdk-trace-base": "^2.0.0",
     "@opentelemetry/sdk-trace-node": "^2.0.0",

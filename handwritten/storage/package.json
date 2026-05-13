@@ -93,6 +93,7 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@babel/cli": "^7.22.10",
     "@babel/core": "^7.22.11",
     "@google-cloud/pubsub": "^4.0.0",
