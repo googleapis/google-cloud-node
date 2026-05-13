@@ -1578,6 +1578,78 @@ describe('v1.BackendBucketsClient', () => {
         });
     });
 
+    describe('aggregatedList', () => {
+
+        it('uses async iteration with aggregatedList without error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.AggregatedListBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.AggregatedListBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              ['tuple_key_1', generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucketsScopedList())],
+              ['tuple_key_2', generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucketsScopedList())],
+              ['tuple_key_3', generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucketsScopedList())],
+            ];
+            client.descriptors.page.aggregatedList.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: Array<[string, protos.google.cloud.compute.v1.IBackendBucketsScopedList]> = [];
+            const iterable = client.aggregatedListAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with aggregatedList with error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.AggregatedListBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.AggregatedListBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.aggregatedList.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.aggregatedListAsync(request);
+            await assert.rejects(async () => {
+                const responses: Array<[string, protos.google.cloud.compute.v1.IBackendBucketsScopedList]> = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('list', () => {
         it('invokes list without error', async () => {
             const client = new backendbucketsModule.v1.BackendBucketsClient({
@@ -1816,6 +1888,251 @@ describe('v1.BackendBucketsClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.list.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listUsable', () => {
+        it('invokes listUsable without error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+            ];
+            client.innerApiCalls.listUsable = stubSimpleCall(expectedResponse);
+            const [response] = await client.listUsable(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsable without error using callback', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+            ];
+            client.innerApiCalls.listUsable = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listUsable(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IBackendBucket[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsable with error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listUsable = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listUsable(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listUsable as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listUsableStream without error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+            ];
+            client.descriptors.page.listUsable.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listUsableStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1.BackendBucket[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1.BackendBucket) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listUsable.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUsable, request));
+            assert(
+                (client.descriptors.page.listUsable.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listUsableStream with error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUsable.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listUsableStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.compute.v1.BackendBucket[] = [];
+                stream.on('data', (response: protos.google.cloud.compute.v1.BackendBucket) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listUsable.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listUsable, request));
+            assert(
+                (client.descriptors.page.listUsable.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listUsable without error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+              generateSampleMessage(new protos.google.cloud.compute.v1.BackendBucket()),
+            ];
+            client.descriptors.page.listUsable.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.compute.v1.IBackendBucket[] = [];
+            const iterable = client.listUsableAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listUsable with error', async () => {
+            const client = new backendbucketsModule.v1.BackendBucketsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.ListUsableBackendBucketsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.ListUsableBackendBucketsRequest', ['project']);
+            request.project = defaultValue1;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listUsable.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listUsableAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.compute.v1.IBackendBucket[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listUsable.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )

@@ -223,7 +223,7 @@ export class RegionDisksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const regionDisksStubMethods =
-        ['addResourcePolicies', 'bulkInsert', 'createSnapshot', 'delete', 'get', 'getIamPolicy', 'insert', 'list', 'removeResourcePolicies', 'resize', 'setIamPolicy', 'setLabels', 'startAsyncReplication', 'stopAsyncReplication', 'stopGroupAsyncReplication', 'testIamPermissions', 'update'];
+        ['addResourcePolicies', 'bulkInsert', 'createSnapshot', 'delete', 'get', 'getIamPolicy', 'insert', 'list', 'removeResourcePolicies', 'resize', 'setIamPolicy', 'setLabels', 'startAsyncReplication', 'stopAsyncReplication', 'stopGroupAsyncReplication', 'testIamPermissions', 'update', 'updateKmsKey'];
     for (const methodName of regionDisksStubMethods) {
       const callPromise = this.regionDisksStub.then(
         stub => (...args: Array<{}>) => {
@@ -2168,6 +2168,127 @@ export class RegionDisksClient {
         }
       : undefined;
     return this.innerApiCalls.update(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Rotates the customer-managed
+ * encryption key to the latest version for the specified persistent disk.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.disk
+ *   Name of the Disk resource, should conform to RFC1035.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   The name of the region for this request.
+ * @param {google.cloud.compute.v1.RegionDiskUpdateKmsKeyRequest} request.regionDiskUpdateKmsKeyRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/region_disks.update_kms_key.js</caption>
+ * region_tag:compute_v1_generated_RegionDisks_UpdateKmsKey_async
+ */
+  updateKmsKey(
+      request?: protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
+  updateKmsKey(
+      request: protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateKmsKey(
+      request: protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateKmsKey(
+      request?: protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'region': request.region ?? '',
+      'disk': request.disk ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateKmsKey request %j', request);
+    const wrappedCallback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdateKmsKeyRegionDiskRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('updateKmsKey response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateKmsKey(request, options, wrappedCallback)
       ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
         return [
           { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
