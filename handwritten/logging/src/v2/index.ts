@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ConfigServiceV2Client} from './config_service_v2_client';
-export {LoggingServiceV2Client} from './logging_service_v2_client';
-export {MetricsServiceV2Client} from './metrics_service_v2_client';
+export { ConfigServiceV2Client } from './config_service_v2_client';
+export { LoggingServiceV2Client } from './logging_service_v2_client';
+export { MetricsServiceV2Client } from './metrics_service_v2_client';

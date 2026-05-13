@@ -16,7 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {QuotaControllerClient, ServiceControllerClient} from '@google-cloud/service-control';
+import {
+  QuotaControllerClient,
+  ServiceControllerClient,
+} from '@google-cloud/service-control';
 
 // check that the client class type name can be used
 function doStuffWithQuotaControllerClient(client: QuotaControllerClient) {
