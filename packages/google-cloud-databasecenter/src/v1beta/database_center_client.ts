@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class DatabaseCenterClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('databasecenter');
@@ -57,8 +64,8 @@ export class DatabaseCenterClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  databaseCenterStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  databaseCenterStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DatabaseCenterClient.
@@ -99,21 +106,42 @@ export class DatabaseCenterClient {
    *     const client = new DatabaseCenterClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DatabaseCenterClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'databasecenter.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -138,7 +166,7 @@ export class DatabaseCenterClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -152,10 +180,7 @@ export class DatabaseCenterClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -176,20 +201,35 @@ export class DatabaseCenterClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      queryProducts:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'products'),
-      aggregateFleet:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rows'),
-      queryDatabaseResourceGroups:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceGroups'),
-      queryIssues:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceIssues')
+      queryProducts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'products',
+      ),
+      aggregateFleet: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rows',
+      ),
+      queryDatabaseResourceGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resourceGroups',
+      ),
+      queryIssues: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resourceIssues',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.databasecenter.v1beta.DatabaseCenter', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.databasecenter.v1beta.DatabaseCenter',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -220,37 +260,47 @@ export class DatabaseCenterClient {
     // Put together the "service stub" for
     // google.cloud.databasecenter.v1beta.DatabaseCenter.
     this.databaseCenterStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.databasecenter.v1beta.DatabaseCenter') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.databasecenter.v1beta.DatabaseCenter,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.databasecenter.v1beta.DatabaseCenter',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.databasecenter.v1beta
+            .DatabaseCenter,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const databaseCenterStubMethods =
-        ['queryProducts', 'aggregateFleet', 'queryDatabaseResourceGroups', 'aggregateIssueStats', 'queryIssues'];
+    const databaseCenterStubMethods = [
+      'queryProducts',
+      'aggregateFleet',
+      'queryDatabaseResourceGroups',
+      'aggregateIssueStats',
+      'queryIssues',
+    ];
     for (const methodName of databaseCenterStubMethods) {
       const callPromise = this.databaseCenterStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -265,8 +315,14 @@ export class DatabaseCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'databasecenter.googleapis.com';
   }
@@ -277,8 +333,14 @@ export class DatabaseCenterClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'databasecenter.googleapis.com';
   }
@@ -309,9 +371,7 @@ export class DatabaseCenterClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -320,8 +380,9 @@ export class DatabaseCenterClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -332,223 +393,299 @@ export class DatabaseCenterClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * AggregateIssueStats provides database resource issues statistics.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
- *     `product.type`, `product.engine`, `product.version`, `location`,
- *     `labels`, `issues`, fields of availability_info,
- *     data_protection_info,'resource_name', etc.
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- * @param {number[]} [request.signalTypeGroups]
- *   Optional. Lists of signal types that are issues.
- * @param {google.type.Date} [request.baselineDate]
- *   Optional. The baseline date w.r.t. which the delta counts are calculated.
- *   If not set, delta counts are not included in the response and the response
- *   indicates the current state of the fleet.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsResponse|AggregateIssueStatsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/database_center.aggregate_issue_stats.js</caption>
- * region_tag:databasecenter_v1beta_generated_DatabaseCenter_AggregateIssueStats_async
- */
+  /**
+   * AggregateIssueStats provides database resource issues statistics.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info,
+   *     data_protection_info,'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   * @param {number[]} [request.signalTypeGroups]
+   *   Optional. Lists of signal types that are issues.
+   * @param {google.type.Date} [request.baselineDate]
+   *   Optional. The baseline date w.r.t. which the delta counts are calculated.
+   *   If not set, delta counts are not included in the response and the response
+   *   indicates the current state of the fleet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsResponse|AggregateIssueStatsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/database_center.aggregate_issue_stats.js</caption>
+   * region_tag:databasecenter_v1beta_generated_DatabaseCenter_AggregateIssueStats_async
+   */
   aggregateIssueStats(
-      request?: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+      (
+        | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   aggregateIssueStats(
-      request: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   aggregateIssueStats(
-      request: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
-      callback: Callback<
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
+    callback: Callback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   aggregateIssueStats(
-      request?: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+      (
+        | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('aggregateIssueStats request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+          | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('aggregateIssueStats response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.aggregateIssueStats(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
-        protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('aggregateIssueStats response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .aggregateIssueStats(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse,
+          (
+            | protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('aggregateIssueStats response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * QueryProducts provides a list of all possible products which can be used to
- * filter database resources.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID}/locations/{LOCATION}
- *   (e.g.,"projects/foo-bar/locations/us-central1")
- *   * projects/{PROJECT_NUMBER}/locations/{LOCATION}
- *   (e.g.,"projects/12345678/locations/us-central1")
- *   * folders/{FOLDER_NUMBER}/locations/{LOCATION}
- *   (e.g.,"folders/1234567/locations/us-central1")
- *   * organizations/{ORGANIZATION_NUMBER}/locations/{LOCATION}
- *   (e.g.,"organizations/123456/locations/us-central1")
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 products will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListLocations` call.
- *   Provide this to retrieve the subsequent page.
- *   All other parameters except page size should match the call that provided
- *   the page page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.Product|Product}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `queryProductsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * QueryProducts provides a list of all possible products which can be used to
+   * filter database resources.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}/locations/{LOCATION}
+   *   (e.g.,"projects/foo-bar/locations/us-central1")
+   *   * projects/{PROJECT_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"projects/12345678/locations/us-central1")
+   *   * folders/{FOLDER_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"folders/1234567/locations/us-central1")
+   *   * organizations/{ORGANIZATION_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"organizations/123456/locations/us-central1")
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 products will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListLocations` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All other parameters except page size should match the call that provided
+   *   the page page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.Product|Product}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryProductsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryProducts(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IProduct[],
-        protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
-      ]>;
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IProduct[],
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse,
+    ]
+  >;
   queryProducts(
-      request: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IProduct>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IProduct
+    >,
+  ): void;
   queryProducts(
-      request: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IProduct>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IProduct
+    >,
+  ): void;
   queryProducts(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IProduct>,
-      callback?: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IProduct>):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IProduct[],
-        protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
-      ]>|void {
+          | protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IProduct
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IProduct
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IProduct[],
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse|null|undefined,
-      protos.google.cloud.databasecenter.v1beta.IProduct>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+          | protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IProduct
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryProducts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -557,282 +694,314 @@ export class DatabaseCenterClient {
     this._log.info('queryProducts request %j', request);
     return this.innerApiCalls
       .queryProducts(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.databasecenter.v1beta.IProduct[],
-        protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse
-      ]) => {
-        this._log.info('queryProducts values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.databasecenter.v1beta.IProduct[],
+          protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest | null,
+          protos.google.cloud.databasecenter.v1beta.IQueryProductsResponse,
+        ]) => {
+          this._log.info('queryProducts values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `queryProducts`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID}/locations/{LOCATION}
- *   (e.g.,"projects/foo-bar/locations/us-central1")
- *   * projects/{PROJECT_NUMBER}/locations/{LOCATION}
- *   (e.g.,"projects/12345678/locations/us-central1")
- *   * folders/{FOLDER_NUMBER}/locations/{LOCATION}
- *   (e.g.,"folders/1234567/locations/us-central1")
- *   * organizations/{ORGANIZATION_NUMBER}/locations/{LOCATION}
- *   (e.g.,"organizations/123456/locations/us-central1")
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 products will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListLocations` call.
- *   Provide this to retrieve the subsequent page.
- *   All other parameters except page size should match the call that provided
- *   the page page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.Product|Product} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `queryProductsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `queryProducts`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}/locations/{LOCATION}
+   *   (e.g.,"projects/foo-bar/locations/us-central1")
+   *   * projects/{PROJECT_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"projects/12345678/locations/us-central1")
+   *   * folders/{FOLDER_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"folders/1234567/locations/us-central1")
+   *   * organizations/{ORGANIZATION_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"organizations/123456/locations/us-central1")
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 products will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListLocations` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All other parameters except page size should match the call that provided
+   *   the page page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.Product|Product} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryProductsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryProductsStream(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['queryProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryProducts stream %j', request);
     return this.descriptors.page.queryProducts.createStream(
       this.innerApiCalls.queryProducts as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `queryProducts`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID}/locations/{LOCATION}
- *   (e.g.,"projects/foo-bar/locations/us-central1")
- *   * projects/{PROJECT_NUMBER}/locations/{LOCATION}
- *   (e.g.,"projects/12345678/locations/us-central1")
- *   * folders/{FOLDER_NUMBER}/locations/{LOCATION}
- *   (e.g.,"folders/1234567/locations/us-central1")
- *   * organizations/{ORGANIZATION_NUMBER}/locations/{LOCATION}
- *   (e.g.,"organizations/123456/locations/us-central1")
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 products will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListLocations` call.
- *   Provide this to retrieve the subsequent page.
- *   All other parameters except page size should match the call that provided
- *   the page page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.databasecenter.v1beta.Product|Product}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/database_center.query_products.js</caption>
- * region_tag:databasecenter_v1beta_generated_DatabaseCenter_QueryProducts_async
- */
+  /**
+   * Equivalent to `queryProducts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID}/locations/{LOCATION}
+   *   (e.g.,"projects/foo-bar/locations/us-central1")
+   *   * projects/{PROJECT_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"projects/12345678/locations/us-central1")
+   *   * folders/{FOLDER_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"folders/1234567/locations/us-central1")
+   *   * organizations/{ORGANIZATION_NUMBER}/locations/{LOCATION}
+   *   (e.g.,"organizations/123456/locations/us-central1")
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 products will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListLocations` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All other parameters except page size should match the call that provided
+   *   the page page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.databasecenter.v1beta.Product|Product}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/database_center.query_products.js</caption>
+   * region_tag:databasecenter_v1beta_generated_DatabaseCenter_QueryProducts_async
+   */
   queryProductsAsync(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.databasecenter.v1beta.IProduct>{
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryProductsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.databasecenter.v1beta.IProduct> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['queryProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryProducts iterate %j', request);
     return this.descriptors.page.queryProducts.asyncIterate(
       this.innerApiCalls['queryProducts'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.databasecenter.v1beta.IProduct>;
   }
- /**
- * AggregateFleet provides statistics about the fleet grouped by various
- * fields.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g.,
- *   "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
- *     `product.type`, `product.engine`, `product.version`, `location`,
- *     `labels`, `issues`, fields of availability_info, data_protection_info,
- *     'resource_name', etc.
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- * @param {string} [request.groupBy]
- *   Optional. A field that statistics are grouped by.
- *   Valid values are any combination of the following:
- *     * container
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * location
- *     * sub_resource_type
- *     * management_type
- *     * tag.key
- *     * tag.value
- *     * tag.source
- *     * tag.inherited
- *     * label.key
- *     * label.value
- *     * label.source
- *     * has_maintenance_schedule
- *     * has_deny_maintenance_schedules
- *   Comma separated list.
- * @param {string} [request.orderBy]
- *   Optional. Valid values to order by are:
- *     * resource_groups_count
- *     * resources_count
- *     * and all fields supported by `group_by`
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It supports ordering using multiple fields.
- *   For example:
- *    `order_by = "resource_groups_count"` sorts response in ascending order
- *    `order_by = "resource_groups_count DESC"` sorts response in descending
- *    order
- *    `order_by = "product.type, product.version DESC, location"` orders by type
- *    in ascending order, version in descending order and location in ascending
- *    order
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 items will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `AggregateFleet` call.
- *   Provide this to retrieve the subsequent page.
- *   All other parameters should match the parameters in the call that provided
- *   the page token except for page_size which can be different.
- * @param {google.type.Date} [request.baselineDate]
- *   Optional. The baseline date w.r.t. which the delta counts are calculated.
- *   If not set, delta counts are not included in the response and the response
- *   indicates the current state of the fleet.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.AggregateFleetRow|AggregateFleetRow}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `aggregateFleetAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * AggregateFleet provides statistics about the fleet grouped by various
+   * fields.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g.,
+   *   "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info, data_protection_info,
+   *     'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   * @param {string} [request.groupBy]
+   *   Optional. A field that statistics are grouped by.
+   *   Valid values are any combination of the following:
+   *     * container
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * location
+   *     * sub_resource_type
+   *     * management_type
+   *     * tag.key
+   *     * tag.value
+   *     * tag.source
+   *     * tag.inherited
+   *     * label.key
+   *     * label.value
+   *     * label.source
+   *     * has_maintenance_schedule
+   *     * has_deny_maintenance_schedules
+   *   Comma separated list.
+   * @param {string} [request.orderBy]
+   *   Optional. Valid values to order by are:
+   *     * resource_groups_count
+   *     * resources_count
+   *     * and all fields supported by `group_by`
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It supports ordering using multiple fields.
+   *   For example:
+   *    `order_by = "resource_groups_count"` sorts response in ascending order
+   *    `order_by = "resource_groups_count DESC"` sorts response in descending
+   *    order
+   *    `order_by = "product.type, product.version DESC, location"` orders by type
+   *    in ascending order, version in descending order and location in ascending
+   *    order
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 items will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `AggregateFleet` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All other parameters should match the parameters in the call that provided
+   *   the page token except for page_size which can be different.
+   * @param {google.type.Date} [request.baselineDate]
+   *   Optional. The baseline date w.r.t. which the delta counts are calculated.
+   *   If not set, delta counts are not included in the response and the response
+   *   indicates the current state of the fleet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.AggregateFleetRow|AggregateFleetRow}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `aggregateFleetAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   aggregateFleet(
-      request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[],
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
-      ]>;
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[],
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse,
+    ]
+  >;
   aggregateFleet(
-      request: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow
+    >,
+  ): void;
   aggregateFleet(
-      request: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow
+    >,
+  ): void;
   aggregateFleet(
-      request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>,
-      callback?: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[],
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
-      ]>|void {
+          | protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+      | protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[],
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse|null|undefined,
-      protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+          | protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('aggregateFleet values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -841,403 +1010,435 @@ export class DatabaseCenterClient {
     this._log.info('aggregateFleet request %j', request);
     return this.innerApiCalls
       .aggregateFleet(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[],
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse
-      ]) => {
-        this._log.info('aggregateFleet values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[],
+          protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest | null,
+          protos.google.cloud.databasecenter.v1beta.IAggregateFleetResponse,
+        ]) => {
+          this._log.info('aggregateFleet values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `aggregateFleet`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g.,
- *   "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
- *     `product.type`, `product.engine`, `product.version`, `location`,
- *     `labels`, `issues`, fields of availability_info, data_protection_info,
- *     'resource_name', etc.
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- * @param {string} [request.groupBy]
- *   Optional. A field that statistics are grouped by.
- *   Valid values are any combination of the following:
- *     * container
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * location
- *     * sub_resource_type
- *     * management_type
- *     * tag.key
- *     * tag.value
- *     * tag.source
- *     * tag.inherited
- *     * label.key
- *     * label.value
- *     * label.source
- *     * has_maintenance_schedule
- *     * has_deny_maintenance_schedules
- *   Comma separated list.
- * @param {string} [request.orderBy]
- *   Optional. Valid values to order by are:
- *     * resource_groups_count
- *     * resources_count
- *     * and all fields supported by `group_by`
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It supports ordering using multiple fields.
- *   For example:
- *    `order_by = "resource_groups_count"` sorts response in ascending order
- *    `order_by = "resource_groups_count DESC"` sorts response in descending
- *    order
- *    `order_by = "product.type, product.version DESC, location"` orders by type
- *    in ascending order, version in descending order and location in ascending
- *    order
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 items will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `AggregateFleet` call.
- *   Provide this to retrieve the subsequent page.
- *   All other parameters should match the parameters in the call that provided
- *   the page token except for page_size which can be different.
- * @param {google.type.Date} [request.baselineDate]
- *   Optional. The baseline date w.r.t. which the delta counts are calculated.
- *   If not set, delta counts are not included in the response and the response
- *   indicates the current state of the fleet.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.AggregateFleetRow|AggregateFleetRow} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `aggregateFleetAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `aggregateFleet`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g.,
+   *   "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info, data_protection_info,
+   *     'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   * @param {string} [request.groupBy]
+   *   Optional. A field that statistics are grouped by.
+   *   Valid values are any combination of the following:
+   *     * container
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * location
+   *     * sub_resource_type
+   *     * management_type
+   *     * tag.key
+   *     * tag.value
+   *     * tag.source
+   *     * tag.inherited
+   *     * label.key
+   *     * label.value
+   *     * label.source
+   *     * has_maintenance_schedule
+   *     * has_deny_maintenance_schedules
+   *   Comma separated list.
+   * @param {string} [request.orderBy]
+   *   Optional. Valid values to order by are:
+   *     * resource_groups_count
+   *     * resources_count
+   *     * and all fields supported by `group_by`
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It supports ordering using multiple fields.
+   *   For example:
+   *    `order_by = "resource_groups_count"` sorts response in ascending order
+   *    `order_by = "resource_groups_count DESC"` sorts response in descending
+   *    order
+   *    `order_by = "product.type, product.version DESC, location"` orders by type
+   *    in ascending order, version in descending order and location in ascending
+   *    order
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 items will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `AggregateFleet` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All other parameters should match the parameters in the call that provided
+   *   the page token except for page_size which can be different.
+   * @param {google.type.Date} [request.baselineDate]
+   *   Optional. The baseline date w.r.t. which the delta counts are calculated.
+   *   If not set, delta counts are not included in the response and the response
+   *   indicates the current state of the fleet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.AggregateFleetRow|AggregateFleetRow} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `aggregateFleetAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   aggregateFleetStream(
-      request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['aggregateFleet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('aggregateFleet stream %j', request);
     return this.descriptors.page.aggregateFleet.createStream(
       this.innerApiCalls.aggregateFleet as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `aggregateFleet`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g.,
- *   "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
- *     `product.type`, `product.engine`, `product.version`, `location`,
- *     `labels`, `issues`, fields of availability_info, data_protection_info,
- *     'resource_name', etc.
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- * @param {string} [request.groupBy]
- *   Optional. A field that statistics are grouped by.
- *   Valid values are any combination of the following:
- *     * container
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * location
- *     * sub_resource_type
- *     * management_type
- *     * tag.key
- *     * tag.value
- *     * tag.source
- *     * tag.inherited
- *     * label.key
- *     * label.value
- *     * label.source
- *     * has_maintenance_schedule
- *     * has_deny_maintenance_schedules
- *   Comma separated list.
- * @param {string} [request.orderBy]
- *   Optional. Valid values to order by are:
- *     * resource_groups_count
- *     * resources_count
- *     * and all fields supported by `group_by`
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It supports ordering using multiple fields.
- *   For example:
- *    `order_by = "resource_groups_count"` sorts response in ascending order
- *    `order_by = "resource_groups_count DESC"` sorts response in descending
- *    order
- *    `order_by = "product.type, product.version DESC, location"` orders by type
- *    in ascending order, version in descending order and location in ascending
- *    order
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 items will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `AggregateFleet` call.
- *   Provide this to retrieve the subsequent page.
- *   All other parameters should match the parameters in the call that provided
- *   the page token except for page_size which can be different.
- * @param {google.type.Date} [request.baselineDate]
- *   Optional. The baseline date w.r.t. which the delta counts are calculated.
- *   If not set, delta counts are not included in the response and the response
- *   indicates the current state of the fleet.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.databasecenter.v1beta.AggregateFleetRow|AggregateFleetRow}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/database_center.aggregate_fleet.js</caption>
- * region_tag:databasecenter_v1beta_generated_DatabaseCenter_AggregateFleet_async
- */
+  /**
+   * Equivalent to `aggregateFleet`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g.,
+   *   "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   Supported fields are: `full_resource_name`, `resource_type`, `container`,
+   *     `product.type`, `product.engine`, `product.version`, `location`,
+   *     `labels`, `issues`, fields of availability_info, data_protection_info,
+   *     'resource_name', etc.
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   * @param {string} [request.groupBy]
+   *   Optional. A field that statistics are grouped by.
+   *   Valid values are any combination of the following:
+   *     * container
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * location
+   *     * sub_resource_type
+   *     * management_type
+   *     * tag.key
+   *     * tag.value
+   *     * tag.source
+   *     * tag.inherited
+   *     * label.key
+   *     * label.value
+   *     * label.source
+   *     * has_maintenance_schedule
+   *     * has_deny_maintenance_schedules
+   *   Comma separated list.
+   * @param {string} [request.orderBy]
+   *   Optional. Valid values to order by are:
+   *     * resource_groups_count
+   *     * resources_count
+   *     * and all fields supported by `group_by`
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It supports ordering using multiple fields.
+   *   For example:
+   *    `order_by = "resource_groups_count"` sorts response in ascending order
+   *    `order_by = "resource_groups_count DESC"` sorts response in descending
+   *    order
+   *    `order_by = "product.type, product.version DESC, location"` orders by type
+   *    in ascending order, version in descending order and location in ascending
+   *    order
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 items will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `AggregateFleet` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All other parameters should match the parameters in the call that provided
+   *   the page token except for page_size which can be different.
+   * @param {google.type.Date} [request.baselineDate]
+   *   Optional. The baseline date w.r.t. which the delta counts are calculated.
+   *   If not set, delta counts are not included in the response and the response
+   *   indicates the current state of the fleet.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.databasecenter.v1beta.AggregateFleetRow|AggregateFleetRow}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/database_center.aggregate_fleet.js</caption>
+   * region_tag:databasecenter_v1beta_generated_DatabaseCenter_AggregateFleet_async
+   */
   aggregateFleetAsync(
-      request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>{
+    request?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['aggregateFleet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('aggregateFleet iterate %j', request);
     return this.descriptors.page.aggregateFleet.asyncIterate(
       this.innerApiCalls['aggregateFleet'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow>;
   }
- /**
- * QueryDatabaseResourceGroups returns paginated results of database groups.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   The following fields are filterable:
- *     * full_resource_name
- *     * resource_type
- *     * container
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * location
- *     * labels
- *     * resource_category
- *     * machine_config.cpu_count
- *     * machine_config.memory_size_bytes
- *     * machine_config.shard_count
- *     * resource_name
- *     * tags
- *     * backupdr_config.backupdr_managed
- *     * edition
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- *   Example: `full_resource_name=~"test"`
- *   Example: `full_resource_name=~"test.*master"`
- * @param {number[]} [request.signalTypeGroups]
- *   Optional. Groups of signal types that are requested.
- * @param {number[]} [request.signalFilters]
- *   Optional. Filters based on signals. The list will be ORed together and then
- *   ANDed with the `filters` field above.
- * @param {string} [request.orderBy]
- *   Optional. A field that specifies the sort order of the results.
- *
- *   The following fields are sortable:
- *     * full_resource_name
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * container
- *     * issue_count
- *     * machine_config.vcpu_count
- *     * machine_config.memory_size_bytes
- *     * machine_config.shard_count
- *     * resource_name
- *     * issue_severity
- *     * signal_type
- *     * location
- *     * resource_type
- *     * instance_type
- *     * edition
- *     * metrics.p99_cpu_utilization
- *     * metrics.p95_cpu_utilization
- *     * metrics.current_storage_used_bytes
- *     * metrics.node_count
- *     * metrics.processing_unit_count
- *     * metrics.current_memory_used_bytes
- *     * metrics.peak_storage_utilization
- *     * metrics.peak_number_connections
- *     * metrics.peak_memory_utilization
- *
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It only supports a single field at a time.
- *
- *   For example:
- *    `order_by = "full_resource_name"` sorts response in ascending order
- *    `order_by = "full_resource_name DESC"` sorts response in descending order
- *    `order_by = "issue_count DESC"` sorts response in descending order of
- *    count of all issues associated with a resource.
- *
- *   More explicitly, `order_by = "full_resource_name, product"` is not
- *   supported.
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 resource groups will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `QueryDatabaseResourceGroupsRequest` call. Provide this to retrieve the
- *   subsequent page. All parameters except page_token should match the
- *   parameters in the call that provided the page page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup|DatabaseResourceGroup}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `queryDatabaseResourceGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * QueryDatabaseResourceGroups returns paginated results of database groups.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   The following fields are filterable:
+   *     * full_resource_name
+   *     * resource_type
+   *     * container
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * location
+   *     * labels
+   *     * resource_category
+   *     * machine_config.cpu_count
+   *     * machine_config.memory_size_bytes
+   *     * machine_config.shard_count
+   *     * resource_name
+   *     * tags
+   *     * backupdr_config.backupdr_managed
+   *     * edition
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   *   Example: `full_resource_name=~"test"`
+   *   Example: `full_resource_name=~"test.*master"`
+   * @param {number[]} [request.signalTypeGroups]
+   *   Optional. Groups of signal types that are requested.
+   * @param {number[]} [request.signalFilters]
+   *   Optional. Filters based on signals. The list will be ORed together and then
+   *   ANDed with the `filters` field above.
+   * @param {string} [request.orderBy]
+   *   Optional. A field that specifies the sort order of the results.
+   *
+   *   The following fields are sortable:
+   *     * full_resource_name
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * container
+   *     * issue_count
+   *     * machine_config.vcpu_count
+   *     * machine_config.memory_size_bytes
+   *     * machine_config.shard_count
+   *     * resource_name
+   *     * issue_severity
+   *     * signal_type
+   *     * location
+   *     * resource_type
+   *     * instance_type
+   *     * edition
+   *     * metrics.p99_cpu_utilization
+   *     * metrics.p95_cpu_utilization
+   *     * metrics.current_storage_used_bytes
+   *     * metrics.node_count
+   *     * metrics.processing_unit_count
+   *     * metrics.current_memory_used_bytes
+   *     * metrics.peak_storage_utilization
+   *     * metrics.peak_number_connections
+   *     * metrics.peak_memory_utilization
+   *
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It only supports a single field at a time.
+   *
+   *   For example:
+   *    `order_by = "full_resource_name"` sorts response in ascending order
+   *    `order_by = "full_resource_name DESC"` sorts response in descending order
+   *    `order_by = "issue_count DESC"` sorts response in descending order of
+   *    count of all issues associated with a resource.
+   *
+   *   More explicitly, `order_by = "full_resource_name, product"` is not
+   *   supported.
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 resource groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `QueryDatabaseResourceGroupsRequest` call. Provide this to retrieve the
+   *   subsequent page. All parameters except page_token should match the
+   *   parameters in the call that provided the page page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup|DatabaseResourceGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryDatabaseResourceGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryDatabaseResourceGroups(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[],
-        protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
-      ]>;
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[],
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse,
+    ]
+  >;
   queryDatabaseResourceGroups(
-      request: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup
+    >,
+  ): void;
   queryDatabaseResourceGroups(
-      request: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup
+    >,
+  ): void;
   queryDatabaseResourceGroups(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>,
-      callback?: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[],
-        protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
-      ]>|void {
+          | protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[],
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse|null|undefined,
-      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+          | protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryDatabaseResourceGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1246,391 +1447,423 @@ export class DatabaseCenterClient {
     this._log.info('queryDatabaseResourceGroups request %j', request);
     return this.innerApiCalls
       .queryDatabaseResourceGroups(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[],
-        protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse
-      ]) => {
-        this._log.info('queryDatabaseResourceGroups values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[],
+          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest | null,
+          protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsResponse,
+        ]) => {
+          this._log.info('queryDatabaseResourceGroups values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `queryDatabaseResourceGroups`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   The following fields are filterable:
- *     * full_resource_name
- *     * resource_type
- *     * container
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * location
- *     * labels
- *     * resource_category
- *     * machine_config.cpu_count
- *     * machine_config.memory_size_bytes
- *     * machine_config.shard_count
- *     * resource_name
- *     * tags
- *     * backupdr_config.backupdr_managed
- *     * edition
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- *   Example: `full_resource_name=~"test"`
- *   Example: `full_resource_name=~"test.*master"`
- * @param {number[]} [request.signalTypeGroups]
- *   Optional. Groups of signal types that are requested.
- * @param {number[]} [request.signalFilters]
- *   Optional. Filters based on signals. The list will be ORed together and then
- *   ANDed with the `filters` field above.
- * @param {string} [request.orderBy]
- *   Optional. A field that specifies the sort order of the results.
- *
- *   The following fields are sortable:
- *     * full_resource_name
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * container
- *     * issue_count
- *     * machine_config.vcpu_count
- *     * machine_config.memory_size_bytes
- *     * machine_config.shard_count
- *     * resource_name
- *     * issue_severity
- *     * signal_type
- *     * location
- *     * resource_type
- *     * instance_type
- *     * edition
- *     * metrics.p99_cpu_utilization
- *     * metrics.p95_cpu_utilization
- *     * metrics.current_storage_used_bytes
- *     * metrics.node_count
- *     * metrics.processing_unit_count
- *     * metrics.current_memory_used_bytes
- *     * metrics.peak_storage_utilization
- *     * metrics.peak_number_connections
- *     * metrics.peak_memory_utilization
- *
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It only supports a single field at a time.
- *
- *   For example:
- *    `order_by = "full_resource_name"` sorts response in ascending order
- *    `order_by = "full_resource_name DESC"` sorts response in descending order
- *    `order_by = "issue_count DESC"` sorts response in descending order of
- *    count of all issues associated with a resource.
- *
- *   More explicitly, `order_by = "full_resource_name, product"` is not
- *   supported.
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 resource groups will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `QueryDatabaseResourceGroupsRequest` call. Provide this to retrieve the
- *   subsequent page. All parameters except page_token should match the
- *   parameters in the call that provided the page page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup|DatabaseResourceGroup} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `queryDatabaseResourceGroupsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `queryDatabaseResourceGroups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   The following fields are filterable:
+   *     * full_resource_name
+   *     * resource_type
+   *     * container
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * location
+   *     * labels
+   *     * resource_category
+   *     * machine_config.cpu_count
+   *     * machine_config.memory_size_bytes
+   *     * machine_config.shard_count
+   *     * resource_name
+   *     * tags
+   *     * backupdr_config.backupdr_managed
+   *     * edition
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   *   Example: `full_resource_name=~"test"`
+   *   Example: `full_resource_name=~"test.*master"`
+   * @param {number[]} [request.signalTypeGroups]
+   *   Optional. Groups of signal types that are requested.
+   * @param {number[]} [request.signalFilters]
+   *   Optional. Filters based on signals. The list will be ORed together and then
+   *   ANDed with the `filters` field above.
+   * @param {string} [request.orderBy]
+   *   Optional. A field that specifies the sort order of the results.
+   *
+   *   The following fields are sortable:
+   *     * full_resource_name
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * container
+   *     * issue_count
+   *     * machine_config.vcpu_count
+   *     * machine_config.memory_size_bytes
+   *     * machine_config.shard_count
+   *     * resource_name
+   *     * issue_severity
+   *     * signal_type
+   *     * location
+   *     * resource_type
+   *     * instance_type
+   *     * edition
+   *     * metrics.p99_cpu_utilization
+   *     * metrics.p95_cpu_utilization
+   *     * metrics.current_storage_used_bytes
+   *     * metrics.node_count
+   *     * metrics.processing_unit_count
+   *     * metrics.current_memory_used_bytes
+   *     * metrics.peak_storage_utilization
+   *     * metrics.peak_number_connections
+   *     * metrics.peak_memory_utilization
+   *
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It only supports a single field at a time.
+   *
+   *   For example:
+   *    `order_by = "full_resource_name"` sorts response in ascending order
+   *    `order_by = "full_resource_name DESC"` sorts response in descending order
+   *    `order_by = "issue_count DESC"` sorts response in descending order of
+   *    count of all issues associated with a resource.
+   *
+   *   More explicitly, `order_by = "full_resource_name, product"` is not
+   *   supported.
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 resource groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `QueryDatabaseResourceGroupsRequest` call. Provide this to retrieve the
+   *   subsequent page. All parameters except page_token should match the
+   *   parameters in the call that provided the page page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup|DatabaseResourceGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryDatabaseResourceGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryDatabaseResourceGroupsStream(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['queryDatabaseResourceGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryDatabaseResourceGroups stream %j', request);
     return this.descriptors.page.queryDatabaseResourceGroups.createStream(
       this.innerApiCalls.queryDatabaseResourceGroups as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `queryDatabaseResourceGroups`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The search
- *   is limited to the resources within the `scope`.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional. The expression to filter resources.
- *
- *   The following fields are filterable:
- *     * full_resource_name
- *     * resource_type
- *     * container
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * location
- *     * labels
- *     * resource_category
- *     * machine_config.cpu_count
- *     * machine_config.memory_size_bytes
- *     * machine_config.shard_count
- *     * resource_name
- *     * tags
- *     * backupdr_config.backupdr_managed
- *     * edition
- *
- *   The expression is a list of zero or more restrictions combined via logical
- *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
- *   expression, parentheses must be appropriately used to group the
- *   combinations.
- *
- *   Example: `location="us-east1"`
- *   Example: `container="projects/123" OR container="projects/456"`
- *   Example: `(container="projects/123" OR
- *             container="projects/456") AND location="us-east1"`
- *   Example: `full_resource_name=~"test"`
- *   Example: `full_resource_name=~"test.*master"`
- * @param {number[]} [request.signalTypeGroups]
- *   Optional. Groups of signal types that are requested.
- * @param {number[]} [request.signalFilters]
- *   Optional. Filters based on signals. The list will be ORed together and then
- *   ANDed with the `filters` field above.
- * @param {string} [request.orderBy]
- *   Optional. A field that specifies the sort order of the results.
- *
- *   The following fields are sortable:
- *     * full_resource_name
- *     * product.type
- *     * product.engine
- *     * product.version
- *     * container
- *     * issue_count
- *     * machine_config.vcpu_count
- *     * machine_config.memory_size_bytes
- *     * machine_config.shard_count
- *     * resource_name
- *     * issue_severity
- *     * signal_type
- *     * location
- *     * resource_type
- *     * instance_type
- *     * edition
- *     * metrics.p99_cpu_utilization
- *     * metrics.p95_cpu_utilization
- *     * metrics.current_storage_used_bytes
- *     * metrics.node_count
- *     * metrics.processing_unit_count
- *     * metrics.current_memory_used_bytes
- *     * metrics.peak_storage_utilization
- *     * metrics.peak_number_connections
- *     * metrics.peak_memory_utilization
- *
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It only supports a single field at a time.
- *
- *   For example:
- *    `order_by = "full_resource_name"` sorts response in ascending order
- *    `order_by = "full_resource_name DESC"` sorts response in descending order
- *    `order_by = "issue_count DESC"` sorts response in descending order of
- *    count of all issues associated with a resource.
- *
- *   More explicitly, `order_by = "full_resource_name, product"` is not
- *   supported.
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 resource groups will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous
- *   `QueryDatabaseResourceGroupsRequest` call. Provide this to retrieve the
- *   subsequent page. All parameters except page_token should match the
- *   parameters in the call that provided the page page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup|DatabaseResourceGroup}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/database_center.query_database_resource_groups.js</caption>
- * region_tag:databasecenter_v1beta_generated_DatabaseCenter_QueryDatabaseResourceGroups_async
- */
+  /**
+   * Equivalent to `queryDatabaseResourceGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The search
+   *   is limited to the resources within the `scope`.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional. The expression to filter resources.
+   *
+   *   The following fields are filterable:
+   *     * full_resource_name
+   *     * resource_type
+   *     * container
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * location
+   *     * labels
+   *     * resource_category
+   *     * machine_config.cpu_count
+   *     * machine_config.memory_size_bytes
+   *     * machine_config.shard_count
+   *     * resource_name
+   *     * tags
+   *     * backupdr_config.backupdr_managed
+   *     * edition
+   *
+   *   The expression is a list of zero or more restrictions combined via logical
+   *   operators `AND` and `OR`. When `AND` and `OR` are both used in the
+   *   expression, parentheses must be appropriately used to group the
+   *   combinations.
+   *
+   *   Example: `location="us-east1"`
+   *   Example: `container="projects/123" OR container="projects/456"`
+   *   Example: `(container="projects/123" OR
+   *             container="projects/456") AND location="us-east1"`
+   *   Example: `full_resource_name=~"test"`
+   *   Example: `full_resource_name=~"test.*master"`
+   * @param {number[]} [request.signalTypeGroups]
+   *   Optional. Groups of signal types that are requested.
+   * @param {number[]} [request.signalFilters]
+   *   Optional. Filters based on signals. The list will be ORed together and then
+   *   ANDed with the `filters` field above.
+   * @param {string} [request.orderBy]
+   *   Optional. A field that specifies the sort order of the results.
+   *
+   *   The following fields are sortable:
+   *     * full_resource_name
+   *     * product.type
+   *     * product.engine
+   *     * product.version
+   *     * container
+   *     * issue_count
+   *     * machine_config.vcpu_count
+   *     * machine_config.memory_size_bytes
+   *     * machine_config.shard_count
+   *     * resource_name
+   *     * issue_severity
+   *     * signal_type
+   *     * location
+   *     * resource_type
+   *     * instance_type
+   *     * edition
+   *     * metrics.p99_cpu_utilization
+   *     * metrics.p95_cpu_utilization
+   *     * metrics.current_storage_used_bytes
+   *     * metrics.node_count
+   *     * metrics.processing_unit_count
+   *     * metrics.current_memory_used_bytes
+   *     * metrics.peak_storage_utilization
+   *     * metrics.peak_number_connections
+   *     * metrics.peak_memory_utilization
+   *
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It only supports a single field at a time.
+   *
+   *   For example:
+   *    `order_by = "full_resource_name"` sorts response in ascending order
+   *    `order_by = "full_resource_name DESC"` sorts response in descending order
+   *    `order_by = "issue_count DESC"` sorts response in descending order of
+   *    count of all issues associated with a resource.
+   *
+   *   More explicitly, `order_by = "full_resource_name, product"` is not
+   *   supported.
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 resource groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `QueryDatabaseResourceGroupsRequest` call. Provide this to retrieve the
+   *   subsequent page. All parameters except page_token should match the
+   *   parameters in the call that provided the page page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup|DatabaseResourceGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/database_center.query_database_resource_groups.js</caption>
+   * region_tag:databasecenter_v1beta_generated_DatabaseCenter_QueryDatabaseResourceGroups_async
+   */
   queryDatabaseResourceGroupsAsync(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>{
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryDatabaseResourceGroupsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['queryDatabaseResourceGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryDatabaseResourceGroups iterate %j', request);
     return this.descriptors.page.queryDatabaseResourceGroups.asyncIterate(
       this.innerApiCalls['queryDatabaseResourceGroups'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup>;
   }
- /**
- * QueryIssues provides a list of issues and recommendations
- * that a user has access to and that are within the requested scope.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The list
- *   is limited to the one attached to resources within the `scope` that a user
- *   has access to.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional.
- *   Supported fields are:
- *   'product',
- *   `location`,
- *   `issue_severity`,
- *   'tags',
- *   'labels',
- * @param {number[]} [request.signalProductsFilters]
- *   Optional. Filters based on signal and product. The filter list will be ORed
- *   across pairs and ANDed within a signal and products pair.
- * @param {string} [request.orderBy]
- *   Optional. Following fields are sortable:
- *   SignalType
- *   Product
- *   Location
- *   IssueSeverity
- *
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It only supports a single field at a time.
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 issues will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `QueryIssues` call.
- *   Provide this to retrieve the subsequent page.
- *   All parameters except page size should match the parameters used in the
- *   call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue|DatabaseResourceIssue}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `queryIssuesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * QueryIssues provides a list of issues and recommendations
+   * that a user has access to and that are within the requested scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The list
+   *   is limited to the one attached to resources within the `scope` that a user
+   *   has access to.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional.
+   *   Supported fields are:
+   *   'product',
+   *   `location`,
+   *   `issue_severity`,
+   *   'tags',
+   *   'labels',
+   * @param {number[]} [request.signalProductsFilters]
+   *   Optional. Filters based on signal and product. The filter list will be ORed
+   *   across pairs and ANDed within a signal and products pair.
+   * @param {string} [request.orderBy]
+   *   Optional. Following fields are sortable:
+   *   SignalType
+   *   Product
+   *   Location
+   *   IssueSeverity
+   *
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It only supports a single field at a time.
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 issues will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `QueryIssues` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All parameters except page size should match the parameters used in the
+   *   call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue|DatabaseResourceIssue}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryIssuesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryIssues(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[],
-        protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
-      ]>;
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[],
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse,
+    ]
+  >;
   queryIssues(
-      request: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue
+    >,
+  ): void;
   queryIssues(
-      request: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>): void;
+    request: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue
+    >,
+  ): void;
   queryIssues(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>,
-      callback?: PaginationCallback<
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-          protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse|null|undefined,
-          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>):
-      Promise<[
-        protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[],
-        protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
-      ]>|void {
+          | protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+      | protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
+      | null
+      | undefined,
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[],
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest | null,
+      protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse|null|undefined,
-      protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+          | protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
+          | null
+          | undefined,
+          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryIssues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1639,164 +1872,170 @@ export class DatabaseCenterClient {
     this._log.info('queryIssues request %j', request);
     return this.innerApiCalls
       .queryIssues(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[],
-        protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest|null,
-        protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse
-      ]) => {
-        this._log.info('queryIssues values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[],
+          protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest | null,
+          protos.google.cloud.databasecenter.v1beta.IQueryIssuesResponse,
+        ]) => {
+          this._log.info('queryIssues values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `queryIssues`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The list
- *   is limited to the one attached to resources within the `scope` that a user
- *   has access to.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional.
- *   Supported fields are:
- *   'product',
- *   `location`,
- *   `issue_severity`,
- *   'tags',
- *   'labels',
- * @param {number[]} [request.signalProductsFilters]
- *   Optional. Filters based on signal and product. The filter list will be ORed
- *   across pairs and ANDed within a signal and products pair.
- * @param {string} [request.orderBy]
- *   Optional. Following fields are sortable:
- *   SignalType
- *   Product
- *   Location
- *   IssueSeverity
- *
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It only supports a single field at a time.
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 issues will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `QueryIssues` call.
- *   Provide this to retrieve the subsequent page.
- *   All parameters except page size should match the parameters used in the
- *   call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue|DatabaseResourceIssue} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `queryIssuesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `queryIssues`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The list
+   *   is limited to the one attached to resources within the `scope` that a user
+   *   has access to.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional.
+   *   Supported fields are:
+   *   'product',
+   *   `location`,
+   *   `issue_severity`,
+   *   'tags',
+   *   'labels',
+   * @param {number[]} [request.signalProductsFilters]
+   *   Optional. Filters based on signal and product. The filter list will be ORed
+   *   across pairs and ANDed within a signal and products pair.
+   * @param {string} [request.orderBy]
+   *   Optional. Following fields are sortable:
+   *   SignalType
+   *   Product
+   *   Location
+   *   IssueSeverity
+   *
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It only supports a single field at a time.
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 issues will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `QueryIssues` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All parameters except page size should match the parameters used in the
+   *   call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue|DatabaseResourceIssue} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryIssuesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryIssuesStream(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['queryIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryIssues stream %j', request);
     return this.descriptors.page.queryIssues.createStream(
       this.innerApiCalls.queryIssues as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `queryIssues`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent can be a project, a folder, or an organization. The list
- *   is limited to the one attached to resources within the `scope` that a user
- *   has access to.
- *
- *   The allowed values are:
- *
- *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
- *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
- *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
- *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
- * @param {string} [request.filter]
- *   Optional.
- *   Supported fields are:
- *   'product',
- *   `location`,
- *   `issue_severity`,
- *   'tags',
- *   'labels',
- * @param {number[]} [request.signalProductsFilters]
- *   Optional. Filters based on signal and product. The filter list will be ORed
- *   across pairs and ANDed within a signal and products pair.
- * @param {string} [request.orderBy]
- *   Optional. Following fields are sortable:
- *   SignalType
- *   Product
- *   Location
- *   IssueSeverity
- *
- *   The default order is ascending. Add "DESC" after the field name to indicate
- *   descending order. Add "ASC" after the field name to indicate ascending
- *   order. It only supports a single field at a time.
- * @param {number} [request.pageSize]
- *   Optional. If unspecified, at most 50 issues will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `QueryIssues` call.
- *   Provide this to retrieve the subsequent page.
- *   All parameters except page size should match the parameters used in the
- *   call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue|DatabaseResourceIssue}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/database_center.query_issues.js</caption>
- * region_tag:databasecenter_v1beta_generated_DatabaseCenter_QueryIssues_async
- */
+  /**
+   * Equivalent to `queryIssues`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent can be a project, a folder, or an organization. The list
+   *   is limited to the one attached to resources within the `scope` that a user
+   *   has access to.
+   *
+   *   The allowed values are:
+   *
+   *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+   *   * folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+   *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
+   * @param {string} [request.filter]
+   *   Optional.
+   *   Supported fields are:
+   *   'product',
+   *   `location`,
+   *   `issue_severity`,
+   *   'tags',
+   *   'labels',
+   * @param {number[]} [request.signalProductsFilters]
+   *   Optional. Filters based on signal and product. The filter list will be ORed
+   *   across pairs and ANDed within a signal and products pair.
+   * @param {string} [request.orderBy]
+   *   Optional. Following fields are sortable:
+   *   SignalType
+   *   Product
+   *   Location
+   *   IssueSeverity
+   *
+   *   The default order is ascending. Add "DESC" after the field name to indicate
+   *   descending order. Add "ASC" after the field name to indicate ascending
+   *   order. It only supports a single field at a time.
+   * @param {number} [request.pageSize]
+   *   Optional. If unspecified, at most 50 issues will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `QueryIssues` call.
+   *   Provide this to retrieve the subsequent page.
+   *   All parameters except page size should match the parameters used in the
+   *   call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue|DatabaseResourceIssue}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/database_center.query_issues.js</caption>
+   * region_tag:databasecenter_v1beta_generated_DatabaseCenter_QueryIssues_async
+   */
   queryIssuesAsync(
-      request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>{
+    request?: protos.google.cloud.databasecenter.v1beta.IQueryIssuesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['queryIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryIssues iterate %j', request);
     return this.descriptors.page.queryIssues.asyncIterate(
       this.innerApiCalls['queryIssues'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue>;
   }
 
@@ -1808,7 +2047,7 @@ export class DatabaseCenterClient {
    */
   close(): Promise<void> {
     if (this.databaseCenterStub && !this._terminated) {
-      return this.databaseCenterStub.then(stub => {
+      return this.databaseCenterStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
