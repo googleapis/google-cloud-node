@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/appoptimize-v0.1.0...appoptimize-v0.1.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* Unblock release by upgrading @types/sinon for the add optimize package ([#8258](https://github.com/googleapis/google-cloud-node/issues/8258)) ([1cb0ff8](https://github.com/googleapis/google-cloud-node/commit/1cb0ff89f5f8a8cbe422c429bd61874b983f6cef))
+
 ## 0.1.0 (2026-05-12)
 
 
