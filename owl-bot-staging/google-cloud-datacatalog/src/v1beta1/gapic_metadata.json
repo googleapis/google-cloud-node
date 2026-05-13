@@ -1,0 +1,505 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.datacatalog.v1beta1",
+  "libraryPackage": "@google-cloud/datacatalog",
+  "services": {
+    "DataCatalog": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataCatalogClient",
+          "rpcs": {
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "CreateTagTemplate": {
+              "methods": [
+                "createTagTemplate"
+              ]
+            },
+            "GetTagTemplate": {
+              "methods": [
+                "getTagTemplate"
+              ]
+            },
+            "UpdateTagTemplate": {
+              "methods": [
+                "updateTagTemplate"
+              ]
+            },
+            "DeleteTagTemplate": {
+              "methods": [
+                "deleteTagTemplate"
+              ]
+            },
+            "CreateTagTemplateField": {
+              "methods": [
+                "createTagTemplateField"
+              ]
+            },
+            "UpdateTagTemplateField": {
+              "methods": [
+                "updateTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateField": {
+              "methods": [
+                "renameTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "renameTagTemplateFieldEnumValue"
+              ]
+            },
+            "DeleteTagTemplateField": {
+              "methods": [
+                "deleteTagTemplateField"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "createTag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "updateTag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "deleteTag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "SearchCatalog": {
+              "methods": [
+                "searchCatalog",
+                "searchCatalogStream",
+                "searchCatalogAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "listTags",
+                "listTagsStream",
+                "listTagsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataCatalogClient",
+          "rpcs": {
+            "CreateEntryGroup": {
+              "methods": [
+                "createEntryGroup"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "updateEntryGroup"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "getEntryGroup"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "deleteEntryGroup"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "createEntry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "updateEntry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "deleteEntry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "getEntry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookupEntry"
+              ]
+            },
+            "CreateTagTemplate": {
+              "methods": [
+                "createTagTemplate"
+              ]
+            },
+            "GetTagTemplate": {
+              "methods": [
+                "getTagTemplate"
+              ]
+            },
+            "UpdateTagTemplate": {
+              "methods": [
+                "updateTagTemplate"
+              ]
+            },
+            "DeleteTagTemplate": {
+              "methods": [
+                "deleteTagTemplate"
+              ]
+            },
+            "CreateTagTemplateField": {
+              "methods": [
+                "createTagTemplateField"
+              ]
+            },
+            "UpdateTagTemplateField": {
+              "methods": [
+                "updateTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateField": {
+              "methods": [
+                "renameTagTemplateField"
+              ]
+            },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "renameTagTemplateFieldEnumValue"
+              ]
+            },
+            "DeleteTagTemplateField": {
+              "methods": [
+                "deleteTagTemplateField"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "createTag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "updateTag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "deleteTag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "SearchCatalog": {
+              "methods": [
+                "searchCatalog",
+                "searchCatalogStream",
+                "searchCatalogAsync"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "listEntryGroups",
+                "listEntryGroupsStream",
+                "listEntryGroupsAsync"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "listEntries",
+                "listEntriesStream",
+                "listEntriesAsync"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "listTags",
+                "listTagsStream",
+                "listTagsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PolicyTagManagerClient",
+          "rpcs": {
+            "CreateTaxonomy": {
+              "methods": [
+                "createTaxonomy"
+              ]
+            },
+            "DeleteTaxonomy": {
+              "methods": [
+                "deleteTaxonomy"
+              ]
+            },
+            "UpdateTaxonomy": {
+              "methods": [
+                "updateTaxonomy"
+              ]
+            },
+            "GetTaxonomy": {
+              "methods": [
+                "getTaxonomy"
+              ]
+            },
+            "CreatePolicyTag": {
+              "methods": [
+                "createPolicyTag"
+              ]
+            },
+            "DeletePolicyTag": {
+              "methods": [
+                "deletePolicyTag"
+              ]
+            },
+            "UpdatePolicyTag": {
+              "methods": [
+                "updatePolicyTag"
+              ]
+            },
+            "GetPolicyTag": {
+              "methods": [
+                "getPolicyTag"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListTaxonomies": {
+              "methods": [
+                "listTaxonomies",
+                "listTaxonomiesStream",
+                "listTaxonomiesAsync"
+              ]
+            },
+            "ListPolicyTags": {
+              "methods": [
+                "listPolicyTags",
+                "listPolicyTagsStream",
+                "listPolicyTagsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PolicyTagManagerClient",
+          "rpcs": {
+            "CreateTaxonomy": {
+              "methods": [
+                "createTaxonomy"
+              ]
+            },
+            "DeleteTaxonomy": {
+              "methods": [
+                "deleteTaxonomy"
+              ]
+            },
+            "UpdateTaxonomy": {
+              "methods": [
+                "updateTaxonomy"
+              ]
+            },
+            "GetTaxonomy": {
+              "methods": [
+                "getTaxonomy"
+              ]
+            },
+            "CreatePolicyTag": {
+              "methods": [
+                "createPolicyTag"
+              ]
+            },
+            "DeletePolicyTag": {
+              "methods": [
+                "deletePolicyTag"
+              ]
+            },
+            "UpdatePolicyTag": {
+              "methods": [
+                "updatePolicyTag"
+              ]
+            },
+            "GetPolicyTag": {
+              "methods": [
+                "getPolicyTag"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListTaxonomies": {
+              "methods": [
+                "listTaxonomies",
+                "listTaxonomiesStream",
+                "listTaxonomiesAsync"
+              ]
+            },
+            "ListPolicyTags": {
+              "methods": [
+                "listPolicyTags",
+                "listPolicyTagsStream",
+                "listPolicyTagsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManagerSerialization": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PolicyTagManagerSerializationClient",
+          "rpcs": {
+            "ImportTaxonomies": {
+              "methods": [
+                "importTaxonomies"
+              ]
+            },
+            "ExportTaxonomies": {
+              "methods": [
+                "exportTaxonomies"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PolicyTagManagerSerializationClient",
+          "rpcs": {
+            "ImportTaxonomies": {
+              "methods": [
+                "importTaxonomies"
+              ]
+            },
+            "ExportTaxonomies": {
+              "methods": [
+                "exportTaxonomies"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
